@@ -1,0 +1,83 @@
+/*Full Screen Warning*/
+
+#fullscreen-warning {
+    background-color: var(--fullscreen-warn) !important;
+    border-color: var(--fullscreen-warn) !important;
+    max-width: 500px !important;
+    max-height: 50px !important;
+    border-radius: 50px !important;
+    font-size: 12px !important;
+    opacity: 0.8 !important;
+}
+
+.pointerlockfswarning-generic-text,
+.pointerlockfswarning-domain-text {
+    font-size: 15px !important;
+    color: rgb(255, 255, 255) !important;
+    text-shadow: none !important;
+}
+
+:root[inFullscreen] {
+    --uc-nav-bar-margin-left: -5px;
+    --uc-bookmarks-margin-left: 0px;
+    --uc-findbar-set-top: calc(
+        var(--uc-bm-padding) + var(--uc-bm-height) +
+            var(--urlbar-toolbar-height)
+    );
+}
+
+/* Full screen Address bar overlap instead of push */
+/* Modified from https://raw.githubusercontent.com/MrOtherGuy/firefox-csshacks/master/chrome/autohide_toolbox.css */
+
+:root[sizemode="fullscreen"],
+:root[sizemode="fullscreen"] #navigator-toolbox {
+    margin-top: 0 !important;
+}
+
+:root[inFullscreen] {
+    & #navigator-toolbox {
+        position: fixed !important;
+        display: block;
+        background-color: var(--lwt-accent-color, black) !important;
+        transition: transform 82ms linear, opacity 82ms linear !important;
+        transition-delay: var(--uc-autohide-toolbox-delay) !important;
+        transform-origin: top;
+        transform: rotateX(var(--uc-toolbox-rotation));
+        opacity: 0;
+        line-height: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    & #navigator-toolbox:hover,
+    & #navigator-toolbox:focus-within {
+        transition-delay: 33ms !important;
+        transform: rotateX(0);
+        opacity: 1;
+    }
+    /* This ruleset is separate, because not having :has support breaks other selectors as well */
+    & #mainPopupSet:has(> #appMenu-popup:hover) ~ toolbox {
+        transition-delay: 33ms !important;
+        transform: rotateX(0);
+        opacity: 1;
+    }
+
+    & #navigator-toolbox > * {
+        line-height: normal;
+        pointer-events: auto;
+    }
+
+    & #navigator-toolbox,
+    & #navigator-toolbox > * {
+        width: 100vw;
+        -moz-appearance: none !important;
+    }
+
+    /* These two exist for oneliner compatibility */
+    & #nav-bar {
+        width: var(--uc-navigationbar-width, 100vw);
+    }
+    & #TabsToolbar {
+        width: calc(100vw - var(--uc-navigationbar-width, 0px));
+    }
+}

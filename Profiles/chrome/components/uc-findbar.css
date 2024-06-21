@@ -1,0 +1,121 @@
+/* Modified from https://raw.githubusercontent.com/ravindUwU/firefox-refined-findbar/main/src/refined-findbar.scss */
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace htmlNs url("http://www.w3.org/1999/xhtml");
+/* Auto hide findbar when unfocused */
+findbar:not(:focus-within) {
+    opacity: 0 !important;
+    width: 0px !important;
+}
+
+/* Move findbar close button to the left */
+.findbar-closebutton {
+    order: -1;
+    margin-right: 0px !important;
+}
+
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton,
+findbar [anonid="findbar-textbox-wrapper"] htmlNs|input,
+findbar checkbox {
+    border: 1px solid ThreeDShadow;
+}
+
+findbar {
+    --button-bgcolor: var(--urlbar-bg);
+    position: absolute;
+    contain: content;
+    border: 1px solid var(--chrome-content-separator-color);
+    left: 20%;
+    top: var(--uc-findbar-set-top, var(--uc-findbar-top));
+    padding-right: 10px;
+    transform-origin: top center;
+    border-radius: var(--toolbarbutton-border-radius);
+    animation: 0.1s keyframes-scale-in;
+    background: var(--bg) !important;
+}
+findbar[hidden="true"] {
+    animation: 0.1s keyframes-scale-out;
+}
+findbar checkbox {
+    margin: 0 !important;
+    padding: 1.5px 6px;
+    border-radius: var(--toolbarbutton-border-radius);
+    color: var(--button-color);
+    background-color: var(--button-bgcolor);
+}
+findbar checkbox:not(:last-of-type) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+findbar checkbox:not(:first-of-type) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+}
+findbar checkbox:hover {
+    background-color: var(--button-hover-bgcolor);
+}
+findbar checkbox:active {
+    background-color: var(--button-active-bgcolor);
+}
+findbar checkbox[checked="true"] {
+    color: var(--button-primary-color);
+    background-color: var(--button-primary-bgcolor);
+}
+findbar checkbox[checked="true"]:hover {
+    background-color: var(--button-primary-hover-bgcolor);
+}
+findbar checkbox[checked="true"]:active {
+    background-color: var(--button-primary-active-bgcolor);
+}
+findbar checkbox:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-inset);
+}
+findbar checkbox .checkbox-check {
+    display: none;
+}
+findbar [anonid="findbar-textbox-wrapper"] {
+    margin-inline-end: 8px !important;
+}
+findbar [anonid="findbar-textbox-wrapper"] htmlNs|input {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton {
+    color: var(--button-color);
+    background-color: var(--button-bgcolor);
+    border-width: 1px !important;
+    margin-inline: 0 !important;
+}
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton:last-of-type {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton:not(:last-of-type) {
+    border-radius: 0 !important;
+    border-right-width: 0 !important;
+}
+findbar .findbar-label {
+    margin: 0 !important;
+    margin-inline-start: 8px !important;
+}
+findbar description.findbar-label:empty {
+    display: none;
+}
+
+@keyframes keyframes-scale-in {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+@keyframes keyframes-scale-out {
+    0% {
+        transform: scaleY(1);
+    }
+    100% {
+        transform: scaleY(0);
+    }
+}

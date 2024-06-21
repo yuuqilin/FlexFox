@@ -1,0 +1,49 @@
+/* Modified from https://gist.github.com/waimus/3209ce6fbd468fe548698000c2281d49 */
+@media not (-moz-bool-pref: "uc.flex.prevent-tabs-toolbar-auto-hide") {
+    @media not (-moz-bool-pref: "uc.flex.hide-toolbox-completely") {
+        :root:not(
+                :has(
+                        #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not(
+                                [hidden]
+                            )
+                    )
+            ) {
+            /* Allow registering hover state over toolbars */
+            &:not([sizemode="normal"])
+                :is(
+                    #toolbar-menubar,
+                    #TabsToolbar,
+                    #nav-bar,
+                    #PersonalToolbar
+                ) {
+                -moz-window-dragging: no-drag !important;
+            }
+
+            /* show tabs toolbar when navigator-toolbox gets hovered */
+            &:not([inFullscreen]):not([customizing])
+                #navigator-toolbox:hover
+                #TabsToolbar {
+                visibility: visible !important;
+                opacity: 1 !important;
+                margin-bottom: 0px;
+            }
+            /* hide tabs toolbar when unfocused */
+            &:not([inFullscreen]):not([customizing]) #TabsToolbar:not(:hover) {
+                visibility: collapse !important;
+                opacity: 0 !important;
+                margin-bottom: calc(-1 * var(--uc-height-of-tabs-toolbar));
+            }
+
+            /* Avoid web content from being pushed or jumping */
+            &:not([inFullscreen]):not([customizing])
+                #navigator-toolbox:hover
+                ~ #browser {
+                margin-top: calc(-1 * var(--uc-height-of-tabs-toolbar) - 4px);
+            }
+
+            &:not([inFullscreen]):not([customizing]) #navigator-toolbox:hover {
+                z-index: 1;
+            }
+        }
+    }
+}
