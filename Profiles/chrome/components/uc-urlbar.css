@@ -55,8 +55,8 @@
     border-radius: 15px !important;
 }
 
-#urlbar[breakout][breakout-extend] > #urlbar-input-container,
-#urlbar-input-container {
+#urlbar[breakout][breakout-extend] > .urlbar-input-container,
+.urlbar-input-container {
     height: var(--urlbar-height) !important;
     padding-block: 0px !important;
     padding-inline: 0px !important;
@@ -127,7 +127,7 @@
     > #nav-bar-customization-target
     > #urlbar-container:not(:hover)
     > #urlbar:not([focused])
-    > #urlbar-input-container {
+    > .urlbar-input-container {
     > #page-action-buttons > *:not(#userContext-icons),
     > #tracking-protection-icon-container {
         opacity: 0;
