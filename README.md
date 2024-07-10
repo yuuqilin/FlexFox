@@ -95,6 +95,6 @@ A Firefox theme based on [VerticalFox](https://github.com/christorange/VerticalF
 </table>
 
 ## Known Issues
-If you're using Firefox Nightly 129.0a1, please rename 'uc-urlbar-fix-for-129.0a1.css' to 'uc-urlbar.css' and replace the existing file. This will fix display issues with the URL bar.
+If you're using a Firefox version prior to v128, please rename 'uc-urlbar-fix-for-pre-v128.css' to 'uc-urlbar.css' and replace the existing file. This will fix display issues with the URL bar.
 
 This style has only been tested on Windows. Manual adjustments may be needed for other operating systems.
