@@ -5,11 +5,11 @@
     border: 0 !important;
 }
 
-#urlbar:not(.megabar):not([focused="true"]):hover {
+#urlbar:not(.megabar):not([focused]):hover {
     outline: 1px solid var(--urlbar-outline) !important;
 }
 
-#urlbar[focused="true"] {
+#urlbar[focused] {
     border: 0 !important;
     border-top: 1px solid var(--urlbar-border-top) !important;
     border-bottom: 1px solid var(--urlbar-border-bottom) !important;
@@ -38,7 +38,7 @@
     background: var(--urlbar-bg) !important;
 }
 
-#urlbar[focused="true"] #urlbar-background {
+#urlbar[focused] #urlbar-background {
     box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35) !important;
     outline: none !important;
 }
