@@ -9,6 +9,10 @@
                 [hidden]
             )
     ) {
+    /* Remove the added outline in nightly v132.0a1 */
+    #tabbrowser-tabbox {
+        outline: none !important;
+    }
     /* Remove background overflow from navigation bar */
     @media not (-moz-bool-pref: "uc.flex.prevent-bookmarks-auto-hide") {
         &:not([customizing]) #nav-bar {
@@ -20,9 +24,12 @@
             :is(.newTabBrowserPanel, #sidebar-box) {
             padding-top: 0px !important;
         }
+        /* Remove unnecessary style from v130.0 */
+        /*
         &[BookmarksToolbarOverlapsBrowser] #navigator-toolbox {
             margin-bottom: 0px !important;
         }
+        */
     }
 
     @media (-moz-bool-pref: "uc.flex.prevent-bookmarks-auto-hide") {
