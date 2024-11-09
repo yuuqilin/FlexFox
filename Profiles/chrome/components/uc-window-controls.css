@@ -20,12 +20,10 @@
             :is(.newTabBrowserPanel, #sidebar-box) {
             padding-top: 0px !important;
         }
-        /* Remove unnecessary style from v130.0 */
-        /*
+        /* Revert necessary style for v128 */
         &[BookmarksToolbarOverlapsBrowser] #navigator-toolbox {
             margin-bottom: 0px !important;
         }
-        */
     }
 
     @media (-moz-bool-pref: "uc.flex.prevent-bookmarks-auto-hide") {
