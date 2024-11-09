@@ -74,11 +74,28 @@
     }
 }
 
-/* Fix urlbar height issue in nightly 126.0a1 (2024-04-08) */
+/* Fix urlbar height issue in v133 (2024-11-05) */
+#urlbar-container,
+#urlbar {
+    --urlbar-height: 32px !important;
+    --urlbar-container-height: 40px !important;
+}
+#urlbar-container {
+    padding-top: 5.5px !important;
+}
+#urlbar[breakout] {
+    display: block !important;
+    position: absolute !important;
+    height: var(--urlbar-height) !important;
+    width: var(--urlbar-width) !important;
+}
+#urlbar[breakout][breakout-extend],
+#urlbar[breakout][breakout-extend-disabled][open] {
+    height: auto !important;
+    top: auto !important;
+}
 :root:not([customizing]) #urlbar {
     --urlbar-toolbar-height: 43px;
-    top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2);
-    left: 0;
 }
 
 /* Hide window controls of toolbar-menubar when menubar is inactive */
