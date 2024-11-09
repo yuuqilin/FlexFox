@@ -1,0 +1,330 @@
+/* Modified from https://raw.githubusercontent.com/christorange/VerticalFox/main/windows/userChrome.css */
+/* Limit PersonalToolbar height */
+#PersonalToolbar {
+    height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding));
+}
+
+:root:has(
+        #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not(
+                [hidden]
+            )
+    ) {
+    /* Remove background overflow from navigation bar */
+    @media not (-moz-bool-pref: "uc.flex.prevent-bookmarks-auto-hide") {
+        &:not([customizing]) #nav-bar {
+            padding-bottom: var(--uc-nav-bar-padding-bottom) !important;
+            margin-bottom: var(--uc-nav-bar-margin-bottom) !important;
+        }
+        /* Prevent bookmarks toolbar from overlapping sidebar */
+        &[BookmarksToolbarOverlapsBrowser]
+            :is(.newTabBrowserPanel, #sidebar-box) {
+            padding-top: 0px !important;
+        }
+        /* Remove unnecessary style from v130.0 */
+        /*
+        &[BookmarksToolbarOverlapsBrowser] #navigator-toolbox {
+            margin-bottom: 0px !important;
+        }
+        */
+    }
+
+    @media (-moz-bool-pref: "uc.flex.prevent-bookmarks-auto-hide") {
+        --uc-findbar-set-top: calc(-1 * var(--uc-bm-padding));
+
+        &:not([customizing]) #nav-bar {
+            padding-bottom: var(--uc-nav-bar-padding-bottom) !important;
+            margin-bottom: calc(
+                var(--uc-nav-bar-margin-bottom) - 1px
+            ) !important;
+        }
+        /* Prevent bookmarks toolbar from overlapping sidebar */
+        & #sidebar-box {
+            padding-top: 0px;
+            margin-top: calc(-1 * var(--uc-bm-height) - 7px);
+        }
+        & #PersonalToolbar {
+            z-index: 1;
+        }
+    }
+
+    &:not([customizing]) #urlbar {
+        --urlbar-toolbar-height: calc(
+            46px + var(--uc-nav-bar-margin-bottom)
+        ) !important;
+    }
+
+    @media not (-moz-bool-pref: "uc.flex.hide-sidebery-completely") {
+        /* Shift bookmarks toolbar right/left to avoid sidebar overlap */
+        &:not(:has(#sidebar-box[positionend])):not([inFullscreen]):not(
+                [customizing]
+            )
+            #PersonalToolbar {
+            margin-left: var(--uc-sidebar-width);
+        }
+
+        &:has(#sidebar-box[positionend]):not([inFullscreen]):not([customizing])
+            #PersonalToolbar {
+            margin-right: var(--uc-sidebar-width);
+        }
+    }
+
+    /* Adjust left spacing of nav bar */
+    &:not([customizing]) #nav-bar {
+        margin-left: var(--uc-nav-bar-margin-left);
+    }
+}
+
+/* Fix urlbar height issue in nightly 126.0a1 (2024-04-08) */
+:root:not([customizing]) #urlbar {
+    --urlbar-toolbar-height: 43px;
+    top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2);
+    left: 0;
+}
+
+/* Hide window controls of toolbar-menubar when menubar is inactive */
+:root[tabsintitlebar="true"]:not([customizing]) {
+    & #toolbar-menubar[inactive="true"] > .titlebar-buttonbox-container {
+        display: none !important;
+    }
+
+    /* Hide window controls of TabsToolbar when menubar is active */
+    &
+        #toolbar-menubar:not([inactive="true"])
+        + #TabsToolbar
+        > .titlebar-buttonbox-container {
+        display: none !important;
+    }
+
+    /* When native vertical tabs are enabled, 
+    the windows controls on the TabsToolbar are disabled, 
+    so the nav-bar no longer needs to reserve space on the right for these controls, 
+    and the padding should be reset to 0. In line 111 of uc-navbar.css, 
+    when uc.flex.hide-toolbox-completely is true and uc.flex.hide-sidebery-completely is false, 
+    the padding variable on the right side is changed to --uc-nav-bar-more-padding-right. 
+    Therefore, to cover the case when uc.flex.hide-toolbox-completely is true, 
+    we need to override the variable --uc-nav-bar-more-padding-right. 
+    */
+    &:has(#sidebar-box[positionend]) {
+        & #navigator-toolbox[tabs-hidden] {
+            --uc-nav-bar-more-padding-right: 0px;
+        }
+    }
+    & #navigator-toolbox[tabs-hidden] {
+        --uc-nav-bar-padding-right: 0px;
+        @media (-moz-bool-pref: "uc.flex.hide-toolbox-completely") {
+            --uc-nav-bar-more-padding-right: calc(var(--uc-sidebar-width) - 5px);
+        }
+    }
+    
+    /* Hide window controls of TabsToolbar when native vertical tabs are enabled */
+    & #navigator-toolbox[tabs-hidden]
+        > #TabsToolbar
+        > .titlebar-buttonbox-container {
+        display: none !important;
+    }
+    
+    & #navigator-toolbox[tabs-hidden]
+        > #nav-bar
+        > .titlebar-spacer[type="post-tabs"] {
+        display: none !important;
+    }
+
+    &
+        #navigator-toolbox[tabs-hidden]
+        > #nav-bar
+        > .titlebar-buttonbox-container {
+        margin-top: 2px;
+        margin-left: -4px;
+    }
+}
+
+/* Adjust menubar height */
+:root[tabsintitlebar="true"]:not([inFullscreen]):not([customizing]) {
+    & #navigator-toolbox #toolbar-menubar[autohide="false"] {
+        margin-top: 0px;
+        margin-bottom: -7px;
+    }
+
+    &
+        #navigator-toolbox
+        #toolbar-menubar[autohide="false"]
+        > .titlebar-buttonbox-container {
+        margin-top: -7px;
+        margin-bottom: 0px;
+    }
+
+    &
+        #navigator-toolbox
+        #toolbar-menubar[autohide="true"]:not([inactive="true"]) {
+        margin-top: 0px;
+        margin-bottom: -11px;
+    }
+
+    &
+        #navigator-toolbox
+        #toolbar-menubar[autohide="true"]:not([inactive="true"])
+        > .titlebar-buttonbox-container {
+        margin-top: -7px;
+        margin-bottom: 0px;
+    }
+}
+
+/* Fix issue with missing window controls. */
+#titlebar,
+#TabsToolbar {
+    will-change: unset !important;
+    transition: none !important;
+    opacity: 1 !important;
+}
+
+/* ----- Close/min/max fix ----- */
+/* Fix popup position */
+#appMenu-popup {
+    margin-inline: -244px !important;
+}
+
+/* Move nav-bar to make room for window controls */
+:root:has(
+        #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not(
+                [hidden]
+            )
+    ) {
+    &[tabsintitlebar="true"]:not([customizing]) #nav-bar {
+        padding-left: 0px !important;
+        padding-right: var(
+            --uc-nav-bar-more-padding-right,
+            var(--uc-nav-bar-padding-right)
+        ) !important;
+    }
+
+    &:has(
+            :is(
+                    #toolbar-menubar[autohide="false"],
+                    #toolbar-menubar[autohide="true"]:not([inactive="true"])
+                )
+        )
+        #nav-bar {
+        --uc-nav-bar-less-padding-right: calc(
+            var(--uc-nav-bar-more-padding-right) -
+                var(--uc-nav-bar-padding-right)
+        );
+        padding-right: var(--uc-nav-bar-less-padding-right, 0px) !important;
+    }
+}
+
+/* Reposition window controls */
+:root:not(
+        :has(
+                #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not(
+                        [hidden]
+                    )
+            )
+    )[tabsintitlebar="true"]:not([inFullscreen]):not([customizing])
+    #navigator-toolbox
+    #TabsToolbar
+    .titlebar-buttonbox-container {
+    padding-top: 2px;
+}
+
+:root:has(
+        #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not(
+                [hidden]
+            )
+    ) {
+    &[tabsintitlebar="true"]:not([inFullscreen]):not([customizing])
+        #navigator-toolbox
+        #TabsToolbar
+        .titlebar-buttonbox-container {
+        visibility: visible !important;
+        display: block;
+        position: absolute !important;
+        top: 2px !important;
+        left: unset !important;
+        right: 0 !important;
+    }
+
+    &[tabsintitlebar="true"]:not([inFullscreen])[sizemode="normal"]:not(
+            [customizing]
+        )
+        #navigator-toolbox
+        #TabsToolbar
+        .titlebar-buttonbox-container {
+        top: 0px !important;
+    }
+}
+
+#TabsToolbar .titlebar-min {
+    -moz-box-ordinal-group: 0 !important;
+}
+
+#TabsToolbar .titlebar-max,
+.titlebar-restore {
+    -moz-box-ordinal-group: 1 !important;
+}
+
+#TabsToolbar .titlebar-close {
+    -moz-box-ordinal-group: 2 !important;
+}
+
+:root[inFullscreen]
+    #navigator-toolbox
+    #TabsToolbar
+    .titlebar-buttonbox-container {
+    -moz-box-ordinal-group: 1 !important;
+}
+
+#navigator-toolbox #TabsToolbar .titlebar-buttonbox-container {
+    -moz-box-ordinal-group: 1 !important;
+}
+
+/* Window control placeholder support in fullscreen */
+.titlebar-buttonbox,
+#window-controls {
+    color: var(--toolbar-color);
+}
+:root:has(
+        #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not(
+                [hidden]
+            )
+    ) {
+    &[sizemode="fullscreen"] .titlebar-buttonbox-container {
+        display: none;
+    }
+    &[sizemode="fullscreen"] #navigator-toolbox {
+        position: relative;
+    }
+
+    &[sizemode="fullscreen"]
+        #TabsToolbar
+        > .titlebar-buttonbox-container:last-child,
+    &[sizemode="fullscreen"] #window-controls {
+        position: absolute;
+        display: flex;
+        top: 0;
+        right: 0;
+        height: 40px;
+    }
+
+    &[sizemode="fullscreen"]
+        #TabsToolbar
+        > .titlebar-buttonbox-container:last-child,
+    &[uidensity="compact"][sizemode="fullscreen"] #window-controls {
+        height: 32px;
+    }
+}
+
+/* Line up the Windows controls with the rest of the icons in the toolbar. */
+:root:not([sizemode="maximized"]) .titlebar-buttonbox-container {
+    padding-top: 3px;
+}
+
+.titlebar-buttonbox {
+    z-index: 3 !important;
+    padding-right: 3px;
+}
+
+.titlebar-buttonbox * {
+    border-radius: 5px;
+    width: 35px;
+    height: 38px;
+}

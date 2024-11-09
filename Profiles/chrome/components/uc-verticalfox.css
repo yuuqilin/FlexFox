@@ -1,0 +1,241 @@
+/* Modified from https://raw.githubusercontent.com/christorange/VerticalFox/main/windows/userChrome.css */
+/* SIDEBERY */
+:root:has(
+        #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not(
+                [hidden]
+            )
+    ) {
+    &:not([customizing]) .tab[selected="true"] {
+        visibility: collapse;
+        height: 0px;
+    }
+
+    &:not([customizing]) .tabbrowser-tab {
+        visibility: collapse;
+        height: 0px;
+    }
+
+    &:not([customizing]) .tabbrowser-tab[visuallyselected="true"] {
+        visibility: collapse;
+        height: 0px;
+    }
+
+    /* AUTO HIDE SIDE BAR */
+    & #sidebar-box {
+        position: relative;
+        min-width: var(--uc-sidebar-width) !important;
+        width: var(--uc-sidebar-width) !important;
+        max-width: var(--uc-sidebar-width) !important;
+        --browser-area-z-index-sidebar: 3;
+        z-index: 100;
+    }
+
+    /* When the revamped sidebar is enabled, adjust Sidebery's position to align with the far left / far right edge of the screen */
+    @media (-moz-bool-pref: "sidebar.revamp") {
+        &[inFullscreen] {
+            & #sidebar-main {
+                margin-right: -4px;
+                margin-left: -11px;
+                &[positionend] {
+                    margin-right: -3px;
+                    margin-left: -4px;
+                }
+            }
+        }
+        @media (-moz-bool-pref: "uc.flex.hide-sidebery-completely") {
+            & {
+                --uc-nav-bar-margin-left: 0px;
+            }
+            &:not(:has(#sidebar-box[positionend])):not([inFullscreen]):not(
+                    [customizing]
+                ) {
+                #PersonalToolbar {
+                    margin-left: 46px;
+                }
+            }
+            &:has(#sidebar-box[positionend]):not([inFullscreen]):not([customizing])
+                #PersonalToolbar {
+                margin-right: 46px;
+            }
+        }
+        @media (prefers-color-scheme: dark) {
+            #sidebar-main,
+            #sidebar-box {
+                background-image: none !important;
+            }
+            #sidebar-box {
+                --sidebar-border-color: transparent;
+            }
+            #tabbrowser-tabbox {
+                outline: none !important;
+                box-shadow: var(--content-area-shadow) /*!important*/;
+            }
+        }
+        @media (prefers-color-scheme: light) {
+            #sidebar-main,
+            #sidebar-box {
+                background-image: none !important;
+            }
+        }
+        & #sidebar-main {
+            background-color: var(--bg) !important;
+            margin-right: -9px;
+            margin-left: -9px;
+            &[positionend] {
+                margin-right: -1px;
+                margin-left: -9px;
+            }
+            @media (-moz-bool-pref: "uc.flex.hide-sidebery-completely") {
+                margin-right: -4px;
+                margin-left: -11px;
+                &[positionend] {
+                    margin-right: -3px;
+                    margin-left: -4px;
+                }
+            }
+            #tabbrowser-tabs {
+                display: none !important;
+            }
+        }
+        & #sidebar-box {
+            --browser-area-z-index-sidebar: 5;
+            background-color: var(--bg) !important;
+            &:not([positionend]) {
+                order: 0 !important;
+                margin-left: -1px;
+            }
+    
+            &[positionend] {
+                order: 5 !important;
+                margin-right: -9px;
+            }
+        }
+    }
+
+    & #sidebar-box[positionend] {
+        direction: rtl;
+    }
+
+    & #sidebar-box[positionend] > * {
+        direction: ltr;
+    }
+
+    & #sidebar-box[positionend]:-moz-locale-dir(rtl) {
+        direction: ltr;
+    }
+
+    & #sidebar-box[positionend]:-moz-locale-dir(rtl) > * {
+        direction: rtl;
+    }
+
+    /* Remove sidebar splitter */
+    & #sidebar-splitter {
+        display: none;
+    }
+
+    & #sidebar {
+        transition: min-width var(--uc-autohide-transition-duration)
+            var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) !important;
+        min-width: var(--uc-sidebar-width) !important;
+        will-change: min-width;
+    }
+
+    @media (-moz-bool-pref: "uc.flex.sidebery-hover-fast-expand") {
+        & #sidebar {
+            transition: none !important;
+        }
+    }
+
+    & #sidebar-box:hover > #sidebar {
+        min-width: var(--uc-sidebar-hover-width) !important;
+        transition: min-width var(--uc-hover-transition-duration)
+            var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay) !important;
+    }
+
+    & .sidebar-panel {
+        background-color: transparent !important;
+        color: var(--newtab-text-primary-color) !important;
+    }
+
+    & .sidebar-panel #search-box {
+        -moz-appearance: none !important;
+        background-color: rgba(249, 249, 250, 0.1) !important;
+        color: inherit !important;
+    }
+
+    /* Add sidebar divider and give it background */
+    /*
+    & #sidebar,
+    & #sidebar-header {
+        background-color: inherit !important;
+        border-inline: 1px solid rgb(80, 80, 80);
+        border-inline-width: 0px 1px;
+    }
+    */
+
+    /* Auto-hide sidebar in fullscreen or when Sidebery is fully hidden */
+    @media (-moz-bool-pref: "uc.flex.hide-sidebery-completely"),
+        (display-mode: fullscreen) {
+        &[sizemode="normal"] {
+            & #sidebar-main {
+                margin-left: -42px;
+            }
+            & #sidebar-main[positionend] {
+                margin-right: -34px;
+            }
+        }
+        & #sidebar-box:not([positionend]) {
+            /* Fixed position for left-side sidebar */
+            position: fixed;
+            left: 0px;
+            height: 100%;
+            /* Make sidebar transparent */
+            opacity: 0;
+            &:hover {
+                /* Show sidebar on hover */
+                transition: opacity var(--uc-hover-transition-duration)
+                    var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+                opacity: 1;
+            }
+        }
+
+        & #sidebar-box[positionend] {
+            /* Fixed position for right-side sidebar */
+            position: fixed;
+            right: 0.5px;
+            height: 100%;
+            opacity: 0;
+            &:hover {
+                transition: opacity var(--uc-hover-transition-duration)
+                    var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+                opacity: 1;
+            }
+        }
+    }
+
+    & #sidebar-box:not([positionend]) > :-moz-locale-dir(rtl),
+    & #sidebar-box[positionend] > * {
+        border-inline-width: 1px 0px;
+    }
+
+    /* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
+    & #sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel {
+        inset-inline: auto 0px !important;
+    }
+    & #sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel-label {
+        margin-inline: 0px !important;
+        border-left-style: solid !important;
+    }
+
+    /* Hide tabs bar for Tree style tabs (Credit u/jfgxyz on Reddit) */
+    &:not([customizing]) toolbar#TabsToolbar {
+        height: 0px;
+        min-height: 0 !important;
+        background-color: var(--bg) !important;
+    }
+    &:not([customizing]) .toolbar-items {
+        visibility: collapse;
+    }
+}
