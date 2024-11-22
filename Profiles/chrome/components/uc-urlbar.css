@@ -1,0 +1,198 @@
+/* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
+/* URL BAR */
+#urlbar {
+    border-radius: 30px !important;
+    border: 0 !important;
+}
+
+#urlbar:not(.megabar):not([focused]):hover {
+    outline: 1px solid var(--urlbar-outline) !important;
+}
+
+#urlbar[focused] {
+    border: 0 !important;
+    border-top: 1px solid var(--urlbar-border-top) !important;
+    border-bottom: 1px solid var(--urlbar-border-bottom) !important;
+    border-radius: 30px !important;
+}
+
+#urlbar[breakout][breakout-extend] {
+    border: none !important;
+    box-shadow:
+        rgba(0, 0, 0, 0.09) 0px 2px 1px,
+        rgba(0, 0, 0, 0.09) 0px 4px 2px,
+        rgba(0, 0, 0, 0.09) 0px 8px 4px,
+        rgba(0, 0, 0, 0.09) 0px 16px 8px,
+        rgba(0, 0, 0, 0.09) 0px 32px 16px !important;
+    /*
+    top: calc(
+        (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2
+    ) !important;
+    */
+    /* Firefox < v133 */
+    &:not([style*="--urlbar-width"]) {
+        left: 0 !important;
+        width: 100% !important;
+    }
+    /* Firefox >= v133 */
+    &[style*="--urlbar-width"] {
+        margin-left: 0 !important;
+        width: var(--urlbar-width) !important;
+    }
+}
+
+#urlbar-container {
+    margin-bottom: 3px;
+    display: initial;
+}
+
+#urlbar-background {
+    box-shadow: none !important;
+    border-radius: 30px !important;
+    background: var(--urlbar-bg) !important;
+}
+
+#urlbar[focused] #urlbar-background {
+    box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35) !important;
+    outline: none !important;
+}
+
+#wrapper-urlbar-container #urlbar {
+    height: var(--urlbar-height) !important;
+}
+
+/* Active Address/Search Field Dropdown */
+#urlbar[breakout][breakout-extend] > #urlbar-background {
+    outline: none !important;
+    box-shadow: none !important;
+    background: var(--urldrop-bg) !important;
+    border-radius: 15px !important;
+}
+
+#urlbar[breakout][breakout-extend] > .urlbar-input-container,
+.urlbar-input-container {
+    height: var(--urlbar-height) !important;
+    padding-block: 0px !important;
+    padding-inline: 0px !important;
+    transition: none !important;
+}
+
+/* Idendity icon button */
+#identity-icon-box.identity-box-button {
+    margin: 3px 0 3px 3px;
+    border-radius: 14px !important;
+    background-color: var(--bg) !important;
+    opacity: 0.8;
+}
+
+#identity-icon-box.identity-box-button:hover {
+    cursor: pointer;
+    background-color: var(--identity-btn-hover-color) !important;
+}
+
+/* Track protection icon */
+#tracking-protection-icon-container {
+    border-radius: 16px !important;
+}
+
+#tracking-protection-icon-container:hover {
+    cursor: pointer !important;
+}
+
+/* Star button */
+#star-button-box {
+    border-radius: 16px !important;
+}
+
+#star-button-box {
+    cursor: pointer !important;
+}
+
+/* | Borders | */
+
+.tabbrowser-tab::after {
+    border: 0 !important;
+}
+.titlebar-spacer[type="pre-tabs"] {
+    border: 0 !important;
+}
+#navigator-toolbox {
+    border: 1 !important;
+}
+
+.titlebar-spacer[type="pre-tabs"] {
+    border: 0 !important;
+}
+
+.tabbrowser-tab::after {
+    border: 0 !important;
+}
+
+#urlbar-background {
+    border: 0 !important;
+}
+
+#urlbar[open] > .urlbarView > .urlbarView-body-outer > .urlbarView-body-inner {
+    border-top: 0 !important;
+}
+
+/* Show URL buttons on Hover */
+#nav-bar:not([customizing="true"])
+    > #nav-bar-customization-target
+    > #urlbar-container:not(:hover)
+    > #urlbar:not([focused]) {
+    > .urlbar-input-container
+        > #page-action-buttons
+        > *:not(#userContext-icons, #translations-button[open], #star-button-box[open]),
+    > #tracking-protection-icon-container:not([open]) {
+        opacity: 0;
+    }
+}
+
+/* Searchmode Switcher */
+#urlbar[pageproxystate="valid"]:not([breakout-extend]):not([focused]):not([searchmode])
+    #urlbar-searchmode-switcher:not([open]) {
+    display: none;
+}
+
+#urlbar-searchmode-switcher {
+    background-color: transparent !important;
+    border-radius: 30px !important;
+    &:hover:not([open="true"]) {
+        background-color: var(--urlbar-box-hover-bgcolor) !important;
+    }
+}
+
+#searchmode-switcher-chicklet {
+    background-color: transparent !important;
+    border-radius: 30px !important;
+    padding-left: 6px;
+    &:hover:not([open="true"]) {
+        background-color: var(--urlbar-box-hover-bgcolor) !important;
+    }
+}
+
+#page-action-buttons {
+    transition: opacity 0.15s ease;
+}
+#tracking-protection-icon-container {
+    transition: opacity 0.15s ease;
+}
+
+/* Searchbar color */
+#searchbar {
+    border-radius: 30px !important;
+    background-color: color-mix(in srgb, var(--urlbar-bg) 50%, transparent) !important;
+    background-clip: border-box;
+    border: 1px solid var(--toolbar-field-border-color);
+    border-radius: var(--toolbarbutton-border-radius);
+}
+
+#PopupSearchAutoComplete {
+    border-radius: 12px;
+    --panel-shadow-margin: 0px !important;
+    background-color: var(--bg);
+    --panel-color: var(--toolbar-field-focus-color);
+    --panel-background: color-mix(in srgb, var(--urlbar-bg) 50%, transparent) !important;
+    --panel-border-color: var(--arrowpanel-border-color);
+}

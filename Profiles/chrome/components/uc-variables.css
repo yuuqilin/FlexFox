@@ -1,0 +1,186 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --uc-sidebar-header-stripe: #9651ff;
+
+        --bg: #1a1b26;
+
+        --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
+        --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
+
+        --urlbar-bg: #0d0d15;
+        --urlbar-border-top: #000;
+        --urldrop-bg: #0d0d15;
+        --urlbar-border-bottom: #404040;
+        --urlbar-height: 30px;
+        --urlbar-outline: #414868;
+
+        --fullscreen-warn: rgb(25, 25, 25);
+
+        --arrowpanel-background: var(--urlbar-bg) !important;
+        --button-hover-bgcolor: rgba(159, 159, 159, 0.35) !important;
+        --button-active-bgcolor: rgba(255, 255, 255, 0.2) !important;
+        --button-bgcolor: rgba(117, 117, 117, 0.9) !important;
+        --toolbarbutton-icon-fill-opacity: 0.8 !important;
+        --arrowpanel-border-color: rgb(55, 55, 55) !important;
+        --identity-btn-hover-color: rgba(117, 117, 117) !important;
+
+        --dark-menu-background-color: rgba(34, 34, 36, 0.5) !important;
+        --dark-menu-border-color: rgb(55, 55, 55) !important;
+        --dark-menuitem-hover-background-color: rgba(159, 159, 159, 0.35) !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --uc-sidebar-header-stripe: #ea4c89;
+
+        --bg: #f1f5f9;
+
+        --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
+        --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
+
+        --urlbar-bg: #cbd5e1;
+        --urlbar-border-top: #9ca3af;
+        --urlbar-border-bottom: #fff;
+        --urldrop-bg: #cbd5e1;
+        --urlbar-outline: #94a3b8;
+
+        --fullscreen-warn: rgb(25, 25, 25);
+
+        --arrowpanel-background: #e2e8f0 !important;
+        --button-hover-bgcolor: #9699a3 !important;
+        --button-hover-bgcolor: #cbd5e1 !important;
+        --button-active-bgcolor: #cbd5e1 !important;
+        --identity-btn-hover-color: white !important;
+    }
+}
+
+:root {
+    /* Initialize variables - do not modify values in this block */
+    --uc-sidebar-width: 0px;
+    --uc-sidebar-hover-width: 0px;
+    --uc-nav-bar-padding-right: 0px;
+    --uc-personal-toolbar-margin: 0px;
+    --uc-bookmarks-margin-left: 0px;
+    /* ---- End of initializing block ---- */
+    /* When Sidebery is active, redefine variable values - if you want to customize variable values, start here */
+    &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+        --uc-sidebar-width: 44px; /* Width of the Sidebery */
+        --uc-sidebar-hover-width: 220px; /* Width of the expanded Sidebery on hover */
+        /* Wider Sidebery width when expanded */
+        @media (-moz-bool-pref: "uc.flex.increase-sidebery-expanded-width") {
+            --uc-sidebar-hover-width: 260px;
+        }
+        /* Trigger width for expanding Sidebery on hover when fully hidden or in fullscreen */
+        @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            --uc-sidebar-width: 1px;
+
+            /* Increase trigger width in non-maximized mode to prevent window resize interference */
+            &[sizemode="normal"] {
+                --uc-sidebar-width: 22px;
+            }
+        }
+        --uc-nav-bar-padding-right: 104px; /* Space reserved on the right of the navbar for window controls */
+        --uc-personal-toolbar-margin: var(--uc-sidebar-width);
+        @media (-moz-bool-pref: "sidebar.revamp") and (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+            --uc-personal-toolbar-margin: 40px;
+        }
+        /* Add margin to align bookmarks with toolbar icons */
+        @media (-moz-bool-pref: "uc.flex.add-bookmarks-left-margin") {
+            &:not([inFullscreen]) {
+                --uc-bookmarks-margin-left: 10px;
+            }
+        }
+    }
+    @media (-moz-bool-pref: "sidebar.revamp") and (-moz-bool-pref: "sidebar.verticalTabs") {
+        --uc-personal-toolbar-margin: 37px;
+    }
+    --uc-nav-bar-margin-left: -4px;
+    --uc-autohide-transition-type: linear; /* Transition style for sidebar auto-hide */
+    --uc-autohide-transition-duration: 55ms; /* Duration of the sidebar hiding transition */
+    --uc-hover-transition-duration: 115ms; /* Duration of the sidebar expansion transition */
+    --uc-autohide-sidebar-delay: 10ms; /* Delay before auto-hiding the sidebar */
+    --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar on hover */
+    --uc-nav-bar-padding-bottom: 1px;
+    --uc-nav-bar-margin-bottom: -1px;
+    --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
+    --uc-findbar-x-position: 24.2vw; /* Sets the horizontal position of the findbar */
+    --uc-uei-icon-size: 20px; /* Icon size in the uni-extensions panel */
+    --uc-number-of-extensions-in-a-row: 4; /* Number of icons per row in the uni-extensions panel */
+
+    --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
+    --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
+    --uc-autohide-toolbar-delay: 200ms; /* Toolbar hides after a 0.2s delay */
+    --uc-hover-toolbar-delay: 80ms; /* Toolbar reveals after a 0.08s delay */
+    --uc-autohide-toolbox-delay: 200ms; /* Wait 0.1s before hiding toolbars */
+    --uc-toolbox-rotation: 82deg; /* Lower rotation for Mac (suggested around 75 degrees) */
+    /**
+     * When the window is not maximized and the toolbar is fully hidden, 
+     * this controls how far from the top edge the cursor can be to trigger toolbar expansion. 
+     * A smaller angle increases the activation range, allowing the toolbar to expand from farther away, 
+     * but this might interfere with interacting with web content.
+     * A larger angle requires the cursor to be much closer to the edge to trigger, 
+     * which can make it harder to activate the toolbar precisely. 
+     * You can adjust the angle to find a comfortable range 
+     * for triggering the toolbar without accidentally expanding it too often. 
+     */
+    &[sizemode="normal"] {
+        --uc-toolbox-rotation: 75deg;
+    }
+    &[sizemode="maximized"] {
+        --uc-toolbox-rotation: 88.5deg;
+    }
+    /**
+     * If you're using Firefox versions earlier than 130, 
+     * starting from FlexFox v1.0.0, the update to autohide_tabstoolbar_v2.css 
+     * may cause vertical shifting when switching between New Tab and regular tabs 
+     * while Sidebery is disabled and "Only Show Bookmarks Toolbar on New Tab" is enabled. 
+     * To eliminate this issue, set --uc-tabs-hide-animation-duration to 0ms and 
+     *                                 --uc-tabs-hide-animation-delay to 1ms. 
+     */
+    --uc-tabs-hide-animation-duration: 48ms; /* Duration of the horizontal tab hiding animation */
+    --uc-tabs-hide-animation-delay: 200ms; /* Delay before hiding horizontal tabs */
+
+    --urlbar-toolbar-height: 43px;
+    --bookmarks-toolbar-overlapping-browser-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding)) !important;
+}
+
+:root[uidensity="touch"] {
+    --uc-bm-padding: 7px;
+}
+
+/* Adjusted height when the search bar is in the bookmark toolbar */
+:root:has(#PersonalToolbar > #search-container) {
+    --uc-bm-height: 32px;
+}
+
+/* Faster sidebar expansion and collapse */
+@media (-moz-bool-pref: "uc.flex.sidebery-fast-hover-expand") {
+    :root {
+        --uc-hover-transition-duration: 100ms;
+        --uc-autohide-sidebar-delay: 1ms;
+        --uc-hover-sidebar-delay: 1ms;
+    }
+}
+
+/* Slower sidebar expansion and collapse */
+@media (-moz-bool-pref: "uc.flex.sidebery-slow-hover-expand") {
+    :root {
+        --uc-autohide-sidebar-delay: 10ms;
+        --uc-hover-sidebar-delay: 350ms;
+        --uc-hover-toolbar-delay: 200ms;
+    }
+}
+
+/* Icon size for Windows controls buttons */
+@media not (-moz-bool-pref: "uc.flex.revert-to-original-window-controls") {
+    :root {
+        --uc-osx-ctrls-size: 15px;
+    }
+}
+
+@media not (-moz-bool-pref: "uc.flex.disable-tabs-toolbar-autohide") {
+    :root {
+        --uc-height-of-tabs-toolbar: 40px;
+    }
+}

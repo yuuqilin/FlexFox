@@ -1,0 +1,17 @@
+/* Add text stroke */
+@media (-moz-bool-pref: "uc.flex.add-ui-text-stroke") {
+    @-moz-document regexp("^moz-extension://.*?/sidebar/sidebar.html")
+    {
+        * {
+            font-family: Chiron Hei HK !important;
+            text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
+            /*-webkit-text-stroke: 0.015em;*/
+        }
+        @media (prefers-color-scheme: dark) {
+            .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
+                text-shadow: none;
+                -webkit-text-stroke: 0.03em;
+            }
+        }
+    }
+}

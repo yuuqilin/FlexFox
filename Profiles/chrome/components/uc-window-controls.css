@@ -1,0 +1,518 @@
+/* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
+/* Fix PersonalToolbar height to prevent toolbar buttons from altering its size */
+#PersonalToolbar {
+    height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding));
+}
+
+/* Prevent navigation bar background overflow in certain themes */
+#nav-bar:not([customizing]) {
+    padding-bottom: var(--uc-nav-bar-padding-bottom) /*!important*/;
+    margin-bottom: var(--uc-nav-bar-margin-bottom) /*!important*/;
+}
+
+/* Fix urlbar height issue in v133 */
+#urlbar-container,
+#urlbar {
+    --urlbar-height: 32px !important;
+    --urlbar-container-height: 40px !important;
+}
+#urlbar-container {
+    padding-top: 5.5px !important;
+}
+/* The [style*="--urlbar-width"] attribute is no longer needed after version 133 */
+#urlbar[breakout][style*="--urlbar-width"] {
+    display: block !important;
+    position: absolute !important;
+    height: var(--urlbar-height) !important;
+    width: var(--urlbar-width) !important;
+}
+#urlbar[breakout][breakout-extend],
+#urlbar[breakout][breakout-extend-disabled][open] {
+    height: auto !important;
+    top: auto !important;
+}
+
+:root:not([customizing]) #urlbar {
+    --urlbar-toolbar-height: 43px;
+    /* The [style*="--urlbar-width"] attribute is no longer needed after version 133 */
+    &:not([style*="--urlbar-width"]) {
+        top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+        left: 0 !important;
+    }
+}
+
+/*
+:root:not([customizing]) #urlbar {
+    -urlbar-toolbar-height: calc(46px + var(--uc-nav-bar-margin-bottom)) !important;
+}
+*/
+
+/* Hide menubar window controls when menubar is inactive */
+:root[tabsintitlebar="true"]:not([customizing]) {
+    #toolbar-menubar[inactive="true"] > .titlebar-buttonbox-container {
+        display: none !important;
+    }
+
+    /* Hide TabsToolbar and nav-bar window controls when menubar is active */
+    #toolbar-menubar:not([inactive="true"]) ~ :is(#TabsToolbar, #nav-bar) > .titlebar-buttonbox-container {
+        display: none !important;
+    }
+
+    /* Hide TabsToolbar window controls when native vertical tabs are enabled */
+    #navigator-toolbox[tabs-hidden] > #TabsToolbar > .titlebar-buttonbox-container {
+        display: none !important;
+    }
+
+    #navigator-toolbox[tabs-hidden] > #nav-bar > .titlebar-spacer[type="post-tabs"] {
+        display: none !important;
+    }
+
+    #navigator-toolbox[tabs-hidden] > #nav-bar > .titlebar-buttonbox-container {
+        margin-left: -4px;
+    }
+
+    #navigator-toolbox .titlebar-spacer[type="pre-tabs"] {
+        display: none !important;
+    }
+}
+
+/* Adjust menubar (title bar) height */
+:root[tabsintitlebar="true"]:not([customizing]):not([inFullscreen]) {
+    #navigator-toolbox #toolbar-menubar[autohide="false"] {
+        margin-top: 0px;
+        margin-bottom: -7px;
+    }
+
+    #navigator-toolbox #toolbar-menubar[autohide="false"] > .titlebar-buttonbox-container {
+        margin-top: -7px;
+        margin-bottom: 0px;
+    }
+
+    #navigator-toolbox #toolbar-menubar[autohide="true"]:not([inactive="true"]) {
+        margin-top: 0px;
+        margin-bottom: -11px;
+    }
+
+    #navigator-toolbox #toolbar-menubar[autohide="true"]:not([inactive="true"]) > .titlebar-buttonbox-container {
+        margin-top: -7px;
+        margin-bottom: 0px;
+    }
+}
+
+/* Increase left spacing for bookmarks */
+#personal-bookmarks {
+    margin-left: var(--uc-bookmarks-margin-left);
+}
+
+/* Fix popup position */
+#appMenu-popup {
+    margin-inline: -244px !important;
+}
+
+/*=============================================
+=              Windows Controls               =
+=============================================*/
+
+/* ----- Close/min/max fix ----- */
+:root[tabsintitlebar="true"]:not([inFullscreen]):not([customizing])
+    :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]))
+    #navigator-toolbox
+    #TabsToolbar
+    .titlebar-buttonbox-container {
+    visibility: visible !important;
+    display: block;
+    position: absolute !important;
+    top: 2px !important;
+    left: unset !important;
+    right: 0 !important;
+}
+
+/*
+#TabsToolbar .titlebar-min {
+    -moz-box-ordinal-group: 0 !important;
+}
+
+#TabsToolbar .titlebar-max,
+.titlebar-restore {
+    -moz-box-ordinal-group: 1 !important;
+}
+
+#TabsToolbar .titlebar-close {
+    -moz-box-ordinal-group: 2 !important;
+}
+
+&[inFullscreen] #navigator-toolbox #TabsToolbar .titlebar-buttonbox-container {
+    -moz-box-ordinal-group: 1 !important;
+}
+
+#navigator-toolbox #TabsToolbar .titlebar-buttonbox-container {
+    -moz-box-ordinal-group: 1 !important;
+}
+*/
+/*==========  End of Section Windows Controls  ===========*/
+
+/*=========================================================
+=     Window control placeholder support in fullscreen    =
+=========================================================*/
+
+/* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/window_control_placeholder_support.css */
+/* 7eca4b1 */
+:root[sizemode="fullscreen"]
+    :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+    #TabsToolbar > .titlebar-buttonbox-container:last-child {
+        position: absolute;
+        display: flex;
+        top: 0;
+        right: 0;
+        height: 40px;
+    }
+
+    /* ??? */
+    #TabsToolbar > .titlebar-buttonbox-container:last-child {
+        height: 32px;
+    }
+}
+/*
+.titlebar-buttonbox {
+    color: var(--toolbar-color);
+}
+*/
+
+/**
+ * Note: When native vertical tabs are enabled, 
+ * the current Nightly version doesn't auto-hide nav-bar window controls in fullscreen, 
+ * so placeholder support is not required.
+ */
+/*
+#navigator-toolbox:not([tabs-hidden]) .titlebar-buttonbox-container {
+    display: none;
+}
+*/
+
+/*=====  End of Section Window control placeholder support in fullscreen  ======*/
+
+/* Line up the Windows controls with the rest of the icons in the toolbar. */
+:root[inFullscreen] .titlebar-buttonbox-container {
+    padding-top: 2px;
+}
+
+.titlebar-buttonbox {
+    z-index: 3 !important;
+    padding-right: 3px;
+}
+
+.titlebar-buttonbox * {
+    border-radius: 5px;
+    width: 35px;
+    height: 38px;
+}
+
+/*=============================================
+=                  Nav Bar                    =
+=============================================*/
+
+/* Adjust left margin of the navigation bar to align toolbar icons with sidebar */
+#nav-bar:not([customizing]) {
+    margin-left: var(--uc-nav-bar-margin-left);
+}
+
+:root[inFullscreen] {
+    --uc-nav-bar-margin-left: -5px;
+    --uc-findbar-set-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
+}
+
+/* Fix issue with missing window controls. */
+#titlebar,
+#TabsToolbar {
+    will-change: unset !important;
+    transition: none !important;
+    opacity: 1 !important;
+}
+
+/* ----  Move nav-bar to make room for window controls ---- */
+:root[tabsintitlebar="true"]:not([customizing]) #nav-bar {
+    padding-left: 0px;
+    padding-right: var(--uc-nav-bar-more-padding-right, var(--uc-nav-bar-padding-right)) !important;
+}
+
+:root:not([inFullscreen]) {
+    /**
+     * When the menu bar is enabled, the nav-bar no longer needs the padding reserved for the window controls on the right. 
+     * In this case, the padding should either be reduced by the width of the window controls or set to 0.
+     */
+    #navigator-toolbox:has(#toolbar-menubar[autohide="false"], #toolbar-menubar[autohide="true"]:not([inactive="true"]))
+        #nav-bar {
+        --uc-nav-bar-less-padding-right: calc(
+            var(--uc-nav-bar-more-padding-right, 0px) - var(--uc-nav-bar-padding-right)
+        );
+        padding-right: var(--uc-nav-bar-less-padding-right, 0px) !important;
+    }
+
+    @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+        --uc-findbar-set-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
+    }
+
+    @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") and (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+        --uc-nav-bar-margin-left: -4px;
+    }
+
+    @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
+        --uc-nav-bar-margin-left: calc(var(--uc-sidebar-width) - 4px);
+        /*! ----   More Padding Here!  ---- */
+        /**
+         * When the top toolbox is hidden but Sidebery is visible, 
+         * the toolbox is shifted to the right by the width of Sidebery, 
+         * causing it to overflow off-screen. To fix this, 
+         * the padding on the right (originally reserved for the window controls) 
+         * must be increased by the width of Sidebery to bring the toolbox back on-screen.
+         */
+        --uc-nav-bar-more-padding-right: calc(var(--uc-nav-bar-padding-right) + var(--uc-sidebar-width));
+
+        /* Remove extra padding for nav-bar window controls when native vertical tabs are enabled */
+        &:not([sizemode="normal"]) :has(#sidebar-box:not([positionend])) #navigator-toolbox[tabs-hidden] {
+            --uc-nav-bar-more-padding-right: calc(var(--uc-sidebar-width) - 4px);
+        }
+
+        :has(#sidebar-box[positionend]) {
+            /*! Potential issue: This variable declaration must be able to override the local variables in #navigator-toolbox. */
+            --uc-nav-bar-margin-left: -4px;
+            .titlebar-buttonbox-container {
+                padding-right: var(--uc-sidebar-width);
+            }
+            #navigator-toolbox:has(
+                    #toolbar-menubar[autohide="false"],
+                    #toolbar-menubar[autohide="true"]:not([inactive="true"])
+                ) {
+                &[tabs-hidden] #nav-bar {
+                    padding-right: var(--uc-sidebar-width) !important;
+                }
+            }
+        }
+
+        :has(#sidebar-box:not([positionend])) {
+            /* Firefox < v133 */
+            /*
+            #navigator-toolbox
+                :is(#toolbar-menubar[autohide="false"], #toolbar-menubar[autohide="true"]:not([inactive="true"])) {
+                margin-left: var(--uc-sidebar-width);
+                width: calc(100% - var(--uc-sidebar-width));
+            }
+            */
+            /* Firefox >= v133 */
+            #navigator-toolbox:has(
+                    #toolbar-menubar[autohide="false"],
+                    #toolbar-menubar[autohide="true"]:not([inactive="true"])
+                ) {
+                #toolbar-menubar {
+                    margin-left: var(--uc-sidebar-width);
+                    /* Firefox >= v128 */
+                    width: calc(100% - var(--uc-sidebar-width));
+                    /* Firefox >= v133 */
+                    /*
+                    padding-right: var(--uc-sidebar-width) !important;
+                    */
+                }
+                /* Firefox >= v133 */
+                &[tabs-hidden] #nav-bar {
+                    padding-right: var(--uc-sidebar-width) !important;
+                }
+            }
+        }
+    }
+}
+
+/**
+ * When native vertical tabs are enabled, 
+ * the windows controls on the TabsToolbar are disabled, 
+ * so the nav-bar no longer needs to reserve space on the right for these controls, 
+ * and the padding should be reset to 0. 
+ * 
+ * In the styles above, we calculate the padding for cases where the toolbox 
+ * is fully hidden but Sidebery is visible, and store it in the new variable 
+ * --uc-nav-bar-more-padding-right. To account for this case, we reset 
+ * --uc-nav-bar-more-padding-right here as well.
+ */
+#navigator-toolbox[tabs-hidden] {
+    --uc-nav-bar-more-padding-right: 0px;
+}
+/*==========  End of Section Nav Bar  ===========*/
+
+/*=============================================
+=               PersonalToolbar               =
+=============================================*/
+
+/* Offset bookmarks toolbar horizontally when Sidebery is visible to prevent overlap with sidebar */
+@media not (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+    :root:not([inFullscreen]):not([customizing]) {
+        :has(#sidebar-box[positionend]) #PersonalToolbar {
+            margin-right: var(--uc-personal-toolbar-margin);
+            width: calc(100% - var(--uc-personal-toolbar-margin));
+        }
+        :has(#sidebar-box:not([positionend])) #PersonalToolbar {
+            margin-left: var(--uc-personal-toolbar-margin);
+            width: calc(100% - var(--uc-personal-toolbar-marginh));
+        }
+    }
+}
+
+/**
+ * Avoid overlap of the bookmarks toolbar by the sidebar
+ * when "Only Show Bookmarks Toolbar on New Tab" is enabled for Firefox < 130 
+ */
+:root[BookmarksToolbarOverlapsBrowser] {
+    #navigator-toolbox {
+        margin-bottom: 0 !important;
+    }
+    #browser {
+        margin-top: calc(-1 * var(--bookmarks-toolbar-overlapping-browser-height));
+    }
+    #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+        padding-top: 0px !important;
+        @media not (-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") {
+            margin-top: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding));
+        }
+    }
+}
+
+/**
+ * Avoid overlap of the bookmarks toolbar by the sidebar
+ * when "Only Show Bookmarks Toolbar on New Tab" is enabled for Firefox >= 130 
+ */
+@media (-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") {
+    :root:not([inFullscreen]):not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
+        /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
+        --uc-findbar-set-top: calc(-1 * var(--uc-bm-padding));
+
+        :has(#PersonalToolbar[collapsed="false"])
+            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+            padding-top: 0px;
+            margin-top: calc(-1 * (var(--uc-bm-height) + 2 * var(--uc-bm-padding)));
+        }
+    }
+}
+/*==========  End of Section PersonalToolbar  ===========*/
+
+/*=============================================
+=             Revamped Sidebar                =
+=============================================*/
+
+@media (-moz-bool-pref: "sidebar.revamp") {
+    #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+        /* Position Sidebery at the screen edge to simplify hover-triggered expansion */
+        --browser-area-z-index-sidebar: 5;
+        background-color: var(--bg) !important;
+
+        &:not([positionend]) {
+            order: 0 !important;
+            margin-left: -1px;
+        }
+
+        &[positionend] {
+            order: 5 !important;
+            margin-right: -9px;
+        }
+    }
+
+    #sidebar-main {
+        background-color: var(--bg) !important;
+        margin-right: -9px;
+        margin-left: -9px;
+    }
+
+    :root :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+        #sidebar-main {
+            &[positionend] {
+                margin-right: -1px;
+                margin-left: -9px;
+            }
+
+            /**
+             * Remove native vertical tabs when Sidebery is enabled 
+             * but retain the tab bar's space to align the revamped sidebar toolbar buttons underneath.
+             */
+            #tabbrowser-tabs {
+                display: none !important;
+            }
+        }
+    }
+
+    :root[inFullscreen]
+        :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+        #sidebar-main {
+            margin-right: -8px;
+            margin-left: -14px;
+
+            &[positionend] {
+                margin-right: -7px;
+                margin-left: -7px;
+            }
+        }
+    }
+
+    @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+        :root :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+            #sidebar-main {
+                margin-right: -8px;
+                margin-left: -14px;
+
+                &[positionend] {
+                    margin-right: -7px;
+                    margin-left: -7px;
+                }
+            }
+        }
+
+        /**
+         * Offset the bookmarks toolbar to prevent overlap 
+         * when the revamped sidebar is enabled and Sidebery is fully hidden, 
+         * as the revamped sidebar will still display.
+         */
+        :root:not([inFullscreen]):not([customizing]) {
+            :has(#sidebar-box[positionend]) #PersonalToolbar {
+                margin-right: var(--uc-personal-toolbar-margin);
+                width: calc(100% - var(--uc-personal-toolbar-margin));
+            }
+            :has(#sidebar-box:not([positionend])) #PersonalToolbar {
+                margin-left: var(--uc-personal-toolbar-margin);
+                width: calc(100% - var(--uc-personal-toolbar-margin));
+            }
+        }
+    }
+
+    /* Dark theme specific styles */
+    @media (prefers-color-scheme: dark) {
+        #sidebar-main {
+            background-image: none !important;
+        }
+
+        #sidebar-box {
+            --sidebar-border-color: transparent;
+            background-image: none !important;
+        }
+
+        #sidebar-box ~ #tabbrowser-tabbox {
+            outline: none !important;
+            box-shadow: var(--content-area-shadow);
+        }
+    }
+
+    /* Light theme specific styles */
+    @media (prefers-color-scheme: light) {
+        #sidebar-main,
+        #sidebar-box {
+            background-image: none !important;
+        }
+    }
+}
+
+/* Reposition nav-bar window controls when native vertical tabs are enabled */
+@media (-moz-bool-pref: "sidebar.verticalTabs") {
+    :root:not([inFullscreen]) #nav-bar > .titlebar-buttonbox-container {
+        margin-top: 2px;
+    }
+
+    :root[inFullscreen] #nav-bar > .titlebar-buttonbox-container {
+        margin-top: 0px;
+    }
+}
+/*==========  End of Section Revamped Sidebar  ===========*/

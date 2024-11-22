@@ -1,0 +1,115 @@
+/* Remove labels from bookmarks */
+@media (-moz-bool-pref: "uc.flex.remove-bookmarks-labels") {
+    #personal-bookmarks .toolbarbutton-text {
+        display: none !important;
+    }
+}
+
+@media (-moz-bool-pref: "uc.flex.remove-bookmarks-folder-icons") {
+    /* No Favicon Available - Don't display default icon */
+    toolbarbutton.bookmark-item:not([container]):not([image]) image {
+        display: none !important;
+    }
+
+    /* Show Favicon Bookmarks */
+    .bookmark-item > .toolbarbutton-icon {
+        display: -moz-box !important;
+        background-position: 0px 1px !important;
+        padding-right: 0px !important;
+        margin: 0 !important;
+    }
+
+    /* Hide label text for items with favicon */
+    #personal-bookmarks toolbarbutton[image] label {
+        display: none !important;
+    }
+
+    /* Hide folder icon for folders */
+    .bookmark-item[container] {
+        /* Method 2 */
+        /*background-image: none !important;*/
+        > .toolbarbutton-icon {
+            margin-right: 5px !important;
+            display: none !important;
+        }
+    }
+}
+
+/* Add text stroke */
+@media (-moz-bool-pref: "uc.flex.add-ui-text-stroke") {
+    * {
+        /*font-family:  !important;*/
+        text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
+        /*-webkit-text-stroke: 0.015em;*/
+    }
+
+    #urlbar-input {
+        text-shadow: none;
+        /*-webkit-text-stroke: 0;*/
+    }
+}
+
+/* Remove zoom icon from urlbar */
+#urlbar-zoom-button {
+    display: none !important;
+}
+
+/* Reduce menu spacing */
+menupopup > menuitem,
+menupopup > menu {
+    padding-block: 2px !important;
+}
+
+/* Reduce Hamburger menu spacing */
+:root {
+    --arrowpanel-menuitem-padding: 4px !important;
+}
+
+/* Enable bookmarks toolbar in full-screen mode */
+:root[inFullscreen] #navigator-toolbox #PersonalToolbar {
+    visibility: unset !important;
+}
+
+/**
+ * Removes the private-browsing-mode indicator from tabs toolbar and changes the menu-button icon 
+ * to the private-browsing indicator in private windows
+ */
+#private-browsing-indicator-with-label,
+.private-browsing-indicator-with-label,
+.private-browsing-indicator {
+    display: none;
+}
+:root[privatebrowsingmode="temporary"] #PanelUI-menu-button {
+    list-style-image: url("chrome://global/skin/icons/indicator-private-browsing.svg") !important;
+}
+
+/* Prevent bookmarks and search bar from growing */
+toolbar:not(#TabsToolbar) > #personal-bookmarks {
+    flex-grow: 0 !important;
+}
+
+toolbar:not(#TabsToolbar) > #search-container {
+    flex-grow: 0 !important;
+    width: 20% !important;
+}
+
+/* Remove 'Show More Bookmarks' chevron when toolbar isn't overflowing */
+/* Use :not(:has(foo[A])) not :has(foo:not([A])) - when multiple bookmark-items exist, 
+  :not(:has()) checks NONE are hidden, while :has(:not()) matches if ANY are visible */
+#PlacesToolbarItems:not(:has(> .bookmark-item[style="visibility: hidden;"])) + #PlacesChevron {
+    display: none !important;
+}
+
+/* Remove white flash before page load */
+/*
+@-moz-document url-prefix(about:), url-prefix(chrome://browser)
+{
+    browser[type="content"],
+    tabpanels {
+        background: #1a1a1a !important;
+    }
+}
+*/
+#tabbrowser-tabpanels {
+    background: hsl(240, 4%, 10%) !important;
+}

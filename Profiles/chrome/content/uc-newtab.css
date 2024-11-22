@@ -1,0 +1,211 @@
+/* Modified from https://raw.githubusercontent.com/bmFtZQ/edge-frfox/main/chrome/content/newtab.css */
+@-moz-document url-prefix("about:newtab"),
+url-prefix("about:home") {
+    /* Search bar. */
+    .search-wrapper {
+        & .search-handoff-button {
+            border-radius: 99px !important;
+            background-position: 12px !important;
+            padding-inline-start: 48px !important;
+            white-space: nowrap !important;
+            text-overflow: ellipsis !important;
+            --elevation: 4;
+            box-shadow:
+                0 0 calc((var(--elevation) * 0.225px) + 2px) rgb(0 0 0 / 0.11),
+                0 calc(var(--elevation) * 0.4px) calc((var(--elevation) * 0.9px)) rgb(0 0 0 / 0.13) !important;
+
+            &:hover {
+                --elevation: 6;
+            }
+        }
+
+        & .search-inner-wrapper {
+            min-height: 44px !important;
+        }
+
+        &.fake-focus:not(.search.disabled) .search-handoff-button {
+            border-color: transparent !important;
+            outline: 2px solid var(--newtab-primary-action-background) !important;
+            outline-offset: -1px !important;
+        }
+
+        &.search-disabled .search-handoff-button {
+            opacity: 0 !important;
+        }
+
+        .search-handoff-button .fake-caret {
+            inset-inline-start: 48px !important;
+            top: 13px !important;
+        }
+
+        @media (height > 700px) {
+            .fixed-search & {
+                padding: 15px 0 !important;
+                min-height: auto !important;
+                border-bottom: none !important;
+            }
+        }
+    }
+
+    .fake-textbox {
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .outer-wrapper.only-search {
+        display: flex !important;
+        padding: 30px !important;
+    }
+
+    /* Recent activity / Pocket cards */
+    .card-outer {
+        --uc-border-radius: 8px;
+
+        &,
+        & .card,
+        & .ds-card-grid.ds-card-grid-border .ds-card:not(.placeholder) {
+            border-radius: var(--uc-border-radius) !important;
+        }
+
+        & .card,
+        & .ds-card-grid.ds-card-grid-border .ds-card:not(.placeholder) {
+            box-shadow:
+                rgb(0 0 0 / 0.14) 0px 1px 2px,
+                rgb(0 0 0 / 0.12) 0px 0px 2px !important;
+        }
+
+        & .card-preview-image-outer,
+        & .ds-card-grid.ds-card-grid-border .ds-card:not(.placeholder) .img-wrapper .img img {
+            border-radius: var(--uc-border-radius) var(--uc-border-radius) 0 0 !important;
+        }
+    }
+
+    /* Add background & adjust padding for Recent activity & Pocket section. */
+    .collapsible-section:not(.top-sites) {
+        background-color: var(--newtab-background-color) !important;
+        border-radius: 12px !important;
+        padding: 10px 20px 20px !important;
+
+        & .section-list {
+            gap: 12px !important;
+        }
+    }
+}
+
+/* private browsing newtab */
+@-moz-document url-prefix(about:privatebrowsing) {
+    :root {
+        --uc-wordmark-color: light-dark(#737373, #fff);
+        --uc-background-color-secondary: light-dark(#fff, #4a4a4a);
+
+        @media (-moz-bool-pref: "browser.theme.dark-private-windows") {
+            color-scheme: dark !important;
+        }
+    }
+
+    /* Private browsing search bar. */
+    .search-inner-wrapper {
+        height: 44px !important;
+
+        .search-handoff-button,
+        .search-handoff-button:active,
+        .search-handoff-button:enabled:hover:active {
+            background-color: var(--uc-background-color-secondary) !important;
+            border: 0 !important;
+            border-radius: 99px !important;
+            padding-inline-start: 48px !important;
+            --elevation: 4;
+            box-shadow:
+                0 0 calc((var(--elevation) * 0.225px) + 2px) rgb(0 0 0 / 0.11),
+                0 calc(var(--elevation) * 0.4px) calc((var(--elevation) * 0.9px)) rgb(0 0 0 / 0.13) !important;
+
+            &:hover {
+                --elevation: 6;
+            }
+
+            &.focused:not(.disabled) {
+                box-shadow: none !important;
+                outline: 2px solid var(--in-content-focus-outline-color) !important;
+                outline-offset: -1px !important;
+            }
+
+            &.disabled {
+                opacity: 0 !important;
+            }
+
+            & .fake-textbox {
+                color: var(--in-content-page-color) !important;
+            }
+        }
+    }
+
+    .wordmark {
+        fill: var(--uc-wordmark-color) !important;
+    }
+}
+
+@media (-moz-bool-pref: "uc.flex.newtab-background") {
+    @-moz-document url(about:newtab),
+  url(about:home),
+  url(about:privatebrowsing) {
+        body {
+            /* Specify both jpg and png file extensions, but jpg images will always
+             * have a higher priority. */
+            --bg-0: url(../background-0.jpg), url(../background-0.png);
+            --bg-1: url(../background-1.jpg), url(../background-1.png);
+            --newtab-element-hover-color: rgb(239 239 239 / 0.3) !important;
+            --newtab-element-active-color: rgb(239 239 239 / 0.45) !important;
+            --text-shadow: 0 1px 2px #000;
+            --icon-shadow: drop-shadow(0 0.3px 0.6px #000);
+            background-color: #252525 !important;
+            background-image: var(--bg-0) !important;
+            background-position: center !important;
+            background-size: cover !important;
+            background-attachment: fixed !important;
+
+            :root[lwt-newtab-brighttext] &,
+            :root.private & {
+                background-image: var(--bg-1), var(--bg-0) !important;
+                --newtab-element-hover-color: rgb(66 66 66 / 0.4) !important;
+                --newtab-element-active-color: rgb(66 66 66 / 0.55) !important;
+            }
+
+            @media not (-moz-bool-pref: "browser.theme.dark-private-windows") {
+                :root.private & {
+                    background-image: var(--bg-0) !important;
+
+                    @media (prefers-color-scheme: dark) {
+                        background-image: var(--bg-1), var(--bg-0) !important;
+                    }
+                }
+            }
+        }
+
+        /* Change text colour & add backgrounds to text over the background. */
+        .top-site-outer .title {
+            text-shadow: var(--text-shadow) !important;
+            color: #fff !important;
+            -moz-osx-font-smoothing: auto !important;
+        }
+
+        .wordmark,
+        .icon-settings,
+        .top-site-outer .context-menu-button {
+            filter: var(--icon-shadow) !important;
+            color: #fff !important;
+            fill: currentColor !important;
+        }
+
+        .top-site-outer .title .sponsored-label {
+            color: #eee !important;
+        }
+
+        /* Add transparent sticky search header. */
+        @media (height > 700px) {
+            .fixed-search .search-wrapper {
+                border-bottom: 0 !important;
+                background: transparent linear-gradient(#0004, transparent) !important;
+            }
+        }
+    }
+}

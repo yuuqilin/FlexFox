@@ -1,0 +1,112 @@
+/* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
+/* 7baf1d3 */
+@media (-moz-bool-pref: "sidebar.verticalTabs") {
+    #sidebar-main:has(> [expanded]) {
+        overflow: visible !important;
+        max-width: var(--tab-collapsed-width);
+        z-index: var(--browser-area-z-index-toolbox-while-animating);
+        transition: z-index 0s linear var(--uc-tabs-hide-duration);
+    }
+    #sidebar-main > [expanded] {
+        --tab-pinned-horizontal-count: 5; /* This needs to match whatever is used in sidebar-main.css - currently 5 */
+        background: inherit;
+        overflow: hidden;
+        min-width: var(--tab-collapsed-width);
+        transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay);
+        border-inline: 0.01px solid var(--chrome-content-separator-color);
+        border-inline-width: 0 0.01px;
+        &[positionend] {
+            transition-property: min-width, transform;
+            border-inline-width: 0.01px 0;
+        }
+    }
+    #sidebar-main > [expanded]:hover {
+        min-width: calc(
+            var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
+                var(--tab-pinned-container-margin-inline-expanded) + 1px
+        );
+        transition-delay: 0ms !important;
+        &[positionend] {
+            transform: translateX(calc(var(--tab-collapsed-width) - 100%));
+        }
+    }
+}
+
+@media not ((-moz-bool-pref: "sidebar.verticalTabs") or (-moz-bool-pref: "uc.flex.fully-hide-toolbox") or (-moz-bool-pref: "uc.flex.disable-tabs-toolbar-autohide")) {
+    :root:not([inFullscreen]) {
+        /* Hide the native horizontal tab bar */
+        &:not([customizing], [chromehidden~="menubar"]) #TabsToolbar {
+            margin-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height));
+        }
+        #navigator-toolbox {
+            /* The z-index property is no longer needed after version 133 */
+            z-index: 5;
+            transition: margin-bottom var(--uc-tabs-hide-animation-duration) ease-out
+                var(--uc-tabs-hide-animation-delay) !important;
+            --browser-area-z-index-toolbox: 3;
+        }
+        #TabsToolbar:not([customizing]) {
+            visibility: hidden;
+            transition:
+                visibility 0ms linear var(--uc-tabs-hide-animation-delay),
+                margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay) !important;
+        }
+        /* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
+        #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
+            max-height: var(--tab-min-height);
+        }
+        .tab-label {
+            line-height: 20px !important;
+        }
+        &[uidensity="compact"] .tab-label {
+            line-height: 18px !important;
+        }
+        /* ---- Show tab bar on hover when Sidebery is inactive ---- */
+        /**
+         * Speed hack: If the property content in the declaration block does not define variables, 
+         * :root :has() can be used instead of :root:has(). 
+         * However, this may increase the risk of variable overrides, leading to unpredictable outcomes.
+         * Avoid using :not(:has(foo[A]:not([B]))); 
+         * instead, use :has(foo[B], foo:not([A])).
+         */
+        :has(
+                #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][hidden],
+                #sidebar-box:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"])
+            ) {
+            &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:hover {
+                margin-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height));
+            }
+            #navigator-toolbox:hover {
+                transition-delay: 0s !important;
+                /* Direct child selectors can be used starting from version 133 */
+                #TabsToolbar {
+                    visibility: visible;
+                    margin-bottom: 0px;
+                    transition-delay: 18ms, 0ms !important;
+                }
+            }
+        }
+    }
+}
+
+/* Hide tabs bar for Tree style tabs (Credit u/jfgxyz on Reddit) */
+:root[inFullscreen]:not([customizing])
+    :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+    /*toolbar#TabsToolbar {
+        height: 0px;
+        min-height: 0 !important;
+        background-color: var(--bg) !important;
+    }*/
+    .toolbar-items {
+        visibility: collapse;
+    }
+}
+
+@media (-moz-bool-pref: "uc.flex.disable-tabs-toolbar-autohide"), (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+    :root:not([inFullscreen]):not([customizing])
+        :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+        .toolbar-items {
+            visibility: collapse;
+        }
+    }
+}

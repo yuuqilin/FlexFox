@@ -1,0 +1,709 @@
+/* Remove text stroke */
+/*
+* {
+    font-family: !important;
+    text-shadow: none;
+    -webkit-text-stroke: 0;
+}
+*/
+
+/* Add image to background */
+/*
+#root {
+    --bg-img: url("data:image/png;base64,insert your image base64 code here") !important;
+    --bg-size: cover !important;
+    background-image: var(--bg-img) !important;
+    background-repeat: no-repeat !important;
+}
+
+.NavigationBar {
+    background-color: transparent;
+}
+
+.PinnedTabsBar {
+    background-color: transparent;
+}
+
+.new-tab-btns {
+    background-color: transparent !important;
+}
+
+.new-tab-btns::after {
+    display: none !important;
+}
+
+.bottom-space {
+    background-color: transparent !important;
+}
+*/
+
+@media (prefers-color-scheme: light) {
+    #root {
+        /* Tab and PinnedTab height adjustment */
+        --tabs-height: 33px;
+        --tabs-pinned-height: var(--tabs-height);
+        --tabs-pinned-width: 40px;
+
+        /* Light Theme base settings */
+        --frame-bg: #f1f5f9 !important;
+        --toolbar-bg: #f1f5f9 !important;
+        --bg: #f1f5f9 !important;
+        --warn: #fca5a5 !important;
+    }
+
+    /* Override color of selected tab */
+    #root[data-act-el-color-scheme="light"] {
+        --frame-fg: #333;
+        --active-el-fg: #000;
+        --tabs-activated-bg: #ea4c895e !important;
+        --active-el-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6), 0 1px 3px -1px rgba(0, 0, 0, 0.196);
+    }
+
+    #root[data-frame-color-scheme="light"] .Tab[data-colorized="true"] {
+        --tabs-color-layer-opacity: 0;
+        --tabs-activated-color-layer-opacity: 0;
+    }
+
+    #root[data-frame-color-scheme="light"] .Tab:is([data-active="true"], [data-selected="true"]) .color-layer {
+        opacity: var(--tabs-activated-color-layer-opacity);
+    }
+
+    .Tab[data-selected="true"] .body {
+        --frame-el-overlay-selected-border: var(--active-el-shadow);
+        background-color: color-mix(in srgb, var(--tabs-activated-bg) 90%, transparent);
+        box-shadow: var(--active-el-shadow);
+    }
+
+    /* Add gradient colors to icon and label of group folder */
+    .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
+        --tabs-normal-fg: hsl(0 73% 41%);
+        --tabs-activated-fg: hsl(0 73% 41%);
+        /*filter: contrast(120%);*/
+        display: flex;
+    }
+
+    /* Align background color with length of text */
+    .Tab[data-group="true"][data-parent="true"] .body .t-box {
+        display: flex;
+    }
+
+    .Tab[data-group="true"][data-parent="true"] .body .fav > svg {
+        background: linear-gradient(45deg, hsl(0 73% 41%), hsl(1 84% 60% / 75%));
+        fill: transparent;
+        mask: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9ncm91cCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTYgMTYiIHN0eWxlPSIvKiEgbWFzazogbGluZWFyLWdyYWRpZW50KCA0NWRlZywgaHNsKDQyMCAxMDAlIDYyJSksIGhzbCgzNTAgMTAwJSA1OSUpICk7ICovIj48cGF0aCBkPSJNMCAzYzAtMS4xLjktMiAyLTJoNC41OWExIDEgMCAwIDEgLjcuM2wxLjQyIDEuNGExIDEgMCAwIDAgLjcuM2g1LjA5Yy44MyAwIDEuNS42NyAxLjUgMS41djhjMCAuODMtLjY3IDEuNS0xLjUgMS41aC0xM0ExLjUgMS41IDAgMCAxIDAgMTIuNVYzWiI+PC9wYXRoPjwvc3ZnPg==");
+    }
+
+    /* Invert Github's dark favicon in light theme */
+    .Tab
+        .fav-icon[src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNiAwQzcuMTYgMCAwIDcuMTYgMCAxNkMwIDIzLjA4IDQuNTggMjkuMDYgMTAuOTQgMzEuMThDMTEuNzQgMzEuMzIgMTIuMDQgMzAuODQgMTIuMDQgMzAuNDJDMTIuMDQgMzAuMDQgMTIuMDIgMjguNzggMTIuMDIgMjcuNDRDOCAyOC4xOCA2Ljk2IDI2LjQ2IDYuNjQgMjUuNTZDNi40NiAyNS4xIDUuNjggMjMuNjggNSAyMy4zQzQuNDQgMjMgMy42NCAyMi4yNiA0Ljk4IDIyLjI0QzYuMjQgMjIuMjIgNy4xNCAyMy40IDcuNDQgMjMuODhDOC44OCAyNi4zIDExLjE4IDI1LjYyIDEyLjEgMjUuMkMxMi4yNCAyNC4xNiAxMi42NiAyMy40NiAxMy4xMiAyMy4wNkM5LjU2IDIyLjY2IDUuODQgMjEuMjggNS44NCAxNS4xNkM1Ljg0IDEzLjQyIDYuNDYgMTEuOTggNy40OCAxMC44NkM3LjMyIDEwLjQ2IDYuNzYgOC44MiA3LjY0IDYuNjJDNy42NCA2LjYyIDguOTggNi4yIDEyLjA0IDguMjZDMTMuMzIgNy45IDE0LjY4IDcuNzIgMTYuMDQgNy43MkMxNy40IDcuNzIgMTguNzYgNy45IDIwLjA0IDguMjZDMjMuMSA2LjE4IDI0LjQ0IDYuNjIgMjQuNDQgNi42MkMyNS4zMiA4LjgyIDI0Ljc2IDEwLjQ2IDI0LjYgMTAuODZDMjUuNjIgMTEuOTggMjYuMjQgMTMuNCAyNi4yNCAxNS4xNkMyNi4yNCAyMS4zIDIyLjUgMjIuNjYgMTguOTQgMjMuMDZDMTkuNTIgMjMuNTYgMjAuMDIgMjQuNTIgMjAuMDIgMjYuMDJDMjAuMDIgMjguMTYgMjAgMjkuODggMjAgMzAuNDJDMjAgMzAuODQgMjAuMyAzMS4zNCAyMS4xIDMxLjE4QzI3LjQyIDI5LjA2IDMyIDIzLjA2IDMyIDE2QzMyIDcuMTYgMjQuODQgMCAxNiAwVjBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K"] {
+        filter: invert();
+    }
+
+    #root .Tab {
+        --tabs-indent: 7px;
+    }
+
+    /* TABS */
+
+    .Tab .lvl-wrapper:after {
+        display: none;
+    }
+
+    .Tab {
+        margin: auto;
+        width: 94%;
+        border-radius: 3px;
+    }
+
+    /* Styling the tab close button */
+    .Tab .close > svg:hover {
+        border-radius: 3px;
+        background: var(--warn) !important;
+        opacity: 80%;
+    }
+
+    .Tab .title {
+        overflow: hidden !important;
+    }
+
+    /* PINNED TABS */
+
+    /*
+    .PinnedTabsBar {
+        background-color: var(--bg) !important;
+    }
+    */
+
+    .tab-wrapper {
+        margin: 0px 0px 2px 0px;
+        border-radius: 3px;
+    }
+
+    .tab-wrapper .Tab .body {
+        border: 1.5px solid rgba(0, 0, 0, 0.22);
+        border-radius: 5px;
+    }
+
+    .tab-wrapper .Tab[data-discarded="true"] .body {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+    }
+
+    /* NAV BAR */
+
+    /* Change icon of panel when Sidebery collapses */
+    @media (max-width: 50px) {
+        #root:not([data-nav-inline="true"]) .nav-item:is(:not([data-class="panel"]), [data-active="false"]) {
+            display: none !important;
+        }
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] {
+            padding-right: 10px;
+            padding-bottom: 2px;
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > svg {
+            width: 0px !important;
+            height: 0px !important;
+            padding: 0 0 16px 16px !important;
+            background-image: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9leHBhbmQiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0ibTMuMTcgNi43My42Ni0xLjEzTDggOS4zbDQuMTctMy43LjY2IDEuMTNMOCAxMS4wM2wtNC44My00LjNaIj48L3BhdGg+PC9zdmc+");
+            background-repeat: no-repeat;
+        }
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > :is(.len, .audio) {
+            display: none !important;
+        }
+    }
+    #root:not([data-nav-inline="true"]) .NavigationBar:not(:hover) {
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar {
+        height: 40px !important;
+        padding: 3px 0px 0px 5px !important;
+        /* background-color: # !important; */
+        margin-bottom: 4px;
+        border-bottom: 1px solid #ced1d4;
+        transition: height 50ms ease-in-out 5ms;
+    }
+
+    #root:not(:hover) .NavigationBar {
+        height: 40px !important;
+        padding: 3px 0px 0px 6.5px !important;
+        /* background-color: # !important; */
+        margin-bottom: 4px;
+        border-bottom: 1px solid #ced1d4;
+        transition: height 50ms ease-in-out 5ms;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar:hover {
+        height: 100% !important;
+        transition: height 50ms ease-in-out 10ms;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar .nav-item {
+        --nav-btn-height: 33px;
+        --nav-btn-width: 38px;
+        margin: 0 1px 1px;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar .nav-item[data-class="space"] {
+        width: 38px;
+        flex-grow: 0;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+        width: 22px;
+        height: 22px;
+        transition:
+            width 50ms ease-in-out 10ms,
+            height 50ms ease-in-out 10ms;
+    }
+
+    .NavigationBar .panel-btn:hover {
+        border-radius: 3px !important;
+        background-color: var(--tabs-bg-hover) !important;
+    }
+
+    .NavigationBar .panel-btn[data-active="true"] {
+        border-radius: 3px !important;
+        background-color: var(--bg) !important;
+    }
+
+    .NavigationBar .panel-btn[data-active="true"]:hover {
+        border-radius: 3px !important;
+        background-color: var(--tabs-bg-hover) !important;
+    }
+
+    .NavigationBar .panel-btn > svg,
+    .NavigationBar .panel-btn > img {
+        fill: var(--panel-btn) !important;
+    }
+
+    /* SIDEBAR HACK PATCHES */
+
+    @media (max-width: 50px) {
+        /* Fix to tab tree identation when minimised */
+        #root:not(:hover) .Tab {
+            --tabs-indent: 0px;
+        }
+
+        .Tab[data-lvl] > div.lvl-wrapper {
+            right: -2px;
+        }
+
+        .Tab {
+            max-width: 34px;
+        }
+
+        .Tab .fav {
+            z-index: 1;
+        }
+
+        .Tab .audio {
+            z-index: 1;
+            margin-left: -12px;
+            height: 26px;
+        }
+
+        .Tab .title {
+            display: none;
+        }
+
+        /*
+        .tab-wrapper {
+            margin-left: 5px;
+        }
+        */
+
+        .NavigationBar .settings-btn {
+            display: none;
+        }
+    }
+
+    /* OPTIONAL */
+
+    /* Make pinned tabs wrap when minimised */
+    .PinnedTabsBar {
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-columns: repeat(5, auto);
+        /* flex-wrap: nowrap !important;
+        flex-direction: column;
+        overflow: hidden; */
+    }
+
+    #root:not(:hover) .PinnedTabsBar {
+        will-change: padding-left;
+    }
+
+    #root:not(:hover) .PinnedTabsBar .Tab .fav,
+    #root:not(:hover) .PinnedTabsBar .Tab .fav-icon {
+        will-change: width, height;
+    }
+
+    #root:hover .PinnedTabsBar .Tab .fav,
+    #root:hover .PinnedTabsBar .Tab .fav-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    #root:hover .PinnedTabsBar {
+        padding-left: 4px;
+    }
+
+    #root:not(:hover) .tab-wrapper {
+        overflow: hidden !important;
+        min-width: var(--tabs-pinned-width) !important;
+    }
+    #root:not(:hover) .PinnedTabsBar {
+        margin-left: 2px !important;
+    }
+    #root:not(:hover) .TabsPanel .new-tab-btns {
+        margin-left: -1px !important;
+    }
+    #root:not(:hover) .tool-btn > svg {
+        margin-left: 7px !important;
+    }
+    #root:not(:hover) .ScrollBox .Tab {
+        --tabs-inner-gap: 7px;
+        margin-left: 4px;
+    }
+
+    /* Optional patch for better tab notifications on pinned tabs */
+
+    .tab-wrapper[data-audible] .fav > img,
+    .tab-wrapper[data-muted] .fav > img,
+    .tab-wrapper[data-loading] .fav > img {
+        mask: none;
+    }
+
+    .tab-wrapper .fav > img {
+        mask: none;
+    }
+
+    .tab-wrapper[data-updated="true"] .fav > img {
+        mask: radial-gradient(
+            circle at calc(100% - 2px) calc(100% - 2px),
+            rgba(0, 0, 0, 0.141),
+            rgba(0, 0, 0, 0.141) 4px,
+            #000 5px,
+            #000
+        );
+    }
+
+    .tab-wrapper .audio-badge {
+        top: 5px;
+    }
+
+    .tab-wrapper .update-badge {
+        opacity: 0;
+    }
+
+    .tab-wrapper[data-updated="true"] .update-badge {
+        opacity: 100;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    #root {
+        /* Tab and PinnedTab height adjustment */
+        --tabs-height: 33px;
+        --tabs-pinned-height: var(--tabs-height);
+        --tabs-pinned-width: 40px;
+
+        /* Dark Theme base settings */
+        --frame-bg: #1a1b26 !important;
+        --toolbar-bg: #1a1b26 !important;
+        --bg: #1a1b26 !important;
+        --tabs-fg: #d4d4d4 !important;
+        --tabs-bg-hover: #3b3948 !important;
+        --tabs-activated-bg: #5b5b66 !important;
+        --nav-btn-activated-bg: #1f222f !important;
+        --panel-btn: #f2f2f2 !important;
+        --warn: #8c4351 !important;
+    }
+
+    /* Override color of selected tab */
+    #root[data-act-el-color-scheme="dark"] {
+        --tabs-activated-bg: #9651ff80 !important;
+        --active-el-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.467), 0 1px 3px -1px rgba(0, 0, 0, 0.212);
+    }
+
+    .Tab:is([data-active="true"], [data-selected="true"]) .color-layer {
+        --tabs-activated-color-layer-opacity: 0;
+        opacity: var(--tabs-activated-color-layer-opacity);
+    }
+
+    .Tab[data-selected="true"] .body {
+        --frame-el-overlay-selected-border: var(--active-el-shadow);
+        background-color: color-mix(in srgb, var(--tabs-activated-bg) 85%, transparent);
+        box-shadow: var(--active-el-shadow);
+    }
+
+    /* Add gradient colors to icon and label of group folder */
+    .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
+        --tabs-normal-fg: transparent;
+        --tabs-activated-fg: transparent;
+        background: linear-gradient(70deg, hsl(420 100% 62%), hsl(350 100% 59%));
+        -webkit-background-clip: text;
+        -webkit-text-stroke-color: transparent;
+        display: flex;
+    }
+
+    /* Align background color with length of text */
+    .Tab[data-group="true"][data-parent="true"] .body .t-box {
+        display: flex;
+    }
+
+    .Tab[data-group="true"][data-parent="true"] .body .fav > svg {
+        background-image: linear-gradient(45deg, hsl(350 100% 59%), hsl(420 100% 62%));
+        fill: transparent;
+        mask: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9ncm91cCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTYgMTYiIHN0eWxlPSIvKiEgbWFzazogbGluZWFyLWdyYWRpZW50KCA0NWRlZywgaHNsKDQyMCAxMDAlIDYyJSksIGhzbCgzNTAgMTAwJSA1OSUpICk7ICovIj48cGF0aCBkPSJNMCAzYzAtMS4xLjktMiAyLTJoNC41OWExIDEgMCAwIDEgLjcuM2wxLjQyIDEuNGExIDEgMCAwIDAgLjcuM2g1LjA5Yy44MyAwIDEuNS42NyAxLjUgMS41djhjMCAuODMtLjY3IDEuNS0xLjUgMS41aC0xM0ExLjUgMS41IDAgMCAxIDAgMTIuNVYzWiI+PC9wYXRoPjwvc3ZnPg==");
+    }
+
+    #root .Tab {
+        --tabs-indent: 7px;
+    }
+
+    /* TABS */
+
+    .Tab .lvl-wrapper:after {
+        display: none;
+    }
+
+    .Tab {
+        margin: auto;
+        width: 94%;
+        border-radius: 3px;
+    }
+
+    /* Styling the tab close button */
+    .Tab .close > svg:hover {
+        border-radius: 3px;
+        background: var(--warn) !important;
+        opacity: 80%;
+    }
+
+    .Tab .title {
+        overflow: hidden !important;
+    }
+
+    /* PINNED TABS */
+
+    /*
+    .PinnedTabsBar {
+        background-color: var(--bg) !important;
+    }
+    */
+
+    .tab-wrapper {
+        margin: 0px 0px 2px 0px;
+        border-radius: 3px;
+    }
+
+    .tab-wrapper .Tab .body {
+        border: 1.5px solid rgba(172, 112, 255, 0.7);
+        border-radius: 5px;
+    }
+
+    .tab-wrapper .Tab[data-discarded="true"] .body {
+        border: 1px solid rgba(172, 112, 255, 0.28);
+        border-radius: 5px;
+    }
+
+    /* NAV BAR */
+
+    /* Change icon of panel when Sidebery collapses */
+    @media (max-width: 50px) {
+        #root:not([data-nav-inline="true"]) .nav-item:is(:not([data-class="panel"]), [data-active="false"]) {
+            display: none !important;
+        }
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] {
+            padding-right: 10px;
+            padding-bottom: 2px;
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > svg {
+            width: 0px !important;
+            height: 0px !important;
+            padding: 0 0 16px 16px !important;
+            background-image: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9leHBhbmQiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0ibTMuMTcgNi43My42Ni0xLjEzTDggOS4zbDQuMTctMy43LjY2IDEuMTNMOCAxMS4wM2wtNC44My00LjNaIj48L3BhdGg+PC9zdmc+");
+            background-repeat: no-repeat;
+            filter: invert(100%);
+        }
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > :is(.len, .audio) {
+            display: none !important;
+        }
+    }
+    #root:not([data-nav-inline="true"]) .NavigationBar:not(:hover) {
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar {
+        height: 40px !important;
+        padding: 3px 0px 0px 5px !important;
+        /* background-color: # !important; */
+        margin-bottom: 4px;
+        border-bottom: 1px solid #686869b3;
+        transition: height 50ms ease-in-out 5ms;
+    }
+
+    #root:not(:hover) .NavigationBar {
+        height: 40px !important;
+        padding: 3px 0px 0px 6.5px !important;
+        /* background-color: # !important; */
+        margin-bottom: 4px;
+        border-bottom: 1px solid #686869b3;
+        transition: height 50ms ease-in-out 5ms;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar:hover {
+        height: 100% !important;
+        transition: height 50ms ease-in-out 10ms;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar .nav-item {
+        --nav-btn-height: 33px;
+        --nav-btn-width: 38px;
+        margin: 0 1px 1px;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar .nav-item[data-class="space"] {
+        width: 38px;
+        flex-grow: 0;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+        width: 22px;
+        height: 22px;
+        transition:
+            width 50ms ease-in-out 10ms,
+            height 50ms ease-in-out 10ms;
+    }
+
+    .NavigationBar .panel-btn:hover {
+        border-radius: 3px !important;
+        background-color: var(--tabs-bg-hover) !important;
+    }
+
+    .NavigationBar .panel-btn[data-active="true"] {
+        border-radius: 3px !important;
+        background-color: var(--bg) !important;
+    }
+
+    .NavigationBar .panel-btn[data-active="true"]:hover {
+        border-radius: 3px !important;
+        background-color: var(--tabs-bg-hover) !important;
+    }
+
+    .NavigationBar .panel-btn > svg,
+    .NavigationBar .panel-btn > img {
+        fill: var(--panel-btn) !important;
+    }
+
+    /* SIDEBAR HACK PATCHES */
+
+    @media (max-width: 50px) {
+        /* Fix to tab tree identation when minimised */
+        #root:not(:hover) .Tab {
+            --tabs-indent: 0px;
+        }
+
+        .Tab[data-lvl] > div.lvl-wrapper {
+            right: -2px;
+        }
+
+        .Tab {
+            max-width: 34px;
+        }
+
+        .Tab .fav {
+            z-index: 1;
+        }
+
+        .Tab .audio {
+            z-index: 1;
+            margin-left: -12px;
+            height: 26px;
+        }
+
+        .Tab .title {
+            display: none;
+        }
+
+        /*
+        .tab-wrapper {
+            margin-left: 5px;
+        }
+        */
+
+        .NavigationBar .settings-btn {
+            display: none;
+        }
+    }
+
+    /* OPTIONAL */
+
+    /* Make pinned tabs wrap when minimised */
+    .PinnedTabsBar {
+        display: grid;
+        grid-auto-flow: row;
+        grid-template-columns: repeat(5, auto);
+        /* flex-wrap: nowrap !important;
+        flex-direction: column;
+        overflow: hidden; */
+    }
+
+    #root:not(:hover) .PinnedTabsBar {
+        will-change: padding-left;
+    }
+
+    #root:not(:hover) .PinnedTabsBar .Tab .fav,
+    #root:not(:hover) .PinnedTabsBar .Tab .fav-icon {
+        will-change: width, height;
+    }
+
+    #root:hover .PinnedTabsBar .Tab .fav,
+    #root:hover .PinnedTabsBar .Tab .fav-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    #root:hover .PinnedTabsBar {
+        padding-left: 4px;
+    }
+
+    #root:not(:hover) .tab-wrapper {
+        overflow: hidden !important;
+        min-width: var(--tabs-pinned-width) !important;
+    }
+    #root:not(:hover) .PinnedTabsBar {
+        margin-left: 2px !important;
+    }
+    #root:not(:hover) .TabsPanel .new-tab-btns {
+        margin-left: -1px !important;
+    }
+    #root:not(:hover) .tool-btn > svg {
+        margin-left: 7px !important;
+    }
+    #root:not(:hover) .ScrollBox .Tab {
+        --tabs-inner-gap: 7px;
+        margin-left: 4px;
+    }
+
+    /* Optional patch for better tab notifications on pinned tabs */
+
+    .tab-wrapper[data-audible] .fav > img,
+    .tab-wrapper[data-muted] .fav > img,
+    .tab-wrapper[data-loading] .fav > img {
+        mask: none;
+    }
+
+    .tab-wrapper .fav > img {
+        mask: none;
+    }
+
+    .tab-wrapper[data-updated="true"] .fav > img {
+        mask: radial-gradient(
+            circle at calc(100% - 2px) calc(100% - 2px),
+            rgba(0, 0, 0, 0.141),
+            rgba(0, 0, 0, 0.141) 4px,
+            #000 5px,
+            #000
+        );
+    }
+
+    .tab-wrapper .audio-badge {
+        top: 5px;
+    }
+
+    .tab-wrapper .update-badge {
+        opacity: 0;
+    }
+
+    .tab-wrapper[data-updated="true"] .update-badge {
+        opacity: 100;
+    }
+}
+
+.Tab .title {
+    transition: margin-left 300ms ease;
+}
+.Tab:hover {
+    --tabs-inner-gap: 8px;
+}
+.Tab:hover .title {
+    margin-left: 8px;
+}
+
+.Tab[data-discarded="true"] .title {
+    opacity: 80%;
+}
+
+/* Remove tree indent line when Sidebery collapses */
+#root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+    display: none;
+}

@@ -1,0 +1,287 @@
+@namespace htmlNs url("http://www.w3.org/1999/xhtml");
+/* Auto hide findbar when unfocused */
+@media not (-moz-bool-pref: "uc.flex.disable-findbar-autohide") {
+    findbar:not(:focus-within) {
+        opacity: 0 !important;
+        width: 0px !important;
+    }
+}
+
+/* Move findbar close button to the left */
+.findbar-closebutton {
+    order: -1;
+    z-index: 10;
+}
+
+findbar checkbox {
+    padding: 1.5px 6px;
+    border-radius: 8px;
+    color: var(--button-color);
+    background-color: var(--button-bgcolor);
+}
+
+@keyframes findbar-scale-in {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+@keyframes findbar-scale-out {
+    0% {
+        transform: scaleY(1);
+    }
+    100% {
+        transform: scaleY(0);
+    }
+}
+
+/* Modified from https://github.com/nuclearcodecat/shimmer/blob/main/userChrome.css */
+/* 1804d7c */
+/* === findbar === */
+findbar {
+    --button-bgcolor: var(--urlbar-bg);
+    position: absolute;
+    border-radius: 8px;
+    top: var(--uc-findbar-set-top, var(--uc-findbar-top));
+    margin-left: min(var(--uc-findbar-x-position), calc(100% - 496px));
+    margin-right: auto !important;
+    width: 496px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    transform-origin: top center;
+    animation: 0.1s findbar-scale-in;
+    background: var(--bg) !important;
+    border: 0;
+    overflow-x: visible;
+}
+
+.findbar-container,
+.findbar-container > hbox {
+    height: 100% !important;
+}
+
+.findbar-container {
+    margin-left: 0px;
+}
+
+/* change text to icons for smaller findbar */
+.findbar-container checkbox::after {
+    height: 20px;
+    font-size: 14px;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    -moz-context-properties: fill;
+    fill: currentColor;
+    color: inherit;
+}
+.findbar-highlight::after {
+    content: "";
+    background: url(../icons/findbar/hl.svg) no-repeat;
+    background-position-x: 1px;
+    background-position-y: -2px;
+    width: 24px;
+}
+.findbar-case-sensitive::after {
+    content: "Aa";
+    justify-content: center;
+    width: 24px;
+    font-weight: 600;
+}
+.findbar-match-diacritics::after {
+    content: "ąâ";
+    justify-content: center;
+    width: 24px;
+    font-weight: 600;
+}
+.findbar-entire-word::after {
+    content: "";
+    background: url(../icons/findbar/word.svg) no-repeat;
+    background-position-y: -2px;
+    width: 24px;
+}
+
+/* hide all text for findbar checkboxes */
+.findbar-container checkbox > .checkbox-label-box {
+    display: none !important;
+}
+
+.findbar-textbox {
+    border-radius: 8px !important;
+    padding: 5px 8px !important;
+    width: 16em !important;
+    height: 26px;
+}
+
+.findbar-find-previous {
+    height: 26px;
+}
+
+.findbar-find-next {
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    height: 26px;
+}
+
+.findbar-closebutton:hover {
+    background: var(--toolbarbutton-hover-background) !important;
+}
+.findbar-closebutton {
+    background: var(--bg) !important;
+    /* wasn't square for some reason */
+    width: auto !important;
+}
+
+/* move matched amount below main findbar */
+.found-matches {
+    height: 42px;
+    position: absolute;
+    padding: 20px 16px 3px 10px;
+    top: 16px;
+    background: var(--bg);
+    left: 0px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 20px;
+    z-index: 9;
+}
+.findbar-find-status {
+    display: none;
+}
+.found-matches::before {
+    z-index: 8;
+}
+.found-matches::after {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 16px;
+    height: 22px;
+    background: var(--bg);
+    right: -6px;
+    top: 10px;
+    transform: rotate(45deg);
+}
+.findbar-textbox {
+    z-index: 10;
+}
+
+/* Modified from https://github.com/ravindUwU/firefox-refined-findbar/blob/main/src/refined-findbar.scss */
+/* 68fce3c */
+
+findbar[hidden="true"] {
+    animation: 0.1s findbar-scale-out;
+}
+findbar checkbox,
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton,
+findbar [anonid="findbar-textbox-wrapper"] htmlNs|input {
+    border: 1px solid ThreeDShadow;
+}
+findbar {
+    gap: 8px;
+    padding: 6px;
+    padding-inline-start: 8px;
+    padding-inline-end: 8px;
+}
+findbar > * {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+}
+findbar .findbar-container {
+    gap: 8px;
+}
+findbar .findbar-container > * {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+}
+/* Previous & next buttons. Hidden if the findbar is opened in quick find mode. */
+/*
+findbar [anonid="findbar-textbox-wrapper"] {
+    
+}
+*/
+findbar [anonid="findbar-textbox-wrapper"] htmlNs|input:not(.minimal) {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton {
+    color: var(--button-color);
+    background-color: var(--button-background-color, var(--button-bgcolor));
+    border-width: 1px !important;
+    margin-inline: 0 !important;
+}
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton:last-of-type {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton:not(:last-of-type) {
+    border-radius: 0 !important;
+    border-right-width: 0 !important;
+}
+/*
+findbar checkbox {
+    padding: 3px 6px;
+    border-radius: var(--toolbarbutton-border-radius);
+    color: var(--button-color);
+    background-color: var(--button-background-color, var(--button-bgcolor));
+}
+*/
+findbar checkbox:hover {
+    background-color: var(--button-background-color-hover, var(--button-hover-bgcolor));
+}
+findbar checkbox:active {
+    background-color: var(--button-background-color-active, var(--button-active-bgcolor));
+}
+findbar checkbox[checked="true"] {
+    color: var(--button-text-color-primary, var(--button-primary-color));
+    background-color: var(--color-accent-primary, var(--button-primary-bgcolor));
+}
+findbar checkbox[checked="true"]:hover {
+    background-color: var(--color-accent-primary-hover, var(--button-primary-hover-bgcolor));
+}
+findbar checkbox[checked="true"]:active {
+    background-color: var(--color-accent-primary-active, var(--button-primary-active-bgcolor));
+}
+findbar checkbox:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-inset);
+}
+findbar checkbox .checkbox-check {
+    display: none;
+}
+findbar checkbox:not(checkbox[anonid="find-entire-word"]) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+findbar checkbox:not(checkbox[anonid="highlight"]) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left-width: 0;
+    margin-inline-start: -8px !important;
+}
+findbar description.findbar-label:empty {
+    display: none;
+}
+findbar [anonid="findbar-textbox-wrapper"] {
+    order: 0;
+}
+findbar checkbox[anonid="highlight"] {
+    order: 1;
+}
+findbar checkbox[anonid="find-case-sensitive"] {
+    order: 2;
+}
+findbar checkbox[anonid="find-match-diacritics"] {
+    order: 3;
+}
+findbar checkbox[anonid="find-entire-word"] {
+    order: 4;
+}
+findbar label.findbar-label {
+    order: 5;
+}
+findbar description.findbar-label {
+    order: 6;
+}

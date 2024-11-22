@@ -1,0 +1,152 @@
+/* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
+/* Active Tab */
+:root:not([lwt-default-theme-in-dark-mode]) .tab-background[selected],
+.tab-background[multiselected="true"] {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+
+:root[lwt-default-theme-in-dark-mode] .tab-background[selected],
+.tab-background[multiselected="true"] {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Navigation Bar */
+#nav-bar {
+    background-color: var(--bg) !important;
+}
+
+/* Bookmarks Bar */
+#PersonalToolbar {
+    background-color: var(--bg) !important;
+}
+
+/* Navigation Bar Separator */
+#navigator-toolbox {
+    border-color: var(--bg) !important;
+}
+
+/* Navigation bar Buttons */
+toolbarbutton:hover {
+    cursor: pointer;
+}
+
+/* Show Tab close button on hover */
+.tabbrowser-tab:not([pinned]) .tab-close-button {
+    display: -moz-box !important;
+    opacity: 0;
+    visibility: collapse !important;
+    transition:
+        opacity 0.25s,
+        visibility 0.25s ease-in !important;
+}
+.tabbrowser-tab:not([pinned]):hover .tab-close-button {
+    opacity: 1;
+    visibility: visible !important;
+    border-radius: 3px 3px 3px 3px !important;
+}
+
+/* ----- Move menu buttons ----- */
+#nav-bar #PanelUI-button {
+    -moz-box-ordinal-group: 0 !important;
+}
+
+#nav-bar #PanelUI-button #PanelUI-menu-button {
+    margin-right: 2px !important;
+    margin-left: 2px !important;
+}
+
+@media only screen and (max-width: 670px) {
+    #main-window:not([inFullscreen]) #navigator-toolbox #TabsToolbar .titlebar-buttonbox-container {
+        visibility: visible !important;
+        position: relative !important;
+        display: block !important;
+    }
+    #main-window:not([inFullscreen]) #navigator-toolbox #nav-bar {
+        padding-right: initial !important;
+    }
+    #TabsToolbar.browser-toolbar {
+        display: flex !important;
+        justify-content: flex-end !important;
+    }
+}
+
+#toolbar-menubar {
+    /* menubar bg color */
+    background-color: var(--bg) !important;
+}
+
+/* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_toolbox.css */
+/* 9eef8cd */
+
+/* Hide the whole toolbar area unless urlbar is focused or cursor is over the toolbar */
+/* Dimensions on non-Win10 OS probably needs to be adjusted */
+
+@media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+    :root:not([inFullscreen]) {
+        #navigator-toolbox {
+            --browser-area-z-index-toolbox: 3;
+            position: fixed !important;
+            background-color: var(--lwt-accent-color, black) !important;
+            transition:
+                transform 82ms linear,
+                opacity 82ms linear !important;
+            transition-delay: var(--uc-autohide-toolbox-delay) !important;
+            transform-origin: top;
+            transform: rotateX(var(--uc-toolbox-rotation));
+            opacity: 0;
+            line-height: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        &[sessionrestored] #urlbar[popover] {
+            pointer-events: none;
+            opacity: 0;
+            transition:
+                transform 82ms linear var(--uc-autohide-toolbox-delay),
+                opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
+            transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+            transform: rotateX(89.9deg);
+        }
+
+        #mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox #urlbar[popover],
+        #navigator-toolbox:is(:hover, :focus-within) #urlbar[popover],
+        #urlbar-container > #urlbar[popover]:is([focused], [open]) {
+            pointer-events: auto;
+            opacity: 1;
+            transition-delay: 33ms;
+            transform: rotateX(0deg);
+        }
+
+        #mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox,
+        #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
+        #navigator-toolbox:hover,
+        #navigator-toolbox:focus-within {
+            transition-delay: 33ms !important;
+            transform: rotateX(0);
+            opacity: 1;
+        }
+
+        #navigator-toolbox > * {
+            line-height: normal;
+            pointer-events: auto;
+        }
+
+        #navigator-toolbox,
+        #navigator-toolbox > * {
+            width: 100vw;
+            -moz-appearance: none !important;
+        }
+
+        /* Don't apply transform before window has been fully created */
+        &:not([sessionrestored]) #navigator-toolbox {
+            transform: none !important;
+        }
+
+        &[customizing] #navigator-toolbox {
+            position: relative !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+    }
+}

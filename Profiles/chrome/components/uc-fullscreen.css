@@ -1,0 +1,84 @@
+/*Full Screen Warning*/
+
+#fullscreen-warning {
+    background-color: var(--fullscreen-warn) !important;
+    border-color: var(--fullscreen-warn) !important;
+    max-width: 500px !important;
+    max-height: 50px !important;
+    border-radius: 50px !important;
+    font-size: 12px !important;
+    opacity: 0.8 !important;
+}
+
+.pointerlockfswarning-generic-text,
+.pointerlockfswarning-domain-text {
+    font-size: 15px !important;
+    color: rgb(255, 255, 255) !important;
+    text-shadow: none !important;
+}
+
+/* Full screen Address bar overlap instead of push */
+/* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_toolbox.css */
+/* 9eef8cd */
+
+:root[sizemode="fullscreen"],
+:root[sizemode="fullscreen"] #navigator-toolbox {
+    margin-top: 0 !important;
+}
+
+:root[inFullscreen] {
+    #navigator-toolbox {
+        --browser-area-z-index-toolbox: 3;
+        position: fixed !important;
+        background-color: var(--lwt-accent-color, black) !important;
+        transition:
+            transform 82ms linear,
+            opacity 82ms linear !important;
+        transition-delay: var(--uc-autohide-toolbox-delay) !important;
+        transform-origin: top;
+        transform: rotateX(var(--uc-toolbox-rotation));
+        opacity: 0;
+        line-height: 0;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    &[sessionrestored] #urlbar[popover] {
+        pointer-events: none;
+        opacity: 0;
+        transition:
+            transform 82ms linear var(--uc-autohide-toolbox-delay),
+            opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
+        transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+        transform: rotateX(89.9deg);
+    }
+
+    #mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox #urlbar[popover],
+    #navigator-toolbox:is(:hover, :focus-within) #urlbar[popover],
+    #urlbar-container > #urlbar[popover]:is([focused], [open]) {
+        pointer-events: auto;
+        opacity: 1;
+        transition-delay: 33ms;
+        transform: rotateX(0deg);
+    }
+
+    #mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox,
+    #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
+    #navigator-toolbox:hover,
+    #navigator-toolbox:focus-within {
+        transition-delay: 33ms !important;
+        transform: rotateX(0);
+        opacity: 1;
+    }
+
+    #navigator-toolbox > * {
+        line-height: normal;
+        pointer-events: auto;
+    }
+
+    #navigator-toolbox,
+    #navigator-toolbox > * {
+        width: 100vw;
+        -moz-appearance: none !important;
+    }
+}

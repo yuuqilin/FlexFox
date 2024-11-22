@@ -1,0 +1,103 @@
+/* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
+/* SIDEBERY */
+/*
+:root:not([customizing]) {
+    .tab[selected="true"] {
+        visibility: collapse;
+        height: 0px;
+    }
+
+    .tabbrowser-tab {
+        visibility: collapse;
+        height: 0px;
+    }
+
+    .tabbrowser-tab[visuallyselected="true"] {
+        visibility: collapse;
+        height: 0px;
+    }
+}
+*/
+/* AUTO HIDE SIDE BAR */
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+    position: relative;
+    min-width: var(--uc-sidebar-width) !important;
+    width: var(--uc-sidebar-width) !important;
+    max-width: var(--uc-sidebar-width) !important;
+    --browser-area-z-index-sidebar: 3;
+    z-index: 100;
+}
+
+#sidebar-box[positionend] {
+    direction: rtl;
+}
+
+#sidebar-box[positionend] > * {
+    direction: ltr;
+}
+
+#sidebar-box[positionend]:-moz-locale-dir(rtl) {
+    direction: ltr;
+}
+
+#sidebar-box[positionend]:-moz-locale-dir(rtl) > * {
+    direction: rtl;
+}
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+    /* Remove sidebar splitter */
+    & + #sidebar-splitter {
+        display: none;
+    }
+
+    #sidebar {
+        transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+            var(--uc-autohide-sidebar-delay) !important;
+        min-width: var(--uc-sidebar-width) !important;
+        will-change: min-width;
+        @media (-moz-bool-pref: "uc.flex.sidebery-fast-hover-expand") {
+            transition: none !important;
+        }
+    }
+
+    &:hover > #sidebar {
+        min-width: var(--uc-sidebar-hover-width) !important;
+        transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+            var(--uc-hover-sidebar-delay) !important;
+    }
+
+    .sidebar-panel {
+        background-color: transparent !important;
+        color: var(--newtab-text-primary-color) !important;
+    }
+
+    .sidebar-panel #search-box {
+        -moz-appearance: none !important;
+        background-color: rgba(249, 249, 250, 0.1) !important;
+        color: inherit !important;
+    }
+
+    /* Add sidebar divider and give it background */
+    /*
+    & #sidebar,
+    & #sidebar-header {
+        background-color: inherit !important;
+        border-inline: 1px solid rgb(80, 80, 80);
+        border-inline-width: 0px 1px;
+    }
+    */
+
+    &:not([positionend]) > :-moz-locale-dir(rtl),
+    &[positionend] > * {
+        border-inline-width: 1px 0px;
+    }
+
+    /* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
+    &:not([positionend]):hover ~ #appcontent #statuspanel {
+        inset-inline: auto 0px !important;
+    }
+    &:not([positionend]):hover ~ #appcontent #statuspanel-label {
+        margin-inline: 0px !important;
+        border-left-style: solid !important;
+    }
+}
