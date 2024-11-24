@@ -1,0 +1,26 @@
+@-moz-document regexp(".*\\.pdf$") {
+    /* https://github.com/mozilla/pdf.js/issues/2784#issuecomment-366480669 */
+    #outerContainer #mainContainer div.toolbar {
+        opacity: 0;
+        transition: opacity 48ms ease-out 200ms;
+    }
+    #outerContainer
+        #mainContainer
+        div.toolbar:is(
+            :hover,
+            :has(#editorModeButtons .toolbarButton.toggled, #secondaryToolbarToggleButton.toolbarButton.toggled)
+        ) {
+        opacity: 1;
+    }
+
+    #outerContainer #mainContainer #viewerContainer {
+        top: 0 !important; /* move doc up into empty bar space */
+    }
+
+    #toolbarContainer {
+        height: 48px !important;
+    }
+    #sidebarContainer {
+        top: 40px !important;
+    }
+}

@@ -13,6 +13,11 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v1.0.1**:  
+- URLバーのトラッキング保護アイコンが非表示にならない問題を修正しました。  
+- `uc-pdf.js.css` を追加しました。  
+- LICENSEファイルを追加しました。 
+
 **v1.0.0**:
 - パフォーマンスが劇的に向上し、従来版と比べて約100倍の高速化を実現しました。コンテキストメニューの表示にかかる時間は標準UIと比べてわずか**16ms**の差に抑えられています。
 > [!IMPORTANT]

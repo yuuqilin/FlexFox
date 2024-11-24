@@ -140,10 +140,9 @@
 #nav-bar:not([customizing="true"])
     > #nav-bar-customization-target
     > #urlbar-container:not(:hover)
-    > #urlbar:not([focused]) {
-    > .urlbar-input-container
-        > #page-action-buttons
-        > *:not(#userContext-icons, #translations-button[open], #star-button-box[open]),
+    > #urlbar:not([focused])
+    > .urlbar-input-container {
+    > #page-action-buttons > *:not(#userContext-icons, #translations-button[open], #star-button-box[open]),
     > #tracking-protection-icon-container:not([open]) {
         opacity: 0;
     }

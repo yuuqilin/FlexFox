@@ -13,6 +13,11 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v1.0.1**:
+- Fixed the issue where the tracking protection icon in the URL bar was not hidden.  
+- Added `uc-pdf.js.css`.  
+- Added LICENSE file.
+
 **v1.0.0**:
 - Performance has improved dramatically, running 100x faster than previous versions. Opening the context menu now only adds **16ms** of latency compared to the default interface.
 > [!IMPORTANT]
