@@ -3,6 +3,10 @@
         --uc-sidebar-header-stripe: #9651ff;
 
         --bg: #1a1b26;
+        --uc-sidebar-color: #1a1b26;
+        @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+            --bg: var(--toolbar-bgcolor);
+        }
 
         --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
         --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
@@ -35,6 +39,10 @@
         --uc-sidebar-header-stripe: #ea4c89;
 
         --bg: #f1f5f9;
+        --uc-sidebar-color: #f1f5f9;
+        @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+            --bg: var(--toolbar-bgcolor);
+        }
 
         --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
         --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
@@ -62,6 +70,7 @@
     --uc-nav-bar-padding-right: 0px;
     --uc-personal-toolbar-margin: 0px;
     --uc-bookmarks-margin-left: 0px;
+    --uc-bg-y-padding: -27px;
     /* ---- End of initializing block ---- */
     /* When Sidebery is active, redefine variable values - if you want to customize variable values, start here */
     &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
@@ -91,6 +100,7 @@
                 --uc-bookmarks-margin-left: 10px;
             }
         }
+        --uc-bg-y-padding: 17px;
     }
     @media (-moz-bool-pref: "sidebar.revamp") and (-moz-bool-pref: "sidebar.verticalTabs") {
         --uc-personal-toolbar-margin: 37px;

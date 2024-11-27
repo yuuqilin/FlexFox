@@ -13,9 +13,14 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v1.0.2**:
+- Improve URL bar switcher and chicklet visuals.  
+- Add option `uc.flex.allow-addons-to-change-toolbar-color` to allow themes and addons to customize toolbar background image and color.
+![allow-addons-to-change-toolbar-color](./assets/allow-addons-to-change-toolbar-color.webp)
+
 **v1.0.1**:
-- Fixed the issue where the tracking protection icon in the URL bar was not hidden.  
-- Added `uc-pdf.js.css`.  
+- Fixed the issue where the tracking protection icon in the URL bar was not hidden.
+- Added `uc-pdf.js.css`.
 - Added LICENSE file.
 
 **v1.0.0**:
@@ -101,6 +106,7 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 | `uc.flex.fully-hide-sidebery`          | Completely hide Sidebery.                           |
 | `uc.flex.fully-hide-toolbox`           | Hide all top toolbars (tabs, navigation, bookmarks).|
 | `uc.flex.increase-sidebery-expanded-width` | Increase the expanded width of Sidebery.          |
+| `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and addons to customize toolbar background image and color.          |
 | `uc.flex.disable-bookmarks-autohide`   | Disable bookmarks toolbar auto-hide.                |
 | `uc.flex.disable-tabs-toolbar-autohide`| Disable the native horizontal tab bar auto-hide when Sidebery is inactive.|
 | `uc.flex.disable-findbar-autohide`     | Disable Findbar auto-hide when it loses focus.       |

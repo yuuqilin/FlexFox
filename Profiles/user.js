@@ -12,6 +12,8 @@ user_pref("uc.flex.fully-hide-sidebery",                        false);
 user_pref("uc.flex.fully-hide-toolbox",                         false);
 /* Increases the expanded width of Sidebery. */
 user_pref("uc.flex.increase-sidebery-expanded-width",           false);
+/* Allows themes and extensions to customize the toolbar background. */
+user_pref("uc.flex.allow-addons-to-change-toolbar-color",       false);
 /* Disables the auto-hide feature of the bookmarks toolbar. */
 user_pref("uc.flex.disable-bookmarks-autohide",                 false);
 /* Disables the auto-hide feature of the horizontal tab bar. */

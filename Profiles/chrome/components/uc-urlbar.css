@@ -154,17 +154,28 @@
     display: none;
 }
 
+#urlbar:is([pageproxystate="invalid"], [searchmode]) #urlbar-searchmode-switcher {
+    margin-left: 2px !important;
+}
+
 #urlbar-searchmode-switcher {
+    margin-top: 3px !important;
+    height: 25px !important;
     background-color: transparent !important;
-    border-radius: 30px !important;
+    border-top-left-radius: 30px !important;
+    border-bottom-left-radius: 30px !important;
+    border-top-right-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
     }
 }
 
 #searchmode-switcher-chicklet {
+    margin-top: 3px;
+    height: 25px !important;
     background-color: transparent !important;
-    border-radius: 30px !important;
+    border-radius: 6px !important;
     padding-left: 6px;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;

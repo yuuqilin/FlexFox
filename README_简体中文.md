@@ -13,10 +13,15 @@
 
 ## 更新内容
 
+**v1.0.2**:
+- 改善地址栏切换器和图标的显示效果。
+- 添加选项 `uc.flex.allow-addons-to-change-toolbar-color`，允许主题和扩展修改工具栏背景图片和颜色。
+![allow-addons-to-change-toolbar-color](./assets/allow-addons-to-change-toolbar-color.webp)
+
 **v1.0.1**:  
-- 修复了URL栏追踪保护图标无法隐藏的问题。  
-- 添加了`uc-pdf.js.css`。  
-- 添加了LICENSE文件。 
+- 修复了URL栏追踪保护图标无法隐藏的问题。
+- 添加了`uc-pdf.js.css`。
+- 添加了LICENSE文件。
 
 **v1.0.0**:
 - 性能大幅提升，相比之前的版本运行速度提高了 **100 倍**。打开右键菜单的延迟仅增加 **16ms**，与默认界面几乎无异。
@@ -101,6 +106,7 @@
 | `uc.flex.fully-hide-sidebery`             | 完全隐藏 Sidebery。                                      |
 | `uc.flex.fully-hide-toolbox`              | 隐藏所有顶部工具栏（标签、导航、书签）。                    |
 | `uc.flex.increase-sidebery-expanded-width`| 增加 Sidebery 展开时的宽度。                             |
+| `uc.flex.allow-addons-to-change-toolbar-color` | 允许主题和扩展修改工具栏的背景图片和颜色                  |
 | `uc.flex.disable-bookmarks-autohide`      | 禁用书签栏自动隐藏。                                      |
 | `uc.flex.disable-tabs-toolbar-autohide`   | 禁用 Sidebery 非激活时的原生标签栏自动隐藏。                  |
 | `uc.flex.disable-findbar-autohide`        | 禁用查找栏失去焦点时自动隐藏。                             |

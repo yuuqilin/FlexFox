@@ -30,7 +30,7 @@
 /* Expand sidebar header on hover */
 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
     #sidebar-header:hover {
-        background-color: var(--bg) !important;
+        background-color: var(--uc-sidebar-color) !important;
         min-width: var(--uc-sidebar-hover-width) !important;
         transition:
             max-height 115ms ease-in-out 10ms,
@@ -54,7 +54,7 @@
             min-width: var(--uc-sidebar-width) !important;
             overflow: hidden;
             padding: 0 !important;
-            background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--bg)) !important;
+            background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-color)) !important;
             opacity: 1 !important;
             transition:
                 max-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -71,7 +71,7 @@
 
         @media (prefers-color-scheme: dark) {
             &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, var(--bg)) !important;
+                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, var(--uc-sidebar-color)) !important;
             }
         }
 
@@ -127,7 +127,7 @@
             min-width: var(--uc-sidebar-width) !important;
             overflow: hidden;
             padding: 0 !important;
-            background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--bg)) !important;
+            background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-color)) !important;
             opacity: 1 !important;
             transition:
                 max-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -144,7 +144,7 @@
 
         @media (prefers-color-scheme: dark) {
             &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, var(--bg)) !important;
+                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, var(--uc-sidebar-color)) !important;
             }
         }
 

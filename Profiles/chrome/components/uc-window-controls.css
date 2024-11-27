@@ -5,9 +5,11 @@
 }
 
 /* Prevent navigation bar background overflow in certain themes */
-#nav-bar:not([customizing]) {
-    padding-bottom: var(--uc-nav-bar-padding-bottom) /*!important*/;
-    margin-bottom: var(--uc-nav-bar-margin-bottom) /*!important*/;
+@media not (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+    #nav-bar:not([customizing]) {
+        padding-bottom: var(--uc-nav-bar-padding-bottom) /*!important*/;
+        margin-bottom: var(--uc-nav-bar-margin-bottom) /*!important*/;
+    }
 }
 
 /* Fix urlbar height issue in v133 */
