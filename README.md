@@ -13,6 +13,9 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v1.0.3**:
+- Optimized performance when the "uc.flex.allow-addons-to-change-toolbar-color" option is enabled, improving speed by 1.4x compared to v1.0.2.
+
 **v1.0.2**:
 - Improve URL bar switcher and chicklet visuals.  
 - Add option `uc.flex.allow-addons-to-change-toolbar-color` to allow themes and addons to customize toolbar background image and color.

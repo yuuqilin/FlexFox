@@ -13,6 +13,9 @@
 
 ## 更新内容
 
+**v1.0.3**:
+- 优化了开启“uc.flex.allow-addons-to-change-toolbar-color”选项时的性能，相较于v1.0.2速度提升了1.4倍。
+
 **v1.0.2**:
 - 改善地址栏切换器和图标的显示效果。
 - 添加选项 `uc.flex.allow-addons-to-change-toolbar-color`，允许主题和扩展修改工具栏背景图片和颜色。

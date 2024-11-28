@@ -13,6 +13,9 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v1.0.3**:
+- "uc.flex.allow-addons-to-change-toolbar-color"オプション有効時のパフォーマンスを最適化し、v1.0.2と比較して速度が1.4倍向上しました。
+
 **v1.0.2**:
 - URLバーのスイッチャーとチックレットの表示を改善。
 - テーマや拡張機能がツールバー背景を変更可能にするオプション `uc.flex.allow-addons-to-change-toolbar-color` を追加。

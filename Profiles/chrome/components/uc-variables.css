@@ -3,7 +3,7 @@
         --uc-sidebar-header-stripe: #9651ff;
 
         --bg: #1a1b26;
-        --uc-sidebar-color: #1a1b26;
+        --uc-sidebar-bgcolor: #1a1b26;
         @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
             --bg: var(--toolbar-bgcolor);
         }
@@ -39,7 +39,7 @@
         --uc-sidebar-header-stripe: #ea4c89;
 
         --bg: #f1f5f9;
-        --uc-sidebar-color: #f1f5f9;
+        --uc-sidebar-bgcolor: #f1f5f9;
         @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
             --bg: var(--toolbar-bgcolor);
         }
@@ -71,6 +71,8 @@
     --uc-personal-toolbar-margin: 0px;
     --uc-bookmarks-margin-left: 0px;
     --uc-bg-y-padding: -27px;
+    --uc-theme-bg-x-left-start: 0px;
+    --uc-theme-bg-x-right-end: 0px;
     /* ---- End of initializing block ---- */
     /* When Sidebery is active, redefine variable values - if you want to customize variable values, start here */
     &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
@@ -101,6 +103,20 @@
             }
         }
         --uc-bg-y-padding: 17px;
+        @media not ((-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") or (-moz-bool-pref: "uc.flex.fully-hide-toolbox") or (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
+            @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+                &:not([inFullscreen]):not([customizing]) {
+                    &:has(#sidebar-box:not([positionend])) {
+                        --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-width));
+                        --uc-theme-bg-x-right-end: 0px;
+                    }
+                    &:has(#sidebar-box[positionend]) {
+                        --uc-theme-bg-x-left-start: 0px;
+                        --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sidebar-width));
+                    }
+                }
+            }
+        }
     }
     @media (-moz-bool-pref: "sidebar.revamp") and (-moz-bool-pref: "sidebar.verticalTabs") {
         --uc-personal-toolbar-margin: 37px;
