@@ -13,13 +13,19 @@
 
 ## 更新内容
 
+**v1.0.4**:
+- 当网页缩放比例不是默认值时，固定显示缩放比例图标。
+- 当网页已加书签时，固定显示书签星标图标。  
+   <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
+   <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
+
 **v1.0.3**:
 - 优化了开启“uc.flex.allow-addons-to-change-toolbar-color”选项时的性能，相较于v1.0.2速度提升了1.4倍。
 
 **v1.0.2**:
 - 改善地址栏切换器和图标的显示效果。
-- 添加选项 `uc.flex.allow-addons-to-change-toolbar-color`，允许主题和扩展修改工具栏背景图片和颜色。
-![allow-addons-to-change-toolbar-color](./assets/allow-addons-to-change-toolbar-color.webp)
+- 添加选项 `uc.flex.allow-addons-to-change-toolbar-color`，允许主题和扩展修改工具栏背景图片和颜色。  
+   <img src="./assets/allow-addons-to-change-toolbar-color.webp" alt="allow-addons-to-change-toolbar-color" width="98%" />
 
 **v1.0.1**:  
 - 修复了URL栏追踪保护图标无法隐藏的问题。
@@ -33,8 +39,8 @@
 
 ## 预览
 
-![FlexFox Light Theme](./assets/FlexFox-light.webp)
-![FlexFox Dark Theme](./assets/FlexFox-dark.webp)
+![FlexFox Light Theme](./assets/FlexFox-light.webp)  
+![FlexFox Dark Theme](./assets/FlexFox-dark.webp)  
 *上图：FlexFox 的浅色和深色主题预览。*
 
 ## 主要功能

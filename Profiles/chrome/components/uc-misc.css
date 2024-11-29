@@ -50,9 +50,11 @@
 }
 
 /* Remove zoom icon from urlbar */
+/*
 #urlbar-zoom-button {
     display: none !important;
 }
+*/
 
 /* Reduce menu spacing */
 menupopup > menuitem,

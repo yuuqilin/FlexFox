@@ -142,7 +142,9 @@
     > #urlbar-container:not(:hover)
     > #urlbar:not([focused])
     > .urlbar-input-container {
-    > #page-action-buttons > *:not(#userContext-icons, #translations-button[open], #star-button-box[open]),
+    > #page-action-buttons
+        > *:not(#userContext-icons, #translations-button[open], #urlbar-zoom-button:not([hidden]), #star-button-box),
+    > #page-action-buttons > #star-button-box:not([open]) > #star-button:not([starred]),
     > #tracking-protection-icon-container:not([open]) {
         opacity: 0;
     }
@@ -180,6 +182,31 @@
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
     }
+}
+
+#urlbar-zoom-button {
+    background-color: var(--bg) !important;
+    border-radius: 16px !important;
+    &:hover {
+        background-color: var(--urlbar-box-hover-bgcolor) !important;
+    }
+}
+
+/* Bookmark Star Icon */
+#pageAction-panel-bookmark[starred],
+#star-button[starred] {
+    list-style-image: url("../icons/bookmark/bookmark.svg") !important;
+    fill: var(--uc-sidebar-header-stripe) !important;
+}
+
+#pageAction-panel-bookmark[starred],
+#star-button-box:is(:hover, [open]) #star-button[starred] {
+    fill: var(--toolbarbutton-icon-fill) !important;
+}
+
+#pageAction-panel-bookmark,
+#star-button {
+    list-style-image: url("../icons/bookmark/bookmark-empty.svg") !important;
 }
 
 #page-action-buttons {

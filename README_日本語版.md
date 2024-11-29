@@ -13,13 +13,19 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v1.0.4**:
+- ウェブページのズームレベルがデフォルトでない場合、ズームレベルアイコンを常に表示するようにしました。
+- ウェブページがブックマーク済みの場合、ブックマークの星アイコンを常に表示するようにしました。  
+   <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
+   <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
+
 **v1.0.3**:
 - "uc.flex.allow-addons-to-change-toolbar-color"オプション有効時のパフォーマンスを最適化し、v1.0.2と比較して速度が1.4倍向上しました。
 
 **v1.0.2**:
 - URLバーのスイッチャーとチックレットの表示を改善。
-- テーマや拡張機能がツールバー背景を変更可能にするオプション `uc.flex.allow-addons-to-change-toolbar-color` を追加。
-![allow-addons-to-change-toolbar-color](./assets/allow-addons-to-change-toolbar-color.webp) 
+- テーマや拡張機能がツールバー背景を変更可能にするオプション `uc.flex.allow-addons-to-change-toolbar-color` を追加。  
+   <img src="./assets/allow-addons-to-change-toolbar-color.webp" alt="allow-addons-to-change-toolbar-color" width="98%" />
 
 **v1.0.1**:  
 - URLバーのトラッキング保護アイコンが非表示にならない問題を修正しました。 
@@ -33,8 +39,8 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## プレビュー
 
-![FlexFox Light Theme](./assets/FlexFox-light.webp)
-![FlexFox Dark Theme](./assets/FlexFox-dark.webp)
+![FlexFox Light Theme](./assets/FlexFox-light.webp)  
+![FlexFox Dark Theme](./assets/FlexFox-dark.webp)  
 *上：FlexFoxのライトテーマとダークテーマの表示例*
 
 ## 主な機能

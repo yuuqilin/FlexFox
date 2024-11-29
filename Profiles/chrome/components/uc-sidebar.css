@@ -101,7 +101,7 @@
 
     @media (prefers-color-scheme: dark) {
         #sidebar-header:not(:hover):not(:has(.active)) {
-            opacity: 0.7 !important;
+            opacity: 0.87 !important;
         }
     }
 
