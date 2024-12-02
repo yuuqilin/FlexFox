@@ -402,7 +402,7 @@
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         /* Position Sidebery at the screen edge to simplify hover-triggered expansion */
         --browser-area-z-index-sidebar: 5;
-        background-color: var(--bg) !important;
+        background-color: var(--uc-sidebar-bgcolor) !important;
 
         &:not([positionend]) {
             order: 0 !important;
@@ -416,7 +416,7 @@
     }
 
     #sidebar-main {
-        background-color: var(--bg) !important;
+        background-color: var(--uc-sidebar-bgcolor) !important;
         margin-right: -9px;
         margin-left: -9px;
     }

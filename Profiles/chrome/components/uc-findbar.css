@@ -54,7 +54,7 @@ findbar {
     align-items: center;
     transform-origin: top center;
     animation: 0.1s findbar-scale-in;
-    background: var(--bg) !important;
+    background: var(--uc-sidebar-bgcolor) !important;
     border: 0;
     overflow-x: visible;
 }
@@ -131,7 +131,7 @@ findbar {
     background: var(--toolbarbutton-hover-background) !important;
 }
 .findbar-closebutton {
-    background: var(--bg) !important;
+    background: var(--uc-sidebar-bgcolor) !important;
     /* wasn't square for some reason */
     width: auto !important;
 }
@@ -142,7 +142,7 @@ findbar {
     position: absolute;
     padding: 20px 16px 3px 10px;
     top: 16px;
-    background: var(--bg);
+    background: var(--uc-sidebar-bgcolor);
     left: 0px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 20px;
@@ -160,7 +160,7 @@ findbar {
     content: "";
     width: 16px;
     height: 22px;
-    background: var(--bg);
+    background: var(--uc-sidebar-bgcolor);
     right: -6px;
     top: 10px;
     transform: rotate(45deg);

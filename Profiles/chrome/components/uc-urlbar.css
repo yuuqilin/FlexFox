@@ -81,7 +81,7 @@
 #identity-icon-box.identity-box-button {
     margin: 3px 0 3px 3px;
     border-radius: 14px !important;
-    background-color: var(--bg) !important;
+    background-color: var(--uc-sidebar-bgcolor) !important;
     opacity: 0.8;
 }
 
@@ -185,7 +185,7 @@
 }
 
 #urlbar-zoom-button {
-    background-color: var(--bg) !important;
+    background-color: var(--uc-sidebar-bgcolor) !important;
     border-radius: 16px !important;
     opacity: 0.8;
     &:hover {
@@ -229,7 +229,7 @@
 #PopupSearchAutoComplete {
     border-radius: 12px;
     --panel-shadow-margin: 0px !important;
-    background-color: var(--bg);
+    background-color: var(--uc-sidebar-bgcolor);
     --panel-color: var(--toolbar-field-focus-color);
     --panel-background: color-mix(in srgb, var(--urlbar-bg) 50%, transparent) !important;
     --panel-border-color: var(--arrowpanel-border-color);

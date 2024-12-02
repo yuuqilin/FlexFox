@@ -13,6 +13,9 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v1.1.1**:
+- Resolved an issue where the Findbar's background color did not display correctly when a theme was applied.
+
 **v1.1.0**:
 - Fixed background image clipping on hover with bookmarks toolbar auto-hide enabled and theme background active.
 - Adjusted zoom level text brightness.
