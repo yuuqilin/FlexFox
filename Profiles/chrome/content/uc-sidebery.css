@@ -1,7 +1,7 @@
 /* Add text stroke */
-@media (-moz-bool-pref: "uc.flex.add-ui-text-stroke") {
-    @-moz-document regexp("^moz-extension://.*?/sidebar/sidebar.html")
-    {
+@-moz-document regexp("^moz-extension://.*?/sidebar/sidebar.html")
+{
+    @media (-moz-bool-pref: "uc.flex.add-ui-text-stroke") {
         * {
             font-family: Chiron Hei HK !important;
             text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
@@ -12,6 +12,74 @@
                 text-shadow: none;
                 -webkit-text-stroke: 0.03em;
             }
+        }
+    }
+
+    /* When Sidebery's auto-collapse is disabled, stop the transition effect when hovering over Sidebery */
+    @media (-moz-bool-pref: "uc.flex.disable-sidebery-autohide") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
+        #root:not([data-nav-inline="true"]) .NavigationBar {
+            overflow: hidden;
+        }
+
+        #root:not([data-nav-inline="true"]) .NavigationBar {
+            max-height: 40px;
+        }
+
+        #root .NavigationBar {
+            max-height: 40px;
+            padding: 3px 0px 0px 5px !important;
+            margin-bottom: 4px !important;
+            border-bottom: 1px solid #ced1d4 !important;
+            @media (prefers-color-scheme: dark) {
+                border-bottom: 1px solid #686869b3 !important;
+            }
+        }
+
+        #root:not([data-nav-inline="true"]) .NavigationBar:hover {
+            max-height: 100vh;
+            transition: 50ms ease-in-out 500ms !important;
+        }
+
+        #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+            max-width: 22px;
+            max-height: 22px;
+            transition: 50ms ease-in-out 500ms !important;
+        }
+
+        #root[data-nav-inline="true"] .NavigationBar {
+            max-height: 30px;
+            padding: 0px !important;
+            margin-bottom: 0px !important;
+            border-bottom: none !important;
+        }
+
+        #root .PinnedTabsBar .Tab .fav,
+        #root .PinnedTabsBar .Tab .fav-icon {
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        #root .PinnedTabsBar {
+            padding-left: 4px !important;
+        }
+
+        #root .PinnedTabsBar {
+            margin-left: 0px !important;
+        }
+        #root .TabsPanel .new-tab-btns {
+            margin-left: 0px !important;
+        }
+        #root .tool-btn > svg {
+            margin-left: 0px !important;
+        }
+
+        #root .ScrollBox .Tab {
+            --tabs-inner-gap: 5px !important;
+            margin-left: 6.6px !important;
+        }
+
+        #root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+            display: block !important;
         }
     }
 }

@@ -75,15 +75,17 @@
     }
     */
 
+    /*
     #unified-extensions-view #unified-extensions-area {
-    /*     padding-top: 0px !important; */
-    /*     padding-bottom: 0px !important; */
-    /*     border-bottom: 0px solid #aeaeae33 !important; */
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+        border-bottom: 0px solid #aeaeae33 !important;
     }
 
     #unified-extensions-view .unified-extensions-list {
-    /*     border-top: 1px solid #aeaeae33 !important; */
+        border-top: 1px solid #aeaeae33 !important;
     }
+    */
 
     #wrapper-edit-controls:is([place="palette"], [place="panel"]) > #edit-controls,
     #wrapper-zoom-controls:is([place="palette"], [place="panel"]) > #zoom-controls,

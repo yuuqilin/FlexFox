@@ -13,14 +13,36 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v1.1.0**:
+- テーマ背景が有効で、ブックマークツールバーの自動非表示を使用する際に、ホバーで背景画像が途切れる問題を修正しました。
+- ズームレベルのテキストの明るさを調整しました。
+- Nightly (v135) におけるウィンドウコントロールの位置の問題を修正しました。`tabsintitlebar` 廃止後の `customtitlebar` との互換性を対応済み。
+- Sideberyの自動折りたたみを無効化するオプション`uc.flex.disable-sidebery-autohide`を追加しました。
+
+   <details>
+   <summary>💬 <b>新機能の使用例</b></summary>
+   <p>ダークテーマで<code>uc.flex.disable-sidebery-autohide</code>を有効化したFlexFox：</p>
+   <img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
+   <p><code>uc.flex.fully-hide-toolbox</code>と組み合わせた表示：</p>
+   <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
+   </details>
+
+> [!IMPORTANT]
+> v1.1.0版の`sidebery-styles.json`をインポートする前に、旧バージョンのスタイルを削除してください。Sideberyの設定（歯車アイコン）> `Styles editor` > `Sidebar` と `Group page` の両セクションでスタイルをすべてクリアしてから、新しいスタイルをインポートしてください。  
+> また、`sidebery-settings.json` をインポートすると、パネルデータが失われる場合がありますので、必ず事前にスナップショットでバックアップを作成してください。
+
 **v1.0.4**:
 - ウェブページのズームレベルがデフォルトでない場合、ズームレベルアイコンを常に表示するようにしました。
 - ウェブページがブックマーク済みの場合、ブックマークの星アイコンを常に表示するようにしました。  
    <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
    <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
 
+<details>
+
+<summary><b>過去の更新</b></summary>
+
 **v1.0.3**:
-- "uc.flex.allow-addons-to-change-toolbar-color"オプション有効時のパフォーマンスを最適化し、v1.0.2と比較して速度が1.4倍向上しました。
+- `uc.flex.allow-addons-to-change-toolbar-color` オプション有効時のパフォーマンスを最適化し、v1.0.2と比較して速度が1.4倍向上しました。
 
 **v1.0.2**:
 - URLバーのスイッチャーとチックレットの表示を改善。
@@ -34,6 +56,9 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 **v1.0.0**:
 - パフォーマンスが劇的に向上し、従来版と比べて約100倍の高速化を実現しました。コンテキストメニューの表示にかかる時間は標準UIと比べてわずか**16ms**の差に抑えられています。
+
+</details>
+
 > [!IMPORTANT]
 > Firefox v133より前のバージョンでFlexFoxをお使いの方は、アップデート前に`about:config`で`uc.flex.`を検索し、該当する設定をすべて削除してください。
 
@@ -107,23 +132,24 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## カスタマイズ設定
 
-| 設定項目 | 説明 |
-|---------|------|
-| `uc.flex.add-ui-text-stroke` | UIテキストを縁取りで強調 |
-| `uc.flex.add-bookmarks-left-margin` | ブックマークとツールバーアイコンの位置を揃える |
-| `uc.flex.fully-hide-sidebery` | Sideberyを完全に非表示 |
-| `uc.flex.fully-hide-toolbox` | 上部ツールバーをすべて非表示 |
-| `uc.flex.increase-sidebery-expanded-width` | Sideberyの展開時の幅を広げる |
+| 設定項目                                   | 説明                                                           |
+|--------------------------------------------|----------------------------------------------------------------|
+| `uc.flex.add-ui-text-stroke`               | UIテキストを縁取りで強調                                       |
+| `uc.flex.add-bookmarks-left-margin`        | ブックマークとツールバーアイコンの位置を揃える                 |
+| `uc.flex.fully-hide-sidebery`              | Sideberyを完全に非表示                                         |
+| `uc.flex.fully-hide-toolbox`               | 上部ツールバーをすべて非表示                                   |
+| `uc.flex.increase-sidebery-expanded-width` | Sideberyの展開時の幅を広げる                                   |
 | `uc.flex.allow-addons-to-change-toolbar-color` | テーマや拡張機能がツールバーの背景画像と色を変更可能にする |
-| `uc.flex.disable-bookmarks-autohide` | ブックマークバーの自動非表示を無効化 |
-| `uc.flex.disable-tabs-toolbar-autohide` | Sidebery未使用時のタブバー自動非表示を無効化 |
-| `uc.flex.disable-findbar-autohide` | 検索バーの自動非表示を無効化 |
-| `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示 |
-| `uc.flex.remove-bookmarks-labels` | ブックマークのテキストラベルを非表示 |
-| `uc.flex.switch-to-alternate-condensed-panel` | 別デザインの拡張機能パネルに切り替え |
-| `uc.flex.revert-to-original-window-controls` | 元のウィンドウコントロール（最小化・最大化・閉じる）に戻す |
-| `uc.flex.sidebery-fast-hover-expand` | Sideberyの展開/折りたたみを高速化 |
-| `uc.flex.sidebery-slow-hover-expand` | Sideberyの展開/折りたたみを遅くする |
+| `uc.flex.disable-bookmarks-autohide`       | ブックマークバーの自動非表示を無効化                           |
+| `uc.flex.disable-tabs-toolbar-autohide`    | Sidebery未使用時のタブバー自動非表示を無効化                   |
+| `uc.flex.disable-findbar-autohide`         | 検索バーの自動非表示を無効化                                   |
+| `uc.flex.disable-sidebery-autohide`        | Sideberyの自動折りたたみを無効化                               |
+| `uc.flex.remove-bookmarks-folder-icons`    | ブックマークフォルダーのアイコンを非表示                       |
+| `uc.flex.remove-bookmarks-labels`          | ブックマークのテキストラベルを非表示                           |
+| `uc.flex.switch-to-alternate-condensed-panel` | 別デザインの拡張機能パネルに切り替え                        |
+| `uc.flex.revert-to-original-window-controls` | 元のウィンドウコントロール（最小化・最大化・閉じる）に戻す   |
+| `uc.flex.sidebery-fast-hover-expand`       | Sideberyの展開/折りたたみを高速化                              |
+| `uc.flex.sidebery-slow-hover-expand`       | Sideberyの展開/折りたたみを遅くする                            |
 
 ## 既知の問題
 

@@ -82,6 +82,11 @@
         @media (-moz-bool-pref: "uc.flex.increase-sidebery-expanded-width") {
             --uc-sidebar-hover-width: 260px;
         }
+        /* Set the display width of Sidebery and the sidebar header when Sidebery's auto-collapse is disabled */
+        @media (-moz-bool-pref: "uc.flex.disable-sidebery-autohide") {
+            --uc-sidebar-width: var(--uc-sidebar-hover-width);
+            --uc-sidebar-header-width: 44px;
+        }
         /* Trigger width for expanding Sidebery on hover when fully hidden or in fullscreen */
         @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             --uc-sidebar-width: 1px;
@@ -102,9 +107,13 @@
                 --uc-bookmarks-margin-left: 10px;
             }
         }
-        --uc-bg-y-padding: 17px;
-        @media not ((-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") or (-moz-bool-pref: "uc.flex.fully-hide-toolbox") or (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
-            @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+        /**
+         * Adjust the vertical and horizontal offsets of the toolbar background image 
+         * when themes and addons are allowed to customize the toolbar background color and image. 
+         */
+        --uc-bg-y-padding: 16px;
+        @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+            @media not ((-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") or (-moz-bool-pref: "uc.flex.fully-hide-toolbox") or (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
                 &:not([inFullscreen]):not([customizing]) {
                     &:has(#sidebar-box:not([positionend])) {
                         --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-width));

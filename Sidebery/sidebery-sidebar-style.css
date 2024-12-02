@@ -1,3 +1,4 @@
+/* For FlexFox >= v1.1.0 */
 /* Remove text stroke */
 /*
 * {
@@ -7,10 +8,10 @@
 }
 */
 
-/* Add image to background */
+/* Add a background image */
 /*
 #root {
-    --bg-img: url("data:image/png;base64,insert your image base64 code here") !important;
+    --bg-img: url("data:image/png;base64,Insert your background image's BASE64 code here") !important;
     --bg-size: cover !important;
     background-image: var(--bg-img) !important;
     background-repeat: no-repeat !important;
@@ -51,7 +52,7 @@
         --warn: #fca5a5 !important;
     }
 
-    /* Override color of selected tab */
+    /* Override the color of selected tabs */
     #root[data-act-el-color-scheme="light"] {
         --frame-fg: #333;
         --active-el-fg: #000;
@@ -74,7 +75,7 @@
         box-shadow: var(--active-el-shadow);
     }
 
-    /* Add gradient colors to icon and label of group folder */
+    /* Apply gradient color transitions to group folder text labels */
     .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
         --tabs-normal-fg: hsl(0 73% 41%);
         --tabs-activated-fg: hsl(0 73% 41%);
@@ -82,18 +83,19 @@
         display: flex;
     }
 
-    /* Align background color with length of text */
+    /* Align the background color length with the text length */
     .Tab[data-group="true"][data-parent="true"] .body .t-box {
         display: flex;
     }
 
+    /* Apply gradient color transitions to group folder icons */
     .Tab[data-group="true"][data-parent="true"] .body .fav > svg {
         background: linear-gradient(45deg, hsl(0 73% 41%), hsl(1 84% 60% / 75%));
         fill: transparent;
         mask: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9ncm91cCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTYgMTYiIHN0eWxlPSIvKiEgbWFzazogbGluZWFyLWdyYWRpZW50KCA0NWRlZywgaHNsKDQyMCAxMDAlIDYyJSksIGhzbCgzNTAgMTAwJSA1OSUpICk7ICovIj48cGF0aCBkPSJNMCAzYzAtMS4xLjktMiAyLTJoNC41OWExIDEgMCAwIDEgLjcuM2wxLjQyIDEuNGExIDEgMCAwIDAgLjcuM2g1LjA5Yy44MyAwIDEuNS42NyAxLjUgMS41djhjMCAuODMtLjY3IDEuNS0xLjUgMS41aC0xM0ExLjUgMS41IDAgMCAxIDAgMTIuNVYzWiI+PC9wYXRoPjwvc3ZnPg==");
     }
 
-    /* Invert Github's dark favicon in light theme */
+    /* Invert GitHub's black favicon in light themes */
     .Tab
         .fav-icon[src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNiAwQzcuMTYgMCAwIDcuMTYgMCAxNkMwIDIzLjA4IDQuNTggMjkuMDYgMTAuOTQgMzEuMThDMTEuNzQgMzEuMzIgMTIuMDQgMzAuODQgMTIuMDQgMzAuNDJDMTIuMDQgMzAuMDQgMTIuMDIgMjguNzggMTIuMDIgMjcuNDRDOCAyOC4xOCA2Ljk2IDI2LjQ2IDYuNjQgMjUuNTZDNi40NiAyNS4xIDUuNjggMjMuNjggNSAyMy4zQzQuNDQgMjMgMy42NCAyMi4yNiA0Ljk4IDIyLjI0QzYuMjQgMjIuMjIgNy4xNCAyMy40IDcuNDQgMjMuODhDOC44OCAyNi4zIDExLjE4IDI1LjYyIDEyLjEgMjUuMkMxMi4yNCAyNC4xNiAxMi42NiAyMy40NiAxMy4xMiAyMy4wNkM5LjU2IDIyLjY2IDUuODQgMjEuMjggNS44NCAxNS4xNkM1Ljg0IDEzLjQyIDYuNDYgMTEuOTggNy40OCAxMC44NkM3LjMyIDEwLjQ2IDYuNzYgOC44MiA3LjY0IDYuNjJDNy42NCA2LjYyIDguOTggNi4yIDEyLjA0IDguMjZDMTMuMzIgNy45IDE0LjY4IDcuNzIgMTYuMDQgNy43MkMxNy40IDcuNzIgMTguNzYgNy45IDIwLjA0IDguMjZDMjMuMSA2LjE4IDI0LjQ0IDYuNjIgMjQuNDQgNi42MkMyNS4zMiA4LjgyIDI0Ljc2IDEwLjQ2IDI0LjYgMTAuODZDMjUuNjIgMTEuOTggMjYuMjQgMTMuNCAyNi4yNCAxNS4xNkMyNi4yNCAyMS4zIDIyLjUgMjIuNjYgMTguOTQgMjMuMDZDMTkuNTIgMjMuNTYgMjAuMDIgMjQuNTIgMjAuMDIgMjYuMDJDMjAuMDIgMjguMTYgMjAgMjkuODggMjAgMzAuNDJDMjAgMzAuODQgMjAuMyAzMS4zNCAyMS4xIDMxLjE4QzI3LjQyIDI5LjA2IDMyIDIzLjA2IDMyIDE2QzMyIDcuMTYgMjQuODQgMCAxNiAwVjBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K"] {
         filter: invert();
@@ -151,7 +153,7 @@
 
     /* NAV BAR */
 
-    /* Change icon of panel when Sidebery collapses */
+    /* Change the navigation panel icon when Sidebery is collapsed */
     @media (max-width: 50px) {
         #root:not([data-nav-inline="true"]) .nav-item:is(:not([data-class="panel"]), [data-active="false"]) {
             display: none !important;
@@ -384,7 +386,7 @@
         --warn: #8c4351 !important;
     }
 
-    /* Override color of selected tab */
+    /* Override the color of selected tabs */
     #root[data-act-el-color-scheme="dark"] {
         --tabs-activated-bg: #9651ff80 !important;
         --active-el-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.467), 0 1px 3px -1px rgba(0, 0, 0, 0.212);
@@ -401,21 +403,23 @@
         box-shadow: var(--active-el-shadow);
     }
 
-    /* Add gradient colors to icon and label of group folder */
+    /* Apply gradient color transitions to group folder text labels */
     .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
         --tabs-normal-fg: transparent;
         --tabs-activated-fg: transparent;
         background: linear-gradient(70deg, hsl(420 100% 62%), hsl(350 100% 59%));
+        background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-stroke-color: transparent;
         display: flex;
     }
 
-    /* Align background color with length of text */
+    /* Align the background color length with the text length */
     .Tab[data-group="true"][data-parent="true"] .body .t-box {
         display: flex;
     }
 
+    /* Apply gradient color transitions to group folder icons */
     .Tab[data-group="true"][data-parent="true"] .body .fav > svg {
         background-image: linear-gradient(45deg, hsl(350 100% 59%), hsl(420 100% 62%));
         fill: transparent;
@@ -474,7 +478,7 @@
 
     /* NAV BAR */
 
-    /* Change icon of panel when Sidebery collapses */
+    /* Change the navigation panel icon when Sidebery is collapsed */
     @media (max-width: 50px) {
         #root:not([data-nav-inline="true"]) .nav-item:is(:not([data-class="panel"]), [data-active="false"]) {
             display: none !important;
@@ -703,7 +707,7 @@
     opacity: 80%;
 }
 
-/* Remove tree indent line when Sidebery collapses */
+/* Hide tree indent lines when Sidebery is collapsed */
 #root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
     display: none;
 }

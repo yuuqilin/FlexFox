@@ -50,7 +50,7 @@
 */
 
 /* Hide menubar window controls when menubar is inactive */
-:root[tabsintitlebar="true"]:not([customizing]) {
+:root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
     #toolbar-menubar[inactive="true"] > .titlebar-buttonbox-container {
         display: none !important;
     }
@@ -79,7 +79,7 @@
 }
 
 /* Adjust menubar (title bar) height */
-:root[tabsintitlebar="true"]:not([customizing]):not([inFullscreen]) {
+:root:is([tabsintitlebar], [customtitlebar]):not([customizing]):not([inFullscreen]) {
     #navigator-toolbox #toolbar-menubar[autohide="false"] {
         margin-top: 0px;
         margin-bottom: -7px;
@@ -116,7 +116,7 @@
 =============================================*/
 
 /* ----- Close/min/max fix ----- */
-:root[tabsintitlebar="true"]:not([inFullscreen]):not([customizing])
+:root:is([tabsintitlebar], [customtitlebar]):not([inFullscreen]):not([customizing])
     :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]))
     #navigator-toolbox
     #TabsToolbar
@@ -232,7 +232,7 @@
 }
 
 /* ----  Move nav-bar to make room for window controls ---- */
-:root[tabsintitlebar="true"]:not([customizing]) #nav-bar {
+:root:is([tabsintitlebar], [customtitlebar]):not([customizing]) #nav-bar {
     padding-left: 0px;
     padding-right: var(--uc-nav-bar-more-padding-right, var(--uc-nav-bar-padding-right)) !important;
 }

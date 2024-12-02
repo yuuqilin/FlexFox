@@ -4,111 +4,82 @@
 }
 
 /* Reduce header size */
-@media (prefers-color-scheme: dark) {
-    #sidebar-header {
-        font-size: 1.2em !important;
-        padding: 2px 6px 2px 3px !important;
-        /*color: #fff !important;*/
-    }
-}
-@media (prefers-color-scheme: light) {
-    #sidebar-header {
-        font-size: 1.2em !important;
-        padding: 2px 6px 2px 3px !important;
-        /*color: #000 !important;*/
-    }
+#sidebar-header {
+    font-size: 1.2em !important;
+    padding: 2px 6px 2px 3px !important;
 }
 #sidebar-header #sidebar-close {
     padding: 3px !important;
 }
 #sidebar-header #sidebar-close .toolbarbutton-icon {
-    width: 14px !important;
-    height: 14px !important;
-    opacity: 0.6 !important;
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
 }
 
 /* Expand sidebar header on hover */
 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
     #sidebar-header:hover {
-        background-color: var(--uc-sidebar-bgcolor) !important;
-        min-width: var(--uc-sidebar-hover-width) !important;
+        @media (prefers-color-scheme: light) {
+            --sidebar-border-color: #ced1d4;
+        }
+        max-height: 100vh;
+        max-width: 100vw;
+        min-width: var(--uc-sidebar-hover-width);
+        background-color: var(--uc-sidebar-bgcolor);
         transition:
-            max-height 115ms ease-in-out 10ms,
-            min-height 115ms ease-in-out 10ms,
-            min-width 115ms ease-in-out 10ms,
-            padding 115ms ease-in-out 10ms,
-            opacity 115ms ease-in-out 10ms;
+            border-bottom var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            max-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            min-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            max-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            padding var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            background-color var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
     }
 
     #sidebar-header:hover :is(#sidebar-switcher-target, #sidebar-close) {
-        transition: opacity 115ms ease-in-out 10ms;
+        transition: opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
     }
 
     /* Modified from https://www.reddit.com/r/FirefoxCSS/comments/77ehp1/how_to_hide_the_title_of_webextension_sidebars/ */
     /* Minimize sidebar header to a stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
-    @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
-        &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-            --uc-sidebar-width: 44px;
-            max-height: 5px !important;
-            min-height: 5px !important;
-            min-width: var(--uc-sidebar-width) !important;
-            overflow: hidden;
-            padding: 0 !important;
-            background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor)) !important;
-            opacity: 1 !important;
-            transition:
-                max-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                min-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                padding var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                background-color 0ms var(--uc-autohide-transition-type) 0ms,
-                opacity 0ms var(--uc-autohide-transition-type) 0ms;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, var(--uc-sidebar-bgcolor)) !important;
-            }
-        }
-
-        @media (-moz-bool-pref: "uc.flex.sidebery-fast-hover-expand") {
-            &:not(:hover) #sidebar-header:not(:hover):not(:has(.active)) {
-                transition: none !important;
-            }
-        }
-    }
-
     #sidebar-header:not(:hover):not(:has(.active)) {
-        max-height: 5px !important;
-        min-height: 5px !important;
-        min-width: var(--uc-sidebar-width) !important;
+        max-height: 5px;
+        min-height: 5px;
+        min-width: var(--uc-sidebar-width);
         overflow: hidden;
         padding: 0 !important;
-        background-color: var(--uc-sidebar-header-stripe) !important;
-        opacity: 0.5 !important;
+        background-color: var(--uc-sidebar-header-stripe);
+        opacity: 0.5;
         transition:
-            max-height 115ms ease-in-out 10ms,
-            min-height 115ms ease-in-out 10ms,
-            min-width 115ms ease-in-out 10ms,
-            padding 115ms ease-in-out 10ms,
-            background-color 115ms ease-in-out 10ms,
+            max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+            min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+            min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+            padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+            background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             opacity 0ms ease-in-out 0ms;
+    }
+
+    /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
+    @media (-moz-bool-pref: "uc.flex.disable-sidebery-autohide") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
+        --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+        #sidebar-header:not(:hover):not(:has(.active)) {
+            max-width: var(--uc-sidebar-header-width);
+            min-width: var(--uc-sidebar-header-width);
+        }
     }
 
     @media (prefers-color-scheme: dark) {
         #sidebar-header:not(:hover):not(:has(.active)) {
-            opacity: 0.87 !important;
+            opacity: 0.87;
         }
     }
 
     &:not(:has(.active)) #sidebar-header:not(:hover) #sidebar-switcher-target,
     #sidebar-header:not(:hover) #sidebar-close {
         /* BAD NEWS: display: none !important; */
-        opacity: 0 !important;
+        opacity: 0;
         transition: opacity 0ms ease-in-out 0ms;
     }
 
@@ -118,39 +89,29 @@
     }
 }
 
-:root[inFullscreen] {
+@media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         &:hover #sidebar-header:not(:hover):not(:has(.active)) {
             --uc-sidebar-width: 44px;
-            max-height: 5px !important;
-            min-height: 5px !important;
-            min-width: var(--uc-sidebar-width) !important;
+            max-height: 5px;
+            min-height: 5px;
+            min-width: var(--uc-sidebar-width);
             overflow: hidden;
             padding: 0 !important;
-            background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor)) !important;
-            opacity: 1 !important;
+            background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+            opacity: 1;
             transition:
-                max-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                min-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                padding var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                background-color 0ms var(--uc-autohide-transition-type) 0ms,
-                opacity 0ms var(--uc-autohide-transition-type) 0ms;
+                max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                opacity 0ms ease-in-out 0ms;
         }
 
         @media (prefers-color-scheme: dark) {
             &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, var(--uc-sidebar-bgcolor)) !important;
-            }
-        }
-
-        @media (-moz-bool-pref: "uc.flex.sidebery-fast-hover-expand") {
-            &:not(:hover) #sidebar-header:not(:hover):not(:has(.active)) {
-                transition: none !important;
+                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 87%, var(--uc-sidebar-bgcolor));
             }
         }
     }

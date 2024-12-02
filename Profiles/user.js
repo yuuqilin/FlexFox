@@ -20,6 +20,8 @@ user_pref("uc.flex.disable-bookmarks-autohide",                 false);
 user_pref("uc.flex.disable-tabs-toolbar-autohide",              false);
 /* Disables the auto-hide feature of the find bar. */
 user_pref("uc.flex.disable-findbar-autohide",                   false);
+/* Disable the auto-collapse feature of the Sidebery. */
+user_pref("uc.flex.disable-sidebery-autohide",                  false);
 /* Removes icons from bookmark folders. */
 user_pref("uc.flex.remove-bookmarks-folder-icons",              false);
 /* Removes labels from bookmarks. */

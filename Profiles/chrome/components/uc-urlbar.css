@@ -187,6 +187,7 @@
 #urlbar-zoom-button {
     background-color: var(--bg) !important;
     border-radius: 16px !important;
+    opacity: 0.8;
     &:hover {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
     }

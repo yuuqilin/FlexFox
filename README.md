@@ -13,14 +13,36 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v1.1.0**:
+- Fixed background image clipping on hover with bookmarks toolbar auto-hide enabled and theme background active.
+- Adjusted zoom level text brightness.
+- Corrected window controls positioning in Nightly (v135). Resolved compatibility with `customtitlebar` after `tabsintitlebar` deprecation.
+- Added preference `uc.flex.disable-sidebery-autohide` to disable Sidebery auto-collapse.
+
+   <details>
+   <summary>💬 <b>Experience the new feature in action</b></summary>
+   <p>FlexFox with the dark theme and <code>uc.flex.disable-sidebery-autohide</code> enabled:</p>
+   <img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="96%" />
+   <p>Combined with <code>uc.flex.fully-hide-toolbox</code>:</p>
+   <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="96%" />
+   </details>
+
+> [!IMPORTANT]
+> Before importing the v1.1.0 version of `sidebery-styles.json`, clear the old styles first. Open Sidebery settings (via the gear icon) > `Styles editor` > clear all styles under both the `Sidebar` and `Group page` sections, then import the new styles.  
+> Importing `sidebery-settings.json` may occasionally cause panel data loss. Be sure to create a snapshot backup of your panel data beforehand.
+
 **v1.0.4**:
 - The zoom level icon is now always visible when the webpage is not at the default zoom level.
 - The bookmark star icon is now always visible when the webpage has already been bookmarked.  
    <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
    <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
 
+<details>
+
+<summary><b>Previous Updates</b></summary>
+
 **v1.0.3**:
-- Optimized performance when the "uc.flex.allow-addons-to-change-toolbar-color" option is enabled, improving speed by 1.4x compared to v1.0.2.
+- Optimized performance when the `uc.flex.allow-addons-to-change-toolbar-color` option is enabled, improving speed by 1.4x compared to v1.0.2.
 
 **v1.0.2**:
 - Improve URL bar switcher and chicklet visuals.  
@@ -34,6 +56,9 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 **v1.0.0**:
 - Performance has improved dramatically, running 100x faster than previous versions. Opening the context menu now only adds **16ms** of latency compared to the default interface.
+
+</details>
+
 > [!IMPORTANT]
 > If you previously used FlexFox on Firefox versions earlier than v133, reset all settings by navigating to `about:config`, searching for `uc.flex.`, and removing all entries before updating.
 
@@ -108,23 +133,24 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## Options
 
-| Preference                             | Description                                          |
-|----------------------------------------|------------------------------------------------------|
-| `uc.flex.add-ui-text-stroke`           | Add a bold outline to interface text.               |
-| `uc.flex.add-bookmarks-left-margin`    | Align bookmarks with toolbar icons by adding margin.|
-| `uc.flex.fully-hide-sidebery`          | Completely hide Sidebery.                           |
-| `uc.flex.fully-hide-toolbox`           | Hide all top toolbars (tabs, navigation, bookmarks).|
-| `uc.flex.increase-sidebery-expanded-width` | Increase the expanded width of Sidebery.          |
-| `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and addons to customize toolbar background image and color.          |
-| `uc.flex.disable-bookmarks-autohide`   | Disable bookmarks toolbar auto-hide.                |
-| `uc.flex.disable-tabs-toolbar-autohide`| Disable the native horizontal tab bar auto-hide when Sidebery is inactive.|
-| `uc.flex.disable-findbar-autohide`     | Disable Findbar auto-hide when it loses focus.       |
-| `uc.flex.remove-bookmarks-folder-icons`| Remove icons from bookmark folders.                 |
-| `uc.flex.remove-bookmarks-labels`      | Remove bookmark text labels.                        |
-| `uc.flex.switch-to-alternate-condensed-panel` | Switch to another condensed extension panel.      |
-| `uc.flex.revert-to-original-window-controls` | Restore the original window buttons (minimize, maximize, close). |
-| `uc.flex.sidebery-fast-hover-expand`   | Speed up Sidebery hover expand/collapse.            |
-| `uc.flex.sidebery-slow-hover-expand`   | Slow down Sidebery hover expand/collapse.           |
+| Preference                                  | Description                                                                  |
+|---------------------------------------------|------------------------------------------------------------------------------|
+| `uc.flex.add-ui-text-stroke`                | Add a bold outline to interface text.                                        |
+| `uc.flex.add-bookmarks-left-margin`         | Align bookmarks with toolbar icons by adding margin.                         |
+| `uc.flex.fully-hide-sidebery`               | Completely hide Sidebery.                                                    |
+| `uc.flex.fully-hide-toolbox`                | Hide all top toolbars (tabs, navigation, bookmarks).                         |
+| `uc.flex.increase-sidebery-expanded-width`  | Increase the expanded width of Sidebery.                                     |
+| `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and addons to customize toolbar background image and color. |
+| `uc.flex.disable-bookmarks-autohide`        | Disable bookmarks toolbar auto-hide.                                         |
+| `uc.flex.disable-tabs-toolbar-autohide`     | Disable the native horizontal tab bar auto-hide when Sidebery is inactive.   |
+| `uc.flex.disable-findbar-autohide`          | Disable Findbar auto-hide when it loses focus.                               |
+| `uc.flex.disable-sidebery-autohide`         | Disable Sidebery auto-collapse.                                              |
+| `uc.flex.remove-bookmarks-folder-icons`     | Remove icons from bookmark folders.                                          |
+| `uc.flex.remove-bookmarks-labels`           | Remove bookmark text labels.                                                 |
+| `uc.flex.switch-to-alternate-condensed-panel` | Switch to another condensed extension panel.                               |
+| `uc.flex.revert-to-original-window-controls` | Restore the original window buttons (minimize, maximize, close).            |
+| `uc.flex.sidebery-fast-hover-expand`        | Speed up Sidebery hover expand/collapse.                                     |
+| `uc.flex.sidebery-slow-hover-expand`        | Slow down Sidebery hover expand/collapse.                                    |
 
 ## Known Issues
 

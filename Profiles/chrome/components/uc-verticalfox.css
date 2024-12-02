@@ -50,20 +50,25 @@
         display: none;
     }
 
-    #sidebar {
-        transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-            var(--uc-autohide-sidebar-delay) !important;
-        min-width: var(--uc-sidebar-width) !important;
-        will-change: min-width;
-        @media (-moz-bool-pref: "uc.flex.sidebery-fast-hover-expand") {
-            transition: none !important;
+    /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */
+    @media not (-moz-bool-pref: "uc.flex.disable-sidebery-autohide"),
+        (-moz-bool-pref: "uc.flex.fully-hide-sidebery"),
+        (display-mode: fullscreen) {
+        #sidebar {
+            min-width: var(--uc-sidebar-width) !important;
+            transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay) !important;
+            @media (-moz-bool-pref: "uc.flex.sidebery-fast-hover-expand") {
+                transition: none !important;
+            }
         }
-    }
 
-    &:hover > #sidebar {
-        min-width: var(--uc-sidebar-hover-width) !important;
-        transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-            var(--uc-hover-sidebar-delay) !important;
+        &:hover > #sidebar {
+            will-change: min-width;
+            min-width: var(--uc-sidebar-hover-width) !important;
+            transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay) !important;
+        }
     }
 
     .sidebar-panel {
@@ -73,6 +78,7 @@
 
     .sidebar-panel #search-box {
         -moz-appearance: none !important;
+        appearance: none !important;
         background-color: rgba(249, 249, 250, 0.1) !important;
         color: inherit !important;
     }

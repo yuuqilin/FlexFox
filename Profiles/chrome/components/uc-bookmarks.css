@@ -33,14 +33,13 @@
             background-position-y: top, top, var(--uc-bg-y), var(--uc-bg-y), var(--uc-bg-y);
             background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
                 linear-gradient(var(--bg), var(--bg)), var(--lwt-header-image, var(--lwt-additional-images)) !important;
-            @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
-                @media not (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
-                    background-position-x:
-                        center,
-                        left,
-                        right var(--uc-theme-bg-x-right-end),
-                        var(--uc-theme-bg-x-left-start);
-                }
+            /* Adjust the background image offset */
+            @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
+                background-position-x:
+                    center,
+                    left,
+                    right var(--uc-theme-bg-x-right-end),
+                    var(--uc-theme-bg-x-left-start);
             }
         }
 
