@@ -93,6 +93,10 @@ toolbar:not(#TabsToolbar) > #personal-bookmarks {
 toolbar:not(#TabsToolbar) > #search-container {
     flex-grow: 0 !important;
     width: 20% !important;
+    #searchbar {
+        min-height: 24px !important;
+        max-height: 30px;
+    }
 }
 
 /* Remove 'Show More Bookmarks' chevron when toolbar isn't overflowing */

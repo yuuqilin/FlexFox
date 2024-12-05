@@ -59,6 +59,11 @@
             padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             opacity 0ms ease-in-out 0ms;
+        :is(#sidebar-switcher-target, #sidebar-close) {
+            /* BAD NEWS: display: none !important; */
+            opacity: 0;
+            transition: opacity 0ms ease-in-out 0ms;
+        }
     }
 
     /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
@@ -74,13 +79,6 @@
         #sidebar-header:not(:hover):not(:has(.active)) {
             opacity: 0.87;
         }
-    }
-
-    &:not(:has(.active)) #sidebar-header:not(:hover) #sidebar-switcher-target,
-    #sidebar-header:not(:hover) #sidebar-close {
-        /* BAD NEWS: display: none !important; */
-        opacity: 0;
-        transition: opacity 0ms ease-in-out 0ms;
     }
 
     /* Remove header's bottom line */
@@ -119,26 +117,6 @@
 
 /* Auto-hide sidebar in fullscreen or when Sidebery is fully hidden */
 @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-    @media (-moz-bool-pref: "sidebar.revamp") {
-        :root[sizemode="normal"]
-            :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
-            #sidebar-main:not([positionend]) {
-                margin-left: calc(-1 * var(--uc-sidebar-width) - 6px);
-                margin-right: -8px;
-                ~ #tabbrowser-tabbox {
-                    padding-left: 0px;
-                }
-            }
-            #sidebar-main[positionend] {
-                margin-right: calc(-1 * var(--uc-sidebar-width) + 1px);
-                margin-left: -7px;
-                ~ #tabbrowser-tabbox {
-                    padding-right: 0px;
-                }
-            }
-        }
-    }
-
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         &:not([positionend]) {
             /* Fixed position for left-side sidebar */

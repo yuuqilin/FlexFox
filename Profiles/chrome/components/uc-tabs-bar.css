@@ -3,7 +3,9 @@
 @media (-moz-bool-pref: "sidebar.verticalTabs") {
     #sidebar-main:has(> [expanded]) {
         overflow: visible !important;
-        max-width: var(--tab-collapsed-width);
+        max-width: var(
+            --tab-collapsed-width
+        ) !important; /* Use !important to override the max-width styles in Nightly (v135) */
         z-index: var(--browser-area-z-index-toolbox-while-animating);
         transition: z-index 0s linear var(--uc-tabs-hide-duration);
     }
@@ -36,7 +38,7 @@
     :root:not([inFullscreen]) {
         /* Hide the native horizontal tab bar */
         &:not([customizing], [chromehidden~="menubar"]) #TabsToolbar {
-            margin-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height));
+            margin-bottom: var(--uc-autohide-bottom);
         }
         #navigator-toolbox {
             /* The z-index property is no longer needed after version 133 */
@@ -69,44 +71,48 @@
          * Avoid using :not(:has(foo[A]:not([B]))); 
          * instead, use :has(foo[B], foo:not([A])).
          */
-        :has(
+        /**
+         * Based on actual testing, using body:has() is 1.2 times faster than :root :has() for this rule. 
+         * However, for other rules, body:has() might be slower. 
+         */
+        /*body:has(
                 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][hidden],
                 #sidebar-box:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"])
-            ) {
-            &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:hover {
-                margin-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height));
-            }
-            #navigator-toolbox:hover {
-                transition-delay: 0s !important;
-                /* Direct child selectors can be used starting from version 133 */
-                #TabsToolbar {
-                    visibility: visible;
-                    margin-bottom: 0px;
-                    transition-delay: 18ms, 0ms !important;
-                }
+            ) {*/
+            /**
+             * The selector below becomes ineffective due to the parent selector using :root :has(), 
+             * but it doesn't seem to affect the outcome. 
+             */
+        /*}*/
+        /* The speed optimization mentioned above is no longer necessary, but the comment remains for future reference */
+        &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:hover {
+            margin-bottom: var(--uc-autohide-navigator-bottom);
+        }
+        #navigator-toolbox:hover {
+            transition-delay: var(--uc-autohide-navigator-delay) !important;
+            /* Direct child selectors can be used starting from version 133 */
+            #TabsToolbar {
+                visibility: var(--uc-autohide-tabstoolbar-visibility);
+                margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
+                transition-delay: var(--uc-autohide-tabstoolbar-delay) !important;
             }
         }
     }
 }
 
+/** 
+ * The auto-hide horizontal tabs feature excludes scenarios like 
+ * "fullscreen," "disable tab hiding," and "hide top toolbar." 
+ * Specific rules are required for these cases. 
+ */
 /* Hide tabs bar for Tree style tabs (Credit u/jfgxyz on Reddit) */
-:root[inFullscreen]:not([customizing])
-    :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
-    /*toolbar#TabsToolbar {
-        height: 0px;
-        min-height: 0 !important;
-        background-color: var(--bg) !important;
-    }*/
-    .toolbar-items {
-        visibility: collapse;
-    }
+/*
+toolbar#TabsToolbar {
+    height: 0px;
+    min-height: 0 !important;
+    background-color: var(--bg) !important;
 }
-
-@media (-moz-bool-pref: "uc.flex.disable-tabs-toolbar-autohide"), (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
-    :root:not([inFullscreen]):not([customizing])
-        :has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
-        .toolbar-items {
-            visibility: collapse;
-        }
-    }
+*/
+.toolbar-items {
+    visibility: var(--uc-tab-items-visibility);
 }

@@ -64,17 +64,28 @@
 }
 
 :root {
-    /* Initialize variables - do not modify values in this block */
+    /*===== Initialize variables =====*/
+    /* - do not modify values in this block */
     --uc-sidebar-width: 0px;
     --uc-sidebar-hover-width: 0px;
     --uc-nav-bar-padding-right: 0px;
-    --uc-personal-toolbar-margin: 0px;
+    --uc-personal-toolbar-offset: 0px;
+    --uc-personal-toolbar-width: 0px;
     --uc-bookmarks-margin-left: 0px;
     --uc-bg-y-padding: -27px;
     --uc-theme-bg-x-left-start: 0px;
     --uc-theme-bg-x-right-end: 0px;
-    /* ---- End of initializing block ---- */
-    /* When Sidebery is active, redefine variable values - if you want to customize variable values, start here */
+    --uc-tab-items-visibility: inherit;
+    --uc-autohide-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height));
+    --uc-autohide-navigator-bottom: var(--uc-autohide-bottom);
+    --uc-autohide-tabstoolbar-bottom: 0px;
+    --uc-autohide-navigator-delay: 0s;
+    --uc-autohide-tabstoolbar-visibility: visible;
+    --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
+    /*===== End of initializing block =====*/
+
+    /*===== Define new variable values when Sidebery is active =====*/
+    /* - if you want to customize variable values, start here */
     &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
         --uc-sidebar-width: 44px; /* Width of the Sidebery */
         --uc-sidebar-hover-width: 220px; /* Width of the expanded Sidebery on hover */
@@ -96,10 +107,18 @@
                 --uc-sidebar-width: 22px;
             }
         }
-        --uc-nav-bar-padding-right: 104px; /* Space reserved on the right of the navbar for window controls */
-        --uc-personal-toolbar-margin: var(--uc-sidebar-width);
+        /* Space reserved on the right of the navbar for window controls */
+        --uc-nav-bar-padding-right: 104px;
+        /* Horizontal offset for the bookmarks toolbar when Sidebery is active */
+        --uc-personal-toolbar-offset: var(--uc-sidebar-width);
+        --uc-personal-toolbar-width: var(--uc-sidebar-width);
+        @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
+            --uc-personal-toolbar-offset: 0px;
+            --uc-personal-toolbar-width: 0px;
+        }
         @media (-moz-bool-pref: "sidebar.revamp") and (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
-            --uc-personal-toolbar-margin: 40px;
+            --uc-personal-toolbar-offset: 40px;
+            --uc-personal-toolbar-width: 40px;
         }
         /* Add margin to align bookmarks with toolbar icons */
         @media (-moz-bool-pref: "uc.flex.add-bookmarks-left-margin") {
@@ -115,21 +134,98 @@
         @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
             @media not ((-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") or (-moz-bool-pref: "uc.flex.fully-hide-toolbox") or (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
                 &:not([inFullscreen]):not([customizing]) {
-                    &:has(#sidebar-box:not([positionend])) {
-                        --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-width));
-                        --uc-theme-bg-x-right-end: 0px;
-                    }
-                    &:has(#sidebar-box[positionend]) {
+                    --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-width));
+                    --uc-theme-bg-x-right-end: 0px;
+
+                    :has(#sidebar-box[positionend]) {
                         --uc-theme-bg-x-left-start: 0px;
                         --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sidebar-width));
                     }
                 }
             }
         }
+        /* Ensure horizontal tabs are forcibly hidden in the following scenarios when Sidebery is enabled */
+        &[inFullscreen]:not([customizing]) {
+            --uc-tab-items-visibility: collapse;
+        }
+        @media (-moz-bool-pref: "uc.flex.disable-tabs-toolbar-autohide"),
+            (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+            &:not([inFullscreen]):not([customizing]) {
+                --uc-tab-items-visibility: collapse;
+            }
+        }
+        --uc-autohide-navigator-bottom: 0px;
+        &:not([customizing]) {
+            --uc-autohide-tabstoolbar-bottom: var(--uc-autohide-bottom);
+            --uc-autohide-navigator-delay: var(--uc-tabs-hide-animation-delay);
+            --uc-autohide-tabstoolbar-visibility: hidden;
+            --uc-autohide-tabstoolbar-delay: var(--uc-tabs-hide-animation-delay);
+        }
+
+        --uc-windows-controls-visibility: visible;
+        --uc-windows-controls-position: absolute;
+        --uc-windows-controls-top: 2px;
+        --uc-windows-controls-right: 0;
+        &[inFullscreen] {
+            --uc-windows-controls-top: 0px;
+        }
+        @media (-moz-bool-pref: "sidebar.revamp") {
+            --uc-vertical-tabs-display: none;
+            --uc-sidebar-main-margin-right: -9px;
+            --uc-sidebar-main-margin-left: -9px;
+            @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+                --uc-sidebar-main-margin-right: -8px;
+                --uc-sidebar-main-margin-left: -14px;
+                &[sizemode="normal"] {
+                    --uc-sidebar-main-margin-right: -8px;
+                    --uc-sidebar-main-margin-left: calc(-1 * var(--uc-sidebar-width) - 6px);
+                    --uc-tabbox-padding-right: 0px;
+                    --uc-tabbox-padding-left: 0px;
+                    #sidebar-main[positionend] {
+                        --uc-sidebar-main-margin-right: calc(-1 * var(--uc-sidebar-width) + 1px);
+                        --uc-sidebar-main-margin-left: -7px;
+                    }
+                }
+            }
+            #sidebar-main[positionend] {
+                --uc-sidebar-main-margin-right: -1px;
+                --uc-sidebar-main-margin-left: -9px;
+                @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+                    --uc-sidebar-main-margin-right: -7px;
+                    --uc-sidebar-main-margin-left: -7px;
+                }
+            }
+        }
+        --uc-sidebar-splitter-display: none;
+    }
+    /*===== End of the block for Sidebery active state =====*/
+
+    /*===== Horizontal offsets for the bookmarks toolbar and navigator =====*/
+    --uc-navigator-offset: var(--uc-sidebar-width);
+    :has(#sidebar-box[positionend]) {
+        @media not (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+            @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+                --uc-navigator-offset: 0px;
+            }
+            @media not (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+                --uc-personal-toolbar-offset: 0px;
+                --uc-personal-toolbar-width: var(--uc-sidebar-width);
+            }
+        }
+        @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+            @media (-moz-bool-pref: "sidebar.revamp") {
+                --uc-personal-toolbar-offset: 0px;
+                --uc-personal-toolbar-width: var(--uc-sidebar-width);
+            }
+        }
     }
     @media (-moz-bool-pref: "sidebar.revamp") and (-moz-bool-pref: "sidebar.verticalTabs") {
-        --uc-personal-toolbar-margin: 37px;
+        --uc-personal-toolbar-offset: 37px;
+        --uc-personal-toolbar-width: 37px;
     }
+    /*===== End of the block for horizontal offsets of the bookmarks toolbar and navigator =====*/
+
+    /*===== Other adjustable global variables =====*/
     --uc-nav-bar-margin-left: -4px;
     --uc-autohide-transition-type: linear; /* Transition style for sidebar auto-hide */
     --uc-autohide-transition-duration: 55ms; /* Duration of the sidebar hiding transition */
@@ -138,10 +234,13 @@
     --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar on hover */
     --uc-nav-bar-padding-bottom: 1px;
     --uc-nav-bar-margin-bottom: -1px;
-    --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
-    --uc-findbar-x-position: 24.2vw; /* Sets the horizontal position of the findbar */
+
     --uc-uei-icon-size: 20px; /* Icon size in the uni-extensions panel */
     --uc-number-of-extensions-in-a-row: 4; /* Number of icons per row in the uni-extensions panel */
+
+    /* ---- Sets the horizontal position of the findbar ---- */
+    --uc-findbar-x-position: 24.2vw;
+    --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
 
     --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
     --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
@@ -185,9 +284,11 @@
 }
 
 /* Adjusted height when the search bar is in the bookmark toolbar */
+/*
 :root:has(#PersonalToolbar > #search-container) {
     --uc-bm-height: 32px;
 }
+*/
 
 /* Faster sidebar expansion and collapse */
 @media (-moz-bool-pref: "uc.flex.sidebery-fast-hover-expand") {

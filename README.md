@@ -13,6 +13,13 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v2.0.0**:  
+- Completely rewritten core functionality, achieving a 28x speed improvement over the previous version.  
+   - The first right-click menu opening after launch now takes just 13ms, matching Firefox's native theme performance.  
+   - Opening the "List All Tabs" menu with 205 tabs takes 26ms, also on par with the native theme.  
+   - In other words, after this rewrite, v2.0.0 has almost no impact on Firefox's performance.  
+- Fixed display issues with the address bar and native vertical tabs in Nightly (v135).  
+
 **v1.1.1**:
 - Resolved an issue where the Findbar's background color did not display correctly when a theme was applied.
 
