@@ -80,5 +80,6 @@
     #navigator-toolbox > * {
         width: 100vw;
         -moz-appearance: none !important;
+        appearance: none !important;
     }
 }

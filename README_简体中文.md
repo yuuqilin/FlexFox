@@ -1,7 +1,7 @@
 # FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v133-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v136-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -13,12 +13,28 @@
 
 ## 更新内容
 
+**v2.0.1**  
+- 窗口未最大化時，在顶部添加了1px的边框。  
+- 清理样式，移除了不必要的规则和注释。  
+
 **v2.0.0**:  
 - 核心功能完全重写，速度比旧版提升28倍。  
    - 启动后首次打开右键菜单的时间为13ms，与Firefox原生主题完全一致。  
    - 在205个标签页的情况下，打开“列出所有标签页”菜单的时间为26ms，也与原生主题无差异。  
    - 换句话说，经过重写后，v2.0.0对Firefox的性能几乎完全没有影响。  
 - 修复了Nightly (v135)的地址栏和原生垂直标签页的显示问题。 
+
+<details>
+<summary>🖼️ <b>新功能的展示效果</b></summary>
+<p>启用深色主题和<code>uc.flex.disable-sidebery-autohide</code>的新FlexFox：</p>
+<img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
+<p>与<code>uc.flex.fully-hide-toolbox</code>结合使用的效果：</p>
+<img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
+</details>
+
+<details>
+
+<summary>💬 <b>历史更新</b></summary>
 
 **v1.1.1**:
 - 修正了应用主题时查找栏背景颜色显示异常的问题。
@@ -29,14 +45,6 @@
 - 修正了 Nightly (v135) 版本中窗口控制按钮位置的问题，解决了 `tabsintitlebar` 被弃用后与 `customtitlebar` 的兼容性问题。
 - 新增选项 `uc.flex.disable-sidebery-autohide`，可停用 Sidebery 自动折叠。
 
-   <details>
-   <summary>💬 <b>新功能的展示效果</b></summary>
-   <p>启用深色主题和<code>uc.flex.disable-sidebery-autohide</code>的新FlexFox：</p>
-   <img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
-   <p>与<code>uc.flex.fully-hide-toolbox</code>结合使用的效果：</p>
-   <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
-   </details>
-
 > [!IMPORTANT]  
 > 在导入 v1.1.0 版的 `sidebery-styles.json` 之前，请先清除旧版样式。打开 Sidebery 设置（齿轮图标）> `Styles editor` > 将 `Sidebar` 和 `Group page` 两个页面下的样式全部清除后，再导入新版样式。  
 > 导入 `sidebery-settings.json` 时可能会导致面板数据丢失，请务必先使用快照功能备份面板数据。
@@ -46,10 +54,6 @@
 - 当网页已加书签时，固定显示书签星标图标。  
    <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
    <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
-
-<details>
-
-<summary><b>历史更新</b></summary>
 
 **v1.0.3**:
 - 优化了开启 `uc.flex.allow-addons-to-change-toolbar-color` 选项时的性能，相较于v1.0.2速度提升了1.4倍。

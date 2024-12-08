@@ -1,7 +1,7 @@
 # FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v133-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v136-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -13,12 +13,28 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v2.0.1**  
+- ウィンドウが最大化されていない時、上部に1pxの枠線を追加しました。  
+- スタイルを整理し、不要なルールやコメントを削除しました。  
+
 **v2.0.0**:  
 - コア機能を完全に再設計し、旧バージョンと比べ速度が28倍向上しました。  
    - 起動後、初回の右クリックメニューの表示時間は13msで、Firefoxのネイティブテーマと全く同じ速度です。  
    - タブが205個ある状態で「すべてのタブを一覧表示」を開く時間も26msで、こちらもネイティブテーマと同等です。  
    - つまり、再設計により、v2.0.0がFirefoxのパフォーマンスに与える影響はほぼ皆無と言えます。  
 - Nightly (v135)のアドレスバーとネイティブ縦型タブの表示問題を修正しました。  
+
+<details>
+<summary>🖼️ <b>新機能の使用例</b></summary>
+<p>ダークテーマで<code>uc.flex.disable-sidebery-autohide</code>を有効化したFlexFox：</p>
+<img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
+<p><code>uc.flex.fully-hide-toolbox</code>と組み合わせた表示：</p>
+<img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
+</details>
+
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
 
 **v1.1.1**:
 - テーマ適用時に検索バーの背景色が正しく表示されない問題を修正しました。
@@ -29,14 +45,6 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 - Nightly (v135) におけるウィンドウコントロールの位置の問題を修正しました。`tabsintitlebar` 廃止後の `customtitlebar` との互換性を対応済み。
 - Sideberyの自動折りたたみを無効化するオプション`uc.flex.disable-sidebery-autohide`を追加しました。
 
-   <details>
-   <summary>💬 <b>新機能の使用例</b></summary>
-   <p>ダークテーマで<code>uc.flex.disable-sidebery-autohide</code>を有効化したFlexFox：</p>
-   <img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
-   <p><code>uc.flex.fully-hide-toolbox</code>と組み合わせた表示：</p>
-   <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
-   </details>
-
 > [!IMPORTANT]
 > v1.1.0版の`sidebery-styles.json`をインポートする前に、旧バージョンのスタイルを削除してください。Sideberyの設定（歯車アイコン）> `Styles editor` > `Sidebar` と `Group page` の両セクションでスタイルをすべてクリアしてから、新しいスタイルをインポートしてください。  
 > また、`sidebery-settings.json` をインポートすると、パネルデータが失われる場合がありますので、必ず事前にスナップショットでバックアップを作成してください。
@@ -46,10 +54,6 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 - ウェブページがブックマーク済みの場合、ブックマークの星アイコンを常に表示するようにしました。  
    <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
    <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
-
-<details>
-
-<summary><b>過去の更新</b></summary>
 
 **v1.0.3**:
 - `uc.flex.allow-addons-to-change-toolbar-color` オプション有効時のパフォーマンスを最適化し、v1.0.2と比較して速度が1.4倍向上しました。

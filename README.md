@@ -1,7 +1,7 @@
 # FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v133-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v136-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -13,12 +13,28 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v2.0.1**  
+- Added a 1px border to the top when the window is not maximized.  
+- Cleaned up the styles by removing unnecessary rules and comments.  
+
 **v2.0.0**:  
 - Completely rewritten core functionality, achieving a 28x speed improvement over the previous version.  
    - The first right-click menu opening after launch now takes just 13ms, matching Firefox's native theme performance.  
    - Opening the "List All Tabs" menu with 205 tabs takes 26ms, also on par with the native theme.  
    - In other words, after this rewrite, v2.0.0 has almost no impact on Firefox's performance.  
 - Fixed display issues with the address bar and native vertical tabs in Nightly (v135).  
+
+<details>
+<summary>🖼️ <b>Experience the new feature in action</b></summary>
+<p>FlexFox with the dark theme and <code>uc.flex.disable-sidebery-autohide</code> enabled:</p>
+<img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="96%" />
+<p>Combined with <code>uc.flex.fully-hide-toolbox</code>:</p>
+<img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="96%" />
+</details>
+
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
 
 **v1.1.1**:
 - Resolved an issue where the Findbar's background color did not display correctly when a theme was applied.
@@ -29,14 +45,6 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 - Corrected window controls positioning in Nightly (v135). Resolved compatibility with `customtitlebar` after `tabsintitlebar` deprecation.
 - Added preference `uc.flex.disable-sidebery-autohide` to disable Sidebery auto-collapse.
 
-   <details>
-   <summary>💬 <b>Experience the new feature in action</b></summary>
-   <p>FlexFox with the dark theme and <code>uc.flex.disable-sidebery-autohide</code> enabled:</p>
-   <img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="96%" />
-   <p>Combined with <code>uc.flex.fully-hide-toolbox</code>:</p>
-   <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="96%" />
-   </details>
-
 > [!IMPORTANT]
 > Before importing the v1.1.0 version of `sidebery-styles.json`, clear the old styles first. Open Sidebery settings (via the gear icon) > `Styles editor` > clear all styles under both the `Sidebar` and `Group page` sections, then import the new styles.  
 > Importing `sidebery-settings.json` may occasionally cause panel data loss. Be sure to create a snapshot backup of your panel data beforehand.
@@ -46,10 +54,6 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 - The bookmark star icon is now always visible when the webpage has already been bookmarked.  
    <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
    <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
-
-<details>
-
-<summary><b>Previous Updates</b></summary>
 
 **v1.0.3**:
 - Optimized performance when the `uc.flex.allow-addons-to-change-toolbar-color` option is enabled, improving speed by 1.4x compared to v1.0.2.

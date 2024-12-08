@@ -64,27 +64,6 @@
             line-height: 18px !important;
         }
         /* ---- Show tab bar on hover when Sidebery is inactive ---- */
-        /**
-         * Speed hack: If the property content in the declaration block does not define variables, 
-         * :root :has() can be used instead of :root:has(). 
-         * However, this may increase the risk of variable overrides, leading to unpredictable outcomes.
-         * Avoid using :not(:has(foo[A]:not([B]))); 
-         * instead, use :has(foo[B], foo:not([A])).
-         */
-        /**
-         * Based on actual testing, using body:has() is 1.2 times faster than :root :has() for this rule. 
-         * However, for other rules, body:has() might be slower. 
-         */
-        /*body:has(
-                #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][hidden],
-                #sidebar-box:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"])
-            ) {*/
-            /**
-             * The selector below becomes ineffective due to the parent selector using :root :has(), 
-             * but it doesn't seem to affect the outcome. 
-             */
-        /*}*/
-        /* The speed optimization mentioned above is no longer necessary, but the comment remains for future reference */
         &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:hover {
             margin-bottom: var(--uc-autohide-navigator-bottom);
         }
