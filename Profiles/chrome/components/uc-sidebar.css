@@ -67,7 +67,7 @@
     }
 
     /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
-    @media (-moz-bool-pref: "uc.flex.disable-sidebery-autohide") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
+    @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
         --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
         #sidebar-header:not(:hover):not(:has(.active)) {
             max-width: var(--uc-sidebar-header-width);
@@ -87,7 +87,7 @@
     }
 }
 
-@media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+@media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         &:hover #sidebar-header:not(:hover):not(:has(.active)) {
             --uc-sidebar-width: 44px;
@@ -116,7 +116,7 @@
 }
 
 /* Auto-hide sidebar in fullscreen or when Sidebery is fully hidden */
-@media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+@media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         &:not([positionend]) {
             /* Fixed position for left-side sidebar */
@@ -148,7 +148,7 @@
              * tweak the sidebar-box edge position to trigger hover auto-expansion under various UI scales 
              * (set to 0.6px, supporting up to layout.css.devPixelsPerPx of 2.0x) 
              */
-            @media (-moz-bool-pref: "sidebar.revamp") {
+            @media -moz-pref("sidebar.revamp") {
                 right: 0.6px;
             }
             height: 100%;

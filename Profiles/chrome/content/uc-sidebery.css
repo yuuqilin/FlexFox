@@ -1,7 +1,7 @@
 /* Add text stroke */
 @-moz-document regexp("^moz-extension://.*?/sidebar/sidebar.html")
 {
-    @media (-moz-bool-pref: "uc.flex.add-ui-text-stroke") {
+    @media -moz-pref("uc.flex.add-ui-text-stroke") {
         * {
             font-family: Chiron Hei HK !important;
             text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
@@ -16,7 +16,7 @@
     }
 
     /* When Sidebery's auto-collapse is disabled, stop the transition effect when hovering over Sidebery */
-    @media (-moz-bool-pref: "uc.flex.disable-sidebery-autohide") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
+    @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
         #root:not([data-nav-inline="true"]) .NavigationBar {
             overflow: hidden;
         }

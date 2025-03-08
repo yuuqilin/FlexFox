@@ -98,7 +98,7 @@ url-prefix("about:home") {
         --uc-wordmark-color: light-dark(#737373, #fff);
         --uc-background-color-secondary: light-dark(#fff, #4a4a4a);
 
-        @media (-moz-bool-pref: "browser.theme.dark-private-windows") {
+        @media -moz-pref("browser.theme.dark-private-windows") {
             color-scheme: dark !important;
         }
     }
@@ -144,7 +144,7 @@ url-prefix("about:home") {
     }
 }
 
-@media (-moz-bool-pref: "uc.flex.newtab-background") {
+@media -moz-pref("uc.flex.newtab-background") {
     @-moz-document url(about:newtab),
   url(about:home),
   url(about:privatebrowsing) {
@@ -170,7 +170,7 @@ url-prefix("about:home") {
                 --newtab-element-active-color: rgb(66 66 66 / 0.55) !important;
             }
 
-            @media not (-moz-bool-pref: "browser.theme.dark-private-windows") {
+            @media not -moz-pref("browser.theme.dark-private-windows") {
                 :root.private & {
                     background-image: var(--bg-0) !important;
 

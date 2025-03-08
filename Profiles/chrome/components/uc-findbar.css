@@ -1,6 +1,6 @@
 @namespace htmlNs url("http://www.w3.org/1999/xhtml");
 /* Auto hide findbar when unfocused */
-@media not (-moz-bool-pref: "uc.flex.disable-findbar-autohide") {
+@media not -moz-pref("uc.flex.disable-findbar-autohide") {
     findbar:not(:focus-within) {
         opacity: 0 !important;
         width: 0px !important;

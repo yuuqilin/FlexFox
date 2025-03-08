@@ -1,7 +1,7 @@
 /* Modified from https://github.com/KiKaraage/ArcWTF/blob/main/tweaks/extensions.css */
 /* fe9b962 */
 /*  Clean and tight extensions menu */
-@media not (-moz-bool-pref: "uc.flex.switch-to-alternate-condensed-panel") {
+@media not -moz-pref("uc.flex.switch-to-alternate-condensed-panel") {
     /* Move dropdown menu to display on the right side of the button */
     #unified-extensions-panel {
         margin-inline-end: calc(
@@ -95,7 +95,7 @@
 }
 
 /* Modified from https://gist.github.com/qaz69wsx/1739d185cff0a15929ac04c3f277a525 */
-@media (-moz-bool-pref: "uc.flex.switch-to-alternate-condensed-panel") {
+@media -moz-pref("uc.flex.switch-to-alternate-condensed-panel") {
     #unified-extensions-view {
         --uei-icon-size: 16px;
     }

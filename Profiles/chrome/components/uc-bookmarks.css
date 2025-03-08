@@ -1,7 +1,7 @@
 /* Source file https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_bookmarks_toolbar.css */
 /* 008c504 */
 
-@media not ((-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") or (-moz-bool-pref: "uc.flex.fully-hide-toolbox")) {
+@media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox")) {
     :root:not([inFullscreen]) {
         #PersonalToolbar {
             /* 0deg = "show" ; 90deg = "hide" ;  Set the following to control when bookmarks are shown */
@@ -34,7 +34,7 @@
             background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
                 linear-gradient(var(--bg), var(--bg)), var(--lwt-header-image, var(--lwt-additional-images)) !important;
             /* Adjust the background image offset */
-            @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
+            @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
                 background-position-x:
                     center,
                     left,

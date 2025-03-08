@@ -4,7 +4,7 @@
 
         --bg: #1a1b26;
         --uc-sidebar-bgcolor: #1a1b26;
-        @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+        @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
             --bg: var(--toolbar-bgcolor);
         }
 
@@ -40,7 +40,7 @@
 
         --bg: #f1f5f9;
         --uc-sidebar-bgcolor: #f1f5f9;
-        @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+        @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
             --bg: var(--toolbar-bgcolor);
         }
 
@@ -90,16 +90,16 @@
         --uc-sidebar-width: 44px; /* Width of the Sidebery */
         --uc-sidebar-hover-width: 220px; /* Width of the expanded Sidebery on hover */
         /* Wider Sidebery width when expanded */
-        @media (-moz-bool-pref: "uc.flex.increase-sidebery-expanded-width") {
+        @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
             --uc-sidebar-hover-width: 260px;
         }
         /* Set the display width of Sidebery and the sidebar header when Sidebery's auto-collapse is disabled */
-        @media (-moz-bool-pref: "uc.flex.disable-sidebery-autohide") {
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
             --uc-sidebar-width: var(--uc-sidebar-hover-width);
             --uc-sidebar-header-width: 44px;
         }
         /* Trigger width for expanding Sidebery on hover when fully hidden or in fullscreen */
-        @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             --uc-sidebar-width: 1px;
 
             /* Increase trigger width in non-maximized mode to prevent window resize interference */
@@ -112,16 +112,16 @@
         /* Horizontal offset for the bookmarks toolbar when Sidebery is active */
         --uc-personal-toolbar-offset: var(--uc-sidebar-width);
         --uc-personal-toolbar-width: var(--uc-sidebar-width);
-        @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
+        @media -moz-pref("uc.flex.fully-hide-toolbox") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
             --uc-personal-toolbar-offset: 0px;
             --uc-personal-toolbar-width: 0px;
         }
-        @media (-moz-bool-pref: "sidebar.revamp") and (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+        @media -moz-pref("sidebar.revamp") and -moz-pref("uc.flex.fully-hide-sidebery") {
             --uc-personal-toolbar-offset: 40px;
             --uc-personal-toolbar-width: 40px;
         }
         /* Add margin to align bookmarks with toolbar icons */
-        @media (-moz-bool-pref: "uc.flex.add-bookmarks-left-margin") {
+        @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
             &:not([inFullscreen]) {
                 --uc-bookmarks-margin-left: 10px;
             }
@@ -131,8 +131,8 @@
          * when themes and addons are allowed to customize the toolbar background color and image. 
          */
         --uc-bg-y-padding: 16px;
-        @media (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
-            @media not ((-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") or (-moz-bool-pref: "uc.flex.fully-hide-toolbox") or (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
+        @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+            @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
                 &:not([inFullscreen]):not([customizing]) {
                     --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-width));
                     --uc-theme-bg-x-right-end: 0px;
@@ -148,8 +148,8 @@
         &[inFullscreen]:not([customizing]) {
             --uc-tab-items-visibility: collapse;
         }
-        @media (-moz-bool-pref: "uc.flex.disable-tabs-toolbar-autohide"),
-            (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+        @media -moz-pref("uc.flex.disable-tabs-toolbar-autohide"),
+            -moz-pref("uc.flex.fully-hide-toolbox") {
             &:not([inFullscreen]):not([customizing]) {
                 --uc-tab-items-visibility: collapse;
             }
@@ -169,11 +169,11 @@
         &[inFullscreen] {
             --uc-windows-controls-top: 0px;
         }
-        @media (-moz-bool-pref: "sidebar.revamp") {
+        @media -moz-pref("sidebar.revamp") {
             --uc-vertical-tabs-display: none;
             --uc-sidebar-main-margin-right: -9px;
             --uc-sidebar-main-margin-left: -9px;
-            @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
                 --uc-sidebar-main-margin-right: -8px;
                 --uc-sidebar-main-margin-left: -14px;
                 &[sizemode="normal"] {
@@ -190,7 +190,7 @@
             #sidebar-main[positionend] {
                 --uc-sidebar-main-margin-right: -1px;
                 --uc-sidebar-main-margin-left: -9px;
-                @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+                @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
                     --uc-sidebar-main-margin-right: -7px;
                     --uc-sidebar-main-margin-left: -7px;
                 }
@@ -203,23 +203,23 @@
     /*===== Horizontal offsets for the bookmarks toolbar and navigator =====*/
     --uc-navigator-offset: var(--uc-sidebar-width);
     :has(#sidebar-box[positionend]) {
-        @media not (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
-            @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            @media -moz-pref("uc.flex.fully-hide-toolbox") {
                 --uc-navigator-offset: 0px;
             }
-            @media not (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+            @media not -moz-pref("uc.flex.fully-hide-toolbox") {
                 --uc-personal-toolbar-offset: 0px;
                 --uc-personal-toolbar-width: var(--uc-sidebar-width);
             }
         }
-        @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
-            @media (-moz-bool-pref: "sidebar.revamp") {
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
+            @media -moz-pref("sidebar.revamp") {
                 --uc-personal-toolbar-offset: 0px;
                 --uc-personal-toolbar-width: var(--uc-sidebar-width);
             }
         }
     }
-    @media (-moz-bool-pref: "sidebar.revamp") and (-moz-bool-pref: "sidebar.verticalTabs") {
+    @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.verticalTabs") {
         --uc-personal-toolbar-offset: 37px;
         --uc-personal-toolbar-width: 37px;
     }
@@ -291,7 +291,7 @@
 */
 
 /* Faster sidebar expansion and collapse */
-@media (-moz-bool-pref: "uc.flex.sidebery-fast-hover-expand") {
+@media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
     :root {
         --uc-hover-transition-duration: 100ms;
         --uc-autohide-sidebar-delay: 1ms;
@@ -300,7 +300,7 @@
 }
 
 /* Slower sidebar expansion and collapse */
-@media (-moz-bool-pref: "uc.flex.sidebery-slow-hover-expand") {
+@media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
     :root {
         --uc-autohide-sidebar-delay: 10ms;
         --uc-hover-sidebar-delay: 350ms;
@@ -309,13 +309,13 @@
 }
 
 /* Icon size for Windows controls buttons */
-@media not (-moz-bool-pref: "uc.flex.revert-to-original-window-controls") {
+@media not -moz-pref("uc.flex.revert-to-original-window-controls") {
     :root {
         --uc-osx-ctrls-size: 15px;
     }
 }
 
-@media not (-moz-bool-pref: "uc.flex.disable-tabs-toolbar-autohide") {
+@media not -moz-pref("uc.flex.disable-tabs-toolbar-autohide") {
     :root {
         --uc-height-of-tabs-toolbar: 40px;
     }

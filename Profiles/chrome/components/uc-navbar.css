@@ -81,7 +81,7 @@ toolbarbutton:hover {
 /* Hide the whole toolbar area unless urlbar is focused or cursor is over the toolbar */
 /* Dimensions on non-Win10 OS probably needs to be adjusted */
 
-@media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+@media -moz-pref("uc.flex.fully-hide-toolbox") {
     :root:not([inFullscreen]) {
         #navigator-toolbox {
             --browser-area-z-index-toolbox: 3;

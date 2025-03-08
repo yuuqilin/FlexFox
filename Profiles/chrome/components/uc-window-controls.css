@@ -5,7 +5,7 @@
 }
 
 /* Prevent navigation bar background overflow in certain themes */
-@media not (-moz-bool-pref: "uc.flex.allow-addons-to-change-toolbar-color") {
+@media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
     #nav-bar:not([customizing]) {
         padding-bottom: var(--uc-nav-bar-padding-bottom) /*!important*/;
         margin-bottom: var(--uc-nav-bar-margin-bottom) /*!important*/;
@@ -215,11 +215,11 @@
         --uc-nav-bar-padding-right: 0px;
     }
 
-    @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") {
+    @media -moz-pref("uc.flex.fully-hide-toolbox") {
         --uc-findbar-set-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
     }
 
-    @media (-moz-bool-pref: "uc.flex.fully-hide-toolbox") and (not (-moz-bool-pref: "uc.flex.fully-hide-sidebery")) {
+    @media -moz-pref("uc.flex.fully-hide-toolbox") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
         #navigator-toolbox {
             margin-left: var(--uc-navigator-offset);
             width: calc(100% - var(--uc-sidebar-width));
@@ -233,7 +233,7 @@
  * so the nav-bar no longer needs to reserve space on the right for these controls, 
  * and the padding should be reset to 0. 
  */
-@media (-moz-bool-pref: "sidebar.verticalTabs") {
+@media -moz-pref("sidebar.verticalTabs") {
     #navigator-toolbox {
         --uc-nav-bar-padding-right: 0px;
     }
@@ -246,7 +246,7 @@
 =============================================*/
 
 /* Offset bookmarks toolbar horizontally when Sidebery is visible to prevent overlap with sidebar */
-@media not (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+@media not -moz-pref("uc.flex.fully-hide-sidebery") {
     :root:not([inFullscreen]):not([customizing]) {
         #PersonalToolbar {
             margin-left: var(--uc-personal-toolbar-offset);
@@ -268,7 +268,7 @@
     }
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         padding-top: 0px !important;
-        @media not (-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") {
+        @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
             margin-top: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding));
         }
     }
@@ -278,7 +278,7 @@
  * Avoid overlap of the bookmarks toolbar by the sidebar
  * when "Only Show Bookmarks Toolbar on New Tab" is enabled for Firefox >= 130 
  */
-@media (-moz-bool-pref: "uc.flex.disable-bookmarks-autohide") {
+@media -moz-pref("uc.flex.disable-bookmarks-autohide") {
     :root:not([inFullscreen]):not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
         /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
         --uc-findbar-set-top: calc(-1 * var(--uc-bm-padding));
@@ -298,7 +298,7 @@
 =             Revamped Sidebar                =
 =============================================*/
 
-@media (-moz-bool-pref: "sidebar.revamp") {
+@media -moz-pref("sidebar.revamp") {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         /* Position Sidebery at the screen edge to simplify hover-triggered expansion */
         --browser-area-z-index-sidebar: 5;
@@ -339,7 +339,7 @@
      * when the revamped sidebar is enabled and Sidebery is fully hidden, 
      * as the revamped sidebar will still display.
      */
-    @media (-moz-bool-pref: "uc.flex.fully-hide-sidebery") {
+    @media -moz-pref("uc.flex.fully-hide-sidebery") {
         :root:not([inFullscreen]):not([customizing]) {
             #PersonalToolbar {
                 margin-left: var(--uc-personal-toolbar-offset);
@@ -375,7 +375,7 @@
 }
 
 /* Reposition nav-bar window controls when native vertical tabs are enabled */
-@media (-moz-bool-pref: "sidebar.verticalTabs") {
+@media -moz-pref("sidebar.verticalTabs") {
     :root:not([inFullscreen]) #nav-bar > .titlebar-buttonbox-container {
         margin-top: 2px;
     }

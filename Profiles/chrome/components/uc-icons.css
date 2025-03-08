@@ -44,7 +44,7 @@
 /* Modified from https://github.com/aminomancer/uc.css.js/blob/master/uc-tabs-bar.css */
 /* https://github.com/aminomancer/uc.css.js/blob/master/LICENSE */
 /* macOS style window controls */
-@media not (-moz-bool-pref: "uc.flex.revert-to-original-window-controls") {
+@media not -moz-pref("uc.flex.revert-to-original-window-controls") {
     .titlebar-button {
         border: none;
         margin: 0 !important;
