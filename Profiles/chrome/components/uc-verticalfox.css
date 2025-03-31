@@ -28,19 +28,19 @@
     z-index: 100;
 }
 
-#sidebar-box[positionend] {
+#sidebar-box:is([positionend], [sidebar-positionend]) {
     direction: rtl;
 }
 
-#sidebar-box[positionend] > * {
+#sidebar-box:is([positionend], [sidebar-positionend]) > * {
     direction: ltr;
 }
 
-#sidebar-box[positionend]:-moz-locale-dir(rtl) {
+#sidebar-box:is([positionend], [sidebar-positionend]):-moz-locale-dir(rtl) {
     direction: ltr;
 }
 
-#sidebar-box[positionend]:-moz-locale-dir(rtl) > * {
+#sidebar-box:is([positionend], [sidebar-positionend]):-moz-locale-dir(rtl) > * {
     direction: rtl;
 }
 
@@ -97,16 +97,16 @@
     }
     */
 
-    &:not([positionend]) > :-moz-locale-dir(rtl),
-    &[positionend] > * {
+    &:not(:is([positionend], [sidebar-positionend])) > :-moz-locale-dir(rtl),
+    &:is([positionend], [sidebar-positionend]) > * {
         border-inline-width: 1px 0px;
     }
 
     /* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
-    &:not([positionend]):hover ~ #appcontent #statuspanel {
+    &:not(:is([positionend], [sidebar-positionend])):hover ~ #appcontent #statuspanel {
         inset-inline: auto 0px !important;
     }
-    &:not([positionend]):hover ~ #appcontent #statuspanel-label {
+    &:not(:is([positionend], [sidebar-positionend])):hover ~ #appcontent #statuspanel-label {
         margin-inline: 0px !important;
         border-left-style: solid !important;
     }

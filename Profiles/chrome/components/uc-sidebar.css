@@ -118,7 +118,7 @@
 /* Auto-hide sidebar in fullscreen or when Sidebery is fully hidden */
 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
-        &:not([positionend]) {
+        &:not(:is([positionend], [sidebar-positionend])) {
             /* Fixed position for left-side sidebar */
             position: absolute;
             left: 0px;
@@ -139,7 +139,7 @@
             }
         }
 
-        &[positionend] {
+        &:is([positionend], [sidebar-positionend]) {
             /* Fixed position for right-side sidebar */
             position: absolute;
             right: 0px;

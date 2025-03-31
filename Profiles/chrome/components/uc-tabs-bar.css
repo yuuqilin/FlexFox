@@ -17,7 +17,7 @@
         transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay);
         border-inline: 0.01px solid var(--chrome-content-separator-color);
         border-inline-width: 0 0.01px;
-        &[positionend] {
+        &:is([positionend], [sidebar-positionend]) {
             transition-property: min-width, transform;
             border-inline-width: 0.01px 0;
         }
@@ -28,7 +28,7 @@
                 var(--tab-pinned-container-margin-inline-expanded) + 1px
         );
         transition-delay: 0ms !important;
-        &[positionend] {
+        &:is([positionend], [sidebar-positionend]) {
             transform: translateX(calc(var(--tab-collapsed-width) - 100%));
         }
     }

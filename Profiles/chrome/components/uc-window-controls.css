@@ -304,14 +304,14 @@
         --browser-area-z-index-sidebar: 5;
         background-color: var(--uc-sidebar-bgcolor) !important;
 
-        &:not([positionend]) {
+        &:not(:is([positionend], [sidebar-positionend])) {
             order: 0 !important;
-            margin-left: -1px;
+            /* margin-left: -1px; */
         }
 
-        &[positionend] {
+        &:is([positionend], [sidebar-positionend]) {
             order: 8 !important;
-            margin-right: -9px;
+            margin-right: 0px !important; /* Override margin-inline-start */
         }
     }
 
