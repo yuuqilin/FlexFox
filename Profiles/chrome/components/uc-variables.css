@@ -8,8 +8,10 @@
             --bg: var(--toolbar-bgcolor);
         }
 
-        --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
-        --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
+        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+            --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
+            --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
+        }
 
         --urlbar-bg: #0d0d15;
         --urlbar-border-top: #000;
@@ -44,8 +46,10 @@
             --bg: var(--toolbar-bgcolor);
         }
 
-        --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
-        --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
+        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+            --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
+            --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
+        }
 
         --urlbar-bg: #cbd5e1;
         --urlbar-border-top: #9ca3af;
@@ -72,7 +76,7 @@
     --uc-personal-toolbar-offset: 0px;
     --uc-personal-toolbar-width: 0px;
     --uc-bookmarks-margin-left: 0px;
-    --uc-bg-y-padding: -27px;
+    --uc-bg-y-padding: -28px;
     --uc-theme-bg-x-left-start: 0px;
     --uc-theme-bg-x-right-end: 0px;
     --uc-tab-items-visibility: inherit;
@@ -82,6 +86,8 @@
     --uc-autohide-navigator-delay: 0s;
     --uc-autohide-tabstoolbar-visibility: visible;
     --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
+    /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
+    --uc-verticalTabs-margin-left: -6px;
     /*===== End of initializing block =====*/
 
     /*===== Define new variable values when Sidebery is active =====*/
@@ -148,8 +154,7 @@
         &[inFullscreen]:not([customizing]) {
             --uc-tab-items-visibility: collapse;
         }
-        @media -moz-pref("uc.flex.disable-tabs-toolbar-autohide"),
-            -moz-pref("uc.flex.fully-hide-toolbox") {
+        @media -moz-pref("uc.flex.disable-tabs-toolbar-autohide"), -moz-pref("uc.flex.fully-hide-toolbox") {
             &:not([inFullscreen]):not([customizing]) {
                 --uc-tab-items-visibility: collapse;
             }
@@ -171,28 +176,36 @@
         }
         @media -moz-pref("sidebar.revamp") {
             --uc-vertical-tabs-display: none;
-            --uc-sidebar-main-margin-right: -9px;
-            --uc-sidebar-main-margin-left: -9px;
+            --uc-sidebar-revamp-margin-right: -9px;
+            --uc-sidebar-revamp-margin-left: -9px;
+            /* !TEMPORARY: These variables are temporary solutions and might be removed later. */
+            @media -moz-pref("sidebar.verticalTabs") {
+                --uc-sidebar-revamp-margin-right: 0px;
+                --uc-sidebar-revamp-margin-left: -5px;
+                --uc-verticalTabs-margin-left: 0px;
+                --uc-tabbox-padding-right: 0px;
+                --uc-tabbox-padding-left: 5px;
+            }
             @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-                --uc-sidebar-main-margin-right: -8px;
-                --uc-sidebar-main-margin-left: -14px;
+                --uc-sidebar-revamp-margin-right: -8px;
+                --uc-sidebar-revamp-margin-left: -14px;
                 &[sizemode="normal"] {
-                    --uc-sidebar-main-margin-right: -6px;
-                    --uc-sidebar-main-margin-left: calc(-1 * var(--uc-sidebar-width) - 6px);
+                    --uc-sidebar-revamp-margin-right: -6px;
+                    --uc-sidebar-revamp-margin-left: calc(-1 * var(--uc-sidebar-width) - 6px);
                     --uc-tabbox-padding-right: 0px;
                     --uc-tabbox-padding-left: 0px;
                     #sidebar-main:is([positionend], [sidebar-positionend]) {
-                        --uc-sidebar-main-margin-right: calc(-1 * var(--uc-sidebar-width) - 6px);
-                        --uc-sidebar-main-margin-left: -6px;
+                        --uc-sidebar-revamp-margin-right: calc(-1 * var(--uc-sidebar-width) - 6px);
+                        --uc-sidebar-revamp-margin-left: -6px;
                     }
                 }
             }
             #sidebar-main:is([positionend], [sidebar-positionend]) {
-                --uc-sidebar-main-margin-right: -9px;
-                --uc-sidebar-main-margin-left: -9px;
+                --uc-sidebar-revamp-margin-right: -9px;
+                --uc-sidebar-revamp-margin-left: -9px;
                 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-                    --uc-sidebar-main-margin-right: -8px;
-                    --uc-sidebar-main-margin-left: -8px;
+                    --uc-sidebar-revamp-margin-right: -8px;
+                    --uc-sidebar-revamp-margin-left: -8px;
                 }
             }
         }
@@ -220,8 +233,13 @@
         }
     }
     @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.verticalTabs") {
-        --uc-personal-toolbar-offset: 37px;
-        --uc-personal-toolbar-width: 37px;
+        --uc-personal-toolbar-offset: 44px;
+        --uc-personal-toolbar-width: 44px;
+        @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
+            &:not([inFullscreen]) {
+                --uc-bookmarks-margin-left: 10px;
+            }
+        }
     }
     /*===== End of the block for horizontal offsets of the bookmarks toolbar and navigator =====*/
 

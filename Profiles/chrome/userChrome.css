@@ -1,3 +1,10 @@
+/*            version: 2.1.0            */
+/*      ____ _          ____            */
+/*     / __/ /__  _  __/ __/___  _  __  */
+/*    / /_/ / _ \| |/_/ /_/ __ \| |/_/  */
+/*   / __/ /  __/>  </ __/ /_/ />  <    */
+/*  /_/ \__\___/_/|_|_/  \____/_/|_|    */
+/*                                      */
 @import url(./components/uc-variables.css);
 @import url(./components/uc-icons.css);
 @import url(./components/uc-menu-icons.css);
@@ -12,3 +19,4 @@
 @import url(./components/uc-findbar.css);
 @import url(./components/uc-window-controls.css);
 @import url(./components/uc-verticalfox.css);
+@import url(./components/uc-user-settings.css);

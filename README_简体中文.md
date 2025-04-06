@@ -1,7 +1,7 @@
 # FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v138-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v139-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -13,8 +13,27 @@
 
 ## 更新内容
 
+**v2.1.0**  
+- 原生垂直选项卡支持自动折叠和鼠标悬停展开。可通过`展开侧边栏`按钮（Alt+Ctrl+Z）启用该功能。  
+- 新增选项 `uc.flex.show-pin-tabs-separator-in-expanded-state`，可在使用原生垂直选项卡时，为固定标签页面板显示分隔线。  
+- 修复启用原生垂直选项卡时无法应用主题，以及自动隐藏书签栏时主题背景图损坏的问题。  
+- 现在用户可以在 `components` 文件夹中创建 `uc-user-settings.css`，用于自定义 FlexFox 的样式。该文件在 FlexFox 之后加载，因此即使 FlexFox 更新，也不会影响用户的自定义修改。  
+- 原生垂直选项卡与 Sidebery 尚未整合，目前只能二选一使用。  
+
+<details>
+<summary>🖼️ <b>原生垂直选项卡自动折叠效果示例</b></summary>
+<p>原生垂直选项卡展开，`uc.flex.show-pin-tabs-separator-in-expanded-state` 为 false</p>
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="96%" />
+<p>原生垂直选项卡折叠，`uc.flex.show-pin-tabs-separator-in-expanded-state` 为 false</p>
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="96%" />
+</details> 
+
 **v2.0.3**  
 - 添加了 `sidebar-positionend` 属性，以兼容 Firefox v138+，并对新版侧边栏的宽度做了轻微调整。  
+
+<details>
+
+<summary>💬 <b>历史更新</b></summary>
 
 **v2.0.2**  
 - 更新 `@media` 规则以兼容 Firefox v137+。  
@@ -37,10 +56,6 @@
 <p>与<code>uc.flex.fully-hide-toolbox</code>结合使用的效果：</p>
 <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
 </details>
-
-<details>
-
-<summary>💬 <b>历史更新</b></summary>
 
 **v1.1.1**:
 - 修正了应用主题时查找栏背景颜色显示异常的问题。
@@ -171,6 +186,7 @@
 | `uc.flex.revert-to-original-window-controls` | 恢复原始窗口按钮（最小化、最大化、关闭）。   |
 | `uc.flex.sidebery-fast-hover-expand`       | 加快 Sidebery 悬停展开/折叠的速度。            |
 | `uc.flex.sidebery-slow-hover-expand`       | 放慢 Sidebery 悬停展开/折叠的速度。            |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在垂直选项卡的固定和普通标签页之间显示分隔线。 |
 
 ## 已知问题
 

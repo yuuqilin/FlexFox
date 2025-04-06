@@ -1,7 +1,7 @@
 # FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v138-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v139-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -13,8 +13,27 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v2.1.0**  
+- Built-in vertical tabs now automatically collapse and expand on hover. Use the `Expand sidebar` button (Alt+Ctrl+Z) to enable this feature.  
+- Added a new option `uc.flex.show-pin-tabs-separator-in-expanded-state` to display a separator line in the pinned tabs panel when using native vertical tabs.  
+- Fixed an issue where themes couldn't be applied when using built-in vertical tabs, and a bug where the theme background image broke when auto-hiding the bookmarks bar.  
+- Users can now create a `uc-user-settings.css` file in the `components` folder to customize FlexFox styles. This file loads after FlexFox and overrides its styles, so custom changes remain intact even after future updates.  
+- Native vertical tabs and Sidebery are not yet integrated. Only one can be used at a time.  
+
+<details>
+<summary>🖼️ <b>Auto-collapse demo for native vertical tabs</b></summary>
+<p>Native vertical tabs expanded, with `uc.flex.show-pin-tabs-separator-in-expanded-state` set to false</p>
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="96%" />
+<p>Native vertical tabs collapsed, with `uc.flex.show-pin-tabs-separator-in-expanded-state` set to false</p>
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="96%" />
+</details>
+
 **v2.0.3**  
 - Added `sidebar-positionend` attribute for compatibility with Firefox v138+, with a slight tweak to the width of the new sidebar.  
+
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
 
 **v2.0.2**  
 - Updated `@media` rule for Firefox v137+ compatibility.  
@@ -37,10 +56,6 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 <p>Combined with <code>uc.flex.fully-hide-toolbox</code>:</p>
 <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="96%" />
 </details>
-
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
 
 **v1.1.1**:
 - Resolved an issue where the Findbar's background color did not display correctly when a theme was applied.
@@ -171,6 +186,7 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 | `uc.flex.revert-to-original-window-controls` | Restore the original window buttons (minimize, maximize, close).            |
 | `uc.flex.sidebery-fast-hover-expand`        | Speed up Sidebery hover expand/collapse.                                     |
 | `uc.flex.sidebery-slow-hover-expand`        | Slow down Sidebery hover expand/collapse.                                    |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in vertical tabs.  |
 
 ## Known Issues
 

@@ -1,5 +1,5 @@
 /* Source file https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_bookmarks_toolbar.css */
-/* 008c504 */
+/* 2ea55cb */
 
 @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox")) {
     :root:not([inFullscreen]) {
@@ -33,6 +33,7 @@
             background-position-y: top, top, var(--uc-bg-y), var(--uc-bg-y), var(--uc-bg-y);
             background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
                 linear-gradient(var(--bg), var(--bg)), var(--lwt-header-image, var(--lwt-additional-images)) !important;
+
             /* Adjust the background image offset */
             @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
                 background-position-x:
@@ -40,6 +41,22 @@
                     left,
                     right var(--uc-theme-bg-x-right-end),
                     var(--uc-theme-bg-x-left-start);
+            }
+        }
+
+        @media -moz-pref("sidebar.verticalTabs") {
+            @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+                #PersonalToolbar {
+                    --bg: transparent;
+                }
+            }
+            #PersonalToolbar:not([customizing]) {
+                background-color: inherit !important;
+                margin-bottom: calc(0px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
+                --uc-bg-y: calc(
+                    0px - (2 * var(--toolbarbutton-inner-padding) + var(--toolbarbutton-outer-padding)) - 30px -
+                        var(--bookmark-block-padding)
+                );
             }
         }
 

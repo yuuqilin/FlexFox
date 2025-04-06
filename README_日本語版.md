@@ -1,7 +1,7 @@
 # FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v138-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v139-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -13,8 +13,27 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v2.1.0**  
+- ネイティブの縦型タブが自動的に折りたたまれ、ホバーで展開されます。`サイドバーを展開します`ボタン（Alt+Ctrl+Z）でこの機能を有効にできます。  
+- 新しいオプション `uc.flex.show-pin-tabs-separator-in-expanded-state` を追加し、ネイティブの垂直タブ使用時にピン留めタブのパネルに区切り線を表示できるようになりました。  
+- ネイティブの縦型タブを有効にした際にテーマが適用されない不具合と、ブックマークバーを自動的に非表示にした時に背景画像が崩れる問題を修正。  
+- `components` フォルダに `uc-user-settings.css` を作成することで、FlexFox のスタイルをユーザーが自由に上書きできるようになりました。このファイルは FlexFox より後に読み込まれるため、FlexFox を更新しても設定が上書きされることはありません。    
+- ネイティブの縦型タブとSideberyの統合はまだ未対応で、同時には使用できません。  
+
+<details>
+<summary>🖼️ <b>ネイティブ垂直タブの自動折りたたみのデモ</b></summary>
+<p>`uc.flex.show-pin-tabs-separator-in-expanded-state` が false の状態でネイティブ垂直タブを展開した例</p>
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="96%" />
+<p>`uc.flex.show-pin-tabs-separator-in-expanded-state` が false の状態でネイティブ垂直タブを折りたたんだ例</p>
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="96%" />
+</details> 
+
 **v2.0.3**  
 - Firefox v138+との互換性を確保するために、`sidebar-positionend`属性を追加し、新しいサイドバーの幅を少し調整しました。  
+
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
 
 **v2.0.2**  
 - `@media` ルールを Firefox v137+ に対応するよう更新。  
@@ -37,10 +56,6 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 <p><code>uc.flex.fully-hide-toolbox</code>と組み合わせた表示：</p>
 <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
 </details>
-
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
 
 **v1.1.1**:
 - テーマ適用時に検索バーの背景色が正しく表示されない問題を修正しました。
@@ -170,6 +185,7 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 | `uc.flex.revert-to-original-window-controls` | 元のウィンドウコントロール（最小化・最大化・閉じる）に戻す   |
 | `uc.flex.sidebery-fast-hover-expand`       | Sideberyの展開/折りたたみを高速化                              |
 | `uc.flex.sidebery-slow-hover-expand`       | Sideberyの展開/折りたたみを遅くする                            |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | 垂直タブのピン留めタブと通常タブの間に区切り線を表示します。 |
 
 ## 既知の問題
 
