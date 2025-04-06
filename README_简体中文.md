@@ -13,6 +13,10 @@
 
 ## 更新内容
 
+**v2.1.1**  
+- 修复了 Firefox v137 中原生垂直选项卡背景变成透明的问题。  
+- 新增 `uc.flex.disable-native-vertical-tabs-autohide` 选项，设为 true 时可关闭自动折叠原生垂直选项卡的功能。  
+
 **v2.1.0**  
 - 原生垂直选项卡支持自动折叠和鼠标悬停展开。可通过`展开侧边栏`按钮（Alt+Ctrl+Z）启用该功能。  
 - 新增选项 `uc.flex.show-pin-tabs-separator-in-expanded-state`，可在使用原生垂直选项卡时，为固定标签页面板显示分隔线。  
@@ -22,11 +26,13 @@
 
 <details>
 <summary>🖼️ <b>原生垂直选项卡自动折叠效果示例</b></summary>
-<p>原生垂直选项卡展开，`uc.flex.show-pin-tabs-separator-in-expanded-state` 为 false</p>
-<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="96%" />
-<p>原生垂直选项卡折叠，`uc.flex.show-pin-tabs-separator-in-expanded-state` 为 false</p>
-<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="96%" />
-</details> 
+<p>原生垂直选项卡展开，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" />
+<p>原生垂直选项卡折叠，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" />
+</details>  
+
+侧边栏工具按钮的设计借鉴了 @Godiesc 的 [firefox-gx](https://github.com/Godiesc/firefox-gx)。感谢 @Godiesc 提供了这样出色的实现。  
 
 **v2.0.3**  
 - 添加了 `sidebar-positionend` 属性，以兼容 Firefox v138+，并对新版侧边栏的宽度做了轻微调整。  
@@ -179,6 +185,7 @@
 | `uc.flex.disable-bookmarks-autohide`       | 禁用书签栏自动隐藏。                           |
 | `uc.flex.disable-tabs-toolbar-autohide`    | 禁用 Sidebery 非激活时的原生标签栏自动隐藏。   |
 | `uc.flex.disable-findbar-autohide`         | 禁用查找栏失去焦点时自动隐藏。                 |
+| `uc.flex.disable-native-vertical-tabs-autohide` | 禁用原生垂直选项卡的自动折叠功能。          |
 | `uc.flex.disable-sidebery-autohide`        | 停用 Sidebery 自动折叠。                       |
 | `uc.flex.remove-bookmarks-folder-icons`    | 移除书签文件夹中的图标。                       |
 | `uc.flex.remove-bookmarks-labels`          | 移除书签文字标签。                             |

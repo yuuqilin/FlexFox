@@ -20,6 +20,8 @@ user_pref("uc.flex.disable-bookmarks-autohide",                 false);
 user_pref("uc.flex.disable-tabs-toolbar-autohide",              false);
 /* Disables the auto-hide feature of the find bar. */
 user_pref("uc.flex.disable-findbar-autohide",                   false);
+/* Disable auto-collapse of native vertical tabs. */
+user_pref("uc.flex.disable-native-vertical-tabs-autohide",      false);
 /* Disable the auto-collapse feature of the Sidebery. */
 user_pref("uc.flex.disable-sidebery-autohide",                  false);
 /* Removes icons from bookmark folders. */
@@ -34,6 +36,8 @@ user_pref("uc.flex.revert-to-original-window-controls",         false);
 user_pref("uc.flex.sidebery-fast-hover-expand",                 false);
 /* Slows down the hover expand/collapse transitions for Sidebery. */
 user_pref("uc.flex.sidebery-slow-hover-expand",                 false);
+/* Shows a separator between pinned and regular tabs in vertical tabs. */
+user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
 
 /* Adjusts the text scaling in the Firefox interface. 100 means no scaling. */
 // user_pref("ui.textScaleFactor",                                 100);

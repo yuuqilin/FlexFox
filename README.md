@@ -13,6 +13,10 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v2.1.1**  
+- Fixed an issue where the native vertical tabs background became transparent in Firefox v137.  
+- Added the `uc.flex.disable-native-vertical-tabs-autohide` option to disable auto-collapsing of native vertical tabs when set to true.  
+
 **v2.1.0**  
 - Built-in vertical tabs now automatically collapse and expand on hover. Use the `Expand sidebar` button (Alt+Ctrl+Z) to enable this feature.  
 - Added a new option `uc.flex.show-pin-tabs-separator-in-expanded-state` to display a separator line in the pinned tabs panel when using native vertical tabs.  
@@ -22,11 +26,13 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 <details>
 <summary>🖼️ <b>Auto-collapse demo for native vertical tabs</b></summary>
-<p>Native vertical tabs expanded, with `uc.flex.show-pin-tabs-separator-in-expanded-state` set to false</p>
-<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="96%" />
-<p>Native vertical tabs collapsed, with `uc.flex.show-pin-tabs-separator-in-expanded-state` set to false</p>
-<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="96%" />
-</details>
+<p>Native vertical tabs expanded, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" />
+<p>Native vertical tabs collapsed, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" />
+</details>  
+
+The sidebar tool button design is based on [firefox-gx](https://github.com/Godiesc/firefox-gx) by @Godiesc. Thanks to @Godiesc for the excellent implementation.  
 
 **v2.0.3**  
 - Added `sidebar-positionend` attribute for compatibility with Firefox v138+, with a slight tweak to the width of the new sidebar.  
@@ -179,6 +185,7 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 | `uc.flex.disable-bookmarks-autohide`        | Disable bookmarks toolbar auto-hide.                                         |
 | `uc.flex.disable-tabs-toolbar-autohide`     | Disable the native horizontal tab bar auto-hide when Sidebery is inactive.   |
 | `uc.flex.disable-findbar-autohide`          | Disable Findbar auto-hide when it loses focus.                               |
+| `uc.flex.disable-native-vertical-tabs-autohide` | Disable auto-collapse of native vertical tabs.                           |
 | `uc.flex.disable-sidebery-autohide`         | Disable Sidebery auto-collapse.                                              |
 | `uc.flex.remove-bookmarks-folder-icons`     | Remove icons from bookmark folders.                                          |
 | `uc.flex.remove-bookmarks-labels`           | Remove bookmark text labels.                                                 |

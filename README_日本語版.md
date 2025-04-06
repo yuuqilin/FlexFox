@@ -13,6 +13,10 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v2.1.1**  
+- Firefox v137でネイティブ縦型タブの背景が透過になる問題を修正しました。  
+- `uc.flex.disable-native-vertical-tabs-autohide` オプションを追加しました。trueに設定するとネイティブ縦型タブの自動折りたたみを無効化できます。  
+
 **v2.1.0**  
 - ネイティブの縦型タブが自動的に折りたたまれ、ホバーで展開されます。`サイドバーを展開します`ボタン（Alt+Ctrl+Z）でこの機能を有効にできます。  
 - 新しいオプション `uc.flex.show-pin-tabs-separator-in-expanded-state` を追加し、ネイティブの垂直タブ使用時にピン留めタブのパネルに区切り線を表示できるようになりました。  
@@ -22,11 +26,13 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 <details>
 <summary>🖼️ <b>ネイティブ垂直タブの自動折りたたみのデモ</b></summary>
-<p>`uc.flex.show-pin-tabs-separator-in-expanded-state` が false の状態でネイティブ垂直タブを展開した例</p>
-<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="96%" />
-<p>`uc.flex.show-pin-tabs-separator-in-expanded-state` が false の状態でネイティブ垂直タブを折りたたんだ例</p>
-<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="96%" />
-</details> 
+<p><code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> が false の状態でネイティブ垂直タブを展開した例</p>
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" />
+<p><code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> が false の状態でネイティブ垂直タブを折りたたんだ例</p>
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" />
+</details>  
+
+サイドバーのツールボタンのデザインは、@Godiesc 氏の [firefox-gx](https://github.com/Godiesc/firefox-gx) を参考にしています。優れた実装に感謝します。  
 
 **v2.0.3**  
 - Firefox v138+との互換性を確保するために、`sidebar-positionend`属性を追加し、新しいサイドバーの幅を少し調整しました。  
@@ -178,6 +184,7 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 | `uc.flex.disable-bookmarks-autohide`       | ブックマークバーの自動非表示を無効化                           |
 | `uc.flex.disable-tabs-toolbar-autohide`    | Sidebery未使用時のタブバー自動非表示を無効化                   |
 | `uc.flex.disable-findbar-autohide`         | 検索バーの自動非表示を無効化                                   |
+| `uc.flex.disable-native-vertical-tabs-autohide` | ネイティブ縦型タブの自動折りたたみを無効化                  |
 | `uc.flex.disable-sidebery-autohide`        | Sideberyの自動折りたたみを無効化                               |
 | `uc.flex.remove-bookmarks-folder-icons`    | ブックマークフォルダーのアイコンを非表示                       |
 | `uc.flex.remove-bookmarks-labels`          | ブックマークのテキストラベルを非表示                           |
@@ -185,7 +192,7 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 | `uc.flex.revert-to-original-window-controls` | 元のウィンドウコントロール（最小化・最大化・閉じる）に戻す   |
 | `uc.flex.sidebery-fast-hover-expand`       | Sideberyの展開/折りたたみを高速化                              |
 | `uc.flex.sidebery-slow-hover-expand`       | Sideberyの展開/折りたたみを遅くする                            |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | 垂直タブのピン留めタブと通常タブの間に区切り線を表示します。 |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | 垂直タブのピン留めタブと通常タブの間に区切り線を表示します |
 
 ## 既知の問題
 

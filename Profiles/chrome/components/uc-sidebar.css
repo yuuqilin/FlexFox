@@ -282,10 +282,10 @@
 =============================================*/
 
 /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
-/* ad7f192 */
+/* be179ef */
 
 /* Autohide the expanded verticalTabs */
-@media (-moz-pref("sidebar.verticalTabs")) and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
+@media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
     #sidebar-main:has(> [expanded]) {
         overflow: visible !important;
         max-width: /* var(--tab-collapsed-width) */ 44px !important; /* Use !important to override the max-width styles in Nightly (v135) */
@@ -317,6 +317,9 @@
         &:is([positionend], [sidebar-positionend]) {
             transform: translateX(calc(var(--tab-collapsed-width) - 100%));
         }
+    }
+    #sidebar-wrapper {
+        background: inherit;
     }
 
     /* ------------------------------------------------ */
