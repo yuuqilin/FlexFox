@@ -13,6 +13,10 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v2.1.2**  
+- Fixed an issue where the bookmarks bar would shift when both native vertical tabs and `uc.flex.disable-bookmarks-autohide` were enabled.  
+- Fixed a delay in the URL bar transition when entering fullscreen mode.  
+
 **v2.1.1**  
 - Fixed an issue where the native vertical tabs background became transparent in Firefox v137.  
 - Added the `uc.flex.disable-native-vertical-tabs-autohide` option to disable auto-collapsing of native vertical tabs when set to true.  

@@ -233,8 +233,10 @@
         }
     }
     @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.verticalTabs") {
-        --uc-personal-toolbar-offset: 44px;
-        --uc-personal-toolbar-width: 44px;
+        @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
+            --uc-personal-toolbar-offset: 44px;
+            --uc-personal-toolbar-width: 44px;
+        }
         @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
             &:not([inFullscreen]) {
                 --uc-bookmarks-margin-left: 10px;

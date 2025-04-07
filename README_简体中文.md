@@ -13,6 +13,10 @@
 
 ## 更新内容
 
+**v2.1.2**  
+- 修复了在启用原生垂直选项卡并将 `uc.flex.disable-bookmarks-autohide` 设为 true 时，书签栏出现偏移的问题。  
+- 修复了全屏模式下地址栏过渡动画延迟的问题。  
+
 **v2.1.1**  
 - 修复了 Firefox v137 中原生垂直选项卡背景变成透明的问题。  
 - 新增 `uc.flex.disable-native-vertical-tabs-autohide` 选项，设为 true 时可关闭自动折叠原生垂直选项卡的功能。  

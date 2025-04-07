@@ -13,6 +13,10 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v2.1.2**  
+- ネイティブの縦型タブと `uc.flex.disable-bookmarks-autohide` が両方有効な場合に、ブックマークバーがずれる問題を修正しました。  
+- フルスクリーン時にURLバーの遷移が遅れる問題を修正しました。  
+
 **v2.1.1**  
 - Firefox v137でネイティブ縦型タブの背景が透過になる問題を修正しました。  
 - `uc.flex.disable-native-vertical-tabs-autohide` オプションを追加しました。trueに設定するとネイティブ縦型タブの自動折りたたみを無効化できます。  
