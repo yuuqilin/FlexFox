@@ -13,6 +13,10 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v3.0.1**  
+- Fixed incorrect positioning of the top stripe when `uc.flex.disable-bookmarks-autohide` is used with the revamped sidebar.  
+- Fixed incorrect width of the top stripe when `uc.flex.disable-sidebery-autohide` is enabled with the revamped sidebar.
+
 **v3.0.0**
 - Integrated Firefox's native vertical tabs with Sidebery.
   - When Sidebery is active, the native vertical tabs are automatically hidden. The new sidebar collapses into a slim colored stripe at the top of Sidebery. Hovering over the stripe reveals the sidebar toolbar buttons.
@@ -24,6 +28,9 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 **Known issue:**  
 When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen mode, the sidebar stripe does not expand correctly. This issue is expected to be fixed in the next release.
 
+<details>
+
+<summary>Details: v2.1.2 ~ v2.1.1</summary>
 **v2.1.2**  
 - Fixed an issue where the bookmarks bar would shift when both native vertical tabs and `uc.flex.disable-bookmarks-autohide` were enabled.  
 - Fixed a delay in the URL bar transition when entering fullscreen mode.  
@@ -31,6 +38,8 @@ When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen m
 **v2.1.1**  
 - Fixed an issue where the native vertical tabs background became transparent in Firefox v137.  
 - Added the `uc.flex.disable-native-vertical-tabs-autohide` option to disable auto-collapsing of native vertical tabs when set to true.  
+
+</details>
 
 **v2.1.0**  
 - Built-in vertical tabs now automatically collapse and expand on hover. Use the `Expand sidebar` button (Alt+Ctrl+Z) to enable this feature.  
@@ -49,12 +58,12 @@ When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen m
 
 The sidebar tool button design is based on [firefox-gx](https://github.com/Godiesc/firefox-gx) by @Godiesc. Thanks to @Godiesc for the excellent implementation.  
 
-**v2.0.3**  
-- Added `sidebar-positionend` attribute for compatibility with Firefox v138+, with a slight tweak to the width of the new sidebar.  
-
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v2.0.3**  
+- Added `sidebar-positionend` attribute for compatibility with Firefox v138+, with a slight tweak to the width of the new sidebar.  
 
 **v2.0.2**  
 - Updated `@media` rule for Firefox v137+ compatibility.  

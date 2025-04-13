@@ -152,10 +152,13 @@
             --uc-personal-toolbar-offset: 0px;
             --uc-personal-toolbar-width: 0px;
         }
+        /* This rule is no longer effective due to the override on line 588 in uc-sidebar.css */
+        /*
         @media -moz-pref("sidebar.revamp") and -moz-pref("uc.flex.fully-hide-sidebery") {
             --uc-personal-toolbar-offset: 40px;
             --uc-personal-toolbar-width: 40px;
         }
+        */
         /* Add margin to align bookmarks with toolbar icons */
         @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
             &:not([inFullscreen]) {
@@ -204,41 +207,11 @@
         &[inFullscreen] {
             --uc-windows-controls-top: 0px;
         }
-        @media -moz-pref("sidebar.revamp") {
-            --uc-sidebar-revamp-margin-right: -9px;
-            --uc-sidebar-revamp-margin-left: -9px;
-            /* !TEMPORARY: These variables are temporary solutions and might be removed later. */
-            @media -moz-pref("sidebar.verticalTabs") {
-                --uc-verticalTabs-margin-left: 0px;
-                #sidebar-main:is([positionend], [sidebar-positionend]) {
-                    --uc-verticalTabs-margin-left: -11px;
-                }
-                --uc-sidebar-revamp-margin-right: 0px;
-                --uc-sidebar-revamp-margin-left: -5px;
-                --uc-tabbox-padding-right: 0px;
-                --uc-tabbox-padding-left: 5px;
-            }
-            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-                --uc-sidebar-revamp-margin-right: -8px;
-                --uc-sidebar-revamp-margin-left: -14px;
-                &[sizemode="normal"] {
-                    --uc-sidebar-revamp-margin-right: -6px;
-                    --uc-sidebar-revamp-margin-left: calc(-1 * var(--uc-sidebar-width) - 6px);
-                    --uc-tabbox-padding-right: 0px;
-                    --uc-tabbox-padding-left: 0px;
-                    #sidebar-main:is([positionend], [sidebar-positionend]) {
-                        --uc-sidebar-revamp-margin-right: calc(-1 * var(--uc-sidebar-width) - 6px);
-                        --uc-sidebar-revamp-margin-left: -6px;
-                    }
-                }
-            }
+        /* !TEMPORARY: These variables are temporary solutions and might be removed later. */
+        @media -moz-pref("sidebar.verticalTabs") {
+            --uc-verticalTabs-margin-left: 0px;
             #sidebar-main:is([positionend], [sidebar-positionend]) {
-                --uc-sidebar-revamp-margin-right: -9px;
-                --uc-sidebar-revamp-margin-left: -9px;
-                @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-                    --uc-sidebar-revamp-margin-right: -8px;
-                    --uc-sidebar-revamp-margin-left: -8px;
-                }
+                --uc-verticalTabs-margin-left: -11px;
             }
         }
         --uc-sidebar-splitter-display: none;
@@ -257,12 +230,15 @@
                 --uc-personal-toolbar-width: var(--uc-sidebar-width, 0);
             }
         }
+        /* This rule is no longer effective due to the override on line 588 in uc-sidebar.css */
+        /*
         @media -moz-pref("uc.flex.fully-hide-sidebery") {
             @media -moz-pref("sidebar.revamp") {
                 --uc-personal-toolbar-offset: 0px;
                 --uc-personal-toolbar-width: var(--uc-sidebar-width, 0);
             }
         }
+        */
     }
     @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.verticalTabs") {
         @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {

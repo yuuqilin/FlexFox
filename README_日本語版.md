@@ -13,6 +13,10 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v3.0.1**  
+- `uc.flex.disable-bookmarks-autohide` を使用中に、新しいサイドバーのヘッダーストライプ（上部の細い帯）の位置がずれる問題を修正しました。  
+- `uc.flex.disable-sidebery-autohide` を使用中に、ヘッダーストライプの幅が不正になる問題を修正しました。
+
 **v3.0.0**
 - Firefoxのネイティブ縦型タブとSideberyを統合しました。  
   - Sideberyが有効な場合、ネイティブの縦型タブは自動的に非表示になり、サイドバーはSidebery上部の細いカラーストライプに折りたたまれます。ストライプにマウスカーソルを合わせると、サイドバーのツールボタンが表示されます。  
@@ -24,6 +28,9 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 **既知の問題：**  
 `uc.flex.fully-hide-sidebery` オプションが有効な場合や、Firefox が全画面モードの状態にある場合、サイドバーのストライプが正常に展開されません。この問題は次回のバージョンで修正される予定です。
 
+<details>
+
+<summary>v2.1.2〜v2.1.1 の更新内容</summary>
 **v2.1.2**  
 - ネイティブの縦型タブと `uc.flex.disable-bookmarks-autohide` が両方有効な場合に、ブックマークバーがずれる問題を修正しました。  
 - フルスクリーン時にURLバーの遷移が遅れる問題を修正しました。  
@@ -31,6 +38,8 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 **v2.1.1**  
 - Firefox v137でネイティブ縦型タブの背景が透過になる問題を修正しました。  
 - `uc.flex.disable-native-vertical-tabs-autohide` オプションを追加しました。trueに設定するとネイティブ縦型タブの自動折りたたみを無効化できます。  
+
+</details>
 
 **v2.1.0**  
 - ネイティブの縦型タブが自動的に折りたたまれ、ホバーで展開されます。`サイドバーを展開します`ボタン（Alt+Ctrl+Z）でこの機能を有効にできます。  
@@ -49,12 +58,12 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 サイドバーのツールボタンのデザインは、@Godiesc 氏の [firefox-gx](https://github.com/Godiesc/firefox-gx) を参考にしています。優れた実装に感謝します。  
 
-**v2.0.3**  
-- Firefox v138+との互換性を確保するために、`sidebar-positionend`属性を追加し、新しいサイドバーの幅を少し調整しました。  
-
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v2.0.3**  
+- Firefox v138+との互換性を確保するために、`sidebar-positionend`属性を追加し、新しいサイドバーの幅を少し調整しました。  
 
 **v2.0.2**  
 - `@media` ルールを Firefox v137+ に対応するよう更新。  

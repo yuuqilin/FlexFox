@@ -171,6 +171,22 @@
 
 @media -moz-pref("sidebar.revamp") {
     #browser:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+        /* 
+         * Used variable indirection instead of direct property under #browser:has()
+         * to try for :root:has()-like perf gain; BUT actual boost ~5% — not clearly worth the cost
+         * in readability and maintainability.
+         */
+        /* These variables are used by both #sidebar-main and #sidebar-box to calculate offset heights,  
+         * so they must be declared under their common parent element #browser. 
+         */
+        --uc-sb-sidebar-main-margin-top: 1px;
+        --uc-sb-sidebar-main-stripe-height: 5px;
+        @media -moz-pref("uc.flex.fully-hide-toolbox"), (display-mode: fullscreen) {
+            --uc-sb-sidebar-main-margin-top: 0px;
+        }
+        @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
+            --uc-sb-sidebar-main-margin-top: calc(-1 * (var(--uc-bm-height) + 2 * var(--uc-bm-padding)) + 1px);
+        }
         sidebar-main[expanded] {
             --uc-sb-sroot-padding-block-start: var(--space-small);
             --uc-sb-sroot-padding-block-end: var(--space-small);
@@ -184,17 +200,15 @@
             --uc-sb-sroot-btn-padding-inline: 0;
             --uc-sb-sroot-btn-padding-block: 0.8px;
         }
-        /* 
-         * Used variable indirection instead of direct property under #browser:has()
-         * to try for :root:has()-like perf gain; BUT actual boost ~5% — not clearly worth the cost
-         * in readability and maintainability.
-         */
         #sidebar-main {
             --uc-sb-sidebar-main-position: absolute;
-            --uc-sb-sidebar-main-margin-top: 1px;
-            --uc-sb-sidebar-main-stripe-height: 5px;
             --uc-sb-sidebar-main-min-width: var(--uc-sidebar-width);
             --uc-sb-sidebar-main-max-width: var(--uc-sidebar-width, 75vw);
+            @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
+                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+            }
             --uc-sb-sidebar-main-overflow: hidden;
             --uc-sb-sidebar-main-opacity-light: 0.5;
             --uc-sb-sidebar-main-opacity-dark: 0.87;
@@ -202,10 +216,6 @@
             --uc-sb-sidebar-main-hover-min-h: auto;
             --uc-sb-sidebar-main-hover-max-h: 100%;
             --uc-sb-vertical-tabs-display: none;
-        }
-        #sidebar-box {
-            --uc-sb-sidebar-main-margin-top: 1px;
-            --uc-sb-sidebar-main-stripe-height: 5px;
         }
     }
     @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
@@ -236,6 +246,7 @@
                 var(--uc-sidebar-bgcolor)
             );
         }
+        /* Remove extra margin from the revamped sidebar */
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             margin-inline-start: -1px !important;
             &:is([positionend], [sidebar-positionend]) {
@@ -276,9 +287,11 @@
 
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
+        /* Remove unnecessary margin when Sidebery is placed on the right side */
         &:is([positionend], [sidebar-positionend]) {
             margin-inline-start: 0px !important;
         }
+        /* Remove unwanted border and shadow applied to Sidebery by the revamped sidebar */
         padding-block-end: 0px !important;
         padding-inline-end: 0px !important;
         background-color: var(--uc-sidebar-bgcolor) !important;
@@ -309,6 +322,9 @@
          */
         #sidebar-main:has(> sidebar-main[expanded]) {
             overflow: var(--uc-sb-sidebar-main-overflow, visible) !important;
+            /* When the built-in vertical tabs are placed on the right side, 
+             * set overflow to hidden to eliminate extra space. 
+             */
             &:not(:hover):is([positionend], [sidebar-positionend]) {
                 overflow: hidden !important;
             }
@@ -355,9 +371,9 @@
         }
     }
 
-    /* ------------------------------------------------------------------------ */
-    /* ----- Styles for tools-and-extensions when the sidebar is expanded ----- */
-    /* ------------------------------------------------------------------------ */
+    /* ----------------------------------------------------------------------------------------------- */
+    /* ----- Styles for tools-and-extensions when Sidebery is active and the sidebar is expanded ----- */
+    /* ----------------------------------------------------------------------------------------------- */
     .tools-and-extensions.actions-list[orientation="horizontal"] {
         /* Add a divider to tools-and-extensions on hover */
         &:hover {
@@ -432,9 +448,9 @@
         */
     }
 
-    /* ------------------------------------------------------------------------- */
-    /* ----- Styles for tools-and-extensions when the sidebar is collapsed ----- */
-    /* ------------------------------------------------------------------------- */
+    /* ------------------------------------------------------------------------------------------------ */
+    /* ----- Styles for tools-and-extensions when Sidebery is active and the sidebar is collapsed ----- */
+    /* ------------------------------------------------------------------------------------------------ */
     .tools-and-extensions.actions-list[orientation="vertical"] {
         /* Add a divider to tools-and-extensions on hover */
         &:hover {
@@ -508,14 +524,44 @@
             --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-2, var(--space-small)) !important;
         }
     }
+    /* ----------------------------------------------------------------------- */
+    /* -------- End of rules that apply only when Sidebery is active --------- */
+    /* ----------------------------------------------------------------------- */
 
+    /* ----------------------------------------------------------------------- */
+    /* --- Start of rules that apply regardless of Sidebery's active state --- */
+    /* ----------------------------------------------------------------------- */
     @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
         /* ----- Styles for tools-and-extensions when the sidebar is expanded ----- */
+        /**
+         * Use variables to pass values into the shadow trees. 
+         * These scoped variables are only defined within #vertical-pinned-tabs-container.
+         * While the style applies globally to matching <slot> elements, it only takes effect here.
+         * Other instances of slot[part="items-wrapper"] are not grid containers, so they're unaffected.
+
+         * Ensure pinned tabs are laid out in 5 columns even when collapsed,
+         * so expanding them doesn't shift the container height and cause the tabs to jump,
+         * which would require users to reposition their mouse.
+         * Requires Firefox v138+. 
+         */
+        #sidebar-main[sidebar-launcher-expanded] sidebar-main[expanded] #vertical-pinned-tabs-container {
+            --uc-vt-sroot-grid-template-columns: repeat(5, auto);
+        }
         spacer[part="overflow-start-indicator"]
             + scrollbox[part="scrollbox"][orient="vertical"]
             > slot[part="items-wrapper"] {
             grid-template-columns: var(--uc-vt-sroot-grid-template-columns, inherit) !important;
         }
+        /* Same purpose as above, but for Firefox v137 and below. */
+        #sidebar-main:not([sidebar-launcher-expanded]) sidebar-main[expanded] #vertical-pinned-tabs-container {
+            grid-template-columns: repeat(5, auto) !important;
+        }
+        /* Hide the vertical scrollbar when pinned tabs are collapsed. */
+        /*
+            spacer[part="overflow-start-indicator"] + scrollbox[part="scrollbox"] {
+                overflow-y: var(--uc-sroot-overflow, inherit) !important;
+            }
+        */
         .tools-and-extensions.actions-list[orientation="horizontal"] {
             /*
             --button-outer-padding-block-start: 2px !important;
@@ -536,48 +582,6 @@
             }
         }
     }
-
-    /* These rules are only applied when Sidebery is active. */
-    /* #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) { */
-    /* Position Sidebery at the screen edge to simplify hover-triggered expansion */
-    /* z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important; */
-
-    /*
-        &:not(:is([positionend], [sidebar-positionend])) {
-            order: 0 !important;
-    */
-    /* margin-left: -1px; */
-    /*
-        }
-
-        &:is([positionend], [sidebar-positionend]) {
-            order: 8 !important; 
-            margin-right: 0px !important; */ /* Override margin-inline-start */
-    /*
-        }
-    }
-    */
-
-    /*
-    #sidebar-main {
-        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-            background-color: var(--uc-sidebar-bgcolor) !important;
-        }
-    */
-    /* These variables are only applied when Sidebery is active. */
-    /*
-        margin-right: var(--uc-sidebar-revamp-margin-right);
-        margin-left: var(--uc-sidebar-revamp-margin-left);
-    }
-    */
-
-    /* #tabbrowser-tabbox {
-        /* These variables are only applied when Sidebery is active. */
-    /*
-        padding-right: var(--uc-tabbox-padding-right);
-        padding-left: var(--uc-tabbox-padding-left);
-    }
-    */
 
     /**
      * Increase the z-index of the navigation bar in fullscreen mode  
@@ -669,33 +673,10 @@
     /* ---------------------------------------------------------------- */
     /* ----- Styles for verticalTabs when the sidebar is expanded ----- */
     /* ---------------------------------------------------------------- */
-    /**
-         * Use variables to pass values into the shadow trees. 
-         * These scoped variables are only defined within #vertical-pinned-tabs-container.
-         * While the style applies globally to matching <slot> elements, it only takes effect here.
-         * Other instances of slot[part="items-wrapper"] are not grid containers, so they're unaffected.
 
-         * Ensure pinned tabs are laid out in 5 columns even when collapsed,
-         * so expanding them doesn't shift the container height and cause the tabs to jump,
-         * which would require users to reposition their mouse.
-         * Requires Firefox v138+. 
-         */
-    #sidebar-main[sidebar-launcher-expanded] sidebar-main[expanded] #vertical-pinned-tabs-container {
-        --uc-vt-sroot-grid-template-columns: repeat(5, auto);
-    }
-    /* Same purpose as above, but for Firefox v137 and below. */
-    #sidebar-main:not([sidebar-launcher-expanded]) sidebar-main[expanded] #vertical-pinned-tabs-container {
-        grid-template-columns: repeat(5, auto) !important;
-    }
-    /* Hide the vertical scrollbar when pinned tabs are collapsed. */
-    /*
-        spacer[part="overflow-start-indicator"] + scrollbox[part="scrollbox"] {
-            overflow-y: var(--uc-sroot-overflow, inherit) !important;
-        }
-        */
     /* Controls how many rows of pinned tab icons can be shown in vertical tab panel.
-         * This affects how many pinned tabs are visible before scrolling appears.
-         */
+     * This affects how many pinned tabs are visible before scrolling appears.
+     */
     sidebar-main[expanded] #vertical-pinned-tabs-container {
         max-height: calc(
             var(--uc-max-visible-vertical-pinned-tabs) * var(--tabstrip-min-height) + var(--space-large) + 15px
@@ -754,9 +735,7 @@
         }
 
         #vertical-pinned-tabs-container {
-            /*
-                --uc-sroot-overflow: hidden;
-                */
+            /* --uc-sroot-overflow: hidden; */
 
             .tabbrowser-tab .tab-stack {
                 min-width: 40px;

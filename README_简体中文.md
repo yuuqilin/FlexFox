@@ -13,6 +13,10 @@
 
 ## 更新内容
 
+**v3.0.1**
+- 修复在同时启用 `uc.flex.disable-bookmarks-autohide` 和新版侧边栏时，侧边栏顶部彩带位置显示错误的问题。  
+- 修复在同时启用 `uc.flex.disable-sidebery-autohide` 和新版侧边栏时，顶部彩带宽度显示异常的问题。
+
 **v3.0.0**
 - 将 Firefox 原生垂直选项卡与 Sidebery 整合。  
   - 当 Sidebery 启用时，原生垂直选项卡会自动隐藏。新版侧边栏会折叠为 Sidebery 顶部的一条细长彩色条带。将鼠标悬停在条带上可以显示侧边栏工具按钮。  
@@ -24,13 +28,18 @@
 **已知问题：**  
 启用 `uc.flex.fully-hide-sidebery` 选项或浏览器处于全屏模式时，侧边栏彩带无法正常展开。该问题预计将在下个版本中修复。
 
+<details>
+
+<summary>版本詳情 v2.1.2 → v2.1.1</summary>
 **v2.1.2**  
 - 修复了在启用原生垂直选项卡并将 `uc.flex.disable-bookmarks-autohide` 设为 true 时，书签栏出现偏移的问题。  
 - 修复了全屏模式下地址栏过渡动画延迟的问题。  
 
 **v2.1.1**  
 - 修复了 Firefox v137 中原生垂直选项卡背景变成透明的问题。  
-- 新增 `uc.flex.disable-native-vertical-tabs-autohide` 选项，设为 true 时可关闭自动折叠原生垂直选项卡的功能。  
+- 新增 `uc.flex.disable-native-vertical-tabs-autohide` 选项，设为 true 时可关闭自动折叠原生垂直选项卡的功能。 
+
+</details> 
 
 **v2.1.0**  
 - 原生垂直选项卡支持自动折叠和鼠标悬停展开。可通过`展开侧边栏`按钮（Alt+Ctrl+Z）启用该功能。  
@@ -49,12 +58,12 @@
 
 侧边栏工具按钮的设计借鉴了 @Godiesc 的 [firefox-gx](https://github.com/Godiesc/firefox-gx)。感谢 @Godiesc 提供了这样出色的实现。  
 
-**v2.0.3**  
-- 添加了 `sidebar-positionend` 属性，以兼容 Firefox v138+，并对新版侧边栏的宽度做了轻微调整。  
-
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v2.0.3**  
+- 添加了 `sidebar-positionend` 属性，以兼容 Firefox v138+，并对新版侧边栏的宽度做了轻微调整。  
 
 **v2.0.2**  
 - 更新 `@media` 规则以兼容 Firefox v137+。  
