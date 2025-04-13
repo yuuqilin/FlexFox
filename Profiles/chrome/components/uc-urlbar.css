@@ -197,7 +197,7 @@
 #pageAction-panel-bookmark[starred],
 #star-button[starred] {
     list-style-image: url("../icons/bookmark/bookmark.svg") !important;
-    fill: var(--uc-sidebar-header-stripe) !important;
+    fill: var(--uc-bookmark-star-color) !important;
 }
 
 #pageAction-panel-bookmark[starred],

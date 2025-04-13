@@ -13,6 +13,17 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 最新情報
 
+**v3.0.0**
+- Firefoxのネイティブ縦型タブとSideberyを統合しました。  
+  - Sideberyが有効な場合、ネイティブの縦型タブは自動的に非表示になり、サイドバーはSidebery上部の細いカラーストライプに折りたたまれます。ストライプにマウスカーソルを合わせると、サイドバーのツールボタンが表示されます。  
+  - Sideberyが無効な場合（たとえば別のサイドバーツールや拡張機能を開いたとき）は、代わりにネイティブの縦型タブが表示されます。  
+  - F1キーでSideberyを素早く切り替えると、Sideberyとネイティブの縦型タブは同じ幅とレイアウトを共有しているため、シームレスに切り替わるように見えます。  
+  - サイドバーが左側・右側のどちらに配置されていても、自動でレイアウトが調整され、UIに適応します。  
+- 数値オプション `uc.flex.max-visible-vertical-pinned-tabs` を新たに追加しました（設定可能範囲：4～6）。このオプションは、ネイティブの縦型タブパネルの各列に縦方向で表示できるピン留めタブの数を制御します。初期値は4です。縦に並ぶピン留めタブの数がこの値を超えると、スクロールバーが表示されます。
+
+**既知の問題：**  
+`uc.flex.fully-hide-sidebery` オプションが有効な場合や、Firefox が全画面モードの状態にある場合、サイドバーのストライプが正常に展開されません。この問題は次回のバージョンで修正される予定です。
+
 **v2.1.2**  
 - ネイティブの縦型タブと `uc.flex.disable-bookmarks-autohide` が両方有効な場合に、ブックマークバーがずれる問題を修正しました。  
 - フルスクリーン時にURLバーの遷移が遅れる問題を修正しました。  
@@ -25,15 +36,15 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 - ネイティブの縦型タブが自動的に折りたたまれ、ホバーで展開されます。`サイドバーを展開します`ボタン（Alt+Ctrl+Z）でこの機能を有効にできます。  
 - 新しいオプション `uc.flex.show-pin-tabs-separator-in-expanded-state` を追加し、ネイティブの垂直タブ使用時にピン留めタブのパネルに区切り線を表示できるようになりました。  
 - ネイティブの縦型タブを有効にした際にテーマが適用されない不具合と、ブックマークバーを自動的に非表示にした時に背景画像が崩れる問題を修正。  
-- `components` フォルダに `uc-user-settings.css` を作成することで、FlexFox のスタイルをユーザーが自由に上書きできるようになりました。このファイルは FlexFox より後に読み込まれるため、FlexFox を更新しても設定が上書きされることはありません。    
+- **`components` フォルダに `uc-user-settings.css` を作成することで、FlexFox のスタイルをユーザーが自由に上書きできるようになりました。このファイルは FlexFox より後に読み込まれるため、FlexFox を更新しても設定が上書きされることはありません。**  
 - ネイティブの縦型タブとSideberyの統合はまだ未対応で、同時には使用できません。  
 
 <details>
 <summary>🖼️ <b>ネイティブ垂直タブの自動折りたたみのデモ</b></summary>
 <p><code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> が false の状態でネイティブ垂直タブを展開した例</p>
-<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" />
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
 <p><code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> が false の状態でネイティブ垂直タブを折りたたんだ例</p>
-<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" />
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
 </details>  
 
 サイドバーのツールボタンのデザインは、@Godiesc 氏の [firefox-gx](https://github.com/Godiesc/firefox-gx) を参考にしています。優れた実装に感謝します。  
@@ -177,6 +188,21 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## カスタマイズ設定
 
+### 📁 ユーザー定義スタイル（`uc-user-settings.css`）
+
+デフォルトのスタイル変数やルールを、コアファイルを編集せずに上書きできます。
+
+カスタマイズ方法：
+
+1. `components` フォルダ内に `uc-user-settings.css` という名前のファイルを作成してください。
+2. 変更したい変数やルール（例：`uc-variables.css` 内のもの）をコピーします。
+3. `uc-user-settings.css` に貼り付け、必要に応じて編集してください。
+
+このファイルはすべての組み込みスタイルの後に読み込まれるため、FlexFox の将来的なアップデートでもカスタマイズ内容は保持されます。  
+> 💡 特定のセレクター（例：`:root` や `:root:has(...)`）内に定義された変数をコピーする場合は、セレクターごと全体をコピーしてください。正しく上書きされるために必要です。
+
+### 🧩 設定可能なオプション（`about:config`）
+
 | 設定項目                                   | 説明                                                           |
 |--------------------------------------------|----------------------------------------------------------------|
 | `uc.flex.add-ui-text-stroke`               | UIテキストを縁取りで強調                                       |
@@ -197,6 +223,7 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 | `uc.flex.sidebery-fast-hover-expand`       | Sideberyの展開/折りたたみを高速化                              |
 | `uc.flex.sidebery-slow-hover-expand`       | Sideberyの展開/折りたたみを遅くする                            |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 垂直タブのピン留めタブと通常タブの間に区切り線を表示します |
+| `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブ縦型タブの1列あたりのピン留めタブ最大数を設定します。      |
 
 ## 既知の問題
 
@@ -205,3 +232,21 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 - **動作環境について：**  
   Windows環境での動作確認を行っています。他のOSでは別途調整が必要な場合があります。
+
+<details>
+  <summary><h2 style="display: inline;">ライセンス</h2></summary>
+  <p>本プロジェクトは主に MIT ライセンスのもとで公開されています。<br>
+  ただし、一部のソースコード（以下参照）は Mozilla Public License 2.0（MPL-2.0）でライセンスされたコードを組み込んでいます。</p>
+
+  <p>具体的には、<code>uc-sidebar.css</code> 内の一部コードは、以下のプロジェクトに由来しています：</p>
+
+  <ul>
+    <li><strong>プロジェクト</strong>：firefox-gx</li>
+    <li><strong>作者</strong>：@Godiesc</li>
+    <li><strong>リポジトリ</strong>：<a href="https://github.com/Godiesc/firefox-gx">https://github.com/Godiesc/firefox-gx</a></li>
+    <li><strong>ライセンス</strong>：MPL-2.0</li>
+  </ul>
+
+  <p>該当するコードには元の MPL-2.0 のライセンス表記が保持されており、ライセンス条件を遵守しています。<br>
+  MPL-2.0 の全文は <code>LICENSES/MPL-2.0.txt</code> をご覧ください。</p>
+</details>

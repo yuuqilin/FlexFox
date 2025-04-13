@@ -1,11 +1,31 @@
+/* ======================================================== */
+/* =====      Color Variables for FlexFox Theme      ====== */
+/* ======================================================== */
+/* These variables define the color scheme used by FlexFox. */
+/* You may customize the values to match your preferences.  */
+/* Do NOT edit them here directly if you're using updates.  */
+/* 
+ * To safely override any values:
+ * 1. Create a new file named `uc-user-settings.css` inside the same `components` folder.
+ * 2. Copy the variables you want to change from the list below.
+ * 3. Paste them into your `uc-user-settings.css` file and edit as needed.
+ *
+ * ⚠️ IMPORTANT: If a variable is defined under a specific selector (e.g. `:root` or `:root:has(...)`),
+ * you MUST copy the entire selector block, not just the variable itself.
+ * This is critical to ensure the override works correctly in the intended context.
+ *
+ * The `uc-user-settings.css` file is loaded last and will override the values defined here.
+ * It will NOT be affected by future updates, so your custom settings will be preserved.
+ */
 @media (prefers-color-scheme: dark) {
     :root {
-        --uc-sidebar-header-stripe: #9651ff;
-
         --bg: #1a1b26;
         --uc-sidebar-bgcolor: #1a1b26;
         @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-            --bg: var(--toolbar-bgcolor);
+            --bg: var(--toolbox-bgcolor);
+            &:-moz-window-inactive {
+                --bg: var(--toolbox-bgcolor-inactive);
+            }
         }
 
         @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
@@ -38,12 +58,13 @@
 
 @media (prefers-color-scheme: light) {
     :root {
-        --uc-sidebar-header-stripe: #ea4c89;
-
         --bg: #f1f5f9;
         --uc-sidebar-bgcolor: #f1f5f9;
         @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-            --bg: var(--toolbar-bgcolor);
+            --bg: var(--toolbox-bgcolor);
+            &:-moz-window-inactive {
+                --bg: var(--toolbox-bgcolor-inactive);
+            }
         }
 
         @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
@@ -60,7 +81,7 @@
         --fullscreen-warn: rgb(25, 25, 25);
 
         --arrowpanel-background: #e2e8f0 !important;
-        --button-hover-bgcolor: #9699a3 !important;
+        /* --button-hover-bgcolor: #9699a3 !important; */
         --button-hover-bgcolor: #cbd5e1 !important;
         --button-active-bgcolor: #cbd5e1 !important;
         --identity-btn-hover-color: white !important;
@@ -68,9 +89,11 @@
 }
 
 :root {
-    /*===== Initialize variables =====*/
+    /* ================================ */
+    /* ===== Initialize variables ===== */
+    /* ================================ */
     /* - do not modify values in this block */
-    --uc-sidebar-width: 0px;
+    /* --uc-sidebar-width: 0px; */
     --uc-sidebar-hover-width: 0px;
     --uc-nav-bar-padding-right: 0px;
     --uc-personal-toolbar-offset: 0px;
@@ -88,11 +111,18 @@
     --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
     /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
     --uc-verticalTabs-margin-left: -6px;
-    /*===== End of initializing block =====*/
+    /* ===== End of initializing block ===== */
 
+    /* =================================================== */
+    /* ===== USER-CUSTOMIZABLE VARIABLES START HERE  ===== */
+    /* =================================================== */
+    /* You may customize the variables listed below.       */
+    /* However, DO NOT modify them directly in this file.  */
+    /* Instead, copy the relevant parts into your          */
+    /* `uc-user-settings.css` file for safe customization. */
     /*===== Define new variable values when Sidebery is active =====*/
-    /* - if you want to customize variable values, start here */
     &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+        --uc-sidebar-header-stripe: light-dark(#ea4c89, #9651ff);
         --uc-sidebar-width: 44px; /* Width of the Sidebery */
         --uc-sidebar-hover-width: 220px; /* Width of the expanded Sidebery on hover */
         /* Wider Sidebery width when expanded */
@@ -150,7 +180,7 @@
                 }
             }
         }
-        /* Ensure horizontal tabs are forcibly hidden in the following scenarios when Sidebery is enabled */
+        /* Ensure horizontal tabs are forcibly hidden in the following scenarios when Sidebery is active */
         &[inFullscreen]:not([customizing]) {
             --uc-tab-items-visibility: collapse;
         }
@@ -175,14 +205,16 @@
             --uc-windows-controls-top: 0px;
         }
         @media -moz-pref("sidebar.revamp") {
-            --uc-vertical-tabs-display: none;
             --uc-sidebar-revamp-margin-right: -9px;
             --uc-sidebar-revamp-margin-left: -9px;
             /* !TEMPORARY: These variables are temporary solutions and might be removed later. */
             @media -moz-pref("sidebar.verticalTabs") {
+                --uc-verticalTabs-margin-left: 0px;
+                #sidebar-main:is([positionend], [sidebar-positionend]) {
+                    --uc-verticalTabs-margin-left: -11px;
+                }
                 --uc-sidebar-revamp-margin-right: 0px;
                 --uc-sidebar-revamp-margin-left: -5px;
-                --uc-verticalTabs-margin-left: 0px;
                 --uc-tabbox-padding-right: 0px;
                 --uc-tabbox-padding-left: 5px;
             }
@@ -211,10 +243,10 @@
         }
         --uc-sidebar-splitter-display: none;
     }
-    /*===== End of the block for Sidebery active state =====*/
+    /* ===== End of the block for Sidebery in active state ===== */
 
-    /*===== Horizontal offsets for the bookmarks toolbar and navigator =====*/
-    --uc-navigator-offset: var(--uc-sidebar-width);
+    /* ===== Horizontal offsets for the bookmarks toolbar and navigator ===== */
+    --uc-navigator-offset: var(--uc-sidebar-width, 0);
     :has(#sidebar-box:is([positionend], [sidebar-positionend])) {
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             @media -moz-pref("uc.flex.fully-hide-toolbox") {
@@ -222,13 +254,13 @@
             }
             @media not -moz-pref("uc.flex.fully-hide-toolbox") {
                 --uc-personal-toolbar-offset: 0px;
-                --uc-personal-toolbar-width: var(--uc-sidebar-width);
+                --uc-personal-toolbar-width: var(--uc-sidebar-width, 0);
             }
         }
         @media -moz-pref("uc.flex.fully-hide-sidebery") {
             @media -moz-pref("sidebar.revamp") {
                 --uc-personal-toolbar-offset: 0px;
-                --uc-personal-toolbar-width: var(--uc-sidebar-width);
+                --uc-personal-toolbar-width: var(--uc-sidebar-width, 0);
             }
         }
     }
@@ -243,9 +275,15 @@
             }
         }
     }
-    /*===== End of the block for horizontal offsets of the bookmarks toolbar and navigator =====*/
+    /* ===== End of the block for horizontal offsets of the bookmarks toolbar and navigator =====* /
 
-    /*===== Other adjustable global variables =====*/
+    /* ======================================================== */
+    /* ===== USER-CUSTOMIZABLE GLOBAL VARIABLES START HERE ==== */
+    /* ======================================================== */
+    /* These variables define global styles (e.g. spacing,      */
+    /* border-radius, font size) that can be freely adjusted.   */
+    /* Override them in `uc-user-settings.css` if needed.       */
+    --uc-bookmark-star-color: light-dark(#ea4c89, #9651ff);
     --uc-nav-bar-margin-left: -4px;
     --uc-autohide-transition-type: linear; /* Transition style for sidebar auto-hide */
     --uc-autohide-transition-duration: 55ms; /* Duration of the sidebar hiding transition */
@@ -257,6 +295,14 @@
 
     --uc-uei-icon-size: 20px; /* Icon size in the uni-extensions panel */
     --uc-number-of-extensions-in-a-row: 4; /* Number of icons per row in the uni-extensions panel */
+
+    --uc-max-visible-vertical-pinned-tabs: 4; /* Max visible rows in vertical pinned tabs (before scrolling) */
+    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 5) {
+        --uc-max-visible-vertical-pinned-tabs: 5;
+    }
+    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 6) {
+        --uc-max-visible-vertical-pinned-tabs: 6;
+    }
 
     /* ---- Sets the horizontal position of the findbar ---- */
     --uc-findbar-x-position: 24.2vw;

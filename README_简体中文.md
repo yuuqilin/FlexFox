@@ -13,6 +13,17 @@
 
 ## 更新内容
 
+**v3.0.0**
+- 将 Firefox 原生垂直选项卡与 Sidebery 整合。  
+  - 当 Sidebery 启用时，原生垂直选项卡会自动隐藏。新版侧边栏会折叠为 Sidebery 顶部的一条细长彩色条带。将鼠标悬停在条带上可以显示侧边栏工具按钮。  
+  - 当 Sidebery 被禁用（例如启用其他侧边栏工具或扩展）时，则会显示原生垂直选项卡。  
+  - 使用 F1 键快速切换 Sidebery 时，由于 Sidebery 与原生垂直选项卡共享相同的宽度与布局，界面切换看起来非常流畅自然。  
+  - 支持自动适配左右两侧的侧边栏布局，可根据 UI 位置灵活调整。  
+- 新增数值选项 `uc.flex.max-visible-vertical-pinned-tabs`（可设范围：4–6）。此选项用于控制原生垂直选项卡面板中，每一列在垂直方向上最多可显示的钉选标签页数量。默认值为 4。若垂直排列的钉选标签页超过此值，将出现滚动条。
+
+**已知问题：**  
+启用 `uc.flex.fully-hide-sidebery` 选项或浏览器处于全屏模式时，侧边栏彩带无法正常展开。该问题预计将在下个版本中修复。
+
 **v2.1.2**  
 - 修复了在启用原生垂直选项卡并将 `uc.flex.disable-bookmarks-autohide` 设为 true 时，书签栏出现偏移的问题。  
 - 修复了全屏模式下地址栏过渡动画延迟的问题。  
@@ -25,15 +36,15 @@
 - 原生垂直选项卡支持自动折叠和鼠标悬停展开。可通过`展开侧边栏`按钮（Alt+Ctrl+Z）启用该功能。  
 - 新增选项 `uc.flex.show-pin-tabs-separator-in-expanded-state`，可在使用原生垂直选项卡时，为固定标签页面板显示分隔线。  
 - 修复启用原生垂直选项卡时无法应用主题，以及自动隐藏书签栏时主题背景图损坏的问题。  
-- 现在用户可以在 `components` 文件夹中创建 `uc-user-settings.css`，用于自定义 FlexFox 的样式。该文件在 FlexFox 之后加载，因此即使 FlexFox 更新，也不会影响用户的自定义修改。  
+- **现在用户可以在 `components` 文件夹中创建 `uc-user-settings.css`，用于自定义 FlexFox 的样式。该文件在 FlexFox 之后加载，因此即使 FlexFox 更新，也不会影响用户的自定义修改。**  
 - 原生垂直选项卡与 Sidebery 尚未整合，目前只能二选一使用。  
 
 <details>
 <summary>🖼️ <b>原生垂直选项卡自动折叠效果示例</b></summary>
 <p>原生垂直选项卡展开，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
-<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" />
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
 <p>原生垂直选项卡折叠，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
-<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" />
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
 </details>  
 
 侧边栏工具按钮的设计借鉴了 @Godiesc 的 [firefox-gx](https://github.com/Godiesc/firefox-gx)。感谢 @Godiesc 提供了这样出色的实现。  
@@ -178,6 +189,21 @@
 
 ## 配置选项
 
+### 📁 用户可自定义样式（`uc-user-settings.css`）
+
+你可以在不修改核心文件的情况下，自行覆盖默认的样式变量和规则。
+
+操作步骤如下：
+
+1. 在 `components` 文件夹中创建一个名为 `uc-user-settings.css` 的新文件。
+2. 将你想修改的变量或规则（例如来自 `uc-variables.css`）复制出来。
+3. 粘贴到 `uc-user-settings.css` 中，并按需修改。
+
+该文件会在所有内建样式之后加载，因此优先级更高。即使 FlexFox 将来更新，你的自定义设置也不会受到影响。  
+> 💡 如果你要复制的是某个选择器（例如 `:root` 或 `:root:has(...)`）中的变量，请务必连同整个选择器区块一并复制，才能保证覆盖生效。
+
+### 🧩 可配置的首选项（`about:config`）
+
 | 配置选项                                   | 说明                                           |
 |--------------------------------------------|------------------------------------------------|
 | `uc.flex.add-ui-text-stroke`               | 给界面文字添加粗体边框。                       |
@@ -198,8 +224,27 @@
 | `uc.flex.sidebery-fast-hover-expand`       | 加快 Sidebery 悬停展开/折叠的速度。            |
 | `uc.flex.sidebery-slow-hover-expand`       | 放慢 Sidebery 悬停展开/折叠的速度。            |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在垂直选项卡的固定和普通标签页之间显示分隔线。 |
+| `uc.flex.max-visible-vertical-pinned-tabs` | 设置原生垂直选项卡中每列钉选标签页的最大数量。    |
 
 ## 已知问题
 
 - 对于 Floorp 用户：请在 Floorp 界面选项中切换到 `Firefox Proton UI`，以减少兼容性问题。
 - 仅在 Windows 上测试：可能需要为其他操作系统进行调整。
+
+<details>
+  <summary><h2 style="display: inline;">许可证</h2></summary>
+  <p>本項目主要基於 MIT 許可證進行授權。<br>
+  不過，部分源代碼（見下文）整合了原本採用 Mozilla Public License 2.0（MPL-2.0）授權的程式碼。</p>
+
+  <p>具體來說，<code>uc-sidebar.css</code> 中的部分整合代碼來自以下專案：</p>
+
+  <ul>
+    <li><strong>項目</strong>：firefox-gx</li>
+    <li><strong>作者</strong>：@Godiesc</li>
+    <li><strong>代碼庫</strong>：<a href="https://github.com/Godiesc/firefox-gx">https://github.com/Godiesc/firefox-gx</a></li>
+    <li><strong>許可證</strong>：MPL-2.0</li>
+  </ul>
+
+  <p>這些代碼區塊保留了原始的 MPL-2.0 許可聲明，並符合其授權條款。<br>
+  有關 MPL-2.0 的完整內容，請參見 <code>LICENSES/MPL-2.0.txt</code>。</p>
+</details>

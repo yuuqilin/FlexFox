@@ -13,6 +13,17 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## What's New
 
+**v3.0.0**
+- Integrated Firefox's native vertical tabs with Sidebery.
+  - When Sidebery is active, the native vertical tabs are automatically hidden. The new sidebar collapses into a slim colored stripe at the top of Sidebery. Hovering over the stripe reveals the sidebar toolbar buttons.
+  - When Sidebery is inactive (e.g., when another sidebar tool or extension is opened), the native vertical tabs are shown instead.
+  - When using the F1 key to quickly toggle Sidebery, since Sidebery and native vertical tabs share the same width and layout, the switch appears seamless.
+  - Supports automatic layout adjustment for both left- and right-sided sidebars, adapting to different UI placements.
+- Added a new numeric option `uc.flex.max-visible-vertical-pinned-tabs` (accepted values: 4–6). This controls how many pinned tabs can be displayed vertically in each column of the native vertical tabs panel. The default is 4. If the number of vertically stacked pinned tabs exceeds this, a scrollbar will appear.
+
+**Known issue:**  
+When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen mode, the sidebar stripe does not expand correctly. This issue is expected to be fixed in the next release.
+
 **v2.1.2**  
 - Fixed an issue where the bookmarks bar would shift when both native vertical tabs and `uc.flex.disable-bookmarks-autohide` were enabled.  
 - Fixed a delay in the URL bar transition when entering fullscreen mode.  
@@ -25,15 +36,15 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 - Built-in vertical tabs now automatically collapse and expand on hover. Use the `Expand sidebar` button (Alt+Ctrl+Z) to enable this feature.  
 - Added a new option `uc.flex.show-pin-tabs-separator-in-expanded-state` to display a separator line in the pinned tabs panel when using native vertical tabs.  
 - Fixed an issue where themes couldn't be applied when using built-in vertical tabs, and a bug where the theme background image broke when auto-hiding the bookmarks bar.  
-- Users can now create a `uc-user-settings.css` file in the `components` folder to customize FlexFox styles. This file loads after FlexFox and overrides its styles, so custom changes remain intact even after future updates.  
+- **Users can now create a `uc-user-settings.css` file in the `components` folder to customize FlexFox styles. This file loads after FlexFox and overrides its styles, so custom changes remain intact even after future updates.**  
 - Native vertical tabs and Sidebery are not yet integrated. Only one can be used at a time.  
 
 <details>
 <summary>🖼️ <b>Auto-collapse demo for native vertical tabs</b></summary>
 <p>Native vertical tabs expanded, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
-<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" />
+<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
 <p>Native vertical tabs collapsed, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
-<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" />
+<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
 </details>  
 
 The sidebar tool button design is based on [firefox-gx](https://github.com/Godiesc/firefox-gx) by @Godiesc. Thanks to @Godiesc for the excellent implementation.  
@@ -178,6 +189,21 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 
 ## Options
 
+### 📁 User-Customizable Styles (`uc-user-settings.css`)
+
+You can safely override default style variables and rules without modifying the core files.
+
+To do this:
+
+1. Create a new file named `uc-user-settings.css` inside the `components` folder.
+2. Copy any variables or rules you want to change (e.g., from `uc-variables.css`).
+3. Paste them into `uc-user-settings.css` and modify them as needed.
+
+This file will be loaded *after* all built-in styles and will take precedence, ensuring your customizations remain intact even after future updates to FlexFox.  
+> 💡 If you're copying variables defined inside specific selectors (like `:root` or `:root:has(...)`), be sure to copy the entire block to keep the context intact.
+
+### 🧩 Configurable Preferences (`about:config`)
+
 | Preference                                  | Description                                                                  |
 |---------------------------------------------|------------------------------------------------------------------------------|
 | `uc.flex.add-ui-text-stroke`                | Add a bold outline to interface text.                                        |
@@ -198,8 +224,27 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 | `uc.flex.sidebery-fast-hover-expand`        | Speed up Sidebery hover expand/collapse.                                     |
 | `uc.flex.sidebery-slow-hover-expand`        | Slow down Sidebery hover expand/collapse.                                    |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in vertical tabs.  |
+| `uc.flex.max-visible-vertical-pinned-tabs`  | Sets max pinned tabs per column in native vertical tabs.                     |
 
 ## Known Issues
 
 - For Floorp users: Switch to `Firefox Proton UI` in Floorp’s interface options to reduce compatibility issues.
 - Tested on Windows only: May require adjustments for other operating systems.
+
+<details>
+  <summary><h2 style="display: inline;">LICENSE</h2></summary>
+  <p>This project is primarily licensed under the MIT License.<br>
+  However, parts of the source code (see below) incorporate code originally licensed under the Mozilla Public License 2.0 (MPL-2.0).</p>
+
+  <p>Specifically, some integrated code sections in <code>uc-sidebar.css</code> are derived from the following project:</p>
+
+  <ul>
+    <li><strong>Project</strong>: firefox-gx</li>
+    <li><strong>Author</strong>: @Godiesc</li>
+    <li><strong>Repository</strong>: <a href="https://github.com/Godiesc/firefox-gx">https://github.com/Godiesc/firefox-gx</a></li>
+    <li><strong>License</strong>: MPL-2.0</li>
+  </ul>
+
+  <p>All such sections retain the original MPL-2.0 license notice and comply with its terms.<br>
+  For the full text of the MPL-2.0, please see <code>LICENSES/MPL-2.0.txt</code>.</p>
+</details>

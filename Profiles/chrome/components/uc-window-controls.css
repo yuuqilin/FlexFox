@@ -222,7 +222,7 @@
     @media -moz-pref("uc.flex.fully-hide-toolbox") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
         #navigator-toolbox {
             margin-left: var(--uc-navigator-offset);
-            width: calc(100% - var(--uc-sidebar-width));
+            width: calc(100% - var(--uc-sidebar-width, 0));
         }
     }
 }
