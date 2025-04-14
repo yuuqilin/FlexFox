@@ -108,6 +108,7 @@
     --uc-autohide-tabstoolbar-bottom: 0px;
     --uc-autohide-navigator-delay: 0s;
     --uc-autohide-tabstoolbar-visibility: visible;
+    /* Default delay for visibility (18ms) and margin-bottom (0ms) transitions */
     --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
     /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
     --uc-verticalTabs-margin-left: -6px;
@@ -120,7 +121,7 @@
     /* However, DO NOT modify them directly in this file.  */
     /* Instead, copy the relevant parts into your          */
     /* `uc-user-settings.css` file for safe customization. */
-    /*===== Define new variable values when Sidebery is active =====*/
+    /* ===== Define new variable values when Sidebery is active ===== */
     &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
         --uc-sidebar-header-stripe: light-dark(#ea4c89, #9651ff);
         --uc-sidebar-width: 44px; /* Width of the Sidebery */

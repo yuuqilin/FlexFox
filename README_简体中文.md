@@ -11,7 +11,11 @@
 
 一款灵活可定制的 Firefox 主题，灵感来自 [VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyArc-fr](https://github.com/artsyfriedchicken/EdgyArc-fr)、[Edge-Frfox](https://github.com/bmFtZQ/edge-frfox)、[ArcWTF](https://github.com/KiKaraage/ArcWTF)、[shimmer](https://github.com/nuclearcodecat/shimmer) 和 [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks)。FlexFox 提供多种功能选项以增强浏览体验。
 
-## 更新内容
+## 🆕 更新内容
+
+**v3.0.2**  
+- 修复了新版侧边栏放在右侧时展开与折叠的动画效果问题。  
+- 现在原生垂直选项卡使用与 Sidebery 相同的展开/折叠速度。你可以使用 `uc.flex.sidebery-fast-hover-expand` 或 `uc.flex.sidebery-slow-hover-expand` 选项来加快或减慢速度，或者直接修改 `--uc-autohide-*` 和 `--uc-hover-*` 变量，设定你喜欢的动画速度。
 
 **v3.0.1**
 - 修复在同时启用 `uc.flex.disable-bookmarks-autohide` 和新版侧边栏时，侧边栏顶部彩带位置显示错误的问题。  
@@ -25,12 +29,28 @@
   - 支持自动适配左右两侧的侧边栏布局，可根据 UI 位置灵活调整。  
 - 新增数值选项 `uc.flex.max-visible-vertical-pinned-tabs`（可设范围：4–6）。此选项用于控制原生垂直选项卡面板中，每一列在垂直方向上最多可显示的钉选标签页数量。默认值为 4。若垂直排列的钉选标签页超过此值，将出现滚动条。
 
-**已知问题：**  
-启用 `uc.flex.fully-hide-sidebery` 选项或浏览器处于全屏模式时，侧边栏彩带无法正常展开。该问题预计将在下个版本中修复。
+> [!Warning]  
+> 启用 `uc.flex.fully-hide-sidebery` 选项或浏览器处于全屏模式时，侧边栏彩带无法正常展开。该问题预计将在下个版本中修复。
+
+> [!IMPORTANT]
+> 原生垂直选项卡支持自动折叠和鼠标悬停展开。可通过`展开侧边栏`按钮（Alt+Ctrl+Z）启用该功能。 
+> <details>
+> <summary>🖼️ <b>原生垂直选项卡自动折叠效果示例</b></summary>
+> <p>原生垂直选项卡展开，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
+> <img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
+> <p>原生垂直选项卡折叠，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
+> <img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
+> </details>  
+
+> [!TIP]
+> **用户现在可以在 `components` 文件夹中创建 `uc-user-settings.css` 文件，以自定义 FlexFox 的样式。该文件会在 FlexFox 之后加载，并覆盖其样式，因此即使将来更新，用户的自定义修改也会保留。**  
+> **详细步骤请参见：[User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox/blob/main/README.md#-user-customizable-styles-uc-user-settingscss)**
+
 
 <details>
 
-<summary>版本詳情 v2.1.2 → v2.1.1</summary>
+<summary>💬 <b>历史更新</b></summary>
+
 **v2.1.2**  
 - 修复了在启用原生垂直选项卡并将 `uc.flex.disable-bookmarks-autohide` 设为 true 时，书签栏出现偏移的问题。  
 - 修复了全屏模式下地址栏过渡动画延迟的问题。  
@@ -39,8 +59,6 @@
 - 修复了 Firefox v137 中原生垂直选项卡背景变成透明的问题。  
 - 新增 `uc.flex.disable-native-vertical-tabs-autohide` 选项，设为 true 时可关闭自动折叠原生垂直选项卡的功能。 
 
-</details> 
-
 **v2.1.0**  
 - 原生垂直选项卡支持自动折叠和鼠标悬停展开。可通过`展开侧边栏`按钮（Alt+Ctrl+Z）启用该功能。  
 - 新增选项 `uc.flex.show-pin-tabs-separator-in-expanded-state`，可在使用原生垂直选项卡时，为固定标签页面板显示分隔线。  
@@ -48,19 +66,7 @@
 - **现在用户可以在 `components` 文件夹中创建 `uc-user-settings.css`，用于自定义 FlexFox 的样式。该文件在 FlexFox 之后加载，因此即使 FlexFox 更新，也不会影响用户的自定义修改。**  
 - 原生垂直选项卡与 Sidebery 尚未整合，目前只能二选一使用。  
 
-<details>
-<summary>🖼️ <b>原生垂直选项卡自动折叠效果示例</b></summary>
-<p>原生垂直选项卡展开，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
-<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
-<p>原生垂直选项卡折叠，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
-<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
-</details>  
-
 侧边栏工具按钮的设计借鉴了 @Godiesc 的 [firefox-gx](https://github.com/Godiesc/firefox-gx)。感谢 @Godiesc 提供了这样出色的实现。  
-
-<details>
-
-<summary>💬 <b>历史更新</b></summary>
 
 **v2.0.3**  
 - 添加了 `sidebar-positionend` 属性，以兼容 Firefox v138+，并对新版侧边栏的宽度做了轻微调整。  
@@ -122,18 +128,18 @@
 **v1.0.0**:
 - 性能大幅提升，相比之前的版本运行速度提高了 **100 倍**。打开右键菜单的延迟仅增加 **16ms**，与默认界面几乎无异。
 
-</details>
-
 > [!IMPORTANT]
 > 如果您在 Firefox v133 之前的版本使用过 FlexFox，更新前请重置设置：在 `about:config` 中搜索 `uc.flex.` 并删除所有相关条目。
 
-## 预览
+</details>
+
+## 🖼️ 预览
 
 ![FlexFox Light Theme](./assets/FlexFox-light.webp)  
 ![FlexFox Dark Theme](./assets/FlexFox-dark.webp)  
 *上图：FlexFox 的浅色和深色主题预览。*
 
-## 主要功能
+## ✨ 主要功能
 
 - **极简界面与轻量化性能**
   - 简化 UI，减少资源占用。
@@ -177,7 +183,7 @@
   - 自动折叠 Sidebery 的导航区和固定标签区。
   - 展开的区域保持垂直对齐，避免布局跳动，减少鼠标调整操作。
 
-## 安装指南
+## 💿 安装指南
 
 > [!IMPORTANT]
 > 1. 安装 [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/)（非必需但推荐）。
@@ -196,19 +202,21 @@
 >    - *注意*：如果 Sidebery 设置未生效，请重新导入文件。
 > 8. *(可选)* 使用 `about:config` 搜索 `uc.flex.`，根据需要启用或禁用 FlexFox 的功能。
 
-## 配置选项
+## ⚙️ 配置选项
 
 ### 📁 用户可自定义样式（`uc-user-settings.css`）
 
-你可以在不修改核心文件的情况下，自行覆盖默认的样式变量和规则。
+> [!TIP]
+> 你可以在不修改核心文件的情况下，自行覆盖默认的样式变量和规则。
+> 
+> 操作步骤如下：
+> 
+> 1. 在 `components` 文件夹中创建一个名为 `uc-user-settings.css` 的新文件。
+> 2. 将你想修改的变量或规则（例如来自 `uc-variables.css`）复制出来。
+> 3. 粘贴到 `uc-user-settings.css` 中，并按需修改。
+> 
+> 该文件会在所有内建样式之后加载，因此优先级更高。即使 FlexFox 将来更新，你的自定义设置也不会受到影响。  
 
-操作步骤如下：
-
-1. 在 `components` 文件夹中创建一个名为 `uc-user-settings.css` 的新文件。
-2. 将你想修改的变量或规则（例如来自 `uc-variables.css`）复制出来。
-3. 粘贴到 `uc-user-settings.css` 中，并按需修改。
-
-该文件会在所有内建样式之后加载，因此优先级更高。即使 FlexFox 将来更新，你的自定义设置也不会受到影响。  
 > 💡 如果你要复制的是某个选择器（例如 `:root` 或 `:root:has(...)`）中的变量，请务必连同整个选择器区块一并复制，才能保证覆盖生效。
 
 ### 🧩 可配置的首选项（`about:config`）
@@ -235,13 +243,13 @@
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在垂直选项卡的固定和普通标签页之间显示分隔线。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | 设置原生垂直选项卡中每列钉选标签页的最大数量。    |
 
-## 已知问题
+## 🐞 已知问题
 
 - 对于 Floorp 用户：请在 Floorp 界面选项中切换到 `Firefox Proton UI`，以减少兼容性问题。
 - 仅在 Windows 上测试：可能需要为其他操作系统进行调整。
 
 <details>
-  <summary><h2 style="display: inline;">许可证</h2></summary>
+  <summary><h2 style="display: inline;">📄 许可证</h2></summary>
   <p>本項目主要基於 MIT 許可證進行授權。<br>
   不過，部分源代碼（見下文）整合了原本採用 Mozilla Public License 2.0（MPL-2.0）授權的程式碼。</p>
 

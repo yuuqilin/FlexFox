@@ -11,7 +11,11 @@
 
 A customizable Firefox theme inspired by [VerticalFox](https://github.com/christorange/VerticalFox), [EdgyArc-fr](https://github.com/artsyfriedchicken/EdgyArc-fr), [Edge-Frfox](https://github.com/bmFtZQ/edge-frfox), [ArcWTF](https://github.com/KiKaraage/ArcWTF), [shimmer](https://github.com/nuclearcodecat/shimmer) and [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks). FlexFox offers extensive flexibility and feature options to enhance your browsing experience.
 
-## What's New
+## 🆕 What's New
+
+**v3.0.2**
+- Fixed animation issue when the new sidebar is placed on the right side.  
+- Native vertical tabs now use the same expand/collapse speed as Sidebery. You can adjust the speed using the `uc.flex.sidebery-fast-hover-expand` or `uc.flex.sidebery-slow-hover-expand` options, or by directly modifying the `--uc-autohide-*` and `--uc-hover-*` variables to suit your preference.
 
 **v3.0.1**  
 - Fixed incorrect positioning of the top stripe when `uc.flex.disable-bookmarks-autohide` is used with the revamped sidebar.  
@@ -25,12 +29,28 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
   - Supports automatic layout adjustment for both left- and right-sided sidebars, adapting to different UI placements.
 - Added a new numeric option `uc.flex.max-visible-vertical-pinned-tabs` (accepted values: 4–6). This controls how many pinned tabs can be displayed vertically in each column of the native vertical tabs panel. The default is 4. If the number of vertically stacked pinned tabs exceeds this, a scrollbar will appear.
 
-**Known issue:**  
-When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen mode, the sidebar stripe does not expand correctly. This issue is expected to be fixed in the next release.
+> [!Warning]
+> When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen mode, the sidebar stripe does not expand correctly. This issue is expected to be fixed in the next release.  
+
+> [!IMPORTANT]
+> Built-in vertical tabs now automatically collapse and expand on hover. Use the `Expand sidebar` button (Alt+Ctrl+Z) to enable this feature.  
+> <details>
+> <summary>🖼️ <b>Auto-collapse demo for native vertical tabs</b></summary>
+> <p>Native vertical tabs expanded, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
+> <img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
+> <p>Native vertical tabs collapsed, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
+> <img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
+> </details>  
+
+> [!TIP]
+> **Users can now create a `uc-user-settings.css` file in the `components` folder to customize FlexFox styles. This file loads after FlexFox and overrides its styles, so custom changes remain intact even after future updates.**  
+> **See this section: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox/blob/main/README.md#-user-customizable-styles-uc-user-settingscss)**
+
 
 <details>
 
-<summary>Details: v2.1.2 ~ v2.1.1</summary>
+<summary>💬 <b>Previous Updates</b></summary>
+
 **v2.1.2**  
 - Fixed an issue where the bookmarks bar would shift when both native vertical tabs and `uc.flex.disable-bookmarks-autohide` were enabled.  
 - Fixed a delay in the URL bar transition when entering fullscreen mode.  
@@ -39,8 +59,6 @@ When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen m
 - Fixed an issue where the native vertical tabs background became transparent in Firefox v137.  
 - Added the `uc.flex.disable-native-vertical-tabs-autohide` option to disable auto-collapsing of native vertical tabs when set to true.  
 
-</details>
-
 **v2.1.0**  
 - Built-in vertical tabs now automatically collapse and expand on hover. Use the `Expand sidebar` button (Alt+Ctrl+Z) to enable this feature.  
 - Added a new option `uc.flex.show-pin-tabs-separator-in-expanded-state` to display a separator line in the pinned tabs panel when using native vertical tabs.  
@@ -48,19 +66,7 @@ When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen m
 - **Users can now create a `uc-user-settings.css` file in the `components` folder to customize FlexFox styles. This file loads after FlexFox and overrides its styles, so custom changes remain intact even after future updates.**  
 - Native vertical tabs and Sidebery are not yet integrated. Only one can be used at a time.  
 
-<details>
-<summary>🖼️ <b>Auto-collapse demo for native vertical tabs</b></summary>
-<p>Native vertical tabs expanded, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
-<img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
-<p>Native vertical tabs collapsed, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
-<img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
-</details>  
-
 The sidebar tool button design is based on [firefox-gx](https://github.com/Godiesc/firefox-gx) by @Godiesc. Thanks to @Godiesc for the excellent implementation.  
-
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
 
 **v2.0.3**  
 - Added `sidebar-positionend` attribute for compatibility with Firefox v138+, with a slight tweak to the width of the new sidebar.  
@@ -122,18 +128,18 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 **v1.0.0**:
 - Performance has improved dramatically, running 100x faster than previous versions. Opening the context menu now only adds **16ms** of latency compared to the default interface.
 
-</details>
-
 > [!IMPORTANT]
 > If you previously used FlexFox on Firefox versions earlier than v133, reset all settings by navigating to `about:config`, searching for `uc.flex.`, and removing all entries before updating.
 
-## Previews
+</details>
+
+## 🖼️ Previews
 
 ![FlexFox Light Theme](./assets/FlexFox-light.webp)  
 ![FlexFox Dark Theme](./assets/FlexFox-dark.webp)  
 *Above: Light and Dark theme previews of FlexFox in action.*
 
-## Features
+## ✨ Features
 
 - **Minimal interface and lightweight performance**
   - Simplifies the UI and minimizes resource usage.
@@ -177,7 +183,7 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
   - Auto-collapses Sidebery's navigation and pinned tab sections.
   - Expanded sections maintain vertical alignment to prevent layout jumps and minimize cursor adjustments.
 
-## Installation
+## 💿 Installation
 
 > [!IMPORTANT]
 > 1. Install [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) (optional but recommended).
@@ -196,19 +202,21 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 >    - *Note:* If Sidebery settings don’t work as expected, re-import the files.
 > 8. *(Optional)* Use `about:config` to search for `uc.flex.` and enable/disable FlexFox features as needed.
 
-## Options
+## ⚙️ Options
 
 ### 📁 User-Customizable Styles (`uc-user-settings.css`)
 
-You can safely override default style variables and rules without modifying the core files.
+> [!TIP]
+> You can safely override default style variables and rules without modifying the core files.
+> 
+> To do this:
+> 
+> 1. Create a new file named `uc-user-settings.css` inside the `components` folder.
+> 2. Copy any variables or rules you want to change (e.g., from `uc-variables.css`).
+> 3. Paste them into `uc-user-settings.css` and modify them as needed.
+> 
+> This file will be loaded *after* all built-in styles and will take precedence, ensuring your customizations remain intact even after future updates to FlexFox. 
 
-To do this:
-
-1. Create a new file named `uc-user-settings.css` inside the `components` folder.
-2. Copy any variables or rules you want to change (e.g., from `uc-variables.css`).
-3. Paste them into `uc-user-settings.css` and modify them as needed.
-
-This file will be loaded *after* all built-in styles and will take precedence, ensuring your customizations remain intact even after future updates to FlexFox.  
 > 💡 If you're copying variables defined inside specific selectors (like `:root` or `:root:has(...)`), be sure to copy the entire block to keep the context intact.
 
 ### 🧩 Configurable Preferences (`about:config`)
@@ -235,13 +243,13 @@ This file will be loaded *after* all built-in styles and will take precedence, e
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in vertical tabs.  |
 | `uc.flex.max-visible-vertical-pinned-tabs`  | Sets max pinned tabs per column in native vertical tabs.                     |
 
-## Known Issues
+## 🐞 Known Issues
 
 - For Floorp users: Switch to `Firefox Proton UI` in Floorp’s interface options to reduce compatibility issues.
 - Tested on Windows only: May require adjustments for other operating systems.
 
 <details>
-  <summary><h2 style="display: inline;">LICENSE</h2></summary>
+  <summary><h2 style="display: inline;">📄 LICENSE</h2></summary>
   <p>This project is primarily licensed under the MIT License.<br>
   However, parts of the source code (see below) incorporate code originally licensed under the Mozilla Public License 2.0 (MPL-2.0).</p>
 

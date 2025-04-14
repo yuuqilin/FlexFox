@@ -23,8 +23,8 @@
         @media (prefers-color-scheme: light) {
             --sidebar-border-color: #ced1d4;
         }
-        max-height: 100vh;
-        max-width: 100vw;
+        max-height: 100%;
+        max-width: 100%;
         min-width: var(--uc-sidebar-hover-width);
         background-color: var(--uc-sidebar-bgcolor);
         transition:
@@ -45,8 +45,8 @@
     /* Modified from https://www.reddit.com/r/FirefoxCSS/comments/77ehp1/how_to_hide_the_title_of_webextension_sidebars/ */
     /* Minimize sidebar header to a stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
     #sidebar-header:not(:hover):not(:has(.active)) {
-        max-height: 5px;
         min-height: 5px;
+        max-height: 5px;
         min-width: var(--uc-sidebar-width);
         overflow: hidden;
         padding: 0 !important;
@@ -91,8 +91,8 @@
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         &:hover #sidebar-header:not(:hover):not(:has(.active)) {
             --uc-sidebar-width: 44px;
-            max-height: 5px;
             min-height: 5px;
+            max-height: 5px;
             min-width: var(--uc-sidebar-width);
             overflow: hidden;
             padding: 0 !important;
@@ -253,8 +253,8 @@
                 margin-inline-end: -1px !important;
             }
         }
-        max-height: var(--uc-sb-sidebar-main-stripe-height);
         min-height: var(--uc-sb-sidebar-main-stripe-height);
+        max-height: var(--uc-sb-sidebar-main-stripe-height);
         min-width: var(--uc-sb-sidebar-main-min-width);
         max-width: var(--uc-sb-sidebar-main-max-width) !important;
         overflow: var(--uc-sb-sidebar-main-overflow, clip) !important;
@@ -266,13 +266,15 @@
         }
         */
         transition:
-            max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+            margin-inline-start var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+            margin-inline-end var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+            max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-            opacity 0ms ease-in-out 0ms !important;
+            z-index 0s linear var(--uc-tabs-hide-duration);
     }
     #sidebar-main:hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-h) !important;
@@ -280,6 +282,14 @@
         max-width: var(--uc-sb-sidebar-main-max-width) !important;
         background-color: var(--bg) !important;
         opacity: 1;
+        transition:
+            min-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            max-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            max-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            overflow var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            background-color var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+            z-index 0s linear var(--uc-tabs-hide-duration);
     }
     #sidebar-launcher-splitter {
         display: var(--uc-sidebar-splitter-display, flex) !important;
@@ -333,7 +343,9 @@
                 44px
             ) !important; /* Use !important to override the max-width styles in Nightly (v135) */
             z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
-            transition: z-index 0s linear var(--uc-tabs-hide-duration);
+            /* This transition is already covered by the one defined above, so it's commented out. 
+               Also, --uc-tabs-hide-duration is undefined, so only the first two values would actually apply. */
+            /* transition: z-index 0s linear var(--uc-tabs-hide-duration); */
             background: inherit;
         }
 
@@ -343,12 +355,17 @@
             overflow: hidden;
             /* !TEMPORARY: */
             margin-inline-start: var(--uc-verticalTabs-margin-left);
-            min-width: /* var(--tab-collapsed-width) */ 49px;
-            transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay);
+            min-width: /* var(--tab-collapsed-width) */ calc(var(--uc-sb-sidebar-main-min-width, 44px) + 5px);
+            /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
+            transition:
+                margin-inline-start var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay);
             border-inline: 0.01px solid var(--chrome-content-separator-color);
             border-inline-width: 0 0.01px;
             &:is([positionend], [sidebar-positionend]) {
-                transition-property: min-width, transform;
+                /* Newly added 'transform' uses initial transition values as it's not defined above */
+                transition-property: margin-inline-start, min-width, overflow, transform;
                 border-inline-width: 0.01px 0;
             }
         }
@@ -360,9 +377,18 @@
                         var(--tab-pinned-container-margin-inline-expanded) + 1px
                 )
             );
-            transition-delay: 0ms !important;
+            /* transition-delay: 0ms !important; */
+            transition:
+                margin-inline-start var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                overflow var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                transform var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
+            /* 
+             * Shift sidebar-main left by its extra expanded width (collapsed width - expanded width) 
+             * to keep it visible when expanding from the right edge. 
+             */
             &:is([positionend], [sidebar-positionend]) {
-                transform: translateX(calc(var(--tab-collapsed-width) - 100%));
+                transform: translateX(calc(var(--uc-sb-sidebar-main-min-width, 44px) + 11px - 100%));
             }
         }
         /* Fix transparent background issue in vertical tabs; no longer needed in Firefox v138 and later */
@@ -724,14 +750,17 @@
     }
 
     sidebar-main[expanded]:not(:hover) {
+        #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+            transition: min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay) !important;
+        }
         :is(.tab-label-container .tab-text, .tab-close-button) {
             visibility: collapse;
-            transition-delay: var(--uc-tabs-hide-animation-delay);
+            transition-delay: var(--uc-autohide-sidebar-delay);
         }
 
         #vertical-tabs-newtab-button .toolbarbutton-text {
             visibility: hidden;
-            transition-delay: var(--uc-tabs-hide-animation-delay);
+            transition-delay: var(--uc-autohide-sidebar-delay);
         }
 
         #vertical-pinned-tabs-container {
@@ -739,37 +768,38 @@
 
             .tabbrowser-tab .tab-stack {
                 min-width: 40px;
-                transition: min-width var(--uc-tabs-hide-animation-duration) ease-out
-                    var(--uc-tabs-hide-animation-delay);
+                transition: min-width var(--uc-autohide-transition-duration) ease-in-out
+                    var(--uc-autohide-sidebar-delay);
             }
         }
 
         #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
             padding-inline: 2px !important;
             max-width: 28px !important;
-            transition: max-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay) !important;
+            transition: max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay) !important;
         }
         #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
             margin-inline-start: 0px !important;
-            transition: margin-inline-start var(--uc-tabs-hide-animation-duration) ease-out
-                var(--uc-tabs-hide-animation-delay) !important;
+            transition:
+                margin-inline-start var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay) !important;
             .tab-group-line {
                 visibility: hidden;
-                transition-delay: var(--uc-tabs-hide-animation-delay);
+                transition-delay: var(--uc-autohide-sidebar-delay);
             }
         }
         #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
             max-width: 32px;
-            transition: max-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay);
+            transition: max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay);
         }
         #tabbrowser-tabs[orient="vertical"]::after {
             width: 32px;
-            transition: width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay);
+            transition: width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay);
         }
         @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
             #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
                 width: 32px !important;
-                transition: width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay);
+                transition: width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay);
             }
         }
         /* Move the container tab indicator to the right for Firefox v138 */
@@ -781,8 +811,8 @@
                     height: calc(100% - 4px);
                     margin: 0;
                     inset-inline-end: calc(100% - 50px) !important;
-                    transition: inset-inline-end var(--uc-tabs-hide-animation-duration) ease-out
-                        var(--uc-tabs-hide-animation-delay);
+                    transition: inset-inline-end var(--uc-autohide-transition-duration) ease-in-out 
+                        var(--uc-autohide-sidebar-delay);
                 }
             }
             */
