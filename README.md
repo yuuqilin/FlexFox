@@ -44,7 +44,7 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 > [!TIP]
 > **Users can now create a `uc-user-settings.css` file in the `components` folder to customize FlexFox styles. This file loads after FlexFox and overrides its styles, so custom changes remain intact even after future updates.**  
-> **See this section: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox/blob/main/README.md#-user-customizable-styles-uc-user-settingscss)**
+> **See this section: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-user-customizable-styles-uc-user-settingscss)**
 
 
 <details>
@@ -241,7 +241,7 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 | `uc.flex.sidebery-fast-hover-expand`        | Speed up Sidebery hover expand/collapse.                                     |
 | `uc.flex.sidebery-slow-hover-expand`        | Slow down Sidebery hover expand/collapse.                                    |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in vertical tabs.  |
-| `uc.flex.max-visible-vertical-pinned-tabs`  | Sets max pinned tabs per column in native vertical tabs.                     |
+| `uc.flex.max-visible-vertical-pinned-tabs`  | Sets max pinned tabs per column in native vertical tabs (numeric, 4–6).      |
 
 ## 🐞 Known Issues
 

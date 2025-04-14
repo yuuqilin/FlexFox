@@ -44,7 +44,7 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 > [!TIP]
 > **ユーザーは現在、`components` フォルダー内に `uc-user-settings.css` ファイルを作成することで、FlexFox のスタイルをカスタマイズできます。このファイルは FlexFox の後に読み込まれ、そのスタイルを上書きするため、将来的なアップデート後もカスタム変更が保持されます。**  
-> **詳細は次のセクションをご覧ください: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox/blob/main/README.md#-user-customizable-styles-uc-user-settingscss)**
+> **詳細は次のセクションをご覧ください: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-user-customizable-styles-uc-user-settingscss)**
 
 
 <details>
@@ -240,7 +240,7 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 | `uc.flex.sidebery-fast-hover-expand`       | Sideberyの展開/折りたたみを高速化                              |
 | `uc.flex.sidebery-slow-hover-expand`       | Sideberyの展開/折りたたみを遅くする                            |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 垂直タブのピン留めタブと通常タブの間に区切り線を表示します |
-| `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブ縦型タブの1列あたりのピン留めタブ最大数を設定します      |
+| `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブ縦型タブの1列あたりのピン留め数を設定（数値、4～6）      |
 
 ## 🐞 既知の問題
 
