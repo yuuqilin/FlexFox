@@ -13,6 +13,10 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 🆕 最新情報
 
+**v3.0.3**  
+- `uc.flex.fully-hide-sidebery` が有効、または全画面モードの際に、サイドバーストライプが展開できない問題を修正しました。併せて、同条件下で発生していたサイドバーストライプと Sidebery のアニメーションの同期ズレも修正しています。  
+- メニューバーの背景色がナビゲーションツールバーと一致しないテーマの表示不具合を修正しました。
+
 **v3.0.2**  
 - サイドバーが右側にある場合の展開・折りたたみアニメーションの不具合を修正しました。  
 - ネイティブの縦型タブもSideberyと同じ展開／折りたたみ速度になりました。`uc.flex.sidebery-fast-hover-expand` または `uc.flex.sidebery-slow-hover-expand` オプションで速度を調整できます。または `--uc-autohide-*` および `--uc-hover-*` の変数を直接編集して、お好みの速度に変更することもできます。
@@ -28,9 +32,6 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
   - F1キーでSideberyを素早く切り替えると、Sideberyとネイティブの縦型タブは同じ幅とレイアウトを共有しているため、シームレスに切り替わるように見えます。  
   - サイドバーが左側・右側のどちらに配置されていても、自動でレイアウトが調整され、UIに適応します。  
 - 数値オプション `uc.flex.max-visible-vertical-pinned-tabs` を新たに追加しました（設定可能範囲：4～6）。このオプションは、ネイティブの縦型タブパネルの各列に縦方向で表示できるピン留めタブの数を制御します。初期値は4です。縦に並ぶピン留めタブの数がこの値を超えると、スクロールバーが表示されます。
-
-> [!Warning]  
-> `uc.flex.fully-hide-sidebery` オプションが有効な場合や、Firefox が全画面モードの状態にある場合、サイドバーのストライプが正常に展開されません。この問題は次回のバージョンで修正される予定です。
 
 > [!IMPORTANT]
 > ネイティブの縦型タブが自動的に折りたたまれ、ホバーで展開されます。`サイドバーを展開します`ボタン（Alt+Ctrl+Z）でこの機能を有効にできます。 

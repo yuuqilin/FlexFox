@@ -22,7 +22,7 @@
         --bg: #1a1b26;
         --uc-sidebar-bgcolor: #1a1b26;
         @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-            --bg: var(--toolbox-bgcolor);
+            --bg: var(--toolbar-bgcolor);
             &:-moz-window-inactive {
                 --bg: var(--toolbox-bgcolor-inactive);
             }
@@ -61,7 +61,7 @@
         --bg: #f1f5f9;
         --uc-sidebar-bgcolor: #f1f5f9;
         @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-            --bg: var(--toolbox-bgcolor);
+            --bg: var(--toolbar-bgcolor);
             &:-moz-window-inactive {
                 --bg: var(--toolbox-bgcolor-inactive);
             }
@@ -124,6 +124,7 @@
     /* ===== Define new variable values when Sidebery is active ===== */
     &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
         --uc-sidebar-header-stripe: light-dark(#ea4c89, #9651ff);
+        --uc-sidebar-header-width: 44px;
         --uc-sidebar-width: 44px; /* Width of the Sidebery */
         --uc-sidebar-hover-width: 220px; /* Width of the expanded Sidebery on hover */
         /* Wider Sidebery width when expanded */
@@ -133,7 +134,6 @@
         /* Set the display width of Sidebery and the sidebar header when Sidebery's auto-collapse is disabled */
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
             --uc-sidebar-width: var(--uc-sidebar-hover-width);
-            --uc-sidebar-header-width: 44px;
         }
         /* Trigger width for expanding Sidebery on hover when fully hidden or in fullscreen */
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
@@ -209,7 +209,15 @@
             --uc-windows-controls-top: 0px;
         }
         /* !TEMPORARY: These variables are temporary solutions and might be removed later. */
-        @media -moz-pref("sidebar.verticalTabs") {
+        @media -moz-pref("sidebar.revamp") {
+            /**
+             * When the new sidebar is enabled and in fullscreen mode,
+             * reduce the navbar's trigger area so the top-aligned sidebar stripe
+             * can receive hover events before the navbar expands. 
+             */
+            @media (display-mode: fullscreen) {
+                --uc-toolbox-rotation: 87deg;
+            }
             --uc-verticalTabs-margin-left: 0px;
             #sidebar-main:is([positionend], [sidebar-positionend]) {
                 --uc-verticalTabs-margin-left: -11px;

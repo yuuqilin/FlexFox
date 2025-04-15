@@ -170,13 +170,14 @@
 =============================================*/
 
 @media -moz-pref("sidebar.revamp") {
+    /**
+     * Used variable indirection instead of direct property under #browser:has()
+     * to try for :root:has()-like perf gain; BUT actual boost ~5% — not clearly worth the cost
+     * in readability and maintainability.
+     */
     #browser:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
-        /* 
-         * Used variable indirection instead of direct property under #browser:has()
-         * to try for :root:has()-like perf gain; BUT actual boost ~5% — not clearly worth the cost
-         * in readability and maintainability.
-         */
-        /* These variables are used by both #sidebar-main and #sidebar-box to calculate offset heights,  
+        /**
+         * These variables are used by both #sidebar-main and #sidebar-box to calculate offset heights,  
          * so they must be declared under their common parent element #browser. 
          */
         --uc-sb-sidebar-main-margin-top: 1px;
@@ -217,6 +218,12 @@
             --uc-sb-sidebar-main-hover-max-h: 100%;
             --uc-sb-vertical-tabs-display: none;
         }
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            #sidebar-main:hover {
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+            }
+        }
     }
     @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
         #browser:has(
@@ -224,12 +231,20 @@
             ) {
             #sidebar-main {
                 --uc-sb-sidebar-main-min-width: 44px;
+                /**
+                 * #sidebar-main normally uses `transition-delay: var(--uc-autohide-sidebar-delay)` when not hovered.
+                 * To visually unify #sidebar-main and #sidebar-box transitions when only #sidebar-box is hovered,
+                 * override with `var(--uc-hover-sidebar-delay)` for synced timing.
+                 */
+                --uc-autohide-sidebar-delay: var(--uc-hover-sidebar-delay);
+                --uc-sb-sidebar-main-z-delay: var(--uc-hover-sidebar-delay);
             }
         }
     }
 
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
     #sidebar-main {
+        --bg: var(--toolbox-bgcolor);
         position: var(--uc-sb-sidebar-main-position, static) !important;
         &:is([positionend], [sidebar-positionend]) {
             right: 0px;
@@ -274,7 +289,11 @@
             max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-            z-index 0s linear var(--uc-tabs-hide-duration);
+            /**
+             * --uc-sb-sidebar-main-z-delay is undefined by default, so only the first two values apply.
+             * It gets set when `uc.flex.fully-hide-sidebery` is enabled or in fullscreen mode. 
+             */
+                z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
     }
     #sidebar-main:hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-h) !important;
@@ -289,7 +308,7 @@
             max-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
             overflow var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
             background-color var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-            z-index 0s linear var(--uc-tabs-hide-duration);
+            z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
     }
     #sidebar-launcher-splitter {
         display: var(--uc-sidebar-splitter-display, flex) !important;
@@ -322,7 +341,7 @@
     /* be179ef */
     /* Autohide vertical tabs when the sidebar is expanded */
     @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
-        /*
+        /**
          * The selector #sidebar-main:has(> [expanded]) has higher specificity
          * than #sidebar-main:not(hover), so its rules will override those above.
          * Since the earlier rule is used to detect when Sidebery is active,
@@ -332,7 +351,8 @@
          */
         #sidebar-main:has(> sidebar-main[expanded]) {
             overflow: var(--uc-sb-sidebar-main-overflow, visible) !important;
-            /* When the built-in vertical tabs are placed on the right side, 
+            /**
+             * When the built-in vertical tabs are placed on the right side, 
              * set overflow to hidden to eliminate extra space. 
              */
             &:not(:hover):is([positionend], [sidebar-positionend]) {
@@ -343,9 +363,8 @@
                 44px
             ) !important; /* Use !important to override the max-width styles in Nightly (v135) */
             z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
-            /* This transition is already covered by the one defined above, so it's commented out. 
-               Also, --uc-tabs-hide-duration is undefined, so only the first two values would actually apply. */
-            /* transition: z-index 0s linear var(--uc-tabs-hide-duration); */
+            /* This transition is already covered by the one defined above, so it's commented out. */
+            /* transition: z-index 0s linear var(--uc-sb-sidebar-main-z-delay); */
             background: inherit;
         }
 
@@ -383,7 +402,7 @@
                 min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 overflow var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 transform var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
-            /* 
+            /**
              * Shift sidebar-main left by its extra expanded width (collapsed width - expanded width) 
              * to keep it visible when expanding from the right edge. 
              */
@@ -558,7 +577,9 @@
     /* --- Start of rules that apply regardless of Sidebery's active state --- */
     /* ----------------------------------------------------------------------- */
     @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
+        /* ------------------------------------------------------------------------ */
         /* ----- Styles for tools-and-extensions when the sidebar is expanded ----- */
+        /* ------------------------------------------------------------------------ */
         /**
          * Use variables to pass values into the shadow trees. 
          * These scoped variables are only defined within #vertical-pinned-tabs-container.
@@ -595,7 +616,9 @@
             padding-block-end: var(--uc-sb-sroot-padding-block-end, 2px) !important;
             gap: var(--uc-sb-sroot-gap, 0px) !important;
         }
+        /* ------------------------------------------------------------------------- */
         /* ----- Styles for tools-and-extensions when the sidebar is collapsed ----- */
+        /* ------------------------------------------------------------------------- */
         .tools-and-extensions.actions-list[orientation="vertical"] {
             overflow: hidden !important;
             & > moz-button {
@@ -700,7 +723,8 @@
     /* ----- Styles for verticalTabs when the sidebar is expanded ----- */
     /* ---------------------------------------------------------------- */
 
-    /* Controls how many rows of pinned tab icons can be shown in vertical tab panel.
+    /**
+     * Controls how many rows of pinned tab icons can be shown in vertical tab panel.
      * This affects how many pinned tabs are visible before scrolling appears.
      */
     sidebar-main[expanded] #vertical-pinned-tabs-container {
@@ -815,7 +839,7 @@
                         var(--uc-autohide-sidebar-delay);
                 }
             }
-            */
+        */
     }
 
     /* ----------------------------------------------------------------- */
@@ -858,7 +882,7 @@
     */
 }
 
-/* 
+/**
  * This section contains code originally sourced from the firefox-gx project.
  * Source: https://github.com/Godiesc/firefox-gx
  * Author: @Godiesc
@@ -869,7 +893,7 @@
  * Modifications made by yuuqilin, marked where applicable.
  */
 
-/* 
+/**
  * .wrapper and .actions-list only appear in #sidebar-main's shadow DOM, 
  * so styling them directly is safe. 
  */

@@ -13,6 +13,10 @@
 
 ## 🆕 更新内容
 
+**v3.0.3**  
+- 修复在启用 `uc.flex.fully-hide-sidebery` 或处于全屏模式时，sidebar stripe 无法展开的问题，同时也修复了在相同条件下 sidebar stripe 与 Sidebery 动画不同步的问题。  
+- 修复主题颜色问题，解决菜单栏背景色与下方导航工具栏不一致的情况。
+
 **v3.0.2**  
 - 修复了新版侧边栏放在右侧时展开与折叠的动画效果问题。  
 - 现在原生垂直选项卡使用与 Sidebery 相同的展开/折叠速度。你可以使用 `uc.flex.sidebery-fast-hover-expand` 或 `uc.flex.sidebery-slow-hover-expand` 选项来加快或减慢速度，或者直接修改 `--uc-autohide-*` 和 `--uc-hover-*` 变量，设定你喜欢的动画速度。
@@ -28,9 +32,6 @@
   - 使用 F1 键快速切换 Sidebery 时，由于 Sidebery 与原生垂直选项卡共享相同的宽度与布局，界面切换看起来非常流畅自然。  
   - 支持自动适配左右两侧的侧边栏布局，可根据 UI 位置灵活调整。  
 - 新增数值选项 `uc.flex.max-visible-vertical-pinned-tabs`（可设范围：4–6）。此选项用于控制原生垂直选项卡面板中，每一列在垂直方向上最多可显示的钉选标签页数量。默认值为 4。若垂直排列的钉选标签页超过此值，将出现滚动条。
-
-> [!Warning]  
-> 启用 `uc.flex.fully-hide-sidebery` 选项或浏览器处于全屏模式时，侧边栏彩带无法正常展开。该问题预计将在下个版本中修复。
 
 > [!IMPORTANT]
 > 原生垂直选项卡支持自动折叠和鼠标悬停展开。可通过`展开侧边栏`按钮（Alt+Ctrl+Z）启用该功能。 

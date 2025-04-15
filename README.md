@@ -13,13 +13,17 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+**v3.0.3**  
+- Fixed an issue where the sidebar stripe could not expand when `uc.flex.fully-hide-sidebery` was enabled or in fullscreen mode. This update also resolves a transition desync between the sidebar stripe and Sidebery under the same conditions.  
+- Corrected a theme color issue where the menu bar displayed an inconsistent background color compared to the navigation toolbar.
+
 **v3.0.2**
 - Fixed animation issue when the new sidebar is placed on the right side.  
 - Native vertical tabs now use the same expand/collapse speed as Sidebery. You can adjust the speed using the `uc.flex.sidebery-fast-hover-expand` or `uc.flex.sidebery-slow-hover-expand` options, or by directly modifying the `--uc-autohide-*` and `--uc-hover-*` variables to suit your preference.
 
 **v3.0.1**  
-- Fixed incorrect positioning of the top stripe when `uc.flex.disable-bookmarks-autohide` is used with the revamped sidebar.  
-- Fixed incorrect width of the top stripe when `uc.flex.disable-sidebery-autohide` is enabled with the revamped sidebar.
+- Fixed incorrect positioning of the top stripe when `uc.flex.disable-bookmarks-autohide` is used with the new sidebar.  
+- Fixed incorrect width of the top stripe when `uc.flex.disable-sidebery-autohide` is enabled with the new sidebar.
 
 **v3.0.0**
 - Integrated Firefox's native vertical tabs with Sidebery.
@@ -27,10 +31,7 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
   - When Sidebery is inactive (e.g., when another sidebar tool or extension is opened), the native vertical tabs are shown instead.
   - When using the F1 key to quickly toggle Sidebery, since Sidebery and native vertical tabs share the same width and layout, the switch appears seamless.
   - Supports automatic layout adjustment for both left- and right-sided sidebars, adapting to different UI placements.
-- Added a new numeric option `uc.flex.max-visible-vertical-pinned-tabs` (accepted values: 4–6). This controls how many pinned tabs can be displayed vertically in each column of the native vertical tabs panel. The default is 4. If the number of vertically stacked pinned tabs exceeds this, a scrollbar will appear.
-
-> [!Warning]
-> When `uc.flex.fully-hide-sidebery` is enabled or when Firefox is in fullscreen mode, the sidebar stripe does not expand correctly. This issue is expected to be fixed in the next release.  
+- Added a new numeric option `uc.flex.max-visible-vertical-pinned-tabs` (accepted values: 4–6). This controls how many pinned tabs can be displayed vertically in each column of the native vertical tabs panel. The default is 4. If the number of vertically stacked pinned tabs exceeds this, a scrollbar will appear. 
 
 > [!IMPORTANT]
 > Built-in vertical tabs now automatically collapse and expand on hover. Use the `Expand sidebar` button (Alt+Ctrl+Z) to enable this feature.  
