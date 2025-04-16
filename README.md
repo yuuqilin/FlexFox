@@ -13,6 +13,9 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+**v3.0.5**  
+- Fixed the position offset of the sidebar stripe when `uc.flex.allow-addons-to-change-toolbar-color` is enabled.
+
 **v3.0.4**  
 - Fixed a typing mistake.  
 - Fixed the horizontal offset of the bookmarks toolbar when the new sidebar option `Hide tabs and sidebar` is enabled.
@@ -26,8 +29,8 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 - Native vertical tabs now use the same expand/collapse speed as Sidebery. You can adjust the speed using the `uc.flex.sidebery-fast-hover-expand` or `uc.flex.sidebery-slow-hover-expand` options, or by directly modifying the `--uc-autohide-*` and `--uc-hover-*` variables to suit your preference.
 
 **v3.0.1**  
-- Fixed incorrect positioning of the top stripe when `uc.flex.disable-bookmarks-autohide` is used with the new sidebar.  
-- Fixed incorrect width of the top stripe when `uc.flex.disable-sidebery-autohide` is enabled with the new sidebar.
+- Fixed an issue where the position of the sidebar stripe was incorrect when both `uc.flex.disable-bookmarks-autohide` and the new sidebar were enabled.  
+- Fixed an issue where the width of the sidebar stripe displayed incorrectly when both `uc.flex.disable-sidebery-autohide` and the new sidebar were enabled.
 
 **v3.0.0**
 - Integrated Firefox's native vertical tabs with Sidebery.

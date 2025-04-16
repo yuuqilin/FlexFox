@@ -13,12 +13,15 @@
 
 ## 🆕 更新内容
 
+**v3.0.5**  
+- 修复启用 `uc.flex.allow-addons-to-change-toolbar-color` 时，侧边栏彩带位置偏移的问题。
+
 **v3.0.4**  
 - 修复了一个打字错误。  
 - 修复了在启用新版侧边栏的 `隐藏标签页和侧栏` 选项时，书签工具栏的水平偏移问题。
 
 **v3.0.3**  
-- 修复在启用 `uc.flex.fully-hide-sidebery` 或处于全屏模式时，sidebar stripe 无法展开的问题，同时也修复了在相同条件下 sidebar stripe 与 Sidebery 动画不同步的问题。  
+- 修复启用 `uc.flex.fully-hide-sidebery` 或处于全屏模式时，侧边栏彩带无法展开的问题，同时也修复了在相同条件下彩带与 Sidebery 动画不同步的问题。  
 - 修复主题颜色问题，解决菜单栏背景色与下方导航工具栏不一致的情况。
 
 **v3.0.2**  
@@ -26,12 +29,12 @@
 - 现在原生垂直选项卡使用与 Sidebery 相同的展开/折叠速度。你可以使用 `uc.flex.sidebery-fast-hover-expand` 或 `uc.flex.sidebery-slow-hover-expand` 选项来加快或减慢速度，或者直接修改 `--uc-autohide-*` 和 `--uc-hover-*` 变量，设定你喜欢的动画速度。
 
 **v3.0.1**
-- 修复在同时启用 `uc.flex.disable-bookmarks-autohide` 和新版侧边栏时，侧边栏顶部彩带位置显示错误的问题。  
-- 修复在同时启用 `uc.flex.disable-sidebery-autohide` 和新版侧边栏时，顶部彩带宽度显示异常的问题。
+- 修复同时启用 `uc.flex.disable-bookmarks-autohide` 和新版侧边栏时，侧边栏彩带位置显示错误的问题。  
+- 修复同时启用 `uc.flex.disable-sidebery-autohide` 和新版侧边栏时，侧边栏彩带宽度显示异常的问题。
 
 **v3.0.0**
 - 将 Firefox 原生垂直选项卡与 Sidebery 整合。  
-  - 当 Sidebery 启用时，原生垂直选项卡会自动隐藏。新版侧边栏会折叠为 Sidebery 顶部的一条细长彩色条带。将鼠标悬停在条带上可以显示侧边栏工具按钮。  
+  - 当 Sidebery 启用时，原生垂直选项卡会自动隐藏。新版侧边栏会折叠为 Sidebery 顶部的一条细长彩色条带。将鼠标悬停在彩带上可以显示侧边栏工具按钮。  
   - 当 Sidebery 被禁用（例如启用其他侧边栏工具或扩展）时，则会显示原生垂直选项卡。  
   - 使用 F1 键快速切换 Sidebery 时，由于 Sidebery 与原生垂直选项卡共享相同的宽度与布局，界面切换看起来非常流畅自然。  
   - 支持自动适配左右两侧的侧边栏布局，可根据 UI 位置灵活调整。  

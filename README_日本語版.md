@@ -13,6 +13,9 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 🆕 最新情報
 
+**v3.0.5**  
+- `uc.flex.allow-addons-to-change-toolbar-color` を有効にした際に発生する、サイドバーストライプの位置ずれを修正しました。
+
 **v3.0.4**  
 - タイプミスを修正しました。  
 - 新しいサイドバーのオプション `タブとサイドバーを隠す` を有効にした際に、ブックマークツールバーの水平方向のずれを修正しました。
@@ -26,12 +29,12 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 - ネイティブの縦型タブもSideberyと同じ展開／折りたたみ速度になりました。`uc.flex.sidebery-fast-hover-expand` または `uc.flex.sidebery-slow-hover-expand` オプションで速度を調整できます。または `--uc-autohide-*` および `--uc-hover-*` の変数を直接編集して、お好みの速度に変更することもできます。
 
 **v3.0.1**  
-- `uc.flex.disable-bookmarks-autohide` を使用中に、新しいサイドバーのヘッダーストライプ（上部の細い帯）の位置がずれる問題を修正しました。  
-- `uc.flex.disable-sidebery-autohide` を使用中に、ヘッダーストライプの幅が不正になる問題を修正しました。
+- `uc.flex.disable-bookmarks-autohide` を使用中に、新しいサイドバーのサイドバーストライプの位置がずれる問題を修正しました。  
+- `uc.flex.disable-sidebery-autohide` を使用中に、サイドバーストライプの幅が不正になる問題を修正しました。
 
 **v3.0.0**
 - Firefoxのネイティブ縦型タブとSideberyを統合しました。  
-  - Sideberyが有効な場合、ネイティブの縦型タブは自動的に非表示になり、サイドバーはSidebery上部の細いカラーストライプに折りたたまれます。ストライプにマウスカーソルを合わせると、サイドバーのツールボタンが表示されます。  
+  - Sideberyが有効な場合、ネイティブの縦型タブは自動的に非表示になり、新しいサイドバーはSidebery上部の細いカラーストライプ（サイドバーストライプ）に折りたたまれます。サイドバーストライプにマウスカーソルを合わせると、サイドバーのツールボタンが表示されます。  
   - Sideberyが無効な場合（たとえば別のサイドバーツールや拡張機能を開いたとき）は、代わりにネイティブの縦型タブが表示されます。  
   - F1キーでSideberyを素早く切り替えると、Sideberyとネイティブの縦型タブは同じ幅とレイアウトを共有しているため、シームレスに切り替わるように見えます。  
   - サイドバーが左側・右側のどちらに配置されていても、自動でレイアウトが調整され、UIに適応します。  

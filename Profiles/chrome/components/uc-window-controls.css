@@ -287,7 +287,7 @@
             + #browser
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
             padding-top: 0px;
-            margin-top: calc(-1 * (var(--uc-bm-height) + 2 * var(--uc-bm-padding)));
+            margin-top: var(--uc-bm-disable-autohide-offset);
             @media -moz-pref("sidebar.revamp") {
                 margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
             }

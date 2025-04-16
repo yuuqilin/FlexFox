@@ -170,6 +170,8 @@
 =============================================*/
 
 @media -moz-pref("sidebar.revamp") {
+    /* ===== Start of variable definitions for active Sidebery ===== */
+    /* ========== [BLOCK A] ========== */
     /**
      * Used variable indirection instead of direct property under #browser:has()
      * to try for :root:has()-like perf gain; BUT actual boost ~5% — not clearly worth the cost
@@ -182,11 +184,16 @@
          */
         --uc-sb-sidebar-main-margin-top: 1px;
         --uc-sb-sidebar-main-stripe-height: 5px;
-        @media -moz-pref("uc.flex.fully-hide-toolbox"), (display-mode: fullscreen) {
+        @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color"),
+            -moz-pref("uc.flex.fully-hide-toolbox"),
+            (display-mode: fullscreen) {
             --uc-sb-sidebar-main-margin-top: 0px;
         }
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
-            --uc-sb-sidebar-main-margin-top: calc(-1 * (var(--uc-bm-height) + 2 * var(--uc-bm-padding)) + 1px);
+            --uc-sb-sidebar-main-margin-top: calc(var(--uc-bm-disable-autohide-offset) + 1px);
+            @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+                --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset);
+            }
         }
         sidebar-main[expanded] {
             --uc-sb-sroot-padding-block-start: var(--space-small);
@@ -241,7 +248,11 @@
             }
         }
     }
+    /* ========== [BLOCK A] ========== */
+    /* ===== End of variable definitions for active Sidebery ===== */
 
+    /* ========== Start of rules for active Sidebery ========== */
+    /* ========== [BLOCK B] ========== */
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
     #sidebar-main {
         --bg: var(--toolbox-bgcolor);
@@ -261,7 +272,7 @@
                 var(--uc-sidebar-bgcolor)
             );
         }
-        /* Remove extra margin from the revamped sidebar */
+        /* Remove extra margin from the revamped sidebar in fullscreen mode */
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             margin-inline-start: -1px !important;
             &:is([positionend], [sidebar-positionend]) {
@@ -336,7 +347,11 @@
     #sidebar-main #vertical-tabs {
         display: var(--uc-sb-vertical-tabs-display, flex) !important;
     }
+    /* ========== [BLOCK B] ========== */
+    /* ========== End of rules for active Sidebery ========== */
 
+    /* ========== Start of rules for inactive Sidebery ========== */
+    /* ========== [BLOCK C] ========== */
     /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
     /* be179ef */
     /* Autohide vertical tabs when the sidebar is expanded */
@@ -373,7 +388,7 @@
             background: inherit;
             overflow: hidden;
             /* !TEMPORARY: */
-            margin-inline-start: var(--uc-verticalTabs-margin-left);
+            margin-inline-start: var(--uc-sidebar-main-margin-left);
             min-width: /* var(--tab-collapsed-width) */ calc(var(--uc-sb-sidebar-main-min-width, 44px) + 5px);
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
             transition:
@@ -407,7 +422,9 @@
              * to keep it visible when expanding from the right edge. 
              */
             &:is([positionend], [sidebar-positionend]) {
-                transform: translateX(calc(var(--uc-sb-sidebar-main-min-width, 44px) + 11px - 100%));
+                transform: translateX(
+                    calc(11px + var(--uc-sb-sidebar-main-min-width, 44px) - 100%)
+                );
             }
         }
         /* Fix transparent background issue in vertical tabs; no longer needed in Firefox v138 and later */
@@ -415,10 +432,12 @@
             background: inherit;
         }
     }
+    /* ========== [BLOCK C] ========== */
+    /* ========== End of rules for inactive Sidebery ========== */
 
-    /* ----------------------------------------------------------------------------------------------- */
-    /* ----- Styles for tools-and-extensions when Sidebery is active and the sidebar is expanded ----- */
-    /* ----------------------------------------------------------------------------------------------- */
+    /* ========== Start of rules for active Sidebery ========== */
+    /* ========== [BLOCK D] ========== */
+    /* ----- Styles for tools-and-extensions when the sidebar is expanded ----- */
     .tools-and-extensions.actions-list[orientation="horizontal"] {
         /* Add a divider to tools-and-extensions on hover */
         &:hover {
@@ -493,9 +512,7 @@
         */
     }
 
-    /* ------------------------------------------------------------------------------------------------ */
-    /* ----- Styles for tools-and-extensions when Sidebery is active and the sidebar is collapsed ----- */
-    /* ------------------------------------------------------------------------------------------------ */
+    /* ----- Styles for tools-and-extensions when the sidebar is collapsed ----- */
     .tools-and-extensions.actions-list[orientation="vertical"] {
         /* Add a divider to tools-and-extensions on hover */
         &:hover {
@@ -569,17 +586,13 @@
             --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-2, var(--space-small)) !important;
         }
     }
-    /* ----------------------------------------------------------------------- */
-    /* -------- End of rules that apply only when Sidebery is active --------- */
-    /* ----------------------------------------------------------------------- */
+    /* ========== [BLOCK D] ========== */
+    /* ========== End of rules for active Sidebery ========== */
 
-    /* ----------------------------------------------------------------------- */
-    /* --- Start of rules that apply regardless of Sidebery's active state --- */
-    /* ----------------------------------------------------------------------- */
+    /* ========== Start of rules for inactive Sidebery ========== */
+    /* ========== [BLOCK E] ========== */
     @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
-        /* ------------------------------------------------------------------------ */
         /* ----- Styles for tools-and-extensions when the sidebar is expanded ----- */
-        /* ------------------------------------------------------------------------ */
         /**
          * Use variables to pass values into the shadow trees. 
          * These scoped variables are only defined within #vertical-pinned-tabs-container.
@@ -616,9 +629,7 @@
             padding-block-end: var(--uc-sb-sroot-padding-block-end, 2px) !important;
             gap: var(--uc-sb-sroot-gap, 0px) !important;
         }
-        /* ------------------------------------------------------------------------- */
         /* ----- Styles for tools-and-extensions when the sidebar is collapsed ----- */
-        /* ------------------------------------------------------------------------- */
         .tools-and-extensions.actions-list[orientation="vertical"] {
             overflow: hidden !important;
             & > moz-button {
@@ -631,7 +642,11 @@
             }
         }
     }
+    /* ========== [BLOCK E] ========== */
+    /* ========== End of rules for inactive Sidebery ========== */
 
+    /* ========== Start of rules unrelated to Sidebery ========== */
+    /* ========== [BLOCK F] ========== */
     /**
      * Increase the z-index of the navigation bar in fullscreen mode  
      * to prevent it from being obscured by the revamped sidebar.
@@ -705,24 +720,26 @@
         margin-top: 0px;
     }
 }
-
+/* ========== [BLOCK F] ========== */
+/* ========== End of rules unrelated to Sidebery ========== */
 /*==========  End of Section Revamped Sidebar  ===========*/
 
 /*=============================================
 =                Vertical Tabs                =
 =============================================*/
 
+/* ========== Start of rules for inactive Sidebery ========== */
+/* ========== [BLOCK G] ========== */
 @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
     /*
     #browser:has(
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][hidden],
             #sidebar-box:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"])
         ) {
-    */
-    /* ---------------------------------------------------------------- */
-    /* ----- Styles for verticalTabs when the sidebar is expanded ----- */
-    /* ---------------------------------------------------------------- */
 
+        }
+    */
+    /* ----- Styles for verticalTabs when the sidebar is expanded ----- */
     /**
      * Controls how many rows of pinned tab icons can be shown in vertical tab panel.
      * This affects how many pinned tabs are visible before scrolling appears.
@@ -842,9 +859,7 @@
         */
     }
 
-    /* ----------------------------------------------------------------- */
     /* ----- Styles for verticalTabs when the sidebar is collapsed ----- */
-    /* ----------------------------------------------------------------- */
     #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
         --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
         --tab-collapsed-width: 44px !important;
@@ -877,11 +892,12 @@
             }
             */
     }
-    /*
-    }
-    */
 }
+/* ========== [BLOCK G] ========== */
+/* ========== End of rules for inactive Sidebery ========== */
 
+/* ========== Start of rules unrelated to Sidebery ========== */
+/* ========== [BLOCK H] ========== */
 /**
  * This section contains code originally sourced from the firefox-gx project.
  * Source: https://github.com/Godiesc/firefox-gx
@@ -964,5 +980,6 @@
         order: -1 !important;
     }
 }
-
+/* ========== [BLOCK H] ========== */
+/* ========== End of rules unrelated to Sidebery ========== */
 /*==========  End of Section Vertical Tabs  ===========*/
