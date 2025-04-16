@@ -13,6 +13,10 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+**v3.0.4**  
+- Fixed a typing mistake.  
+- Fixed the horizontal offset of the bookmarks toolbar when the new sidebar option `Hide tabs and sidebar` is enabled.
+
 **v3.0.3**  
 - Fixed an issue where the sidebar stripe could not expand when `uc.flex.fully-hide-sidebery` was enabled or in fullscreen mode. This update also resolves a transition desync between the sidebar stripe and Sidebery under the same conditions.  
 - Corrected a theme color issue where the menu bar displayed an inconsistent background color compared to the navigation toolbar.

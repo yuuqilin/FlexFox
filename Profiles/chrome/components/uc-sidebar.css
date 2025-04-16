@@ -252,7 +252,7 @@
         margin-top: var(--uc-sb-sidebar-main-margin-top);
         z-index: var(--uc-sb-sidebar-main-z-index);
     }
-    #sidebar-main:not(hover) {
+    #sidebar-main:not(:hover) {
         --uc-sidebar-main-stripe: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
         @media (prefers-color-scheme: dark) {
             --uc-sidebar-main-stripe: color-mix(
@@ -343,7 +343,7 @@
     @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
         /**
          * The selector #sidebar-main:has(> [expanded]) has higher specificity
-         * than #sidebar-main:not(hover), so its rules will override those above.
+         * than #sidebar-main:not(:hover), so its rules will override those above.
          * Since the earlier rule is used to detect when Sidebery is active,
          * we rely on the --uc-sb-* custom variable (with fallback) to carry that logic forward.
          * This ensures that even when overridden, the correct behavior still applies

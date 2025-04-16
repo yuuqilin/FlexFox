@@ -253,6 +253,12 @@
         @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
             --uc-personal-toolbar-offset: 44px;
             --uc-personal-toolbar-width: 44px;
+            @media -moz-pref("sidebar.visibility", "hide-sidebar") {
+                :has(#sidebar-main[hidden]) {
+                    --uc-personal-toolbar-offset: 0px;
+                    --uc-personal-toolbar-width: 0px;
+                }
+            }
         }
         @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
             &:not([inFullscreen]) {
