@@ -13,6 +13,15 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+<details>
+  <summary>🔧 <b>Various Fixes (v3.0.1–v3.0.6)</b></summary>
+
+**3.0.6**
+- Updated multiple imported styles to their latest versions.  
+  - Added a closing animation to the find bar when it loses focus.  
+  - Improved behavior to keep the navigation bar visible when various panels are open.  
+- Fixed a non-standard syntax to prevent potential bugs and ease future debugging.
+
 **v3.0.5**  
 - Fixed the position offset of the sidebar stripe when `uc.flex.allow-addons-to-change-toolbar-color` is enabled.
 
@@ -31,6 +40,8 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 **v3.0.1**  
 - Fixed an issue where the position of the sidebar stripe was incorrect when both `uc.flex.disable-bookmarks-autohide` and the new sidebar were enabled.  
 - Fixed an issue where the width of the sidebar stripe displayed incorrectly when both `uc.flex.disable-sidebery-autohide` and the new sidebar were enabled.
+
+</details>
 
 **v3.0.0**
 - Integrated Firefox's native vertical tabs with Sidebery.

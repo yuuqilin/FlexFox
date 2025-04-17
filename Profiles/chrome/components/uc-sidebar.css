@@ -195,13 +195,13 @@
                 --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset);
             }
         }
-        sidebar-main[expanded] {
+        & sidebar-main[expanded] {
             --uc-sb-sroot-padding-block-start: var(--space-small);
             --uc-sb-sroot-padding-block-end: var(--space-small);
             --uc-sb-sroot-padding-inline: 6px;
             --uc-sb-sroot-gap: var(--space-xxsmall);
         }
-        sidebar-main:not([expanded]) {
+        & sidebar-main:not([expanded]) {
             --uc-sb-sroot-btn-padding-block-end-1: var(--space-small);
             --uc-sb-sroot-btn-padding-block-end-2: 2px;
             --uc-sb-sroot-align-items: center;
@@ -364,10 +364,10 @@
          * This ensures that even when overridden, the correct behavior still applies
          * based on whether Sidebery is active or not.
          */
-        #sidebar-main:has(> sidebar-main[expanded]) {
+        #sidebar-main:has(> [expanded]) {
             overflow: var(--uc-sb-sidebar-main-overflow, visible) !important;
             /**
-             * When the built-in vertical tabs are placed on the right side, 
+             * When the native vertical tabs are placed on the right side, 
              * set overflow to hidden to eliminate extra space. 
              */
             &:not(:hover):is([positionend], [sidebar-positionend]) {
@@ -731,14 +731,6 @@
 /* ========== Start of rules for inactive Sidebery ========== */
 /* ========== [BLOCK G] ========== */
 @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
-    /*
-    #browser:has(
-            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][hidden],
-            #sidebar-box:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"])
-        ) {
-
-        }
-    */
     /* ----- Styles for verticalTabs when the sidebar is expanded ----- */
     /**
      * Controls how many rows of pinned tab icons can be shown in vertical tab panel.

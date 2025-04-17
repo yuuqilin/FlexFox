@@ -13,6 +13,15 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 🆕 最新情報
 
+<details>
+  <summary>🔧 <b>さまざまな修正（v3.0.1～v3.0.6）</b></summary>
+
+**3.0.6**
+- インポートしている複数のスタイルを最新版に更新。  
+  - 検索バーがフォーカスを失ったときの閉じるアニメーションを追加。  
+  - パネルが開いている際にナビゲーションバーが非表示にならないよう挙動を改善。  
+- 潜在的な不具合やデバッグの困難を避けるため、非標準の構文を修正しました。
+
 **v3.0.5**  
 - `uc.flex.allow-addons-to-change-toolbar-color` を有効にした際に発生する、サイドバーストライプの位置ずれを修正しました。
 
@@ -31,6 +40,8 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 **v3.0.1**  
 - `uc.flex.disable-bookmarks-autohide` を使用中に、新しいサイドバーのサイドバーストライプの位置がずれる問題を修正しました。  
 - `uc.flex.disable-sidebery-autohide` を使用中に、サイドバーストライプの幅が不正になる問題を修正しました。
+
+</details>
 
 **v3.0.0**
 - Firefoxのネイティブ縦型タブとSideberyを統合しました。  

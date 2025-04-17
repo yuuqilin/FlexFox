@@ -13,6 +13,15 @@
 
 ## 🆕 更新内容
 
+<details>
+  <summary>🔧 <b>多种修复（v3.0.1～v3.0.6）</b></summary>
+
+**3.0.6**
+- 将多个引入的样式更新为最新版本。  
+  - 为查找栏失去焦点后自动关闭添加了动画效果。  
+  - 优化了在打开面板时导航栏保持显示的行为。  
+- 为避免潜在错误和调试困难，修正了一处不符合标准的语法写法。
+
 **v3.0.5**  
 - 修复启用 `uc.flex.allow-addons-to-change-toolbar-color` 时，侧边栏彩带位置偏移的问题。
 
@@ -31,6 +40,8 @@
 **v3.0.1**
 - 修复同时启用 `uc.flex.disable-bookmarks-autohide` 和新版侧边栏时，侧边栏彩带位置显示错误的问题。  
 - 修复同时启用 `uc.flex.disable-sidebery-autohide` 和新版侧边栏时，侧边栏彩带宽度显示异常的问题。
+
+</details>
 
 **v3.0.0**
 - 将 Firefox 原生垂直选项卡与 Sidebery 整合。  

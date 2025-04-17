@@ -1,9 +1,26 @@
 @namespace htmlNs url("http://www.w3.org/1999/xhtml");
 /* Auto hide findbar when unfocused */
 @media not -moz-pref("uc.flex.disable-findbar-autohide") {
+    @keyframes findbar-hide-when-unfocused {
+        0% {
+            opacity: 1;
+            height: auto;
+        }
+        99% {
+            opacity: 1;
+            height: auto;
+        }
+        100% {
+        }
+    }
     findbar:not(:focus-within) {
-        opacity: 0 !important;
-        width: 0px !important;
+        animation:
+            findbar-scale-out 0.1s,
+            findbar-hide-when-unfocused 0.1s;
+        height: 0;
+        opacity: 0;
+        pointer-events: none;
+        overflow: hidden;
     }
 }
 
@@ -31,6 +48,11 @@ findbar checkbox {
 @keyframes findbar-scale-out {
     0% {
         transform: scaleY(1);
+        visibility: visible;
+    }
+    99% {
+        transform: scaleY(0);
+        visibility: visible;
     }
     100% {
         transform: scaleY(0);
@@ -53,7 +75,7 @@ findbar {
     display: flex;
     align-items: center;
     transform-origin: top center;
-    animation: 0.1s findbar-scale-in;
+    animation: findbar-scale-in 0.1s;
     background: var(--uc-sidebar-bgcolor) !important;
     border: 0;
     overflow-x: visible;
@@ -170,10 +192,10 @@ findbar {
 }
 
 /* Modified from https://github.com/ravindUwU/firefox-refined-findbar/blob/main/src/refined-findbar.scss */
-/* 68fce3c */
+/* aecb463 */
 
 findbar[hidden="true"] {
-    animation: 0.1s findbar-scale-out;
+    animation: findbar-scale-out 0.1s;
 }
 findbar checkbox,
 findbar [anonid="findbar-textbox-wrapper"] toolbarbutton,

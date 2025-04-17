@@ -78,7 +78,7 @@ toolbarbutton:hover {
 }
 
 /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_toolbox.css */
-/* 9eef8cd */
+/* 9bf9c83 */
 
 /* Hide the whole toolbar area unless urlbar is focused or cursor is over the toolbar */
 /* Dimensions on non-Win10 OS probably needs to be adjusted */
@@ -99,6 +99,7 @@ toolbarbutton:hover {
             line-height: 0;
             z-index: 1;
             pointer-events: none;
+            width: 100vw;
         }
 
         &[sessionrestored] #urlbar[popover] {
@@ -112,8 +113,17 @@ toolbarbutton:hover {
             transform: rotateX(89.9deg);
         }
 
-        #mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox #urlbar[popover],
-        #navigator-toolbox:is(:hover, :focus-within) #urlbar[popover],
+        #mainPopupSet:has(
+                > [panelopen]:not(
+                        #ask-chat-shortcuts,
+                        #selection-shortcut-action-panel,
+                        #chat-shortcuts-options-panel,
+                        #tab-preview-panel
+                    )
+            )
+            ~ toolbox
+            #urlbar[popover],
+        #navigator-toolbox:is(:hover, :focus-within, [movingtab]) #urlbar[popover],
         #urlbar-container > #urlbar[popover]:is([focused], [open]) {
             pointer-events: auto;
             opacity: 1;
@@ -121,10 +131,17 @@ toolbarbutton:hover {
             transform: rotateX(0deg);
         }
 
-        #mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox,
+        #mainPopupSet:has(
+                > [panelopen]:not(
+                        #ask-chat-shortcuts,
+                        #selection-shortcut-action-panel,
+                        #chat-shortcuts-options-panel,
+                        #tab-preview-panel
+                    )
+            )
+            ~ toolbox,
         #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
-        #navigator-toolbox:hover,
-        #navigator-toolbox:focus-within {
+        #navigator-toolbox:is(:hover, :focus-within, [movingtab]) {
             transition-delay: 33ms !important;
             transform: rotateX(0);
             opacity: 1;
@@ -133,14 +150,6 @@ toolbarbutton:hover {
         #navigator-toolbox > * {
             line-height: normal;
             pointer-events: auto;
-        }
-
-        /* Comment out the #navigator-toolbox > * selector to allow the shift rules for #navigator-toolbox in uc-window-controls.css to take effect */
-        #navigator-toolbox/*,
-        #navigator-toolbox > **/ {
-            width: 100vw;
-            -moz-appearance: none !important;
-            appearance: none !important;
         }
 
         /* Don't apply transform before window has been fully created */
@@ -152,6 +161,13 @@ toolbarbutton:hover {
             position: relative !important;
             transform: none !important;
             opacity: 1 !important;
+        }
+
+        /* This is a bit hacky fix for an issue that will make urlbar zero pixels tall after you enter customize mode */
+        #urlbar[breakout][breakout-extend] > .urlbar-input-container {
+            padding-block: calc(
+                min(4px, (var(--urlbar-container-height) - var(--urlbar-height)) / 2) + var(--urlbar-container-padding)
+            ) !important;
         }
     }
 }
