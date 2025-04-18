@@ -16,6 +16,11 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 <details>
   <summary>🔧 <b>Various Fixes (v3.0.1–v3.0.6)</b></summary>
 
+**v3.0.7**
+- Fixed incorrect background highlight for the active tab when using Firefox's native tabs (both horizontal and vertical layouts).  
+- Fixed a visual glitch in themes where the background image did not align properly between the navigation bar and bookmarks bar, when the menubar was shown and the bookmarks bar was set to auto-hide.  
+- Fixed an issue where the menubar background color did not update correctly when the Firefox window was inactive.
+
 **3.0.6**
 - Updated multiple imported styles to their latest versions.  
   - Added a closing animation to the find bar when it loses focus.  

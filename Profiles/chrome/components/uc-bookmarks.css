@@ -24,7 +24,7 @@
                 -2 * (
                         var(--tab-block-margin) + var(--toolbarbutton-inner-padding) +
                             var(--toolbarbutton-outer-padding)
-                    ) - var(--tab-min-height) + var(--uc-bg-y-padding) - var(--bookmark-block-padding)
+                    ) - var(--tab-min-height) + var(--uc-theme-bg-y-clip) - var(--bookmark-block-padding)
             );
             background-position:
                 top left,
@@ -54,8 +54,8 @@
                 background-color: inherit !important;
                 margin-bottom: calc(0px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
                 --uc-bg-y: calc(
-                    0px - (2 * var(--toolbarbutton-inner-padding) + var(--toolbarbutton-outer-padding)) - 30px -
-                        var(--bookmark-block-padding)
+                    0px - (2 * var(--toolbarbutton-inner-padding) + var(--toolbarbutton-outer-padding)) -
+                        var(--uc-theme-bg-y-vt-clip) - var(--bookmark-block-padding)
                 );
             }
         }

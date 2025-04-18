@@ -224,6 +224,18 @@
             --uc-sb-sidebar-main-hover-min-h: auto;
             --uc-sb-sidebar-main-hover-max-h: 100%;
             --uc-sb-vertical-tabs-display: none;
+            --uc-sidebar-main-stripe: color-mix(
+                in srgb,
+                var(--uc-sidebar-header-stripe) 50%,
+                var(--uc-sidebar-bgcolor)
+            );
+            @media (prefers-color-scheme: dark) {
+                --uc-sidebar-main-stripe: color-mix(
+                    in srgb,
+                    var(--uc-sidebar-header-stripe) 87%,
+                    var(--uc-sidebar-bgcolor)
+                );
+            }
         }
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             #sidebar-main:hover {
@@ -264,14 +276,6 @@
         z-index: var(--uc-sb-sidebar-main-z-index);
     }
     #sidebar-main:not(:hover) {
-        --uc-sidebar-main-stripe: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
-        @media (prefers-color-scheme: dark) {
-            --uc-sidebar-main-stripe: color-mix(
-                in srgb,
-                var(--uc-sidebar-header-stripe) 87%,
-                var(--uc-sidebar-bgcolor)
-            );
-        }
         /* Remove extra margin from the revamped sidebar in fullscreen mode */
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             margin-inline-start: -1px !important;
@@ -422,9 +426,7 @@
              * to keep it visible when expanding from the right edge. 
              */
             &:is([positionend], [sidebar-positionend]) {
-                transform: translateX(
-                    calc(11px + var(--uc-sb-sidebar-main-min-width, 44px) - 100%)
-                );
+                transform: translateX(calc(11px + var(--uc-sb-sidebar-main-min-width, 44px) - 100%));
             }
         }
         /* Fix transparent background issue in vertical tabs; no longer needed in Firefox v138 and later */

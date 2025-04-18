@@ -1,5 +1,6 @@
 /* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
 /* Active Tab */
+/*
 :root:not([lwt-default-theme-in-dark-mode]) .tab-background[selected],
 .tab-background[multiselected="true"] {
     background: rgba(0, 0, 0, 0.05) !important;
@@ -9,6 +10,7 @@
 .tab-background[multiselected="true"] {
     background: rgba(0, 0, 0, 0.2) !important;
 }
+*/
 
 @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
     /* Navigation Bar */
@@ -24,6 +26,11 @@
     /* Navigation Bar Separator */
     #navigator-toolbox {
         border-color: var(--bg) !important;
+    }
+
+    /* menubar bg color */
+    #toolbar-menubar {
+        background-color: var(--bg) !important;
     }
 }
 
@@ -70,11 +77,6 @@ toolbarbutton:hover {
         display: flex !important;
         justify-content: flex-end !important;
     }
-}
-
-#toolbar-menubar {
-    /* menubar bg color */
-    background-color: var(--bg) !important;
 }
 
 /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_toolbox.css */

@@ -99,7 +99,7 @@
     --uc-personal-toolbar-offset: 0px;
     --uc-personal-toolbar-width: 0px;
     --uc-bookmarks-margin-left: 0px;
-    --uc-bg-y-padding: -28px;
+    --uc-theme-bg-y-clip: -28px;
     --uc-theme-bg-x-left-start: 0px;
     --uc-theme-bg-x-right-end: 0px;
     --uc-tab-items-visibility: inherit;
@@ -170,7 +170,15 @@
          * Adjust the vertical and horizontal offsets of the toolbar background image 
          * when themes and addons are allowed to customize the toolbar background color and image. 
          */
-        --uc-bg-y-padding: 16px;
+        --uc-theme-bg-y-clip: 16px;
+        #PersonalToolbar {
+            #toolbar-menubar[autohide="false"] ~ & {
+                --uc-theme-bg-y-clip: -8px;
+            }
+            #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+                --uc-theme-bg-y-clip: -17px;
+            }
+        }
         @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
             @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
                 &:not([inFullscreen]):not([customizing]) {
@@ -250,6 +258,15 @@
         */
     }
     @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.verticalTabs") {
+        --uc-theme-bg-y-vt-clip: 30px;
+        #PersonalToolbar {
+            #toolbar-menubar[autohide="false"] ~ & {
+                --uc-theme-bg-y-vt-clip: 54px;
+            }
+            #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+                --uc-theme-bg-y-vt-clip: 59px;
+            }
+        }
         @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
             --uc-personal-toolbar-offset: 44px;
             --uc-personal-toolbar-width: 44px;
