@@ -13,8 +13,15 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+**v3.1.0**
+- Refactored the structure of `uc-variables.css`. Frequently used and user-customizable variables are now grouped at the top of the file with clearer descriptions.
+- Overhauled the logic for overriding the toolbar background color in FlexFox. This update should fully resolve issues with theme background image alignment, transparency handling, and incorrect display when the window is inactive.
+- Improved animation smoothness when expanding or collapsing vertical tabs.
+- Adjusted the navbar positioning so that its buttons align better with vertical tabs.
+- Toggling `uc.flex.allow-addons-to-change-toolbar-color` no longer causes the sidebar to shift vertically.
+
 <details>
-  <summary>🔧 <b>Various Fixes (v3.0.1–v3.0.6)</b></summary>
+  <summary>🔧 <b>Various Fixes (v3.0.1–v3.0.7)</b></summary>
 
 **v3.0.7**
 - Fixed incorrect background highlight for the active tab when using Firefox's native tabs (both horizontal and vertical layouts).  

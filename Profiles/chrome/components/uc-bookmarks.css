@@ -32,7 +32,7 @@
                 var(--lwt-background-alignment, top left);
             background-position-y: top, top, var(--uc-bg-y), var(--uc-bg-y), var(--uc-bg-y);
             background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                linear-gradient(var(--bg), var(--bg)), var(--lwt-header-image, var(--lwt-additional-images)) !important;
+                linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)), var(--lwt-header-image, var(--lwt-additional-images)) !important;
 
             /* Adjust the background image offset */
             @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
@@ -47,7 +47,7 @@
         @media -moz-pref("sidebar.verticalTabs") {
             @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
                 #PersonalToolbar {
-                    --bg: transparent;
+                    --toolbar-bgcolor: transparent;
                 }
             }
             #PersonalToolbar:not([customizing]) {
@@ -55,7 +55,7 @@
                 margin-bottom: calc(0px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
                 --uc-bg-y: calc(
                     0px - (2 * var(--toolbarbutton-inner-padding) + var(--toolbarbutton-outer-padding)) -
-                        var(--uc-theme-bg-y-vt-clip) - var(--bookmark-block-padding)
+                        var(--uc-theme-bg-y-clip) - var(--bookmark-block-padding)
                 );
             }
         }

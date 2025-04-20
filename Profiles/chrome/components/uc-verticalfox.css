@@ -21,9 +21,9 @@
 /* AUTO HIDE SIDE BAR */
 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
     position: relative;
-    min-width: var(--uc-sidebar-width) !important;
-    width: var(--uc-sidebar-width) !important;
-    max-width: var(--uc-sidebar-width) !important;
+    min-width: var(--uc-sb-sidebar-width) !important;
+    width: var(--uc-sb-sidebar-width) !important;
+    max-width: var(--uc-sb-sidebar-width) !important;
     --browser-area-z-index-sidebar: 3;
     z-index: 100;
 }
@@ -59,7 +59,8 @@
         -moz-pref("uc.flex.fully-hide-sidebery"),
         (display-mode: fullscreen) {
         #sidebar {
-            min-width: var(--uc-sidebar-width) !important;
+            will-change: min-width;
+            min-width: var(--uc-sb-sidebar-width) !important;
             transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay) !important;
             @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
@@ -68,8 +69,7 @@
         }
 
         &:hover > #sidebar {
-            will-change: min-width;
-            min-width: var(--uc-sidebar-hover-width) !important;
+            min-width: var(--uc-sb-sidebar-hover-width) !important;
             transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay) !important;
         }

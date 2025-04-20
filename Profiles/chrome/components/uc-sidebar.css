@@ -25,7 +25,7 @@
         }
         max-height: 100%;
         max-width: 100%;
-        min-width: var(--uc-sidebar-hover-width);
+        min-width: var(--uc-sb-sidebar-hover-width);
         background-color: var(--uc-sidebar-bgcolor);
         transition:
             border-bottom var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
@@ -47,11 +47,12 @@
     #sidebar-header:not(:hover):not(:has(.active)) {
         min-height: 5px;
         max-height: 5px;
-        min-width: var(--uc-sidebar-width);
+        min-width: var(--uc-sb-sidebar-width);
         overflow: hidden;
         padding: 0 !important;
-        background-color: var(--uc-sidebar-header-stripe);
+        background-color: var(--uc-sb-sidebar-header-stripe);
         opacity: 0.5;
+        will-change: min-height, max-height, min-width, overflow, background-color, opacity;
         transition:
             max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
@@ -70,8 +71,8 @@
     @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
         --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
         #sidebar-header:not(:hover):not(:has(.active)) {
-            max-width: var(--uc-sidebar-header-width);
-            min-width: var(--uc-sidebar-header-width);
+            max-width: var(--uc-sb-sidebar-header-width);
+            min-width: var(--uc-sb-sidebar-header-width);
         }
     }
 
@@ -90,14 +91,15 @@
 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-            --uc-sidebar-width: 44px;
+            --uc-sb-sidebar-width: 44px;
             min-height: 5px;
             max-height: 5px;
-            min-width: var(--uc-sidebar-width);
+            min-width: var(--uc-sb-sidebar-width);
             overflow: hidden;
             padding: 0 !important;
-            background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+            background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
             opacity: 1;
+            will-change: min-height, max-height, min-width, overflow, background-color, opacity;
             transition:
                 max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
@@ -109,7 +111,7 @@
 
         @media (prefers-color-scheme: dark) {
             &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 87%, var(--uc-sidebar-bgcolor));
+                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 87%, var(--uc-sidebar-bgcolor));
             }
         }
     }
@@ -165,13 +167,13 @@
     }
 }
 
-/*=============================================
-=             Revamped Sidebar                =
-=============================================*/
+
+/* 🧱══════════════════════════════════════════════════════════════════
+   🧱 Revamped Sidebar
+   🧱════════════════════════════════════════════════════════════════ */
 
 @media -moz-pref("sidebar.revamp") {
-    /* ===== Start of variable definitions for active Sidebery ===== */
-    /* ========== [BLOCK A] ========== */
+    /* 🔽 [BLOCK A] Start of variable definitions for active Sidebery */
     /**
      * Used variable indirection instead of direct property under #browser:has()
      * to try for :root:has()-like perf gain; BUT actual boost ~5% — not clearly worth the cost
@@ -182,18 +184,10 @@
          * These variables are used by both #sidebar-main and #sidebar-box to calculate offset heights,  
          * so they must be declared under their common parent element #browser. 
          */
-        --uc-sb-sidebar-main-margin-top: 1px;
+        --uc-sb-sidebar-main-margin-top: 0px;
         --uc-sb-sidebar-main-stripe-height: 5px;
-        @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color"),
-            -moz-pref("uc.flex.fully-hide-toolbox"),
-            (display-mode: fullscreen) {
-            --uc-sb-sidebar-main-margin-top: 0px;
-        }
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
-            --uc-sb-sidebar-main-margin-top: calc(var(--uc-bm-disable-autohide-offset) + 1px);
-            @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-                --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset);
-            }
+            --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset);
         }
         & sidebar-main[expanded] {
             --uc-sb-sroot-padding-block-start: var(--space-small);
@@ -210,12 +204,12 @@
         }
         #sidebar-main {
             --uc-sb-sidebar-main-position: absolute;
-            --uc-sb-sidebar-main-min-width: var(--uc-sidebar-width);
-            --uc-sb-sidebar-main-max-width: var(--uc-sidebar-width, 75vw);
+            --uc-sb-sidebar-main-min-width: var(--uc-sb-sidebar-width);
+            --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-width, 75vw);
             @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
                 --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-min-width: var(--uc-sb-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-header-width);
             }
             --uc-sb-sidebar-main-overflow: hidden;
             --uc-sb-sidebar-main-opacity-light: 0.5;
@@ -226,21 +220,21 @@
             --uc-sb-vertical-tabs-display: none;
             --uc-sidebar-main-stripe: color-mix(
                 in srgb,
-                var(--uc-sidebar-header-stripe) 50%,
+                var(--uc-sb-sidebar-header-stripe) 50%,
                 var(--uc-sidebar-bgcolor)
             );
             @media (prefers-color-scheme: dark) {
                 --uc-sidebar-main-stripe: color-mix(
                     in srgb,
-                    var(--uc-sidebar-header-stripe) 87%,
+                    var(--uc-sb-sidebar-header-stripe) 87%,
                     var(--uc-sidebar-bgcolor)
                 );
             }
         }
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             #sidebar-main:hover {
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-min-width: var(--uc-sb-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-header-width);
             }
         }
     }
@@ -260,22 +254,22 @@
             }
         }
     }
-    /* ========== [BLOCK A] ========== */
-    /* ===== End of variable definitions for active Sidebery ===== */
+    /* 🔼 [BLOCK A] End of variable definitions for active Sidebery */
 
-    /* ========== Start of rules for active Sidebery ========== */
-    /* ========== [BLOCK B] ========== */
+    /* 🔽 [BLOCK B] Start of rules for active Sidebery */
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
     #sidebar-main {
         --bg: var(--toolbox-bgcolor);
+        &:-moz-window-inactive {
+            --bg: var(--toolbox-bgcolor-inactive);
+        }
         position: var(--uc-sb-sidebar-main-position, static) !important;
         &:is([positionend], [sidebar-positionend]) {
             right: 0px;
         }
         margin-top: var(--uc-sb-sidebar-main-margin-top);
         z-index: var(--uc-sb-sidebar-main-z-index);
-    }
-    #sidebar-main:not(:hover) {
+
         /* Remove extra margin from the revamped sidebar in fullscreen mode */
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             margin-inline-start: -1px !important;
@@ -295,6 +289,7 @@
             opacity: var(--uc-sb-sidebar-main-opacity-dark);
         }
         */
+        will-change: min-height, max-height, overflow, background-color;
         transition:
             margin-inline-start var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
             margin-inline-end var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
@@ -351,14 +346,12 @@
     #sidebar-main #vertical-tabs {
         display: var(--uc-sb-vertical-tabs-display, flex) !important;
     }
-    /* ========== [BLOCK B] ========== */
-    /* ========== End of rules for active Sidebery ========== */
+    /* 🔼 [BLOCK B] End of rules for active Sidebery */
 
-    /* ========== Start of rules for inactive Sidebery ========== */
-    /* ========== [BLOCK C] ========== */
+    /* 🔽 [BLOCK C] Start of rules for inactive Sidebery */
     /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
     /* be179ef */
-    /* Autohide vertical tabs when the sidebar is expanded */
+    /* ── ▶️ Autohide vertical tabs when the sidebar is expanded */
     @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
         /**
          * The selector #sidebar-main:has(> [expanded]) has higher specificity
@@ -395,12 +388,15 @@
             margin-inline-start: var(--uc-sidebar-main-margin-left);
             min-width: /* var(--tab-collapsed-width) */ calc(var(--uc-sb-sidebar-main-min-width, 44px) + 5px);
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
+            will-change: margin-inline-start, min-width, overflow, transform;
             transition:
                 margin-inline-start var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay);
+            /*
             border-inline: 0.01px solid var(--chrome-content-separator-color);
             border-inline-width: 0 0.01px;
+            */
             &:is([positionend], [sidebar-positionend]) {
                 /* Newly added 'transform' uses initial transition values as it's not defined above */
                 transition-property: margin-inline-start, min-width, overflow, transform;
@@ -434,12 +430,10 @@
             background: inherit;
         }
     }
-    /* ========== [BLOCK C] ========== */
-    /* ========== End of rules for inactive Sidebery ========== */
+    /* 🔼 [BLOCK C] End of rules for inactive Sidebery */
 
-    /* ========== Start of rules for active Sidebery ========== */
-    /* ========== [BLOCK D] ========== */
-    /* ----- Styles for tools-and-extensions when the sidebar is expanded ----- */
+    /* 🔽 [BLOCK D] Start of rules for active Sidebery */
+    /* ── ▶️ Styles for tools-and-extensions when the sidebar is expanded */
     .tools-and-extensions.actions-list[orientation="horizontal"] {
         /* Add a divider to tools-and-extensions on hover */
         &:hover {
@@ -454,7 +448,7 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 box-shadow: 0 -10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
                 @media (prefers-color-scheme: dark) {
                     /*
                     background-color: rgba(255, 255, 255, 0.06);
@@ -462,7 +456,7 @@
                     */
                     background-color: color-mix(
                         in srgb,
-                        var(--uc-sidebar-header-stripe) 87%,
+                        var(--uc-sb-sidebar-header-stripe) 87%,
                         var(--uc-sidebar-bgcolor)
                     );
                 }
@@ -478,7 +472,7 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 box-shadow: 0 10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
                 @media (prefers-color-scheme: dark) {
                     /*
                     background-color: rgba(255, 255, 255, 0.06);
@@ -486,7 +480,7 @@
                     */
                     background-color: color-mix(
                         in srgb,
-                        var(--uc-sidebar-header-stripe) 87%,
+                        var(--uc-sb-sidebar-header-stripe) 87%,
                         var(--uc-sidebar-bgcolor)
                     );
                 }
@@ -514,7 +508,7 @@
         */
     }
 
-    /* ----- Styles for tools-and-extensions when the sidebar is collapsed ----- */
+    /* ── ◀️ Styles for tools-and-extensions when the sidebar is collapsed */
     .tools-and-extensions.actions-list[orientation="vertical"] {
         /* Add a divider to tools-and-extensions on hover */
         &:hover {
@@ -529,7 +523,7 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 box-shadow: 0 -10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
                 @media (prefers-color-scheme: dark) {
                     /*
                     background-color: rgba(255, 255, 255, 0.06);
@@ -537,7 +531,7 @@
                     */
                     background-color: color-mix(
                         in srgb,
-                        var(--uc-sidebar-header-stripe) 87%,
+                        var(--uc-sb-sidebar-header-stripe) 87%,
                         var(--uc-sidebar-bgcolor)
                     );
                 }
@@ -553,7 +547,7 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 box-shadow: 0 10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
-                background-color: color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
                 @media (prefers-color-scheme: dark) {
                     /*
                     background-color: rgba(255, 255, 255, 0.06);
@@ -561,7 +555,7 @@
                     */
                     background-color: color-mix(
                         in srgb,
-                        var(--uc-sidebar-header-stripe) 87%,
+                        var(--uc-sb-sidebar-header-stripe) 87%,
                         var(--uc-sidebar-bgcolor)
                     );
                 }
@@ -588,13 +582,11 @@
             --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-2, var(--space-small)) !important;
         }
     }
-    /* ========== [BLOCK D] ========== */
-    /* ========== End of rules for active Sidebery ========== */
+    /* 🔼 [BLOCK D] End of rules for active Sidebery */
 
-    /* ========== Start of rules for inactive Sidebery ========== */
-    /* ========== [BLOCK E] ========== */
+    /* 🔽 [BLOCK E] Start of rules for inactive Sidebery */
     @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
-        /* ----- Styles for tools-and-extensions when the sidebar is expanded ----- */
+        /* ── ▶️ Styles for tools-and-extensions when the sidebar is expanded */
         /**
          * Use variables to pass values into the shadow trees. 
          * These scoped variables are only defined within #vertical-pinned-tabs-container.
@@ -631,7 +623,7 @@
             padding-block-end: var(--uc-sb-sroot-padding-block-end, 2px) !important;
             gap: var(--uc-sb-sroot-gap, 0px) !important;
         }
-        /* ----- Styles for tools-and-extensions when the sidebar is collapsed ----- */
+        /* ── ◀️ Styles for tools-and-extensions when the sidebar is collapsed */
         .tools-and-extensions.actions-list[orientation="vertical"] {
             overflow: hidden !important;
             & > moz-button {
@@ -644,11 +636,9 @@
             }
         }
     }
-    /* ========== [BLOCK E] ========== */
-    /* ========== End of rules for inactive Sidebery ========== */
+    /* 🔼 [BLOCK E] End of rules for inactive Sidebery */
 
-    /* ========== Start of rules unrelated to Sidebery ========== */
-    /* ========== [BLOCK F] ========== */
+    /* 🔽 [BLOCK F] Start of rules unrelated to Sidebery */
     /**
      * Increase the z-index of the navigation bar in fullscreen mode  
      * to prevent it from being obscured by the revamped sidebar.
@@ -658,22 +648,6 @@
             z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
         }
     }
-
-    /**
-     * Offset the bookmarks toolbar to prevent overlap 
-     * when the revamped sidebar is enabled and Sidebery is fully hidden, 
-     * as the revamped sidebar will still display.
-     */
-    /*
-    @media -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root:not([inFullscreen]):not([customizing]) {
-            #PersonalToolbar {
-                margin-left: var(--uc-personal-toolbar-offset);
-                width: calc(100% - var(--uc-personal-toolbar-width));
-            }
-        }
-    }
-    */
 
     /* Dark theme specific styles */
     /*
@@ -722,18 +696,16 @@
         margin-top: 0px;
     }
 }
-/* ========== [BLOCK F] ========== */
-/* ========== End of rules unrelated to Sidebery ========== */
-/*==========  End of Section Revamped Sidebar  ===========*/
+/* 🔼 [BLOCK F] End of rules unrelated to Sidebery */
 
-/*=============================================
-=                Vertical Tabs                =
-=============================================*/
 
-/* ========== Start of rules for inactive Sidebery ========== */
-/* ========== [BLOCK G] ========== */
+/* 🧱══════════════════════════════════════════════════════════════════
+   🧱 Vertical Tabs
+   🧱════════════════════════════════════════════════════════════════ */
+
+/* 🔽 [BLOCK G] Start of rules for inactive Sidebery */
 @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
-    /* ----- Styles for verticalTabs when the sidebar is expanded ----- */
+    /* ── ▶️ Styles for verticalTabs when the sidebar is expanded */
     /**
      * Controls how many rows of pinned tab icons can be shown in vertical tab panel.
      * This affects how many pinned tabs are visible before scrolling appears.
@@ -853,7 +825,7 @@
         */
     }
 
-    /* ----- Styles for verticalTabs when the sidebar is collapsed ----- */
+    /* ── ◀️ Styles for verticalTabs when the sidebar is collapsed */
     #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
         --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
         --tab-collapsed-width: 44px !important;
@@ -887,11 +859,9 @@
             */
     }
 }
-/* ========== [BLOCK G] ========== */
-/* ========== End of rules for inactive Sidebery ========== */
+/* 🔼 [BLOCK G] End of rules for inactive Sidebery */
 
-/* ========== Start of rules unrelated to Sidebery ========== */
-/* ========== [BLOCK H] ========== */
+/* 🔽 [BLOCK H] Start of rules unrelated to Sidebery */
 /**
  * This section contains code originally sourced from the firefox-gx project.
  * Source: https://github.com/Godiesc/firefox-gx
@@ -974,6 +944,4 @@
         order: -1 !important;
     }
 }
-/* ========== [BLOCK H] ========== */
-/* ========== End of rules unrelated to Sidebery ========== */
-/*==========  End of Section Vertical Tabs  ===========*/
+/* 🔼 [BLOCK H] End of rules unrelated to Sidebery */

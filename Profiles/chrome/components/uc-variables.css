@@ -1,34 +1,36 @@
-/* ======================================================== */
-/* =====      Color Variables for FlexFox Theme      ====== */
-/* ======================================================== */
-/* These variables define the color scheme used by FlexFox. */
-/* You may customize the values to match your preferences.  */
-/* Do NOT edit them here directly if you're using updates.  */
-/* 
- * To safely override any values:
- * 1. Create a new file named `uc-user-settings.css` inside the same `components` folder.
- * 2. Copy the variables you want to change from the list below.
- * 3. Paste them into your `uc-user-settings.css` file and edit as needed.
- *
- * ⚠️ IMPORTANT: If a variable is defined under a specific selector (e.g. `:root` or `:root:has(...)`),
- * you MUST copy the entire selector block, not just the variable itself.
- * This is critical to ensure the override works correctly in the intended context.
- *
- * The `uc-user-settings.css` file is loaded last and will override the values defined here.
- * It will NOT be affected by future updates, so your custom settings will be preserved.
- */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #1a1b26;
-        --uc-sidebar-bgcolor: #1a1b26;
-        @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-            --bg: var(--toolbar-bgcolor);
-            &:-moz-window-inactive {
-                --bg: var(--toolbox-bgcolor-inactive);
-            }
-        }
+/* ════════════════════════════════════════════════════════════════════
+   🛠️ USER CONFIGURABLE VARIABLES — SAFE TO EDIT
 
-        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+   The following values control appearance settings such as colors,
+   dimensions, and animation timing. You are welcome to customize
+   them — but DO NOT edit them directly in this file.
+
+   ✅ Instead, to safely override any value:
+      1. Create a file named `uc-user-settings.css` inside the `components` folder.
+      2. Copy the relevant selector block (e.g. `:root`)
+         that contains the variable(s) you want to change.
+      3. Paste and edit them in your `uc-user-settings.css` file.
+
+   🛡️ Why? The `uc-user-settings.css` file is loaded last and will override values here.
+   It will not be affected by updates, so your changes will be preserved.
+
+   ⚠️ IMPORTANT: If a variable is defined inside a selector (like `:root:has(...)`),
+   be sure to copy the *entire block*, not just the variable — this ensures
+   your overrides will take effect properly.
+════════════════════════════════════════════════════════════════════ */
+:root {
+    /* ════════════════════════════════════════════════════════════════════
+       🎨 COLOR SCHEME — FLEXFOX THEME PALETTE
+    
+       This section defines the color palette used by the FlexFox theme.
+       You can customize these to create your preferred visual style.
+    ════════════════════════════════════════════════════════════════════ */
+    /* 🔽 Start of color scheme definitions for FlexFox Theme */
+    @media (prefers-color-scheme: dark) {
+        --bg: #1a1b26; /* Background color of the toolbar */
+        --uc-sidebar-bgcolor: #1a1b26; /* Internal fallback; must match --bg */
+
+        &:not([lwtheme-image]) {
             --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
             --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
         }
@@ -54,20 +56,12 @@
         --dark-menu-border-color: rgb(55, 55, 55) !important;
         --dark-menuitem-hover-background-color: rgba(159, 159, 159, 0.35) !important;
     }
-}
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --bg: #f1f5f9;
-        --uc-sidebar-bgcolor: #f1f5f9;
-        @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-            --bg: var(--toolbar-bgcolor);
-            &:-moz-window-inactive {
-                --bg: var(--toolbox-bgcolor-inactive);
-            }
-        }
+    @media (prefers-color-scheme: light) {
+        --bg: #f1f5f9; /* Background color of the toolbar */
+        --uc-sidebar-bgcolor: #f1f5f9; /* Internal fallback; must match --bg */
 
-        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+        &:not([lwtheme-image]) {
             --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
             --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
         }
@@ -86,225 +80,59 @@
         --button-active-bgcolor: #cbd5e1 !important;
         --identity-btn-hover-color: white !important;
     }
-}
+    /* 🔼 End of color scheme definitions */
 
-:root {
-    /* ================================ */
-    /* ===== Initialize variables ===== */
-    /* ================================ */
-    /* - do not modify values in this block */
-    /* --uc-sidebar-width: 0px; */
-    --uc-sidebar-hover-width: 0px;
-    --uc-nav-bar-padding-right: 0px;
-    --uc-personal-toolbar-offset: 0px;
-    --uc-personal-toolbar-width: 0px;
-    --uc-bookmarks-margin-left: 0px;
-    --uc-theme-bg-y-clip: -28px;
-    --uc-theme-bg-x-left-start: 0px;
-    --uc-theme-bg-x-right-end: 0px;
-    --uc-tab-items-visibility: inherit;
-    --uc-autohide-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height));
-    --uc-autohide-navigator-bottom: var(--uc-autohide-bottom);
-    --uc-autohide-tabstoolbar-bottom: 0px;
-    --uc-autohide-navigator-delay: 0s;
-    --uc-autohide-tabstoolbar-visibility: visible;
-    /* Default delay for visibility (18ms) and margin-bottom (0ms) transitions */
-    --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
-    /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
-    --uc-sidebar-main-margin-left: -6px;
-    /* ===== End of initializing block ===== */
+    /* ════════════════════════════════════════════════════════════════════
+       🧩 LAYOUT & TYPOGRAPHY SETTINGS
+    
+       Base style variables for animations, icon sizes, element positions,
+       and other layout behaviors.
+    ════════════════════════════════════════════════════════════════════ */
+    /* 🔽 Start of layout and typography definitions */
+    --uc-bookmark-star-color: light-dark(#ea4c89, #9651ff); /* Color of the bookmark star icon in the address bar */
 
-    /* =================================================== */
-    /* ===== USER-CUSTOMIZABLE VARIABLES START HERE  ===== */
-    /* =================================================== */
-    /* You may customize the variables listed below.       */
-    /* However, DO NOT modify them directly in this file.  */
-    /* Instead, copy the relevant parts into your          */
-    /* `uc-user-settings.css` file for safe customization. */
-    /* ===== Start of variable definitions for active Sidebery ===== */
-    &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
-        --uc-sidebar-header-stripe: light-dark(#ea4c89, #9651ff);
-        --uc-sidebar-header-width: 44px;
-        --uc-sidebar-width: 44px; /* Width of the Sidebery */
-        --uc-sidebar-hover-width: 220px; /* Width of the expanded Sidebery on hover */
-        /* Wider Sidebery width when expanded */
-        @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
-            --uc-sidebar-hover-width: 260px;
-        }
-        /* Set the display width of Sidebery and the sidebar header when Sidebery's auto-collapse is disabled */
-        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-            --uc-sidebar-width: var(--uc-sidebar-hover-width);
-        }
-        /* Trigger width for expanding Sidebery on hover when fully hidden or in fullscreen */
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-            --uc-sidebar-width: 1px;
-
-            /* Increase trigger width in non-maximized mode to prevent window resize interference */
-            &[sizemode="normal"] {
-                --uc-sidebar-width: 22px;
-            }
-        }
-        /* Space reserved on the right of the navbar for window controls */
-        --uc-nav-bar-padding-right: 104px;
-        /* Horizontal offset for the bookmarks toolbar when Sidebery is active */
-        --uc-personal-toolbar-offset: var(--uc-sidebar-width);
-        --uc-personal-toolbar-width: var(--uc-sidebar-width);
-        @media -moz-pref("uc.flex.fully-hide-toolbox") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
-            --uc-personal-toolbar-offset: 0px;
-            --uc-personal-toolbar-width: 0px;
-        }
-        /* This rule is no longer effective due to the override on line 588 in uc-sidebar.css */
-        /*
-        @media -moz-pref("sidebar.revamp") and -moz-pref("uc.flex.fully-hide-sidebery") {
-            --uc-personal-toolbar-offset: 40px;
-            --uc-personal-toolbar-width: 40px;
-        }
-        */
-        /* Add margin to align bookmarks with toolbar icons */
-        @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
-            &:not([inFullscreen]) {
-                --uc-bookmarks-margin-left: 10px;
-            }
-        }
-        /**
-         * Adjust the vertical and horizontal offsets of the toolbar background image 
-         * when themes and addons are allowed to customize the toolbar background color and image. 
-         */
-        --uc-theme-bg-y-clip: 16px;
-        #PersonalToolbar {
-            #toolbar-menubar[autohide="false"] ~ & {
-                --uc-theme-bg-y-clip: -8px;
-            }
-            #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
-                --uc-theme-bg-y-clip: -17px;
-            }
-        }
-        @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-            @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
-                &:not([inFullscreen]):not([customizing]) {
-                    --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-width));
-                    --uc-theme-bg-x-right-end: 0px;
-
-                    :has(#sidebar-box:is([positionend], [sidebar-positionend])) {
-                        --uc-theme-bg-x-left-start: 0px;
-                        --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sidebar-width));
-                    }
-                }
-            }
-        }
-        /* Ensure horizontal tabs are forcibly hidden in the following scenarios when Sidebery is active */
-        &[inFullscreen]:not([customizing]) {
-            --uc-tab-items-visibility: collapse;
-        }
-        @media -moz-pref("uc.flex.disable-tabs-toolbar-autohide"), -moz-pref("uc.flex.fully-hide-toolbox") {
-            &:not([inFullscreen]):not([customizing]) {
-                --uc-tab-items-visibility: collapse;
-            }
-        }
-        --uc-autohide-navigator-bottom: 0px;
-        &:not([customizing]) {
-            --uc-autohide-tabstoolbar-bottom: var(--uc-autohide-bottom);
-            --uc-autohide-navigator-delay: var(--uc-tabs-hide-animation-delay);
-            --uc-autohide-tabstoolbar-visibility: hidden;
-            --uc-autohide-tabstoolbar-delay: var(--uc-tabs-hide-animation-delay);
-        }
-
-        --uc-windows-controls-visibility: visible;
-        --uc-windows-controls-position: absolute;
-        --uc-windows-controls-top: 2px;
-        --uc-windows-controls-right: 0;
-        &[inFullscreen] {
-            --uc-windows-controls-top: 0px;
-        }
-        /* !TEMPORARY: These variables are temporary solutions and might be removed later. */
-        @media -moz-pref("sidebar.revamp") {
-            /**
-             * When the new sidebar is enabled and in fullscreen mode,
-             * reduce the navbar's trigger area so the top-aligned sidebar stripe
-             * can receive hover events before the navbar expands. 
-             */
-            @media (display-mode: fullscreen) {
-                --uc-toolbox-rotation: 87deg;
-            }
-            --uc-sidebar-main-margin-left: 0px;
-            #sidebar-main:is([positionend], [sidebar-positionend]) {
-                --uc-sidebar-main-margin-left: -11px;
-            }
-        }
-        --uc-sidebar-splitter-display: none;
+    --uc-sidebar-header-stripe: light-dark(#ea4c89, #9651ff); /* Color of the sidebar header stripe */
+    --uc-sidebar-width: 44px; /* Width when Sidebery or vertical tabs are collapsed */
+    --uc-sidebar-header-width: 44px; /* Internal reference; must match --uc-sidebar-width */
+    --uc-sidebar-hover-width: 220px; /* Width when Sidebery is expanded */
+    /* Increase expanded width of Sidebery */
+    @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
+        --uc-sidebar-hover-width: 260px;
     }
-    /* ===== End of variable definitions for active Sidebery ===== */
 
-    /* ===== Horizontal offsets for the bookmarks toolbar and navigator ===== */
-    --uc-navigator-offset: var(--uc-sidebar-width, 0);
-    :has(#sidebar-box:is([positionend], [sidebar-positionend])) {
-        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            @media -moz-pref("uc.flex.fully-hide-toolbox") {
-                --uc-navigator-offset: 0px;
-            }
-            @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-                --uc-personal-toolbar-offset: 0px;
-                --uc-personal-toolbar-width: var(--uc-sidebar-width, 0);
-            }
-        }
-        /* This rule is no longer effective due to the override on line 588 in uc-sidebar.css */
-        /*
-        @media -moz-pref("uc.flex.fully-hide-sidebery") {
-            @media -moz-pref("sidebar.revamp") {
-                --uc-personal-toolbar-offset: 0px;
-                --uc-personal-toolbar-width: var(--uc-sidebar-width, 0);
-            }
-        }
-        */
+    /* Horizontal position of the findbar */
+    --uc-findbar-x-position: 24.2vw;
+
+    /* Sidebar expand/collapse animation settings */
+    --uc-autohide-transition-type: linear; /* Easing type for sidebar collapsing animation */
+    --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
+    --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
+    --uc-autohide-sidebar-delay: 10ms; /* Delay before collapsing the sidebar */
+    --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar */
+
+    /* Speed up sidebar expand/collapse animation */
+    @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
+        --uc-hover-transition-duration: 100ms;
+        --uc-autohide-sidebar-delay: 1ms;
+        --uc-hover-sidebar-delay: 1ms;
     }
-    @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.verticalTabs") {
-        --uc-theme-bg-y-vt-clip: 30px;
-        #PersonalToolbar {
-            #toolbar-menubar[autohide="false"] ~ & {
-                --uc-theme-bg-y-vt-clip: 54px;
-            }
-            #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
-                --uc-theme-bg-y-vt-clip: 59px;
-            }
-        }
-        @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
-            --uc-personal-toolbar-offset: 44px;
-            --uc-personal-toolbar-width: 44px;
-            @media -moz-pref("sidebar.visibility", "hide-sidebar") {
-                :has(#sidebar-main[hidden]) {
-                    --uc-personal-toolbar-offset: 0px;
-                    --uc-personal-toolbar-width: 0px;
-                }
-            }
-        }
-        @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
-            &:not([inFullscreen]) {
-                --uc-bookmarks-margin-left: 10px;
-            }
-        }
+    /* Slow down sidebar expand/collapse animation */
+    @media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
+        --uc-autohide-sidebar-delay: 10ms;
+        --uc-hover-sidebar-delay: 350ms;
+        --uc-hover-toolbar-delay: 200ms;
     }
-    /* ===== End of the block for horizontal offsets of the bookmarks toolbar and navigator =====* /
 
-    /* ======================================================== */
-    /* ===== USER-CUSTOMIZABLE GLOBAL VARIABLES START HERE ==== */
-    /* ======================================================== */
-    /* These variables define global styles (e.g. spacing,      */
-    /* border-radius, font size) that can be freely adjusted.   */
-    /* Override them in `uc-user-settings.css` if needed.       */
-    --uc-bookmark-star-color: light-dark(#ea4c89, #9651ff);
-    --uc-nav-bar-margin-left: -4px;
-    --uc-autohide-transition-type: linear; /* Transition style for sidebar auto-hide */
-    --uc-autohide-transition-duration: 55ms; /* Duration of the sidebar hiding transition */
-    --uc-hover-transition-duration: 115ms; /* Duration of the sidebar expansion transition */
-    --uc-autohide-sidebar-delay: 10ms; /* Delay before auto-hiding the sidebar */
-    --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar on hover */
-    --uc-nav-bar-padding-bottom: 1px;
-    --uc-nav-bar-margin-bottom: -1px;
+    /* Size of macOS-style window control buttons */
+    @media not -moz-pref("uc.flex.revert-to-original-window-controls") {
+        --uc-osx-ctrls-size: 15px;
+    }
 
-    --uc-uei-icon-size: 20px; /* Icon size in the uni-extensions panel */
-    --uc-number-of-extensions-in-a-row: 4; /* Number of icons per row in the uni-extensions panel */
+    --uc-uei-icon-size: 20px; /* Size of extension icons in the unified extensions panel */
+    --uc-number-of-extensions-in-a-row: 4; /* Number of extension icons per row in the unified extensions panel */
 
-    --uc-max-visible-vertical-pinned-tabs: 4; /* Max visible rows in vertical pinned tabs (before scrolling) */
+    /* Max visible rows in native vertical pinned tabs (before scrolling) */
+    --uc-max-visible-vertical-pinned-tabs: 4;
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 5) {
         --uc-max-visible-vertical-pinned-tabs: 5;
     }
@@ -312,16 +140,12 @@
         --uc-max-visible-vertical-pinned-tabs: 6;
     }
 
-    /* ---- Sets the horizontal position of the findbar ---- */
-    --uc-findbar-x-position: 24.2vw;
-    --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
+    --uc-autohide-toolbar-delay: 200ms; /* Delay before hiding the bookmarks toolbar */
+    --uc-hover-toolbar-delay: 80ms; /* Delay before showing the bookmarks toolbar */
+    --uc-autohide-toolbox-delay: 200ms; /* Delay before hiding the navigator toolbox */
 
-    --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
-    --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
-    --uc-autohide-toolbar-delay: 200ms; /* Toolbar hides after a 0.2s delay */
-    --uc-hover-toolbar-delay: 80ms; /* Toolbar reveals after a 0.08s delay */
-    --uc-autohide-toolbox-delay: 200ms; /* Wait 0.1s before hiding toolbars */
-    --uc-toolbox-rotation: 82deg; /* Lower rotation for Mac (suggested around 75 degrees) */
+    /* Controls toolbar reveal sensitivity – lower angle = wider trigger zone */
+    --uc-toolbox-rotation: 82deg; /* Toolbox rotation angle (lower value recommended for macOS) */
     /**
      * When the window is not maximized and the toolbar is fully hidden, 
      * this controls how far from the top edge the cursor can be to trigger toolbar expansion. 
@@ -338,6 +162,7 @@
     &[sizemode="maximized"] {
         --uc-toolbox-rotation: 88.5deg;
     }
+
     /**
      * If you're using Firefox versions earlier than 130, 
      * starting from FlexFox v1.0.0, the update to autohide_tabstoolbar_v2.css 
@@ -346,52 +171,275 @@
      * To eliminate this issue, set --uc-tabs-hide-animation-duration to 0ms and 
      *                                 --uc-tabs-hide-animation-delay to 1ms. 
      */
-    --uc-tabs-hide-animation-duration: 48ms; /* Duration of the horizontal tab hiding animation */
+    --uc-tabs-hide-animation-duration: 48ms; /* Duration of horizontal tab hide animation */
     --uc-tabs-hide-animation-delay: 200ms; /* Delay before hiding horizontal tabs */
+    /* 🔼 End of layout and typography definitions */
+}
 
+/* ════════════════════════════════════════════════════════════════════
+   ⚙️ SYSTEM LOGIC VARIABLES — DO NOT EDIT
+
+   These variables are dynamically assigned based on complex conditions,
+   using nested @media -moz-pref() queries and advanced selectors.
+
+   They are used internally by the stylesheet to switch layout behavior
+   based on the current environment and user settings.
+
+   🚫 Do not modify this section unless you understand the logic fully.
+════════════════════════════════════════════════════════════════════ */
+:root {
+    /* ════════════════════════════════════════════════════════════════════
+       🧪 INITIAL VARIABLE DEFINITIONS
+    
+       Sets fallback values to prevent undefined vars and layout issues.
+       Includes base sizes used in later layout calculations.
+    ════════════════════════════════════════════════════════════════════ */
+    /* 🔽 Begin initializing block */
+    --uc-sb-sidebar-header-width: var(--uc-sidebar-header-width); /* Load user-defined value for internal calculations */
+
+    /* Initial value: shift nav bar left to make room for window control buttons */
+    --uc-nav-bar-padding-right: 0px;
+    /**
+     * When the menu bar is visible, window controls are pushed upward,
+     * so the nav bar no longer needs to shift. Reset padding to 0.
+     */
+    &:not([inFullscreen]) {
+        #toolbar-menubar:is([autohide="false"], [autohide="true"]:not([inactive="true"])) ~ #nav-bar {
+            --uc-nav-bar-padding-right: 0px;
+        }
+    }
+    /**
+     * When native vertical tabs are enabled,
+     * window controls for horizontal tabs are disabled.
+     * Reset nav bar padding since extra space is unnecessary.
+     */
+    @media -moz-pref("sidebar.verticalTabs") {
+        #nav-bar {
+            --uc-nav-bar-padding-right: 0px;
+        }
+    }
+
+    /* Align the first toolbar button with vertical tabs by shifting the nav bar when vertical tabs are active */
+    --uc-nav-bar-margin-left: -2px;
+    &[inFullscreen] {
+        --uc-nav-bar-margin-left: -3px;
+    }
+
+    /* Toolbar sizing */
+    --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
+    --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
+    &[uidensity="touch"] {
+        --uc-bm-padding: 7px;
+    }
     --urlbar-toolbar-height: 43px;
     --bookmarks-toolbar-overlapping-browser-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding)) !important;
     --uc-bm-disable-autohide-offset: calc(-1 * (var(--uc-bm-height) + 2 * var(--uc-bm-padding)));
-}
 
-:root[uidensity="touch"] {
-    --uc-bm-padding: 7px;
-}
+    /* Initial values for variables required by uc-tabs-bar.css (autohide horizontal tabs) */
+    --uc-autohide-bottom: calc(0px - 2 * var(--tab-block-margin) - var(--tab-min-height));
+    --uc-autohide-navigator-bottom: var(--uc-autohide-bottom);
+    --uc-autohide-tabstoolbar-bottom: 0px;
+    --uc-autohide-navigator-delay: 0s;
+    --uc-autohide-tabstoolbar-visibility: visible;
+    /* Default delay for visibility (18ms) and margin-bottom (0ms) transitions */
+    --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
 
-/* Adjusted height when the search bar is in the bookmark toolbar */
-/*
-:root:has(#PersonalToolbar > #search-container) {
-    --uc-bm-height: 32px;
-}
-*/
-
-/* Faster sidebar expansion and collapse */
-@media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
-    :root {
-        --uc-hover-transition-duration: 100ms;
-        --uc-autohide-sidebar-delay: 1ms;
-        --uc-hover-sidebar-delay: 1ms;
+    /* Adjust vertical offset of the bookmarks toolbar background image */
+    #PersonalToolbar {
+        --uc-theme-bg-y-clip: -28px;
+        #toolbar-menubar[autohide="false"] ~ & {
+            --uc-theme-bg-y-clip: -52px;
+        }
+        #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+            --uc-theme-bg-y-clip: -61px;
+        }
     }
-}
+    /* Initial values for horizontal offset of the bookmarks toolbar background image */
+    --uc-theme-bg-x-left-start: 0px;
+    --uc-theme-bg-x-right-end: 0px;
 
-/* Slower sidebar expansion and collapse */
-@media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
-    :root {
-        --uc-autohide-sidebar-delay: 10ms;
-        --uc-hover-sidebar-delay: 350ms;
-        --uc-hover-toolbar-delay: 200ms;
+    /* Adjust findbar position to avoid being overlapped when top toolbar height changes */
+    --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
+    &[inFullscreen] {
+        --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
     }
-}
+    &:not([inFullscreen]) {
+        @media -moz-pref("uc.flex.fully-hide-toolbox") {
+            --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
+        }
+        @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
+            &:not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
+                /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
+                --uc-findbar-top: calc(-1 * var(--uc-bm-padding));
+            }
+        }
+    }
 
-/* Icon size for Windows controls buttons */
-@media not -moz-pref("uc.flex.revert-to-original-window-controls") {
-    :root {
-        --uc-osx-ctrls-size: 15px;
-    }
-}
+    /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
+    --uc-sidebar-main-margin-left: -6px;
+    /* 🔼 End of initializing block */
 
-@media not -moz-pref("uc.flex.disable-tabs-toolbar-autohide") {
-    :root {
-        --uc-height-of-tabs-toolbar: 40px;
+    /* ════════════════════════════════════════════════════════════════════
+       📌 VARIABLES FOR ACTIVE SIDEBERY
+    
+       These values apply only when Sidebery is active, including layout
+       offsets and visibility-related adjustments.
+    ════════════════════════════════════════════════════════════════════ */
+    /* 🔽 Start of variable definitions for active Sidebery */
+    &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
+        /* Hide sidebar splitter */
+        --uc-sidebar-splitter-display: none;
+
+        --uc-sb-sidebar-header-stripe: var(--uc-sidebar-header-stripe); /* Load user-defined value for internal calculations */
+        --uc-sb-sidebar-width: var(--uc-sidebar-width); /* Load user-defined value for internal calculations */
+        --uc-sb-sidebar-hover-width: var(--uc-sidebar-hover-width); /* Load user-defined value for internal calculations */
+        /* When Sidebery autohide is disabled, fix its width to the expanded value */
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+            --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
+        }
+        /* When Sidebery is fully hidden, set width to 1px to allow hover-triggered expansion */
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            --uc-sb-sidebar-width: 1px;
+
+            /**
+             * In normal (non-maximized) mode, increase hover activation width
+             * to avoid cursor switching to resize mode near window edge. 
+             */
+            &[sizemode="normal"] {
+                --uc-sb-sidebar-width: 22px;
+            }
+        }
+
+        /* Initial values for window controls positioning */
+        --uc-nav-bar-padding-right: 104px; /* Reserve space on the nav bar's right for window controls */
+        --uc-windows-controls-visibility: visible;
+        --uc-windows-controls-position: absolute;
+        --uc-windows-controls-top: 2px;
+        --uc-windows-controls-right: 0;
+        &[inFullscreen] {
+            --uc-windows-controls-top: 0px;
+        }
+
+        /**
+         * When vertical tabs are used and bookmarks are placed second from the left on the nav bar,
+         * add spacing to separate bookmarks from the vertical tab bar for better visual alignment. 
+         */
+        --uc-bookmarks-margin-left: 10px;
+
+        /* Adjust vertical offset of the bookmarks toolbar background image */
+        @media not -moz-pref("sidebar.verticalTabs") {
+            #PersonalToolbar {
+                --uc-theme-bg-y-clip: 16px;
+                #toolbar-menubar[autohide="false"] ~ & {
+                    --uc-theme-bg-y-clip: -8px;
+                }
+                #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+                    --uc-theme-bg-y-clip: -17px;
+                }
+            }
+        }
+
+        /* Hide horizontal tab bar when Sidebery is active in fullscreen (and not customizing) */
+        &[inFullscreen]:not([customizing]) {
+            --uc-tab-items-visibility: collapse;
+        }
+        @media -moz-pref("uc.flex.disable-tabs-toolbar-autohide"), -moz-pref("uc.flex.fully-hide-toolbox") {
+            &:not([inFullscreen]):not([customizing]) {
+                --uc-tab-items-visibility: collapse;
+            }
+        }
+
+        /* Values used by uc-tabs-bar.css when Sidebery is active */
+        --uc-autohide-navigator-bottom: 0px;
+        &:not([customizing]) {
+            --uc-autohide-tabstoolbar-bottom: var(--uc-autohide-bottom);
+            --uc-autohide-navigator-delay: var(--uc-tabs-hide-animation-delay);
+            --uc-autohide-tabstoolbar-visibility: hidden;
+            --uc-autohide-tabstoolbar-delay: var(--uc-tabs-hide-animation-delay);
+        }
+
+        @media -moz-pref("sidebar.revamp") {
+            /**
+             * When the new sidebar is enabled and in fullscreen mode,
+             * reduce the navbar's trigger area so the top-aligned sidebar stripe
+             * can receive hover events before the navbar expands. 
+             */
+            @media (display-mode: fullscreen) {
+                --uc-toolbox-rotation: 87deg;
+            }
+            /* !TEMPORARY: These variables are temporary solutions and might be removed later. */
+            --uc-sidebar-main-margin-left: 0px;
+            #sidebar-main:is([positionend], [sidebar-positionend]) {
+                --uc-sidebar-main-margin-left: -11px;
+            }
+        }
     }
+    /* 🔼 End of variable definitions for active Sidebery */
+
+    /* ════════════════════════════════════════════════════════════════════
+       🧭 OFFSETS FOR BOOKMARKS TOOLBAR & NAVIGATOR
+    
+       These styles control spacing and layout shifts for the toolbar
+       and navigator depending on sidebar visibility and position.
+    ════════════════════════════════════════════════════════════════════ */
+    /* 🔽 Start of offset block for bookmarks toolbar and navigator */
+    --uc-navigator-offset: var(--uc-sb-sidebar-width, 0px);
+    --uc-navigator-width: var(--uc-sb-sidebar-width, 0px);
+    --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, 0px);
+    --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, 0px);
+    /**
+     * The :has() selector that checks if the sidebar is on the right overrides 
+     * the @media rule below that checks if vertical tabs are active. 
+     * Also, --uc-bookmarks-margin-left can't override the earlier :has() for active Sidebery, 
+     * so !important is needed. 
+     */
+    &:has(#sidebar-box:is([positionend], [sidebar-positionend])) {
+        --uc-bookmarks-margin-left: 0px !important;
+        --uc-navigator-offset: 0px;
+        --uc-personal-toolbar-offset: 0px;
+    }
+    /* Adjust horizontal offset of the bookmarks toolbar background image */
+    @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
+        &:not([inFullscreen]):not([customizing]) {
+            --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-width, 0px));
+            @media -moz-pref("sidebar.verticalTabs") {
+                --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-header-width));
+            }
+            --uc-theme-bg-x-right-end: 0px;
+
+            &:has(#sidebar-box:is([positionend], [sidebar-positionend])) {
+                --uc-theme-bg-x-left-start: 0px;
+                --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sb-sidebar-width, 0px));
+                @media -moz-pref("sidebar.verticalTabs") {
+                    --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sb-sidebar-header-width));
+                }
+            }
+        }
+    }
+    @media -moz-pref("sidebar.verticalTabs") {
+        --uc-bookmarks-margin-left: 10px;
+        --uc-navigator-offset: var(--uc-sb-sidebar-header-width);
+        --uc-navigator-width: var(--uc-sb-sidebar-header-width);
+        @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
+            --uc-personal-toolbar-offset: var(--uc-sb-sidebar-header-width);
+            --uc-personal-toolbar-width: var(--uc-sb-sidebar-header-width);
+            @media -moz-pref("sidebar.visibility", "hide-sidebar") {
+                &:has(#sidebar-main[hidden]) {
+                    --uc-personal-toolbar-offset: 0px;
+                    --uc-personal-toolbar-width: 0px;
+                }
+            }
+        }
+        /* Adjust vertical offset of the bookmarks toolbar background image */
+        #PersonalToolbar {
+            --uc-theme-bg-y-clip: 30px;
+            #toolbar-menubar[autohide="false"] ~ & {
+                --uc-theme-bg-y-clip: 54px;
+            }
+            #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+                --uc-theme-bg-y-clip: 59px;
+            }
+        }
+    }
+    /* 🔼 End of offset block for bookmarks toolbar and navigator */
 }

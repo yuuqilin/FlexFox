@@ -5,11 +5,8 @@
 }
 
 /* Prevent navigation bar background overflow in certain themes */
-@media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-    #nav-bar:not([customizing]) {
-        padding-bottom: var(--uc-nav-bar-padding-bottom) /*!important*/;
-        margin-bottom: var(--uc-nav-bar-margin-bottom) /*!important*/;
-    }
+#navigator-toolbox {
+    border-bottom: none !important;
 }
 
 /* Fix urlbar height issue in v133 */
@@ -42,12 +39,6 @@
         left: 0 !important;
     }
 }
-
-/*
-:root:not([customizing]) #urlbar {
-    -urlbar-toolbar-height: calc(46px + var(--uc-nav-bar-margin-bottom)) !important;
-}
-*/
 
 /* Hide menubar window controls when menubar is inactive */
 :root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
@@ -103,19 +94,15 @@
     }
 }
 
-/* Increase left spacing for bookmarks */
-#personal-bookmarks {
-    margin-left: var(--uc-bookmarks-margin-left);
-}
-
 /* Fix popup position */
 #appMenu-popup {
     margin-inline: -244px !important;
 }
 
-/*=============================================
-=              Windows Controls               =
-=============================================*/
+
+/* 🧱══════════════════════════════════════════════════════════════════
+   🧱 Windows Controls
+   🧱════════════════════════════════════════════════════════════════ */
 
 /* ----- Close/min/max fix ----- */
 :root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
@@ -152,8 +139,6 @@
 }
 */
 
-/*==========  End of Section Windows Controls  ===========*/
-
 /* Line up the Windows controls with the rest of the icons in the toolbar. */
 :root[inFullscreen] .titlebar-buttonbox-container {
     padding-top: 2px;
@@ -170,18 +155,14 @@
     height: 38px;
 }
 
-/*=============================================
-=                  Nav Bar                    =
-=============================================*/
+
+/* 🧱══════════════════════════════════════════════════════════════════
+   🧱 Nav Bar
+   🧱════════════════════════════════════════════════════════════════ */
 
 /* Adjust left margin of the navigation bar to align toolbar icons with sidebar */
 #nav-bar:not([customizing]) {
     margin-left: var(--uc-nav-bar-margin-left);
-}
-
-:root[inFullscreen] {
-    --uc-nav-bar-margin-left: -5px;
-    --uc-findbar-set-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
 }
 
 /* Fix issue with missing window controls. */
@@ -207,46 +188,28 @@
 }
 
 :root:not([inFullscreen]) {
-    /**
-     * When the menu bar is enabled, the nav-bar no longer needs the padding reserved for the window controls on the right. 
-     * In this case, the padding should either be reduced by the width of the window controls or set to 0.
-     */
-    :is(#toolbar-menubar[autohide="false"], #toolbar-menubar[autohide="true"]:not([inactive="true"])) ~ #nav-bar {
-        --uc-nav-bar-padding-right: 0px;
-    }
-
-    @media -moz-pref("uc.flex.fully-hide-toolbox") {
-        --uc-findbar-set-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
+    /* Increase left spacing for bookmarks */
+    @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
+        #personal-bookmarks {
+            margin-left: var(--uc-bookmarks-margin-left, 0);
+        }
     }
 
     @media -moz-pref("uc.flex.fully-hide-toolbox") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
         #navigator-toolbox {
             margin-left: var(--uc-navigator-offset);
-            width: calc(100% - var(--uc-sidebar-width, 0));
+            width: calc(100% - var(--uc-navigator-width));
         }
     }
 }
 
-/**
- * When native vertical tabs are enabled, 
- * the windows controls on the TabsToolbar are disabled, 
- * so the nav-bar no longer needs to reserve space on the right for these controls, 
- * and the padding should be reset to 0. 
- */
-@media -moz-pref("sidebar.verticalTabs") {
-    #navigator-toolbox {
-        --uc-nav-bar-padding-right: 0px;
-    }
-}
 
-/*==========  End of Section Nav Bar  ===========*/
-
-/*=============================================
-=               PersonalToolbar               =
-=============================================*/
+/* 🧱══════════════════════════════════════════════════════════════════
+   🧱 PersonalToolbar
+   🧱════════════════════════════════════════════════════════════════ */
 
 /* Offset bookmarks toolbar horizontally when Sidebery is visible to prevent overlap with sidebar */
-@media not -moz-pref("uc.flex.fully-hide-sidebery") {
+@media not (-moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox")) {
     :root:not([inFullscreen]):not([customizing]) {
         #PersonalToolbar {
             margin-left: var(--uc-personal-toolbar-offset);
@@ -280,9 +243,6 @@
  */
 @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
     :root:not([inFullscreen]):not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
-        /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
-        --uc-findbar-set-top: calc(-1 * var(--uc-bm-padding));
-
         #navigator-toolbox:has(#PersonalToolbar[collapsed="false"])
             + #browser
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
@@ -294,5 +254,3 @@
         }
     }
 }
-
-/*==========  End of Section PersonalToolbar  ===========*/
