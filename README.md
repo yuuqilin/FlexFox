@@ -13,6 +13,14 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+**v3.1.1**
+
+- Updated the default animation for collapsing/expanding Sidebery to `ease-in-out` to match Firefox's native vertical tabs (previously Sidebery used `linear`). Users can customize the transition type via the `--uc-autohide-transition-type` variable in `uc-user-settings.css`.
+- The animation type for Firefox's native vertical tabs is now also controlled by `--uc-autohide-transition-type`, allowing user customization.
+- Fixed an issue where enabling the `uc.flex.fully-hide-sidebery` option in a non-maximized window would leave unwanted blank space at the edge and cause incorrect Sidebery height.
+
+With this update, all previously missing features from the horizontal tab mode are now fully compatible with Firefox's native vertical tabs. FlexFox v3.1.1 brings complete feature parity, making it seamless for users to switch from the old setup.
+
 **v3.1.0**
 - Refactored the structure of `uc-variables.css`. Frequently used and user-customizable variables are now grouped at the top of the file with clearer descriptions.
 - Overhauled the logic for overriding the toolbar background color in FlexFox. This update should fully resolve issues with theme background image alignment, transparency handling, and incorrect display when the window is inactive.

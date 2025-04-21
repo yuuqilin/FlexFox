@@ -28,7 +28,6 @@
     /* 🔽 Start of color scheme definitions for FlexFox Theme */
     @media (prefers-color-scheme: dark) {
         --bg: #1a1b26; /* Background color of the toolbar */
-        --uc-sidebar-bgcolor: #1a1b26; /* Internal fallback; must match --bg */
 
         &:not([lwtheme-image]) {
             --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
@@ -59,7 +58,6 @@
 
     @media (prefers-color-scheme: light) {
         --bg: #f1f5f9; /* Background color of the toolbar */
-        --uc-sidebar-bgcolor: #f1f5f9; /* Internal fallback; must match --bg */
 
         &:not([lwtheme-image]) {
             --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
@@ -93,7 +91,6 @@
 
     --uc-sidebar-header-stripe: light-dark(#ea4c89, #9651ff); /* Color of the sidebar header stripe */
     --uc-sidebar-width: 44px; /* Width when Sidebery or vertical tabs are collapsed */
-    --uc-sidebar-header-width: 44px; /* Internal reference; must match --uc-sidebar-width */
     --uc-sidebar-hover-width: 220px; /* Width when Sidebery is expanded */
     /* Increase expanded width of Sidebery */
     @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
@@ -104,7 +101,7 @@
     --uc-findbar-x-position: 24.2vw;
 
     /* Sidebar expand/collapse animation settings */
-    --uc-autohide-transition-type: linear; /* Easing type for sidebar collapsing animation */
+    --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
     --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
     --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
     --uc-autohide-sidebar-delay: 10ms; /* Delay before collapsing the sidebar */
@@ -195,6 +192,8 @@
        Includes base sizes used in later layout calculations.
     ════════════════════════════════════════════════════════════════════ */
     /* 🔽 Begin initializing block */
+    --uc-sidebar-bgcolor: var(--bg); /* Internal fallback; must match --bg */
+    --uc-sidebar-header-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
     --uc-sb-sidebar-header-width: var(--uc-sidebar-header-width); /* Load user-defined value for internal calculations */
 
     /* Initial value: shift nav bar left to make room for window control buttons */
@@ -420,7 +419,7 @@
         --uc-bookmarks-margin-left: 10px;
         --uc-navigator-offset: var(--uc-sb-sidebar-header-width);
         --uc-navigator-width: var(--uc-sb-sidebar-header-width);
-        @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
+        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide")) {
             --uc-personal-toolbar-offset: var(--uc-sb-sidebar-header-width);
             --uc-personal-toolbar-width: var(--uc-sb-sidebar-header-width);
             @media -moz-pref("sidebar.visibility", "hide-sidebar") {

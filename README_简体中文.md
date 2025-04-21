@@ -13,6 +13,14 @@
 
 ## 🆕 更新内容
 
+**v3.1.1**
+
+- 将 Sidebery 折叠/展开的默认动画类型改为 `ease-in-out`，与 Firefox 原生垂直选项卡的效果一致（之前 Sidebery 使用的是 `linear`）。用户可以在 `uc-user-settings.css` 中通过设置 `--uc-autohide-transition-type` 变量自定义动画效果。
+- 现在 Firefox 原生垂直选项卡的动画类型也可以通过 `--uc-autohide-transition-type` 变量进行修改。
+- 修复了在未最大化窗口状态下启用新版侧边栏并开启 `uc.flex.fully-hide-sidebery` 选项时，窗口边缘出现多余空白并导致 Sidebery 高度显示异常的问题。
+
+随着本次更新完成了对原生垂直选项卡与 `uc.flex.fully-hide-sidebery` 的兼容性处理，FlexFox v3.1.1 已实现与旧版水平选项卡模式完全一致的功能，用户可以无缝迁移使用。
+
 **v3.1.0**
 - 重新整理了 `uc-variables.css` 的结构。常用且可自定义的变量现在集中放在文件开头，并配有清晰的说明。
 - 重构了 FlexFox 对工具栏背景颜色的覆盖逻辑。此次更新应彻底修复在启用主题时背景图错位、透明度异常，以及窗口非激活状态下显示不正确的问题。

@@ -13,6 +13,14 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 🆕 最新情報
 
+**v3.1.1**
+
+- Sideberyの折りたたみ・展開アニメーションのデフォルトを`ease-in-out`に変更し、Firefoxのネイティブ縦型タブと動作を統一しました（以前はSideberyが`linear`を使用していました）。アニメーションの種類は`uc-user-settings.css`内の`--uc-autohide-transition-type`変数でカスタマイズ可能です。
+- Firefox標準の縦型タブのアニメーションも`--uc-autohide-transition-type`によって変更可能になりました。
+- 新しいサイドバーを有効にしていてウィンドウが最大化されていない状態で、`uc.flex.fully-hide-sidebery`オプションを使うと、ウィンドウ端に余白が発生し、Sideberyの高さが正しく表示されない問題を修正しました。
+
+今回のアップデートにより、旧バージョンの水平タブモードで利用可能だった全機能が縦型タブモードでも完全に利用可能となりました。FlexFox v3.1.1で、よりスムーズな移行が可能になります。
+
 **v3.1.0**
 - `uc-variables.css`の構成を見直し。ユーザーがよく使うカスタマイズ可能な変数をファイルの先頭にまとめ、分かりやすい説明を追加しました。
 - FlexFoxによるツールバー背景色の上書き処理を全面的に再設計。テーマ適用時に発生していた背景画像のずれ、透明度の不具合、非アクティブウィンドウ時の表示崩れなどがすべて解消されたはずです。
