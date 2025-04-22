@@ -13,8 +13,16 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+<details>
+  <summary>🔧 <b>Various Fixes (v3.1.3–v3.1.4)</b></summary>
+
+**v3.1.4**  
+- Fine-tuned the positioning of the findbar.
+
 **v3.1.3**  
 - Fixed an issue where the findbar failed to display match count when positioned in the bottom-right corner.
+
+</details>
 
 **v3.1.2**
 

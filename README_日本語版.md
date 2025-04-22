@@ -13,8 +13,16 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 🆕 最新情報
 
+<details>
+  <summary>🔧 <b>さまざまな修正（v3.1.3～v3.1.4）</b></summary>
+
+**v3.1.4**  
+- Findbarの表示位置を微調整しました。
+
 **v3.1.3**  
 - Findbarを右下に配置した際に、一致件数が表示されない問題を修正しました。
+
+</details>
 
 **v3.1.2**
 

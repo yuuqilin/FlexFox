@@ -105,7 +105,7 @@
      * Positive values (e.g., 2px) shift it downward,
      * negative values (e.g., -2px) shift it upward.
      */
-    --uc-findbar-y-position: -4px;
+    --uc-findbar-y-position: 0px;
 
     /* Move the findbar to the top-center-left area of the window */
     @media -moz-pref("uc.flex.findbar-position", "top-center-left"), -moz-pref("uc.flex.findbar-position", "0") {
@@ -289,16 +289,16 @@
     /* Adjust findbar position to avoid being overlapped when top toolbar height changes */
     --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
     &[inFullscreen] {
-        --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
+        --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px);
     }
     &:not([inFullscreen]) {
         @media -moz-pref("uc.flex.fully-hide-toolbox") {
-            --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
+            --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px);
         }
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
             &:not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
                 /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
-                --uc-findbar-y-offset: calc(-1 * var(--uc-bm-padding));
+                --uc-findbar-y-offset: calc(-1 * var(--uc-bm-padding) - 1.5px);
             }
         }
     }
