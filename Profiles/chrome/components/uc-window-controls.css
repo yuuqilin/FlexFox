@@ -99,7 +99,6 @@
     margin-inline: -244px !important;
 }
 
-
 /* 🧱══════════════════════════════════════════════════════════════════
    🧱 Windows Controls
    🧱════════════════════════════════════════════════════════════════ */
@@ -155,7 +154,6 @@
     height: 38px;
 }
 
-
 /* 🧱══════════════════════════════════════════════════════════════════
    🧱 Nav Bar
    🧱════════════════════════════════════════════════════════════════ */
@@ -179,11 +177,20 @@
  * However, since the title bar is not displayed in fullscreen mode, 
  * we need to add Condition B (`:root[inFullscreen]`) to account for that scenario. 
  */
-:root:is([tabsintitlebar], [customtitlebar]):not([customizing]),
-:root[inFullscreen] {
-    #nav-bar {
-        padding-left: 0px;
-        padding-right: var(--uc-nav-bar-padding-right) !important;
+/**
+ * When native vertical tabs are enabled,
+ * window controls for horizontal tabs are disabled.
+ * Reset nav bar padding since extra space is unnecessary.
+ */
+@media not -moz-pref("sidebar.verticalTabs") {
+    :root:is([tabsintitlebar], [customtitlebar]):not([customizing]),
+    :root[inFullscreen] {
+        #nav-bar {
+            /*
+            padding-left: 0px;
+            */
+            padding-right: var(--uc-nav-bar-padding-right) !important;
+        }
     }
 }
 
@@ -202,7 +209,6 @@
         }
     }
 }
-
 
 /* 🧱══════════════════════════════════════════════════════════════════
    🧱 PersonalToolbar

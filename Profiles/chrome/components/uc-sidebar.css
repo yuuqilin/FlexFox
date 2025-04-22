@@ -6,101 +6,60 @@
     min-width: var(--uc-sidebar-header-width) !important;
 }
 
-/* Reduce header size */
-#sidebar-header {
-    font-size: 1.2em !important;
-    padding: 2px 6px 2px 3px !important;
-}
-#sidebar-header #sidebar-close {
-    padding: 3px !important;
-}
-#sidebar-header #sidebar-close .toolbarbutton-icon {
-    width: 14px;
-    height: 14px;
-    opacity: 0.6;
-}
+/* 🧱══════════════════════════════════════════════════════════════════
+   🧱 Sidebar Header
+   🧱════════════════════════════════════════════════════════════════ */
 
-/* Expand sidebar header on hover */
-#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
-    #sidebar-header:hover {
-        @media (prefers-color-scheme: light) {
-            --sidebar-border-color: #ced1d4;
-        }
-        max-height: 100%;
-        max-width: 100%;
-        min-width: var(--uc-sb-sidebar-hover-width);
-        background-color: var(--uc-sidebar-bgcolor);
-        transition:
-            border-bottom var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-            max-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-            min-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-            max-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-            min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-            padding var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-            background-color var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-            opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
+@media not -moz-pref("sidebar.revamp") {
+    /* Reduce header size */
+    #sidebar-header {
+        font-size: 1.2em !important;
+        padding: 2px 6px 2px 3px !important;
+    }
+    #sidebar-header #sidebar-close {
+        padding: 3px !important;
+    }
+    #sidebar-header #sidebar-close .toolbarbutton-icon {
+        width: 14px;
+        height: 14px;
+        opacity: 0.6;
     }
 
-    #sidebar-header:hover :is(#sidebar-switcher-target, #sidebar-close) {
-        transition: opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
-    }
-
-    /* Modified from https://www.reddit.com/r/FirefoxCSS/comments/77ehp1/how_to_hide_the_title_of_webextension_sidebars/ */
-    /* Minimize sidebar header to a stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
-    #sidebar-header:not(:hover):not(:has(.active)) {
-        min-height: 5px;
-        max-height: 5px;
-        min-width: var(--uc-sb-sidebar-width);
-        overflow: hidden;
-        padding: 0 !important;
-        background-color: var(--uc-sb-sidebar-header-stripe);
-        opacity: 0.5;
-        will-change: min-height, max-height, min-width, overflow, background-color, opacity;
-        transition:
-            max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-            min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-            min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-            padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-            background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-            opacity 0ms ease-in-out 0ms;
-        :is(#sidebar-switcher-target, #sidebar-close) {
-            /* BAD NEWS: display: none !important; */
-            opacity: 0;
-            transition: opacity 0ms ease-in-out 0ms;
-        }
-    }
-
-    /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
-    @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
-        --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
-        #sidebar-header:not(:hover):not(:has(.active)) {
-            max-width: var(--uc-sidebar-header-width);
-            min-width: var(--uc-sidebar-header-width);
-        }
-    }
-
-    @media (prefers-color-scheme: dark) {
-        #sidebar-header:not(:hover):not(:has(.active)) {
-            opacity: 0.87;
-        }
-    }
-
-    /* Remove header's bottom line */
-    #sidebar-header:not(:hover) {
-        border-bottom: none !important;
-    }
-}
-
-@media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+    /* Expand sidebar header on hover */
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
-        &:hover #sidebar-header:not(:hover):not(:has(.active)) {
+        #sidebar-header:is(:hover, :has(.active)) {
+            @media (prefers-color-scheme: light) {
+                --sidebar-border-color: #ced1d4;
+            }
+            max-height: 100%;
+            max-width: 100%;
+            min-width: var(--uc-sb-sidebar-hover-width);
+            background-color: var(--uc-sidebar-bgcolor);
+            transition:
+                border-bottom var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                max-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                min-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                max-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                padding var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                background-color var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
+        }
+
+        #sidebar-header:hover :is(#sidebar-switcher-target, #sidebar-close) {
+            transition: opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
+        }
+
+        /* Modified from https://www.reddit.com/r/FirefoxCSS/comments/77ehp1/how_to_hide_the_title_of_webextension_sidebars/ */
+        /* Minimize sidebar header to a stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
+        #sidebar-header:not(:hover):not(:has(.active)) {
             min-height: 5px;
             max-height: 5px;
-            min-width: var(--uc-sidebar-header-width);
+            min-width: var(--uc-sb-sidebar-width);
             overflow: hidden;
             padding: 0 !important;
-            background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
-            opacity: 1;
+            background-color: var(--uc-sb-sidebar-header-stripe);
+            opacity: 0.5;
             will-change: min-height, max-height, min-width, overflow, background-color, opacity;
             transition:
                 max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
@@ -109,15 +68,70 @@
                 padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 opacity 0ms ease-in-out 0ms;
+            :is(#sidebar-switcher-target, #sidebar-close) {
+                /* BAD NEWS: display: none !important; */
+                opacity: 0;
+                transition: opacity 0ms ease-in-out 0ms;
+            }
+        }
+
+        /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
+            --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+            #sidebar-header:not(:hover):not(:has(.active)) {
+                max-width: var(--uc-sidebar-header-width);
+                min-width: var(--uc-sidebar-header-width);
+            }
         }
 
         @media (prefers-color-scheme: dark) {
+            #sidebar-header:not(:hover):not(:has(.active)) {
+                opacity: 0.87;
+            }
+        }
+
+        /* Remove header's bottom line */
+        #sidebar-header:not(:hover) {
+            border-bottom: none !important;
+        }
+    }
+
+    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
             &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 87%, var(--uc-sidebar-bgcolor));
+                min-height: 5px;
+                max-height: 5px;
+                min-width: var(--uc-sidebar-header-width);
+                overflow: hidden;
+                padding: 0 !important;
+                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                opacity: 1;
+                will-change: min-height, max-height, min-width, overflow, background-color, opacity;
+                transition:
+                    max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    opacity 0ms ease-in-out 0ms;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                &:hover #sidebar-header:not(:hover):not(:has(.active)) {
+                    background-color: color-mix(
+                        in srgb,
+                        var(--uc-sb-sidebar-header-stripe) 87%,
+                        var(--uc-sidebar-bgcolor)
+                    );
+                }
             }
         }
     }
 }
+
+/* 🧱══════════════════════════════════════════════════════════════════
+   🧱 Sidebar in Fullscreen
+   🧱════════════════════════════════════════════════════════════════ */
 
 /* Auto-hide sidebar in fullscreen or when Sidebery is fully hidden */
 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
@@ -386,7 +400,9 @@
             overflow: hidden;
             /* !TEMPORARY: */
             margin-inline-start: var(--uc-sidebar-main-margin-left);
-            min-width: /* var(--tab-collapsed-width) */ calc(var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) + 5px);
+            min-width: /* var(--tab-collapsed-width) */ calc(
+                var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) + 5px
+            );
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
             will-change: margin-inline-start, min-width, overflow, transform;
             transition:
@@ -429,7 +445,9 @@
              * to keep it visible when expanding from the right edge. 
              */
             &:is([positionend], [sidebar-positionend]) {
-                transform: translateX(calc(11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) - 100%));
+                transform: translateX(
+                    calc(11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) - 100%)
+                );
             }
         }
         /* Fix transparent background issue in vertical tabs; no longer needed in Firefox v138 and later */

@@ -68,7 +68,7 @@
             }
         }
 
-        &:hover > #sidebar {
+        &:hover > #sidebar, #sidebar-header:has(.active) + #sidebar {
             min-width: var(--uc-sb-sidebar-hover-width) !important;
             transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay) !important;

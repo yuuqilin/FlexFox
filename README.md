@@ -14,7 +14,12 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 ## 🆕 What's New
 
 <details>
-  <summary>🔧 <b>Various Fixes (v3.1.3–v3.1.4)</b></summary>
+  <summary>🔧 <b>Various Fixes (v3.1.3–v3.1.5)</b></summary>
+
+**v3.1.5**  
+- Reduced unnecessary style rules when the new sidebar is enabled.  
+- Fixed a long-standing bug in the classic sidebar where the sidebar would collapse when hovering over the switcher menu.  
+_Note: This bug had existed for quite some time. Since its impact was minor and fixing it required a slight performance cost, it was previously left unaddressed. Now that FlexFox has fully transitioned to the new sidebar, this patch closes the chapter on the legacy version with a proper fix._
 
 **v3.1.4**  
 - Fine-tuned the positioning of the findbar.

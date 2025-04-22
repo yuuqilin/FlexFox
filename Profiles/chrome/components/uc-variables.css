@@ -236,16 +236,6 @@
             --uc-nav-bar-padding-right: 0px;
         }
     }
-    /**
-     * When native vertical tabs are enabled,
-     * window controls for horizontal tabs are disabled.
-     * Reset nav bar padding since extra space is unnecessary.
-     */
-    @media -moz-pref("sidebar.verticalTabs") {
-        #nav-bar {
-            --uc-nav-bar-padding-right: 0px;
-        }
-    }
 
     /* Align the first toolbar button with vertical tabs by shifting the nav bar when vertical tabs are active */
     --uc-nav-bar-margin-left: -2px;
