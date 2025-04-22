@@ -98,7 +98,26 @@
     }
 
     /* Horizontal position of the findbar */
-    --uc-findbar-x-position: 24.2vw;
+    --uc-findbar-x-position: 0.9vw;
+
+    /* Adjusts the vertical position of the findbar */
+    /** 
+     * Positive values (e.g., 2px) shift it downward,
+     * negative values (e.g., -2px) shift it upward.
+     */
+    --uc-findbar-y-position: -4px;
+
+    /* Move the findbar to the top-center-left area of the window */
+    @media -moz-pref("uc.flex.findbar-position", "top-center-left"), -moz-pref("uc.flex.findbar-position", "0") {
+        --uc-findbar-x-position: 40.65vw;
+        --uc-findbar-y-position: 0px;
+    }
+    /* Move the findbar to the bottom-right corner of the window */
+    @media -moz-pref("uc.flex.findbar-position", "bottom-right"), -moz-pref("uc.flex.findbar-position", "2") {
+        --uc-findbar-x-position: 0.9vw;
+        --uc-findbar-y-position: calc(100% - 40px);
+        --uc-findbar-y-offset: 0px !important;
+    }
 
     /* Sidebar expand/collapse animation settings */
     --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
@@ -125,8 +144,9 @@
         --uc-osx-ctrls-size: 15px;
     }
 
-    --uc-uei-icon-size: 20px; /* Size of extension icons in the unified extensions panel */
-    --uc-number-of-extensions-in-a-row: 4; /* Number of extension icons per row in the unified extensions panel */
+    /* Layout of extension icons in the unified extensions panel */
+    --uc-uei-icon-size: 20px; /* Size of extension icons */
+    --uc-number-of-extensions-in-a-row: 4; /* Number of extension icons per row */
 
     /* Max visible rows in native vertical pinned tabs (before scrolling) */
     --uc-max-visible-vertical-pinned-tabs: 4;
@@ -137,22 +157,26 @@
         --uc-max-visible-vertical-pinned-tabs: 6;
     }
 
-    --uc-autohide-toolbar-delay: 200ms; /* Delay before hiding the bookmarks toolbar */
-    --uc-hover-toolbar-delay: 80ms; /* Delay before showing the bookmarks toolbar */
-    --uc-autohide-toolbox-delay: 200ms; /* Delay before hiding the navigator toolbox */
-
-    /* Controls toolbar reveal sensitivity – lower angle = wider trigger zone */
-    --uc-toolbox-rotation: 82deg; /* Toolbox rotation angle (lower value recommended for macOS) */
+    /* Trigger sensitivity for fully hidden Sidebery sidebar */
     /**
-     * When the window is not maximized and the toolbar is fully hidden, 
-     * this controls how far from the top edge the cursor can be to trigger toolbar expansion. 
-     * A smaller angle increases the activation range, allowing the toolbar to expand from farther away, 
-     * but this might interfere with interacting with web content.
-     * A larger angle requires the cursor to be much closer to the edge to trigger, 
-     * which can make it harder to activate the toolbar precisely. 
-     * You can adjust the angle to find a comfortable range 
-     * for triggering the toolbar without accidentally expanding it too often. 
+     * Controls how close the cursor must be to the window edge to trigger the sidebar
+     * when `uc.flex.fully-hide-sidebery` is enabled and the window is not maximized.
+     * A larger value increases the trigger distance, allowing activation from farther away,
+     * but may interfere with webpage interaction.
+     * A smaller value reduces accidental triggers, but may make it difficult
+     * to reveal the sidebar without entering resize mode.
      */
+    --uc-hover-sidebar-trigger-width: 22px;
+
+    /* Trigger sensitivity for fully hidden top toolbar */
+    /**
+     * Controls how close the cursor must be to the top edge to trigger the toolbar
+     * when `uc.flex.fully-hide-toolbox` is enabled.
+     * A lower angle increases the trigger distance, allowing activation from farther away,
+     * but may interfere with webpage interaction.
+     * A higher angle reduces accidental triggers, requiring more precise cursor placement.
+     */
+    --uc-toolbox-rotation: 82deg; /* Toolbox rotation angle (lower value recommended for macOS) */
     &[sizemode="normal"] {
         --uc-toolbox-rotation: 75deg;
     }
@@ -160,6 +184,12 @@
         --uc-toolbox-rotation: 88.5deg;
     }
 
+    /* Auto-hide delay for bookmarks toolbar and navigator toolbox */
+    --uc-autohide-toolbar-delay: 200ms; /* Delay before hiding the bookmarks toolbar */
+    --uc-hover-toolbar-delay: 80ms; /* Delay before showing the bookmarks toolbar */
+    --uc-autohide-toolbox-delay: 200ms; /* Delay before hiding the navigator toolbox */
+
+    /* Auto-hide timing for horizontal tabs */
     /**
      * If you're using Firefox versions earlier than 130, 
      * starting from FlexFox v1.0.0, the update to autohide_tabstoolbar_v2.css 
@@ -194,7 +224,6 @@
     /* 🔽 Begin initializing block */
     --uc-sidebar-bgcolor: var(--bg); /* Internal fallback; must match --bg */
     --uc-sidebar-header-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
-    --uc-sb-sidebar-header-width: var(--uc-sidebar-header-width); /* Load user-defined value for internal calculations */
 
     /* Initial value: shift nav bar left to make room for window control buttons */
     --uc-nav-bar-padding-right: 0px;
@@ -258,18 +287,18 @@
     --uc-theme-bg-x-right-end: 0px;
 
     /* Adjust findbar position to avoid being overlapped when top toolbar height changes */
-    --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
+    --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
     &[inFullscreen] {
-        --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
+        --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
     }
     &:not([inFullscreen]) {
         @media -moz-pref("uc.flex.fully-hide-toolbox") {
-            --uc-findbar-top: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
+            --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height));
         }
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
             &:not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
                 /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
-                --uc-findbar-top: calc(-1 * var(--uc-bm-padding));
+                --uc-findbar-y-offset: calc(-1 * var(--uc-bm-padding));
             }
         }
     }
@@ -289,9 +318,13 @@
         /* Hide sidebar splitter */
         --uc-sidebar-splitter-display: none;
 
-        --uc-sb-sidebar-header-stripe: var(--uc-sidebar-header-stripe); /* Load user-defined value for internal calculations */
+        --uc-sb-sidebar-header-stripe: var(
+            --uc-sidebar-header-stripe
+        ); /* Load user-defined value for internal calculations */
         --uc-sb-sidebar-width: var(--uc-sidebar-width); /* Load user-defined value for internal calculations */
-        --uc-sb-sidebar-hover-width: var(--uc-sidebar-hover-width); /* Load user-defined value for internal calculations */
+        --uc-sb-sidebar-hover-width: var(
+            --uc-sidebar-hover-width
+        ); /* Load user-defined value for internal calculations */
         /* When Sidebery autohide is disabled, fix its width to the expanded value */
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
             --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
@@ -305,7 +338,7 @@
              * to avoid cursor switching to resize mode near window edge. 
              */
             &[sizemode="normal"] {
-                --uc-sb-sidebar-width: 22px;
+                --uc-sb-sidebar-width: var(--uc-hover-sidebar-trigger-width);
             }
         }
 
@@ -402,7 +435,7 @@
         &:not([inFullscreen]):not([customizing]) {
             --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-width, 0px));
             @media -moz-pref("sidebar.verticalTabs") {
-                --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-header-width));
+                --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-header-width));
             }
             --uc-theme-bg-x-right-end: 0px;
 
@@ -410,18 +443,18 @@
                 --uc-theme-bg-x-left-start: 0px;
                 --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sb-sidebar-width, 0px));
                 @media -moz-pref("sidebar.verticalTabs") {
-                    --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sb-sidebar-header-width));
+                    --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sidebar-header-width));
                 }
             }
         }
     }
     @media -moz-pref("sidebar.verticalTabs") {
         --uc-bookmarks-margin-left: 10px;
-        --uc-navigator-offset: var(--uc-sb-sidebar-header-width);
-        --uc-navigator-width: var(--uc-sb-sidebar-header-width);
+        --uc-navigator-offset: var(--uc-sidebar-header-width);
+        --uc-navigator-width: var(--uc-sidebar-header-width);
         @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide")) {
-            --uc-personal-toolbar-offset: var(--uc-sb-sidebar-header-width);
-            --uc-personal-toolbar-width: var(--uc-sb-sidebar-header-width);
+            --uc-personal-toolbar-offset: var(--uc-sidebar-header-width);
+            --uc-personal-toolbar-width: var(--uc-sidebar-header-width);
             @media -moz-pref("sidebar.visibility", "hide-sidebar") {
                 &:has(#sidebar-main[hidden]) {
                     --uc-personal-toolbar-offset: 0px;

@@ -13,6 +13,15 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+**v3.1.2**
+
+- The default position of the findbar has been changed from *top-center-left* to *top-right*. A new string-based preference `uc.flex.findbar-position` has been added:
+  - `"top-center-left"` or `"0"` moves the findbar to the previous default location near the top center-left.
+  - `"top-right"` or `"1"` places it in the new default location at the top right.
+  - `"bottom-right"` or `"2"` sets it to Firefox’s original position at the bottom right.
+- The `--uc-findbar-top` variable has been removed. Findbar placement is now controlled using `--uc-findbar-x-position` and `--uc-findbar-y-position`, allowing full customization.
+- The hardcoded minimum width of the sidebar has been removed. The value is now fully controlled via the `--uc-sidebar-width` variable.
+
 **v3.1.1**
 
 - Updated the default animation for collapsing/expanding Sidebery to `ease-in-out` to match Firefox's native vertical tabs (previously Sidebery used `linear`). Users can customize the transition type via the `--uc-autohide-transition-type` variable in `uc-user-settings.css`.
@@ -21,15 +30,15 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 With this update, all previously missing features from the horizontal tab mode are now fully compatible with Firefox's native vertical tabs. FlexFox v3.1.1 brings complete feature parity, making it seamless for users to switch from the old setup.
 
+<details>
+  <summary>🔧 <b>Various Fixes (v3.0.1–v3.1.0)</b></summary>
+
 **v3.1.0**
 - Refactored the structure of `uc-variables.css`. Frequently used and user-customizable variables are now grouped at the top of the file with clearer descriptions.
 - Overhauled the logic for overriding the toolbar background color in FlexFox. This update should fully resolve issues with theme background image alignment, transparency handling, and incorrect display when the window is inactive.
 - Improved animation smoothness when expanding or collapsing vertical tabs.
 - Adjusted the navbar positioning so that its buttons align better with vertical tabs.
 - Toggling `uc.flex.allow-addons-to-change-toolbar-color` no longer causes the sidebar to shift vertically.
-
-<details>
-  <summary>🔧 <b>Various Fixes (v3.0.1–v3.0.7)</b></summary>
 
 **v3.0.7**
 - Fixed incorrect background highlight for the active tab when using Firefox's native tabs (both horizontal and vertical layouts).  

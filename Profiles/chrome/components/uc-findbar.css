@@ -67,9 +67,8 @@ findbar {
     --button-bgcolor: var(--urlbar-bg);
     position: absolute;
     border-radius: 8px;
-    top: var(--uc-findbar-top);
-    margin-left: min(var(--uc-findbar-x-position), calc(100% - 496px));
-    margin-right: auto !important;
+    top: calc(var(--uc-findbar-y-position) + var(--uc-findbar-y-offset));
+    right: min(var(--uc-findbar-x-position), calc(100% - 496px));
     width: 496px;
     height: 40px;
     display: flex;

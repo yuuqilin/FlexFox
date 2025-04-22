@@ -13,6 +13,15 @@
 
 ## 🆕 更新内容
 
+**v3.1.2**
+
+- Findbar（查找栏）的默认位置从“上方中央偏左”更改为“右上角”。新增字符串类型的选项 `uc.flex.findbar-position`：
+  - 设置为 `"top-center-left"` 或 `"0"` 时，Findbar 将显示在之前的默认位置（上方中央偏左）。
+  - 设置为 `"top-right"` 或 `"1"` 时，将显示在新的默认位置（右上角）。
+  - 设置为 `"bottom-right"` 或 `"2"` 时，将回到 Firefox 原本的默认位置（右下角）。
+- 移除了 `--uc-findbar-top` 变量，Findbar 位置现在通过 `--uc-findbar-x-position` 和 `--uc-findbar-y-position` 两个变量进行控制，用户可以自由调整位置。
+- 移除了侧边栏最小宽度的硬编码限制，最小宽度现在完全由用户自定义变量 `--uc-sidebar-width` 控制。
+
 **v3.1.1**
 
 - 将 Sidebery 折叠/展开的默认动画类型改为 `ease-in-out`，与 Firefox 原生垂直选项卡的效果一致（之前 Sidebery 使用的是 `linear`）。用户可以在 `uc-user-settings.css` 中通过设置 `--uc-autohide-transition-type` 变量自定义动画效果。
@@ -21,15 +30,15 @@
 
 随着本次更新完成了对原生垂直选项卡与 `uc.flex.fully-hide-sidebery` 的兼容性处理，FlexFox v3.1.1 已实现与旧版水平选项卡模式完全一致的功能，用户可以无缝迁移使用。
 
+<details>
+  <summary>🔧 <b>多种修复（v3.0.1～v3.1.0）</b></summary>
+
 **v3.1.0**
 - 重新整理了 `uc-variables.css` 的结构。常用且可自定义的变量现在集中放在文件开头，并配有清晰的说明。
 - 重构了 FlexFox 对工具栏背景颜色的覆盖逻辑。此次更新应彻底修复在启用主题时背景图错位、透明度异常，以及窗口非激活状态下显示不正确的问题。
 - 优化了垂直选项卡在展开和折叠时的动画流畅度。
 - 调整了导航栏的位置，使其按钮更好地与垂直选项卡对齐。
 - 切换 `uc.flex.allow-addons-to-change-toolbar-color` 时不再导致侧边栏上下晃动。
-
-<details>
-  <summary>🔧 <b>多种修复（v3.0.1～v3.0.7）</b></summary>
 
 **v3.0.7**
 - 修复在使用 Firefox 原生标签页（包括水平和垂直选项）时，当前激活标签页背景高亮显示异常的问题。  

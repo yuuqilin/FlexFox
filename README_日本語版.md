@@ -13,6 +13,15 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 🆕 最新情報
 
+**v3.1.2**
+
+- Findbar（検索バー）のデフォルト位置が、*上部中央やや左寄り*から*右上*に変更されました。文字列型の新しい設定オプション `uc.flex.findbar-position` が追加されています：
+  - `"top-center-left"` または `"0"` を指定すると、以前のデフォルトである上部中央左寄りに表示されます。
+  - `"top-right"` または `"1"` を指定すると、現在のデフォルトである右上に表示されます。
+  - `"bottom-right"` または `"2"` を指定すると、Firefox本来の下部右側に表示されます。
+- `--uc-findbar-top` 変数は廃止されました。代わりに `--uc-findbar-x-position` と `--uc-findbar-y-position` により、任意の位置への調整が可能になりました。
+- サイドバーの最小幅に関するハードコードを撤廃し、`--uc-sidebar-width` 変数によって最小幅を自由に設定できるようになりました。
+
 **v3.1.1**
 
 - Sideberyの折りたたみ・展開アニメーションのデフォルトを`ease-in-out`に変更し、Firefoxのネイティブ縦型タブと動作を統一しました（以前はSideberyが`linear`を使用していました）。アニメーションの種類は`uc-user-settings.css`内の`--uc-autohide-transition-type`変数でカスタマイズ可能です。
@@ -21,15 +30,15 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 今回のアップデートにより、旧バージョンの水平タブモードで利用可能だった全機能が縦型タブモードでも完全に利用可能となりました。FlexFox v3.1.1で、よりスムーズな移行が可能になります。
 
+<details>
+  <summary>🔧 <b>さまざまな修正（v3.0.1～v3.1.0）</b></summary>
+
 **v3.1.0**
 - `uc-variables.css`の構成を見直し。ユーザーがよく使うカスタマイズ可能な変数をファイルの先頭にまとめ、分かりやすい説明を追加しました。
 - FlexFoxによるツールバー背景色の上書き処理を全面的に再設計。テーマ適用時に発生していた背景画像のずれ、透明度の不具合、非アクティブウィンドウ時の表示崩れなどがすべて解消されたはずです。
 - 垂直タブの折りたたみ／展開時のアニメーションがよりスムーズになりました。
 - ナビゲーションバーの位置を微調整し、垂直タブとの整合性を改善しました。
 - `uc.flex.allow-addons-to-change-toolbar-color`を切り替えても、サイドバーが上下にずれることがなくなりました。
-
-<details>
-  <summary>🔧 <b>さまざまな修正（v3.0.1～v3.0.7）</b></summary>
 
 **v3.0.7**
 - Firefoxのネイティブタブ（横型・縦型の両方）を使用している場合に、アクティブなタブの背景ハイライトが正しく表示されない問題を修正しました。  

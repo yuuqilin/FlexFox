@@ -1,6 +1,9 @@
 #sidebar-box {
     max-width: calc(100% - 496px) !important;
-    min-width: 44px !important;
+    @media -moz-pref("sidebar.revamp") {
+        max-width: calc(100% - var(--uc-sidebar-header-width) - 496px) !important;
+    }
+    min-width: var(--uc-sidebar-header-width) !important;
 }
 
 /* Reduce header size */
@@ -71,8 +74,8 @@
     @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
         --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
         #sidebar-header:not(:hover):not(:has(.active)) {
-            max-width: var(--uc-sb-sidebar-header-width);
-            min-width: var(--uc-sb-sidebar-header-width);
+            max-width: var(--uc-sidebar-header-width);
+            min-width: var(--uc-sidebar-header-width);
         }
     }
 
@@ -91,10 +94,9 @@
 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-            --uc-sb-sidebar-width: 44px;
             min-height: 5px;
             max-height: 5px;
-            min-width: var(--uc-sb-sidebar-width);
+            min-width: var(--uc-sidebar-header-width);
             overflow: hidden;
             padding: 0 !important;
             background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
@@ -203,8 +205,8 @@
             --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-width, 75vw);
             @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
                 --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
-                --uc-sb-sidebar-main-min-width: var(--uc-sb-sidebar-header-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-header-width);
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
             }
             --uc-sb-sidebar-main-overflow: hidden;
             --uc-sb-sidebar-main-z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1);
@@ -229,8 +231,8 @@
                 --uc-sb-sidebar-main-opacity: 0;
             }
             #sidebar-main:hover {
-                --uc-sb-sidebar-main-min-width: var(--uc-sb-sidebar-header-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-header-width);
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
             }
         }
     }
@@ -239,7 +241,7 @@
                 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]):hover
             ) {
             #sidebar-main {
-                --uc-sb-sidebar-main-min-width: 44px;
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
                 --uc-sb-sidebar-main-opacity: 1;
                 /**
                  * #sidebar-main normally uses `transition-delay: var(--uc-autohide-sidebar-delay)` when not hovered.
@@ -370,7 +372,7 @@
             }
             max-width: var(
                 --uc-sb-sidebar-main-max-width,
-                44px
+                var(--uc-sidebar-header-width)
             ) !important; /* Use !important to override the max-width styles in Nightly (v135) */
             z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
             /* This transition is already covered by the one defined above, so it's commented out. */
@@ -384,7 +386,7 @@
             overflow: hidden;
             /* !TEMPORARY: */
             margin-inline-start: var(--uc-sidebar-main-margin-left);
-            min-width: /* var(--tab-collapsed-width) */ calc(var(--uc-sb-sidebar-main-min-width, 44px) + 5px);
+            min-width: /* var(--tab-collapsed-width) */ calc(var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) + 5px);
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
             will-change: margin-inline-start, min-width, overflow, transform;
             transition:
@@ -427,7 +429,7 @@
              * to keep it visible when expanding from the right edge. 
              */
             &:is([positionend], [sidebar-positionend]) {
-                transform: translateX(calc(11px + var(--uc-sb-sidebar-main-min-width, 44px) - 100%));
+                transform: translateX(calc(11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) - 100%));
             }
         }
         /* Fix transparent background issue in vertical tabs; no longer needed in Firefox v138 and later */
@@ -839,8 +841,8 @@
     /* ── ◀️ Styles for verticalTabs when the sidebar is collapsed */
     #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
         --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
-        --tab-collapsed-width: 44px !important;
-        width: 44px !important;
+        --tab-collapsed-width: var(--uc-sidebar-header-width) !important;
+        width: var(--uc-sidebar-header-width) !important;
         .tab-background {
             margin-inline: 5px !important;
         }
