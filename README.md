@@ -13,6 +13,9 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+**v3.1.3**  
+- Fixed an issue where the findbar failed to display match count when positioned in the bottom-right corner.
+
 **v3.1.2**
 
 - The default position of the findbar has been changed from *top-center-left* to *top-right*. A new string-based preference `uc.flex.findbar-position` has been added:

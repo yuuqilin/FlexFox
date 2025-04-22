@@ -115,7 +115,7 @@
     /* Move the findbar to the bottom-right corner of the window */
     @media -moz-pref("uc.flex.findbar-position", "bottom-right"), -moz-pref("uc.flex.findbar-position", "2") {
         --uc-findbar-x-position: 0.9vw;
-        --uc-findbar-y-position: calc(100% - 40px);
+        --uc-findbar-y-position: calc(100% - 60px);
         --uc-findbar-y-offset: 0px !important;
     }
 

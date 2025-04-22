@@ -13,6 +13,9 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 🆕 最新情報
 
+**v3.1.3**  
+- Findbarを右下に配置した際に、一致件数が表示されない問題を修正しました。
+
 **v3.1.2**
 
 - Findbar（検索バー）のデフォルト位置が、*上部中央やや左寄り*から*右上*に変更されました。文字列型の新しい設定オプション `uc.flex.findbar-position` が追加されています：
