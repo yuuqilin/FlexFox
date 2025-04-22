@@ -289,6 +289,7 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 | `uc.flex.sidebery-slow-hover-expand`       | Sideberyの展開/折りたたみを遅くする                            |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 垂直タブのピン留めタブと通常タブの間に区切り線を表示します |
 | `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブ縦型タブの1列あたりのピン留め数を設定（数値、4～6）      |
+| `uc.flex.findbar-position` | 検索バーの表示位置を設定します。（文字列, `"top-center-left"` または `"0"` = 上中央やや左, `"top-right"` または `"1"` = 右上, `"bottom-right"` または `"2"` = 右下） |
 
 ## 🐞 既知の問題
 

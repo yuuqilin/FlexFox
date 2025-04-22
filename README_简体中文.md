@@ -290,6 +290,7 @@
 | `uc.flex.sidebery-slow-hover-expand`       | 放慢 Sidebery 悬停展开/折叠的速度。            |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在垂直选项卡的固定和普通标签页之间显示分隔线。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | 设置原生垂直选项卡中每列钉选标签页的最大数量（数值，4～6）。    |
+| `uc.flex.findbar-position` | 设置查找栏的位置。（字符串，`"top-center-left"` 或 `"0"` = 上方中央偏左，`"top-right"` 或 `"1"` = 右上角，`"bottom-right"` 或 `"2"` = 右下角） |
 
 ## 🐞 已知问题
 

@@ -40,6 +40,8 @@ user_pref("uc.flex.sidebery-slow-hover-expand",                 false);
 user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
 /* Sets max pinned tabs per column in native vertical tabs (numeric, 4–6). */
 user_pref("uc.flex.max-visible-vertical-pinned-tabs",  4);
+/* Sets findbar position (string: "top-center-left"/"0", "top-right"/"1", "bottom-right"/"2"). */
+user_pref("uc.flex.findbar-position", "top-right");
 
 /* Adjusts the text scaling in the Firefox interface. 100 means no scaling. */
 // user_pref("ui.textScaleFactor",                                 100);

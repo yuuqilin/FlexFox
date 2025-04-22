@@ -290,6 +290,7 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 | `uc.flex.sidebery-slow-hover-expand`        | Slow down Sidebery hover expand/collapse.                                    |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in vertical tabs.  |
 | `uc.flex.max-visible-vertical-pinned-tabs`  | Sets max pinned tabs per column in native vertical tabs (numeric, 4–6).      |
+| `uc.flex.findbar-position` | Sets the findbar position. (string, `"top-center-left"` or `"0"` = center-left top, `"top-right"` or `"1"` = top right, `"bottom-right"` or `"2"` = bottom right) |
 
 ## 🐞 Known Issues
 
