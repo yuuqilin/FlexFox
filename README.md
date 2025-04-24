@@ -14,7 +14,11 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 ## 🆕 What's New
 
 <details>
-  <summary>🔧 <b>Various Fixes (v3.1.3–v3.1.5)</b></summary>
+  <summary>🔧 <b>Various Fixes (v3.1.3–v3.1.6)</b></summary>
+
+**v3.1.6**
+- Users can now create a `uc-custom-content.css` file in the `content` folder to apply custom styles for web content. It is imported at the end of `userContent.css`, allowing it to override previous styles. Since this file is not part of the FlexFox repository, its contents will remain untouched during future updates.
+- Restructured the project directory to simplify the update process for users who update via Git clone and pull. This change also lays the foundation for the upcoming install/update script.
 
 **v3.1.5**  
 - Reduced unnecessary style rules when the new sidebar is enabled.  
