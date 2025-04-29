@@ -1,7 +1,7 @@
-# FlexFox
+# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v139-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v140-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -11,10 +11,13 @@
 
 A customizable Firefox theme inspired by [VerticalFox](https://github.com/christorange/VerticalFox), [EdgyArc-fr](https://github.com/artsyfriedchicken/EdgyArc-fr), [Edge-Frfox](https://github.com/bmFtZQ/edge-frfox), [ArcWTF](https://github.com/KiKaraage/ArcWTF), [shimmer](https://github.com/nuclearcodecat/shimmer) and [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks). FlexFox offers extensive flexibility and feature options to enhance your browsing experience.
 
+![FlexFox Dark-Light Theme](./assets/FlexFox-light-dark.webp)   
+
 ## 🆕 What's New
 
 <details>
-  <summary>🔧 <b>Various Fixes (v3.1.3–v3.1.6)</b></summary>
+
+<summary>💬 <b>Previous Updates</b></summary>
 
 **v3.1.6**
 - Users can now create a `uc-custom-content.css` file in the `content` folder to apply custom styles for web content. It is imported at the end of `userContent.css`, allowing it to override previous styles. Since this file is not part of the FlexFox repository, its contents will remain untouched during future updates.
@@ -31,14 +34,12 @@ _Note: This bug had existed for quite some time. Since its impact was minor and 
 **v3.1.3**  
 - Fixed an issue where the findbar failed to display match count when positioned in the bottom-right corner.
 
-</details>
-
 **v3.1.2**
 
 - The default position of the findbar has been changed from *top-center-left* to *top-right*. A new string-based preference `uc.flex.findbar-position` has been added:
   - `"top-center-left"` or `"0"` moves the findbar to the previous default location near the top center-left.
   - `"top-right"` or `"1"` places it in the new default location at the top right.
-  - `"bottom-right"` or `"2"` sets it to Firefox’s original position at the bottom right.
+  - `"bottom-right"` or `"2"` sets it to Firefox's original position at the bottom right.
 - The `--uc-findbar-top` variable has been removed. Findbar placement is now controlled using `--uc-findbar-x-position` and `--uc-findbar-y-position`, allowing full customization.
 - The hardcoded minimum width of the sidebar has been removed. The value is now fully controlled via the `--uc-sidebar-width` variable.
 
@@ -49,9 +50,6 @@ _Note: This bug had existed for quite some time. Since its impact was minor and 
 - Fixed an issue where enabling the `uc.flex.fully-hide-sidebery` option in a non-maximized window would leave unwanted blank space at the edge and cause incorrect Sidebery height.
 
 With this update, all previously missing features from the horizontal tab mode are now fully compatible with Firefox's native vertical tabs. FlexFox v3.1.1 brings complete feature parity, making it seamless for users to switch from the old setup.
-
-<details>
-  <summary>🔧 <b>Various Fixes (v3.0.1–v3.1.0)</b></summary>
 
 **v3.1.0**
 - Refactored the structure of `uc-variables.css`. Frequently used and user-customizable variables are now grouped at the top of the file with clearer descriptions.
@@ -90,8 +88,6 @@ With this update, all previously missing features from the horizontal tab mode a
 - Fixed an issue where the position of the sidebar stripe was incorrect when both `uc.flex.disable-bookmarks-autohide` and the new sidebar were enabled.  
 - Fixed an issue where the width of the sidebar stripe displayed incorrectly when both `uc.flex.disable-sidebery-autohide` and the new sidebar were enabled.
 
-</details>
-
 **v3.0.0**
 - Integrated Firefox's native vertical tabs with Sidebery.
   - When Sidebery is active, the native vertical tabs are automatically hidden. The new sidebar collapses into a slim colored stripe at the top of Sidebery. Hovering over the stripe reveals the sidebar toolbar buttons.
@@ -113,11 +109,6 @@ With this update, all previously missing features from the horizontal tab mode a
 > [!TIP]
 > **Users can now create a `uc-user-settings.css` file in the `components` folder to customize FlexFox styles. This file loads after FlexFox and overrides its styles, so custom changes remain intact even after future updates.**  
 > **See this section: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-user-customizable-styles-uc-user-settingscss)**
-
-
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
 
 **v2.1.2**  
 - Fixed an issue where the bookmarks bar would shift when both native vertical tabs and `uc.flex.disable-bookmarks-autohide` were enabled.  
@@ -201,57 +192,112 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 
 </details>
 
-## 🖼️ Previews
-
-![FlexFox Light Theme](./assets/FlexFox-light.webp)  
-![FlexFox Dark Theme](./assets/FlexFox-dark.webp)  
-*Above: Light and Dark theme previews of FlexFox in action.*
-
 ## ✨ Features
 
-- **Minimal interface and lightweight performance**
-  - Simplifies the UI and minimizes resource usage.
+### 🌟 Minimalism
 
-- **Auto-hide toolbars**
-  - Automatically hides the horizontal tab bar, bookmarks toolbar, all top toolbars, and Sidebery's sidebar.
-  - Expands them when hovered.
+> *Maximize your view.*
 
-- **Customizable toolbar visibility**
-  - Choose which toolbars and Sidebery sidebar to show or hide.
-  - With all toolbars and sidebar hidden, the browser displays only webpage content, offering a full-screen experience without full-screen mode.
+- Freely collapse or hide the toolbar and sidebar independently.  
+  > *You can freely choose to hide the sidebar, the navigation bar, or both, depending on how you want to organize your workspace.*
 
-- **Trigger zones for hidden toolbars**
-  - Easily expand hidden toolbars or Sidebery sidebar from window edges.
-  - Works even when the window is not maximized.
-  - Adjust trigger sensitivity to your preference.
+- Focus entirely on content when everything is hidden.  
+  > *Create clean windows that look like sticky notes on your desktop, making it easy to compare pages side by side without unnecessary browser UI. You can also maximize the page area without entering fullscreen, keeping the desktop environment accessible.*
 
-- **Sidebery compatibility**
-  - Works seamlessly with or without Sidebery installed.
-  - Automatically hides the horizontal tab bar when Sidebery is active, and restores it when Sidebery is inactive.
-  - Supports placing Sidebery's sidebar on either the left or right, adapting to your preferred layout.
+### 🌟 Stability
 
-- **Integration with Title Bar and Menu Bar**
-  - FlexFox adjusts its layout for compatibility when these elements are enabled.
+> *Stay steady.*
 
-- **Overlay toolbars**
-  - Expanded toolbars overlay webpage content without causing layout shifts.
-  - Works smoothly even in full-screen mode.
+- UI elements expand without shifting the page layout.  
+  > *Collapsed toolbars or sidebars float over the page instead of pushing it aside, avoiding disruptive visual jumps.*
 
-- **Redesigned Findbar**
-  - Relocated to the top of the browser with a compact, floating design.
-  - Customize its position (left or right).
-  - Auto-hides when unfocused by default (can be disabled in options).
+- Tabs stay exactly where they were after unfolding.  
+  > *When vertical tabs expand, they smoothly stretch without shifting their positions, so there is no jumping and no need to reposition your mouse.*
 
-- **Compact extension panel**
-  - Displays only extension icons.
-  - Right-click for extension options.
-  - Alternatively, switch to a condensed panel retaining extension labels.
+### 🌟 Adaptability
 
-- **Improved Sidebery folding**
-  - Auto-collapses Sidebery's navigation and pinned tab sections.
-  - Expanded sections maintain vertical alignment to prevent layout jumps and minimize cursor adjustments.
+> *Adjusts itself.*
 
-## 💿 Installation
+- Automatically hides native tabs when Sidebery is active.  
+  > *Prevents redundant UI elements by showing only what is needed.*
+
+- Compatible with different Firefox setups.  
+  > *Whether your sidebar is on the left or right, and whether you show the title bar, menu bar, or bookmarks bar, FlexFox adapts without breaking the layout.*
+
+### 🌟 Flexibility
+
+> *Shape it your way.*
+
+- Quickly enable or disable features through `about:config`.  
+  > *You can customize FlexFox to fit your needs by disabling any feature you don't want, while keeping Firefox's original behavior intact.*
+
+- Deep customization through your own user styles.  
+  > *FlexFox loads user styles after its own, so you can safely override any setting and keep your changes across future updates.*
+
+## 💿 Deployment
+
+### 🚀 Method 1: Automatic Installation and Updates
+
+<details>
+<summary><h4>💻 PowerShell Script [Click to expand] 👇</h4></summary>
+
+- **Online deployment** – Run this command in a PowerShell window:
+  ```powershell
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
+  ```
+  **Silent online deployment**:
+  ```powershell
+   $env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
+  ```
+
+- **Local deployment** – Download the [`deploy-userchrome.ps1`](https://github.com/yuuqilin/FlexFox/raw/refs/heads/main/deploy-userchrome.ps1) script and run it in PowerShell:
+  ```powershell
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
+  ```
+  **Silent local deployment**:
+  ```powershell
+   $env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
+  ```
+
+- **Scheduled or Run dialog deployment** – Use the following for silent deployment:
+  ```powershell
+   powershell -ExecutionPolicy Bypass -Command "$env:FLEXFOX_INSTALL_MODE = 'silent'; .\deploy-userchrome.ps1"
+  ```
+
+</details>
+
+<details>
+<summary><h4>🔃 Git Pull [Click to expand] 👇</h4></summary>
+
+- Use one of the `git-pull-chrome-only` scripts inside the `scripts` folder, depending on your environment. These scripts will:
+  - Automatically set your Firefox profile folder as a Git working directory
+  - Track the FlexFox repository as a remote
+  - Download and update only the `chrome` folder (excluding all other files)
+
+- Alternatively, you can manually add the remote repository to your Firefox profile folder:
+
+  **First-time setup (initialize the profile folder):**
+  ```bash
+  git init
+  git remote add origin https://github.com/yuuqilin/FlexFox.git
+  git sparse-checkout init --no-cone
+  git sparse-checkout set /chrome
+  git fetch origin
+  git checkout -b main origin/main
+  ```
+
+  **Manual update (after setup):**
+  ```bash
+  git fetch origin
+  git checkout main
+  git merge origin/main --allow-unrelated-histories
+  ```
+
+</details>
+
+---
+
+### 👷 Method 2: Manual Installation
 
 > [!IMPORTANT]
 > 1. Install [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) (optional but recommended).
@@ -259,20 +305,22 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 >    - [FlexFox](https://github.com/yuuqilin/FlexFox/archive/refs/heads/main.zip) for standard Firefox.
 >    - [FlexFox Beta](https://github.com/yuuqilin/FlexFox/archive/refs/heads/Beta.zip) for Firefox Beta/Nightly.
 >    - [FlexFox ESR](https://github.com/yuuqilin/FlexFox/archive/refs/heads/ESR.zip) for Firefox ESR.
-> 3. Navigate to `about:support`, find `Profile Folder`, and click **Open** to access your Firefox profile folder.
-> 4. Copy the `chrome` folder and `user.js` file from the downloaded `Profiles` directory into your Firefox profile folder.
-> 5. *(Optional)* Edit `user.js` with a text editor to enable additional features by removing the `//` comment markers.
->    - Ensure `toolkit.legacyUserProfileCustomizations.stylesheets` and `svg.context-properties.content.enabled` remain enabled (`true`).
-> 6. Restart Firefox, then delete `user.js` to allow changes made in `about:config` to persist.
+> 3. Open `about:support`, find **Profile Folder**, and click **Open Folder** to access your Firefox profile directory.
+> 4. Copy the `chrome` folder and the `user.js` file from the `scripts` directory into your Firefox profile folder.
+> 5. *(Optional)* Open `user.js` in a text editor and remove `//` comment markers to enable additional features.
+>    - Make sure the following settings remain `true`:
+>      - `toolkit.legacyUserProfileCustomizations.stylesheets`
+>      - `svg.context-properties.content.enabled`
+> 6. Restart Firefox, then delete `user.js` so that any manual changes made in `about:config` can persist.
 > 7. Configure Sidebery:
->    - Open Sidebery settings via the gear icon in the sidebar.
->    - Go to `Help` > `Import addon data` and import `sidebery-settings.json` and `sidebery-styles.json` from the `Sidebery` folder in the downloaded archive.
->    - *Note:* If Sidebery settings don’t work as expected, re-import the files.
-> 8. *(Optional)* Use `about:config` to search for `uc.flex.` and enable/disable FlexFox features as needed.
+>    - Open Sidebery settings (gear icon in the sidebar).
+>    - Navigate to `Help` > `Import addon data`, then import both `sidebery-settings.json` and `sidebery-styles.json` from the `Sidebery` folder in the downloaded archive.
+>    - *Note:* If the settings don’t apply correctly, try re-importing them.
+> 8. *(Optional)* Open `about:config` and search for `uc.flex.` to toggle FlexFox features.
 
 ## ⚙️ Options
 
-### 📁 User-Customizable Styles (`uc-user-settings.css`)
+### 📜 User-Customizable Styles (`uc-user-settings.css`)
 
 > [!TIP]
 > You can safely override default style variables and rules without modifying the core files.
@@ -314,7 +362,7 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 
 ## 🐞 Known Issues
 
-- For Floorp users: Switch to `Firefox Proton UI` in Floorp’s interface options to reduce compatibility issues.
+- For Floorp users: Switch to `Firefox Proton UI` in Floorp's interface options to reduce compatibility issues.
 - Tested on Windows only: May require adjustments for other operating systems.
 
 <details>

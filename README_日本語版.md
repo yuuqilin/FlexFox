@@ -1,7 +1,7 @@
-# FlexFox（日本語版）
+# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v139-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v140-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -11,10 +11,13 @@
 
 FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyArc-fr](https://github.com/artsyfriedchicken/EdgyArc-fr)、[Edge-Frfox](https://github.com/bmFtZQ/edge-frfox)、[ArcWTF](https://github.com/KiKaraage/ArcWTF)、[shimmer](https://github.com/nuclearcodecat/shimmer)、[firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks)からインスピレーションを得て開発された、カスタマイズ性の高いFirefox用テーマです。豊富な機能と柔軟な設定により、より快適なブラウジング体験を実現します。
 
+![FlexFox Dark-Light Theme](./assets/FlexFox-light-dark.webp) 
+
 ## 🆕 最新情報
 
 <details>
-  <summary>🔧 <b>さまざまな修正（v3.1.3～v3.1.6）</b></summary>
+
+<summary>💬 <b>過去の更新</b></summary>
 
 **v3.1.6**
 - `content`フォルダに `uc-custom-content.css` を作成することで、ウェブページの表示に対する独自スタイルを適用できるようになりました。このファイルは `userContent.css` の末尾で読み込まれるため、前のスタイルを上書きできます。また、FlexFox本体には含まれていないため、今後のアップデートでも内容が上書きされることはありません。
@@ -30,8 +33,6 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 
 **v3.1.3**  
 - Findbarを右下に配置した際に、一致件数が表示されない問題を修正しました。
-
-</details>
 
 **v3.1.2**
 
@@ -49,9 +50,6 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 - 新しいサイドバーを有効にしていてウィンドウが最大化されていない状態で、`uc.flex.fully-hide-sidebery`オプションを使うと、ウィンドウ端に余白が発生し、Sideberyの高さが正しく表示されない問題を修正しました。
 
 今回のアップデートにより、旧バージョンの水平タブモードで利用可能だった全機能が縦型タブモードでも完全に利用可能となりました。FlexFox v3.1.1で、よりスムーズな移行が可能になります。
-
-<details>
-  <summary>🔧 <b>さまざまな修正（v3.0.1～v3.1.0）</b></summary>
 
 **v3.1.0**
 - `uc-variables.css`の構成を見直し。ユーザーがよく使うカスタマイズ可能な変数をファイルの先頭にまとめ、分かりやすい説明を追加しました。
@@ -90,8 +88,6 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 - `uc.flex.disable-bookmarks-autohide` を使用中に、新しいサイドバーのサイドバーストライプの位置がずれる問題を修正しました。  
 - `uc.flex.disable-sidebery-autohide` を使用中に、サイドバーストライプの幅が不正になる問題を修正しました。
 
-</details>
-
 **v3.0.0**
 - Firefoxのネイティブ縦型タブとSideberyを統合しました。  
   - Sideberyが有効な場合、ネイティブの縦型タブは自動的に非表示になり、新しいサイドバーはSidebery上部の細いカラーストライプ（サイドバーストライプ）に折りたたまれます。サイドバーストライプにマウスカーソルを合わせると、サイドバーのツールボタンが表示されます。  
@@ -113,11 +109,6 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 > [!TIP]
 > **ユーザーは現在、`components` フォルダー内に `uc-user-settings.css` ファイルを作成することで、FlexFox のスタイルをカスタマイズできます。このファイルは FlexFox の後に読み込まれ、そのスタイルを上書きするため、将来的なアップデート後もカスタム変更が保持されます。**  
 > **詳細は次のセクションをご覧ください: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-user-customizable-styles-uc-user-settingscss)**
-
-
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
 
 **v2.1.2**  
 - ネイティブの縦型タブと `uc.flex.disable-bookmarks-autohide` が両方有効な場合に、ブックマークバーがずれる問題を修正しました。  
@@ -201,77 +192,135 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 
 </details>
 
-## 🖼️ プレビュー
+## ✨ 特徴
 
-![FlexFox Light Theme](./assets/FlexFox-light.webp)  
-![FlexFox Dark Theme](./assets/FlexFox-dark.webp)  
-*上：FlexFoxのライトテーマとダークテーマの表示例*
+### 🌟 ミニマル設計
 
-## ✨ 主な機能
+> *表示領域を最大限に。*
 
-- **シンプル＆軽量なインターフェース**
-  - UIを必要最小限に抑え、システムリソースを効率的に使用します
+- ツールバーやサイドバーを個別に折りたたみ・非表示にできます。  
+  > *サイドバーだけを隠してナビゲーションバーを残す、あるいはその逆など、柔軟に組み合わせて作業しやすい画面にできます。*
 
-- **ツールバーの自動非表示**
-  - タブバー、ブックマークバー、上部ツールバー、Sideberyサイドバーを自動的に隠します
-  - マウスを近づけると自然に表示されます
+- すべてのUIを隠すことで、コンテンツに完全フォーカス。  
+  > *ブラウザのUIが一切ない、まるで付箋のような小さなウィンドウを作ることができ、複数ページの並列表示や作業用のコンパクトビューにも最適です。また、全画面表示に切り替えることなくページ領域を最大化でき、デスクトップ環境へのアクセスも維持されます。*
 
-- **表示項目のカスタマイズ**
-  - 必要なツールバーやサイドバーを自由に選択できます
-  - すべて非表示にすれば、フルスクリーンモードを使わずともWebページだけを表示できます
+### 🌟 安定した動作
 
-- **便利な表示トリガー**
-  - ウィンドウの端にマウスを移動するだけで、ツールバーやサイドバーが表示されます
-  - ウィンドウが最大化されていなくても機能します
-  - 反応感度も調整可能です
+> *UIが動いても、ページは動かない。*
 
-- **Sideberyとの優れた互換性**
-  - Sideberyの有無にかかわらずスムーズに動作
-  - Sidebery使用時は自動的にタブバーを非表示に
-  - サイドバーは左右どちらにも配置可能
+- UIを展開しても、ページのレイアウトに影響なし。  
+  > *折りたたまれたUIはページ上に浮かぶように表示され、表示中のページが押しのけられることはありません。*
 
-- **タイトルバー・メニューバーへの対応**
-  - これらの要素が有効な場合でも、自動的にレイアウトを最適化
+- タブを展開しても位置がずれません。  
+  > *縦型タブが展開される際、横に広がっても元の縦位置のまま動かず、マウスカーソルの再移動は不要です。*
 
-- **オーバーレイ方式のツールバー**
-  - ツールバーはページコンテンツの上に重なって表示されるため、レイアウトが崩れません
-  - フルスクリーンモードでも快適に使用できます
+### 🌟 適応性
 
-- **検索バーの改善**
-  - ブラウザ上部にコンパクトで浮かぶようなデザイン
-  - 左右の位置を自由に調整可能
-  - フォーカスが外れると自動的に非表示（設定で変更可能）
+> *使い方に合わせて自動調整。*
 
-- **すっきりとした拡張機能パネル**
-  - アイコンのみのシンプルな表示
-  - 右クリックで設定画面にアクセス
-  - 必要に応じてラベル付き表示に切り替え可能
+- Sidebery有効時はネイティブのタブバーを自動的に非表示に。  
+  > *似た機能が重複しないように、自動的に最適化します。*
 
-- **Sideberyの折りたたみ機能を強化**
-  - ナビゲーションと固定タブセクションを自動的に折りたたみ
-  - 展開時も位置を維持し、マウス操作がスムーズ
+- Firefoxの様々なUI構成に対応。  
+  > *タイトルバーやメニューバーの表示、ブックマークツールバーの有無、サイドバーの左右配置など、ユーザーの好みに合わせた環境でもレイアウトが崩れません。*
 
-## 💿 インストール方法
+### 🌟 柔軟性
+
+> *自分好みにカスタマイズ。*
+
+- `about:config`から機能を簡単にオン・オフ可能。  
+  > *不要な機能を無効にして、Firefox本来の見た目や挙動に戻すこともできます。*
+
+- 独自スタイルで詳細設定も可能。  
+  > *ユーザースタイルはFlexFox本体の後に読み込まれるため、設定を安全に上書きでき、アップデートの影響も受けません。*
+
+## 💿 導入
+
+### 🚀 方法1：自動インストールと更新
+
+<details>
+<summary><h4>💻 PowerShellスクリプト《クリックで展開》👇</h4></summary>
+
+- **オンライン導入** – PowerShellで次のコマンドを実行します：
+  ```powershell
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
+  ```
+  **サイレント導入（オンライン）**：
+  ```powershell
+   $env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
+  ```
+
+- **ローカル導入** – [`deploy-userchrome.ps1`](https://github.com/yuuqilin/FlexFox/raw/refs/heads/main/deploy-userchrome.ps1) をダウンロードしてPowerShellで実行：
+  ```powershell
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
+  ```
+  **サイレント導入（ローカル）**：
+  ```powershell
+   $env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
+  ```
+
+- **タスクスケジューラや「ファイル名を指定して実行」からの導入**：
+  ```powershell
+   powershell -ExecutionPolicy Bypass -Command "$env:FLEXFOX_INSTALL_MODE = 'silent'; .\deploy-userchrome.ps1"
+  ```
+
+</details>
+
+<details>
+<summary><h4>🔃 Git Pull《クリックで展開》👇</h4></summary>
+
+- 使用環境に応じて、`scripts` フォルダ内のいずれかの `git-pull-chrome-only` スクリプトを使ってください。これらのスクリプトでは：
+  - FirefoxプロファイルフォルダをGitワーキングディレクトリとして設定
+  - FlexFoxリポジトリをリモートとして登録
+  - `chrome`フォルダのみを取得・更新（他のファイルは除外）
+
+- または、手動でリモートリポジトリを追加：
+
+  **初回セットアップ（chromeフォルダの作成）：**
+  ```bash
+  git init
+  git remote add origin https://github.com/yuuqilin/FlexFox.git
+  git sparse-checkout init --no-cone
+  git sparse-checkout set /chrome
+  git fetch origin
+  git checkout -b main origin/main
+  ```
+
+  **手動で更新する場合：**
+  ```bash
+  git fetch origin
+  git checkout main
+  git merge origin/main --allow-unrelated-histories
+  ```
+
+</details>
+
+---
+
+### 👷 方法2：手動インストール
 
 > [!IMPORTANT]
-> 1. まずは[Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/)をインストール（推奨）
-> 2. お使いのFirefoxに合わせてFlexFoxをダウンロード：
->    - 通常版Firefox → [FlexFox](https://github.com/yuuqilin/FlexFox/archive/refs/heads/main.zip)
->    - Firefox Beta/Nightly → [FlexFox Beta](https://github.com/yuuqilin/FlexFox/archive/refs/heads/Beta.zip)
->    - Firefox ESR → [FlexFox ESR](https://github.com/yuuqilin/FlexFox/archive/refs/heads/ESR.zip)
-> 3. `about:support`を開き、「プロファイルフォルダー」の「開く」をクリック
-> 4. ダウンロードした`Profiles`フォルダー内の`chrome`フォルダと`user.js`をプロファイルフォルダーにコピー
-> 5. *（任意）* `user.js`をテキストエディターで開き、使用したい機能の`//`を削除
->    - `toolkit.legacyUserProfileCustomizations.stylesheets`と`svg.context-properties.content.enabled`は必ず`true`のままにしてください
-> 6. Firefoxを再起動し、その後`user.js`を削除（`about:config`での設定は保持されます）
+> 1. [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) をインストール（推奨）。
+> 2. FlexFoxをダウンロード：
+>    - [FlexFox](https://github.com/yuuqilin/FlexFox/archive/refs/heads/main.zip)：通常版Firefox用
+>    - [FlexFox Beta](https://github.com/yuuqilin/FlexFox/archive/refs/heads/Beta.zip)：Firefox Beta / Nightly用
+>    - [FlexFox ESR](https://github.com/yuuqilin/FlexFox/archive/refs/heads/ESR.zip)：Firefox ESR用
+> 3. `about:support`を開き、「プロファイルフォルダー」の「フォルダーを開く」をクリック。
+> 4. `chrome` フォルダと、`scripts` フォルダ内の `user.js` をプロファイルフォルダにコピーします。
+> 5. *(任意)* テキストエディタで`user.js`を編集し、必要な機能の`//`コメントを外す。
+>    - 以下の設定は`true`のままにしてください：
+>      - `toolkit.legacyUserProfileCustomizations.stylesheets`
+>      - `svg.context-properties.content.enabled`
+> 6. Firefoxを再起動し、その後`user.js`を削除して、`about:config`の変更を保存できるようにします。
 > 7. Sideberyの設定：
->    - サイドバーの歯車アイコンから設定を開き、`Help > Import addon data`で`sidebery-settings.json`と`sidebery-styles.json`をインポート
->    - *注：* 設定が反映されない場合は、再度インポートをお試しください
-> 8. *（任意）* `about:config`で`uc.flex.`を検索し、お好みの機能を有効化/無効化
+>    - サイドバーの歯車アイコンから設定を開く
+>    - 「ヘルプ」→「アドオンデータをインポート」で、アーカイブ内の`sidebery-settings.json`と`sidebery-styles.json`をインポート
+>    - *注*：設定が反映されない場合は再度インポートしてください。
+> 8. *(任意)* `about:config`で`uc.flex.`を検索し、必要に応じてFlexFoxの機能を有効／無効にします。
 
 ## ⚙️ カスタマイズ設定
 
-### 📁 ユーザー定義スタイル（`uc-user-settings.css`）
+### 📜 ユーザー定義スタイル（`uc-user-settings.css`）
 
 > [!TIP]
 > デフォルトのスタイル変数やルールを、コアファイルを編集せずに上書きできます。
