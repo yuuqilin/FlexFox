@@ -778,21 +778,65 @@
     }
 
     sidebar-main[expanded]:hover {
+        #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+            transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay) !important;
+        }
+        :is(.tab-label-container .tab-text, .tab-close-button) {
+            transition-delay: var(--uc-hover-sidebar-delay);
+        }
+
+        .toolbarbutton-text {
+            transition-delay: var(--uc-hover-sidebar-delay);
+        }
+
+        #vertical-pinned-tabs-container {
+            .tabbrowser-tab .tab-stack {
+                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+            }
+        }
+
         #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
             padding-inline: 2px !important;
             max-width: 100% !important;
+            transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay) !important;
         }
-        .tabbrowser-tab .tab-stack {
-            min-width: 100%;
+        #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
+            transition:
+                margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay) !important;
+            .tab-group-line {
+                transition-delay: var(--uc-hover-sidebar-delay);
+            }
         }
-        .tabbrowser-tab .tab-background {
-            max-width: 100% !important;
+        #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
+            transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay);
         }
         #tabbrowser-tabs[orient="vertical"]::after {
             width: calc(
                 var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
                     var(--tab-pinned-container-margin-inline-expanded) - 22px
             );
+            transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay);
+        }
+        @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+            #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+                transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+            }
+        }
+
+        .tabbrowser-tab .tab-stack {
+            min-width: 100%;
+        }
+        .tabbrowser-tab .tab-background {
+            max-width: 100% !important;
         }
         @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
             #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {

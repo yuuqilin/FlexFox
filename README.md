@@ -15,6 +15,10 @@ A customizable Firefox theme inspired by [VerticalFox](https://github.com/christ
 
 ## 🆕 What's New
 
+**v3.1.7**
+- Fixed a timing issue in the native vertical tabs animation. Tab label appearance now syncs properly with the tab width expansion.
+- Improved the file size estimation in the PowerShell installer script to more accurately reflect the actual download size.
+
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>

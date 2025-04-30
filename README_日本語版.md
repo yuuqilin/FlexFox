@@ -15,6 +15,10 @@ FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyA
 
 ## 🆕 最新情報
 
+**v3.1.7**
+- Firefox標準の縦型タブを展開する際、アニメーションのタイミングがずれていた問題を修正しました。タブのラベル表示が幅の変化と同期するようになりました。
+- PowerShellインストーラーにおけるダウンロードファイルのサイズ推定値をより実際のサイズに近づけました。
+
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
