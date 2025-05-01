@@ -9,7 +9,10 @@
 
 <br>
 
-FlexFoxは、[VerticalFox](https://github.com/christorange/VerticalFox)、[EdgyArc-fr](https://github.com/artsyfriedchicken/EdgyArc-fr)、[Edge-Frfox](https://github.com/bmFtZQ/edge-frfox)、[ArcWTF](https://github.com/KiKaraage/ArcWTF)、[shimmer](https://github.com/nuclearcodecat/shimmer)、[firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks)からインスピレーションを得て開発された、カスタマイズ性の高いFirefox用テーマです。豊富な機能と柔軟な設定により、より快適なブラウジング体験を実現します。
+FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変えます。  
+無駄な視覚要素を省き、安定した UI と軽快な動作を両立。  
+カスタマイズ性の高いベースとして、理想のインターフェースを自由に作れます。  
+見た目を変えるだけではなく、ブラウジングの質そのものを高めるテーマです。  
 
 ![FlexFox Dark-Light Theme](./assets/FlexFox-light-dark.webp) 
 
@@ -242,6 +245,9 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 
 ### 🚀 方法1：自動インストールと更新
 
+初めて FlexFox をインストールする場合は、スクリプトの実行後に [方法2](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) の手順5以降を手動で実行してください。  
+以降のアップデートでは、スクリプトを再実行するだけで自動的に更新されます。手動作業は不要です。
+
 <details>
 <summary><h4>💻 PowerShellスクリプト《クリックで展開》👇</h4></summary>
 
@@ -324,45 +330,46 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 
 ## ⚙️ カスタマイズ設定
 
-### 📜 ユーザー定義スタイル（`uc-user-settings.css`）
+### 📜 ユーザー定義スタイル（`uc-user-settings.css`、`uc-custom-content.css`）
 
-> [!TIP]
-> デフォルトのスタイル変数やルールを、コアファイルを編集せずに上書きできます。
-> 
-> カスタマイズ方法：
-> 
-> 1. `components` フォルダ内に `uc-user-settings.css` という名前のファイルを作成してください。
-> 2. 変更したい変数やルール（例：`uc-variables.css` 内のもの）をコピーします。
-> 3. `uc-user-settings.css` に貼り付け、必要に応じて編集してください。
-> 
-> このファイルはすべての組み込みスタイルの後に読み込まれるため、FlexFox の将来的なアップデートでもカスタマイズ内容は保持されます。  
+> [!TIP]  
+> FlexFox のコアファイルを直接編集せずに、Firefoxのインターフェースやウェブページの表示スタイルを自由にカスタマイズできます。
+>
+> カスタマイズの方法：
+>
+> - **Firefoxのインターフェース（chrome）**を変更するには、`components` フォルダに `uc-user-settings.css` を作成してください。
+> - **ウェブページの内容（content）**を変更するには、`content` フォルダに `uc-custom-content.css` を作成してください。
+>
+> 必要に応じて、`uc-variables.css` などの既存ファイルから変数やスタイルをコピーし、自分用に編集して使うことができます。これらのファイルは **既定のスタイルの後に読み込まれるため、ユーザーの設定が優先されます。**
+>
+> これらのファイルは **FlexFox本体には含まれていないため、将来のアップデートで上書きされることはありません。** 一度設定すれば、以後もそのまま利用可能です。
+>
+> 💡 `:root` や `:root:has(...)` のようにセレクター内で定義されているルールをコピーする場合は、文脈を保つためにセレクター全体を含めてコピーしてください。
 
-> 💡 特定のセレクター（例：`:root` や `:root:has(...)`）内に定義された変数をコピーする場合は、セレクターごと全体をコピーしてください。正しく上書きされるために必要です。
+### 🧩 カスタマイズ可能な設定 (`about:config`)
 
-### 🧩 設定可能なオプション（`about:config`）
-
-| 設定項目                                   | 説明                                                           |
-|--------------------------------------------|----------------------------------------------------------------|
-| `uc.flex.add-ui-text-stroke`               | UIテキストを縁取りで強調                                       |
-| `uc.flex.add-bookmarks-left-margin`        | ブックマークとツールバーアイコンの位置を揃える                 |
-| `uc.flex.fully-hide-sidebery`              | Sideberyを完全に非表示                                         |
-| `uc.flex.fully-hide-toolbox`               | 上部ツールバーをすべて非表示                                   |
-| `uc.flex.increase-sidebery-expanded-width` | Sideberyの展開時の幅を広げる                                   |
-| `uc.flex.allow-addons-to-change-toolbar-color` | テーマや拡張機能がツールバーの背景画像と色を変更可能にする |
-| `uc.flex.disable-bookmarks-autohide`       | ブックマークバーの自動非表示を無効化                           |
-| `uc.flex.disable-tabs-toolbar-autohide`    | Sidebery未使用時のタブバー自動非表示を無効化                   |
-| `uc.flex.disable-findbar-autohide`         | 検索バーの自動非表示を無効化                                   |
-| `uc.flex.disable-native-vertical-tabs-autohide` | ネイティブ縦型タブの自動折りたたみを無効化                  |
-| `uc.flex.disable-sidebery-autohide`        | Sideberyの自動折りたたみを無効化                               |
-| `uc.flex.remove-bookmarks-folder-icons`    | ブックマークフォルダーのアイコンを非表示                       |
-| `uc.flex.remove-bookmarks-labels`          | ブックマークのテキストラベルを非表示                           |
-| `uc.flex.switch-to-alternate-condensed-panel` | 別デザインの拡張機能パネルに切り替え                        |
-| `uc.flex.revert-to-original-window-controls` | 元のウィンドウコントロール（最小化・最大化・閉じる）に戻す   |
-| `uc.flex.sidebery-fast-hover-expand`       | Sideberyの展開/折りたたみを高速化                              |
-| `uc.flex.sidebery-slow-hover-expand`       | Sideberyの展開/折りたたみを遅くする                            |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | 垂直タブのピン留めタブと通常タブの間に区切り線を表示します |
-| `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブ縦型タブの1列あたりのピン留め数を設定（数値、4～6）      |
-| `uc.flex.findbar-position` | 検索バーの表示位置を設定します。（文字列, `"top-center-left"` または `"0"` = 上中央やや左, `"top-right"` または `"1"` = 右上, `"bottom-right"` または `"2"` = 右下） |
+| 設定名 | 説明 |
+|--------|------|
+| `uc.flex.add-ui-text-stroke` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
+| `uc.flex.add-bookmarks-left-margin` | ナビゲーションバーでブックマークが左から2番目に配置されている場合、ブックマークと垂直タブバーの間に余白を追加して、視覚的な区切りと整列を改善します。 |
+| `uc.flex.fully-hide-sidebery` | Sidebery を完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
+| `uc.flex.fully-hide-toolbox` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
+| `uc.flex.increase-sidebery-expanded-width` | Sidebery の展開時の幅を広げます。 |
+| `uc.flex.allow-addons-to-change-toolbar-color` | テーマや拡張機能によるツールバーの背景色や背景画像の上書きを許可します。 |
+| `uc.flex.disable-bookmarks-autohide` | ブックマークツールバーの自動非表示を無効にします。 |
+| `uc.flex.disable-tabs-toolbar-autohide` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
+| `uc.flex.disable-findbar-autohide` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |
+| `uc.flex.disable-native-vertical-tabs-autohide` | Firefox の垂直タブバーの自動折りたたみを無効にします。 |
+| `uc.flex.disable-sidebery-autohide` | Sidebery の自動折りたたみを無効にします。 |
+| `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
+| `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
+| `uc.flex.switch-to-alternate-condensed-panel` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
+| `uc.flex.revert-to-original-window-controls` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
+| `uc.flex.sidebery-fast-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
+| `uc.flex.sidebery-slow-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Firefox の「展開モード」のネイティブ垂直タブにおいて、ピン留めタブと通常タブの間に区切り線を表示します（デフォルトでは非表示）。 |
+| `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブの垂直タブにおいて、1列あたりに表示できるピン留めタブの最大数を設定します（数値の範囲は 4～6）。この数を超えるとスクロールバーが表示されるため、使用環境に応じて調整してください。 |
+| `uc.flex.findbar-position` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `"top-center-left"` または `"0"`（左寄せ上部）、`"top-right"` または `"1"`（右上）、`"bottom-right"` または `"2"`（右下）です。 |
 
 ## 🐞 既知の問題
 
@@ -372,8 +379,26 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 - **動作環境について：**  
   Windows環境での動作確認を行っています。他のOSでは別途調整が必要な場合があります。
 
+## 🎖️ クレジット
+
+FlexFox は、以下の優れたプロジェクトの成果を基盤に構築されています：
+
+- **[VerticalFox](https://github.com/christorange/VerticalFox)** — 垂直タブのレイアウトと、いくつかのレイアウト設計の基本となる発想を提供してくれました。  
+- **[firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks)** — 多くの微調整やレイアウトの修正において、この素晴らしい CSS コレクションを活用しています。
+
+また、以下のプロジェクトからもデザインや機能の着想を得ています：
+
+- [EdgyArc-fr](https://github.com/artsyfriedchicken/EdgyArc-fr)  
+- [Edge-Frfox](https://github.com/bmFtZQ/edge-frfox)  
+- [ArcWTF](https://github.com/KiKaraage/ArcWTF)  
+- [shimmer](https://github.com/nuclearcodecat/shimmer)
+- [firefox-gx](https://github.com/Godiesc/firefox-gx)
+
+これらの素晴らしい制作者の皆様に、心から感謝いたします。
+
 <details>
   <summary><h2 style="display: inline;">📄 ライセンス</h2></summary>
+  <hr style="border: none; border-top: 1px solid #d0d7de; margin: 16px 0;">
   <p>本プロジェクトは主に MIT ライセンスのもとで公開されています。<br>
   ただし、一部のソースコード（以下参照）は Mozilla Public License 2.0（MPL-2.0）でライセンスされたコードを組み込んでいます。</p>
 

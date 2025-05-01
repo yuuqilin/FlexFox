@@ -9,7 +9,10 @@
 
 <br>
 
-A customizable Firefox theme inspired by [VerticalFox](https://github.com/christorange/VerticalFox), [EdgyArc-fr](https://github.com/artsyfriedchicken/EdgyArc-fr), [Edge-Frfox](https://github.com/bmFtZQ/edge-frfox), [ArcWTF](https://github.com/KiKaraage/ArcWTF), [shimmer](https://github.com/nuclearcodecat/shimmer) and [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks). FlexFox offers extensive flexibility and feature options to enhance your browsing experience.
+FlexFox makes Firefox faster, smarter, and easier to use.  
+It cuts out visual noise, keeps the UI steady, and stays fast.  
+Designed as a flexible base, it lets you shape your ideal interface without bloat.  
+It's not just a new look, it's a better way to browse.  
 
 ![FlexFox Dark-Light Theme](./assets/FlexFox-light-dark.webp)   
 
@@ -206,7 +209,7 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
   > *You can freely choose to hide the sidebar, the navigation bar, or both, depending on how you want to organize your workspace.*
 
 - Focus entirely on content when everything is hidden.  
-  > *Create clean windows that look like sticky notes on your desktop, making it easy to compare pages side by side without unnecessary browser UI. You can also maximize the page area without entering fullscreen, keeping the desktop environment accessible.*
+  > *Turn pages into sticky-note-like windows on your desktop, making it easy to compare pages side by side without unnecessary browser UI. You can also maximize the page area without entering fullscreen, keeping the desktop environment accessible.*
 
 ### 🌟 Stability
 
@@ -220,7 +223,7 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 
 ### 🌟 Adaptability
 
-> *Adjusts itself.*
+> *Adapts on its own.*
 
 - Automatically hides native tabs when Sidebery is active.  
   > *Prevents redundant UI elements by showing only what is needed.*
@@ -241,6 +244,9 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 ## 💿 Deployment
 
 ### 🚀 Method 1: Automatic Installation and Updates
+
+If this is your first time installing FlexFox, please proceed to [Method 2](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) and follow the steps starting from Step 5 **after** running the script.  
+For future updates, simply re-running the script will be enough, and you won't need to repeat the manual steps.
 
 <details>
 <summary><h4>💻 PowerShell Script [Click to expand] 👇</h4></summary>
@@ -324,53 +330,71 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 
 ## ⚙️ Options
 
-### 📜 User-Customizable Styles (`uc-user-settings.css`)
+### 📜 User-Customizable Styles (`uc-user-settings.css`, `uc-custom-content.css`)
 
-> [!TIP]
-> You can safely override default style variables and rules without modifying the core files.
-> 
-> To do this:
-> 
-> 1. Create a new file named `uc-user-settings.css` inside the `components` folder.
-> 2. Copy any variables or rules you want to change (e.g., from `uc-variables.css`).
-> 3. Paste them into `uc-user-settings.css` and modify them as needed.
-> 
-> This file will be loaded *after* all built-in styles and will take precedence, ensuring your customizations remain intact even after future updates to FlexFox. 
-
-> 💡 If you're copying variables defined inside specific selectors (like `:root` or `:root:has(...)`), be sure to copy the entire block to keep the context intact.
+> [!TIP]  
+> You can safely customize both the Firefox interface and webpage content without modifying any core files.  
+>  
+> To apply your own styles:  
+> - For **interface (chrome) styles**, create a file named `uc-user-settings.css` inside the `components` folder.  
+> - For **webpage (content) styles**, create a file named `uc-custom-content.css` inside the `content` folder.  
+>  
+> You can copy and override any style rules or variables from the built-in files (e.g., from `uc-variables.css`) and adjust them as needed. These user-defined files are loaded **after** the default styles, so your customizations will take precedence.  
+>  
+> These files are **not part of the FlexFox project by default**, which means they will **not be affected by future updates**. Your changes will remain intact even after upgrading FlexFox.  
+>  
+> 💡 If you're copying rules defined inside a specific selector like `:root` or `:root:has(...)`, be sure to copy the entire selector block to keep the context intact.
 
 ### 🧩 Configurable Preferences (`about:config`)
 
-| Preference                                  | Description                                                                  |
-|---------------------------------------------|------------------------------------------------------------------------------|
-| `uc.flex.add-ui-text-stroke`                | Add a bold outline to interface text.                                        |
-| `uc.flex.add-bookmarks-left-margin`         | Align bookmarks with toolbar icons by adding margin.                         |
-| `uc.flex.fully-hide-sidebery`               | Completely hide Sidebery.                                                    |
-| `uc.flex.fully-hide-toolbox`                | Hide all top toolbars (tabs, navigation, bookmarks).                         |
-| `uc.flex.increase-sidebery-expanded-width`  | Increase the expanded width of Sidebery.                                     |
-| `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and addons to customize toolbar background image and color. |
-| `uc.flex.disable-bookmarks-autohide`        | Disable bookmarks toolbar auto-hide.                                         |
-| `uc.flex.disable-tabs-toolbar-autohide`     | Disable the native horizontal tab bar auto-hide when Sidebery is inactive.   |
-| `uc.flex.disable-findbar-autohide`          | Disable Findbar auto-hide when it loses focus.                               |
-| `uc.flex.disable-native-vertical-tabs-autohide` | Disable auto-collapse of native vertical tabs.                           |
-| `uc.flex.disable-sidebery-autohide`         | Disable Sidebery auto-collapse.                                              |
-| `uc.flex.remove-bookmarks-folder-icons`     | Remove icons from bookmark folders.                                          |
-| `uc.flex.remove-bookmarks-labels`           | Remove bookmark text labels.                                                 |
-| `uc.flex.switch-to-alternate-condensed-panel` | Switch to another condensed extension panel.                               |
-| `uc.flex.revert-to-original-window-controls` | Restore the original window buttons (minimize, maximize, close).            |
-| `uc.flex.sidebery-fast-hover-expand`        | Speed up Sidebery hover expand/collapse.                                     |
-| `uc.flex.sidebery-slow-hover-expand`        | Slow down Sidebery hover expand/collapse.                                    |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in vertical tabs.  |
-| `uc.flex.max-visible-vertical-pinned-tabs`  | Sets max pinned tabs per column in native vertical tabs (numeric, 4–6).      |
-| `uc.flex.findbar-position` | Sets the findbar position. (string, `"top-center-left"` or `"0"` = center-left top, `"top-right"` or `"1"` = top right, `"bottom-right"` or `"2"` = bottom right) |
+| Preference | Description |
+|-----------|-------------|
+| `uc.flex.add-ui-text-stroke` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
+| `uc.flex.add-bookmarks-left-margin` | Adds spacing between bookmarks and the vertical tabs when bookmarks are placed second from the left on the navigation bar, ensuring better visual separation and alignment. |
+| `uc.flex.fully-hide-sidebery` | Fully hides Sidebery; it reappears when the cursor moves to the screen edge. |
+| `uc.flex.fully-hide-toolbox` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
+| `uc.flex.increase-sidebery-expanded-width` | Increases the width of Sidebery when expanded. |
+| `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and extensions to override toolbar background color and image. |
+| `uc.flex.disable-bookmarks-autohide` | Disables auto-hide for the bookmarks toolbar. |
+| `uc.flex.disable-tabs-toolbar-autohide` | Prevents the native horizontal tabs from auto-hiding when Sidebery is inactive. |
+| `uc.flex.disable-findbar-autohide` | Prevents the Findbar from automatically hiding when it loses focus. |
+| `uc.flex.disable-native-vertical-tabs-autohide` | Disables auto-collapse for the native vertical tabs. |
+| `uc.flex.disable-sidebery-autohide` | Disables auto-collapse for Sidebery. |
+| `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
+| `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |
+| `uc.flex.switch-to-alternate-condensed-panel` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
+| `uc.flex.revert-to-original-window-controls` | Reverts to Firefox's default window control buttons (minimize, maximize, close), replacing the macOS-style icons used by FlexFox. |
+| `uc.flex.sidebery-fast-hover-expand` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
+| `uc.flex.sidebery-slow-hover-expand` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in the native vertical tabs when in expanded state. Firefox hides this separator by default in this mode. |
+| `uc.flex.max-visible-vertical-pinned-tabs` | Sets the maximum number of pinned tabs visible per column in the native vertical tabs (numeric value, typically 4–6). Content beyond this limit will scroll, so adjust this to avoid scrollbars based on your usage. |
+| `uc.flex.findbar-position` | Sets the Findbar's position. Accepts string values: `"top-center-left"` or `"0"` = center-left top, `"top-right"` or `"1"` = top right, `"bottom-right"` or `"2"` = bottom right. |
 
 ## 🐞 Known Issues
 
 - For Floorp users: Switch to `Firefox Proton UI` in Floorp's interface options to reduce compatibility issues.
 - Tested on Windows only: May require adjustments for other operating systems.
 
+## 🎖️ Credits
+
+FlexFox builds upon the work of the following excellent projects:
+
+- **[VerticalFox](https://github.com/christorange/VerticalFox)** — provided the foundation for the vertical tab layout and several core layout concepts.  
+- **[firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks)** — many essential tweaks and layout fixes used in FlexFox are derived from this invaluable collection.
+
+FlexFox is also inspired by the ideas and aesthetics of these projects:
+
+- [EdgyArc-fr](https://github.com/artsyfriedchicken/EdgyArc-fr)  
+- [Edge-Frfox](https://github.com/bmFtZQ/edge-frfox)  
+- [ArcWTF](https://github.com/KiKaraage/ArcWTF)  
+- [shimmer](https://github.com/nuclearcodecat/shimmer)
+- [firefox-gx](https://github.com/Godiesc/firefox-gx)
+
+Much appreciation goes to all these creators for sharing their work with the community.
+
 <details>
   <summary><h2 style="display: inline;">📄 LICENSE</h2></summary>
+  <hr style="border: none; border-top: 1px solid #d0d7de; margin: 16px 0;">
   <p>This project is primarily licensed under the MIT License.<br>
   However, parts of the source code (see below) incorporate code originally licensed under the Mozilla Public License 2.0 (MPL-2.0).</p>
 
