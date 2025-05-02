@@ -378,6 +378,14 @@
     #sidebar-main #vertical-tabs {
         display: var(--uc-sb-vertical-tabs-display, flex) !important;
     }
+    /* Hide the sidebar header in web extension panel windows to restore compact layout */
+    #webextpanels-window #sidebar-panel-header {
+        display: none !important;
+    }
+    /* Remove background fill from sidebar buttons */
+    #sidebar-button:not(:hover) {
+        color: transparent !important;
+    }
     /* 🔼 [BLOCK B] End of rules for active Sidebery */
 
     /* 🔽 [BLOCK C] Start of rules for inactive Sidebery */

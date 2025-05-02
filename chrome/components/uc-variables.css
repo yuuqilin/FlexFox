@@ -259,9 +259,9 @@
     }
 
     /* Align the first toolbar button with vertical tabs by shifting the nav bar when vertical tabs are active */
-    --uc-nav-bar-margin-left: -2px;
+    --uc-nav-bar-margin-left: 6px;
     &[inFullscreen] {
-        --uc-nav-bar-margin-left: -3px;
+        --uc-nav-bar-margin-left: 5px;
     }
 
     /* Toolbar sizing */

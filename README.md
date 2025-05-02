@@ -18,17 +18,21 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**v3.1.7**
-- Fixed a timing issue in the native vertical tabs animation. Tab label appearance now syncs properly with the tab width expansion.
-- Improved the file size estimation in the PowerShell installer script to more accurately reflect the actual download size.
+**v3.1.8**  
+- Removed the sidebar header that now appears in *web extension panel windows* (introduced in Nightly v140), restoring the intended compact layout for extensions like Sidebery.  
+- Adjusted alignment between the navigation bar and vertical tabs.  
 
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
 
-**v3.1.6**
-- Users can now create a `uc-custom-content.css` file in the `content` folder to apply custom styles for web content. It is imported at the end of `userContent.css`, allowing it to override previous styles. Since this file is not part of the FlexFox repository, its contents will remain untouched during future updates.
-- Restructured the project directory to simplify the update process for users who update via Git clone and pull. This change also lays the foundation for the upcoming install/update script.
+**v3.1.7**  
+- Fixed a timing issue in the native vertical tabs animation. Tab label appearance now syncs properly with the tab width expansion.  
+- Improved the file size estimation in the PowerShell installer script to more accurately reflect the actual download size.  
+
+**v3.1.6**  
+- Users can now create a `uc-custom-content.css` file in the `content` folder to apply custom styles for web content. It is imported at the end of `userContent.css`, allowing it to override previous styles. Since this file is not part of the FlexFox repository, its contents will remain untouched during future updates.  
+- Restructured the project directory to simplify the update process for users who update via Git clone and pull. This change also lays the foundation for the upcoming install/update script.  
 
 **v3.1.5**  
 - Reduced unnecessary style rules when the new sidebar is enabled.  

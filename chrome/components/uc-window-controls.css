@@ -171,8 +171,17 @@
 ═════════════════════════════════════════════════════════════════════ */
 
 /* Adjust left margin of the navigation bar to align toolbar icons with sidebar */
+/*
 #nav-bar:not([customizing]) {
     margin-left: var(--uc-nav-bar-margin-left);
+}
+*/
+
+#nav-bar-customization-target {
+    & > :is(toolbarbutton, toolbaritem):first-child,
+    & > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
+        padding-inline-start: var(--uc-nav-bar-margin-left) !important;
+    }
 }
 
 /* Fix issue with missing window controls. */
