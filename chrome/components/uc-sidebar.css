@@ -289,7 +289,7 @@
 
     /* 🔽 [BLOCK B] Start of rules for active Sidebery */
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
-    #sidebar-main {
+    #sidebar-main[sidebar-panel-open] {
         --bg: var(--toolbox-bgcolor);
         &:-moz-window-inactive {
             --bg: var(--toolbox-bgcolor-inactive);
@@ -329,10 +329,15 @@
              */
                 z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
     }
-    #sidebar-main:hover {
+    #sidebar-main[sidebar-panel-open]:hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-h) !important;
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            height: fit-content;
+        }
         max-height: var(--uc-sb-sidebar-main-hover-max-h) !important;
         max-width: var(--uc-sb-sidebar-main-max-width) !important;
+        /* TEMPORARY: This z-index rule will no longer be needed in Firefox version 140 and later. */
+        z-index: var(--uc-sb-sidebar-main-z-index) !important;
         background-color: var(--bg) !important;
         opacity: 1;
         transition:
@@ -358,6 +363,10 @@
 
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
+        /* Remove unnecessary margin when Sidebery is in 'expand-on-hover' state */
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            margin-inline-start: 0px !important;
+        }
         /* Remove unnecessary margin when Sidebery is placed on the right side */
         &:is([positionend], [sidebar-positionend]) {
             margin-inline-start: 0px !important;
@@ -383,7 +392,7 @@
         display: none !important;
     }
     /* Remove background fill from sidebar buttons */
-    #sidebar-button {
+    #sidebar-button:not(:hover) {
         --toolbarbutton-active-background: transparent !important;
     }
     /* 🔼 [BLOCK B] End of rules for active Sidebery */
@@ -394,14 +403,14 @@
     /* ── ▶️ Autohide vertical tabs when the sidebar is expanded */
     @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
         /**
-         * The selector #sidebar-main:has(> [expanded]) has higher specificity
-         * than #sidebar-main:not(:hover), so its rules will override those above.
+         * The selector #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) has higher specificity
+         * than #sidebar-main[sidebar-panel-open], so its rules will override those above.
          * Since the earlier rule is used to detect when Sidebery is active,
          * we rely on the --uc-sb-* custom variable (with fallback) to carry that logic forward.
          * This ensures that even when overridden, the correct behavior still applies
          * based on whether Sidebery is active or not.
          */
-        #sidebar-main:has(> [expanded]) {
+        #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) {
             overflow: var(--uc-sb-sidebar-main-overflow, visible) !important;
             /**
              * When the native vertical tabs are placed on the right side, 
