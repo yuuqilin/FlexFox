@@ -475,11 +475,11 @@
     }
     @media -moz-pref("sidebar.verticalTabs") {
         --uc-bookmarks-margin-left: 10px;
-        --uc-navigator-offset: var(--uc-sidebar-header-width);
-        --uc-navigator-width: var(--uc-sidebar-header-width);
+        --uc-navigator-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-header-width));
+        --uc-navigator-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-header-width));
         @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide")) {
-            --uc-personal-toolbar-offset: var(--uc-sidebar-header-width);
-            --uc-personal-toolbar-width: var(--uc-sidebar-header-width);
+            --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-header-width));
+            --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-header-width));
             @media -moz-pref("sidebar.visibility", "hide-sidebar") {
                 &:has(#sidebar-main[hidden]) {
                     --uc-personal-toolbar-offset: 0px;

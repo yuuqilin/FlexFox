@@ -383,8 +383,8 @@
         display: none !important;
     }
     /* Remove background fill from sidebar buttons */
-    #sidebar-button:not(:hover) {
-        color: transparent !important;
+    #sidebar-button {
+        --toolbarbutton-active-background: transparent !important;
     }
     /* 🔼 [BLOCK B] End of rules for active Sidebery */
 

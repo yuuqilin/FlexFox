@@ -18,13 +18,17 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**v3.1.8**  
-- Removed the sidebar header that now appears in *web extension panel windows* (introduced in Nightly v140), restoring the intended compact layout for extensions like Sidebery.  
-- Adjusted alignment between the navigation bar and vertical tabs.  
+**v3.1.9**  
+- Fixed an issue where the sidebar toggle button would disappear when a theme was applied.  
+- Fixed incorrect layout offsets for the bookmarks toolbar and navigation bar when Sidebery’s auto-hide was disabled.  
 
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.1.8**  
+- Removed the sidebar header that now appears in *web extension panel windows* (introduced in Nightly v140), restoring the intended compact layout for extensions like Sidebery.  
+- Adjusted alignment between the navigation bar and vertical tabs.  
 
 **v3.1.7**  
 - Fixed a timing issue in the native vertical tabs animation. Tab label appearance now syncs properly with the tab width expansion.  
