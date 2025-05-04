@@ -18,12 +18,15 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**v3.2.2**  
-- Fixed various display issues when using Firefox's native vertical tabs in expand-on-hover mode.  
+**v3.2.3**  
+- Continued fixes for display glitches in expand-on-hover mode (native vertical tabs).  
 
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.2.2**  
+- Fixed various display issues when using Firefox's native vertical tabs in expand-on-hover mode.  
 
 **v3.2.1**  
 - Fixed an issue where native vertical tabs were obscured by the sidebar when expanded.  

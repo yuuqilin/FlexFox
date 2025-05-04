@@ -291,6 +291,13 @@
             }
         }
     }
+    /* TEMPORARY: */
+    @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+        #sidebar-box,
+        #tabbrowser-tabbox {
+            --sidebar-launcher-collapsed-width: 55px !important;
+        }
+    }
     /* 🔼 [BLOCK A] End of variable definitions for active Sidebery */
 
     /* 🔽 [BLOCK B] Start of rules for active Sidebery */
@@ -378,6 +385,10 @@
 
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
+        /* Remove unwanted 1px margin when Sidebery is in 'expand-on-hover' state */
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top) - 1px);
+        }
         /* Remove unnecessary margin when Sidebery is in 'expand-on-hover' state */
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
             margin-inline-start: 0px !important;
