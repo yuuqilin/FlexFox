@@ -336,8 +336,15 @@
         }
         max-height: var(--uc-sb-sidebar-main-hover-max-h) !important;
         max-width: var(--uc-sb-sidebar-main-max-width) !important;
-        /* TEMPORARY: This z-index rule will no longer be needed in Firefox version 140 and later. */
-        z-index: var(--uc-sb-sidebar-main-z-index) !important;
+        /**
+         * TEMPORARY: This z-index rule is added to override
+         * Firefox's native z-index for #sidebar-main in expand-on-hover mode.
+         * However, it also unintentionally overrides
+         * the later rule targeting #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]).
+         * We keep the later rule as-is, since this one will be removed
+         * after Firefox v140, when it’s no longer needed.
+         */
+        z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating)) !important;
         background-color: var(--bg) !important;
         opacity: 1;
         transition:

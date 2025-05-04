@@ -18,15 +18,18 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**v3.2.1**  
+- Fixed an issue where native vertical tabs were obscured by the sidebar when expanded.  
+
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
+
 **v3.2.0**  
 - Fixed a bug where the sidebar toggle button lost its background on hover.  
 - Full support for Firefox v138’s native vertical tabs in *expand-on-hover* mode.  
   When the new sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox’s own auto-collapse feature for vertical tabs is disabled in favor of the native behavior.  
   In this mode, the width of the vertical tab bar can be freely adjusted.  
-
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
 
 **v3.1.9**  
 - Fixed an issue where the sidebar toggle button would disappear when a theme was applied.  
