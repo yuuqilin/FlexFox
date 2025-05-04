@@ -247,7 +247,7 @@ function Get-GitHubDownloadInfo {
                     
                     # Repo size is in KB, convert to bytes and apply compression estimate
                     if ($repoInfo.size -gt 0) {
-                        $compressionRatio = 0.82 # Using 92% compression ratio as requested
+                        $compressionRatio = 0.70 # Using 70% compression ratio as requested
                         $fileSize = [long]($repoInfo.size * 1024 * $compressionRatio)
                         Write-ColoredText "Estimated archive size based on repo size" "Yellow"
                         $actualSize = $false

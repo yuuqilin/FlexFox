@@ -18,12 +18,16 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**v3.2.3**  
-- 继续修复在使用 Firefox 原生垂直选项卡的“悬停时展开侧栏”模式下出现的显示问题。  
+**v3.2.4**  
+- 当你在侧边栏设置中启用 **“悬停时展开侧栏”** 时，FlexFox 会停用其改进的垂直选项卡自动折叠机制，改为采用 Firefox 原生的行为。在这种模式下，Sidebery 也可以通过快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧边栏开关按钮，切换**自动折叠**和**保持展开**两种状态。  
+- 此外，Sidebery 在保持展开状态时，悬停时的动画效果可能会导致界面轻微抖动。为了改善视觉稳定性，现在可以使用新选项 `uc.flex.disable-sidebery-hover-animations` 来关闭这些动画。不过，关闭动画后，在折叠状态下的显示效果可能不如默认状态整洁。  
 
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.2.3**  
+- 继续修复在使用 Firefox 原生垂直选项卡的“悬停时展开侧栏”模式下出现的显示问题。  
 
 **v3.2.2**  
 - 修复使用 Firefox 原生垂直选项卡的“悬停时展开”模式时出现的各种显示问题。  
@@ -388,7 +392,10 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 | `uc.flex.disable-tabs-toolbar-autohide` | 当 Sidebery 处于非活动状态时，防止原生水平标签栏自动隐藏。 |
 | `uc.flex.disable-findbar-autohide` | 防止查找栏（Findbar）在失去焦点后自动隐藏。 |
 | `uc.flex.disable-native-vertical-tabs-autohide` | 停用原生垂直选项卡的自动折叠功能。 |
-| `sidebar.visibility` | 当设置为 `expand-on-hover` 时，将启用 Firefox 原生垂直选项卡的自动折叠功能。在此模式下，FlexFox 会自动关闭其自身的自动折叠功能，恢复为 Firefox 的默认行为。你也可以通过侧边栏设置中的 **“悬停时展开侧栏”** 来启用此功能。虽然原生的自动折叠在整洁度、动画流畅性、固定标签的排列逻辑等方面不如 FlexFox，但可以使用快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 在自动折叠与保持展开之间切换。 |
+| `sidebar.visibility`（`always-show`） | Firefox 的原生设置。当设置为 `always-show` 时，Firefox 自带的垂直选项卡自动折叠功能将会停用，FlexFox 的自动折叠功能将接管。相比原生功能，FlexFox 的动画更流畅，折叠后的布局更整洁，对固定标签页的处理也更加合理。你也可以通过取消勾选侧栏设置中的 **“悬停时展开侧栏”** 来切换此功能。 |
+| `sidebar.visibility`（`expand-on-hover`） | 当设置为 `expand-on-hover` 时，将恢复 Firefox 原生的垂直选项卡自动折叠行为，同时会关闭 FlexFox 的自动折叠功能。此功能也可以通过勾选 **“悬停时展开侧栏”** 来启用。在此模式下，原生垂直选项卡和 Sidebery 都可以通过快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧栏开关按钮，在自动折叠和保持展开之间切换。 |
+| `sidebar.animation.expand-on-hover.duration-ms` | Firefox 原生设置，用于控制在 `sidebar.visibility` 设置为 `expand-on-hover` 时，原生垂直选项卡展开和折叠的动画速度。 |
+| `uc.flex.disable-sidebery-hover-animations` | 当 `sidebar.visibility` 设置为 `expand-on-hover` 且 Sidebery 处于“保持展开”状态时，鼠标悬停所触发的动画可能导致轻微画面抖动。启用此选项可关闭这些动画，提升稳定性，但可能会让折叠状态下的显示不如原来整洁。 |
 | `uc.flex.disable-sidebery-autohide` | 停用 Sidebery 的自动折叠功能。 |
 | `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |

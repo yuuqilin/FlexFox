@@ -16,7 +16,7 @@
     }
 
     /* When Sidebery's auto-collapse is disabled, stop the transition effect when hovering over Sidebery */
-    @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
+    @media (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.disable-sidebery-hover-animations")) and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
         #root:not([data-nav-inline="true"]) .NavigationBar {
             overflow: hidden;
         }

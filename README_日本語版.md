@@ -18,12 +18,16 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**v3.2.3**  
-- Firefoxの「ホバーでサイドバーを展開」モード（ネイティブの縦型タブ）における表示の不具合を引き続き修正しました。  
+**v3.2.4**  
+- サイドバー設定の **「カーソルを合わせた時にサイドバーを展開する」** を有効にすると、FlexFox のカスタム折りたたみ機能は無効化され、Firefox 標準の自動折りたたみ挙動が使用されるようになりました。この状態でも、Sidebery は <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> のショートカットキーやサイドバーの切り替えボタンを使って、**自動折りたたみ**と**常に展開**の状態を切り替えることができます。  
+- また、Sidebery が常に展開された状態のときに、マウスホバー時のアニメーションによって軽微な画面の揺れが発生することがあります。これを抑えるために、アニメーションを無効化するオプション `uc.flex.disable-sidebery-hover-animations` を追加しました。ただし、無効化すると折りたたみ時の見た目の整然さがやや損なわれる場合があります。  
 
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.2.3**  
+- Firefoxの「ホバーでサイドバーを展開」モード（ネイティブの縦型タブ）における表示の不具合を引き続き修正しました。  
 
 **v3.2.2**  
 - Firefoxのネイティブ縦型タブにおける「ホバーで展開」モード使用時の表示崩れをいくつか修正しました。  
@@ -383,7 +387,10 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 | `uc.flex.disable-tabs-toolbar-autohide` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
 | `uc.flex.disable-findbar-autohide` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |
 | `uc.flex.disable-native-vertical-tabs-autohide` | Firefox の垂直タブバーの自動折りたたみを無効にします。 |
-| `sidebar.visibility` | `expand-on-hover`に設定すると、Firefox の垂直タブバーの自動折りたたみ機能が有効になります。この状態では FlexFox 側の自動折りたたみは無効化され、挙動は Firefox 本来の仕様に従います。また、サイドバーの設定内にある **「カーソルを合わせた時にサイドバーを展開する」** を有効にすることでも切り替え可能です。ネイティブの自動折りたたみは FlexFox に比べて、表示の滑らかさ、折りたたみ時の見た目の整理、ピン留めタブの扱いやすさなどの点で劣りますが、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーで展開状態と折りたたみ状態の切り替えが可能です。 |
+| `sidebar.visibility`（`always-show`） | Firefoxのネイティブ設定です。値を `always-show` にすると、Firefox標準の垂直タブバーの自動折りたたみが無効化され、代わりにFlexFox独自の自動折りたたみ機能が有効になります。FlexFoxはアニメーションの滑らかさ、折りたたみ時の整理されたレイアウト、ピン留めタブの扱いやすさに優れています。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** のチェックを外すことで切り替えることも可能です。 |
+| `sidebar.visibility`（`expand-on-hover`） | 値を `expand-on-hover` にすると、Firefoxの垂直タブバーのネイティブな自動折りたたみ動作が有効になり、FlexFoxの機能は無効化されます。この動作は、サイドバー設定の **「カーソルを合わせた時にサイドバーを展開する」** を有効にすることで切り替え可能です。このモードでは、ネイティブの垂直タブとSideberyのどちらも、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみの状態を変更できます。 |
+| `sidebar.animation.expand-on-hover.duration-ms` | `sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーションの速度を制御するFirefoxのネイティブ設定です。 |
+| `uc.flex.disable-sidebery-hover-animations` | `sidebar.visibility` が `expand-on-hover` に設定され、Sidebery が「常に展開」状態になっている場合、ホバー時のアニメーションによって画面がわずかに揺れることがあります。この設定を有効にすると、そうしたアニメーションが無効化され、より安定した表示になりますが、折りたたみ時のレイアウトがやや崩れることがあります。 |
 | `uc.flex.disable-sidebery-autohide` | Sidebery の自動折りたたみを無効にします。 |
 | `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
 | `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |

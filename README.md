@@ -18,12 +18,16 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**v3.2.3**  
-- Continued fixes for display glitches in expand-on-hover mode (native vertical tabs).  
+**v3.2.4**  
+- When the sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox now defers to Firefox’s native auto-collapse behavior for vertical tabs. In this mode, Sidebery also supports toggling between **auto-collapse** and **keep expanded** states using the <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> shortcut or the sidebar toggle button.  
+- A new preference, `uc.flex.disable-sidebery-hover-animations`, has been added to disable hover animations in Sidebery when it is pinned open. This helps reduce slight visual jitter caused by those animations, though it may slightly impact the visual neatness of the collapsed state.  
 
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.2.3**  
+- Continued fixes for display glitches in expand-on-hover mode (native vertical tabs).  
 
 **v3.2.2**  
 - Fixed various display issues when using Firefox's native vertical tabs in expand-on-hover mode.  
@@ -382,7 +386,10 @@ For future updates, simply re-running the script will be enough, and you won't n
 | `uc.flex.disable-tabs-toolbar-autohide` | Prevents the native horizontal tabs from auto-hiding when Sidebery is inactive. |
 | `uc.flex.disable-findbar-autohide` | Prevents the Findbar from automatically hiding when it loses focus. |
 | `uc.flex.disable-native-vertical-tabs-autohide` | Disables auto-collapse for the native vertical tabs. |
-| `sidebar.visibility` | When set to `expand-on-hover`, enables Firefox's built-in auto-collapse for vertical tabs. FlexFox will defer to the native behavior and disable its own auto-collapse. This can also be toggled via **“Expand sidebar on hover”** in the sidebar settings. While the native version offers less polish than FlexFox (e.g. in smoothness, layout cleanliness, and pinned tab handling), it allows toggling collapse state with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>. |
+| `sidebar.visibility` (`always-show`) | A native Firefox preference. When set to `always-show`, Firefox's built-in auto-collapse for the vertical tab bar is disabled, and FlexFox's enhanced auto-collapse takes over. FlexFox offers smoother animations, a cleaner collapsed layout, and improved handling of pinned tabs. This behavior can also be toggled by unchecking **“Expand sidebar on hover”** in the sidebar settings. |
+| `sidebar.visibility` (`expand-on-hover`) | When set to `expand-on-hover`, Firefox's native vertical tab auto-collapse behavior is restored, and FlexFox's own auto-collapse is disabled. This can also be enabled via **“Expand sidebar on hover”** in the sidebar settings. In this mode, both the native vertical tabs and Sidebery can toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. |
+| `sidebar.animation.expand-on-hover.duration-ms` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
+| `uc.flex.disable-sidebery-hover-animations` | When `sidebar.visibility` is set to `expand-on-hover` and Sidebery is in the *expanded* state, hover animations may cause subtle jittering. This preference disables those animations for smoother interaction, but may make the collapsed layout appear less tidy. |
 | `uc.flex.disable-sidebery-autohide` | Disables auto-collapse for Sidebery. |
 | `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
 | `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |

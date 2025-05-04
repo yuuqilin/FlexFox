@@ -235,11 +235,6 @@
             --uc-sb-sidebar-main-position: absolute;
             --uc-sb-sidebar-main-min-width: var(--uc-sb-sidebar-width);
             --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-width, 75vw);
-            @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
-                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
-            }
             --uc-sb-sidebar-main-overflow: hidden;
             --uc-sb-sidebar-main-z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1);
             --uc-sb-sidebar-main-hover-min-h: auto;
@@ -257,6 +252,18 @@
                     var(--uc-sb-sidebar-header-stripe) 87%,
                     var(--uc-sidebar-bgcolor)
                 );
+            }
+            @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
+                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+            }
+        }
+        :root[sidebar-expand-on-hover] & #sidebar-main {
+            @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
             }
         }
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
@@ -729,7 +736,7 @@
      * Increase the z-index of the navigation bar in fullscreen mode  
      * to prevent it from being obscured by the revamped sidebar.
      */
-    :root[inFullscreen] {
+    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
         #navigator-toolbox {
             z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
         }

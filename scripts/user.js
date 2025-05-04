@@ -44,6 +44,8 @@ user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
 user_pref("uc.flex.findbar-position",                     "top-right");
 /* Disables Firefox's built-in auto-collapse for vertical tabs. */
 user_pref("sidebar.visibility",                         "always-show");
+/* Defines the animation duration for expanding/collapsing vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. */
+user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 
 /* Adjusts the text scaling in the Firefox interface. 100 means no scaling. */
 // user_pref("ui.textScaleFactor",                                 100);

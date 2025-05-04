@@ -304,7 +304,9 @@
     }
     &:not([inFullscreen]) {
         @media -moz-pref("uc.flex.fully-hide-toolbox") {
-            --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px);
+            --uc-findbar-y-offset: calc(
+                var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px
+            );
         }
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
             &:not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
@@ -345,6 +347,9 @@
         ); /* Load user-defined value for internal calculations */
         /* When Sidebery autohide is disabled, fix its width to the expanded value */
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+            --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
+        }
+        &[sidebar-expand-on-hover] {
             --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
         }
         /* When Sidebery is fully hidden, set width to 1px to allow hover-triggered expansion */
