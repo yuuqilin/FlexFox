@@ -244,6 +244,7 @@
             --uc-sb-sidebar-main-z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1);
             --uc-sb-sidebar-main-hover-min-h: auto;
             --uc-sb-sidebar-main-hover-max-h: 100%;
+            --uc-sb-sidebar-main-hover-h: fit-content;
             --uc-sb-vertical-tabs-display: none;
             --uc-sidebar-main-stripe: color-mix(
                 in srgb,
@@ -265,6 +266,11 @@
             #sidebar-main:hover {
                 --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
                 --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+            }
+        }
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            #sidebar-main[sidebar-panel-open] {
+                position: var(--uc-sb-sidebar-main-position, static) !important;
             }
         }
     }
@@ -294,7 +300,9 @@
         &:-moz-window-inactive {
             --bg: var(--toolbox-bgcolor-inactive);
         }
-        position: var(--uc-sb-sidebar-main-position, static) !important;
+        @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
+            position: var(--uc-sb-sidebar-main-position, static) !important;
+        }
         &:is([positionend], [sidebar-positionend]) {
             right: 0px;
         }
@@ -332,7 +340,7 @@
     #sidebar-main[sidebar-panel-open]:hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-h) !important;
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
-            height: fit-content;
+            height: var(--uc-sb-sidebar-main-hover-h);
         }
         max-height: var(--uc-sb-sidebar-main-hover-max-h) !important;
         max-width: var(--uc-sb-sidebar-main-max-width) !important;
