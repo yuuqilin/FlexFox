@@ -383,6 +383,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 | `uc.flex.disable-tabs-toolbar-autohide` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
 | `uc.flex.disable-findbar-autohide` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |
 | `uc.flex.disable-native-vertical-tabs-autohide` | Firefox の垂直タブバーの自動折りたたみを無効にします。 |
+| `sidebar.visibility` | `expand-on-hover`に設定すると、Firefox の垂直タブバーの自動折りたたみ機能が有効になります。この状態では FlexFox 側の自動折りたたみは無効化され、挙動は Firefox 本来の仕様に従います。また、サイドバーの設定内にある **「カーソルを合わせた時にサイドバーを展開する」** を有効にすることでも切り替え可能です。ネイティブの自動折りたたみは FlexFox に比べて、表示の滑らかさ、折りたたみ時の見た目の整理、ピン留めタブの扱いやすさなどの点で劣りますが、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーで展開状態と折りたたみ状態の切り替えが可能です。 |
 | `uc.flex.disable-sidebery-autohide` | Sidebery の自動折りたたみを無効にします。 |
 | `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
 | `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |

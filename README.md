@@ -382,6 +382,7 @@ For future updates, simply re-running the script will be enough, and you won't n
 | `uc.flex.disable-tabs-toolbar-autohide` | Prevents the native horizontal tabs from auto-hiding when Sidebery is inactive. |
 | `uc.flex.disable-findbar-autohide` | Prevents the Findbar from automatically hiding when it loses focus. |
 | `uc.flex.disable-native-vertical-tabs-autohide` | Disables auto-collapse for the native vertical tabs. |
+| `sidebar.visibility` | When set to `expand-on-hover`, enables Firefox's built-in auto-collapse for vertical tabs. FlexFox will defer to the native behavior and disable its own auto-collapse. This can also be toggled via **“Expand sidebar on hover”** in the sidebar settings. While the native version offers less polish than FlexFox (e.g. in smoothness, layout cleanliness, and pinned tab handling), it allows toggling collapse state with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>. |
 | `uc.flex.disable-sidebery-autohide` | Disables auto-collapse for Sidebery. |
 | `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
 | `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |

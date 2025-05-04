@@ -388,6 +388,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 | `uc.flex.disable-tabs-toolbar-autohide` | 当 Sidebery 处于非活动状态时，防止原生水平标签栏自动隐藏。 |
 | `uc.flex.disable-findbar-autohide` | 防止查找栏（Findbar）在失去焦点后自动隐藏。 |
 | `uc.flex.disable-native-vertical-tabs-autohide` | 停用原生垂直选项卡的自动折叠功能。 |
+| `sidebar.visibility` | 当设置为 `expand-on-hover` 时，将启用 Firefox 原生垂直选项卡的自动折叠功能。在此模式下，FlexFox 会自动关闭其自身的自动折叠功能，恢复为 Firefox 的默认行为。你也可以通过侧边栏设置中的 **“悬停时展开侧栏”** 来启用此功能。虽然原生的自动折叠在整洁度、动画流畅性、固定标签的排列逻辑等方面不如 FlexFox，但可以使用快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 在自动折叠与保持展开之间切换。 |
 | `uc.flex.disable-sidebery-autohide` | 停用 Sidebery 的自动折叠功能。 |
 | `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |

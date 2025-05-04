@@ -42,6 +42,8 @@ user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
 user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
 /* Sets findbar position (string: "top-center-left"/"0", "top-right"/"1", "bottom-right"/"2"). */
 user_pref("uc.flex.findbar-position",                     "top-right");
+/* Disables Firefox's built-in auto-collapse for vertical tabs. */
+user_pref("sidebar.visibility",                         "always-show");
 
 /* Adjusts the text scaling in the Firefox interface. 100 means no scaling. */
 // user_pref("ui.textScaleFactor",                                 100);
