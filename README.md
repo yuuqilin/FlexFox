@@ -18,6 +18,9 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**v3.2.5**  
+- Added missing icons for some menus.  
+
 **v3.2.4**  
 - When the sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox now defers to Firefox’s native auto-collapse behavior for vertical tabs. In this mode, Sidebery also supports toggling between **auto-collapse** and **keep expanded** states using the <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> shortcut or the sidebar toggle button.  
 - A new preference, `uc.flex.disable-sidebery-hover-animations`, has been added to disable hover animations in Sidebery when it is pinned open. This helps reduce slight visual jitter caused by those animations, though it may slightly impact the visual neatness of the collapsed state.  

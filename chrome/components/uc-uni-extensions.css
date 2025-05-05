@@ -64,7 +64,9 @@
             calc(100% / var(--uc-number-of-extensions-in-a-row))
         );
         justify-items: left !important;
+        /*
         align-items: left !important;
+        */
     }
 
     /*
@@ -87,9 +89,11 @@
     }
     */
 
+    /*
     #wrapper-edit-controls:is([place="palette"], [place="panel"]) > #edit-controls,
     #wrapper-zoom-controls:is([place="palette"], [place="panel"]) > #zoom-controls,
-    :is(panelview, #widget-overflow-fixed-list) .toolbaritem-combined-buttons {
+    */
+    #unified-extensions-view .toolbaritem-combined-buttons {
         margin: 5px !important;
     }
 }
