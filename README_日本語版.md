@@ -18,6 +18,9 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
+**v3.2.6**
+- アイコンのサイズを修正しました。
+
 **v3.2.5**  
 - 一部のメニューに欠けていたアイコンを追加しました。  
 
@@ -25,6 +28,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 - サイドバー設定の **「カーソルを合わせた時にサイドバーを展開する」** を有効にすると、FlexFox のカスタム折りたたみ機能は無効化され、Firefox 標準の自動折りたたみ挙動が使用されるようになりました。この状態でも、Sidebery は <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> のショートカットキーやサイドバーの切り替えボタンを使って、**自動折りたたみ**と**常に展開**の状態を切り替えることができます。  
 - また、Sidebery が常に展開された状態のときに、マウスホバー時のアニメーションによって軽微な画面の揺れが発生することがあります。これを抑えるために、アニメーションを無効化するオプション `uc.flex.disable-sidebery-hover-animations` を追加しました。ただし、無効化すると折りたたみ時の見た目の整然さがやや損なわれる場合があります。  
 
+<a id="updates-top-start"></a>
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
@@ -43,6 +47,10 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 - Firefox v138で追加されたネイティブの垂直タブ「カーソルを合わせた時にサイドバーを展開する」モードに完全対応。  
   この設定を有効にすると、FlexFoxの垂直タブ自動折りたたみ機能は無効化され、Firefox標準の動作が使われます。  
   このモードでは、垂直タブバーの幅を自由に調整できます。  
+
+<a id="updates-top-3.1"></a>
+<details>
+<summary>📦 <b>v3.1.9〜v3.1.0の更新</b></summary>
 
 **v3.1.9**  
 - テーマ適用時にサイドバーの切り替えボタンが消える不具合を修正しました。  
@@ -95,6 +103,13 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 - ナビゲーションバーの位置を微調整し、垂直タブとの整合性を改善しました。
 - `uc.flex.allow-addons-to-change-toolbar-color`を切り替えても、サイドバーが上下にずれることがなくなりました。
 
+<a href="#updates-top-3.1">🔝 セクションの先頭へ戻る</a>
+</details>
+
+<a id="updates-top-3.0"></a>
+<details>
+<summary>📦 <b>v3.0.7〜v3.0.0の更新</b></summary>
+
 **v3.0.7**
 - Firefoxのネイティブタブ（横型・縦型の両方）を使用している場合に、アクティブなタブの背景ハイライトが正しく表示されない問題を修正しました。  
 - メニューバーを表示し、ブックマークバーを自動的に隠す設定にしていると、テーマの背景画像がナビゲーションバーとブックマークバーの間でずれて表示される問題を修正しました。  
@@ -146,6 +161,13 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 > [!TIP]
 > **ユーザーは現在、`components` フォルダー内に `uc-user-settings.css` ファイルを作成することで、FlexFox のスタイルをカスタマイズできます。このファイルは FlexFox の後に読み込まれ、そのスタイルを上書きするため、将来的なアップデート後もカスタム変更が保持されます。**  
 > **詳細は次のセクションをご覧ください: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-user-customizable-styles-uc-user-settingscss)**
+
+<a href="#updates-top-3.0">🔝 セクションの先頭へ戻る</a>
+</details>
+
+<a id="updates-top-2.0"></a>
+<details>
+<summary>📦 <b>v2.1.2〜v1.0.0の更新</b></summary>
 
 **v2.1.2**  
 - ネイティブの縦型タブと `uc.flex.disable-bookmarks-autohide` が両方有効な場合に、ブックマークバーがずれる問題を修正しました。  
@@ -227,6 +249,10 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 > [!IMPORTANT]
 > Firefox v133より前のバージョンでFlexFoxをお使いの方は、アップデート前に`about:config`で`uc.flex.`を検索し、該当する設定をすべて削除してください。
 
+<a href="#updates-top-2.0">🔝 セクションの先頭へ戻る</a>
+</details>
+
+<a href="#updates-top-start">🔼 アップデート一覧の先頭へ戻る</a>
 </details>
 
 ## ✨ 特徴

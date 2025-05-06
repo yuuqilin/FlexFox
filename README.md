@@ -18,6 +18,9 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**v3.2.6**
+- Fixed the size of an icon.
+
 **v3.2.5**  
 - Added missing icons for some menus.  
 
@@ -25,6 +28,7 @@ It's not just a new look, it's a better way to browse.
 - When the sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox now defers to Firefox’s native auto-collapse behavior for vertical tabs. In this mode, Sidebery also supports toggling between **auto-collapse** and **keep expanded** states using the <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> shortcut or the sidebar toggle button.  
 - A new preference, `uc.flex.disable-sidebery-hover-animations`, has been added to disable hover animations in Sidebery when it is pinned open. This helps reduce slight visual jitter caused by those animations, though it may slightly impact the visual neatness of the collapsed state.  
 
+<a id="updates-top-start"></a>
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
@@ -43,6 +47,10 @@ It's not just a new look, it's a better way to browse.
 - Full support for Firefox v138’s native vertical tabs in *expand-on-hover* mode.  
   When the new sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox’s own auto-collapse feature for vertical tabs is disabled in favor of the native behavior.  
   In this mode, the width of the vertical tab bar can be freely adjusted.  
+
+<a id="updates-top-3.1"></a>
+<details>
+<summary>📦 <b>Updates in v3.1.9 ~ v3.1.0</b></summary>
 
 **v3.1.9**  
 - Fixed an issue where the sidebar toggle button would disappear when a theme was applied.  
@@ -95,6 +103,13 @@ With this update, all previously missing features from the horizontal tab mode a
 - Adjusted the navbar positioning so that its buttons align better with vertical tabs.
 - Toggling `uc.flex.allow-addons-to-change-toolbar-color` no longer causes the sidebar to shift vertically.
 
+<a href="#updates-top-3.1">🔝 Back to top of this section</a>
+</details>
+
+<a id="updates-top-3.0"></a>
+<details>
+<summary>📦 <b>Updates in v3.0.7 ~ v3.0.0</b></summary>
+
 **v3.0.7**
 - Fixed incorrect background highlight for the active tab when using Firefox's native tabs (both horizontal and vertical layouts).  
 - Fixed a visual glitch in themes where the background image did not align properly between the navigation bar and bookmarks bar, when the menubar was shown and the bookmarks bar was set to auto-hide.  
@@ -146,6 +161,13 @@ With this update, all previously missing features from the horizontal tab mode a
 > [!TIP]
 > **Users can now create a `uc-user-settings.css` file in the `components` folder to customize FlexFox styles. This file loads after FlexFox and overrides its styles, so custom changes remain intact even after future updates.**  
 > **See this section: [User-Customizable Styles (`uc-user-settings.css`)](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-user-customizable-styles-uc-user-settingscss)**
+
+<a href="#updates-top-3.0">🔝 Back to top of this section</a>
+</details>
+
+<a id="updates-top-2.0"></a>
+<details>
+<summary>📦 <b>Updates in v2.1.2 ~ v1.0.0</b></summary>
 
 **v2.1.2**  
 - Fixed an issue where the bookmarks bar would shift when both native vertical tabs and `uc.flex.disable-bookmarks-autohide` were enabled.  
@@ -227,6 +249,10 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 > [!IMPORTANT]
 > If you previously used FlexFox on Firefox versions earlier than v133, reset all settings by navigating to `about:config`, searching for `uc.flex.`, and removing all entries before updating.
 
+<a href="#updates-top-2.0">🔝 Back to top of this section</a>
+</details>
+
+<a href="#updates-top-start">⏫ Back to the beginning of updates</a>
 </details>
 
 ## ✨ Features

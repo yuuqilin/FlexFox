@@ -33,6 +33,12 @@ menuitem[data-l10n-id*="-copy-"][data-l10n-id*="-link"] {
     background-size: 21.5px !important;
     background-position-x: 11.5px !important;
 }
+#context-stripOnShareLink,
+menuitem[data-l10n-id="text-action-strip-on-share"] {
+    background-image: url("chrome://browser/skin/fingerprint.svg");
+    background-size: 16px !important;
+    background-position-x: 13.5px !important;
+}
 #paste-and-go {
     background-image: url("chrome://browser/skin/forward.svg");
     background-size: 14px;
@@ -375,10 +381,12 @@ menuitem[data-l10n-id="text-action-copy"],
 #syncedTabsCopySelected {
     background-image: url("chrome://global/skin/icons/edit-copy.svg");
 }
+/*
 #context-stripOnShareLink,
 menuitem[data-l10n-id="text-action-strip-on-share"] {
     background-image: url("chrome://browser/skin/fingerprint.svg");
 }
+*/
 menuitem[data-l10n-id="text-action-paste"] {
     background-image: url("chrome://browser/skin/edit-paste.svg");
 }
