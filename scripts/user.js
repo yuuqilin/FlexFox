@@ -24,6 +24,8 @@ user_pref("uc.flex.disable-findbar-autohide",                   false);
 user_pref("uc.flex.disable-native-vertical-tabs-autohide",      false);
 /* Disable the auto-collapse feature of the Sidebery. */
 user_pref("uc.flex.disable-sidebery-autohide",                  false);
+/* Disables custom menu icons added by FlexFox. */
+user_pref("uc.flex.disable-menu-icons",                         false);
 /* Removes icons from bookmark folders. */
 user_pref("uc.flex.remove-bookmarks-folder-icons",              false);
 /* Removes labels from bookmarks. */

@@ -18,6 +18,14 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
+**v3.2.7**  
+- メニューのアイコン表示を無効にできる `uc.flex.disable-menu-icons` オプションを追加しました。  
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
+
 **v3.2.6**
 - アイコンのサイズを修正しました。
 
@@ -27,11 +35,6 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 **v3.2.4**  
 - サイドバー設定の **「カーソルを合わせた時にサイドバーを展開する」** を有効にすると、FlexFox のカスタム折りたたみ機能は無効化され、Firefox 標準の自動折りたたみ挙動が使用されるようになりました。この状態でも、Sidebery は <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> のショートカットキーやサイドバーの切り替えボタンを使って、**自動折りたたみ**と**常に展開**の状態を切り替えることができます。  
 - また、Sidebery が常に展開された状態のときに、マウスホバー時のアニメーションによって軽微な画面の揺れが発生することがあります。これを抑えるために、アニメーションを無効化するオプション `uc.flex.disable-sidebery-hover-animations` を追加しました。ただし、無効化すると折りたたみ時の見た目の整然さがやや損なわれる場合があります。  
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
 
 **v3.2.3**  
 - Firefoxの「ホバーでサイドバーを展開」モード（ネイティブの縦型タブ）における表示の不具合を引き続き修正しました。  
@@ -50,7 +53,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 <a id="updates-top-3.1"></a>
 <details>
-<summary>📦 <b>v3.1.9〜v3.1.0の更新</b></summary>
+<summary>📦 <b>v3.1.xの更新</b></summary>
 
 **v3.1.9**  
 - テーマ適用時にサイドバーの切り替えボタンが消える不具合を修正しました。  
@@ -108,7 +111,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 
 <a id="updates-top-3.0"></a>
 <details>
-<summary>📦 <b>v3.0.7〜v3.0.0の更新</b></summary>
+<summary>📦 <b>v3.0.xの更新</b></summary>
 
 **v3.0.7**
 - Firefoxのネイティブタブ（横型・縦型の両方）を使用している場合に、アクティブなタブの背景ハイライトが正しく表示されない問題を修正しました。  
@@ -167,7 +170,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 
 <a id="updates-top-2.0"></a>
 <details>
-<summary>📦 <b>v2.1.2〜v1.0.0の更新</b></summary>
+<summary>📦 <b>v2.x.xの更新</b></summary>
 
 **v2.1.2**  
 - ネイティブの縦型タブと `uc.flex.disable-bookmarks-autohide` が両方有効な場合に、ブックマークバーがずれる問題を修正しました。  
@@ -211,6 +214,13 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
 </details>
 
+<a href="#updates-top-2.0">🔝 セクションの先頭へ戻る</a>
+</details>
+
+<a id="updates-top-1.0"></a>
+<details>
+<summary>📦 <b>v1.x.xの更新</b></summary>
+
 **v1.1.1**:
 - テーマ適用時に検索バーの背景色が正しく表示されない問題を修正しました。
 
@@ -249,7 +259,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 > [!IMPORTANT]
 > Firefox v133より前のバージョンでFlexFoxをお使いの方は、アップデート前に`about:config`で`uc.flex.`を検索し、該当する設定をすべて削除してください。
 
-<a href="#updates-top-2.0">🔝 セクションの先頭へ戻る</a>
+<a href="#updates-top-1.0">🔝 セクションの先頭へ戻る</a>
 </details>
 
 <a href="#updates-top-start">🔼 アップデート一覧の先頭へ戻る</a>
@@ -421,6 +431,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 | `sidebar.animation.expand-on-hover.duration-ms` | `sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーションの速度を制御するFirefoxのネイティブ設定です。 |
 | `uc.flex.disable-sidebery-hover-animations` | `sidebar.visibility` が `expand-on-hover` に設定され、Sidebery が「常に展開」状態になっている場合、ホバー時のアニメーションによって画面がわずかに揺れることがあります。この設定を有効にすると、そうしたアニメーションが無効化され、より安定した表示になりますが、折りたたみ時のレイアウトがやや崩れることがあります。 |
 | `uc.flex.disable-sidebery-autohide` | Sidebery の自動折りたたみを無効にします。 |
+| `uc.flex.disable-menu-icons` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
 | `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
 | `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |

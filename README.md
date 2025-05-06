@@ -18,6 +18,14 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**v3.2.7**  
+- Added `uc.flex.disable-menu-icons` option to allow disabling menu icons.  
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
+
 **v3.2.6**
 - Fixed the size of an icon.
 
@@ -27,11 +35,6 @@ It's not just a new look, it's a better way to browse.
 **v3.2.4**  
 - When the sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox now defers to Firefox’s native auto-collapse behavior for vertical tabs. In this mode, Sidebery also supports toggling between **auto-collapse** and **keep expanded** states using the <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> shortcut or the sidebar toggle button.  
 - A new preference, `uc.flex.disable-sidebery-hover-animations`, has been added to disable hover animations in Sidebery when it is pinned open. This helps reduce slight visual jitter caused by those animations, though it may slightly impact the visual neatness of the collapsed state.  
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
 
 **v3.2.3**  
 - Continued fixes for display glitches in expand-on-hover mode (native vertical tabs).  
@@ -50,7 +53,7 @@ It's not just a new look, it's a better way to browse.
 
 <a id="updates-top-3.1"></a>
 <details>
-<summary>📦 <b>Updates in v3.1.9 ~ v3.1.0</b></summary>
+<summary>📦 <b>Updates in v3.1.x</b></summary>
 
 **v3.1.9**  
 - Fixed an issue where the sidebar toggle button would disappear when a theme was applied.  
@@ -108,7 +111,7 @@ With this update, all previously missing features from the horizontal tab mode a
 
 <a id="updates-top-3.0"></a>
 <details>
-<summary>📦 <b>Updates in v3.0.7 ~ v3.0.0</b></summary>
+<summary>📦 <b>Updates in v3.0.x</b></summary>
 
 **v3.0.7**
 - Fixed incorrect background highlight for the active tab when using Firefox's native tabs (both horizontal and vertical layouts).  
@@ -167,7 +170,7 @@ With this update, all previously missing features from the horizontal tab mode a
 
 <a id="updates-top-2.0"></a>
 <details>
-<summary>📦 <b>Updates in v2.1.2 ~ v1.0.0</b></summary>
+<summary>📦 <b>Updates in v2.x.x</b></summary>
 
 **v2.1.2**  
 - Fixed an issue where the bookmarks bar would shift when both native vertical tabs and `uc.flex.disable-bookmarks-autohide` were enabled.  
@@ -211,6 +214,13 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="96%" />
 </details>
 
+<a href="#updates-top-2.0">🔝 Back to top of this section</a>
+</details>
+
+<a id="updates-top-1.0"></a>
+<details>
+<summary>📦 <b>Updates in v1.x.x</b></summary>
+
 **v1.1.1**:
 - Resolved an issue where the Findbar's background color did not display correctly when a theme was applied.
 
@@ -249,7 +259,7 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 > [!IMPORTANT]
 > If you previously used FlexFox on Firefox versions earlier than v133, reset all settings by navigating to `about:config`, searching for `uc.flex.`, and removing all entries before updating.
 
-<a href="#updates-top-2.0">🔝 Back to top of this section</a>
+<a href="#updates-top-1.0">🔝 Back to top of this section</a>
 </details>
 
 <a href="#updates-top-start">⏫ Back to the beginning of updates</a>
@@ -420,6 +430,7 @@ For future updates, simply re-running the script will be enough, and you won't n
 | `sidebar.animation.expand-on-hover.duration-ms` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
 | `uc.flex.disable-sidebery-hover-animations` | When `sidebar.visibility` is set to `expand-on-hover` and Sidebery is in the *expanded* state, hover animations may cause subtle jittering. This preference disables those animations for smoother interaction, but may make the collapsed layout appear less tidy. |
 | `uc.flex.disable-sidebery-autohide` | Disables auto-collapse for Sidebery. |
+| `uc.flex.disable-menu-icons` | Disables custom icons in menus added by FlexFox. |
 | `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
 | `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |
 | `uc.flex.switch-to-alternate-condensed-panel` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |

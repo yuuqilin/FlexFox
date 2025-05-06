@@ -18,6 +18,14 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
+**v3.2.7**  
+- 新增选项 `uc.flex.disable-menu-icons`，允许用户停用菜单图示。  
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>历史更新</b></summary>
+
 **v3.2.6**
 - 修正了一个图标的尺寸。
 
@@ -27,11 +35,6 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 **v3.2.4**  
 - 当你在侧边栏设置中启用 **“悬停时展开侧栏”** 时，FlexFox 会停用其改进的垂直选项卡自动折叠机制，改为采用 Firefox 原生的行为。在这种模式下，Sidebery 也可以通过快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧边栏开关按钮，切换**自动折叠**和**保持展开**两种状态。  
 - 此外，Sidebery 在保持展开状态时，悬停时的动画效果可能会导致界面轻微抖动。为了改善视觉稳定性，现在可以使用新选项 `uc.flex.disable-sidebery-hover-animations` 来关闭这些动画。不过，关闭动画后，在折叠状态下的显示效果可能不如默认状态整洁。  
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>历史更新</b></summary>
 
 **v3.2.3**  
 - 继续修复在使用 Firefox 原生垂直选项卡的“悬停时展开侧栏”模式下出现的显示问题。  
@@ -50,7 +53,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 <a id="updates-top-3.1"></a>
 <details>
-<summary>📦 <b>v3.1.9~v3.1.0 更新记录</b></summary>
+<summary>📦 <b>v3.1.x 更新记录</b></summary>
 
 **v3.1.9**  
 - 修复启用主题时侧边栏切换按钮消失的问题。  
@@ -108,7 +111,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 
 <a id="updates-top-3.0"></a>
 <details>
-<summary>📦 <b>v3.0.7~v3.0.0 更新记录</b></summary>
+<summary>📦 <b>v3.0.x 更新记录</b></summary>
 
 **v3.0.7**
 - 修复在使用 Firefox 原生标签页（包括水平和垂直选项）时，当前激活标签页背景高亮显示异常的问题。  
@@ -167,7 +170,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 
 <a id="updates-top-2.0"></a>
 <details>
-<summary>📦 <b>v2.1.2~v1.0.0 更新记录</b></summary>
+<summary>📦 <b>v2.x.x 更新记录</b></summary>
 
 **v2.1.2**  
 - 修复了在启用原生垂直选项卡并将 `uc.flex.disable-bookmarks-autohide` 设为 true 时，书签栏出现偏移的问题。  
@@ -211,6 +214,13 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 <img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
 </details>
 
+<a href="#updates-top-2.0">🔝 返回本段顶部</a>
+</details>
+
+<a id="updates-top-1.0"></a>
+<details>
+<summary>📦 <b>v1.x.x 更新记录</b></summary>
+
 **v1.1.1**:
 - 修正了应用主题时查找栏背景颜色显示异常的问题。
 
@@ -249,7 +259,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 > [!IMPORTANT]
 > 如果您在 Firefox v133 之前的版本使用过 FlexFox，更新前请重置设置：在 `about:config` 中搜索 `uc.flex.` 并删除所有相关条目。
 
-<a href="#updates-top-2.0">🔝 返回本段顶部</a>
+<a href="#updates-top-1.0">🔝 返回本段顶部</a>
 </details>
 
 <a href="#updates-top-start">🔼 返回更新记录顶部</a>
@@ -426,6 +436,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 | `sidebar.animation.expand-on-hover.duration-ms` | Firefox 原生设置，用于控制在 `sidebar.visibility` 设置为 `expand-on-hover` 时，原生垂直选项卡展开和折叠的动画速度。 |
 | `uc.flex.disable-sidebery-hover-animations` | 当 `sidebar.visibility` 设置为 `expand-on-hover` 且 Sidebery 处于“保持展开”状态时，鼠标悬停所触发的动画可能导致轻微画面抖动。启用此选项可关闭这些动画，提升稳定性，但可能会让折叠状态下的显示不如原来整洁。 |
 | `uc.flex.disable-sidebery-autohide` | 停用 Sidebery 的自动折叠功能。 |
+| `uc.flex.disable-menu-icons` | 停用 FlexFox 添加的自定义选单图示。 |
 | `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
