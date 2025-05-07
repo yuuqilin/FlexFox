@@ -4,8 +4,6 @@ user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("svg.context-properties.content.enabled",              true);
 /* Boldens the text in the Firefox interface. */
 user_pref("uc.flex.add-ui-text-stroke",                         false);
-/* Adds extra left margin to bookmarks for alignment with other toolbar icons. */
-user_pref("uc.flex.add-bookmarks-left-margin",                  false);
 /* Fully hides the Sidebery sidebar. */
 user_pref("uc.flex.fully-hide-sidebery",                        false);
 /* Fully hides the top tab bar, navigation bar, and bookmarks toolbar. */
@@ -14,16 +12,22 @@ user_pref("uc.flex.fully-hide-toolbox",                         false);
 user_pref("uc.flex.increase-sidebery-expanded-width",           false);
 /* Allows themes and extensions to customize the toolbar background. */
 user_pref("uc.flex.allow-addons-to-change-toolbar-color",       false);
+/* Sets gradient style for the highlight color (0 = off, 1–X = select style). Applies to logo, stripe, and star icon. */
+user_pref("uc.flex.enable-gradient-highlight",                      0);
 /* Disables the auto-hide feature of the bookmarks toolbar. */
 user_pref("uc.flex.disable-bookmarks-autohide",                 false);
 /* Disables the auto-hide feature of the horizontal tab bar. */
 user_pref("uc.flex.disable-tabs-toolbar-autohide",              false);
 /* Disables the auto-hide feature of the find bar. */
 user_pref("uc.flex.disable-findbar-autohide",                   false);
-/* Disable auto-collapse of native vertical tabs. */
+/* Disables auto-collapse of native vertical tabs. */
 user_pref("uc.flex.disable-native-vertical-tabs-autohide",      false);
-/* Disable the auto-collapse feature of the Sidebery. */
+/* Disables hover animations in Sidebery's expanded sidebar to prevent jittering. */
+user_pref("uc.flex.disable-sidebery-hover-animations",          false);
+/* Disables the auto-collapse feature of the Sidebery. */
 user_pref("uc.flex.disable-sidebery-autohide",                  false);
+/* Disables the extra right padding after the first item in the navigation bar. */
+user_pref("uc.flex.disable-nav-bar-first-item-right-padding",   false);
 /* Disables custom menu icons added by FlexFox. */
 user_pref("uc.flex.disable-menu-icons",                         false);
 /* Removes icons from bookmark folders. */
@@ -32,8 +36,12 @@ user_pref("uc.flex.remove-bookmarks-folder-icons",              false);
 user_pref("uc.flex.remove-bookmarks-labels",                    false);
 /* Switches to a different, condensed extension panel. */
 user_pref("uc.flex.switch-to-alternate-condensed-panel",        false);
-/* Restores the original icons for minimize, maximize, and close window buttons. */
+/* Reverts the window control buttons (minimize, maximize, close) to Firefox's default design. */
 user_pref("uc.flex.revert-to-original-window-controls",         false);
+/* Reverts the bookmark star icon to Firefox's default design. */
+user_pref("uc.flex.revert-to-original-bookmark-star-icon",      false);
+/* Reverts the sidebar button icon to Firefox's default design. */
+user_pref("uc.flex.revert-to-original-sidebar-icon",            false);
 /* Speeds up the hover expand/collapse transitions for Sidebery. */
 user_pref("uc.flex.sidebery-fast-hover-expand",                 false);
 /* Slows down the hover expand/collapse transitions for Sidebery. */
@@ -75,7 +83,7 @@ user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 // user_pref("full-screen-api.transition-duration.enter",          0 0);
 // user_pref("full-screen-api.transition-duration.leave",          0 0);
 
-/* Enable browser chrome and add-on debugging toolboxes, and allow remote debugging without connection prompts. */
+/* Enables browser chrome and add-on debugging toolboxes, and allows remote debugging without connection prompts. */
 // user_pref("devtools.chrome.enabled",                           true);
 // user_pref("devtools.debugger.remote-enabled",                  true);
 // user_pref("devtools.debugger.prompt-connection",              false);

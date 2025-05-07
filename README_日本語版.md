@@ -18,13 +18,21 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**v3.2.7**  
-- メニューのアイコン表示を無効にできる `uc.flex.disable-menu-icons` オプションを追加しました。  
+**v3.2.8**
+- `uc.flex.add-bookmarks-left-margin` オプションを削除しました。現在は、ネイティブの縦型タブや Sidebery 使用時に、ナビゲーションバーの最初のアイテムの後ろに自動で余白が追加されます。これにより縦タブとの視覚的な整列が自然になり、ツールバーの他の項目と適度に区切られます。このスペースは、全画面表示や縦タブが非表示のときには自動で無効になります。
+- この挙動を無効化するオプション `uc.flex.disable-nav-bar-first-item-right-padding` を追加しました。
+- サイドバー切り替えボタンのアイコンが FlexFox のロゴに置き換えられました。このロゴはナビゲーションバーの最左端に表示されるよう設計されていますが、Firefox の「ツールバーをカスタマイズ」機能を使って、任意の場所に移動できます。サイドバーが右側にある場合、Firefox は通常このアイコンをナビゲーションバーの右端に自動で移動しますが、FlexFox はさらに画面の最右端（ハンバーガーメニューやウィンドウ制御ボタンのさらに右）へ移動させ、右側の縦型タブと整列するようにしています。
+- 上記の動作を無効にして、元のサイドバーアイコンに戻す `uc.flex.revert-to-original-sidebar-icon` オプションを追加しました。
+- アドレスバーのブックマーク（星型）アイコンを Firefox の標準アイコンに戻す `uc.flex.revert-to-original-bookmark-star-icon` オプションを追加しました（FlexFox のデフォルトはハート型アイコン）。
+- 実験的機能：`uc.flex.enable-gradient-highlight` オプションを追加。FlexFox ロゴ、サイドバーストライプ、ブックマークアイコンにグラデーション色を適用します。値は `0`（無効）または `1`（有効）を指定してください。現在は 1 種類のグラデーションのみ利用可能ですが、今後さらに多くの部位と色が追加される予定です。
 
 <a id="updates-top-start"></a>
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.2.7**  
+- メニューのアイコン表示を無効にできる `uc.flex.disable-menu-icons` オプションを追加しました。  
 
 **v3.2.6**
 - アイコンのサイズを修正しました。
@@ -262,7 +270,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 <a href="#updates-top-1.0">🔝 セクションの先頭へ戻る</a>
 </details>
 
-<a href="#updates-top-start">🔼 アップデート一覧の先頭へ戻る</a>
+<a href="#updates-top-start">⏫ アップデート一覧の先頭へ戻る</a>
 </details>
 
 ## ✨ 特徴
@@ -414,14 +422,23 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 
 ### 🧩 カスタマイズ可能な設定 (`about:config`)
 
+#### 🪄 機能を追加・有効化するオプション
+
 | 設定名 | 説明 |
 |--------|------|
 | `uc.flex.add-ui-text-stroke` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
-| `uc.flex.add-bookmarks-left-margin` | ナビゲーションバーでブックマークが左から2番目に配置されている場合、ブックマークと垂直タブバーの間に余白を追加して、視覚的な区切りと整列を改善します。 |
 | `uc.flex.fully-hide-sidebery` | Sidebery を完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
 | `uc.flex.fully-hide-toolbox` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
-| `uc.flex.increase-sidebery-expanded-width` | Sidebery の展開時の幅を広げます。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | テーマや拡張機能によるツールバーの背景色や背景画像の上書きを許可します。 |
+| `uc.flex.enable-gradient-highlight` | FlexFox のロゴ、サイドバーのストライプ、ブックマークの星アイコンなど、主要な UI 要素に使われるハイライトカラーにグラデーションスタイルを適用します。数値で設定でき、`0` は無効、`1` ～ `X` は異なるグラデーションスタイルを選択します。 |
+| `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
+| `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Firefox の「展開モード」のネイティブ垂直タブにおいて、ピン留めタブと通常タブの間に区切り線を表示します（デフォルトでは非表示）。 |
+
+#### 🚫 機能を無効化・元に戻すオプション
+
+| 設定名 | 説明 |
+|--------|------|
 | `uc.flex.disable-bookmarks-autohide` | ブックマークツールバーの自動非表示を無効にします。 |
 | `uc.flex.disable-tabs-toolbar-autohide` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
 | `uc.flex.disable-findbar-autohide` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |
@@ -431,14 +448,20 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 | `sidebar.animation.expand-on-hover.duration-ms` | `sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーションの速度を制御するFirefoxのネイティブ設定です。 |
 | `uc.flex.disable-sidebery-hover-animations` | `sidebar.visibility` が `expand-on-hover` に設定され、Sidebery が「常に展開」状態になっている場合、ホバー時のアニメーションによって画面がわずかに揺れることがあります。この設定を有効にすると、そうしたアニメーションが無効化され、より安定した表示になりますが、折りたたみ時のレイアウトがやや崩れることがあります。 |
 | `uc.flex.disable-sidebery-autohide` | Sidebery の自動折りたたみを無効にします。 |
+| `uc.flex.disable-nav-bar-first-item-right-padding` | デフォルトでは、ナビゲーションバーの最初の項目の後ろに右側の余白を追加して、垂直タブとその周辺項目との視覚的な区切りや整列を改善します。このオプションはその余白を無効にします。 |
 | `uc.flex.disable-menu-icons` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
-| `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
-| `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
-| `uc.flex.switch-to-alternate-condensed-panel` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
 | `uc.flex.revert-to-original-window-controls` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
+| `uc.flex.revert-to-original-bookmark-star-icon` | FlexFox 独自のブックマーク星アイコンを Firefox 標準のデザインに戻します。 |
+| `uc.flex.revert-to-original-sidebar-icon` | FlexFox 独自のロゴを使用したサイドバーアイコンを Firefox 標準のデザインに戻します。 |
+
+#### 🪛 機能を調整・変更するオプション
+
+| 設定名 | 説明 |
+|--------|------|
+| `uc.flex.increase-sidebery-expanded-width` | Sidebery の展開時の幅を広げます。 |
+| `uc.flex.switch-to-alternate-condensed-panel` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
 | `uc.flex.sidebery-fast-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
 | `uc.flex.sidebery-slow-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Firefox の「展開モード」のネイティブ垂直タブにおいて、ピン留めタブと通常タブの間に区切り線を表示します（デフォルトでは非表示）。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブの垂直タブにおいて、1列あたりに表示できるピン留めタブの最大数を設定します（数値の範囲は 4～6）。この数を超えるとスクロールバーが表示されるため、使用環境に応じて調整してください。 |
 | `uc.flex.findbar-position` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `"top-center-left"` または `"0"`（左寄せ上部）、`"top-right"` または `"1"`（右上）、`"bottom-right"` または `"2"`（右下）です。 |
 

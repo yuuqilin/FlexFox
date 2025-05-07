@@ -18,13 +18,21 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**v3.2.7**  
-- Added `uc.flex.disable-menu-icons` option to allow disabling menu icons.  
+**v3.2.8**
+- Removed the `uc.flex.add-bookmarks-left-margin` option. Padding is now automatically added after the first item in the navigation bar when using native vertical tabs or Sidebery. This visually separates it from the rest of the toolbar items and aligns it more cleanly with the vertical tab column. The spacing adjusts dynamically and disables itself in fullscreen or when vertical tabs are hidden.
+- Added a new option: `uc.flex.disable-nav-bar-first-item-right-padding`, which disables the above behavior.
+- The sidebar toggle icon is now replaced with the FlexFox logo. Although it's designed to appear on the far left of the navigation bar, users can move it freely using Firefox's Customize Toolbar. If the sidebar is placed on the right, Firefox normally moves this icon to the far right of the navigation bar, but FlexFox pushes it even further to the edge of the screen—past the hamburger menu and window controls—so it aligns cleanly with the right-side vertical tabs.
+- Added option: `uc.flex.revert-to-original-sidebar-icon`, which restores Firefox's default sidebar icon.
+- Added option: `uc.flex.revert-to-original-bookmark-star-icon`, which brings back Firefox's original bookmark star icon (instead of FlexFox's heart-shaped version).
+- Experimental feature: `uc.flex.enable-gradient-highlight` adds gradient colors to the FlexFox logo, the sidebar stripe, and the bookmark star icon. The value should be set to `0` (off) or `1` (on). Only one preset gradient is currently available, but support for more areas and styles is planned for future updates.
 
 <a id="updates-top-start"></a>
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.2.7**  
+- Added `uc.flex.disable-menu-icons` option to allow disabling menu icons.  
 
 **v3.2.6**
 - Fixed the size of an icon.
@@ -33,7 +41,7 @@ It's not just a new look, it's a better way to browse.
 - Added missing icons for some menus.  
 
 **v3.2.4**  
-- When the sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox now defers to Firefox’s native auto-collapse behavior for vertical tabs. In this mode, Sidebery also supports toggling between **auto-collapse** and **keep expanded** states using the <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> shortcut or the sidebar toggle button.  
+- When the sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox now defers to Firefox's native auto-collapse behavior for vertical tabs. In this mode, Sidebery also supports toggling between **auto-collapse** and **keep expanded** states using the <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> shortcut or the sidebar toggle button.  
 - A new preference, `uc.flex.disable-sidebery-hover-animations`, has been added to disable hover animations in Sidebery when it is pinned open. This helps reduce slight visual jitter caused by those animations, though it may slightly impact the visual neatness of the collapsed state.  
 
 **v3.2.3**  
@@ -47,8 +55,8 @@ It's not just a new look, it's a better way to browse.
 
 **v3.2.0**  
 - Fixed a bug where the sidebar toggle button lost its background on hover.  
-- Full support for Firefox v138’s native vertical tabs in *expand-on-hover* mode.  
-  When the new sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox’s own auto-collapse feature for vertical tabs is disabled in favor of the native behavior.  
+- Full support for Firefox v138's native vertical tabs in *expand-on-hover* mode.  
+  When the new sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox's own auto-collapse feature for vertical tabs is disabled in favor of the native behavior.  
   In this mode, the width of the vertical tab bar can be freely adjusted.  
 
 <a id="updates-top-3.1"></a>
@@ -57,7 +65,7 @@ It's not just a new look, it's a better way to browse.
 
 **v3.1.9**  
 - Fixed an issue where the sidebar toggle button would disappear when a theme was applied.  
-- Fixed incorrect layout offsets for the bookmarks toolbar and navigation bar when Sidebery’s auto-hide was disabled. 
+- Fixed incorrect layout offsets for the bookmarks toolbar and navigation bar when Sidebery's auto-hide was disabled. 
 
 **v3.1.8**  
 - Removed the sidebar header that now appears in *web extension panel windows* (introduced in Nightly v140), restoring the intended compact layout for extensions like Sidebery.  
@@ -391,7 +399,7 @@ For future updates, simply re-running the script will be enough, and you won't n
 > 7. Configure Sidebery:
 >    - Open Sidebery settings (gear icon in the sidebar).
 >    - Navigate to `Help` > `Import addon data`, then import both `sidebery-settings.json` and `sidebery-styles.json` from the `Sidebery` folder in the downloaded archive.
->    - *Note:* If the settings don’t apply correctly, try re-importing them.
+>    - *Note:* If the settings don't apply correctly, try re-importing them.
 > 8. *(Optional)* Open `about:config` and search for `uc.flex.` to toggle FlexFox features.
 
 ## ⚙️ Options
@@ -413,14 +421,23 @@ For future updates, simply re-running the script will be enough, and you won't n
 
 ### 🧩 Configurable Preferences (`about:config`)
 
+#### 🪄 Add or Enable Features
+
 | Preference | Description |
 |-----------|-------------|
 | `uc.flex.add-ui-text-stroke` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
-| `uc.flex.add-bookmarks-left-margin` | Adds spacing between bookmarks and the vertical tabs when bookmarks are placed second from the left on the navigation bar, ensuring better visual separation and alignment. |
 | `uc.flex.fully-hide-sidebery` | Fully hides Sidebery; it reappears when the cursor moves to the screen edge. |
 | `uc.flex.fully-hide-toolbox` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
-| `uc.flex.increase-sidebery-expanded-width` | Increases the width of Sidebery when expanded. |
 | `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and extensions to override toolbar background color and image. |
+| `uc.flex.enable-gradient-highlight` | Enables gradient styling for the highlight color used across key UI elements such as the FlexFox logo, sidebar stripe, and bookmark star icon. This numeric setting accepts 0 to disable gradients, or values 1 to X to switch between different gradient styles. |
+| `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
+| `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in the native vertical tabs when in expanded state. Firefox hides this separator by default in this mode. |
+
+#### 🚫 Disable or Revert Features
+
+| Preference | Description |
+|-----------|-------------|
 | `uc.flex.disable-bookmarks-autohide` | Disables auto-hide for the bookmarks toolbar. |
 | `uc.flex.disable-tabs-toolbar-autohide` | Prevents the native horizontal tabs from auto-hiding when Sidebery is inactive. |
 | `uc.flex.disable-findbar-autohide` | Prevents the Findbar from automatically hiding when it loses focus. |
@@ -430,14 +447,20 @@ For future updates, simply re-running the script will be enough, and you won't n
 | `sidebar.animation.expand-on-hover.duration-ms` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
 | `uc.flex.disable-sidebery-hover-animations` | When `sidebar.visibility` is set to `expand-on-hover` and Sidebery is in the *expanded* state, hover animations may cause subtle jittering. This preference disables those animations for smoother interaction, but may make the collapsed layout appear less tidy. |
 | `uc.flex.disable-sidebery-autohide` | Disables auto-collapse for Sidebery. |
+| `uc.flex.disable-nav-bar-first-item-right-padding` | By default, FlexFox adds right-side padding after the first item in the navigation bar to improve visual separation and alignment between the vertical tabs and nearby items. This option disables that padding. |
 | `uc.flex.disable-menu-icons` | Disables custom icons in menus added by FlexFox. |
-| `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
-| `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |
-| `uc.flex.switch-to-alternate-condensed-panel` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
 | `uc.flex.revert-to-original-window-controls` | Reverts to Firefox's default window control buttons (minimize, maximize, close), replacing the macOS-style icons used by FlexFox. |
+| `uc.flex.revert-to-original-bookmark-star-icon` | Reverts the bookmark star icon to Firefox's default design, replacing the custom icon used by FlexFox. |
+| `uc.flex.revert-to-original-sidebar-icon` | Reverts the sidebar button icon to Firefox's default design, replacing the FlexFox logo. |
+
+#### 🪛 Modify or Adjust Features
+
+| Preference | Description |
+|-----------|-------------|
+| `uc.flex.increase-sidebery-expanded-width` | Increases the width of Sidebery when expanded. |
+| `uc.flex.switch-to-alternate-condensed-panel` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
 | `uc.flex.sidebery-fast-hover-expand` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in the native vertical tabs when in expanded state. Firefox hides this separator by default in this mode. |
 | `uc.flex.max-visible-vertical-pinned-tabs` | Sets the maximum number of pinned tabs visible per column in the native vertical tabs (numeric value, typically 4–6). Content beyond this limit will scroll, so adjust this to avoid scrollbars based on your usage. |
 | `uc.flex.findbar-position` | Sets the Findbar's position. Accepts string values: `"top-center-left"` or `"0"` = center-left top, `"top-right"` or `"1"` = top right, `"bottom-right"` or `"2"` = bottom right. |
 

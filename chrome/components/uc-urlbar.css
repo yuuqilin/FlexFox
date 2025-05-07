@@ -194,20 +194,32 @@
 }
 
 /* Bookmark Star Icon */
-#pageAction-panel-bookmark[starred],
-#star-button[starred] {
-    list-style-image: url("../icons/bookmark/bookmark.svg") !important;
-    fill: var(--uc-bookmark-star-color) !important;
-}
+@media not -moz-pref("uc.flex.revert-to-original-bookmark-star-icon") {
+    #pageAction-panel-bookmark[starred],
+    #star-button[starred] {
+        list-style-image: var(--uc-bookmark-star-image) !important;
+        fill: color-mix(in srgb, var(--uc-bookmark-star-color) 90%, var(--uc-sidebar-bgcolor)) !important;
+        @media -moz-pref("uc.flex.enable-gradient-highlight") {
+            &:not(:hover) {
+                list-style-image: none !important;
+                background: var(--uc-gradient-highlight);
+                mask-image: var(--uc-bookmark-star-image);
+                mask-position: 0px 0px;
+                mask-repeat: no-repeat;
+                mask-size: 16px;
+            }
+        }
+    }
 
-#pageAction-panel-bookmark[starred],
-#star-button-box:is(:hover, [open]) #star-button[starred] {
-    fill: var(--toolbarbutton-icon-fill) !important;
-}
+    #pageAction-panel-bookmark[starred],
+    #star-button-box:is(:hover, [open]) #star-button[starred] {
+        fill: var(--toolbarbutton-icon-fill) !important;
+    }
 
-#pageAction-panel-bookmark,
-#star-button {
-    list-style-image: url("../icons/bookmark/bookmark-empty.svg") !important;
+    #pageAction-panel-bookmark,
+    #star-button {
+        list-style-image: url("../icons/bookmark/bookmark-empty.svg") !important;
+    }
 }
 
 #page-action-buttons {

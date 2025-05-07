@@ -18,13 +18,21 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**v3.2.7**  
-- 新增选项 `uc.flex.disable-menu-icons`，允许用户停用菜单图示。  
+**v3.2.8**
+- 移除 `uc.flex.add-bookmarks-left-margin` 选项。现在在使用原生垂直选项卡或 Sidebery 时，FlexFox 会自动在导航栏第一个项目后添加空隙，以便和垂直选项卡对齐，整体视觉上更整洁。这项功能会自动适配，在全屏或垂直选项卡隐藏时自动停用。
+- 新增选项 `uc.flex.disable-nav-bar-first-item-right-padding`，可关闭上述自动添加空隙的行为。
+- 侧栏切换按钮图标现在替换为 FlexFox 的 logo。虽然默认位于导航栏最左侧，但用户仍可通过 Firefox 的“自定义工具栏”自由调整位置。若侧栏设在右侧，Firefox 会默认将此图标移至导航栏最右端，但 FlexFox 会将它进一步移至整个窗口的最右边（位于菜单按钮和窗口控制按钮的右边），实现与右侧垂直选项卡的对齐效果。
+- 新增选项 `uc.flex.revert-to-original-sidebar-icon`，可将图标恢复为 Firefox 默认样式。
+- 新增选项 `uc.flex.revert-to-original-bookmark-star-icon`，将地址栏的书签星星图标恢复为 Firefox 原始的五角星图标（FlexFox 默认为心形图标）。
+- 实验功能：新增 `uc.flex.enable-gradient-highlight` 选项，将 FlexFox logo、侧栏彩带、书签图标改为渐变色。此选项为数值类型，设为 `0` 关闭，`1` 开启。目前仅提供一组渐变色，未来会支持更多区域和样式，通过设置 1\~X 进行切换。
 
 <a id="updates-top-start"></a>
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.2.7**  
+- 新增选项 `uc.flex.disable-menu-icons`，允许用户停用菜单图示。  
 
 **v3.2.6**
 - 修正了一个图标的尺寸。
@@ -262,7 +270,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 <a href="#updates-top-1.0">🔝 返回本段顶部</a>
 </details>
 
-<a href="#updates-top-start">🔼 返回更新记录顶部</a>
+<a href="#updates-top-start">⏫ 返回更新记录顶部</a>
 </details>
 
 ## ✨ 功能亮点
@@ -419,14 +427,23 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 
 ### 🧩 可配置的首选项（`about:config`）
 
+#### 🪄 添加或启用选项
+
 | 配置选项 | 说明 |
 |----------|------|
 | `uc.flex.add-ui-text-stroke` | 为界面文字添加粗描边，提高低分辨率屏幕下的可读性。 |
-| `uc.flex.add-bookmarks-left-margin` | 当书签位于导航栏左侧第二个位置时，在其与垂直选项卡之间添加间距，以增强视觉上的分隔感与对齐感。 |
 | `uc.flex.fully-hide-sidebery` | 完全隐藏 Sidebery，将鼠标移至屏幕边缘时自动显示。 |
 | `uc.flex.fully-hide-toolbox` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
-| `uc.flex.increase-sidebery-expanded-width` | 增加 Sidebery 展开时的宽度。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | 允许主题或扩展修改工具栏的背景颜色或背景图。 |
+| `uc.flex.enable-gradient-highlight` | 为 FlexFox 图标、侧栏彩带、书签星形图标等主要界面元素中使用的高亮颜色启用渐变样式。此选项接受数值设置：`0` 表示关闭渐变，`1` 到 `X` 表示切换不同的渐变样式。 |
+| `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
+| `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在原生垂直选项卡处于“展开模式”时，在已固定的标签页和普通标签页之间显示分隔线（默认情况下该分隔线为隐藏）。 |
+
+#### 🚫 停用或还原选项
+
+| 配置选项 | 说明 |
+|----------|------|
 | `uc.flex.disable-bookmarks-autohide` | 停用书签工具栏的自动隐藏功能。 |
 | `uc.flex.disable-tabs-toolbar-autohide` | 当 Sidebery 处于非活动状态时，防止原生水平标签栏自动隐藏。 |
 | `uc.flex.disable-findbar-autohide` | 防止查找栏（Findbar）在失去焦点后自动隐藏。 |
@@ -436,14 +453,20 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 | `sidebar.animation.expand-on-hover.duration-ms` | Firefox 原生设置，用于控制在 `sidebar.visibility` 设置为 `expand-on-hover` 时，原生垂直选项卡展开和折叠的动画速度。 |
 | `uc.flex.disable-sidebery-hover-animations` | 当 `sidebar.visibility` 设置为 `expand-on-hover` 且 Sidebery 处于“保持展开”状态时，鼠标悬停所触发的动画可能导致轻微画面抖动。启用此选项可关闭这些动画，提升稳定性，但可能会让折叠状态下的显示不如原来整洁。 |
 | `uc.flex.disable-sidebery-autohide` | 停用 Sidebery 的自动折叠功能。 |
-| `uc.flex.disable-menu-icons` | 停用 FlexFox 添加的自定义选单图示。 |
-| `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
-| `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |
-| `uc.flex.switch-to-alternate-condensed-panel` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
+| `uc.flex.disable-nav-bar-first-item-right-padding` | 默认情况下，FlexFox 会在导航栏第一个图标后添加右侧间距，以优化垂直选项卡与周围项目之间的视觉间隔和对齐。此选项可停用该间距。 |
+| `uc.flex.disable-menu-icons` | 停用 FlexFox 添加的自定义选单图标。 |
 | `uc.flex.revert-to-original-window-controls` | 将 FlexFox 使用的 macOS 风格窗口按钮恢复为 Firefox 默认的最小化、最大化、关闭按钮。 |
+| `uc.flex.revert-to-original-bookmark-star-icon` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |
+| `uc.flex.revert-to-original-sidebar-icon` | 将 FlexFox 使用的侧栏按钮图标恢复为 Firefox 默认设计。 |
+
+#### 🪛 修改或调整选项
+
+| 配置选项 | 说明 |
+|----------|------|
+| `uc.flex.increase-sidebery-expanded-width` | 增加 Sidebery 展开时的宽度。 |
+| `uc.flex.switch-to-alternate-condensed-panel` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
 | `uc.flex.sidebery-fast-hover-expand` | 加快 Sidebery 与原生垂直选项卡的自动展开/折叠速度。 |
 | `uc.flex.sidebery-slow-hover-expand` | 减慢 Sidebery 与原生垂直选项卡的自动展开/折叠速度。 |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在原生垂直选项卡处于“展开模式”时，在已固定的标签页和普通标签页之间显示分隔线（默认情况下该分隔线为隐藏）。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | 设置原生垂直选项卡中每列可显示的固定标签页数量上限（可选值为数值，范围 4–6）。超过该值时将出现滚动条，可根据使用习惯进行调整。 |
 | `uc.flex.findbar-position` | 设置查找栏的位置。可选值为字符串：`"top-center-left"` 或 `"0"`（顶部左侧），`"top-right"` 或 `"1"`（右上角），`"bottom-right"` 或 `"2"`（右下角）。 |
 

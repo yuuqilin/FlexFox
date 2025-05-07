@@ -170,20 +170,6 @@
                                                           
 ═════════════════════════════════════════════════════════════════════ */
 
-/* Adjust left margin of the navigation bar to align toolbar icons with sidebar */
-/*
-#nav-bar:not([customizing]) {
-    margin-left: var(--uc-nav-bar-margin-left);
-}
-*/
-
-#nav-bar-customization-target {
-    & > :is(toolbarbutton, toolbaritem):first-child,
-    & > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
-        padding-inline-start: var(--uc-nav-bar-margin-left) !important;
-    }
-}
-
 /* Fix issue with missing window controls. */
 #titlebar,
 #TabsToolbar {
@@ -198,31 +184,34 @@
  * However, since the title bar is not displayed in fullscreen mode, 
  * we need to add Condition B (`:root[inFullscreen]`) to account for that scenario. 
  */
-/**
- * When native vertical tabs are enabled,
- * window controls for horizontal tabs are disabled.
- * Reset nav bar padding since extra space is unnecessary.
- */
-@media not -moz-pref("sidebar.verticalTabs") {
-    :root:is([tabsintitlebar], [customtitlebar]):not([customizing]),
-    :root[inFullscreen] {
-        #nav-bar {
-            /*
-            padding-left: 0px;
-            */
-            padding-right: var(--uc-nav-bar-padding-right) !important;
-        }
+:root:is([tabsintitlebar], [customtitlebar]):not([customizing]),
+:root[inFullscreen] {
+    #nav-bar {
+        padding-right: var(--uc-nav-bar-padding-right) !important;
     }
 }
 
-:root:not([inFullscreen]) {
-    /* Increase left spacing for bookmarks */
-    @media -moz-pref("uc.flex.add-bookmarks-left-margin") {
-        #personal-bookmarks {
-            margin-left: var(--uc-bookmarks-margin-left, 0);
+/* Add left padding to the first item in the nav bar for alignment with the vertical tabs */
+#nav-bar-customization-target {
+    & > :is(toolbarbutton, toolbaritem):first-child,
+    & > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
+        padding-inline-start: var(--uc-nav-bar-margin-left) !important;
+    }
+}
+
+:root:not([inFullscreen], [customizing]) {
+    @media not -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding") {
+        /* Add right padding to the first item in the nav bar for alignment with the vertical tabs */
+        #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):first-child:not(#personal-bookmarks) {
+            padding-right: var(--uc-nav-bar-first-child-padding-right) !important;
+        }
+        /* If the second item is the bookmarks toolbar, add extra left padding for proper spacing */
+        #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):nth-child(2)#personal-bookmarks {
+            padding-left: var(--uc-nav-bar-first-child-padding-right) !important;
         }
     }
 
+    /* Offset the navigator toolbox to account for the width of the vertical tabs */
     @media -moz-pref("uc.flex.fully-hide-toolbox") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
         #navigator-toolbox {
             margin-left: var(--uc-navigator-offset);
