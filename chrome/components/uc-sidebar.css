@@ -11,11 +11,21 @@
     &:not(:hover) {
         --toolbarbutton-active-background: transparent !important;
     }
-    @media not -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
-        :root[customizing] & {
-            list-style-image: var(--uc-flexfox-logo-image) !important;
+    :root[customizing] & {
+        list-style-image: var(--uc-flexfox-logo-image) !important;
+    }
+
+    :root:not([customizing]) & {
+        &[sidebar-positionend]:last-child {
+            position: absolute;
+            top: 8px;
+            right: 4px;
+            width: 36px;
+            height: 26px;
+            background-position: 9px 3px;
+            mask-position: 9px 3px;
         }
-        :root:not([customizing]) & {
+        @media not -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
             fill: var(--toolbarbutton-icon-fill) !important;
             list-style-image: none !important;
             background-image: var(--uc-flexfox-logo-image);
@@ -39,15 +49,6 @@
             &:first-child {
                 background-position: 13px 12px;
                 mask-position: 13px 12px;
-            }
-            &[sidebar-positionend]:last-child {
-                position: absolute;
-                top: 8px;
-                right: 4px;
-                width: 36px;
-                height: 26px;
-                background-position: 9px 3px;
-                mask-position: 9px 3px;
             }
 
             &[checked="true"] {
@@ -119,6 +120,7 @@
             min-height: 5px;
             max-height: 5px;
             min-width: var(--uc-sb-sidebar-width);
+            max-width: var(--uc-sb-sidebar-width);
             overflow: hidden;
             padding: 0 !important;
             background-color: var(--uc-sb-sidebar-header-stripe);
@@ -128,6 +130,7 @@
                 max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 opacity 0ms ease-in-out 0ms;
@@ -139,14 +142,24 @@
         }
 
         /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
-        @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
-            --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
-            #sidebar-header:not(:hover):not(:has(.active)) {
-                max-width: var(--uc-sidebar-header-width);
-                min-width: var(--uc-sidebar-header-width);
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
+            :root:not([titlepreface*="\200c "]) & {
+                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+                #sidebar-header:not(:hover):not(:has(.active)) {
+                    max-width: var(--uc-sidebar-header-width);
+                    min-width: var(--uc-sidebar-header-width);
+                }
             }
         }
-
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+            :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]):not([titlepreface*="\200c "]) & {
+                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+                #sidebar-header:not(:hover):not(:has(.active)) {
+                    max-width: var(--uc-sidebar-header-width);
+                    min-width: var(--uc-sidebar-header-width);
+                }
+            }
+        }
         @media (prefers-color-scheme: dark) {
             #sidebar-header:not(:hover):not(:has(.active)) {
                 opacity: 0.87;
@@ -165,6 +178,9 @@
                 min-height: 5px;
                 max-height: 5px;
                 min-width: var(--uc-sidebar-header-width);
+                /* When "Disable Sidebery Collapse" is toggled via hotkey (instead of the about:config option),  
+                we need to explicitly cap max-width to match the stripe width. */
+                max-width: var(--uc-sidebar-header-width);
                 overflow: hidden;
                 padding: 0 !important;
                 background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
@@ -174,6 +190,7 @@
                     max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     opacity 0ms ease-in-out 0ms;
@@ -186,6 +203,46 @@
                         var(--uc-sb-sidebar-header-stripe) 87%,
                         var(--uc-sidebar-bgcolor)
                     );
+                }
+            }
+        }
+    }
+    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+        :root[titlepreface*="\200c "] {
+            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+                &:hover #sidebar-header:not(:hover):not(:has(.active)) {
+                    min-height: 5px;
+                    max-height: 5px;
+                    min-width: var(--uc-sidebar-header-width);
+                    max-width: var(--uc-sidebar-header-width);
+                    overflow: hidden;
+                    padding: 0 !important;
+                    background-color: color-mix(
+                        in srgb,
+                        var(--uc-sb-sidebar-header-stripe) 50%,
+                        var(--uc-sidebar-bgcolor)
+                    );
+                    opacity: 1;
+                    will-change: min-height, max-height, min-width, overflow, background-color, opacity;
+                    transition:
+                        max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                        min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                        min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                        max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                        padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                        background-color var(--uc-autohide-transition-duration) ease-in-out
+                            var(--uc-autohide-sidebar-delay),
+                        opacity 0ms ease-in-out 0ms;
+                }
+
+                @media (prefers-color-scheme: dark) {
+                    &:hover #sidebar-header:not(:hover):not(:has(.active)) {
+                        background-color: color-mix(
+                            in srgb,
+                            var(--uc-sb-sidebar-header-stripe) 87%,
+                            var(--uc-sidebar-bgcolor)
+                        );
+                    }
                 }
             }
         }
@@ -247,6 +304,39 @@
         }
     }
 }
+@media not -moz-pref("uc.flex.fully-hide-sidebery") {
+    :root[titlepreface*="\200c "] {
+        #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+            &:not(:is([positionend], [sidebar-positionend])) {
+                position: absolute !important;
+                left: 0px;
+                height: calc(
+                    100% - (var(--uc-sb-sidebar-main-stripe-height, 0px) + var(--uc-sb-sidebar-main-margin-top, 0px))
+                );
+                opacity: 0;
+                &:hover {
+                    transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-hover-sidebar-delay) + 10ms) !important;
+                    opacity: 1;
+                }
+            }
+
+            &:is([positionend], [sidebar-positionend]) {
+                position: absolute !important;
+                right: 0px;
+                height: calc(
+                    100% - (var(--uc-sb-sidebar-main-stripe-height, 0px) + var(--uc-sb-sidebar-main-margin-top, 0px))
+                );
+                opacity: 0;
+                &:hover {
+                    transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-hover-sidebar-delay) + 10ms) !important;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
 
 /* ════════════════════════════════════════════════════════════════════
    ██████╗ ███████╗██╗   ██╗ █████╗ ███╗   ███╗██████╗ ███████╗██████╗     ███████╗██╗██████╗ ███████╗██████╗  █████╗ ██████╗ 
@@ -273,7 +363,9 @@
         --uc-sb-sidebar-main-margin-top: 0px;
         --uc-sb-sidebar-main-stripe-height: 5px;
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
-            --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset);
+            :root:not([titlepreface*="\200b "]) & {
+                --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset);
+            }
         }
         & sidebar-main[expanded] {
             --uc-sb-sroot-padding-block-start: var(--space-small);
@@ -313,14 +405,18 @@
             @media -moz-pref("uc.flex.enable-gradient-highlight") {
                 --uc-sb-gradient-highlight: var(--uc-gradient-highlight);
             }
-            @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen)) {
-                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+            @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
+                :root:not([titlepreface*="\200c "]) & {
+                    --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                }
             }
         }
-        :root[sidebar-expand-on-hover] & #sidebar-main {
-            @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+            :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]):not([titlepreface*="\200c "])
+                &
+                #sidebar-main {
                 --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
                 --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
                 --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
@@ -335,18 +431,33 @@
                 --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
             }
         }
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            :root[titlepreface*="\200c "] & {
+                #sidebar-main {
+                    --uc-sb-sidebar-main-opacity: 0;
+                }
+                #sidebar-main:hover {
+                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                }
+            }
+        }
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
             #sidebar-main[sidebar-panel-open] {
                 position: var(--uc-sb-sidebar-main-position, static) !important;
             }
         }
     }
-    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-        #browser:has(
-                #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]):hover
-            ) {
+
+    #browser:has(
+            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]):hover
+        ) {
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             #sidebar-main {
                 --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                /* When "Disable Sidebery Collapse" is toggled via hotkey (instead of the about:config option),  
+                   we need to explicitly cap max-width to match the stripe width. */
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
                 --uc-sb-sidebar-main-opacity: 1;
                 /**
                  * #sidebar-main normally uses `transition-delay: var(--uc-autohide-sidebar-delay)` when not hovered.
@@ -355,6 +466,17 @@
                  */
                 --uc-autohide-sidebar-delay: var(--uc-hover-sidebar-delay);
                 --uc-sb-sidebar-main-z-delay: var(--uc-hover-sidebar-delay);
+            }
+        }
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            :root[titlepreface*="\200c "] & {
+                #sidebar-main {
+                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                    --uc-sb-sidebar-main-opacity: 1;
+                    --uc-autohide-sidebar-delay: var(--uc-hover-sidebar-delay);
+                    --uc-sb-sidebar-main-z-delay: var(--uc-hover-sidebar-delay);
+                }
             }
         }
     }
@@ -801,6 +923,13 @@
     @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
         #navigator-toolbox {
             z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
+        }
+    }
+    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+        :root[titlepreface*="\200c "] {
+            #navigator-toolbox {
+                z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
+            }
         }
     }
 

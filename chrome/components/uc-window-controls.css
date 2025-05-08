@@ -109,6 +109,14 @@
                                                                                                                                       
 ═════════════════════════════════════════════════════════════════════ */
 
+/* Fix issue with missing window controls. */
+#titlebar,
+#TabsToolbar {
+    will-change: unset !important;
+    transition: none !important;
+    opacity: 1 !important;
+}
+
 /* ----- Close/min/max fix ----- */
 :root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
     #TabsToolbar .titlebar-buttonbox-container {
@@ -170,14 +178,6 @@
                                                           
 ═════════════════════════════════════════════════════════════════════ */
 
-/* Fix issue with missing window controls. */
-#titlebar,
-#TabsToolbar {
-    will-change: unset !important;
-    transition: none !important;
-    opacity: 1 !important;
-}
-
 /* ----  Move nav-bar to make room for window controls ---- */
 /**
  * Condition A excludes cases where the title bar is enabled. 
@@ -212,10 +212,22 @@
     }
 
     /* Offset the navigator toolbox to account for the width of the vertical tabs */
-    @media -moz-pref("uc.flex.fully-hide-toolbox") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
-        #navigator-toolbox {
-            margin-left: var(--uc-navigator-offset);
-            width: calc(100% - var(--uc-navigator-width));
+    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+        &:not([titlepreface*="\200c "]) {
+            @media -moz-pref("uc.flex.fully-hide-toolbox") {
+                #navigator-toolbox {
+                    margin-left: var(--uc-navigator-offset);
+                    width: calc(100% - var(--uc-navigator-width));
+                }
+            }
+            @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+                &[titlepreface*="\200b "] {
+                    #navigator-toolbox {
+                        margin-left: var(--uc-navigator-offset);
+                        width: calc(100% - var(--uc-navigator-width));
+                    }
+                }
+            }
         }
     }
 }
@@ -231,8 +243,8 @@
 ═════════════════════════════════════════════════════════════════════ */
 
 /* Offset bookmarks toolbar horizontally when Sidebery is visible to prevent overlap with sidebar */
-@media not (-moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox")) {
-    :root:not([inFullscreen]):not([customizing]) {
+@media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
+    :root:not([inFullscreen]):not([customizing]):not([titlepreface*="\200b "]):not([titlepreface*="\200c "]) {
         #PersonalToolbar {
             margin-left: var(--uc-personal-toolbar-offset);
             width: calc(100% - var(--uc-personal-toolbar-width));

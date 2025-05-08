@@ -48,17 +48,17 @@
     display: var(--uc-sidebar-splitter-display);
 }
 
-:root:not([sidebar-expand-on-hover]) {
-    #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
-        /* Remove sidebar splitter */
-        & + #sidebar-splitter {
-            display: none;
-        }
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+    /* Remove sidebar splitter */
+    & + #sidebar-splitter {
+        display: none;
+    }
 
-        /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */
-        @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
-            -moz-pref("uc.flex.fully-hide-sidebery"),
-            (display-mode: fullscreen) {
+    /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */
+    @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
+        -moz-pref("uc.flex.fully-hide-sidebery"),
+        (display-mode: fullscreen) {
+        :root:not([sidebar-expand-on-hover]):not([titlepreface*="\180e "]) & {
             #sidebar {
                 will-change: min-width;
                 min-width: var(--uc-sb-sidebar-width) !important;
@@ -76,21 +76,62 @@
                     var(--uc-hover-sidebar-delay) !important;
             }
         }
+    }
+    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]) & {
+            #sidebar {
+                will-change: min-width;
+                min-width: var(--uc-sb-sidebar-width) !important;
+                transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+                @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
+                    transition: none !important;
+                }
+            }
 
-        .sidebar-panel {
-            background-color: transparent !important;
-            color: var(--newtab-text-primary-color) !important;
+            &:hover > #sidebar,
+            #sidebar-header:has(.active) + #sidebar {
+                min-width: var(--uc-sb-sidebar-hover-width) !important;
+                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay) !important;
+            }
         }
+    }
+    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+        :root[titlepreface*="\200c "] & {
+            #sidebar {
+                will-change: min-width;
+                min-width: var(--uc-sb-sidebar-width) !important;
+                transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+                @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
+                    transition: none !important;
+                }
+            }
 
-        .sidebar-panel #search-box {
-            -moz-appearance: none !important;
-            appearance: none !important;
-            background-color: rgba(249, 249, 250, 0.1) !important;
-            color: inherit !important;
+            &:hover > #sidebar,
+            #sidebar-header:has(.active) + #sidebar {
+                min-width: var(--uc-sb-sidebar-hover-width) !important;
+                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay) !important;
+            }
         }
+    }
 
-        /* Add sidebar divider and give it background */
-        /*
+    .sidebar-panel {
+        background-color: transparent !important;
+        color: var(--newtab-text-primary-color) !important;
+    }
+
+    .sidebar-panel #search-box {
+        -moz-appearance: none !important;
+        appearance: none !important;
+        background-color: rgba(249, 249, 250, 0.1) !important;
+        color: inherit !important;
+    }
+
+    /* Add sidebar divider and give it background */
+    /*
     & #sidebar,
     & #sidebar-header {
         background-color: inherit !important;
@@ -99,18 +140,17 @@
     }
     */
 
-        &:not(:is([positionend], [sidebar-positionend])) > :-moz-locale-dir(rtl),
-        &:is([positionend], [sidebar-positionend]) > * {
-            border-inline-width: 1px 0px;
-        }
+    &:not(:is([positionend], [sidebar-positionend])) > :-moz-locale-dir(rtl),
+    &:is([positionend], [sidebar-positionend]) > * {
+        border-inline-width: 1px 0px;
+    }
 
-        /* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
-        &:not(:is([positionend], [sidebar-positionend])):hover ~ #appcontent #statuspanel {
-            inset-inline: auto 0px !important;
-        }
-        &:not(:is([positionend], [sidebar-positionend])):hover ~ #appcontent #statuspanel-label {
-            margin-inline: 0px !important;
-            border-left-style: solid !important;
-        }
+    /* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
+    &:not(:is([positionend], [sidebar-positionend])):hover ~ #appcontent #statuspanel {
+        inset-inline: auto 0px !important;
+    }
+    &:not(:is([positionend], [sidebar-positionend])):hover ~ #appcontent #statuspanel-label {
+        margin-inline: 0px !important;
+        border-left-style: solid !important;
     }
 }

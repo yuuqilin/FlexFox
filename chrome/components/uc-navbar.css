@@ -161,3 +161,92 @@ toolbarbutton:hover {
         }
     }
 }
+
+@media not -moz-pref("uc.flex.fully-hide-toolbox") {
+    :root[titlepreface*="\200b "]:not([inFullscreen]) {
+        #navigator-toolbox {
+            --browser-area-z-index-toolbox: 3;
+            position: fixed !important;
+            background-color: var(--lwt-accent-color, black) !important;
+            transition:
+                transform 82ms linear,
+                opacity 82ms linear !important;
+            transition-delay: var(--uc-autohide-toolbox-delay) !important;
+            transform-origin: top;
+            transform: rotateX(var(--uc-toolbox-rotation));
+            opacity: 0;
+            line-height: 0;
+            z-index: 1;
+            pointer-events: none;
+            width: 100vw;
+        }
+
+        &[sessionrestored] #urlbar[popover] {
+            pointer-events: none;
+            opacity: 0;
+            transition:
+                transform 82ms linear var(--uc-autohide-toolbox-delay),
+                /* Use !important to override the transition styles in Nightly (v135) */ opacity 0ms
+                    calc(var(--uc-autohide-toolbox-delay) + 82ms) !important;
+            transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+            transform: rotateX(89.9deg);
+        }
+
+        #mainPopupSet:has(
+                > [panelopen]:not(
+                        #ask-chat-shortcuts,
+                        #selection-shortcut-action-panel,
+                        #chat-shortcuts-options-panel,
+                        #tab-preview-panel
+                    )
+            )
+            ~ toolbox
+            #urlbar[popover],
+        #navigator-toolbox:is(:hover, :focus-within, [movingtab]) #urlbar[popover],
+        #urlbar-container > #urlbar[popover]:is([focused], [open]) {
+            pointer-events: auto;
+            opacity: 1;
+            transition-delay: 33ms !important; /* Use !important to override the transition styles in Nightly (v135) */
+            transform: rotateX(0deg);
+        }
+
+        #mainPopupSet:has(
+                > [panelopen]:not(
+                        #ask-chat-shortcuts,
+                        #selection-shortcut-action-panel,
+                        #chat-shortcuts-options-panel,
+                        #tab-preview-panel
+                    )
+            )
+            ~ toolbox,
+        #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
+        #navigator-toolbox:is(:hover, :focus-within, [movingtab]) {
+            transition-delay: 33ms !important;
+            transform: rotateX(0);
+            opacity: 1;
+        }
+
+        #navigator-toolbox > * {
+            line-height: normal;
+            pointer-events: auto;
+        }
+
+        /* Don't apply transform before window has been fully created */
+        &:not([sessionrestored]) #navigator-toolbox {
+            transform: none !important;
+        }
+
+        &[customizing] #navigator-toolbox {
+            position: relative !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        /* This is a bit hacky fix for an issue that will make urlbar zero pixels tall after you enter customize mode */
+        #urlbar[breakout][breakout-extend] > .urlbar-input-container {
+            padding-block: calc(
+                min(4px, (var(--urlbar-container-height) - var(--urlbar-height)) / 2) + var(--urlbar-container-padding)
+            ) !important;
+        }
+    }
+}

@@ -18,6 +18,33 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
+**🦊 v3.3.0**
+- `expand-on-hover` を有効にしている状態で `uc.flex.fully-hide-sidebery` またはフルスクリーンを併用した際に、Sidebery が展開されなくなる問題を修正しました。
+- サイドバー切り替えボタンが画面右端にあるときに、位置がずれる問題を修正しました。
+
+🚀 **新機能：ショートカットによる UI レイアウト切り替えに対応**
+
+FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 拡張機能に対応しました。
+以下の画像のように設定してください：  
+<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />
+設定後は、左上の `Apply changes` ボタンをクリックするのを忘れずに。クリックしないと設定が反映されません。
+
+設定が完了すれば、次のショートカットキーで 3 種類の UI レイアウトを切り替えられます：
+
+| ショートカット | 動作内容 |
+| ------------- | ------- |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 1 | Sidebery を自動折りたたみと常に展開の状態で切り替え。`uc.flex.disable-sidebery-autohide` オプションと同じレイアウト動作。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 2 | タブ・ナビゲーションバー・ブックマークバーなど、すべての上部ツールバーを完全に非表示に切り替え。隠れている時はマウスを画面上端に移動すると表示されます。`uc.flex.fully-hide-toolbox` と同様。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 3 | Sidebery を完全に非表示に切り替え。隠れている時はマウスを画面端に移動すると表示されます。`uc.flex.fully-hide-sidebery` と同様。 |
+
+> [!IMPORTANT]
+> `about:config` で有効にしているオプションはショートカットより優先され、状態が固定されます。ショートカットで切り替えを行うには、該当するオプションを `false` に設定してください。
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
+
 **v3.2.8**
 - `uc.flex.add-bookmarks-left-margin` オプションを削除しました。現在は、ネイティブの縦型タブや Sidebery 使用時に、ナビゲーションバーの最初のアイテムの後ろに自動で余白が追加されます。これにより縦タブとの視覚的な整列が自然になり、ツールバーの他の項目と適度に区切られます。このスペースは、全画面表示や縦タブが非表示のときには自動で無効になります。
 - この挙動を無効化するオプション `uc.flex.disable-nav-bar-first-item-right-padding` を追加しました。
@@ -25,11 +52,6 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 - 上記の動作を無効にして、元のサイドバーアイコンに戻す `uc.flex.revert-to-original-sidebar-icon` オプションを追加しました。
 - アドレスバーのブックマーク（星型）アイコンを Firefox の標準アイコンに戻す `uc.flex.revert-to-original-bookmark-star-icon` オプションを追加しました（FlexFox のデフォルトはハート型アイコン）。
 - 実験的機能：`uc.flex.enable-gradient-highlight` オプションを追加。FlexFox ロゴ、サイドバーストライプ、ブックマークアイコンにグラデーション色を適用します。値は `0`（無効）または `1`（有効）を指定してください。現在は 1 種類のグラデーションのみ利用可能ですが、今後さらに多くの部位と色が追加される予定です。
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
 
 **v3.2.7**  
 - メニューのアイコン表示を無効にできる `uc.flex.disable-menu-icons` オプションを追加しました。  

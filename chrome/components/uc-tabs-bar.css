@@ -1,7 +1,7 @@
 /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
 /* be179ef */
 @media not (-moz-pref("sidebar.verticalTabs") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.disable-tabs-toolbar-autohide")) {
-    :root:not([inFullscreen]) {
+    :root:not([inFullscreen]):not([titlepreface*="\200b "]) {
         /* Hide the native horizontal tab bar */
         &:not([customizing], [chromehidden~="menubar"]) #TabsToolbar {
             margin-bottom: var(--uc-autohide-bottom);

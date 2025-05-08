@@ -269,6 +269,44 @@
     
        Sets fallback values to prevent undefined vars and layout issues.
        Includes base sizes used in later layout calculations.
+
+           Originally, condition A was handled via a @media query.
+           Now that [titlepreface*="A"] offers equivalent logic,
+           we need to ensure both mechanisms (@media A and [titlepreface*="A"])
+           apply the same styles. The conversion pattern is as follows:
+        
+           When the original is:
+             @media A and B {
+                 ...
+             }
+        
+        +  Add a new block below:
+        +  @media (not A) and B {
+        +      [titlepreface*="A"] {
+        +          ...
+        +      }
+        +  }
+        
+           -------------------------------------------------------
+        
+           For negated conditions:
+        
+           When the original is:
+             @media not (A or B) {
+                 ...
+             }
+        
+        +  Simply insert this inside the existing block:
+        +      :not([titlepreface*="A"]) {
+                   ...
+        +      }
+        
+           Summary:
+           1. If the original rule is @media not A, no duplication is needed—
+              just wrap the existing rules with :not([titlepreface*="A"]).
+           2. If the original rule is @media A, duplicate the block with the
+              adjusted @media condition and nest [titlepreface*="A"] inside it.
+
     ════════════════════════════════════════════════════════════════════ */
     /* 🔽 Begin initializing block */
     --uc-sidebar-bgcolor: var(--bg); /* Internal fallback; must match --bg */
@@ -304,6 +342,16 @@
         -moz-pref("uc.flex.fully-hide-toolbox"),
         -moz-pref("uc.flex.fully-hide-sidebery") {
         --uc-nav-bar-first-child-padding-right: 0px;
+    }
+    @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+        &[titlepreface*="\200b "] {
+            --uc-nav-bar-first-child-padding-right: 0px;
+        }
+    }
+    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+        &[titlepreface*="\200c "] {
+            --uc-nav-bar-first-child-padding-right: 0px;
+        }
     }
 
     /* Toolbar sizing */
@@ -350,6 +398,13 @@
                 var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px
             );
         }
+        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+            &[titlepreface*="\200b "] {
+                --uc-findbar-y-offset: calc(
+                    var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px
+                );
+            }
+        }
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
             &:not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
                 /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
@@ -394,7 +449,7 @@
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
             --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
         }
-        &[sidebar-expand-on-hover] {
+        &:is([sidebar-expand-on-hover], [titlepreface*="\180e "]) {
             --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
         }
         /* When Sidebery is fully hidden, set width to 1px to allow hover-triggered expansion */
@@ -407,6 +462,15 @@
              */
             &[sizemode="normal"] {
                 --uc-sb-sidebar-width: var(--uc-hover-sidebar-trigger-width);
+            }
+        }
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            :root[titlepreface*="\200c "] & {
+                --uc-sb-sidebar-width: 1px;
+
+                &[sizemode="normal"] {
+                    --uc-sb-sidebar-width: var(--uc-hover-sidebar-trigger-width);
+                }
             }
         }
 
@@ -437,9 +501,14 @@
         &[inFullscreen]:not([customizing]) {
             --uc-tab-items-visibility: collapse;
         }
-        @media -moz-pref("uc.flex.disable-tabs-toolbar-autohide"), -moz-pref("uc.flex.fully-hide-toolbox") {
-            &:not([inFullscreen]):not([customizing]) {
+        &:not([inFullscreen]):not([customizing]) {
+            @media -moz-pref("uc.flex.disable-tabs-toolbar-autohide"), -moz-pref("uc.flex.fully-hide-toolbox") {
                 --uc-tab-items-visibility: collapse;
+            }
+            @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+                &[titlepreface*="\200b "] {
+                    --uc-tab-items-visibility: collapse;
+                }
             }
         }
 
@@ -499,7 +568,7 @@
     }
     /* Adjust horizontal offset of the bookmarks toolbar background image */
     @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
-        &:not([inFullscreen]):not([customizing]) {
+        &:not([inFullscreen]):not([customizing]):not([titlepreface*="\200b "]):not([titlepreface*="\200c "]) {
             --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-width, 0px));
             @media -moz-pref("sidebar.verticalTabs") {
                 --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-header-width));

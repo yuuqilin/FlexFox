@@ -18,6 +18,33 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**🦊 v3.3.0**
+- Fixed an issue where Sidebery would not expand when using `expand-on-hover` together with `uc.flex.fully-hide-sidebery` or in fullscreen mode.
+- Resolved a display issue where the sidebar toggle button appeared misaligned when positioned on the far right of the screen.
+
+🚀 **Major Feature: Layout Switching via Hotkeys**
+
+FlexFox now supports the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension.
+After installing and configuring the extension as shown below:  
+<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
+Make sure to click the `Apply changes` button in the upper-left corner. The settings won't take effect until you do.
+
+Once set up, you can switch between three UI layout modes using keyboard shortcuts:
+
+| Shortcut | Action |
+| -------- | ------ |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 1 | Toggle between auto-collapsing and keeping Sidebery always open. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 2 | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 3 | Toggle fully hiding Sidebery. When hidden, it reappears when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
+
+> [!IMPORTANT]
+> Options set in `about:config` take priority. If a related option is enabled there, it will override the toggle behavior and lock the layout state. To enable hotkey switching, make sure the corresponding option is set to `false`.
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
+
 **v3.2.8**
 - Removed the `uc.flex.add-bookmarks-left-margin` option. Padding is now automatically added after the first item in the navigation bar when using native vertical tabs or Sidebery. This visually separates it from the rest of the toolbar items and aligns it more cleanly with the vertical tab column. The spacing adjusts dynamically and disables itself in fullscreen or when vertical tabs are hidden.
 - Added a new option: `uc.flex.disable-nav-bar-first-item-right-padding`, which disables the above behavior.
@@ -25,11 +52,6 @@ It's not just a new look, it's a better way to browse.
 - Added option: `uc.flex.revert-to-original-sidebar-icon`, which restores Firefox's default sidebar icon.
 - Added option: `uc.flex.revert-to-original-bookmark-star-icon`, which brings back Firefox's original bookmark star icon (instead of FlexFox's heart-shaped version).
 - Experimental feature: `uc.flex.enable-gradient-highlight` adds gradient colors to the FlexFox logo, the sidebar stripe, and the bookmark star icon. The value should be set to `0` (off) or `1` (on). Only one preset gradient is currently available, but support for more areas and styles is planned for future updates.
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
 
 **v3.2.7**  
 - Added `uc.flex.disable-menu-icons` option to allow disabling menu icons.  
