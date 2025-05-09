@@ -39,7 +39,8 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 > [!IMPORTANT]
 > `about:config` で有効にしているオプションはショートカットより優先され、状態が固定されます。ショートカットで切り替えを行うには、該当するオプションを `false` に設定してください。
 
-キーボードショートカットに加えて、UserChrome Toggle Extended 拡張機能のボタンからもレイアウトを切り替えることができます。
+キーボードショートカットに加えて、UserChrome Toggle Extended 拡張機能のボタンからもレイアウトを切り替えることができます。  
+<img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 ショートカットキーの設定を変更するには、右上の歯車アイコンをクリックし、メニューから **拡張機能のショートカットキーの管理** を選んでください。  
 <img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 

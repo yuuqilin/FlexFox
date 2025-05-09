@@ -39,7 +39,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 > [!IMPORTANT]
 > 在 `about:config` 中设置的选项优先级更高。如果相关选项已启用，将会固定布局状态，快捷键将失效。若需使用快捷键切换，请将对应选项设为 `false`。
 
-除了使用快捷键，也可以通过 UserChrome Toggle Extended 扩展提供的按钮切换界面布局。
+除了使用快捷键，也可以通过 UserChrome Toggle Extended 扩展提供的按钮切换界面布局。  
+<img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 如果需要修改默认快捷键，点击右上角的齿轮图标，在菜单中选择 **管理扩展快捷键**。  
 <img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 

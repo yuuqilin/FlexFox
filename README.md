@@ -39,7 +39,8 @@ Once set up, you can switch between four UI layout modes using keyboard shortcut
 > [!IMPORTANT]
 > Options set in `about:config` take priority. If a related option is enabled there, it will override the toggle behavior and lock the layout state. To enable hotkey switching, make sure the corresponding option is set to `false`.
 
-In addition to using keyboard shortcuts, you can also switch layouts using the toggle button provided by the UserChrome Toggle Extended extension.
+In addition to using keyboard shortcuts, you can also switch layouts using the toggle button provided by the UserChrome Toggle Extended extension.  
+<img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 To change the default hotkeys, click the gear icon in the top-right corner and select **Manage Extension Shortcuts** from the menu.  
 <img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 
