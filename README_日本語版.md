@@ -33,12 +33,16 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 | ショートカット | 動作内容 |
 | ------------- | ------- |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 1 | Sidebery を自動折りたたみと常に展開の状態で切り替え。`uc.flex.disable-sidebery-autohide` オプションと同じレイアウト動作。 |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 2 | タブ・ナビゲーションバー・ブックマークバーなど、すべての上部ツールバーを完全に非表示に切り替え。隠れている時はマウスを画面上端に移動すると表示されます。`uc.flex.fully-hide-toolbox` と同様。 |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 3 | Sidebery を完全に非表示に切り替え。隠れている時はマウスを画面端に移動すると表示されます。`uc.flex.fully-hide-sidebery` と同様。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Sidebery を自動折りたたみと常に展開の状態で切り替え。`uc.flex.disable-sidebery-autohide` オプションと同じレイアウト動作。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | タブ・ナビゲーションバー・ブックマークバーなど、すべての上部ツールバーを完全に非表示に切り替え。隠れている時はマウスを画面上端に移動すると表示されます。`uc.flex.fully-hide-toolbox` と同様。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Sidebery を完全に非表示に切り替え。隠れている時はマウスを画面端に移動すると表示されます。`uc.flex.fully-hide-sidebery` と同様。 |
 
 > [!IMPORTANT]
 > `about:config` で有効にしているオプションはショートカットより優先され、状態が固定されます。ショートカットで切り替えを行うには、該当するオプションを `false` に設定してください。
+
+キーボードショートカットに加えて、UserChrome Toggle Extended 拡張機能のボタンからもレイアウトを切り替えることができます。
+ショートカットキーの設定を変更するには、右上の歯車アイコンをクリックし、メニューから **拡張機能のショートカットキーの管理** を選んでください。  
+<img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 
 <a id="updates-top-start"></a>
 <details>

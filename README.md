@@ -33,12 +33,16 @@ Once set up, you can switch between three UI layout modes using keyboard shortcu
 
 | Shortcut | Action |
 | -------- | ------ |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 1 | Toggle between auto-collapsing and keeping Sidebery always open. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 2 | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 3 | Toggle fully hiding Sidebery. When hidden, it reappears when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Toggle between auto-collapsing and keeping Sidebery always open. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Toggle fully hiding Sidebery. When hidden, it reappears when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
 
 > [!IMPORTANT]
 > Options set in `about:config` take priority. If a related option is enabled there, it will override the toggle behavior and lock the layout state. To enable hotkey switching, make sure the corresponding option is set to `false`.
+
+In addition to using keyboard shortcuts, you can also switch layouts using the toggle button provided by the UserChrome Toggle Extended extension.
+To change the default hotkeys, click the gear icon in the top-right corner and select **Manage Extension Shortcuts** from the menu.  
+<img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 
 <a id="updates-top-start"></a>
 <details>

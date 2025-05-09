@@ -33,12 +33,16 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 | 快捷键 | 功能说明 |
 | ------ | ------- |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 1 | 切换 Sidebery 自动折叠和保持展开的状态，保持展开的布局效果与选项 `uc.flex.disable-sidebery-autohide` 相同。 |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 2 | 切换是否完全隐藏顶部工具栏（标签页、导航栏、书签栏），隐藏时鼠标移到屏幕上方边缘可自动显示。对应选项 `uc.flex.fully-hide-toolbox`。 |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + 3 | 切换是否完全隐藏 Sidebery，隐藏时鼠标移到屏幕边缘可自动显示。对应选项 `uc.flex.fully-hide-sidebery`。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | 切换 Sidebery 自动折叠和保持展开的状态，保持展开的布局效果与选项 `uc.flex.disable-sidebery-autohide` 相同。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | 切换是否完全隐藏顶部工具栏（标签页、导航栏、书签栏），隐藏时鼠标移到屏幕上方边缘可自动显示。对应选项 `uc.flex.fully-hide-toolbox`。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | 切换是否完全隐藏 Sidebery，隐藏时鼠标移到屏幕边缘可自动显示。对应选项 `uc.flex.fully-hide-sidebery`。 |
 
 > [!IMPORTANT]
 > 在 `about:config` 中设置的选项优先级更高。如果相关选项已启用，将会固定布局状态，快捷键将失效。若需使用快捷键切换，请将对应选项设为 `false`。
+
+除了使用快捷键，也可以通过 UserChrome Toggle Extended 扩展提供的按钮切换界面布局。
+如果需要修改默认快捷键，点击右上角的齿轮图标，在菜单中选择 **管理扩展快捷键**。  
+<img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 
 <a id="updates-top-start"></a>
 <details>
