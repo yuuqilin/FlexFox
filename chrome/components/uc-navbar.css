@@ -163,7 +163,7 @@ toolbarbutton:hover {
 }
 
 @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-    :root[titlepreface*="\200b "]:not([inFullscreen]) {
+    :root:is([titlepreface*="\200b "], [titlepreface*="\200d "]):not([inFullscreen]) {
         #navigator-toolbox {
             --browser-area-z-index-toolbox: 3;
             position: fixed !important;

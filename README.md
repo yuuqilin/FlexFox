@@ -18,9 +18,7 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.3.0**
-- Fixed an issue where Sidebery would not expand when using `expand-on-hover` together with `uc.flex.fully-hide-sidebery` or in fullscreen mode.
-- Resolved a display issue where the sidebar toggle button appeared misaligned when positioned on the far right of the screen.
+**🦊 v3.3.1**
 
 🚀 **Major Feature: Layout Switching via Hotkeys**
 
@@ -29,13 +27,14 @@ After installing and configuring the extension as shown below:
 <img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
 Make sure to click the `Apply changes` button in the upper-left corner. The settings won't take effect until you do.
 
-Once set up, you can switch between three UI layout modes using keyboard shortcuts:
+Once set up, you can switch between four UI layout modes using keyboard shortcuts:
 
 | Shortcut | Action |
 | -------- | ------ |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Toggle between auto-collapsing and keeping Sidebery always open. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Toggle fully hiding Sidebery. When hidden, it reappears when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Toggle hiding all toolbars and Sidebery, leaving only the webpage content visible. When hidden, moving your mouse to the edge will reveal them. The layout behaves like `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery`. |
 
 > [!IMPORTANT]
 > Options set in `about:config` take priority. If a related option is enabled there, it will override the toggle behavior and lock the layout state. To enable hotkey switching, make sure the corresponding option is set to `false`.
@@ -48,6 +47,10 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.3.0**
+- Fixed an issue where Sidebery would not expand when using `expand-on-hover` together with `uc.flex.fully-hide-sidebery` or in fullscreen mode.
+- Resolved a display issue where the sidebar toggle button appeared misaligned when positioned on the far right of the screen.
 
 **v3.2.8**
 - Removed the `uc.flex.add-bookmarks-left-margin` option. Padding is now automatically added after the first item in the navigation bar when using native vertical tabs or Sidebery. This visually separates it from the rest of the toolbar items and aligns it more cleanly with the vertical tab column. The spacing adjusts dynamically and disables itself in fullscreen or when vertical tabs are hidden.

@@ -213,7 +213,7 @@
 
     /* Offset the navigator toolbox to account for the width of the vertical tabs */
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        &:not([titlepreface*="\200c "]) {
+        &:not([titlepreface*="\200c "], [titlepreface*="\200d "]) {
             @media -moz-pref("uc.flex.fully-hide-toolbox") {
                 #navigator-toolbox {
                     margin-left: var(--uc-navigator-offset);
@@ -244,7 +244,13 @@
 
 /* Offset bookmarks toolbar horizontally when Sidebery is visible to prevent overlap with sidebar */
 @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
-    :root:not([inFullscreen]):not([customizing]):not([titlepreface*="\200b "]):not([titlepreface*="\200c "]) {
+    :root:not(
+            [inFullscreen],
+            [customizing],
+            [titlepreface*="\200b "],
+            [titlepreface*="\200c "],
+            [titlepreface*="\200d "]
+        ) {
         #PersonalToolbar {
             margin-left: var(--uc-personal-toolbar-offset);
             width: calc(100% - var(--uc-personal-toolbar-width));

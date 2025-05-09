@@ -18,9 +18,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.3.0**
-- `expand-on-hover` を有効にしている状態で `uc.flex.fully-hide-sidebery` またはフルスクリーンを併用した際に、Sidebery が展開されなくなる問題を修正しました。
-- サイドバー切り替えボタンが画面右端にあるときに、位置がずれる問題を修正しました。
+**🦊 v3.3.1**
 
 🚀 **新機能：ショートカットによる UI レイアウト切り替えに対応**
 
@@ -29,13 +27,14 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
 設定後は、左上の `Apply changes` ボタンをクリックするのを忘れずに。クリックしないと設定が反映されません。
 
-設定が完了すれば、次のショートカットキーで 3 種類の UI レイアウトを切り替えられます：
+設定が完了すれば、次のショートカットキーで 4 種類の UI レイアウトを切り替えられます：
 
 | ショートカット | 動作内容 |
 | ------------- | ------- |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Sidebery を自動折りたたみと常に展開の状態で切り替え。`uc.flex.disable-sidebery-autohide` オプションと同じレイアウト動作。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | タブ・ナビゲーションバー・ブックマークバーなど、すべての上部ツールバーを完全に非表示に切り替え。隠れている時はマウスを画面上端に移動すると表示されます。`uc.flex.fully-hide-toolbox` と同様。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Sidebery を完全に非表示に切り替え。隠れている時はマウスを画面端に移動すると表示されます。`uc.flex.fully-hide-sidebery` と同様。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | すべてのツールバーと Sidebery を隠し、ウェブページのコンテンツだけが表示される状態に切り替え。隠れている時はマウスを画面端に移動すると表示されます。レイアウトは `uc.flex.fully-hide-toolbox` と `uc.flex.fully-hide-sidebery` と同様の動作をします。 |
 
 > [!IMPORTANT]
 > `about:config` で有効にしているオプションはショートカットより優先され、状態が固定されます。ショートカットで切り替えを行うには、該当するオプションを `false` に設定してください。
@@ -48,6 +47,10 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.3.0**
+- `expand-on-hover` を有効にしている状態で `uc.flex.fully-hide-sidebery` またはフルスクリーンを併用した際に、Sidebery が展開されなくなる問題を修正しました。
+- サイドバー切り替えボタンが画面右端にあるときに、位置がずれる問題を修正しました。
 
 **v3.2.8**
 - `uc.flex.add-bookmarks-left-margin` オプションを削除しました。現在は、ネイティブの縦型タブや Sidebery 使用時に、ナビゲーションバーの最初のアイテムの後ろに自動で余白が追加されます。これにより縦タブとの視覚的な整列が自然になり、ツールバーの他の項目と適度に区切られます。このスペースは、全画面表示や縦タブが非表示のときには自動で無効になります。

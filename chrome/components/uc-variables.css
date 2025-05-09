@@ -349,7 +349,7 @@
         }
     }
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        &[titlepreface*="\200c "] {
+        &:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
             --uc-nav-bar-first-child-padding-right: 0px;
         }
     }
@@ -465,7 +465,7 @@
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            :root[titlepreface*="\200c "] & {
+            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 --uc-sb-sidebar-width: 1px;
 
                 &[sizemode="normal"] {
@@ -506,7 +506,7 @@
                 --uc-tab-items-visibility: collapse;
             }
             @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-                &[titlepreface*="\200b "] {
+                &:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
                     --uc-tab-items-visibility: collapse;
                 }
             }
@@ -568,7 +568,13 @@
     }
     /* Adjust horizontal offset of the bookmarks toolbar background image */
     @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
-        &:not([inFullscreen]):not([customizing]):not([titlepreface*="\200b "]):not([titlepreface*="\200c "]) {
+        &:not(
+                [inFullscreen],
+                [customizing],
+                [titlepreface*="\200b "],
+                [titlepreface*="\200c "],
+                [titlepreface*="\200d "]
+            ) {
             --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-width, 0px));
             @media -moz-pref("sidebar.verticalTabs") {
                 --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-header-width));

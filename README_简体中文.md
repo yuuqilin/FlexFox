@@ -18,9 +18,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.3.0**
-- 修复了在启用 `expand-on-hover` 并同时使用 `uc.flex.fully-hide-sidebery` 或处于全屏模式时，Sidebery 无法展开的问题。
-- 修复了侧边栏按钮位于屏幕最右侧时显示位置不正确的问题。
+**🦊 v3.3.1**
 
 🚀 **重大更新：支持通过快捷键切换 UI 布局**
 
@@ -29,13 +27,14 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
 设置后，别忘了点击左上角的 `Apply changes` 按钮，否则设置不会生效。
 
-完成设置后，可通过快捷键切换三种 UI 布局模式：
+完成设置后，可通过快捷键切换四种 UI 布局模式：
 
 | 快捷键 | 功能说明 |
 | ------ | ------- |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | 切换 Sidebery 自动折叠和保持展开的状态，保持展开的布局效果与选项 `uc.flex.disable-sidebery-autohide` 相同。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | 切换是否完全隐藏顶部工具栏（标签页、导航栏、书签栏），隐藏时鼠标移到屏幕上方边缘可自动显示。对应选项 `uc.flex.fully-hide-toolbox`。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | 切换是否完全隐藏 Sidebery，隐藏时鼠标移到屏幕边缘可自动显示。对应选项 `uc.flex.fully-hide-sidebery`。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | 切换是否隐藏所有工具栏和 Sidebery，只剩下网页内容显示。隐藏时鼠标移到边缘时可自动显示。布局效果与 `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery` 相同。 |
 
 > [!IMPORTANT]
 > 在 `about:config` 中设置的选项优先级更高。如果相关选项已启用，将会固定布局状态，快捷键将失效。若需使用快捷键切换，请将对应选项设为 `false`。
@@ -48,6 +47,10 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.3.0**
+- 修复了在启用 `expand-on-hover` 并同时使用 `uc.flex.fully-hide-sidebery` 或处于全屏模式时，Sidebery 无法展开的问题。
+- 修复了侧边栏按钮位于屏幕最右侧时显示位置不正确的问题。
 
 **v3.2.8**
 - 移除 `uc.flex.add-bookmarks-left-margin` 选项。现在在使用原生垂直选项卡或 Sidebery 时，FlexFox 会自动在导航栏第一个项目后添加空隙，以便和垂直选项卡对齐，整体视觉上更整洁。这项功能会自动适配，在全屏或垂直选项卡隐藏时自动停用。

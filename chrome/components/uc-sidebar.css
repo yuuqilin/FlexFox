@@ -143,7 +143,7 @@
 
         /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
         @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
-            :root:not([titlepreface*="\200c "]) & {
+            :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
                 #sidebar-header:not(:hover):not(:has(.active)) {
                     max-width: var(--uc-sidebar-header-width);
@@ -152,7 +152,11 @@
             }
         }
         @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
-            :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]):not([titlepreface*="\200c "]) & {
+            :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]):not(
+                    [titlepreface*="\200c "],
+                    [titlepreface*="\200d "]
+                )
+                & {
                 --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
                 #sidebar-header:not(:hover):not(:has(.active)) {
                     max-width: var(--uc-sidebar-header-width);
@@ -208,7 +212,7 @@
         }
     }
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root[titlepreface*="\200c "] {
+        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
                 &:hover #sidebar-header:not(:hover):not(:has(.active)) {
                     min-height: 5px;
@@ -305,7 +309,7 @@
     }
 }
 @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-    :root[titlepreface*="\200c "] {
+    :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
         #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
             &:not(:is([positionend], [sidebar-positionend])) {
                 position: absolute !important;
@@ -363,7 +367,7 @@
         --uc-sb-sidebar-main-margin-top: 0px;
         --uc-sb-sidebar-main-stripe-height: 5px;
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
-            :root:not([titlepreface*="\200b "]) & {
+            :root:not([titlepreface*="\200b "], [titlepreface*="\200d "]) & {
                 --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset);
             }
         }
@@ -406,7 +410,7 @@
                 --uc-sb-gradient-highlight: var(--uc-gradient-highlight);
             }
             @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
-                :root:not([titlepreface*="\200c "]) & {
+                :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
                     --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
                     --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
@@ -414,7 +418,10 @@
             }
         }
         @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
-            :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]):not([titlepreface*="\200c "])
+            :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]):not(
+                    [titlepreface*="\200c "],
+                    [titlepreface*="\200d "]
+                )
                 &
                 #sidebar-main {
                 --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
@@ -432,7 +439,7 @@
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            :root[titlepreface*="\200c "] & {
+            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 #sidebar-main {
                     --uc-sb-sidebar-main-opacity: 0;
                 }
@@ -469,7 +476,7 @@
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            :root[titlepreface*="\200c "] & {
+            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 #sidebar-main {
                     --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
                     --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
@@ -926,7 +933,7 @@
         }
     }
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root[titlepreface*="\200c "] {
+        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
             #navigator-toolbox {
                 z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
             }

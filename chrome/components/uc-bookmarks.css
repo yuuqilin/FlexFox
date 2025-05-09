@@ -2,7 +2,7 @@
 /* 2ea55cb */
 
 @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox")) {
-    :root:not([inFullscreen]):not([titlepreface*="\200b "]) {
+    :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
         #PersonalToolbar {
             /* 0deg = "show" ; 90deg = "hide" ;  Set the following to control when bookmarks are shown */
             --uc-autohide-toolbar-focus-rotation: 0deg; /* urlbar is focused */

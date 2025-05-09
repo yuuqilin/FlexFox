@@ -58,7 +58,7 @@
     @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
         -moz-pref("uc.flex.fully-hide-sidebery"),
         (display-mode: fullscreen) {
-        :root:not([sidebar-expand-on-hover]):not([titlepreface*="\180e "]) & {
+        :root:not([sidebar-expand-on-hover], [titlepreface*="\180e "]) & {
             #sidebar {
                 will-change: min-width;
                 min-width: var(--uc-sb-sidebar-width) !important;
@@ -98,7 +98,7 @@
         }
     }
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root[titlepreface*="\200c "] & {
+        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
             #sidebar {
                 will-change: min-width;
                 min-width: var(--uc-sb-sidebar-width) !important;
