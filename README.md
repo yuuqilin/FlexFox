@@ -29,12 +29,12 @@ Make sure to click the `Apply changes` button in the upper-left corner. The sett
 
 Once set up, you can switch between four UI layout modes using keyboard shortcuts:
 
-| Shortcut | Action |
-| -------- | ------ |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Toggle between auto-collapsing and keeping Sidebery always open. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Toggle fully hiding Sidebery. When hidden, it reappears when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Toggle hiding all toolbars and Sidebery, leaving only the webpage content visible. When hidden, moving your mouse to the edge will reveal them. The layout behaves like `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery`. |
+| Shortcut | Label | Action |
+| -------- | ----- | ------ |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | Toggle between auto-collapsing and keeping Sidebery always open. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Hide Topbar | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | Toggle fully hiding Sidebery. When hidden, it reappears when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | Toggle hiding all toolbars and Sidebery, leaving only the webpage content visible. When hidden, moving your mouse to the edge will reveal them. The layout behaves like `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery`. |
 
 > [!IMPORTANT]
 > Options set in `about:config` take priority. If a related option is enabled there, it will override the toggle behavior and lock the layout state. To enable hotkey switching, make sure the corresponding option is set to `false`.
