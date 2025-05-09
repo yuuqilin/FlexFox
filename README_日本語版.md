@@ -26,7 +26,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 拡張機能に対応しました。
 以下の画像のように設定してください：  
-<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />
+<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
 設定後は、左上の `Apply changes` ボタンをクリックするのを忘れずに。クリックしないと設定が反映されません。
 
 設定が完了すれば、次のショートカットキーで 3 種類の UI レイアウトを切り替えられます：

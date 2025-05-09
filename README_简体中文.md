@@ -26,7 +26,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/)。
 安装并按下图设置：  
-<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />
+<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
 设置后，别忘了点击左上角的 `Apply changes` 按钮，否则设置不会生效。
 
 完成设置后，可通过快捷键切换三种 UI 布局模式：
