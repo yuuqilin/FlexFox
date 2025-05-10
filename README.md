@@ -18,6 +18,9 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**🦊 v3.3.3**
+- Fixed an issue where corner rounding was not rendered correctly in native vertical tabs mode.
+
 **🦊 v3.3.2**
 - The header stripe in native horizontal tab mode now supports gradient highlights. (By the way, you can customize the gradient color using the `--uc-gradient-highlight` variable.)
 - Fixed an issue where the sidebar button overlapped with the window controls when placed at the far right in horizontal tab mode.

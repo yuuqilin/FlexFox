@@ -907,8 +907,12 @@
         outline: none !important;
         box-shadow: none !important;
         @media -moz-pref("sidebar.revamp.round-content-area") {
-            border-start-start-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
-            border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+            @media -moz-pref("sidebar.position_start") {
+                border-start-start-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+            }
+            @media not -moz-pref("sidebar.position_start") {
+                border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+            }
         }
     }
 }
