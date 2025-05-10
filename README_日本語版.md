@@ -18,7 +18,12 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.3.1**
+**🦊 v3.3.2**
+- ネイティブの横型タブモードで、ヘッダーストライプにグラデーションが表示されるようになりました。（ちなみに、`--uc-gradient-highlight` 変数を使えばグラデーションの色をカスタマイズできます。）
+- 横型タブモードで、サイドバーボタンが右端にある場合にウィンドウ操作ボタンと重なってしまう問題を修正しました。
+- ナビゲーションバーの2番目の要素がブックマークアイテムの場合、`uc.flex.disable-nav-bar-first-item-right-padding` が `false` に設定されていない限り、左側に常に余白が追加されるようになりました。
+- Sideberyが非アクティブなとき、Firefox標準の縦型タブおよびコンテンツ領域の角丸が復元されます。角丸を無効にするには、**Firefox標準の**設定オプション `sidebar.revamp.round-content-area` を `false` に設定してください。
+- メニューアイコンが誤った画像を表示していた問題を修正しました。
 
 🚀 **新機能：ショートカットによる UI レイアウト切り替えに対応**
 
@@ -48,6 +53,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.3.1**
+- すべての上部バーと Sidebery を非表示にするショートカットを追加しました。
 
 **v3.3.0**
 - `expand-on-hover` を有効にしている状態で `uc.flex.fully-hide-sidebery` またはフルスクリーンを併用した際に、Sidebery が展開されなくなる問題を修正しました。

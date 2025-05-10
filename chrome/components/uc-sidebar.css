@@ -99,14 +99,19 @@
             max-width: 100%;
             min-width: var(--uc-sb-sidebar-hover-width);
             background-color: var(--uc-sidebar-bgcolor);
+            background-image: inherit;
+            /* Enable transitions for discrete properties like overflow or background-image */
+            transition-behavior: allow-discrete;
             transition:
                 border-bottom var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 max-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 min-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 max-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                overflow var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 padding var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 background-color var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                background-image var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
         }
 
@@ -124,15 +129,19 @@
             overflow: hidden;
             padding: 0 !important;
             background-color: var(--uc-sb-sidebar-header-stripe);
-            opacity: 0.5;
+            background-image: var(--uc-sb-gradient-highlight, inherit);
             will-change: min-height, max-height, min-width, overflow, background-color, opacity;
+            /* Enable transitions for discrete properties like overflow or background-image */
+            transition-behavior: allow-discrete;
             transition:
                 max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                background-image var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 opacity 0ms ease-in-out 0ms;
             :is(#sidebar-switcher-target, #sidebar-close) {
                 /* BAD NEWS: display: none !important; */
@@ -164,11 +173,6 @@
                 }
             }
         }
-        @media (prefers-color-scheme: dark) {
-            #sidebar-header:not(:hover):not(:has(.active)) {
-                opacity: 0.87;
-            }
-        }
 
         /* Remove header's bottom line */
         #sidebar-header:not(:hover) {
@@ -187,7 +191,8 @@
                 max-width: var(--uc-sidebar-header-width);
                 overflow: hidden;
                 padding: 0 !important;
-                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: var(--uc-sb-sidebar-header-stripe);
+                background-image: var(--uc-sb-gradient-highlight, inherit);
                 opacity: 1;
                 will-change: min-height, max-height, min-width, overflow, background-color, opacity;
                 transition:
@@ -195,19 +200,11 @@
                     min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    background-image var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     opacity 0ms ease-in-out 0ms;
-            }
-
-            @media (prefers-color-scheme: dark) {
-                &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-                    background-color: color-mix(
-                        in srgb,
-                        var(--uc-sb-sidebar-header-stripe) 87%,
-                        var(--uc-sidebar-bgcolor)
-                    );
-                }
             }
         }
     }
@@ -221,11 +218,8 @@
                     max-width: var(--uc-sidebar-header-width);
                     overflow: hidden;
                     padding: 0 !important;
-                    background-color: color-mix(
-                        in srgb,
-                        var(--uc-sb-sidebar-header-stripe) 50%,
-                        var(--uc-sidebar-bgcolor)
-                    );
+                    background-color: var(--uc-sb-sidebar-header-stripe);
+                    background-image: var(--uc-sb-gradient-highlight, inherit);
                     opacity: 1;
                     will-change: min-height, max-height, min-width, overflow, background-color, opacity;
                     transition:
@@ -233,20 +227,13 @@
                         min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                         min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                         max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                        overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                         padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                         background-color var(--uc-autohide-transition-duration) ease-in-out
                             var(--uc-autohide-sidebar-delay),
+                        background-image var(--uc-autohide-transition-duration) ease-in-out
+                            var(--uc-autohide-sidebar-delay),
                         opacity 0ms ease-in-out 0ms;
-                }
-
-                @media (prefers-color-scheme: dark) {
-                    &:hover #sidebar-header:not(:hover):not(:has(.active)) {
-                        background-color: color-mix(
-                            in srgb,
-                            var(--uc-sb-sidebar-header-stripe) 87%,
-                            var(--uc-sidebar-bgcolor)
-                        );
-                    }
                 }
             }
         }
@@ -266,7 +253,7 @@
 /* Auto-hide sidebar in fullscreen or when Sidebery is fully hidden */
 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
-        &:not(:is([positionend], [sidebar-positionend])) {
+        &:not([positionend], [sidebar-positionend]) {
             /* Fixed position for left-side sidebar */
             position: absolute !important;
             left: 0px;
@@ -311,7 +298,7 @@
 @media not -moz-pref("uc.flex.fully-hide-sidebery") {
     :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
         #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
-            &:not(:is([positionend], [sidebar-positionend])) {
+            &:not([positionend], [sidebar-positionend]) {
                 position: absolute !important;
                 left: 0px;
                 height: calc(
@@ -364,6 +351,7 @@
          * These variables are used by both #sidebar-main and #sidebar-box to calculate offset heights,  
          * so they must be declared under their common parent element #browser. 
          */
+        --uc-sb-tabbox-border-radius: 0px;
         --uc-sb-sidebar-main-margin-top: 0px;
         --uc-sb-sidebar-main-stripe-height: 5px;
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
@@ -394,21 +382,7 @@
             --uc-sb-sidebar-main-hover-max-h: 100%;
             --uc-sb-sidebar-main-hover-h: fit-content;
             --uc-sb-vertical-tabs-display: none;
-            --uc-sidebar-main-stripe: color-mix(
-                in srgb,
-                var(--uc-sb-sidebar-header-stripe) 50%,
-                var(--uc-sidebar-bgcolor)
-            );
-            @media (prefers-color-scheme: dark) {
-                --uc-sidebar-main-stripe: color-mix(
-                    in srgb,
-                    var(--uc-sb-sidebar-header-stripe) 87%,
-                    var(--uc-sidebar-bgcolor)
-                );
-            }
-            @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                --uc-sb-gradient-highlight: var(--uc-gradient-highlight);
-            }
+            --uc-sidebar-main-stripe: var(--uc-sb-sidebar-header-stripe);
             @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
                 :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
@@ -520,6 +494,8 @@
         background-image: var(--uc-sb-gradient-highlight, inherit) !important;
         opacity: var(--uc-sb-sidebar-main-opacity, 1);
         will-change: min-height, max-height, overflow, background-color;
+        /* Enable transitions for discrete properties like overflow or background-image */
+        transition-behavior: allow-discrete;
         transition:
             min-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
@@ -532,6 +508,8 @@
             overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay),
+            background-image var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 calc(var(--uc-autohide-sidebar-delay) + 10ms),
@@ -572,6 +550,8 @@
             overflow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay),
             background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay),
+            background-image var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay),
             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 calc(var(--uc-hover-sidebar-delay) + 10ms),
@@ -660,6 +640,8 @@
             );
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
             will-change: margin-inline-start, min-width, overflow, transform;
+            /* Enable transitions for discrete properties like overflow or background-image */
+            transition-behavior: allow-discrete;
             transition:
                 margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay),
@@ -729,18 +711,13 @@
                 box-shadow: 0 -10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
                 background-image: var(--uc-sb-gradient-highlight, none);
-                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: var(--uc-sb-sidebar-header-stripe);
+                /*
                 @media (prefers-color-scheme: dark) {
-                    /*
                     background-color: rgba(255, 255, 255, 0.06);
                     box-shadow: 0 -10px 20px 28px rgba(255, 255, 255, 0.06);
-                    */
-                    background-color: color-mix(
-                        in srgb,
-                        var(--uc-sb-sidebar-header-stripe) 87%,
-                        var(--uc-sidebar-bgcolor)
-                    );
                 }
+                */
             }
             &::after {
                 content: "";
@@ -754,18 +731,13 @@
                 box-shadow: 0 10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
                 background-image: var(--uc-sb-gradient-highlight, none);
-                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: var(--uc-sb-sidebar-header-stripe);
+                /*
                 @media (prefers-color-scheme: dark) {
-                    /*
                     background-color: rgba(255, 255, 255, 0.06);
                     box-shadow: 0 10px 20px 28px rgba(255, 255, 255, 0.06);
-                    */
-                    background-color: color-mix(
-                        in srgb,
-                        var(--uc-sb-sidebar-header-stripe) 87%,
-                        var(--uc-sidebar-bgcolor)
-                    );
                 }
+                */
             }
         }
 
@@ -806,18 +778,13 @@
                 box-shadow: 0 -10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
                 background-image: var(--uc-sb-gradient-highlight, none);
-                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: var(--uc-sb-sidebar-header-stripe);
+                /*
                 @media (prefers-color-scheme: dark) {
-                    /*
                     background-color: rgba(255, 255, 255, 0.06);
                     box-shadow: 0 -10px 20px 28px rgba(255, 255, 255, 0.06);
-                    */
-                    background-color: color-mix(
-                        in srgb,
-                        var(--uc-sb-sidebar-header-stripe) 87%,
-                        var(--uc-sidebar-bgcolor)
-                    );
                 }
+                */
             }
             &::after {
                 content: "";
@@ -831,18 +798,13 @@
                 box-shadow: 0 10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
                 background-image: var(--uc-sb-gradient-highlight, none);
-                background-color: color-mix(in srgb, var(--uc-sb-sidebar-header-stripe) 50%, var(--uc-sidebar-bgcolor));
+                background-color: var(--uc-sb-sidebar-header-stripe);
+                /*
                 @media (prefers-color-scheme: dark) {
-                    /*
                     background-color: rgba(255, 255, 255, 0.06);
                     box-shadow: 0 -10px 20px 28px rgba(255, 255, 255, 0.06);
-                    */
-                    background-color: color-mix(
-                        in srgb,
-                        var(--uc-sb-sidebar-header-stripe) 87%,
-                        var(--uc-sidebar-bgcolor)
-                    );
                 }
+                */
             }
         }
 
@@ -940,40 +902,14 @@
         }
     }
 
-    /* Dark theme specific styles */
-    /*
-    @media (prefers-color-scheme: dark) {
-        #sidebar-main {
-            background-image: none !important;
-        }
-
-        #sidebar-box {
-            --sidebar-border-color: transparent;
-            background-image: none !important;
-        }
-
-        #tabbrowser-tabbox {
-            outline: none !important;
-            box-shadow: var(--content-area-shadow);
-        }
-    }
-    */
-
-    /* Light theme specific styles */
-    /*
-    @media (prefers-color-scheme: light) {
-        #sidebar-main,
-        #sidebar-box {
-            background-image: none !important;
-        }
-    }
-    */
-
     /* Remove the border and rounded corners from the webpage content area */
     #tabbrowser-tabbox {
         outline: none !important;
         box-shadow: none !important;
-        border-radius: 0px !important;
+        @media -moz-pref("sidebar.revamp.round-content-area") {
+            border-start-start-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+            border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+        }
     }
 }
 

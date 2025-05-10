@@ -314,13 +314,17 @@
 
     /* Initial value: shift nav bar left to make room for window control buttons */
     --uc-nav-bar-padding-right: 0px;
+    --uc-sidebar-button-offset: 0px;
+    /* If the sidebar button is the last item in the nav bar, leave room for it. */
+    #navigator-toolbox:has(#sidebar-button[sidebar-positionend]:last-child) {
+        --uc-sidebar-button-offset: var(--uc-sidebar-header-width, 0px);
+    }
 
     /* When native vertical tabs are enabled, window control spacing is not needed. */
     @media -moz-pref("sidebar.verticalTabs") {
-        --uc-nav-bar-padding-right: 0px !important;
-        /* However, if the sidebar button is the last item in the nav bar, leave room for it. */
-        #nav-bar:has(#sidebar-button[sidebar-positionend]:last-child) {
-            --uc-nav-bar-padding-right: var(--uc-sidebar-header-width);
+        /* Set the variable under #navigator-toolbox to override the Sidebery-active value on :root, avoiding !important. */
+        #navigator-toolbox {
+            --uc-nav-bar-padding-right: 0px;
         }
     }
     /* When the menu bar is enabled, window control spacing is not needed. */
@@ -331,13 +335,14 @@
     }
 
     /* Shift the nav bar to align the first item with the vertical tabs */
-    --uc-nav-bar-margin-left: 6px;
+    --uc-nav-bar-padding-left: 6px;
     &[inFullscreen] {
-        --uc-nav-bar-margin-left: 5px;
+        --uc-nav-bar-padding-left: 5px;
     }
 
     /* Add right-side spacing after the first item to align nearby items with the vertical tabs */
     --uc-nav-bar-first-child-padding-right: 6px;
+    --uc-nav-bar-second-bookmarks-padding-left: 6px;
     @media -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding"),
         -moz-pref("uc.flex.fully-hide-toolbox"),
         -moz-pref("uc.flex.fully-hide-sidebery") {
@@ -438,9 +443,21 @@
         /* Hide sidebar splitter */
         --uc-sidebar-splitter-display: none;
 
-        --uc-sb-sidebar-header-stripe: var(
-            --uc-sidebar-header-stripe
+        --uc-sb-sidebar-header-stripe: color-mix(
+            in srgb,
+            var(--uc-sidebar-header-stripe) 50%,
+            var(--uc-sidebar-bgcolor)
         ); /* Load user-defined value for internal calculations */
+        @media (prefers-color-scheme: dark) {
+            --uc-sb-sidebar-header-stripe: color-mix(
+                in srgb,
+                var(--uc-sidebar-header-stripe) 87%,
+                var(--uc-sidebar-bgcolor)
+            );
+        }
+        @media -moz-pref("uc.flex.enable-gradient-highlight") {
+            --uc-sb-gradient-highlight: var(--uc-gradient-highlight);
+        }
         --uc-sb-sidebar-width: var(--uc-sidebar-width); /* Load user-defined value for internal calculations */
         --uc-sb-sidebar-hover-width: var(
             --uc-sidebar-hover-width
@@ -479,7 +496,7 @@
         --uc-windows-controls-visibility: visible;
         --uc-windows-controls-position: absolute;
         --uc-windows-controls-top: 2px;
-        --uc-windows-controls-right: 0;
+        --uc-windows-controls-right: 0px;
         &[inFullscreen] {
             --uc-windows-controls-top: 0px;
         }
@@ -557,15 +574,7 @@
     --uc-navigator-width: var(--uc-sb-sidebar-width, 0px);
     --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, 0px);
     --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, 0px);
-    /**
-     * The :has() selector that checks if the sidebar is on the right overrides 
-     * the @media rule below that checks if vertical tabs are active.
-     */
-    &:has(#sidebar-box:is([positionend], [sidebar-positionend])) {
-        --uc-nav-bar-first-child-padding-right: 0px;
-        --uc-navigator-offset: 0px;
-        --uc-personal-toolbar-offset: 0px;
-    }
+
     /* Adjust horizontal offset of the bookmarks toolbar background image */
     @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
         &:not(
@@ -581,7 +590,7 @@
             }
             --uc-theme-bg-x-right-end: 0px;
 
-            &:has(#sidebar-box:is([positionend], [sidebar-positionend])) {
+            @media not -moz-pref("sidebar.position_start") {
                 --uc-theme-bg-x-left-start: 0px;
                 --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sb-sidebar-width, 0px));
                 @media -moz-pref("sidebar.verticalTabs") {
@@ -613,6 +622,15 @@
                 --uc-theme-bg-y-clip: 59px;
             }
         }
+    }
+    /**
+     * When the sidebar is positioned on the right ([sidebar-positionend]),
+     * ensure the following variables take precedence over all previous cases.
+     */
+    @media not -moz-pref("sidebar.position_start") {
+        --uc-nav-bar-first-child-padding-right: 0px;
+        --uc-navigator-offset: 0px;
+        --uc-personal-toolbar-offset: 0px;
     }
     /* 🔼 End of offset block for bookmarks toolbar and navigator */
 }

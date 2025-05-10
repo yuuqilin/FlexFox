@@ -18,7 +18,12 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.3.1**
+**🦊 v3.3.2**
+- The header stripe in native horizontal tab mode now supports gradient highlights. (By the way, you can customize the gradient color using the `--uc-gradient-highlight` variable.)
+- Fixed an issue where the sidebar button overlapped with the window controls when placed at the far right in horizontal tab mode.
+- Left padding is now always added when bookmarks items are the second element in the navigation bar, unless `uc.flex.disable-nav-bar-first-item-right-padding` is explicitly set to `false`.
+- When Sidebery is inactive, native Firefox rounded corners for vertical tabs and the content area are restored. To revert to square corners, set the **built-in** Firefox option `sidebar.revamp.round-content-area` to `false`.
+- Fixed an issue where a menu icon displayed the wrong image.
 
 🚀 **Major Feature: Layout Switching via Hotkeys**
 
@@ -48,6 +53,9 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.3.1**
+- Add shortcut for hiding all topbars and Sidebery.
 
 **v3.3.0**
 - Fixed an issue where Sidebery would not expand when using `expand-on-hover` together with `uc.flex.fully-hide-sidebery` or in fullscreen mode.

@@ -18,7 +18,12 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.3.1**
+**🦊 v3.3.2**
+- 原生水平标签页模式下，现在 Header Stripe 也支持渐变色显示。（顺带一提，你可以通过修改 `--uc-gradient-highlight` 变量来自定义渐变的颜色。）
+- 修复了在水平标签页模式中，当侧边栏按钮位于最右侧时，会与窗口控制按钮重叠的问题。
+- 当书签项目是导航栏的第二个元素时，如果没有显式设置 `uc.flex.disable-nav-bar-first-item-right-padding` 为 false，就会始终添加左侧间距。
+- 在 Sidebery 未启用时，恢复了 Firefox 原生的垂直选项卡与内容区域的圆角样式。若要改为直角，可将 **原生选项** `sidebar.revamp.round-content-area` 设置为 false。
+- 修复了菜单图标显示错误图像的问题。
 
 🚀 **重大更新：支持通过快捷键切换 UI 布局**
 
@@ -48,6 +53,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.3.1**
+- 新增快捷键，用于隐藏所有顶部工具栏和 Sidebery。
 
 **v3.3.0**
 - 修复了在启用 `expand-on-hover` 并同时使用 `uc.flex.fully-hide-sidebery` 或处于全屏模式时，Sidebery 无法展开的问题。

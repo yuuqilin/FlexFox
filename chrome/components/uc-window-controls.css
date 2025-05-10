@@ -125,7 +125,7 @@
         position: var(--uc-windows-controls-position) !important;
         top: var(--uc-windows-controls-top) !important;
         /*left: unset !important;*/
-        right: var(--uc-windows-controls-right) !important;
+        right: calc(var(--uc-windows-controls-right) + var(--uc-sidebar-button-offset)) !important;
     }
 }
 
@@ -187,7 +187,7 @@
 :root:is([tabsintitlebar], [customtitlebar]):not([customizing]),
 :root[inFullscreen] {
     #nav-bar {
-        padding-right: var(--uc-nav-bar-padding-right) !important;
+        padding-right: calc(var(--uc-nav-bar-padding-right) + var(--uc-sidebar-button-offset)) !important;
     }
 }
 
@@ -195,36 +195,40 @@
 #nav-bar-customization-target {
     & > :is(toolbarbutton, toolbaritem):first-child,
     & > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
-        padding-inline-start: var(--uc-nav-bar-margin-left) !important;
+        padding-inline-start: var(--uc-nav-bar-padding-left) !important;
     }
 }
 
-:root:not([inFullscreen], [customizing]) {
+:root:not([customizing]) {
     @media not -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding") {
         /* Add right padding to the first item in the nav bar for alignment with the vertical tabs */
-        #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):first-child:not(#personal-bookmarks) {
-            padding-right: var(--uc-nav-bar-first-child-padding-right) !important;
+        &:not([inFullscreen]) {
+            #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):first-child:not(#personal-bookmarks) {
+                padding-right: var(--uc-nav-bar-first-child-padding-right) !important;
+            }
         }
         /* If the second item is the bookmarks toolbar, add extra left padding for proper spacing */
         #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):nth-child(2)#personal-bookmarks {
-            padding-left: var(--uc-nav-bar-first-child-padding-right) !important;
+            padding-left: var(--uc-nav-bar-second-bookmarks-padding-left) !important;
         }
     }
 
     /* Offset the navigator toolbox to account for the width of the vertical tabs */
-    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        &:not([titlepreface*="\200c "], [titlepreface*="\200d "]) {
-            @media -moz-pref("uc.flex.fully-hide-toolbox") {
-                #navigator-toolbox {
-                    margin-left: var(--uc-navigator-offset);
-                    width: calc(100% - var(--uc-navigator-width));
-                }
-            }
-            @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-                &[titlepreface*="\200b "] {
+    &:not([inFullscreen]) {
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            &:not([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                @media -moz-pref("uc.flex.fully-hide-toolbox") {
                     #navigator-toolbox {
                         margin-left: var(--uc-navigator-offset);
                         width: calc(100% - var(--uc-navigator-width));
+                    }
+                }
+                @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+                    &[titlepreface*="\200b "] {
+                        #navigator-toolbox {
+                            margin-left: var(--uc-navigator-offset);
+                            width: calc(100% - var(--uc-navigator-width));
+                        }
                     }
                 }
             }

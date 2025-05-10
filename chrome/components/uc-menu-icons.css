@@ -36,6 +36,7 @@
         background-position-x: 11.5px !important;
     }
     #context-stripOnShareLink,
+    #strip-on-share,
     menuitem[data-l10n-id="text-action-strip-on-share"] {
         background-image: url("chrome://browser/skin/fingerprint.svg");
         background-size: 16px !important;
