@@ -18,15 +18,32 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.3.3**
-- Fixed an issue where corner rounding was not rendered correctly in native vertical tabs mode.
+**🦊 3.3.4**
+- When the sidebar button is not at the first or last position on the navigation bar, its size will now revert to the standard toolbar icon size instead of being enlarged.
+- The `List all tabs` button icon has been updated for better visual harmony with the colored bookmark folders. You can revert to the original Firefox icon by setting `uc.flex.revert-to-original-sidebar-icon` to `true`.
+- A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
 
-**🦊 v3.3.2**
-- The header stripe in native horizontal tab mode now supports gradient highlights. (By the way, you can customize the gradient color using the `--uc-gradient-highlight` variable.)
-- Fixed an issue where the sidebar button overlapped with the window controls when placed at the far right in horizontal tab mode.
-- Left padding is now always added when bookmarks items are the second element in the navigation bar, unless `uc.flex.disable-nav-bar-first-item-right-padding` is explicitly set to `false`.
-- When Sidebery is inactive, native Firefox rounded corners for vertical tabs and the content area are restored. To revert to square corners, set the **built-in** Firefox option `sidebar.revamp.round-content-area` to `false`.
-- Fixed an issue where a menu icon displayed the wrong image.
+  - `0`: Disabled
+  - `1`: Enables the first set of colored folder icons
+  - `2`: Enables the second set of icons and automatically hides folder labels for a cleaner look
+
+**Visual Examples:**
+Below is the default Firefox bookmark folder icon:  
+<img src="./assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
+
+Enabling `uc.flex.remove-bookmarks-folder-icons` will hide the folder icon and show only text labels:  
+<img src="./assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
+
+Setting `uc.flex.enable-colored-bookmarks-folder-icons` to `1` applies the first set of colored icons:  
+<img src="./assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
+
+Using `1` together with `uc.flex.remove-bookmarks-labels` removes text labels and shows only icons:  
+<img src="./assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
+
+Setting it to `2` automatically hides labels and enables the second set of icons:  
+<img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
+
+- You can customize the icon's color, size, and position by editing the `--uc-bookmark-folder-*` variables, and replace the `folder*.svg` files in the `../icons/bookmark/` directory to use your own icons.
 
 🚀 **Major Feature: Layout Switching via Hotkeys**
 
@@ -56,6 +73,16 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.3.3**
+- Fixed an issue where corner rounding was not rendered correctly in native vertical tabs mode.
+
+**v3.3.2**
+- The header stripe in native horizontal tab mode now supports gradient highlights. (By the way, you can customize the gradient color using the `--uc-gradient-highlight` variable.)
+- Fixed an issue where the sidebar button overlapped with the window controls when placed at the far right in horizontal tab mode.
+- Left padding is now always added when bookmarks items are the second element in the navigation bar, unless `uc.flex.disable-nav-bar-first-item-right-padding` is explicitly set to `false`.
+- When Sidebery is inactive, native Firefox rounded corners for vertical tabs and the content area are restored. To revert to square corners, set the **built-in** Firefox option `sidebar.revamp.round-content-area` to `false`.
+- Fixed an issue where a menu icon displayed the wrong image.
 
 **v3.3.1**
 - Add shortcut for hiding all topbars and Sidebery.
@@ -471,6 +498,7 @@ For future updates, simply re-running the script will be enough, and you won't n
 | `uc.flex.fully-hide-toolbox` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
 | `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and extensions to override toolbar background color and image. |
 | `uc.flex.enable-gradient-highlight` | Enables gradient styling for the highlight color used across key UI elements such as the FlexFox logo, sidebar stripe, and bookmark star icon. This numeric setting accepts 0 to disable gradients, or values 1 to X to switch between different gradient styles. |
+| `uc.flex.enable-colored-bookmarks-folder-icons` | Enables colored icons for bookmark folders. This numeric setting accepts `0` (disabled), `1` (uses the first icon set), or `2` (uses the second icon set, with labels automatically hidden). |
 | `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
 | `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in the native vertical tabs when in expanded state. Firefox hides this separator by default in this mode. |

@@ -34,6 +34,9 @@ user_pref("uc.flex.disable-menu-icons",                         false);
 user_pref("uc.flex.remove-bookmarks-folder-icons",              false);
 /* Removes labels from bookmarks. */
 user_pref("uc.flex.remove-bookmarks-labels",                    false);
+/* Enables colored icons for bookmark folders.
+   0 = disabled, 1 = use first icon set, 2 = use second icon set (labels auto-hidden). */
+user_pref("uc.flex.enable-colored-bookmarks-folder-icons",          0);
 /* Switches to a different, condensed extension panel. */
 user_pref("uc.flex.switch-to-alternate-condensed-panel",        false);
 /* Reverts the window control buttons (minimize, maximize, close) to Firefox's default design. */

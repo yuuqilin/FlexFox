@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24" height="24" viewBox="2.979 3.972 42.042 40.056"
+     xmlns="http://www.w3.org/2000/svg" fill="context-fill" fill-opacity="context-fill-opacity">
+  <defs>
+    <mask id="mask-folder-close" maskUnits="userSpaceOnUse" x="2.979" y="3.972" width="42.042" height="40.056">
+      <rect x="2.979" y="3.972" width="42.042" height="40.056" fill="white"/>
+      <rect x="9" y="20" width="30" height="4" fill="black"/>
+    </mask>
+  </defs>
+  <path d="M5 8C5 6.89543 5.89543 6 7 6H19L24 12H41C42.1046 12 43 12.8954 43 14V40C43 41.1046 42.1046 42 41 42H7C5.89543 42 5 41.1046 5 40V8Z"
+        stroke-width="4" stroke-linejoin="round" mask="url(#mask-folder-close)"/>
+</svg>

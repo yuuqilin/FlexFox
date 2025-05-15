@@ -1,36 +1,317 @@
-/* Replace folder icon for bookmarks */
+/* Customize folder icon for bookmarks */
 /* Method 1: Using list-style-image for the icon */
-/*
-.bookmark-item[container="true"][label=""] {
-    list-style-image: url("../icons/") !important;
-}
-*/
 /* Method 2: Using background-image for the icon */
 /*
-.bookmark-item[container="true"][label=""] {
-    list-style-image: none !important;
-    background-image: url(../icons/);
-    background-repeat: no-repeat;
-    background-size: 16px 16px;
-    background-position: 0px 0px;
-}
+@media -moz-pref("uc.flex.enable-custom-bookmarks-folder-icons") {
+    .bookmark-item[container="true"][label=""] {
+        list-style-image: url("../icons/bookmark/") !important;
+    }
 
-/* Adjusts the position of bookmark icons inside the PlacesChevron ">" */
-/*
-#PlacesChevronPopup > .bookmark-item[container="true"][label=""] {
-    background-position: 0px 0px;
+    .bookmark-item[container="true"][label=""] {
+        list-style-image: none !important;
+        background-image: url(../icons/bookmark/);
+        background-repeat: no-repeat;
+        background-size: 16px 16px;
+        background-position: 0px 0px;
+    }
+
+    #PlacesChevronPopup > .bookmark-item[container="true"][label=""] {
+        background-position: 0px 0px;
+    }
 }
 */
 
-/* Change github icon in bookmarks bar to white color one */
+/* Remove labels from bookmarks */
+@media -moz-pref("uc.flex.remove-bookmarks-labels"), -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+    #personal-bookmarks .toolbarbutton-text {
+        display: none !important;
+    }
+}
+
+/* Remove icons from bookmarks */
+@media -moz-pref("uc.flex.remove-bookmarks-folder-icons") {
+    /* No Favicon Available - Don't display default icon */
+    toolbarbutton.bookmark-item:not([container]):not([image]) image {
+        display: none !important;
+    }
+
+    /* Show Favicon Bookmarks */
+    .bookmark-item > .toolbarbutton-icon {
+        display: -moz-box !important;
+        background-position: 0px 1px !important;
+        padding-right: 0px !important;
+        margin: 0 !important;
+    }
+
+    /* Hide label text for items with favicon */
+    #personal-bookmarks toolbarbutton[image] label {
+        display: none !important;
+    }
+
+    /* Hide folder icon for folders */
+    .bookmark-item[container] {
+        /* Method 2 */
+        /*background-image: none !important;*/
+        > .toolbarbutton-icon {
+            margin-right: 5px !important;
+            display: none !important;
+        }
+    }
+}
+
+@media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+    #PlacesToolbarItems,
+    #PlacesChevronPopup {
+        > .bookmark-item[container] {
+            /*
+             * Replace icons for all subfolders (.menu-iconic.bookmark-item).
+             * Currently, the icon element is .menu-iconic-icon.
+             * From v140+, .menu-icon will be used instead and .menu-iconic-icon can be removed.
+             */
+            .menu-iconic.bookmark-item[container] {
+                .menu-icon,
+                .menu-iconic-left .menu-iconic-icon {
+                    list-style-image: var(--uc-bookmark-sub-folder-icon) !important;
+                }
+                &[open] {
+                    /* Use the direct child selector (">") to ensure only *open* subfolders get the open-state icon.
+                   Other folder icons that are not direct children will not be affected. */
+                    > .menu-icon,
+                    > .menu-iconic-left .menu-iconic-icon {
+                        list-style-image: var(--uc-bookmark-sub-folder-open-icon) !important;
+                    }
+                }
+            }
+
+            @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+                padding: var(--uc-bookmark-folder-padding) !important;
+            }
+            /*
+             * Replace icons for top-level bookmark folders.
+             * In the toolbar (#PlacesToolbarItems), the icon element is .toolbarbutton-icon.
+             * In the overflow menu (#PlacesChevronPopup), it is .menu-iconic-icon.
+             * From v140+, .menu-icon will be used instead and .menu-iconic-icon can be removed.
+             */
+            &[open] {
+                > :is(.toolbarbutton-icon, .menu-icon),
+                > .menu-iconic-left .menu-iconic-icon {
+                    --uc-bookmark-folder-icon-1: var(--uc-bookmark-folder-open-icon);
+                    --uc-bookmark-folder-icon-2: var(--uc-bookmark-folder-open-icon);
+                    --uc-bookmark-folder-icon-3: var(--uc-bookmark-folder-open-icon);
+                    --uc-bookmark-folder-icon-4: var(--uc-bookmark-folder-open-icon);
+                    --uc-bookmark-folder-icon-5: var(--uc-bookmark-folder-open-icon);
+                    --uc-bookmark-folder-icon-6: var(--uc-bookmark-folder-open-icon);
+                    --uc-bookmark-folder-icon-7: var(--uc-bookmark-folder-open-icon);
+                    --uc-bookmark-folder-icon-8: var(--uc-bookmark-folder-open-icon);
+                    --uc-bookmark-folder-icon-9: var(--uc-bookmark-folder-open-icon);
+                    @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+                        background-position: var(--uc-bookmark-folder-open-position);
+                        background-size: var(--uc-bookmark-folder-open-size);
+                        mask-position: var(--uc-bookmark-folder-open-position);
+                        mask-size: var(--uc-bookmark-folder-open-size);
+                    }
+                }
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                list-style-image: none !important;
+                background-position: var(--uc-bookmark-folder-position);
+                background-repeat: no-repeat;
+                background-size: 16px;
+                mask-position: var(--uc-bookmark-folder-position);
+                mask-repeat: no-repeat;
+                mask-size: 16px;
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+                    width: var(--uc-bookmark-folder-size) !important;
+                    height: var(--uc-bookmark-folder-size) !important;
+                    background-size: var(--uc-bookmark-folder-size);
+                    mask-size: var(--uc-bookmark-folder-size);
+                }
+                /*transform: scale(1.4);*/
+            }
+        }
+    }
+
+    #PlacesToolbarItems,
+    #PlacesChevronPopup {
+        > .bookmark-item[container]:nth-of-type(9n + 1) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-1);
+            }
+            /*
+             * Use the direct child selector (">") to ensure only top-level bookmark folders
+             * get their folder icon replaced (folder-icon-1).
+             * In the toolbar, the icon element is .toolbarbutton-icon.
+             * In the overflow menu, it is .menu-iconic-icon.
+             * From v140+, .menu-icon will be used instead and .menu-iconic-icon can be removed.
+             */
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-1);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-1);
+                }
+                */
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 2) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-2);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-2);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-2);
+                }
+                */
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 3) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-3);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-3);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-3);
+                }
+                */
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 4) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-4);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-4);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-4);
+                }
+                */
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 5) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-5);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-5);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-5);
+                }
+                */
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 6) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-6);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-6);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-6);
+                }
+                */
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 7) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-7);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-7);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-7);
+                }
+                */
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 8) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-8);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-8);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-8);
+                }
+                */
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 9) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-9);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-9);
+                /*
+                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                    background: var(--uc-gradient-highlight);
+                    mask-image: var(--uc-bookmark-folder-icon-9);
+                }
+                */
+            }
+        }
+    }
+}
+
+@media not -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
+    #alltabs-button {
+        list-style-image: var(--uc-list-all-tabs-image) !important;
+        /*
+        @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+            :root:not([customizing]) &:is(:first-child, :nth-child(2)) {
+                fill: var(--uc-list-all-tabs-color) !important;
+            }
+        }
+        */
+    }
+}
+
+/* Change github icon in bookmarks to white color one */
 @media (prefers-color-scheme: dark) {
-    .bookmark-item[image="page-icon:https://github.com/"] > .toolbarbutton-icon
+    .bookmark-item[image^="page-icon:https://github.com/"]
     {
-        width: 0px !important;
-        height: 0px !important;
-        padding: 0 0 16px 16px !important;
-        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCEtLSBHZW5lcmF0b3I6IEdyYXZpdC5pbyAtLT48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHN0eWxlPSJpc29sYXRpb246aXNvbGF0ZSIgdmlld0JveD0iMCAwIDQzOC41NDkgNDM4LjU0OSIgd2lkdGg9IjQzOC41NDlwdCIgaGVpZ2h0PSI0MzguNTQ5cHQiPjxkZWZzPjxjbGlwUGF0aCBpZD0iX2NsaXBQYXRoXzg3QXhvTjhPanFCRmEzQ3dVTlAwTzMxZ1U1Z2JteUNwIj48cmVjdCB3aWR0aD0iNDM4LjU0OSIgaGVpZ2h0PSI0MzguNTQ5Ii8+PC9jbGlwUGF0aD48L2RlZnM+PGcgY2xpcC1wYXRoPSJ1cmwoI19jbGlwUGF0aF84N0F4b044T2pxQkZhM0N3VU5QME8zMWdVNWdibXlDcCkiPjxwYXRoIGQ9IiBNIDQwOS4xMzIgMTE0LjU3MyBDIDM4OS41MjQgODAuOTc3IDM2Mi45MjcgNTQuMzc5IDMyOS4zMzQgMzQuNzczIEMgMjk1LjczNiAxNS4xNjYgMjU5LjA1NyA1LjM2NSAyMTkuMjcxIDUuMzY1IEMgMTc5LjQ5IDUuMzY1IDE0Mi43OTkgMTUuMTY5IDEwOS4yMDggMzQuNzczIEMgNzUuNjEyIDU0LjM3OCA0OS4wMTYgODAuOTc3IDI5LjQwOCAxMTQuNTczIEMgOS44MDMgMTQ4LjE2OCAwIDE4NC44NTQgMCAyMjQuNjMgQyAwIDI3Mi40MSAxMy45NCAzMTUuMzc1IDQxLjgyNyAzNTMuNTM2IEMgNjkuNzExIDM5MS43IDEwNS43MzMgNDE4LjEwOCAxNDkuODkgNDMyLjc2MyBDIDE1NS4wMyA0MzMuNzE3IDE1OC44MzUgNDMzLjA0NiAxNjEuMzA5IDQzMC43NjcgQyAxNjMuNzg0IDQyOC40ODUgMTY1LjAyIDQyNS42MjcgMTY1LjAyIDQyMi4yMDUgQyAxNjUuMDIgNDIxLjYzNCAxNjQuOTcxIDQxNi40OTcgMTY0Ljg3NiA0MDYuNzg4IEMgMTY0Ljc3OCAzOTcuMDc5IDE2NC43MzIgMzg4LjYwOSAxNjQuNzMyIDM4MS4zODIgTCAxNTguMTY1IDM4Mi41MTggQyAxNTMuOTc4IDM4My4yODUgMTQ4LjY5NiAzODMuNjEgMTQyLjMxOSAzODMuNTE4IEMgMTM1Ljk0NSAzODMuNDI5IDEyOS4zMjggMzgyLjc2MSAxMjIuNDc3IDM4MS41MTkgQyAxMTUuNjIzIDM4MC4yODggMTA5LjI0OCAzNzcuNDMzIDEwMy4zNDcgMzcyLjk2IEMgOTcuNDQ5IDM2OC40ODcgOTMuMjYyIDM2Mi42MzIgOTAuNzg3IDM1NS40MDQgTCA4Ny45MzIgMzQ4LjgzNCBDIDg2LjAyOSAzNDQuNDYgODMuMDMzIDMzOS42MDEgNzguOTQgMzM0LjI3NSBDIDc0Ljg0NyAzMjguOTQ0IDcwLjcwOCAzMjUuMzMgNjYuNTIxIDMyMy40MjcgTCA2NC41MjIgMzIxLjk5NiBDIDYzLjE5IDMyMS4wNDUgNjEuOTU0IDMxOS44OTggNjAuODExIDMxOC41NjcgQyA1OS42NjkgMzE3LjIzNiA1OC44MTQgMzE1LjkwNCA1OC4yNDMgMzE0LjU3IEMgNTcuNjcxIDMxMy4yMzUgNTguMTQ1IDMxMi4xNCA1OS42NyAzMTEuMjgxIEMgNjEuMTk1IDMxMC40MjIgNjMuOTUxIDMxMC4wMDUgNjcuOTUgMzEwLjAwNSBMIDczLjY1OCAzMTAuODU4IEMgNzcuNDY1IDMxMS42MjEgODIuMTc0IDMxMy45IDg3Ljc5MSAzMTcuNzA5IEMgOTMuNDA1IDMyMS41MTUgOTguMDIgMzI2LjQ2MyAxMDEuNjM3IDMzMi41NTEgQyAxMDYuMDE3IDM0MC4zNTcgMTExLjI5NCAzNDYuMzA1IDExNy40ODMgMzUwLjM5OCBDIDEyMy42NjcgMzU0LjQ5MSAxMjkuOTAyIDM1Ni41MzQgMTM2LjE4MiAzNTYuNTM0IEMgMTQyLjQ2MiAzNTYuNTM0IDE0Ny44ODYgMzU2LjA1OCAxNTIuNDU2IDM1NS4xMTEgQyAxNTcuMDIxIDM1NC4xNTkgMTYxLjMwNCAzNTIuNzI4IDE2NS4zMDMgMzUwLjgyNiBDIDE2Ny4wMTYgMzM4LjA2OCAxNzEuNjggMzI4LjI2NyAxNzkuMjkxIDMyMS40MTYgQyAxNjguNDQzIDMyMC4yNzYgMTU4LjY5IDMxOC41NTkgMTUwLjAyNyAzMTYuMjc2IEMgMTQxLjM2OSAzMTMuOTkgMTMyLjQyMiAzMTAuMjggMTIzLjE5MiAzMDUuMTM2IEMgMTEzLjk1NyAyOTkuOTk5IDEwNi4yOTYgMjkzLjYyIDEwMC4yMDcgMjg2LjAxIEMgOTQuMTE3IDI3OC4zOTYgODkuMTE5IDI2OC40IDg1LjIyIDI1Ni4wMzEgQyA4MS4zMTkgMjQzLjY1NyA3OS4zNjggMjI5LjM4MyA3OS4zNjggMjEzLjIwNSBDIDc5LjM2OCAxOTAuMTcgODYuODg4IDE3MC41NjggMTAxLjkyNSAxNTQuMzg4IEMgOTQuODgxIDEzNy4wNyA5NS41NDYgMTE3LjY1NiAxMDMuOTIyIDk2LjE0OCBDIDEwOS40NDIgOTQuNDMzIDExNy42MjggOTUuNzIgMTI4LjQ3NiAxMDAuMDAxIEMgMTM5LjMyNiAxMDQuMjg0IDE0Ny4yNyAxMDcuOTUzIDE1Mi4zMTYgMTEwLjk5NSBDIDE1Ny4zNjIgMTE0LjAzNiAxNjEuNDA1IDExNi42MTMgMTY0LjQ1MSAxMTguNzAzIEMgMTgyLjE1NiAxMTMuNzU2IDIwMC40MjcgMTExLjI4MiAyMTkuMjY5IDExMS4yODIgQyAyMzguMTExIDExMS4yODIgMjU2LjM4NiAxMTMuNzU2IDI3NC4wOTIgMTE4LjcwMyBMIDI4NC45NDEgMTExLjg1NCBDIDI5Mi4zNiAxMDcuMjg0IDMwMS4xMjEgMTAzLjA5NiAzMTEuMjAzIDk5LjI4OSBDIDMyMS4yOTEgOTUuNDg0IDMyOS4wMDUgOTQuNDM2IDMzNC4zMzcgOTYuMTUxIEMgMzQyLjg5OSAxMTcuNjYgMzQzLjY2MiAxMzcuMDczIDMzNi42MTYgMTU0LjM5MSBDIDM1MS42NTIgMTcwLjU3MSAzNTkuMTc1IDE5MC4xNzggMzU5LjE3NSAyMTMuMjA4IEMgMzU5LjE3NSAyMjkuMzg2IDM1Ny4yMTcgMjQzLjcwNSAzNTMuMzIyIDI1Ni4xNzQgQyAzNDkuNDIyIDI2OC42NDUgMzQ0LjM4MSAyNzguNjMxIDMzOC4xOTcgMjg2LjE1MyBDIDMzMi4wMDYgMjkzLjY3NCAzMjQuMjk2IDMwMC4wMDMgMzE1LjA2NiAzMDUuMTM5IEMgMzA1LjgzNCAzMTAuMjc5IDI5Ni44ODQgMzEzLjk4OSAyODguMjI2IDMxNi4yNzUgQyAyNzkuNTY0IDMxOC41NjEgMjY5LjgxMSAzMjAuMjc5IDI1OC45NjMgMzIxLjQyMSBDIDI2OC44NTcgMzI5Ljk4MyAyNzMuODA1IDM0My40OTggMjczLjgwNSAzNjEuOTYgTCAyNzMuODA1IDQyMi4xOTcgQyAyNzMuODA1IDQyNS42MTkgMjc0Ljk5NSA0MjguNDc2IDI3Ny4zNzcgNDMwLjc1OSBDIDI3OS43NTYgNDMzLjAzOCAyODMuNTEzIDQzMy43MDkgMjg4LjY1MyA0MzIuNzU0IEMgMzMyLjgxNiA0MTguMTAxIDM2OC44MzggMzkxLjY5MiAzOTYuNzIxIDM1My41MjggQyA0MjQuNjAxIDMxNS4zNjcgNDM4LjU0NiAyNzIuNDAyIDQzOC41NDYgMjI0LjYyMiBDIDQzOC41MzYgMTg0Ljg1MSA0MjguNzI4IDE0OC4xNjggNDA5LjEzMiAxMTQuNTczIFogIiBmaWxsPSJyZ2IoMjU1LDI1NSwyNTUpIi8+PC9nPjwvc3ZnPg==") !important;
-        background-size: cover !important;
+        > :is(.toolbarbutton-icon, .menu-icon),
+        > .menu-iconic-left .menu-iconic-icon {
+            width: 0px !important;
+            height: 0px !important;
+            padding: 0 0 16px 16px !important;
+            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCEtLSBHZW5lcmF0b3I6IEdyYXZpdC5pbyAtLT48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHN0eWxlPSJpc29sYXRpb246aXNvbGF0ZSIgdmlld0JveD0iMCAwIDQzOC41NDkgNDM4LjU0OSIgd2lkdGg9IjQzOC41NDlwdCIgaGVpZ2h0PSI0MzguNTQ5cHQiPjxkZWZzPjxjbGlwUGF0aCBpZD0iX2NsaXBQYXRoXzg3QXhvTjhPanFCRmEzQ3dVTlAwTzMxZ1U1Z2JteUNwIj48cmVjdCB3aWR0aD0iNDM4LjU0OSIgaGVpZ2h0PSI0MzguNTQ5Ii8+PC9jbGlwUGF0aD48L2RlZnM+PGcgY2xpcC1wYXRoPSJ1cmwoI19jbGlwUGF0aF84N0F4b044T2pxQkZhM0N3VU5QME8zMWdVNWdibXlDcCkiPjxwYXRoIGQ9IiBNIDQwOS4xMzIgMTE0LjU3MyBDIDM4OS41MjQgODAuOTc3IDM2Mi45MjcgNTQuMzc5IDMyOS4zMzQgMzQuNzczIEMgMjk1LjczNiAxNS4xNjYgMjU5LjA1NyA1LjM2NSAyMTkuMjcxIDUuMzY1IEMgMTc5LjQ5IDUuMzY1IDE0Mi43OTkgMTUuMTY5IDEwOS4yMDggMzQuNzczIEMgNzUuNjEyIDU0LjM3OCA0OS4wMTYgODAuOTc3IDI5LjQwOCAxMTQuNTczIEMgOS44MDMgMTQ4LjE2OCAwIDE4NC44NTQgMCAyMjQuNjMgQyAwIDI3Mi40MSAxMy45NCAzMTUuMzc1IDQxLjgyNyAzNTMuNTM2IEMgNjkuNzExIDM5MS43IDEwNS43MzMgNDE4LjEwOCAxNDkuODkgNDMyLjc2MyBDIDE1NS4wMyA0MzMuNzE3IDE1OC44MzUgNDMzLjA0NiAxNjEuMzA5IDQzMC43NjcgQyAxNjMuNzg0IDQyOC40ODUgMTY1LjAyIDQyNS42MjcgMTY1LjAyIDQyMi4yMDUgQyAxNjUuMDIgNDIxLjYzNCAxNjQuOTcxIDQxNi40OTcgMTY0Ljg3NiA0MDYuNzg4IEMgMTY0Ljc3OCAzOTcuMDc5IDE2NC43MzIgMzg4LjYwOSAxNjQuNzMyIDM4MS4zODIgTCAxNTguMTY1IDM4Mi41MTggQyAxNTMuOTc4IDM4My4yODUgMTQ4LjY5NiAzODMuNjEgMTQyLjMxOSAzODMuNTE4IEMgMTM1Ljk0NSAzODMuNDI5IDEyOS4zMjggMzgyLjc2MSAxMjIuNDc3IDM4MS41MTkgQyAxMTUuNjIzIDM4MC4yODggMTA5LjI0OCAzNzcuNDMzIDEwMy4zNDcgMzcyLjk2IEMgOTcuNDQ5IDM2OC40ODcgOTMuMjYyIDM2Mi42MzIgOTAuNzg3IDM1NS40MDQgTCA4Ny45MzIgMzQ4LjgzNCBDIDg2LjAyOSAzNDQuNDYgODMuMDMzIDMzOS42MDEgNzguOTQgMzM0LjI3NSBDIDc0Ljg0NyAzMjguOTQ0IDcwLjcwOCAzMjUuMzMgNjYuNTIxIDMyMy40MjcgTCA2NC41MjIgMzIxLjk5NiBDIDYzLjE5IDMyMS4wNDUgNjEuOTU0IDMxOS44OTggNjAuODExIDMxOC41NjcgQyA1OS42NjkgMzE3LjIzNiA1OC44MTQgMzE1LjkwNCA1OC4yNDMgMzE0LjU3IEMgNTcuNjcxIDMxMy4yMzUgNTguMTQ1IDMxMi4xNCA1OS42NyAzMTEuMjgxIEMgNjEuMTk1IDMxMC40MjIgNjMuOTUxIDMxMC4wMDUgNjcuOTUgMzEwLjAwNSBMIDczLjY1OCAzMTAuODU4IEMgNzcuNDY1IDMxMS42MjEgODIuMTc0IDMxMy45IDg3Ljc5MSAzMTcuNzA5IEMgOTMuNDA1IDMyMS41MTUgOTguMDIgMzI2LjQ2MyAxMDEuNjM3IDMzMi41NTEgQyAxMDYuMDE3IDM0MC4zNTcgMTExLjI5NCAzNDYuMzA1IDExNy40ODMgMzUwLjM5OCBDIDEyMy42NjcgMzU0LjQ5MSAxMjkuOTAyIDM1Ni41MzQgMTM2LjE4MiAzNTYuNTM0IEMgMTQyLjQ2MiAzNTYuNTM0IDE0Ny44ODYgMzU2LjA1OCAxNTIuNDU2IDM1NS4xMTEgQyAxNTcuMDIxIDM1NC4xNTkgMTYxLjMwNCAzNTIuNzI4IDE2NS4zMDMgMzUwLjgyNiBDIDE2Ny4wMTYgMzM4LjA2OCAxNzEuNjggMzI4LjI2NyAxNzkuMjkxIDMyMS40MTYgQyAxNjguNDQzIDMyMC4yNzYgMTU4LjY5IDMxOC41NTkgMTUwLjAyNyAzMTYuMjc2IEMgMTQxLjM2OSAzMTMuOTkgMTMyLjQyMiAzMTAuMjggMTIzLjE5MiAzMDUuMTM2IEMgMTEzLjk1NyAyOTkuOTk5IDEwNi4yOTYgMjkzLjYyIDEwMC4yMDcgMjg2LjAxIEMgOTQuMTE3IDI3OC4zOTYgODkuMTE5IDI2OC40IDg1LjIyIDI1Ni4wMzEgQyA4MS4zMTkgMjQzLjY1NyA3OS4zNjggMjI5LjM4MyA3OS4zNjggMjEzLjIwNSBDIDc5LjM2OCAxOTAuMTcgODYuODg4IDE3MC41NjggMTAxLjkyNSAxNTQuMzg4IEMgOTQuODgxIDEzNy4wNyA5NS41NDYgMTE3LjY1NiAxMDMuOTIyIDk2LjE0OCBDIDEwOS40NDIgOTQuNDMzIDExNy42MjggOTUuNzIgMTI4LjQ3NiAxMDAuMDAxIEMgMTM5LjMyNiAxMDQuMjg0IDE0Ny4yNyAxMDcuOTUzIDE1Mi4zMTYgMTEwLjk5NSBDIDE1Ny4zNjIgMTE0LjAzNiAxNjEuNDA1IDExNi42MTMgMTY0LjQ1MSAxMTguNzAzIEMgMTgyLjE1NiAxMTMuNzU2IDIwMC40MjcgMTExLjI4MiAyMTkuMjY5IDExMS4yODIgQyAyMzguMTExIDExMS4yODIgMjU2LjM4NiAxMTMuNzU2IDI3NC4wOTIgMTE4LjcwMyBMIDI4NC45NDEgMTExLjg1NCBDIDI5Mi4zNiAxMDcuMjg0IDMwMS4xMjEgMTAzLjA5NiAzMTEuMjAzIDk5LjI4OSBDIDMyMS4yOTEgOTUuNDg0IDMyOS4wMDUgOTQuNDM2IDMzNC4zMzcgOTYuMTUxIEMgMzQyLjg5OSAxMTcuNjYgMzQzLjY2MiAxMzcuMDczIDMzNi42MTYgMTU0LjM5MSBDIDM1MS42NTIgMTcwLjU3MSAzNTkuMTc1IDE5MC4xNzggMzU5LjE3NSAyMTMuMjA4IEMgMzU5LjE3NSAyMjkuMzg2IDM1Ny4yMTcgMjQzLjcwNSAzNTMuMzIyIDI1Ni4xNzQgQyAzNDkuNDIyIDI2OC42NDUgMzQ0LjM4MSAyNzguNjMxIDMzOC4xOTcgMjg2LjE1MyBDIDMzMi4wMDYgMjkzLjY3NCAzMjQuMjk2IDMwMC4wMDMgMzE1LjA2NiAzMDUuMTM5IEMgMzA1LjgzNCAzMTAuMjc5IDI5Ni44ODQgMzEzLjk4OSAyODguMjI2IDMxNi4yNzUgQyAyNzkuNTY0IDMxOC41NjEgMjY5LjgxMSAzMjAuMjc5IDI1OC45NjMgMzIxLjQyMSBDIDI2OC44NTcgMzI5Ljk4MyAyNzMuODA1IDM0My40OTggMjczLjgwNSAzNjEuOTYgTCAyNzMuODA1IDQyMi4xOTcgQyAyNzMuODA1IDQyNS42MTkgMjc0Ljk5NSA0MjguNDc2IDI3Ny4zNzcgNDMwLjc1OSBDIDI3OS43NTYgNDMzLjAzOCAyODMuNTEzIDQzMy43MDkgMjg4LjY1MyA0MzIuNzU0IEMgMzMyLjgxNiA0MTguMTAxIDM2OC44MzggMzkxLjY5MiAzOTYuNzIxIDM1My41MjggQyA0MjQuNjAxIDMxNS4zNjcgNDM4LjU0NiAyNzIuNDAyIDQzOC41NDYgMjI0LjYyMiBDIDQzOC41MzYgMTg0Ljg1MSA0MjguNzI4IDE0OC4xNjggNDA5LjEzMiAxMTQuNTczIFogIiBmaWxsPSJyZ2IoMjU1LDI1NSwyNTUpIi8+PC9nPjwvc3ZnPg==") !important;
+            background-size: cover !important;
+        }
     }
 }
 

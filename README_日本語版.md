@@ -18,15 +18,32 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.3.3**
-- ネイティブの縦型タブモードで角の丸みが正しく表示されない問題を修正しました。
+**🦊 3.3.4**
+- サイドバー・ボタンがナビゲーションバーの先頭または末尾以外にある場合、そのサイズが通常のツールバーボタンと同じ大きさに戻るようになりました。
+- カラーブックマークフォルダーとのデザイン統一のため、「すべてのタブを表示」ボタンのアイコンを変更しました。`uc.flex.revert-to-original-sidebar-icon` を `true` に設定すると、元のFirefoxアイコンに戻せます。
+- 数値型オプション `uc.flex.enable-colored-bookmarks-folder-icons` を追加しました：
 
-**🦊 v3.3.2**
-- ネイティブの横型タブモードで、ヘッダーストライプにグラデーションが表示されるようになりました。（ちなみに、`--uc-gradient-highlight` 変数を使えばグラデーションの色をカスタマイズできます。）
-- 横型タブモードで、サイドバーボタンが右端にある場合にウィンドウ操作ボタンと重なってしまう問題を修正しました。
-- ナビゲーションバーの2番目の要素がブックマークアイテムの場合、`uc.flex.disable-nav-bar-first-item-right-padding` が `false` に設定されていない限り、左側に常に余白が追加されるようになりました。
-- Sideberyが非アクティブなとき、Firefox標準の縦型タブおよびコンテンツ領域の角丸が復元されます。角丸を無効にするには、**Firefox標準の**設定オプション `sidebar.revamp.round-content-area` を `false` に設定してください。
-- メニューアイコンが誤った画像を表示していた問題を修正しました。
+  - `0`：無効
+  - `1`：第1セットのカラーフォルダーアイコンを有効化
+  - `2`：フォルダー名を自動的に非表示にし、第2セットのアイコンを使用
+
+**表示例：**
+こちらはFirefoxのデフォルトのブックマークフォルダーアイコンです：  
+<img src="./assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
+
+`uc.flex.remove-bookmarks-folder-icons` を有効にすると、フォルダーアイコンが非表示になり、フォルダー名のみが表示されます：  
+<img src="./assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
+
+`uc.flex.enable-colored-bookmarks-folder-icons` を `1` に設定すると、第1セットのカラーフォルダーアイコンが表示されます：  
+<img src="./assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
+
+さらに `uc.flex.remove-bookmarks-labels` を併用すると、ラベルが非表示になり、アイコンのみ表示されます：  
+<img src="./assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
+
+値を `2` に設定すると、ラベルが自動的に非表示になり、第2セットのアイコンが適用されます：  
+<img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
+
+- CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ・位置を調整したり、`../icons/bookmark/` フォルダー内の `folder*.svg` ファイルを差し替えて好きなアイコンに変更することができます。
 
 🚀 **新機能：ショートカットによる UI レイアウト切り替えに対応**
 
@@ -56,6 +73,16 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.3.3**
+- ネイティブの縦型タブモードで角の丸みが正しく表示されない問題を修正しました。
+
+**v3.3.2**
+- ネイティブの横型タブモードで、ヘッダーストライプにグラデーションが表示されるようになりました。（ちなみに、`--uc-gradient-highlight` 変数を使えばグラデーションの色をカスタマイズできます。）
+- 横型タブモードで、サイドバーボタンが右端にある場合にウィンドウ操作ボタンと重なってしまう問題を修正しました。
+- ナビゲーションバーの2番目の要素がブックマークアイテムの場合、`uc.flex.disable-nav-bar-first-item-right-padding` が `false` に設定されていない限り、左側に常に余白が追加されるようになりました。
+- Sideberyが非アクティブなとき、Firefox標準の縦型タブおよびコンテンツ領域の角丸が復元されます。角丸を無効にするには、**Firefox標準の**設定オプション `sidebar.revamp.round-content-area` を `false` に設定してください。
+- メニューアイコンが誤った画像を表示していた問題を修正しました。
 
 **v3.3.1**
 - すべての上部バーと Sidebery を非表示にするショートカットを追加しました。
@@ -472,6 +499,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 | `uc.flex.fully-hide-toolbox` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | テーマや拡張機能によるツールバーの背景色や背景画像の上書きを許可します。 |
 | `uc.flex.enable-gradient-highlight` | FlexFox のロゴ、サイドバーのストライプ、ブックマークの星アイコンなど、主要な UI 要素に使われるハイライトカラーにグラデーションスタイルを適用します。数値で設定でき、`0` は無効、`1` ～ `X` は異なるグラデーションスタイルを選択します。 |
+| `uc.flex.enable-colored-bookmarks-folder-icons` | ブックマークフォルダーのアイコンをカラー表示にします。数値で設定でき、`0` は無効、`1` は第1セットのアイコンを使用、`2` は第2セットのアイコンを使用し、ラベルは自動的に非表示になります。 |
 | `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
 | `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Firefox の「展開モード」のネイティブ垂直タブにおいて、ピン留めタブと通常タブの間に区切り線を表示します（デフォルトでは非表示）。 |

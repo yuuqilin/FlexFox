@@ -18,15 +18,32 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.3.3**
-- 修复了原生垂直选项卡模式下圆角显示异常的问题。
+**🦊 3.3.4**
+- 当侧边栏按钮不在导航栏的首位或末位时，其大小将恢复为正常工具栏按钮的尺寸，不再放大。
+- 为了配合彩色书签文件夹的视觉效果，更新了“列出所有标签页”按钮的图标。设置 `uc.flex.revert-to-original-sidebar-icon` 为 `true` 可恢复为 Firefox 默认图标。
+- 新增数值型选项 `uc.flex.enable-colored-bookmarks-folder-icons`：
 
-**🦊 v3.3.2**
-- 原生水平标签页模式下，现在 Header Stripe 也支持渐变色显示。（顺带一提，你可以通过修改 `--uc-gradient-highlight` 变量来自定义渐变的颜色。）
-- 修复了在水平标签页模式中，当侧边栏按钮位于最右侧时，会与窗口控制按钮重叠的问题。
-- 当书签项目是导航栏的第二个元素时，如果没有显式设置 `uc.flex.disable-nav-bar-first-item-right-padding` 为 false，就会始终添加左侧间距。
-- 在 Sidebery 未启用时，恢复了 Firefox 原生的垂直选项卡与内容区域的圆角样式。若要改为直角，可将 **原生选项** `sidebar.revamp.round-content-area` 设置为 false。
-- 修复了菜单图标显示错误图像的问题。
+  - `0`：关闭
+  - `1`：启用第一套彩色文件夹图标
+  - `2`：自动隐藏文件夹文字，并启用第二套图标风格
+
+**显示示例：**
+下图为 Firefox 默认的书签文件夹图标：  
+<img src="./assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
+
+启用 `uc.flex.remove-bookmarks-folder-icons` 会隐藏文件夹图标，仅显示文字标签：  
+<img src="./assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
+
+将 `uc.flex.enable-colored-bookmarks-folder-icons` 设为 `1` 时，会启用第一组彩色图标：  
+<img src="./assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
+
+若同时启用 `uc.flex.remove-bookmarks-labels`，则会隐藏文件夹名称，仅显示图标：  
+<img src="./assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
+
+将该选项设为 `2` 时，会自动隐藏文字标签，并启用第二组图标：  
+<img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
+
+- 用户可以通过修改 CSS 变量 `--uc-bookmark-folder-*` 来调整图标的颜色、大小和位置，也可以替换 `../icons/bookmark/` 目录下的 `folder*.svg` 文件来自定义喜欢的图标。
 
 🚀 **重大更新：支持通过快捷键切换 UI 布局**
 
@@ -56,6 +73,16 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.3.3**
+- 修复了原生垂直选项卡模式下圆角显示异常的问题。
+
+**v3.3.2**
+- 原生水平标签页模式下，现在 Header Stripe 也支持渐变色显示。（顺带一提，你可以通过修改 `--uc-gradient-highlight` 变量来自定义渐变的颜色。）
+- 修复了在水平标签页模式中，当侧边栏按钮位于最右侧时，会与窗口控制按钮重叠的问题。
+- 当书签项目是导航栏的第二个元素时，如果没有显式设置 `uc.flex.disable-nav-bar-first-item-right-padding` 为 false，就会始终添加左侧间距。
+- 在 Sidebery 未启用时，恢复了 Firefox 原生的垂直选项卡与内容区域的圆角样式。若要改为直角，可将 **原生选项** `sidebar.revamp.round-content-area` 设置为 false。
+- 修复了菜单图标显示错误图像的问题。
 
 **v3.3.1**
 - 新增快捷键，用于隐藏所有顶部工具栏和 Sidebery。
@@ -477,6 +504,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 | `uc.flex.fully-hide-toolbox` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | 允许主题或扩展修改工具栏的背景颜色或背景图。 |
 | `uc.flex.enable-gradient-highlight` | 为 FlexFox 图标、侧栏彩带、书签星形图标等主要界面元素中使用的高亮颜色启用渐变样式。此选项接受数值设置：`0` 表示关闭渐变，`1` 到 `X` 表示切换不同的渐变样式。 |
+| `uc.flex.enable-colored-bookmarks-folder-icons` | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
 | `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在原生垂直选项卡处于“展开模式”时，在已固定的标签页和普通标签页之间显示分隔线（默认情况下该分隔线为隐藏）。 |

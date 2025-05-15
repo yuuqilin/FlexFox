@@ -101,7 +101,7 @@
        element positions, and highlight colors used in key theme elements
        like the logo, stripe, and bookmark star.
     ════════════════════════════════════════════════════════════════════ */
-    /* 🔽 Start of layout and typography definitions */
+    /* 🔽 Start of layout and highlight definitions */
     --uc-bookmark-star-color: light-dark(#ea4c89, #9651ff); /* Color of the bookmark star icon in the address bar */
     --uc-bookmark-star-image: url("../icons/bookmark/bookmark.svg"); /* SVG image used for the bookmark star icon in the address bar */
 
@@ -128,6 +128,13 @@
     }
     --uc-flexfox-logo-image: url("../icons/toolbarbutton/flexfox.svg"); /* SVG image used for the FlexFox logo shown in the sidebar button */
 
+    /* List all tabs button */
+    --uc-list-all-tabs-color: var(--uc-flexfox-logo-color);
+    @media (prefers-color-scheme: dark) {
+        --uc-list-all-tabs-color: #b584ff;
+    }
+    --uc-list-all-tabs-image: url("../icons/toolbarbutton/list-all-tabs.svg");
+
     /* Gradient highlight color (used when gradient highlight is enabled) */
     @media -moz-pref("uc.flex.enable-gradient-highlight") {
         --uc-gradient-highlight: linear-gradient(to top right in oklab, oklch(70% 0.5 340) 0%, oklch(90% 0.5 200) 100%);
@@ -139,6 +146,53 @@
             );
         }
     }
+
+    /* Bookmark folder icons */
+    --uc-bookmark-folder-color-1: #ccb76d; /* Color for the first bookmark folder */
+    --uc-bookmark-folder-color-2: #50a466; /* Color for the second bookmark folder */
+    --uc-bookmark-folder-color-3: #ef9875; /* Color for the third bookmark folder */
+    --uc-bookmark-folder-color-4: #ef6f6f; /* Color for the fourth bookmark folder */
+    --uc-bookmark-folder-color-5: #f073ec; /* Color for the fifth bookmark folder */
+    --uc-bookmark-folder-color-6: #b475f5; /* Color for the sixth bookmark folder */
+    --uc-bookmark-folder-color-7: #85caf4; /* Color for the seventh bookmark folder */
+    --uc-bookmark-folder-color-8: #717cf4; /* Color for the eighth bookmark folder */
+    --uc-bookmark-folder-color-9: #8f7044; /* Color for the ninth bookmark folder */
+
+    --uc-bookmark-folder-size: 20px; /* Size of the bookmark folder icon */
+    --uc-bookmark-folder-position: 0px 0px; /* Position of the bookmark folder icon */
+    --uc-bookmark-folder-open-size: 17.5px; /* Size of the open folder icon */
+    --uc-bookmark-folder-open-position: 2px 1px; /* Position of the open folder icon */
+    --uc-bookmark-folder-padding: 4px 2px; /* Padding around the folder icon */
+    --uc-bookmark-sub-folder-icon: url("../icons/bookmark/sub-folder.svg"); /* Icon for subfolders */
+    --uc-bookmark-sub-folder-open-icon: url("../icons/bookmark/sub-folder-open.svg"); /* Icon for open subfolders */
+
+    /* Folder icons used with colored folder setting 1 */
+    @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 1) {
+        --uc-bookmark-folder-open-icon: url("../icons/bookmark/folder-open.svg");
+        --uc-bookmark-folder-icon-1: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-2: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-3: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-4: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-5: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-6: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-7: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-8: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-9: url("../icons/bookmark/folder.svg");
+    }
+    /* Folder icons used with colored folder setting 2 */
+    @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+        --uc-bookmark-folder-open-icon: url("../icons/bookmark/sub-folder-open.svg");
+        --uc-bookmark-folder-icon-1: url("../icons/bookmark/folder-1.svg");
+        --uc-bookmark-folder-icon-2: url("../icons/bookmark/folder-2.svg");
+        --uc-bookmark-folder-icon-3: url("../icons/bookmark/folder-3.svg");
+        --uc-bookmark-folder-icon-4: url("../icons/bookmark/folder-4.svg");
+        --uc-bookmark-folder-icon-5: url("../icons/bookmark/folder-5.svg");
+        --uc-bookmark-folder-icon-6: url("../icons/bookmark/folder-6.svg");
+        --uc-bookmark-folder-icon-7: url("../icons/bookmark/folder-7.svg");
+        --uc-bookmark-folder-icon-8: url("../icons/bookmark/folder-8.svg");
+        --uc-bookmark-folder-icon-9: url("../icons/bookmark/folder-9.svg");
+    }
+
     /* Horizontal position of the findbar */
     --uc-findbar-x-position: 0.9vw;
 
@@ -242,7 +296,7 @@
      */
     --uc-tabs-hide-animation-duration: 48ms; /* Duration of horizontal tab hide animation */
     --uc-tabs-hide-animation-delay: 200ms; /* Delay before hiding horizontal tabs */
-    /* 🔼 End of layout and typography definitions */
+    /* 🔼 End of layout and highlight definitions */
 }
 
 /* ════════════════════════════════════════════════════════════════════
