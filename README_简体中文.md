@@ -18,7 +18,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 3.3.4**
+**🦊 v3.3.5**
+- 修复了 Firefox v140+ 中菜单图标出现多余空白的问题。
+
+**🦊 v3.3.4**
 - 当侧边栏按钮不在导航栏的首位或末位时，其大小将恢复为正常工具栏按钮的尺寸，不再放大。
 - 为了配合彩色书签文件夹的视觉效果，更新了“列出所有标签页”按钮的图标。设置 `uc.flex.revert-to-original-sidebar-icon` 为 `true` 可恢复为 Firefox 默认图标。
 - 新增数值型选项 `uc.flex.enable-colored-bookmarks-folder-icons`：

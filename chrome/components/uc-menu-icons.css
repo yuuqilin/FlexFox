@@ -4,6 +4,17 @@
 /* based on https://gist.github.com/qaz69wsx/83a90423163b65a8344b2e60fc356a58 (now removed) */
 /* for better compatibility with dark mode, enable `svg.context-properties.content.enabled` in `about:config` */
 @media not -moz-pref("uc.flex.disable-menu-icons") {
+    /* Reverts the menu gutter changes introduced in Firefox v140+.
+       Firefox started displaying empty .menu-icon elements to standardize gutter behavior across platforms.
+       This broke our existing padding-based spacing by adding extra visual gaps.
+       We hide the redundant icon elements so that our padding adjustments work as intended again. */
+    menupopup[needsgutter] {
+        @media (-moz-platform: linux) or (-moz-platform: windows) {
+            > :is(menu, menuitem):not([image]) > .menu-icon {
+                display: none !important;
+            }
+        }
+    }
     #appMenu-zoom-controls {
         padding-inline-start: calc(1em + 22px) !important;
         margin-inline-start: 0px !important;
@@ -37,6 +48,9 @@
     .subviewbutton[data-l10n-id*="-manage-"] {
         background-position: 5px 7px;
     }
+    #unified-extensions-view #unified-extensions-manage-extensions {
+        padding-inline-start: 24px !important;
+    }
     menuitem[data-l10n-id*="-copy-"][data-l10n-id*="-link"] {
         background-image: url("../icons/menu/link.svg");
         background-size: 20px !important;
@@ -68,9 +82,9 @@
     menupopup:not(.in-menulist, [aria-label]) > menuitem[checked="true"] {
         padding-inline-start: 1em !important;
     }
-    /* !TEMPORARY: This rule is a workaround. The issue will be fixed officially after v140, so this rule will no longer be needed. */
-    menupopup:not(.in-menulist, [aria-label])
-        > menuitem[data-l10n-id$="-shortcut"][checked="true"]:not(:has(.menu-icon)) {
+    /* !TEMPORARY: This rule is still needed in v140+, as the issue wasn't fully fixed. 
+   If Firefox addresses this properly in a future update, this rule can be removed. */
+    menupopup:not(.in-menulist, [aria-label]) > menuitem[data-l10n-id$="-shortcut"][checked="true"] {
         padding-inline-start: calc(1em + 24px) !important;
         background-image: url("chrome://global/skin/icons/menu-check.svg");
         background-position: 15px 4px;

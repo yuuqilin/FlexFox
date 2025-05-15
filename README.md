@@ -18,7 +18,10 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 3.3.4**
+**🦊 v3.3.5**
+- Fixed extra spacing around menu icons introduced in Firefox v140+.
+
+**🦊 v3.3.4**
 - When the sidebar button is not at the first or last position on the navigation bar, its size will now revert to the standard toolbar icon size instead of being enlarged.
 - The `List all tabs` button icon has been updated for better visual harmony with the colored bookmark folders. You can revert to the original Firefox icon by setting `uc.flex.revert-to-original-sidebar-icon` to `true`.
 - A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
