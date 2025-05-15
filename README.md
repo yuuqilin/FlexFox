@@ -18,13 +18,15 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.3.5**
-- Fixed extra spacing around menu icons introduced in Firefox v140+.
+**🦊 v3.4.0**
 
-**🦊 v3.3.4**
-- When the sidebar button is not at the first or last position on the navigation bar, its size will now revert to the standard toolbar icon size instead of being enlarged.
-- The `List all tabs` button icon has been updated for better visual harmony with the colored bookmark folders. You can revert to the original Firefox icon by setting `uc.flex.revert-to-original-sidebar-icon` to `true`.
-- A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
+- Fixed an issue where the trigger area for showing Sidebery after hiding it via shortcut could not use the custom width set by `--uc-hover-sidebar-trigger-width`.
+- Major update: FlexFox now supports fully hiding the **built-in vertical tabs**.
+  The existing option `uc.flex.fully-hide-sidebery` and the shortcut `Hide Sidebery` now also apply to native vertical tabs. When entering fullscreen mode (`F11`), native vertical tabs are automatically hidden as well.
+  When the window is not maximized, the `--uc-hover-sidebar-trigger-width` value also controls the trigger area for native vertical tabs. This means all settings that apply to Sidebery—such as show/hide speed—now apply to native vertical tabs too, offering a unified behavior.
+
+🌈 **Major Update: Custom Bookmark Folder Icons**
+A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
 
   - `0`: Disabled
   - `1`: Enables the first set of colored folder icons
@@ -46,9 +48,9 @@ Using `1` together with `uc.flex.remove-bookmarks-labels` removes text labels an
 Setting it to `2` automatically hides labels and enables the second set of icons:  
 <img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
 
-- You can customize the icon's color, size, and position by editing the `--uc-bookmark-folder-*` variables, and replace the `folder*.svg` files in the `../icons/bookmark/` directory to use your own icons.
+You can customize the icon's color, size, and position by editing the `--uc-bookmark-folder-*` variables, and replace the `folder*.svg` files in the `../icons/bookmark/` directory to use your own icons.
 
-🚀 **Major Feature: Layout Switching via Hotkeys**
+🚀 **Major Update: Layout Switching via Hotkeys**
 
 FlexFox now supports the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension.
 After installing and configuring the extension as shown below:  
@@ -61,8 +63,8 @@ Once set up, you can switch between four UI layout modes using keyboard shortcut
 | -------- | ----- | ------ |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | Toggle between auto-collapsing and keeping Sidebery always open. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Hide Topbar | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | Toggle fully hiding Sidebery. When hidden, it reappears when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | Toggle hiding all toolbars and Sidebery, leaving only the webpage content visible. When hidden, moving your mouse to the edge will reveal them. The layout behaves like `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery`. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | Toggle fully hiding Sidebery and native vertical tabs. When hidden, they reappear when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | Toggle hiding all toolbars and the sidebar (Sidebery or native vertical tabs), leaving only the webpage visible. When hidden, move the mouse to the screen edge to show them. Equivalent to `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery`. |
 
 > [!IMPORTANT]
 > Options set in `about:config` take priority. If a related option is enabled there, it will override the toggle behavior and lock the layout state. To enable hotkey switching, make sure the corresponding option is set to `false`.
@@ -76,6 +78,17 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+<a id="updates-top-3.3"></a>
+<details>
+<summary>📦 <b>Updates in v3.3.x</b></summary>
+
+**v3.3.5**
+- Fixed extra spacing around menu icons introduced in Firefox v140+.
+
+**v3.3.4**
+- When the sidebar button is not at the first or last position on the navigation bar, its size will now revert to the standard toolbar icon size instead of being enlarged.
+- The `List all tabs` button icon has been updated for better visual harmony with the colored bookmark folders. You can revert to the original Firefox icon by setting `uc.flex.revert-to-original-sidebar-icon` to `true`.
 
 **v3.3.3**
 - Fixed an issue where corner rounding was not rendered correctly in native vertical tabs mode.
@@ -129,6 +142,9 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 - Full support for Firefox v138's native vertical tabs in *expand-on-hover* mode.  
   When the new sidebar setting **“Expand sidebar on hover”** is enabled, FlexFox's own auto-collapse feature for vertical tabs is disabled in favor of the native behavior.  
   In this mode, the width of the vertical tab bar can be freely adjusted.  
+
+<a href="#updates-top-3.3">🔝 Back to top of this section</a>
+</details>
 
 <a id="updates-top-3.1"></a>
 <details>
@@ -497,7 +513,7 @@ For future updates, simply re-running the script will be enough, and you won't n
 | Preference | Description |
 |-----------|-------------|
 | `uc.flex.add-ui-text-stroke` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
-| `uc.flex.fully-hide-sidebery` | Fully hides Sidebery; it reappears when the cursor moves to the screen edge. |
+| `uc.flex.fully-hide-sidebery` | Fully hides Sidebery and native vertical tabs. They reappear when the cursor moves to the screen edge. |
 | `uc.flex.fully-hide-toolbox` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
 | `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and extensions to override toolbar background color and image. |
 | `uc.flex.enable-gradient-highlight` | Enables gradient styling for the highlight color used across key UI elements such as the FlexFox logo, sidebar stripe, and bookmark star icon. This numeric setting accepts 0 to disable gradients, or values 1 to X to switch between different gradient styles. |

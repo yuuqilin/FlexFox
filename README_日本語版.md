@@ -18,13 +18,14 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.3.5**
-- Firefox v140以降で発生していたメニューアイコン周辺の余白の問題を修正しました。
+**🦊 v3.4.0**
+- Sidebery を完全に非表示に切り替えた際、マウスカーソルで再表示させるためのトリガー領域の幅が、カスタム設定どおりに反映されない問題を修正しました。
+- 重要な更新：FlexFox が Firefox の**ネイティブ縦型タブ**の完全非表示にも対応しました。
+  これまでの `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のショートカットは、Sidebery に加えてネイティブの縦型タブも対象になります。さらに、<kbd>F11</kbd>で全画面表示に切り替えた際にも、自動で非表示になります。
+  ウィンドウが最大化されていない場合、`--uc-hover-sidebar-trigger-width` の値は、Sidebery だけでなくネイティブ縦型タブの再表示トリガー領域の幅も制御します。これにより、Sidebery に対する動作設定がそのままネイティブ縦型タブにも反映され、統一された挙動が実現されます。
 
-**🦊 v3.3.4**
-- サイドバー・ボタンがナビゲーションバーの先頭または末尾以外にある場合、そのサイズが通常のツールバーボタンと同じ大きさに戻るようになりました。
-- カラーブックマークフォルダーとのデザイン統一のため、「すべてのタブを表示」ボタンのアイコンを変更しました。`uc.flex.revert-to-original-sidebar-icon` を `true` に設定すると、元のFirefoxアイコンに戻せます。
-- 数値型オプション `uc.flex.enable-colored-bookmarks-folder-icons` を追加しました：
+🌈 **新機能：ブックマークフォルダーのアイコンをカスタマイズ**
+数値型オプション `uc.flex.enable-colored-bookmarks-folder-icons` を追加しました：
 
   - `0`：無効
   - `1`：第1セットのカラーフォルダーアイコンを有効化
@@ -46,7 +47,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 値を `2` に設定すると、ラベルが自動的に非表示になり、第2セットのアイコンが適用されます：  
 <img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
 
-- CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ・位置を調整したり、`../icons/bookmark/` フォルダー内の `folder*.svg` ファイルを差し替えて好きなアイコンに変更することができます。
+CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ・位置を調整したり、`../icons/bookmark/` フォルダー内の `folder*.svg` ファイルを差し替えて好きなアイコンに変更することができます。
 
 🚀 **新機能：ショートカットによる UI レイアウト切り替えに対応**
 
@@ -61,8 +62,8 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | ------------- | ------ | ------- |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | Sidebery を自動折りたたみと常に展開の状態で切り替え。`uc.flex.disable-sidebery-autohide` オプションと同じレイアウト動作。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Hide Topbar | タブ・ナビゲーションバー・ブックマークバーなど、すべての上部ツールバーを完全に非表示に切り替え。隠れている時はマウスを画面上端に移動すると表示されます。`uc.flex.fully-hide-toolbox` と同様。 |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | Sidebery を完全に非表示に切り替え。隠れている時はマウスを画面端に移動すると表示されます。`uc.flex.fully-hide-sidebery` と同様。 |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | すべてのツールバーと Sidebery を隠し、ウェブページのコンテンツだけが表示される状態に切り替え。隠れている時はマウスを画面端に移動すると表示されます。レイアウトは `uc.flex.fully-hide-toolbox` と `uc.flex.fully-hide-sidebery` と同様の動作をします。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | Sidebery とネイティブの縦型タブを完全に非表示に切り替え。隠れている時はマウスを画面端に移動すると表示されます。`uc.flex.fully-hide-sidebery` と同様。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | すべてのツールバーとサイドバー（Sidebery またはネイティブ縦型タブ）を隠し、ウェブページのコンテンツだけが表示される状態に切り替え。隠れている時はマウスを画面端に移動すると表示されます。レイアウトは `uc.flex.fully-hide-toolbox` と `uc.flex.fully-hide-sidebery` と同様の動作をします。 |
 
 > [!IMPORTANT]
 > `about:config` で有効にしているオプションはショートカットより優先され、状態が固定されます。ショートカットで切り替えを行うには、該当するオプションを `false` に設定してください。
@@ -76,6 +77,17 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+<a id="updates-top-3.3"></a>
+<details>
+<summary>📦 <b>v3.3.xの更新</b></summary>
+
+**v3.3.5**
+- Firefox v140以降で発生していたメニューアイコン周辺の余白の問題を修正しました。
+
+**v3.3.4**
+- サイドバー・ボタンがナビゲーションバーの先頭または末尾以外にある場合、そのサイズが通常のツールバーボタンと同じ大きさに戻るようになりました。
+- カラーブックマークフォルダーとのデザイン統一のため、「すべてのタブを表示」ボタンのアイコンを変更しました。`uc.flex.revert-to-original-sidebar-icon` を `true` に設定すると、元のFirefoxアイコンに戻せます。
 
 **v3.3.3**
 - ネイティブの縦型タブモードで角の丸みが正しく表示されない問題を修正しました。
@@ -129,6 +141,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 - Firefox v138で追加されたネイティブの垂直タブ「カーソルを合わせた時にサイドバーを展開する」モードに完全対応。  
   この設定を有効にすると、FlexFoxの垂直タブ自動折りたたみ機能は無効化され、Firefox標準の動作が使われます。  
   このモードでは、垂直タブバーの幅を自由に調整できます。  
+
+<a href="#updates-top-3.3">🔝 セクションの先頭へ戻る</a>
+</details>
 
 <a id="updates-top-3.1"></a>
 <details>
@@ -498,7 +513,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 | 設定名 | 説明 |
 |--------|------|
 | `uc.flex.add-ui-text-stroke` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
-| `uc.flex.fully-hide-sidebery` | Sidebery を完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
+| `uc.flex.fully-hide-sidebery` | Sidebery とネイティブの縦型タブを完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
 | `uc.flex.fully-hide-toolbox` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | テーマや拡張機能によるツールバーの背景色や背景画像の上書きを許可します。 |
 | `uc.flex.enable-gradient-highlight` | FlexFox のロゴ、サイドバーのストライプ、ブックマークの星アイコンなど、主要な UI 要素に使われるハイライトカラーにグラデーションスタイルを適用します。数値で設定でき、`0` は無効、`1` ～ `X` は異なるグラデーションスタイルを選択します。 |

@@ -18,13 +18,14 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.3.5**
-- 修复了 Firefox v140+ 中菜单图标出现多余空白的问题。
+**🦊 v3.4.0**
+- 修复使用快捷键切换完全隐藏 Sidebery 时，鼠标触发区域的宽度无法按 `--uc-hover-sidebar-trigger-width` 自定义设置生效的问题。
+- 重要更新：FlexFox 现已支持完全隐藏 **原生垂直选项卡**。
+  现有选项 `uc.flex.fully-hide-sidebery` 和快捷键 `Hide Sidebery` 除了可以隐藏 Sidebery，也同样适用于 Firefox 自带的垂直选项卡。此外，进入全屏模式（<kbd>F11</kbd>）时也会自动隐藏原生垂直选项卡。
+  在窗口未最大化时，`--uc-hover-sidebar-trigger-width` 除了控制 Sidebery 的触发宽度，也用于原生垂直选项卡的触发区域。至此，所有适用于 Sidebery 的相关设置（如显示/隐藏速度）也会同步应用于原生垂直选项卡，实现一致的行为体验。
 
-**🦊 v3.3.4**
-- 当侧边栏按钮不在导航栏的首位或末位时，其大小将恢复为正常工具栏按钮的尺寸，不再放大。
-- 为了配合彩色书签文件夹的视觉效果，更新了“列出所有标签页”按钮的图标。设置 `uc.flex.revert-to-original-sidebar-icon` 为 `true` 可恢复为 Firefox 默认图标。
-- 新增数值型选项 `uc.flex.enable-colored-bookmarks-folder-icons`：
+🌈 **重大更新：自定义书签文件夹图标**
+新增数值型选项 `uc.flex.enable-colored-bookmarks-folder-icons`：
 
   - `0`：关闭
   - `1`：启用第一套彩色文件夹图标
@@ -46,7 +47,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 将该选项设为 `2` 时，会自动隐藏文字标签，并启用第二组图标：  
 <img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
 
-- 用户可以通过修改 CSS 变量 `--uc-bookmark-folder-*` 来调整图标的颜色、大小和位置，也可以替换 `../icons/bookmark/` 目录下的 `folder*.svg` 文件来自定义喜欢的图标。
+用户可以通过修改 CSS 变量 `--uc-bookmark-folder-*` 来调整图标的颜色、大小和位置，也可以替换 `../icons/bookmark/` 目录下的 `folder*.svg` 文件来自定义喜欢的图标。
 
 🚀 **重大更新：支持通过快捷键切换 UI 布局**
 
@@ -61,8 +62,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | ------ | ---- | ------- |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | 切换 Sidebery 自动折叠和保持展开的状态，保持展开的布局效果与选项 `uc.flex.disable-sidebery-autohide` 相同。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Hide Topbar | 切换是否完全隐藏顶部工具栏（标签页、导航栏、书签栏），隐藏时鼠标移到屏幕上方边缘可自动显示。对应选项 `uc.flex.fully-hide-toolbox`。 |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | 切换是否完全隐藏 Sidebery，隐藏时鼠标移到屏幕边缘可自动显示。对应选项 `uc.flex.fully-hide-sidebery`。 |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | 切换是否隐藏所有工具栏和 Sidebery，只剩下网页内容显示。隐藏时鼠标移到边缘时可自动显示。布局效果与 `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery` 相同。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | 切换是否完全隐藏 Sidebery 和原生垂直选项卡。隐藏时鼠标移到屏幕边缘可自动显示。对应选项 `uc.flex.fully-hide-sidebery`。                                                      |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All      | 切换是否隐藏所有工具栏和侧边栏（Sidebery 或原生垂直选项卡），只显示网页内容。隐藏时将鼠标移到屏幕边缘可自动显示。相当于 `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery` 的组合效果。 |
 
 > [!IMPORTANT]
 > 在 `about:config` 中设置的选项优先级更高。如果相关选项已启用，将会固定布局状态，快捷键将失效。若需使用快捷键切换，请将对应选项设为 `false`。
@@ -76,6 +77,17 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+<a id="updates-top-3.3"></a>
+<details>
+<summary>📦 <b>v3.3.x 更新记录</b></summary>
+
+**v3.3.5**
+- 修复了 Firefox v140+ 中菜单图标出现多余空白的问题。
+
+**v3.3.4**
+- 当侧边栏按钮不在导航栏的首位或末位时，其大小将恢复为正常工具栏按钮的尺寸，不再放大。
+- 为了配合彩色书签文件夹的视觉效果，更新了“列出所有标签页”按钮的图标。设置 `uc.flex.revert-to-original-sidebar-icon` 为 `true` 可恢复为 Firefox 默认图标。
 
 **v3.3.3**
 - 修复了原生垂直选项卡模式下圆角显示异常的问题。
@@ -129,6 +141,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 - 完全支持 Firefox v138 的原生垂直选项卡“悬停时展开侧栏”模式。  
   启用该设置后，FlexFox 的自动折叠功能将被关闭，改为使用 Firefox 原生的自动折叠行为。  
   在该模式下，垂直选项卡的宽度可以自由调整。  
+
+<a href="#updates-top-3.3">🔝 返回本段顶部</a>
+</details>
 
 <a id="updates-top-3.1"></a>
 <details>
@@ -503,7 +518,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 | 配置选项 | 说明 |
 |----------|------|
 | `uc.flex.add-ui-text-stroke` | 为界面文字添加粗描边，提高低分辨率屏幕下的可读性。 |
-| `uc.flex.fully-hide-sidebery` | 完全隐藏 Sidebery，将鼠标移至屏幕边缘时自动显示。 |
+| `uc.flex.fully-hide-sidebery` | 完全隐藏 Sidebery 和原生垂直选项卡，将鼠标移至屏幕边缘时自动显示。 |
 | `uc.flex.fully-hide-toolbox` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | 允许主题或扩展修改工具栏的背景颜色或背景图。 |
 | `uc.flex.enable-gradient-highlight` | 为 FlexFox 图标、侧栏彩带、书签星形图标等主要界面元素中使用的高亮颜色启用渐变样式。此选项接受数值设置：`0` 表示关闭渐变，`1` 到 `X` 表示切换不同的渐变样式。 |

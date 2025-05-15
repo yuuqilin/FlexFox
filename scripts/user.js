@@ -4,7 +4,7 @@ user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("svg.context-properties.content.enabled",              true);
 /* Boldens the text in the Firefox interface. */
 user_pref("uc.flex.add-ui-text-stroke",                         false);
-/* Fully hides the Sidebery sidebar. */
+/* Fully hides the Sidebery sidebar and native vertical tabs. */
 user_pref("uc.flex.fully-hide-sidebery",                        false);
 /* Fully hides the top tab bar, navigation bar, and bookmarks toolbar. */
 user_pref("uc.flex.fully-hide-toolbox",                         false);
