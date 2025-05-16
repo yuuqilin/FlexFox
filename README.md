@@ -18,14 +18,22 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.0**
+**🦊 v3.4.1**
+- Fixed an issue where the sidebar stripe did not expand to the correct height when Sidebery was fully hidden.
+- Fixed incorrect width when expanding the native vertical tabs while the sidebar was on the right and fully hidden.
+- Fixed an issue where native vertical tabs could not be expanded when both `uc.flex.disable-native-vertical-tabs-autohide` and `uc.flex.fully-hide-sidebery` were enabled.
+- Deprecated `uc.flex.disable-native-vertical-tabs-autohide`. Use `uc.flex.disable-sidebery-autohide` instead to enable always-open mode for both Sidebery and native vertical tabs.
 
-- Fixed an issue where the trigger area for showing Sidebery after hiding it via shortcut could not use the custom width set by `--uc-hover-sidebar-trigger-width`.
-- Major update: FlexFox now supports fully hiding the **built-in vertical tabs**.
-  The existing option `uc.flex.fully-hide-sidebery` and the shortcut `Hide Sidebery` now also apply to native vertical tabs. When entering fullscreen mode (`F11`), native vertical tabs are automatically hidden as well.
-  When the window is not maximized, the `--uc-hover-sidebar-trigger-width` value also controls the trigger area for native vertical tabs. This means all settings that apply to Sidebery—such as show/hide speed—now apply to native vertical tabs too, offering a unified behavior.
+🚀 **Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs**
+
+- The existing `uc.flex.fully-hide-sidebery` option and the `Hide Sidebery` hotkey now also hide native vertical tabs completely.
+- Native vertical tabs are now also fully hidden when entering fullscreen mode (<kbd>F11</kbd>).
+- The `--uc-hover-sidebar-trigger-width` variable now defines the trigger area for both Sidebery and native vertical tabs when the window is not maximized.
+- The existing `uc.flex.disable-sidebery-autohide` option and the `Lock Sidebery` hotkey now also keep native vertical tabs open at all times.
+- This means all settings that apply to Sidebery—such as show/hide speed—now apply to native vertical tabs too, offering a unified behavior.
 
 🌈 **Major Update: Custom Bookmark Folder Icons**
+
 A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
 
   - `0`: Disabled
@@ -61,7 +69,7 @@ Once set up, you can switch between four UI layout modes using keyboard shortcut
 
 | Shortcut | Label | Action |
 | -------- | ----- | ------ |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | Toggle between auto-collapsing and keeping Sidebery always open. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | Toggle between auto-collapsing and keeping open, for both Sidebery and native vertical tabs. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Hide Topbar | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | Toggle fully hiding Sidebery and native vertical tabs. When hidden, they reappear when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | Toggle hiding all toolbars and the sidebar (Sidebery or native vertical tabs), leaving only the webpage visible. When hidden, move the mouse to the screen edge to show them. Equivalent to `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery`. |
@@ -78,6 +86,12 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.4.0**
+- Fixed an issue where the trigger area for showing Sidebery after hiding it via shortcut could not use the custom width set by `--uc-hover-sidebar-trigger-width`.
+- Major update: FlexFox now supports fully hiding the **built-in vertical tabs**.
+  The existing option `uc.flex.fully-hide-sidebery` and the shortcut `Hide Sidebery` now also apply to native vertical tabs. When entering fullscreen mode (`F11`), native vertical tabs are automatically hidden as well.
+  When the window is not maximized, the `--uc-hover-sidebar-trigger-width` value also controls the trigger area for native vertical tabs. This means all settings that apply to Sidebery—such as show/hide speed—now apply to native vertical tabs too, offering a unified behavior.
 
 <a id="updates-top-3.3"></a>
 <details>
@@ -529,12 +543,11 @@ For future updates, simply re-running the script will be enough, and you won't n
 | `uc.flex.disable-bookmarks-autohide` | Disables auto-hide for the bookmarks toolbar. |
 | `uc.flex.disable-tabs-toolbar-autohide` | Prevents the native horizontal tabs from auto-hiding when Sidebery is inactive. |
 | `uc.flex.disable-findbar-autohide` | Prevents the Findbar from automatically hiding when it loses focus. |
-| `uc.flex.disable-native-vertical-tabs-autohide` | Disables auto-collapse for the native vertical tabs. |
 | `sidebar.visibility` (`always-show`) | A native Firefox preference. When set to `always-show`, Firefox's built-in auto-collapse for the vertical tab bar is disabled, and FlexFox's enhanced auto-collapse takes over. FlexFox offers smoother animations, a cleaner collapsed layout, and improved handling of pinned tabs. This behavior can also be toggled by unchecking **“Expand sidebar on hover”** in the sidebar settings. |
 | `sidebar.visibility` (`expand-on-hover`) | When set to `expand-on-hover`, Firefox's native vertical tab auto-collapse behavior is restored, and FlexFox's own auto-collapse is disabled. This can also be enabled via **“Expand sidebar on hover”** in the sidebar settings. In this mode, both the native vertical tabs and Sidebery can toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. |
 | `sidebar.animation.expand-on-hover.duration-ms` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
 | `uc.flex.disable-sidebery-hover-animations` | When `sidebar.visibility` is set to `expand-on-hover` and Sidebery is in the *expanded* state, hover animations may cause subtle jittering. This preference disables those animations for smoother interaction, but may make the collapsed layout appear less tidy. |
-| `uc.flex.disable-sidebery-autohide` | Disables auto-collapse for Sidebery. |
+| `uc.flex.disable-sidebery-autohide` | Disables auto-collapse for Sidebery and native vertical tabs. |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | By default, FlexFox adds right-side padding after the first item in the navigation bar to improve visual separation and alignment between the vertical tabs and nearby items. This option disables that padding. |
 | `uc.flex.disable-menu-icons` | Disables custom icons in menus added by FlexFox. |
 | `uc.flex.revert-to-original-window-controls` | Reverts to Firefox's default window control buttons (minimize, maximize, close), replacing the macOS-style icons used by FlexFox. |

@@ -304,19 +304,27 @@
                 opacity: 1;
             }
         }
+        /* Applies styles for native vertical tabs when fully hidden or in fullscreen.
+        Behavior depends on whether Sidebery is active, determined via --uc-sb-* variables. */
         &[id="sidebar-main"] {
             --uc-sidebar-main-max-width: 1px;
             :root[sizemode="normal"] & {
                 --uc-sidebar-main-max-width: var(--uc-hover-sidebar-trigger-width);
             }
-            --uc-sidebar-main-opacity: var(--uc-sb-sidebar-main-opacity, 0);
             max-width: var(--uc-sb-sidebar-main-max-width, var(--uc-sidebar-main-max-width)) !important;
-            opacity: var(--uc-sidebar-main-opacity);
+            height: var(--uc-sb-sidebar-main-hover-min-h, 100%);
+            opacity: var(--uc-sb-sidebar-main-opacity, 0);
             &:hover {
                 opacity: 1;
             }
             &:not(:hover) sidebar-main[expanded] {
                 min-width: var(--uc-sb-sidebar-main-min-width, 1px);
+            }
+            /* Adjust offset for absolute positioning; +11px is no longer needed, replaced with -11px. */
+            &:is([positionend], [sidebar-positionend]) sidebar-main[expanded]:hover {
+                transform: translateX(
+                    calc(-11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) - 100%)
+                );
             }
         }
     }
@@ -357,14 +365,19 @@
                 :root[sizemode="normal"] & {
                     --uc-sidebar-main-max-width: var(--uc-hover-sidebar-trigger-width);
                 }
-                --uc-sidebar-main-opacity: var(--uc-sb-sidebar-main-opacity, 0);
                 max-width: var(--uc-sb-sidebar-main-max-width, var(--uc-sidebar-main-max-width)) !important;
-                opacity: var(--uc-sidebar-main-opacity);
+                height: var(--uc-sb-sidebar-main-hover-min-h, 100%);
+                opacity: var(--uc-sb-sidebar-main-opacity, 0);
                 &:hover {
                     opacity: 1;
                 }
                 &:not(:hover) sidebar-main[expanded] {
                     min-width: var(--uc-sb-sidebar-main-min-width, 1px);
+                }
+                &:is([positionend], [sidebar-positionend]) sidebar-main[expanded]:hover {
+                    transform: translateX(
+                        calc(-11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) - 100%)
+                    );
                 }
             }
         }
@@ -643,7 +656,7 @@
     /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
     /* be179ef */
     /* ── ▶️ Autohide vertical tabs when the sidebar is expanded */
-    @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
+    @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
         /**
          * The selector #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) has higher specificity
          * than #sidebar-main[sidebar-panel-open], so its rules will override those above.
@@ -653,6 +666,15 @@
          * based on whether Sidebery is active or not.
          */
         #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) {
+            --uc-sidebar-main-width: var(--uc-sidebar-header-width);
+            @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+                --uc-sidebar-main-width: var(--uc-sidebar-main-hover-w);
+            }
+            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                :root[titlepreface*="\180e "] & {
+                    --uc-sidebar-main-width: var(--uc-sidebar-main-hover-w);
+                }
+            }
             overflow: var(--uc-sb-sidebar-main-overflow, visible) !important;
             /**
              * When the native vertical tabs are placed on the right side, 
@@ -663,7 +685,7 @@
             }
             max-width: var(
                 --uc-sb-sidebar-main-max-width,
-                var(--uc-sidebar-header-width)
+                var(--uc-sidebar-main-width)
             ) !important; /* Use !important to override the max-width styles in Nightly (v135) */
             z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
             /* This transition is already covered by the one defined above, so it's commented out. */
@@ -678,7 +700,7 @@
             /* !TEMPORARY: */
             margin-inline-start: var(--uc-sidebar-main-margin-left);
             min-width: /* var(--tab-collapsed-width) */ calc(
-                var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) + 5px
+                var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-main-width)) + 5px
             );
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
             will-change: margin-inline-start, min-width, overflow, transform;
@@ -702,13 +724,11 @@
             }
         }
         sidebar-main[expanded]:hover {
-            min-width: var(
-                --uc-sb-sidebar-main-min-width,
-                calc(
-                    var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                        var(--tab-pinned-container-margin-inline-expanded) + 1px
-                )
+            --uc-sidebar-main-hover-w: calc(
+                var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
+                    var(--tab-pinned-container-margin-inline-expanded) + 1px
             );
+            min-width: var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-main-hover-w));
             /* transition-delay: 0ms !important; */
             transition:
                 margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -873,7 +893,7 @@
     /* 🔼 [BLOCK D] End of rules for active Sidebery */
 
     /* 🔽 [BLOCK E] Start of rules for inactive Sidebery */
-    @media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
+    @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
         /* ── ▶️ Styles for tools-and-extensions when the sidebar is expanded */
         /**
          * Use variables to pass values into the shadow trees. 
@@ -955,11 +975,13 @@
             @media not -moz-pref("sidebar.position_start") {
                 border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
             }
-            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            @media -moz-pref("uc.flex.fully-hide-toolbox"),
+                -moz-pref("uc.flex.fully-hide-sidebery"),
+                (display-mode: fullscreen) {
                 border-radius: 0 !important;
             }
-            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
+                :root:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     border-radius: 0 !important;
                 }
             }
@@ -990,164 +1012,165 @@
 ═════════════════════════════════════════════════════════════════════ */
 
 /* 🔽 [BLOCK G] Start of rules for inactive Sidebery */
-@media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide"))) {
+@media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-sidebery-autohide"))) {
     /* ── ▶️ Styles for verticalTabs when the sidebar is expanded */
     /**
      * Controls how many rows of pinned tab icons can be shown in vertical tab panel.
      * This affects how many pinned tabs are visible before scrolling appears.
      */
-    sidebar-main[expanded] #vertical-pinned-tabs-container {
-        max-height: calc(
-            var(--uc-max-visible-vertical-pinned-tabs) * var(--tabstrip-min-height) + var(--space-large) + 15px
-        ) !important;
-    }
-    #tabbrowser-tabs[orient="vertical"] #tabbrowser-arrowscrollbox[orient="vertical"] .tabbrowser-tab {
-        padding-block: 0px !important;
-    }
-    @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-        /* Show pin tabs separator in expanded state */
-        #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
-            display: block !important;
+    :root:not([titlepreface*="\180e "]) {
+        sidebar-main[expanded] #vertical-pinned-tabs-container {
+            max-height: calc(
+                var(--uc-max-visible-vertical-pinned-tabs) * var(--tabstrip-min-height) + var(--space-large) + 15px
+            ) !important;
         }
-        /* Hide pin tabs separator in expanded state with no pin tabs */
-        #vertical-pinned-tabs-container:empty + #vertical-pinned-tabs-container-separator {
-            display: none !important;
+        #tabbrowser-tabs[orient="vertical"] #tabbrowser-arrowscrollbox[orient="vertical"] .tabbrowser-tab {
+            padding-block: 0px !important;
         }
-    }
-
-    sidebar-main[expanded]:hover {
-        #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
-            transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay) !important;
-        }
-        :is(.tab-label-container .tab-text, .tab-close-button) {
-            transition-delay: var(--uc-hover-sidebar-delay);
-        }
-
-        .toolbarbutton-text {
-            transition-delay: var(--uc-hover-sidebar-delay);
-        }
-
-        #vertical-pinned-tabs-container {
-            .tabbrowser-tab .tab-stack {
-                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
+        @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+            /* Show pin tabs separator in expanded state */
+            #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+                display: block !important;
+            }
+            /* Hide pin tabs separator in expanded state with no pin tabs */
+            #vertical-pinned-tabs-container:empty + #vertical-pinned-tabs-container-separator {
+                display: none !important;
             }
         }
 
-        #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
-            padding-inline: 2px !important;
-            max-width: 100% !important;
-            transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay) !important;
-        }
-        #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
-            transition:
-                margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+        sidebar-main[expanded]:hover {
+            #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;
-            .tab-group-line {
+            }
+            :is(.tab-label-container .tab-text, .tab-close-button) {
                 transition-delay: var(--uc-hover-sidebar-delay);
             }
-        }
-        #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
-            transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay);
-        }
-        #tabbrowser-tabs[orient="vertical"]::after {
-            width: calc(
-                var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                    var(--tab-pinned-container-margin-inline-expanded) - 22px
-            );
-            transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay);
-        }
-        @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-            #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
-                transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+
+            .toolbarbutton-text {
+                transition-delay: var(--uc-hover-sidebar-delay);
+            }
+
+            #vertical-pinned-tabs-container {
+                .tabbrowser-tab .tab-stack {
+                    transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
+                }
+            }
+
+            #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
+                padding-inline: 2px !important;
+                max-width: 100% !important;
+                transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay) !important;
+            }
+            #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
+                transition:
+                    margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+                .tab-group-line {
+                    transition-delay: var(--uc-hover-sidebar-delay);
+                }
+            }
+            #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
+                transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay);
             }
-        }
-
-        .tabbrowser-tab .tab-stack {
-            min-width: 100%;
-        }
-        .tabbrowser-tab .tab-background {
-            max-width: 100% !important;
-        }
-        @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-            #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+            #tabbrowser-tabs[orient="vertical"]::after {
                 width: calc(
                     var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
                         var(--tab-pinned-container-margin-inline-expanded) - 22px
                 );
+                transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
             }
-        }
-    }
-
-    sidebar-main[expanded]:not(:hover) {
-        #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
-            transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay) !important;
-        }
-        :is(.tab-label-container .tab-text, .tab-close-button) {
-            visibility: collapse;
-            transition-delay: var(--uc-autohide-sidebar-delay);
-        }
-
-        .toolbarbutton-text {
-            visibility: hidden;
-            transition-delay: var(--uc-autohide-sidebar-delay);
-        }
-
-        #vertical-pinned-tabs-container {
-            /* --uc-sroot-overflow: hidden; */
+            @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+                #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+                    transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
+                }
+            }
 
             .tabbrowser-tab .tab-stack {
-                min-width: 40px;
-                transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay);
+                min-width: 100%;
+            }
+            .tabbrowser-tab .tab-background {
+                max-width: 100% !important;
+            }
+            @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+                #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+                    width: calc(
+                        var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
+                            var(--tab-pinned-container-margin-inline-expanded) - 22px
+                    );
+                }
             }
         }
 
-        #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
-            padding-inline: 2px !important;
-            max-width: 28px !important;
-            transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay) !important;
-        }
-        #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
-            margin-inline-start: 0px !important;
-            transition:
-                margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay),
-                min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+        sidebar-main[expanded]:not(:hover) {
+            #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+                transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay) !important;
-            .tab-group-line {
+            }
+            :is(.tab-label-container .tab-text, .tab-close-button) {
+                visibility: collapse;
+                transition-delay: var(--uc-autohide-sidebar-delay);
+            }
+
+            .toolbarbutton-text {
                 visibility: hidden;
                 transition-delay: var(--uc-autohide-sidebar-delay);
             }
-        }
-        #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
-            max-width: 32px;
-            transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay);
-        }
-        #tabbrowser-tabs[orient="vertical"]::after {
-            width: 32px;
-            transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay);
-        }
-        @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-            #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
-                width: 32px !important;
+
+            #vertical-pinned-tabs-container {
+                /* --uc-sroot-overflow: hidden; */
+
+                .tabbrowser-tab .tab-stack {
+                    min-width: 40px;
+                    transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay);
+                }
+            }
+
+            #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
+                padding-inline: 2px !important;
+                max-width: 28px !important;
+                transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+            }
+            #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
+                margin-inline-start: 0px !important;
+                transition:
+                    margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay) !important;
+                .tab-group-line {
+                    visibility: hidden;
+                    transition-delay: var(--uc-autohide-sidebar-delay);
+                }
+            }
+            #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
+                max-width: 32px;
+                transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay);
+            }
+            #tabbrowser-tabs[orient="vertical"]::after {
+                width: 32px;
                 transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay);
             }
-        }
-        /* Move the container tab indicator to the right for Firefox v138 */
-        /*
+            @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+                #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+                    width: 32px !important;
+                    transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay);
+                }
+            }
+            /* Move the container tab indicator to the right for Firefox v138 */
+            /*
             .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
                 #vertical-pinned-tabs-container &,
                 #tabbrowser-tabs[orient="vertical"] & {
@@ -1160,29 +1183,29 @@
                 }
             }
         */
-    }
+        }
 
-    /* ── ◀️ Styles for verticalTabs when the sidebar is collapsed */
-    #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
-        --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
-        --tab-collapsed-width: var(--uc-sidebar-header-width) !important;
-        width: var(--uc-sidebar-header-width) !important;
-        .tab-background {
-            margin-inline: 5px !important;
+        /* ── ◀️ Styles for verticalTabs when the sidebar is collapsed */
+        #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
+            --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
+            --tab-collapsed-width: var(--uc-sidebar-header-width) !important;
+            width: var(--uc-sidebar-header-width) !important;
+            .tab-background {
+                margin-inline: 5px !important;
+            }
+            .tab-close-button {
+                width: 14px !important;
+                height: 14px !important;
+                top: -1px !important;
+                inset-inline-start: 0px !important;
+            }
         }
-        .tab-close-button {
-            width: 14px !important;
-            height: 14px !important;
-            top: -1px !important;
-            inset-inline-start: 0px !important;
-        }
-    }
-    sidebar-main:not([expanded]) {
-        #vertical-tabs-newtab-button {
-            margin-inline: 5.5px !important;
-        }
-        /* Move the container tab indicator to the left for Firefox v138 */
-        /*
+        sidebar-main:not([expanded]) {
+            #vertical-tabs-newtab-button {
+                margin-inline: 5.5px !important;
+            }
+            /* Move the container tab indicator to the left for Firefox v138 */
+            /*
             .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
                 #vertical-pinned-tabs-container &,
                 #tabbrowser-tabs[orient="vertical"] & {
@@ -1194,6 +1217,7 @@
                 }
             }
             */
+        }
     }
 }
 /* 🔼 [BLOCK G] End of rules for inactive Sidebery */

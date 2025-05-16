@@ -18,13 +18,22 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.4.0**
-- 修复使用快捷键切换完全隐藏 Sidebery 时，鼠标触发区域的宽度无法按 `--uc-hover-sidebar-trigger-width` 自定义设置生效的问题。
-- 重要更新：FlexFox 现已支持完全隐藏 **原生垂直选项卡**。
-  现有选项 `uc.flex.fully-hide-sidebery` 和快捷键 `Hide Sidebery` 除了可以隐藏 Sidebery，也同样适用于 Firefox 自带的垂直选项卡。此外，进入全屏模式（<kbd>F11</kbd>）时也会自动隐藏原生垂直选项卡。
-  在窗口未最大化时，`--uc-hover-sidebar-trigger-width` 除了控制 Sidebery 的触发宽度，也用于原生垂直选项卡的触发区域。至此，所有适用于 Sidebery 的相关设置（如显示/隐藏速度）也会同步应用于原生垂直选项卡，实现一致的行为体验。
+**🦊 v3.4.1**
+- 修复完全隐藏 Sidebery 时，侧边栏彩带展开高度不正确的问题。
+- 修复侧边栏在右侧且原生垂直选项卡完全隐藏时，展开宽度不正确的问题。
+- 修复同时启用 `uc.flex.disable-native-vertical-tabs-autohide` 和 `uc.flex.fully-hide-sidebery` 时，原生垂直选项卡无法展开的问题。
+- 废弃 `uc.flex.disable-native-vertical-tabs-autohide` 选项。现在使用 `uc.flex.disable-sidebery-autohide` 可统一控制 Sidebery 和原生垂直选项卡是否保持展开。
+
+🚀 **重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式**
+
+- `uc.flex.fully-hide-sidebery` 选项与 `Hide Sidebery` 快捷键现在也适用于原生垂直选项卡，可将其完全隐藏。
+- 进入全屏模式（<kbd>F11</kbd>）时，原生垂直选项卡也会随之自动隐藏。
+- 在窗口未最大化时，变量 `--uc-hover-sidebar-trigger-width` 现在也适用于原生垂直选项卡，可同时控制其触发区域。
+- `uc.flex.disable-sidebery-autohide` 选项与 `Lock Sidebery` 快捷键现在也适用于原生垂直选项卡，可使其保持展开状态。
+- 至此，所有适用于 Sidebery 的设置（如显示/隐藏速度）也会同步应用于原生垂直选项卡，实现一致的操作体验。
 
 🌈 **重大更新：自定义书签文件夹图标**
+
 新增数值型选项 `uc.flex.enable-colored-bookmarks-folder-icons`：
 
   - `0`：关闭
@@ -60,7 +69,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 | 快捷键 | 标签 | 功能说明 |
 | ------ | ---- | ------- |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | 切换 Sidebery 自动折叠和保持展开的状态，保持展开的布局效果与选项 `uc.flex.disable-sidebery-autohide` 相同。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | 切换 Sidebery 和原生垂直选项卡的自动折叠与保持展开状态，保持展开的布局效果与选项 `uc.flex.disable-sidebery-autohide` 相同。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Hide Topbar | 切换是否完全隐藏顶部工具栏（标签页、导航栏、书签栏），隐藏时鼠标移到屏幕上方边缘可自动显示。对应选项 `uc.flex.fully-hide-toolbox`。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | 切换是否完全隐藏 Sidebery 和原生垂直选项卡。隐藏时鼠标移到屏幕边缘可自动显示。对应选项 `uc.flex.fully-hide-sidebery`。                                                      |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All      | 切换是否隐藏所有工具栏和侧边栏（Sidebery 或原生垂直选项卡），只显示网页内容。隐藏时将鼠标移到屏幕边缘可自动显示。相当于 `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery` 的组合效果。 |
@@ -77,6 +86,12 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.4.0**
+- 修复使用快捷键切换完全隐藏 Sidebery 时，鼠标触发区域的宽度无法按 `--uc-hover-sidebar-trigger-width` 自定义设置生效的问题。
+- 重要更新：FlexFox 现已支持完全隐藏 **原生垂直选项卡**。
+  现有选项 `uc.flex.fully-hide-sidebery` 和快捷键 `Hide Sidebery` 除了可以隐藏 Sidebery，也同样适用于 Firefox 自带的垂直选项卡。此外，进入全屏模式（<kbd>F11</kbd>）时也会自动隐藏原生垂直选项卡。
+  在窗口未最大化时，`--uc-hover-sidebar-trigger-width` 除了控制 Sidebery 的触发宽度，也用于原生垂直选项卡的触发区域。至此，所有适用于 Sidebery 的相关设置（如显示/隐藏速度）也会同步应用于原生垂直选项卡，实现一致的行为体验。
 
 <a id="updates-top-3.3"></a>
 <details>
@@ -534,12 +549,11 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 | `uc.flex.disable-bookmarks-autohide` | 停用书签工具栏的自动隐藏功能。 |
 | `uc.flex.disable-tabs-toolbar-autohide` | 当 Sidebery 处于非活动状态时，防止原生水平标签栏自动隐藏。 |
 | `uc.flex.disable-findbar-autohide` | 防止查找栏（Findbar）在失去焦点后自动隐藏。 |
-| `uc.flex.disable-native-vertical-tabs-autohide` | 停用原生垂直选项卡的自动折叠功能。 |
 | `sidebar.visibility`（`always-show`） | Firefox 的原生设置。当设置为 `always-show` 时，Firefox 自带的垂直选项卡自动折叠功能将会停用，FlexFox 的自动折叠功能将接管。相比原生功能，FlexFox 的动画更流畅，折叠后的布局更整洁，对固定标签页的处理也更加合理。你也可以通过取消勾选侧栏设置中的 **“悬停时展开侧栏”** 来切换此功能。 |
 | `sidebar.visibility`（`expand-on-hover`） | 当设置为 `expand-on-hover` 时，将恢复 Firefox 原生的垂直选项卡自动折叠行为，同时会关闭 FlexFox 的自动折叠功能。此功能也可以通过勾选 **“悬停时展开侧栏”** 来启用。在此模式下，原生垂直选项卡和 Sidebery 都可以通过快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧栏开关按钮，在自动折叠和保持展开之间切换。 |
 | `sidebar.animation.expand-on-hover.duration-ms` | Firefox 原生设置，用于控制在 `sidebar.visibility` 设置为 `expand-on-hover` 时，原生垂直选项卡展开和折叠的动画速度。 |
 | `uc.flex.disable-sidebery-hover-animations` | 当 `sidebar.visibility` 设置为 `expand-on-hover` 且 Sidebery 处于“保持展开”状态时，鼠标悬停所触发的动画可能导致轻微画面抖动。启用此选项可关闭这些动画，提升稳定性，但可能会让折叠状态下的显示不如原来整洁。 |
-| `uc.flex.disable-sidebery-autohide` | 停用 Sidebery 的自动折叠功能。 |
+| `uc.flex.disable-sidebery-autohide` | 禁用 Sidebery 和原生垂直选项卡的自动折叠功能。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | 默认情况下，FlexFox 会在导航栏第一个图标后添加右侧间距，以优化垂直选项卡与周围项目之间的视觉间隔和对齐。此选项可停用该间距。 |
 | `uc.flex.disable-menu-icons` | 停用 FlexFox 添加的自定义选单图标。 |
 | `uc.flex.revert-to-original-window-controls` | 将 FlexFox 使用的 macOS 风格窗口按钮恢复为 Firefox 默认的最小化、最大化、关闭按钮。 |

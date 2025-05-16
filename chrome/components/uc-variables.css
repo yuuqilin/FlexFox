@@ -654,11 +654,27 @@
         }
     }
     @media -moz-pref("sidebar.verticalTabs") {
-        --uc-navigator-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-header-width));
-        --uc-navigator-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-header-width));
-        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.disable-native-vertical-tabs-autohide")) {
-            --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-header-width));
-            --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-header-width));
+        --tab-pinned-horizontal-count: 5;
+        --uc-sidebar-main-width: var(--uc-sidebar-header-width);
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+            --uc-sidebar-main-width: calc(
+                var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
+                    var(--tab-pinned-container-margin-inline-expanded) - 4px
+            );
+        }
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+            &[titlepreface*="\180e "] {
+                --uc-sidebar-main-width: calc(
+                    var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
+                        var(--tab-pinned-container-margin-inline-expanded) - 4px
+                );
+            }
+        }
+        --uc-navigator-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-main-width));
+        --uc-navigator-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-main-width));
+        @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
+            --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-main-width));
+            --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-main-width));
             @media -moz-pref("sidebar.visibility", "hide-sidebar") {
                 &:has(#sidebar-main[hidden]) {
                     --uc-personal-toolbar-offset: 0px;

@@ -18,13 +18,22 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.4.0**
-- Sidebery を完全に非表示に切り替えた際、マウスカーソルで再表示させるためのトリガー領域の幅が、カスタム設定どおりに反映されない問題を修正しました。
-- 重要な更新：FlexFox が Firefox の**ネイティブ縦型タブ**の完全非表示にも対応しました。
-  これまでの `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のショートカットは、Sidebery に加えてネイティブの縦型タブも対象になります。さらに、<kbd>F11</kbd>で全画面表示に切り替えた際にも、自動で非表示になります。
-  ウィンドウが最大化されていない場合、`--uc-hover-sidebar-trigger-width` の値は、Sidebery だけでなくネイティブ縦型タブの再表示トリガー領域の幅も制御します。これにより、Sidebery に対する動作設定がそのままネイティブ縦型タブにも反映され、統一された挙動が実現されます。
+**🦊 v3.4.1**
+- Sidebery を完全に非表示にした状態で、サイドバーのストライプが正しく展開されない問題を修正しました。
+- サイドバーが右側にあり、かつネイティブの縦型タブを完全に非表示にしていると、展開後の幅が正しくない問題を修正しました。
+- `uc.flex.disable-native-vertical-tabs-autohide` と `uc.flex.fully-hide-sidebery` の両方を有効にした際に、ネイティブの縦型タブが展開できなくなる不具合を修正しました。
+- `uc.flex.disable-native-vertical-tabs-autohide` オプションは廃止され、今後は `uc.flex.disable-sidebery-autohide` を使用して、Sidebery とネイティブ縦型タブの両方を常時展開状態に固定できるようになりました。
+
+🚀 **新機能：ネイティブ縦型タブが完全非表示と常時展開に対応**
+
+- `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のホットキーは、Sidebery に加えてネイティブ縦型タブにも同じ挙動が適用され、両方を完全に非表示にできます。
+- 全画面モード（<kbd>F11</kbd>）では、ネイティブ縦型タブも自動で完全非表示になります。
+- 最大化されていないウィンドウでは、`--uc-hover-sidebar-trigger-width` 変数によって Sidebery とネイティブ縦型タブ両方のトリガー領域を制御できます。
+- `uc.flex.disable-sidebery-autohide` オプションと `Lock Sidebery` のホットキーは、Sidebery に加えてネイティブ縦型タブにも同じ挙動が適用され、両方を常時展開された状態にできます。
+- これにより、ネイティブ縦型タブも Sidebery と同様に変数で制御され（展開／折りたたみの速度など）、一貫した挙動が実現されます。
 
 🌈 **新機能：ブックマークフォルダーのアイコンをカスタマイズ**
+
 数値型オプション `uc.flex.enable-colored-bookmarks-folder-icons` を追加しました：
 
   - `0`：無効
@@ -60,7 +69,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 | ショートカット | ラベル | 動作内容 |
 | ------------- | ------ | ------- |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | Sidebery を自動折りたたみと常に展開の状態で切り替え。`uc.flex.disable-sidebery-autohide` オプションと同じレイアウト動作。 |
+| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | Sidebery とネイティブ縦型タブを自動折りたたみと常時展開の状態で切り替え。`uc.flex.disable-sidebery-autohide` オプションと同じ挙動になります。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Hide Topbar | タブ・ナビゲーションバー・ブックマークバーなど、すべての上部ツールバーを完全に非表示に切り替え。隠れている時はマウスを画面上端に移動すると表示されます。`uc.flex.fully-hide-toolbox` と同様。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | Sidebery とネイティブの縦型タブを完全に非表示に切り替え。隠れている時はマウスを画面端に移動すると表示されます。`uc.flex.fully-hide-sidebery` と同様。 |
 | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | すべてのツールバーとサイドバー（Sidebery またはネイティブ縦型タブ）を隠し、ウェブページのコンテンツだけが表示される状態に切り替え。隠れている時はマウスを画面端に移動すると表示されます。レイアウトは `uc.flex.fully-hide-toolbox` と `uc.flex.fully-hide-sidebery` と同様の動作をします。 |
@@ -77,6 +86,12 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.4.0**
+- Sidebery を完全に非表示に切り替えた際、マウスカーソルで再表示させるためのトリガー領域の幅が、カスタム設定どおりに反映されない問題を修正しました。
+- 重要な更新：FlexFox が Firefox の**ネイティブ縦型タブ**の完全非表示にも対応しました。
+  これまでの `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のショートカットは、Sidebery に加えてネイティブの縦型タブも対象になります。さらに、<kbd>F11</kbd>で全画面表示に切り替えた際にも、自動で非表示になります。
+  ウィンドウが最大化されていない場合、`--uc-hover-sidebar-trigger-width` の値は、Sidebery だけでなくネイティブ縦型タブの再表示トリガー領域の幅も制御します。これにより、Sidebery に対する動作設定がそのままネイティブ縦型タブにも反映され、統一された挙動が実現されます。
 
 <a id="updates-top-3.3"></a>
 <details>
@@ -529,12 +544,11 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 | `uc.flex.disable-bookmarks-autohide` | ブックマークツールバーの自動非表示を無効にします。 |
 | `uc.flex.disable-tabs-toolbar-autohide` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
 | `uc.flex.disable-findbar-autohide` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |
-| `uc.flex.disable-native-vertical-tabs-autohide` | Firefox の垂直タブバーの自動折りたたみを無効にします。 |
 | `sidebar.visibility`（`always-show`） | Firefoxのネイティブ設定です。値を `always-show` にすると、Firefox標準の垂直タブバーの自動折りたたみが無効化され、代わりにFlexFox独自の自動折りたたみ機能が有効になります。FlexFoxはアニメーションの滑らかさ、折りたたみ時の整理されたレイアウト、ピン留めタブの扱いやすさに優れています。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** のチェックを外すことで切り替えることも可能です。 |
 | `sidebar.visibility`（`expand-on-hover`） | 値を `expand-on-hover` にすると、Firefoxの垂直タブバーのネイティブな自動折りたたみ動作が有効になり、FlexFoxの機能は無効化されます。この動作は、サイドバー設定の **「カーソルを合わせた時にサイドバーを展開する」** を有効にすることで切り替え可能です。このモードでは、ネイティブの垂直タブとSideberyのどちらも、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみの状態を変更できます。 |
 | `sidebar.animation.expand-on-hover.duration-ms` | `sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーションの速度を制御するFirefoxのネイティブ設定です。 |
 | `uc.flex.disable-sidebery-hover-animations` | `sidebar.visibility` が `expand-on-hover` に設定され、Sidebery が「常に展開」状態になっている場合、ホバー時のアニメーションによって画面がわずかに揺れることがあります。この設定を有効にすると、そうしたアニメーションが無効化され、より安定した表示になりますが、折りたたみ時のレイアウトがやや崩れることがあります。 |
-| `uc.flex.disable-sidebery-autohide` | Sidebery の自動折りたたみを無効にします。 |
+| `uc.flex.disable-sidebery-autohide` | Sidebery とネイティブ縦型タブの自動折りたたみを無効にします。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | デフォルトでは、ナビゲーションバーの最初の項目の後ろに右側の余白を追加して、垂直タブとその周辺項目との視覚的な区切りや整列を改善します。このオプションはその余白を無効にします。 |
 | `uc.flex.disable-menu-icons` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
 | `uc.flex.revert-to-original-window-controls` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
