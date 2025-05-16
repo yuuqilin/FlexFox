@@ -520,7 +520,7 @@
     @media -moz-pref("sidebar.visibility", "expand-on-hover") {
         #sidebar-box,
         #tabbrowser-tabbox {
-            --sidebar-launcher-collapsed-width: 55px !important;
+            --sidebar-launcher-collapsed-width: calc(var(--uc-sidebar-header-width) + 11px) !important;
         }
     }
     /* 🔼 [BLOCK A] End of variable definitions for active Sidebery */
@@ -559,6 +559,8 @@
             min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay),
+            width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
@@ -602,6 +604,7 @@
                 var(--uc-hover-sidebar-delay),
             max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay),
+            width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
             overflow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay),
             background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -666,15 +669,6 @@
          * based on whether Sidebery is active or not.
          */
         #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) {
-            --uc-sidebar-main-width: var(--uc-sidebar-header-width);
-            @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-                --uc-sidebar-main-width: var(--uc-sidebar-main-hover-w);
-            }
-            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-                :root[titlepreface*="\180e "] & {
-                    --uc-sidebar-main-width: var(--uc-sidebar-main-hover-w);
-                }
-            }
             overflow: var(--uc-sb-sidebar-main-overflow, visible) !important;
             /**
              * When the native vertical tabs are placed on the right side, 
@@ -683,6 +677,8 @@
             &:not(:hover):is([positionend], [sidebar-positionend]) {
                 overflow: hidden !important;
             }
+            /* TEMPORARY: Override Firefox v138 width; not needed in v140+ */
+            width: var(--uc-sb-sidebar-main-max-width, var(--uc-sidebar-main-width)) !important;
             max-width: var(
                 --uc-sb-sidebar-main-max-width,
                 var(--uc-sidebar-main-width)
@@ -699,8 +695,9 @@
             overflow: hidden;
             /* !TEMPORARY: */
             margin-inline-start: var(--uc-sidebar-main-margin-left);
-            min-width: /* var(--tab-collapsed-width) */ calc(
-                var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-main-width)) + 5px
+            min-width: /* var(--tab-collapsed-width) */ var(
+                --uc-sb-sidebar-main-min-width,
+                var(--uc-sidebar-main-width)
             );
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
             will-change: margin-inline-start, min-width, overflow, transform;
@@ -724,11 +721,7 @@
             }
         }
         sidebar-main[expanded]:hover {
-            --uc-sidebar-main-hover-w: calc(
-                var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                    var(--tab-pinned-container-margin-inline-expanded) + 1px
-            );
-            min-width: var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-main-hover-w));
+            min-width: var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-main-hover-width));
             /* transition-delay: 0ms !important; */
             transition:
                 margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)

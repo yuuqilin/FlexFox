@@ -18,11 +18,8 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.1**
-- Fixed an issue where the sidebar stripe did not expand to the correct height when Sidebery was fully hidden.
-- Fixed incorrect width when expanding the native vertical tabs while the sidebar was on the right and fully hidden.
-- Fixed an issue where native vertical tabs could not be expanded when both `uc.flex.disable-native-vertical-tabs-autohide` and `uc.flex.fully-hide-sidebery` were enabled.
-- Deprecated `uc.flex.disable-native-vertical-tabs-autohide`. Use `uc.flex.disable-sidebery-autohide` instead to enable always-open mode for both Sidebery and native vertical tabs.
+**🦊 v3.4.2**
+- Fixed layout issues with native vertical tabs in Firefox v138 when using Always-Open Mode. Incorrect width handling caused jitter on hover and misalignment of the bookmarks toolbar.
 
 🚀 **Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs**
 
@@ -86,6 +83,12 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.4.1**
+- Fixed an issue where the sidebar stripe did not expand to the correct height when Sidebery was fully hidden.
+- Fixed incorrect width when expanding the native vertical tabs while the sidebar was on the right and fully hidden.
+- Fixed an issue where native vertical tabs could not be expanded when both `uc.flex.disable-native-vertical-tabs-autohide` and `uc.flex.fully-hide-sidebery` were enabled.
+- Deprecated `uc.flex.disable-native-vertical-tabs-autohide`. Use `uc.flex.disable-sidebery-autohide` instead to enable always-open mode for both Sidebery and native vertical tabs.
 
 **v3.4.0**
 - Fixed an issue where the trigger area for showing Sidebery after hiding it via shortcut could not use the custom width set by `--uc-hover-sidebar-trigger-width`.

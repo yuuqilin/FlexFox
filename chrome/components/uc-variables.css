@@ -472,6 +472,22 @@
         }
     }
 
+    @media -moz-pref("sidebar.verticalTabs") {
+        --tab-pinned-horizontal-count: 5;
+        --uc-sidebar-main-width: var(--uc-sidebar-header-width);
+        --uc-sidebar-main-hover-width: calc(
+            var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
+                var(--tab-pinned-container-margin-inline-expanded) + 1px
+        );
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+            --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
+        }
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+            &[titlepreface*="\180e "] {
+                --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
+            }
+        }
+    }
     /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
     --uc-sidebar-main-margin-left: -6px;
     #sidebar-main:is([positionend], [sidebar-positionend]) {
@@ -654,22 +670,6 @@
         }
     }
     @media -moz-pref("sidebar.verticalTabs") {
-        --tab-pinned-horizontal-count: 5;
-        --uc-sidebar-main-width: var(--uc-sidebar-header-width);
-        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-            --uc-sidebar-main-width: calc(
-                var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                    var(--tab-pinned-container-margin-inline-expanded) - 4px
-            );
-        }
-        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-            &[titlepreface*="\180e "] {
-                --uc-sidebar-main-width: calc(
-                    var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                        var(--tab-pinned-container-margin-inline-expanded) - 4px
-                );
-            }
-        }
         --uc-navigator-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-main-width));
         --uc-navigator-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-main-width));
         @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {

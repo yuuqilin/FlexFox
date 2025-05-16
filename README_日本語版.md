@@ -18,11 +18,8 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.4.1**
-- Sidebery を完全に非表示にした状態で、サイドバーのストライプが正しく展開されない問題を修正しました。
-- サイドバーが右側にあり、かつネイティブの縦型タブを完全に非表示にしていると、展開後の幅が正しくない問題を修正しました。
-- `uc.flex.disable-native-vertical-tabs-autohide` と `uc.flex.fully-hide-sidebery` の両方を有効にした際に、ネイティブの縦型タブが展開できなくなる不具合を修正しました。
-- `uc.flex.disable-native-vertical-tabs-autohide` オプションは廃止され、今後は `uc.flex.disable-sidebery-autohide` を使用して、Sidebery とネイティブ縦型タブの両方を常時展開状態に固定できるようになりました。
+**🦊 v3.4.2**
+- Firefox v138 において、ネイティブの縦型タブを「常時展開モード」で使用した際に発生していたレイアウトの不具合を修正しました。幅の処理が正しく行われず、ホバー時のちらつきやブックマークツールバーのずれが発生していました。
 
 🚀 **新機能：ネイティブ縦型タブが完全非表示と常時展開に対応**
 
@@ -86,6 +83,12 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.4.1**
+- Sidebery を完全に非表示にした状態で、サイドバーのストライプが正しく展開されない問題を修正しました。
+- サイドバーが右側にあり、かつネイティブの縦型タブを完全に非表示にしていると、展開後の幅が正しくない問題を修正しました。
+- `uc.flex.disable-native-vertical-tabs-autohide` と `uc.flex.fully-hide-sidebery` の両方を有効にした際に、ネイティブの縦型タブが展開できなくなる不具合を修正しました。
+- `uc.flex.disable-native-vertical-tabs-autohide` オプションは廃止され、今後は `uc.flex.disable-sidebery-autohide` を使用して、Sidebery とネイティブ縦型タブの両方を常時展開状態に固定できるようになりました。
 
 **v3.4.0**
 - Sidebery を完全に非表示に切り替えた際、マウスカーソルで再表示させるためのトリガー領域の幅が、カスタム設定どおりに反映されない問題を修正しました。

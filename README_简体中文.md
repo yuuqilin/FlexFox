@@ -18,11 +18,8 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.4.1**
-- 修复完全隐藏 Sidebery 时，侧边栏彩带展开高度不正确的问题。
-- 修复侧边栏在右侧且原生垂直选项卡完全隐藏时，展开宽度不正确的问题。
-- 修复同时启用 `uc.flex.disable-native-vertical-tabs-autohide` 和 `uc.flex.fully-hide-sidebery` 时，原生垂直选项卡无法展开的问题。
-- 废弃 `uc.flex.disable-native-vertical-tabs-autohide` 选项。现在使用 `uc.flex.disable-sidebery-autohide` 可统一控制 Sidebery 和原生垂直选项卡是否保持展开。
+**🦊 v3.4.2**
+- 修复在 Firefox v138 中使用原生垂直选项卡的保持展开模式时出现的布局问题。由于宽度处理不正确，导致悬停时抖动，以及书签工具栏未能正确对齐。
 
 🚀 **重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式**
 
@@ -86,6 +83,12 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.4.1**
+- 修复完全隐藏 Sidebery 时，侧边栏彩带展开高度不正确的问题。
+- 修复侧边栏在右侧且原生垂直选项卡完全隐藏时，展开宽度不正确的问题。
+- 修复同时启用 `uc.flex.disable-native-vertical-tabs-autohide` 和 `uc.flex.fully-hide-sidebery` 时，原生垂直选项卡无法展开的问题。
+- 废弃 `uc.flex.disable-native-vertical-tabs-autohide` 选项。现在使用 `uc.flex.disable-sidebery-autohide` 可统一控制 Sidebery 和原生垂直选项卡是否保持展开。
 
 **v3.4.0**
 - 修复使用快捷键切换完全隐藏 Sidebery 时，鼠标触发区域的宽度无法按 `--uc-hover-sidebar-trigger-width` 自定义设置生效的问题。
