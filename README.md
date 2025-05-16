@@ -21,7 +21,9 @@ It's not just a new look, it's a better way to browse.
 **🦊 v3.4.2**
 - Fixed layout issues with native vertical tabs in Firefox v138 when using Always-Open Mode. Incorrect width handling caused jitter on hover and misalignment of the bookmarks toolbar.
 
-🚀 **Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs**
+<details>
+
+<summary>🚀 <b>Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs</b></summary>
 
 - The existing `uc.flex.fully-hide-sidebery` option and the `Hide Sidebery` hotkey now also hide native vertical tabs completely.
 - Native vertical tabs are now also fully hidden when entering fullscreen mode (<kbd>F11</kbd>).
@@ -29,7 +31,10 @@ It's not just a new look, it's a better way to browse.
 - The existing `uc.flex.disable-sidebery-autohide` option and the `Lock Sidebery` hotkey now also keep native vertical tabs open at all times.
 - This means all settings that apply to Sidebery—such as show/hide speed—now apply to native vertical tabs too, offering a unified behavior.
 
-🌈 **Major Update: Custom Bookmark Folder Icons**
+</details>
+
+<details>
+<summary>🌈 <b>Major Update: Custom Bookmark Folder Icons</b></summary>
 
 A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
 
@@ -55,7 +60,10 @@ Setting it to `2` automatically hides labels and enables the second set of icons
 
 You can customize the icon's color, size, and position by editing the `--uc-bookmark-folder-*` variables, and replace the `folder*.svg` files in the `../icons/bookmark/` directory to use your own icons.
 
-🚀 **Major Update: Layout Switching via Hotkeys**
+</details>
+
+<details>
+<summary>🚀 <b>Major Update: Layout Switching via Hotkeys</b></summary>
 
 FlexFox now supports the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension.
 After installing and configuring the extension as shown below:  
@@ -78,6 +86,8 @@ In addition to using keyboard shortcuts, you can also switch layouts using the t
 <img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 To change the default hotkeys, click the gear icon in the top-right corner and select **Manage Extension Shortcuts** from the menu.  
 <img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
+
+</details>
 
 <a id="updates-top-start"></a>
 <details>

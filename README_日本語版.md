@@ -21,7 +21,8 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 **🦊 v3.4.2**
 - Firefox v138 において、ネイティブの縦型タブを「常時展開モード」で使用した際に発生していたレイアウトの不具合を修正しました。幅の処理が正しく行われず、ホバー時のちらつきやブックマークツールバーのずれが発生していました。
 
-🚀 **新機能：ネイティブ縦型タブが完全非表示と常時展開に対応**
+<details>
+<summary>🚀 <b>新機能：ネイティブ縦型タブが完全非表示と常時展開に対応</b></summary>
 
 - `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のホットキーは、Sidebery に加えてネイティブ縦型タブにも同じ挙動が適用され、両方を完全に非表示にできます。
 - 全画面モード（<kbd>F11</kbd>）では、ネイティブ縦型タブも自動で完全非表示になります。
@@ -29,7 +30,10 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 - `uc.flex.disable-sidebery-autohide` オプションと `Lock Sidebery` のホットキーは、Sidebery に加えてネイティブ縦型タブにも同じ挙動が適用され、両方を常時展開された状態にできます。
 - これにより、ネイティブ縦型タブも Sidebery と同様に変数で制御され（展開／折りたたみの速度など）、一貫した挙動が実現されます。
 
-🌈 **新機能：ブックマークフォルダーのアイコンをカスタマイズ**
+</details>
+
+<details>
+<summary>🌈 <b>新機能：ブックマークフォルダーのアイコンをカスタマイズ</b></summary>
 
 数値型オプション `uc.flex.enable-colored-bookmarks-folder-icons` を追加しました：
 
@@ -55,7 +59,10 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ・位置を調整したり、`../icons/bookmark/` フォルダー内の `folder*.svg` ファイルを差し替えて好きなアイコンに変更することができます。
 
-🚀 **新機能：ショートカットによる UI レイアウト切り替えに対応**
+</details>
+
+<details>
+<summary>🚀 <b>新機能：ショートカットによる UI レイアウト切り替えに対応</b></summary>
 
 FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 拡張機能に対応しました。
 以下の画像のように設定してください：  
@@ -78,6 +85,8 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 ショートカットキーの設定を変更するには、右上の歯車アイコンをクリックし、メニューから **拡張機能のショートカットキーの管理** を選んでください。  
 <img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
+
+</details>
 
 <a id="updates-top-start"></a>
 <details>

@@ -21,7 +21,8 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 **🦊 v3.4.2**
 - 修复在 Firefox v138 中使用原生垂直选项卡的保持展开模式时出现的布局问题。由于宽度处理不正确，导致悬停时抖动，以及书签工具栏未能正确对齐。
 
-🚀 **重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式**
+<details>
+<summary>🚀 <b>重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式</b></summary>
 
 - `uc.flex.fully-hide-sidebery` 选项与 `Hide Sidebery` 快捷键现在也适用于原生垂直选项卡，可将其完全隐藏。
 - 进入全屏模式（<kbd>F11</kbd>）时，原生垂直选项卡也会随之自动隐藏。
@@ -29,7 +30,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 - `uc.flex.disable-sidebery-autohide` 选项与 `Lock Sidebery` 快捷键现在也适用于原生垂直选项卡，可使其保持展开状态。
 - 至此，所有适用于 Sidebery 的设置（如显示/隐藏速度）也会同步应用于原生垂直选项卡，实现一致的操作体验。
 
-🌈 **重大更新：自定义书签文件夹图标**
+</details>
+
+<details>
+<summary>🌈 <b>重大更新：自定义书签文件夹图标</b></summary>
 
 新增数值型选项 `uc.flex.enable-colored-bookmarks-folder-icons`：
 
@@ -55,7 +59,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 用户可以通过修改 CSS 变量 `--uc-bookmark-folder-*` 来调整图标的颜色、大小和位置，也可以替换 `../icons/bookmark/` 目录下的 `folder*.svg` 文件来自定义喜欢的图标。
 
-🚀 **重大更新：支持通过快捷键切换 UI 布局**
+</details>
+
+<details>
+<summary>🚀 <b>重大更新：支持通过快捷键切换 UI 布局</b></summary>
 
 FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/)。
 安装并按下图设置：  
@@ -78,6 +85,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 如果需要修改默认快捷键，点击右上角的齿轮图标，在菜单中选择 **管理扩展快捷键**。  
 <img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
+
+</details>
 
 <a id="updates-top-start"></a>
 <details>
