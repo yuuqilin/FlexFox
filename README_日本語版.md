@@ -14,7 +14,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 カスタマイズ性の高いベースとして、理想のインターフェースを自由に作れます。  
 見た目を変えるだけではなく、ブラウジングの質そのものを高めるテーマです。  
 
-![FlexFox Dark-Light Theme](./assets/FlexFox-light-dark.webp) 
+![FlexFox Dark-Light Theme](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-light-dark.webp) 
 
 ## 🆕 最新情報
 
@@ -43,19 +43,19 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 **表示例：**
 こちらはFirefoxのデフォルトのブックマークフォルダーアイコンです：  
-<img src="./assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
 
 `uc.flex.remove-bookmarks-folder-icons` を有効にすると、フォルダーアイコンが非表示になり、フォルダー名のみが表示されます：  
-<img src="./assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
 
 `uc.flex.enable-colored-bookmarks-folder-icons` を `1` に設定すると、第1セットのカラーフォルダーアイコンが表示されます：  
-<img src="./assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
 
 さらに `uc.flex.remove-bookmarks-labels` を併用すると、ラベルが非表示になり、アイコンのみ表示されます：  
-<img src="./assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
 
 値を `2` に設定すると、ラベルが自動的に非表示になり、第2セットのアイコンが適用されます：  
-<img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
 
 CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ・位置を調整したり、`../icons/bookmark/` フォルダー内の `folder*.svg` ファイルを差し替えて好きなアイコンに変更することができます。
 
@@ -66,7 +66,7 @@ CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ
 
 FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 拡張機能に対応しました。
 以下の画像のように設定してください：  
-<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
 設定後は、左上の `Apply changes` ボタンをクリックするのを忘れずに。クリックしないと設定が反映されません。
 
 設定が完了すれば、次のショートカットキーで 4 種類の UI レイアウトを切り替えられます：
@@ -82,9 +82,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 > `about:config` で有効にしているオプションはショートカットより優先され、状態が固定されます。ショートカットで切り替えを行うには、該当するオプションを `false` に設定してください。
 
 キーボードショートカットに加えて、UserChrome Toggle Extended 拡張機能のボタンからもレイアウトを切り替えることができます。  
-<img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 ショートカットキーの設定を変更するには、右上の歯車アイコンをクリックし、メニューから **拡張機能のショートカットキーの管理** を選んでください。  
-<img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 
 </details>
 
@@ -277,9 +277,9 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 > <details>
 > <summary>🖼️ <b>ネイティブ垂直タブの自動折りたたみのデモ</b></summary>
 > <p><code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> が false の状態でネイティブ垂直タブを展開した例</p>
-> <img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
+> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
 > <p><code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> が false の状態でネイティブ垂直タブを折りたたんだ例</p>
-> <img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
+> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
 > </details> 
 
 > [!TIP]
@@ -330,9 +330,9 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 <details>
 <summary>🖼️ <b>新機能の使用例</b></summary>
 <p>ダークテーマで<code>uc.flex.disable-sidebery-autohide</code>を有効化したFlexFox：</p>
-<img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
 <p><code>uc.flex.fully-hide-toolbox</code>と組み合わせた表示：</p>
-<img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
 </details>
 
 <a href="#updates-top-2.0">🔝 セクションの先頭へ戻る</a>
@@ -358,8 +358,8 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 **v1.0.4**:
 - ウェブページのズームレベルがデフォルトでない場合、ズームレベルアイコンを常に表示するようにしました。
 - ウェブページがブックマーク済みの場合、ブックマークの星アイコンを常に表示するようにしました。  
-   <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
-   <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
 
 **v1.0.3**:
 - `uc.flex.allow-addons-to-change-toolbar-color` オプション有効時のパフォーマンスを最適化し、v1.0.2と比較して速度が1.4倍向上しました。
@@ -367,7 +367,7 @@ _補足：このバグは長らく存在していましたが、影響が軽微�
 **v1.0.2**:
 - URLバーのスイッチャーとチックレットの表示を改善。
 - テーマや拡張機能がツールバー背景を変更可能にするオプション `uc.flex.allow-addons-to-change-toolbar-color` を追加。  
-   <img src="./assets/allow-addons-to-change-toolbar-color.webp" alt="allow-addons-to-change-toolbar-color" width="98%" />
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/allow-addons-to-change-toolbar-color.webp" alt="allow-addons-to-change-toolbar-color" width="98%" />
 
 **v1.0.1**:  
 - URLバーのトラッキング保護アイコンが非表示にならない問題を修正しました。 

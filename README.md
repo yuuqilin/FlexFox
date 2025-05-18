@@ -14,7 +14,7 @@ It cuts out visual noise, keeps the UI steady, and stays fast.
 Designed as a flexible base, it lets you shape your ideal interface without bloat.  
 It's not just a new look, it's a better way to browse.  
 
-![FlexFox Dark-Light Theme](./assets/FlexFox-light-dark.webp)   
+![FlexFox Dark-Light Theme](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-light-dark.webp)   
 
 ## 🆕 What's New
 
@@ -44,19 +44,19 @@ A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been ad
 
 **Visual Examples:**
 Below is the default Firefox bookmark folder icon:  
-<img src="./assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
 
 Enabling `uc.flex.remove-bookmarks-folder-icons` will hide the folder icon and show only text labels:  
-<img src="./assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
 
 Setting `uc.flex.enable-colored-bookmarks-folder-icons` to `1` applies the first set of colored icons:  
-<img src="./assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
 
 Using `1` together with `uc.flex.remove-bookmarks-labels` removes text labels and shows only icons:  
-<img src="./assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
 
 Setting it to `2` automatically hides labels and enables the second set of icons:  
-<img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
 
 You can customize the icon's color, size, and position by editing the `--uc-bookmark-folder-*` variables, and replace the `folder*.svg` files in the `../icons/bookmark/` directory to use your own icons.
 
@@ -67,7 +67,7 @@ You can customize the icon's color, size, and position by editing the `--uc-book
 
 FlexFox now supports the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension.
 After installing and configuring the extension as shown below:  
-<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
 Make sure to click the `Apply changes` button in the upper-left corner. The settings won't take effect until you do.
 
 Once set up, you can switch between four UI layout modes using keyboard shortcuts:
@@ -83,9 +83,9 @@ Once set up, you can switch between four UI layout modes using keyboard shortcut
 > Options set in `about:config` take priority. If a related option is enabled there, it will override the toggle behavior and lock the layout state. To enable hotkey switching, make sure the corresponding option is set to `false`.
 
 In addition to using keyboard shortcuts, you can also switch layouts using the toggle button provided by the UserChrome Toggle Extended extension.  
-<img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 To change the default hotkeys, click the gear icon in the top-right corner and select **Manage Extension Shortcuts** from the menu.  
-<img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 
 </details>
 
@@ -278,9 +278,9 @@ With this update, all previously missing features from the horizontal tab mode a
 > <details>
 > <summary>🖼️ <b>Auto-collapse demo for native vertical tabs</b></summary>
 > <p>Native vertical tabs expanded, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
-> <img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
+> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
 > <p>Native vertical tabs collapsed, with <code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> set to false</p>
-> <img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
+> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
 > </details>  
 
 > [!TIP]
@@ -331,9 +331,9 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 <details>
 <summary>🖼️ <b>Experience the new feature in action</b></summary>
 <p>FlexFox with the dark theme and <code>uc.flex.disable-sidebery-autohide</code> enabled:</p>
-<img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="96%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="96%" />
 <p>Combined with <code>uc.flex.fully-hide-toolbox</code>:</p>
-<img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="96%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="96%" />
 </details>
 
 <a href="#updates-top-2.0">🔝 Back to top of this section</a>
@@ -359,8 +359,8 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 **v1.0.4**:
 - The zoom level icon is now always visible when the webpage is not at the default zoom level.
 - The bookmark star icon is now always visible when the webpage has already been bookmarked.  
-   <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
-   <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
 
 **v1.0.3**:
 - Optimized performance when the `uc.flex.allow-addons-to-change-toolbar-color` option is enabled, improving speed by 1.4x compared to v1.0.2.
@@ -368,7 +368,7 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 **v1.0.2**:
 - Improve URL bar switcher and chicklet visuals.  
 - Add option `uc.flex.allow-addons-to-change-toolbar-color` to allow themes and addons to customize toolbar background image and color.  
-   <img src="./assets/allow-addons-to-change-toolbar-color.webp" alt="allow-addons-to-change-toolbar-color" width="96%" />
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/allow-addons-to-change-toolbar-color.webp" alt="allow-addons-to-change-toolbar-color" width="96%" />
 
 **v1.0.1**:
 - Fixed the issue where the tracking protection icon in the URL bar was not hidden.

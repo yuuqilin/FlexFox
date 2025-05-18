@@ -14,7 +14,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 作为一个灵活的基础框架，FlexFox 让你自由定制浏览器界面，无需担心冗余或卡顿。  
 这不仅是一个外观主题，更是提升浏览效率的新方式。  
 
-![FlexFox Dark-Light Theme](./assets/FlexFox-light-dark.webp) 
+![FlexFox Dark-Light Theme](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-light-dark.webp) 
 
 ## 🆕 更新内容
 
@@ -43,19 +43,19 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 **显示示例：**
 下图为 Firefox 默认的书签文件夹图标：  
-<img src="./assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
 
 启用 `uc.flex.remove-bookmarks-folder-icons` 会隐藏文件夹图标，仅显示文字标签：  
-<img src="./assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
 
 将 `uc.flex.enable-colored-bookmarks-folder-icons` 设为 `1` 时，会启用第一组彩色图标：  
-<img src="./assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
 
 若同时启用 `uc.flex.remove-bookmarks-labels`，则会隐藏文件夹名称，仅显示图标：  
-<img src="./assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
 
 将该选项设为 `2` 时，会自动隐藏文字标签，并启用第二组图标：  
-<img src="./assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
 
 用户可以通过修改 CSS 变量 `--uc-bookmark-folder-*` 来调整图标的颜色、大小和位置，也可以替换 `../icons/bookmark/` 目录下的 `folder*.svg` 文件来自定义喜欢的图标。
 
@@ -66,7 +66,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/)。
 安装并按下图设置：  
-<img src="./assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
 设置后，别忘了点击左上角的 `Apply changes` 按钮，否则设置不会生效。
 
 完成设置后，可通过快捷键切换四种 UI 布局模式：
@@ -82,9 +82,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 > 在 `about:config` 中设置的选项优先级更高。如果相关选项已启用，将会固定布局状态，快捷键将失效。若需使用快捷键切换，请将对应选项设为 `false`。
 
 除了使用快捷键，也可以通过 UserChrome Toggle Extended 扩展提供的按钮切换界面布局。  
-<img src="./assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
 如果需要修改默认快捷键，点击右上角的齿轮图标，在菜单中选择 **管理扩展快捷键**。  
-<img src="./assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
 
 </details>
 
@@ -277,9 +277,9 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 > <details>
 > <summary>🖼️ <b>原生垂直选项卡自动折叠效果示例</b></summary>
 > <p>原生垂直选项卡展开，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
-> <img src="./assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
+> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/vertical-tabs-expanded.webp" alt="vertical-tabs-expanded" width="50%" />
 > <p>原生垂直选项卡折叠，<code>uc.flex.show-pin-tabs-separator-in-expanded-state</code> 为 false</p>
-> <img src="./assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
+> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/vertical-tabs-collapsed.webp" alt="vertical-tabs-collapsed" width="50%" />
 > </details>  
 
 > [!TIP]
@@ -330,9 +330,9 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 <details>
 <summary>🖼️ <b>新功能的展示效果</b></summary>
 <p>启用深色主题和<code>uc.flex.disable-sidebery-autohide</code>的新FlexFox：</p>
-<img src="./assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/disable-sidebery-autohide.webp" alt="disable-sidebery-autohide" width="98%" />
 <p>与<code>uc.flex.fully-hide-toolbox</code>结合使用的效果：</p>
-<img src="./assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/disable-sidebery-autohide-with-fully-hide-toolbox.webp" alt="disable-sidebery-autohide-with-fully-hide-toolbox" width="98%" />
 </details>
 
 <a href="#updates-top-2.0">🔝 返回本段顶部</a>
@@ -358,8 +358,8 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 **v1.0.4**:
 - 当网页缩放比例不是默认值时，固定显示缩放比例图标。
 - 当网页已加书签时，固定显示书签星标图标。  
-   <img src="./assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
-   <img src="./assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/urlbar-star-light.webp" alt="urlbar-star-light" width="380" />  
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/urlbar-star-dark.webp" alt="urlbar-star-dar" width="380" />
 
 **v1.0.3**:
 - 优化了开启 `uc.flex.allow-addons-to-change-toolbar-color` 选项时的性能，相较于v1.0.2速度提升了1.4倍。
@@ -367,7 +367,7 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 **v1.0.2**:
 - 改善地址栏切换器和图标的显示效果。
 - 添加选项 `uc.flex.allow-addons-to-change-toolbar-color`，允许主题和扩展修改工具栏背景图片和颜色。  
-   <img src="./assets/allow-addons-to-change-toolbar-color.webp" alt="allow-addons-to-change-toolbar-color" width="98%" />
+   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/allow-addons-to-change-toolbar-color.webp" alt="allow-addons-to-change-toolbar-color" width="98%" />
 
 **v1.0.1**:  
 - 修复了URL栏追踪保护图标无法隐藏的问题。
