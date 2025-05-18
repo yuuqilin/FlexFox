@@ -18,8 +18,16 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.2**
-- Fixed layout issues with native vertical tabs in Firefox v138 when using Always-Open Mode. Incorrect width handling caused jitter on hover and misalignment of the bookmarks toolbar.
+**🦊 v3.4.3**
+* Fixed an issue where enabling `uc.flex.add-ui-text-stroke` caused Sidebery to use an unintended font.
+* Fixed extra padding after the first navigation bar item when using horizontal tabs.
+* Improved compatibility when only the new sidebar is enabled without native vertical tabs:
+
+  * Sidebar stripe now highlights correctly.
+  * Sidebar settings button no longer shifts position when the stripe expands.
+
+> [!NOTE]
+> Using the new sidebar without native vertical tabs is still not recommended, as FlexFox is designed and optimized around the vertical tab layout.
 
 <details>
 
@@ -93,6 +101,9 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.4.2**
+- Fixed layout issues with native vertical tabs in Firefox v138 when using Always-Open Mode. Incorrect width handling caused jitter on hover and misalignment of the bookmarks toolbar.
 
 **v3.4.1**
 - Fixed an issue where the sidebar stripe did not expand to the correct height when Sidebery was fully hidden.
@@ -433,8 +444,9 @@ The sidebar tool button design is based on [firefox-gx](https://github.com/Godie
 
 ### 🚀 Method 1: Automatic Installation and Updates
 
-If this is your first time installing FlexFox, please proceed to [Method 2](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) and follow the steps starting from Step 5 **after** running the script.  
-For future updates, simply re-running the script will be enough, and you won't need to repeat the manual steps.
+> [!IMPORTANT]
+> If this is your first time installing FlexFox, please proceed to [Method 2](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) and follow the steps starting from Step 5 **after** running the script.  
+> For future updates, simply re-running the script will be enough, and you won't need to repeat the manual steps.
 
 <details>
 <summary><h4>💻 PowerShell Script [Click to expand] 👇</h4></summary>

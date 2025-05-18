@@ -437,6 +437,10 @@
             --uc-sb-sidebar-main-hover-max-h: 100%;
             --uc-sb-sidebar-main-hover-h: fit-content;
             --uc-sb-vertical-tabs-display: none;
+            --uc-sb-sidebar-main-background-image: none;
+            @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                --uc-sb-sidebar-main-background-image: var(--uc-gradient-highlight);
+            }
             --uc-sidebar-main-stripe: var(--uc-sb-sidebar-header-stripe);
             @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
                 :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
@@ -546,7 +550,7 @@
         max-width: var(--uc-sb-sidebar-main-max-width) !important;
         overflow: var(--uc-sb-sidebar-main-overflow, clip) !important;
         background-color: var(--uc-sidebar-main-stripe, var(--bg)) !important;
-        background-image: var(--uc-sb-gradient-highlight, inherit) !important;
+        background-image: var(--uc-sb-sidebar-main-background-image, inherit) !important;
         opacity: var(--uc-sb-sidebar-main-opacity, 1);
         will-change: min-height, max-height, overflow, background-color;
         /* Enable transitions for discrete properties like overflow or background-image */
@@ -818,7 +822,8 @@
     }
 
     /* ── ◀️ Styles for tools-and-extensions when the sidebar is collapsed */
-    .tools-and-extensions.actions-list[orientation="vertical"] {
+    .tools-and-extensions.actions-list[orientation="vertical"],
+    .bottom-actions.actions-list {
         /* Add a divider to tools-and-extensions on hover */
         &:hover {
             &::before {
@@ -863,24 +868,35 @@
             }
         }
 
-        /* Align tools-and-extensions when Sidebery is active */
-        align-items: var(--uc-sb-sroot-align-items, start) !important;
-        > moz-button {
-            --button-outer-padding-inline: var(--uc-sb-sroot-btn-padding-inline, var(--space-medium)) !important;
-            --button-outer-padding-block: var(--uc-sb-sroot-btn-padding-block, var(--space-xxsmall)) !important;
-        }
+        &[class="tools-and-extensions actions-list"] {
+            /* Align tools-and-extensions when Sidebery is active */
+            align-items: var(--uc-sb-sroot-align-items, start) !important;
+            > moz-button {
+                --button-outer-padding-inline: var(--uc-sb-sroot-btn-padding-inline, var(--space-medium)) !important;
+                --button-outer-padding-block: var(--uc-sb-sroot-btn-padding-block, var(--space-xxsmall)) !important;
+            }
 
-        /* Adjust spacing between buttons in tools-and-extensions when Sidebery is active */
-        @media -moz-pref("sidebar.verticalTabs") {
-            > moz-button[view="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
-                --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-1);
-                .tools-and-extensions.actions-list:not(:hover) & {
-                    visibility: hidden;
+            /* Adjust spacing between buttons in tools-and-extensions when Sidebery is active */
+            @media -moz-pref("sidebar.verticalTabs") {
+                > moz-button[view="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
+                    --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-1);
+                    .tools-and-extensions.actions-list:not(:hover) & {
+                        visibility: hidden;
+                    }
                 }
             }
+            > moz-button:last-of-type {
+                --button-outer-padding-block-end: var(
+                    --uc-sb-sroot-btn-padding-block-end-2,
+                    var(--space-small)
+                ) !important;
+            }
         }
-        > moz-button:last-of-type {
-            --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-2, var(--space-small)) !important;
+        &[class="bottom-actions actions-list"] {
+            align-items: var(--uc-sb-sroot-align-items, start) !important;
+            > moz-button {
+                --button-outer-padding-block-start: var(--uc-sb-sroot-btn-padding-block, var(--space-small)) !important;
+            }
         }
     }
     /* 🔼 [BLOCK D] End of rules for active Sidebery */

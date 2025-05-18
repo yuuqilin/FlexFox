@@ -18,8 +18,16 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.4.2**
-- 修复在 Firefox v138 中使用原生垂直选项卡的保持展开模式时出现的布局问题。由于宽度处理不正确，导致悬停时抖动，以及书签工具栏未能正确对齐。
+**🦊 v3.4.3**
+* 修复启用 `uc.flex.add-ui-text-stroke` 时，Sidebery 误用指定字体的问题。
+* 修复在使用水平标签页时，导航栏第一个元素后方多出不必要的空白的问题。
+* 提升在仅启用新版侧边栏但未启用原生垂直选项卡时的兼容性：
+
+  * 侧边栏彩带现在能正确显示高亮颜色
+  * 彩带展开时设置按钮不再发生偏移
+
+> [!NOTE]
+> 注意：不推荐在未启用原生垂直选项卡的情况下单独使用新版侧边栏，因为 FlexFox 的优化是基于垂直选项卡模式设计的。
 
 <details>
 <summary>🚀 <b>重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式</b></summary>
@@ -92,6 +100,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.4.2**
+- 修复在 Firefox v138 中使用原生垂直选项卡的保持展开模式时出现的布局问题。由于宽度处理不正确，导致悬停时抖动，以及书签工具栏未能正确对齐。
 
 **v3.4.1**
 - 修复完全隐藏 Sidebery 时，侧边栏彩带展开高度不正确的问题。
@@ -434,8 +445,9 @@ _注：这个 Bug 已经存在多年，由于影响较小且修复它会带来�
 
 ### 🚀 方法一：自动安装与更新
 
-如果是首次安装 FlexFox，请在运行脚本后继续执行 [方法二](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) 中第 5 步开始的手动步骤。  
-之后更新时，只需重新运行脚本即可，无需再次手动操作。
+> [!IMPORTANT]
+> 如果是首次安装 FlexFox，请在运行脚本后继续执行 [方法二](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) 中第 5 步开始的手动步骤。  
+> 之后更新时，只需重新运行脚本即可，无需再次手动操作。
 
 <details>
 <summary><h4>💻 PowerShell 脚本《点击展开》👇</h4></summary>

@@ -399,7 +399,8 @@
     --uc-nav-bar-second-bookmarks-padding-left: 6px;
     @media -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding"),
         -moz-pref("uc.flex.fully-hide-toolbox"),
-        -moz-pref("uc.flex.fully-hide-sidebery") {
+        -moz-pref("uc.flex.fully-hide-sidebery"),
+        not -moz-pref("sidebar.verticalTabs") {
         --uc-nav-bar-first-child-padding-right: 0px;
     }
     @media not -moz-pref("uc.flex.fully-hide-toolbox") {
@@ -571,8 +572,14 @@
             --uc-windows-controls-top: 0px;
         }
 
-        /* Adjust vertical offset of the bookmarks toolbar background image */
         @media not -moz-pref("sidebar.verticalTabs") {
+            /* Add right-side spacing after the first item to align nearby items with the Sidebery */
+            @media not (-moz-pref("uc.flex.disable-nav-bar-first-item-right-padding") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
+                &:not([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                    --uc-nav-bar-first-child-padding-right: 6px;
+                }
+            }
+            /* Adjust vertical offset of the bookmarks toolbar background image */
             #PersonalToolbar {
                 --uc-theme-bg-y-clip: 16px;
                 #toolbar-menubar[autohide="false"] ~ & {

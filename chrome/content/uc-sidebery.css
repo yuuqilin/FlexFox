@@ -3,7 +3,7 @@
 {
     @media -moz-pref("uc.flex.add-ui-text-stroke") {
         * {
-            font-family: Chiron Hei HK !important;
+            /*font-family:  !important;*/
             text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
             /*-webkit-text-stroke: 0.015em;*/
         }
