@@ -397,6 +397,7 @@
     /* Add right-side spacing after the first item to align nearby items with the vertical tabs */
     --uc-nav-bar-first-child-padding-right: 6px;
     --uc-nav-bar-second-bookmarks-padding-left: 6px;
+    /* When vertical tabs are not enabled, the extra spacing above is unnecessary */
     @media -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding"),
         -moz-pref("uc.flex.fully-hide-toolbox"),
         -moz-pref("uc.flex.fully-hide-sidebery"),
@@ -573,7 +574,10 @@
         }
 
         @media not -moz-pref("sidebar.verticalTabs") {
-            /* Add right-side spacing after the first item to align nearby items with the Sidebery */
+            /* 
+             * When vertical tabs are not enabled but Sidebery is active, 
+             * add spacing after the first item to align with Sidebery's layout. 
+             */
             @media not (-moz-pref("uc.flex.disable-nav-bar-first-item-right-padding") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
                 &:not([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
                     --uc-nav-bar-first-child-padding-right: 6px;

@@ -821,10 +821,11 @@
         */
     }
 
-    /* ── ◀️ Styles for tools-and-extensions when the sidebar is collapsed */
+    /* ── ◀️ Styles for tools-and-extensions when the sidebar is collapsed, 
+            or for bottom-actions when vertical tabs are disabled but the sidebar revamp is enabled */
     .tools-and-extensions.actions-list[orientation="vertical"],
     .bottom-actions.actions-list {
-        /* Add a divider to tools-and-extensions on hover */
+        /* Add a divider to tools-and-extensions and bottom-actions on hover */
         &:hover {
             &::before {
                 content: "";
@@ -868,8 +869,8 @@
             }
         }
 
+        /* Align tools-and-extensions when Sidebery is active */
         &[class="tools-and-extensions actions-list"] {
-            /* Align tools-and-extensions when Sidebery is active */
             align-items: var(--uc-sb-sroot-align-items, start) !important;
             > moz-button {
                 --button-outer-padding-inline: var(--uc-sb-sroot-btn-padding-inline, var(--space-medium)) !important;
@@ -892,6 +893,8 @@
                 ) !important;
             }
         }
+
+        /* Align bottom-actions (the sidebar settings button) when vertical tabs are disabled but Sidebery is active */
         &[class="bottom-actions actions-list"] {
             align-items: var(--uc-sb-sroot-align-items, start) !important;
             > moz-button {
