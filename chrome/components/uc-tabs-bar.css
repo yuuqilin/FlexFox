@@ -55,7 +55,7 @@
 toolbar#TabsToolbar {
     height: 0px;
     min-height: 0 !important;
-    background-color: var(--bg) !important;
+    background-color: var(--uc-bgcolor) !important;
 }
 */
 .toolbar-items {

@@ -64,7 +64,7 @@ findbar checkbox {
 /* 1804d7c */
 /* === findbar === */
 findbar {
-    --button-bgcolor: var(--urlbar-bg);
+    --button-bgcolor: var(--uc-urlbar-bg, var(--button-background-color));
     position: absolute;
     border-radius: 8px;
     top: calc(var(--uc-findbar-y-position) + var(--uc-findbar-y-offset));
@@ -75,7 +75,7 @@ findbar {
     align-items: center;
     transform-origin: top center;
     animation: findbar-scale-in 0.1s;
-    background: var(--uc-sidebar-bgcolor) !important;
+    background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)) !important;
     border: 0;
     overflow-x: visible;
 }
@@ -152,7 +152,7 @@ findbar {
     background: var(--toolbarbutton-hover-background) !important;
 }
 .findbar-closebutton {
-    background: var(--uc-sidebar-bgcolor) !important;
+    background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)) !important;
     /* wasn't square for some reason */
     width: auto !important;
 }
@@ -163,7 +163,7 @@ findbar {
     position: absolute;
     padding: 20px 16px 3px 10px;
     top: 16px;
-    background: var(--uc-sidebar-bgcolor);
+    background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor));
     left: 0px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 20px;
@@ -181,7 +181,7 @@ findbar {
     content: "";
     width: 16px;
     height: 22px;
-    background: var(--uc-sidebar-bgcolor);
+    background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor));
     right: -6px;
     top: 10px;
     transform: rotate(45deg);

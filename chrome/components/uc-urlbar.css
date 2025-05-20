@@ -6,13 +6,13 @@
 }
 
 #urlbar:not(.megabar):not([focused]):hover {
-    outline: 1px solid var(--urlbar-outline) !important;
+    outline: 1px solid var(--uc-urlbar-outline);
 }
 
 #urlbar[focused] {
     border: 0 !important;
-    border-top: 1px solid var(--urlbar-border-top) !important;
-    border-bottom: 1px solid var(--urlbar-border-bottom) !important;
+    border-top: 1px solid var(--uc-urlbar-border-top, currentcolor) !important;
+    border-bottom: 1px solid var(--uc-urlbar-border-bottom, currentcolor) !important;
     border-radius: 30px !important;
 }
 
@@ -49,7 +49,7 @@
 #urlbar-background {
     box-shadow: none !important;
     border-radius: 30px !important;
-    background: var(--urlbar-bg) !important;
+    background: var(--uc-urlbar-bg, var(--toolbar-field-background-color)) !important;
 }
 
 #urlbar[focused] #urlbar-background {
@@ -65,7 +65,7 @@
 #urlbar[breakout][breakout-extend] > #urlbar-background {
     outline: none !important;
     box-shadow: none !important;
-    background: var(--urldrop-bg) !important;
+    background: var(--uc-urldrop-bg, var(--toolbar-field-focus-background-color)) !important;
     border-radius: 15px !important;
 }
 
@@ -81,13 +81,13 @@
 #identity-icon-box.identity-box-button {
     margin: 3px 3px 3px 3px;
     border-radius: 14px !important;
-    background-color: var(--uc-sidebar-bgcolor) !important;
+    background-color: var(--uc-identity-btn-bgcolor) !important;
     opacity: 0.8;
 }
 
 #identity-icon-box.identity-box-button:hover {
     cursor: pointer;
-    background-color: var(--identity-btn-hover-color) !important;
+    background-color: var(--identity-btn-hover-color, var(--urlbar-box-hover-bgcolor)) !important;
 }
 
 /* Track protection icon */
@@ -185,7 +185,7 @@
 }
 
 #urlbar-zoom-button {
-    background-color: var(--uc-sidebar-bgcolor) !important;
+    background-color: var(--uc-toolbar-bgcolor) !important;
     border-radius: 16px !important;
     opacity: 0.8;
     &:hover {
@@ -198,7 +198,7 @@
     #pageAction-panel-bookmark[starred],
     #star-button[starred] {
         list-style-image: var(--uc-bookmark-star-image) !important;
-        fill: color-mix(in srgb, var(--uc-bookmark-star-color) 90%, var(--uc-sidebar-bgcolor)) !important;
+        fill: color-mix(in srgb, var(--uc-bookmark-star-color) 90%, var(--uc-toolbar-bgcolor)) !important;
         @media -moz-pref("uc.flex.enable-gradient-highlight") {
             &:not(:hover) {
                 list-style-image: none !important;
@@ -232,7 +232,7 @@
 /* Searchbar color */
 #searchbar {
     border-radius: 30px !important;
-    background-color: color-mix(in srgb, var(--urlbar-bg) 50%, transparent) !important;
+    background-color: var(--uc-urlbar-bg-transparent, var(--toolbar-field-background-color)) !important;
     background-clip: border-box;
     border: 1px solid var(--toolbar-field-border-color);
     border-radius: var(--toolbarbutton-border-radius);
@@ -241,8 +241,8 @@
 #PopupSearchAutoComplete {
     border-radius: 12px;
     --panel-shadow-margin: 0px !important;
-    background-color: var(--uc-sidebar-bgcolor);
+    background-color: var(--uc-toolbar-bgcolor);
     --panel-color: var(--toolbar-field-focus-color);
-    --panel-background: color-mix(in srgb, var(--urlbar-bg) 50%, transparent) !important;
+    --panel-background: var(--uc-urlbar-bg-transparent, var(--toolbar-field-focus-background-color)) !important;
     --panel-border-color: var(--arrowpanel-border-color);
 }

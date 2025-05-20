@@ -32,7 +32,11 @@
     direction: rtl;
 }
 
-#sidebar-box:is([positionend], [sidebar-positionend]) > * {
+/* 
+ * !TEMPORARY: Firefox v140+ wraps #sidebar in .sidebar-browser-stack, breaking leftward expansion.
+ * This excludes it to keep old behavior; can be simplified after v140. 
+ */
+#sidebar-box:is([positionend], [sidebar-positionend]) > *:not(.sidebar-browser-stack) {
     direction: ltr;
 }
 
@@ -40,7 +44,7 @@
     direction: ltr;
 }
 
-#sidebar-box:is([positionend], [sidebar-positionend]):-moz-locale-dir(rtl) > * {
+#sidebar-box:is([positionend], [sidebar-positionend]):-moz-locale-dir(rtl) > *:not(.sidebar-browser-stack) {
     direction: rtl;
 }
 
@@ -69,8 +73,14 @@
                 }
             }
 
-            &:hover > #sidebar,
-            #sidebar-header:has(.active) + #sidebar {
+            /* 
+             * !TEMPORARY: Since Firefox v140, #sidebar is no longer a sibling of #sidebar-header.
+             * Keep the "+ #sidebar" selector for compatibility with pre-v140 versions.
+             * Can be removed once v140 is officially released. 
+             */
+            &:hover #sidebar,
+            #sidebar-header:has(.active) + #sidebar,
+            #sidebar-header:has(.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;
@@ -89,8 +99,9 @@
                 }
             }
 
-            &:hover > #sidebar,
-            #sidebar-header:has(.active) + #sidebar {
+            &:hover #sidebar,
+            #sidebar-header:has(.active) + #sidebar,
+            #sidebar-header:has(.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;
@@ -109,8 +120,9 @@
                 }
             }
 
-            &:hover > #sidebar,
-            #sidebar-header:has(.active) + #sidebar {
+            &:hover #sidebar,
+            #sidebar-header:has(.active) + #sidebar,
+            #sidebar-header:has(.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;

@@ -36,23 +36,23 @@
                 var(--lwt-header-image, var(--lwt-additional-images)) !important;
 
             /* Adjust the background image offset */
-            @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
+            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
                 :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     background-position-x:
-                        center,
+                        left,
                         left,
                         right var(--uc-theme-bg-x-right-end),
-                        var(--uc-theme-bg-x-left-start);
+                        left var(--uc-theme-bg-x-left-start),
+                        right;
                 }
             }
         }
 
         @media -moz-pref("sidebar.verticalTabs") {
-            @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-                #PersonalToolbar {
-                    --toolbar-bgcolor: transparent;
-                }
+            #PersonalToolbar {
+                --toolbar-bgcolor: transparent;
             }
+
             #PersonalToolbar:not([customizing]) {
                 background-color: inherit !important;
                 margin-bottom: calc(0px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));

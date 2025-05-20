@@ -1,8 +1,8 @@
 /*Full Screen Warning*/
 
 #fullscreen-warning {
-    background-color: var(--fullscreen-warn) !important;
-    border-color: var(--fullscreen-warn) !important;
+    background-color: var(--uc-fullscreen-warn) !important;
+    border-color: var(--uc-fullscreen-warn) !important;
     max-width: 500px !important;
     max-height: 50px !important;
     border-radius: 50px !important;

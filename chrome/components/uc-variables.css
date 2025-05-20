@@ -34,57 +34,68 @@
     ════════════════════════════════════════════════════════════════════ */
     /* 🔽 Start of color scheme definitions for FlexFox Theme */
     @media (prefers-color-scheme: dark) {
-        --bg: #1a1b26; /* Background color of the toolbar */
+        --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
 
-        &:not([lwtheme-image]) {
-            --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
-            --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
+        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+            &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
+                --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
+
+                --uc-urlbar-bg: #0d0d15; /* Background color of the URL bar */
+                --uc-urldrop-bg: #0d0d15; /* Background color of the expanded URL bar dropdown */
+                --uc-urlbar-border-top: #000; /* Top border color when the URL bar is focused */
+                --uc-urlbar-border-bottom: #404040; /* Bottom border color when the URL bar is focused */
+                --uc-urlbar-outline: #414868; /* Outline color that appears when hovering over the URL bar */
+
+                --arrowpanel-background: var(--uc-urlbar-bg) !important; /* Toolbar button dropdown background color */
+                --arrowpanel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
+
+                --identity-btn-hover-color: rgba(117, 117, 117) !important; /* Hover color for the URL bar lock icon */
+
+                /* Unused legacy vars – kept in case fallback is needed */
+                /*
+                --urlbar-height: 30px;
+                --button-hover-bgcolor: rgba(159, 159, 159, 0.35) !important;
+                --button-active-bgcolor: rgba(255, 255, 255, 0.2) !important;
+                --button-bgcolor: rgba(117, 117, 117, 0.9) !important;
+                --toolbarbutton-icon-fill-opacity: 0.8 !important;
+
+                --dark-menu-background-color: rgba(34, 34, 36, 0.5) !important;
+                --dark-menu-border-color: rgb(55, 55, 55) !important;
+                --dark-menuitem-hover-background-color: rgba(159, 159, 159, 0.35) !important;
+                */
+            }
         }
-
-        --urlbar-bg: #0d0d15;
-        --urlbar-border-top: #000;
-        --urldrop-bg: #0d0d15;
-        --urlbar-border-bottom: #404040;
-        --urlbar-height: 30px;
-        --urlbar-outline: #414868;
-
-        --fullscreen-warn: rgb(25, 25, 25);
-
-        --arrowpanel-background: var(--urlbar-bg) !important;
-        --button-hover-bgcolor: rgba(159, 159, 159, 0.35) !important;
-        --button-active-bgcolor: rgba(255, 255, 255, 0.2) !important;
-        --button-bgcolor: rgba(117, 117, 117, 0.9) !important;
-        --toolbarbutton-icon-fill-opacity: 0.8 !important;
-        --arrowpanel-border-color: rgb(55, 55, 55) !important;
-        --identity-btn-hover-color: rgba(117, 117, 117) !important;
-
-        --dark-menu-background-color: rgba(34, 34, 36, 0.5) !important;
-        --dark-menu-border-color: rgb(55, 55, 55) !important;
-        --dark-menuitem-hover-background-color: rgba(159, 159, 159, 0.35) !important;
     }
 
     @media (prefers-color-scheme: light) {
-        --bg: #f1f5f9; /* Background color of the toolbar */
+        --uc-bgcolor: #f1f5f9; /* Background color of the toolbar */
 
-        &:not([lwtheme-image]) {
-            --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
-            --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
+        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+            &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
+                --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
+
+                --uc-urlbar-bg: #cbd5e1; /* Background color of the URL bar */
+                --uc-urldrop-bg: #cbd5e1; /* Background color of the expanded URL bar dropdown */
+                --uc-urlbar-border-top: #9ca3af; /* Top border color when the URL bar is focused */
+                --uc-urlbar-border-bottom: #fff; /* Bottom border color when the URL bar is focused */
+                --uc-urlbar-outline: #94a3b8; /* Outline color that appears when hovering over the URL bar */
+
+                --arrowpanel-background: #e2e8f0 !important; /* Toolbar button dropdown background color */
+
+                --identity-btn-hover-color: white !important; /* Hover color for the URL bar lock icon */
+
+                /* Unused legacy vars – kept in case fallback is needed */
+                /*
+                --button-hover-bgcolor: #9699a3 !important;
+                --button-hover-bgcolor: #cbd5e1 !important;
+                --button-active-bgcolor: #cbd5e1 !important;
+                */
+            }
         }
-
-        --urlbar-bg: #cbd5e1;
-        --urlbar-border-top: #9ca3af;
-        --urlbar-border-bottom: #fff;
-        --urldrop-bg: #cbd5e1;
-        --urlbar-outline: #94a3b8;
-
-        --fullscreen-warn: rgb(25, 25, 25);
-
-        --arrowpanel-background: #e2e8f0 !important;
-        /* --button-hover-bgcolor: #9699a3 !important; */
-        --button-hover-bgcolor: #cbd5e1 !important;
-        --button-active-bgcolor: #cbd5e1 !important;
-        --identity-btn-hover-color: white !important;
     }
+    --uc-fullscreen-warn: rgb(25, 25, 25); /* Background color of the fullscreen warning prompt */
     /* 🔼 End of color scheme definitions */
 
     /* ════════════════════════════════════════════════════════════════════
@@ -117,13 +128,13 @@
     --uc-flexfox-logo-color: color-mix(
         in srgb,
         var(--uc-sidebar-header-stripe) 77%,
-        var(--uc-sidebar-bgcolor)
+        var(--uc-toolbar-bgcolor)
     ); /* Tint color applied to the FlexFox logo */
     @media (prefers-color-scheme: dark) {
         --uc-flexfox-logo-color: color-mix(
             in srgb,
             var(--uc-sidebar-header-stripe) 100%,
-            var(--uc-sidebar-bgcolor)
+            var(--uc-toolbar-bgcolor)
         ); /* Adjusted logo color for dark theme */
     }
     --uc-flexfox-logo-image: url("../icons/toolbarbutton/flexfox.svg"); /* SVG image used for the FlexFox logo shown in the sidebar button */
@@ -192,6 +203,12 @@
         --uc-bookmark-folder-icon-8: url("../icons/bookmark/folder-8.svg");
         --uc-bookmark-folder-icon-9: url("../icons/bookmark/folder-9.svg");
     }
+
+    /* 
+     * Adjusts the horizontal offset of the bookmarks bar background image when using a theme. 
+     * Use this variable if the image alignment looks off; supports positive and negative values. 
+     */
+    --uc-theme-bg-x-offset: 0px;
 
     /* Horizontal position of the findbar */
     --uc-findbar-x-position: 0.9vw;
@@ -363,15 +380,15 @@
 
     ════════════════════════════════════════════════════════════════════ */
     /* 🔽 Begin initializing block */
-    --uc-sidebar-bgcolor: var(--bg); /* Internal fallback; must match --bg */
-    --uc-sidebar-header-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
+    --uc-toolbar-bgcolor: var(--uc-bgcolor); /* Internal fallback; must match --uc-bgcolor */
+    --uc-sidebar-stripe-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
 
     /* Initial value: shift nav bar left to make room for window control buttons */
     --uc-nav-bar-padding-right: 0px;
     --uc-sidebar-button-offset: 0px;
     /* If the sidebar button is the last item in the nav bar, leave room for it. */
     #navigator-toolbox:has(#sidebar-button[sidebar-positionend]:last-child) {
-        --uc-sidebar-button-offset: var(--uc-sidebar-header-width, 0px);
+        --uc-sidebar-button-offset: var(--uc-sidebar-stripe-width, 0px);
     }
 
     /* When native vertical tabs are enabled, window control spacing is not needed. */
@@ -448,6 +465,23 @@
     --uc-theme-bg-x-left-start: 0px;
     --uc-theme-bg-x-right-end: 0px;
 
+    /* Semi-transparent background color for the #searchbar input field */
+    --uc-urlbar-bg-transparent: color-mix(in srgb, var(--uc-urlbar-bg) 50%, transparent);
+
+    /* Default background colors for the identity button and findbar when a theme is active */
+    &[lwtheme] {
+        --uc-identity-btn-bgcolor: inherit;
+        --uc-findbar-bgcolor: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+    }
+
+    /* Override the default background color with a custom value when add-on color changes are not allowed */
+    @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+        &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+            --uc-identity-btn-bgcolor: var(--uc-toolbar-bgcolor);
+            --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);
+        }
+    }
+
     /* Adjust findbar position to avoid being overlapped when top toolbar height changes */
     --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
     &[inFullscreen] {
@@ -476,7 +510,7 @@
 
     @media -moz-pref("sidebar.verticalTabs") {
         --tab-pinned-horizontal-count: 5;
-        --uc-sidebar-main-width: var(--uc-sidebar-header-width);
+        --uc-sidebar-main-width: var(--uc-sidebar-stripe-width);
         --uc-sidebar-main-hover-width: calc(
             var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
                 var(--tab-pinned-container-margin-inline-expanded) + 1px
@@ -518,13 +552,13 @@
         --uc-sb-sidebar-header-stripe: color-mix(
             in srgb,
             var(--uc-sidebar-header-stripe) 50%,
-            var(--uc-sidebar-bgcolor)
+            var(--uc-toolbar-bgcolor)
         ); /* Load user-defined value for internal calculations */
         @media (prefers-color-scheme: dark) {
             --uc-sb-sidebar-header-stripe: color-mix(
                 in srgb,
                 var(--uc-sidebar-header-stripe) 87%,
-                var(--uc-sidebar-bgcolor)
+                var(--uc-toolbar-bgcolor)
             );
         }
         @media -moz-pref("uc.flex.enable-gradient-highlight") {
@@ -667,15 +701,15 @@
             ) {
             --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-width, 0px));
             @media -moz-pref("sidebar.verticalTabs") {
-                --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-header-width));
+                --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-stripe-width));
             }
-            --uc-theme-bg-x-right-end: 0px;
+            --uc-theme-bg-x-right-end: var(--uc-theme-bg-x-offset);
 
             @media not -moz-pref("sidebar.position_start") {
-                --uc-theme-bg-x-left-start: 0px;
+                --uc-theme-bg-x-left-start: var(--uc-theme-bg-x-offset);
                 --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sb-sidebar-width, 0px));
                 @media -moz-pref("sidebar.verticalTabs") {
-                    --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sidebar-header-width));
+                    --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sidebar-stripe-width));
                 }
             }
         }

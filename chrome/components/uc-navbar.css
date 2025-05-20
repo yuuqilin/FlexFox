@@ -13,11 +13,13 @@
 */
 
 @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
-    :root:not([lwtheme-image]) {
+    :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
         #navigator-toolbox {
-            --toolbar-bgcolor: var(--bg) !important;
-            --toolbox-bgcolor-inactive: var(--bg) !important;
-            background-image: none !important;
+            --toolbar-bgcolor: var(--uc-bgcolor) !important;
+            --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
+            background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
+                linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
+                var(--lwt-header-image, var(--lwt-additional-images)) !important;
         }
     }
 }

@@ -1,9 +1,9 @@
 #sidebar-box {
     max-width: calc(100% - 496px) !important;
     @media -moz-pref("sidebar.revamp") {
-        max-width: calc(100% - var(--uc-sidebar-header-width) - 496px) !important;
+        max-width: calc(100% - var(--uc-sidebar-stripe-width) - 496px) !important;
     }
-    min-width: var(--uc-sidebar-header-width) !important;
+    min-width: var(--uc-sidebar-stripe-width) !important;
 }
 
 /* Remove background fill from sidebar buttons */
@@ -108,7 +108,7 @@
             max-height: 100%;
             max-width: 100%;
             min-width: var(--uc-sb-sidebar-hover-width);
-            background-color: var(--uc-sidebar-bgcolor);
+            background-color: var(--uc-toolbar-bgcolor);
             background-image: inherit;
             /* Enable transitions for discrete properties like overflow or background-image */
             transition-behavior: allow-discrete;
@@ -163,10 +163,10 @@
         /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
         @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
             :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+                --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
                 #sidebar-header:not(:hover):not(:has(.active)) {
-                    max-width: var(--uc-sidebar-header-width);
-                    min-width: var(--uc-sidebar-header-width);
+                    max-width: var(--uc-sidebar-stripe-width);
+                    min-width: var(--uc-sidebar-stripe-width);
                 }
             }
         }
@@ -176,10 +176,10 @@
                     [titlepreface*="\200d "]
                 )
                 & {
-                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
+                --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
                 #sidebar-header:not(:hover):not(:has(.active)) {
-                    max-width: var(--uc-sidebar-header-width);
-                    min-width: var(--uc-sidebar-header-width);
+                    max-width: var(--uc-sidebar-stripe-width);
+                    min-width: var(--uc-sidebar-stripe-width);
                 }
             }
         }
@@ -195,10 +195,10 @@
             &:hover #sidebar-header:not(:hover):not(:has(.active)) {
                 min-height: 5px;
                 max-height: 5px;
-                min-width: var(--uc-sidebar-header-width);
+                min-width: var(--uc-sidebar-stripe-width);
                 /* When "Disable Sidebery Collapse" is toggled via hotkey (instead of the about:config option),  
                 we need to explicitly cap max-width to match the stripe width. */
-                max-width: var(--uc-sidebar-header-width);
+                max-width: var(--uc-sidebar-stripe-width);
                 overflow: hidden;
                 padding: 0 !important;
                 background-color: var(--uc-sb-sidebar-header-stripe);
@@ -224,8 +224,8 @@
                 &:hover #sidebar-header:not(:hover):not(:has(.active)) {
                     min-height: 5px;
                     max-height: 5px;
-                    min-width: var(--uc-sidebar-header-width);
-                    max-width: var(--uc-sidebar-header-width);
+                    min-width: var(--uc-sidebar-stripe-width);
+                    max-width: var(--uc-sidebar-stripe-width);
                     overflow: hidden;
                     padding: 0 !important;
                     background-color: var(--uc-sb-sidebar-header-stripe);
@@ -323,7 +323,7 @@
             /* Adjust offset for absolute positioning; +11px is no longer needed, replaced with -11px. */
             &:is([positionend], [sidebar-positionend]) sidebar-main[expanded]:hover {
                 transform: translateX(
-                    calc(-11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) - 100%)
+                    calc(-11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%)
                 );
             }
         }
@@ -376,7 +376,7 @@
                 }
                 &:is([positionend], [sidebar-positionend]) sidebar-main[expanded]:hover {
                     transform: translateX(
-                        calc(-11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) - 100%)
+                        calc(-11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%)
                     );
                 }
             }
@@ -444,9 +444,9 @@
             --uc-sidebar-main-stripe: var(--uc-sb-sidebar-header-stripe);
             @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
                 :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                    --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
-                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                    --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
+                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
+                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
                 }
             }
         }
@@ -457,9 +457,9 @@
                 )
                 &
                 #sidebar-main {
-                --sidebar-background-color: var(--uc-sidebar-bgcolor) !important;
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
             }
         }
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
@@ -467,8 +467,8 @@
                 --uc-sb-sidebar-main-opacity: 0;
             }
             #sidebar-main:hover {
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
@@ -477,8 +477,8 @@
                     --uc-sb-sidebar-main-opacity: 0;
                 }
                 #sidebar-main:hover {
-                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
+                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
                 }
             }
         }
@@ -494,10 +494,10 @@
         ) {
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             #sidebar-main {
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
                 /* When "Disable Sidebery Collapse" is toggled via hotkey (instead of the about:config option),  
                    we need to explicitly cap max-width to match the stripe width. */
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
                 --uc-sb-sidebar-main-opacity: 1;
                 /**
                  * #sidebar-main normally uses `transition-delay: var(--uc-autohide-sidebar-delay)` when not hovered.
@@ -511,8 +511,8 @@
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 #sidebar-main {
-                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-header-width);
-                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-header-width);
+                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
+                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
                     --uc-sb-sidebar-main-opacity: 1;
                     --uc-autohide-sidebar-delay: var(--uc-hover-sidebar-delay);
                     --uc-sb-sidebar-main-z-delay: var(--uc-hover-sidebar-delay);
@@ -524,7 +524,7 @@
     @media -moz-pref("sidebar.visibility", "expand-on-hover") {
         #sidebar-box,
         #tabbrowser-tabbox {
-            --sidebar-launcher-collapsed-width: calc(var(--uc-sidebar-header-width) + 11px) !important;
+            --sidebar-launcher-collapsed-width: calc(var(--uc-sidebar-stripe-width) + 11px) !important;
         }
     }
     /* 🔼 [BLOCK A] End of variable definitions for active Sidebery */
@@ -532,9 +532,9 @@
     /* 🔽 [BLOCK B] Start of rules for active Sidebery */
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
     #sidebar-main[sidebar-panel-open] {
-        --bg: var(--toolbox-bgcolor);
+        --uc-bgcolor: var(--toolbox-bgcolor);
         &:-moz-window-inactive {
-            --bg: var(--toolbox-bgcolor-inactive);
+            --uc-bgcolor: var(--toolbox-bgcolor-inactive);
         }
         @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
             position: var(--uc-sb-sidebar-main-position, static) !important;
@@ -549,7 +549,7 @@
         min-width: var(--uc-sb-sidebar-main-min-width);
         max-width: var(--uc-sb-sidebar-main-max-width) !important;
         overflow: var(--uc-sb-sidebar-main-overflow, clip) !important;
-        background-color: var(--uc-sidebar-main-stripe, var(--bg)) !important;
+        background-color: var(--uc-sidebar-main-stripe, var(--uc-bgcolor)) !important;
         background-image: var(--uc-sb-sidebar-main-background-image, inherit) !important;
         opacity: var(--uc-sb-sidebar-main-opacity, 1);
         will-change: min-height, max-height, overflow, background-color;
@@ -596,7 +596,7 @@
          * after Firefox v140, when it’s no longer needed.
          */
         z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating)) !important;
-        background-color: var(--bg) !important;
+        background-color: var(--uc-bgcolor) !important;
         background-image: inherit !important;
         opacity: 1;
         transition:
@@ -640,7 +640,7 @@
         /* Remove unwanted border and shadow applied to Sidebery by the revamped sidebar */
         padding-block-end: 0px !important;
         padding-inline-end: 0px !important;
-        background-color: var(--uc-sidebar-bgcolor) !important;
+        background-color: var(--uc-toolbar-bgcolor) !important;
         #sidebar {
             outline: none !important;
             border: none !important;
@@ -742,7 +742,7 @@
              */
             &:is([positionend], [sidebar-positionend]) {
                 transform: translateX(
-                    calc(11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-header-width)) - 100%)
+                    calc(11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%)
                 );
             }
         }
@@ -1200,8 +1200,8 @@
         /* ── ◀️ Styles for verticalTabs when the sidebar is collapsed */
         #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
             --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
-            --tab-collapsed-width: var(--uc-sidebar-header-width) !important;
-            width: var(--uc-sidebar-header-width) !important;
+            --tab-collapsed-width: var(--uc-sidebar-stripe-width) !important;
+            width: var(--uc-sidebar-stripe-width) !important;
             .tab-background {
                 margin-inline: 5px !important;
             }

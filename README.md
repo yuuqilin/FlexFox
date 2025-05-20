@@ -18,16 +18,16 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.3**
-* Fixed an issue where enabling `uc.flex.add-ui-text-stroke` caused Sidebery to use an unintended font.
-* Fixed extra padding after the first navigation bar item when using horizontal tabs.
-* Improved compatibility when only the new sidebar is enabled without native vertical tabs:
+**🦊 v3.4.4**
+* Fixed an issue that prevented Sidebery from expanding in Nightly v140.
+* Improved theme compatibility: if the theme includes a background image (even a transparent one), FlexFox now automatically allows the theme to override the built-in color palette, without needing to manually enable `uc.flex.allow-addons-to-change-toolbar-color`.
+* Added support for [Firefox Color](https://color.firefox.com/), allowing users to freely customize the browser's appearance.
 
-  * Sidebar stripe now highlights correctly.
-  * Sidebar settings button no longer shifts position when the stripe expands.
+  * To allow Firefox Color themes to override FlexFox's built-in palette, select any background image in the **Custom backgrounds** tab on the Firefox Color site.
+  * Some **Preset themes** in Firefox Color do not include background images. To make them apply fully, either pick a background image or manually enable the `uc.flex.allow-addons-to-change-toolbar-color` setting. Without a background image or this setting, text colors may change, but toolbar backgrounds will not.
 
-> [!NOTE]
-> Using the new sidebar without native vertical tabs is still not recommended, as FlexFox is designed and optimized around the vertical tab layout.
+<p>Here's how FlexFox looks with the <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> theme applied via Firefox Color:</p>
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
 
 <details>
 
@@ -101,6 +101,17 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.4.3**
+* Fixed an issue where enabling `uc.flex.add-ui-text-stroke` caused Sidebery to use an unintended font.
+* Fixed extra padding after the first navigation bar item when using horizontal tabs.
+* Improved compatibility when only the new sidebar is enabled without native vertical tabs:
+
+  * Sidebar stripe now highlights correctly.
+  * Sidebar settings button no longer shifts position when the stripe expands.
+
+> [!NOTE]
+> Using the new sidebar without native vertical tabs is still not recommended, as FlexFox is designed and optimized around the vertical tab layout.
 
 **v3.4.2**
 - Fixed layout issues with native vertical tabs in Firefox v138 when using Always-Open Mode. Incorrect width handling caused jitter on hover and misalignment of the bookmarks toolbar.
