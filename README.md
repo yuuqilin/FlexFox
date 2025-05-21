@@ -9,6 +9,8 @@
 
 <br>
 
+[English](./README.md) | [日本語](./README_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md) | [简体中文](./README_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md) | [Wiki](https://github.com/yuuqilin/FlexFox/wiki)
+
 FlexFox makes Firefox faster, smarter, and easier to use.  
 It cuts out visual noise, keeps the UI steady, and stays fast.  
 Designed as a flexible base, it lets you shape your ideal interface without bloat.  
@@ -184,8 +186,9 @@ For more update logs from earlier versions,
 > If this is your first time installing FlexFox, please proceed to [Method 2](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) and follow the steps starting from Step 5 **after** running the script.  
 > For future updates, simply re-running the script will be enough, and you won't need to repeat the manual steps.
 
+<h4>💻 PowerShell Script</h4>
 <details>
-<summary><h4>💻 PowerShell Script [Click to expand] 👇</h4></summary>
+<summary>[Click to expand] 👇</summary>
 
 - **Online deployment** – Run this command in a PowerShell window:
   ```powershell
@@ -212,8 +215,9 @@ For more update logs from earlier versions,
 
 </details>
 
+<h4>🔃 Git Pull</h4>
 <details>
-<summary><h4>🔃 Git Pull [Click to expand] 👇</h4></summary>
+<summary>[Click to expand] 👇</summary>
 
 - Use one of the `git-pull-chrome-only` scripts inside the `scripts` folder, depending on your environment. These scripts will:
   - Automatically set your Firefox profile folder as a Git working directory

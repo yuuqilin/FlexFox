@@ -9,6 +9,8 @@
 
 <br>
 
+[English](./README.md) | [日本語](./README_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md) | [简体中文](./README_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md) | [Wiki](https://github.com/yuuqilin/FlexFox/wiki)
+
 FlexFox 让 Firefox 变得更快、更智能，也更顺手。  
 它去除视觉干扰，保持界面稳定，同时运行依旧流畅。  
 作为一个灵活的基础框架，FlexFox 让你自由定制浏览器界面，无需担心冗余或卡顿。  
@@ -185,8 +187,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 > 如果是首次安装 FlexFox，请在运行脚本后继续执行 [方法二](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) 中第 5 步开始的手动步骤。  
 > 之后更新时，只需重新运行脚本即可，无需再次手动操作。
 
+<h4>💻 PowerShell 脚本</h4>
 <details>
-<summary><h4>💻 PowerShell 脚本《点击展开》👇</h4></summary>
+<summary>《点击展开》👇</summary>
 
 - **在线部署** – 在 PowerShell 中输入以下命令：
   ```powershell
@@ -215,8 +218,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 </details>
 
+<h4>🔃 Git Pull</h4>
 <details>
-<summary><h4>🔃 Git Pull《点击展开》👇</h4></summary>
+<summary>《点击展开》👇</summary>
 
 - 可根据使用环境，选择 `scripts` 文件夹中的任一 `git-pull-chrome-only` 脚本。这些脚本将：
 

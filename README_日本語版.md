@@ -9,6 +9,8 @@
 
 <br>
 
+[English](./README.md) | [日本語](./README_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md) | [简体中文](./README_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md) | [Wiki](https://github.com/yuuqilin/FlexFox/wiki)
+
 FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変えます。  
 無駄な視覚要素を省き、安定した UI と軽快な動作を両立。  
 カスタマイズ性の高いベースとして、理想のインターフェースを自由に作れます。  
@@ -183,8 +185,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 > 初めて FlexFox をインストールする場合は、スクリプトの実行後に [方法2](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) の手順5以降を手動で実行してください。  
 > 以降のアップデートでは、スクリプトを再実行するだけで自動的に更新されます。手動作業は不要です。
 
+<h4>💻 PowerShellスクリプト</h4>
 <details>
-<summary><h4>💻 PowerShellスクリプト《クリックで展開》👇</h4></summary>
+<summary>《クリックで展開》👇</summary>
 
 - **オンライン導入** – PowerShellで次のコマンドを実行します：
   ```powershell
@@ -211,8 +214,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 </details>
 
+<h4>🔃 Git Pull</h4>
 <details>
-<summary><h4>🔃 Git Pull《クリックで展開》👇</h4></summary>
+<summary>《クリックで展開》👇</summary>
 
 - 使用環境に応じて、`scripts` フォルダ内のいずれかの `git-pull-chrome-only` スクリプトを使ってください。これらのスクリプトでは：
   - FirefoxプロファイルフォルダをGitワーキングディレクトリとして設定
