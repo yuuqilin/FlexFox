@@ -20,8 +20,9 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.4.5**
-* v3.4.3で発生したリグレッションを修正：ネイティブの縦型タブが「折りたたみ」モードのときに、タブパネルの幅が正しく表示されない問題を修正しました。
+**🦊 v3.4.6**
+* Firefox v140以降で、タブグループラベルのサイズや位置がずれていた問題を修正しました。
+* `uc.flex.show-pin-tabs-separator-in-expanded-state` オプションを有効にしても、ピン留めタブと通常タブの間に区切り線が表示されない問題を修正しました（v140での内部構造の変更に対応）。
 
 <details>
 <summary>🎨 <b>新機能：Firefox Color 対応</b></summary>
@@ -106,6 +107,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.4.5**
+* v3.4.3で発生したリグレッションを修正：ネイティブの縦型タブが「折りたたみ」モードのときに、タブパネルの幅が正しく表示されない問題を修正しました。
 
 **v3.4.4**
 * Nightly v140でSideberyが展開できなくなる不具合を修正しました。

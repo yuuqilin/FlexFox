@@ -1034,16 +1034,40 @@
                 var(--uc-max-visible-vertical-pinned-tabs) * var(--tabstrip-min-height) + var(--space-large) + 15px
             ) !important;
         }
-        #tabbrowser-tabs[orient="vertical"] #tabbrowser-arrowscrollbox[orient="vertical"] .tabbrowser-tab {
-            padding-block: 0px !important;
+        #tabbrowser-tabs[orient="vertical"] {
+            &[expanded] {
+                /* 
+                 * Restore the pre-v140 bottom border for the pinned tabs separator. 
+                 * Firefox v140+ replaced #vertical-pinned-tabs-container-separator with 
+                 * #vertical-pinned-tabs-splitter and removed its bottom border.
+                 * This rule re-enables the separator when 
+                 * `uc.flex.show-pin-tabs-separator-in-expanded-state` is set.
+                 */
+                @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+                    :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter):not(:hover) {
+                        color: var(--toolbox-textcolor) !important;
+                        border-bottom: var(--tabstrip-inner-border) !important;
+                    }
+                }
+                /* Restore pre-v140 box-sizing and padding for tab group labels */
+                .tab-group-label {
+                    box-sizing: content-box;
+                    padding-block: 2.5px;
+                }
+            }
+            #tabbrowser-arrowscrollbox[orient="vertical"] .tabbrowser-tab {
+                padding-block: 0px !important;
+            }
         }
         @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
             /* Show pin tabs separator in expanded state */
-            #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+            #tabbrowser-tabs[expanded]
+                > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
                 display: block !important;
             }
             /* Hide pin tabs separator in expanded state with no pin tabs */
-            #vertical-pinned-tabs-container:empty + #vertical-pinned-tabs-container-separator {
+            #vertical-pinned-tabs-container:empty
+                + :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
                 display: none !important;
             }
         }
@@ -1097,7 +1121,8 @@
                     var(--uc-hover-sidebar-delay);
             }
             @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-                #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+                #tabbrowser-tabs[expanded]
+                    > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
                     transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay);
                 }
@@ -1110,7 +1135,8 @@
                 max-width: 100% !important;
             }
             @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-                #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+                #tabbrowser-tabs[expanded]
+                    > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
                     width: calc(
                         var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
                             var(--tab-pinned-container-margin-inline-expanded) - 22px
@@ -1173,7 +1199,8 @@
                     var(--uc-autohide-sidebar-delay);
             }
             @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-                #tabbrowser-tabs[expanded] > #vertical-pinned-tabs-container-separator {
+                #tabbrowser-tabs[expanded]
+                    > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
                     width: 32px !important;
                     transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay);
@@ -1208,6 +1235,13 @@
                 height: 14px !important;
                 top: -1px !important;
                 inset-inline-start: 0px !important;
+            }
+            /* 
+             * Override v140+ margin changes for tab group labels (was auto → ~6px).
+             * Adjusted to 8px for a look closer to the previous layout. 
+             */
+            .tab-group-label {
+                margin-inline: 8px !important;
             }
         }
         sidebar-main:not([expanded]) {

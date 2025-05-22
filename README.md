@@ -20,8 +20,9 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.5**
-* Fixed a regression introduced in v3.4.3 where the width of the native vertical tabs in collapsed mode was incorrect.
+**🦊 v3.4.6**
+* Fixed layout issues with tab group labels in Firefox v140+, where size and alignment were incorrect.
+* Restored the separator between pinned and regular tabs when using `uc.flex.show-pin-tabs-separator-in-expanded-state` in Firefox v140+, which had stopped appearing due to structural changes.
 
 <details>
 <summary>🎨 <b>Major Update: Firefox Color Support</b></summary>
@@ -107,6 +108,9 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.4.5**
+* Fixed a regression introduced in v3.4.3 where the width of the native vertical tabs in collapsed mode was incorrect.
 
 **v3.4.4**
 * Fixed an issue that prevented Sidebery from expanding in Nightly v140.

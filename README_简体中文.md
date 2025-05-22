@@ -20,8 +20,9 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.4.5**
-* 修复 v3.4.3 引入的回归问题：在原生垂直选项卡处于折叠模式时，显示宽度异常。
+**🦊 v3.4.6**
+* 修复了 Firefox v140+ 中分组标签（tab group）的尺寸和位置显示异常的问题。
+* 修复了在启用 `uc.flex.show-pin-tabs-separator-in-expanded-state` 选项时，仍无法显示固定标签页与普通标签页之间分隔线的问题（v140 起结构发生变化导致该问题）。
 
 <details>
 <summary>🎨 <b>重大更新：支持 Firefox Color</b></summary>
@@ -106,6 +107,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.4.5**
+* 修复 v3.4.3 引入的回归问题：在原生垂直选项卡处于折叠模式时，显示宽度异常。
 
 **v3.4.4**
 * 修复了 Nightly v140 中 Sidebery 无法展开的问题。
