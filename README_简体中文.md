@@ -20,16 +20,20 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.4.4**
-* 修复了 Nightly v140 中 Sidebery 无法展开的问题。
-* 增强了对主题的兼容性：如果主题设置了背景图片（包括透明图片），FlexFox 会自动允许主题覆盖内建配色，无需手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。
-* 支持 [Firefox Color](https://color.firefox.com/)，用户现在可以自由调整浏览器界面配色。
+**🦊 v3.4.5**
+* 修复 v3.4.3 引入的回归问题：在原生垂直选项卡处于折叠模式时，显示宽度异常。
 
-  * 请在 Firefox Color 网站中的「Custom backgrounds」标签页中选择任意一张背景图片，FlexFox 就会允许 Firefox Color 覆盖内建配色方案。
-  * Firefox Color 内置的部分「Preset themes」主题没有背景图。要让这些主题完全生效，请选择一张背景图，或手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。否则只会改变文字颜色，工具栏等背景颜色则不会变动。
+<details>
+<summary>🎨 <b>重大更新：支持 Firefox Color</b></summary>
 
-<p>这是使用 Firefox Color 套用 <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> 主题后的 FlexFox 显示效果：</p>
+FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通过实时预览，自由自定义浏览器的配色外观。
+
+要让 Firefox Color 在 FlexFox 中生效，请前往 Firefox Color 网站，在 **Custom backgrounds** 标签页中选择任意一张背景图片，或启用 `uc.flex.allow-addons-to-change-toolbar-color` 设置。若这两者都未设置，颜色修改将不会生效。
+
+<p>以下是通过 Firefox Color 应用 <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> 主题后的 FlexFox 效果：</p>
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
+
+</details>
 
 <details>
 <summary>🚀 <b>重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式</b></summary>
@@ -102,6 +106,17 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.4.4**
+* 修复了 Nightly v140 中 Sidebery 无法展开的问题。
+* 增强了对主题的兼容性：如果主题设置了背景图片（包括透明图片），FlexFox 会自动允许主题覆盖内建配色，无需手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。
+* 支持 [Firefox Color](https://color.firefox.com/)，用户现在可以自由调整浏览器界面配色。
+
+  * 请在 Firefox Color 网站中的「Custom backgrounds」标签页中选择任意一张背景图片，FlexFox 就会允许 Firefox Color 覆盖内建配色方案。
+  * Firefox Color 内置的部分「Preset themes」主题没有背景图。要让这些主题完全生效，请选择一张背景图，或手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。否则只会改变文字颜色，工具栏等背景颜色则不会变动。
+
+<p>这是使用 Firefox Color 套用 <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> 主题后的 FlexFox 显示效果：</p>
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
 
 **v3.4.3**
 * 修复启用 `uc.flex.add-ui-text-stroke` 时，Sidebery 误用指定字体的问题。

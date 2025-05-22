@@ -20,16 +20,20 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.4**
-* Fixed an issue that prevented Sidebery from expanding in Nightly v140.
-* Improved theme compatibility: if the theme includes a background image (even a transparent one), FlexFox now automatically allows the theme to override the built-in color palette, without needing to manually enable `uc.flex.allow-addons-to-change-toolbar-color`.
-* Added support for [Firefox Color](https://color.firefox.com/), allowing users to freely customize the browser's appearance.
+**🦊 v3.4.5**
+* Fixed a regression introduced in v3.4.3 where the width of the native vertical tabs in collapsed mode was incorrect.
 
-  * To allow Firefox Color themes to override FlexFox's built-in palette, select any background image in the **Custom backgrounds** tab on the Firefox Color site.
-  * Some **Preset themes** in Firefox Color do not include background images. To make them apply fully, either pick a background image or manually enable the `uc.flex.allow-addons-to-change-toolbar-color` setting. Without a background image or this setting, text colors may change, but toolbar backgrounds will not.
+<details>
+<summary>🎨 <b>Major Update: Firefox Color Support</b></summary>
+
+FlexFox now supports [Firefox Color](https://color.firefox.com/), so you can freely customize your browser's appearance with live previews.
+
+To make Firefox Color work with FlexFox, choose any background image from the **Custom backgrounds** tab on the Firefox Color site, or enable the `uc.flex.allow-addons-to-change-toolbar-color` setting. Without either of these, your color changes won't take effect.
 
 <p>Here's how FlexFox looks with the <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> theme applied via Firefox Color:</p>
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
+
+</details>
 
 <details>
 
@@ -103,6 +107,17 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+**v3.4.4**
+* Fixed an issue that prevented Sidebery from expanding in Nightly v140.
+* Improved theme compatibility: if the theme includes a background image (even a transparent one), FlexFox now automatically allows the theme to override the built-in color palette, without needing to manually enable `uc.flex.allow-addons-to-change-toolbar-color`.
+* Added support for [Firefox Color](https://color.firefox.com/), allowing users to freely customize the browser's appearance.
+
+  * To allow Firefox Color themes to override FlexFox's built-in palette, select any background image in the **Custom backgrounds** tab on the Firefox Color site.
+  * Some **Preset themes** in Firefox Color do not include background images. To make them apply fully, either pick a background image or manually enable the `uc.flex.allow-addons-to-change-toolbar-color` setting. Without a background image or this setting, text colors may change, but toolbar backgrounds will not.
+
+<p>Here's how FlexFox looks with the <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> theme applied via Firefox Color:</p>
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
 
 **v3.4.3**
 * Fixed an issue where enabling `uc.flex.add-ui-text-stroke` caused Sidebery to use an unintended font.

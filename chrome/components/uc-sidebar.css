@@ -868,40 +868,38 @@
                 */
             }
         }
+    }
 
-        /* Align tools-and-extensions when Sidebery is active */
-        &[class="tools-and-extensions actions-list"] {
-            align-items: var(--uc-sb-sroot-align-items, start) !important;
-            > moz-button {
-                --button-outer-padding-inline: var(--uc-sb-sroot-btn-padding-inline, var(--space-medium)) !important;
-                --button-outer-padding-block: var(--uc-sb-sroot-btn-padding-block, var(--space-xxsmall)) !important;
-            }
+    /* Align tools-and-extensions when Sidebery is active */
+    .tools-and-extensions.actions-list[orientation="vertical"] {
+        align-items: var(--uc-sb-sroot-align-items, start) !important;
+        > moz-button {
+            --button-outer-padding-inline: var(--uc-sb-sroot-btn-padding-inline, var(--space-medium)) !important;
+            --button-outer-padding-block: var(--uc-sb-sroot-btn-padding-block, var(--space-xxsmall)) !important;
+        }
 
-            /* Adjust spacing between buttons in tools-and-extensions when Sidebery is active */
-            @media -moz-pref("sidebar.verticalTabs") {
-                > moz-button[view="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
-                    --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-1);
-                    .tools-and-extensions.actions-list:not(:hover) & {
-                        visibility: hidden;
-                    }
+        /* Adjust spacing between buttons in tools-and-extensions when Sidebery is active */
+        @media -moz-pref("sidebar.verticalTabs") {
+            > moz-button[view="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
+                --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-1);
+                .tools-and-extensions.actions-list:not(:hover) & {
+                    visibility: hidden;
                 }
             }
-            > moz-button:last-of-type {
-                --button-outer-padding-block-end: var(
-                    --uc-sb-sroot-btn-padding-block-end-2,
-                    var(--space-small)
-                ) !important;
-            }
         }
-
-        /* Align bottom-actions (the sidebar settings button) when vertical tabs are disabled but Sidebery is active */
-        &[class="bottom-actions actions-list"] {
-            align-items: var(--uc-sb-sroot-align-items, start) !important;
-            > moz-button {
-                --button-outer-padding-block-start: var(--uc-sb-sroot-btn-padding-block, var(--space-small)) !important;
-            }
+        > moz-button:last-of-type {
+            --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-2, var(--space-small)) !important;
         }
     }
+
+    /* Align bottom-actions (the sidebar settings button) when vertical tabs are disabled but Sidebery is active */
+    .bottom-actions.actions-list {
+        align-items: var(--uc-sb-sroot-align-items, start) !important;
+        > moz-button {
+            --button-outer-padding-block-start: var(--uc-sb-sroot-btn-padding-block, var(--space-small)) !important;
+        }
+    }
+
     /* 🔼 [BLOCK D] End of rules for active Sidebery */
 
     /* 🔽 [BLOCK E] Start of rules for inactive Sidebery */

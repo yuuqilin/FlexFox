@@ -20,16 +20,20 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.4.4**
-* Nightly v140でSideberyが展開できなくなる不具合を修正しました。
-* テーマとの互換性を強化しました。テーマに背景画像（透明なものを含む）が設定されている場合、FlexFox は自動的にテーマが内蔵カラーパレットを上書きできるようにします。これにより、`uc.flex.allow-addons-to-change-toolbar-color` オプションを手動で設定する必要がなくなります。
-* [Firefox Color](https://color.firefox.com/) に対応しました。ユーザーはブラウザー全体の配色を自由にカスタマイズできるようになります。
+**🦊 v3.4.5**
+* v3.4.3で発生したリグレッションを修正：ネイティブの縦型タブが「折りたたみ」モードのときに、タブパネルの幅が正しく表示されない問題を修正しました。
 
-  * Firefox Color のウェブサイトで「Custom backgrounds」タブを開き、任意の背景画像を選択すると、FlexFox は Firefox Color による配色の上書きを許可します。
-  * Firefox Colorの「Preset themes」には一部、背景画像が設定されていないテーマがあります。これらは画像を選ぶか、`uc.flex.allow-addons-to-change-toolbar-color`オプションを有効にすることで完全に適用されます。背景画像がないままだと、文字色は変わってもツールバーの背景色は反映されません。
+<details>
+<summary>🎨 <b>新機能：Firefox Color 対応</b></summary>
 
-<p>こちらは、Firefox Color を使って <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> テーマを適用したときの FlexFox の表示例です：</p>
+FlexFox は [Firefox Color](https://color.firefox.com/) に対応し、ブラウザーの配色をライブプレビュー付きで自由にカスタマイズできるようになりました。
+
+FlexFox 上で Firefox Color を有効にするには、Firefox Color サイトの **Custom backgrounds** タブから任意の背景画像を選ぶか、`uc.flex.allow-addons-to-change-toolbar-color` 設定を有効にしてください。どちらも設定されていない場合、配色の変更は反映されません。
+
+<p>以下は、Firefox Color を使って <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> テーマを適用した FlexFox の表示例です：</p>
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
+
+</details>
 
 <details>
 <summary>🚀 <b>新機能：ネイティブ縦型タブが完全非表示と常時展開に対応</b></summary>
@@ -102,6 +106,17 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.4.4**
+* Nightly v140でSideberyが展開できなくなる不具合を修正しました。
+* テーマとの互換性を強化しました。テーマに背景画像（透明なものを含む）が設定されている場合、FlexFox は自動的にテーマが内蔵カラーパレットを上書きできるようにします。これにより、`uc.flex.allow-addons-to-change-toolbar-color` オプションを手動で設定する必要がなくなります。
+* [Firefox Color](https://color.firefox.com/) に対応しました。ユーザーはブラウザー全体の配色を自由にカスタマイズできるようになります。
+
+  * Firefox Color のウェブサイトで「Custom backgrounds」タブを開き、任意の背景画像を選択すると、FlexFox は Firefox Color による配色の上書きを許可します。
+  * Firefox Colorの「Preset themes」には一部、背景画像が設定されていないテーマがあります。これらは画像を選ぶか、`uc.flex.allow-addons-to-change-toolbar-color`オプションを有効にすることで完全に適用されます。背景画像がないままだと、文字色は変わってもツールバーの背景色は反映されません。
+
+<p>こちらは、Firefox Color を使って <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> テーマを適用したときの FlexFox の表示例です：</p>
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
 
 **v3.4.3**
 * `uc.flex.add-ui-text-stroke` を有効にした際、Sidebery に意図しないフォントが適用されてしまう問題を修正しました。
