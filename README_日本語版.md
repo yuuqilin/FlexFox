@@ -25,7 +25,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 * `uc.flex.show-pin-tabs-separator-in-expanded-state` オプションを有効にしても、ピン留めタブと通常タブの間に区切り線が表示されない問題を修正しました（v140での内部構造の変更に対応）。
 
 <details>
-<summary>🎨 <b>新機能：Firefox Color 対応</b></summary>
+<summary>🎨 <b>新機能：Firefox Color 対応《クリックで展開》</b>👇</summary>
 
 FlexFox は [Firefox Color](https://color.firefox.com/) に対応し、ブラウザーの配色をライブプレビュー付きで自由にカスタマイズできるようになりました。
 
@@ -37,7 +37,7 @@ FlexFox 上で Firefox Color を有効にするには、Firefox Color サイト�
 </details>
 
 <details>
-<summary>🚀 <b>新機能：ネイティブ縦型タブが完全非表示と常時展開に対応</b></summary>
+<summary>🚀 <b>新機能：ネイティブ縦型タブが完全非表示と常時展開に対応《クリックで展開》</b>👇</summary>
 
 - `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のホットキーは、Sidebery に加えてネイティブ縦型タブにも同じ挙動が適用され、両方を完全に非表示にできます。
 - 全画面モード（<kbd>F11</kbd>）では、ネイティブ縦型タブも自動で完全非表示になります。
@@ -48,7 +48,7 @@ FlexFox 上で Firefox Color を有効にするには、Firefox Color サイト�
 </details>
 
 <details>
-<summary>🌈 <b>新機能：ブックマークフォルダーのアイコンをカスタマイズ</b></summary>
+<summary>🌈 <b>新機能：ブックマークフォルダーのアイコンをカスタマイズ《クリックで展開》</b>👇</summary>
 
 数値型オプション `uc.flex.enable-colored-bookmarks-folder-icons` を追加しました：
 
@@ -77,7 +77,7 @@ CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ
 </details>
 
 <details>
-<summary>🚀 <b>新機能：ショートカットによる UI レイアウト切り替えに対応</b></summary>
+<summary>🚀 <b>新機能：ショートカットによる UI レイアウト切り替えに対応《クリックで展開》</b>👇</summary>
 
 FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 拡張機能に対応しました。
 以下の画像のように設定してください：  

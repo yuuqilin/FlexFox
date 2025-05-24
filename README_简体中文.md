@@ -25,7 +25,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 * 修复了在启用 `uc.flex.show-pin-tabs-separator-in-expanded-state` 选项时，仍无法显示固定标签页与普通标签页之间分隔线的问题（v140 起结构发生变化导致该问题）。
 
 <details>
-<summary>🎨 <b>重大更新：支持 Firefox Color</b></summary>
+<summary>🎨 <b>重大更新：支持 Firefox Color《点击展开》</b>👇</summary>
 
 FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通过实时预览，自由自定义浏览器的配色外观。
 
@@ -37,7 +37,7 @@ FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通�
 </details>
 
 <details>
-<summary>🚀 <b>重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式</b></summary>
+<summary>🚀 <b>重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式《点击展开》</b>👇</summary>
 
 - `uc.flex.fully-hide-sidebery` 选项与 `Hide Sidebery` 快捷键现在也适用于原生垂直选项卡，可将其完全隐藏。
 - 进入全屏模式（<kbd>F11</kbd>）时，原生垂直选项卡也会随之自动隐藏。
@@ -48,7 +48,7 @@ FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通�
 </details>
 
 <details>
-<summary>🌈 <b>重大更新：自定义书签文件夹图标</b></summary>
+<summary>🌈 <b>重大更新：自定义书签文件夹图标《点击展开》</b>👇</summary>
 
 新增数值型选项 `uc.flex.enable-colored-bookmarks-folder-icons`：
 
@@ -77,7 +77,7 @@ FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通�
 </details>
 
 <details>
-<summary>🚀 <b>重大更新：支持通过快捷键切换 UI 布局</b></summary>
+<summary>🚀 <b>重大更新：支持通过快捷键切换 UI 布局《点击展开》</b>👇</summary>
 
 FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/)。
 安装并按下图设置：  

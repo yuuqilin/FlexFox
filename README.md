@@ -24,8 +24,10 @@ It's not just a new look, it's a better way to browse.
 * Fixed layout issues with tab group labels in Firefox v140+, where size and alignment were incorrect.
 * Restored the separator between pinned and regular tabs when using `uc.flex.show-pin-tabs-separator-in-expanded-state` in Firefox v140+, which had stopped appearing due to structural changes.
 
+<!-- END What's New -->
+
 <details>
-<summary>🎨 <b>Major Update: Firefox Color Support</b></summary>
+<summary>🎨 <b>Major Update: Firefox Color Support [Click to expand]</b> 👇</summary>
 
 FlexFox now supports [Firefox Color](https://color.firefox.com/), so you can freely customize your browser's appearance with live previews.
 
@@ -38,7 +40,7 @@ To make Firefox Color work with FlexFox, choose any background image from the **
 
 <details>
 
-<summary>🚀 <b>Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs</b></summary>
+<summary>🚀 <b>Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs [Click to expand]</b> 👇</summary>
 
 - The existing `uc.flex.fully-hide-sidebery` option and the `Hide Sidebery` hotkey now also hide native vertical tabs completely.
 - Native vertical tabs are now also fully hidden when entering fullscreen mode (<kbd>F11</kbd>).
@@ -49,7 +51,7 @@ To make Firefox Color work with FlexFox, choose any background image from the **
 </details>
 
 <details>
-<summary>🌈 <b>Major Update: Custom Bookmark Folder Icons</b></summary>
+<summary>🌈 <b>Major Update: Custom Bookmark Folder Icons [Click to expand]</b> 👇</summary>
 
 A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
 
@@ -78,7 +80,7 @@ You can customize the icon's color, size, and position by editing the `--uc-book
 </details>
 
 <details>
-<summary>🚀 <b>Major Update: Layout Switching via Hotkeys</b></summary>
+<summary>🚀 <b>Major Update: Layout Switching via Hotkeys [Click to expand]</b> 👇</summary>
 
 FlexFox now supports the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension.
 After installing and configuring the extension as shown below:  
@@ -108,6 +110,8 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <details>
 
 <summary>💬 <b>Previous Updates</b></summary>
+
+<!-- END Release Note -->
 
 **v3.4.5**
 * Fixed a regression introduced in v3.4.3 where the width of the native vertical tabs in collapsed mode was incorrect.

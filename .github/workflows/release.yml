@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Extract version tag
+        run: echo "RELEASE_TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+
+      - name: Extract release notes
+        run: node .github/extract-release-notes.js
+        env:
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
+
+      - name: Create release package
+        run: |
+          mkdir -p package
+          zip -r package/FlexFox-${{ env.RELEASE_TAG }}.zip \
+            chrome \
+            scripts \
+            Sidebery/sidebery-settings.json \
+            Sidebery/sidebery-styles.json \
+            deploy-userchrome.ps1
+
+      - name: Check if release notes exist
+        id: check_notes
+        run: |
+          if [ -f ".github/release-notes/${RELEASE_TAG}.md" ]; then
+            echo "NOTES_EXIST=true" >> $GITHUB_OUTPUT
+          else
+            echo "NOTES_EXIST=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload release (with or without notes)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: FlexFox ${{ env.RELEASE_TAG }}
+          files: package/FlexFox-${{ env.RELEASE_TAG }}.zip
+          body_path: ${{ steps.check_notes.outputs.NOTES_EXIST == 'true' && format('.github/release-notes/{0}.md', env.RELEASE_TAG) || '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
