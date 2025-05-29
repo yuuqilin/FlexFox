@@ -20,9 +20,10 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.6**
-* Fixed layout issues with tab group labels in Firefox v140+, where size and alignment were incorrect.
-* Restored the separator between pinned and regular tabs when using `uc.flex.show-pin-tabs-separator-in-expanded-state` in Firefox v140+, which had stopped appearing due to structural changes.
+**🦊 v3.4.7**
+* Fixed an issue where the native vertical tabs couldn't smoothly expand when placed on the right and the mouse moved to the edge of the screen.
+* Fixed missing scrollbars when native vertical tabs were on the right side.
+* Adjusted spacing to ensure proper left padding when vertical tabs expand from the left.
 
 <!-- END What's New -->
 
@@ -112,6 +113,10 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.4.6**
+* Fixed layout issues with tab group labels in Firefox v140+, where size and alignment were incorrect.
+* Restored the separator between pinned and regular tabs when using `uc.flex.show-pin-tabs-separator-in-expanded-state` in Firefox v140+, which had stopped appearing due to structural changes.
 
 **v3.4.5**
 * Fixed a regression introduced in v3.4.3 where the width of the native vertical tabs in collapsed mode was incorrect.

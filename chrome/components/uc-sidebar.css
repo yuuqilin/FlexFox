@@ -710,6 +710,8 @@
             transition:
                 margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay),
+                padding-inline-end var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
                 min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay),
                 overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -719,16 +721,20 @@
             border-inline-width: 0 0.01px;
             */
             &:is([positionend], [sidebar-positionend]) {
+                padding-inline-end: 11px;
                 /* Newly added 'transform' uses initial transition values as it's not defined above */
                 transition-property: margin-inline-start, min-width, overflow, transform;
                 border-inline-width: 0.01px 0;
             }
         }
         sidebar-main[expanded]:hover {
+            margin-inline-start: 0;
             min-width: var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-main-hover-width));
             /* transition-delay: 0ms !important; */
             transition:
                 margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                padding-inline-end var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay),
                 min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay),

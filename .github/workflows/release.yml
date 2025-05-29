@@ -25,7 +25,7 @@ jobs:
         run: echo "RELEASE_TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
 
       - name: Extract release notes
-        run: node .github/extract-release-notes.js
+        run: node scripts/extract-release-notes.js
         env:
           RELEASE_TAG: ${{ env.RELEASE_TAG }}
 
@@ -37,7 +37,8 @@ jobs:
             scripts \
             Sidebery/sidebery-settings.json \
             Sidebery/sidebery-styles.json \
-            deploy-userchrome.ps1
+            deploy-userchrome.ps1 \
+            -x "scripts/extract-release-notes.js"
 
       - name: Check if release notes exist
         id: check_notes
