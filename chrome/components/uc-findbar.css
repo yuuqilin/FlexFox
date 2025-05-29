@@ -76,7 +76,13 @@ findbar {
     transform-origin: top center;
     animation: findbar-scale-in 0.1s;
     background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)) !important;
+    background-image: linear-gradient(
+            var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)),
+            var(--uc-findbar-bgcolor, var(--toolbar-bgcolor))
+        ),
+        var(--lwt-additional-images) !important;
     border: 0;
+    border-top-color: transparent !important;
     overflow-x: visible;
 }
 

@@ -20,11 +20,14 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**🦊 v3.4.10**
+* Fixed an issue where the Findbar displayed the wrong background color.
+
+<!-- END What's New -->
+
 **🦊 v3.4.9**
 * Fixed a regression introduced in v3.4.8 where the address bar outline no longer appeared on hover.
 * The search box on the New Tab page now also supports the `uc.flex.revert-to-original-flat-corner-style` option, allowing it to revert to Firefox's default rounded corners.
-
-<!-- END What's New -->
 
 **🦊 v3.4.8**
 * Fixed misalignment between the address bar and its suggestion dropdown when the URL bar is focused.
