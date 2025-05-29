@@ -1,11 +1,13 @@
 /* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
 /* URL BAR */
 #urlbar {
-    border-radius: 30px !important;
+    /*
+    border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
+    */
     border: 0 !important;
 }
 
-#urlbar:not(.megabar):not([focused]):hover {
+#urlbar:not(.megabar):not([focused]):not([breakout]):hover {
     outline: 1px solid var(--uc-urlbar-outline);
 }
 
@@ -13,18 +15,18 @@
     border: 0 !important;
     border-top: 1px solid var(--uc-urlbar-border-top, currentcolor) !important;
     border-bottom: 1px solid var(--uc-urlbar-border-bottom, currentcolor) !important;
-    border-radius: 30px !important;
+    border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
 }
 
 #urlbar[breakout][breakout-extend] {
     border: none !important;
+    /*
     box-shadow:
         rgba(0, 0, 0, 0.09) 0px 2px 1px,
         rgba(0, 0, 0, 0.09) 0px 4px 2px,
         rgba(0, 0, 0, 0.09) 0px 8px 4px,
         rgba(0, 0, 0, 0.09) 0px 16px 8px,
         rgba(0, 0, 0, 0.09) 0px 32px 16px !important;
-    /*
     top: calc(
         (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2
     ) !important;
@@ -48,7 +50,7 @@
 
 #urlbar-background {
     box-shadow: none !important;
-    border-radius: 30px !important;
+    border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     background: var(--uc-urlbar-bg, var(--toolbar-field-background-color)) !important;
 }
 
@@ -64,9 +66,17 @@
 /* Active Address/Search Field Dropdown */
 #urlbar[breakout][breakout-extend] > #urlbar-background {
     outline: none !important;
+    box-shadow:
+        rgba(0, 0, 0, 0.09) 0px 2px 1px,
+        rgba(0, 0, 0, 0.09) 0px 4px 2px,
+        rgba(0, 0, 0, 0.09) 0px 8px 4px,
+        rgba(0, 0, 0, 0.09) 0px 16px 8px,
+        rgba(0, 0, 0, 0.09) 0px 32px 16px !important;
+    /*
     box-shadow: none !important;
+    */
     background: var(--uc-urldrop-bg, var(--toolbar-field-focus-background-color)) !important;
-    border-radius: 15px !important;
+    border-radius: var(--uc-urlbar-popup-border-radius, var(--toolbarbutton-border-radius)) !important;
 }
 
 #urlbar[breakout][breakout-extend] > .urlbar-input-container,
@@ -80,7 +90,7 @@
 /* Idendity icon button */
 #identity-icon-box.identity-box-button {
     margin: 3px 3px 3px 3px;
-    border-radius: 14px !important;
+    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
     background-color: var(--uc-identity-btn-bgcolor) !important;
     opacity: 0.8;
 }
@@ -92,7 +102,7 @@
 
 /* Track protection icon */
 #tracking-protection-icon-container {
-    border-radius: 16px !important;
+    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
 }
 
 #tracking-protection-icon-container:hover {
@@ -101,7 +111,7 @@
 
 /* Star button */
 #star-button-box {
-    border-radius: 16px !important;
+    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
 }
 
 #star-button-box {
@@ -164,10 +174,10 @@
     margin-top: 3px !important;
     height: 25px !important;
     background-color: transparent !important;
-    border-top-left-radius: 30px !important;
-    border-bottom-left-radius: 30px !important;
-    border-top-right-radius: 6px !important;
-    border-bottom-right-radius: 6px !important;
+    border-top-left-radius: var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius)) !important;
+    border-bottom-left-radius: var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius)) !important;
+    border-top-right-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius)) !important;
+    border-bottom-right-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius)) !important;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
     }
@@ -177,7 +187,7 @@
     margin-top: 3px;
     height: 25px !important;
     background-color: transparent !important;
-    border-radius: 6px !important;
+    border-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius)) !important;
     padding-left: 6px;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
@@ -186,7 +196,7 @@
 
 #urlbar-zoom-button {
     background-color: var(--uc-toolbar-bgcolor) !important;
-    border-radius: 16px !important;
+    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
     opacity: 0.8;
     &:hover {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
@@ -231,15 +241,14 @@
 
 /* Searchbar color */
 #searchbar {
-    border-radius: 30px !important;
     background-color: var(--uc-urlbar-bg-transparent, var(--toolbar-field-background-color)) !important;
     background-clip: border-box;
     border: 1px solid var(--toolbar-field-border-color);
-    border-radius: var(--toolbarbutton-border-radius);
+    border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
 }
 
 #PopupSearchAutoComplete {
-    border-radius: 12px;
+    border-radius: var(--uc-searchbar-popup-border-radius, var(--toolbarbutton-border-radius));
     --panel-shadow-margin: 0px !important;
     background-color: var(--uc-toolbar-bgcolor);
     --panel-color: var(--toolbar-field-focus-color);

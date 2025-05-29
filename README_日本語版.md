@@ -20,10 +20,11 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.4.7**
-* ネイティブの縦型タブを右側に配置した際、画面端にマウスを移動してもスムーズに展開できなかった問題を修正しました。
-* 縦型タブを右側に表示した場合にスクロールバーが表示されない不具合を修正しました。
-* 左側に縦型タブを展開した際、左端の余白が不十分だった問題を調整しました。
+**🦊 v3.4.8**
+* アドレスバーにフォーカスした際、候補ポップアップとバー本体の境界がずれて見える問題を修正しました。
+* 新しいオプション `uc.flex.revert-to-original-flat-corner-style` を追加しました。これを `true` に設定すると、FlexFox の丸みを帯びたデザインを無効化し、Firefox 標準のフラットな角丸スタイルに戻すことができます。さらに、`uc-variables.css` 内の該当オプション下にある `*-radius` 変数を編集することで、アドレスバー・検索バー・検索パネルの角の丸みを個別に調整できます。
+
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox標準の角丸スタイルのプレビュー" width="72%" />
 
 <details>
 <summary>🎨 <b>新機能：Firefox Color 対応《クリックで展開》</b>👇</summary>
@@ -108,6 +109,11 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.4.7**
+* ネイティブの縦型タブを右側に配置した際、画面端にマウスを移動してもスムーズに展開できなかった問題を修正しました。
+* 縦型タブを右側に表示した場合にスクロールバーが表示されない不具合を修正しました。
+* 左側に縦型タブを展開した際、左端の余白が不十分だった問題を調整しました。
 
 **v3.4.6**
 * Firefox v140以降で、タブグループラベルのサイズや位置がずれていた問題を修正しました。
@@ -340,6 +346,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.disable-nav-bar-first-item-right-padding` | デフォルトでは、ナビゲーションバーの最初の項目の後ろに右側の余白を追加して、垂直タブとその周辺項目との視覚的な区切りや整列を改善します。このオプションはその余白を無効にします。 |
 | `uc.flex.disable-menu-icons` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
 | `uc.flex.revert-to-original-window-controls` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
+| `uc.flex.revert-to-original-flat-corner-style` | URLバー、検索バー、検索パネルの角丸を、FlexFox 独自の大きな丸みから Firefox 標準の控えめな角丸スタイルに戻します。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | FlexFox 独自のブックマーク星アイコンを Firefox 標準のデザインに戻します。 |
 | `uc.flex.revert-to-original-sidebar-icon` | FlexFox 独自のロゴを使用したサイドバーアイコンを Firefox 標準のデザインに戻します。 |
 

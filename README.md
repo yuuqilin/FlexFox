@@ -20,10 +20,11 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.7**
-* Fixed an issue where the native vertical tabs couldn't smoothly expand when placed on the right and the mouse moved to the edge of the screen.
-* Fixed missing scrollbars when native vertical tabs were on the right side.
-* Adjusted spacing to ensure proper left padding when vertical tabs expand from the left.
+**🦊 v3.4.8**
+* Fixed misalignment between the address bar and its suggestion dropdown when the URL bar is focused.
+* Added a new option `uc.flex.revert-to-original-flat-corner-style`. When set to `true`, this restores Firefox's default flatter corner style instead of FlexFox's rounded design. You can also customize the corner radius of the address bar, search bar, and find bar by adjusting the `*-radius` variables under this option in `uc-variables.css`.
+
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
 
 <!-- END What's New -->
 
@@ -113,6 +114,11 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.4.7**
+* Fixed an issue where the native vertical tabs couldn't smoothly expand when placed on the right and the mouse moved to the edge of the screen.
+* Fixed missing scrollbars when native vertical tabs were on the right side.
+* Adjusted spacing to ensure proper left padding when vertical tabs expand from the left.
 
 **v3.4.6**
 * Fixed layout issues with tab group labels in Firefox v140+, where size and alignment were incorrect.
@@ -344,6 +350,7 @@ For more update logs from earlier versions,
 | `uc.flex.disable-nav-bar-first-item-right-padding` | By default, FlexFox adds right-side padding after the first item in the navigation bar to improve visual separation and alignment between the vertical tabs and nearby items. This option disables that padding. |
 | `uc.flex.disable-menu-icons` | Disables custom icons in menus added by FlexFox. |
 | `uc.flex.revert-to-original-window-controls` | Reverts to Firefox's default window control buttons (minimize, maximize, close), replacing the macOS-style icons used by FlexFox. |
+| `uc.flex.revert-to-original-flat-corner-style` | Reverts the rounded corner radius of the urlbar, searchbar, and findbar to Firefox's original flatter style. |
 | `uc.flex.revert-to-original-bookmark-star-icon` | Reverts the bookmark star icon to Firefox's default design, replacing the custom icon used by FlexFox. |
 | `uc.flex.revert-to-original-sidebar-icon` | Reverts the sidebar button icon to Firefox's default design, replacing the FlexFox logo. |
 

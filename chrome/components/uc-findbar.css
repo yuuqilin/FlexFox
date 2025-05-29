@@ -32,7 +32,7 @@
 
 findbar checkbox {
     padding: 1.5px 6px;
-    border-radius: 8px;
+    border-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
     color: var(--button-color);
     background-color: var(--button-bgcolor);
 }
@@ -66,7 +66,7 @@ findbar checkbox {
 findbar {
     --button-bgcolor: var(--uc-urlbar-bg, var(--button-background-color));
     position: absolute;
-    border-radius: 8px;
+    border-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
     top: calc(var(--uc-findbar-y-position) + var(--uc-findbar-y-offset));
     right: min(var(--uc-findbar-x-position), calc(100% - 496px));
     width: 496px;
@@ -132,7 +132,7 @@ findbar {
 }
 
 .findbar-textbox {
-    border-radius: 8px !important;
+    border-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     padding: 5px 8px !important;
     width: 16em !important;
     height: 26px;
@@ -143,8 +143,8 @@ findbar {
 }
 
 .findbar-find-next {
-    border-top-right-radius: 8px !important;
-    border-bottom-right-radius: 8px !important;
+    border-top-right-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius)) !important;
+    border-bottom-right-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     height: 26px;
 }
 
@@ -165,7 +165,7 @@ findbar {
     top: 16px;
     background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor));
     left: 0px;
-    border-bottom-left-radius: 8px;
+    border-bottom-left-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
     border-bottom-right-radius: 20px;
     z-index: 9;
 }

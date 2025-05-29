@@ -20,10 +20,11 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.4.7**
-* 修复了将原生垂直选项卡放在右侧时，鼠标移到屏幕最右边无法顺畅展开的问题。
-* 修复了原生垂直选项卡在右侧无法显示滚动条的问题。
-* 调整了原生垂直选项卡在左侧展开时左侧留白不足的问题。
+**🦊 v3.4.8**
+* 修复了在地址栏聚焦时，地址栏与下拉建议列表边缘未对齐的问题。
+* 新增选项 `uc.flex.revert-to-original-flat-corner-style`，设置为 `true` 后可关闭 FlexFox 的圆角设计，还原为 Firefox 默认的较平缓圆角风格。你也可以在 `uc-variables.css` 中调整该选项下的 `*-radius` 变量，自定义地址栏、搜索框和查找栏的圆角大小。
+
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox 默认圆角样式预览" width="72%" />
 
 <details>
 <summary>🎨 <b>重大更新：支持 Firefox Color《点击展开》</b>👇</summary>
@@ -108,6 +109,11 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.4.7**
+* 修复了将原生垂直选项卡放在右侧时，鼠标移到屏幕最右边无法顺畅展开的问题。
+* 修复了原生垂直选项卡在右侧无法显示滚动条的问题。
+* 调整了原生垂直选项卡在左侧展开时左侧留白不足的问题。
 
 **v3.4.6**
 * 修复了 Firefox v140+ 中分组标签（tab group）的尺寸和位置显示异常的问题。
@@ -345,6 +351,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.disable-nav-bar-first-item-right-padding` | 默认情况下，FlexFox 会在导航栏第一个图标后添加右侧间距，以优化垂直选项卡与周围项目之间的视觉间隔和对齐。此选项可停用该间距。 |
 | `uc.flex.disable-menu-icons` | 停用 FlexFox 添加的自定义选单图标。 |
 | `uc.flex.revert-to-original-window-controls` | 将 FlexFox 使用的 macOS 风格窗口按钮恢复为 Firefox 默认的最小化、最大化、关闭按钮。 |
+| `uc.flex.revert-to-original-flat-corner-style` | 将 URL 栏、搜索栏和查找栏的圆角样式恢复为 Firefox 默认的较平角设计，替代 FlexFox 使用的大圆角样式。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |
 | `uc.flex.revert-to-original-sidebar-icon` | 将 FlexFox 使用的侧栏按钮图标恢复为 Firefox 默认设计。 |
 

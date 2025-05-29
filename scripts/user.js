@@ -39,6 +39,8 @@ user_pref("uc.flex.enable-colored-bookmarks-folder-icons",          0);
 user_pref("uc.flex.switch-to-alternate-condensed-panel",        false);
 /* Reverts the window control buttons (minimize, maximize, close) to Firefox's default design. */
 user_pref("uc.flex.revert-to-original-window-controls",         false);
+/* Reverts the rounded corner radius of the urlbar, searchbar, and findbar to Firefox's original flatter style. */
+user_pref("uc.flex.revert-to-original-flat-corner-style",       false);
 /* Reverts the bookmark star icon to Firefox's default design. */
 user_pref("uc.flex.revert-to-original-bookmark-star-icon",      false);
 /* Reverts the sidebar button icon to Firefox's default design. */

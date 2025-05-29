@@ -232,6 +232,16 @@
         --uc-findbar-y-offset: 0px !important;
     }
 
+    /* Corner radius settings for the urlbar, searchbar, findbar, and their icons */
+    @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
+    --uc-urlbar-border-radius: 30px;
+    --uc-urlbar-popup-border-radius: 15px;
+    --uc-urlbar-icon-radius: 16px;
+    --uc-urlbar-icon-inner-radius: 6px;
+    --uc-searchbar-popup-border-radius: 12px;
+    --uc-findbar-border-radius: 8px;
+    }
+
     /* Sidebar expand/collapse animation settings */
     --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
     --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
