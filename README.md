@@ -20,13 +20,17 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**🦊 v3.4.9**
+* Fixed a regression introduced in v3.4.8 where the address bar outline no longer appeared on hover.
+* The search box on the New Tab page now also supports the `uc.flex.revert-to-original-flat-corner-style` option, allowing it to revert to Firefox's default rounded corners.
+
+<!-- END What's New -->
+
 **🦊 v3.4.8**
 * Fixed misalignment between the address bar and its suggestion dropdown when the URL bar is focused.
 * Added a new option `uc.flex.revert-to-original-flat-corner-style`. When set to `true`, this restores Firefox's default flatter corner style instead of FlexFox's rounded design. You can also customize the corner radius of the address bar, search bar, and find bar by adjusting the `*-radius` variables under this option in `uc-variables.css`.
 
   <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
-
-<!-- END What's New -->
 
 <details>
 <summary>🎨 <b>Major Update: Firefox Color Support [Click to expand]</b> 👇</summary>

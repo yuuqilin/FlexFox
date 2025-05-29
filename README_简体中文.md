@@ -20,6 +20,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
+**🦊 v3.4.9**
+* 修复了 v3.4.8 中地址栏在鼠标悬停时无法显示外框的问题。
+* 新标签页的搜索框也已支持 `uc.flex.revert-to-original-flat-corner-style` 选项，可还原为 Firefox 默认的圆角样式。
+
 **🦊 v3.4.8**
 * 修复了在地址栏聚焦时，地址栏与下拉建议列表边缘未对齐的问题。
 * 新增选项 `uc.flex.revert-to-original-flat-corner-style`，设置为 `true` 后可关闭 FlexFox 的圆角设计，还原为 Firefox 默认的较平缓圆角风格。你也可以在 `uc-variables.css` 中调整该选项下的 `*-radius` 变量，自定义地址栏、搜索框和查找栏的圆角大小。

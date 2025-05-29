@@ -1,13 +1,11 @@
 /* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
 /* URL BAR */
 #urlbar {
-    /*
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
-    */
     border: 0 !important;
 }
 
-#urlbar:not(.megabar):not([focused]):not([breakout]):hover {
+#urlbar:not(.megabar):not([focused]):not([breakout-extend]):hover {
     outline: 1px solid var(--uc-urlbar-outline);
 }
 

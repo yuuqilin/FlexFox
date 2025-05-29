@@ -1,10 +1,15 @@
 /* Modified from https://raw.githubusercontent.com/bmFtZQ/edge-frfox/main/chrome/content/newtab.css */
 @-moz-document url-prefix("about:newtab"),
 url-prefix("about:home") {
+    :root {
+        @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
+            --uc-search-wrapper-radius: 99px;
+        }
+    }
     /* Search bar. */
     .search-wrapper {
         & .search-handoff-button {
-            border-radius: 99px !important;
+            border-radius: var(--uc-search-wrapper-radius, var(--border-radius-medium)) !important;
             background-position: 12px !important;
             padding-inline-start: 48px !important;
             white-space: nowrap !important;
@@ -101,6 +106,9 @@ url-prefix("about:home") {
         @media -moz-pref("browser.theme.dark-private-windows") {
             color-scheme: dark !important;
         }
+        @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
+            --uc-search-wrapper-radius: 99px;
+        }
     }
 
     /* Private browsing search bar. */
@@ -112,7 +120,7 @@ url-prefix("about:home") {
         .search-handoff-button:enabled:hover:active {
             background-color: var(--uc-background-color-secondary) !important;
             border: 0 !important;
-            border-radius: 99px !important;
+            border-radius: var(--uc-search-wrapper-radius, var(--border-radius-medium)) !important;
             padding-inline-start: 48px !important;
             --elevation: 4;
             box-shadow:
