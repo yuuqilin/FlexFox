@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v140-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v141-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,21 +20,25 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.4.10**
-* 検索バーの背景色が正しく表示されない不具合を修正しました。
+**🦊 v3.5.0**
+* Firefox v141以降で、ピン留めされたタブが縦に並んでしまう表示の不具合を修正しました（本来は横に並ぶべき）。
+* ピン留めされたタブが3つ以下のときに、タブの幅がはみ出す問題を修正しました。
+* サイドバーのツールボタンが5個以下のときに、設定ボタンの位置がずれる、またツールバーの展開方向が縦になってしまう問題を修正しました。
+* ネイティブの縦型タブにおけるサイドバーツールボタンの表示スタイルを統一しました。Sideberyの有効・無効、サイドバーの展開状態、ボタン数の多少にかかわらず、すべてのパターンで一貫した整った間隔で表示されるようになりました。
 
-**🦊 v3.4.9**
-* v3.4.8で発生した不具合により、アドレスバーにホバーしてもアウトライン（外枠）が表示されなくなっていた問題を修正しました。
-* 新しいタブの検索ボックスも `uc.flex.revert-to-original-flat-corner-style` オプションに対応し、Firefox標準の角丸スタイルに戻せるようになりました。
+<details>  
+<summary>🪄 <b>新機能：角丸なしのフラットなデザインに切り替え可能</b> <i>《クリックで展開》</i> 👇</summary>
 
-**🦊 v3.4.8**
-* アドレスバーにフォーカスした際、候補ポップアップとバー本体の境界がずれて見える問題を修正しました。
-* 新しいオプション `uc.flex.revert-to-original-flat-corner-style` を追加しました。これを `true` に設定すると、FlexFox の丸みを帯びたデザインを無効化し、Firefox 標準のフラットな角丸スタイルに戻すことができます。さらに、`uc-variables.css` 内の該当オプション下にある `*-radius` 変数を編集することで、アドレスバー・検索バー・検索パネルの角の丸みを個別に調整できます。
+新しく追加された `uc.flex.revert-to-original-flat-corner-style` オプションを有効にすると、Firefox標準のフラットな角のスタイルに戻すことができます。FlexFox独自の丸みを帯びたデザインを使わず、よりシャープな外観を好む方におすすめです。
 
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox標準の角丸スタイルのプレビュー" width="72%" />
+さらに、`uc-variables.css` 内のこのオプションに関連する `*-radius` 変数を編集することで、アドレスバーや検索バー、検索ウィンドウなどの角丸の大きさを細かく調整できます。
+
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
+
+</details>
 
 <details>
-<summary>🎨 <b>新機能：Firefox Color 対応《クリックで展開》</b>👇</summary>
+<summary>🎨 <b>新機能：Firefox Color 対応</b> <i>《クリックで展開》</i> 👇</summary>
 
 FlexFox は [Firefox Color](https://color.firefox.com/) に対応し、ブラウザーの配色をライブプレビュー付きで自由にカスタマイズできるようになりました。
 
@@ -46,7 +50,7 @@ FlexFox 上で Firefox Color を有効にするには、Firefox Color サイト�
 </details>
 
 <details>
-<summary>🚀 <b>新機能：ネイティブ縦型タブが完全非表示と常時展開に対応《クリックで展開》</b>👇</summary>
+<summary>🚀 <b>新機能：ネイティブ縦型タブが完全非表示と常時展開に対応</b> <i>《クリックで展開》</i> 👇</summary>
 
 - `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のホットキーは、Sidebery に加えてネイティブ縦型タブにも同じ挙動が適用され、両方を完全に非表示にできます。
 - 全画面モード（<kbd>F11</kbd>）では、ネイティブ縦型タブも自動で完全非表示になります。
@@ -57,7 +61,7 @@ FlexFox 上で Firefox Color を有効にするには、Firefox Color サイト�
 </details>
 
 <details>
-<summary>🌈 <b>新機能：ブックマークフォルダーのアイコンをカスタマイズ《クリックで展開》</b>👇</summary>
+<summary>🌈 <b>新機能：ブックマークフォルダーのアイコンをカスタマイズ</b> <i>《クリックで展開》</i> 👇</summary>
 
 数値型オプション `uc.flex.enable-colored-bookmarks-folder-icons` を追加しました：
 
@@ -86,7 +90,7 @@ CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ
 </details>
 
 <details>
-<summary>🚀 <b>新機能：ショートカットによる UI レイアウト切り替えに対応《クリックで展開》</b>👇</summary>
+<summary>🚀 <b>新機能：ショートカットによる UI レイアウト切り替えに対応</b> <i>《クリックで展開》</i> 👇</summary>
 
 FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 拡張機能に対応しました。
 以下の画像のように設定してください：  
@@ -116,6 +120,19 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.4.10**
+* 検索バーの背景色が正しく表示されない不具合を修正しました。
+
+**v3.4.9**
+* v3.4.8で発生した不具合により、アドレスバーにホバーしてもアウトライン（外枠）が表示されなくなっていた問題を修正しました。
+* 新しいタブの検索ボックスも `uc.flex.revert-to-original-flat-corner-style` オプションに対応し、Firefox標準の角丸スタイルに戻せるようになりました。
+
+**v3.4.8**
+* アドレスバーにフォーカスした際、候補ポップアップとバー本体の境界がずれて見える問題を修正しました。
+* 新しいオプション `uc.flex.revert-to-original-flat-corner-style` を追加しました。これを `true` に設定すると、FlexFox の丸みを帯びたデザインを無効化し、Firefox 標準のフラットな角丸スタイルに戻すことができます。さらに、`uc-variables.css` 内の該当オプション下にある `*-radius` 変数を編集することで、アドレスバー・検索バー・検索パネルの角の丸みを個別に調整できます。
+
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox標準の角丸スタイルのプレビュー" width="72%" />
 
 **v3.4.7**
 * ネイティブの縦型タブを右側に配置した際、画面端にマウスを移動してもスムーズに展開できなかった問題を修正しました。
@@ -224,7 +241,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 <h4>💻 PowerShellスクリプト</h4>
 <details>
-<summary>《クリックで展開》👇</summary>
+<summary><i>《クリックで展開》</i> 👇</summary>
 
 - **オンライン導入** – PowerShellで次のコマンドを実行します：
   ```powershell
@@ -253,7 +270,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 <h4>🔃 Git Pull</h4>
 <details>
-<summary>《クリックで展開》👇</summary>
+<summary><i>《クリックで展開》</i> 👇</summary>
 
 - 使用環境に応じて、`scripts` フォルダ内のいずれかの `git-pull-chrome-only` スクリプトを使ってください。これらのスクリプトでは：
   - FirefoxプロファイルフォルダをGitワーキングディレクトリとして設定

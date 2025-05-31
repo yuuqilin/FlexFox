@@ -419,15 +419,20 @@
             --uc-sb-sroot-padding-block-end: var(--space-small);
             --uc-sb-sroot-padding-inline: 6px;
             --uc-sb-sroot-gap: var(--space-xxsmall);
+            --uc-sb-sroot-btn-padding-inline-start: 5.5px;
         }
         & sidebar-main:not([expanded]) {
-            --uc-sb-sroot-btn-padding-block-end-1: var(--space-small);
-            --uc-sb-sroot-btn-padding-block-end-2: 2px;
+            /*
+            --uc-sb-sroot-btn-padding-block-end-sidebery: var(--space-small);
+            */
             --uc-sb-sroot-align-items: center;
-            --uc-sb-sroot-btn-padding-inline: 0;
-            --uc-sb-sroot-btn-padding-block: 0.8px;
+            --uc-sb-sroot-btn-padding-block: var(--space-xxsmall);
+            --uc-sb-sroot-btn-padding-inline-start: 0px;
         }
         #sidebar-main {
+            --uc-sb-sroot-btn-padding-block-start: var(--space-small);
+            --uc-sb-sroot-btn-padding-block-end-last: 2px;
+            --uc-sb-sroot-btn-padding-inline: 5.5px;
             --uc-sb-sidebar-main-position: absolute;
             --uc-sb-sidebar-main-min-width: var(--uc-sb-sidebar-width);
             --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-width, 75vw);
@@ -810,7 +815,7 @@
         padding-inline: var(--uc-sb-sroot-padding-inline, var(--space-medium)) !important;
 
         /* Adjust spacing between buttons in tools-and-extensions when Sidebery is active */
-        padding-block-start: var(--uc-sb-sroot-padding-block-start, 5px);
+        padding-block-start: var(--uc-sb-sroot-padding-block-start, var(--space-xxsmall));
 
         > moz-button[view="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
             /* --button-outer-padding-block-end: 0; */
@@ -879,22 +884,55 @@
     /* Align tools-and-extensions when Sidebery is active */
     .tools-and-extensions.actions-list[orientation="vertical"] {
         align-items: var(--uc-sb-sroot-align-items, start) !important;
+        /* 
+         * Applies in three cases:
+         * 1. Sidebery is active
+         * 2. Sidebery is inactive but the sidebar is not expanded
+         * 3. Fallback 
+         */
         > moz-button {
-            --button-outer-padding-inline: var(--uc-sb-sroot-btn-padding-inline, var(--space-medium)) !important;
+            --button-outer-padding-inline: var(
+                --uc-sb-sroot-btn-padding-inline,
+                var(--uc-sroot-btn-padding-inline, var(--space-medium))
+            ) !important;
+            /*
             --button-outer-padding-block: var(--uc-sb-sroot-btn-padding-block, var(--space-xxsmall)) !important;
+            */
         }
 
         /* Adjust spacing between buttons in tools-and-extensions when Sidebery is active */
         @media -moz-pref("sidebar.verticalTabs") {
             > moz-button[view="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
-                --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-1);
+                /*
+                --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-sidebery, var(--space-small));
+                */
                 .tools-and-extensions.actions-list:not(:hover) & {
                     visibility: hidden;
                 }
             }
+            /* Reduce bottom padding if the last element is no longer the one displayed at the bottom */
+            &:has(moz-button[type="icon"]:not(:last-of-type)) > moz-button:last-of-type {
+                --button-outer-padding-block-end: var(--space-xxsmall) !important;
+            }
+            /* Increase top padding for the second element if it's now displayed at the top */
+            &:has(moz-button[type="icon"]:first-of-type) > moz-button:nth-of-type(2) {
+                --button-outer-padding-block-start: var(
+                    --uc-sb-sroot-btn-padding-block-start-2nd-type,
+                    var(--space-xxsmall)
+                ) !important;
+            }
         }
-        > moz-button:last-of-type {
-            --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-2, var(--space-small)) !important;
+        /* 
+         * When native vertical tabs are disabled, the last element is always at the bottom;
+         * adjust only based on whether Sidebery is active. 
+         */
+        @media not -moz-pref("sidebar.verticalTabs") {
+            > moz-button:last-of-type {
+                --button-outer-padding-block-end: var(
+                    --uc-sb-sroot-btn-padding-block-end-last,
+                    var(--space-small)
+                ) !important;
+            }
         }
     }
 
@@ -913,7 +951,7 @@
         /* ── ▶️ Styles for tools-and-extensions when the sidebar is expanded */
         /**
          * Use variables to pass values into the shadow trees. 
-         * These scoped variables are only defined within #vertical-pinned-tabs-container.
+         * These scoped variables are only defined within #pinned-tabs-container.
          * While the style applies globally to matching <slot> elements, it only takes effect here.
          * Other instances of slot[part="items-wrapper"] are not grid containers, so they're unaffected.
 
@@ -922,7 +960,10 @@
          * which would require users to reposition their mouse.
          * Requires Firefox v138+. 
          */
-        #sidebar-main[sidebar-launcher-expanded] sidebar-main[expanded] #vertical-pinned-tabs-container {
+        /* TEMPORARY: Since Firefox v141, #vertical-pinned-tabs-container renamed to #pinned-tabs-container (Bug 1964534) */
+        #sidebar-main[sidebar-launcher-expanded]
+            sidebar-main[expanded]
+            :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
             --uc-vt-sroot-grid-template-columns: repeat(5, auto);
         }
         spacer[part="overflow-start-indicator"]
@@ -931,7 +972,9 @@
             grid-template-columns: var(--uc-vt-sroot-grid-template-columns, inherit) !important;
         }
         /* Same purpose as above, but for Firefox v137 and below. */
-        #sidebar-main:not([sidebar-launcher-expanded]) sidebar-main[expanded] #vertical-pinned-tabs-container {
+        #sidebar-main:not([sidebar-launcher-expanded])
+            sidebar-main[expanded]
+            :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
             grid-template-columns: repeat(5, auto) !important;
         }
         /* Hide the vertical scrollbar when pinned tabs are collapsed. */
@@ -944,20 +987,64 @@
             /*
             --button-outer-padding-block-start: 2px !important;
             */
-            padding-block-end: var(--uc-sb-sroot-padding-block-end, 2px) !important;
+            padding-block-end: var(--uc-sb-sroot-padding-block-end, var(--space-small)) !important;
             gap: var(--uc-sb-sroot-gap, 0px) !important;
         }
         /* ── ◀️ Styles for tools-and-extensions when the sidebar is collapsed */
         .tools-and-extensions.actions-list[orientation="vertical"] {
             overflow: hidden !important;
+            /*
             & > moz-button {
                 --button-outer-padding-inline: 5.5px !important;
-                /*
                 --button-outer-padding-block-start: 2px !important;
                 --button-outer-padding-block-end: 2px !important;
                 padding-left: 5.5px;
-                */
             }
+            */
+            /* When icon-type buttons are active (always at the bottom), set top and bottom padding accordingly */
+            & > moz-button[type="icon"] {
+                --button-outer-padding-block-start: var(--space-xxsmall) !important;
+                --button-outer-padding-block-end: var(--space-small);
+            }
+        }
+        /* Force .tools-and-extensions into a horizontal layout when the sidebar is expanded */
+        sidebar-main {
+            --uc-sroot-flex-direction: column;
+        }
+        sidebar-main[expanded] {
+            --uc-sroot-flex-direction: row-reverse;
+        }
+        sidebar-main:not([expanded]) {
+            --uc-sb-sroot-btn-padding-inline-start: 5.5px;
+            --uc-sb-sroot-btn-padding-block-start: var(--space-small);
+            --uc-sb-sroot-btn-padding-block-start-2nd-type: var(--space-small);
+        }
+        .tools-and-extensions.actions-list[orientation="vertical"] {
+            flex-direction: var(--uc-sroot-flex-direction) !important;
+            flex-wrap: wrap;
+            justify-content: flex-end !important;
+            padding-inline-start: var(--uc-sb-sroot-btn-padding-inline-start, var(--space-medium)) !important;
+
+            /* Force a horizontal layout even when there are 5 or fewer buttons */
+            & > moz-button:not(.tools-overflow) {
+                width: unset !important;
+                --button-outer-padding-inline: 0px !important;
+                --button-outer-padding-block-start: var(--space-xxsmall) !important;
+                &:not([type="icon"]):first-of-type {
+                    --button-outer-padding-block-start: var(
+                        --uc-sb-sroot-btn-padding-block-start,
+                        var(--space-xxsmall)
+                    ) !important;
+                }
+            }
+        }
+        /* Hide text labels on sidebar tool buttons */
+        .button-background.labelled > label {
+            display: none !important;
+        }
+        /* Adjust the highlight width of tool button backgrounds */
+        button > .button-background {
+            width: var(--button-size-icon) !important;
         }
     }
     /* 🔼 [BLOCK E] End of rules for inactive Sidebery */
@@ -1035,7 +1122,7 @@
      * This affects how many pinned tabs are visible before scrolling appears.
      */
     :root:not([titlepreface*="\180e "]) {
-        sidebar-main[expanded] #vertical-pinned-tabs-container {
+        sidebar-main[expanded] :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
             max-height: calc(
                 var(--uc-max-visible-vertical-pinned-tabs) * var(--tabstrip-min-height) + var(--space-large) + 15px
             ) !important;
@@ -1072,7 +1159,7 @@
                 display: block !important;
             }
             /* Hide pin tabs separator in expanded state with no pin tabs */
-            #vertical-pinned-tabs-container:empty
+            :is(#vertical-pinned-tabs-container, #pinned-tabs-container):empty
                 + :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
                 display: none !important;
             }
@@ -1091,7 +1178,7 @@
                 transition-delay: var(--uc-hover-sidebar-delay);
             }
 
-            #vertical-pinned-tabs-container {
+            :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
                 .tabbrowser-tab .tab-stack {
                     transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay);
@@ -1166,13 +1253,17 @@
                 transition-delay: var(--uc-autohide-sidebar-delay);
             }
 
-            #vertical-pinned-tabs-container {
+            :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
                 /* --uc-sroot-overflow: hidden; */
 
                 .tabbrowser-tab .tab-stack {
                     min-width: 40px;
-                    transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay);
+                    max-width: 40px;
+                    transition:
+                        min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay);
                 }
             }
 
@@ -1215,7 +1306,7 @@
             /* Move the container tab indicator to the right for Firefox v138 */
             /*
             .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
-                #vertical-pinned-tabs-container &,
+                :is(#vertical-pinned-tabs-container, #pinned-tabs-container) &,
                 #tabbrowser-tabs[orient="vertical"] & {
                     position: absolute;
                     height: calc(100% - 4px);
@@ -1251,13 +1342,14 @@
             }
         }
         sidebar-main:not([expanded]) {
+            --uc-sroot-btn-padding-inline: 5.5px;
             #vertical-tabs-newtab-button {
                 margin-inline: 5.5px !important;
             }
             /* Move the container tab indicator to the left for Firefox v138 */
             /*
             .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
-                #vertical-pinned-tabs-container &,
+                :is(#vertical-pinned-tabs-container, #pinned-tabs-container) &,
                 #tabbrowser-tabs[orient="vertical"] & {
                     position: absolute;
                     height: calc(100% - 4px);

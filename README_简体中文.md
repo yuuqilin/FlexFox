@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v140-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v141-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,21 +20,25 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.4.10**
-* 修复了查找栏背景颜色显示异常的问题。
+**🦊 v3.5.0**
+* 修复了在 Firefox v141 及以上版本中，原生垂直选项卡的固定标签显示为垂直排列的问题（应为水平排列）。
+* 修复了当固定标签数量少于 4 个时，标签宽度溢出的问题。
+* 修复了当侧边栏工具按钮少于 6 个时，设置按钮位置不对齐，以及工具栏展开方向错误的问题（原本应水平展开，却变为垂直）。
+* 统一了原生垂直选项卡中侧边栏工具按钮的排列样式。无论 Sidebery 是否启用，侧边栏是否展开，按钮数量是多是少，展开或折叠状态下，均能保持一致、整齐的间距与布局。
 
-**🦊 v3.4.9**
-* 修复了 v3.4.8 中地址栏在鼠标悬停时无法显示外框的问题。
-* 新标签页的搜索框也已支持 `uc.flex.revert-to-original-flat-corner-style` 选项，可还原为 Firefox 默认的圆角样式。
+<details>  
+<summary>🪄 <b>重大更新：支持还原原生平角风格</b> <i>《点击展开》</i> 👇</summary>
 
-**🦊 v3.4.8**
-* 修复了在地址栏聚焦时，地址栏与下拉建议列表边缘未对齐的问题。
-* 新增选项 `uc.flex.revert-to-original-flat-corner-style`，设置为 `true` 后可关闭 FlexFox 的圆角设计，还原为 Firefox 默认的较平缓圆角风格。你也可以在 `uc-variables.css` 中调整该选项下的 `*-radius` 变量，自定义地址栏、搜索框和查找栏的圆角大小。
+现在可以通过启用 `uc.flex.revert-to-original-flat-corner-style` 选项，将界面样式切换回 Firefox 默认的平直角风格，替代 FlexFox 的圆角设计。如果你偏好更加简洁、锐利的视觉效果，这个选项非常适合。
 
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox 默认圆角样式预览" width="72%" />
+此外，还可以通过修改 `uc-variables.css` 中该选项下的 `*-radius` 变量，自定义地址栏、搜索栏和查找栏的圆角大小，实现更精细的个性化调整。
+
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
+
+</details>
 
 <details>
-<summary>🎨 <b>重大更新：支持 Firefox Color《点击展开》</b>👇</summary>
+<summary>🎨 <b>重大更新：支持 Firefox Color</b> <i>《点击展开》</i> 👇</summary>
 
 FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通过实时预览，自由自定义浏览器的配色外观。
 
@@ -46,7 +50,7 @@ FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通�
 </details>
 
 <details>
-<summary>🚀 <b>重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式《点击展开》</b>👇</summary>
+<summary>🚀 <b>重大更新：原生垂直选项卡现支持完全隐藏与保持展开模式</b> <i>《点击展开》</i> 👇</summary>
 
 - `uc.flex.fully-hide-sidebery` 选项与 `Hide Sidebery` 快捷键现在也适用于原生垂直选项卡，可将其完全隐藏。
 - 进入全屏模式（<kbd>F11</kbd>）时，原生垂直选项卡也会随之自动隐藏。
@@ -57,7 +61,7 @@ FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通�
 </details>
 
 <details>
-<summary>🌈 <b>重大更新：自定义书签文件夹图标《点击展开》</b>👇</summary>
+<summary>🌈 <b>重大更新：自定义书签文件夹图标</b> <i>《点击展开》</i> 👇</summary>
 
 新增数值型选项 `uc.flex.enable-colored-bookmarks-folder-icons`：
 
@@ -86,7 +90,7 @@ FlexFox 现已支持 [Firefox Color](https://color.firefox.com/)，你可以通�
 </details>
 
 <details>
-<summary>🚀 <b>重大更新：支持通过快捷键切换 UI 布局《点击展开》</b>👇</summary>
+<summary>🚀 <b>重大更新：支持通过快捷键切换 UI 布局</b> <i>《点击展开》</i> 👇</summary>
 
 FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/)。
 安装并按下图设置：  
@@ -116,6 +120,19 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.4.10**
+* 修复了查找栏背景颜色显示异常的问题。
+
+**v3.4.9**
+* 修复了 v3.4.8 中地址栏在鼠标悬停时无法显示外框的问题。
+* 新标签页的搜索框也已支持 `uc.flex.revert-to-original-flat-corner-style` 选项，可还原为 Firefox 默认的圆角样式。
+
+**v3.4.8**
+* 修复了在地址栏聚焦时，地址栏与下拉建议列表边缘未对齐的问题。
+* 新增选项 `uc.flex.revert-to-original-flat-corner-style`，设置为 `true` 后可关闭 FlexFox 的圆角设计，还原为 Firefox 默认的较平缓圆角风格。你也可以在 `uc-variables.css` 中调整该选项下的 `*-radius` 变量，自定义地址栏、搜索框和查找栏的圆角大小。
+
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox 默认圆角样式预览" width="72%" />
 
 **v3.4.7**
 * 修复了将原生垂直选项卡放在右侧时，鼠标移到屏幕最右边无法顺畅展开的问题。
@@ -226,7 +243,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <h4>💻 PowerShell 脚本</h4>
 <details>
-<summary>《点击展开》👇</summary>
+<summary><i>《点击展开》</i> 👇</summary>
 
 - **在线部署** – 在 PowerShell 中输入以下命令：
   ```powershell
@@ -257,7 +274,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <h4>🔃 Git Pull</h4>
 <details>
-<summary>《点击展开》👇</summary>
+<summary><i>《点击展开》</i> 👇</summary>
 
 - 可根据使用环境，选择 `scripts` 文件夹中的任一 `git-pull-chrome-only` 脚本。这些脚本将：
 

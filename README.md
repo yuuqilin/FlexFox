@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v140-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v141-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,23 +20,27 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.4.10**
-* Fixed an issue where the Findbar displayed the wrong background color.
+**🦊 v3.5.0**
+* Fixed a display issue where pinned tabs in native vertical tabs were incorrectly stacked vertically in Firefox v141+.
+* Fixed an overflow issue with pinned tab width when fewer than 4 tabs are pinned.
+* Fixed misalignment of the settings button in the sidebar when there are 5 or fewer tool buttons, and ensured the toolbar expands horizontally as intended.
+* Standardized the spacing and layout of native vertical tab sidebar tool buttons across all scenarios—whether Sidebery is active or not, the sidebar is expanded or collapsed, and regardless of the number of buttons. The layout now remains clean and consistent at all times.
 
 <!-- END What's New -->
 
-**🦊 v3.4.9**
-* Fixed a regression introduced in v3.4.8 where the address bar outline no longer appeared on hover.
-* The search box on the New Tab page now also supports the `uc.flex.revert-to-original-flat-corner-style` option, allowing it to revert to Firefox's default rounded corners.
+<details>  
+<summary>🪄 <b>Major Update: Optional Flat Corner Style</b> <i>[Click to expand]</i> 👇</summary>
 
-**🦊 v3.4.8**
-* Fixed misalignment between the address bar and its suggestion dropdown when the URL bar is focused.
-* Added a new option `uc.flex.revert-to-original-flat-corner-style`. When set to `true`, this restores Firefox's default flatter corner style instead of FlexFox's rounded design. You can also customize the corner radius of the address bar, search bar, and find bar by adjusting the `*-radius` variables under this option in `uc-variables.css`.
+You can now restore Firefox's original flat corner style by enabling the `uc.flex.revert-to-original-flat-corner-style` option. This replaces FlexFox's rounded design with the default, sharper look.
 
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
+For further customization, you can fine-tune the corner radius of the address bar, search bar, and find bar by editing the related `*-radius` variables under this option in `uc-variables.css`.
+
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
+
+</details>
 
 <details>
-<summary>🎨 <b>Major Update: Firefox Color Support [Click to expand]</b> 👇</summary>
+<summary>🎨 <b>Major Update: Firefox Color Support</b> <i>[Click to expand]</i> 👇</summary>
 
 FlexFox now supports [Firefox Color](https://color.firefox.com/), so you can freely customize your browser's appearance with live previews.
 
@@ -49,7 +53,7 @@ To make Firefox Color work with FlexFox, choose any background image from the **
 
 <details>
 
-<summary>🚀 <b>Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs [Click to expand]</b> 👇</summary>
+<summary>🚀 <b>Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs</b> <i>[Click to expand]</i> 👇</summary>
 
 - The existing `uc.flex.fully-hide-sidebery` option and the `Hide Sidebery` hotkey now also hide native vertical tabs completely.
 - Native vertical tabs are now also fully hidden when entering fullscreen mode (<kbd>F11</kbd>).
@@ -60,7 +64,7 @@ To make Firefox Color work with FlexFox, choose any background image from the **
 </details>
 
 <details>
-<summary>🌈 <b>Major Update: Custom Bookmark Folder Icons [Click to expand]</b> 👇</summary>
+<summary>🌈 <b>Major Update: Custom Bookmark Folder Icons</b> <i>[Click to expand]</i> 👇</summary>
 
 A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
 
@@ -89,7 +93,7 @@ You can customize the icon's color, size, and position by editing the `--uc-book
 </details>
 
 <details>
-<summary>🚀 <b>Major Update: Layout Switching via Hotkeys [Click to expand]</b> 👇</summary>
+<summary>🚀 <b>Major Update: Layout Switching via Hotkeys</b> <i>[Click to expand]</i> 👇</summary>
 
 FlexFox now supports the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension.
 After installing and configuring the extension as shown below:  
@@ -121,6 +125,19 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.4.10**
+* Fixed an issue where the Findbar displayed the wrong background color.
+
+**v3.4.9**
+* Fixed a regression introduced in v3.4.8 where the address bar outline no longer appeared on hover.
+* The search box on the New Tab page now also supports the `uc.flex.revert-to-original-flat-corner-style` option, allowing it to revert to Firefox's default rounded corners.
+
+**v3.4.8**
+* Fixed misalignment between the address bar and its suggestion dropdown when the URL bar is focused.
+* Added a new option `uc.flex.revert-to-original-flat-corner-style`. When set to `true`, this restores Firefox's default flatter corner style instead of FlexFox's rounded design. You can also customize the corner radius of the address bar, search bar, and find bar by adjusting the `*-radius` variables under this option in `uc-variables.css`.
+
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
 
 **v3.4.7**
 * Fixed an issue where the native vertical tabs couldn't smoothly expand when placed on the right and the mouse moved to the edge of the screen.
@@ -229,7 +246,7 @@ For more update logs from earlier versions,
 
 <h4>💻 PowerShell Script</h4>
 <details>
-<summary>[Click to expand] 👇</summary>
+<summary><i>[Click to expand]</i> 👇</summary>
 
 - **Online deployment** – Run this command in a PowerShell window:
   ```powershell
@@ -258,7 +275,7 @@ For more update logs from earlier versions,
 
 <h4>🔃 Git Pull</h4>
 <details>
-<summary>[Click to expand] 👇</summary>
+<summary><i>[Click to expand]</i> 👇</summary>
 
 - Use one of the `git-pull-chrome-only` scripts inside the `scripts` folder, depending on your environment. These scripts will:
   - Automatically set your Firefox profile folder as a Git working directory
