@@ -20,11 +20,15 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.5.0**
-* Fixed a display issue where pinned tabs in native vertical tabs were incorrectly stacked vertically in Firefox v141+.
-* Fixed an overflow issue with pinned tab width when fewer than 4 tabs are pinned.
-* Fixed misalignment of the settings button in the sidebar when there are 5 or fewer tool buttons, and ensured the toolbar expands horizontally as intended.
-* Standardized the spacing and layout of native vertical tab sidebar tool buttons across all scenarios—whether Sidebery is active or not, the sidebar is expanded or collapsed, and regardless of the number of buttons. The layout now remains clean and consistent at all times.
+**🦊 v3.5.1**
+* Fixed a regression introduced in v3.4.7 where native vertical tabs would flicker on hover and expand incorrectly when positioned on the right, if `uc.flex.disable-sidebery-autohide` was enabled or the `Lock Sidebery` shortcut was used.
+* Made the picture-in-picture (PiP) volume control button always visible. Credit to u/endgame0 on Reddit.
+* Added a new option: `uc.flex.move-pip-volume-to-top` – moves the PiP volume button to the top (boolean). Credit to u/endgame0 on Reddit.
+* Added a new option: `uc.flex.dim-urlbar-popup-backdrop` – dims the background when the address bar dropdown is open. Accepts values from `0` (disabled) to `2`; higher values increase the dimming effect.
+* Added a new option: `uc.flex.enable-rounded-web-content` – adds margins, rounded corners, and drop shadows around the web content area. Accepts values from `0` (disabled) to `2`; higher values increase the margin. This creates a soft, floating card appearance for web content, resembling the visual style of Zen or Microsoft Edge.
+  You can quickly adjust the appearance using the following variables: `--uc-web-content-margin-small`, `--uc-web-content-margin-large`, and `--uc-web-content-radius-box`.
+
+  Below is a preview of FlexFox with `uc.flex.enable-rounded-web-content` set to `1`: <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
 
 <!-- END What's New -->
 
@@ -125,6 +129,12 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.5.0**
+* Fixed a display issue where pinned tabs in native vertical tabs were incorrectly stacked vertically in Firefox v141+.
+* Fixed an overflow issue with pinned tab width when fewer than 4 tabs are pinned.
+* Fixed misalignment of the settings button in the sidebar when there are 5 or fewer tool buttons, and ensured the toolbar expands horizontally as intended.
+* Standardized the spacing and layout of native vertical tab sidebar tool buttons across all scenarios—whether Sidebery is active or not, the sidebar is expanded or collapsed, and regardless of the number of buttons. The layout now remains clean and consistent at all times.
 
 **v3.4.10**
 * Fixed an issue where the Findbar displayed the wrong background color.
@@ -358,6 +368,9 @@ For more update logs from earlier versions,
 | `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
 | `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in the native vertical tabs when in expanded state. Firefox hides this separator by default in this mode. |
+| `uc.flex.dim-urlbar-popup-backdrop` | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
+| `uc.flex.move-pip-volume-to-top` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
+| `uc.flex.enable-rounded-web-content` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
 
 #### 🚫 Disable or Revert Features
 

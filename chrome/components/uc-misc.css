@@ -87,3 +87,121 @@ toolbar:not(#TabsToolbar) > #search-container {
 #tabbrowser-tabpanels {
     background: hsl(240, 4%, 10%) !important;
 }
+
+/* Make Picture-in-Picture Volume Controls always appear at the bottom (Credit u/endgame0 on Reddit) */
+/* Modified from https://www.reddit.com/r/FirefoxCSS/comments/1kuyu02/firefox_picture_in_picture_is_almost_perfect_but/ */
+@-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
+{
+    #audio-scrubber {
+        min-width: 30px !important;
+        max-width: 64px !important;
+        width: 100% !important;
+    }
+    @media (width <= 630px) {
+        #audio-scrubber {
+            display: inline-block !important;
+        }
+        .end-controls {
+            grid-template-columns: 1fr auto 1fr 1fr !important;
+            grid-template-areas: "audio audio-scrubber closedcaption fullscreen" !important;
+        }
+    }
+    @media (width <= 475px) {
+        .end-controls {
+            grid-template-columns: 1fr auto 1fr !important;
+            grid-template-areas: "audio audio-scrubber fullscreen" !important;
+        }
+    }
+    @media (height <= 325px) and (width <= 630px) {
+        #audio-scrubber {
+            display: inline-block !important;
+        }
+        .end-controls {
+            grid-template-columns: 1fr auto 1fr !important;
+            grid-template-areas: "audio audio-scrubber fullscreen" !important;
+        }
+    }
+}
+
+/* Move Picture-In-Picture Volume Controls to the top on small sizes (Credit u/endgame0 on Reddit) */
+/* Modified from https://www.reddit.com/r/FirefoxCSS/comments/1kuyu02/firefox_picture_in_picture_is_almost_perfect_but/ */
+@media -moz-pref("uc.flex.move-pip-volume-to-top") {
+    @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml")
+    {
+        @media (width <= 630px) {
+            #audio {
+                position: absolute !important;
+                top: calc(
+                    10px - (100vh - 2 * var(--resize-margin)) + var(--controls-bottom-upper-height) +
+                        var(--player-control-item-height) + var(--controls-bottom-distance)
+                ) !important;
+                left: calc(10px + var(--player-control-item-height) + 10px) !important;
+                width: var(--player-control-item-height) !important;
+                height: var(--player-control-item-height) !important;
+                z-index: 14 !important;
+                grid-area: initial !important;
+            }
+
+            #audio::after {
+                display: none !important;
+            }
+
+            #audio-scrubber {
+                display: block !important;
+                position: absolute !important;
+                top: calc(
+                    10px - (100vh - 2 * var(--resize-margin)) + var(--controls-bottom-upper-height) +
+                        var(--player-control-item-height) + var(--controls-bottom-distance)
+                ) !important;
+                left: calc(10px + var(--player-control-item-height) + 10px) !important;
+                width: calc(var(--player-control-item-height) + 5px + clamp(80px, 20vw, 120px) + 5px) !important;
+                height: var(--player-control-item-height) !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+                z-index: 13 !important;
+                -moz-appearance: auto !important;
+                appearance: auto !important;
+                background: transparent !important;
+                padding-left: calc(var(--player-control-item-height) + 5px) !important;
+                padding-right: 5px !important;
+                border: initial !important;
+                box-sizing: border-box !important;
+                transition:
+                    opacity 0.2s ease-in-out,
+                    visibility 0s linear 0.2s,
+                    width 0.25s ease-in-out;
+            }
+
+            #audio:hover + #audio-scrubber,
+            #audio-scrubber:hover {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+            }
+        }
+
+        @media (width <= 280px) {
+            #audio-scrubber {
+                width: calc(var(--player-control-item-height) + 5px + clamp(40px, 10vw, 70px) + 5px) !important;
+            }
+        }
+
+        @media (width <= 300px) {
+            .controls-bottom-lower {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .center-controls {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+        }
+    }
+}

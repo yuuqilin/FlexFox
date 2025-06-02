@@ -55,6 +55,12 @@ user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
 user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
 /* Sets findbar position (string: "top-center-left"/"0", "top-right"/"1", "bottom-right"/"2"). */
 user_pref("uc.flex.findbar-position",                     "top-right");
+/* Darkens background when URL bar dropdown is open (0 = off, 1–2 = dim intensity). */
+user_pref("uc.flex.dim-urlbar-popup-backdrop",                      0);
+/* Moves PiP window volume button to the top */
+user_pref("uc.flex.move-pip-volume-to-top",                     false);
+/* Adds margin, shadow, and rounded corners to web content (0 = off, 1–2 = more margin). */
+user_pref("uc.flex.enable-rounded-web-content",                     0);
 /* Disables Firefox's built-in auto-collapse for vertical tabs. */
 user_pref("sidebar.visibility",                         "always-show");
 /* Defines the animation duration for expanding/collapsing vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. */

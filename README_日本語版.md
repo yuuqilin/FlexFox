@@ -20,11 +20,15 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.5.0**
-* Firefox v141以降で、ピン留めされたタブが縦に並んでしまう表示の不具合を修正しました（本来は横に並ぶべき）。
-* ピン留めされたタブが3つ以下のときに、タブの幅がはみ出す問題を修正しました。
-* サイドバーのツールボタンが5個以下のときに、設定ボタンの位置がずれる、またツールバーの展開方向が縦になってしまう問題を修正しました。
-* ネイティブの縦型タブにおけるサイドバーツールボタンの表示スタイルを統一しました。Sideberyの有効・無効、サイドバーの展開状態、ボタン数の多少にかかわらず、すべてのパターンで一貫した整った間隔で表示されるようになりました。
+**🦊 v3.5.1**
+* v3.4.7 で発生した不具合を修正：`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` ショートカットを使用すると、ネイティブの縦型タブでホバー時にちらつきが発生し、タブが右側にある場合に展開位置がずれる問題がありました。
+* ピクチャ・イン・ピクチャ (PiP) の音量調整ボタンを常に表示するように変更。Reddit の u/endgame0 氏に感謝。
+* 新オプション `uc.flex.move-pip-volume-to-top` を追加。PiP の音量ボタンを上部に移動します（ブール値）。Reddit の u/endgame0 氏に感謝。
+* 新オプション `uc.flex.dim-urlbar-popup-backdrop` を追加。アドレスバーのドロップダウンが展開された際に背景を暗くします。`0`（無効）から `2` までの数値を設定でき、数値が大きいほど暗さが増します。
+* 新オプション `uc.flex.enable-rounded-web-content` を追加。Web コンテンツ領域にマージン、角丸、影を追加します。`0`（無効）～`2` まで設定可能で、数値が大きいほどマージンが広がります。カードのように柔らかく浮かび上がるスタイルになり、Zen や Microsoft Edge に近い外観になります。
+  外観は、`--uc-web-content-margin-small`、`--uc-web-content-margin-large`、`--uc-web-content-radius-box` の各変数で簡単に調整できます。
+
+  下図は `uc.flex.enable-rounded-web-content` を `1` に設定した FlexFox の表示例です： <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="FlexFoxのrounded web content表示例" width="96%" />
 
 <details>  
 <summary>🪄 <b>新機能：角丸なしのフラットなデザインに切り替え可能</b> <i>《クリックで展開》</i> 👇</summary>
@@ -120,6 +124,12 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.5.0**
+* Firefox v141以降で、ピン留めされたタブが縦に並んでしまう表示の不具合を修正しました（本来は横に並ぶべき）。
+* ピン留めされたタブが3つ以下のときに、タブの幅がはみ出す問題を修正しました。
+* サイドバーのツールボタンが5個以下のときに、設定ボタンの位置がずれる、またツールバーの展開方向が縦になってしまう問題を修正しました。
+* ネイティブの縦型タブにおけるサイドバーツールボタンの表示スタイルを統一しました。Sideberyの有効・無効、サイドバーの展開状態、ボタン数の多少にかかわらず、すべてのパターンで一貫した整った間隔で表示されるようになりました。
 
 **v3.4.10**
 * 検索バーの背景色が正しく表示されない不具合を修正しました。
@@ -354,6 +364,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
 | `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Firefox の「展開モード」のネイティブ垂直タブにおいて、ピン留めタブと通常タブの間に区切り線を表示します（デフォルトでは非表示）。 |
+| `uc.flex.dim-urlbar-popup-backdrop` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
+| `uc.flex.move-pip-volume-to-top` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
+| `uc.flex.enable-rounded-web-content` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
 
 #### 🚫 機能を無効化・元に戻すオプション
 

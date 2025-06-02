@@ -20,11 +20,15 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.5.0**
-* 修复了在 Firefox v141 及以上版本中，原生垂直选项卡的固定标签显示为垂直排列的问题（应为水平排列）。
-* 修复了当固定标签数量少于 4 个时，标签宽度溢出的问题。
-* 修复了当侧边栏工具按钮少于 6 个时，设置按钮位置不对齐，以及工具栏展开方向错误的问题（原本应水平展开，却变为垂直）。
-* 统一了原生垂直选项卡中侧边栏工具按钮的排列样式。无论 Sidebery 是否启用，侧边栏是否展开，按钮数量是多是少，展开或折叠状态下，均能保持一致、整齐的间距与布局。
+**🦊 v3.5.1**
+* 修复 v3.4.7 引入的回归问题：当启用 `uc.flex.disable-sidebery-autohide` 或使用快捷键 `Lock Sidebery` 时，原生垂直选项卡在悬停时会发生闪烁，若分栏在右侧时，展开位置也会异常。
+* 让画中画 (PiP) 的音量控制按钮始终可见。致谢 Reddit 用户 u/endgame0。
+* 新增选项 `uc.flex.move-pip-volume-to-top`，将 PiP 的音量按钮移至上方（布尔值）。致谢 Reddit 用户 u/endgame0。
+* 新增选项 `uc.flex.dim-urlbar-popup-backdrop`，在地址栏下拉建议列表展开时暗化背景。支持数值 `0`（关闭）至 `2`，数值越大，背景越暗。
+* 新增选项 `uc.flex.enable-rounded-web-content`，为网页内容区域添加边距、圆角和阴影。可设置为 `0`（关闭）至 `2`，数值越大，边距越宽。启用后，网页内容呈现出柔和的卡片式悬浮感，整体视觉风格类似 Zen 或 Microsoft Edge 浏览器。
+  可通过以下变量快速调整外观：`--uc-web-content-margin-small`、`--uc-web-content-margin-large` 和 `--uc-web-content-radius-box`。
+
+  下图为 `uc.flex.enable-rounded-web-content` 设为 `1` 时的 FlexFox 显示效果： <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="FlexFox 卡片式网页显示效果预览" width="96%" />
 
 <details>  
 <summary>🪄 <b>重大更新：支持还原原生平角风格</b> <i>《点击展开》</i> 👇</summary>
@@ -120,6 +124,12 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.5.0**
+* 修复了在 Firefox v141 及以上版本中，原生垂直选项卡的固定标签显示为垂直排列的问题（应为水平排列）。
+* 修复了当固定标签数量少于 4 个时，标签宽度溢出的问题。
+* 修复了当侧边栏工具按钮少于 6 个时，设置按钮位置不对齐，以及工具栏展开方向错误的问题（原本应水平展开，却变为垂直）。
+* 统一了原生垂直选项卡中侧边栏工具按钮的排列样式。无论 Sidebery 是否启用，侧边栏是否展开，按钮数量是多是少，展开或折叠状态下，均能保持一致、整齐的间距与布局。
 
 **v3.4.10**
 * 修复了查找栏背景颜色显示异常的问题。
@@ -359,6 +369,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在原生垂直选项卡处于“展开模式”时，在已固定的标签页和普通标签页之间显示分隔线（默认情况下该分隔线为隐藏）。 |
+| `uc.flex.dim-urlbar-popup-backdrop` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
+| `uc.flex.move-pip-volume-to-top` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
+| `uc.flex.enable-rounded-web-content` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
 
 #### 🚫 停用或还原选项
 

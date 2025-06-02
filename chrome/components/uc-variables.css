@@ -234,13 +234,28 @@
 
     /* Corner radius settings for the urlbar, searchbar, findbar, and their icons */
     @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
-    --uc-urlbar-border-radius: 30px;
-    --uc-urlbar-popup-border-radius: 15px;
-    --uc-urlbar-icon-radius: 16px;
-    --uc-urlbar-icon-inner-radius: 6px;
-    --uc-searchbar-popup-border-radius: 12px;
-    --uc-findbar-border-radius: 8px;
+        --uc-urlbar-border-radius: 30px;
+        --uc-urlbar-popup-border-radius: 15px;
+        --uc-urlbar-icon-radius: 16px;
+        --uc-urlbar-icon-inner-radius: 6px;
+        --uc-searchbar-popup-border-radius: 12px;
+        --uc-findbar-border-radius: 8px;
     }
+
+    /* Adjusts background darkness behind the urlbar popup. Higher values = darker background. */
+    @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop", 1) {
+        --uc-urlbar-popup-dimness: 0.05;
+    }
+    @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop", 2) {
+        --uc-urlbar-popup-dimness: 0.1;
+    }
+
+    /* Add margin, shadow, and rounded corners to the web content area */
+    --uc-web-content-margin-small: 4px;
+    @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
+        --uc-web-content-margin-large: 8px;
+    }
+    --uc-web-content-radius-box: 8px;
 
     /* Sidebar expand/collapse animation settings */
     --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
@@ -442,6 +457,61 @@
         }
     }
 
+    /* Add margin to the web content area */
+    @media -moz-pref("uc.flex.enable-rounded-web-content") {
+        --uc-web-content-margin-top: 0;
+        --uc-web-content-margin-side: 0;
+        @media -moz-pref("uc.flex.fully-hide-toolbox") {
+            --uc-web-content-margin-top: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+        }
+        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+            &[titlepreface*="\200b "] {
+                --uc-web-content-margin-top: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+            }
+        }
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
+            --uc-web-content-margin-side: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+        }
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            &[titlepreface*="\200c "] {
+                --uc-web-content-margin-side: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+            }
+        }
+        @media not -moz-pref("sidebar.revamp") {
+            /* 
+             * --margin-side can't be overridden here because it's used in --margin-box, 
+             * which is statically resolved at :root and won't update dynamically.
+             * This could be fixed with :root:has(), but we avoid using it. 
+             * Define the full box value directly instead. 
+             */
+            #sidebar-box[hidden] ~ #tabbrowser-tabbox {
+                /*
+                --uc-web-content-margin-side: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                */
+                --uc-web-content-margin-box: var(--uc-web-content-margin-top)
+                    var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
+                    var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
+                    var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+            }
+        }
+        --uc-web-content-margin-box: var(--uc-web-content-margin-top)
+            var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
+            var(--uc-web-content-margin-large, var(--uc-web-content-margin-small)) var(--uc-web-content-margin-side);
+        #tabbrowser-tabbox[sidebar-positionend] {
+            --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin-side)
+                var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
+                var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+        }
+
+        --uc-devtools-toolbox-margin-box: 0 var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
+            var(--uc-web-content-margin-large, var(--uc-web-content-margin-small)) var(--uc-web-content-margin-side);
+        #tabbrowser-tabbox[sidebar-positionend] {
+            --uc-devtools-toolbox-margin-box: 0 var(--uc-web-content-margin-side)
+                var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
+                var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+        }
+    }
+
     /* Toolbar sizing */
     --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
     --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
@@ -527,10 +597,18 @@
         );
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
             --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
+            --uc-sidebar-main-margin-left: 0px;
+            #sidebar-main:is([positionend], [sidebar-positionend]) {
+                --uc-sidebar-main-margin-left: 0px;
+            }
         }
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             &[titlepreface*="\180e "] {
                 --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
+                --uc-sidebar-main-margin-left: 0px;
+                #sidebar-main:is([positionend], [sidebar-positionend]) {
+                    --uc-sidebar-main-margin-left: 0px;
+                }
             }
         }
     }
@@ -615,6 +693,32 @@
         --uc-windows-controls-right: 0px;
         &[inFullscreen] {
             --uc-windows-controls-top: 0px;
+        }
+
+        /* Adjust the top-left-right border radius of the web content area when Sidebery is active */
+        @media -moz-pref("uc.flex.enable-rounded-web-content") and (not -moz-pref("uc.flex.disable-sidebery-autohide")) {
+            &:not([titlepreface*="\180e "]) {
+                #tabbrowser-tabbox:not([sidebar-positionend]) {
+                    --uc-sb-web-content-radius-top-left: 0;
+                    --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius-box);
+                    @media -moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox") {
+                        --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius-box);
+                    }
+                }
+                #tabbrowser-tabbox[sidebar-positionend] {
+                    --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius-box);
+                    --uc-sb-web-content-radius-top-right: 0;
+                    @media -moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox") {
+                        --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius-box);
+                    }
+                }
+                @media not (-moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox")) {
+                    &:is([titlepreface*="\200b "], [titlepreface*="\200c "]) #tabbrowser-tabbox {
+                        --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius-box);
+                        --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius-box);
+                    }
+                }
+            }
         }
 
         @media not -moz-pref("sidebar.verticalTabs") {

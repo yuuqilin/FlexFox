@@ -752,9 +752,13 @@
              * to keep it visible when expanding from the right edge. 
              */
             &:is([positionend], [sidebar-positionend]) {
-                transform: translateX(
-                    calc(11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%)
-                );
+                @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                    :root:not([titlepreface*="\180e "]) & {
+                        transform: translateX(
+                            calc(11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%)
+                        );
+                    }
+                }
             }
         }
         /* Fix transparent background issue in vertical tabs; no longer needed in Firefox v138 and later */

@@ -1,4 +1,4 @@
-/*            FlexFox v3.5.0            */
+/*            FlexFox v3.5.1            */
 /*      ____ _          ____            */
 /*     / __/ /__  _  __/ __/___  _  __  */
 /*    / /_/ / _ \| |/_/ /_/ __ \| |/_/  */
@@ -16,6 +16,7 @@
 @import url(./components/uc-fullscreen.css);
 @import url(./components/uc-bookmarks.css);
 @import url(./components/uc-sidebar.css);
+@import url(./components/uc-browser.css);
 @import url(./components/uc-findbar.css);
 @import url(./components/uc-window-controls.css);
 @import url(./components/uc-verticalfox.css);
