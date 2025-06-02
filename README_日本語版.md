@@ -20,6 +20,11 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
+**🦊 v3.5.2**
+* `uc.flex.move-pip-volume-to-top` を有効にした際、PiP ウィンドウ内の音量スライダーが短すぎる不具合を修正しました。
+* 新オプション `uc.flex.disable-flexfox` を追加。Firefox を再起動せずに FlexFox の全スタイルを一時的に無効化できます。
+* 新オプション `uc.flex.skip-loading-uc-*.css` を追加。`./components/` や `./content/` フォルダー内の特定の `uc-*.css` ファイルの読み込みを個別にスキップできます。たとえば、`uc.flex.skip-loading-uc-newtab.css` を true に設定すると、`./content/uc-newtab.css` の読み込みが無効化されます。
+
 **🦊 v3.5.1**
 * v3.4.7 で発生した不具合を修正：`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` ショートカットを使用すると、ネイティブの縦型タブでホバー時にちらつきが発生し、タブが右側にある場合に展開位置がずれる問題がありました。
 * ピクチャ・イン・ピクチャ (PiP) の音量調整ボタンを常に表示するように変更。Reddit の u/endgame0 氏に感謝。
@@ -372,6 +377,8 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 | 設定名 | 説明 |
 |--------|------|
+| `uc.flex.disable-flexfox` | Firefox を再起動せずに、FlexFox のすべてのスタイルと機能を無効にします。 |
+| `uc.flex.skip-loading-uc-*.css` | `./components/` および `./content/` 内の特定の `uc-*.css` ファイルの読み込みをスキップします。たとえば、`uc.flex.skip-loading-uc-newtab.css` を有効にすると `./content/uc-newtab.css` が読み込まれなくなります。 |
 | `uc.flex.disable-bookmarks-autohide` | ブックマークツールバーの自動非表示を無効にします。 |
 | `uc.flex.disable-tabs-toolbar-autohide` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
 | `uc.flex.disable-findbar-autohide` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |

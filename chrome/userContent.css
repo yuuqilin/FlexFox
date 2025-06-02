@@ -1,4 +1,7 @@
-@import url(./content/uc-sidebery.css);
-@import url(./content/uc-newtab.css);
-@import url(./content/uc-pdf.js.css);
+@import url(./content/uc-sidebery.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-sidebery.css"));
+@import url(./content/uc-newtab.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-newtab.css"));
+@import url(./content/uc-pdf.js.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-pdf.js.css"));
 @import url(./content/uc-custom-content.css);

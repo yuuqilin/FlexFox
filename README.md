@@ -20,6 +20,13 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**🦊 v3.5.2**
+* Fixed an issue where the PiP volume slider was too short when `uc.flex.move-pip-volume-to-top` was enabled.
+* Added a new option `uc.flex.disable-flexfox`, which allows you to instantly disable all FlexFox styles while Firefox is running.
+* Added a new option `uc.flex.skip-loading-uc-*.css`, which lets you selectively skip loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will prevent `./content/uc-newtab.css` from loading.
+
+<!-- END What's New -->
+
 **🦊 v3.5.1**
 * Fixed a regression introduced in v3.4.7 where native vertical tabs would flicker on hover and expand incorrectly when positioned on the right, if `uc.flex.disable-sidebery-autohide` was enabled or the `Lock Sidebery` shortcut was used.
 * Made the picture-in-picture (PiP) volume control button always visible. Credit to u/endgame0 on Reddit.
@@ -29,8 +36,6 @@ It's not just a new look, it's a better way to browse.
   You can quickly adjust the appearance using the following variables: `--uc-web-content-margin-small`, `--uc-web-content-margin-large`, and `--uc-web-content-radius-box`.
 
   Below is a preview of FlexFox with `uc.flex.enable-rounded-web-content` set to `1`: <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
-
-<!-- END What's New -->
 
 <details>  
 <summary>🪄 <b>Major Update: Optional Flat Corner Style</b> <i>[Click to expand]</i> 👇</summary>
@@ -376,6 +381,8 @@ For more update logs from earlier versions,
 
 | Preference | Description |
 |-----------|-------------|
+| `uc.flex.disable-flexfox` | Disables all FlexFox styles and features without needing to restart Firefox. |
+| `uc.flex.skip-loading-uc-*.css` | Skips loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will skip loading `./content/uc-newtab.css`. |
 | `uc.flex.disable-bookmarks-autohide` | Disables auto-hide for the bookmarks toolbar. |
 | `uc.flex.disable-tabs-toolbar-autohide` | Prevents the native horizontal tabs from auto-hiding when Sidebery is inactive. |
 | `uc.flex.disable-findbar-autohide` | Prevents the Findbar from automatically hiding when it loses focus. |

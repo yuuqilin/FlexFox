@@ -1,23 +1,38 @@
-/*            FlexFox v3.5.1            */
+/*            FlexFox v3.5.2            */
 /*      ____ _          ____            */
 /*     / __/ /__  _  __/ __/___  _  __  */
 /*    / /_/ / _ \| |/_/ /_/ __ \| |/_/  */
 /*   / __/ /  __/>  </ __/ /_/ />  <    */
 /*  /_/ \__\___/_/|_|_/  \____/_/|_|    */
 /*  __________________________________  */
-@import url(./components/uc-variables.css);
-@import url(./components/uc-icons.css);
-@import url(./components/uc-menu-icons.css);
-@import url(./components/uc-uni-extensions.css);
-@import url(./components/uc-misc.css);
-@import url(./components/uc-tabs-bar.css);
-@import url(./components/uc-urlbar.css);
-@import url(./components/uc-navbar.css);
-@import url(./components/uc-fullscreen.css);
-@import url(./components/uc-bookmarks.css);
-@import url(./components/uc-sidebar.css);
-@import url(./components/uc-browser.css);
-@import url(./components/uc-findbar.css);
-@import url(./components/uc-window-controls.css);
-@import url(./components/uc-verticalfox.css);
+@import url(./components/uc-variables.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-variables.css"));
+@import url(./components/uc-icons.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-icons.css"));
+@import url(./components/uc-menu-icons.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-menu-icons.css"));
+@import url(./components/uc-uni-extensions.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-uni-extensions.css"));
+@import url(./components/uc-misc.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-misc.css"));
+@import url(./components/uc-tabs-bar.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-tabs-bar.css"));
+@import url(./components/uc-urlbar.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-urlbar.css"));
+@import url(./components/uc-navbar.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-navbar.css"));
+@import url(./components/uc-fullscreen.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-fullscreen.css"));
+@import url(./components/uc-bookmarks.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-bookmarks.css"));
+@import url(./components/uc-sidebar.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-sidebar.css"));
+@import url(./components/uc-browser.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-browser.css"));
+@import url(./components/uc-findbar.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-findbar.css"));
+@import url(./components/uc-window-controls.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-window-controls.css"));
+@import url(./components/uc-verticalfox.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-verticalfox.css"));
 @import url(./components/uc-user-settings.css);

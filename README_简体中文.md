@@ -20,6 +20,11 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
+**🦊 v3.5.2**
+* 修复启用 `uc.flex.move-pip-volume-to-top` 时，画中画窗口的音量滑块长度过短的问题。
+* 新增选项 `uc.flex.disable-flexfox`，可在 Firefox 运行中立即停用所有 FlexFox 样式与功能。
+* 新增选项 `uc.flex.skip-loading-uc-*.css`，允许选择性跳过加载位于 `./components/` 和 `./content/` 目录下的特定 `uc-*.css` 文件。例如设置 `uc.flex.skip-loading-uc-newtab.css` 为 true，可跳过加载 `./content/uc-newtab.css` 文件。
+
 **🦊 v3.5.1**
 * 修复 v3.4.7 引入的回归问题：当启用 `uc.flex.disable-sidebery-autohide` 或使用快捷键 `Lock Sidebery` 时，原生垂直选项卡在悬停时会发生闪烁，若分栏在右侧时，展开位置也会异常。
 * 让画中画 (PiP) 的音量控制按钮始终可见。致谢 Reddit 用户 u/endgame0。
@@ -377,6 +382,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 | 配置选项 | 说明 |
 |----------|------|
+| `uc.flex.disable-flexfox` | 无需重启 Firefox 即可停用所有 FlexFox 样式和功能。 |
+| `uc.flex.skip-loading-uc-*.css`  | 跳过加载 `./components/` 和 `./content/` 中的特定 `uc-*.css` 文件。例如将 `uc.flex.skip-loading-uc-newtab.css` 设置为 true 时，将不会加载 `./content/uc-newtab.css` 文件。 |
 | `uc.flex.disable-bookmarks-autohide` | 停用书签工具栏的自动隐藏功能。 |
 | `uc.flex.disable-tabs-toolbar-autohide` | 当 Sidebery 处于非活动状态时，防止原生水平标签栏自动隐藏。 |
 | `uc.flex.disable-findbar-autohide` | 防止查找栏（Findbar）在失去焦点后自动隐藏。 |

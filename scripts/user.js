@@ -65,6 +65,10 @@ user_pref("uc.flex.enable-rounded-web-content",                     0);
 user_pref("sidebar.visibility",                         "always-show");
 /* Defines the animation duration for expanding/collapsing vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. */
 user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
+/* Disables all FlexFox features without restarting Firefox */
+user_pref("uc.flex.disable-flexfox",                            false);
+/* Skips loading specific uc-*.css files in ./components/ and ./content/ */
+// user_pref("uc.flex.skip-loading-uc-*.css",                   false);
 
 /* Adjusts the text scaling in the Firefox interface. 100 means no scaling. */
 // user_pref("ui.textScaleFactor",                                 100);
