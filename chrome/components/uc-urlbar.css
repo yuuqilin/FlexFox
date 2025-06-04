@@ -87,7 +87,14 @@
     height: var(--urlbar-height) !important;
     padding-block: 0px !important;
     padding-inline: 0px !important;
+    /*
     transition: none !important;
+    */
+}
+
+/* .urlbar-input-container padding shifts this up. Add top padding to fix alignment. */
+#notification-popup-box {
+    padding-block-start: 2px;
 }
 
 /* Idendity icon button */
@@ -156,11 +163,31 @@
     > #urlbar:not([focused])
     > .urlbar-input-container {
     > #page-action-buttons
-        > *:not(#userContext-icons, #translations-button[open], #urlbar-zoom-button:not([hidden]), #star-button-box),
+        > *:not(
+            #userContext-icons,
+            #reader-mode-button[readeractive],
+            #picture-in-picture-button[pipactive],
+            #translations-button[open],
+            #urlbar-zoom-button:not([hidden]),
+            #star-button-box
+        ),
     > #page-action-buttons > #star-button-box:not([open]) > #star-button:not([starred]),
     > #tracking-protection-icon-container:not([open]) {
         opacity: 0;
+        transition: 0.15s ease-in-out 0.15s;
     }
+    > #identity-box {
+        > #identity-permission-box:not([open]),
+        > #notification-popup-box:not([open]) {
+            visibility: collapse;
+            opacity: 0;
+            transition: 0.15s ease-in-out 0.15s;
+        }
+    }
+}
+
+.urlbar-input-container {
+    transition: 0.15s ease-in-out 0.15s;
 }
 
 /* Searchmode Switcher */
@@ -170,7 +197,7 @@
 }
 
 #urlbar:is([pageproxystate="invalid"], [searchmode]) #urlbar-searchmode-switcher {
-    margin-left: 2px !important;
+    margin-left: 3px !important;
 }
 
 #urlbar-searchmode-switcher {

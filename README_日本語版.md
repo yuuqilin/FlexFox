@@ -20,6 +20,15 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
+**🦊 v3.5.3**
+* `uc.flex.enable-rounded-web-content` を有効にすると、開発者ツールがブラウザウィンドウ内にドッキングされている場合にリサイズできなくなる不具合（v3.5.2で発生）を修正しました。
+* アドレスバーの見た目と動作を改善しました：
+  * アドレスバー内に表示される位置情報や通知、カメラ／マイク共有などの許可関連アイコンの位置ずれを修正しました。
+  * ホバーしていないときに、さらに多くのアイコンを非表示にして、初期状態でよりすっきりとした見た目にしました。
+  * リーダーモードやPiP（ピクチャー・イン・ピクチャー）のアイコンは、それぞれの機能が有効な場合に常に表示されるようにしました。
+* `uc-pdf.js.css` によるPDF検出とスタイリングを改善しました。`.pdf` で終わらないURLであっても、ページ自体がPDFビューアである学術サイトでも、スタイルが正しく適用されるようになりました。
+* 以前は `Lock Sidebery` ショートカットでSideberyを常時表示にした際、ホバーアニメーションによってわずかなレイアウトのズレが発生することがあり、その対策として `uc.flex.disable-sidebery-hover-animations` オプションを有効にする必要がありました。現在は動作判定の改良により、Sideberyを固定表示している場合はホバーアニメーションが自動で無効化されるようになったため、このオプションは不要となり、設定自体も削除されました。
+
 **🦊 v3.5.2**
 * `uc.flex.move-pip-volume-to-top` を有効にした際、PiP ウィンドウ内の音量スライダーが短すぎる不具合を修正しました。
 * 新オプション `uc.flex.disable-flexfox` を追加。Firefox を再起動せずに FlexFox の全スタイルを一時的に無効化できます。
@@ -385,7 +394,6 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `sidebar.visibility`（`always-show`） | Firefoxのネイティブ設定です。値を `always-show` にすると、Firefox標準の垂直タブバーの自動折りたたみが無効化され、代わりにFlexFox独自の自動折りたたみ機能が有効になります。FlexFoxはアニメーションの滑らかさ、折りたたみ時の整理されたレイアウト、ピン留めタブの扱いやすさに優れています。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** のチェックを外すことで切り替えることも可能です。 |
 | `sidebar.visibility`（`expand-on-hover`） | 値を `expand-on-hover` にすると、Firefoxの垂直タブバーのネイティブな自動折りたたみ動作が有効になり、FlexFoxの機能は無効化されます。この動作は、サイドバー設定の **「カーソルを合わせた時にサイドバーを展開する」** を有効にすることで切り替え可能です。このモードでは、ネイティブの垂直タブとSideberyのどちらも、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみの状態を変更できます。 |
 | `sidebar.animation.expand-on-hover.duration-ms` | `sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーションの速度を制御するFirefoxのネイティブ設定です。 |
-| `uc.flex.disable-sidebery-hover-animations` | `sidebar.visibility` が `expand-on-hover` に設定され、Sidebery が「常に展開」状態になっている場合、ホバー時のアニメーションによって画面がわずかに揺れることがあります。この設定を有効にすると、そうしたアニメーションが無効化され、より安定した表示になりますが、折りたたみ時のレイアウトがやや崩れることがあります。 |
 | `uc.flex.disable-sidebery-autohide` | Sidebery とネイティブ縦型タブの自動折りたたみを無効にします。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | デフォルトでは、ナビゲーションバーの最初の項目の後ろに右側の余白を追加して、垂直タブとその周辺項目との視覚的な区切りや整列を改善します。このオプションはその余白を無効にします。 |
 | `uc.flex.disable-menu-icons` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |

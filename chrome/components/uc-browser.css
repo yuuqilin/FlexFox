@@ -110,7 +110,7 @@
 
             .devtools-side-splitter,
             .devtools-horizontal-splitter {
-                display: none;
+                opacity: 0;
             }
         }
 

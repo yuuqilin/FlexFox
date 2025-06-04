@@ -20,8 +20,6 @@ user_pref("uc.flex.disable-bookmarks-autohide",                 false);
 user_pref("uc.flex.disable-tabs-toolbar-autohide",              false);
 /* Disables the auto-hide feature of the find bar. */
 user_pref("uc.flex.disable-findbar-autohide",                   false);
-/* Disables hover animations in Sidebery's expanded sidebar to prevent jittering. */
-user_pref("uc.flex.disable-sidebery-hover-animations",          false);
 /* Disables the auto-collapse feature of Sidebery and native vertical tabs. */
 user_pref("uc.flex.disable-sidebery-autohide",                  false);
 /* Disables the extra right padding after the first item in the navigation bar. */

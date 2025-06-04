@@ -20,12 +20,21 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**🦊 v3.5.3**
+* Fixed a regression introduced in v3.5.2 where enabling `uc.flex.enable-rounded-web-content` made it impossible to resize the Developer Tools panel when it's docked inside the main browser window.
+* Improved the appearance and behavior of the URL bar:
+  * Fixed misalignment of permission-related icons (e.g. location access, notifications, camera/microphone sharing) that appear within the URL bar.
+  * Hid more icons when the URL bar is not hovered, making it cleaner by default.
+  * Ensured Reader Mode and PiP icons remain visible when those features are active.
+* Improved PDF detection and styling with `uc-pdf.js.css`. Styles now apply correctly not only to local PDF files, but also to PDF pages from academic websites where the URL doesn't end in `.pdf`.
+* Previously, keeping Sidebery open using the `Lock Sidebery` shortcut could cause subtle layout jittering when hovering, due to hover animations. This was usually mitigated by enabling the `uc.flex.disable-sidebery-hover-animations` option. With improved behavior detection, these animations are now automatically disabled when Sidebery is locked open, making the option unnecessary. The option has been deprecated.
+
+<!-- END What's New -->
+
 **🦊 v3.5.2**
 * Fixed an issue where the PiP volume slider was too short when `uc.flex.move-pip-volume-to-top` was enabled.
 * Added a new option `uc.flex.disable-flexfox`, which allows you to instantly disable all FlexFox styles while Firefox is running.
 * Added a new option `uc.flex.skip-loading-uc-*.css`, which lets you selectively skip loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will prevent `./content/uc-newtab.css` from loading.
-
-<!-- END What's New -->
 
 **🦊 v3.5.1**
 * Fixed a regression introduced in v3.4.7 where native vertical tabs would flicker on hover and expand incorrectly when positioned on the right, if `uc.flex.disable-sidebery-autohide` was enabled or the `Lock Sidebery` shortcut was used.
@@ -389,7 +398,6 @@ For more update logs from earlier versions,
 | `sidebar.visibility` (`always-show`) | A native Firefox preference. When set to `always-show`, Firefox's built-in auto-collapse for the vertical tab bar is disabled, and FlexFox's enhanced auto-collapse takes over. FlexFox offers smoother animations, a cleaner collapsed layout, and improved handling of pinned tabs. This behavior can also be toggled by unchecking **“Expand sidebar on hover”** in the sidebar settings. |
 | `sidebar.visibility` (`expand-on-hover`) | When set to `expand-on-hover`, Firefox's native vertical tab auto-collapse behavior is restored, and FlexFox's own auto-collapse is disabled. This can also be enabled via **“Expand sidebar on hover”** in the sidebar settings. In this mode, both the native vertical tabs and Sidebery can toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. |
 | `sidebar.animation.expand-on-hover.duration-ms` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
-| `uc.flex.disable-sidebery-hover-animations` | When `sidebar.visibility` is set to `expand-on-hover` and Sidebery is in the *expanded* state, hover animations may cause subtle jittering. This preference disables those animations for smoother interaction, but may make the collapsed layout appear less tidy. |
 | `uc.flex.disable-sidebery-autohide` | Disables auto-collapse for Sidebery and native vertical tabs. |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | By default, FlexFox adds right-side padding after the first item in the navigation bar to improve visual separation and alignment between the vertical tabs and nearby items. This option disables that padding. |
 | `uc.flex.disable-menu-icons` | Disables custom icons in menus added by FlexFox. |

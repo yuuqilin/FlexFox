@@ -1,4 +1,8 @@
-@-moz-document regexp(".*\\.pdf$") {
+/*
+@-moz-document regexp(".*\\.pdf$")
+*/
+html[mozdisallowselectionprint]:has(head link:nth-of-type(1)[href^="resource://pdf.js"])
+{
     /* https://github.com/mozilla/pdf.js/issues/2784#issuecomment-366480669 */
     #outerContainer #mainContainer div.toolbar {
         opacity: 0;
@@ -18,9 +22,25 @@
     }
 
     #toolbarContainer {
-        height: 48px !important;
+        height: 43px !important;
     }
+
     #sidebarContainer {
-        top: 40px !important;
+        inset-block: 0 0 !important;
+        width: calc(var(--sidebar-width) + 8px) !important;
+        #toolbarSidebar {
+            height: 42.5px !important;
+            box-shadow: var(--toolbar-box-shadow) !important;
+        }
+        #sidebarContent {
+            inset-block: 43.5px 0 !important;
+        }
+    }
+
+    #outerContainer.sidebarOpen #mainContainer {
+        margin-inline-start: calc(var(--sidebar-width) + 8px) !important;
+        #viewerContainer {
+            left: 0 !important;
+        }
     }
 }

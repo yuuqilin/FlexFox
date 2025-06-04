@@ -20,6 +20,15 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
+**🦊 v3.5.3**
+* 修复了 v3.5.2 引入的问题：启用 `uc.flex.enable-rounded-web-content` 时，开发者工具面板在嵌入主窗口时无法调整大小。
+* 优化了地址栏的显示与行为：
+  * 修复了地址栏中权限相关图标（如定位请求、通知、摄像头/麦克风共享等）的错位问题。
+  * 当鼠标未悬停时，隐藏更多图标，使默认状态下更简洁。
+  * 确保阅读模式和画中画图标在功能启用时始终显示。
+* 改进了 `uc-pdf.js.css` 的 PDF 检测与样式支持。现在不仅支持本地 PDF 文件，也能正确识别并样式化一些虽然 URL 不以 `.pdf` 结尾、但页面本身是 PDF 查看器的学术网站。
+* 过去使用 `Lock Sidebery` 快捷键将 Sidebery 保持展开时，悬停动画会导致页面元素发生轻微抖动，通常需要启用 `uc.flex.disable-sidebery-hover-animations` 选项来规避这个问题。现在通过改进行为判断机制，在 Sidebery 固定展开时会自动停用悬停动画，无需额外设置，因此该选项已不再需要，相关设置也已被移除。
+
 **🦊 v3.5.2**
 * 修复启用 `uc.flex.move-pip-volume-to-top` 时，画中画窗口的音量滑块长度过短的问题。
 * 新增选项 `uc.flex.disable-flexfox`，可在 Firefox 运行中立即停用所有 FlexFox 样式与功能。
@@ -390,7 +399,6 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `sidebar.visibility`（`always-show`） | Firefox 的原生设置。当设置为 `always-show` 时，Firefox 自带的垂直选项卡自动折叠功能将会停用，FlexFox 的自动折叠功能将接管。相比原生功能，FlexFox 的动画更流畅，折叠后的布局更整洁，对固定标签页的处理也更加合理。你也可以通过取消勾选侧栏设置中的 **“悬停时展开侧栏”** 来切换此功能。 |
 | `sidebar.visibility`（`expand-on-hover`） | 当设置为 `expand-on-hover` 时，将恢复 Firefox 原生的垂直选项卡自动折叠行为，同时会关闭 FlexFox 的自动折叠功能。此功能也可以通过勾选 **“悬停时展开侧栏”** 来启用。在此模式下，原生垂直选项卡和 Sidebery 都可以通过快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧栏开关按钮，在自动折叠和保持展开之间切换。 |
 | `sidebar.animation.expand-on-hover.duration-ms` | Firefox 原生设置，用于控制在 `sidebar.visibility` 设置为 `expand-on-hover` 时，原生垂直选项卡展开和折叠的动画速度。 |
-| `uc.flex.disable-sidebery-hover-animations` | 当 `sidebar.visibility` 设置为 `expand-on-hover` 且 Sidebery 处于“保持展开”状态时，鼠标悬停所触发的动画可能导致轻微画面抖动。启用此选项可关闭这些动画，提升稳定性，但可能会让折叠状态下的显示不如原来整洁。 |
 | `uc.flex.disable-sidebery-autohide` | 禁用 Sidebery 和原生垂直选项卡的自动折叠功能。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | 默认情况下，FlexFox 会在导航栏第一个图标后添加右侧间距，以优化垂直选项卡与周围项目之间的视觉间隔和对齐。此选项可停用该间距。 |
 | `uc.flex.disable-menu-icons` | 停用 FlexFox 添加的自定义选单图标。 |
