@@ -20,31 +20,32 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.5.3**
-* Fixed a regression introduced in v3.5.2 where enabling `uc.flex.enable-rounded-web-content` made it impossible to resize the Developer Tools panel when it's docked inside the main browser window.
-* Improved the appearance and behavior of the URL bar:
-  * Fixed misalignment of permission-related icons (e.g. location access, notifications, camera/microphone sharing) that appear within the URL bar.
-  * Hid more icons when the URL bar is not hovered, making it cleaner by default.
-  * Ensured Reader Mode and PiP icons remain visible when those features are active.
-* Improved PDF detection and styling with `uc-pdf.js.css`. Styles now apply correctly not only to local PDF files, but also to PDF pages from academic websites where the URL doesn't end in `.pdf`.
-* Previously, keeping Sidebery open using the `Lock Sidebery` shortcut could cause subtle layout jittering when hovering, due to hover animations. This was usually mitigated by enabling the `uc.flex.disable-sidebery-hover-animations` option. With improved behavior detection, these animations are now automatically disabled when Sidebery is locked open, making the option unnecessary. The option has been deprecated.
+**🦊 v3.5.4**
+* Improved compatibility with native vertical tabs when using the `Lock Sidebery` shortcut or enabling `uc.flex.disable-sidebery-autohide`. Even if the sidebar toggle button switches the panel to collapsed mode, the layout remains consistent and unaffected.
+* When `Lock Sidebery` is active, the native vertical tab panel now matches Sidebery's width, preventing layout shifts when switching between them. The `uc.flex.increase-sidebery-expanded-width` option will now also increase the expanded width of the native panel when applicable.
 
 <!-- END What's New -->
 
-**🦊 v3.5.2**
-* Fixed an issue where the PiP volume slider was too short when `uc.flex.move-pip-volume-to-top` was enabled.
-* Added a new option `uc.flex.disable-flexfox`, which allows you to instantly disable all FlexFox styles while Firefox is running.
-* Added a new option `uc.flex.skip-loading-uc-*.css`, which lets you selectively skip loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will prevent `./content/uc-newtab.css` from loading.
+<details>  
+<summary>🪄 <b>Major Update: Rounded & Floating Web Content</b> <i>[Click to expand]</i> 👇</summary>
 
-**🦊 v3.5.1**
-* Fixed a regression introduced in v3.4.7 where native vertical tabs would flicker on hover and expand incorrectly when positioned on the right, if `uc.flex.disable-sidebery-autohide` was enabled or the `Lock Sidebery` shortcut was used.
-* Made the picture-in-picture (PiP) volume control button always visible. Credit to u/endgame0 on Reddit.
-* Added a new option: `uc.flex.move-pip-volume-to-top` – moves the PiP volume button to the top (boolean). Credit to u/endgame0 on Reddit.
-* Added a new option: `uc.flex.dim-urlbar-popup-backdrop` – dims the background when the address bar dropdown is open. Accepts values from `0` (disabled) to `2`; higher values increase the dimming effect.
-* Added a new option: `uc.flex.enable-rounded-web-content` – adds margins, rounded corners, and drop shadows around the web content area. Accepts values from `0` (disabled) to `2`; higher values increase the margin. This creates a soft, floating card appearance for web content, resembling the visual style of Zen or Microsoft Edge.
-  You can quickly adjust the appearance using the following variables: `--uc-web-content-margin-small`, `--uc-web-content-margin-large`, and `--uc-web-content-radius-box`.
+A new visual option has been added: `uc.flex.enable-rounded-web-content`.
 
-  Below is a preview of FlexFox with `uc.flex.enable-rounded-web-content` set to `1`: <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
+When enabled, this adds padding around the main content area and applies rounded corners and drop shadows, giving web pages a floating, card-like appearance. This style is inspired by the visual aesthetics of Zen and Microsoft Edge.
+
+The option accepts values from `0` (off) to `2`; higher values increase the padding around the page content.
+
+You can further adjust the appearance using the following variables:
+
+* `--uc-web-content-margin-small`
+* `--uc-web-content-margin-large`
+* `--uc-web-content-radius-box`
+
+Below is a preview of FlexFox with this feature enabled (`uc.flex.enable-rounded-web-content = 1`):
+
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
+
+</details>
 
 <details>  
 <summary>🪄 <b>Major Update: Optional Flat Corner Style</b> <i>[Click to expand]</i> 👇</summary>
@@ -143,6 +144,30 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.5.3**
+* Fixed a regression introduced in v3.5.2 where enabling `uc.flex.enable-rounded-web-content` made it impossible to resize the Developer Tools panel when it's docked inside the main browser window.
+* Improved the appearance and behavior of the URL bar:
+  * Fixed misalignment of permission-related icons (e.g. location access, notifications, camera/microphone sharing) that appear within the URL bar.
+  * Hid more icons when the URL bar is not hovered, making it cleaner by default.
+  * Ensured Reader Mode and PiP icons remain visible when those features are active.
+* Improved PDF detection and styling with `uc-pdf.js.css`. Styles now apply correctly not only to local PDF files, but also to PDF pages from academic websites where the URL doesn't end in `.pdf`.
+* Previously, keeping Sidebery open using the `Lock Sidebery` shortcut could cause subtle layout jittering when hovering, due to hover animations. This was usually mitigated by enabling the `uc.flex.disable-sidebery-hover-animations` option. With improved behavior detection, these animations are now automatically disabled when Sidebery is locked open, making the option unnecessary. The option has been deprecated.
+
+**v3.5.2**
+* Fixed an issue where the PiP volume slider was too short when `uc.flex.move-pip-volume-to-top` was enabled.
+* Added a new option `uc.flex.disable-flexfox`, which allows you to instantly disable all FlexFox styles while Firefox is running.
+* Added a new option `uc.flex.skip-loading-uc-*.css`, which lets you selectively skip loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will prevent `./content/uc-newtab.css` from loading.
+
+**v3.5.1**
+* Fixed a regression introduced in v3.4.7 where native vertical tabs would flicker on hover and expand incorrectly when positioned on the right, if `uc.flex.disable-sidebery-autohide` was enabled or the `Lock Sidebery` shortcut was used.
+* Made the picture-in-picture (PiP) volume control button always visible. Credit to u/endgame0 on Reddit.
+* Added a new option: `uc.flex.move-pip-volume-to-top` – moves the PiP volume button to the top (boolean). Credit to u/endgame0 on Reddit.
+* Added a new option: `uc.flex.dim-urlbar-popup-backdrop` – dims the background when the address bar dropdown is open. Accepts values from `0` (disabled) to `2`; higher values increase the dimming effect.
+* Added a new option: `uc.flex.enable-rounded-web-content` – adds margins, rounded corners, and drop shadows around the web content area. Accepts values from `0` (disabled) to `2`; higher values increase the margin. This creates a soft, floating card appearance for web content, resembling the visual style of Zen or Microsoft Edge.
+  You can quickly adjust the appearance using the following variables: `--uc-web-content-margin-small`, `--uc-web-content-margin-large`, and `--uc-web-content-radius-box`.
+
+  Below is a preview of FlexFox with `uc.flex.enable-rounded-web-content` set to `1`: <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
 
 **v3.5.0**
 * Fixed a display issue where pinned tabs in native vertical tabs were incorrectly stacked vertically in Firefox v141+.
@@ -410,7 +435,7 @@ For more update logs from earlier versions,
 
 | Preference | Description |
 |-----------|-------------|
-| `uc.flex.increase-sidebery-expanded-width` | Increases the width of Sidebery when expanded. |
+| `uc.flex.increase-sidebery-expanded-width` | Increases the expanded width of Sidebery and, when `uc.flex.disable-sidebery-autohide` is enabled or `Lock Sidebery` is active, also applies the increased width to the native vertical tab panel. |
 | `uc.flex.switch-to-alternate-condensed-panel` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
 | `uc.flex.sidebery-fast-hover-expand` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |

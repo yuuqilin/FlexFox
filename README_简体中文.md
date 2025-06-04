@@ -20,29 +20,28 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.5.3**
-* 修复了 v3.5.2 引入的问题：启用 `uc.flex.enable-rounded-web-content` 时，开发者工具面板在嵌入主窗口时无法调整大小。
-* 优化了地址栏的显示与行为：
-  * 修复了地址栏中权限相关图标（如定位请求、通知、摄像头/麦克风共享等）的错位问题。
-  * 当鼠标未悬停时，隐藏更多图标，使默认状态下更简洁。
-  * 确保阅读模式和画中画图标在功能启用时始终显示。
-* 改进了 `uc-pdf.js.css` 的 PDF 检测与样式支持。现在不仅支持本地 PDF 文件，也能正确识别并样式化一些虽然 URL 不以 `.pdf` 结尾、但页面本身是 PDF 查看器的学术网站。
-* 过去使用 `Lock Sidebery` 快捷键将 Sidebery 保持展开时，悬停动画会导致页面元素发生轻微抖动，通常需要启用 `uc.flex.disable-sidebery-hover-animations` 选项来规避这个问题。现在通过改进行为判断机制，在 Sidebery 固定展开时会自动停用悬停动画，无需额外设置，因此该选项已不再需要，相关设置也已被移除。
+**🦊 v3.5.4**
+* 提升了兼容性：当启用快捷键 `Lock Sidebery` 或设定 `uc.flex.disable-sidebery-autohide` 固定原生垂直选项卡为展开状态时，即使通过侧边栏按钮切换为折叠状态，原生垂直选项卡的版式也不会错乱，能保持一致的显示效果。
+* 启用 `Lock Sidebery` 后，原生垂直选项卡的宽度现在会与 Sidebery 保持一致，切换时不会因宽度变化而造成画面跳动。同时，在此状态下启用 `uc.flex.increase-sidebery-expanded-width`，也会一并扩大原生面板的展开宽度。
 
-**🦊 v3.5.2**
-* 修复启用 `uc.flex.move-pip-volume-to-top` 时，画中画窗口的音量滑块长度过短的问题。
-* 新增选项 `uc.flex.disable-flexfox`，可在 Firefox 运行中立即停用所有 FlexFox 样式与功能。
-* 新增选项 `uc.flex.skip-loading-uc-*.css`，允许选择性跳过加载位于 `./components/` 和 `./content/` 目录下的特定 `uc-*.css` 文件。例如设置 `uc.flex.skip-loading-uc-newtab.css` 为 true，可跳过加载 `./content/uc-newtab.css` 文件。
+<details>  
+<summary>🪄 <b>重大更新：圆角与悬浮式网页内容样式</b> <i>《点击展开》</i> 👇</summary>
 
-**🦊 v3.5.1**
-* 修复 v3.4.7 引入的回归问题：当启用 `uc.flex.disable-sidebery-autohide` 或使用快捷键 `Lock Sidebery` 时，原生垂直选项卡在悬停时会发生闪烁，若分栏在右侧时，展开位置也会异常。
-* 让画中画 (PiP) 的音量控制按钮始终可见。致谢 Reddit 用户 u/endgame0。
-* 新增选项 `uc.flex.move-pip-volume-to-top`，将 PiP 的音量按钮移至上方（布尔值）。致谢 Reddit 用户 u/endgame0。
-* 新增选项 `uc.flex.dim-urlbar-popup-backdrop`，在地址栏下拉建议列表展开时暗化背景。支持数值 `0`（关闭）至 `2`，数值越大，背景越暗。
-* 新增选项 `uc.flex.enable-rounded-web-content`，为网页内容区域添加边距、圆角和阴影。可设置为 `0`（关闭）至 `2`，数值越大，边距越宽。启用后，网页内容呈现出柔和的卡片式悬浮感，整体视觉风格类似 Zen 或 Microsoft Edge 浏览器。
-  可通过以下变量快速调整外观：`--uc-web-content-margin-small`、`--uc-web-content-margin-large` 和 `--uc-web-content-radius-box`。
+新增了视觉选项 `uc.flex.enable-rounded-web-content`，可以为网页内容区域添加边距、圆角和阴影效果，让页面呈现出卡片式、浮起的柔和视觉风格，灵感来源于 Zen 和 Microsoft Edge 的界面设计。
 
-  下图为 `uc.flex.enable-rounded-web-content` 设为 `1` 时的 FlexFox 显示效果： <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="FlexFox 卡片式网页显示效果预览" width="96%" />
+该选项支持从 `0`（关闭）到 `2` 的数值，数值越高，页面周围的边距越宽。
+
+也可以通过以下变量进一步调整显示效果：
+
+* `--uc-web-content-margin-small`
+* `--uc-web-content-margin-large`
+* `--uc-web-content-radius-box`
+
+以下是启用该功能后（`uc.flex.enable-rounded-web-content = 1`）的效果预览图：
+
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
+
+</details>
 
 <details>  
 <summary>🪄 <b>重大更新：支持还原原生平角风格</b> <i>《点击展开》</i> 👇</summary>
@@ -138,6 +137,32 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.5.3**
+* 修复了 v3.5.2 引入的问题：启用 `uc.flex.enable-rounded-web-content` 时，开发者工具面板在嵌入主窗口时无法调整大小。
+* 优化了地址栏的显示与行为：
+  * 修复了地址栏中权限相关图标（如定位请求、通知、摄像头/麦克风共享等）的错位问题。
+  * 当鼠标未悬停时，隐藏更多图标，使默认状态下更简洁。
+  * 确保阅读模式和画中画图标在功能启用时始终显示。
+* 改进了 `uc-pdf.js.css` 的 PDF 检测与样式支持。现在不仅支持本地 PDF 文件，也能正确识别并样式化一些虽然 URL 不以 `.pdf` 结尾、但页面本身是 PDF 查看器的学术网站。
+* 过去使用 `Lock Sidebery` 快捷键将 Sidebery 保持展开时，悬停动画会导致页面元素发生轻微抖动，通常需要启用 `uc.flex.disable-sidebery-hover-animations` 选项来规避这个问题。现在通过改进行为判断机制，在 Sidebery 固定展开时会自动停用悬停动画，无需额外设置，因此该选项已不再需要，相关设置也已被移除。
+
+**v3.5.2**
+* 修复启用 `uc.flex.move-pip-volume-to-top` 时，画中画窗口的音量滑块长度过短的问题。
+* 新增选项 `uc.flex.disable-flexfox`，可在 Firefox 运行中立即停用所有 FlexFox 样式与功能。
+* 新增选项 `uc.flex.skip-loading-uc-*.css`，允许选择性跳过加载位于 `./components/` 和 `./content/` 目录下的特定 `uc-*.css` 文件。例如设置 `uc.flex.skip-loading-uc-newtab.css` 为 true，可跳过加载 `./content/uc-newtab.css` 文件。
+
+**v3.5.1**
+* 修复 v3.4.7 引入的回归问题：当启用 `uc.flex.disable-sidebery-autohide` 或使用快捷键 `Lock Sidebery` 时，原生垂直选项卡在悬停时会发生闪烁，若分栏在右侧时，展开位置也会异常。
+* 让画中画 (PiP) 的音量控制按钮始终可见。致谢 Reddit 用户 u/endgame0。
+* 新增选项 `uc.flex.move-pip-volume-to-top`，将 PiP 的音量按钮移至上方（布尔值）。致谢 Reddit 用户 u/endgame0。
+* 新增选项 `uc.flex.dim-urlbar-popup-backdrop`，在地址栏下拉建议列表展开时暗化背景。支持数值 `0`（关闭）至 `2`，数值越大，背景越暗。
+* 新增选项 `uc.flex.enable-rounded-web-content`，为网页内容区域添加边距、圆角和阴影。可设置为 `0`（关闭）至 `2`，数值越大，边距越宽。启用后，网页内容呈现出柔和的卡片式悬浮感，整体视觉风格类似 Zen 或 Microsoft Edge 浏览器。
+  可通过以下变量快速调整外观：`--uc-web-content-margin-small`、`--uc-web-content-margin-large` 和 `--uc-web-content-radius-box`。
+
+  下图为 `uc.flex.enable-rounded-web-content` 设为 `1` 时的 FlexFox 显示效果：
+  
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="FlexFox 卡片式网页显示效果预览" width="96%" />
 
 **v3.5.0**
 * 修复了在 Firefox v141 及以上版本中，原生垂直选项卡的固定标签显示为垂直排列的问题（应为水平排列）。
@@ -411,7 +436,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 | 配置选项 | 说明 |
 |----------|------|
-| `uc.flex.increase-sidebery-expanded-width` | 增加 Sidebery 展开时的宽度。 |
+| `uc.flex.increase-sidebery-expanded-width` | 增加 Sidebery 展开时的宽度；启用 `uc.flex.disable-sidebery-autohide` 或激活 `Lock Sidebery` 时，也会同步增加原生垂直选项卡的展开宽度。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
 | `uc.flex.sidebery-fast-hover-expand` | 加快 Sidebery 与原生垂直选项卡的自动展开/折叠速度。 |
 | `uc.flex.sidebery-slow-hover-expand` | 减慢 Sidebery 与原生垂直选项卡的自动展开/折叠速度。 |

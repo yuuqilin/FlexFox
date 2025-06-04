@@ -20,29 +20,30 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.5.3**
-* `uc.flex.enable-rounded-web-content` を有効にすると、開発者ツールがブラウザウィンドウ内にドッキングされている場合にリサイズできなくなる不具合（v3.5.2で発生）を修正しました。
-* アドレスバーの見た目と動作を改善しました：
-  * アドレスバー内に表示される位置情報や通知、カメラ／マイク共有などの許可関連アイコンの位置ずれを修正しました。
-  * ホバーしていないときに、さらに多くのアイコンを非表示にして、初期状態でよりすっきりとした見た目にしました。
-  * リーダーモードやPiP（ピクチャー・イン・ピクチャー）のアイコンは、それぞれの機能が有効な場合に常に表示されるようにしました。
-* `uc-pdf.js.css` によるPDF検出とスタイリングを改善しました。`.pdf` で終わらないURLであっても、ページ自体がPDFビューアである学術サイトでも、スタイルが正しく適用されるようになりました。
-* 以前は `Lock Sidebery` ショートカットでSideberyを常時表示にした際、ホバーアニメーションによってわずかなレイアウトのズレが発生することがあり、その対策として `uc.flex.disable-sidebery-hover-animations` オプションを有効にする必要がありました。現在は動作判定の改良により、Sideberyを固定表示している場合はホバーアニメーションが自動で無効化されるようになったため、このオプションは不要となり、設定自体も削除されました。
+**🦊 v3.5.4**
+* `Lock Sidebery` ショートカットを使用するか、`uc.flex.disable-sidebery-autohide` を有効にしている場合でも、Firefoxのサイドバー切り替えボタンで折りたたみ状態にしてもレイアウトが崩れず、表示が一貫するようになりました。
+* `Lock Sidebery` 有効時には、Firefox標準の縦型タブパネルもSideberyと同じ幅に揃うようになり、切り替え時にレイアウトが揺れることがなくなりました。また、`uc.flex.increase-sidebery-expanded-width` を有効にすると、標準のパネルの幅も拡張されます。
 
-**🦊 v3.5.2**
-* `uc.flex.move-pip-volume-to-top` を有効にした際、PiP ウィンドウ内の音量スライダーが短すぎる不具合を修正しました。
-* 新オプション `uc.flex.disable-flexfox` を追加。Firefox を再起動せずに FlexFox の全スタイルを一時的に無効化できます。
-* 新オプション `uc.flex.skip-loading-uc-*.css` を追加。`./components/` や `./content/` フォルダー内の特定の `uc-*.css` ファイルの読み込みを個別にスキップできます。たとえば、`uc.flex.skip-loading-uc-newtab.css` を true に設定すると、`./content/uc-newtab.css` の読み込みが無効化されます。
+<details>  
+<summary>🪄 <b>新機能：丸みと浮かせたようなWeb表示スタイル</b> <i>《クリックで展開》</i> 👇</summary>
 
-**🦊 v3.5.1**
-* v3.4.7 で発生した不具合を修正：`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` ショートカットを使用すると、ネイティブの縦型タブでホバー時にちらつきが発生し、タブが右側にある場合に展開位置がずれる問題がありました。
-* ピクチャ・イン・ピクチャ (PiP) の音量調整ボタンを常に表示するように変更。Reddit の u/endgame0 氏に感謝。
-* 新オプション `uc.flex.move-pip-volume-to-top` を追加。PiP の音量ボタンを上部に移動します（ブール値）。Reddit の u/endgame0 氏に感謝。
-* 新オプション `uc.flex.dim-urlbar-popup-backdrop` を追加。アドレスバーのドロップダウンが展開された際に背景を暗くします。`0`（無効）から `2` までの数値を設定でき、数値が大きいほど暗さが増します。
-* 新オプション `uc.flex.enable-rounded-web-content` を追加。Web コンテンツ領域にマージン、角丸、影を追加します。`0`（無効）～`2` まで設定可能で、数値が大きいほどマージンが広がります。カードのように柔らかく浮かび上がるスタイルになり、Zen や Microsoft Edge に近い外観になります。
-  外観は、`--uc-web-content-margin-small`、`--uc-web-content-margin-large`、`--uc-web-content-radius-box` の各変数で簡単に調整できます。
+新しいビジュアルオプション `uc.flex.enable-rounded-web-content` が追加されました。
 
-  下図は `uc.flex.enable-rounded-web-content` を `1` に設定した FlexFox の表示例です： <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="FlexFoxのrounded web content表示例" width="96%" />
+このオプションを有効にすると、Webコンテンツの周囲に余白が追加され、角丸とドロップシャドウが適用され、カードのように柔らかく浮いた印象の表示になります。Zen や Microsoft Edge を参考にしたデザインです。
+
+値は `0`（無効）〜 `2` まで指定でき、数値が大きいほど余白が広がります。
+
+以下の変数を調整することで、表示を細かくカスタマイズできます：
+
+* `--uc-web-content-margin-small`
+* `--uc-web-content-margin-large`
+* `--uc-web-content-radius-box`
+
+以下は `uc.flex.enable-rounded-web-content = 1` の状態での表示例です：
+
+<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
+
+</details>
 
 <details>  
 <summary>🪄 <b>新機能：角丸なしのフラットなデザインに切り替え可能</b> <i>《クリックで展開》</i> 👇</summary>
@@ -138,6 +139,32 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.5.3**
+* `uc.flex.enable-rounded-web-content` を有効にすると、開発者ツールがブラウザウィンドウ内にドッキングされている場合にリサイズできなくなる不具合（v3.5.2で発生）を修正しました。
+* アドレスバーの見た目と動作を改善しました：
+  * アドレスバー内に表示される位置情報や通知、カメラ／マイク共有などの許可関連アイコンの位置ずれを修正しました。
+  * ホバーしていないときに、さらに多くのアイコンを非表示にして、初期状態でよりすっきりとした見た目にしました。
+  * リーダーモードやPiP（ピクチャー・イン・ピクチャー）のアイコンは、それぞれの機能が有効な場合に常に表示されるようにしました。
+* `uc-pdf.js.css` によるPDF検出とスタイリングを改善しました。`.pdf` で終わらないURLであっても、ページ自体がPDFビューアである学術サイトでも、スタイルが正しく適用されるようになりました。
+* 以前は `Lock Sidebery` ショートカットでSideberyを常時表示にした際、ホバーアニメーションによってわずかなレイアウトのズレが発生することがあり、その対策として `uc.flex.disable-sidebery-hover-animations` オプションを有効にする必要がありました。現在は動作判定の改良により、Sideberyを固定表示している場合はホバーアニメーションが自動で無効化されるようになったため、このオプションは不要となり、設定自体も削除されました。
+
+**v3.5.2**
+* `uc.flex.move-pip-volume-to-top` を有効にした際、PiP ウィンドウ内の音量スライダーが短すぎる不具合を修正しました。
+* 新オプション `uc.flex.disable-flexfox` を追加。Firefox を再起動せずに FlexFox の全スタイルを一時的に無効化できます。
+* 新オプション `uc.flex.skip-loading-uc-*.css` を追加。`./components/` や `./content/` フォルダー内の特定の `uc-*.css` ファイルの読み込みを個別にスキップできます。たとえば、`uc.flex.skip-loading-uc-newtab.css` を true に設定すると、`./content/uc-newtab.css` の読み込みが無効化されます。
+
+**v3.5.1**
+* v3.4.7 で発生した不具合を修正：`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` ショートカットを使用すると、ネイティブの縦型タブでホバー時にちらつきが発生し、タブが右側にある場合に展開位置がずれる問題がありました。
+* ピクチャ・イン・ピクチャ (PiP) の音量調整ボタンを常に表示するように変更。Reddit の u/endgame0 氏に感謝。
+* 新オプション `uc.flex.move-pip-volume-to-top` を追加。PiP の音量ボタンを上部に移動します（ブール値）。Reddit の u/endgame0 氏に感謝。
+* 新オプション `uc.flex.dim-urlbar-popup-backdrop` を追加。アドレスバーのドロップダウンが展開された際に背景を暗くします。`0`（無効）から `2` までの数値を設定でき、数値が大きいほど暗さが増します。
+* 新オプション `uc.flex.enable-rounded-web-content` を追加。Web コンテンツ領域にマージン、角丸、影を追加します。`0`（無効）～`2` まで設定可能で、数値が大きいほどマージンが広がります。カードのように柔らかく浮かび上がるスタイルになり、Zen や Microsoft Edge に近い外観になります。
+  外観は、`--uc-web-content-margin-small`、`--uc-web-content-margin-large`、`--uc-web-content-radius-box` の各変数で簡単に調整できます。
+
+  下図は `uc.flex.enable-rounded-web-content` を `1` に設定した FlexFox の表示例です：
+  
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="FlexFoxのrounded web content表示例" width="96%" />
 
 **v3.5.0**
 * Firefox v141以降で、ピン留めされたタブが縦に並んでしまう表示の不具合を修正しました（本来は横に並ぶべき）。
@@ -406,7 +433,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 | 設定名 | 説明 |
 |--------|------|
-| `uc.flex.increase-sidebery-expanded-width` | Sidebery の展開時の幅を広げます。 |
+| `uc.flex.increase-sidebery-expanded-width` | Sidebery の展開時の幅を広げます。また、`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` が有効な場合は、Firefox標準の縦型タブパネルの幅も広がります。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
 | `uc.flex.sidebery-fast-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
 | `uc.flex.sidebery-slow-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |

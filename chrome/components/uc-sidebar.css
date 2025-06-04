@@ -1119,48 +1119,27 @@
 ═════════════════════════════════════════════════════════════════════ */
 
 /* 🔽 [BLOCK G] Start of rules for inactive Sidebery */
-@media (-moz-pref("sidebar.verticalTabs")) and (not (-moz-pref("sidebar.visibility", "expand-on-hover") or -moz-pref("uc.flex.disable-sidebery-autohide"))) {
+@media (-moz-pref("sidebar.verticalTabs")) and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
     /* ── ▶️ Styles for verticalTabs when the sidebar is expanded */
-    /**
-     * Controls how many rows of pinned tab icons can be shown in vertical tab panel.
-     * This affects how many pinned tabs are visible before scrolling appears.
-     */
-    :root:not([titlepreface*="\180e "]) {
-        sidebar-main[expanded] :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
-            max-height: calc(
-                var(--uc-max-visible-vertical-pinned-tabs) * var(--tabstrip-min-height) + var(--space-large) + 15px
-            ) !important;
-        }
-        #tabbrowser-tabs[orient="vertical"] {
-            &[expanded] {
-                /* 
-                 * Restore the pre-v140 bottom border for the pinned tabs separator. 
-                 * Firefox v140+ replaced #vertical-pinned-tabs-container-separator with 
-                 * #vertical-pinned-tabs-splitter and removed its bottom border.
-                 * This rule re-enables the separator when 
-                 * `uc.flex.show-pin-tabs-separator-in-expanded-state` is set.
-                 */
-                @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-                    :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter):not(:hover) {
-                        color: var(--toolbox-textcolor) !important;
-                        border-bottom: var(--tabstrip-inner-border) !important;
-                    }
-                }
-                /* Restore pre-v140 box-sizing and padding for tab group labels */
-                .tab-group-label {
-                    box-sizing: content-box;
-                    padding-block: 2.5px;
-                }
-            }
-            #tabbrowser-arrowscrollbox[orient="vertical"] .tabbrowser-tab {
-                padding-block: 0px !important;
-            }
+    #tabbrowser-tabs[orient="vertical"][expanded] {
+        #tabbrowser-arrowscrollbox[orient="vertical"] .tabbrowser-tab {
+            padding-block: 0px !important;
         }
         @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-            /* Show pin tabs separator in expanded state */
-            #tabbrowser-tabs[expanded]
-                > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
+            /* 
+             * Restore the pre-v140 bottom border for the pinned tabs separator. 
+             * Firefox v140+ replaced #vertical-pinned-tabs-container-separator with 
+             * #vertical-pinned-tabs-splitter and removed its bottom border.
+             * This rule re-enables the separator when 
+             * `uc.flex.show-pin-tabs-separator-in-expanded-state` is set.
+             */
+            :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
+                /* Show pin tabs separator in expanded state */
                 display: block !important;
+                &:not(:hover) {
+                    color: var(--toolbox-textcolor) !important;
+                    border-bottom: var(--tabstrip-inner-border) !important;
+                }
             }
             /* Hide pin tabs separator in expanded state with no pin tabs */
             :is(#vertical-pinned-tabs-container, #pinned-tabs-container):empty
@@ -1168,204 +1147,225 @@
                 display: none !important;
             }
         }
-
-        sidebar-main[expanded]:hover {
-            #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
-                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay) !important;
+    }
+    @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+        /**
+         * Controls how many rows of pinned tab icons can be shown in vertical tab panel.
+         * This affects how many pinned tabs are visible before scrolling appears.
+         */
+        :root:not([titlepreface*="\180e "]) {
+            sidebar-main[expanded] :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
+                max-height: calc(
+                    var(--uc-max-visible-vertical-pinned-tabs) * var(--tabstrip-min-height) + var(--space-large) + 15px
+                ) !important;
             }
-            :is(.tab-label-container .tab-text, .tab-close-button) {
-                transition-delay: var(--uc-hover-sidebar-delay);
-            }
-
-            .toolbarbutton-text {
-                transition-delay: var(--uc-hover-sidebar-delay);
-            }
-
-            :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
-                .tabbrowser-tab .tab-stack {
-                    transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay);
+            #tabbrowser-tabs[orient="vertical"][expanded] {
+                /* Restore pre-v140 box-sizing and padding for tab group labels */
+                .tab-group-label {
+                    box-sizing: content-box;
+                    padding-block: 2.5px;
                 }
             }
 
-            #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
-                padding-inline: 2px !important;
-                max-width: 100% !important;
-                transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay) !important;
-            }
-            #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
-                transition:
-                    margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay),
-                    min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+            sidebar-main[expanded]:hover {
+                #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+                    transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
-                .tab-group-line {
+                }
+                :is(.tab-label-container .tab-text, .tab-close-button) {
                     transition-delay: var(--uc-hover-sidebar-delay);
                 }
-            }
-            #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
-                transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
-            }
-            #tabbrowser-tabs[orient="vertical"]::after {
-                width: calc(
-                    var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                        var(--tab-pinned-container-margin-inline-expanded) - 22px
-                );
-                transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
-            }
-            @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-                #tabbrowser-tabs[expanded]
-                    > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
-                    transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+
+                .toolbarbutton-text {
+                    transition-delay: var(--uc-hover-sidebar-delay);
+                }
+
+                :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
+                    .tabbrowser-tab .tab-stack {
+                        transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay);
+                    }
+                }
+
+                #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
+                    padding-inline: 2px !important;
+                    max-width: 100% !important;
+                    transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+                }
+                #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
+                    transition:
+                        margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay),
+                        min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay) !important;
+                    .tab-group-line {
+                        transition-delay: var(--uc-hover-sidebar-delay);
+                    }
+                }
+                #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
+                    transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay);
                 }
-            }
-
-            .tabbrowser-tab .tab-stack {
-                min-width: 100%;
-            }
-            .tabbrowser-tab .tab-background {
-                max-width: 100% !important;
-            }
-            @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-                #tabbrowser-tabs[expanded]
-                    > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
+                #tabbrowser-tabs[orient="vertical"]::after {
                     width: calc(
                         var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
                             var(--tab-pinned-container-margin-inline-expanded) - 22px
                     );
+                    transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
                 }
-            }
-        }
-
-        sidebar-main[expanded]:not(:hover) {
-            #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
-                transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay) !important;
-            }
-            :is(.tab-label-container .tab-text, .tab-close-button) {
-                visibility: collapse;
-                transition-delay: var(--uc-autohide-sidebar-delay);
-            }
-
-            .toolbarbutton-text {
-                visibility: hidden;
-                transition-delay: var(--uc-autohide-sidebar-delay);
-            }
-
-            :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
-                /* --uc-sroot-overflow: hidden; */
+                @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+                    #tabbrowser-tabs[expanded]
+                        > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
+                        transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay);
+                    }
+                }
 
                 .tabbrowser-tab .tab-stack {
-                    min-width: 40px;
-                    max-width: 40px;
-                    transition:
-                        min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-autohide-sidebar-delay),
-                        max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-autohide-sidebar-delay);
+                    min-width: 100%;
+                }
+                .tabbrowser-tab .tab-background {
+                    max-width: 100% !important;
+                }
+                @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+                    #tabbrowser-tabs[expanded]
+                        > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
+                        width: calc(
+                            var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
+                                var(--tab-pinned-container-margin-inline-expanded) - 22px
+                        );
+                    }
                 }
             }
 
-            #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
-                padding-inline: 2px !important;
-                max-width: 28px !important;
-                transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay) !important;
-            }
-            #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
-                margin-inline-start: 0px !important;
-                transition:
-                    margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay),
-                    min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+            sidebar-main[expanded]:not(:hover) {
+                #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+                    transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay) !important;
-                .tab-group-line {
+                }
+                :is(.tab-label-container .tab-text, .tab-close-button) {
+                    visibility: collapse;
+                    transition-delay: var(--uc-autohide-sidebar-delay);
+                }
+
+                .toolbarbutton-text {
                     visibility: hidden;
                     transition-delay: var(--uc-autohide-sidebar-delay);
                 }
-            }
-            #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
-                max-width: 32px;
-                transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay);
-            }
-            #tabbrowser-tabs[orient="vertical"]::after {
-                width: 32px;
-                transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay);
-            }
-            @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-                #tabbrowser-tabs[expanded]
-                    > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
-                    width: 32px !important;
+
+                :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
+                    /* --uc-sroot-overflow: hidden; */
+
+                    .tabbrowser-tab .tab-stack {
+                        min-width: 40px;
+                        max-width: 40px;
+                        transition:
+                            min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay),
+                            max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay);
+                    }
+                }
+
+                #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
+                    padding-inline: 2px !important;
+                    max-width: 28px !important;
+                    transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay) !important;
+                }
+                #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
+                    margin-inline-start: 0px !important;
+                    transition:
+                        margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay) !important;
+                    .tab-group-line {
+                        visibility: hidden;
+                        transition-delay: var(--uc-autohide-sidebar-delay);
+                    }
+                }
+                #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
+                    max-width: 32px;
+                    transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay);
+                }
+                #tabbrowser-tabs[orient="vertical"]::after {
+                    width: 32px;
                     transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay);
                 }
-            }
-            /* Move the container tab indicator to the right for Firefox v138 */
-            /*
-            .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
-                :is(#vertical-pinned-tabs-container, #pinned-tabs-container) &,
-                #tabbrowser-tabs[orient="vertical"] & {
-                    position: absolute;
-                    height: calc(100% - 4px);
-                    margin: 0;
-                    inset-inline-end: calc(100% - 50px) !important;
-                    transition: inset-inline-end var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type) 
-                        var(--uc-autohide-sidebar-delay);
+                @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+                    #tabbrowser-tabs[expanded]
+                        > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
+                        width: 32px !important;
+                        transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay);
+                    }
                 }
-            }
-        */
-        }
-
-        /* ── ◀️ Styles for verticalTabs when the sidebar is collapsed */
-        #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
-            --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
-            --tab-collapsed-width: var(--uc-sidebar-stripe-width) !important;
-            width: var(--uc-sidebar-stripe-width) !important;
-            .tab-background {
-                margin-inline: 5px !important;
-            }
-            .tab-close-button {
-                width: 14px !important;
-                height: 14px !important;
-                top: -1px !important;
-                inset-inline-start: 0px !important;
-            }
-            /* 
-             * Override v140+ margin changes for tab group labels (was auto → ~6px).
-             * Adjusted to 8px for a look closer to the previous layout. 
-             */
-            .tab-group-label {
-                margin-inline: 8px !important;
-            }
-        }
-        sidebar-main:not([expanded]) {
-            --uc-sroot-btn-padding-inline: 5.5px;
-            #vertical-tabs-newtab-button {
-                margin-inline: 5.5px !important;
-            }
-            /* Move the container tab indicator to the left for Firefox v138 */
-            /*
-            .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
-                :is(#vertical-pinned-tabs-container, #pinned-tabs-container) &,
-                #tabbrowser-tabs[orient="vertical"] & {
-                    position: absolute;
-                    height: calc(100% - 4px);
-                    margin: 0;
-                    inset-inline-end: calc(100% - 7px) !important;
-                    margin-inline-end: 0 !important;
+                /* Move the container tab indicator to the right for Firefox v138 */
+                /*
+                .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+                    :is(#vertical-pinned-tabs-container, #pinned-tabs-container) &,
+                    #tabbrowser-tabs[orient="vertical"] & {
+                        position: absolute;
+                        height: calc(100% - 4px);
+                        margin: 0;
+                        inset-inline-end: calc(100% - 50px) !important;
+                        transition: inset-inline-end var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type) 
+                            var(--uc-autohide-sidebar-delay);
+                    }
                 }
+                */
             }
-            */
         }
     }
+
+    /* ── ◀️ Styles for verticalTabs when the sidebar is collapsed */
+    #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
+        --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
+        --tab-collapsed-width: var(--uc-sidebar-stripe-width) !important;
+        width: var(--uc-sidebar-stripe-width) !important;
+        .tab-background {
+            margin-inline: 5px !important;
+        }
+        .tab-close-button {
+            width: 14px !important;
+            height: 14px !important;
+            top: -1px !important;
+            inset-inline-start: 0px !important;
+        }
+        /* 
+         * Override v140+ margin changes for tab group labels (was auto → ~6px).
+         * Adjusted to 8px for a look closer to the previous layout. 
+         */
+        .tab-group-label {
+            margin-inline: 8px !important;
+        }
+    }
+    sidebar-main:not([expanded]) {
+        --uc-sroot-btn-padding-inline: 5.5px;
+        #vertical-tabs-newtab-button {
+            margin-inline: 5.5px !important;
+        }
+        /* Move the container tab indicator to the left for Firefox v138 */
+        /*
+        .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+            :is(#vertical-pinned-tabs-container, #pinned-tabs-container) &,
+            #tabbrowser-tabs[orient="vertical"] & {
+                position: absolute;
+                height: calc(100% - 4px);
+                margin: 0;
+                inset-inline-end: calc(100% - 7px) !important;
+                margin-inline-end: 0 !important;
+            }
+        }
+        */
+    }
 }
+
 /* 🔼 [BLOCK G] End of rules for inactive Sidebery */
 
 /* ════════════════════════════════════════════════════════════════════

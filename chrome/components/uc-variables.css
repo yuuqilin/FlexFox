@@ -591,11 +591,13 @@
     @media -moz-pref("sidebar.verticalTabs") {
         --tab-pinned-horizontal-count: 5;
         --uc-sidebar-main-width: var(--uc-sidebar-stripe-width);
+        --uc-sidebar-main-hover-clip: 1px;
         --uc-sidebar-main-hover-width: calc(
             var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                var(--tab-pinned-container-margin-inline-expanded) + 1px
+                var(--tab-pinned-container-margin-inline-expanded) + var(--uc-sidebar-main-hover-clip)
         );
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+            --uc-sidebar-main-hover-clip: calc(var(--uc-sidebar-hover-width) - 254px);
             --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
             --uc-sidebar-main-margin-left: 0px;
             #sidebar-main:is([positionend], [sidebar-positionend]) {
@@ -604,6 +606,7 @@
         }
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             &[titlepreface*="\180e "] {
+                --uc-sidebar-main-hover-clip: calc(var(--uc-sidebar-hover-width) - 254px);
                 --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
                 --uc-sidebar-main-margin-left: 0px;
                 #sidebar-main:is([positionend], [sidebar-positionend]) {
@@ -838,6 +841,19 @@
                 &:has(#sidebar-main[hidden]) {
                     --uc-personal-toolbar-offset: 0px;
                     --uc-personal-toolbar-width: 0px;
+                }
+            }
+
+            &:has(#sidebar-main:not([sidebar-launcher-expanded])) {
+                @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+                    --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
+                    --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
+                }
+                @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                    &[titlepreface*="\180e "] {
+                        --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
+                        --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
+                    }
                 }
             }
         }
