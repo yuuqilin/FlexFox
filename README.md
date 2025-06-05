@@ -20,9 +20,10 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.5.4**
-* Improved compatibility with native vertical tabs when using the `Lock Sidebery` shortcut or enabling `uc.flex.disable-sidebery-autohide`. Even if the sidebar toggle button switches the panel to collapsed mode, the layout remains consistent and unaffected.
-* When `Lock Sidebery` is active, the native vertical tab panel now matches Sidebery's width, preventing layout shifts when switching between them. The `uc.flex.increase-sidebery-expanded-width` option will now also increase the expanded width of the native panel when applicable.
+**🦊 v3.5.5**
+* Fixed misaligned toolbar buttons inside the sidebar stripe when Sidebery is placed on the right and either `uc.flex.disable-sidebery-autohide`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
+* The navbar height now uses Firefox's default, which has a more compact appearance. In earlier FlexFox versions, the taller navbar was visually closer in size to the sidebar width.
+* Added `uc.flex.increase-navbar-height`, which restores the thicker navbar height from previous FlexFox layouts.
 
 <!-- END What's New -->
 
@@ -144,6 +145,10 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.5.4**
+* Improved compatibility with native vertical tabs when using the `Lock Sidebery` shortcut or enabling `uc.flex.disable-sidebery-autohide`. Even if the sidebar toggle button switches the panel to collapsed mode, the layout remains consistent and unaffected.
+* When `Lock Sidebery` is active, the native vertical tab panel now matches Sidebery's width, preventing layout shifts when switching between them. The `uc.flex.increase-sidebery-expanded-width` option will now also increase the expanded width of the native panel when applicable.
 
 **v3.5.3**
 * Fixed a regression introduced in v3.5.2 where enabling `uc.flex.enable-rounded-web-content` made it impossible to resize the Developer Tools panel when it's docked inside the main browser window.
@@ -436,6 +441,7 @@ For more update logs from earlier versions,
 | Preference | Description |
 |-----------|-------------|
 | `uc.flex.increase-sidebery-expanded-width` | Increases the expanded width of Sidebery and, when `uc.flex.disable-sidebery-autohide` is enabled or `Lock Sidebery` is active, also applies the increased width to the native vertical tab panel. |
+| `uc.flex.increase-navbar-height` | Restores the thicker navbar height used in earlier FlexFox versions. This change overrides the current default, which matches Firefox's original compact height. |
 | `uc.flex.switch-to-alternate-condensed-panel` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
 | `uc.flex.sidebery-fast-hover-expand` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |

@@ -20,9 +20,10 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.5.4**
-* `Lock Sidebery` ショートカットを使用するか、`uc.flex.disable-sidebery-autohide` を有効にしている場合でも、Firefoxのサイドバー切り替えボタンで折りたたみ状態にしてもレイアウトが崩れず、表示が一貫するようになりました。
-* `Lock Sidebery` 有効時には、Firefox標準の縦型タブパネルもSideberyと同じ幅に揃うようになり、切り替え時にレイアウトが揺れることがなくなりました。また、`uc.flex.increase-sidebery-expanded-width` を有効にすると、標準のパネルの幅も拡張されます。
+**🦊 v3.5.5**
+* Sidebery を右側に配置し、`uc.flex.disable-sidebery-autohide` や `Hide Sidebery` のショートカット、またはフルスクリーンモードを有効にしている場合に、サイドバーのストライプ内のツールボタンがずれて表示される問題を修正しました。
+* ナビゲーションバーの高さを Firefox のデフォルトに変更しました。これにより全体的によりコンパクトな印象になります。以前の FlexFox バージョンでは、ナビゲーションバーがより高く、サイドバーの幅と視覚的に近いバランスでした。
+* ナビゲーションバーの高さを従来の FlexFox のレイアウトに戻す `uc.flex.increase-navbar-height` オプションを追加しました。
 
 <details>  
 <summary>🪄 <b>新機能：丸みと浮かせたようなWeb表示スタイル</b> <i>《クリックで展開》</i> 👇</summary>
@@ -139,6 +140,10 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.5.4**
+* `Lock Sidebery` ショートカットを使用するか、`uc.flex.disable-sidebery-autohide` を有効にしている場合でも、Firefoxのサイドバー切り替えボタンで折りたたみ状態にしてもレイアウトが崩れず、表示が一貫するようになりました。
+* `Lock Sidebery` 有効時には、Firefox標準の縦型タブパネルもSideberyと同じ幅に揃うようになり、切り替え時にレイアウトが揺れることがなくなりました。また、`uc.flex.increase-sidebery-expanded-width` を有効にすると、標準のパネルの幅も拡張されます。
 
 **v3.5.3**
 * `uc.flex.enable-rounded-web-content` を有効にすると、開発者ツールがブラウザウィンドウ内にドッキングされている場合にリサイズできなくなる不具合（v3.5.2で発生）を修正しました。
@@ -434,6 +439,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | 設定名 | 説明 |
 |--------|------|
 | `uc.flex.increase-sidebery-expanded-width` | Sidebery の展開時の幅を広げます。また、`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` が有効な場合は、Firefox標準の縦型タブパネルの幅も広がります。 |
+| `uc.flex.increase-navbar-height` | 以前のFlexFoxバージョンで使用されていた、より厚みのあるナビゲーションバーの高さを復元します。現在のデフォルト（Firefox本来のコンパクトな高さ）を上書きします。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
 | `uc.flex.sidebery-fast-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
 | `uc.flex.sidebery-slow-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |

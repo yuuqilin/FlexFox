@@ -513,12 +513,35 @@
     }
 
     /* Toolbar sizing */
+    #urlbar-container,
+    #urlbar {
+        --urlbar-height: 32px !important;
+        --urlbar-container-height: 40px !important;
+        @media -moz-pref("uc.flex.increase-navbar-height") {
+            --urlbar-container-height: 43px !important;
+        }
+    }
+    --urlbar-toolbar-height: var(--urlbar-container-height);
+    --uc-titlebar-buttonbox-height: 35px;
+    --uc-sidebar-button-bg-pos: 9px 11.5px;
+    --uc-sidebar-button-bg-pos-first: 13px 10px;
+    --uc-sidebar-button-bg-pos-first-fs: 11px 10px;
+    --uc-sidebar-button-bg-pos-last: 9px 1.5px;
+    --uc-sidebar-button-height-last: 23px;
+    @media -moz-pref("uc.flex.increase-navbar-height") {
+        --uc-titlebar-buttonbox-height: 38px;
+        --uc-sidebar-button-bg-pos: 9.5px 12px;
+        --uc-sidebar-button-bg-pos-first: 13px 12px;
+        --uc-sidebar-button-bg-pos-first-fs: 11px 12px;
+        --uc-sidebar-button-bg-pos-last: 9px 3px;
+        --uc-sidebar-button-height-last: 26px;
+    }
+
     --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
     --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
     &[uidensity="touch"] {
         --uc-bm-padding: 7px;
     }
-    --urlbar-toolbar-height: 43px;
     --bookmarks-toolbar-overlapping-browser-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding)) !important;
     --uc-bm-disable-autohide-offset: calc(-1 * (var(--uc-bm-height) + 2 * var(--uc-bm-padding)));
 

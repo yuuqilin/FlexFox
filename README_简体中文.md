@@ -20,9 +20,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.5.4**
-* 提升了兼容性：当启用快捷键 `Lock Sidebery` 或设定 `uc.flex.disable-sidebery-autohide` 固定原生垂直选项卡为展开状态时，即使通过侧边栏按钮切换为折叠状态，原生垂直选项卡的版式也不会错乱，能保持一致的显示效果。
-* 启用 `Lock Sidebery` 后，原生垂直选项卡的宽度现在会与 Sidebery 保持一致，切换时不会因宽度变化而造成画面跳动。同时，在此状态下启用 `uc.flex.increase-sidebery-expanded-width`，也会一并扩大原生面板的展开宽度。
+**🦊 v3.5.5**
+* 修复 Sidebery 放在右侧，并启用 `uc.flex.disable-sidebery-autohide`、快捷键 `Hide Sidebery` 或进入全屏模式时，展开侧边栏彩带后，彩带中的工具按钮显示错位的问题。
+* 导航栏高度已调整为 Firefox 默认值，整体界面更为紧凑。而在旧版 FlexFox 中，导航栏高度更高，在视觉上与侧边栏的宽度更为接近。
+* 新增选项 `uc.flex.increase-navbar-height`，启用后可将导航栏高度恢复为旧版 FlexFox 的样式。
 
 <details>  
 <summary>🪄 <b>重大更新：圆角与悬浮式网页内容样式</b> <i>《点击展开》</i> 👇</summary>
@@ -137,6 +138,10 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.5.4**
+* 提升了兼容性：当启用快捷键 `Lock Sidebery` 或设定 `uc.flex.disable-sidebery-autohide` 固定原生垂直选项卡为展开状态时，即使通过侧边栏按钮切换为折叠状态，原生垂直选项卡的版式也不会错乱，能保持一致的显示效果。
+* 启用 `Lock Sidebery` 后，原生垂直选项卡的宽度现在会与 Sidebery 保持一致，切换时不会因宽度变化而造成画面跳动。同时，在此状态下启用 `uc.flex.increase-sidebery-expanded-width`，也会一并扩大原生面板的展开宽度。
 
 **v3.5.3**
 * 修复了 v3.5.2 引入的问题：启用 `uc.flex.enable-rounded-web-content` 时，开发者工具面板在嵌入主窗口时无法调整大小。
@@ -437,6 +442,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | 配置选项 | 说明 |
 |----------|------|
 | `uc.flex.increase-sidebery-expanded-width` | 增加 Sidebery 展开时的宽度；启用 `uc.flex.disable-sidebery-autohide` 或激活 `Lock Sidebery` 时，也会同步增加原生垂直选项卡的展开宽度。 |
+| `uc.flex.increase-navbar-height` | 恢复旧版 FlexFox 中使用的较厚导航栏高度。此更改会覆盖当前默认值（与 Firefox 原始的紧凑高度一致）。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
 | `uc.flex.sidebery-fast-hover-expand` | 加快 Sidebery 与原生垂直选项卡的自动展开/折叠速度。 |
 | `uc.flex.sidebery-slow-hover-expand` | 减慢 Sidebery 与原生垂直选项卡的自动展开/折叠速度。 |

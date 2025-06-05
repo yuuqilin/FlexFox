@@ -8,8 +8,10 @@ user_pref("uc.flex.add-ui-text-stroke",                         false);
 user_pref("uc.flex.fully-hide-sidebery",                        false);
 /* Fully hides the top tab bar, navigation bar, and bookmarks toolbar. */
 user_pref("uc.flex.fully-hide-toolbox",                         false);
-/* Increases the expanded width of Sidebery. */
+/* Increases Sidebery's expanded width; also applies to native vertical tabs when kept open. */
 user_pref("uc.flex.increase-sidebery-expanded-width",           false);
+/* Increases navbar height, instead of Firefox's compact default. */
+user_pref("uc.flex.increase-navbar-height",                     false);
 /* Allows themes and extensions to customize the toolbar background. */
 user_pref("uc.flex.allow-addons-to-change-toolbar-color",       false);
 /* Sets gradient style for the highlight color (0 = off, 1–X = select style). Applies to logo, stripe, and star icon. */

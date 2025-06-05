@@ -23,20 +23,20 @@
             top: 8px;
             right: 4px;
             width: 36px;
-            height: 26px;
-            background-position: 9px 3px;
+            height: var(--uc-sidebar-button-height-last);
+            background-position: var(--uc-sidebar-button-bg-pos-last);
             background-size: 20px;
-            mask-position: 9px 3px;
+            mask-position: var(--uc-sidebar-button-bg-pos-last);
             mask-size: 20px;
         }
         @media not -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
             fill: var(--toolbarbutton-icon-fill) !important;
             list-style-image: none !important;
             background-image: var(--uc-flexfox-logo-image);
-            background-position: 9.5px 12px;
+            background-position: var(--uc-sidebar-button-bg-pos);
             background-repeat: no-repeat;
             background-size: 18px;
-            mask-position: 9.5px 12px;
+            mask-position: var(--uc-sidebar-button-bg-pos);
             mask-repeat: no-repeat;
             mask-size: 18px;
             /*
@@ -51,13 +51,13 @@
             }
             */
             &:first-child {
-                background-position: 13px 12px;
+                background-position: var(--uc-sidebar-button-bg-pos-first);
                 background-size: 20px;
-                mask-position: 13px 12px;
+                mask-position: var(--uc-sidebar-button-bg-pos-first);
                 mask-size: 20px;
                 @media (display-mode: fullscreen) {
-                    background-position: 12px 12px;
-                    mask-position: 12px 12px;
+                    background-position: var(--uc-sidebar-button-bg-pos-first-fs);
+                    mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
                 }
             }
 
@@ -323,7 +323,10 @@
             /* Adjust offset for absolute positioning; +11px is no longer needed, replaced with -11px. */
             &:is([positionend], [sidebar-positionend]) sidebar-main[expanded]:hover {
                 transform: translateX(
-                    calc(-11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%)
+                    calc(
+                        var(--uc-sb-sidebar-main-translateX-offset, -11px) +
+                            var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%
+                    )
                 );
             }
         }
@@ -376,7 +379,10 @@
                 }
                 &:is([positionend], [sidebar-positionend]) sidebar-main[expanded]:hover {
                     transform: translateX(
-                        calc(-11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%)
+                        calc(
+                            var(--uc-sb-sidebar-main-translateX-offset, -11px) +
+                                var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%
+                        )
                     );
                 }
             }
@@ -420,6 +426,7 @@
             --uc-sb-sroot-padding-inline: 6px;
             --uc-sb-sroot-gap: var(--space-xxsmall);
             --uc-sb-sroot-btn-padding-inline-start: 5.5px;
+            --uc-sb-sidebar-main-translateX-offset: 11px;
         }
         & sidebar-main:not([expanded]) {
             /*
@@ -1096,16 +1103,6 @@
     }
 }
 
-/* Reposition nav-bar window controls when native vertical tabs are enabled */
-@media -moz-pref("sidebar.verticalTabs") {
-    :root:not([inFullscreen]) #nav-bar > .titlebar-buttonbox-container {
-        margin-top: 2px;
-    }
-
-    :root[inFullscreen] #nav-bar > .titlebar-buttonbox-container {
-        margin-top: 0px;
-    }
-}
 /* 🔼 [BLOCK F] End of rules unrelated to Sidebery */
 
 /* ════════════════════════════════════════════════════════════════════

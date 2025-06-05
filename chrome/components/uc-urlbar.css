@@ -1,4 +1,22 @@
 /* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
+/* Fix urlbar height issue after v133 */
+@media -moz-pref("uc.flex.increase-navbar-height") {
+    #urlbar-container {
+        padding-top: 5.5px !important;
+    }
+}
+
+#urlbar[breakout][breakout-extend] {
+    margin-left: 0 !important;
+    width: var(--urlbar-width) !important;
+}
+
+#urlbar[breakout][breakout-extend],
+#urlbar[breakout][breakout-extend-disabled][open] {
+    height: auto !important;
+    top: auto !important;
+}
+
 /* URL BAR */
 #urlbar {
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
@@ -29,16 +47,7 @@
         (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2
     ) !important;
     */
-    /* Firefox < v133 */
-    &:not([style*="--urlbar-width"]) {
-        left: 0 !important;
-        width: 100% !important;
-    }
-    /* Firefox >= v133 */
-    &[style*="--urlbar-width"] {
-        margin-left: 0 !important;
-        width: var(--urlbar-width) !important;
-    }
+
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop") {
         &::backdrop {
             background-color: rgb(0 0 0 / var(--uc-urlbar-popup-dimness));
@@ -47,7 +56,9 @@
 }
 
 #urlbar-container {
+    /*
     margin-bottom: 3px;
+    */
     display: initial;
 }
 
