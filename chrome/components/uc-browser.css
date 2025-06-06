@@ -1,3 +1,29 @@
+/* Remove the border and rounded corners from the webpage content area */
+@media -moz-pref("sidebar.revamp") {
+    #tabbrowser-tabbox {
+        outline: none !important;
+        box-shadow: none !important;
+        @media -moz-pref("sidebar.revamp.round-content-area") {
+            @media -moz-pref("sidebar.position_start") {
+                border-start-start-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+            }
+            @media not -moz-pref("sidebar.position_start") {
+                border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+            }
+            @media -moz-pref("uc.flex.fully-hide-toolbox"),
+                -moz-pref("uc.flex.fully-hide-sidebery"),
+                (display-mode: fullscreen) {
+                border-radius: 0 !important;
+            }
+            @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
+                :root:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    border-radius: 0 !important;
+                }
+            }
+        }
+    }
+}
+
 /* Add margin, shadow, and rounded corners to the web content area */
 @media -moz-pref("uc.flex.enable-rounded-web-content") and (not (display-mode: fullscreen)) {
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {

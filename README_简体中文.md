@@ -20,10 +20,9 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.5.5**
-* 修复 Sidebery 放在右侧，并启用 `uc.flex.disable-sidebery-autohide`、快捷键 `Hide Sidebery` 或进入全屏模式时，展开侧边栏彩带后，彩带中的工具按钮显示错位的问题。
-* 导航栏高度已调整为 Firefox 默认值，整体界面更为紧凑。而在旧版 FlexFox 中，导航栏高度更高，在视觉上与侧边栏的宽度更为接近。
-* 新增选项 `uc.flex.increase-navbar-height`，启用后可将导航栏高度恢复为旧版 FlexFox 的样式。
+**🦊 v3.5.6**
+* 修复了在侧边栏置于右侧、且启用 `uc.flex.fully-hide-sidebery`、使用 `Hide Sidebery` 快捷键或进入全屏模式时出现的多个显示异常。
+* 重构了右侧侧边栏的排版逻辑，简化了规则，减少判断流程的复杂性。
 
 <details>  
 <summary>🪄 <b>重大更新：圆角与悬浮式网页内容样式</b> <i>《点击展开》</i> 👇</summary>
@@ -138,6 +137,11 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.5.5**
+* 修复 Sidebery 放在右侧，并启用 `uc.flex.disable-sidebery-autohide`、快捷键 `Hide Sidebery` 或进入全屏模式时，展开侧边栏彩带后，彩带中的工具按钮显示错位的问题。
+* 导航栏高度已调整为 Firefox 默认值，整体界面更为紧凑。而在旧版 FlexFox 中，导航栏高度更高，在视觉上与侧边栏的宽度更为接近。
+* 新增选项 `uc.flex.increase-navbar-height`，启用后可将导航栏高度恢复为旧版 FlexFox 的样式。
 
 **v3.5.4**
 * 提升了兼容性：当启用快捷键 `Lock Sidebery` 或设定 `uc.flex.disable-sidebery-autohide` 固定原生垂直选项卡为展开状态时，即使通过侧边栏按钮切换为折叠状态，原生垂直选项卡的版式也不会错乱，能保持一致的显示效果。

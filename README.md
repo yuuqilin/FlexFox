@@ -20,10 +20,9 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.5.5**
-* Fixed misaligned toolbar buttons inside the sidebar stripe when Sidebery is placed on the right and either `uc.flex.disable-sidebery-autohide`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
-* The navbar height now uses Firefox's default, which has a more compact appearance. In earlier FlexFox versions, the taller navbar was visually closer in size to the sidebar width.
-* Added `uc.flex.increase-navbar-height`, which restores the thicker navbar height from previous FlexFox layouts.
+**🦊 v3.5.6**
+* Fixed various display issues when the sidebar is on the right and `uc.flex.fully-hide-sidebery`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
+* Refactored sidebar layout logic for right-side positioning to streamline the rules and reduce complexity.
 
 <!-- END What's New -->
 
@@ -145,6 +144,11 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.5.5**
+* Fixed misaligned toolbar buttons inside the sidebar stripe when Sidebery is placed on the right and either `uc.flex.disable-sidebery-autohide`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
+* The navbar height now uses Firefox's default, which has a more compact appearance. In earlier FlexFox versions, the taller navbar was visually closer in size to the sidebar width.
+* Added `uc.flex.increase-navbar-height`, which restores the thicker navbar height from previous FlexFox layouts.
 
 **v3.5.4**
 * Improved compatibility with native vertical tabs when using the `Lock Sidebery` shortcut or enabling `uc.flex.disable-sidebery-autohide`. Even if the sidebar toggle button switches the panel to collapsed mode, the layout remains consistent and unaffected.

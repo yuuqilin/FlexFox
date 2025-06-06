@@ -307,10 +307,7 @@
         /* Applies styles for native vertical tabs when fully hidden or in fullscreen.
         Behavior depends on whether Sidebery is active, determined via --uc-sb-* variables. */
         &[id="sidebar-main"] {
-            --uc-sidebar-main-max-width: 1px;
-            :root[sizemode="normal"] & {
-                --uc-sidebar-main-max-width: var(--uc-hover-sidebar-trigger-width);
-            }
+            --uc-sidebar-main-max-width: var(--uc-hover-sidebar-trigger-width);
             max-width: var(--uc-sb-sidebar-main-max-width, var(--uc-sidebar-main-max-width)) !important;
             height: var(--uc-sb-sidebar-main-hover-min-h, 100%);
             opacity: var(--uc-sb-sidebar-main-opacity, 0);
@@ -319,15 +316,6 @@
             }
             &:not(:hover) sidebar-main[expanded] {
                 min-width: var(--uc-sb-sidebar-main-min-width, 1px);
-            }
-            /* Adjust offset for absolute positioning; +11px is no longer needed, replaced with -11px. */
-            &:is([positionend], [sidebar-positionend]) sidebar-main[expanded]:hover {
-                transform: translateX(
-                    calc(
-                        var(--uc-sb-sidebar-main-translateX-offset, -11px) +
-                            var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%
-                    )
-                );
             }
         }
     }
@@ -364,10 +352,7 @@
                 }
             }
             &[id="sidebar-main"] {
-                --uc-sidebar-main-max-width: 1px;
-                :root[sizemode="normal"] & {
-                    --uc-sidebar-main-max-width: var(--uc-hover-sidebar-trigger-width);
-                }
+                --uc-sidebar-main-max-width: var(--uc-hover-sidebar-trigger-width);
                 max-width: var(--uc-sb-sidebar-main-max-width, var(--uc-sidebar-main-max-width)) !important;
                 height: var(--uc-sb-sidebar-main-hover-min-h, 100%);
                 opacity: var(--uc-sb-sidebar-main-opacity, 0);
@@ -376,14 +361,6 @@
                 }
                 &:not(:hover) sidebar-main[expanded] {
                     min-width: var(--uc-sb-sidebar-main-min-width, 1px);
-                }
-                &:is([positionend], [sidebar-positionend]) sidebar-main[expanded]:hover {
-                    transform: translateX(
-                        calc(
-                            var(--uc-sb-sidebar-main-translateX-offset, -11px) +
-                                var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%
-                        )
-                    );
                 }
             }
         }
@@ -426,7 +403,6 @@
             --uc-sb-sroot-padding-inline: 6px;
             --uc-sb-sroot-gap: var(--space-xxsmall);
             --uc-sb-sroot-btn-padding-inline-start: 5.5px;
-            --uc-sb-sidebar-main-translateX-offset: 11px;
         }
         & sidebar-main:not([expanded]) {
             /*
@@ -733,14 +709,13 @@
             border-inline-width: 0 0.01px;
             */
             &:is([positionend], [sidebar-positionend]) {
-                padding-inline-end: 11px;
+                padding-inline-end: var(--uc-sidebar-main-padding-inline-end, 0);
                 /* Newly added 'transform' uses initial transition values as it's not defined above */
                 transition-property: margin-inline-start, min-width, overflow, transform;
                 border-inline-width: 0.01px 0;
             }
         }
         sidebar-main[expanded]:hover {
-            margin-inline-start: 0;
             min-width: var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-main-hover-width));
             /* transition-delay: 0ms !important; */
             transition:
@@ -762,7 +737,10 @@
                 @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                     :root:not([titlepreface*="\180e "]) & {
                         transform: translateX(
-                            calc(11px + var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%)
+                            calc(
+                                var(--uc-sidebar-main-padding-inline-end, 0px) +
+                                    var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%
+                            )
                         );
                     }
                 }
@@ -990,9 +968,9 @@
         }
         /* Hide the vertical scrollbar when pinned tabs are collapsed. */
         /*
-            spacer[part="overflow-start-indicator"] + scrollbox[part="scrollbox"] {
-                overflow-y: var(--uc-sroot-overflow, inherit) !important;
-            }
+        spacer[part="overflow-start-indicator"] + scrollbox[part="scrollbox"] {
+            overflow-y: var(--uc-sroot-overflow, inherit) !important;
+        }
         */
         .tools-and-extensions.actions-list[orientation="horizontal"] {
             /*
@@ -1058,52 +1036,9 @@
             width: var(--button-size-icon) !important;
         }
     }
-    /* 🔼 [BLOCK E] End of rules for inactive Sidebery */
-
-    /* 🔽 [BLOCK F] Start of rules unrelated to Sidebery */
-    /**
-     * Increase the z-index of the navigation bar in fullscreen mode  
-     * to prevent it from being obscured by the revamped sidebar.
-     */
-    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-        #navigator-toolbox {
-            z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
-        }
-    }
-    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
-            #navigator-toolbox {
-                z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
-            }
-        }
-    }
-
-    /* Remove the border and rounded corners from the webpage content area */
-    #tabbrowser-tabbox {
-        outline: none !important;
-        box-shadow: none !important;
-        @media -moz-pref("sidebar.revamp.round-content-area") {
-            @media -moz-pref("sidebar.position_start") {
-                border-start-start-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
-            }
-            @media not -moz-pref("sidebar.position_start") {
-                border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
-            }
-            @media -moz-pref("uc.flex.fully-hide-toolbox"),
-                -moz-pref("uc.flex.fully-hide-sidebery"),
-                (display-mode: fullscreen) {
-                border-radius: 0 !important;
-            }
-            @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
-                :root:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                    border-radius: 0 !important;
-                }
-            }
-        }
-    }
 }
 
-/* 🔼 [BLOCK F] End of rules unrelated to Sidebery */
+/* 🔼 [BLOCK E] End of rules for inactive Sidebery */
 
 /* ════════════════════════════════════════════════════════════════════
    ██╗   ██╗███████╗██████╗ ████████╗██╗ ██████╗ █████╗ ██╗         ████████╗ █████╗ ██████╗ ███████╗
@@ -1115,7 +1050,7 @@
                                                                                                      
 ═════════════════════════════════════════════════════════════════════ */
 
-/* 🔽 [BLOCK G] Start of rules for inactive Sidebery */
+/* 🔽 [BLOCK F] Start of rules for inactive Sidebery */
 @media (-moz-pref("sidebar.verticalTabs")) and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
     /* ── ▶️ Styles for verticalTabs when the sidebar is expanded */
     #tabbrowser-tabs[orient="vertical"][expanded] {
@@ -1363,7 +1298,7 @@
     }
 }
 
-/* 🔼 [BLOCK G] End of rules for inactive Sidebery */
+/* 🔼 [BLOCK F] End of rules for inactive Sidebery */
 
 /* ════════════════════════════════════════════════════════════════════
    ███████╗██╗  ██╗████████╗███████╗███╗   ██╗███████╗██╗ ██████╗ ███╗   ██╗███████╗
@@ -1374,7 +1309,7 @@
    ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
                                                                                                                                                                                        
 ═════════════════════════════════════════════════════════════════════ */
-/* 🔽 [BLOCK H] Start of rules unrelated to Sidebery */
+/* 🔽 [BLOCK G] Start of rules unrelated to Sidebery */
 /**
  * This section contains code originally sourced from the firefox-gx project.
  * Source: https://github.com/Godiesc/firefox-gx
@@ -1457,4 +1392,4 @@
         order: -1 !important;
     }
 }
-/* 🔼 [BLOCK H] End of rules unrelated to Sidebery */
+/* 🔼 [BLOCK G] End of rules unrelated to Sidebery */

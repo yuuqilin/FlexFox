@@ -20,10 +20,9 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.5.5**
-* Sidebery を右側に配置し、`uc.flex.disable-sidebery-autohide` や `Hide Sidebery` のショートカット、またはフルスクリーンモードを有効にしている場合に、サイドバーのストライプ内のツールボタンがずれて表示される問題を修正しました。
-* ナビゲーションバーの高さを Firefox のデフォルトに変更しました。これにより全体的によりコンパクトな印象になります。以前の FlexFox バージョンでは、ナビゲーションバーがより高く、サイドバーの幅と視覚的に近いバランスでした。
-* ナビゲーションバーの高さを従来の FlexFox のレイアウトに戻す `uc.flex.increase-navbar-height` オプションを追加しました。
+**🦊 v3.5.6**
+* サイドバーを右側に配置した際に、`uc.flex.fully-hide-sidebery` や `Hide Sidebery` のショートカット、または全画面モードを有効にすると発生する複数の表示不具合を修正しました。
+* サイドバーを右側に置いたときのレイアウト処理を整理し、ルールを簡潔化しました。
 
 <details>  
 <summary>🪄 <b>新機能：丸みと浮かせたようなWeb表示スタイル</b> <i>《クリックで展開》</i> 👇</summary>
@@ -140,6 +139,11 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.5.5**
+* Sidebery を右側に配置し、`uc.flex.disable-sidebery-autohide` や `Hide Sidebery` のショートカット、またはフルスクリーンモードを有効にしている場合に、サイドバーのストライプ内のツールボタンがずれて表示される問題を修正しました。
+* ナビゲーションバーの高さを Firefox のデフォルトに変更しました。これにより全体的によりコンパクトな印象になります。以前の FlexFox バージョンでは、ナビゲーションバーがより高く、サイドバーの幅と視覚的に近いバランスでした。
+* ナビゲーションバーの高さを従来の FlexFox のレイアウトに戻す `uc.flex.increase-navbar-height` オプションを追加しました。
 
 **v3.5.4**
 * `Lock Sidebery` ショートカットを使用するか、`uc.flex.disable-sidebery-autohide` を有効にしている場合でも、Firefoxのサイドバー切り替えボタンで折りたたみ状態にしてもレイアウトが崩れず、表示が一貫するようになりました。
