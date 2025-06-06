@@ -20,9 +20,8 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.5.6**
-* 修复了在侧边栏置于右侧、且启用 `uc.flex.fully-hide-sidebery`、使用 `Hide Sidebery` 快捷键或进入全屏模式时出现的多个显示异常。
-* 重构了右侧侧边栏的排版逻辑，简化了规则，减少判断流程的复杂性。
+**🦊 v3.5.7**
+* 修复了 v3.5.5 引入的问题：当书签工具栏自动展开时，主题背景图在导航栏与工具栏之间出现断层，无法连续衔接。
 
 <details>  
 <summary>🪄 <b>重大更新：圆角与悬浮式网页内容样式</b> <i>《点击展开》</i> 👇</summary>
@@ -137,6 +136,10 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.5.6**
+* 修复了在侧边栏置于右侧、且启用 `uc.flex.fully-hide-sidebery`、使用 `Hide Sidebery` 快捷键或进入全屏模式时出现的多个显示异常。
+* 重构了右侧侧边栏的排版逻辑，简化了规则，减少判断流程的复杂性。
 
 **v3.5.5**
 * 修复 Sidebery 放在右侧，并启用 `uc.flex.disable-sidebery-autohide`、快捷键 `Hide Sidebery` 或进入全屏模式时，展开侧边栏彩带后，彩带中的工具按钮显示错位的问题。

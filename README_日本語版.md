@@ -20,9 +20,8 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.5.6**
-* サイドバーを右側に配置した際に、`uc.flex.fully-hide-sidebery` や `Hide Sidebery` のショートカット、または全画面モードを有効にすると発生する複数の表示不具合を修正しました。
-* サイドバーを右側に置いたときのレイアウト処理を整理し、ルールを簡潔化しました。
+**🦊 v3.5.7**
+* v3.5.5で発生した不具合を修正。ブックマークツールバーが自動展開される際、ナビゲーションバーとの間でテーマの背景画像が途切れてしまう問題を解消しました。
 
 <details>  
 <summary>🪄 <b>新機能：丸みと浮かせたようなWeb表示スタイル</b> <i>《クリックで展開》</i> 👇</summary>
@@ -139,6 +138,10 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.5.6**
+* サイドバーを右側に配置した際に、`uc.flex.fully-hide-sidebery` や `Hide Sidebery` のショートカット、または全画面モードを有効にすると発生する複数の表示不具合を修正しました。
+* サイドバーを右側に置いたときのレイアウト処理を整理し、ルールを簡潔化しました。
 
 **v3.5.5**
 * Sidebery を右側に配置し、`uc.flex.disable-sidebery-autohide` や `Hide Sidebery` のショートカット、またはフルスクリーンモードを有効にしている場合に、サイドバーのストライプ内のツールボタンがずれて表示される問題を修正しました。

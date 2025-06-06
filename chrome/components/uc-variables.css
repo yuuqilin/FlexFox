@@ -557,20 +557,6 @@
     /* Default delay for visibility (18ms) and margin-bottom (0ms) transitions */
     --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
 
-    /* Adjust vertical offset of the bookmarks toolbar background image */
-    #PersonalToolbar {
-        --uc-theme-bg-y-clip: -28px;
-        #toolbar-menubar[autohide="false"] ~ & {
-            --uc-theme-bg-y-clip: -52px;
-        }
-        #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
-            --uc-theme-bg-y-clip: -61px;
-        }
-    }
-    /* Initial values for horizontal offset of the bookmarks toolbar background image */
-    --uc-theme-bg-x-left-start: 0px;
-    --uc-theme-bg-x-right-end: 0px;
-
     /* Semi-transparent background color for the #searchbar input field */
     --uc-urlbar-bg-transparent: color-mix(in srgb, var(--uc-urlbar-bg) 50%, transparent);
 
@@ -769,12 +755,12 @@
             }
             /* Adjust vertical offset of the bookmarks toolbar background image */
             #PersonalToolbar {
-                --uc-theme-bg-y-clip: 16px;
+                --uc-theme-bg-y-clip: calc(19px - var(--uc-theme-bg-y-offset));
                 #toolbar-menubar[autohide="false"] ~ & {
-                    --uc-theme-bg-y-clip: -8px;
+                    --uc-theme-bg-y-clip: calc(-2px - (2 * var(--uc-theme-bg-y-offset)));
                 }
                 #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
-                    --uc-theme-bg-y-clip: -17px;
+                    --uc-theme-bg-y-clip: calc(-2px - var(--uc-theme-bg-y-offset));
                 }
             }
         }
@@ -842,6 +828,33 @@
     --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, 0px);
     --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, 0px);
 
+    /* Adjust vertical offset of the bookmarks toolbar background image */
+    #PersonalToolbar {
+        --uc-theme-bg-y-offset: 0px;
+        @media -moz-pref("uc.flex.increase-navbar-height") {
+            --uc-theme-bg-y-offset: 3px;
+        }
+        --uc-theme-bg-y-clip: calc(-25px - var(--uc-theme-bg-y-offset));
+        #toolbar-menubar[autohide="false"] ~ & {
+            --uc-theme-bg-y-clip: calc(-46px - (2 * var(--uc-theme-bg-y-offset)));
+        }
+        #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+            --uc-theme-bg-y-clip: calc(-46px - var(--uc-theme-bg-y-offset));
+        }
+        @media -moz-pref("sidebar.verticalTabs") {
+            --uc-theme-bg-y-clip: calc(27px + var(--uc-theme-bg-y-offset));
+            #toolbar-menubar[autohide="false"] ~ & {
+                --uc-theme-bg-y-clip: calc(48px + 2 * var(--uc-theme-bg-y-offset));
+            }
+            #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+                --uc-theme-bg-y-clip: calc(44px + var(--uc-theme-bg-y-offset));
+            }
+        }
+    }
+    /* Initial values for horizontal offset of the bookmarks toolbar background image */
+    --uc-theme-bg-x-left-start: 0px;
+    --uc-theme-bg-x-right-end: 0px;
+
     /* Adjust horizontal offset of the bookmarks toolbar background image */
     @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
         &:not(
@@ -890,16 +903,6 @@
                         --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
                     }
                 }
-            }
-        }
-        /* Adjust vertical offset of the bookmarks toolbar background image */
-        #PersonalToolbar {
-            --uc-theme-bg-y-clip: 30px;
-            #toolbar-menubar[autohide="false"] ~ & {
-                --uc-theme-bg-y-clip: 54px;
-            }
-            #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
-                --uc-theme-bg-y-clip: 59px;
             }
         }
     }

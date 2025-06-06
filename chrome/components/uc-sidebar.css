@@ -607,9 +607,6 @@
                 calc(var(--uc-hover-sidebar-delay) + 10ms),
             z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
     }
-    #sidebar-launcher-splitter {
-        display: var(--uc-sidebar-splitter-display, flex) !important;
-    }
 
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
@@ -749,6 +746,10 @@
         /* Fix transparent background issue in vertical tabs; no longer needed in Firefox v138 and later */
         #sidebar-wrapper {
             background: inherit;
+        }
+
+        #sidebar-launcher-splitter {
+            display: none !important;
         }
     }
     /* 🔼 [BLOCK C] End of rules for inactive Sidebery */

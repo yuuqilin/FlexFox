@@ -20,9 +20,8 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.5.6**
-* Fixed various display issues when the sidebar is on the right and `uc.flex.fully-hide-sidebery`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
-* Refactored sidebar layout logic for right-side positioning to streamline the rules and reduce complexity.
+**🦊 v3.5.7**
+* Fixed a regression from v3.5.5 that caused a visual break in theme background images between the navigation bar and the bookmarks toolbar when the toolbar auto-expanded.
 
 <!-- END What's New -->
 
@@ -144,6 +143,10 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.5.6**
+* Fixed various display issues when the sidebar is on the right and `uc.flex.fully-hide-sidebery`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
+* Refactored sidebar layout logic for right-side positioning to streamline the rules and reduce complexity.
 
 **v3.5.5**
 * Fixed misaligned toolbar buttons inside the sidebar stripe when Sidebery is placed on the right and either `uc.flex.disable-sidebery-autohide`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
