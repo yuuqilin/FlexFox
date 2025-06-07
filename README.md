@@ -20,11 +20,16 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.5.8**
-* Improved compatibility of theme backgrounds and the bookmarks toolbar across multiple layout states, including `Lock Sidebery`, `Collapse sidebar`, `Hide tabs and sidebar`, and `Move sidebar to the right`.
-* Restored missing checkmark icons in Firefox’s native menus for AI chatbots and the Bookmarks toolbar.
-* Status panel now adopts rounded corners when `uc.flex.enable-rounded-web-content` is enabled.
-* Renamed some variables for better clarity and usability.
+**🔥 v3.6.0 Major Performance Update**
+> [!WARNING]
+> * Fixed a serious performance regression introduced in v3.5.1.
+>   * The issue was caused by the new “Rounded & Floating Web Content” feature added in v3.5.1.
+>   * One of the most noticeable symptoms was the sluggish response when opening the “List All Tabs” panel — it could take over 0.5 seconds to appear.
+>   * The browser UI also became noticeably unresponsive when using DevTools or the Browser Toolbox.
+>   * As some long-time users may have guessed, the culprit was once again a `:root:has()` selector affecting rendering performance.
+> * This regression has now been resolved, and performance has also been slightly optimized.
+> * Compared to v3.5.8, the response time is now approximately **17× faster**.
+> * ⬆️ We recommend updating to this version as soon as possible.
 
 <!-- END What's New -->
 
@@ -146,6 +151,12 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.5.8**
+* Improved compatibility of theme backgrounds and the bookmarks toolbar across multiple layout states, including `Lock Sidebery`, `Collapse sidebar`, `Hide tabs and sidebar`, and `Move sidebar to the right`.
+* Restored missing checkmark icons in Firefox’s native menus for AI chatbots and the Bookmarks toolbar.
+* Status panel now adopts rounded corners when `uc.flex.enable-rounded-web-content` is enabled.
+* Renamed some variables for better clarity and usability.
 
 **v3.5.7**
 * Fixed a regression from v3.5.5 that caused a visual break in theme background images between the navigation bar and the bookmarks toolbar when the toolbar auto-expanded.
