@@ -188,73 +188,18 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 * 修复了当侧边栏工具按钮少于 6 个时，设置按钮位置不对齐，以及工具栏展开方向错误的问题（原本应水平展开，却变为垂直）。
 * 统一了原生垂直选项卡中侧边栏工具按钮的排列样式。无论 Sidebery 是否启用，侧边栏是否展开，按钮数量是多是少，展开或折叠状态下，均能保持一致、整齐的间距与布局。
 
-**v3.4.10**
-* 修复了查找栏背景颜色显示异常的问题。
-
-**v3.4.9**
-* 修复了 v3.4.8 中地址栏在鼠标悬停时无法显示外框的问题。
-* 新标签页的搜索框也已支持 `uc.flex.revert-to-original-flat-corner-style` 选项，可还原为 Firefox 默认的圆角样式。
-
-**v3.4.8**
-* 修复了在地址栏聚焦时，地址栏与下拉建议列表边缘未对齐的问题。
-* 新增选项 `uc.flex.revert-to-original-flat-corner-style`，设置为 `true` 后可关闭 FlexFox 的圆角设计，还原为 Firefox 默认的较平缓圆角风格。你也可以在 `uc-variables.css` 中调整该选项下的 `*-radius` 变量，自定义地址栏、搜索框和查找栏的圆角大小。
-
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox 默认圆角样式预览" width="72%" />
-
-**v3.4.7**
-* 修复了将原生垂直选项卡放在右侧时，鼠标移到屏幕最右边无法顺畅展开的问题。
-* 修复了原生垂直选项卡在右侧无法显示滚动条的问题。
-* 调整了原生垂直选项卡在左侧展开时左侧留白不足的问题。
-
-**v3.4.6**
-* 修复了 Firefox v140+ 中分组标签（tab group）的尺寸和位置显示异常的问题。
-* 修复了在启用 `uc.flex.show-pin-tabs-separator-in-expanded-state` 选项时，仍无法显示固定标签页与普通标签页之间分隔线的问题（v140 起结构发生变化导致该问题）。
-
-**v3.4.5**
-* 修复 v3.4.3 引入的回归问题：在原生垂直选项卡处于折叠模式时，显示宽度异常。
-
-**v3.4.4**
-* 修复了 Nightly v140 中 Sidebery 无法展开的问题。
-* 增强了对主题的兼容性：如果主题设置了背景图片（包括透明图片），FlexFox 会自动允许主题覆盖内建配色，无需手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。
-* 支持 [Firefox Color](https://color.firefox.com/)，用户现在可以自由调整浏览器界面配色。
-
-  * 请在 Firefox Color 网站中的「Custom backgrounds」标签页中选择任意一张背景图片，FlexFox 就会允许 Firefox Color 覆盖内建配色方案。
-  * Firefox Color 内置的部分「Preset themes」主题没有背景图。要让这些主题完全生效，请选择一张背景图，或手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。否则只会改变文字颜色，工具栏等背景颜色则不会变动。
-
-<p>这是使用 Firefox Color 套用 <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> 主题后的 FlexFox 显示效果：</p>
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
-
-**v3.4.3**
-* 修复启用 `uc.flex.add-ui-text-stroke` 时，Sidebery 误用指定字体的问题。
-* 修复在使用水平标签页时，导航栏第一个元素后方多出不必要的空白的问题。
-* 提升在仅启用新版侧边栏但未启用原生垂直选项卡时的兼容性：
-
-  * 侧边栏彩带现在能正确显示高亮颜色
-  * 彩带展开时设置按钮不再发生偏移
-
-> [!NOTE]
-> 注意：不推荐在未启用原生垂直选项卡的情况下单独使用新版侧边栏，因为 FlexFox 的优化是基于垂直选项卡模式设计的。
-
-**v3.4.2**
-- 修复在 Firefox v138 中使用原生垂直选项卡的保持展开模式时出现的布局问题。由于宽度处理不正确，导致悬停时抖动，以及书签工具栏未能正确对齐。
-
-**v3.4.1**
-- 修复完全隐藏 Sidebery 时，侧边栏彩带展开高度不正确的问题。
-- 修复侧边栏在右侧且原生垂直选项卡完全隐藏时，展开宽度不正确的问题。
-- 修复同时启用 `uc.flex.disable-native-vertical-tabs-autohide` 和 `uc.flex.fully-hide-sidebery` 时，原生垂直选项卡无法展开的问题。
-- 废弃 `uc.flex.disable-native-vertical-tabs-autohide` 选项。现在使用 `uc.flex.disable-sidebery-autohide` 可统一控制 Sidebery 和原生垂直选项卡是否保持展开。
-
-**v3.4.0**
-- 修复使用快捷键切换完全隐藏 Sidebery 时，鼠标触发区域的宽度无法按 `--uc-hover-sidebar-trigger-width` 自定义设置生效的问题。
-- 重要更新：FlexFox 现已支持完全隐藏 **原生垂直选项卡**。
-  现有选项 `uc.flex.fully-hide-sidebery` 和快捷键 `Hide Sidebery` 除了可以隐藏 Sidebery，也同样适用于 Firefox 自带的垂直选项卡。此外，进入全屏模式（<kbd>F11</kbd>）时也会自动隐藏原生垂直选项卡。
-  在窗口未最大化时，`--uc-hover-sidebar-trigger-width` 除了控制 Sidebery 的触发宽度，也用于原生垂直选项卡的触发区域。至此，所有适用于 Sidebery 的相关设置（如显示/隐藏速度）也会同步应用于原生垂直选项卡，实现一致的行为体验。
-
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
 
 <a href="#updates-top-start">⏫ 返回更新记录顶部</a>
 </details>
+
+> [!IMPORTANT]
+> 如果你在使用 FlexFox 搭配 Firefox 的原生垂直标签页，请务必在「定制侧栏」设置中取消勾选 **“悬停时展开侧栏”** 选项。
+>
+> * 启用该选项后，FlexFox 将不会使用其优化后的垂直标签页设计，而是会回退为 Firefox 默认的布局。
+> * 为获得最佳的外观和体验，建议在日常使用中 **保持该选项处于未勾选状态**。
+> * 如果你需要使用原生功能（如可调节的标签页宽度），可以根据个人习惯或使用需求灵活启用此选项。
 
 ## ✨ 功能亮点
 

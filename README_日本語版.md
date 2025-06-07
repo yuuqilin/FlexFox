@@ -190,73 +190,18 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 * サイドバーのツールボタンが5個以下のときに、設定ボタンの位置がずれる、またツールバーの展開方向が縦になってしまう問題を修正しました。
 * ネイティブの縦型タブにおけるサイドバーツールボタンの表示スタイルを統一しました。Sideberyの有効・無効、サイドバーの展開状態、ボタン数の多少にかかわらず、すべてのパターンで一貫した整った間隔で表示されるようになりました。
 
-**v3.4.10**
-* 検索バーの背景色が正しく表示されない不具合を修正しました。
-
-**v3.4.9**
-* v3.4.8で発生した不具合により、アドレスバーにホバーしてもアウトライン（外枠）が表示されなくなっていた問題を修正しました。
-* 新しいタブの検索ボックスも `uc.flex.revert-to-original-flat-corner-style` オプションに対応し、Firefox標準の角丸スタイルに戻せるようになりました。
-
-**v3.4.8**
-* アドレスバーにフォーカスした際、候補ポップアップとバー本体の境界がずれて見える問題を修正しました。
-* 新しいオプション `uc.flex.revert-to-original-flat-corner-style` を追加しました。これを `true` に設定すると、FlexFox の丸みを帯びたデザインを無効化し、Firefox 標準のフラットな角丸スタイルに戻すことができます。さらに、`uc-variables.css` 内の該当オプション下にある `*-radius` 変数を編集することで、アドレスバー・検索バー・検索パネルの角の丸みを個別に調整できます。
-
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox標準の角丸スタイルのプレビュー" width="72%" />
-
-**v3.4.7**
-* ネイティブの縦型タブを右側に配置した際、画面端にマウスを移動してもスムーズに展開できなかった問題を修正しました。
-* 縦型タブを右側に表示した場合にスクロールバーが表示されない不具合を修正しました。
-* 左側に縦型タブを展開した際、左端の余白が不十分だった問題を調整しました。
-
-**v3.4.6**
-* Firefox v140以降で、タブグループラベルのサイズや位置がずれていた問題を修正しました。
-* `uc.flex.show-pin-tabs-separator-in-expanded-state` オプションを有効にしても、ピン留めタブと通常タブの間に区切り線が表示されない問題を修正しました（v140での内部構造の変更に対応）。
-
-**v3.4.5**
-* v3.4.3で発生したリグレッションを修正：ネイティブの縦型タブが「折りたたみ」モードのときに、タブパネルの幅が正しく表示されない問題を修正しました。
-
-**v3.4.4**
-* Nightly v140でSideberyが展開できなくなる不具合を修正しました。
-* テーマとの互換性を強化しました。テーマに背景画像（透明なものを含む）が設定されている場合、FlexFox は自動的にテーマが内蔵カラーパレットを上書きできるようにします。これにより、`uc.flex.allow-addons-to-change-toolbar-color` オプションを手動で設定する必要がなくなります。
-* [Firefox Color](https://color.firefox.com/) に対応しました。ユーザーはブラウザー全体の配色を自由にカスタマイズできるようになります。
-
-  * Firefox Color のウェブサイトで「Custom backgrounds」タブを開き、任意の背景画像を選択すると、FlexFox は Firefox Color による配色の上書きを許可します。
-  * Firefox Colorの「Preset themes」には一部、背景画像が設定されていないテーマがあります。これらは画像を選ぶか、`uc.flex.allow-addons-to-change-toolbar-color`オプションを有効にすることで完全に適用されます。背景画像がないままだと、文字色は変わってもツールバーの背景色は反映されません。
-
-<p>こちらは、Firefox Color を使って <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> テーマを適用したときの FlexFox の表示例です：</p>
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
-
-**v3.4.3**
-* `uc.flex.add-ui-text-stroke` を有効にした際、Sidebery に意図しないフォントが適用されてしまう問題を修正しました。
-* 水平タブ使用時、ナビゲーションバーの先頭要素の後に不要な余白が追加されていた問題を修正しました。
-* 新しいサイドバーのみを有効にしてネイティブの垂直タブを無効にした場合に発生する以下の不具合を修正しました：
-
-  * サイドバーのストライプが正しくハイライトされない問題
-  * ストライプ展開時に設定ボタンの位置がずれる問題
-
-> [!NOTE]
-> 補足：FlexFox はネイティブの垂直タブを前提に設計されているため、新しいサイドバーのみの使用は非推奨です。
-
-**v3.4.2**
-- Firefox v138 において、ネイティブの縦型タブを「常時展開モード」で使用した際に発生していたレイアウトの不具合を修正しました。幅の処理が正しく行われず、ホバー時のちらつきやブックマークツールバーのずれが発生していました。
-
-**v3.4.1**
-- Sidebery を完全に非表示にした状態で、サイドバーのストライプが正しく展開されない問題を修正しました。
-- サイドバーが右側にあり、かつネイティブの縦型タブを完全に非表示にしていると、展開後の幅が正しくない問題を修正しました。
-- `uc.flex.disable-native-vertical-tabs-autohide` と `uc.flex.fully-hide-sidebery` の両方を有効にした際に、ネイティブの縦型タブが展開できなくなる不具合を修正しました。
-- `uc.flex.disable-native-vertical-tabs-autohide` オプションは廃止され、今後は `uc.flex.disable-sidebery-autohide` を使用して、Sidebery とネイティブ縦型タブの両方を常時展開状態に固定できるようになりました。
-
-**v3.4.0**
-- Sidebery を完全に非表示に切り替えた際、マウスカーソルで再表示させるためのトリガー領域の幅が、カスタム設定どおりに反映されない問題を修正しました。
-- 重要な更新：FlexFox が Firefox の**ネイティブ縦型タブ**の完全非表示にも対応しました。
-  これまでの `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のショートカットは、Sidebery に加えてネイティブの縦型タブも対象になります。さらに、<kbd>F11</kbd>で全画面表示に切り替えた際にも、自動で非表示になります。
-  ウィンドウが最大化されていない場合、`--uc-hover-sidebar-trigger-width` の値は、Sidebery だけでなくネイティブ縦型タブの再表示トリガー領域の幅も制御します。これにより、Sidebery に対する動作設定がそのままネイティブ縦型タブにも反映され、統一された挙動が実現されます。
-
 以前のバージョンの更新履歴については  
 👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
 
 <a href="#updates-top-start">⏫ アップデート一覧の先頭へ戻る</a>
 </details>
+
+> [!IMPORTANT]
+> FlexFox を Firefox のネイティブ垂直タブと併用する場合は、「カーソルを合わせた時にサイドバーを展開する」のオプションを「サイドバーのカスタマイズ」設定から **無効** にしてください。
+>
+> * このオプションを有効にすると、FlexFox 独自の最適化デザインではなく、Firefox 標準の垂直タブレイアウトに切り替わります。
+> * FlexFox の外観や動作を最大限に活かすには、通常時はこのオプションを **無効にしたまま** ご使用いただくことをおすすめします。
+> * タブ幅の調整など、Firefox 標準の機能が必要な場合は、用途や作業スタイルに応じて柔軟にこのオプションを有効にすることもできます。
 
 ## ✨ 特徴
 

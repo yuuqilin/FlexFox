@@ -193,73 +193,18 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 * Fixed misalignment of the settings button in the sidebar when there are 5 or fewer tool buttons, and ensured the toolbar expands horizontally as intended.
 * Standardized the spacing and layout of native vertical tab sidebar tool buttons across all scenarios—whether Sidebery is active or not, the sidebar is expanded or collapsed, and regardless of the number of buttons. The layout now remains clean and consistent at all times.
 
-**v3.4.10**
-* Fixed an issue where the Findbar displayed the wrong background color.
-
-**v3.4.9**
-* Fixed a regression introduced in v3.4.8 where the address bar outline no longer appeared on hover.
-* The search box on the New Tab page now also supports the `uc.flex.revert-to-original-flat-corner-style` option, allowing it to revert to Firefox's default rounded corners.
-
-**v3.4.8**
-* Fixed misalignment between the address bar and its suggestion dropdown when the URL bar is focused.
-* Added a new option `uc.flex.revert-to-original-flat-corner-style`. When set to `true`, this restores Firefox's default flatter corner style instead of FlexFox's rounded design. You can also customize the corner radius of the address bar, search bar, and find bar by adjusting the `*-radius` variables under this option in `uc-variables.css`.
-
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
-
-**v3.4.7**
-* Fixed an issue where the native vertical tabs couldn't smoothly expand when placed on the right and the mouse moved to the edge of the screen.
-* Fixed missing scrollbars when native vertical tabs were on the right side.
-* Adjusted spacing to ensure proper left padding when vertical tabs expand from the left.
-
-**v3.4.6**
-* Fixed layout issues with tab group labels in Firefox v140+, where size and alignment were incorrect.
-* Restored the separator between pinned and regular tabs when using `uc.flex.show-pin-tabs-separator-in-expanded-state` in Firefox v140+, which had stopped appearing due to structural changes.
-
-**v3.4.5**
-* Fixed a regression introduced in v3.4.3 where the width of the native vertical tabs in collapsed mode was incorrect.
-
-**v3.4.4**
-* Fixed an issue that prevented Sidebery from expanding in Nightly v140.
-* Improved theme compatibility: if the theme includes a background image (even a transparent one), FlexFox now automatically allows the theme to override the built-in color palette, without needing to manually enable `uc.flex.allow-addons-to-change-toolbar-color`.
-* Added support for [Firefox Color](https://color.firefox.com/), allowing users to freely customize the browser's appearance.
-
-  * To allow Firefox Color themes to override FlexFox's built-in palette, select any background image in the **Custom backgrounds** tab on the Firefox Color site.
-  * Some **Preset themes** in Firefox Color do not include background images. To make them apply fully, either pick a background image or manually enable the `uc.flex.allow-addons-to-change-toolbar-color` setting. Without a background image or this setting, text colors may change, but toolbar backgrounds will not.
-
-<p>Here's how FlexFox looks with the <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> theme applied via Firefox Color:</p>
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
-
-**v3.4.3**
-* Fixed an issue where enabling `uc.flex.add-ui-text-stroke` caused Sidebery to use an unintended font.
-* Fixed extra padding after the first navigation bar item when using horizontal tabs.
-* Improved compatibility when only the new sidebar is enabled without native vertical tabs:
-
-  * Sidebar stripe now highlights correctly.
-  * Sidebar settings button no longer shifts position when the stripe expands.
-
-> [!NOTE]
-> Using the new sidebar without native vertical tabs is still not recommended, as FlexFox is designed and optimized around the vertical tab layout.
-
-**v3.4.2**
-- Fixed layout issues with native vertical tabs in Firefox v138 when using Always-Open Mode. Incorrect width handling caused jitter on hover and misalignment of the bookmarks toolbar.
-
-**v3.4.1**
-- Fixed an issue where the sidebar stripe did not expand to the correct height when Sidebery was fully hidden.
-- Fixed incorrect width when expanding the native vertical tabs while the sidebar was on the right and fully hidden.
-- Fixed an issue where native vertical tabs could not be expanded when both `uc.flex.disable-native-vertical-tabs-autohide` and `uc.flex.fully-hide-sidebery` were enabled.
-- Deprecated `uc.flex.disable-native-vertical-tabs-autohide`. Use `uc.flex.disable-sidebery-autohide` instead to enable always-open mode for both Sidebery and native vertical tabs.
-
-**v3.4.0**
-- Fixed an issue where the trigger area for showing Sidebery after hiding it via shortcut could not use the custom width set by `--uc-hover-sidebar-trigger-width`.
-- Major update: FlexFox now supports fully hiding the **built-in vertical tabs**.
-  The existing option `uc.flex.fully-hide-sidebery` and the shortcut `Hide Sidebery` now also apply to native vertical tabs. When entering fullscreen mode (`F11`), native vertical tabs are automatically hidden as well.
-  When the window is not maximized, the `--uc-hover-sidebar-trigger-width` value also controls the trigger area for native vertical tabs. This means all settings that apply to Sidebery—such as show/hide speed—now apply to native vertical tabs too, offering a unified behavior.
-
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))
 
 <a href="#updates-top-start">⏫ Back to the beginning of updates</a>
 </details>
+
+> [!IMPORTANT]
+> When using FlexFox with Firefox's native vertical tabs, make sure to **uncheck** `Expand sidebar on hover` in the `Customize Sidebar` settings.
+>
+> * If this option is enabled, FlexFox will revert to Firefox's default vertical tab layout instead of using its own optimized design.
+> * To enjoy the best appearance and behavior with FlexFox, we recommend **keeping this option unchecked** during normal use.
+> * If you need native features like adjustable tab width, you can flexibly enable this option based on your preferences or workflow.
 
 ## ✨ Features
 
