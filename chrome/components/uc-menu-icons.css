@@ -84,7 +84,15 @@
     }
     /* !TEMPORARY: This rule is still needed in v140+, as the issue wasn't fully fixed. 
    If Firefox addresses this properly in a future update, this rule can be removed. */
-    menupopup:not(.in-menulist, [aria-label]) > menuitem[data-l10n-id$="-shortcut"][checked="true"] {
+    menupopup:not(.in-menulist, [aria-label])
+        > menuitem:is(
+            [data-l10n-id$="-shortcut"],
+            [data-l10n-id^="toolbar-context-menu-bookmarks-toolbar-"]
+        )[checked="true"] {
+        > .menu-icon {
+            list-style-image: none !important;
+            display: none !important;
+        }
         padding-inline-start: calc(1em + 24px) !important;
         background-image: url("chrome://global/skin/icons/menu-check.svg");
         background-position: 15px 4px;

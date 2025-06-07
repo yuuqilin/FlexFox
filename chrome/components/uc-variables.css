@@ -304,9 +304,9 @@
      * A smaller value reduces accidental triggers, but may make it difficult
      * to reveal the sidebar without entering resize mode.
      */
-    --uc-hover-sidebar-trigger-width: 22px;
+    --uc-sidebar-hover-trigger-width: 22px;
     &:not([sizemode="normal"]) {
-        --uc-hover-sidebar-trigger-width: 1px;
+        --uc-sidebar-hover-trigger-width: 1px;
     }
 
     /* Trigger sensitivity for fully hidden top toolbar */
@@ -628,13 +628,13 @@
             &:hover {
                 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
                     --uc-sidebar-main-padding-inline-end: calc(
-                        var(--uc-hover-sidebar-trigger-width) - var(--uc-sidebar-stripe-width)
+                        var(--uc-sidebar-hover-trigger-width) - var(--uc-sidebar-stripe-width)
                     );
                 }
                 @media not -moz-pref("uc.flex.fully-hide-sidebery") {
                     :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                         --uc-sidebar-main-padding-inline-end: calc(
-                            var(--uc-hover-sidebar-trigger-width) - var(--uc-sidebar-stripe-width)
+                            var(--uc-sidebar-hover-trigger-width) - var(--uc-sidebar-stripe-width)
                         );
                     }
                 }
@@ -699,11 +699,11 @@
         }
         /* When Sidebery is fully hidden, set width to trigger width to allow hover-triggered expansion */
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-            --uc-sb-sidebar-width: var(--uc-hover-sidebar-trigger-width);
+            --uc-sb-sidebar-width: var(--uc-sidebar-hover-trigger-width);
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             &:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
-                --uc-sb-sidebar-width: var(--uc-hover-sidebar-trigger-width);
+                --uc-sb-sidebar-width: var(--uc-sidebar-hover-trigger-width);
             }
         }
 
@@ -866,7 +866,7 @@
             ) {
             --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-width, 0px));
             @media -moz-pref("sidebar.verticalTabs") {
-                --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-stripe-width));
+                --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sidebar-main-width));
             }
             --uc-theme-bg-x-right-end: var(--uc-theme-bg-x-offset);
 
@@ -874,7 +874,7 @@
                 --uc-theme-bg-x-left-start: var(--uc-theme-bg-x-offset);
                 --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sb-sidebar-width, 0px));
                 @media -moz-pref("sidebar.verticalTabs") {
-                    --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sidebar-stripe-width));
+                    --uc-theme-bg-x-right-end: calc(-1 * var(--uc-sidebar-main-width));
                 }
             }
         }
@@ -885,22 +885,58 @@
         @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
             --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-main-width));
             --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-main-width));
+            /* 
+             * When "Hide tabs and sidebar" is enabled in sidebar settings
+             * and the sidebar toggle button is in a collapsed state,
+             * the sidebar is fully hidden, so all offsets are set to 0 
+             */
             @media -moz-pref("sidebar.visibility", "hide-sidebar") {
                 &:has(#sidebar-main[hidden]) {
                     --uc-personal-toolbar-offset: 0px;
                     --uc-personal-toolbar-width: 0px;
+                    --uc-theme-bg-x-left-start: 0px;
+                    --uc-theme-bg-x-right-end: 0px;
                 }
             }
 
-            &:has(#sidebar-main:not([sidebar-launcher-expanded])) {
+            /* 
+             * When Sidebery is set to stay expanded (via uc.flex.disable-sidebery-autohide)
+             * and the sidebar toggle button is in a collapsed state (no [sidebar-launcher-expanded]),
+             * the toolbar offset depends on whether Sidebery is active:
+                - If Sidebery is active, the offset equals the Sidebery hover width.
+                - If Sidebery is inactive, the offset falls back to the native collapsed sidebar (stripe) width. 
+             */
+            &:has(#sidebar-main:not([sidebar-launcher-expanded], [hidden])) {
                 @media -moz-pref("uc.flex.disable-sidebery-autohide") {
                     --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
                     --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
+                    @media -moz-pref("sidebar.position_start") {
+                        --uc-theme-bg-x-left-start: calc(
+                            -1 * var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width))
+                        );
+                    }
+                    @media not -moz-pref("sidebar.position_start") {
+                        --uc-personal-toolbar-offset: 0;
+                        --uc-theme-bg-x-right-end: calc(
+                            -1 * var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width))
+                        );
+                    }
                 }
                 @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                     &[titlepreface*="\180e "] {
                         --uc-personal-toolbar-offset: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
                         --uc-personal-toolbar-width: var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width));
+                        @media -moz-pref("sidebar.position_start") {
+                            --uc-theme-bg-x-left-start: calc(
+                                -1 * var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width))
+                            );
+                        }
+                        @media not -moz-pref("sidebar.position_start") {
+                            --uc-personal-toolbar-offset: 0;
+                            --uc-theme-bg-x-right-end: calc(
+                                -1 * var(--uc-sb-sidebar-width, var(--uc-sidebar-stripe-width))
+                            );
+                        }
                     }
                 }
             }

@@ -307,15 +307,14 @@
         /* Applies styles for native vertical tabs when fully hidden or in fullscreen.
         Behavior depends on whether Sidebery is active, determined via --uc-sb-* variables. */
         &[id="sidebar-main"] {
-            --uc-sidebar-main-max-width: var(--uc-hover-sidebar-trigger-width);
-            max-width: var(--uc-sb-sidebar-main-max-width, var(--uc-sidebar-main-max-width)) !important;
-            height: var(--uc-sb-sidebar-main-hover-min-h, 100%);
+            max-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-hover-trigger-width)) !important;
+            height: var(--uc-sb-sidebar-main-hover-min-height, 100%);
             opacity: var(--uc-sb-sidebar-main-opacity, 0);
             &:hover {
                 opacity: 1;
             }
             &:not(:hover) sidebar-main[expanded] {
-                min-width: var(--uc-sb-sidebar-main-min-width, 1px);
+                min-width: var(--uc-sb-sidebar-main-width, 1px);
             }
         }
     }
@@ -352,15 +351,14 @@
                 }
             }
             &[id="sidebar-main"] {
-                --uc-sidebar-main-max-width: var(--uc-hover-sidebar-trigger-width);
-                max-width: var(--uc-sb-sidebar-main-max-width, var(--uc-sidebar-main-max-width)) !important;
-                height: var(--uc-sb-sidebar-main-hover-min-h, 100%);
+                max-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-hover-trigger-width)) !important;
+                height: var(--uc-sb-sidebar-main-hover-min-height, 100%);
                 opacity: var(--uc-sb-sidebar-main-opacity, 0);
                 &:hover {
                     opacity: 1;
                 }
                 &:not(:hover) sidebar-main[expanded] {
-                    min-width: var(--uc-sb-sidebar-main-min-width, 1px);
+                    min-width: var(--uc-sb-sidebar-main-width, 1px);
                 }
             }
         }
@@ -417,13 +415,12 @@
             --uc-sb-sroot-btn-padding-block-end-last: 2px;
             --uc-sb-sroot-btn-padding-inline: 5.5px;
             --uc-sb-sidebar-main-position: absolute;
-            --uc-sb-sidebar-main-min-width: var(--uc-sb-sidebar-width);
-            --uc-sb-sidebar-main-max-width: var(--uc-sb-sidebar-width, 75vw);
+            --uc-sb-sidebar-main-width: var(--uc-sb-sidebar-width);
             --uc-sb-sidebar-main-overflow: hidden;
             --uc-sb-sidebar-main-z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1);
-            --uc-sb-sidebar-main-hover-min-h: auto;
-            --uc-sb-sidebar-main-hover-max-h: 100%;
-            --uc-sb-sidebar-main-hover-h: fit-content;
+            --uc-sb-sidebar-main-hover-min-height: auto;
+            --uc-sb-sidebar-main-hover-max-height: 100%;
+            --uc-sb-sidebar-main-hover-height: fit-content;
             --uc-sb-vertical-tabs-display: none;
             --uc-sb-sidebar-main-background-image: none;
             @media -moz-pref("uc.flex.enable-gradient-highlight") {
@@ -433,8 +430,7 @@
             @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
                 :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
-                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
-                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
+                    --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
                 }
             }
         }
@@ -446,8 +442,7 @@
                 &
                 #sidebar-main {
                 --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
+                --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
             }
         }
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
@@ -455,8 +450,7 @@
                 --uc-sb-sidebar-main-opacity: 0;
             }
             #sidebar-main:hover {
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
+                --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
@@ -465,8 +459,7 @@
                     --uc-sb-sidebar-main-opacity: 0;
                 }
                 #sidebar-main:hover {
-                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
-                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
+                    --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
                 }
             }
         }
@@ -482,10 +475,9 @@
         ) {
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             #sidebar-main {
-                --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
                 /* When "Disable Sidebery Collapse" is toggled via hotkey (instead of the about:config option),  
                    we need to explicitly cap max-width to match the stripe width. */
-                --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
+                --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
                 --uc-sb-sidebar-main-opacity: 1;
                 /**
                  * #sidebar-main normally uses `transition-delay: var(--uc-autohide-sidebar-delay)` when not hovered.
@@ -499,8 +491,7 @@
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 #sidebar-main {
-                    --uc-sb-sidebar-main-min-width: var(--uc-sidebar-stripe-width);
-                    --uc-sb-sidebar-main-max-width: var(--uc-sidebar-stripe-width);
+                    --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
                     --uc-sb-sidebar-main-opacity: 1;
                     --uc-autohide-sidebar-delay: var(--uc-hover-sidebar-delay);
                     --uc-sb-sidebar-main-z-delay: var(--uc-hover-sidebar-delay);
@@ -534,8 +525,8 @@
         z-index: var(--uc-sb-sidebar-main-z-index);
         min-height: var(--uc-sb-sidebar-main-stripe-height);
         max-height: var(--uc-sb-sidebar-main-stripe-height);
-        min-width: var(--uc-sb-sidebar-main-min-width);
-        max-width: var(--uc-sb-sidebar-main-max-width) !important;
+        min-width: var(--uc-sb-sidebar-main-width);
+        max-width: var(--uc-sb-sidebar-main-width, 75vw) !important;
         overflow: var(--uc-sb-sidebar-main-overflow, clip) !important;
         background-color: var(--uc-sidebar-main-stripe, var(--uc-bgcolor)) !important;
         background-image: var(--uc-sb-sidebar-main-background-image, inherit) !important;
@@ -569,12 +560,12 @@
                 z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
     }
     #sidebar-main[sidebar-panel-open]:hover {
-        min-height: var(--uc-sb-sidebar-main-hover-min-h) !important;
+        min-height: var(--uc-sb-sidebar-main-hover-min-height) !important;
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
-            height: var(--uc-sb-sidebar-main-hover-h);
+            height: var(--uc-sb-sidebar-main-hover-height);
         }
-        max-height: var(--uc-sb-sidebar-main-hover-max-h) !important;
-        max-width: var(--uc-sb-sidebar-main-max-width) !important;
+        max-height: var(--uc-sb-sidebar-main-hover-max-height) !important;
+        max-width: var(--uc-sb-sidebar-main-width) !important;
         /**
          * TEMPORARY: This z-index rule is added to override
          * Firefox's native z-index for #sidebar-main in expand-on-hover mode.
@@ -667,9 +658,9 @@
                 overflow: hidden !important;
             }
             /* TEMPORARY: Override Firefox v138 width; not needed in v140+ */
-            width: var(--uc-sb-sidebar-main-max-width, var(--uc-sidebar-main-width)) !important;
+            width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-width)) !important;
             max-width: var(
-                --uc-sb-sidebar-main-max-width,
+                --uc-sb-sidebar-main-width,
                 var(--uc-sidebar-main-width)
             ) !important; /* Use !important to override the max-width styles in Nightly (v135) */
             z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
@@ -685,7 +676,7 @@
             /* !TEMPORARY: */
             margin-inline-start: var(--uc-sidebar-main-margin-left);
             min-width: /* var(--tab-collapsed-width) */ var(
-                --uc-sb-sidebar-main-min-width,
+                --uc-sb-sidebar-main-width,
                 var(--uc-sidebar-main-width)
             );
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
@@ -713,7 +704,7 @@
             }
         }
         sidebar-main[expanded]:hover {
-            min-width: var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-main-hover-width));
+            min-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-hover-width));
             /* transition-delay: 0ms !important; */
             transition:
                 margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -736,7 +727,7 @@
                         transform: translateX(
                             calc(
                                 var(--uc-sidebar-main-padding-inline-end, 0px) +
-                                    var(--uc-sb-sidebar-main-min-width, var(--uc-sidebar-stripe-width)) - 100%
+                                    var(--uc-sb-sidebar-main-width, var(--uc-sidebar-stripe-width)) - 100%
                             )
                         );
                     }

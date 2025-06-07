@@ -20,8 +20,11 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.5.7**
-* Fixed a regression from v3.5.5 that caused a visual break in theme background images between the navigation bar and the bookmarks toolbar when the toolbar auto-expanded.
+**🦊 v3.5.8**
+* Improved compatibility of theme backgrounds and the bookmarks toolbar across multiple layout states, including `Lock Sidebery`, `Collapse sidebar`, `Hide tabs and sidebar`, and `Move sidebar to the right`.
+* Restored missing checkmark icons in Firefox’s native menus for AI chatbots and the Bookmarks toolbar.
+* Status panel now adopts rounded corners when `uc.flex.enable-rounded-web-content` is enabled.
+* Renamed some variables for better clarity and usability.
 
 <!-- END What's New -->
 
@@ -143,6 +146,9 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.5.7**
+* Fixed a regression from v3.5.5 that caused a visual break in theme background images between the navigation bar and the bookmarks toolbar when the toolbar auto-expanded.
 
 **v3.5.6**
 * Fixed various display issues when the sidebar is on the right and `uc.flex.fully-hide-sidebery`, the `Hide Sidebery` shortcut, or fullscreen mode is active.

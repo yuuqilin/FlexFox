@@ -146,5 +146,14 @@
         background-color: transparent !important;
         */
         }
+        
+        #statuspanel-label {
+            border-bottom-left-radius: var(--uc-web-content-radius-box);
+            #statuspanel:not([mirror]) > &:-moz-locale-dir(rtl),
+            #statuspanel[mirror] > &:-moz-locale-dir(ltr) {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: var(--uc-web-content-radius-box);
+            }
+        }
     }
 }

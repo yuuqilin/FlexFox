@@ -20,8 +20,11 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.5.7**
-* 修复了 v3.5.5 引入的问题：当书签工具栏自动展开时，主题背景图在导航栏与工具栏之间出现断层，无法连续衔接。
+**🦊 v3.5.8**
+* 提升主题背景与书签工具栏在多种布局状态下的兼容性，包括 `Lock Sidebery`、`Collapse sidebar`、`Hide tabs and sidebar`、`Move sidebar to the right` 等情境。
+* 补全 Firefox 原生菜单中 AI 聊天机器人和书签工具栏的勾选图标。
+* 启用 `uc.flex.enable-rounded-web-content` 时，状态栏也会应用圆角样式。
+* 重命名部分变量，使其更清晰易用。
 
 <details>  
 <summary>🪄 <b>重大更新：圆角与悬浮式网页内容样式</b> <i>《点击展开》</i> 👇</summary>
@@ -136,6 +139,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.5.7**
+* 修复了 v3.5.5 引入的问题：当书签工具栏自动展开时，主题背景图在导航栏与工具栏之间出现断层，无法连续衔接。
 
 **v3.5.6**
 * 修复了在侧边栏置于右侧、且启用 `uc.flex.fully-hide-sidebery`、使用 `Hide Sidebery` 快捷键或进入全屏模式时出现的多个显示异常。
