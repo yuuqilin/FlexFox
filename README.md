@@ -28,8 +28,8 @@ It's not just a new look, it's a better way to browse.
 
 <!-- END What's New -->
 
-### 🔧 v3.6.x Performance Fix for v3.5.1 Regression
-> [!INFO]
+🔧 <b>v3.6.x Performance Fix for v3.5.1 Regression</b>
+> [!NOTE]
 > - The performance regression introduced in v3.5.1 has been fixed starting from **v3.6.0**.
 > - One of the most noticeable improvements is the speed when opening the **“List All Tabs”** panel. It now appears up to **17× faster** compared to v3.5.8.
 > - Users on **v3.5.1 or later** are recommended to update to **v3.6.0 or newer** for improved responsiveness.
