@@ -265,29 +265,10 @@
 
 /**
  * Avoid overlap of the bookmarks toolbar by the sidebar
- * when "Only Show Bookmarks Toolbar on New Tab" is enabled for Firefox < 130 
- */
-:root[BookmarksToolbarOverlapsBrowser] {
-    #navigator-toolbox {
-        margin-bottom: 0 !important;
-    }
-    #browser {
-        margin-top: calc(-1 * var(--bookmarks-toolbar-overlapping-browser-height));
-    }
-    #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
-        padding-top: 0px !important;
-        @media not -moz-pref("uc.flex.disable-bookmarks-autohide") {
-            margin-top: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding));
-        }
-    }
-}
-
-/**
- * Avoid overlap of the bookmarks toolbar by the sidebar
  * when "Only Show Bookmarks Toolbar on New Tab" is enabled for Firefox >= 130 
  */
 @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-    :root:not([inFullscreen]):not([customizing]):not([BookmarksToolbarOverlapsBrowser]) {
+    :root:not([inFullscreen]):not([customizing]) {
         #navigator-toolbox:has(#PersonalToolbar[collapsed="false"])
             + #browser
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
@@ -295,6 +276,16 @@
             margin-top: var(--uc-bm-disable-autohide-offset);
             @media -moz-pref("sidebar.revamp") {
                 margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
+            }
+        }
+        @media -moz-pref("sidebar.revamp") {
+            #navigator-toolbox:has(#PersonalToolbar[collapsed="true"]) + #browser {
+                #sidebar-main {
+                    margin-top: 0;
+                }
+            }
+            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+                margin-top: var(--uc-sb-sidebar-main-stripe-height);
             }
         }
     }

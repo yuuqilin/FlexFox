@@ -59,6 +59,7 @@
     }
 }
 
+/* Enable colored bookmarks folder icons */
 @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
     #PlacesToolbarItems,
     #PlacesChevronPopup {

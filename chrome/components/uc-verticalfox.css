@@ -18,6 +18,12 @@
     }
 }
 */
+
+/* Remove sidebar splitter */
+#sidebar-splitter {
+    display: var(--uc-sb-sidebar-splitter-display, flex) !important;
+}
+
 /* AUTO HIDE SIDE BAR */
 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
     position: relative;
@@ -26,35 +32,29 @@
     max-width: var(--uc-sb-sidebar-width) !important;
     --browser-area-z-index-sidebar: 3;
     z-index: 100;
-}
 
-#sidebar-box:is([positionend], [sidebar-positionend]) {
-    direction: rtl;
-}
+    @media not -moz-pref("sidebar.position_start") {
+        direction: rtl;
+        &:-moz-locale-dir(rtl) {
+            direction: ltr;
+        }
 
-/* 
- * !TEMPORARY: Firefox v140+ wraps #sidebar in .sidebar-browser-stack, breaking leftward expansion.
- * This excludes it to keep old behavior; can be simplified after v140. 
- */
-#sidebar-box:is([positionend], [sidebar-positionend]) > *:not(.sidebar-browser-stack) {
-    direction: ltr;
-}
-
-#sidebar-box:is([positionend], [sidebar-positionend]):-moz-locale-dir(rtl) {
-    direction: ltr;
-}
-
-#sidebar-box:is([positionend], [sidebar-positionend]):-moz-locale-dir(rtl) > *:not(.sidebar-browser-stack) {
-    direction: rtl;
-}
-
-#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
-    /* Remove sidebar splitter */
-    & + #sidebar-splitter {
-        display: none;
+        #sidebar-header,
+        #sidebar {
+            direction: ltr;
+            &:-moz-locale-dir(rtl) {
+                direction: rtl;
+            }
+        }
     }
 
     /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */
+    /* 
+     * This @media query uses three comma-separated conditions:
+     * 1. If auto-collapse is *not* disabled (`uc.flex.disable-sidebery-autohide` is false), auto-hide applies.
+     * 2. If full hiding of Sidebery is enabled (`uc.flex.fully-hide-sidebery`), auto-hide applies regardless of auto-collapse setting.
+     * 3. If in fullscreen mode (`display-mode: fullscreen`), auto-hide also applies regardless of auto-collapse setting. 
+     */
     @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
         -moz-pref("uc.flex.fully-hide-sidebery"),
         (display-mode: fullscreen) {
@@ -83,6 +83,14 @@
             }
         }
     }
+    /* 
+     * The [titlepreface*="\180e "] attribute has the same effect as 
+     * `uc.flex.disable-sidebery-autohide`. However, unlike 
+     * `uc.flex.disable-sidebery-autohide`, it cannot be used in media 
+     * queries alongside `uc.flex.fully-hide-sidebery` and fullscreen mode.
+     * Therefore, we need to duplicate the same rules here specifically 
+     * for the [titlepreface*="\180e "] case. 
+     */
     @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
         :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]) & {
             #sidebar {
@@ -104,6 +112,12 @@
             }
         }
     }
+    /* 
+     * The [titlepreface*="\200c "] and [titlepreface*="\200d "] attributes 
+     * behave the same as `uc.flex.fully-hide-sidebery`. For the same reason 
+     * as above, we need to duplicate the rules here specifically for these 
+     * cases, since attribute selectors can't be combined with media queries. 
+     */
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
         :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
             #sidebar {
@@ -148,16 +162,16 @@
     }
     */
 
-    &:not(:is([positionend], [sidebar-positionend])) > :-moz-locale-dir(rtl),
-    &:is([positionend], [sidebar-positionend]) > * {
+    &:not([sidebar-positionend]) > :-moz-locale-dir(rtl),
+    &[sidebar-positionend] > * {
         border-inline-width: 1px 0px;
     }
 
     /* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
-    &:not(:is([positionend], [sidebar-positionend])):hover ~ #appcontent #statuspanel {
+    &:not([sidebar-positionend]):hover ~ #appcontent #statuspanel {
         inset-inline: auto 0px !important;
     }
-    &:not(:is([positionend], [sidebar-positionend])):hover ~ #appcontent #statuspanel-label {
+    &:not([sidebar-positionend]):hover ~ #appcontent #statuspanel-label {
         margin-inline: 0px !important;
         border-left-style: solid !important;
     }

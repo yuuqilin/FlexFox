@@ -7,7 +7,7 @@
             margin-bottom: var(--uc-autohide-bottom);
         }
         #navigator-toolbox {
-            /* The z-index property is no longer needed after version 133 */
+            /* !TEMPORARY: The z-index property is no longer needed after version 133 */
             z-index: 5;
             transition: margin-bottom var(--uc-tabs-hide-animation-duration) ease-out
                 var(--uc-tabs-hide-animation-delay) !important;

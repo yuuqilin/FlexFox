@@ -263,8 +263,8 @@
 /* Auto-hide sidebar in fullscreen or when Sidebery is fully hidden */
 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]),
-    #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) {
-        &:not([positionend], [sidebar-positionend]) {
+    #sidebar-main[sidebar-launcher-expanded] {
+        &:not([sidebar-positionend]) {
             /* Fixed position for left-side sidebar */
             position: absolute !important;
             left: 0px;
@@ -285,7 +285,7 @@
             }
         }
 
-        &:is([positionend], [sidebar-positionend]) {
+        &[sidebar-positionend] {
             /* Fixed position for right-side sidebar */
             position: absolute !important;
             right: 0px;
@@ -322,8 +322,8 @@
 @media not -moz-pref("uc.flex.fully-hide-sidebery") {
     :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
         #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]),
-        #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) {
-            &:not([positionend], [sidebar-positionend]) {
+        #sidebar-main[sidebar-launcher-expanded] {
+            &:not([sidebar-positionend]) {
                 position: absolute !important;
                 left: 0px;
                 height: calc(
@@ -337,7 +337,7 @@
                 }
             }
 
-            &:is([positionend], [sidebar-positionend]) {
+            &[sidebar-positionend] {
                 position: absolute !important;
                 right: 0px;
                 height: calc(
@@ -411,6 +411,8 @@
             --uc-sb-sroot-btn-padding-inline-start: 0px;
         }
         #sidebar-main {
+            --uc-sidebar-main-margin-left: 0px;
+            --uc-sidebar-main-padding-inline-end: 0px;
             --uc-sb-sroot-btn-padding-block-start: var(--space-small);
             --uc-sb-sroot-btn-padding-block-end-last: 2px;
             --uc-sb-sroot-btn-padding-inline: 5.5px;
@@ -463,11 +465,13 @@
                 }
             }
         }
+        /*
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
             #sidebar-main[sidebar-panel-open] {
                 position: var(--uc-sb-sidebar-main-position, static) !important;
             }
         }
+        */
     }
 
     #browser:has(
@@ -499,18 +503,30 @@
             }
         }
     }
-    /* TEMPORARY: */
+
+    /* 
+     * !TEMPORARY: When sidebar.visibility is set to always-show, 
+     * Firefox assigns --sidebar-launcher-collapsed-width the same value 
+     * as --uc-sidebar-width. However, switching to expand-on-hover does 
+     * not automatically update this variable to reflect the new sidebar width. 
+     * To address this, we have to override the variable manually. 
+     * Note that this value should ideally be calculated dynamically by Firefox, 
+     * so our hardcoded fallback may not match the actual sidebar width across 
+     * different system environments. This can cause layout shifts when the 
+     * sidebar expands. 
+     */
     @media -moz-pref("sidebar.visibility", "expand-on-hover") {
         #sidebar-box,
         #tabbrowser-tabbox {
-            --sidebar-launcher-collapsed-width: calc(var(--uc-sidebar-stripe-width) + 11px) !important;
+            --sidebar-launcher-collapsed-width: calc(var(--uc-sidebar-stripe-width) + 11.0667px) !important;
         }
     }
+
     /* 🔼 [BLOCK A] End of variable definitions for active Sidebery */
 
     /* 🔽 [BLOCK B] Start of rules for active Sidebery */
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
-    #sidebar-main[sidebar-panel-open] {
+    #sidebar-main {
         --uc-bgcolor: var(--toolbox-bgcolor);
         &:-moz-window-inactive {
             --uc-bgcolor: var(--toolbox-bgcolor-inactive);
@@ -518,7 +534,13 @@
         @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
             position: var(--uc-sb-sidebar-main-position, static) !important;
         }
-        &:is([positionend], [sidebar-positionend]) {
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            &[sidebar-panel-open] {
+                position: var(--uc-sb-sidebar-main-position, absolute) !important;
+                z-index: var(--browser-area-z-index-sidebar);
+            }
+        }
+        &[sidebar-positionend] {
             right: 0px;
         }
         margin-top: var(--uc-sb-sidebar-main-margin-top);
@@ -559,7 +581,7 @@
              */
                 z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
     }
-    #sidebar-main[sidebar-panel-open]:hover {
+    #sidebar-main:hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-height) !important;
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
             height: var(--uc-sb-sidebar-main-hover-height);
@@ -567,10 +589,10 @@
         max-height: var(--uc-sb-sidebar-main-hover-max-height) !important;
         max-width: var(--uc-sb-sidebar-main-width) !important;
         /**
-         * TEMPORARY: This z-index rule is added to override
+         * !TEMPORARY: This z-index rule is added to override
          * Firefox's native z-index for #sidebar-main in expand-on-hover mode.
          * However, it also unintentionally overrides
-         * the later rule targeting #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]).
+         * the later rule targeting #sidebar-main[sidebar-launcher-expanded].
          * We keep the later rule as-is, since this one will be removed
          * after Firefox v140, when it’s no longer needed.
          */
@@ -599,18 +621,42 @@
             z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
     }
 
+    @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+        /*
+         * This block is logically tied to the position setting of #sidebar-main 
+         * under @media -moz-pref("sidebar.visibility", "expand-on-hover"). 
+         * Changes to #sidebar-main's positioning affect how much margin 
+         * #sidebar-box needs, so the two are functionally connected.
+         *
+         * Ideally, this rule would be written together with #sidebar-main 
+         * using the "~" general sibling selector for clarity and easier maintenance. 
+         * However, to keep the selector complexity low and avoid potential 
+         * performance issues, it's placed here as a separate rule.
+         */
+        #sidebar-box[sidebar-panel-open]:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]) {
+            margin-inline-start: var(--sidebar-launcher-collapsed-width) !important;
+            &[sidebar-positionend] {
+                margin-inline-start: 0 !important;
+                margin-inline-end: var(--sidebar-launcher-collapsed-width) !important;
+            }
+        }
+    }
+
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
         margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
-        /* Remove unwanted 1px margin when Sidebery is in 'expand-on-hover' state */
+
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            /* Remove unwanted 1px margin when Sidebery is in 'expand-on-hover' state */
             margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top) - 1px);
-        }
-        /* Remove unnecessary margin when Sidebery is in 'expand-on-hover' state */
-        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+
+            /* Remove unnecessary margin when Sidebery is in 'expand-on-hover' state */
             margin-inline-start: 0px !important;
+            &[sidebar-positionend] {
+                margin-inline-end: 0 !important;
+            }
         }
         /* Remove unnecessary margin when Sidebery is placed on the right side */
-        &:is([positionend], [sidebar-positionend]) {
+        &[sidebar-positionend] {
             margin-inline-start: 0px !important;
         }
         /* Remove unwanted border and shadow applied to Sidebery by the revamped sidebar */
@@ -623,6 +669,11 @@
             border-radius: 0px !important;
             box-shadow: none !important;
         }
+    }
+
+    /* Remove sidebar launcher splitter */
+    #sidebar-launcher-splitter {
+        display: var(--uc-sb-sidebar-splitter-display, flex) !important;
     }
 
     /* Remove native vertical tabs when Sidebery is active. */
@@ -641,23 +692,23 @@
     /* ── ▶️ Autohide vertical tabs when the sidebar is expanded */
     @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
         /**
-         * The selector #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) has higher specificity
-         * than #sidebar-main[sidebar-panel-open], so its rules will override those above.
+         * The selector #sidebar-main[sidebar-launcher-expanded] has higher specificity
+         * than #sidebar-main, so its rules will override those above.
          * Since the earlier rule is used to detect when Sidebery is active,
          * we rely on the --uc-sb-* custom variable (with fallback) to carry that logic forward.
          * This ensures that even when overridden, the correct behavior still applies
          * based on whether Sidebery is active or not.
          */
-        #sidebar-main[sidebar-launcher-expanded]:has(> [expanded]) {
+        #sidebar-main[sidebar-launcher-expanded] {
             overflow: var(--uc-sb-sidebar-main-overflow, visible) !important;
             /**
              * When the native vertical tabs are placed on the right side, 
              * set overflow to hidden to eliminate extra space. 
              */
-            &:not(:hover):is([positionend], [sidebar-positionend]) {
+            &[sidebar-positionend]:not(:hover) {
                 overflow: hidden !important;
             }
-            /* TEMPORARY: Override Firefox v138 width; not needed in v140+ */
+            /* !TEMPORARY: Override Firefox v138 width; not needed in v140+ */
             width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-width)) !important;
             max-width: var(
                 --uc-sb-sidebar-main-width,
@@ -675,10 +726,7 @@
             overflow: hidden;
             /* !TEMPORARY: */
             margin-inline-start: var(--uc-sidebar-main-margin-left);
-            min-width: /* var(--tab-collapsed-width) */ var(
-                --uc-sb-sidebar-main-width,
-                var(--uc-sidebar-main-width)
-            );
+            min-width: /* var(--tab-collapsed-width) */ var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-width));
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
             will-change: margin-inline-start, min-width, overflow, transform;
             /* Enable transitions for discrete properties like overflow or background-image */
@@ -696,7 +744,7 @@
             border-inline: 0.01px solid var(--chrome-content-separator-color);
             border-inline-width: 0 0.01px;
             */
-            &:is([positionend], [sidebar-positionend]) {
+            &[sidebar-positionend] {
                 padding-inline-end: var(--uc-sidebar-main-padding-inline-end, 0);
                 /* Newly added 'transform' uses initial transition values as it's not defined above */
                 transition-property: margin-inline-start, min-width, overflow, transform;
@@ -721,7 +769,7 @@
              * Shift sidebar-main left by its extra expanded width (collapsed width - expanded width) 
              * to keep it visible when expanding from the right edge. 
              */
-            &:is([positionend], [sidebar-positionend]) {
+            &[sidebar-positionend] {
                 @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                     :root:not([titlepreface*="\180e "]) & {
                         transform: translateX(
@@ -737,10 +785,6 @@
         /* Fix transparent background issue in vertical tabs; no longer needed in Firefox v138 and later */
         #sidebar-wrapper {
             background: inherit;
-        }
-
-        #sidebar-launcher-splitter {
-            display: none !important;
         }
     }
     /* 🔼 [BLOCK C] End of rules for inactive Sidebery */

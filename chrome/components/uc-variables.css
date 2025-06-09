@@ -415,8 +415,10 @@
     --uc-nav-bar-padding-right: 0px;
     --uc-sidebar-button-offset: 0px;
     /* If the sidebar button is the last item in the nav bar, leave room for it. */
-    #navigator-toolbox:has(#sidebar-button[sidebar-positionend]:last-child) {
-        --uc-sidebar-button-offset: var(--uc-sidebar-stripe-width, 0px);
+    @media not -moz-pref("sidebar.position_start") {
+        #navigator-toolbox:has(#sidebar-button:last-child) {
+            --uc-sidebar-button-offset: var(--uc-sidebar-stripe-width, 0px);
+        }
     }
 
     /* When native vertical tabs are enabled, window control spacing is not needed. */
@@ -487,7 +489,7 @@
              * This could be fixed with :root:has(), but we avoid using it. 
              * Define the full box value directly instead. 
              */
-            #sidebar-box[hidden] ~ #tabbrowser-tabbox {
+            #tabbrowser-tabbox:not([sidebar-panel-open]) {
                 /*
                 --uc-web-content-margin-side: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
                 */
@@ -500,7 +502,7 @@
         --uc-web-content-margin-box: var(--uc-web-content-margin-top)
             var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
             var(--uc-web-content-margin-large, var(--uc-web-content-margin-small)) var(--uc-web-content-margin-side);
-        #tabbrowser-tabbox[sidebar-positionend] {
+        @media not -moz-pref("sidebar.position_start") {
             --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin-side)
                 var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
                 var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
@@ -508,7 +510,7 @@
 
         --uc-devtools-toolbox-margin-box: 0 var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
             var(--uc-web-content-margin-large, var(--uc-web-content-margin-small)) var(--uc-web-content-margin-side);
-        #tabbrowser-tabbox[sidebar-positionend] {
+        @media not -moz-pref("sidebar.position_start") {
             --uc-devtools-toolbox-margin-box: 0 var(--uc-web-content-margin-side)
                 var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
                 var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
@@ -622,7 +624,7 @@
     /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
     #sidebar-main {
         --uc-sidebar-main-margin-left: 0px;
-        &:is([positionend], [sidebar-positionend]) {
+        &[sidebar-positionend] {
             --uc-sidebar-main-margin-left: 0px;
             --uc-sidebar-main-padding-inline-end: 5px;
             &:hover {
@@ -644,7 +646,7 @@
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             :root:not([titlepreface*="\180e "]) &:not(:hover) {
                 --uc-sidebar-main-margin-left: -6px;
-                &:is([positionend], [sidebar-positionend]) {
+                &[sidebar-positionend] {
                     --uc-sidebar-main-margin-left: -5px;
                 }
             }
@@ -669,7 +671,7 @@
     /* 🔽 Start of variable definitions for active Sidebery */
     &:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden])) {
         /* Hide sidebar splitter */
-        --uc-sidebar-splitter-display: none;
+        --uc-sb-sidebar-splitter-display: none;
 
         --uc-sb-sidebar-header-stripe: color-mix(
             in srgb,
@@ -794,9 +796,6 @@
             @media (display-mode: fullscreen) {
                 --uc-toolbox-rotation: 87deg;
             }
-            /* !TEMPORARY: These variables are temporary solutions and might be removed later. */
-            --uc-sidebar-main-margin-left: 0px;
-            --uc-sidebar-main-padding-inline-end: 0px;
         }
     }
     /* 🔼 End of variable definitions for active Sidebery */

@@ -12,6 +12,7 @@
 }
 */
 
+/* Override toolbar color if there's no theme background image. */
 @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
     :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
         #navigator-toolbox {
