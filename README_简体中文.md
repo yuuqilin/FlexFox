@@ -20,11 +20,12 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.6.1**
-* 利用 Firefox 的新特性，移除已不再需要的 `:has()` 和 `:is()` 选择器，改用 `@media` 查询替代属性判断，并通过新的内建属性简化选择器结构。
-* 实测性能变化低于 2%，属于误差范围，几乎无明显提升。
-* 新增 `uc.flex.disable-bookmarks-autohide` 与“仅在新标签页显示书签工具栏”设置的兼容性。
-* 提升“悬停时展开侧栏”功能在多种情况下的兼容表现。
+**🦊 v3.6.2**
+* 提升了 `uc.flex.disable-bookmarks-autohide` 选项在多种情境下的兼容性。
+* 提升了 `uc.flex.enable-rounded-web-content` 选项在水平标签页模式下使用开发者工具时的兼容性。
+* 移除旧的规则和变量，改用更高效的选择器。
+* 降低 Sidebery 和原生垂直标签页变量赋值时的判断开销。
+* 相比 v3.6.1 性能提升约 **7%**，与默认 Firefox UI 的差距小于 2 毫秒。
 
 🔧 <b>v3.6.x 修复 v3.5.1 引入的性能问题</b>
 > [!NOTE]
@@ -145,6 +146,12 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.6.1**
+* 利用 Firefox 的新特性，移除已不再需要的 `:has()` 和 `:is()` 选择器，改用 `@media` 查询替代属性判断，并通过新的内建属性简化选择器结构。
+* 实测性能变化低于 2%，属于误差范围，几乎无明显提升。
+* 新增 `uc.flex.disable-bookmarks-autohide` 与“仅在新标签页显示书签工具栏”设置的兼容性。
+* 提升“悬停时展开侧栏”功能在多种情况下的兼容表现。
 
 **🔥 v3.6.0 重大性能更新**
 > [!WARNING]

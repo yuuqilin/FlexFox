@@ -20,11 +20,12 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.1**
-* Removed outdated `:has()` and `:is()` selectors by taking advantage of new Firefox features. Replaced attribute checks with `@media` queries and simplified selectors using newer built-in attributes.
-* Performance impact is negligible (less than 2% in tests), with no noticeable speedup.
-* Added compatibility between `uc.flex.disable-bookmarks-autohide` and the "Only Show Bookmarks Toolbar on New Tab" setting.
-* Improved support for the "Expand sidebar on hover" feature in more scenarios.
+**🦊 v3.6.2**
+* Improved compatibility for `uc.flex.disable-bookmarks-autohide` in various scenarios.
+* Improved compatibility for `uc.flex.enable-rounded-web-content` when using Developer Tools in horizontal tab mode.
+* Removed outdated rules and variables, replacing them with more efficient selectors.
+* Reduced conditional overhead during variable assignment for Sidebery and native vertical tabs.
+* Performance improved by about **7%** compared to v3.6.1, with less than a 2ms difference from the default Firefox UI.
 
 <!-- END What's New -->
 
@@ -152,6 +153,12 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.6.1**
+* Removed outdated `:has()` and `:is()` selectors by taking advantage of new Firefox features. Replaced attribute checks with `@media` queries and simplified selectors using newer built-in attributes.
+* Performance impact is negligible (less than 2% in tests), with no noticeable speedup.
+* Added compatibility between `uc.flex.disable-bookmarks-autohide` and the "Only Show Bookmarks Toolbar on New Tab" setting.
+* Improved support for the "Expand sidebar on hover" feature in more scenarios.
 
 **🔥 v3.6.0 Major Performance Update**
 > [!WARNING]

@@ -19,13 +19,8 @@
 }
 */
 
-/* Remove sidebar splitter */
-#sidebar-splitter {
-    display: var(--uc-sb-sidebar-splitter-display, flex) !important;
-}
-
 /* AUTO HIDE SIDE BAR */
-#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
     position: relative;
     min-width: var(--uc-sb-sidebar-width) !important;
     width: var(--uc-sb-sidebar-width) !important;
@@ -46,6 +41,11 @@
                 direction: rtl;
             }
         }
+    }
+
+    /* Remove sidebar splitter */
+    & + #sidebar-splitter {
+        display: none;
     }
 
     /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */

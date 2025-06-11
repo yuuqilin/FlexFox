@@ -7,11 +7,14 @@
             margin-bottom: var(--uc-autohide-bottom);
         }
         #navigator-toolbox {
-            /* !TEMPORARY: The z-index property is no longer needed after version 133 */
-            z-index: 5;
             transition: margin-bottom var(--uc-tabs-hide-animation-duration) ease-out
                 var(--uc-tabs-hide-animation-delay) !important;
-            --browser-area-z-index-toolbox: 3;
+            /**
+             * When automatic hiding of the bookmarks toolbar is disabled and Sidebery is active,
+             * set z-index to 0 so that Sidebery can appear above the bookmarks toolbar.
+             * In other cases, it should be set to 3 so horizontal tabs can appear above the content area.
+             */
+            --browser-area-z-index-toolbox: var(--uc-sb-bm-disable-autohide-z-index, 3);
         }
         #TabsToolbar:not([customizing]) {
             visibility: hidden;
@@ -58,6 +61,8 @@ toolbar#TabsToolbar {
     background-color: var(--uc-bgcolor) !important;
 }
 */
-.toolbar-items {
-    visibility: var(--uc-tab-items-visibility, inherit);
+@media not -moz-pref("sidebar.verticalTabs") {
+    .toolbar-items {
+        visibility: var(--uc-tab-items-visibility, inherit);
+    }
 }

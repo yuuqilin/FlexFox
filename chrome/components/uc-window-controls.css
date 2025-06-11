@@ -14,16 +14,18 @@
     }
 
     /* Hide TabsToolbar window controls when native vertical tabs are enabled */
-    #navigator-toolbox[tabs-hidden] > #TabsToolbar > .titlebar-buttonbox-container {
-        display: none !important;
-    }
+    @media -moz-pref("sidebar.verticalTabs") {
+        #navigator-toolbox[tabs-hidden] > #TabsToolbar > .titlebar-buttonbox-container {
+            display: none !important;
+        }
 
-    #navigator-toolbox[tabs-hidden] > #nav-bar > .titlebar-spacer[type="post-tabs"] {
-        display: none !important;
-    }
+        #navigator-toolbox[tabs-hidden] > #nav-bar > .titlebar-spacer[type="post-tabs"] {
+            display: none !important;
+        }
 
-    #navigator-toolbox[tabs-hidden] > #nav-bar > .titlebar-buttonbox-container {
-        margin-left: -4px;
+        #navigator-toolbox[tabs-hidden] > #nav-bar > .titlebar-buttonbox-container {
+            margin-left: -4px;
+        }
     }
 
     #navigator-toolbox .titlebar-spacer[type="pre-tabs"] {
@@ -80,23 +82,25 @@
                                                                                                                                       
 ═════════════════════════════════════════════════════════════════════ */
 
-/* Fix issue with missing window controls. */
-#titlebar,
-#TabsToolbar {
-    will-change: unset !important;
-    transition: none !important;
-    opacity: 1 !important;
-}
+@media not -moz-pref("sidebar.verticalTabs") {
+    /* Fix issue with missing window controls. */
+    #titlebar,
+    #TabsToolbar {
+        will-change: unset !important;
+        transition: none !important;
+        opacity: 1 !important;
+    }
 
-/* ----- Close/min/max fix ----- */
-:root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
-    #TabsToolbar .titlebar-buttonbox-container {
-        visibility: var(--uc-windows-controls-visibility) !important;
-        /*display: block;*/
-        position: var(--uc-windows-controls-position) !important;
-        top: var(--uc-windows-controls-top) !important;
-        /*left: unset !important;*/
-        right: calc(var(--uc-windows-controls-right) + var(--uc-sidebar-button-offset)) !important;
+    /* ----- Close/min/max fix ----- */
+    :root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
+        #TabsToolbar .titlebar-buttonbox-container {
+            visibility: var(--uc-windows-controls-visibility) !important;
+            /*display: block;*/
+            position: var(--uc-windows-controls-position) !important;
+            top: var(--uc-windows-controls-top) !important;
+            /*left: unset !important;*/
+            right: calc(var(--uc-windows-controls-right) + var(--uc-sidebar-button-offset)) !important;
+        }
     }
 }
 
@@ -213,11 +217,12 @@
     }
 }
 
+/**
+ * Increase the z-index of the navigation bar in fullscreen mode  
+ * to prevent it from being obscured by the revamped sidebar.
+ */
+/*
 @media -moz-pref("sidebar.revamp") {
-    /**
-     * Increase the z-index of the navigation bar in fullscreen mode  
-     * to prevent it from being obscured by the revamped sidebar.
-     */
     @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
         #navigator-toolbox {
             z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
@@ -231,6 +236,7 @@
         }
     }
 }
+*/
 
 /* ════════════════════════════════════════════════════════════════════
    ██████╗ ███████╗██████╗ ███████╗ ██████╗ ███╗   ██╗ █████╗ ██╗  ████████╗ ██████╗  ██████╗ ██╗     ██████╗  █████╗ ██████╗ 
@@ -263,28 +269,49 @@
     }
 }
 
-/**
- * Avoid overlap of the bookmarks toolbar by the sidebar
- * when "Only Show Bookmarks Toolbar on New Tab" is enabled for Firefox >= 130 
- */
+/* Adjust Sidebery's vertical offset when the bookmarks toolbar autohide is disabled.
+   These rules override those defined in uc-sidebar.css. */
 @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
     :root:not([inFullscreen]):not([customizing]) {
+        /** 
+         * When the bookmarks toolbar is visible,
+         * i.e. it is set to "Always Show", or set to "Only Show on New Tab" and the current tab is a New Tab,
+         * move Sidebery upward if it is active. 
+         */
         #navigator-toolbox:has(#PersonalToolbar[collapsed="false"])
             + #browser
-            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
+            /*
             padding-top: 0px;
-            margin-top: var(--uc-bm-disable-autohide-offset);
+            */
+            @media not -moz-pref("sidebar.revamp") {
+                margin-top: var(--uc-bm-disable-autohide-offset, 0);
+                height: calc(-1 * var(--uc-bm-disable-autohide-offset, 0px) + 100%);
+            }
+            /** 
+             * Same as above, but when sidebar.revamp is enabled,
+             * adjust the offset to account for the sidebar stripe height. 
+             */
             @media -moz-pref("sidebar.revamp") {
                 margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
             }
         }
         @media -moz-pref("sidebar.revamp") {
+            /**
+             * When the bookmarks toolbar is hidden,
+             * i.e. it is set to "Never Show", or set to "Only Show on New Tab" and the current tab is not a New Tab,
+             * no upward offset is needed for #sidebar-main.
+             */
             #navigator-toolbox:has(#PersonalToolbar[collapsed="true"]) + #browser {
                 #sidebar-main {
                     margin-top: 0;
                 }
             }
-            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([hidden]) {
+            /* 
+             * When bookmarks toolbar autohide is disabled and sidebar.revamp is enabled,
+             * move Sidebery downward only by the height of the sidebar stripe. 
+             */
+            #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
                 margin-top: var(--uc-sb-sidebar-main-stripe-height);
             }
         }
