@@ -86,8 +86,8 @@
                                     var(--uc-web-content-margin-small)
                                 ) !important;
                                 /* When Sidebery is hidden, add margin to the same side as Sidebery (left). */
-                                @media not -moz-pref("sidebar.revamp") {
-                                    #tabbrowser-tabbox:not([sidebar-panel-open]) & {
+                                @media not -moz-pref("sidebar.revamp"), -moz-pref("sidebar.visibility", "hide-sidebar") {
+                                    #tabbrowser-tabbox:not([sidebar-panel-open], [sidebar-launcher-expanded]) & {
                                         margin-right: 0 !important;
                                         margin-left: var(
                                             --uc-web-content-margin-large,
@@ -126,8 +126,8 @@
                                     var(--uc-web-content-margin-small)
                                 ) !important;
 
-                                @media not -moz-pref("sidebar.revamp") {
-                                    #tabbrowser-tabbox:not([sidebar-panel-open]) & {
+                                @media not -moz-pref("sidebar.revamp"), -moz-pref("sidebar.visibility", "hide-sidebar") {
+                                    #tabbrowser-tabbox:not([sidebar-panel-open], [sidebar-launcher-expanded]) & {
                                         margin-left: 0 !important;
                                         margin-right: var(
                                             --uc-web-content-margin-large,

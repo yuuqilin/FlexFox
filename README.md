@@ -20,20 +20,23 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.2**
-* Improved compatibility for `uc.flex.disable-bookmarks-autohide` in various scenarios.
-* Improved compatibility for `uc.flex.enable-rounded-web-content` when using Developer Tools in horizontal tab mode.
-* Removed outdated rules and variables, replacing them with more efficient selectors.
-* Reduced conditional overhead during variable assignment for Sidebery and native vertical tabs.
-* Performance improved by about **7%** compared to v3.6.1, with less than a 2ms difference from the default Firefox UI.
+**🦊 v3.6.3**
+* Added compatibility for `uc.flex.enable-rounded-web-content` when "Hide tabs and sidebar" is enabled in the sidebar settings, ensuring proper spacing around the web content when using the Developer Tools docked to the side.
+* Fixed a long-standing issue where Sidebery would shift upward and cause layout jitter when hovering over the Navigation Bar, especially when the number of panels was less than one full row.
+
+  * This behavior was unintended and has now been resolved.
+  * I hadn't noticed this before because, in my own setup, the number of panels always exceeded a full row.
+  * The expansion animation for the Navigation Bar has also been refined to support both auto-hide and the `Lock Sidebery` shortcut.
+  * This fix is applied via `userContent.css`, so you don't need to modify the internal Sidebery styles. Just update FlexFox as usual.
 
 <!-- END What's New -->
 
 🔧 <b>v3.6.x Performance Fix for v3.5.1 Regression</b>
 > [!NOTE]
-> - The performance regression introduced in v3.5.1 has been fixed starting from **v3.6.0**.
-> - One of the most noticeable improvements is the speed when opening the **“List All Tabs”** panel. It now appears up to **17× faster** compared to v3.5.8.
-> - Users on **v3.5.1 or later** are recommended to update to **v3.6.0 or newer** for improved responsiveness.
+> * The performance regression introduced in v3.5.1 has been fixed starting from **v3.6.0**.
+> * One of the most noticeable improvements is the speed when opening the **“List All Tabs”** panel. Compared to **v3.5.8**, the latest version opens it up to **18× faster**.
+> * In addition to addressing the performance regression, parts of the code have been refactored to further improve speed. The difference is now less than **2ms** compared to Firefox's native UI.
+> * If you're using any version from the **v3.5.x** series, we recommend updating to the latest release.
 
 <details>  
 <summary>🪄 <b>Major Update: Rounded & Floating Web Content</b> <i>[Click to expand]</i> 👇</summary>
@@ -153,6 +156,13 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.6.2**
+* Improved compatibility for `uc.flex.disable-bookmarks-autohide` in various scenarios.
+* Improved compatibility for `uc.flex.enable-rounded-web-content` when using Developer Tools in horizontal tab mode.
+* Removed outdated rules and variables, replacing them with more efficient selectors.
+* Reduced conditional overhead during variable assignment for Sidebery and native vertical tabs.
+* Performance improved by about **7%** compared to v3.6.1, with less than a 2ms difference from the default Firefox UI.
 
 **v3.6.1**
 * Removed outdated `:has()` and `:is()` selectors by taking advantage of new Firefox features. Replaced attribute checks with `@media` queries and simplified selectors using newer built-in attributes.

@@ -486,8 +486,8 @@
                     );
                 }
             }
-            @media not -moz-pref("sidebar.revamp") {
-                &:not([sidebar-panel-open]) {
+            @media not -moz-pref("sidebar.revamp"), -moz-pref("sidebar.visibility", "hide-sidebar") {
+                &:not([sidebar-panel-open], [sidebar-launcher-expanded]) {
                     --uc-web-content-margin-side: var(
                         --uc-web-content-margin-large,
                         var(--uc-web-content-margin-small)

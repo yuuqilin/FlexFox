@@ -19,34 +19,57 @@
     /*
     @media (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.disable-sidebery-hover-animations")) and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen))
     */
-    @media not (max-width: 50px) {
-        #root:not([data-nav-inline="true"]) .NavigationBar {
-            overflow: hidden;
+    #root:not([data-nav-inline="true"]) .NavigationBar {
+        .nav-item[data-active="true"] > svg {
+            width: 16px !important;
+            height: 16px !important;
         }
+        &:hover .nav-item[data-active="true"] > svg {
+            width: 22px !important;
+            height: 22px !important;
+        }
+    }
 
+    @media (width > 50px) {
         #root:not([data-nav-inline="true"]) .NavigationBar {
             max-height: 40px;
-        }
-
-        #root .NavigationBar {
-            max-height: 40px;
-            padding: 3px 0px 0px 5px !important;
+            height: 40px !important;
+            padding: 3px 0px 2.5px 5px !important;
             margin-bottom: 4px !important;
             border-bottom: 1px solid #ced1d4 !important;
             @media (prefers-color-scheme: dark) {
                 border-bottom: 1px solid #686869b3 !important;
             }
+            overflow: hidden;
+            &:not(:hover) {
+                transition:
+                    max-height 50ms ease-in-out 50ms,
+                    height 50ms ease-in-out 50ms !important;
+            }
         }
 
         #root:not([data-nav-inline="true"]) .NavigationBar:hover {
             max-height: 100vh;
-            transition: 50ms ease-in-out 500ms !important;
+            height: auto !important;
+            transition:
+                max-height 50ms ease-in-out 500ms,
+                height 50ms ease-in-out 500ms !important;
+        }
+
+        #root:not([data-nav-inline="true"]) .NavigationBar .nav-item .icon {
+            width: 16px;
+            height: 16px;
+            transition:
+                width 50ms ease-in-out 50ms,
+                height 50ms ease-in-out 50ms !important;
         }
 
         #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
-            max-width: 22px;
-            max-height: 22px;
-            transition: 50ms ease-in-out 500ms !important;
+            width: 22px;
+            height: 22px;
+            transition:
+                width 50ms ease-in-out 120ms,
+                height 50ms ease-in-out 120ms !important;
         }
 
         #root[data-nav-inline="true"] .NavigationBar {
