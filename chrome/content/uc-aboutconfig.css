@@ -1,0 +1,170 @@
+﻿@-moz-document url("about:config") {
+    /* Display FlexFox installation message */
+    @media -moz-pref("uc.flex.show-flexfox-version-info-in-about-config") {
+        body:lang(ja) {
+            &::before {
+                content: "🎉  FlexFox v3.6.4 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
+            }
+        }
+        body:lang(zh-CN) {
+            &::before {
+                content: "🎉  FlexFox v3.6.4 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
+            }
+        }
+        body:lang(zh-tw) {
+            &::before {
+                content: "🎉  FlexFox v3.6.4 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
+            }
+        }
+
+        body::before {
+            content: "🎉  FlexFox v3.6.4 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
+            /* !-- End of version info -- */
+            display: block;
+            margin: 10px 10px 0px 10px;
+            padding: 12px 30px;
+            color: var(--in-content-text-color);
+            background-color: var(--table-row-background-color);
+            border: var(--prefs-table-border);
+            border-radius: 4px;
+            white-space: pre-line;
+            line-height: 1.6;
+            font-family: monospace;
+            font-size: var(--font-size-root);
+        }
+    }
+
+    /* Highlight preferences that have been modified by the user */
+    #prefs
+        .has-user-value:has(
+            span[data-l10n-id="about-config-pref-accessible-value-custom"]:not(
+                    [data-l10n-args='{"value":"false"}'],
+                    [data-l10n-args='{"value":"0"}'],
+                    [data-l10n-args='{"value":"top-right"}']
+                )
+        ) {
+        --uc-pref-custom-bg: light-dark(#ea4c895e, #9651ff80);
+        background-color: color-mix(
+            in srgb,
+            var(--uc-pref-custom-bg) 25%,
+            var(--table-row-background-color)
+        ) !important;
+
+        &:is(.odd) {
+            background-color: color-mix(
+                in srgb,
+                var(--uc-pref-custom-bg) 25%,
+                var(--table-row-background-color-alternate)
+            ) !important;
+        }
+        &:hover {
+            background-color: color-mix(in srgb, var(--uc-pref-custom-bg) 20%, var(--in-content-item-hover)) !important;
+        }
+        th[scope="row"]::before {
+            content: "🟢";
+            position: absolute;
+            left: 16px;
+        }
+    }
+
+    /* If sidebar visibility is set to 'expand-on-hover', show a hint message above the search field */
+    #toolbar {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #toolbar::before {
+        position: relative;
+        /* z-index: 100; */
+        top: 0;
+        /* left: 50%;
+        transform: translateX(-50%); */
+        width: 100%;
+        max-width: 100%;
+        min-width: 200px;
+        max-height: 200px;
+        padding: 12px 32px;
+        color: var(--in-content-text-color);
+        background: var(--table-row-background-color);
+        /*
+        box-shadow:
+            0px 2px 4px 0px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)),
+            0px 8px 15px 5px light-dark(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.6));
+        */
+        border: 2px solid light-dark(#ea4c89, #9651ff);
+        border-radius: 8px;
+        white-space: pre-line;
+        line-height: 1.4;
+        font-family: monospace;
+        font-size: 1.2em;
+        overflow: hidden;
+        display: none;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+        #toolbar:lang(ja) {
+            &::before {
+                content: "💡 サイドバーは「カーソルを合わせた時にサイドバーを展開する」に設定されています。FlexFox の垂直タブ最適化は無効です。使用するには、この設定をオフにするか、`sidebar.visibility` を `always-show` にリセットしてください。";
+            }
+        }
+        #toolbar:lang(zh-CN) {
+            &::before {
+                content: "💡 侧栏设置为“悬停时展开侧栏”。FlexFox 的垂直标签页功能已停用。如需启用，请取消此选项或将 `sidebar.visibility` 重置为 `always-show`。";
+            }
+        }
+        #toolbar:lang(zh-tw) {
+            &::before {
+                content: "💡 側邊欄設定為「在滑鼠移到上方時展開」。FlexFox 的垂直分頁功能已停用。如要啟用，請取消此選項或將 `sidebar.visibility` 重設為 `always-show`。";
+            }
+        }
+
+        #toolbar::before {
+            content: "💡 Sidebar set to 'Expand sidebar on hover'. FlexFox's vertical tab tweaks are disabled in this mode. To use them, uncheck the option or reset `sidebar.visibility` to `always-show`.";
+            margin-bottom: 8px;
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
+            animation: messageFadeOut 12s linear forwards;
+        }
+
+        /** 
+         * Pause the fade-out animation of the message when hovering over the search field or message.
+         * Pointer events are disabled after pausing to allow text input in the search field.
+         * Since the message now appears above the search field, the pointer-events property can be removed. 
+         */
+        #toolbar:hover::before {
+            animation-play-state: paused;
+            opacity: 1;
+            pointer-events: none;
+        }
+    }
+}
+
+@keyframes messageFadeOut {
+    0%,
+    96% {
+        max-height: 200px;
+        padding: 12px 32px;
+        margin-bottom: 8px;
+        border-width: 2px;
+        opacity: 1;
+        visibility: visible;
+    }
+    99.99% {
+        padding: 0px 32px;
+        margin-bottom: 0;
+        border-width: 0px 2px;
+    }
+
+    100% {
+        max-height: 0;
+        padding: 0;
+        margin-bottom: 0;
+        border-width: 0;
+        opacity: 0;
+        visibility: collapse;
+    }
+}

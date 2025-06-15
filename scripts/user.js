@@ -49,6 +49,8 @@ user_pref("uc.flex.revert-to-original-sidebar-icon",            false);
 user_pref("uc.flex.sidebery-fast-hover-expand",                 false);
 /* Slows down the hover expand/collapse transitions for Sidebery. */
 user_pref("uc.flex.sidebery-slow-hover-expand",                 false);
+/* Shows a confirmation message and version number in the about:config page. */
+user_pref("uc.flex.show-flexfox-version-info-in-about-config",   true);
 /* Shows a separator between pinned and regular tabs in vertical tabs. */
 user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
 /* Sets max pinned tabs per column in native vertical tabs (numeric, 4–6). */

@@ -244,10 +244,10 @@
 
     /* Adjusts background darkness behind the urlbar popup. Higher values = darker background. */
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop", 1) {
-        --uc-urlbar-popup-dimness: 0.05;
+        --uc-urlbar-popup-dimness: 0.25;
     }
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop", 2) {
-        --uc-urlbar-popup-dimness: 0.1;
+        --uc-urlbar-popup-dimness: 0.5;
     }
 
     /* Add margin, shadow, and rounded corners to the web content area */

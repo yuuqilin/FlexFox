@@ -20,13 +20,13 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.6.3**
-* サイドバー設定で「タブとサイドバーを非表示にする」が有効な場合でも、`uc.flex.enable-rounded-web-content` オプションがウェブ開発ツールとの併用に対応するようになりました。ツールが左右にドッキングされた際にも、コンテンツの周囲に適切な余白が確保されます。
-* Sidebery のナビゲーションバーにおいて、パネルの数が1行未満のときにホバーすると、Sidebery 全体が上にズレて画面がちらつく問題を修正しました。
-  * 本来意図していない挙動であり、今後はどのような状態でも安定して表示されるようになります。
-  * 私自身の環境では常にパネル数が1行を超えていたため、これまで気付かずにいました。
-  * ナビゲーションバーの展開アニメーションも調整され、Sidebery の自動非表示と `Lock Sidebery` ショートカットの併用にも対応しました。
-  * 修正は `userContent.css` 経由で反映されるため、Sidebery 本体のスタイルは更新不要です。FlexFox の通常アップデートのみで適用されます。
+**🦊 v3.6.4**
+* Nightly v141 によって発生したサイドバーのレイアウト崩れを修正しました。
+  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
+  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
+* `uc.flex.dim-urlbar-popup-backdrop` の背景暗転にフェードアニメーションを追加し、表示効果を改善しました。
+* `about:config` 上に FlexFox のバージョン情報を表示できる `uc.flex.show-flexfox-version-info-in-about-config` を追加しました。
+* `about:config` の表示を改善し、変更された設定がより見つけやすくなりました。また、「カーソルを合わせた時にサイドバーを展開する」オプションが有効な場合、FlexFox による垂直タブの最適化が無効化されている旨の通知が12秒間表示されます。
 
 🔧 <b>v3.6.x パフォーマンス修正（v3.5.1の問題に対応）</b>
 > [!NOTE]
@@ -150,6 +150,14 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.6.3**
+* サイドバー設定で「タブとサイドバーを非表示にする」が有効な場合でも、`uc.flex.enable-rounded-web-content` オプションがウェブ開発ツールとの併用に対応するようになりました。ツールが左右にドッキングされた際にも、コンテンツの周囲に適切な余白が確保されます。
+* Sidebery のナビゲーションバーにおいて、パネルの数が1行未満のときにホバーすると、Sidebery 全体が上にズレて画面がちらつく問題を修正しました。
+  * 本来意図していない挙動であり、今後はどのような状態でも安定して表示されるようになります。
+  * 私自身の環境では常にパネル数が1行を超えていたため、これまで気付かずにいました。
+  * ナビゲーションバーの展開アニメーションも調整され、Sidebery の自動非表示と `Lock Sidebery` ショートカットの併用にも対応しました。
+  * 修正は `userContent.css` 経由で反映されるため、Sidebery 本体のスタイルは更新不要です。FlexFox の通常アップデートのみで適用されます。
 
 **v3.6.2**
 * `uc.flex.disable-bookmarks-autohide` オプション有効時の互換性を、さまざまなケースで向上させました。
@@ -406,6 +414,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.enable-colored-bookmarks-folder-icons` | ブックマークフォルダーのアイコンをカラー表示にします。数値で設定でき、`0` は無効、`1` は第1セットのアイコンを使用、`2` は第2セットのアイコンを使用し、ラベルは自動的に非表示になります。 |
 | `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
 | `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
+| `uc.flex.show-flexfox-version-info-in-about-config` | `about:config` ページに FlexFox のインストール確認メッセージと現在のバージョン番号を表示します。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Firefox の「展開モード」のネイティブ垂直タブにおいて、ピン留めタブと通常タブの間に区切り線を表示します（デフォルトでは非表示）。 |
 | `uc.flex.dim-urlbar-popup-backdrop` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
 | `uc.flex.move-pip-volume-to-top` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |

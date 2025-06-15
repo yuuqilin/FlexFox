@@ -63,9 +63,9 @@ toolbar:not(#TabsToolbar) > #search-container {
 }
 
 /* Remove 'Show More Bookmarks' chevron when toolbar isn't overflowing */
-/* Use :not(:has(foo[A])) not :has(foo:not([A])) - when multiple bookmark-items exist, 
-  :not(:has()) checks NONE are hidden, while :has(:not()) matches if ANY are visible */
-#PlacesToolbarItems:not(:has(> .bookmark-item[style="visibility: hidden;"])) + #PlacesChevron {
+/* It's enough to check only the last bookmark item — if it's not hidden, 
+   then none of the items are hidden, and there's no need to show the chevron */
+#PlacesToolbarItems:has(> .bookmark-item:last-child:not([style="visibility: hidden;"])) + #PlacesChevron {
     display: none !important;
 }
 

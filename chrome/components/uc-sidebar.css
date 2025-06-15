@@ -406,6 +406,7 @@
         --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset, 0px);
         --uc-sb-sidebar-main-stripe-height: 5px;
 
+        --uc-sb-sroot-splitter-display: none;
         &[sidebar-launcher-expanded] {
             --uc-sb-sroot-padding-block-start: var(--space-small);
             --uc-sb-sroot-padding-block-end: var(--space-small);
@@ -677,6 +678,13 @@
         #sidebar-launcher-splitter {
             display: none !important;
         }
+    }
+
+    #sidebar-tools-and-extensions-splitter {
+        margin-block-end: 0 !important;
+        display: var(--uc-sb-sroot-splitter-display, block) !important;
+        border-width: 0 0 !important;
+        border-color: transparent !important;
     }
 
     /* Remove native vertical tabs when Sidebery is active. */
@@ -1003,6 +1011,12 @@
             overflow-y: var(--uc-sroot-overflow, inherit) !important;
         }
         */
+        .tools-and-extensions.actions-list.overflow-button {
+            display: none !important;
+        }
+        .tools-and-extensions.actions-list {
+            height: auto !important;
+        }
         .tools-and-extensions.actions-list[orientation="horizontal"] {
             /*
             --button-outer-padding-block-start: 2px !important;
@@ -1417,6 +1431,12 @@
     }
     .tools-and-extensions.actions-list[orientation="horizontal"] moz-button[type="icon"] {
         order: -1 !important;
+    }
+
+    @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+        .tools-and-extensions.actions-list[orientation="horizontal"] {
+            width: -moz-available !important;
+        }
     }
 }
 /* 🔼 [BLOCK G] End of rules unrelated to Sidebery */

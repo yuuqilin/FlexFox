@@ -20,14 +20,13 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.3**
-* Added compatibility for `uc.flex.enable-rounded-web-content` when "Hide tabs and sidebar" is enabled in the sidebar settings, ensuring proper spacing around the web content when using the Developer Tools docked to the side.
-* Fixed a long-standing issue where Sidebery would shift upward and cause layout jitter when hovering over the Navigation Bar, especially when the number of panels was less than one full row.
-
-  * This behavior was unintended and has now been resolved.
-  * I hadn't noticed this before because, in my own setup, the number of panels always exceeded a full row.
-  * The expansion animation for the Navigation Bar has also been refined to support both auto-hide and the `Lock Sidebery` shortcut.
-  * This fix is applied via `userContent.css`, so you don't need to modify the internal Sidebery styles. Just update FlexFox as usual.
+**🦊 v3.6.4**
+* Fixed layout issues in the sidebar caused by Nightly v141.
+  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
+  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
+* Improved the visual effect of `uc.flex.dim-urlbar-popup-backdrop` by adding a fade animation to the darkened background.
+* Added `uc.flex.show-flexfox-version-info-in-about-config`, which displays the current FlexFox version in `about:config` for easier version tracking.
+* Refined the appearance of the `about:config` page. Modified preferences are now more clearly highlighted. Additionally, if 'Expand sidebar on hover' is enabled, a 12-second notice will appear in `about:config` indicating that FlexFox's vertical tab optimizations are disabled.
 
 <!-- END What's New -->
 
@@ -156,6 +155,15 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.6.3**
+* Added compatibility for `uc.flex.enable-rounded-web-content` when "Hide tabs and sidebar" is enabled in the sidebar settings, ensuring proper spacing around the web content when using the Developer Tools docked to the side.
+* Fixed a long-standing issue where Sidebery would shift upward and cause layout jitter when hovering over the Navigation Bar, especially when the number of panels was less than one full row.
+
+  * This behavior was unintended and has now been resolved.
+  * I hadn't noticed this before because, in my own setup, the number of panels always exceeded a full row.
+  * The expansion animation for the Navigation Bar has also been refined to support both auto-hide and the `Lock Sidebery` shortcut.
+  * This fix is applied via `userContent.css`, so you don't need to modify the internal Sidebery styles. Just update FlexFox as usual.
 
 **v3.6.2**
 * Improved compatibility for `uc.flex.disable-bookmarks-autohide` in various scenarios.
@@ -409,6 +417,7 @@ For more update logs from earlier versions,
 | `uc.flex.enable-colored-bookmarks-folder-icons` | Enables colored icons for bookmark folders. This numeric setting accepts `0` (disabled), `1` (uses the first icon set), or `2` (uses the second icon set, with labels automatically hidden). |
 | `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |
 | `uc.flex.remove-bookmarks-labels` | Removes text labels from bookmark folders. |
+| `uc.flex.show-flexfox-version-info-in-about-config` | Shows a confirmation message in the `about:config` page indicating that FlexFox is installed, along with the current version number. |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | Shows a separator between pinned and regular tabs in the native vertical tabs when in expanded state. Firefox hides this separator by default in this mode. |
 | `uc.flex.dim-urlbar-popup-backdrop` | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
 | `uc.flex.move-pip-volume-to-top` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |

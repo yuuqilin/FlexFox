@@ -21,6 +21,10 @@
 #urlbar {
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     border: 0 !important;
+    @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop") {
+        box-shadow: 0 0 0 100vw transparent;
+        transition: box-shadow 250ms ease-out !important;
+    }
 }
 
 #urlbar:not(.megabar):not([focused]):not([breakout-extend]):hover {
@@ -49,9 +53,13 @@
     */
 
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop") {
+        box-shadow: 0 0 0 100vw rgba(0, 0, 0, var(--uc-urlbar-popup-dimness));
+        transition: box-shadow 250ms ease-out !important;
+        /*
         &::backdrop {
             background-color: rgb(0 0 0 / var(--uc-urlbar-popup-dimness));
         }
+        */
     }
 }
 

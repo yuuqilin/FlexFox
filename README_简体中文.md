@@ -20,13 +20,13 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.6.3**
-* `uc.flex.enable-rounded-web-content` 现在兼容在侧栏设置中启用“隐藏标签页和侧栏”的情况，确保在开发者工具固定在网页左侧或右侧时，网页内容区域依然保有适当边距。
-* 修复了一个长期存在的问题：
-  * 当 Sidebery 的导航栏面板数量不足一整行时，鼠标悬停在导航栏上会导致整个 Sidebery 向上偏移，引起界面抖动。
-  * 这不是预期的行为，FlexFox 应该在所有状态下保持稳定。这么久没有发现，是因为我自己的使用环境中面板数量一直较多。
-  * 此问题现已修复，同时也重新设计了导航栏展开的动画效果，以适配 Sidebery 自动隐藏和使用 `Lock Sidebery` 快捷键固定展开的两种情况。
-  * 此次修复通过 `userContent.css` 实现，用户不需要修改 Sidebery 本体的样式，只需按正常流程更新 FlexFox 即可。
+**🦊 v3.4.4**
+* 修复了 Nightly v141 导致的侧栏布局异常问题。
+  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
+  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
+* 改进了 `uc.flex.dim-urlbar-popup-backdrop` 的显示效果，为暗背景添加了淡入动画。
+* 新增选项 `uc.flex.show-flexfox-version-info-in-about-config`，启用后可在 `about:config` 页面显示当前使用的 FlexFox 版本，方便确认版本号。
+* 优化了 `about:config` 页面显示，已修改的选项现在会更明显地高亮显示。如果启用了“悬停时展开侧栏”，还会在页面中显示 FlexFox 已停用垂直标签页优化的提示信息，显示时长为 12 秒。
 
 🔧 <b>v3.6.x 修复 v3.5.1 引入的性能问题</b>
 > [!NOTE]
@@ -148,6 +148,14 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.6.3**
+* `uc.flex.enable-rounded-web-content` 现在兼容在侧栏设置中启用“隐藏标签页和侧栏”的情况，确保在开发者工具固定在网页左侧或右侧时，网页内容区域依然保有适当边距。
+* 修复了一个长期存在的问题：
+  * 当 Sidebery 的导航栏面板数量不足一整行时，鼠标悬停在导航栏上会导致整个 Sidebery 向上偏移，引起界面抖动。
+  * 这不是预期的行为，FlexFox 应该在所有状态下保持稳定。这么久没有发现，是因为我自己的使用环境中面板数量一直较多。
+  * 此问题现已修复，同时也重新设计了导航栏展开的动画效果，以适配 Sidebery 自动隐藏和使用 `Lock Sidebery` 快捷键固定展开的两种情况。
+  * 此次修复通过 `userContent.css` 实现，用户不需要修改 Sidebery 本体的样式，只需按正常流程更新 FlexFox 即可。
 
 **v3.6.2**
 * 提升了 `uc.flex.disable-bookmarks-autohide` 选项在多种情境下的兼容性。
@@ -409,6 +417,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.enable-colored-bookmarks-folder-icons` | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
 | `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |
+| `uc.flex.show-flexfox-version-info-in-about-config` | 在 `about:config` 頁面顯示 FlexFox 已安裝的提示訊息，並附帶當前版本號。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在原生垂直选项卡处于“展开模式”时，在已固定的标签页和普通标签页之间显示分隔线（默认情况下该分隔线为隐藏）。 |
 | `uc.flex.dim-urlbar-popup-backdrop` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
 | `uc.flex.move-pip-volume-to-top` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
