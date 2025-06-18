@@ -36,7 +36,7 @@
     @media (prefers-color-scheme: dark) {
         --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
 
-        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+        @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
             &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
                 --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
                 --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
@@ -71,7 +71,7 @@
     @media (prefers-color-scheme: light) {
         --uc-bgcolor: #f1f5f9; /* Background color of the toolbar */
 
-        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+        @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
             &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
                 --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
                 --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
@@ -221,12 +221,12 @@
     --uc-findbar-y-position: 0px;
 
     /* Move the findbar to the top-center-left area of the window */
-    @media -moz-pref("uc.flex.findbar-position", "top-center-left"), -moz-pref("uc.flex.findbar-position", "0") {
+    @media -moz-pref("uc.flex.findbar-position", "top-center-left"), -moz-pref("uc.flex.findbar-position", "1") {
         --uc-findbar-x-position: 40.65vw;
         --uc-findbar-y-position: 0px;
     }
     /* Move the findbar to the bottom-right corner of the window */
-    @media -moz-pref("uc.flex.findbar-position", "bottom-right"), -moz-pref("uc.flex.findbar-position", "2") {
+    @media -moz-pref("uc.flex.findbar-position", "bottom-right"), -moz-pref("uc.flex.findbar-position", "3") {
         --uc-findbar-x-position: 0.9vw;
         --uc-findbar-y-position: calc(100% - 60px);
         --uc-findbar-y-offset: 0px !important;
@@ -282,8 +282,26 @@
         --uc-osx-ctrls-size: 15px;
     }
 
+    /* Vertical spacing between items in the Firefox app menu (hamburger menu), bookmarks menu, and context menus. */
+    --uc-app-menu-item-padding-block: 4px;
+    --uc-menu-item-padding-block: 2px;
+    --uc-content-area-context-menu-item-padding-block: 2px;
+    --uc-appMenu-zoom-controls-x-offset: 0px;
+    @media -moz-pref("uc.flex.menu-item-spacing", "2"), -moz-pref("uc.flex.menu-item-spacing", "medium") {
+        --uc-app-menu-item-padding-block: 6px;
+        --uc-menu-item-padding-block: 4px;
+        --uc-content-area-context-menu-item-padding-block: 3px;
+        --uc-appMenu-zoom-controls-x-offset: 2px;
+    }
+    @media -moz-pref("uc.flex.menu-item-spacing", "3"), -moz-pref("uc.flex.menu-item-spacing", "large") {
+        --uc-app-menu-item-padding-block: 8px;
+        --uc-menu-item-padding-block: 8px;
+        --uc-content-area-context-menu-item-padding-block: 8px;
+        --uc-appMenu-zoom-controls-x-offset: 4px;
+    }
+
     /* Layout of extension icons in the unified extensions panel */
-    --uc-uei-icon-size: 20px; /* Size of extension icons */
+    --uc-uei-icon-size: 22px; /* Size of extension icons */
     --uc-number-of-extensions-in-a-row: 4; /* Number of extension icons per row */
 
     /* Max visible rows in native vertical pinned tabs (before scrolling) */
@@ -486,7 +504,8 @@
                     );
                 }
             }
-            @media not -moz-pref("sidebar.revamp"), -moz-pref("sidebar.visibility", "hide-sidebar") {
+            @media not -moz-pref("sidebar.revamp"),
+                -moz-pref("sidebar.visibility", "hide-sidebar") and -moz-pref("sidebar.verticalTabs") {
                 &:not([sidebar-panel-open], [sidebar-launcher-expanded]) {
                     --uc-web-content-margin-side: var(
                         --uc-web-content-margin-large,
@@ -569,7 +588,7 @@
     }
 
     /* Override the default background color with a custom value when add-on color changes are not allowed */
-    @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+    @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
         &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
             --uc-identity-btn-bgcolor: var(--uc-toolbar-bgcolor);
             --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);

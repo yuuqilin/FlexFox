@@ -55,8 +55,10 @@ user_pref("uc.flex.show-flexfox-version-info-in-about-config",   true);
 user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
 /* Sets max pinned tabs per column in native vertical tabs (numeric, 4–6). */
 user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
-/* Sets findbar position (string: "top-center-left"/"0", "top-right"/"1", "bottom-right"/"2"). */
+/* Sets findbar position (string: "top-center-left"/"1", "top-right"/"2", "bottom-right"/"3"). */
 user_pref("uc.flex.findbar-position",                     "top-right");
+/* Sets vertical spacing between items in app/bookmark/context menus (string: "1"/"small", "2"/"medium", "3"/"large"). */
+user_pref("uc.flex.menu-item-spacing",                        "small");
 /* Darkens background when URL bar dropdown is open (0 = off, 1–2 = dim intensity). */
 user_pref("uc.flex.dim-urlbar-popup-backdrop",                      0);
 /* Moves PiP window volume button to the top */

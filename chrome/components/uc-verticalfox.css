@@ -75,8 +75,8 @@
              * Can be removed once v140 is officially released. 
              */
             &:hover #sidebar,
-            #sidebar-header:has(.active) + #sidebar,
-            #sidebar-header:has(.active) + .sidebar-browser-stack #sidebar {
+            #sidebar-header:has(#sidebar-switcher-target.active) + #sidebar,
+            #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;
@@ -104,8 +104,8 @@
             }
 
             &:hover #sidebar,
-            #sidebar-header:has(.active) + #sidebar,
-            #sidebar-header:has(.active) + .sidebar-browser-stack #sidebar {
+            #sidebar-header:has(#sidebar-switcher-target.active) + #sidebar,
+            #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;
@@ -131,8 +131,8 @@
             }
 
             &:hover #sidebar,
-            #sidebar-header:has(.active) + #sidebar,
-            #sidebar-header:has(.active) + .sidebar-browser-stack #sidebar {
+            #sidebar-header:has(#sidebar-switcher-target.active) + #sidebar,
+            #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;

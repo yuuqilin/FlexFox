@@ -1,3 +1,21 @@
+/* Ensure the background color of the sidebar stripe area matches the sidebar when the window is inactive */
+@media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
+    :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+            #browser:-moz-window-inactive {
+                background-color: var(--toolbox-bgcolor) !important;
+            }
+        }
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+            &[titlepreface*="\180e "] {
+                #browser:-moz-window-inactive {
+                    background-color: var(--toolbox-bgcolor) !important;
+                }
+            }
+        }
+    }
+}
+
 /* Remove the border and rounded corners from the webpage content area */
 @media -moz-pref("sidebar.revamp") {
     #tabbrowser-tabbox {
@@ -59,7 +77,7 @@
                 transition: 0.25s !important;
                 */
                 background-color: transparent !important;
-                @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+                @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
                     :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
                         background-color: var(--uc-bgcolor) !important;
                     }
@@ -86,7 +104,8 @@
                                     var(--uc-web-content-margin-small)
                                 ) !important;
                                 /* When Sidebery is hidden, add margin to the same side as Sidebery (left). */
-                                @media not -moz-pref("sidebar.revamp"), -moz-pref("sidebar.visibility", "hide-sidebar") {
+                                @media not -moz-pref("sidebar.revamp"),
+                                    -moz-pref("sidebar.visibility", "hide-sidebar") {
                                     #tabbrowser-tabbox:not([sidebar-panel-open], [sidebar-launcher-expanded]) & {
                                         margin-right: 0 !important;
                                         margin-left: var(
@@ -126,7 +145,8 @@
                                     var(--uc-web-content-margin-small)
                                 ) !important;
 
-                                @media not -moz-pref("sidebar.revamp"), -moz-pref("sidebar.visibility", "hide-sidebar") {
+                                @media not -moz-pref("sidebar.revamp"),
+                                    -moz-pref("sidebar.visibility", "hide-sidebar") {
                                     #tabbrowser-tabbox:not([sidebar-panel-open], [sidebar-launcher-expanded]) & {
                                         margin-left: 0 !important;
                                         margin-right: var(

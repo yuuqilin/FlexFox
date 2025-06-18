@@ -46,8 +46,10 @@
     }
 
     #unified-extensions-view .panel-subview-body {
-        padding: 2px !important;
+        padding: 4px !important;
+        /*
         padding-left: 4px !important;
+        */
     }
 
     #unified-extensions-view .unified-extensions-item .unified-extensions-item-icon,
@@ -63,9 +65,9 @@
             var(--uc-number-of-extensions-in-a-row),
             calc(100% / var(--uc-number-of-extensions-in-a-row))
         );
-        justify-items: left !important;
+        justify-items: center !important;
         /*
-        align-items: left !important;
+        align-items: center !important;
         */
     }
 
@@ -77,17 +79,18 @@
     }
     */
 
-    /*
     #unified-extensions-view #unified-extensions-area {
-        padding-top: 0px !important;
-        padding-bottom: 0px !important;
-        border-bottom: 0px solid #aeaeae33 !important;
+        padding-top: 3px !important;
+        padding-bottom: 3px !important;
+        border-bottom: 1px solid var(--panel-separator-color) !important;
     }
 
     #unified-extensions-view .unified-extensions-list {
+        padding-top: 3px;
+        /*
         border-top: 1px solid #aeaeae33 !important;
+        */
     }
-    */
 
     /*
     #wrapper-edit-controls:is([place="palette"], [place="panel"]) > #edit-controls,

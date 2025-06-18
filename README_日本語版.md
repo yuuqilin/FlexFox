@@ -20,13 +20,32 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.6.4**
-* Nightly v141 によって発生したサイドバーのレイアウト崩れを修正しました。
-  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
-  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
-* `uc.flex.dim-urlbar-popup-backdrop` の背景暗転にフェードアニメーションを追加し、表示効果を改善しました。
-* `about:config` 上に FlexFox のバージョン情報を表示できる `uc.flex.show-flexfox-version-info-in-about-config` を追加しました。
-* `about:config` の表示を改善し、変更された設定がより見つけやすくなりました。また、「カーソルを合わせた時にサイドバーを展開する」オプションが有効な場合、FlexFox による垂直タブの最適化が無効化されている旨の通知が12秒間表示されます。
+**🦊 v3.6.5**
+* テーマとの互換性を強化。Firefoxの組み込みテーマ以外を使用している場合、ツールバーの色が自動的にテーマに従うようになりました。`uc.flex.allow-addons-to-change-toolbar-color` オプションは、Firefox Color を背景画像なしで使用する場合のみ必要です。
+* `uc.flex.enable-rounded-web-content` オプション有効時に、サイドバーが「タブとサイドバーを非表示」に設定され、垂直タブが無効な状態でも、サイドマージンが誤って適用される問題を修正。
+* 拡張機能パネル（拡張機能ボタン一覧パネル）の表示を改善。ボタンが見やすくなり、クリックもしやすくなりました。  
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="拡張機能パネルのレイアウトとボタン間隔を改善" width="175px" />
+* メニュー項目の間隔を調整するための `uc.flex.menu-item-spacing` オプションを追加しました。  
+  指定可能な文字列値は以下の通りです：  
+  `"1"` または `"small"` = コンパクトな間隔（デフォルト。従来バージョンと同様）  
+  `"2"` または `"medium"` = 中程度の間隔  
+  `"3"` または `"large"` = Firefox 標準の広い間隔  
+
+  以下の変数を使用すれば、各メニューごとにより細かく調整できます：
+
+  ```
+  --uc-app-menu-item-padding-block            // アプリメニューの間隔
+  --uc-menu-item-padding-block                // ブックマークやシステムメニュー
+  --uc-content-area-context-menu-item-padding-block // ページの右クリックメニュー
+  --uc-appMenu-zoom-controls-x-offset         // 拡大・縮小ボタンの配置調整
+  ```
+* `uc-aboutconfig.css` および `uc.flex.menu-item-spacing` の設定形式に合わせて、`uc.flex.findbar-position` の値の範囲を `"0"`〜`"2"` から `"1"`〜`"3"` に変更しました。  
+  設定可能な値は以下の通りです：  
+  `"1"` または `"top-center-left"` = 左寄せ上部  
+  `"2"` または `"top-right"` = 右上  
+  `"3"` または `"bottom-right"` = 右下  
+* メニュー内のチェックボックス項目の文字位置ずれを修正し、より多くの項目に補完用のアイコンを追加しました。
 
 🔧 <b>v3.6.x パフォーマンス修正（v3.5.1の問題に対応）</b>
 > [!NOTE]
@@ -150,6 +169,14 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.6.4**
+* Nightly v141 によって発生したサイドバーのレイアウト崩れを修正しました。
+  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
+  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
+* `uc.flex.dim-urlbar-popup-backdrop` の背景暗転にフェードアニメーションを追加し、表示効果を改善しました。
+* `about:config` 上に FlexFox のバージョン情報を表示できる `uc.flex.show-flexfox-version-info-in-about-config` を追加しました。
+* `about:config` の表示を改善し、変更された設定がより見つけやすくなりました。また、「カーソルを合わせた時にサイドバーを展開する」オプションが有効な場合、FlexFox による垂直タブの最適化が無効化されている旨の通知が12秒間表示されます。
 
 **v3.6.3**
 * サイドバー設定で「タブとサイドバーを非表示にする」が有効な場合でも、`uc.flex.enable-rounded-web-content` オプションがウェブ開発ツールとの併用に対応するようになりました。ツールが左右にドッキングされた際にも、コンテンツの周囲に適切な余白が確保されます。
@@ -450,7 +477,8 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.sidebery-fast-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
 | `uc.flex.sidebery-slow-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブの垂直タブにおいて、1列あたりに表示できるピン留めタブの最大数を設定します（数値の範囲は 4～6）。この数を超えるとスクロールバーが表示されるため、使用環境に応じて調整してください。 |
-| `uc.flex.findbar-position` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `"top-center-left"` または `"0"`（左寄せ上部）、`"top-right"` または `"1"`（右上）、`"bottom-right"` または `"2"`（右下）です。 |
+| `uc.flex.findbar-position` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `"top-center-left"` または `"1"`（左寄せ上部）、`"top-right"` または `"2"`（右上）、`"bottom-right"` または `"3"`（右下）です。 |
+| `uc.flex.menu-item-spacing` | Firefoxのアプリメニュー、ブックマークメニュー、右クリックメニューにおける項目同士の垂直間隔を設定します。指定可能な値は文字列 `"1"` または `"small"`（狭い間隔）、`"2"` または `"medium"`（標準の間隔）、`"3"` または `"large"`（広い間隔）です。 |
 
 ## 🐞 既知の問題
 

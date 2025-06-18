@@ -101,7 +101,7 @@
 
     /* Expand sidebar header on hover */
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
-        #sidebar-header:is(:hover, :has(.active)) {
+        #sidebar-header:is(:hover, :has(#sidebar-switcher-target.active)) {
             @media (prefers-color-scheme: light) {
                 --sidebar-border-color: #ced1d4;
             }
@@ -131,7 +131,7 @@
 
         /* Modified from https://www.reddit.com/r/FirefoxCSS/comments/77ehp1/how_to_hide_the_title_of_webextension_sidebars/ */
         /* Minimize sidebar header to a stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
-        #sidebar-header:not(:hover):not(:has(.active)) {
+        #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
             min-height: 5px;
             max-height: 5px;
             min-width: var(--uc-sb-sidebar-width);
@@ -164,7 +164,7 @@
         @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
             :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
-                #sidebar-header:not(:hover):not(:has(.active)) {
+                #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                     max-width: var(--uc-sidebar-stripe-width);
                     min-width: var(--uc-sidebar-stripe-width);
                 }
@@ -177,7 +177,7 @@
                 )
                 & {
                 --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
-                #sidebar-header:not(:hover):not(:has(.active)) {
+                #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                     max-width: var(--uc-sidebar-stripe-width);
                     min-width: var(--uc-sidebar-stripe-width);
                 }
@@ -192,7 +192,7 @@
 
     @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
         #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
-            &:hover #sidebar-header:not(:hover):not(:has(.active)) {
+            &:hover #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                 min-height: 5px;
                 max-height: 5px;
                 min-width: var(--uc-sidebar-stripe-width);
@@ -221,7 +221,7 @@
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
         :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
-                &:hover #sidebar-header:not(:hover):not(:has(.active)) {
+                &:hover #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                     min-height: 5px;
                     max-height: 5px;
                     min-width: var(--uc-sidebar-stripe-width);
@@ -306,7 +306,7 @@
         }
         /* Applies styles for native vertical tabs when fully hidden or in fullscreen.
         Behavior depends on whether Sidebery is active, determined via --uc-sb-* variables. */
-        &[id="sidebar-main"] {
+        &:is(#sidebar-main) {
             max-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-hover-trigger-width)) !important;
             height: var(--uc-sb-sidebar-main-hover-min-height, 100%);
             opacity: var(--uc-sb-sidebar-main-opacity, 0);
@@ -350,7 +350,7 @@
                     opacity: 1;
                 }
             }
-            &[id="sidebar-main"] {
+            &:is(#sidebar-main) {
                 max-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-hover-trigger-width)) !important;
                 height: var(--uc-sb-sidebar-main-hover-min-height, 100%);
                 opacity: var(--uc-sb-sidebar-main-opacity, 0);
@@ -947,11 +947,11 @@
                 }
             }
             /* Reduce bottom padding if the last element is no longer the one displayed at the bottom */
-            &:has(moz-button[type="icon"]:not(:last-of-type)) > moz-button:last-of-type {
+            &:has(> moz-button[type="icon"]:not(:last-of-type)) > moz-button:last-of-type {
                 --button-outer-padding-block-end: var(--space-xxsmall) !important;
             }
             /* Increase top padding for the second element if it's now displayed at the top */
-            &:has(moz-button[type="icon"]:first-of-type) > moz-button:nth-of-type(2) {
+            &:has(> moz-button[type="icon"]:first-of-type) > moz-button:nth-of-type(2) {
                 --button-outer-padding-block-start: var(
                     --uc-sb-sroot-btn-padding-block-start-2nd-type,
                     var(--space-xxsmall)
@@ -1375,9 +1375,9 @@
 @media -moz-pref("sidebar.verticalTabs") {
     /* Hide all tool buttons except the last one ('configuration') */
     .tools-and-extensions.actions-list[orientation="vertical"]:not(:hover)
-        moz-button[type="icon ghost"]:not(:last-child),
+        > moz-button[type="icon ghost"]:not(:last-child),
     .tools-and-extensions.actions-list[orientation="horizontal"]:not(:hover)
-        moz-button[type="icon ghost"]:not(:first-child) {
+        > moz-button[type="icon ghost"]:not(:first-child) {
         opacity: 0 !important;
         transform: translateY(10px) !important;
         visibility: collapse !important;
@@ -1388,8 +1388,8 @@
     }
 
     /* Show all tool buttons on hover */
-    .tools-and-extensions.actions-list[orientation="vertical"]:hover moz-button[type="icon ghost"]:not(:last-child),
-    .tools-and-extensions.actions-list[orientation="horizontal"]:hover moz-button[type="icon ghost"]:not(:first-child) {
+    .tools-and-extensions.actions-list[orientation="vertical"]:hover > moz-button[type="icon ghost"]:not(:last-child),
+    .tools-and-extensions.actions-list[orientation="horizontal"]:hover > moz-button[type="icon ghost"]:not(:first-child) {
         opacity: 1 !important;
         transform: translateY(0px) !important;
         visibility: visible !important;
@@ -1400,10 +1400,10 @@
     }
 
     /* Hide the 'configuration' button when another tool is active */
-    .tools-and-extensions.actions-list[orientation="vertical"]:not(:hover):has(moz-button[type="icon"])
-        moz-button[type="icon ghost"]:is(:last-child),
-    .tools-and-extensions.actions-list[orientation="horizontal"]:not(:hover):has(moz-button[type="icon"])
-        moz-button[type="icon ghost"]:is(:first-child) {
+    .tools-and-extensions.actions-list[orientation="vertical"]:not(:hover):has(> moz-button[type="icon"])
+        > moz-button[type="icon ghost"]:is(:last-child),
+    .tools-and-extensions.actions-list[orientation="horizontal"]:not(:hover):has(> moz-button[type="icon"])
+        > moz-button[type="icon ghost"]:is(:first-child) {
         opacity: 0 !important;
         visibility: collapse !important;
         transform: translateY(10px) !important;
@@ -1414,8 +1414,8 @@
     }
 
     /* Show the 'configuration' button on hover */
-    .tools-and-extensions.actions-list:is(:hover) moz-button[type="icon ghost"]:is(:last-child),
-    .tools-and-extensions.actions-list:is(:hover) moz-button[type="icon ghost"]:is(:first-child) {
+    .tools-and-extensions.actions-list:is(:hover) > moz-button[type="icon ghost"]:is(:last-child),
+    .tools-and-extensions.actions-list:is(:hover) > moz-button[type="icon ghost"]:is(:first-child) {
         opacity: 1 !important;
         visibility: visible !important;
         transform: translateY(0px) !important;
@@ -1426,10 +1426,10 @@
     }
 
     /* Ensure the active tool button always appears at the end */
-    .tools-and-extensions.actions-list[orientation="vertical"] moz-button[type="icon"] {
+    .tools-and-extensions.actions-list[orientation="vertical"] > moz-button[type="icon"] {
         order: 1 !important;
     }
-    .tools-and-extensions.actions-list[orientation="horizontal"] moz-button[type="icon"] {
+    .tools-and-extensions.actions-list[orientation="horizontal"] > moz-button[type="icon"] {
         order: -1 !important;
     }
 

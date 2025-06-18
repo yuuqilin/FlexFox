@@ -22,12 +22,18 @@
 /* Reduce menu spacing */
 menupopup > menuitem,
 menupopup > menu {
-    padding-block: 2px !important;
+    padding-block: var(--uc-menu-item-padding-block) !important;
+}
+
+#contentAreaContextMenu {
+    > menuitem {
+        padding-block: var(--uc-content-area-context-menu-item-padding-block) !important;
+    }
 }
 
 /* Reduce Hamburger menu spacing */
 :root {
-    --arrowpanel-menuitem-padding: 4px !important;
+    --arrowpanel-menuitem-padding: var(--uc-app-menu-item-padding-block) !important;
 }
 
 /* Enable bookmarks toolbar in full-screen mode */

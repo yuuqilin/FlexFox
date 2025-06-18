@@ -20,13 +20,32 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.4**
-* Fixed layout issues in the sidebar caused by Nightly v141.
-  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
-  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
-* Improved the visual effect of `uc.flex.dim-urlbar-popup-backdrop` by adding a fade animation to the darkened background.
-* Added `uc.flex.show-flexfox-version-info-in-about-config`, which displays the current FlexFox version in `about:config` for easier version tracking.
-* Refined the appearance of the `about:config` page. Modified preferences are now more clearly highlighted. Additionally, if 'Expand sidebar on hover' is enabled, a 12-second notice will appear in `about:config` indicating that FlexFox's vertical tab optimizations are disabled.
+**🦊 v3.6.5**
+* Improved compatibility with themes. When using any non-default Firefox theme, toolbar colors now follow the theme automatically. The `uc.flex.allow-addons-to-change-toolbar-color` option is only needed when using Firefox Color without a background image.
+* Fixed an issue where side margins were incorrectly applied when `uc.flex.enable-rounded-web-content` was enabled, the sidebar was set to "Hide tabs and sidebar", and vertical tabs were disabled.
+* Improved the unified extensions panel appearance, making extension buttons easier to view and click.  
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="Improved layout and spacing in the unified extensions panel" width="175px" />
+* Added `uc.flex.menu-item-spacing` option to control spacing between menu items.  
+  Accepts string values:  
+  `"1"` or `"small"` = compact spacing (default; same as in earlier versions)  
+  `"2"` or `"medium"` = moderately spaced  
+  `"3"` or `"large"` = Firefox default (widest spacing)  
+
+  You can also use the following variables for more granular control:
+
+  ```
+  --uc-app-menu-item-padding-block            // App menu item spacing
+  --uc-menu-item-padding-block                // Bookmarks & system menus
+  --uc-content-area-context-menu-item-padding-block // Page context menu
+  --uc-appMenu-zoom-controls-x-offset         // Adjusts zoom control alignment
+  ```
+* Updated the accepted range for `uc.flex.findbar-position` to match the structure used by `uc-aboutconfig.css` and `uc.flex.menu-item-spacing`.  
+  Accepts string values:  
+  `"1"` or `"top-center-left"` = top left  
+  `"2"` or `"top-right"` = top right  
+  `"3"` or `"bottom-right"` = bottom right  
+* Fixed alignment issues in menus involving checkbox items, and added fallback icons for more menu entries.
 
 <!-- END What's New -->
 
@@ -155,6 +174,14 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.6.4**
+* Fixed layout issues in the sidebar caused by Nightly v141.
+  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
+  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
+* Improved the visual effect of `uc.flex.dim-urlbar-popup-backdrop` by adding a fade animation to the darkened background.
+* Added `uc.flex.show-flexfox-version-info-in-about-config`, which displays the current FlexFox version in `about:config` for easier version tracking.
+* Refined the appearance of the `about:config` page. Modified preferences are now more clearly highlighted. Additionally, if 'Expand sidebar on hover' is enabled, a 12-second notice will appear in `about:config` indicating that FlexFox's vertical tab optimizations are disabled.
 
 **v3.6.3**
 * Added compatibility for `uc.flex.enable-rounded-web-content` when "Hide tabs and sidebar" is enabled in the sidebar settings, ensuring proper spacing around the web content when using the Developer Tools docked to the side.
@@ -453,7 +480,8 @@ For more update logs from earlier versions,
 | `uc.flex.sidebery-fast-hover-expand` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.max-visible-vertical-pinned-tabs` | Sets the maximum number of pinned tabs visible per column in the native vertical tabs (numeric value, typically 4–6). Content beyond this limit will scroll, so adjust this to avoid scrollbars based on your usage. |
-| `uc.flex.findbar-position` | Sets the Findbar's position. Accepts string values: `"top-center-left"` or `"0"` = center-left top, `"top-right"` or `"1"` = top right, `"bottom-right"` or `"2"` = bottom right. |
+| `uc.flex.findbar-position` | Sets the Findbar's position. Accepts string values: `"top-center-left"` or `"1"` = center-left top, `"top-right"` or `"2"` = top right, `"bottom-right"` or `"3"` = bottom right. |
+| `uc.flex.menu-item-spacing` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `"1"` or `"small"` = narrow spacing, `"2"` or `"medium"` = medium spacing, `"3"` or `"large"` = wide spacing. |
 
 ## 🐞 Known Issues
 

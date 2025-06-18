@@ -16,10 +16,10 @@
         }
     }
     #appMenu-zoom-controls {
-        padding-inline-start: calc(1em + 22px) !important;
+        padding-inline-start: calc(1em + 22px + var(--uc-appMenu-zoom-controls-x-offset)) !important;
         margin-inline-start: 0px !important;
         background-image: url("chrome://global/skin/media/fullscreenEnterButton.svg");
-        background-position: 10px 10px;
+        background-position: left calc(10px + var(--uc-appMenu-zoom-controls-x-offset)) center;
         background-repeat: no-repeat;
         background-size: 18px;
         -moz-context-properties: fill, fill-opacity;
@@ -37,16 +37,18 @@
         position: relative;
         height: 16px;
         width: 16px;
-        background-image: url("chrome://global/skin/icons/undo.svg");
+        background-image: url("../icons/menu/redo.svg");
+        /*
         transform: scaleX(-1);
-        margin-left: -13px;
-        margin-right: 7px;
+        */
+        margin-left: -8px;
+        margin-right: 8px;
     }
     menuitem[data-l10n-id="text-action-redo"] {
-        margin-left: -10px !important;
+        margin-left: -16px !important;
     }
     .subviewbutton[data-l10n-id*="-manage-"] {
-        background-position: 5px 7px;
+        background-position: left 0.5em center;
     }
     #unified-extensions-view #unified-extensions-manage-extensions {
         padding-inline-start: 24px !important;
@@ -59,7 +61,7 @@
     #context-stripOnShareLink,
     #strip-on-share,
     menuitem[data-l10n-id="text-action-strip-on-share"] {
-        background-image: url("chrome://browser/skin/fingerprint.svg");
+        background-image: url("../icons/menu/fingerprinters-disabled.svg");
         background-size: 16px !important;
         background-position-x: 13.5px !important;
     }
@@ -79,23 +81,107 @@
     #spell-check-enabled {
         background-image: url("../icons/menu/spellcheck.svg");
     }
+
+    #toolbar-context-toggle-vertical-tabs,
+    #sidebar-context-menu-enable-vertical-tabs {
+        background-image: url("chrome://devtools/skin/images/pane-expand.svg");
+        @media not -moz-pref("sidebar.position_start") {
+            background-image: url("chrome://devtools/skin/images/pane-collapse.svg");
+        }
+        &:is(
+                [data-l10n-id="toolbar-context-turn-on-vertical-tabs"],
+                [data-l10n-id="sidebar-context-menu-enable-vertical-tabs"]
+            ) {
+            background-image: url("chrome://devtools/skin/images/pane-collapse.svg");
+            @media not -moz-pref("sidebar.position_start") {
+                background-image: url("chrome://devtools/skin/images/pane-expand.svg");
+            }
+        }
+    }
+    #unified-extensions-context-menu-pin-to-toolbar,
+    #toolbar-context-move-to-panel,
+    #context_pinTab {
+        background-image: url("chrome://newtab/content/data/content/assets/glyph-pin-16.svg");
+    }
+    #context_unpinTab {
+        background-image: url("chrome://newtab/content/data/content/assets/glyph-unpin-16.svg");
+    }
+    #toolbar-context-remove-from-toolbar {
+        background-image: url("chrome://global/skin/icons/delete.svg");
+    }
+    #toggle_toolbar-menubar:not([checked="true"]) {
+        background-image: url("../icons/menu/calendar-agenda.svg");
+    }
+    #toolbar-context-customize-sidebar {
+        background-image: url("chrome://browser/skin/sidebars.svg");
+    }
+
+    #placesContext_openBookmarkContainer\:tabs {
+        background-image: url("chrome://browser/skin/open.svg");
+    }
+    #placesContext_open {
+        background-image: url("../icons/menu/open-in-window.svg");
+    }
+    #context_reopenInContainer,
+    #context-openlinkinusercontext-menu,
+    #placesContext_open\:newcontainertab {
+        background-image: url("../icons/menu/reopen-in-container.svg");
+    }
+    #placesContext_sortBy\:name {
+        background-image: url("../icons/menu/sort-alpha-down.svg");
+        background-position: left 0.9em center;
+        background-size: 20px;
+    }
+    #placesContext_new\:bookmark {
+        background-image: url("chrome://browser/skin/bookmark-hollow.svg");
+    }
+    #placesContext_new\:folder {
+        background-image: url("chrome://devtools/skin/images/folder.svg");
+    }
+    #placesContext_new\:separator {
+        background-image: url("../icons/menu/separator.svg");
+        background-position: left 0.9em center;
+        background-size: 20px;
+    }
+
+    #context_moveTabToGroup {
+        background-image: url("chrome://browser/skin/tabbrowser/tab-groups.svg");
+    }
+    #context_moveTabToGroupNewGroup {
+        background-image: url("../icons/menu/new-group.svg");
+        background-position: left 1em center;
+        background-size: 18px;
+    }
+    #context_ungroupTab {
+        background-image: url("../icons/menu/ungroup-tab.svg");
+        background-position: left 0.9em center;
+        background-size: 18px;
+    }
+    #context_selectAllTabs {
+        background-image: url("../icons/menu/select-all-tabs-rounded.svg");
+        background-position: left 0.9em center;
+        background-size: 18px;
+    }
+    #context_closeTab {
+        background-image: url("../icons/menu/close-tab-photon.svg");
+    }
+    #context_closeDuplicateTabs {
+        background-image: url("../icons/menu/close-duplicate-tabs-photon.svg");
+    }
+
     menupopup:not(.in-menulist, [aria-label]) > menuitem[checked="true"] {
         padding-inline-start: 1em !important;
     }
     /* !TEMPORARY: This rule is still needed in v140+, as the issue wasn't fully fixed. 
    If Firefox addresses this properly in a future update, this rule can be removed. */
-    menupopup:not(.in-menulist, [aria-label])
-        > menuitem:is(
-            [data-l10n-id$="-shortcut"],
-            [data-l10n-id^="toolbar-context-menu-bookmarks-toolbar-"]
-        )[checked="true"] {
+    menupopup:not(.in-menulist, [aria-label]) > menuitem[checked="true"] {
         > .menu-icon {
             list-style-image: none !important;
             display: none !important;
         }
         padding-inline-start: calc(1em + 24px) !important;
         background-image: url("chrome://global/skin/icons/menu-check.svg");
-        background-position: 15px 4px;
+        background-position: left 1em center;
         background-repeat: no-repeat;
         background-size: 16px;
         -moz-context-properties: fill, fill-opacity;
@@ -136,11 +222,18 @@
         background-position-x: 12px !important;
     }
     #context-showonlythisframe,
-    #context-media-showcontrols {
+    #context-media-showcontrols,
+    #toolbar-context-always-open-downloads-panel:not([checked="true"]) {
         background-image: url("../icons/menu/password.svg");
     }
-    #context-media-hidecontrols {
+    #context-media-hidecontrols,
+    #toolbar-context-autohide-downloads-button:not([checked="true"]) {
         background-image: url("../icons/menu/password-hide.svg");
+    }
+    toolbarbutton[data-l10n-id*="-manage-"],
+    #BMB_bookmarksShowAll,
+    #manage-saved-logins {
+        background-image: url("chrome://global/skin/icons/settings.svg");
     }
 
     :root {
@@ -585,11 +678,14 @@
     .share-tab-url-item {
         background-image: url("../icons/menu/share-tab-url.svg");
     }
+    /*
     #context_reopenInContainer,
     #context-openlinkinusercontext-menu {
         background-image: url("../icons/menu/reopen-in-container.svg");
     }
+    
     #context_closeTab,
+    */
     #orgClose {
         background-image: url("chrome://global/skin/icons/close.svg");
     }
@@ -691,10 +787,10 @@
         background-size: 24px !important;
         background-position-x: 8px !important;
     }
-    */
     #unified-extensions-context-menu-pin-to-toolbar {
         background-image: url("chrome://activity-stream/content/data/content/assets/glyph-pin-16.svg");
     }
+    */
     #unified-extensions-context-menu-move-widget-up {
         background-image: url("chrome://global/skin/icons/arrow-up.svg");
     }
@@ -738,10 +834,10 @@
     #identity-popup-clear-sitedata-button {
         list-style-image: url("chrome://global/skin/icons/delete.svg");
     }
+    /*
     #toolbar-context-remove-from-toolbar {
         background-image: url("chrome://global/skin/icons/close.svg");
     }
-    /*
     #context-showonlythisframe,
     #context-media-showcontrols {
         background-image: url("resource://gre-resources/password.svg");
@@ -766,10 +862,12 @@
     #spell-add-dictionaries {
         background-image: url("chrome://global/skin/icons/plus.svg");
     }
+    /*
     toolbarbutton[data-l10n-id*="-manage-"],
     #manage-saved-logins {
         background-image: url("chrome://global/skin/icons/settings.svg");
     }
+    */
     #context-sendpagetodevice-popup menuseparator + menuitem {
         background-image: url("chrome://browser/skin/forward.svg");
     }

@@ -20,13 +20,32 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.4.4**
-* 修复了 Nightly v141 导致的侧栏布局异常问题。
-  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
-  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
-* 改进了 `uc.flex.dim-urlbar-popup-backdrop` 的显示效果，为暗背景添加了淡入动画。
-* 新增选项 `uc.flex.show-flexfox-version-info-in-about-config`，启用后可在 `about:config` 页面显示当前使用的 FlexFox 版本，方便确认版本号。
-* 优化了 `about:config` 页面显示，已修改的选项现在会更明显地高亮显示。如果启用了“悬停时展开侧栏”，还会在页面中显示 FlexFox 已停用垂直标签页优化的提示信息，显示时长为 12 秒。
+**🦊 v3.6.5**
+* 增强了对主题的兼容性：只要不使用 Firefox 内建主题，工具栏颜色现在会自动跟随所用主题。只有在使用 Firefox Color 且未设置背景图片时，才需要手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。
+* 修复启用 `uc.flex.enable-rounded-web-content` 时，若设置为“隐藏标签页和侧栏”且关闭垂直选项卡，侧边误出现边距的问题。
+* 优化扩展面板（扩展按钮汇总面板）的显示效果，使按钮更易查看和点击。  
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="改进后的扩展面板布局和按钮间距" width="175px" />
+* 新增 `uc.flex.menu-item-spacing` 选项，用于调整菜单项之间的间距。  
+  可选字符串值如下：  
+  `"1"` 或 `"small"` = 较小间距（默认值，与旧版相同）  
+  `"2"` 或 `"medium"` = 中等间距  
+  `"3"` 或 `"large"` = Firefox 默认的最宽间距  
+
+  你也可以使用以下变量分别控制不同类型菜单的间距：
+
+  ```
+  --uc-app-menu-item-padding-block            // 应用菜单项间距
+  --uc-menu-item-padding-block                // 书签菜单和系统菜单
+  --uc-content-area-context-menu-item-padding-block // 页面右键菜单
+  --uc-appMenu-zoom-controls-x-offset         // 缩放控制按钮的位置微调
+  ```
+* 为统一 `uc-aboutconfig.css` 和 `uc.flex.menu-item-spacing` 的设置格式，`uc.flex.findbar-position` 的取值范围已从 `"0"`–`"2"` 调整为 `"1"`–`"3"`。  
+  可选字符串值包括：  
+  `"1"` 或 `"top-center-left"` = 顶部左侧  
+  `"2"` 或 `"top-right"` = 右上角  
+  `"3"` 或 `"bottom-right"` = 右下角  
+* 修复菜单中复选项（checkbox）文字错位的问题，并为更多菜单项补充图标，提升排版一致性。
 
 🔧 <b>v3.6.x 修复 v3.5.1 引入的性能问题</b>
 > [!NOTE]
@@ -148,6 +167,14 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.6.4**
+* 修复了 Nightly v141 导致的侧栏布局异常问题。
+  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
+  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
+* 改进了 `uc.flex.dim-urlbar-popup-backdrop` 的显示效果，为暗背景添加了淡入动画。
+* 新增选项 `uc.flex.show-flexfox-version-info-in-about-config`，启用后可在 `about:config` 页面显示当前使用的 FlexFox 版本，方便确认版本号。
+* 优化了 `about:config` 页面显示，已修改的选项现在会更明显地高亮显示。如果启用了“悬停时展开侧栏”，还会在页面中显示 FlexFox 已停用垂直标签页优化的提示信息，显示时长为 12 秒。
 
 **v3.6.3**
 * `uc.flex.enable-rounded-web-content` 现在兼容在侧栏设置中启用“隐藏标签页和侧栏”的情况，确保在开发者工具固定在网页左侧或右侧时，网页内容区域依然保有适当边距。
@@ -453,7 +480,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.sidebery-fast-hover-expand` | 加快 Sidebery 与原生垂直选项卡的自动展开/折叠速度。 |
 | `uc.flex.sidebery-slow-hover-expand` | 减慢 Sidebery 与原生垂直选项卡的自动展开/折叠速度。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | 设置原生垂直选项卡中每列可显示的固定标签页数量上限（可选值为数值，范围 4–6）。超过该值时将出现滚动条，可根据使用习惯进行调整。 |
-| `uc.flex.findbar-position` | 设置查找栏的位置。可选值为字符串：`"top-center-left"` 或 `"0"`（顶部左侧），`"top-right"` 或 `"1"`（右上角），`"bottom-right"` 或 `"2"`（右下角）。 |
+| `uc.flex.findbar-position` | 设置查找栏的位置。可选值为字符串：`"top-center-left"` 或 `"1"`（顶部左侧），`"top-right"` 或 `"2"`（右上角），`"bottom-right"` 或 `"3"`（右下角）。 |
+| `uc.flex.menu-item-spacing` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `"1"` 或 `"small"`（较小间距）、`"2"` 或 `"medium"`（默认间距）、`"3"` 或 `"large"`（较大间距）。 |
 
 ## 🐞 已知问题
 
