@@ -20,32 +20,15 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.6.5**
-* 增强了对主题的兼容性：只要不使用 Firefox 内建主题，工具栏颜色现在会自动跟随所用主题。只有在使用 Firefox Color 且未设置背景图片时，才需要手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。
-* 修复启用 `uc.flex.enable-rounded-web-content` 时，若设置为“隐藏标签页和侧栏”且关闭垂直选项卡，侧边误出现边距的问题。
-* 优化扩展面板（扩展按钮汇总面板）的显示效果，使按钮更易查看和点击。  
+**🦊 v3.6.6**
+* 修复了由于 Nightly v141 的变更导致 macOS 风格的窗口控制按钮无法显示的问题。
+  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
+* 增加并补全了更多缺失的菜单图标。
+* 新增选项 `uc.flex.auto-hide-navbar-icons`。启用后，导航栏中的工具按钮图标会默认隐藏，鼠标悬停时显示。窗口控制按钮、地址栏以及侧栏切换按钮（FlexFox 图标）会始终显示。如果侧栏按钮被移动到导航栏的中间位置（不是最左或最右），或者启用了 `uc.flex.revert-to-original-sidebar-icon` 选项，该按钮也会跟随隐藏。
+* 重要更新：FlexFox 现在可以根据当前 Firefox 主题自动切换 Sidebery 的背景颜色。要启用此功能，请在 Sidebery 的设置中，将「外观」下的「配色模式」设为 “firefox”。
 
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="改进后的扩展面板布局和按钮间距" width="175px" />
-* 新增 `uc.flex.menu-item-spacing` 选项，用于调整菜单项之间的间距。  
-  可选字符串值如下：  
-  `"1"` 或 `"small"` = 较小间距（默认值，与旧版相同）  
-  `"2"` 或 `"medium"` = 中等间距  
-  `"3"` 或 `"large"` = Firefox 默认的最宽间距  
-
-  你也可以使用以下变量分别控制不同类型菜单的间距：
-
-  ```
-  --uc-app-menu-item-padding-block            // 应用菜单项间距
-  --uc-menu-item-padding-block                // 书签菜单和系统菜单
-  --uc-content-area-context-menu-item-padding-block // 页面右键菜单
-  --uc-appMenu-zoom-controls-x-offset         // 缩放控制按钮的位置微调
-  ```
-* 为统一 `uc-aboutconfig.css` 和 `uc.flex.menu-item-spacing` 的设置格式，`uc.flex.findbar-position` 的取值范围已从 `"0"`–`"2"` 调整为 `"1"`–`"3"`。  
-  可选字符串值包括：  
-  `"1"` 或 `"top-center-left"` = 顶部左侧  
-  `"2"` 或 `"top-right"` = 右上角  
-  `"3"` 或 `"bottom-right"` = 右下角  
-* 修复菜单中复选项（checkbox）文字错位的问题，并为更多菜单项补充图标，提升排版一致性。
+自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
+<video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
 
 🔧 <b>v3.6.x 修复 v3.5.1 引入的性能问题</b>
 > [!NOTE]
@@ -167,6 +150,33 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.6.5**
+* 增强了对主题的兼容性：只要不使用 Firefox 内建主题，工具栏颜色现在会自动跟随所用主题。只有在使用 Firefox Color 且未设置背景图片时，才需要手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。
+* 修复启用 `uc.flex.enable-rounded-web-content` 时，若设置为“隐藏标签页和侧栏”且关闭垂直选项卡，侧边误出现边距的问题。
+* 优化扩展面板（扩展按钮汇总面板）的显示效果，使按钮更易查看和点击。  
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="改进后的扩展面板布局和按钮间距" width="175px" />
+* 新增 `uc.flex.menu-item-spacing` 选项，用于调整菜单项之间的间距。  
+  可选字符串值如下：  
+  `"1"` 或 `"small"` = 较小间距（默认值，与旧版相同）  
+  `"2"` 或 `"medium"` = 中等间距  
+  `"3"` 或 `"large"` = Firefox 默认的最宽间距  
+
+  你也可以使用以下变量分别控制不同类型菜单的间距：
+
+  ```
+  --uc-app-menu-item-padding-block            // 应用菜单项间距
+  --uc-menu-item-padding-block                // 书签菜单和系统菜单
+  --uc-content-area-context-menu-item-padding-block // 页面右键菜单
+  --uc-appMenu-zoom-controls-x-offset         // 缩放控制按钮的位置微调
+  ```
+* 为统一 `uc-aboutconfig.css` 和 `uc.flex.menu-item-spacing` 的设置格式，`uc.flex.findbar-position` 的取值范围已从 `"0"`–`"2"` 调整为 `"1"`–`"3"`。  
+  可选字符串值包括：  
+  `"1"` 或 `"top-center-left"` = 顶部左侧  
+  `"2"` 或 `"top-right"` = 右上角  
+  `"3"` 或 `"bottom-right"` = 右下角  
+* 修复菜单中复选项（checkbox）文字错位的问题，并为更多菜单项补充图标，提升排版一致性。
 
 **v3.6.4**
 * 修复了 Nightly v141 导致的侧栏布局异常问题。
@@ -439,7 +449,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.add-ui-text-stroke` | 为界面文字添加粗描边，提高低分辨率屏幕下的可读性。 |
 | `uc.flex.fully-hide-sidebery` | 完全隐藏 Sidebery 和原生垂直选项卡，将鼠标移至屏幕边缘时自动显示。 |
 | `uc.flex.fully-hide-toolbox` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
-| `uc.flex.allow-addons-to-change-toolbar-color` | 允许主题或扩展修改工具栏的背景颜色或背景图。 |
+| `uc.flex.auto-hide-navbar-icons` | 默认隐藏导航栏中的图标，鼠标悬停在工具栏上时会显示。窗口控制按钮、地址栏和侧栏按钮（FlexFox 图标）始终显示，但当侧栏按钮未放在导航栏边缘，或启用了 `uc.flex.revert-to-original-sidebar-icon` 时，也会一并隐藏。 |
+| `uc.flex.allow-addons-to-change-toolbar-color` | 允许 Firefox Color 等扩展修改工具栏的颜色（在未设置背景图时需要启用）。 |
 | `uc.flex.enable-gradient-highlight` | 为 FlexFox 图标、侧栏彩带、书签星形图标等主要界面元素中使用的高亮颜色启用渐变样式。此选项接受数值设置：`0` 表示关闭渐变，`1` 到 `X` 表示切换不同的渐变样式。 |
 | `uc.flex.enable-colored-bookmarks-folder-icons` | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
 | `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |

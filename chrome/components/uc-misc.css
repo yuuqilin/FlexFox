@@ -1,14 +1,19 @@
 /* Add text stroke */
 @media -moz-pref("uc.flex.add-ui-text-stroke") {
     * {
-        /*font-family:  !important;*/
+        /**
+         * Since Firefox v141 on Windows, system Fluent fonts are used
+         * for window control icons. Listing them first ensures default
+         * Firefox icons take priority over any custom font.
+         */
+        /* font-family: Segoe Fluent Icons, Segoe MDL2 Assets, <your custom font>, !important; */
         text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
-        /*-webkit-text-stroke: 0.015em;*/
+        /* -webkit-text-stroke: 0.015em; */
     }
 
     #urlbar-input {
         text-shadow: none;
-        /*-webkit-text-stroke: 0;*/
+        /* -webkit-text-stroke: 0; */
     }
 }
 

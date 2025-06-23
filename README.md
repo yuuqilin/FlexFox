@@ -20,32 +20,15 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.5**
-* Improved compatibility with themes. When using any non-default Firefox theme, toolbar colors now follow the theme automatically. The `uc.flex.allow-addons-to-change-toolbar-color` option is only needed when using Firefox Color without a background image.
-* Fixed an issue where side margins were incorrectly applied when `uc.flex.enable-rounded-web-content` was enabled, the sidebar was set to "Hide tabs and sidebar", and vertical tabs were disabled.
-* Improved the unified extensions panel appearance, making extension buttons easier to view and click.  
+**🦊 v3.6.6**
+* Fixed an issue caused by Nightly v141 that prevented macOS-style window control buttons from appearing.
+  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
+* Added more missing menu icons to improve visual consistency.
+* Introduced a new option: `uc.flex.auto-hide-navbar-icons`. When enabled, toolbar button icons in the navigation bar will be hidden by default and shown on hover. Window controls, the URL bar, and the Sidebar toggle (FlexFox logo) remain visible by default. If the Sidebar button is moved away from the far left or far right edge, or if `uc.flex.revert-to-original-sidebar-icon` is enabled, it will also follow the auto-hide behavior.
+* Major improvement: FlexFox can now automatically adapt the Sidebery background color based on the current Firefox theme. To enable this feature, set the **Color scheme** in Sidebery's **Appearance** settings to `"firefox"`.
 
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="Improved layout and spacing in the unified extensions panel" width="175px" />
-* Added `uc.flex.menu-item-spacing` option to control spacing between menu items.  
-  Accepts string values:  
-  `"1"` or `"small"` = compact spacing (default; same as in earlier versions)  
-  `"2"` or `"medium"` = moderately spaced  
-  `"3"` or `"large"` = Firefox default (widest spacing)  
-
-  You can also use the following variables for more granular control:
-
-  ```
-  --uc-app-menu-item-padding-block            // App menu item spacing
-  --uc-menu-item-padding-block                // Bookmarks & system menus
-  --uc-content-area-context-menu-item-padding-block // Page context menu
-  --uc-appMenu-zoom-controls-x-offset         // Adjusts zoom control alignment
-  ```
-* Updated the accepted range for `uc.flex.findbar-position` to match the structure used by `uc-aboutconfig.css` and `uc.flex.menu-item-spacing`.  
-  Accepts string values:  
-  `"1"` or `"top-center-left"` = top left  
-  `"2"` or `"top-right"` = top right  
-  `"3"` or `"bottom-right"` = bottom right  
-* Fixed alignment issues in menus involving checkbox items, and added fallback icons for more menu entries.
+Preview of auto-hide navbar icons and theme-based background switching in Sidebery:  
+<video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
 
 <!-- END What's New -->
 
@@ -175,6 +158,33 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 <!-- END Release Note -->
 
+**v3.6.5**
+* Improved compatibility with themes. When using any non-default Firefox theme, toolbar colors now follow the theme automatically. The `uc.flex.allow-addons-to-change-toolbar-color` option is only needed when using Firefox Color without a background image.
+* Fixed an issue where side margins were incorrectly applied when `uc.flex.enable-rounded-web-content` was enabled, the sidebar was set to "Hide tabs and sidebar", and vertical tabs were disabled.
+* Improved the unified extensions panel appearance, making extension buttons easier to view and click.  
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="Improved layout and spacing in the unified extensions panel" width="175px" />
+* Added `uc.flex.menu-item-spacing` option to control spacing between menu items.  
+  Accepts string values:  
+  `"1"` or `"small"` = compact spacing (default; same as in earlier versions)  
+  `"2"` or `"medium"` = moderately spaced  
+  `"3"` or `"large"` = Firefox default (widest spacing)  
+
+  You can also use the following variables for more granular control:
+
+  ```
+  --uc-app-menu-item-padding-block            // App menu item spacing
+  --uc-menu-item-padding-block                // Bookmarks & system menus
+  --uc-content-area-context-menu-item-padding-block // Page context menu
+  --uc-appMenu-zoom-controls-x-offset         // Adjusts zoom control alignment
+  ```
+* Updated the accepted range for `uc.flex.findbar-position` to match the structure used by `uc-aboutconfig.css` and `uc.flex.menu-item-spacing`.  
+  Accepts string values:  
+  `"1"` or `"top-center-left"` = top left  
+  `"2"` or `"top-right"` = top right  
+  `"3"` or `"bottom-right"` = bottom right  
+* Fixed alignment issues in menus involving checkbox items, and added fallback icons for more menu entries.
+
 **v3.6.4**
 * Fixed layout issues in the sidebar caused by Nightly v141.
   * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
@@ -218,7 +228,7 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 **v3.5.8**
 * Improved compatibility of theme backgrounds and the bookmarks toolbar across multiple layout states, including `Lock Sidebery`, `Collapse sidebar`, `Hide tabs and sidebar`, and `Move sidebar to the right`.
-* Restored missing checkmark icons in Firefox’s native menus for AI chatbots and the Bookmarks toolbar.
+* Restored missing checkmark icons in Firefox's native menus for AI chatbots and the Bookmarks toolbar.
 * Status panel now adopts rounded corners when `uc.flex.enable-rounded-web-content` is enabled.
 * Renamed some variables for better clarity and usability.
 
@@ -439,7 +449,8 @@ For more update logs from earlier versions,
 | `uc.flex.add-ui-text-stroke` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
 | `uc.flex.fully-hide-sidebery` | Fully hides Sidebery and native vertical tabs. They reappear when the cursor moves to the screen edge. |
 | `uc.flex.fully-hide-toolbox` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
-| `uc.flex.allow-addons-to-change-toolbar-color` | Allows themes and extensions to override toolbar background color and image. |
+| `uc.flex.auto-hide-navbar-icons` | Hides navigation bar icons by default. They reappear when hovering over the toolbar. Window control buttons, the URL bar, and the sidebar button (FlexFox logo) remain visible, unless the sidebar button is not placed at the edge of the navigation bar or `uc.flex.revert-to-original-sidebar-icon` is enabled. |
+| `uc.flex.allow-addons-to-change-toolbar-color` | Allows toolbar colors set by extensions like Firefox Color to take effect, especially when no background image is selected. |
 | `uc.flex.enable-gradient-highlight` | Enables gradient styling for the highlight color used across key UI elements such as the FlexFox logo, sidebar stripe, and bookmark star icon. This numeric setting accepts 0 to disable gradients, or values 1 to X to switch between different gradient styles. |
 | `uc.flex.enable-colored-bookmarks-folder-icons` | Enables colored icons for bookmark folders. This numeric setting accepts `0` (disabled), `1` (uses the first icon set), or `2` (uses the second icon set, with labels automatically hidden). |
 | `uc.flex.remove-bookmarks-folder-icons` | Removes folder icons from bookmarks. |

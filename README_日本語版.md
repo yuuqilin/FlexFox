@@ -20,32 +20,15 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.6.5**
-* テーマとの互換性を強化。Firefoxの組み込みテーマ以外を使用している場合、ツールバーの色が自動的にテーマに従うようになりました。`uc.flex.allow-addons-to-change-toolbar-color` オプションは、Firefox Color を背景画像なしで使用する場合のみ必要です。
-* `uc.flex.enable-rounded-web-content` オプション有効時に、サイドバーが「タブとサイドバーを非表示」に設定され、垂直タブが無効な状態でも、サイドマージンが誤って適用される問題を修正。
-* 拡張機能パネル（拡張機能ボタン一覧パネル）の表示を改善。ボタンが見やすくなり、クリックもしやすくなりました。  
+**🦊 v3.6.6**
+* Nightly v141の変更によってmacOS風ウィンドウ操作ボタンが表示されなくなっていた問題を修正しました。
+  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
+* メニュー内で欠けていたアイコンを追加・補完しました。
+* 新オプション`uc.flex.auto-hide-navbar-icons`を追加しました。このオプションを有効にすると、ナビゲーションバーのツールボタンアイコンが自動的に非表示になり、ホバー時にのみ表示されるようになります。ウィンドウ操作ボタン、URLバー、FlexFoxロゴのサイドバー切り替えボタンは常に表示されます。ただし、サイドバーボタンがナビゲーションバーの最左端・最右端以外の位置に移動された場合や、`uc.flex.revert-to-original-sidebar-icon`オプションが有効な場合は、このボタンも自動非表示の対象となります。
+* 大きな改良点として、FlexFoxはFirefoxのテーマに合わせてSideberyの背景色を自動で切り替えられるようになりました。この機能を使用するには、Sideberyの「設定」→「外観」→「カラースキーム」で「firefox」を選択してください。
 
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="拡張機能パネルのレイアウトとボタン間隔を改善" width="175px" />
-* メニュー項目の間隔を調整するための `uc.flex.menu-item-spacing` オプションを追加しました。  
-  指定可能な文字列値は以下の通りです：  
-  `"1"` または `"small"` = コンパクトな間隔（デフォルト。従来バージョンと同様）  
-  `"2"` または `"medium"` = 中程度の間隔  
-  `"3"` または `"large"` = Firefox 標準の広い間隔  
-
-  以下の変数を使用すれば、各メニューごとにより細かく調整できます：
-
-  ```
-  --uc-app-menu-item-padding-block            // アプリメニューの間隔
-  --uc-menu-item-padding-block                // ブックマークやシステムメニュー
-  --uc-content-area-context-menu-item-padding-block // ページの右クリックメニュー
-  --uc-appMenu-zoom-controls-x-offset         // 拡大・縮小ボタンの配置調整
-  ```
-* `uc-aboutconfig.css` および `uc.flex.menu-item-spacing` の設定形式に合わせて、`uc.flex.findbar-position` の値の範囲を `"0"`〜`"2"` から `"1"`〜`"3"` に変更しました。  
-  設定可能な値は以下の通りです：  
-  `"1"` または `"top-center-left"` = 左寄せ上部  
-  `"2"` または `"top-right"` = 右上  
-  `"3"` または `"bottom-right"` = 右下  
-* メニュー内のチェックボックス項目の文字位置ずれを修正し、より多くの項目に補完用のアイコンを追加しました。
+ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
+<video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
 
 🔧 <b>v3.6.x パフォーマンス修正（v3.5.1の問題に対応）</b>
 > [!NOTE]
@@ -169,6 +152,33 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.6.5**
+* テーマとの互換性を強化。Firefoxの組み込みテーマ以外を使用している場合、ツールバーの色が自動的にテーマに従うようになりました。`uc.flex.allow-addons-to-change-toolbar-color` オプションは、Firefox Color を背景画像なしで使用する場合のみ必要です。
+* `uc.flex.enable-rounded-web-content` オプション有効時に、サイドバーが「タブとサイドバーを非表示」に設定され、垂直タブが無効な状態でも、サイドマージンが誤って適用される問題を修正。
+* 拡張機能パネル（拡張機能ボタン一覧パネル）の表示を改善。ボタンが見やすくなり、クリックもしやすくなりました。  
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="拡張機能パネルのレイアウトとボタン間隔を改善" width="175px" />
+* メニュー項目の間隔を調整するための `uc.flex.menu-item-spacing` オプションを追加しました。  
+  指定可能な文字列値は以下の通りです：  
+  `"1"` または `"small"` = コンパクトな間隔（デフォルト。従来バージョンと同様）  
+  `"2"` または `"medium"` = 中程度の間隔  
+  `"3"` または `"large"` = Firefox 標準の広い間隔  
+
+  以下の変数を使用すれば、各メニューごとにより細かく調整できます：
+
+  ```
+  --uc-app-menu-item-padding-block            // アプリメニューの間隔
+  --uc-menu-item-padding-block                // ブックマークやシステムメニュー
+  --uc-content-area-context-menu-item-padding-block // ページの右クリックメニュー
+  --uc-appMenu-zoom-controls-x-offset         // 拡大・縮小ボタンの配置調整
+  ```
+* `uc-aboutconfig.css` および `uc.flex.menu-item-spacing` の設定形式に合わせて、`uc.flex.findbar-position` の値の範囲を `"0"`〜`"2"` から `"1"`〜`"3"` に変更しました。  
+  設定可能な値は以下の通りです：  
+  `"1"` または `"top-center-left"` = 左寄せ上部  
+  `"2"` または `"top-right"` = 右上  
+  `"3"` または `"bottom-right"` = 右下  
+* メニュー内のチェックボックス項目の文字位置ずれを修正し、より多くの項目に補完用のアイコンを追加しました。
 
 **v3.6.4**
 * Nightly v141 によって発生したサイドバーのレイアウト崩れを修正しました。
@@ -436,7 +446,8 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.add-ui-text-stroke` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
 | `uc.flex.fully-hide-sidebery` | Sidebery とネイティブの縦型タブを完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
 | `uc.flex.fully-hide-toolbox` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
-| `uc.flex.allow-addons-to-change-toolbar-color` | テーマや拡張機能によるツールバーの背景色や背景画像の上書きを許可します。 |
+| `uc.flex.auto-hide-navbar-icons` | ナビゲーションバーのアイコンを通常は非表示にし、ツールバーにカーソルを合わせると再表示されます。ウィンドウ操作ボタン、URLバー、サイドバーのボタン（FlexFox ロゴ）は常に表示されますが、サイドバーのボタンがナビゲーションバーの端に配置されていない場合や、`uc.flex.revert-to-original-sidebar-icon` が有効な場合は自動的に隠れます。 |
+| `uc.flex.allow-addons-to-change-toolbar-color` | Firefox Color などの拡張機能によるツールバーの色の変更を有効にします（背景画像が設定されていない場合に必要です）。 |
 | `uc.flex.enable-gradient-highlight` | FlexFox のロゴ、サイドバーのストライプ、ブックマークの星アイコンなど、主要な UI 要素に使われるハイライトカラーにグラデーションスタイルを適用します。数値で設定でき、`0` は無効、`1` ～ `X` は異なるグラデーションスタイルを選択します。 |
 | `uc.flex.enable-colored-bookmarks-folder-icons` | ブックマークフォルダーのアイコンをカラー表示にします。数値で設定でき、`0` は無効、`1` は第1セットのアイコンを使用、`2` は第2セットのアイコンを使用し、ラベルは自動的に非表示になります。 |
 | `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |

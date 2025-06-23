@@ -14,7 +14,9 @@
             margin-bottom: calc(0px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
             transform: rotateX(90deg);
             transform-origin: top;
-            transition: transform 80ms linear var(--uc-autohide-toolbar-delay) !important;
+            transition:
+                opacity 80ms linear var(--uc-autohide-toolbar-delay),
+                transform 80ms linear var(--uc-autohide-toolbar-delay) !important;
             z-index: 1;
             /* The following properties should allow the themes with trasparent toolbars to work */
             background-color: transparent !important;

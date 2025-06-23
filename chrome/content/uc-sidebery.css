@@ -1,11 +1,11 @@
-/* Add text stroke */
 @-moz-document regexp("^moz-extension://.*?/sidebar/sidebar.html")
 {
+    /* Add text stroke */
     @media -moz-pref("uc.flex.add-ui-text-stroke") {
         * {
-            /*font-family:  !important;*/
+            /* font-family: <your custom font> !important; */
             text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
-            /*-webkit-text-stroke: 0.015em;*/
+            /* -webkit-text-stroke: 0.015em; */
         }
         @media (prefers-color-scheme: dark) {
             .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
@@ -106,6 +106,45 @@
 
         #root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
             display: block !important;
+        }
+    }
+
+    @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color"),
+        not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
+        #root {
+            --tabs-activated-bg: var(--active-el-bg) !important;
+
+            @media (prefers-color-scheme: dark) {
+                .Tab[data-selected="true"] .body {
+                    --frame-el-overlay-selected-border: var(--s-accent, #47cfff) !important;
+                    background-color: var(--tabs-activated-bg) !important;
+                    box-shadow: var(--tabs-activated-shadow) !important;
+                }
+            }
+            &[data-frame-color-scheme="dark"] {
+                --frame-bg: var(--s-frame-bg, #282828) !important;
+                --toolbar-bg: var(--s-toolbar-bg, #323232) !important;
+            }
+
+            @media (prefers-color-scheme: light) {
+                .Tab[data-selected="true"] .body {
+                    --frame-el-overlay-selected-border: var(--s-accent, #146fd9) !important;
+                    background-color: var(--tabs-activated-bg) !important;
+                    box-shadow: var(--tabs-activated-shadow) !important;
+                }
+            }
+            &[data-frame-color-scheme="light"] {
+                --frame-bg: var(--s-frame-bg, #eaeaea) !important;
+                --toolbar-bg: var(--s-toolbar-bg, #fafafa) !important;
+            }
+
+            .NewTabShortcutsPopup {
+                --toolbar-bg: var(--popup-bg) !important;
+            }
+
+            .SiteConfigPopup {
+                --toolbar-bg: var(--popup-bg) !important;
+            }
         }
     }
 }
