@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v141-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v142-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,17 +20,29 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.6**
-* Fixed an issue caused by Nightly v141 that prevented macOS-style window control buttons from appearing.
-  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
-* Added more missing menu icons to improve visual consistency.
-* Introduced a new option: `uc.flex.auto-hide-navbar-icons`. When enabled, toolbar button icons in the navigation bar will be hidden by default and shown on hover. Window controls, the URL bar, and the Sidebar toggle (FlexFox logo) remain visible by default. If the Sidebar button is moved away from the far left or far right edge, or if `uc.flex.revert-to-original-sidebar-icon` is enabled, it will also follow the auto-hide behavior.
-* Major improvement: FlexFox can now automatically adapt the Sidebery background color based on the current Firefox theme. To enable this feature, set the **Color scheme** in Sidebery's **Appearance** settings to `"firefox"`.
+**🦊 v3.6.7**
+* Improved the visibility behavior of `uc.flex.auto-hide-navbar-icons`. Buttons that open popups now remain visible along with their menus, even when not hovered.
+* Standardized animation for hiding buttons in the URL bar, navigation bar, and bookmarks toolbar. You can adjust the transition by copying the following variables from `uc-variables.css` and overriding them in `uc-user-settings.css`:
+
+  ```css
+  --uc-autohide-navbar-icons-duration
+  --uc-hover-navbar-icons-duration
+  --uc-autohide-navbar-icons-type
+  --uc-collapse-navbar-icons-duration
+  ```
+
+<!-- END What's New -->
 
 Preview of auto-hide navbar icons and theme-based background switching in Sidebery:  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
 
-<!-- END What's New -->
+🖌️ <b>Major Improvement: Sidebery Background Now Theme-Aware</b>
+> [!NOTE]
+> * FlexFox can now automatically adjust the background color of Sidebery based on the current Firefox theme.
+> * To enable this feature, go to Sidebery's **Settings → Appearance → Color scheme** and select `"firefox"`.
+> <details><summary>Click to view Sidebery appearance settings screenshot</summary>
+> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.webp" alt="Sidebery appearance settings" width="50%" />
+> </details>
 
 🔧 <b>v3.6.x Performance Fix for v3.5.1 Regression</b>
 > [!NOTE]
@@ -38,6 +50,48 @@ Preview of auto-hide navbar icons and theme-based background switching in Sidebe
 > * One of the most noticeable improvements is the speed when opening the **“List All Tabs”** panel. Compared to **v3.5.8**, the latest version opens it up to **18× faster**.
 > * In addition to addressing the performance regression, parts of the code have been refactored to further improve speed. The difference is now less than **2ms** compared to Firefox's native UI.
 > * If you're using any version from the **v3.5.x** series, we recommend updating to the latest release.
+
+<details>  
+<summary>👻 <b>Major Update: Auto-Hide Toolbar Icons</b> <i>[Click to expand]</i> 👇</summary>
+
+* Added the `uc.flex.auto-hide-navbar-icons` option to hide navigation bar buttons by default and reveal them on hover.
+* The following items remain visible at all times:
+  * Window control buttons (minimize, maximize, close)
+  * The URL bar
+  * The Sidebar toggle button (FlexFox logo)
+* If the Sidebar button is moved away from the far left or right edge of the toolbar, or if `uc.flex.revert-to-original-sidebar-icon` is enabled, it will also follow the auto-hide behavior.
+* You can adjust the animation timing and easing by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
+
+  ```css
+  --uc-autohide-navbar-icons-duration
+  --uc-hover-navbar-icons-duration
+  --uc-autohide-navbar-icons-type
+  --uc-collapse-navbar-icons-duration
+  ```
+
+Preview of auto-hide behavior and theme-based Sidebery background switching: <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
+
+</details>
+
+<details>  
+<summary>🧩 <b>Major Update: Adjustable Menu Item Spacing</b> <i>[Click to expand]</i> 👇</summary>
+
+* Added the `uc.flex.menu-item-spacing` option to control spacing between menu items.  
+  Accepts the following string values:  
+  `"1"` or `"small"` = compact spacing (default; same as earlier versions)  
+  `"2"` or `"medium"` = moderately spaced  
+  `"3"` or `"large"` = Firefox default (widest spacing)  
+
+* You can fine-tune the spacing for individual menus by copying these variables from `uc-variables.css` and editing them in `uc-user-settings.css`:
+
+  ```css
+  --uc-app-menu-item-padding-block
+  --uc-menu-item-padding-block
+  --uc-content-area-context-menu-item-padding-block
+  --uc-appMenu-zoom-controls-x-offset
+  ```
+
+</details>
 
 <details>  
 <summary>🪄 <b>Major Update: Rounded & Floating Web Content</b> <i>[Click to expand]</i> 👇</summary>
@@ -48,11 +102,13 @@ When enabled, this adds padding around the main content area and applies rounded
 
 The option accepts values from `0` (off) to `2`; higher values increase the padding around the page content.
 
-You can further adjust the appearance using the following variables:
+You can further adjust the appearance by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
 
-* `--uc-web-content-margin-small`
-* `--uc-web-content-margin-large`
-* `--uc-web-content-radius-box`
+  ```css
+  --uc-web-content-margin-small
+  --uc-web-content-margin-large
+  --uc-web-content-radius-box
+  ```
 
 Below is a preview of FlexFox with this feature enabled (`uc.flex.enable-rounded-web-content = 1`):
 
@@ -65,7 +121,16 @@ Below is a preview of FlexFox with this feature enabled (`uc.flex.enable-rounded
 
 You can now restore Firefox's original flat corner style by enabling the `uc.flex.revert-to-original-flat-corner-style` option. This replaces FlexFox's rounded design with the default, sharper look.
 
-For further customization, you can fine-tune the corner radius of the address bar, search bar, and find bar by editing the related `*-radius` variables under this option in `uc-variables.css`.
+For further customization, you can fine-tune the corner radius of the address bar, search bar, and find bar by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
+
+```css
+--uc-urlbar-border-radius
+--uc-urlbar-popup-border-radius
+--uc-urlbar-icon-radius
+--uc-urlbar-icon-inner-radius
+--uc-searchbar-popup-border-radius
+--uc-findbar-border-radius
+```
 
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
 
@@ -80,18 +145,6 @@ To make Firefox Color work with FlexFox, choose any background image from the **
 
 <p>Here's how FlexFox looks with the <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> theme applied via Firefox Color:</p>
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
-
-</details>
-
-<details>
-
-<summary>🚀 <b>Major Update: Full Hide and Always-Open Mode for Native Vertical Tabs</b> <i>[Click to expand]</i> 👇</summary>
-
-- The existing `uc.flex.fully-hide-sidebery` option and the `Hide Sidebery` hotkey now also hide native vertical tabs completely.
-- Native vertical tabs are now also fully hidden when entering fullscreen mode (<kbd>F11</kbd>).
-- The `--uc-hover-sidebar-trigger-width` variable now defines the trigger area for both Sidebery and native vertical tabs when the window is not maximized.
-- The existing `uc.flex.disable-sidebery-autohide` option and the `Lock Sidebery` hotkey now also keep native vertical tabs open at all times.
-- This means all settings that apply to Sidebery—such as show/hide speed—now apply to native vertical tabs too, offering a unified behavior.
 
 </details>
 
@@ -121,6 +174,15 @@ Setting it to `2` automatically hides labels and enables the second set of icons
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
 
 You can customize the icon's color, size, and position by editing the `--uc-bookmark-folder-*` variables, and replace the `folder*.svg` files in the `../icons/bookmark/` directory to use your own icons.
+
+</details>
+
+<details>  
+<summary>🚀 <b>Major Update: Native Vertical Tabs Integrated with Sidebery</b> <i>[Click to expand]</i> 👇</summary>
+
+* FlexFox now integrates native vertical tabs with Sidebery. When Sidebery is active, the native vertical tabs are automatically hidden, and the sidebar toolbar is collapsed into a colored stripe positioned above Sidebery.
+* When Sidebery becomes inactive, such as when a sidebar tool or extension is opened, the native vertical tabs are automatically restored. This provides a usable fallback when Sidebery is not available.
+* Native vertical tabs now share the same layout and behavior as Sidebery. They support the same variables for width, transition speed, and trigger area. Features such as locking the sidebar open, fully hiding it, and auto-hiding in fullscreen mode (<kbd>F11</kbd>) are also supported. Transitions between the two are seamless, providing a consistent user experience.
 
 </details>
 
@@ -157,6 +219,13 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.6.6**
+* Fixed an issue caused by Nightly v141 that prevented macOS-style window control buttons from appearing.
+  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
+* Added more missing menu icons to improve visual consistency.
+* Introduced a new option: `uc.flex.auto-hide-navbar-icons`. When enabled, toolbar button icons in the navigation bar will be hidden by default and shown on hover. Window controls, the URL bar, and the Sidebar toggle (FlexFox logo) remain visible by default. If the Sidebar button is moved away from the far left or far right edge, or if `uc.flex.revert-to-original-sidebar-icon` is enabled, it will also follow the auto-hide behavior.
+* Major improvement: FlexFox can now automatically adapt the Sidebery background color based on the current Firefox theme. To enable this feature, set the **Color scheme** in Sidebery's **Appearance** settings to `"firefox"`.
 
 **v3.6.5**
 * Improved compatibility with themes. When using any non-default Firefox theme, toolbar colors now follow the theme automatically. The `uc.flex.allow-addons-to-change-toolbar-color` option is only needed when using Firefox Color without a background image.

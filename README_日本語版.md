@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v141-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v142-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,15 +20,27 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.6.6**
-* Nightly v141の変更によってmacOS風ウィンドウ操作ボタンが表示されなくなっていた問題を修正しました。
-  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
-* メニュー内で欠けていたアイコンを追加・補完しました。
-* 新オプション`uc.flex.auto-hide-navbar-icons`を追加しました。このオプションを有効にすると、ナビゲーションバーのツールボタンアイコンが自動的に非表示になり、ホバー時にのみ表示されるようになります。ウィンドウ操作ボタン、URLバー、FlexFoxロゴのサイドバー切り替えボタンは常に表示されます。ただし、サイドバーボタンがナビゲーションバーの最左端・最右端以外の位置に移動された場合や、`uc.flex.revert-to-original-sidebar-icon`オプションが有効な場合は、このボタンも自動非表示の対象となります。
-* 大きな改良点として、FlexFoxはFirefoxのテーマに合わせてSideberyの背景色を自動で切り替えられるようになりました。この機能を使用するには、Sideberyの「設定」→「外観」→「カラースキーム」で「firefox」を選択してください。
+**🦊 v3.6.7**
+* `uc.flex.auto-hide-navbar-icons` の動作を改善しました。ポップアップを開くボタンは、ホバーしていない場合でもメニューと一緒に表示されたままになります。
+* アドレスバー・ナビゲーションバー・ブックマークツールバーの非表示ボタンのアニメーションを統一しました。`uc-variables.css` から以下の変数を `uc-user-settings.css` にコピーして編集することで、遷移効果を調整できます：
+
+  ```css
+  --uc-autohide-navbar-icons-duration
+  --uc-hover-navbar-icons-duration
+  --uc-autohide-navbar-icons-type
+  --uc-collapse-navbar-icons-duration
+  ```
 
 ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
+
+🖌️ <b>大きな改良点：Sidebery の背景がテーマに連動</b>
+> [!NOTE]
+> * FlexFox は、Firefox の現在のテーマに合わせて Sidebery の背景色を自動で切り替えられるようになりました。
+> * この機能を有効にするには、Sidebery の **設定 → 外観 → カラースキーム** で `"firefox"` を選択してください。
+> <details><summary>Sidebery の外観設定のスクリーンショットを見る</summary>
+> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.webp" alt="Sidebery の外観設定" width="50%" />
+> </details>
 
 🔧 <b>v3.6.x パフォーマンス修正（v3.5.1の問題に対応）</b>
 > [!NOTE]
@@ -36,6 +48,48 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 > * 特に「**タブを一覧表示します**」パネルを開く速度が目に見えて向上しており、最新版では **v3.5.8** に比べて最大 **18倍** 高速です。
 > * 単なるパフォーマンス低下の修正にとどまらず、一部のコードをリファクタリングすることで速度をさらに最適化しました。Firefox のネイティブ UI との差は **2ms 未満** まで縮まりました。
 > * **v3.5.x** をお使いの方には、最新バージョンへのアップデートをおすすめします。
+
+<details>  
+<summary>👻 <b>新機能：ツールバーのアイコンを自動で非表示に</b> <i>《クリックで展開》</i> 👇</summary>
+
+* ナビゲーションバーのツールボタンを既定で非表示にし、ホバー時に表示させる `uc.flex.auto-hide-navbar-icons` オプションを追加しました。
+* 以下の要素は常に表示されます：
+  * ウィンドウ操作ボタン（最小化・最大化・閉じる）
+  * URLバー
+  * サイドバーの切り替えボタン（FlexFoxロゴ）
+* サイドバー切り替えボタンがツールバーの最左端・最右端以外に移動された場合や、`uc.flex.revert-to-original-sidebar-icon` オプションが有効な場合、このボタンも自動非表示の対象になります。
+* アニメーションの速度やイージングは、`uc-variables.css` の以下の変数を `uc-user-settings.css` にコピーして調整できます：
+
+  ```css
+  --uc-autohide-navbar-icons-duration
+  --uc-hover-navbar-icons-duration
+  --uc-autohide-navbar-icons-type
+  --uc-collapse-navbar-icons-duration
+  ```
+
+ナビゲーションバーの自動非表示と、Sidebery のテーマ背景切り替えのプレビュー： <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
+
+</details>
+
+<details>  
+<summary>🧩 <b>新機能：メニュー項目の間隔を調整可能に</b> <i>《クリックで展開》</i> 👇</summary>
+
+* メニュー項目の間隔を調整するための `uc.flex.menu-item-spacing` オプションを追加しました。  
+  指定できる文字列は以下の通りです：  
+  `"1"` または `"small"` = コンパクトな間隔（デフォルト。従来バージョンと同じ）  
+  `"2"` または `"medium"` = 中程度の間隔  
+  `"3"` または `"large"` = Firefox 標準の広い間隔  
+
+* 各メニューの間隔をより細かく調整したい場合は、`uc-variables.css` の変数を `uc-user-settings.css` にコピーして編集してください：
+
+  ```css
+  --uc-app-menu-item-padding-block
+  --uc-menu-item-padding-block
+  --uc-content-area-context-menu-item-padding-block
+  --uc-appMenu-zoom-controls-x-offset
+  ```
+
+</details>
 
 <details>  
 <summary>🪄 <b>新機能：丸みと浮かせたようなWeb表示スタイル</b> <i>《クリックで展開》</i> 👇</summary>
@@ -46,11 +100,13 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 値は `0`（無効）〜 `2` まで指定でき、数値が大きいほど余白が広がります。
 
-以下の変数を調整することで、表示を細かくカスタマイズできます：
+表示をさらに細かくカスタマイズしたい場合は、`uc-variables.css` の変数を `uc-user-settings.css` にコピーして編集してください：
 
-* `--uc-web-content-margin-small`
-* `--uc-web-content-margin-large`
-* `--uc-web-content-radius-box`
+  ```css
+  --uc-web-content-margin-small
+  --uc-web-content-margin-large
+  --uc-web-content-radius-box
+  ```
 
 以下は `uc.flex.enable-rounded-web-content = 1` の状態での表示例です：
 
@@ -63,7 +119,16 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 新しく追加された `uc.flex.revert-to-original-flat-corner-style` オプションを有効にすると、Firefox標準のフラットな角のスタイルに戻すことができます。FlexFox独自の丸みを帯びたデザインを使わず、よりシャープな外観を好む方におすすめです。
 
-さらに、`uc-variables.css` 内のこのオプションに関連する `*-radius` 変数を編集することで、アドレスバーや検索バー、検索ウィンドウなどの角丸の大きさを細かく調整できます。
+さらにカスタマイズしたい場合は、アドレスバー・検索バー・検索ウィンドウの角丸のサイズを調整するために、`uc-variables.css` の以下の変数を `uc-user-settings.css` にコピーして編集してください：
+
+```css
+--uc-urlbar-border-radius
+--uc-urlbar-popup-border-radius
+--uc-urlbar-icon-radius
+--uc-urlbar-icon-inner-radius
+--uc-searchbar-popup-border-radius
+--uc-findbar-border-radius
+```
 
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
 
@@ -78,17 +143,6 @@ FlexFox 上で Firefox Color を有効にするには、Firefox Color サイト�
 
 <p>以下は、Firefox Color を使って <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> テーマを適用した FlexFox の表示例です：</p>
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
-
-</details>
-
-<details>
-<summary>🚀 <b>新機能：ネイティブ縦型タブが完全非表示と常時展開に対応</b> <i>《クリックで展開》</i> 👇</summary>
-
-- `uc.flex.fully-hide-sidebery` オプションと `Hide Sidebery` のホットキーは、Sidebery に加えてネイティブ縦型タブにも同じ挙動が適用され、両方を完全に非表示にできます。
-- 全画面モード（<kbd>F11</kbd>）では、ネイティブ縦型タブも自動で完全非表示になります。
-- 最大化されていないウィンドウでは、`--uc-hover-sidebar-trigger-width` 変数によって Sidebery とネイティブ縦型タブ両方のトリガー領域を制御できます。
-- `uc.flex.disable-sidebery-autohide` オプションと `Lock Sidebery` のホットキーは、Sidebery に加えてネイティブ縦型タブにも同じ挙動が適用され、両方を常時展開された状態にできます。
-- これにより、ネイティブ縦型タブも Sidebery と同様に変数で制御され（展開／折りたたみの速度など）、一貫した挙動が実現されます。
 
 </details>
 
@@ -118,6 +172,15 @@ FlexFox 上で Firefox Color を有効にするには、Firefox Color サイト�
 <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
 
 CSS変数 `--uc-bookmark-folder-*` を編集してアイコンの色・サイズ・位置を調整したり、`../icons/bookmark/` フォルダー内の `folder*.svg` ファイルを差し替えて好きなアイコンに変更することができます。
+
+</details>
+
+<details>  
+<summary>🚀 <b>新機能：ネイティブ縦型タブと Sidebery の統合</b> <i>《クリックで展開》</i> 👇</summary>
+
+* FlexFox は、ネイティブ縦型タブと Sidebery の動作を統合しました。Sidebery がアクティブなときは、ネイティブ縦型タブが自動的に非表示になり、サイドバーのツールバーは Sidebery の上部にカラー付きの細いストライプとして折りたたまれます。
+* サイドバーのツールや拡張機能を開くなど Sidebery が非アクティブな状態になると、ネイティブ縦型タブが自動的に復元され、Sidebery が使えない場合の代替として機能します。
+* ネイティブ縦型タブは Sidebery と同じレイアウトと挙動を持ち、展開幅・アニメーション速度・トリガー領域といった変数設定にも対応しています。常時展開や完全非表示、全画面モード（<kbd>F11</kbd>）での自動非表示にも対応し、両者を切り替える際にも自然で一貫した操作体験が得られます。
 
 </details>
 
@@ -152,6 +215,13 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.6.6**
+* Nightly v141の変更によってmacOS風ウィンドウ操作ボタンが表示されなくなっていた問題を修正しました。
+  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
+* メニュー内で欠けていたアイコンを追加・補完しました。
+* 新オプション`uc.flex.auto-hide-navbar-icons`を追加しました。このオプションを有効にすると、ナビゲーションバーのツールボタンアイコンが自動的に非表示になり、ホバー時にのみ表示されるようになります。ウィンドウ操作ボタン、URLバー、FlexFoxロゴのサイドバー切り替えボタンは常に表示されます。ただし、サイドバーボタンがナビゲーションバーの最左端・最右端以外の位置に移動された場合や、`uc.flex.revert-to-original-sidebar-icon`オプションが有効な場合は、このボタンも自動非表示の対象となります。
+* 大きな改良点として、FlexFoxはFirefoxのテーマに合わせてSideberyの背景色を自動で切り替えられるようになりました。この機能を使用するには、Sideberyの「設定」→「外観」→「カラースキーム」で「firefox」を選択してください。
 
 **v3.6.5**
 * テーマとの互換性を強化。Firefoxの組み込みテーマ以外を使用している場合、ツールバーの色が自動的にテーマに従うようになりました。`uc.flex.allow-addons-to-change-toolbar-color` オプションは、Firefox Color を背景画像なしで使用する場合のみ必要です。

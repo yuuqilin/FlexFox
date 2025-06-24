@@ -257,6 +257,12 @@
     }
     --uc-web-content-radius-box: 8px;
 
+    /* Navbar icon auto-hide animation settings */
+    --uc-autohide-navbar-icons-duration: 0.7s; /* Duration of fade-out transition when hiding navbar icons */
+    --uc-hover-navbar-icons-duration: 0.3s; /* Duration of fade-in transition when showing navbar icons on hover */
+    --uc-autohide-navbar-icons-type: ease; /* Easing type for navbar icon fade-in/out transitions */
+    --uc-collapse-navbar-icons-duration: 0.28s; /* Duration of visibility collapse transition to remove icon spacing */
+
     /* Sidebar expand/collapse animation settings */
     --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
     --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */

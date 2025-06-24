@@ -28,27 +28,26 @@
 /* Auto hide icons on the Nav Bar */
 @media -moz-pref("uc.flex.auto-hide-navbar-icons") and (not -moz-pref("uc.flex.fully-hide-toolbox")) {
     :root:not([customizing], [inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
-        #menubar-items,
-        #nav-bar-customization-target
-            *:not(#urlbar-container):not(#urlbar-container *):not(
-                #sidebar-button:is(:first-child, [sidebar-positionend]:last-child)
-            ),
-        #PersonalToolbar,
-        #PanelUI-button {
-            opacity: 0 !important;
-            transition: opacity 0.7s ease !important;
+        #navigator-toolbox:not(:hover) {
+            #main-menubar > menu:not([open]),
+            toolbarbutton:not(#urlbar-container *):not(#customizationui-widget-panel *):not(
+                    #sidebar-button:is(:first-child, [sidebar-positionend]:last-child)
+                ):not(.titlebar-button):not([open]):not(#downloads-button[progress]),
+            #search-container:not(:focus-within),
+            #zoom-controls,
+            #edit-controls {
+                opacity: 0 !important;
+                transition: opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
+            }
         }
 
         #navigator-toolbox:hover {
-            #menubar-items,
-            #nav-bar-customization-target
-                *:not(#urlbar-container):not(#urlbar-container *):not(
-                    #sidebar-button:is(:first-child, [sidebar-positionend]:last-child)
-                ),
-            #PersonalToolbar,
-            #PanelUI-button {
-                opacity: 1 !important;
-                transition: opacity 0.3s ease !important;
+            #main-menubar > menu,
+            toolbarbutton,
+            #search-container,
+            #zoom-controls,
+            #edit-controls {
+                transition: opacity var(--uc-hover-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
             }
         }
     }

@@ -193,20 +193,22 @@
     > #page-action-buttons > #star-button-box:not([open]) > #star-button:not([starred]),
     > #tracking-protection-icon-container:not([open]) {
         opacity: 0;
-        transition: 0.15s ease-in-out 0.15s;
+        transition: opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
     }
     > #identity-box {
         > #identity-permission-box:not([open]),
         > #notification-popup-box:not([open]) {
             visibility: collapse;
             opacity: 0;
-            transition: 0.15s ease-in-out 0.15s;
+            transition:
+                opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type),
+                visibility var(--uc-collapse-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
         }
     }
 }
 
-.urlbar-input-container {
-    transition: 0.15s ease-in-out 0.15s;
+#urlbar-container:hover {
+    transition: opacity var(--uc-hover-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
 }
 
 /* Searchmode Switcher */
@@ -281,12 +283,14 @@
     }
 }
 
+/*
 #page-action-buttons {
     transition: opacity 0.15s ease;
 }
 #tracking-protection-icon-container {
     transition: opacity 0.15s ease;
 }
+*/
 
 /* Searchbar color */
 #searchbar {
