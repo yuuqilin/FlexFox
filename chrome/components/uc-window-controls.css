@@ -184,7 +184,7 @@
             }
         }
         /* If the second item is the bookmarks toolbar, add extra left padding for proper spacing */
-        #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):nth-child(2)#personal-bookmarks {
+        #nav-bar-customization-target > #personal-bookmarks:nth-child(2) {
             padding-left: var(--uc-nav-bar-second-bookmarks-padding-left) !important;
         }
     }

@@ -7,14 +7,10 @@
             margin-bottom: var(--uc-autohide-bottom);
         }
         #navigator-toolbox {
-            transition: margin-bottom var(--uc-tabs-hide-animation-duration) ease-out
-                var(--uc-tabs-hide-animation-delay) !important;
-            /**
-             * When automatic hiding of the bookmarks toolbar is disabled and Sidebery is active,
-             * set z-index to 0 so that Sidebery can appear above the bookmarks toolbar.
-             * In other cases, it should be set to 3 so horizontal tabs can appear above the content area.
-             */
-            --browser-area-z-index-toolbox: var(--uc-sb-bm-disable-autohide-z-index, 3);
+            transition:
+                background-color var(--inactive-window-transition),
+                margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay),
+                z-index 0ms linear calc(var(--uc-autohide-toolbar-delay) + 80ms + 10ms) !important;
         }
         #TabsToolbar:not([customizing]) {
             visibility: hidden;
@@ -37,7 +33,16 @@
             margin-bottom: var(--uc-autohide-navigator-bottom);
         }
         #navigator-toolbox:hover {
-            transition-delay: var(--uc-autohide-navigator-delay) !important;
+            /**
+             * When automatic hiding of the bookmarks toolbar is disabled and Sidebery is active,
+             * set z-index to 0 so that Sidebery can appear above the bookmarks toolbar.
+             * In other cases, it should be set to 3 so horizontal tabs can appear above the content area.
+             */
+            --browser-area-z-index-toolbox: var(--uc-sb-bm-disable-autohide-z-index, 3);
+            transition:
+                background-color var(--inactive-window-transition),
+                margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-autohide-navigator-delay),
+                z-index 0ms linear 0ms /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
             /* Direct child selectors can be used starting from version 133 */
             #TabsToolbar {
                 visibility: var(--uc-autohide-tabstoolbar-visibility);

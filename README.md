@@ -20,16 +20,12 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.7**
-* Improved the visibility behavior of `uc.flex.auto-hide-navbar-icons`. Buttons that open popups now remain visible along with their menus, even when not hovered.
-* Standardized animation for hiding buttons in the URL bar, navigation bar, and bookmarks toolbar. You can adjust the transition by copying the following variables from `uc-variables.css` and overriding them in `uc-user-settings.css`:
-
-  ```css
-  --uc-autohide-navbar-icons-duration
-  --uc-hover-navbar-icons-duration
-  --uc-autohide-navbar-icons-type
-  --uc-collapse-navbar-icons-duration
-  ```
+**🦊 v3.6.8**
+* Fixed incorrect hover highlight sizing on the sidebar toggle button caused by Nightly 142.
+* Improved `uc.flex.enable-rounded-web-content`: page containers now display shadows and rounded corners correctly without clipping. The underlying styles were completely rewritten for better performance and reduced complexity.
+* Changed how z-index is handled for the sidebar and navigation bar — now they elevate dynamically on hover instead of using static values.
+* Fixed an issue where the sidebar toolbar could not fully expand when "Expand sidebar on hover" was enabled and Sidebery was active.
+* Improved compatibility between the Sidebar Header and theme backgrounds when using the native horizontal tabs layout.
 
 <!-- END What's New -->
 
@@ -219,6 +215,17 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.6.7**
+* Improved the visibility behavior of `uc.flex.auto-hide-navbar-icons`. Buttons that open popups now remain visible along with their menus, even when not hovered.
+* Standardized animation for hiding buttons in the URL bar, navigation bar, and bookmarks toolbar. You can adjust the transition by copying the following variables from `uc-variables.css` and overriding them in `uc-user-settings.css`:
+
+  ```css
+  --uc-autohide-navbar-icons-duration
+  --uc-hover-navbar-icons-duration
+  --uc-autohide-navbar-icons-type
+  --uc-collapse-navbar-icons-duration
+  ```
 
 **v3.6.6**
 * Fixed an issue caused by Nightly v141 that prevented macOS-style window control buttons from appearing.

@@ -8,6 +8,11 @@
 
 /* Remove background fill from sidebar buttons */
 #sidebar-button {
+    /* Fix missing icon height caused by a regression in Nightly 142 */
+    .toolbarbutton-icon {
+        width: 16px;
+        height: 16px;
+    }
     &:not(:hover) {
         --toolbarbutton-active-background: transparent !important;
     }
@@ -108,7 +113,7 @@
             max-height: 100%;
             max-width: 100%;
             min-width: var(--uc-sb-sidebar-hover-width);
-            background-color: var(--uc-toolbar-bgcolor);
+            background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color));
             background-image: inherit;
             /* Enable transitions for discrete properties like overflow or background-image */
             transition-behavior: allow-discrete;
@@ -163,7 +168,7 @@
         /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
         @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
             :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
+                --sidebar-background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
                 #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                     max-width: var(--uc-sidebar-stripe-width);
                     min-width: var(--uc-sidebar-stripe-width);
@@ -176,7 +181,7 @@
                     [titlepreface*="\200d "]
                 )
                 & {
-                --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
+                --sidebar-background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
                 #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                     max-width: var(--uc-sidebar-stripe-width);
                     min-width: var(--uc-sidebar-stripe-width);
@@ -435,6 +440,10 @@
         --uc-sb-sidebar-main-hover-max-height: 100%;
         --uc-sb-sidebar-main-hover-height: fit-content;
         --uc-sb-vertical-tabs-display: none;
+        /*
+        --uc-sb-sidebar-main-background-duration: var(--uc-autohide-transition-duration);
+        --uc-sb-sidebar-main-background-delay: calc(var(--uc-autohide-sidebar-delay) + 10ms);
+        */
         --uc-sb-sidebar-main-background-image: none;
         @media -moz-pref("uc.flex.enable-gradient-highlight") {
             --uc-sb-sidebar-main-background-image: var(--uc-gradient-highlight);
@@ -459,6 +468,8 @@
         }
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             --uc-sb-sidebar-main-opacity: 0;
+            --uc-sb-sidebar-main-opacity-duration: 0ms;
+            --uc-sb-sidebar-main-opacity-delay: 0ms;
 
             &:hover {
                 --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
@@ -467,6 +478,8 @@
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 --uc-sb-sidebar-main-opacity: 0;
+                --uc-sb-sidebar-main-opacity-duration: 0ms;
+                --uc-sb-sidebar-main-opacity-delay: 0ms;
 
                 &:hover {
                     --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
@@ -494,14 +507,22 @@
              * override with `var(--uc-hover-sidebar-delay)` for synced timing.
              */
             --uc-autohide-sidebar-delay: var(--uc-hover-sidebar-delay);
+            /*
             --uc-sb-sidebar-main-z-delay: var(--uc-hover-sidebar-delay);
+            */
+            --uc-sb-sidebar-main-opacity-duration: var(--uc-hover-transition-duration);
+            --uc-sb-sidebar-main-opacity-delay: calc(var(--uc-hover-sidebar-delay) + 10ms);
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
                 --uc-sb-sidebar-main-opacity: 1;
                 --uc-autohide-sidebar-delay: var(--uc-hover-sidebar-delay);
+                /*
                 --uc-sb-sidebar-main-z-delay: var(--uc-hover-sidebar-delay);
+                */
+                --uc-sb-sidebar-main-opacity-duration: var(--uc-hover-transition-duration);
+                --uc-sb-sidebar-main-opacity-delay: calc(var(--uc-hover-sidebar-delay) + 10ms);
             }
         }
     }
@@ -559,6 +580,7 @@
         /* Enable transitions for discrete properties like overflow or background-image */
         transition-behavior: allow-discrete;
         transition:
+            /*
             min-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             max-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -571,17 +593,21 @@
                 var(--uc-autohide-sidebar-delay),
             overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
-            background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay),
-            background-image var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay),
-            opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 10ms),
-            /**
-             * --uc-sb-sidebar-main-z-delay is undefined by default, so only the first two values apply.
-             * It gets set when `uc.flex.fully-hide-sidebery` is enabled or in fullscreen mode. 
+            background-color var(--uc-sb-sidebar-main-background-duration, 0ms) var(--uc-autohide-transition-type)
+                var(--uc-sb-sidebar-main-background-delay, 0ms),
+            background-image var(--uc-sb-sidebar-main-background-duration, 0ms) var(--uc-autohide-transition-type)
+                var(--uc-sb-sidebar-main-background-delay, 0ms),
+            */
+            opacity var(--uc-sb-sidebar-main-opacity-duration, var(--uc-autohide-transition-duration))
+                var(--uc-autohide-transition-type)
+                var(--uc-sb-sidebar-main-opacity-delay, calc(var(--uc-autohide-sidebar-delay) + 10ms)),
+            /** 
+             * z-index is a discrete property and doesn't support transition duration.
+             * Add a delay equal to other properties' delay + duration
+             * so the z-index change happens only after the animation finishes. 
              */
-                z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
+                z-index 0ms linear
+                calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms);
     }
     #sidebar-main:hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-height) !important;
@@ -598,11 +624,24 @@
          * We keep the later rule as-is, since this one will be removed
          * after Firefox v140, when it’s no longer needed.
          */
-        z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating)) !important;
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") and (-moz-pref("sidebar.revamp") not -moz-pref("sidebar.verticalTabs")) {
+            :root:not([titlepreface*="\180e "]) & {
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+            }
+        }
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+        }
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+            }
+        }
         background-color: var(--uc-bgcolor) !important;
         background-image: inherit !important;
         opacity: 1;
         transition:
+            /*
             min-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay),
             max-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -614,13 +653,12 @@
             width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
             overflow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay),
-            background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay),
-            background-image var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay),
+            background-color 0ms var(--uc-autohide-transition-type) 0ms,
+            background-image 0ms var(--uc-autohide-transition-type) 0ms,
+            */
             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 calc(var(--uc-hover-sidebar-delay) + 10ms),
-            z-index 0s linear var(--uc-sb-sidebar-main-z-delay);
+            z-index 0s linear calc(var(--uc-hover-sidebar-delay) - 10ms);
     }
 
     @media -moz-pref("sidebar.visibility", "expand-on-hover") {
@@ -725,7 +763,25 @@
                 --uc-sb-sidebar-main-width,
                 var(--uc-sidebar-main-width)
             ) !important; /* Use !important to override the max-width styles in Nightly (v135) */
-            z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+
+            /** 
+             * Raise the z-index of #sidemain (native vertical tabs) on hover
+             * so it can appear above #tabbrowser-tabbox when expanded.
+             * When not hovering, keep the z-index low so the tab box shadow stays on top.
+             */
+            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                :root:not([titlepreface*="\180e "]) &:hover {
+                    z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                }
+            }
+            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+            }
+            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                }
+            }
             /* This transition is already covered by the one defined above, so it's commented out. */
             /* transition: z-index 0s linear var(--uc-sb-sidebar-main-z-delay); */
             background: inherit;
@@ -1389,7 +1445,8 @@
 
     /* Show all tool buttons on hover */
     .tools-and-extensions.actions-list[orientation="vertical"]:hover > moz-button[type="icon ghost"]:not(:last-child),
-    .tools-and-extensions.actions-list[orientation="horizontal"]:hover > moz-button[type="icon ghost"]:not(:first-child) {
+    .tools-and-extensions.actions-list[orientation="horizontal"]:hover
+        > moz-button[type="icon ghost"]:not(:first-child) {
         opacity: 1 !important;
         transform: translateY(0px) !important;
         visibility: visible !important;
@@ -1434,8 +1491,14 @@
     }
 
     @media -moz-pref("sidebar.visibility", "expand-on-hover") {
-        .tools-and-extensions.actions-list[orientation="horizontal"] {
-            width: -moz-available !important;
+        .tools-and-extensions.actions-list {
+            &[orientation="horizontal"] {
+                width: -moz-available !important;
+                margin-block-start: 0 !important;
+            }
+            &[orientation="vertical"] {
+                height: auto !important;
+            }
         }
     }
 }

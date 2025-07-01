@@ -20,16 +20,12 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.6.7**
-* 优化了 `uc.flex.auto-hide-navbar-icons` 的显示逻辑。现在即使鼠标未悬停，打开菜单的按钮也会和菜单一起保持可见。
-* 统一了地址栏、导航栏和书签工具栏隐藏按钮的动画效果。你可以将下列变量从 `uc-variables.css` 中复制到 `uc-user-settings.css` 并修改，以自定义转场效果：
-
-  ```css
-  --uc-autohide-navbar-icons-duration
-  --uc-hover-navbar-icons-duration
-  --uc-autohide-navbar-icons-type
-  --uc-collapse-navbar-icons-duration
-  ```
+**🦊 v3.6.8**
+* 修复了Nightly 142导致的侧栏开关按钮在悬停时高亮尺寸错误的问题。
+* 改进了 `uc.flex.enable-rounded-web-content` 的显示效果：现在网页容器的阴影和圆角不会被裁剪，相关样式已重构，复杂度大幅降低。
+* 调整了侧栏与导航栏的层叠样式处理方式，从原来的固定数值改为悬停时动态提升。
+* 修复在启用“悬停时展开侧栏”并启用 Sidebery 时，侧栏工具栏无法完全展开的问题。
+* 优化了在使用原生水平标签页布局时，侧栏标题栏与主题背景颜色之间的显示兼容性。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -213,6 +209,17 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.6.7**
+* 优化了 `uc.flex.auto-hide-navbar-icons` 的显示逻辑。现在即使鼠标未悬停，打开菜单的按钮也会和菜单一起保持可见。
+* 统一了地址栏、导航栏和书签工具栏隐藏按钮的动画效果。你可以将下列变量从 `uc-variables.css` 中复制到 `uc-user-settings.css` 并修改，以自定义转场效果：
+
+  ```css
+  --uc-autohide-navbar-icons-duration
+  --uc-hover-navbar-icons-duration
+  --uc-autohide-navbar-icons-type
+  --uc-collapse-navbar-icons-duration
+  ```
 
 **v3.6.6**
 * 修复了由于 Nightly v141 的变更导致 macOS 风格的窗口控制按钮无法显示的问题。

@@ -20,16 +20,12 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.6.7**
-* `uc.flex.auto-hide-navbar-icons` の動作を改善しました。ポップアップを開くボタンは、ホバーしていない場合でもメニューと一緒に表示されたままになります。
-* アドレスバー・ナビゲーションバー・ブックマークツールバーの非表示ボタンのアニメーションを統一しました。`uc-variables.css` から以下の変数を `uc-user-settings.css` にコピーして編集することで、遷移効果を調整できます：
-
-  ```css
-  --uc-autohide-navbar-icons-duration
-  --uc-hover-navbar-icons-duration
-  --uc-autohide-navbar-icons-type
-  --uc-collapse-navbar-icons-duration
-  ```
+**🦊 v3.6.8**
+* Nightly 142で発生した、サイドバー切り替えボタンのホバー時のハイライトサイズが正しく表示されない問題を修正しました。
+* `uc.flex.enable-rounded-web-content` の表示を改善。ページコンテナの影や角丸が正常に表示されるようになり、スタイル全体を再構築してパフォーマンスと可読性を向上させました。
+* サイドバーとナビゲーションバーのz-indexの処理を見直し、固定値ではなくホバー時に動的に切り替わるようになりました。
+* 「カーソルを合わせた時にサイドバーを展開する」が有効かつSideberyがアクティブなとき、サイドバーツールバーが完全に展開されない問題を修正しました。
+* ネイティブの横型タブレイアウト使用時に、サイドバーのヘッダーとテーマの背景色の表示がより自然になるよう調整しました。
 
 ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -215,6 +211,17 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.6.7**
+* `uc.flex.auto-hide-navbar-icons` の動作を改善しました。ポップアップを開くボタンは、ホバーしていない場合でもメニューと一緒に表示されたままになります。
+* アドレスバー・ナビゲーションバー・ブックマークツールバーの非表示ボタンのアニメーションを統一しました。`uc-variables.css` から以下の変数を `uc-user-settings.css` にコピーして編集することで、遷移効果を調整できます：
+
+  ```css
+  --uc-autohide-navbar-icons-duration
+  --uc-hover-navbar-icons-duration
+  --uc-autohide-navbar-icons-type
+  --uc-collapse-navbar-icons-duration
+  ```
 
 **v3.6.6**
 * Nightly v141の変更によってmacOS風ウィンドウ操作ボタンが表示されなくなっていた問題を修正しました。

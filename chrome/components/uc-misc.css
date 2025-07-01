@@ -95,6 +95,8 @@ toolbar:not(#TabsToolbar) > #search-container {
     }
 }
 */
+/* When `uc.flex.enable-rounded-web-content` is enabled,
+   the following rule will be overridden by uc-browser.css */
 #tabbrowser-tabpanels {
     background: hsl(240, 4%, 10%) !important;
 }

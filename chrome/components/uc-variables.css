@@ -36,7 +36,7 @@
     @media (prefers-color-scheme: dark) {
         --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
 
-        @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
+        @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
             &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
                 --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
                 --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
@@ -71,7 +71,7 @@
     @media (prefers-color-scheme: light) {
         --uc-bgcolor: #f1f5f9; /* Background color of the toolbar */
 
-        @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
+        @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
             &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
                 --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
                 --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
@@ -255,7 +255,7 @@
     @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
         --uc-web-content-margin-large: 8px;
     }
-    --uc-web-content-radius-box: 8px;
+    --uc-web-content-radius: 8px;
 
     /* Navbar icon auto-hide animation settings */
     --uc-autohide-navbar-icons-duration: 0.7s; /* Duration of fade-out transition when hiding navbar icons */
@@ -527,14 +527,6 @@
                     var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
                     var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
             }
-
-            --uc-devtools-toolbox-margin-box: 0 var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
-                var(--uc-web-content-margin-large, var(--uc-web-content-margin-small)) var(--uc-web-content-margin-side);
-            @media not -moz-pref("sidebar.position_start") {
-                --uc-devtools-toolbox-margin-box: 0 var(--uc-web-content-margin-side)
-                    var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
-                    var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
-            }
         }
     }
 
@@ -594,10 +586,11 @@
     }
 
     /* Override the default background color with a custom value when add-on color changes are not allowed */
-    @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
+    @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
         &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
             --uc-identity-btn-bgcolor: var(--uc-toolbar-bgcolor);
             --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);
+            --uc-sidebar-header-bgcolor: var(--uc-toolbar-bgcolor);
         }
     }
 
@@ -734,22 +727,22 @@
             &:not([titlepreface*="\180e "]) {
                 @media -moz-pref("sidebar.position_start") {
                     --uc-sb-web-content-radius-top-left: 0;
-                    --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius-box);
+                    --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius);
                     @media -moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox") {
-                        --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius-box);
+                        --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius);
                     }
                 }
                 @media not -moz-pref("sidebar.position_start") {
-                    --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius-box);
+                    --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius);
                     --uc-sb-web-content-radius-top-right: 0;
                     @media -moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox") {
-                        --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius-box);
+                        --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius);
                     }
                 }
                 @media not (-moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox")) {
                     &:is([titlepreface*="\200b "], [titlepreface*="\200c "]) {
-                        --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius-box);
-                        --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius-box);
+                        --uc-sb-web-content-radius-top-left: var(--uc-web-content-radius);
+                        --uc-sb-web-content-radius-top-right: var(--uc-web-content-radius);
                     }
                 }
             }

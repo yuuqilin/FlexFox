@@ -25,8 +25,47 @@
     min-width: var(--uc-sb-sidebar-width) !important;
     width: var(--uc-sb-sidebar-width) !important;
     max-width: var(--uc-sb-sidebar-width) !important;
-    --browser-area-z-index-sidebar: 3;
-    z-index: 100;
+    background-image: linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor));
+    /** 
+     * Raise the z-index of Sidebery on hover
+     * so it can appear above #tabbrowser-tabbox.
+     * When not hovering, keep the z-index low so the tab box shadow stays on top. 
+     */
+    @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+        :root:not([titlepreface*="\180e "]) & {
+            /** 
+             * z-index is a discrete property and doesn't support transition duration.
+             * Add a delay equal to other properties' delay + duration
+             * so the z-index change happens only after the animation finishes. 
+             */
+            transition: z-index 0ms linear
+                calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms);
+            @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
+                transition: none;
+            }
+            &:hover {
+                transition: z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms);
+                --browser-area-z-index-sidebar: 3;
+                /** 
+                 * In vertical tab mode, Firefox uses --browser-area-z-index-sidebar
+                 * to raise the sidebar's z-index when it needs to overlay the page (e.g. on hover).
+                 * In horizontal tab mode, this variable isn't applied, and the sidebar keeps its default z-index.
+                 * To make Sidebery appear above the page content in that case, set its z-index directly.
+                 */
+                z-index: 100;
+            }
+        }
+    }
+    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        --browser-area-z-index-sidebar: 3;
+        z-index: 100;
+    }
+    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            --browser-area-z-index-sidebar: 3;
+            z-index: 100;
+        }
+    }
 
     @media not -moz-pref("sidebar.position_start") {
         direction: rtl;
@@ -69,13 +108,7 @@
                 }
             }
 
-            /* 
-             * !TEMPORARY: Since Firefox v140, #sidebar is no longer a sibling of #sidebar-header.
-             * Keep the "+ #sidebar" selector for compatibility with pre-v140 versions.
-             * Can be removed once v140 is officially released. 
-             */
             &:hover #sidebar,
-            #sidebar-header:has(#sidebar-switcher-target.active) + #sidebar,
             #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -104,7 +137,6 @@
             }
 
             &:hover #sidebar,
-            #sidebar-header:has(#sidebar-switcher-target.active) + #sidebar,
             #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -131,7 +163,6 @@
             }
 
             &:hover #sidebar,
-            #sidebar-header:has(#sidebar-switcher-target.active) + #sidebar,
             #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -160,14 +191,15 @@
         border-inline: 1px solid rgb(80, 80, 80);
         border-inline-width: 0px 1px;
     }
-    */
 
     &:not([sidebar-positionend]) > :-moz-locale-dir(rtl),
     &[sidebar-positionend] > * {
         border-inline-width: 1px 0px;
     }
+    */
 
     /* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
+    /*
     &:not([sidebar-positionend]):hover ~ #appcontent #statuspanel {
         inset-inline: auto 0px !important;
     }
@@ -175,4 +207,5 @@
         margin-inline: 0px !important;
         border-left-style: solid !important;
     }
+    */
 }
