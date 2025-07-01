@@ -2,14 +2,20 @@
 @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
     :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-            #browser:-moz-window-inactive {
-                background-color: var(--toolbox-bgcolor) !important;
+            #browser {
+                background-image: none !important;
+                &:-moz-window-inactive {
+                    background-color: var(--uc-bgcolor) !important;
+                }
             }
         }
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             &[titlepreface*="\180e "] {
-                #browser:-moz-window-inactive {
-                    background-color: var(--toolbox-bgcolor) !important;
+                #browser {
+                    background-image: none !important;
+                    &:-moz-window-inactive {
+                        background-color: var(--uc-bgcolor) !important;
+                    }
                 }
             }
         }

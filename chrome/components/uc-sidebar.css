@@ -114,7 +114,7 @@
             max-width: 100%;
             min-width: var(--uc-sb-sidebar-hover-width);
             background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color));
-            background-image: inherit;
+            background-image: initial;
             /* Enable transitions for discrete properties like overflow or background-image */
             transition-behavior: allow-discrete;
             transition:
@@ -144,7 +144,7 @@
             overflow: hidden;
             padding: 0 !important;
             background-color: var(--uc-sb-sidebar-header-stripe);
-            background-image: var(--uc-gradient-highlight, inherit);
+            background-image: var(--uc-gradient-highlight, initial);
             will-change: min-height, max-height, min-width, overflow, background-color, opacity;
             /* Enable transitions for discrete properties like overflow or background-image */
             transition-behavior: allow-discrete;
