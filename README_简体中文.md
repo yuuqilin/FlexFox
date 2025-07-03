@@ -20,9 +20,8 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.6.9**
-* 修复 v3.6.8 引起的问题：在原生水平标签页模式下，侧栏标题条的颜色消失。
-* 修复 v3.6.8 引起的问题：在原生水平标签页模式下，打开侧栏标题时，Sidebery 无法保持展开状态。
+**🦊 v3.6.10**
+* 修复了 v3.6.8 引入的问题：当启用“悬停时展开侧栏”并处于 Sidebery 活动状态时，展开后的侧栏工具栏无法正常显示。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -207,6 +206,10 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <summary>💬 <b>历史更新</b></summary>
 
+**v3.6.9**
+* 修复 v3.6.8 引起的问题：在原生水平标签页模式下，侧栏标题条的颜色消失。
+* 修复 v3.6.8 引起的问题：在原生水平标签页模式下，打开侧栏标题时，Sidebery 无法保持展开状态。
+
 **v3.6.8**
 * 修复了Nightly 142导致的侧栏开关按钮在悬停时高亮尺寸错误的问题。
 * 改进了 `uc.flex.enable-rounded-web-content` 的显示效果：现在网页容器的阴影和圆角不会被裁剪，相关样式已重构，复杂度大幅降低。
@@ -298,60 +301,6 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 > * 此性能问题现已修复，并在原有基础上做了一定优化。
 > * 相比 v3.5.8，界面响应速度约提升了 **17 倍**。
 > * ⬆️ 强烈建议尽快升级到此版本。
-
-**v3.5.8**
-* 提升主题背景与书签工具栏在多种布局状态下的兼容性，包括 `Lock Sidebery`、`Collapse sidebar`、`Hide tabs and sidebar`、`Move sidebar to the right` 等情境。
-* 补全 Firefox 原生菜单中 AI 聊天机器人和书签工具栏的勾选图标。
-* 启用 `uc.flex.enable-rounded-web-content` 时，状态栏也会应用圆角样式。
-* 重命名部分变量，使其更清晰易用。
-
-**v3.5.7**
-* 修复了 v3.5.5 引入的问题：当书签工具栏自动展开时，主题背景图在导航栏与工具栏之间出现断层，无法连续衔接。
-
-**v3.5.6**
-* 修复了在侧边栏置于右侧、且启用 `uc.flex.fully-hide-sidebery`、使用 `Hide Sidebery` 快捷键或进入全屏模式时出现的多个显示异常。
-* 重构了右侧侧边栏的排版逻辑，简化了规则，减少判断流程的复杂性。
-
-**v3.5.5**
-* 修复 Sidebery 放在右侧，并启用 `uc.flex.disable-sidebery-autohide`、快捷键 `Hide Sidebery` 或进入全屏模式时，展开侧边栏彩带后，彩带中的工具按钮显示错位的问题。
-* 导航栏高度已调整为 Firefox 默认值，整体界面更为紧凑。而在旧版 FlexFox 中，导航栏高度更高，在视觉上与侧边栏的宽度更为接近。
-* 新增选项 `uc.flex.increase-navbar-height`，启用后可将导航栏高度恢复为旧版 FlexFox 的样式。
-
-**v3.5.4**
-* 提升了兼容性：当启用快捷键 `Lock Sidebery` 或设定 `uc.flex.disable-sidebery-autohide` 固定原生垂直标签页为展开状态时，即使通过侧边栏按钮切换为折叠状态，原生垂直标签页的版式也不会错乱，能保持一致的显示效果。
-* 启用 `Lock Sidebery` 后，原生垂直标签页的宽度现在会与 Sidebery 保持一致，切换时不会因宽度变化而造成画面跳动。同时，在此状态下启用 `uc.flex.increase-sidebery-expanded-width`，也会一并扩大原生面板的展开宽度。
-
-**v3.5.3**
-* 修复了 v3.5.2 引入的问题：启用 `uc.flex.enable-rounded-web-content` 时，开发者工具面板在嵌入主窗口时无法调整大小。
-* 优化了地址栏的显示与行为：
-  * 修复了地址栏中权限相关图标（如定位请求、通知、摄像头/麦克风共享等）的错位问题。
-  * 当鼠标未悬停时，隐藏更多图标，使默认状态下更简洁。
-  * 确保阅读模式和画中画图标在功能启用时始终显示。
-* 改进了 `uc-pdf.js.css` 的 PDF 检测与样式支持。现在不仅支持本地 PDF 文件，也能正确识别并样式化一些虽然 URL 不以 `.pdf` 结尾、但页面本身是 PDF 查看器的学术网站。
-* 过去使用 `Lock Sidebery` 快捷键将 Sidebery 保持展开时，悬停动画会导致页面元素发生轻微抖动，通常需要启用 `uc.flex.disable-sidebery-hover-animations` 选项来规避这个问题。现在通过改进行为判断机制，在 Sidebery 固定展开时会自动停用悬停动画，无需额外设置，因此该选项已不再需要，相关设置也已被移除。
-
-**v3.5.2**
-* 修复启用 `uc.flex.move-pip-volume-to-top` 时，画中画窗口的音量滑块长度过短的问题。
-* 新增选项 `uc.flex.disable-flexfox`，可在 Firefox 运行中立即停用所有 FlexFox 样式与功能。
-* 新增选项 `uc.flex.skip-loading-uc-*.css`，允许选择性跳过加载位于 `./components/` 和 `./content/` 目录下的特定 `uc-*.css` 文件。例如设置 `uc.flex.skip-loading-uc-newtab.css` 为 true，可跳过加载 `./content/uc-newtab.css` 文件。
-
-**v3.5.1**
-* 修复 v3.4.7 引入的回归问题：当启用 `uc.flex.disable-sidebery-autohide` 或使用快捷键 `Lock Sidebery` 时，原生垂直标签页在悬停时会发生闪烁，若分栏在右侧时，展开位置也会异常。
-* 让画中画 (PiP) 的音量控制按钮始终可见。致谢 Reddit 用户 u/endgame0。
-* 新增选项 `uc.flex.move-pip-volume-to-top`，将 PiP 的音量按钮移至上方（布尔值）。致谢 Reddit 用户 u/endgame0。
-* 新增选项 `uc.flex.dim-urlbar-popup-backdrop`，在地址栏下拉建议列表展开时暗化背景。支持数值 `0`（关闭）至 `2`，数值越大，背景越暗。
-* 新增选项 `uc.flex.enable-rounded-web-content`，为网页内容区域添加边距、圆角和阴影。可设置为 `0`（关闭）至 `2`，数值越大，边距越宽。启用后，网页内容呈现出柔和的卡片式悬浮感，整体视觉风格类似 Zen 或 Microsoft Edge 浏览器。
-  可通过以下变量快速调整外观：`--uc-web-content-margin-small`、`--uc-web-content-margin-large` 和 `--uc-web-content-radius-box`。
-
-  下图为 `uc.flex.enable-rounded-web-content` 设为 `1` 时的 FlexFox 显示效果：
-  
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="FlexFox 卡片式网页显示效果预览" width="96%" />
-
-**v3.5.0**
-* 修复了在 Firefox v141 及以上版本中，原生垂直标签页的固定标签显示为垂直排列的问题（应为水平排列）。
-* 修复了当固定标签数量少于 4 个时，标签宽度溢出的问题。
-* 修复了当侧边栏工具按钮少于 6 个时，设置按钮位置不对齐，以及工具栏展开方向错误的问题（原本应水平展开，却变为垂直）。
-* 统一了原生垂直标签页中侧边栏工具按钮的排列样式。无论 Sidebery 是否启用，侧边栏是否展开，按钮数量是多是少，展开或折叠状态下，均能保持一致、整齐的间距与布局。
 
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))

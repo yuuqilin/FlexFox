@@ -168,7 +168,9 @@
         /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
         @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
             :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                /*
                 --sidebar-background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
+                */
                 #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                     max-width: var(--uc-sidebar-stripe-width);
                     min-width: var(--uc-sidebar-stripe-width);
@@ -181,7 +183,9 @@
                     [titlepreface*="\200d "]
                 )
                 & {
+                /*
                 --sidebar-background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
+                */
                 #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                     max-width: var(--uc-sidebar-stripe-width);
                     min-width: var(--uc-sidebar-stripe-width);
@@ -451,7 +455,9 @@
         --uc-sidebar-main-stripe: var(--uc-sb-sidebar-header-stripe);
         @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
             :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                /*
                 --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
+                */
                 --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
             }
         }
@@ -462,7 +468,9 @@
                     [titlepreface*="\200d "]
                 )
                 & {
+                /*
                 --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
+                */
                 --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
             }
         }
@@ -624,7 +632,7 @@
          * We keep the later rule as-is, since this one will be removed
          * after Firefox v140, when it’s no longer needed.
          */
-        @media not -moz-pref("uc.flex.disable-sidebery-autohide") and (-moz-pref("sidebar.revamp") not -moz-pref("sidebar.verticalTabs")) {
+        @media (not -moz-pref("uc.flex.disable-sidebery-autohide")) and (-moz-pref("sidebar.revamp") and -moz-pref("sidebar.verticalTabs")) {
             :root:not([titlepreface*="\180e "]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
             }

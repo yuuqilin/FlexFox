@@ -20,9 +20,8 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.9**
-* Fixed a regression in v3.6.8 where the Sidebar Header Stripe color was missing in native horizontal tab mode.
-* Fixed a regression in v3.6.8 where opening the Sidebar Header would no longer keep Sidebery expanded in native horizontal tab mode.
+**🦊 v3.6.10**
+* Fixed a regression introduced in v3.6.8 where the expanded sidebar toolbar failed to appear when Sidebery was active and "Expand sidebar on hover" was enabled.
 
 <!-- END What's New -->
 
@@ -213,6 +212,10 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 <!-- END Release Note -->
 
+**v3.6.9**
+* Fixed a regression in v3.6.8 where the Sidebar Header Stripe color was missing in native horizontal tab mode.
+* Fixed a regression in v3.6.8 where opening the Sidebar Header would no longer keep Sidebery expanded in native horizontal tab mode.
+
 **v3.6.8**
 * Fixed incorrect hover highlight sizing on the sidebar toggle button caused by Nightly 142.
 * Improved `uc.flex.enable-rounded-web-content`: page containers now display shadows and rounded corners correctly without clipping. The underlying styles were completely rewritten for better performance and reduced complexity.
@@ -305,58 +308,6 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 > * This regression has now been resolved, and performance has also been slightly optimized.
 > * Compared to v3.5.8, the response time is now approximately **17× faster**.
 > * ⬆️ We recommend updating to this version as soon as possible.
-
-**v3.5.8**
-* Improved compatibility of theme backgrounds and the bookmarks toolbar across multiple layout states, including `Lock Sidebery`, `Collapse sidebar`, `Hide tabs and sidebar`, and `Move sidebar to the right`.
-* Restored missing checkmark icons in Firefox's native menus for AI chatbots and the Bookmarks toolbar.
-* Status panel now adopts rounded corners when `uc.flex.enable-rounded-web-content` is enabled.
-* Renamed some variables for better clarity and usability.
-
-**v3.5.7**
-* Fixed a regression from v3.5.5 that caused a visual break in theme background images between the navigation bar and the bookmarks toolbar when the toolbar auto-expanded.
-
-**v3.5.6**
-* Fixed various display issues when the sidebar is on the right and `uc.flex.fully-hide-sidebery`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
-* Refactored sidebar layout logic for right-side positioning to streamline the rules and reduce complexity.
-
-**v3.5.5**
-* Fixed misaligned toolbar buttons inside the sidebar stripe when Sidebery is placed on the right and either `uc.flex.disable-sidebery-autohide`, the `Hide Sidebery` shortcut, or fullscreen mode is active.
-* The navbar height now uses Firefox's default, which has a more compact appearance. In earlier FlexFox versions, the taller navbar was visually closer in size to the sidebar width.
-* Added `uc.flex.increase-navbar-height`, which restores the thicker navbar height from previous FlexFox layouts.
-
-**v3.5.4**
-* Improved compatibility with native vertical tabs when using the `Lock Sidebery` shortcut or enabling `uc.flex.disable-sidebery-autohide`. Even if the sidebar toggle button switches the panel to collapsed mode, the layout remains consistent and unaffected.
-* When `Lock Sidebery` is active, the native vertical tab panel now matches Sidebery's width, preventing layout shifts when switching between them. The `uc.flex.increase-sidebery-expanded-width` option will now also increase the expanded width of the native panel when applicable.
-
-**v3.5.3**
-* Fixed a regression introduced in v3.5.2 where enabling `uc.flex.enable-rounded-web-content` made it impossible to resize the Developer Tools panel when it's docked inside the main browser window.
-* Improved the appearance and behavior of the URL bar:
-  * Fixed misalignment of permission-related icons (e.g. location access, notifications, camera/microphone sharing) that appear within the URL bar.
-  * Hid more icons when the URL bar is not hovered, making it cleaner by default.
-  * Ensured Reader Mode and PiP icons remain visible when those features are active.
-* Improved PDF detection and styling with `uc-pdf.js.css`. Styles now apply correctly not only to local PDF files, but also to PDF pages from academic websites where the URL doesn't end in `.pdf`.
-* Previously, keeping Sidebery open using the `Lock Sidebery` shortcut could cause subtle layout jittering when hovering, due to hover animations. This was usually mitigated by enabling the `uc.flex.disable-sidebery-hover-animations` option. With improved behavior detection, these animations are now automatically disabled when Sidebery is locked open, making the option unnecessary. The option has been deprecated.
-
-**v3.5.2**
-* Fixed an issue where the PiP volume slider was too short when `uc.flex.move-pip-volume-to-top` was enabled.
-* Added a new option `uc.flex.disable-flexfox`, which allows you to instantly disable all FlexFox styles while Firefox is running.
-* Added a new option `uc.flex.skip-loading-uc-*.css`, which lets you selectively skip loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will prevent `./content/uc-newtab.css` from loading.
-
-**v3.5.1**
-* Fixed a regression introduced in v3.4.7 where native vertical tabs would flicker on hover and expand incorrectly when positioned on the right, if `uc.flex.disable-sidebery-autohide` was enabled or the `Lock Sidebery` shortcut was used.
-* Made the picture-in-picture (PiP) volume control button always visible. Credit to u/endgame0 on Reddit.
-* Added a new option: `uc.flex.move-pip-volume-to-top` – moves the PiP volume button to the top (boolean). Credit to u/endgame0 on Reddit.
-* Added a new option: `uc.flex.dim-urlbar-popup-backdrop` – dims the background when the address bar dropdown is open. Accepts values from `0` (disabled) to `2`; higher values increase the dimming effect.
-* Added a new option: `uc.flex.enable-rounded-web-content` – adds margins, rounded corners, and drop shadows around the web content area. Accepts values from `0` (disabled) to `2`; higher values increase the margin. This creates a soft, floating card appearance for web content, resembling the visual style of Zen or Microsoft Edge.
-  You can quickly adjust the appearance using the following variables: `--uc-web-content-margin-small`, `--uc-web-content-margin-large`, and `--uc-web-content-radius-box`.
-
-  Below is a preview of FlexFox with `uc.flex.enable-rounded-web-content` set to `1`: <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
-
-**v3.5.0**
-* Fixed a display issue where pinned tabs in native vertical tabs were incorrectly stacked vertically in Firefox v141+.
-* Fixed an overflow issue with pinned tab width when fewer than 4 tabs are pinned.
-* Fixed misalignment of the settings button in the sidebar when there are 5 or fewer tool buttons, and ensured the toolbar expands horizontally as intended.
-* Standardized the spacing and layout of native vertical tab sidebar tool buttons across all scenarios—whether Sidebery is active or not, the sidebar is expanded or collapsed, and regardless of the number of buttons. The layout now remains clean and consistent at all times.
 
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))

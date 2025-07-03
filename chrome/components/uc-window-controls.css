@@ -217,27 +217,6 @@
     }
 }
 
-/**
- * Increase the z-index of the navigation bar in fullscreen mode  
- * to prevent it from being obscured by the revamped sidebar.
- */
-/*
-@media -moz-pref("sidebar.revamp") {
-    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-        #navigator-toolbox {
-            z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
-        }
-    }
-    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
-            #navigator-toolbox {
-                z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1) !important;
-            }
-        }
-    }
-}
-*/
-
 /* ════════════════════════════════════════════════════════════════════
    ██████╗ ███████╗██████╗ ███████╗ ██████╗ ███╗   ██╗ █████╗ ██╗  ████████╗ ██████╗  ██████╗ ██╗     ██████╗  █████╗ ██████╗ 
    ██╔══██╗██╔════╝██╔══██╗██╔════╝██╔═══██╗████╗  ██║██╔══██╗██║  ╚══██╔══╝██╔═══██╗██╔═══██╗██║     ██╔══██╗██╔══██╗██╔══██╗
