@@ -1,5 +1,189 @@
 @-moz-document regexp("^moz-extension://.*?/sidebar/sidebar.html")
 {
+    #root {
+        /** 
+         * These variables must stay in sync with the identical ones in uc-variables.css.
+         * If you copy and modify them in uc-custom-content.css, be sure to also update
+         * the corresponding variables in uc-user-settings.css to keep both sides consistent. 
+         */
+        /* Sidebar expand/collapse animation settings */
+        --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
+        --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
+        --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
+        --uc-autohide-sidebar-delay: 10ms; /* Delay before collapsing the sidebar */
+        --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar */
+
+        /* Speed up sidebar expand/collapse animation */
+        @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
+            --uc-hover-transition-duration: 100ms;
+            --uc-autohide-sidebar-delay: 1ms;
+            --uc-hover-sidebar-delay: 1ms;
+        }
+        /* Slow down sidebar expand/collapse animation */
+        @media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
+            --uc-autohide-sidebar-delay: 10ms;
+            --uc-hover-sidebar-delay: 350ms;
+            --uc-hover-toolbar-delay: 200ms;
+        }
+
+        /*
+        .NavigationBar {
+            transition:
+                height 50ms ease-in-out 5ms,
+                padding-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+        }
+        .PinnedTabsBar {
+            transition:
+                padding var(--d-fast),
+                padding-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                margin-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+        }
+
+        .PinnedTabsBar .Tab .fav,
+        .PinnedTabsBar .Tab .fav-icon {
+            transition:
+                opacity var(--d-fast),
+                width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+        }
+        .tab-wrapper {
+            transition: margin-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay) !important;
+        }
+        .TabsPanel .new-tab-btns {
+            transition:
+                transform var(--d-fast),
+                opacity var(--d-fast),
+                z-index var(--d-fast) var(--d-fast),
+                margin-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+        }
+        .ScrollBox .bottom-shadow[data-show="true"] + .scroll-container .new-tab-btns {
+            transition:
+                transform var(--d-fast),
+                opacity var(--d-fast),
+                margin-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+        }
+        .tool-btn > svg {
+            transition: margin-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay) !important;
+        }
+        .ScrollBox .Tab {
+            transition:
+                transform var(--d-fast),
+                opacity var(--d-fast),
+                padding var(--d-fast),
+                padding-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                margin var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) !important;
+        }
+        &[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+            display: block !important;
+
+            visibility: hidden;
+            transition-behavior: allow-discrete;
+            transition: visibility var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay) !important;
+        }
+        .Tab[data-pin="false"] .fav {
+            transition: margin var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay) !important;
+        }
+        */
+
+        .Tab:hover {
+            --tabs-inner-gap: 5px !important;
+        }
+
+        &:hover {
+            @media (max-width: 50px) {
+                .Tab .close,
+                .Tab .close-icon {
+                    transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+                }
+            }
+            .NavigationBar {
+                transition:
+                    height 50ms ease-in-out 5ms,
+                    padding-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
+            .PinnedTabsBar {
+                transition:
+                    padding var(--d-fast),
+                    padding-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
+            .PinnedTabsBar .Tab .fav,
+            .PinnedTabsBar .Tab .fav-icon {
+                transition:
+                    opacity var(--d-fast),
+                    width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
+            .tab-wrapper {
+                min-width: var(--tabs-pinned-width);
+                transition: margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay) !important;
+            }
+            .TabsPanel .new-tab-btns {
+                transition:
+                    transform var(--d-fast),
+                    opacity var(--d-fast),
+                    z-index var(--d-fast) var(--d-fast),
+                    margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
+            .ScrollBox .bottom-shadow[data-show="true"] + .scroll-container .new-tab-btns {
+                transition:
+                    transform var(--d-fast),
+                    opacity var(--d-fast),
+                    margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
+            .tool-btn > svg {
+                transition: margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay) !important;
+            }
+            .ScrollBox .Tab {
+                margin-left: 6.6px !important;
+                transition:
+                    transform var(--d-fast),
+                    opacity var(--d-fast),
+                    padding var(--d-fast),
+                    padding-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    margin var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
+            &[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+                visibility: visible;
+                transition: visibility var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay) !important;
+            }
+            .Tab[data-pin="false"] .fav {
+                transition: margin var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay) !important;
+            }
+        }
+    }
+
     /* Add text stroke */
     @media -moz-pref("uc.flex.add-ui-text-stroke") {
         * {
@@ -20,6 +204,7 @@
     @media (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.disable-sidebery-hover-animations")) and (not -moz-pref("uc.flex.fully-hide-sidebery")) and (not (display-mode: fullscreen))
     */
     #root:not([data-nav-inline="true"]) .NavigationBar {
+        padding: 3px 0px 2.5px 6.5px !important;
         .nav-item[data-active="true"] > svg {
             width: 16px !important;
             height: 16px !important;

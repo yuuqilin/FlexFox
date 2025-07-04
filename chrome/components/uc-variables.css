@@ -263,6 +263,11 @@
     --uc-autohide-navbar-icons-type: ease; /* Easing type for navbar icon fade-in/out transitions */
     --uc-collapse-navbar-icons-duration: 0.28s; /* Duration of visibility collapse transition to remove icon spacing */
 
+    /** 
+     * These variables must stay in sync with the identical ones in uc-sidebery.css.
+     * If you copy and modify them in uc-user-settings.css, be sure to also update
+     * the corresponding variables in uc-custom-content.css to keep both sides consistent. 
+     */
     /* Sidebar expand/collapse animation settings */
     --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
     --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */

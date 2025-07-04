@@ -20,8 +20,12 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.6.10**
-* Fixed a regression introduced in v3.6.8 where the expanded sidebar toolbar failed to appear when Sidebery was active and "Expand sidebar on hover" was enabled.
+**🦊 v3.7.0**
+* Improved the expand/collapse animation of Sidebery to eliminate flickering during hover.
+  (Previously, inconsistent transitions in `padding` and auto-calculated `width` caused tabs to shift in multiple steps instead of moving smoothly, resulting in a jittery or shaky visual effect.)
+* Fixed a timing mismatch between the sidebar and Sidebery animations when `uc.flex.sidebery-slow-hover-expand` is enabled.
+* Variables controlling sidebar transition speed are now also defined in `uc-sidebery.css` to allow Sidebery's internal animations to stay in sync with the outer container.
+  If you've customized the animation speed by copying variables from `uc-variables.css` to `uc-user-settings.css`, you must also copy the corresponding definitions (including the correct `@media` query and `#root` selector) from `uc-sidebery.css` to `uc-custom-content.css`, using the same values. This ensures consistent timing across both userChrome and userContent stylesheets.
 
 <!-- END What's New -->
 
@@ -211,6 +215,9 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.6.10**
+* Fixed a regression introduced in v3.6.8 where the expanded sidebar toolbar failed to appear when Sidebery was active and "Expand sidebar on hover" was enabled.
 
 **v3.6.9**
 * Fixed a regression in v3.6.8 where the Sidebar Header Stripe color was missing in native horizontal tab mode.

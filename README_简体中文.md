@@ -20,8 +20,12 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.6.10**
-* 修复了 v3.6.8 引入的问题：当启用“悬停时展开侧栏”并处于 Sidebery 活动状态时，展开后的侧栏工具栏无法正常显示。
+**🦊 v3.7.0**
+* 改进了 Sidebery 的展开与收起动画，解决了悬停时标签页抖动的问题。
+  （旧版在动画过程中，padding 和自动计算的宽度不协调，导致标签页位置阶段性跳动，无法顺畅过渡，看起来会有明显的抖动感。）
+* 修复启用 `uc.flex.sidebery-slow-hover-expand` 后，侧边栏与 Sidebery 的动画时序不同步的问题。
+* 为了让 Sidebery 内部的动画与外部容器保持同步，现在在 `uc-sidebery.css` 中也定义了控制展开动画的变量。
+  如果你曾将 `uc-variables.css` 中的变量复制到 `uc-user-settings.css` 来自定义动画时间，请务必也将对应的定义（包含正确的 `@media` 查询语句和 `#root` 选择器）从 `uc-sidebery.css` 复制到 `uc-custom-content.css`，并使用相同的数值。这样才能确保 userChrome 和 userContent 样式之间的动画效果保持一致。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -205,6 +209,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.6.10**
+* 修复了 v3.6.8 引入的问题：当启用“悬停时展开侧栏”并处于 Sidebery 活动状态时，展开后的侧栏工具栏无法正常显示。
 
 **v3.6.9**
 * 修复 v3.6.8 引起的问题：在原生水平标签页模式下，侧栏标题条的颜色消失。
