@@ -89,7 +89,7 @@
                                                                                                           
 ═════════════════════════════════════════════════════════════════════ */
 
-@media not -moz-pref("sidebar.revamp") {
+@media not (-moz-pref("sidebar.revamp") or -moz-pref("uc.flex.remove-sidebar-stripe")) {
     /* Reduce header size */
     #sidebar-header {
         font-size: 1.2em !important;
@@ -399,6 +399,9 @@
          */
         --uc-sb-sidebar-main-margin-top: var(--uc-bm-disable-autohide-offset, 0px);
         --uc-sb-sidebar-main-stripe-height: 5px;
+        @media -moz-pref("uc.flex.remove-sidebar-stripe") {
+            --uc-sb-sidebar-main-stripe-height: 0px;
+        }
 
         ~ #tabbrowser-tabbox {
             --uc-sb-tabbox-border-radius: 0px;
@@ -443,7 +446,7 @@
         --uc-sb-sidebar-main-hover-min-height: auto;
         --uc-sb-sidebar-main-hover-max-height: 100%;
         --uc-sb-sidebar-main-hover-height: fit-content;
-        --uc-sb-vertical-tabs-display: none;
+        --uc-sb-sidebar-stripe-display: none;
         /*
         --uc-sb-sidebar-main-background-duration: var(--uc-autohide-transition-duration);
         --uc-sb-sidebar-main-background-delay: calc(var(--uc-autohide-sidebar-delay) + 10ms);
@@ -735,8 +738,16 @@
 
     /* Remove native vertical tabs when Sidebery is active. */
     #sidebar-main #vertical-tabs {
-        display: var(--uc-sb-vertical-tabs-display, flex) !important;
+        display: var(--uc-sb-sidebar-stripe-display, flex) !important;
     }
+
+    /* Remove sidebar stripe when Sidebery is active. */
+    @media -moz-pref("uc.flex.remove-sidebar-stripe") {
+        #sidebar-main {
+            display: var(--uc-sb-sidebar-stripe-display, flex) !important;
+        }
+    }
+
     /* Hide the sidebar header in web extension panel windows to restore compact layout */
     #webextpanels-window #sidebar-panel-header {
         display: none !important;

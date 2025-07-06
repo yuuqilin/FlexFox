@@ -1,17 +1,22 @@
-/* Ensure the background color of the sidebar stripe area matches the sidebar when the window is inactive */
 @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
     :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-            #browser {
+        #browser {
+            /* Override toolbox color if there's no theme background image. */
+            --toolbar-bgcolor: var(--uc-bgcolor) !important;
+            --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
+            background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
+                linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
+                var(--lwt-header-image, var(--lwt-additional-images)) !important;
+
+            /* Ensure the background color of the sidebar stripe area matches the sidebar when the window is inactive */
+            @media -moz-pref("uc.flex.disable-sidebery-autohide") {
                 background-image: none !important;
                 &:-moz-window-inactive {
                     background-color: var(--uc-bgcolor) !important;
                 }
             }
-        }
-        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-            &[titlepreface*="\180e "] {
-                #browser {
+            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                &[titlepreface*="\180e "] {
                     background-image: none !important;
                     &:-moz-window-inactive {
                         background-color: var(--uc-bgcolor) !important;
@@ -23,19 +28,6 @@
 }
 
 @media -moz-pref("sidebar.revamp") {
-    /* Override toolbox color if there's no theme background image. */
-    @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
-        :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-            #browser {
-                --toolbar-bgcolor: var(--uc-bgcolor) !important;
-                --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
-                background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                    linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
-                    var(--lwt-header-image, var(--lwt-additional-images)) !important;
-            }
-        }
-    }
-
     /* Remove the border and rounded corners from the webpage content area */
     #tabbrowser-tabbox {
         outline: none !important;

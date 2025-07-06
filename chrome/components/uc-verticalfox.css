@@ -92,6 +92,16 @@
         display: none;
     }
 
+    /* Remove sidebar stripe */
+    @media -moz-pref("uc.flex.remove-sidebar-stripe") {
+        #sidebar {
+            border-top: 1px solid light-dark(#ced1d4, #686869b3) !important;
+        }
+        #sidebar-header {
+            display: none;
+        }
+    }
+
     /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */
     /* 
      * This @media query uses three comma-separated conditions:

@@ -20,12 +20,12 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.7.0**
-* Sideberyの展開・折りたたみアニメーションを改善し、ホバー時のタブのちらつきを解消しました。
-  （従来は`padding`や自動計算された`width`の変化が段階的に発生し、タブの位置が滑らかに遷移せず、不自然な揺れが生じていました。）
-* `uc.flex.sidebery-slow-hover-expand` オプション有効時に、サイドバーと Sidebery のアニメーションのタイミングが合わない問題を修正しました。
-* サイドバーのアニメーション速度に関する変数は、Sidebery 内部のアニメーションと同期させるために `uc-sidebery.css` にも定義されるようになりました。
-  `uc-variables.css` の変数を `uc-user-settings.css` にコピーしてカスタマイズしている場合は、同じ値の変数定義を `uc-sidebery.css` から `uc-custom-content.css` にもコピーしてください。その際、`@media` クエリと `#root` セレクタを含めるのを忘れないようにしてください。userChrome と userContent の間でアニメーションのタイミングを一致させるために必要です。
+**🦊 v3.7.1**
+* 横型タブモードで `uc.flex.enable-rounded-web-content` オプションを有効にした際、ウェブコンテンツの周囲に追加される余白の背景色がツールバーと一致しない問題を修正しました。
+* `uc.flex.revert-to-original-sidebar-icon` と `uc.flex.auto-hide-navbar-icons` の両方を有効にしても、サイドバーのトグルボタンのアイコンが非表示にならない問題を修正しました。
+* 新オプション `uc.flex.remove-sidebar-stripe` を追加しました。Sidebery がアクティブなときにサイドバーのストライプを非表示にできます。サイドバーのツールや拡張機能に切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを再表示してください。  
+
+   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="サイドバーストライプ非表示" width="55%" />
 
 ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -211,6 +211,13 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.7.0**
+* Sideberyの展開・折りたたみアニメーションを改善し、ホバー時のタブのちらつきを解消しました。
+  （従来は`padding`や自動計算された`width`の変化が段階的に発生し、タブの位置が滑らかに遷移せず、不自然な揺れが生じていました。）
+* `uc.flex.sidebery-slow-hover-expand` オプション有効時に、サイドバーと Sidebery のアニメーションのタイミングが合わない問題を修正しました。
+* サイドバーのアニメーション速度に関する変数は、Sidebery 内部のアニメーションと同期させるために `uc-sidebery.css` にも定義されるようになりました。
+  `uc-variables.css` の変数を `uc-user-settings.css` にコピーしてカスタマイズしている場合は、同じ値の変数定義を `uc-sidebery.css` から `uc-custom-content.css` にもコピーしてください。その際、`@media` クエリと `#root` セレクタを含めるのを忘れないようにしてください。userChrome と userContent の間でアニメーションのタイミングを一致させるために必要です。
 
 **v3.6.10**
 * v3.6.8で発生した不具合を修正しました。Sideberyがアクティブな状態で「カーソルを合わせた時にサイドバーを展開する」設定を有効にしていると、展開されたサイドバーのツールバーが表示されない問題が発生していました。
@@ -514,6 +521,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.revert-to-original-flat-corner-style` | URLバー、検索バー、検索パネルの角丸を、FlexFox 独自の大きな丸みから Firefox 標準の控えめな角丸スタイルに戻します。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | FlexFox 独自のブックマーク星アイコンを Firefox 標準のデザインに戻します。 |
 | `uc.flex.revert-to-original-sidebar-icon` | FlexFox 独自のロゴを使用したサイドバーアイコンを Firefox 標準のデザインに戻します。 |
+| `uc.flex.remove-sidebar-stripe` | Sidebery がアクティブなときにサイドバーのストライプを非表示にします。サイドバーを切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してサイドバーツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを表示します。 |
 
 #### 🪛 機能を調整・変更するオプション
 

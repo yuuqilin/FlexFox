@@ -20,12 +20,12 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.7.0**
-* Improved the expand/collapse animation of Sidebery to eliminate flickering during hover.
-  (Previously, inconsistent transitions in `padding` and auto-calculated `width` caused tabs to shift in multiple steps instead of moving smoothly, resulting in a jittery or shaky visual effect.)
-* Fixed a timing mismatch between the sidebar and Sidebery animations when `uc.flex.sidebery-slow-hover-expand` is enabled.
-* Variables controlling sidebar transition speed are now also defined in `uc-sidebery.css` to allow Sidebery's internal animations to stay in sync with the outer container.
-  If you've customized the animation speed by copying variables from `uc-variables.css` to `uc-user-settings.css`, you must also copy the corresponding definitions (including the correct `@media` query and `#root` selector) from `uc-sidebery.css` to `uc-custom-content.css`, using the same values. This ensures consistent timing across both userChrome and userContent stylesheets.
+**🦊 v3.7.1**
+* Fixed an issue where the margin area around web content appeared in a different color from the toolbar when `uc.flex.enable-rounded-web-content` was enabled in horizontal tab mode.
+* Fixed an issue where the sidebar toggle button icon could not be hidden when both `uc.flex.revert-to-original-sidebar-icon` and `uc.flex.auto-hide-navbar-icons` were enabled.
+* Added a new option `uc.flex.remove-sidebar-stripe`, which removes the sidebar stripe when Sidebery is active. To access other sidebar tools or extensions, press <kbd>F1</kbd> in vertical tabs mode to show the sidebar tool buttons, or <kbd>Ctrl</kbd> + <kbd>B</kbd> in horizontal tabs mode to restore the sidebar header.  
+
+   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="Sidebar stripe removed" width="55%" />
 
 <!-- END What's New -->
 
@@ -215,6 +215,13 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.7.0**
+* Improved the expand/collapse animation of Sidebery to eliminate flickering during hover.
+  (Previously, inconsistent transitions in `padding` and auto-calculated `width` caused tabs to shift in multiple steps instead of moving smoothly, resulting in a jittery or shaky visual effect.)
+* Fixed a timing mismatch between the sidebar and Sidebery animations when `uc.flex.sidebery-slow-hover-expand` is enabled.
+* Variables controlling sidebar transition speed are now also defined in `uc-sidebery.css` to allow Sidebery's internal animations to stay in sync with the outer container.
+  If you've customized the animation speed by copying variables from `uc-variables.css` to `uc-user-settings.css`, you must also copy the corresponding definitions (including the correct `@media` query and `#root` selector) from `uc-sidebery.css` to `uc-custom-content.css`, using the same values. This ensures consistent timing across both userChrome and userContent stylesheets.
 
 **v3.6.10**
 * Fixed a regression introduced in v3.6.8 where the expanded sidebar toolbar failed to appear when Sidebery was active and "Expand sidebar on hover" was enabled.
@@ -518,6 +525,7 @@ For more update logs from earlier versions,
 | `uc.flex.revert-to-original-flat-corner-style` | Reverts the rounded corner radius of the urlbar, searchbar, and findbar to Firefox's original flatter style. |
 | `uc.flex.revert-to-original-bookmark-star-icon` | Reverts the bookmark star icon to Firefox's default design, replacing the custom icon used by FlexFox. |
 | `uc.flex.revert-to-original-sidebar-icon` | Reverts the sidebar button icon to Firefox's default design, replacing the FlexFox logo. |
+| `uc.flex.remove-sidebar-stripe` | Removes the sidebar stripe when Sidebery is active. To switch sidebar tools, press <kbd>F1</kbd> in vertical tabs mode to show the sidebar tool buttons, or <kbd>Ctrl</kbd> + <kbd>B</kbd> in horizontal tabs mode to restore the sidebar header. |
 
 #### 🪛 Modify or Adjust Features
 

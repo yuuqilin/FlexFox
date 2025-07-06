@@ -20,12 +20,12 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.7.0**
-* 改进了 Sidebery 的展开与收起动画，解决了悬停时标签页抖动的问题。
-  （旧版在动画过程中，padding 和自动计算的宽度不协调，导致标签页位置阶段性跳动，无法顺畅过渡，看起来会有明显的抖动感。）
-* 修复启用 `uc.flex.sidebery-slow-hover-expand` 后，侧边栏与 Sidebery 的动画时序不同步的问题。
-* 为了让 Sidebery 内部的动画与外部容器保持同步，现在在 `uc-sidebery.css` 中也定义了控制展开动画的变量。
-  如果你曾将 `uc-variables.css` 中的变量复制到 `uc-user-settings.css` 来自定义动画时间，请务必也将对应的定义（包含正确的 `@media` 查询语句和 `#root` 选择器）从 `uc-sidebery.css` 复制到 `uc-custom-content.css`，并使用相同的数值。这样才能确保 userChrome 和 userContent 样式之间的动画效果保持一致。
+**🦊 v3.7.1**
+* 修复在水平标签页模式下启用 `uc.flex.enable-rounded-web-content` 时，网页内容周围的间距区域背景颜色与工具栏不一致的问题。
+* 修复同时启用 `uc.flex.revert-to-original-sidebar-icon` 和 `uc.flex.auto-hide-navbar-icons` 时，侧边栏开关按钮图标无法隐藏的问题。
+* 新增选项 `uc.flex.remove-sidebar-stripe`，在 Sidebery 激活时可移除侧边栏彩带。如需切换到其他侧边栏工具或扩展，垂直标签页模式下可按 <kbd>F1</kbd> 显示工具按钮，水平模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。  
+
+   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="移除侧边栏彩带" width="55%" />
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -209,6 +209,13 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.7.0**
+* 改进了 Sidebery 的展开与收起动画，解决了悬停时标签页抖动的问题。
+  （旧版在动画过程中，padding 和自动计算的宽度不协调，导致标签页位置阶段性跳动，无法顺畅过渡，看起来会有明显的抖动感。）
+* 修复启用 `uc.flex.sidebery-slow-hover-expand` 后，侧边栏与 Sidebery 的动画时序不同步的问题。
+* 为了让 Sidebery 内部的动画与外部容器保持同步，现在在 `uc-sidebery.css` 中也定义了控制展开动画的变量。
+  如果你曾将 `uc-variables.css` 中的变量复制到 `uc-user-settings.css` 来自定义动画时间，请务必也将对应的定义（包含正确的 `@media` 查询语句和 `#root` 选择器）从 `uc-sidebery.css` 复制到 `uc-custom-content.css`，并使用相同的数值。这样才能确保 userChrome 和 userContent 样式之间的动画效果保持一致。
 
 **v3.6.10**
 * 修复了 v3.6.8 引入的问题：当启用“悬停时展开侧栏”并处于 Sidebery 活动状态时，展开后的侧栏工具栏无法正常显示。
@@ -517,6 +524,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.revert-to-original-flat-corner-style` | 将 URL 栏、搜索栏和查找栏的圆角样式恢复为 Firefox 默认的较平角设计，替代 FlexFox 使用的大圆角样式。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |
 | `uc.flex.revert-to-original-sidebar-icon` | 将 FlexFox 使用的侧栏按钮图标恢复为 Firefox 默认设计。 |
+| `uc.flex.remove-sidebar-stripe` | Sidebery 激活时移除侧边栏彩带。若需切换侧边栏工具，垂直标签页模式下可按 <kbd>F1</kbd> 显示侧边栏工具按钮，水平标签页模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。 |
 
 #### 🪛 修改或调整选项
 

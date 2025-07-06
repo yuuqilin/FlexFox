@@ -39,6 +39,12 @@
                 opacity: 0 !important;
                 transition: opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
             }
+            @media -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
+                #sidebar-button {
+                    opacity: 0 !important;
+                    transition: opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
+                }
+            }
         }
 
         #navigator-toolbox:hover {

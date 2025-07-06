@@ -30,6 +30,8 @@ user_pref("uc.flex.disable-sidebery-autohide",                  false);
 user_pref("uc.flex.disable-nav-bar-first-item-right-padding",   false);
 /* Disables custom menu icons added by FlexFox. */
 user_pref("uc.flex.disable-menu-icons",                         false);
+/* Removes the sidebar stripe when Sidebery is active. */
+user_pref("uc.flex.remove-sidebar-stripe",                      false);
 /* Removes icons from bookmark folders. */
 user_pref("uc.flex.remove-bookmarks-folder-icons",              false);
 /* Removes labels from bookmarks. */
