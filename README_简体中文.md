@@ -20,6 +20,9 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
+**🦊 v3.7.2**
+* 修复 Sidebery 展开时树状缩进线提前出现，未与动画同步的问题。
+
 **🦊 v3.7.1**
 * 修复在水平标签页模式下启用 `uc.flex.enable-rounded-web-content` 时，网页内容周围的间距区域背景颜色与工具栏不一致的问题。
 * 修复同时启用 `uc.flex.revert-to-original-sidebar-icon` 和 `uc.flex.auto-hide-navbar-icons` 时，侧边栏开关按钮图标无法隐藏的问题。

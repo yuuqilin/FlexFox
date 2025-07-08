@@ -20,6 +20,9 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
+**🦊 v3.7.2**
+* Sidebery の展開アニメーション中に、ツリーの接続線が早く表示されてしまう問題を修正しました。
+
 **🦊 v3.7.1**
 * 横型タブモードで `uc.flex.enable-rounded-web-content` オプションを有効にした際、ウェブコンテンツの周囲に追加される余白の背景色がツールバーと一致しない問題を修正しました。
 * `uc.flex.revert-to-original-sidebar-icon` と `uc.flex.auto-hide-navbar-icons` の両方を有効にしても、サイドバーのトグルボタンのアイコンが非表示にならない問題を修正しました。

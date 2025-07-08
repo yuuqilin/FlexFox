@@ -20,14 +20,17 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
+**🦊 v3.7.2**
+* Fixed an issue where tree indent lines appeared too early during Sidebery's expansion animation.
+
+<!-- END What's New -->
+
 **🦊 v3.7.1**
 * Fixed an issue where the margin area around web content appeared in a different color from the toolbar when `uc.flex.enable-rounded-web-content` was enabled in horizontal tab mode.
 * Fixed an issue where the sidebar toggle button icon could not be hidden when both `uc.flex.revert-to-original-sidebar-icon` and `uc.flex.auto-hide-navbar-icons` were enabled.
 * Added a new option `uc.flex.remove-sidebar-stripe`, which removes the sidebar stripe when Sidebery is active. To access other sidebar tools or extensions, press <kbd>F1</kbd> in vertical tabs mode to show the sidebar tool buttons, or <kbd>Ctrl</kbd> + <kbd>B</kbd> in horizontal tabs mode to restore the sidebar header.  
 
    <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="Sidebar stripe removed" width="55%" />
-
-<!-- END What's New -->
 
 Preview of auto-hide navbar icons and theme-based background switching in Sidebery:  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
