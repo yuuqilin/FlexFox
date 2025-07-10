@@ -20,15 +20,10 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.7.2**
-* Sidebery の展開アニメーション中に、ツリーの接続線が早く表示されてしまう問題を修正しました。
-
-**🦊 v3.7.1**
-* 横型タブモードで `uc.flex.enable-rounded-web-content` オプションを有効にした際、ウェブコンテンツの周囲に追加される余白の背景色がツールバーと一致しない問題を修正しました。
-* `uc.flex.revert-to-original-sidebar-icon` と `uc.flex.auto-hide-navbar-icons` の両方を有効にしても、サイドバーのトグルボタンのアイコンが非表示にならない問題を修正しました。
-* 新オプション `uc.flex.remove-sidebar-stripe` を追加しました。Sidebery がアクティブなときにサイドバーのストライプを非表示にできます。サイドバーのツールや拡張機能に切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを再表示してください。  
-
-   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="サイドバーストライプ非表示" width="55%" />
+**🦊 v3.7.3**
+* 全画面表示の際、検索バーの位置が上に寄りすぎてナビゲーションバーに重なる問題を修正しました。
+* サイドバーのツール領域とネイティブ垂直タブの間で、境界線と区切り線が二重に表示される問題を調整しました。
+* `uc.flex.sidebery-slow-hover-expand` を有効にしている場合、Sidebery が完全に展開される前にタブをクリックすると、意図せず閉じてしまうことがある問題を修正しました。
 
 ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -214,6 +209,16 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.7.2**
+* Sidebery の展開アニメーション中に、ツリーの接続線が早く表示されてしまう問題を修正しました。
+
+**v3.7.1**
+* 横型タブモードで `uc.flex.enable-rounded-web-content` オプションを有効にした際、ウェブコンテンツの周囲に追加される余白の背景色がツールバーと一致しない問題を修正しました。
+* `uc.flex.revert-to-original-sidebar-icon` と `uc.flex.auto-hide-navbar-icons` の両方を有効にしても、サイドバーのトグルボタンのアイコンが非表示にならない問題を修正しました。
+* 新オプション `uc.flex.remove-sidebar-stripe` を追加しました。Sidebery がアクティブなときにサイドバーのストライプを非表示にできます。サイドバーのツールや拡張機能に切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを再表示してください。  
+
+   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="サイドバーストライプ非表示" width="55%" />
 
 **v3.7.0**
 * Sideberyの展開・折りたたみアニメーションを改善し、ホバー時のタブのちらつきを解消しました。

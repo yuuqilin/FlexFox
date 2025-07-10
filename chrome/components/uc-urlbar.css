@@ -48,7 +48,7 @@
         rgba(0, 0, 0, 0.09) 0px 16px 8px,
         rgba(0, 0, 0, 0.09) 0px 32px 16px !important;
     top: calc(
-        (var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2
+        (var(--uc-nav-bar-height) - var(--urlbar-height)) / 2
     ) !important;
     */
 

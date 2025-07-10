@@ -734,6 +734,9 @@
         display: var(--uc-sb-sroot-splitter-display, block) !important;
         border-width: 0 0 !important;
         border-color: transparent !important;
+        &:not(:hover) {
+            background-color: transparent !important;
+        }
     }
 
     /* Remove native vertical tabs when Sidebery is active. */

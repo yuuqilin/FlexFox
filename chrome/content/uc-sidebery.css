@@ -109,6 +109,7 @@
             @media (max-width: 50px) {
                 .Tab .close,
                 .Tab .close-icon {
+                    display: none;
                     transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
                 }

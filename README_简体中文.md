@@ -20,15 +20,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.7.2**
-* 修复 Sidebery 展开时树状缩进线提前出现，未与动画同步的问题。
-
-**🦊 v3.7.1**
-* 修复在水平标签页模式下启用 `uc.flex.enable-rounded-web-content` 时，网页内容周围的间距区域背景颜色与工具栏不一致的问题。
-* 修复同时启用 `uc.flex.revert-to-original-sidebar-icon` 和 `uc.flex.auto-hide-navbar-icons` 时，侧边栏开关按钮图标无法隐藏的问题。
-* 新增选项 `uc.flex.remove-sidebar-stripe`，在 Sidebery 激活时可移除侧边栏彩带。如需切换到其他侧边栏工具或扩展，垂直标签页模式下可按 <kbd>F1</kbd> 显示工具按钮，水平模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。  
-
-   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="移除侧边栏彩带" width="55%" />
+**🦊 v3.7.3**
+* 修复了在全屏模式下，查找栏位置过高导致被导航栏遮挡的问题。
+* 调整了侧栏工具区域与原生垂直标签页之间边框和分隔线重复显示的问题。
+* 修复启用 `uc.flex.sidebery-slow-hover-expand` 时，在 Sidebery 尚未完全展开前点击标签页可能会意外关闭标签页的问题。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -212,6 +207,16 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.7.2**
+* 修复 Sidebery 展开时树状缩进线提前出现，未与动画同步的问题。
+
+**v3.7.1**
+* 修复在水平标签页模式下启用 `uc.flex.enable-rounded-web-content` 时，网页内容周围的间距区域背景颜色与工具栏不一致的问题。
+* 修复同时启用 `uc.flex.revert-to-original-sidebar-icon` 和 `uc.flex.auto-hide-navbar-icons` 时，侧边栏开关按钮图标无法隐藏的问题。
+* 新增选项 `uc.flex.remove-sidebar-stripe`，在 Sidebery 激活时可移除侧边栏彩带。如需切换到其他侧边栏工具或扩展，垂直标签页模式下可按 <kbd>F1</kbd> 显示工具按钮，水平模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。  
+
+   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="移除侧边栏彩带" width="55%" />
 
 **v3.7.0**
 * 改进了 Sidebery 的展开与收起动画，解决了悬停时标签页抖动的问题。

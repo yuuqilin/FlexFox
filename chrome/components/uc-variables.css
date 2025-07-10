@@ -544,7 +544,10 @@
             --urlbar-container-height: 43px !important;
         }
     }
-    --urlbar-toolbar-height: var(--urlbar-container-height);
+    --uc-nav-bar-height: 40px;
+    @media -moz-pref("uc.flex.increase-navbar-height") {
+        --uc-nav-bar-height: 43px;
+    }
     --uc-titlebar-buttonbox-height: 35px;
     --uc-sidebar-button-bg-pos: 9px 11.5px;
     --uc-sidebar-button-bg-pos-first: 13px 10px;
@@ -602,18 +605,16 @@
     /* Adjust findbar position to avoid being overlapped when top toolbar height changes */
     --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
     &[inFullscreen] {
-        --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px);
+        --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 1.5px);
     }
     &:not([inFullscreen]) {
         @media -moz-pref("uc.flex.fully-hide-toolbox") {
-            --uc-findbar-y-offset: calc(
-                var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px
-            );
+            --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 9.5px);
         }
         @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-            &[titlepreface*="\200b "] {
+            &:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
                 --uc-findbar-y-offset: calc(
-                    var(--uc-bm-padding) + var(--uc-bm-height) + var(--urlbar-toolbar-height) - 1px
+                    var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 9.5px
                 );
             }
         }
