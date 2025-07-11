@@ -117,8 +117,7 @@
             @media (max-width: 50px) {
                 .Tab[data-parent="true"][data-folded="false"] .fav:hover {
                     .fav-icon {
-                        transition: opacity var(--d-fast) var(--uc-autohide-transition-type)
-                            var(--uc-hover-sidebar-delay) !important;
+                        transition: opacity var(--d-fast) var(--uc-hover-sidebar-delay) !important;
                     }
                 }
                 .Tab[data-parent="true"][data-folded="false"] .exp,

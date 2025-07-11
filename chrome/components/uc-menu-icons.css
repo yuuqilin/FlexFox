@@ -91,6 +91,10 @@
         background-image: url("chrome://browser/skin/forward.svg");
         background-size: 14px;
     }
+    #context-paste-no-formatting {
+        background-image: url("../icons/menu/context-paste-no-formatting.svg");
+        background-size: 15px;
+    }
     #context-delete,
     menuitem[data-l10n-id="text-action-delete"] {
         background-position-x: 13.5px !important;
@@ -102,6 +106,7 @@
     }
     #spell-check-enabled {
         background-image: url("../icons/menu/spellcheck.svg");
+        background-position-x: 14px;
         background-size: 18px;
     }
 

@@ -20,10 +20,13 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.7.5**
-* Refined the animation behavior introduced in v3.7.4 and fixed a flickering issue that occurred when Sidebery was collapsed.
+**🦊 v3.7.6**
+* Added a new menu icon and fixed a display issue with an existing one.
 
 <!-- END What's New -->
+
+**🦊 v3.7.5**
+* Refined the animation behavior introduced in v3.7.4 and fixed a flickering issue that occurred when Sidebery was collapsed.
 
 **🦊 v3.7.4**
 * Improved behavior when `uc.flex.sidebery-slow-hover-expand` is enabled. When Sidebery is in a collapsed state, clicking the root of a tree-style tab will now switch to the root tab, instead of collapsing the entire tree branch.
