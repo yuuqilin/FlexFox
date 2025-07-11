@@ -20,10 +20,8 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.7.3**
-* 修复了在全屏模式下，查找栏位置过高导致被导航栏遮挡的问题。
-* 调整了侧栏工具区域与原生垂直标签页之间边框和分隔线重复显示的问题。
-* 修复启用 `uc.flex.sidebery-slow-hover-expand` 时，在 Sidebery 尚未完全展开前点击标签页可能会意外关闭标签页的问题。
+**🦊 v3.7.4**
+* 改进了在启用 `uc.flex.sidebery-slow-hover-expand` 时，Sidebery 处于折叠状态下，点击树形标签页的根节点时，能够切换到根节点标签页，而不是折叠整个树分支。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -207,6 +205,11 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.7.3**
+* 修复了在全屏模式下，查找栏位置过高导致被导航栏遮挡的问题。
+* 调整了侧栏工具区域与原生垂直标签页之间边框和分隔线重复显示的问题。
+* 修复启用 `uc.flex.sidebery-slow-hover-expand` 时，在 Sidebery 尚未完全展开前点击标签页可能会意外关闭标签页的问题。
 
 **v3.7.2**
 * 修复 Sidebery 展开时树状缩进线提前出现，未与动画同步的问题。

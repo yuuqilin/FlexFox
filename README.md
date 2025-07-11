@@ -20,10 +20,8 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.7.3**
-* Fixed an issue where the findbar appeared too high in fullscreen mode, causing it to be covered when the navigation bar was revealed.
-* Corrected overlapping borders and divider lines between the sidebar tool area and the native vertical tabs.
-* Fixed an issue where clicking a tab in Sidebery before it fully expanded (when `uc.flex.sidebery-slow-hover-expand` was enabled) could cause the tab to close unintentionally.
+**🦊 v3.7.4**
+* Improved behavior when `uc.flex.sidebery-slow-hover-expand` is enabled. When Sidebery is in a collapsed state, clicking the root of a tree-style tab will now switch to the root tab, instead of collapsing the entire tree branch.
 
 <!-- END What's New -->
 
@@ -213,6 +211,11 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.7.3**
+* Fixed an issue where the findbar appeared too high in fullscreen mode, causing it to be covered when the navigation bar was revealed.
+* Corrected overlapping borders and divider lines between the sidebar tool area and the native vertical tabs.
+* Fixed an issue where clicking a tab in Sidebery before it fully expanded (when `uc.flex.sidebery-slow-hover-expand` was enabled) could cause the tab to close unintentionally.
 
 **v3.7.2**
 * Fixed an issue where tree indent lines appeared too early during Sidebery's expansion animation.

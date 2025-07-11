@@ -20,10 +20,8 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.7.3**
-* 全画面表示の際、検索バーの位置が上に寄りすぎてナビゲーションバーに重なる問題を修正しました。
-* サイドバーのツール領域とネイティブ垂直タブの間で、境界線と区切り線が二重に表示される問題を調整しました。
-* `uc.flex.sidebery-slow-hover-expand` を有効にしている場合、Sidebery が完全に展開される前にタブをクリックすると、意図せず閉じてしまうことがある問題を修正しました。
+**🦊 v3.7.4**
+* `uc.flex.sidebery-slow-hover-expand` を有効にしたとき、Sidebery が折りたたまれている状態でツリータブのルートをクリックすると、ツリー全体を折りたたむのではなく、ルートタブに切り替わるように動作が改善されました。
 
 ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -209,6 +207,11 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.7.3**
+* 全画面表示の際、検索バーの位置が上に寄りすぎてナビゲーションバーに重なる問題を修正しました。
+* サイドバーのツール領域とネイティブ垂直タブの間で、境界線と区切り線が二重に表示される問題を調整しました。
+* `uc.flex.sidebery-slow-hover-expand` を有効にしている場合、Sidebery が完全に展開される前にタブをクリックすると、意図せず閉じてしまうことがある問題を修正しました。
 
 **v3.7.2**
 * Sidebery の展開アニメーション中に、ツリーの接続線が早く表示されてしまう問題を修正しました。

@@ -106,12 +106,25 @@
         }
 
         &:hover {
-            @media (max-width: 50px) {
+            @media (width > 50px) {
+                .Tab[data-parent="true"][data-folded="false"] .exp,
                 .Tab .close,
                 .Tab .close-icon {
-                    display: none;
+                    transition:
+                        opacity var(--d-fast),
+                        transform var(--d-fast),
+                        visibility 0ms var(--uc-autohide-transition-type) var(--uc-hover-transition-duration) !important;
+                }
+            }
+            @media (max-width: 50px) {
+                .Tab[data-parent="true"][data-folded="false"] .exp,
+                .Tab .close,
+                .Tab .close-icon {
+                    visibility: hidden;
+                    /*
                     transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
+                    */
                 }
             }
             .NavigationBar {

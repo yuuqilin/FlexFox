@@ -3,22 +3,22 @@
     @media -moz-pref("uc.flex.show-flexfox-version-info-in-about-config") {
         body:lang(ja) {
             &::before {
-                content: "🎉  FlexFox v3.7.3 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
+                content: "🎉  FlexFox v3.7.4 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
             }
         }
         body:lang(zh-CN) {
             &::before {
-                content: "🎉  FlexFox v3.7.3 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
+                content: "🎉  FlexFox v3.7.4 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
             }
         }
         body:lang(zh-tw) {
             &::before {
-                content: "🎉  FlexFox v3.7.3 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
+                content: "🎉  FlexFox v3.7.4 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
             }
         }
 
         body::before {
-            content: "🎉  FlexFox v3.7.3 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
+            content: "🎉  FlexFox v3.7.4 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
             /* !-- End of version info -- */
             display: block;
             margin: 10px 10px 0px 10px;
