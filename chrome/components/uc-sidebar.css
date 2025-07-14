@@ -121,13 +121,16 @@
                 min-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 max-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                overflow var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                overflow var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay) allow-discrete,
                 padding var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
                 background-color var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                background-image var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
+                background-image var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay)
+                    allow-discrete,
                 opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
             /* Enable transitions for discrete properties like overflow or background-image */
+            /*
             transition-behavior: allow-discrete;
+            */
         }
 
         #sidebar-header:hover :is(#sidebar-switcher-target, #sidebar-close) {
@@ -151,13 +154,17 @@
                 min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
+                    allow-discrete,
                 padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                 background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                background-image var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                background-image var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
+                    allow-discrete,
                 opacity 0ms ease-in-out 0ms;
             /* Enable transitions for discrete properties like overflow or background-image */
+            /*
             transition-behavior: allow-discrete;
+            */
             :is(#sidebar-switcher-target, #sidebar-close) {
                 /* BAD NEWS: display: none !important; */
                 opacity: 0;
@@ -569,16 +576,18 @@
             position: var(--uc-sb-sidebar-main-position, static) !important;
         }
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
-            &[sidebar-panel-open] {
+            :root:not([sidebar-expand-on-hover]) &[sidebar-panel-open] {
+                position: var(--uc-sb-sidebar-main-position, static) !important;
+            }
+            :root[sidebar-expand-on-hover] &[sidebar-panel-open] {
                 position: var(--uc-sb-sidebar-main-position, absolute) !important;
-                z-index: var(--browser-area-z-index-sidebar);
             }
         }
         &[sidebar-positionend] {
             right: 0px;
         }
         margin-top: var(--uc-sb-sidebar-main-margin-top);
-        z-index: var(--uc-sb-sidebar-main-z-index);
+        z-index: var(--browser-area-z-index-sidebar);
         min-height: var(--uc-sb-sidebar-main-stripe-height);
         max-height: var(--uc-sb-sidebar-main-stripe-height);
         min-width: var(--uc-sb-sidebar-main-width);
@@ -611,14 +620,16 @@
                 var(--uc-autohide-transition-type)
                 var(--uc-sb-sidebar-main-opacity-delay, calc(var(--uc-autohide-sidebar-delay) + 10ms)),
             /** 
-             * z-index is a discrete property and doesn't support transition duration.
+             * z-index transitions result in instant visual changes.
              * Add a delay equal to other properties' delay + duration
              * so the z-index change happens only after the animation finishes. 
              */
                 z-index 0ms linear
                 calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms);
         /* Enable transitions for discrete properties like overflow or background-image */
+        /*
         transition-behavior: allow-discrete;
+        */
     }
     #sidebar-main:hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-height) !important;
@@ -633,9 +644,9 @@
          * However, it also unintentionally overrides
          * the later rule targeting #sidebar-main[sidebar-launcher-expanded].
          * We keep the later rule as-is, since this one will be removed
-         * after Firefox v140, when it’s no longer needed.
+         * after Firefox v140, when it's no longer needed.
          */
-        @media (not -moz-pref("uc.flex.disable-sidebery-autohide")) and (-moz-pref("sidebar.verticalTabs")) {
+        @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("uc.flex.disable-sidebery-autohide")) {
             :root:not([titlepreface*="\180e "]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
             }
@@ -685,10 +696,12 @@
          * performance issues, it's placed here as a separate rule.
          */
         #sidebar-box[sidebar-panel-open]:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]) {
-            margin-inline-start: var(--sidebar-launcher-collapsed-width) !important;
-            &[sidebar-positionend] {
-                margin-inline-start: 0 !important;
-                margin-inline-end: var(--sidebar-launcher-collapsed-width) !important;
+            :root[sidebar-expand-on-hover] & {
+                margin-inline-start: var(--sidebar-launcher-collapsed-width) !important;
+                &[sidebar-positionend] {
+                    margin-inline-start: 0 !important;
+                    margin-inline-end: var(--sidebar-launcher-collapsed-width) !important;
+                }
             }
         }
     }
@@ -791,7 +804,7 @@
              * so it can appear above #tabbrowser-tabbox when expanded.
              * When not hovering, keep the z-index low so the tab box shadow stays on top.
              */
-            @media (not -moz-pref("uc.flex.disable-sidebery-autohide")) and (-moz-pref("sidebar.verticalTabs")) {
+            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                 :root:not([titlepreface*="\180e "]) &:hover {
                     z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
                 }
@@ -826,9 +839,11 @@
                 min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay),
                 overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay);
+                    var(--uc-autohide-sidebar-delay) allow-discrete;
             /* Enable transitions for discrete properties like overflow or background-image */
+            /*
             transition-behavior: allow-discrete;
+            */
             /*
             border-inline: 0.01px solid var(--chrome-content-separator-color);
             border-inline-width: 0 0.01px;
@@ -1174,7 +1189,7 @@
 ═════════════════════════════════════════════════════════════════════ */
 
 /* 🔽 [BLOCK F] Start of rules for inactive Sidebery */
-@media (-moz-pref("sidebar.verticalTabs")) and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
+@media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
     /* ── ▶️ Styles for verticalTabs when the sidebar is expanded */
     #tabbrowser-tabs[orient="vertical"][expanded] {
         #tabbrowser-arrowscrollbox[orient="vertical"] .tabbrowser-tab {

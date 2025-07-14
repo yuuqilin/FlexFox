@@ -20,16 +20,13 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.7.6**
-* Added a new menu icon and fixed a display issue with an existing one.
+**🦊 v3.7.7**
+* Fixed missing transition effects when collapsing the native vertical tabs or the sidebar header.
+* Fixed an issue where opening the sidebar panel while using **Expand sidebar on hover** and keeping the sidebar expanded would overlap the native vertical tabs.
+* Fixed a visual bug where page shadows could not overlay the sidebar stripe when Sidebery is active.
+* Adjusted the collapse transition of Sidebery when `uc.flex.sidebery-fast-hover-expand` is enabled.
 
 <!-- END What's New -->
-
-**🦊 v3.7.5**
-* Refined the animation behavior introduced in v3.7.4 and fixed a flickering issue that occurred when Sidebery was collapsed.
-
-**🦊 v3.7.4**
-* Improved behavior when `uc.flex.sidebery-slow-hover-expand` is enabled. When Sidebery is in a collapsed state, clicking the root of a tree-style tab will now switch to the root tab, instead of collapsing the entire tree branch.
 
 Preview of auto-hide navbar icons and theme-based background switching in Sidebery:  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -217,6 +214,15 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.7.6**
+* Added a new menu icon and fixed a display issue with an existing one.
+
+**v3.7.5**
+* Refined the animation behavior introduced in v3.7.4 and fixed a flickering issue that occurred when Sidebery was collapsed.
+
+**v3.7.4**
+* Improved behavior when `uc.flex.sidebery-slow-hover-expand` is enabled. When Sidebery is in a collapsed state, clicking the root of a tree-style tab will now switch to the root tab, instead of collapsing the entire tree branch.
 
 **v3.7.3**
 * Fixed an issue where the findbar appeared too high in fullscreen mode, causing it to be covered when the navigation bar was revealed.

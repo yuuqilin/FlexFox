@@ -36,24 +36,33 @@
     @media (prefers-color-scheme: dark) {
         --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
 
-        @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
-            &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-                --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
-                --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
+        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
+                -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+                -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+                &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                    --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
+                    --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
 
-                --uc-urlbar-bg: #0d0d15; /* Background color of the URL bar */
-                --uc-urldrop-bg: #0d0d15; /* Background color of the expanded URL bar dropdown */
-                --uc-urlbar-border-top: #000; /* Top border color when the URL bar is focused */
-                --uc-urlbar-border-bottom: #404040; /* Bottom border color when the URL bar is focused */
-                --uc-urlbar-outline: #414868; /* Outline color that appears when hovering over the URL bar */
+                    --uc-urlbar-bg: #0d0d15; /* Background color of the URL bar */
+                    --uc-urldrop-bg: #0d0d15; /* Background color of the expanded URL bar dropdown */
+                    --uc-urlbar-border-top: #000; /* Top border color when the URL bar is focused */
+                    --uc-urlbar-border-bottom: #404040; /* Bottom border color when the URL bar is focused */
+                    --uc-urlbar-outline: #414868; /* Outline color that appears when hovering over the URL bar */
 
-                --arrowpanel-background: var(--uc-urlbar-bg) !important; /* Toolbar button dropdown background color */
-                --arrowpanel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
+                    --arrowpanel-background: var(
+                        --uc-urlbar-bg
+                    ) !important; /* Toolbar button dropdown background color */
+                    --arrowpanel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
 
-                --identity-btn-hover-color: rgba(117, 117, 117) !important; /* Hover color for the URL bar lock icon */
+                    --identity-btn-hover-color: rgba(
+                        117,
+                        117,
+                        117
+                    ) !important; /* Hover color for the URL bar lock icon */
 
-                /* Unused legacy vars – kept in case fallback is needed */
-                /*
+                    /* Unused legacy vars – kept in case fallback is needed */
+                    /*
                 --urlbar-height: 30px;
                 --button-hover-bgcolor: rgba(159, 159, 159, 0.35) !important;
                 --button-active-bgcolor: rgba(255, 255, 255, 0.2) !important;
@@ -64,6 +73,7 @@
                 --dark-menu-border-color: rgb(55, 55, 55) !important;
                 --dark-menuitem-hover-background-color: rgba(159, 159, 159, 0.35) !important;
                 */
+                }
             }
         }
     }
@@ -71,27 +81,31 @@
     @media (prefers-color-scheme: light) {
         --uc-bgcolor: #f1f5f9; /* Background color of the toolbar */
 
-        @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
-            &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-                --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
-                --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
+        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
+                -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+                -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+                &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                    --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
+                    --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
 
-                --uc-urlbar-bg: #cbd5e1; /* Background color of the URL bar */
-                --uc-urldrop-bg: #cbd5e1; /* Background color of the expanded URL bar dropdown */
-                --uc-urlbar-border-top: #9ca3af; /* Top border color when the URL bar is focused */
-                --uc-urlbar-border-bottom: #fff; /* Bottom border color when the URL bar is focused */
-                --uc-urlbar-outline: #94a3b8; /* Outline color that appears when hovering over the URL bar */
+                    --uc-urlbar-bg: #cbd5e1; /* Background color of the URL bar */
+                    --uc-urldrop-bg: #cbd5e1; /* Background color of the expanded URL bar dropdown */
+                    --uc-urlbar-border-top: #9ca3af; /* Top border color when the URL bar is focused */
+                    --uc-urlbar-border-bottom: #fff; /* Bottom border color when the URL bar is focused */
+                    --uc-urlbar-outline: #94a3b8; /* Outline color that appears when hovering over the URL bar */
 
-                --arrowpanel-background: #e2e8f0 !important; /* Toolbar button dropdown background color */
+                    --arrowpanel-background: #e2e8f0 !important; /* Toolbar button dropdown background color */
 
-                --identity-btn-hover-color: white !important; /* Hover color for the URL bar lock icon */
+                    --identity-btn-hover-color: white !important; /* Hover color for the URL bar lock icon */
 
-                /* Unused legacy vars – kept in case fallback is needed */
-                /*
+                    /* Unused legacy vars – kept in case fallback is needed */
+                    /*
                 --button-hover-bgcolor: #9699a3 !important;
                 --button-hover-bgcolor: #cbd5e1 !important;
                 --button-active-bgcolor: #cbd5e1 !important;
                 */
+                }
             }
         }
     }
@@ -278,7 +292,7 @@
     /* Speed up sidebar expand/collapse animation */
     @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
         --uc-hover-transition-duration: 100ms;
-        --uc-autohide-sidebar-delay: 1ms;
+        --uc-autohide-sidebar-delay: 10ms;
         --uc-hover-sidebar-delay: 1ms;
     }
     /* Slow down sidebar expand/collapse animation */
@@ -594,11 +608,15 @@
     }
 
     /* Override the default background color with a custom value when add-on color changes are not allowed */
-    @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
-        &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-            --uc-identity-btn-bgcolor: var(--uc-toolbar-bgcolor);
-            --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);
-            --uc-sidebar-header-bgcolor: var(--uc-toolbar-bgcolor);
+    @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
+            -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+            -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+            &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                --uc-identity-btn-bgcolor: var(--uc-toolbar-bgcolor);
+                --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);
+                --uc-sidebar-header-bgcolor: var(--uc-toolbar-bgcolor);
+            }
         }
     }
 

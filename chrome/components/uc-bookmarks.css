@@ -107,7 +107,7 @@
          * caused by unstable hover state inside #navigator-toolbox.
          */
         #navigator-toolbox {
-            /* z-index is a discrete property and doesn't support transition duration.
+            /* z-index transitions result in instant visual changes.
              * Add a delay equal to other properties' delay + duration
              * so the z-index change happens only after the animation finishes. 
              */

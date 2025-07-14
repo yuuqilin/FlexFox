@@ -34,15 +34,12 @@
     @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
         :root:not([titlepreface*="\180e "]) & {
             /** 
-             * z-index is a discrete property and doesn't support transition duration.
+             * z-index transitions result in instant visual changes.
              * Add a delay equal to other properties' delay + duration
              * so the z-index change happens only after the animation finishes. 
              */
             transition: z-index 0ms linear
                 calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms);
-            @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
-                transition: none;
-            }
             &:hover {
                 transition: z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms);
                 --browser-area-z-index-sidebar: 3;

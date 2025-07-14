@@ -96,7 +96,6 @@
             display: block !important;
 
             visibility: hidden;
-            transition-behavior: allow-discrete;
             transition: visibility var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay) !important;
         }

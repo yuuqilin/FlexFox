@@ -1,25 +1,29 @@
-@media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
-    :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-        #browser {
-            /* Override toolbox color if there's no theme background image. */
-            --toolbar-bgcolor: var(--uc-bgcolor) !important;
-            --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
-            background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
-                var(--lwt-header-image, var(--lwt-additional-images)) !important;
+@media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
+        -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+        -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+        :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+            #browser {
+                /* Override toolbox color if there's no theme background image. */
+                --toolbar-bgcolor: var(--uc-bgcolor) !important;
+                --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
+                background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
+                    linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
+                    var(--lwt-header-image, var(--lwt-additional-images)) !important;
 
-            /* Ensure the background color of the sidebar stripe area matches the sidebar when the window is inactive */
-            @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-                background-image: none !important;
-                &:-moz-window-inactive {
-                    background-color: var(--uc-bgcolor) !important;
-                }
-            }
-            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-                &[titlepreface*="\180e "] {
+                /* Ensure the background color of the sidebar stripe area matches the sidebar when the window is inactive */
+                @media -moz-pref("uc.flex.disable-sidebery-autohide") {
                     background-image: none !important;
                     &:-moz-window-inactive {
                         background-color: var(--uc-bgcolor) !important;
+                    }
+                }
+                @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                    &[titlepreface*="\180e "] {
+                        background-image: none !important;
+                        &:-moz-window-inactive {
+                            background-color: var(--uc-bgcolor) !important;
+                        }
                     }
                 }
             }
@@ -72,9 +76,13 @@
                 margin: var(--uc-web-content-margin-box);
                 box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
                 background-color: transparent !important;
-                @media (not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color")) and ((-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica"))) or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
-                    :root:not([lwtheme-image], [style*="--lwt-additional-images"]) & {
-                        background-color: var(--uc-bgcolor) !important;
+                @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+                    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
+                        -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+                        -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+                        :root:not([lwtheme-image], [style*="--lwt-additional-images"]) & {
+                            background-color: var(--uc-bgcolor) !important;
+                        }
                     }
                 }
             }

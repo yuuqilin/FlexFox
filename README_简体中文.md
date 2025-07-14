@@ -20,14 +20,11 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.7.6**
-* 新增一个菜单图标，并修复了一个现有图标的显示问题。
-
-**🦊 v3.7.5**
-* 优化了 v3.7.4 中引入的动画效果，修复了 Sidebery 折叠时出现的闪烁问题。
-
-**🦊 v3.7.4**
-* 改进了在启用 `uc.flex.sidebery-slow-hover-expand` 时，Sidebery 处于折叠状态下，点击树形标签页的根节点时，能够切换到根节点标签页，而不是折叠整个树分支。
+**🦊 v3.7.7**
+* 修复折叠原生垂直标签页或侧栏标题时，动画过渡效果失效的问题。
+* 修复开启“悬停时展开侧栏”并保持侧栏展开状态时，打开侧栏面板会遮挡原生垂直标签页的问题。
+* 修复在 Sidebery 活动时，网页区域的阴影无法覆盖侧栏彩带的问题。
+* 修正启用 `uc.flex.sidebery-fast-hover-expand` 时，Sidebery 折叠动画的过渡效果。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -211,6 +208,15 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.7.6**
+* 新增一个菜单图标，并修复了一个现有图标的显示问题。
+
+**v3.7.5**
+* 优化了 v3.7.4 中引入的动画效果，修复了 Sidebery 折叠时出现的闪烁问题。
+
+**v3.7.4**
+* 改进了在启用 `uc.flex.sidebery-slow-hover-expand` 时，Sidebery 处于折叠状态下，点击树形标签页的根节点时，能够切换到根节点标签页，而不是折叠整个树分支。
 
 **v3.7.3**
 * 修复了在全屏模式下，查找栏位置过高导致被导航栏遮挡的问题。
