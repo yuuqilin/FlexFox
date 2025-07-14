@@ -20,11 +20,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.7.7**
-* 修复折叠原生垂直标签页或侧栏标题时，动画过渡效果失效的问题。
-* 修复开启“悬停时展开侧栏”并保持侧栏展开状态时，打开侧栏面板会遮挡原生垂直标签页的问题。
-* 修复在 Sidebery 活动时，网页区域的阴影无法覆盖侧栏彩带的问题。
-* 修正启用 `uc.flex.sidebery-fast-hover-expand` 时，Sidebery 折叠动画的过渡效果。
+**🦊 v3.7.8**
+* 修复 v3.7.7 引入的问题，在完全隐藏 Sidebery 或进入全屏模式时，侧栏彩带无法显示的问题。
+* 修复在启用新版侧栏但未使用原生垂直标签页时，侧栏彩带无法展开的问题。
+* 修复多种情况下，网页阴影无法覆盖工具栏或侧栏，以及网页边距未正确添加的问题。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -208,6 +207,12 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.7.7**
+* 修复折叠原生垂直标签页或侧栏标题时，动画过渡效果失效的问题。
+* 修复开启“悬停时展开侧栏”并保持侧栏展开状态时，打开侧栏面板会遮挡原生垂直标签页的问题。
+* 修复在 Sidebery 活动时，网页区域的阴影无法覆盖侧栏彩带的问题。
+* 修正启用 `uc.flex.sidebery-fast-hover-expand` 时，Sidebery 折叠动画的过渡效果。
 
 **v3.7.6**
 * 新增一个菜单图标，并修复了一个现有图标的显示问题。

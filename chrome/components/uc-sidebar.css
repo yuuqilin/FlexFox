@@ -587,7 +587,21 @@
             right: 0px;
         }
         margin-top: var(--uc-sb-sidebar-main-margin-top);
+        /* Keep z-index low when not hovering so tab box shadow stays on top */
         z-index: var(--browser-area-z-index-sidebar);
+        /* 
+         * When Sidebery is fully hidden or in fullscreen,
+         * hovering over #sidebar-box triggers #sidebar-main to appear,
+         * so raise z-index even if #sidebar-main itself isn't hovered
+         */
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
+        }
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
+            }
+        }
         min-height: var(--uc-sb-sidebar-main-stripe-height);
         max-height: var(--uc-sb-sidebar-main-stripe-height);
         min-width: var(--uc-sb-sidebar-main-width);
@@ -646,9 +660,17 @@
          * We keep the later rule as-is, since this one will be removed
          * after Firefox v140, when it's no longer needed.
          */
-        @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("uc.flex.disable-sidebery-autohide")) {
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             :root:not([titlepreface*="\180e "]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                /** 
+                 * When the revamped sidebar is active but [sidebar-launcher-expanded] is missing
+                 * (collapsed vertical tabs or vertical tabs disabled),
+                 * lower z-index if Sidebery is inactive to let the tab box shadow appear above.
+                 */
+                &:not([sidebar-launcher-expanded]) {
+                    z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
+                }
             }
         }
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
@@ -657,6 +679,11 @@
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+            }
+        }
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            :root:not([sidebar-expand-on-hover]) & {
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
             }
         }
         background-color: var(--uc-bgcolor) !important;
@@ -695,12 +722,16 @@
          * However, to keep the selector complexity low and avoid potential 
          * performance issues, it's placed here as a separate rule.
          */
-        #sidebar-box[sidebar-panel-open]:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]) {
-            :root[sidebar-expand-on-hover] & {
-                margin-inline-start: var(--sidebar-launcher-collapsed-width) !important;
-                &[sidebar-positionend] {
-                    margin-inline-start: 0 !important;
-                    margin-inline-end: var(--sidebar-launcher-collapsed-width) !important;
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            #sidebar-box[sidebar-panel-open]:not(
+                    [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+                ) {
+                :root[sidebar-expand-on-hover] & {
+                    margin-inline-start: var(--sidebar-launcher-collapsed-width) !important;
+                    &[sidebar-positionend] {
+                        margin-inline-start: 0 !important;
+                        margin-inline-end: var(--sidebar-launcher-collapsed-width) !important;
+                    }
                 }
             }
         }

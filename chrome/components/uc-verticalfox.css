@@ -43,13 +43,19 @@
             &:hover {
                 transition: z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms);
                 --browser-area-z-index-sidebar: 3;
-                /** 
-                 * In vertical tab mode, Firefox uses --browser-area-z-index-sidebar
-                 * to raise the sidebar's z-index when it needs to overlay the page (e.g. on hover).
-                 * In horizontal tab mode, this variable isn't applied, and the sidebar keeps its default z-index.
-                 * To make Sidebery appear above the page content in that case, set its z-index directly.
+                /**
+                 * Firefox applies --browser-area-z-index-sidebar to the whole sidebar
+                 * in vertical tab mode, to support hover expansion of #sidebar-main.
+                 * In horizontal tab mode, this variable isn't set,
+                 * so the sidebar keeps its default z-index (auto).
+                 * Set z-index explicitly to ensure Sidebery appears above the page.
                  */
                 z-index: 100;
+            }
+            @media -moz-pref("sidebar.visibility", "expand-on-hover") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
+                :root[sidebar-expand-on-hover]:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    --browser-area-z-index-sidebar: 1;
+                }
             }
             @media not -moz-pref("sidebar.revamp") {
                 &:has(#sidebar-switcher-target.active) {

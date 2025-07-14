@@ -20,11 +20,10 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.7.7**
-* Fixed missing transition effects when collapsing the native vertical tabs or the sidebar header.
-* Fixed an issue where opening the sidebar panel while using **Expand sidebar on hover** and keeping the sidebar expanded would overlap the native vertical tabs.
-* Fixed a visual bug where page shadows could not overlay the sidebar stripe when Sidebery is active.
-* Adjusted the collapse transition of Sidebery when `uc.flex.sidebery-fast-hover-expand` is enabled.
+**🦊 v3.7.8**
+* Fixed a regression in v3.7.7 where the sidebar stripe would not appear when Sidebery is fully hidden or in fullscreen mode.
+* Fixed an issue where the sidebar stripe failed to expand when using the new sidebar layout without native vertical tabs.
+* Fixed several cases where page shadows failed to appear above the toolbar or sidebar, and page margins were missing.
 
 <!-- END What's New -->
 
@@ -214,6 +213,12 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.7.7**
+* Fixed missing transition effects when collapsing the native vertical tabs or the sidebar header.
+* Fixed an issue where opening the sidebar panel while using **Expand sidebar on hover** and keeping the sidebar expanded would overlap the native vertical tabs.
+* Fixed a visual bug where page shadows could not overlay the sidebar stripe when Sidebery is active.
+* Adjusted the collapse transition of Sidebery when `uc.flex.sidebery-fast-hover-expand` is enabled.
 
 **v3.7.6**
 * Added a new menu icon and fixed a display issue with an existing one.

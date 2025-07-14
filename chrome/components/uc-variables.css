@@ -520,6 +520,12 @@
             }
             @media -moz-pref("uc.flex.fully-hide-sidebery") {
                 --uc-web-content-margin-side: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                /* Apply margin when Sidebery is active and sidebar is collapsed; not needed for native vertical tabs */
+                @media -moz-pref("sidebar.verticalTabs") {
+                    &:not([sidebar-launcher-expanded]) {
+                        --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
+                    }
+                }
             }
             @media not -moz-pref("uc.flex.fully-hide-sidebery") {
                 :root[titlepreface*="\200c "] & {
@@ -527,15 +533,29 @@
                         --uc-web-content-margin-large,
                         var(--uc-web-content-margin-small)
                     );
+                    @media -moz-pref("sidebar.verticalTabs") {
+                        &:not([sidebar-launcher-expanded]) {
+                            --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
+                        }
+                    }
                 }
             }
-            @media not -moz-pref("sidebar.revamp"),
-                -moz-pref("sidebar.visibility", "hide-sidebar") and -moz-pref("sidebar.verticalTabs") {
-                &:not([sidebar-panel-open], [sidebar-launcher-expanded]) {
-                    --uc-web-content-margin-side: var(
-                        --uc-web-content-margin-large,
-                        var(--uc-web-content-margin-small)
-                    );
+            @media -moz-pref("sidebar.visibility", "hide-sidebar") {
+                @media not -moz-pref("sidebar.revamp") {
+                    &:not([sidebar-panel-open]) {
+                        --uc-web-content-margin-side: var(
+                            --uc-web-content-margin-large,
+                            var(--uc-web-content-margin-small)
+                        );
+                    }
+                }
+                @media -moz-pref("sidebar.revamp") {
+                    &:not([sidebar-panel-open], [sidebar-shown]) {
+                        --uc-web-content-margin-side: var(
+                            --uc-web-content-margin-large,
+                            var(--uc-web-content-margin-small)
+                        );
+                    }
                 }
             }
             --uc-web-content-margin-box: var(--uc-web-content-margin-top)
@@ -770,6 +790,11 @@
                     }
                 }
             }
+        }
+
+        /* Always apply margin when Sidebery is fully hidden, regardless of sidebar state */
+        @media -moz-pref("sidebar.verticalTabs") and -moz-pref("uc.flex.enable-rounded-web-content") {
+            --uc-sb-web-content-margin-side: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
         }
 
         @media not -moz-pref("sidebar.verticalTabs") {
