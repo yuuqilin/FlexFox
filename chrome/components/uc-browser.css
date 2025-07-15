@@ -129,20 +129,20 @@
                 /* When DevTools is docked on the left, override sharp corner with a rounded one and add right margin */
                 @media -moz-pref("devtools.toolbox.host", "left") {
                     border-top-right-radius: var(--uc-web-content-radius);
-                    margin-right: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                    margin-right: var(--uc-web-content-margin);
                     box-shadow: 4px 0 8px -4px light-dark(#00000026, #00000040);
                 }
                 /* When DevTools is docked on the right, override sharp corner with a rounded one and add left margin */
                 @media -moz-pref("devtools.toolbox.host", "right") {
                     border-top-left-radius: var(--uc-web-content-radius);
-                    margin-left: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                    margin-left: var(--uc-web-content-margin);
                     box-shadow: -4px 0 8px -4px light-dark(#00000026, #00000040);
                 }
             }
 
             .devtools-toolbox-bottom-iframe {
                 border-radius: var(--uc-web-content-radius);
-                margin-top: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                margin-top: var(--uc-web-content-margin);
                 box-shadow: 0 -2px 6px -2px light-dark(#00000026, #00000040);
             }
 

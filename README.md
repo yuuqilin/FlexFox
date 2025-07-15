@@ -20,10 +20,10 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.7.8**
-* Fixed a regression in v3.7.7 where the sidebar stripe would not appear when Sidebery is fully hidden or in fullscreen mode.
-* Fixed an issue where the sidebar stripe failed to expand when using the new sidebar layout without native vertical tabs.
-* Fixed several cases where page shadows failed to appear above the toolbar or sidebar, and page margins were missing.
+**🦊 v3.7.9**
+* Fixed a regression from v3.7.7 where the sidebar stripe could not expand when `uc.flex.disable-sidebery-autohide` was enabled.
+* Refactored the z-index logic for the sidebar.
+* Deprecated the `--uc-web-content-margin-small` and `--uc-web-content-margin-large` variables in favor of a unified `--uc-web-content-margin`.
 
 <!-- END What's New -->
 
@@ -214,6 +214,11 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 <!-- END Release Note -->
 
+**v3.7.8**
+* Fixed a regression in v3.7.7 where the sidebar stripe would not appear when Sidebery is fully hidden or in fullscreen mode.
+* Fixed an issue where the sidebar stripe failed to expand when using the new sidebar layout without native vertical tabs.
+* Fixed several cases where page shadows failed to appear above the toolbar or sidebar, and page margins were missing.
+
 **v3.7.7**
 * Fixed missing transition effects when collapsing the native vertical tabs or the sidebar header.
 * Fixed an issue where opening the sidebar panel while using **Expand sidebar on hover** and keeping the sidebar expanded would overlap the native vertical tabs.
@@ -250,106 +255,6 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 * Fixed a timing mismatch between the sidebar and Sidebery animations when `uc.flex.sidebery-slow-hover-expand` is enabled.
 * Variables controlling sidebar transition speed are now also defined in `uc-sidebery.css` to allow Sidebery's internal animations to stay in sync with the outer container.
   If you've customized the animation speed by copying variables from `uc-variables.css` to `uc-user-settings.css`, you must also copy the corresponding definitions (including the correct `@media` query and `#root` selector) from `uc-sidebery.css` to `uc-custom-content.css`, using the same values. This ensures consistent timing across both userChrome and userContent stylesheets.
-
-**v3.6.10**
-* Fixed a regression introduced in v3.6.8 where the expanded sidebar toolbar failed to appear when Sidebery was active and "Expand sidebar on hover" was enabled.
-
-**v3.6.9**
-* Fixed a regression in v3.6.8 where the Sidebar Header Stripe color was missing in native horizontal tab mode.
-* Fixed a regression in v3.6.8 where opening the Sidebar Header would no longer keep Sidebery expanded in native horizontal tab mode.
-
-**v3.6.8**
-* Fixed incorrect hover highlight sizing on the sidebar toggle button caused by Nightly 142.
-* Improved `uc.flex.enable-rounded-web-content`: page containers now display shadows and rounded corners correctly without clipping. The underlying styles were completely rewritten for better performance and reduced complexity.
-* Changed how z-index is handled for the sidebar and navigation bar — now they elevate dynamically on hover instead of using static values.
-* Fixed an issue where the sidebar toolbar could not fully expand when "Expand sidebar on hover" was enabled and Sidebery was active.
-* Improved compatibility between the Sidebar Header and theme backgrounds when using the native horizontal tabs layout.
-
-**v3.6.7**
-* Improved the visibility behavior of `uc.flex.auto-hide-navbar-icons`. Buttons that open popups now remain visible along with their menus, even when not hovered.
-* Standardized animation for hiding buttons in the URL bar, navigation bar, and bookmarks toolbar. You can adjust the transition by copying the following variables from `uc-variables.css` and overriding them in `uc-user-settings.css`:
-
-  ```css
-  --uc-autohide-navbar-icons-duration
-  --uc-hover-navbar-icons-duration
-  --uc-autohide-navbar-icons-type
-  --uc-collapse-navbar-icons-duration
-  ```
-
-**v3.6.6**
-* Fixed an issue caused by Nightly v141 that prevented macOS-style window control buttons from appearing.
-  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
-* Added more missing menu icons to improve visual consistency.
-* Introduced a new option: `uc.flex.auto-hide-navbar-icons`. When enabled, toolbar button icons in the navigation bar will be hidden by default and shown on hover. Window controls, the URL bar, and the Sidebar toggle (FlexFox logo) remain visible by default. If the Sidebar button is moved away from the far left or far right edge, or if `uc.flex.revert-to-original-sidebar-icon` is enabled, it will also follow the auto-hide behavior.
-* Major improvement: FlexFox can now automatically adapt the Sidebery background color based on the current Firefox theme. To enable this feature, set the **Color scheme** in Sidebery's **Appearance** settings to `"firefox"`.
-
-**v3.6.5**
-* Improved compatibility with themes. When using any non-default Firefox theme, toolbar colors now follow the theme automatically. The `uc.flex.allow-addons-to-change-toolbar-color` option is only needed when using Firefox Color without a background image.
-* Fixed an issue where side margins were incorrectly applied when `uc.flex.enable-rounded-web-content` was enabled, the sidebar was set to "Hide tabs and sidebar", and vertical tabs were disabled.
-* Improved the unified extensions panel appearance, making extension buttons easier to view and click.  
-
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="Improved layout and spacing in the unified extensions panel" width="175px" />
-* Added `uc.flex.menu-item-spacing` option to control spacing between menu items.  
-  Accepts string values:  
-  `"1"` or `"small"` = compact spacing (default; same as in earlier versions)  
-  `"2"` or `"medium"` = moderately spaced  
-  `"3"` or `"large"` = Firefox default (widest spacing)  
-
-  You can also use the following variables for more granular control:
-
-  ```
-  --uc-app-menu-item-padding-block            // App menu item spacing
-  --uc-menu-item-padding-block                // Bookmarks & system menus
-  --uc-content-area-context-menu-item-padding-block // Page context menu
-  --uc-appMenu-zoom-controls-x-offset         // Adjusts zoom control alignment
-  ```
-* Updated the accepted range for `uc.flex.findbar-position` to match the structure used by `uc-aboutconfig.css` and `uc.flex.menu-item-spacing`.  
-  Accepts string values:  
-  `"1"` or `"top-center-left"` = top left  
-  `"2"` or `"top-right"` = top right  
-  `"3"` or `"bottom-right"` = bottom right  
-* Fixed alignment issues in menus involving checkbox items, and added fallback icons for more menu entries.
-
-**v3.6.4**
-* Fixed layout issues in the sidebar caused by Nightly v141.
-  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
-  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
-* Improved the visual effect of `uc.flex.dim-urlbar-popup-backdrop` by adding a fade animation to the darkened background.
-* Added `uc.flex.show-flexfox-version-info-in-about-config`, which displays the current FlexFox version in `about:config` for easier version tracking.
-* Refined the appearance of the `about:config` page. Modified preferences are now more clearly highlighted. Additionally, if 'Expand sidebar on hover' is enabled, a 12-second notice will appear in `about:config` indicating that FlexFox's vertical tab optimizations are disabled.
-
-**v3.6.3**
-* Added compatibility for `uc.flex.enable-rounded-web-content` when "Hide tabs and sidebar" is enabled in the sidebar settings, ensuring proper spacing around the web content when using the Developer Tools docked to the side.
-* Fixed a long-standing issue where Sidebery would shift upward and cause layout jitter when hovering over the Navigation Bar, especially when the number of panels was less than one full row.
-
-  * This behavior was unintended and has now been resolved.
-  * I hadn't noticed this before because, in my own setup, the number of panels always exceeded a full row.
-  * The expansion animation for the Navigation Bar has also been refined to support both auto-hide and the `Lock Sidebery` shortcut.
-  * This fix is applied via `userContent.css`, so you don't need to modify the internal Sidebery styles. Just update FlexFox as usual.
-
-**v3.6.2**
-* Improved compatibility for `uc.flex.disable-bookmarks-autohide` in various scenarios.
-* Improved compatibility for `uc.flex.enable-rounded-web-content` when using Developer Tools in horizontal tab mode.
-* Removed outdated rules and variables, replacing them with more efficient selectors.
-* Reduced conditional overhead during variable assignment for Sidebery and native vertical tabs.
-* Performance improved by about **7%** compared to v3.6.1, with less than a 2ms difference from the default Firefox UI.
-
-**v3.6.1**
-* Removed outdated `:has()` and `:is()` selectors by taking advantage of new Firefox features. Replaced attribute checks with `@media` queries and simplified selectors using newer built-in attributes.
-* Performance impact is negligible (less than 2% in tests), with no noticeable speedup.
-* Added compatibility between `uc.flex.disable-bookmarks-autohide` and the "Only Show Bookmarks Toolbar on New Tab" setting.
-* Improved support for the "Expand sidebar on hover" feature in more scenarios.
-
-**🔥 v3.6.0 Major Performance Update**
-> [!WARNING]
-> * Fixed a serious performance regression introduced in v3.5.1.
->   * The issue was caused by the new “Rounded & Floating Web Content” feature added in v3.5.1.
->   * One of the most noticeable symptoms was the sluggish response when opening the “List All Tabs” panel — it could take over 0.5 seconds to appear.
->   * The browser UI also became noticeably unresponsive when using DevTools or the Browser Toolbox.
->   * As some long-time users may have guessed, the culprit was once again a `:root:has()` selector affecting rendering performance.
-> * This regression has now been resolved, and performance has also been slightly optimized.
-> * Compared to v3.5.8, the response time is now approximately **17× faster**.
-> * ⬆️ We recommend updating to this version as soon as possible.
 
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))

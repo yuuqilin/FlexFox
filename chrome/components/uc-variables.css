@@ -265,9 +265,9 @@
     }
 
     /* Add margin, shadow, and rounded corners to the web content area */
-    --uc-web-content-margin-small: 4px;
+    --uc-web-content-margin: 4px;
     @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
-        --uc-web-content-margin-large: 8px;
+        --uc-web-content-margin: 8px;
     }
     --uc-web-content-radius: 8px;
 
@@ -511,15 +511,15 @@
             --uc-web-content-margin-top: 0;
             --uc-web-content-margin-side: 0;
             @media -moz-pref("uc.flex.fully-hide-toolbox") {
-                --uc-web-content-margin-top: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                --uc-web-content-margin-top: var(--uc-web-content-margin);
             }
             @media not -moz-pref("uc.flex.fully-hide-toolbox") {
                 :root[titlepreface*="\200b "] & {
-                    --uc-web-content-margin-top: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                    --uc-web-content-margin-top: var(--uc-web-content-margin);
                 }
             }
             @media -moz-pref("uc.flex.fully-hide-sidebery") {
-                --uc-web-content-margin-side: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                --uc-web-content-margin-side: var(--uc-web-content-margin);
                 /* Apply margin when Sidebery is active and sidebar is collapsed; not needed for native vertical tabs */
                 @media -moz-pref("sidebar.verticalTabs") {
                     &:not([sidebar-launcher-expanded]) {
@@ -529,10 +529,7 @@
             }
             @media not -moz-pref("uc.flex.fully-hide-sidebery") {
                 :root[titlepreface*="\200c "] & {
-                    --uc-web-content-margin-side: var(
-                        --uc-web-content-margin-large,
-                        var(--uc-web-content-margin-small)
-                    );
+                    --uc-web-content-margin-side: var(--uc-web-content-margin);
                     @media -moz-pref("sidebar.verticalTabs") {
                         &:not([sidebar-launcher-expanded]) {
                             --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
@@ -543,28 +540,20 @@
             @media -moz-pref("sidebar.visibility", "hide-sidebar") {
                 @media not -moz-pref("sidebar.revamp") {
                     &:not([sidebar-panel-open]) {
-                        --uc-web-content-margin-side: var(
-                            --uc-web-content-margin-large,
-                            var(--uc-web-content-margin-small)
-                        );
+                        --uc-web-content-margin-side: var(--uc-web-content-margin);
                     }
                 }
                 @media -moz-pref("sidebar.revamp") {
                     &:not([sidebar-panel-open], [sidebar-shown]) {
-                        --uc-web-content-margin-side: var(
-                            --uc-web-content-margin-large,
-                            var(--uc-web-content-margin-small)
-                        );
+                        --uc-web-content-margin-side: var(--uc-web-content-margin);
                     }
                 }
             }
-            --uc-web-content-margin-box: var(--uc-web-content-margin-top)
-                var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
-                var(--uc-web-content-margin-large, var(--uc-web-content-margin-small)) var(--uc-web-content-margin-side);
+            --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin)
+                var(--uc-web-content-margin) var(--uc-web-content-margin-side);
             @media not -moz-pref("sidebar.position_start") {
                 --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin-side)
-                    var(--uc-web-content-margin-large, var(--uc-web-content-margin-small))
-                    var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+                    var(--uc-web-content-margin) var(--uc-web-content-margin);
             }
         }
     }
@@ -794,7 +783,7 @@
 
         /* Always apply margin when Sidebery is fully hidden, regardless of sidebar state */
         @media -moz-pref("sidebar.verticalTabs") and -moz-pref("uc.flex.enable-rounded-web-content") {
-            --uc-sb-web-content-margin-side: var(--uc-web-content-margin-large, var(--uc-web-content-margin-small));
+            --uc-sb-web-content-margin-side: var(--uc-web-content-margin);
         }
 
         @media not -moz-pref("sidebar.verticalTabs") {

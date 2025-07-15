@@ -589,17 +589,35 @@
         margin-top: var(--uc-sb-sidebar-main-margin-top);
         /* Keep z-index low when not hovering so tab box shadow stays on top */
         z-index: var(--browser-area-z-index-sidebar);
-        /* 
-         * When Sidebery is fully hidden or in fullscreen,
-         * hovering over #sidebar-box triggers #sidebar-main to appear,
-         * so raise z-index even if #sidebar-main itself isn't hovered
+        /** 
+         * When auto-hide for vertical tabs is disabled and Sidebery is active,
+         * raise z-index to keep #sidebar-main above Sidebery. 
          */
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-            z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+            z-index: var(--uc-sb-sidebar-main-z-index, --browser-area-z-index-sidebar);
         }
-        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or (display-mode: fullscreen)) {
+            :root[titlepreface*="\180e "] & {
+                z-index: var(--uc-sb-sidebar-main-z-index, --browser-area-z-index-sidebar);
+            }
+        }
+        /* No need to lower z-index when vertical tabs are fully hidden or in fullscreen */
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+            /**
+             * When vertical tabs are collapsed,
+             * lower z-index if Sidebery is inactive to let the tab box shadow appear above.
+             */
+            &:not([sidebar-launcher-expanded]) {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
+            }
+        }
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                &:not([sidebar-launcher-expanded]) {
+                    z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
+                }
             }
         }
         min-height: var(--uc-sb-sidebar-main-stripe-height);
@@ -652,16 +670,9 @@
         }
         max-height: var(--uc-sb-sidebar-main-hover-max-height) !important;
         max-width: var(--uc-sb-sidebar-main-width) !important;
-        /**
-         * !TEMPORARY: This z-index rule is added to override
-         * Firefox's native z-index for #sidebar-main in expand-on-hover mode.
-         * However, it also unintentionally overrides
-         * the later rule targeting #sidebar-main[sidebar-launcher-expanded].
-         * We keep the later rule as-is, since this one will be removed
-         * after Firefox v140, when it's no longer needed.
-         */
-        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-            :root:not([titlepreface*="\180e "]) & {
+        /* Raise z-index on hover so #sidebar-main appears above other elements */
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+            :root:not([titlepreface*="\180e "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
                 /** 
                  * When the revamped sidebar is active but [sidebar-launcher-expanded] is missing
@@ -673,14 +684,10 @@
                 }
             }
         }
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-            z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
-        }
-        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
-            }
-        }
+        /**
+         * When vertical tabs are set to expand on hover but are locked in the expanded state,
+         * lower z-index if Sidebery is inactive to let the tab box shadow appear above.
+         */
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
             :root:not([sidebar-expand-on-hover]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
@@ -835,6 +842,7 @@
              * so it can appear above #tabbrowser-tabbox when expanded.
              * When not hovering, keep the z-index low so the tab box shadow stays on top.
              */
+            /*
             @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                 :root:not([titlepreface*="\180e "]) &:hover {
                     z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
@@ -848,6 +856,7 @@
                     z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
                 }
             }
+            */
             /* This transition is already covered by the one defined above, so it's commented out. */
             /* transition: z-index 0s linear var(--uc-sb-sidebar-main-z-delay); */
             background: inherit;

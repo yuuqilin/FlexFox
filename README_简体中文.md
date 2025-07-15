@@ -20,10 +20,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.7.8**
-* 修复 v3.7.7 引入的问题，在完全隐藏 Sidebery 或进入全屏模式时，侧栏彩带无法显示的问题。
-* 修复在启用新版侧栏但未使用原生垂直标签页时，侧栏彩带无法展开的问题。
-* 修复多种情况下，网页阴影无法覆盖工具栏或侧栏，以及网页边距未正确添加的问题。
+**🦊 v3.7.9**
+* 修复了 v3.7.7 引入的回退问题：当启用 `uc.flex.disable-sidebery-autohide` 时，侧栏彩带无法展开。
+* 重构了侧栏的 z-index 处理逻辑。
+* 废弃了 `--uc-web-content-margin-small` 和 `--uc-web-content-margin-large` 变量，统一改用 `--uc-web-content-margin`。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -208,6 +208,11 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <summary>💬 <b>历史更新</b></summary>
 
+**v3.7.8**
+* 修复 v3.7.7 引入的问题，在完全隐藏 Sidebery 或进入全屏模式时，侧栏彩带无法显示的问题。
+* 修复在启用新版侧栏但未使用原生垂直标签页时，侧栏彩带无法展开的问题。
+* 修复多种情况下，网页阴影无法覆盖工具栏或侧栏，以及网页边距未正确添加的问题。
+
 **v3.7.7**
 * 修复折叠原生垂直标签页或侧栏标题时，动画过渡效果失效的问题。
 * 修复开启“悬停时展开侧栏”并保持侧栏展开状态时，打开侧栏面板会遮挡原生垂直标签页的问题。
@@ -244,105 +249,6 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 * 修复启用 `uc.flex.sidebery-slow-hover-expand` 后，侧边栏与 Sidebery 的动画时序不同步的问题。
 * 为了让 Sidebery 内部的动画与外部容器保持同步，现在在 `uc-sidebery.css` 中也定义了控制展开动画的变量。
   如果你曾将 `uc-variables.css` 中的变量复制到 `uc-user-settings.css` 来自定义动画时间，请务必也将对应的定义（包含正确的 `@media` 查询语句和 `#root` 选择器）从 `uc-sidebery.css` 复制到 `uc-custom-content.css`，并使用相同的数值。这样才能确保 userChrome 和 userContent 样式之间的动画效果保持一致。
-
-**v3.6.10**
-* 修复了 v3.6.8 引入的问题：当启用“悬停时展开侧栏”并处于 Sidebery 活动状态时，展开后的侧栏工具栏无法正常显示。
-
-**v3.6.9**
-* 修复 v3.6.8 引起的问题：在原生水平标签页模式下，侧栏标题条的颜色消失。
-* 修复 v3.6.8 引起的问题：在原生水平标签页模式下，打开侧栏标题时，Sidebery 无法保持展开状态。
-
-**v3.6.8**
-* 修复了Nightly 142导致的侧栏开关按钮在悬停时高亮尺寸错误的问题。
-* 改进了 `uc.flex.enable-rounded-web-content` 的显示效果：现在网页容器的阴影和圆角不会被裁剪，相关样式已重构，复杂度大幅降低。
-* 调整了侧栏与导航栏的层叠样式处理方式，从原来的固定数值改为悬停时动态提升。
-* 修复在启用“悬停时展开侧栏”并启用 Sidebery 时，侧栏工具栏无法完全展开的问题。
-* 优化了在使用原生水平标签页布局时，侧栏标题栏与主题背景颜色之间的显示兼容性。
-
-**v3.6.7**
-* 优化了 `uc.flex.auto-hide-navbar-icons` 的显示逻辑。现在即使鼠标未悬停，打开菜单的按钮也会和菜单一起保持可见。
-* 统一了地址栏、导航栏和书签工具栏隐藏按钮的动画效果。你可以将下列变量从 `uc-variables.css` 中复制到 `uc-user-settings.css` 并修改，以自定义转场效果：
-
-  ```css
-  --uc-autohide-navbar-icons-duration
-  --uc-hover-navbar-icons-duration
-  --uc-autohide-navbar-icons-type
-  --uc-collapse-navbar-icons-duration
-  ```
-
-**v3.6.6**
-* 修复了由于 Nightly v141 的变更导致 macOS 风格的窗口控制按钮无法显示的问题。
-  * [Bug 1789579](https://bugzilla.mozilla.org/show_bug.cgi?id=1789579)
-* 增加并补全了更多缺失的菜单图标。
-* 新增选项 `uc.flex.auto-hide-navbar-icons`。启用后，导航栏中的工具按钮图标会默认隐藏，鼠标悬停时显示。窗口控制按钮、地址栏以及侧栏切换按钮（FlexFox 图标）会始终显示。如果侧栏按钮被移动到导航栏的中间位置（不是最左或最右），或者启用了 `uc.flex.revert-to-original-sidebar-icon` 选项，该按钮也会跟随隐藏。
-* 重要更新：FlexFox 现在可以根据当前 Firefox 主题自动切换 Sidebery 的背景颜色。要启用此功能，请在 Sidebery 的设置中，将「外观」下的「配色模式」设为 “firefox”。
-
-**v3.6.5**
-* 增强了对主题的兼容性：只要不使用 Firefox 内建主题，工具栏颜色现在会自动跟随所用主题。只有在使用 Firefox Color 且未设置背景图片时，才需要手动启用 `uc.flex.allow-addons-to-change-toolbar-color` 选项。
-* 修复启用 `uc.flex.enable-rounded-web-content` 时，若设置为“隐藏标签页和侧栏”且关闭垂直标签页，侧边误出现边距的问题。
-* 优化扩展面板（扩展按钮汇总面板）的显示效果，使按钮更易查看和点击。  
-
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/unified-extensions-panel.webp" alt="改进后的扩展面板布局和按钮间距" width="175px" />
-* 新增 `uc.flex.menu-item-spacing` 选项，用于调整菜单项之间的间距。  
-  可选字符串值如下：  
-  `"1"` 或 `"small"` = 较小间距（默认值，与旧版相同）  
-  `"2"` 或 `"medium"` = 中等间距  
-  `"3"` 或 `"large"` = Firefox 默认的最宽间距  
-
-  你也可以使用以下变量分别控制不同类型菜单的间距：
-
-  ```
-  --uc-app-menu-item-padding-block            // 应用菜单项间距
-  --uc-menu-item-padding-block                // 书签菜单和系统菜单
-  --uc-content-area-context-menu-item-padding-block // 页面右键菜单
-  --uc-appMenu-zoom-controls-x-offset         // 缩放控制按钮的位置微调
-  ```
-* 为统一 `uc-aboutconfig.css` 和 `uc.flex.menu-item-spacing` 的设置格式，`uc.flex.findbar-position` 的取值范围已从 `"0"`–`"2"` 调整为 `"1"`–`"3"`。  
-  可选字符串值包括：  
-  `"1"` 或 `"top-center-left"` = 顶部左侧  
-  `"2"` 或 `"top-right"` = 右上角  
-  `"3"` 或 `"bottom-right"` = 右下角  
-* 修复菜单中复选项（checkbox）文字错位的问题，并为更多菜单项补充图标，提升排版一致性。
-
-**v3.6.4**
-* 修复了 Nightly v141 导致的侧栏布局异常问题。
-  * [Bug 1954155](https://bugzilla.mozilla.org/show_bug.cgi?id=1954155)
-  * [Bug 1972060](https://bugzilla.mozilla.org/show_bug.cgi?id=1972060)
-* 改进了 `uc.flex.dim-urlbar-popup-backdrop` 的显示效果，为暗背景添加了淡入动画。
-* 新增选项 `uc.flex.show-flexfox-version-info-in-about-config`，启用后可在 `about:config` 页面显示当前使用的 FlexFox 版本，方便确认版本号。
-* 优化了 `about:config` 页面显示，已修改的选项现在会更明显地高亮显示。如果启用了“悬停时展开侧栏”，还会在页面中显示 FlexFox 已停用垂直标签页优化的提示信息，显示时长为 12 秒。
-
-**v3.6.3**
-* `uc.flex.enable-rounded-web-content` 现在兼容在侧栏设置中启用“隐藏标签页和侧栏”的情况，确保在开发者工具固定在网页左侧或右侧时，网页内容区域依然保有适当边距。
-* 修复了一个长期存在的问题：
-  * 当 Sidebery 的导航栏面板数量不足一整行时，鼠标悬停在导航栏上会导致整个 Sidebery 向上偏移，引起界面抖动。
-  * 这不是预期的行为，FlexFox 应该在所有状态下保持稳定。这么久没有发现，是因为我自己的使用环境中面板数量一直较多。
-  * 此问题现已修复，同时也重新设计了导航栏展开的动画效果，以适配 Sidebery 自动隐藏和使用 `Lock Sidebery` 快捷键固定展开的两种情况。
-  * 此次修复通过 `userContent.css` 实现，用户不需要修改 Sidebery 本体的样式，只需按正常流程更新 FlexFox 即可。
-
-**v3.6.2**
-* 提升了 `uc.flex.disable-bookmarks-autohide` 选项在多种情境下的兼容性。
-* 提升了 `uc.flex.enable-rounded-web-content` 选项在水平标签页模式下使用开发者工具时的兼容性。
-* 移除旧的规则和变量，改用更高效的选择器。
-* 降低 Sidebery 和原生垂直标签页变量赋值时的判断开销。
-* 相比 v3.6.1 性能提升约 **7%**，与默认 Firefox UI 的差距小于 2 毫秒。
-
-**v3.6.1**
-* 利用 Firefox 的新特性，移除已不再需要的 `:has()` 和 `:is()` 选择器，改用 `@media` 查询替代属性判断，并通过新的内建属性简化选择器结构。
-* 实测性能变化低于 2%，属于误差范围，几乎无明显提升。
-* 新增 `uc.flex.disable-bookmarks-autohide` 与“仅在新标签页显示书签工具栏”设置的兼容性。
-* 提升“悬停时展开侧栏”功能在多种情况下的兼容表现。
-
-**🔥 v3.6.0 重大性能更新**
-> [!WARNING]
-> * 修复了 v3.5.1 引入的严重性能下降问题。
->   * 问题源自 v3.5.1 中新增的 “圆角与悬浮式网页内容样式” 功能。
->   * 最明显的表现是在点击 “列出所有标签页” 按钮时，标签页列表的展开速度非常缓慢，通常需要 0.5 秒以上。
->   * 此外，在使用开发者工具或浏览器工具箱时，浏览器界面也会明显卡顿。
->   * 熟悉 FlexFox 历史更新的用户可能已经猜到，问题再次与 `:root:has()` 选择器有关。
-> * 此性能问题现已修复，并在原有基础上做了一定优化。
-> * 相比 v3.5.8，界面响应速度约提升了 **17 倍**。
-> * ⬆️ 强烈建议尽快升级到此版本。
 
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
