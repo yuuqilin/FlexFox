@@ -1,0 +1,11 @@
+@-moz-document url-prefix("http") {
+    body {
+        background-color: light-dark(#f9f9fb, #2b2a33);
+        @media (-moz-content-prefers-color-scheme: light) {
+            background-color: #f9f9fb;
+        }
+        @media (-moz-content-prefers-color-scheme: dark) {
+            background-color: #2b2a33;
+        }
+    }
+}

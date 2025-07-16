@@ -20,10 +20,9 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.7.9**
-* `uc.flex.disable-sidebery-autohide`を有効にした際に、サイドバーのストライプが展開されない不具合（v3.7.7で発生）を修正しました。
-* サイドバーのz-indexの処理ロジックを整理しました。
-* `--uc-web-content-margin-small`および`--uc-web-content-margin-large`の変数を廃止し、`--uc-web-content-margin`に統一しました。
+**🦊 v3.8.0**
+* ページ読み込み時に発生していた画面のちらつきを修正しました。
+* `uc.flex.enable-rounded-web-content` が無効な場合、ページ読み込み中の背景色は「ウェブサイトの外観」で設定された配色モードに従うようになりました。有効な場合は、使用中のテーマに基づいて背景色が表示されます。
 
 ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -209,6 +208,11 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.7.9**
+* `uc.flex.disable-sidebery-autohide`を有効にした際に、サイドバーのストライプが展開されない不具合（v3.7.7で発生）を修正しました。
+* サイドバーのz-indexの処理ロジックを整理しました。
+* `--uc-web-content-margin-small`および`--uc-web-content-margin-large`の変数を廃止し、`--uc-web-content-margin`に統一しました。
 
 **v3.7.8**
 * v3.7.7で発生した、Sideberyを完全に非表示にしたり全画面表示にした際に、サイドバーのストライプが表示されなくなる不具合を修正しました。

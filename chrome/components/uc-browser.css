@@ -4,7 +4,7 @@
         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
         :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
             #browser {
-                /* Override toolbox color if there's no theme background image. */
+                /* Override browser color if there's no theme background image. */
                 --toolbar-bgcolor: var(--uc-bgcolor) !important;
                 --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
                 background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
@@ -61,6 +61,13 @@
 @media -moz-pref("uc.flex.enable-rounded-web-content") and (not (display-mode: fullscreen)) {
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
         :root:not([titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
+            /* Remove white overlay to match the browser margin background with the sidebar */
+            @media not -moz-pref("sidebar.verticalTabs") {
+                #browser /* :not(.browser-toolbox-background) */ {
+                    background-image: none !important;
+                }
+            }
+
             #tabbrowser-tabbox {
                 box-shadow: none !important;
                 outline: none !important;
@@ -104,22 +111,32 @@
             }
 
             .browserStack {
+                /*
                 > browser {
+                */
                     /* Background shown while loading pages; must be set on this layer to avoid visible gaps near DevTools */
-                    background-color: light-dark(#fff, #202020);
+                    /*
+                    background-color: light-dark(#f9f9fb, #2b2a33);
+                    */
                     /* Prevent loss of rounded corners on pages using backdrop-filter (e.g. YouTube homepage) */
+                    /*
                     clip-path: border-box;
+                    */
+                /*
                 }
+                */
                 border-radius: var(--uc-web-content-radius);
                 border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 overflow: hidden;
                 /* Clip any background color bleed that appears around the rounded corners */
+                /*
                 clip-path: inset(
                     0 round var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius))
                         var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius))
                         var(--uc-web-content-radius) var(--uc-web-content-radius)
                 );
+                */
             }
 
             .devtools-toolbox-side-iframe {

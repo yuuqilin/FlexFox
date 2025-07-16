@@ -20,10 +20,9 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.7.9**
-* 修复了 v3.7.7 引入的回退问题：当启用 `uc.flex.disable-sidebery-autohide` 时，侧栏彩带无法展开。
-* 重构了侧栏的 z-index 处理逻辑。
-* 废弃了 `--uc-web-content-margin-small` 和 `--uc-web-content-margin-large` 变量，统一改用 `--uc-web-content-margin`。
+**🦊 v3.8.0**
+* 修复了加载网页时出现的闪烁问题。
+* 当未启用 `uc.flex.enable-rounded-web-content` 时，网页加载过程中的背景颜色将根据“网站外观”中设置的配色模式显示为浅色或深色。启用该选项时，背景颜色将根据当前主题显示。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -207,6 +206,11 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.7.9**
+* 修复了 v3.7.7 引入的回退问题：当启用 `uc.flex.disable-sidebery-autohide` 时，侧栏彩带无法展开。
+* 重构了侧栏的 z-index 处理逻辑。
+* 废弃了 `--uc-web-content-margin-small` 和 `--uc-web-content-margin-large` 变量，统一改用 `--uc-web-content-margin`。
 
 **v3.7.8**
 * 修复 v3.7.7 引入的问题，在完全隐藏 Sidebery 或进入全屏模式时，侧栏彩带无法显示的问题。
