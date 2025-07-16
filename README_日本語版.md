@@ -20,9 +20,8 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.8.0**
-* ページ読み込み時に発生していた画面のちらつきを修正しました。
-* `uc.flex.enable-rounded-web-content` が無効な場合、ページ読み込み中の背景色は「ウェブサイトの外観」で設定された配色モードに従うようになりました。有効な場合は、使用中のテーマに基づいて背景色が表示されます。
+**🦊 v3.8.1**
+* ページ読み込み中の背景色の処理方法を変更しました。`uc.flex.enable-rounded-web-content` の設定にかかわらず、「ウェブサイトの外観」で指定された配色モードに従うようになりました。
 
 ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -208,6 +207,10 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.8.0**
+* ページ読み込み時に発生していた画面のちらつきを修正しました。
+* `uc.flex.enable-rounded-web-content` が無効な場合、ページ読み込み中の背景色は「ウェブサイトの外観」で設定された配色モードに従うようになりました。有効な場合は、使用中のテーマに基づいて背景色が表示されます。
 
 **v3.7.9**
 * `uc.flex.disable-sidebery-autohide`を有効にした際に、サイドバーのストライプが展開されない不具合（v3.7.7で発生）を修正しました。

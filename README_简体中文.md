@@ -20,9 +20,8 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.8.0**
-* 修复了加载网页时出现的闪烁问题。
-* 当未启用 `uc.flex.enable-rounded-web-content` 时，网页加载过程中的背景颜色将根据“网站外观”中设置的配色模式显示为浅色或深色。启用该选项时，背景颜色将根据当前主题显示。
+**🦊 v3.8.1**
+* 调整了网页加载过程中的背景颜色处理方式。无论是否启用 `uc.flex.enable-rounded-web-content`，背景颜色现在都会根据“网站外观”中设置的配色模式显示为浅色或深色。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -206,6 +205,10 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.8.0**
+* 修复了加载网页时出现的闪烁问题。
+* 当未启用 `uc.flex.enable-rounded-web-content` 时，网页加载过程中的背景颜色将根据“网站外观”中设置的配色模式显示为浅色或深色。启用该选项时，背景颜色将根据当前主题显示。
 
 **v3.7.9**
 * 修复了 v3.7.7 引入的回退问题：当启用 `uc.flex.disable-sidebery-autohide` 时，侧栏彩带无法展开。

@@ -20,9 +20,8 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.8.0**
-* Fixed a screen flicker issue that occurred when loading pages.
-* The background color during page load now follows the color scheme set in **Website appearance** if `uc.flex.enable-rounded-web-content` is disabled. When this option is enabled, the background color instead follows the current theme.
+**🦊 v3.8.1**
+* Updated how background color is handled during page load. It now always follows the color scheme set in **Website appearance**, regardless of whether `uc.flex.enable-rounded-web-content` is enabled.
 
 <!-- END What's New -->
 
@@ -212,6 +211,10 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.8.0**
+* Fixed a screen flicker issue that occurred when loading pages.
+* The background color during page load now follows the color scheme set in **Website appearance** if `uc.flex.enable-rounded-web-content` is disabled. When this option is enabled, the background color instead follows the current theme.
 
 **v3.7.9**
 * Fixed a regression from v3.7.7 where the sidebar stripe could not expand when `uc.flex.disable-sidebery-autohide` was enabled.

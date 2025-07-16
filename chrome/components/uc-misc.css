@@ -85,33 +85,6 @@ toolbar:not(#TabsToolbar) > #search-container {
     border-top: 1px solid rgb(67, 72, 76);
 }
 
-/* Remove white flash before page load */
-/*
-@-moz-document url-prefix(about:), url-prefix(chrome://browser)
-{
-    browser[type="content"],
-    tabpanels {
-        background: #1a1a1a !important;
-    }
-}
-*/
-/* When `uc.flex.enable-rounded-web-content` is enabled,
-   the following rule will be overridden by uc-browser.css */
-#tabbrowser-tabpanels {
-    /*
-    background: hsl(240, 4%, 10%) !important;
-    */
-    background-color: light-dark(#f9f9fb, #2b2a33) !important;
-    /* Use dark background when the system theme is light but "Website appearance" is set to dark */
-    @media (prefers-color-scheme: light) and -moz-pref("layout.css.prefers-color-scheme.content-override", 0) {
-        background-color: #2b2a33 !important;
-    }
-    /* Use light background when the system theme is dark but "Website appearance" is set to light */
-    @media (prefers-color-scheme: dark) and -moz-pref("layout.css.prefers-color-scheme.content-override", 1) {
-        background-color: #f9f9fb !important;
-    }
-}
-
 /* Make Picture-in-Picture Volume Controls always appear at the bottom (Credit u/endgame0 on Reddit) */
 /* Modified from https://www.reddit.com/r/FirefoxCSS/comments/1kuyu02/firefox_picture_in_picture_is_almost_perfect_but/ */
 @media not -moz-pref("uc.flex.move-pip-volume-to-top") {

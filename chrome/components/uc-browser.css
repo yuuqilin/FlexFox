@@ -57,6 +57,37 @@
     }
 }
 
+/* Remove white flash before page load */
+/*
+@-moz-document url-prefix(about:), url-prefix(chrome://browser)
+{
+    browser[type="content"],
+    tabpanels {
+        background: #1a1a1a !important;
+    }
+}
+*/
+#tabbrowser-tabpanels {
+    /*
+    background: hsl(240, 4%, 10%) !important;
+    */
+    background-color: light-dark(#f9f9fb, #202020) !important;
+    /* Use light background when the system theme is dark but "Website appearance" is set to light */
+    /*
+    @media (prefers-color-scheme: dark) and -moz-pref("layout.css.prefers-color-scheme.content-override", 1) {
+    */
+    @media (-moz-content-prefers-color-scheme: light) {
+        background-color: #f9f9fb !important;
+    }
+    /* Use dark background when the system theme is light but "Website appearance" is set to dark */
+    /*
+    @media (prefers-color-scheme: light) and -moz-pref("layout.css.prefers-color-scheme.content-override", 0) {
+    */
+    @media (-moz-content-prefers-color-scheme: dark) {
+        background-color: #202020 !important;
+    }
+}
+
 /* Add margin, shadow, and rounded corners to the web content area */
 @media -moz-pref("uc.flex.enable-rounded-web-content") and (not (display-mode: fullscreen)) {
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
@@ -111,32 +142,40 @@
             }
 
             .browserStack {
-                /*
                 > browser {
-                */
-                    /* Background shown while loading pages; must be set on this layer to avoid visible gaps near DevTools */
-                    /*
-                    background-color: light-dark(#f9f9fb, #2b2a33);
-                    */
-                    /* Prevent loss of rounded corners on pages using backdrop-filter (e.g. YouTube homepage) */
-                    /*
+                    /** 
+                     * Prevent loss of rounded corners on pages that use backdrop-filter (e.g. YouTube homepage),
+                     * combined with outer .browserStack clip-path cutting into the corners. 
+                     */
                     clip-path: border-box;
-                    */
-                /*
                 }
-                */
                 border-radius: var(--uc-web-content-radius);
                 border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 overflow: hidden;
-                /* Clip any background color bleed that appears around the rounded corners */
-                /*
+
+                /** 
+                 * Background shown while loading pages.
+                 * Applied to .browserStack instead of <browser> to avoid flickering,
+                 * though this may cause minor subpixel bleed near the edges when DevTools is docked.
+                 */
+                background-color: light-dark(#f9f9fb, #202020);
+                @media (-moz-content-prefers-color-scheme: light) {
+                    background-color: #f9f9fb;
+                }
+                @media (-moz-content-prefers-color-scheme: dark) {
+                    background-color: #202020;
+                }
+                /** 
+                 * Clips background bleed around rounded corners.
+                 * Does not cover subpixel edge artifacts caused by DevTools docking,
+                 * which are left unpatched to avoid added complexity and performance cost.
+                 */
                 clip-path: inset(
                     0 round var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius))
                         var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius))
                         var(--uc-web-content-radius) var(--uc-web-content-radius)
                 );
-                */
             }
 
             .devtools-toolbox-side-iframe {
