@@ -195,14 +195,14 @@
             &:not([titlepreface*="\200c "], [titlepreface*="\200d "]) {
                 @media -moz-pref("uc.flex.fully-hide-toolbox") {
                     #navigator-toolbox {
-                        margin-left: var(--uc-navigator-offset);
+                        left: var(--uc-navigator-offset);
                         width: calc(100% - var(--uc-navigator-width));
                     }
                 }
                 @media not -moz-pref("uc.flex.fully-hide-toolbox") {
                     &[titlepreface*="\200b "] {
                         #navigator-toolbox {
-                            margin-left: var(--uc-navigator-offset);
+                            left: var(--uc-navigator-offset);
                             width: calc(100% - var(--uc-navigator-width));
                         }
                     }

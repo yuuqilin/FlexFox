@@ -112,7 +112,7 @@
                 border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 margin: var(--uc-web-content-margin-box);
-                box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
+
                 background-color: transparent !important;
                 @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
                     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
@@ -126,56 +126,57 @@
             }
 
             .browserContainer {
-                /* Hide overflow to ensure the border radius can clip the child content properly */
-                overflow: hidden;
-                /* When DevTools and Sidebery are on the same side, override sharp corners with rounded ones */
+                /**
+                 * When DevTools and Sidebery are docked on the same side, 
+                 * the corresponding corner of the web content container should always be rounded. 
+                 */
                 @media -moz-pref("devtools.toolbox.host", "left") {
-                    &:not(:first-child) {
+                    &:not(:first-child) .browserStack {
                         border-top-left-radius: var(--uc-web-content-radius);
                     }
                 }
                 @media -moz-pref("devtools.toolbox.host", "right") {
-                    &:not(:last-child) {
+                    &:not(:last-child) .browserStack {
                         border-top-right-radius: var(--uc-web-content-radius);
                     }
                 }
             }
 
+            /**
+             * 1. Page loading background cannot be applied directly to <browser>, or it causes flickering.
+             * 2. clip-path must be on the same layer as the background to properly mask background bleed around rounded corners.
+             * 3. box-shadow must be inside .browserStack (or its descendants) so that content and DevTools frames can each render their own shadows.
+             * 4. These constraints mean background, clip-path, and box-shadow can only coexist on .browserStack.
+             * 5. However, clip-path will also clip the box-shadow.
+             * 6. To resolve this, we separate concerns using a pseudo-element: apply background and clip-path to ::before, and keep box-shadow on .browserStack.
+             */
             .browserStack {
-                > browser {
-                    /** 
-                     * Prevent loss of rounded corners on pages that use backdrop-filter (e.g. YouTube homepage),
-                     * combined with outer .browserStack clip-path cutting into the corners. 
-                     */
-                    clip-path: border-box;
-                }
                 border-radius: var(--uc-web-content-radius);
                 border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 overflow: hidden;
+                box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
 
-                /** 
-                 * Background shown while loading pages.
-                 * Applied to .browserStack instead of <browser> to avoid flickering,
-                 * though this may cause minor subpixel bleed near the edges when DevTools is docked.
-                 */
-                background-color: light-dark(#f9f9fb, #202020);
-                @media (-moz-content-prefers-color-scheme: light) {
-                    background-color: #f9f9fb;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    pointer-events: none;
+                    /* Background shown while loading pages */
+                    background-color: light-dark(#f9f9fb, #202020);
+                    @media (-moz-content-prefers-color-scheme: light) {
+                        background-color: #f9f9fb;
+                    }
+                    @media (-moz-content-prefers-color-scheme: dark) {
+                        background-color: #202020;
+                    }
+                    /* Clips background bleed around rounded corners */
+                    clip-path: inset(
+                        0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip))
+                            var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip))
+                            var(--uc-web-content-radius-clip) var(--uc-web-content-radius-clip)
+                    );
                 }
-                @media (-moz-content-prefers-color-scheme: dark) {
-                    background-color: #202020;
-                }
-                /** 
-                 * Clips background bleed around rounded corners.
-                 * Does not cover subpixel edge artifacts caused by DevTools docking,
-                 * which are left unpatched to avoid added complexity and performance cost.
-                 */
-                clip-path: inset(
-                    0 round var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius))
-                        var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius))
-                        var(--uc-web-content-radius) var(--uc-web-content-radius)
-                );
             }
 
             .devtools-toolbox-side-iframe {
@@ -186,20 +187,20 @@
                 @media -moz-pref("devtools.toolbox.host", "left") {
                     border-top-right-radius: var(--uc-web-content-radius);
                     margin-right: var(--uc-web-content-margin);
-                    box-shadow: 4px 0 8px -4px light-dark(#00000026, #00000040);
+                    box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
                 }
                 /* When DevTools is docked on the right, override sharp corner with a rounded one and add left margin */
                 @media -moz-pref("devtools.toolbox.host", "right") {
                     border-top-left-radius: var(--uc-web-content-radius);
                     margin-left: var(--uc-web-content-margin);
-                    box-shadow: -4px 0 8px -4px light-dark(#00000026, #00000040);
+                    box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
                 }
             }
 
             .devtools-toolbox-bottom-iframe {
                 border-radius: var(--uc-web-content-radius);
                 margin-top: var(--uc-web-content-margin);
-                box-shadow: 0 -2px 6px -2px light-dark(#00000026, #00000040);
+                box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
             }
 
             .devtools-side-splitter,

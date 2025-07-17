@@ -20,8 +20,11 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v3.8.1**
-* Updated how background color is handled during page load. It now always follows the color scheme set in **Website appearance**, regardless of whether `uc.flex.enable-rounded-web-content` is enabled.
+**🦊 v3.8.2**
+* Improved shadow rendering when `uc.flex.enable-rounded-web-content` is enabled and DevTools is open.
+* Fixed background color bleeding along the edge shared by the webpage container and DevTools when docked.
+* Refactored the internal handling of `uc.flex.enable-rounded-web-content`.
+* Updated the behavior of `uc.flex.fully-hide-toolbox` and the "Hide Topbar" shortcut.
 
 <!-- END What's New -->
 
@@ -211,6 +214,9 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v3.8.1**
+* Updated how background color is handled during page load. It now always follows the color scheme set in **Website appearance**, regardless of whether `uc.flex.enable-rounded-web-content` is enabled.
 
 **v3.8.0**
 * Fixed a screen flicker issue that occurred when loading pages.
