@@ -226,10 +226,12 @@
                     min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                    overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
+                        allow-discrete,
                     padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                     background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                    background-image var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                    background-image var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
+                        allow-discrete,
                     opacity 0ms ease-in-out 0ms;
             }
         }
@@ -253,12 +255,13 @@
                         min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                         min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                         max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                        overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
+                        overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
+                            allow-discrete,
                         padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
                         background-color var(--uc-autohide-transition-duration) ease-in-out
                             var(--uc-autohide-sidebar-delay),
                         background-image var(--uc-autohide-transition-duration) ease-in-out
-                            var(--uc-autohide-sidebar-delay),
+                            var(--uc-autohide-sidebar-delay) allow-discrete,
                         opacity 0ms ease-in-out 0ms;
                 }
             }
@@ -295,8 +298,16 @@
                 * Extend opacity transition delay slightly (10ms) 
                 * to avoid abrupt display changes when opacity changes from 0 to 1 
                 */
+                /*
                 transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     calc(var(--uc-hover-sidebar-delay) + 10ms) !important;
+                */
+                transition:
+                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-hover-sidebar-delay) + 10ms),
+                    z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete,
+                    clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
                 opacity: 1;
             }
         }
@@ -315,8 +326,16 @@
                 * Extend opacity transition delay slightly (10ms) 
                 * to avoid abrupt display changes when opacity changes from 0 to 1 
                 */
+                /*
                 transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     calc(var(--uc-hover-sidebar-delay) + 10ms) !important;
+                */
+                transition:
+                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-hover-sidebar-delay) + 10ms),
+                    z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete,
+                    clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
                 opacity: 1;
             }
         }
@@ -347,8 +366,16 @@
                 );
                 opacity: 0;
                 &:hover {
+                    /*
                     transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         calc(var(--uc-hover-sidebar-delay) + 10ms) !important;
+                    */
+                    transition:
+                        opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            calc(var(--uc-hover-sidebar-delay) + 10ms),
+                        z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete,
+                        clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay) !important;
                     opacity: 1;
                 }
             }
@@ -361,8 +388,16 @@
                 );
                 opacity: 0;
                 &:hover {
+                    /*
                     transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         calc(var(--uc-hover-sidebar-delay) + 10ms) !important;
+                    */
+                    transition:
+                        opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            calc(var(--uc-hover-sidebar-delay) + 10ms),
+                        z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete,
+                        clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay) !important;
                     opacity: 1;
                 }
             }
@@ -642,22 +677,24 @@
             width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay),
+                var(--uc-autohide-sidebar-delay) allow-discrete,
             background-color var(--uc-sb-sidebar-main-background-duration, 0ms) var(--uc-autohide-transition-type)
                 var(--uc-sb-sidebar-main-background-delay, 0ms),
             background-image var(--uc-sb-sidebar-main-background-duration, 0ms) var(--uc-autohide-transition-type)
-                var(--uc-sb-sidebar-main-background-delay, 0ms),
+                var(--uc-sb-sidebar-main-background-delay, 0ms) allow-discrete,
             */
             opacity var(--uc-sb-sidebar-main-opacity-duration, var(--uc-autohide-transition-duration))
                 var(--uc-autohide-transition-type)
                 var(--uc-sb-sidebar-main-opacity-delay, calc(var(--uc-autohide-sidebar-delay) + 10ms)),
             /** 
-             * z-index transitions result in instant visual changes.
-             * Add a delay equal to other properties' delay + duration
-             * so the z-index change happens only after the animation finishes. 
+             * Although z-index is listed as an animatable integer on MDN,
+             * Firefox treats it as a discrete property that requires 'allow-discrete'
+             * for transition delays to take effect.
+             * To avoid ambiguity, we still apply a manual delay equal to other
+             * properties' delay + duration, ensuring the change happens after animation ends.
              */
                 z-index 0ms linear
-                calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms);
+                calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms) allow-discrete;
         /* Enable transitions for discrete properties like overflow or background-image */
         /*
         transition-behavior: allow-discrete;
@@ -708,13 +745,13 @@
                 var(--uc-hover-sidebar-delay),
             width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
             overflow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay),
+                var(--uc-hover-sidebar-delay) allow-discrete,
             background-color 0ms var(--uc-autohide-transition-type) 0ms,
-            background-image 0ms var(--uc-autohide-transition-type) 0ms,
+            background-image 0ms var(--uc-autohide-transition-type) 0ms allow-discrete,
             */
             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 calc(var(--uc-hover-sidebar-delay) + 10ms),
-            z-index 0s linear calc(var(--uc-hover-sidebar-delay) - 10ms);
+            z-index 0s linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete;
     }
 
     @media -moz-pref("sidebar.visibility", "expand-on-hover") {
@@ -858,7 +895,7 @@
             }
             */
             /* This transition is already covered by the one defined above, so it's commented out. */
-            /* transition: z-index 0s linear var(--uc-sb-sidebar-main-z-delay); */
+            /* transition: z-index 0s linear var(--uc-sb-sidebar-main-z-delay) allow-discrete; */
             background: inherit;
         }
 
@@ -868,7 +905,10 @@
             overflow: hidden;
             /* !TEMPORARY: */
             margin-inline-start: var(--uc-sidebar-main-margin-left);
-            min-width: /* var(--tab-collapsed-width) */ var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-width));
+            min-width: /* var(--tab-collapsed-width) */ var(
+                --uc-sb-sidebar-main-width,
+                calc(var(--uc-sidebar-main-width) - var(--uc-sidebar-main-margin-left))
+            );
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
             will-change: margin-inline-start, min-width, overflow, transform;
             transition:
@@ -906,7 +946,7 @@
                 min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay),
                 overflow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
+                    var(--uc-hover-sidebar-delay) allow-discrete,
                 transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay);
             /**

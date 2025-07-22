@@ -10,18 +10,18 @@
         --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
         --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
         --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
-        --uc-autohide-sidebar-delay: 10ms; /* Delay before collapsing the sidebar */
+        --uc-autohide-sidebar-delay: 28ms; /* Delay before collapsing the sidebar */
         --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar */
 
         /* Speed up sidebar expand/collapse animation */
         @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
             --uc-hover-transition-duration: 100ms;
-            --uc-autohide-sidebar-delay: 1ms;
+            --uc-autohide-sidebar-delay: 28ms;
             --uc-hover-sidebar-delay: 1ms;
         }
         /* Slow down sidebar expand/collapse animation */
         @media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
-            --uc-autohide-sidebar-delay: 10ms;
+            --uc-autohide-sidebar-delay: 28ms;
             --uc-hover-sidebar-delay: 350ms;
             --uc-hover-toolbar-delay: 200ms;
         }
@@ -161,7 +161,7 @@
                 transition:
                     transform var(--d-fast),
                     opacity var(--d-fast),
-                    z-index var(--d-fast) var(--d-fast),
+                    z-index var(--d-fast) var(--d-fast) allow-discrete,
                     margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }

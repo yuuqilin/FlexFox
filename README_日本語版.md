@@ -20,11 +20,10 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v3.8.2**
-* `uc.flex.enable-rounded-web-content`を有効にし、開発ツールを表示している際のシャドウ表示を改善しました。
-* 開発ツールを表示中に、ウェブページコンテナとツールが接する辺に発生していた背景色のにじみを修正しました。
-* `uc.flex.enable-rounded-web-content`の処理方法を内部的にリファクタリングしました。
-* `uc.flex.fully-hide-toolbox`および "Hide Topbar" ショートカットの動作を調整しました。
+**🦊 v3.8.3**
+* `z-index` の変更がアニメーションの遅延に従わない不具合を修正しました。
+* Firefox標準の縦型タブで、ホバー時にアイコンがアニメーションの遅延前に移動してしまう問題を修正しました。
+* 横型タブモードとの互換性のため、デフォルトの折りたたみ速度を調整しました。
 
 ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -210,6 +209,12 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v3.8.2**
+* `uc.flex.enable-rounded-web-content`を有効にし、開発ツールを表示している際のシャドウ表示を改善しました。
+* 開発ツールを表示中に、ウェブページコンテナとツールが接する辺に発生していた背景色のにじみを修正しました。
+* `uc.flex.enable-rounded-web-content`の処理方法を内部的にリファクタリングしました。
+* `uc.flex.fully-hide-toolbox`および "Hide Topbar" ショートカットの動作を調整しました。
 
 **v3.8.1**
 * ページ読み込み中の背景色の処理方法を変更しました。`uc.flex.enable-rounded-web-content` の設定にかかわらず、「ウェブサイトの外観」で指定された配色モードに従うようになりました。

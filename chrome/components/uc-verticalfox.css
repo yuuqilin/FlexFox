@@ -34,16 +34,29 @@
     @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
         :root:not([titlepreface*="\180e "]) & {
             /** 
-             * z-index transitions result in instant visual changes.
-             * Add a delay equal to other properties' delay + duration
-             * so the z-index change happens only after the animation finishes. 
+             * Although z-index is listed as an animatable integer on MDN,
+             * Firefox treats it as a discrete property that requires 'allow-discrete'
+             * for transition delays to take effect.
+             * To avoid ambiguity, we still apply a manual delay equal to other
+             * properties' delay + duration, ensuring the change happens after animation ends.
              */
-            transition: z-index 0ms linear
-                calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms);
+            transition:
+                opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                z-index 0ms linear
+                    calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms)
+                    allow-discrete,
+                clip-path var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay);
             @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
                 :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     &:hover {
-                        transition: z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms);
+                        transition:
+                            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                calc(var(--uc-hover-sidebar-delay) + 10ms),
+                            z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete,
+                            clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay);
                         --browser-area-z-index-sidebar: 3;
                         /**
                          * Firefox applies --browser-area-z-index-sidebar to the whole sidebar
@@ -133,9 +146,11 @@
                 min-width: var(--uc-sb-sidebar-width) !important;
                 transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay) !important;
+                /*
                 @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
                     transition: none !important;
                 }
+                */
             }
 
             &:hover #sidebar,
@@ -161,9 +176,11 @@
                 min-width: var(--uc-sb-sidebar-width) !important;
                 transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay) !important;
+                /*
                 @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
                     transition: none !important;
                 }
+                */
             }
 
             &:hover #sidebar,
@@ -187,9 +204,11 @@
                 min-width: var(--uc-sb-sidebar-width) !important;
                 transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay) !important;
+                /*
                 @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
                     transition: none !important;
                 }
+                */
             }
 
             &:hover #sidebar,

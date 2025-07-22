@@ -286,18 +286,18 @@
     --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
     --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
     --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
-    --uc-autohide-sidebar-delay: 10ms; /* Delay before collapsing the sidebar */
+    --uc-autohide-sidebar-delay: 28ms; /* Delay before collapsing the sidebar */
     --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar */
 
     /* Speed up sidebar expand/collapse animation */
     @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
         --uc-hover-transition-duration: 100ms;
-        --uc-autohide-sidebar-delay: 10ms;
+        --uc-autohide-sidebar-delay: 28ms;
         --uc-hover-sidebar-delay: 1ms;
     }
     /* Slow down sidebar expand/collapse animation */
     @media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
-        --uc-autohide-sidebar-delay: 10ms;
+        --uc-autohide-sidebar-delay: 28ms;
         --uc-hover-sidebar-delay: 350ms;
         --uc-hover-toolbar-delay: 200ms;
     }
@@ -506,8 +506,8 @@
     }
 
     /**
-     * Used to clip background bleed at rounded corners; 
-     * slightly larger than --uc-web-content-radius to ensure the background is inset further. 
+     * Clips background bleed at rounded corners;
+     * slightly larger than --uc-web-content-radius to push the clipping edge further inward.
      */
     --uc-web-content-radius-clip: calc(var(--uc-web-content-radius) + 1px);
 
@@ -701,7 +701,7 @@
         }
 
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-            :root:not([titlepreface*="\180e "]) &:not(:hover) {
+            :root:not([titlepreface*="\180e "]) & {
                 --uc-sidebar-main-margin-left: -6px;
                 &[sidebar-positionend] {
                     --uc-sidebar-main-margin-left: -5px;

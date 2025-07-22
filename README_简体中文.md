@@ -20,11 +20,10 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v3.8.2**
-* 优化了在启用 `uc.flex.enable-rounded-web-content` 且打开开发者工具时的阴影显示效果。
-* 修复了开发者工具打开时，网页容器与工具同侧边缘出现的背景颜色溢出问题。
-* 重构了 `uc.flex.enable-rounded-web-content` 的内部处理方式。
-* 调整了 `uc.flex.fully-hide-toolbox` 和 “隐藏顶部栏” 快捷键的行为逻辑。
+**🦊 v3.8.3**
+* 修复了 `z-index` 的变更未遵循动画延迟的问题。
+* 修正了在原生垂直标签页中，悬停时图标提前移动的问题。
+* 为兼容横向标签页模式，调整了默认的折叠速度。
 
 自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
 <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
@@ -208,6 +207,12 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v3.8.2**
+* 优化了在启用 `uc.flex.enable-rounded-web-content` 且打开开发者工具时的阴影显示效果。
+* 修复了开发者工具打开时，网页容器与工具同侧边缘出现的背景颜色溢出问题。
+* 重构了 `uc.flex.enable-rounded-web-content` 的内部处理方式。
+* 调整了 `uc.flex.fully-hide-toolbox` 和 “隐藏顶部栏” 快捷键的行为逻辑。
 
 **v3.8.1**
 * 调整了网页加载过程中的背景颜色处理方式。无论是否启用 `uc.flex.enable-rounded-web-content`，背景颜色现在都会根据“网站外观”中设置的配色模式显示为浅色或深色。

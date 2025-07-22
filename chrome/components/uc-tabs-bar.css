@@ -10,7 +10,7 @@
             transition:
                 background-color var(--inactive-window-transition),
                 margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay),
-                z-index 0ms linear calc(var(--uc-autohide-toolbar-delay) + 80ms + 10ms) !important;
+                z-index 0ms linear calc(var(--uc-autohide-toolbar-delay) + 80ms + 10ms) allow-discrete !important;
         }
         #TabsToolbar:not([customizing]) {
             visibility: hidden;
@@ -42,7 +42,7 @@
             transition:
                 background-color var(--inactive-window-transition),
                 margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-autohide-navigator-delay),
-                z-index 0ms linear 0ms /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
+                z-index 0ms linear 0ms allow-discrete /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
             /* Direct child selectors can be used starting from version 133 */
             #TabsToolbar {
                 visibility: var(--uc-autohide-tabstoolbar-visibility);

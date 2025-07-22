@@ -1,10 +1,10 @@
+/* Override browser color if there's no theme background image. */
 @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
         -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
         :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
             #browser {
-                /* Override browser color if there's no theme background image. */
                 --toolbar-bgcolor: var(--uc-bgcolor) !important;
                 --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
                 background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
@@ -31,8 +31,8 @@
     }
 }
 
+/* Remove the border and rounded corners from the webpage content area */
 @media -moz-pref("sidebar.revamp") {
-    /* Remove the border and rounded corners from the webpage content area */
     #tabbrowser-tabbox {
         outline: none !important;
         box-shadow: none !important;

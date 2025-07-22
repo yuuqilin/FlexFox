@@ -100,21 +100,24 @@
             transition:
                 background-color var(--inactive-window-transition),
                 margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-autohide-navigator-delay),
-                z-index 0ms linear 0ms /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
+                z-index 0ms linear 0ms allow-discrete /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
         }
         /** 
          * Add a delay to z-index transitions to avoid flickering
          * caused by unstable hover state inside #navigator-toolbox.
          */
         #navigator-toolbox {
-            /* z-index transitions result in instant visual changes.
-             * Add a delay equal to other properties' delay + duration
-             * so the z-index change happens only after the animation finishes. 
+            /** 
+             * Although z-index is listed as an animatable integer on MDN,
+             * Firefox treats it as a discrete property that requires 'allow-discrete'
+             * for transition delays to take effect.
+             * To avoid ambiguity, we still apply a manual delay equal to other
+             * properties' delay + duration, ensuring the change happens after animation ends.
              */
             transition:
                 background-color var(--inactive-window-transition),
                 margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay),
-                z-index 0ms linear calc(var(--uc-autohide-toolbar-delay) + 80ms + 10ms) !important;
+                z-index 0ms linear calc(var(--uc-autohide-toolbar-delay) + 80ms + 10ms) allow-discrete !important;
         }
     }
 }

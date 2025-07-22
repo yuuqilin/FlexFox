@@ -47,9 +47,9 @@
     &[sessionrestored] #urlbar[popover] {
         pointer-events: none;
         opacity: 0;
+        /* Use !important to override the transition styles in Nightly (v135) */
         transition:
             transform 82ms linear var(--uc-autohide-toolbox-delay),
-            /* Use !important to override the transition styles in Nightly (v135) */
             opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms) !important;
         transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
         transform: rotateX(89.9deg);
@@ -69,7 +69,8 @@
     #urlbar-container > #urlbar[popover]:is([focused], [open]) {
         pointer-events: auto;
         opacity: 1;
-        transition-delay: 33ms !important; /* Use !important to override the transition styles in Nightly (v135) */
+        /* Use !important to override the transition styles in Nightly (v135) */
+        transition-delay: 33ms !important;
         transform: rotateX(0deg);
     }
 
