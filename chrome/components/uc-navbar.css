@@ -13,7 +13,7 @@
 */
 
 /* Override toolbar color if there's no theme background image. */
-@media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
         -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -119,11 +119,23 @@ toolbarbutton:hover {
         #navigator-toolbox {
             --browser-area-z-index-toolbox: 3;
             position: fixed !important;
+            /*
             background-color: var(--lwt-accent-color, black) !important;
+            */
+            background-color: var(--toolbox-bgcolor) !important;
             transition:
                 transform 82ms linear,
                 opacity 82ms linear !important;
             transition-delay: var(--uc-autohide-toolbox-delay) !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay) !important;
+            }
             transform-origin: top;
             transform: rotateX(var(--uc-toolbox-rotation));
             opacity: 0;
@@ -140,6 +152,15 @@ toolbarbutton:hover {
             transition:
                 transform 82ms linear var(--uc-autohide-toolbox-delay),
                 opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms) !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    opacity 0ms var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration)) !important;
+            }
             transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
             transform: rotateX(89.9deg);
         }
@@ -160,6 +181,15 @@ toolbarbutton:hover {
             opacity: 1;
             /* Use !important to override the transition styles in Nightly (v135) */
             transition-delay: 33ms !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
             transform: rotateX(0deg);
         }
 
@@ -175,6 +205,15 @@ toolbarbutton:hover {
         #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
         #navigator-toolbox:is(:hover, :focus-within, [movingtab]) {
             transition-delay: 33ms !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
             transform: rotateX(0);
             opacity: 1;
         }
@@ -209,11 +248,23 @@ toolbarbutton:hover {
         #navigator-toolbox {
             --browser-area-z-index-toolbox: 3;
             position: fixed !important;
+            /*
             background-color: var(--lwt-accent-color, black) !important;
+            */
+            background-color: var(--toolbox-bgcolor) !important;
             transition:
                 transform 82ms linear,
                 opacity 82ms linear !important;
             transition-delay: var(--uc-autohide-toolbox-delay) !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay) !important;
+            }
             transform-origin: top;
             transform: rotateX(var(--uc-toolbox-rotation));
             opacity: 0;
@@ -230,6 +281,15 @@ toolbarbutton:hover {
             transition:
                 transform 82ms linear var(--uc-autohide-toolbox-delay),
                 opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms) !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    opacity 0ms var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration)) !important;
+            }
             transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
             transform: rotateX(89.9deg);
         }
@@ -250,6 +310,15 @@ toolbarbutton:hover {
             opacity: 1;
             /* Use !important to override the transition styles in Nightly (v135) */
             transition-delay: 33ms !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
             transform: rotateX(0deg);
         }
 
@@ -265,6 +334,15 @@ toolbarbutton:hover {
         #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
         #navigator-toolbox:is(:hover, :focus-within, [movingtab]) {
             transition-delay: 33ms !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
+            }
             transform: rotateX(0);
             opacity: 1;
         }

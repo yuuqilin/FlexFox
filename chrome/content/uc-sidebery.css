@@ -355,4 +355,28 @@
             }
         }
     }
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        #root {
+            --frame-bg: transparent !important;
+            --toolbar-bg: transparent !important;
+        }
+        :root {
+            background-color: transparent !important;
+        }
+    }
+}
+
+@-moz-document regexp("^moz-extension://.*?/sidebery/group.html.*?")
+{
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser"),
+        -moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser") {
+        #root {
+            --frame-bg: transparent !important;
+            --toolbar-bg: transparent !important;
+        }
+        :root {
+            background-color: transparent !important;
+        }
+    }
 }

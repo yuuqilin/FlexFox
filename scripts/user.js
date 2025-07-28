@@ -1,8 +1,10 @@
-/* ✅ Required for custom styles and theming */
+/* ✅ Required for FlexFox Styles */
 /* Enables userChrome.css for custom styles. Required — do not modify. */
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 /* Enables icon color to auto-adjust between light and dark themes. Required — do not modify. */
 user_pref("svg.context-properties.content.enabled",              true);
+/* Enables FlexFox's vertical tabs auto-collapse and layout. Required — do not modify. */
+user_pref("sidebar.visibility",                         "always-show");
 
 /* 🪄 Add or Enable Features */
 /* Boldens the text in the Firefox interface. */
@@ -28,10 +30,10 @@ user_pref("uc.flex.remove-bookmarks-labels",                    false);
 user_pref("uc.flex.show-flexfox-version-info-in-about-config",   true);
 /* Shows a separator between pinned and regular tabs in vertical tabs. */
 user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
-/* Darkens background when URL bar dropdown is open (0 = off, 1–2 = dim intensity). */
-user_pref("uc.flex.dim-urlbar-popup-backdrop",                      0);
 /* Moves PiP window volume button to the top */
 user_pref("uc.flex.move-pip-volume-to-top",                     false);
+/* Darkens background when URL bar dropdown is open (0 = off, 1–2 = dim intensity). */
+user_pref("uc.flex.dim-urlbar-popup-backdrop",                      0);
 /* Adds margin, shadow, and rounded corners to web content (0 = off, 1–2 = more margin). */
 user_pref("uc.flex.enable-rounded-web-content",                     0);
 
@@ -46,10 +48,6 @@ user_pref("uc.flex.disable-bookmarks-autohide",                 false);
 user_pref("uc.flex.disable-tabs-toolbar-autohide",              false);
 /* Disables the auto-hide feature of the find bar. */
 user_pref("uc.flex.disable-findbar-autohide",                   false);
-/* Enables FlexFox's auto-collapse for vertical tabs (default Firefox setting; recommended to keep). */
-user_pref("sidebar.visibility",                         "always-show");
-/* Sets animation duration for Firefox's native auto-collapse (only used if `sidebar.visibility` is set to `expand-on-hover`). */
-user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 /* Disables the auto-collapse feature of Sidebery and native vertical tabs. */
 user_pref("uc.flex.disable-sidebery-autohide",                  false);
 /* Disables the extra right padding after the first item in the navigation bar. */
@@ -74,16 +72,42 @@ user_pref("uc.flex.increase-sidebery-expanded-width",           false);
 user_pref("uc.flex.increase-navbar-height",                     false);
 /* Switches to a different, condensed extension panel. */
 user_pref("uc.flex.switch-to-alternate-condensed-panel",        false);
+/* Sets animation duration for Firefox's native auto-collapse (only used if `sidebar.visibility` is set to `expand-on-hover`). */
+user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 /* Speeds up the hover expand/collapse transitions for Sidebery. */
 user_pref("uc.flex.sidebery-fast-hover-expand",                 false);
 /* Slows down the hover expand/collapse transitions for Sidebery. */
 user_pref("uc.flex.sidebery-slow-hover-expand",                 false);
+/* Applies Sidebery's expand/collapse animation speed to the navigation bar and bookmarks toolbar. */
+user_pref("uc.flex.sidebery-apply-expand-speed-to-toolbars",    false);
 /* Sets max pinned tabs per column in native vertical tabs (numeric, 4–6). */
 user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
 /* Sets findbar position (string: "top-center-left"/"1", "top-right"/"2", "bottom-right"/"3"). */
 user_pref("uc.flex.findbar-position",                     "top-right");
 /* Sets vertical spacing between items in app/bookmark/context menus (string: "1"/"small", "2"/"medium", "3"/"large"). */
 user_pref("uc.flex.menu-item-spacing",                        "small");
+
+/* 🧊 Visual Background & Mica Effects */
+/* Enables native Mica backdrop (Windows 11 only; requires System theme). */
+user_pref("widget.windows.mica",                                false);
+/* Enables Mica for popup menus (0 = off, 1 = on, 2 = auto). */
+user_pref("widget.windows.mica.popups",                             2);
+/* Sets Mica backdrop type (0 = auto/none, 1 = Mica, 2 = Acrylic, 3 = Mica Alt). */
+user_pref("widget.windows.mica.toplevel-backdrop",                  2);
+/* Allows full transparency for sidebars and panels (required for Mica and wallpaper in Sidebery). */
+user_pref("browser.tabs.allow_transparent_browser",             false);
+/* Sets Mica mask transparency level (0–4; higher = clearer). */
+user_pref("uc.flex.browser-mica-transparency-level",                2);
+/* Enables custom wallpaper as browser background. */
+user_pref("uc.flex.browser-wallpaper-enabled",                  false);
+/* Selects which image to use when multiple wallpapers are defined. */
+user_pref("uc.flex.browser-wallpaper-index",                        1);
+/* Disables acrylic-style blur effect on custom wallpaper. */
+user_pref("uc.flex.browser-wallpaper-acrylic-disabled",         false);
+/* Sets wallpaper mask transparency level (0–4; higher = clearer). */
+user_pref("uc.flex.browser-wallpaper-transparency-level",           2);
+/* Sets wallpaper contrast level in dark mode with acrylic (0–4; higher = more contrast). */
+user_pref("uc.flex.browser-wallpaper-contrast-level",               2);
 
 /* 🧩 Optional native Firefox preferences */
 /* Adjusts the text scaling in the Firefox interface. 100 means no scaling. */

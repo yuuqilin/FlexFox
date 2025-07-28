@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v142-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v143-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -16,32 +16,87 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 作为一个灵活的基础框架，FlexFox 让你自由定制浏览器界面，无需担心冗余或卡顿。  
 这不仅是一个外观主题，更是提升浏览效率的新方式。  
 
-![FlexFox Dark-Light Theme](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-light-dark.webp) 
+![启用 Mica 效果并显示卡片式网页内容的 FlexFox](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/a-blue-and-purple-background-with-wavy-shapes.webp) 
 
 ## 🆕 更新内容
 
-**🦊 v3.8.3**
-* 修复了 `z-index` 的变更未遵循动画延迟的问题。
-* 修正了在原生垂直标签页中，悬停时图标提前移动的问题。
-* 为兼容横向标签页模式，调整了默认的折叠速度。
+**🧊 v4.0.0 – 主要功能更新**
+* 支持 Windows 11 的 **Mica 背景效果**。
+  * 要启用 Mica，必须在 `about:config` 中设置以下项目：
+    ```
+    widget.windows.mica = true
+    widget.windows.mica.popups = 2
+    widget.windows.mica.toplevel-backdrop = 2
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-mica-transparency-level = 2
+    ```
+  * 请将主题设置为 `系统主题 — 自动`，否则 Mica 效果将无法生效。
+  * **需要重启 Firefox 浏览器。**
+  * 详细说明请参考：[🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
+  * 若背景被其他窗口遮挡，可使用快捷键 <kbd>Win</kbd> + <kbd>Home</kbd> 最小化所有非活动窗口，也可以设置为鼠标手势或使用脚本自动执行。  
 
-自动隐藏图标和根据主题切换 Sidebery 背景色的展示：  
-<video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
+  使用原生 Mica 背景的效果展示。（YouTube 网页内容的透明效果是通过搭配 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展实现的） 
+  
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="示例展示了 Firefox 标签页和工具栏背后的 Mica 背景效果。" width="96%" />
 
-🖌️ <b>重要更新：Sidebery 背景颜色可自动跟随主题</b>
-> [!NOTE]
-> * FlexFox 现在可以根据当前的 Firefox 主题自动调整 Sidebery 的背景颜色。
-> * 要启用此功能，请在 Sidebery 的 **设置 → 外观 → 配色模式** 中选择 `"firefox"`。
-> <details><summary>点击展开 Sidebery 外观设置截图</summary>
-> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.webp" alt="Sidebery 外观设置" width="50%" />
-> </details>
+* 若系统不支持 Mica，或希望使用不受窗口遮挡影响的固定壁纸，可以启用 FlexFox 提供的 **自定义浏览器壁纸** 功能。
+  * 在 `about:config` 中启用以下选项：
+    ```
+    uc.flex.browser-wallpaper-enabled = true
+    uc.flex.browser-wallpaper-index = 1
+    uc.flex.browser-wallpaper-acrylic-disabled = false
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-wallpaper-transparency-level = 2
+    uc.flex.browser-wallpaper-contrast-level = 2
+    ```
+  * **需要重启 Firefox 浏览器。**
+  * 壁纸文件需命名为 `main-image-1.jpg` 至 `main-image-9.jpg`，存放于 `../icons/wallpaper/` 文件夹中。
+  * 默认启用 **Acrylic 模糊效果**，外观类似原生 Mica，但并非完全相同。
+  * 启用 **自定义浏览器壁纸** 功能后将覆盖系统原生的 Mica 背景。如果同时启用 Mica 和壁纸，显示的是壁纸。  
 
-🔧 <b>v3.6.x 修复 v3.5.1 引入的性能问题</b>
-> [!NOTE]
-> * **v3.5.1** 中引入的性能衰退问题已从 **v3.6.0** 起修复。
-> * 最明显的提升是打开 **“列出所有标签页”** 面板时的速度，最新版相比 **v3.5.8** 提升可达 **18 倍**。
-> * 除了修复性能衰退，新版本还重构了部分代码，进一步提升了速度，与 Firefox 原生界面的差距已小于 **2ms**。
-> * 建议使用 **v3.5.x** 系列的用户更新到最新版本。
+  启用自定义壁纸后可见，与原生 Mica 相比，模糊程度、色调和背景材质都有所不同。  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-acrylic.webp" alt="示例展示了启用 Acrylic 模糊效果的自定义壁纸，模拟了 Mica 效果的视觉风格。" width="96%" />
+
+  关闭自定义壁纸的 Acrylic 模糊效果后，背景图会变得非常清晰。可通过调整遮罩透明度来平衡网页文字的可读性。  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/churning-in-the-chukchi-sea-no-acrylic.webp" alt="启用自定义壁纸但关闭 Acrylic 模糊效果的示例，壁纸清晰可见。" width="96%" />
+
+* 示例壁纸的来源与鸣谢：
+  * [a blue and purple background with wavy shapes (Unsplash)](https://unsplash.com/photos/a-blue-and-purple-background-with-wavy-shapes-1hg6NpO0kIk) – 作为 Firefox 新标签页自定义功能中的内建背景之一提供。
+  * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – 作为 Firefox 新标签页自定义功能中的内建背景之一提供。
+  * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([下载](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
+
+* 要让 Sidebery 和网页内容显示 Mica 背景或壁纸，需要启用 `browser.tabs.allow_transparent_browser`。
+  * 页面透明效果需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展。
+  * 若部分页面显示为全透明导致难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。
+
+* 新增选项：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
+  * 启用后，会将 Sidebery 与原生垂直标签页使用的展开/折叠动画速度应用到导航栏和书签工具栏，统一所有动画速度。
+  * 动画速度统一后，也可以使用 `uc.flex.sidebery-fast-hover-expand` 或 `uc.flex.sidebery-slow-hover-expand` 来调整导航栏和书签工具栏的动画速度。
+  * 启用 Mica 或自定义壁纸时，FlexFox 会在内部自动统一动画速度，此时无需手动设置这个选项。
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>历史更新</b></summary>
+
+更多旧版本的更新记录请参见  
+👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
+
+<a href="#updates-top-start">⏫ 返回更新记录顶部</a>
+</details>
+
+<details>  
+<summary>🖌️ <b>重大更新：Sidebery 背景颜色可自动跟随主题</b> <i>《点击展开》</i> 👇</summary>
+
+* FlexFox 现在可以根据当前的 Firefox 主题自动调整 Sidebery 的背景颜色。
+* 要启用此功能，请在 Sidebery 的 **设置 → 外观 → 配色模式** 中选择 `"firefox"`。
+  <details><summary>点击展开 Sidebery 外观设置截图</summary>
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.  webp"alt="Sidebery 外观设置" width="50%" />
+  </details>
+
+</details>
 
 <details>  
 <summary>✨ <b>重大更新：自动隐藏导航栏图标</b> <i>《点击展开》</i> 👇</summary>
@@ -203,83 +258,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 </details>
 
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>历史更新</b></summary>
-
-**v3.8.2**
-* 优化了在启用 `uc.flex.enable-rounded-web-content` 且打开开发者工具时的阴影显示效果。
-* 修复了开发者工具打开时，网页容器与工具同侧边缘出现的背景颜色溢出问题。
-* 重构了 `uc.flex.enable-rounded-web-content` 的内部处理方式。
-* 调整了 `uc.flex.fully-hide-toolbox` 和 “隐藏顶部栏” 快捷键的行为逻辑。
-
-**v3.8.1**
-* 调整了网页加载过程中的背景颜色处理方式。无论是否启用 `uc.flex.enable-rounded-web-content`，背景颜色现在都会根据“网站外观”中设置的配色模式显示为浅色或深色。
-
-**v3.8.0**
-* 修复了加载网页时出现的闪烁问题。
-* 当未启用 `uc.flex.enable-rounded-web-content` 时，网页加载过程中的背景颜色将根据“网站外观”中设置的配色模式显示为浅色或深色。启用该选项时，背景颜色将根据当前主题显示。
-
-**v3.7.9**
-* 修复了 v3.7.7 引入的回退问题：当启用 `uc.flex.disable-sidebery-autohide` 时，侧栏彩带无法展开。
-* 重构了侧栏的 z-index 处理逻辑。
-* 废弃了 `--uc-web-content-margin-small` 和 `--uc-web-content-margin-large` 变量，统一改用 `--uc-web-content-margin`。
-
-**v3.7.8**
-* 修复 v3.7.7 引入的问题，在完全隐藏 Sidebery 或进入全屏模式时，侧栏彩带无法显示的问题。
-* 修复在启用新版侧栏但未使用原生垂直标签页时，侧栏彩带无法展开的问题。
-* 修复多种情况下，网页阴影无法覆盖工具栏或侧栏，以及网页边距未正确添加的问题。
-
-**v3.7.7**
-* 修复折叠原生垂直标签页或侧栏标题时，动画过渡效果失效的问题。
-* 修复开启“悬停时展开侧栏”并保持侧栏展开状态时，打开侧栏面板会遮挡原生垂直标签页的问题。
-* 修复在 Sidebery 活动时，网页区域的阴影无法覆盖侧栏彩带的问题。
-* 修正启用 `uc.flex.sidebery-fast-hover-expand` 时，Sidebery 折叠动画的过渡效果。
-
-**v3.7.6**
-* 新增一个菜单图标，并修复了一个现有图标的显示问题。
-
-**v3.7.5**
-* 优化了 v3.7.4 中引入的动画效果，修复了 Sidebery 折叠时出现的闪烁问题。
-
-**v3.7.4**
-* 改进了在启用 `uc.flex.sidebery-slow-hover-expand` 时，Sidebery 处于折叠状态下，点击树形标签页的根节点时，能够切换到根节点标签页，而不是折叠整个树分支。
-
-**v3.7.3**
-* 修复了在全屏模式下，查找栏位置过高导致被导航栏遮挡的问题。
-* 调整了侧栏工具区域与原生垂直标签页之间边框和分隔线重复显示的问题。
-* 修复启用 `uc.flex.sidebery-slow-hover-expand` 时，在 Sidebery 尚未完全展开前点击标签页可能会意外关闭标签页的问题。
-
-**v3.7.2**
-* 修复 Sidebery 展开时树状缩进线提前出现，未与动画同步的问题。
-
-**v3.7.1**
-* 修复在水平标签页模式下启用 `uc.flex.enable-rounded-web-content` 时，网页内容周围的间距区域背景颜色与工具栏不一致的问题。
-* 修复同时启用 `uc.flex.revert-to-original-sidebar-icon` 和 `uc.flex.auto-hide-navbar-icons` 时，侧边栏开关按钮图标无法隐藏的问题。
-* 新增选项 `uc.flex.remove-sidebar-stripe`，在 Sidebery 激活时可移除侧边栏彩带。如需切换到其他侧边栏工具或扩展，垂直标签页模式下可按 <kbd>F1</kbd> 显示工具按钮，水平模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。  
-
-   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="移除侧边栏彩带" width="55%" />
-
-**v3.7.0**
-* 改进了 Sidebery 的展开与收起动画，解决了悬停时标签页抖动的问题。
-  （旧版在动画过程中，padding 和自动计算的宽度不协调，导致标签页位置阶段性跳动，无法顺畅过渡，看起来会有明显的抖动感。）
-* 修复启用 `uc.flex.sidebery-slow-hover-expand` 后，侧边栏与 Sidebery 的动画时序不同步的问题。
-* 为了让 Sidebery 内部的动画与外部容器保持同步，现在在 `uc-sidebery.css` 中也定义了控制展开动画的变量。
-  如果你曾将 `uc-variables.css` 中的变量复制到 `uc-user-settings.css` 来自定义动画时间，请务必也将对应的定义（包含正确的 `@media` 查询语句和 `#root` 选择器）从 `uc-sidebery.css` 复制到 `uc-custom-content.css`，并使用相同的数值。这样才能确保 userChrome 和 userContent 样式之间的动画效果保持一致。
-
-更多旧版本的更新记录请参见  
-👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
-
-<a href="#updates-top-start">⏫ 返回更新记录顶部</a>
-</details>
-
 > [!IMPORTANT]
-> 如果你在使用 FlexFox 搭配 Firefox 的原生垂直标签页，请务必在「定制侧栏」设置中取消勾选 **“悬停时展开侧栏”** 选项。
->
-> * 启用该选项后，FlexFox 将不会使用其优化后的垂直标签页设计，而是会回退为 Firefox 默认的布局。
-> * 为获得最佳的外观和体验，建议在日常使用中 **保持该选项处于未勾选状态**。
-> * 如果你需要使用原生功能（如可调节的标签页宽度），可以根据个人习惯或使用需求灵活启用此选项。
+> 日常使用 FlexFox 的垂直标签页模式时，请确保「定制侧栏」中的「悬停时展开侧栏」选项已**取消勾选**。大多数功能依赖此设置才能正常工作。
 
 ## ✨ 功能亮点
 
@@ -327,10 +307,35 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 ## 💿 部署指南
 
-### 🚀 方法一：自动安装与更新
+### 👷 方法一：手动安装
 
 > [!IMPORTANT]
-> 如果是首次安装 FlexFox，请在运行脚本后继续执行 [方法二](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) 中第 5 步开始的手动步骤。  
+> 1. 安装 [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/)（可选，但推荐）。
+> 2. 下载对应版本的 FlexFox：
+>    * [FlexFox](https://github.com/yuuqilin/FlexFox/archive/refs/heads/main.zip)：标准版 Firefox 使用
+>    * [FlexFox Beta](https://github.com/yuuqilin/FlexFox/archive/refs/heads/Beta.zip)：Firefox Beta / Nightly 使用
+>    * [FlexFox ESR](https://github.com/yuuqilin/FlexFox/archive/refs/heads/ESR.zip)：Firefox ESR 使用
+> 3. 打开 `about:support`，找到 **配置文件夹**，点击 **打开文件夹**。
+> 4. 将 `chrome` 文件夹和 `scripts` 文件夹中的 `user.js` 文件复制到配置文件夹中。
+> 5. 使用文本编辑器打开 `user.js`，删除注释 `//` 以启用额外功能。
+>    * 确保以下选项设置为对应的值：
+>      * `toolkit.legacyUserProfileCustomizations.stylesheets` = `true`
+>      * `svg.context-properties.content.enabled` = `true`
+>      * `sidebar.visibility` = `always-show`
+> 6. 重启 Firefox，然后删除 `user.js` 文件，以便后续对 `about:config` 的更改能被正常保存。
+> 7. 配置 Sidebery：
+>    * 点击侧边栏齿轮图标进入设置
+>    * 清除 `Styles editor` 中已有的样式，以避免冲突
+>    * 前往 `帮助` > `导入插件数据`，导入下载包中 `Sidebery` 文件夹内的 `sidebery-settings.json` 和 `sidebery-styles.json`
+>    * *注意*：如果导入的样式没有正常生效，请尝试重新导入一次
+> 8. 打开 `about:config`，搜索 `uc.flex.`，按需启用或关闭功能。
+
+---
+
+### 🚀 方法二：自动安装与更新
+
+> [!IMPORTANT]
+> 如果是首次安装 FlexFox，请在运行脚本后继续执行 [方法一](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-1-manual-installation) 中第 5 步开始的手动步骤。  
 > 之后更新时，只需重新运行脚本即可，无需再次手动操作。
 
 <h4>💻 PowerShell 脚本</h4>
@@ -395,101 +400,100 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 </details>
 
----
-
-### 👷 方法二：手动安装
-
-> [!IMPORTANT]  
-> 1. 安装 [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/)（可选，但推荐）。  
-> 2. 下载对应版本的 FlexFox：
->    - [FlexFox](https://github.com/yuuqilin/FlexFox/archive/refs/heads/main.zip)：标准版 Firefox 使用  
->    - [FlexFox Beta](https://github.com/yuuqilin/FlexFox/archive/refs/heads/Beta.zip)：Firefox Beta / Nightly 使用  
->    - [FlexFox ESR](https://github.com/yuuqilin/FlexFox/archive/refs/heads/ESR.zip)：Firefox ESR 使用  
-> 3. 打开 `about:support`，找到 **配置文件夹**，点击 **打开文件夹**。  
-> 4. 将 `chrome` 文件夹和 `scripts` 文件夹中的 `user.js` 文件复制到配置文件夹中。  
-> 5. *(可选)* 使用文本编辑器打开 `user.js`，删除注释 `//` 以启用额外功能。
->    - 确保以下设置保持为 `true`：
->      - `toolkit.legacyUserProfileCustomizations.stylesheets`  
->      - `svg.context-properties.content.enabled`  
-> 6. 重启 Firefox，然后删除 `user.js` 文件，以便后续对 `about:config` 的更改能被正常保存。  
-> 7. 配置 Sidebery：
->    - 点击侧边栏齿轮图标进入设置  
->    - 前往 `帮助` > `导入插件数据`，导入下载包中的 `sidebery-settings.json` 和 `sidebery-styles.json`  
->    - *注意*：如果设置未生效，请尝试重新导入一次  
-> 8. *(可选)* 在 `about:config` 中搜索 `uc.flex.`，按需启用或关闭功能。  
-
 ## ⚙️ 配置选项
 
-### 📜 用户自定义样式（`uc-user-settings.css` 和 `uc-custom-content.css`）
+### 📜 用户自定义样式
 
 > [!TIP]  
-> 无需修改核心文件，即可自定义 Firefox 的界面样式与网页内容样式。
+> 你可以自定义 FlexFox 的样式，而无需担心在更新时被覆盖。
 >
-> 操作方式如下：
+> * 若需修改 **界面（chrome）** 样式，请在 `components` 文件夹中创建 `uc-user-settings.css`
+> * 若需修改 **网页内容（content）** 样式，请在 `content` 文件夹中创建 `uc-custom-content.css`
 >
-> - 若需修改 **浏览器界面（chrome）**，请在 `components` 文件夹中创建名为 `uc-user-settings.css` 的文件。  
-> - 若需修改 **网页内容（content）**，请在 `content` 文件夹中创建名为 `uc-custom-content.css` 的文件。  
+> 将你想修改的样式或变量（如从 `uc-variables.css` 中）复制到上述文件中进行调整。这些文件中的规则将覆盖 FlexFox 的默认样式。
+> 它们不会在 FlexFox 更新时被修改，因此你的个性化设置将始终保留。
 >
-> 可将需要更改的变量或样式（如从 `uc-variables.css` 中）复制至上述文件中进行个性化调整。这两个文件会在内建样式之后加载，确保自定义设置优先生效。
->
-> 这两个文件 **不属于 FlexFox 项目的默认内容**，因此在更新版本时不会被覆盖。自定义配置可长期保留，无需担心升级带来的影响。
->
-> 💡 如果复制的是像 `:root` 或 `:root:has(...)` 这样的选择器中的内容，为了保证语法和上下文正确，请记得一并复制整个选择器块。
+> 💡 复制样式时请包含完整的选择器，以确保上下文正确。
+
+---
 
 ### 🧩 可配置的首选项（`about:config`）
 
+#### ✅ FlexFox 样式所需配置
+
+| 配置选项 | 值 | 说明 |
+|----------|------|----------|
+| `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` | 启用 `userChrome.css` 文件，以支持自定义样式。 |
+| `svg.context-properties.content.enabled` | `true` | 允许图标颜色根据亮／暗主题自动调整。 |
+| `sidebar.visibility` | `always-show` | 启用 FlexFox 的垂直标签页自动折叠功能和布局（在垂直标签页模式下生效）。也可以在侧栏设置中取消勾选 **“悬停时展开侧栏”** 来应用此设置。 |
+
 #### 🪄 添加或启用选项
 
-| 配置选项 | 说明 |
-|----------|------|
-| `uc.flex.add-ui-text-stroke` | 为界面文字添加粗描边，提高低分辨率屏幕下的可读性。 |
-| `uc.flex.fully-hide-sidebery` | 完全隐藏 Sidebery 和原生垂直标签页，将鼠标移至屏幕边缘时自动显示。 |
-| `uc.flex.fully-hide-toolbox` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
-| `uc.flex.auto-hide-navbar-icons` | 默认隐藏导航栏中的图标，鼠标悬停在工具栏上时会显示。窗口控制按钮、地址栏和侧栏按钮（FlexFox 图标）始终显示，但当侧栏按钮未放在导航栏边缘，或启用了 `uc.flex.revert-to-original-sidebar-icon` 时，也会一并隐藏。 |
-| `uc.flex.allow-addons-to-change-toolbar-color` | 允许 Firefox Color 等扩展修改工具栏的颜色（在未设置背景图时需要启用）。 |
-| `uc.flex.enable-gradient-highlight` | 为 FlexFox 图标、侧栏彩带、书签星形图标等主要界面元素中使用的高亮颜色启用渐变样式。此选项接受数值设置：`0` 表示关闭渐变，`1` 到 `X` 表示切换不同的渐变样式。 |
-| `uc.flex.enable-colored-bookmarks-folder-icons` | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
-| `uc.flex.remove-bookmarks-folder-icons` | 移除书签文件夹的图标。 |
-| `uc.flex.remove-bookmarks-labels` | 移除书签文件夹的文字标签。 |
-| `uc.flex.show-flexfox-version-info-in-about-config` | 在 `about:config` 頁面顯示 FlexFox 已安裝的提示訊息，並附帶當前版本號。 |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | 在原生垂直标签页处于“展开模式”时，在已固定的标签页和普通标签页之间显示分隔线（默认情况下该分隔线为隐藏）。 |
-| `uc.flex.dim-urlbar-popup-backdrop` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
-| `uc.flex.move-pip-volume-to-top` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
-| `uc.flex.enable-rounded-web-content` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
+| 配置选项 | 值 | 说明 |
+|----------|------|----------|
+| `uc.flex.add-ui-text-stroke` | `true` | 为界面文字添加粗描边，提高低分辨率屏幕下的可读性。 |
+| `uc.flex.fully-hide-sidebery` | `true` | 完全隐藏 Sidebery 和原生垂直标签页，将鼠标移至屏幕边缘时自动显示。 |
+| `uc.flex.fully-hide-toolbox` | `true` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
+| `uc.flex.auto-hide-navbar-icons` | `true` | 默认隐藏导航栏中的图标，鼠标悬停在工具栏上时会显示。窗口控制按钮、地址栏和侧栏按钮（FlexFox 图标）始终显示，但当侧栏按钮未放在导航栏边缘，或启用了 `uc.flex.revert-to-original-sidebar-icon` 时，也会一并隐藏。 |
+| `uc.flex.allow-addons-to-change-toolbar-color` | `true` | 允许 Firefox Color 等扩展修改工具栏的颜色（在未设置背景图时需要启用）。 |
+| `uc.flex.enable-gradient-highlight` | `0`-`X` | 为 FlexFox 图标、侧栏彩带、书签星形图标等主要界面元素中使用的高亮颜色启用渐变样式。此选项接受数值设置：`0` 表示关闭渐变，`1` 到 `X` 表示切换不同的渐变样式。 |
+| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
+| `uc.flex.remove-bookmarks-folder-icons` | `true` | 移除书签文件夹的图标。 |
+| `uc.flex.remove-bookmarks-labels` | `true` | 移除书签文件夹的文字标签。 |
+| `uc.flex.show-flexfox-version-info-in-about-config` | `true` | 在 `about:config` 頁面顯示 FlexFox 已安裝的提示訊息，並附帶當前版本號。 |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | 在原生垂直标签页处于“展开模式”时，在已固定的标签页和普通标签页之间显示分隔线（默认情况下该分隔线为隐藏）。 |
+| `uc.flex.move-pip-volume-to-top` | `true` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
+| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
+| `uc.flex.enable-rounded-web-content` | `0`-`2` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
 
 #### 🚫 停用或还原选项
 
-| 配置选项 | 说明 |
-|----------|------|
-| `uc.flex.disable-flexfox` | 无需重启 Firefox 即可停用所有 FlexFox 样式和功能。 |
-| `uc.flex.skip-loading-uc-*.css`  | 跳过加载 `./components/` 和 `./content/` 中的特定 `uc-*.css` 文件。例如将 `uc.flex.skip-loading-uc-newtab.css` 设置为 true 时，将不会加载 `./content/uc-newtab.css` 文件。 |
-| `uc.flex.disable-bookmarks-autohide` | 停用书签工具栏的自动隐藏功能。 |
-| `uc.flex.disable-tabs-toolbar-autohide` | 当 Sidebery 处于非活动状态时，防止原生水平标签栏自动隐藏。 |
-| `uc.flex.disable-findbar-autohide` | 防止查找栏（Findbar）在失去焦点后自动隐藏。 |
-| `sidebar.visibility`（`always-show`） | Firefox 的原生设置。当设置为 `always-show` 时，Firefox 自带的垂直标签页自动折叠功能将会停用，FlexFox 的自动折叠功能将接管。相比原生功能，FlexFox 的动画更流畅，折叠后的布局更整洁，对固定标签页的处理也更加合理。你也可以通过取消勾选侧栏设置中的 **“悬停时展开侧栏”** 来切换此功能。 |
-| `sidebar.visibility`（`expand-on-hover`） | 当设置为 `expand-on-hover` 时，将恢复 Firefox 原生的垂直标签页自动折叠行为，同时会关闭 FlexFox 的自动折叠功能。此功能也可以通过勾选 **“悬停时展开侧栏”** 来启用。在此模式下，原生垂直标签页和 Sidebery 都可以通过快捷键 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧栏开关按钮，在自动折叠和保持展开之间切换。 |
-| `sidebar.animation.expand-on-hover.duration-ms` | Firefox 原生设置，用于控制在 `sidebar.visibility` 设置为 `expand-on-hover` 时，原生垂直标签页展开和折叠的动画速度。 |
-| `uc.flex.disable-sidebery-autohide` | 禁用 Sidebery 和原生垂直标签页的自动折叠功能。 |
-| `uc.flex.disable-nav-bar-first-item-right-padding` | 默认情况下，FlexFox 会在导航栏第一个图标后添加右侧间距，以优化垂直标签页与周围项目之间的视觉间隔和对齐。此选项可停用该间距。 |
-| `uc.flex.disable-menu-icons` | 停用 FlexFox 添加的自定义选单图标。 |
-| `uc.flex.revert-to-original-window-controls` | 将 FlexFox 使用的 macOS 风格窗口按钮恢复为 Firefox 默认的最小化、最大化、关闭按钮。 |
-| `uc.flex.revert-to-original-flat-corner-style` | 将 URL 栏、搜索栏和查找栏的圆角样式恢复为 Firefox 默认的较平角设计，替代 FlexFox 使用的大圆角样式。 |
-| `uc.flex.revert-to-original-bookmark-star-icon` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |
-| `uc.flex.revert-to-original-sidebar-icon` | 将 FlexFox 使用的侧栏按钮图标恢复为 Firefox 默认设计。 |
-| `uc.flex.remove-sidebar-stripe` | Sidebery 激活时移除侧边栏彩带。若需切换侧边栏工具，垂直标签页模式下可按 <kbd>F1</kbd> 显示侧边栏工具按钮，水平标签页模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。 |
+| 配置选项 | 值 | 说明 |
+|----------|------|----------|
+| `uc.flex.disable-flexfox` | `true` | 无需重启 Firefox 即可停用所有 FlexFox 样式和功能。 |
+| `uc.flex.skip-loading-uc-*.css`  | `true` | 跳过加载 `./components/` 和 `./content/` 中的特定 `uc-*.css` 文件。例如将 `uc.flex.skip-loading-uc-newtab.css` 设置为 true 时，将不会加载 `./content/uc-newtab.css` 文件。 |
+| `uc.flex.disable-bookmarks-autohide` | `true` | 停用书签工具栏的自动隐藏功能。 |
+| `uc.flex.disable-tabs-toolbar-autohide` | `true` | 当 Sidebery 处于非活动状态时，防止原生水平标签栏自动隐藏。 |
+| `uc.flex.disable-findbar-autohide` | `true` | 防止查找栏（Findbar）在失去焦点后自动隐藏。 |
+| `uc.flex.disable-sidebery-autohide` | `true` | 禁用 Sidebery 和原生垂直标签页的自动折叠功能。 |
+| `uc.flex.disable-nav-bar-first-item-right-padding` | `true` | 默认情况下，FlexFox 会在导航栏第一个图标后添加右侧间距，以优化垂直标签页与周围项目之间的视觉间隔和对齐。此选项可停用该间距。 |
+| `uc.flex.disable-menu-icons` | `true` | 停用 FlexFox 添加的自定义选单图标。 |
+| `uc.flex.revert-to-original-window-controls` | `true` | 将 FlexFox 使用的 macOS 风格窗口按钮恢复为 Firefox 默认的最小化、最大化、关闭按钮。 |
+| `uc.flex.revert-to-original-flat-corner-style` | `true` | 将 URL 栏、搜索栏和查找栏的圆角样式恢复为 Firefox 默认的较平角设计，替代 FlexFox 使用的大圆角样式。 |
+| `uc.flex.revert-to-original-bookmark-star-icon` | `true` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |
+| `uc.flex.revert-to-original-sidebar-icon` | `true` | 将 FlexFox 使用的侧栏按钮图标恢复为 Firefox 默认设计。 |
+| `uc.flex.remove-sidebar-stripe` | `true` | Sidebery 激活时移除侧边栏彩带。若需切换侧边栏工具，垂直标签页模式下可按 <kbd>F1</kbd> 显示侧边栏工具按钮，水平标签页模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。 |
 
 #### 🪛 修改或调整选项
 
-| 配置选项 | 说明 |
-|----------|------|
-| `uc.flex.increase-sidebery-expanded-width` | 增加 Sidebery 展开时的宽度；启用 `uc.flex.disable-sidebery-autohide` 或激活 `Lock Sidebery` 时，也会同步增加原生垂直标签页的展开宽度。 |
-| `uc.flex.increase-navbar-height` | 恢复旧版 FlexFox 中使用的较厚导航栏高度。此更改会覆盖当前默认值（与 Firefox 原始的紧凑高度一致）。 |
-| `uc.flex.switch-to-alternate-condensed-panel` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
-| `uc.flex.sidebery-fast-hover-expand` | 加快 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
-| `uc.flex.sidebery-slow-hover-expand` | 减慢 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
-| `uc.flex.max-visible-vertical-pinned-tabs` | 设置原生垂直标签页中每列可显示的固定标签页数量上限（可选值为数值，范围 4–6）。超过该值时将出现滚动条，可根据使用习惯进行调整。 |
-| `uc.flex.findbar-position` | 设置查找栏的位置。可选值为字符串：`"top-center-left"` 或 `"1"`（顶部左侧），`"top-right"` 或 `"2"`（右上角），`"bottom-right"` 或 `"3"`（右下角）。 |
-| `uc.flex.menu-item-spacing` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `"1"` 或 `"small"`（较小间距）、`"2"` 或 `"medium"`（默认间距）、`"3"` 或 `"large"`（较大间距）。 |
+| 配置选项 | 值 | 说明 |
+|----------|------|----------|
+| `uc.flex.increase-sidebery-expanded-width` | `true` | 增加 Sidebery 展开时的宽度；启用 `uc.flex.disable-sidebery-autohide` 或激活 `Lock Sidebery` 时，也会同步增加原生垂直标签页的展开宽度。 |
+| `uc.flex.increase-navbar-height` | `true` | 恢复旧版 FlexFox 中使用的较厚导航栏高度。此更改会覆盖当前默认值（与 Firefox 原始的紧凑高度一致）。 |
+| `uc.flex.switch-to-alternate-condensed-panel` | `true` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
+| `sidebar.visibility` | `expand-on-hover` | 禁用 FlexFox 的垂直标签页自动折叠功能和布局。也可以在侧栏设置中勾选 **“悬停时展开侧栏”** 来启用此模式。启用后，可以自由调整侧栏宽度，并使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧栏切换按钮在展开和折叠状态之间切换。 |
+| `sidebar.animation.expand-on-hover.duration-ms` | `120` | Firefox 原生设置，用于控制在 `sidebar.visibility` 设置为 `expand-on-hover` 时，原生垂直标签页展开和折叠的动画速度。 |
+| `uc.flex.sidebery-fast-hover-expand` | `true` | 加快 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
+| `uc.flex.sidebery-slow-hover-expand` | `true` | 减慢 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
+| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | 将导航栏和书签栏的动画速度统一为 Sidebery／垂直标签页的速度。启用 Mica 或壁纸时自动生效。 |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `4`-`6` | 设置原生垂直标签页中每列可显示的固定标签页数量上限（可选值为数值，范围 4–6）。超过该值时将出现滚动条，可根据使用习惯进行调整。 |
+| `uc.flex.findbar-position` | `top-center-left`/<br>`top-right`/<br>`bottom-right` | 设置查找栏的位置。可选值为字符串：`"top-center-left"` 或 `"1"`（顶部左侧），`"top-right"` 或 `"2"`（右上角），`"bottom-right"` 或 `"3"`（右下角）。 |
+| `uc.flex.menu-item-spacing` | `small`/<br>`medium`/<br>`large` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `"1"` 或 `"small"`（较小间距）、`"2"` 或 `"medium"`（默认间距）、`"3"` 或 `"large"`（较大间距）。 |
+
+#### 🧊 视觉背景和 Mica 效果
+
+| 配置选项 | 值 | 说明 |
+|----------|------|----------|
+| `widget.windows.mica` | `true` | 启用 Firefox 原生的 Mica 背景效果。需将主题设置为 `系统主题 — 自动` 才能生效。此功能仅在 Windows 11 系统中可用。如果当前系统不支持 Mica，可使用 `uc.flex.browser-wallpaper-enabled` 来模拟类似效果。 |
+| `widget.windows.mica.popups` | `1`/`2` | 为弹出菜单启用 Mica 背景效果。可设置为 `0`（关闭）、`1`（开启）或 `2`（自动）。 |
+| `widget.windows.mica.toplevel-backdrop` | `2` | 指定要使用的 Mica 背景类型：`0`（自动或不使用）、`1`: Mica、`2`: Acrylic、`3`: Mica Alt。FlexFox 是基于该选项设为 `2`: Acrylic 的前提进行设计的。 |
+| `browser.tabs.allow_transparent_browser` | `true` | 允许 Sidebery 和网页内容背景透明，可显示 Mica 或壁纸效果。**更改后需重启 Firefox 才会生效。** 若要实现网页内容透明，需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展。若部分网页因透明而难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。 |
+| `uc.flex.browser-mica-transparency-level` | `0`-`4` | 调整浏览器 Mica 背景遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，背景越清晰。Firefox 默认值为 0，而 FlexFox 的默认值为 2。 |
+| `uc.flex.browser-wallpaper-enabled` | `true` | 启用 Firefox 浏览器背景的自定义壁纸。此功能会套用 Acrylic 风格的模糊效果，用于模拟原生 Mica 效果。适用于系统不支持 Mica，或希望始终显示固定背景的情况。但请注意，模拟效果无法与原生 Mica 完全一致。 |
+| `uc.flex.browser-wallpaper-index` | `1`-`9` | 设置使用哪一张编号图片作为浏览器背景。该选项为数值类型，可设置为 1 到 9。每个数值对应使用 `../icons/wallpaper/` 文件夹中的 `main-image-1.jpg` 到 `main-image-9.jpg` 文件。|
+| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | 禁用自定义壁纸背景的 Acrylic 模糊效果。 |
+| `uc.flex.browser-wallpaper-transparency-level` | `0`-`4` | 调整浏览器壁纸遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，壁纸越清晰。该设置旨在与 Mica 背景的透明度效果保持视觉一致。FlexFox 的默认值为 2。 |
+| `uc.flex.browser-wallpaper-contrast-level` | `0`-`4` | 在深色模式下启用 Acrylic 模糊效果时，用于调整浏览器壁纸的对比度。可设置的数值范围为 0 到 4，数值越高对比度越强。FlexFox 默认值为 2。 |
 
 ## 🐞 已知问题
 

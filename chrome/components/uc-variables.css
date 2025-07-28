@@ -36,7 +36,7 @@
     @media (prefers-color-scheme: dark) {
         --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
 
-        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
                 -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
                 -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -81,7 +81,7 @@
     @media (prefers-color-scheme: light) {
         --uc-bgcolor: #f1f5f9; /* Background color of the toolbar */
 
-        @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
                 -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
                 -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -264,6 +264,12 @@
         --uc-urlbar-popup-dimness: 0.5;
     }
 
+    /* Navbar icon auto-hide animation settings */
+    --uc-autohide-navbar-icons-duration: 0.7s; /* Duration of fade-out transition when hiding navbar icons */
+    --uc-hover-navbar-icons-duration: 0.3s; /* Duration of fade-in transition when showing navbar icons on hover */
+    --uc-autohide-navbar-icons-type: ease; /* Easing type for navbar icon fade-in/out transitions */
+    --uc-collapse-navbar-icons-duration: 0.28s; /* Duration of visibility collapse transition to remove icon spacing */
+
     /* Add margin, shadow, and rounded corners to the web content area */
     --uc-web-content-margin: 4px;
     @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
@@ -271,11 +277,125 @@
     }
     --uc-web-content-radius: 8px;
 
-    /* Navbar icon auto-hide animation settings */
-    --uc-autohide-navbar-icons-duration: 0.7s; /* Duration of fade-out transition when hiding navbar icons */
-    --uc-hover-navbar-icons-duration: 0.3s; /* Duration of fade-in transition when showing navbar icons on hover */
-    --uc-autohide-navbar-icons-type: ease; /* Easing type for navbar icon fade-in/out transitions */
-    --uc-collapse-navbar-icons-duration: 0.28s; /* Duration of visibility collapse transition to remove icon spacing */
+    /* Custom browser wallpaper background */
+    --uc-browser-wallpaper: url("../icons/wallpaper/main-image-1.jpg"); /* Wallpaper image path */
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 0) {
+        --uc-browser-wallpaper: none;
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 2) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-2.jpg");
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 3) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-3.jpg");
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 4) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-4.jpg");
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 5) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-5.jpg");
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 6) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-6.jpg");
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 7) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-7.jpg");
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 8) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-8.jpg");
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 9) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-9.jpg");
+    }
+    
+    --uc-browser-wallpaper-transparency: 0.37; /* Default wallpaper mask transparency (lower = more visible) */
+    @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
+        --uc-browser-wallpaper-transparency: 0.62;
+    }
+    --uc-browser-wallpaper-contrast-offset: 0%; /* Default contrast level offset for wallpaper */
+    @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 0) {
+        --uc-browser-wallpaper-contrast-offset: -9%;
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 1) {
+        --uc-browser-wallpaper-contrast-offset: -4.5%;
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 3) {
+        --uc-browser-wallpaper-contrast-offset: 4.5%;
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 4) {
+        --uc-browser-wallpaper-contrast-offset: 9%;
+    }
+    --uc-browser-wallpaper-contrast: calc(
+        82% + var(--uc-browser-wallpaper-contrast-offset)
+    ); /* Base wallpaper contrast value */
+
+    --uc-browser-wallpaper-dark-mask: 0, 0, 0;
+    --uc-browser-wallpaper-light-mask: 255, 255, 255;
+    @media -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
+        --uc-browser-wallpaper-dark-mask: 30, 30, 47;
+        --uc-browser-wallpaper-light-mask: 249, 249, 251;
+        --uc-browser-wallpaper-transparency: 0.74;
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 0) {
+            --uc-browser-wallpaper-transparency: 0.98;
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 1) {
+            --uc-browser-wallpaper-transparency: 0.9;
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 3) {
+            --uc-browser-wallpaper-transparency: 0.64;
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 4) {
+            --uc-browser-wallpaper-transparency: 0;
+        }
+    }
+
+    @media not -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 0) {
+            --uc-browser-wallpaper-transparency: 0.69;
+            --uc-browser-wallpaper-contrast: calc(91% + var(--uc-browser-wallpaper-contrast-offset));
+            @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
+                --uc-browser-wallpaper-transparency: 0.8;
+            }
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 1) {
+            --uc-browser-wallpaper-transparency: 0.44;
+            --uc-browser-wallpaper-contrast: calc(85% + var(--uc-browser-wallpaper-contrast-offset));
+            @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
+                --uc-browser-wallpaper-transparency: 0.67;
+            }
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 3) {
+            --uc-browser-wallpaper-transparency: 0.31;
+            --uc-browser-wallpaper-contrast: calc(79% + var(--uc-browser-wallpaper-contrast-offset));
+            @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
+                --uc-browser-wallpaper-transparency: 0.58;
+            }
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 4) {
+            --uc-browser-wallpaper-transparency: 0.08;
+            --uc-browser-wallpaper-contrast: calc(73% + var(--uc-browser-wallpaper-contrast-offset));
+            @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
+                --uc-browser-wallpaper-transparency: 0.49;
+            }
+        }
+    }
+
+    /* Mica backdrop mask transparency */
+    --uc-browser-mica-transparency: 0.25;
+    @media -moz-pref("uc.flex.browser-mica-transparency-level", 0) {
+        --uc-browser-mica-transparency: 0.6;
+    }
+    @media -moz-pref("uc.flex.browser-mica-transparency-level", 1) {
+        --uc-browser-mica-transparency: 0.35;
+    }
+    @media -moz-pref("uc.flex.browser-mica-transparency-level", 3) {
+        --uc-browser-mica-transparency: 0.2;
+    }
+    @media -moz-pref("uc.flex.browser-mica-transparency-level", 4) {
+        --uc-browser-mica-transparency: 0;
+    }
+
+    /* Popup menu backdrop transparency */
+    --uc-menupopup-backdrop-transparency: calc(var(--uc-browser-mica-transparency) + 0.15);
 
     /** 
      * These variables must stay in sync with the identical ones in uc-sidebery.css.
@@ -510,6 +630,8 @@
      * slightly larger than --uc-web-content-radius to push the clipping edge further inward.
      */
     --uc-web-content-radius-clip: calc(var(--uc-web-content-radius) + 1px);
+    /* Outset clip for tab box shadows when Mica is enabled */
+    --uc-web-content-margin-outset-clip-mica: calc(-1 * var(--uc-web-content-margin));
 
     /* Add margin to the web content area */
     @media -moz-pref("uc.flex.enable-rounded-web-content") {
@@ -597,10 +719,13 @@
     &[uidensity="touch"] {
         --uc-bm-padding: 7px;
     }
+    /*
     --bookmarks-toolbar-overlapping-browser-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding)) !important;
+    */
+    --uc-bm-padding-box-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding));
     @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
         &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
-            --uc-bm-disable-autohide-offset: calc(-1 * (var(--uc-bm-height) + 2 * var(--uc-bm-padding)));
+            --uc-bm-disable-autohide-offset: calc(-1 * (var(--uc-bm-padding-box-height)));
         }
     }
 
@@ -623,7 +748,7 @@
     }
 
     /* Override the default background color with a custom value when add-on color changes are not allowed */
-    @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+    @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
         @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
             -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
             -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -677,7 +802,63 @@
                 --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
             }
         }
+        --uc-sidebar-main-hover-clip-mica: calc(var(--uc-sidebar-main-hover-width) - var(--uc-sidebar-main-width));
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
+        }
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+            &:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
+            }
+        }
     }
+
+    --uc-sidebar-box-hover-clip-mica: calc(var(--uc-sb-sidebar-hover-width) - var(--uc-sb-sidebar-width));
+    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        --uc-sidebar-box-hover-clip-mica: var(--uc-sb-sidebar-hover-width);
+    }
+    @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+        &:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+            --uc-sidebar-box-hover-clip-mica: var(--uc-sb-sidebar-hover-width);
+        }
+    }
+
+    @media -moz-pref("sidebar.verticalTabs") {
+        --uc-navigator-hover-clip-mica: calc(var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height));
+        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen)) {
+            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
+                --uc-navigator-hover-clip-mica: var(--uc-bm-padding-box-height);
+            }
+        }
+    }
+    @media not -moz-pref("sidebar.verticalTabs") {
+        --uc-navigator-hover-clip-mica: calc(
+            var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height) - var(--uc-autohide-navigator-bottom)
+        );
+        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen)) {
+            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
+                --uc-navigator-hover-clip-mica: calc(
+                    var(--uc-bm-padding-box-height) - var(--uc-autohide-navigator-bottom)
+                );
+            }
+        }
+        @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
+            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
+                --uc-navigator-hover-clip-mica: calc(
+                    0px - var(--uc-autohide-navigator-bottom) + var(--uc-sb-navigator-hover-clip-mica, 0px)
+                );
+            }
+        }
+        @media -moz-pref("uc.flex.disable-tabs-toolbar-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
+            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
+                --uc-navigator-hover-clip-mica: calc(var(--uc-bm-padding-box-height));
+                @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
+                    --uc-navigator-hover-clip-mica: var(--uc-web-content-margin-outset-clip-mica);
+                }
+            }
+        }
+    }
+
     /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
     #sidebar-main {
         --uc-sidebar-main-margin-left: 0px;
@@ -800,7 +981,19 @@
             --uc-sb-web-content-margin-side: var(--uc-web-content-margin);
         }
 
+        /* If Sidebery is active and either fully hidden or in fullscreen mode, 
+            clip the background to reveal the Mica backdrop */
+        @media -moz-pref("sidebar.verticalTabs") {
+            --uc-sb-sidebar-main-hover-clip-mica: var(--uc-sidebar-stripe-width);
+        }
+
         @media not -moz-pref("sidebar.verticalTabs") {
+            /* If Sidebery is active while horizontal tabs are fully hidden, 
+                the clipped height doesn't need to account for the tab bar */
+            @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
+                --uc-sb-navigator-hover-clip-mica: var(--uc-web-content-margin-outset-clip-mica);
+            }
+
             /* Initial values for window controls positioning */
             --uc-nav-bar-padding-right: 104px; /* Reserve space on the nav bar's right for window controls */
             --uc-windows-controls-visibility: visible;

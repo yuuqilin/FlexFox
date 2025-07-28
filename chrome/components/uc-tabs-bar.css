@@ -11,12 +11,31 @@
                 background-color var(--inactive-window-transition),
                 margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay),
                 z-index 0ms linear calc(var(--uc-autohide-toolbar-delay) + 80ms + 10ms) allow-discrete !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    background-color var(--inactive-window-transition),
+                    margin-bottom var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    z-index 0ms linear
+                        calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms)
+                        allow-discrete !important;
+            }
         }
         #TabsToolbar:not([customizing]) {
             visibility: hidden;
             transition:
                 visibility 0ms linear var(--uc-tabs-hide-animation-delay),
                 margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay) !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    visibility 0ms linear var(--uc-autohide-sidebar-delay),
+                    margin-bottom var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay) !important;
+            }
         }
         /* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
         #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
@@ -43,11 +62,32 @@
                 background-color var(--inactive-window-transition),
                 margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-autohide-navigator-delay),
                 z-index 0ms linear 0ms allow-discrete /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                transition:
+                    background-color var(--inactive-window-transition),
+                    margin-bottom var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    z-index 0ms linear 0ms allow-discrete /* calc(var(--uc-hover-sidebar-delay) - 10ms) */ !important;
+            }
             /* Direct child selectors can be used starting from version 133 */
             #TabsToolbar {
                 visibility: var(--uc-autohide-tabstoolbar-visibility);
                 margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
                 transition-delay: var(--uc-autohide-tabstoolbar-delay) !important;
+                @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                    -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+                    -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                    /*
+                    transition-duration: var(--uc-hover-transition-duration) !important;
+                    transition-delay: var(--uc-hover-sidebar-delay) !important;
+                    */
+                    transition:
+                        visibility 0ms linear var(--uc-hover-sidebar-delay),
+                        margin-bottom var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay) !important;
+                }
             }
         }
     }

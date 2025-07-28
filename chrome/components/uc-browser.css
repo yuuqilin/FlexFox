@@ -1,5 +1,5 @@
 /* Override browser color if there's no theme background image. */
-@media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
         -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -114,7 +114,7 @@
                 margin: var(--uc-web-content-margin-box);
 
                 background-color: transparent !important;
-                @media not -moz-pref("uc.flex.allow-addons-to-change-toolbar-color") {
+                @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
                     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
                         -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
                         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -156,26 +156,34 @@
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 overflow: hidden;
                 box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
+                @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
+                    box-shadow: 0 1.5px 9px red;
+                }
 
-                &::before {
-                    content: "";
-                    position: absolute;
-                    inset: 0;
-                    pointer-events: none;
-                    /* Background shown while loading pages */
-                    background-color: light-dark(#f9f9fb, #202020);
-                    @media (-moz-content-prefers-color-scheme: light) {
-                        background-color: #f9f9fb;
+                @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser")) {
+                    @media not (-moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser")) {
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            inset: 0;
+                            z-index: -1;
+                            pointer-events: none;
+                            /* Background shown while loading pages */
+                            background-color: light-dark(#f9f9fb, #202020);
+                            @media (-moz-content-prefers-color-scheme: light) {
+                                background-color: #f9f9fb;
+                            }
+                            @media (-moz-content-prefers-color-scheme: dark) {
+                                background-color: #202020;
+                            }
+                            /* Clips background bleed around rounded corners */
+                            clip-path: inset(
+                                0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip))
+                                    var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip))
+                                    var(--uc-web-content-radius-clip) var(--uc-web-content-radius-clip)
+                            );
+                        }
                     }
-                    @media (-moz-content-prefers-color-scheme: dark) {
-                        background-color: #202020;
-                    }
-                    /* Clips background bleed around rounded corners */
-                    clip-path: inset(
-                        0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip))
-                            var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip))
-                            var(--uc-web-content-radius-clip) var(--uc-web-content-radius-clip)
-                    );
                 }
             }
 
@@ -217,6 +225,449 @@
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: var(--uc-web-content-radius);
             }
+        }
+    }
+}
+
+/* Mica background clipping and window transparency settings */
+@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+    -moz-pref("uc.flex.browser-wallpaper-enabled") {
+    #main-window {
+        background-color: light-dark(
+            rgba(255, 255, 255, var(--uc-browser-mica-transparency)),
+            rgba(0, 0, 0, var(--uc-browser-mica-transparency))
+        ) !important;
+        /*
+        -moz-appearance: -moz-win-borderless-glass !important;
+        */
+    }
+
+    #tabbrowser-tabpanels {
+        background-color: transparent !important;
+    }
+
+    @media not -moz-pref("sidebar.verticalTabs") {
+        #browser,
+        #nav-bar,
+        #PersonalToolbar {
+            background-color: transparent !important;
+            background-image: none !important;
+        }
+    }
+
+    /**
+     * Sets the initial clip state of the tab box to enable a smooth transition
+     * when the sidebar or navigator expands, allowing the Mica backdrop to show cleanly.
+     */
+    #tabbrowser-tabbox {
+        @media -moz-pref("sidebar.position_start") {
+            clip-path: inset(
+                var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
+            );
+        }
+        @media not -moz-pref("sidebar.position_start") {
+            clip-path: inset(
+                var(--uc-web-content-margin-outset-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
+            );
+        }
+        will-change: clip-path;
+        transition: clip-path var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+            var(--uc-autohide-sidebar-delay);
+    }
+
+    /* When the navigator or its child bookmark toolbar is expanded, clip the tab box to reveal the Mica backdrop */
+    @media not -moz-pref("sidebar.verticalTabs") {
+        #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
+            @media -moz-pref("sidebar.position_start") {
+                clip-path: inset(var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica));
+            }
+            @media not -moz-pref("sidebar.position_start") {
+                clip-path: inset(var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0);
+            }
+            transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay);
+        }
+
+        /* Keep the tab box clipped when the navigator contains an open toolbar button */
+        @media -moz-pref("uc.flex.fully-hide-toolbox") {
+            #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
+                @media -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
+                    );
+                }
+                @media not -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
+                    );
+                }
+                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+            }
+        }
+        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+            :root:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
+                #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
+                    @media -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
+                        );
+                    }
+                    @media not -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
+                        );
+                    }
+                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
+                }
+            }
+        }
+    }
+
+    /* When the navigator or its child bookmark toolbar is expanded, clip the tab box to reveal the Mica backdrop */
+    @media -moz-pref("sidebar.verticalTabs") {
+        @media not -moz-pref("uc.flex.disable-bookmarks-autohide"),
+            -moz-pref("uc.flex.fully-hide-toolbox"),
+            (display-mode: fullscreen) {
+            #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
+                @media -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
+                    );
+                }
+                @media not -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
+                    );
+                }
+                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+            }
+
+            /* Keep the tab box clipped when the navigator contains an open toolbar button */
+            @media -moz-pref("uc.flex.fully-hide-toolbox") {
+                #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
+                    @media -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
+                        );
+                    }
+                    @media not -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
+                        );
+                    }
+                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
+                }
+            }
+        }
+    }
+    /** 
+     * Repeat the styles above using the selector for the "Hide Topbar" shortcut,
+     * which has the same effect as @media -moz-pref("uc.flex.fully-hide-toolbox"). 
+     */
+    @media -moz-pref("sidebar.verticalTabs") {
+        :root:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
+            #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
+                @media -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
+                    );
+                }
+                @media not -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
+                    );
+                }
+                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+            }
+
+            #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
+                @media -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
+                    );
+                }
+                @media not -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
+                    );
+                }
+                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+            }
+        }
+    }
+
+    /* Clip the tab box when native vertical tabs are expanded to reveal the Mica backdrop */
+    @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
+            -moz-pref("uc.flex.fully-hide-sidebery"),
+            (display-mode: fullscreen) {
+            /** 
+             * The [inFullscreen] selector is required to prevent fullscreen mode 
+             * from being blocked by :not([titlepreface*="\180e "]), 
+             * ensuring styles can be applied in fullscreen state. 
+             */
+            :root:is(
+                    :not([titlepreface*="\180e "]),
+                    [titlepreface*="\200c "],
+                    [titlepreface*="\200d "],
+                    [inFullscreen]
+                ) {
+                #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-launcher-expanded]:not([sidebar-panel-open]) {
+                    @media -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-sidebar-main-hover-clip-mica)
+                        );
+                    }
+                    /*if sidebar on right*/
+                    @media not -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-web-content-margin-outset-clip-mica) var(--uc-sidebar-main-hover-clip-mica) 0 0
+                        );
+                    }
+                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
+                }
+
+                /** 
+                 * When the sidebar panel is open ([sidebar-panel-open]) 
+                 * and native vertical tabs are in expanded mode ([sidebar-launcher-expanded]), 
+                 * clip the sidebar panel on hover to reveal the Mica backdrop. 
+                 */
+                #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
+                        [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+                    ) {
+                    min-width: var(--uc-sidebar-main-hover-clip-mica) !important;
+                    clip-path: inset(0 0 0 0);
+                    transition: clip-path var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay);
+                }
+                #sidebar-main:hover
+                    ~ #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
+                        [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+                    ) {
+                    @media -moz-pref("sidebar.position_start") {
+                        clip-path: inset(0 0 0 var(--uc-sidebar-main-hover-clip-mica));
+                    }
+                    /*if sidebar on right*/
+                    @media not -moz-pref("sidebar.position_start") {
+                        clip-path: inset(0 var(--uc-sidebar-main-hover-clip-mica) 0 0);
+                    }
+                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
+                }
+            }
+        }
+    }
+
+    /** 
+     * When using Sidebery as the sidebar panel, 
+     * clip Sidebery on hover over the sidebar stripe to reveal the Mica backdrop. 
+     */
+    @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
+        #sidebar-box[sidebar-panel-open][sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
+            &:not(:hover) {
+                clip-path: inset(0 0 0 0);
+            }
+            transition:
+                opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                z-index 0ms linear 0ms
+                    /* calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms) */
+                    allow-discrete,
+                /*
+                clip-path var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay);
+                */
+                    clip-path 0ms var(--uc-autohide-transition-type) 0ms;
+        }
+        @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+            :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                #sidebar-main:hover
+                    ~ #sidebar-box[sidebar-panel-open][sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
+                    @media -moz-pref("sidebar.position_start") {
+                        clip-path: inset(0 0 0 var(--uc-sidebar-stripe-width));
+                    }
+                    @media not -moz-pref("sidebar.position_start") {
+                        clip-path: inset(0 var(--uc-sidebar-stripe-width) 0 0);
+                    }
+                    transition:
+                        opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            calc(var(--uc-hover-sidebar-delay) + 10ms),
+                        z-index 0ms linear 0ms /* calc(var(--uc-hover-sidebar-delay) - 10ms) */ allow-discrete,
+                        /*
+                        clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay);
+                        */
+                            clip-path 0ms var(--uc-autohide-transition-type) 0ms;
+                }
+            }
+        }
+
+        /** 
+         * When Sidebery is fully hidden or in fullscreen mode, 
+         * the sidebar stripe expands over the tab box, 
+         * so clip the tab box to reveal the Mica backdrop.
+         * Clipping is only applied when --uc-sb-sidebar-main-hover-clip-mica is set, 
+         * indicating Sidebery is active.
+         */
+        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
+                @media -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-web-content-margin-outset-clip-mica) 0 0
+                            var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica))
+                    );
+                }
+                /*if sidebar on right*/
+                @media not -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        var(--uc-web-content-margin-outset-clip-mica)
+                            var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica)) 0 0
+                    );
+                }
+                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay);
+            }
+        }
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
+                    @media -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-web-content-margin-outset-clip-mica) 0 0
+                                var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica))
+                        );
+                    }
+                    /*if sidebar on right*/
+                    @media not -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-web-content-margin-outset-clip-mica)
+                                var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica))
+                                0 0
+                        );
+                    }
+                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
+                }
+            }
+        }
+    }
+
+    /* Clip the tab box when Sidebery is expanded to reveal the Mica backdrop */
+    #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
+            -moz-pref("uc.flex.fully-hide-sidebery"),
+            (display-mode: fullscreen) {
+            /** 
+             * The [inFullscreen] selector is required to prevent fullscreen mode 
+             * from being blocked by :not([titlepreface*="\180e "]), 
+             * ensuring styles can be applied in fullscreen state. 
+             */
+            :root:is(:not([titlepreface*="\180e "]), [titlepreface*="\200c "], [titlepreface*="\200d "], [inFullscreen])
+                & {
+                &:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
+                    @media -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-sidebar-box-hover-clip-mica)
+                        );
+                    }
+                    /*if sidebar on right*/
+                    @media not -moz-pref("sidebar.position_start") {
+                        clip-path: inset(
+                            var(--uc-web-content-margin-outset-clip-mica) var(--uc-sidebar-box-hover-clip-mica) 0 0
+                        );
+                    }
+                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
+                }
+            }
+        }
+    }
+
+    #sidebar,
+    #webextpanels-window {
+        background-color: transparent !important;
+    }
+
+    .toolbar-menupopup,
+    menupopup {
+        --panel-background: light-dark(
+            rgba(249, 249, 251, var(--uc-menupopup-backdrop-transparency)),
+            rgba(32, 32, 32, var(--uc-menupopup-backdrop-transparency))
+        ) !important;
+    }
+
+    /* backdrop-filter doesn't blur remote <browser> element https://bugzilla.mozilla.org/show_bug.cgi?id=1799334 */
+    /* #urlbar[breakout][breakout-extend] > #urlbar-background, */
+    menupopup,
+    panel:not(#autoscroller),
+    tooltip,
+    slot[part="content"] {
+        background-color: light-dark(
+            rgba(249, 249, 251, var(--uc-menupopup-backdrop-transparency)),
+            rgba(32, 32, 32, var(--uc-menupopup-backdrop-transparency))
+        ) !important;
+        appearance: menupopup !important;
+        --panel-shadow-margin: 0px !important;
+    }
+}
+
+@media -moz-pref("uc.flex.browser-wallpaper-enabled") {
+    #main-window {
+        --toolbar-bgcolor: light-dark(
+            rgba(var(--uc-browser-wallpaper-light-mask), var(--uc-browser-wallpaper-transparency)),
+            rgba(var(--uc-browser-wallpaper-dark-mask), var(--uc-browser-wallpaper-transparency))
+        ) !important;
+        /*
+        -moz-appearance: -moz-win-borderless-glass !important;
+        */
+        --lwt-header-image: var(--uc-browser-wallpaper, none) !important;
+        --lwt-additional-images: var(--uc-browser-wallpaper, none) !important;
+        @media not -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
+            --uc-acrylic-noise-image: url("../icons/wallpaper/acrylic-noise.png");
+        }
+
+        background-image: var(--uc-acrylic-noise-image, none),
+            linear-gradient(var(--toolbar-bgcolor, Field), var(--toolbar-bgcolor, Field)),
+            var(--lwt-additional-images, none), var(--lwt-header-image, none) !important;
+        background-repeat: repeat, no-repeat, no-repeat, no-repeat !important;
+        background-position: right top !important;
+        background-position-y: top !important;
+        background-size: auto, cover, cover, cover !important;
+        @media not -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+                @media (prefers-color-scheme: dark), (-moz-content-prefers-color-scheme: dark) {
+                    backdrop-filter: blur(26px) contrast(var(--uc-browser-wallpaper-contrast)) saturate(140%);
+                }
+                @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
+                    backdrop-filter: blur(26px) saturate(140%);
+                }
+                pointer-events: none;
+            }
+        }
+    }
+
+    @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
+        #navigator-toolbox {
+            --toolbox-bgcolor: transparent !important;
+            --toolbox-bgcolor-inactive: transparent !important;
+        }
+        #sidebar-main {
+            --uc-bgcolor: transparent;
+        }
+        #browser {
+            --toolbox-bgcolor: transparent !important;
+            --toolbox-bgcolor-inactive: transparent !important;
         }
     }
 }

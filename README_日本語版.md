@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v142-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v143-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -16,32 +16,87 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 カスタマイズ性の高いベースとして、理想のインターフェースを自由に作れます。  
 見た目を変えるだけではなく、ブラウジングの質そのものを高めるテーマです。  
 
-![FlexFox Dark-Light Theme](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-light-dark.webp) 
+![Mica 効果とカード風に浮かぶウェブコンテンツを表示する FlexFox](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/a-blue-and-purple-background-with-wavy-shapes.webp) 
 
 ## 🆕 最新情報
 
-**🦊 v3.8.3**
-* `z-index` の変更がアニメーションの遅延に従わない不具合を修正しました。
-* Firefox標準の縦型タブで、ホバー時にアイコンがアニメーションの遅延前に移動してしまう問題を修正しました。
-* 横型タブモードとの互換性のため、デフォルトの折りたたみ速度を調整しました。
+**🧊 v4.0.0 – 主な機能アップデート**
+* Windows 11 の **Mica 背景効果** に対応しました。
+  * 有効にするには、`about:config` に以下の設定を追加してください：
+    ```
+    widget.windows.mica = true
+    widget.windows.mica.popups = 2
+    widget.windows.mica.toplevel-backdrop = 2
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-mica-transparency-level = 2
+    ```
+  * テーマは `システムテーマ — 自動` に設定しておく必要があります。他のテーマでは Mica は反映されません。
+  * **Firefoxの再起動が必要です。**
+  * 詳細設定はこちらをご覧ください: [🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
+  * 背景が他のウィンドウに隠れて見えない場合は、<kbd>Win</kbd> + <kbd>Home</kbd> キーで他のウィンドウをすべて最小化できます。マウスジェスチャーや自動化スクリプトでの操作も可能です。  
 
-ナビゲーションバーの自動非表示機能とSideberyの背景色切り替えのプレビュー：  
-<video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
+  ネイティブの Mica 背景効果を表示した例です。YouTube のようなウェブページの透明効果には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 拡張機能を使用しています。  
+  
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="Firefox のツールバーやタブの後ろに Mica 背景効果が表示されている例。" width="96%" />
 
-🖌️ <b>大きな改良点：Sidebery の背景がテーマに連動</b>
-> [!NOTE]
-> * FlexFox は、Firefox の現在のテーマに合わせて Sidebery の背景色を自動で切り替えられるようになりました。
-> * この機能を有効にするには、Sidebery の **設定 → 外観 → カラースキーム** で `"firefox"` を選択してください。
-> <details><summary>Sidebery の外観設定のスクリーンショットを見る</summary>
-> <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.webp" alt="Sidebery の外観設定" width="50%" />
-> </details>
+* Mica が使用できない場合や、固定された壁紙を表示したい場合には、**カスタム背景壁紙**機能を利用できます。
+  * `about:config` に以下の設定を追加して有効にします：
+    ```
+    uc.flex.browser-wallpaper-enabled = true
+    uc.flex.browser-wallpaper-index = 1
+    uc.flex.browser-wallpaper-acrylic-disabled = false
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-wallpaper-transparency-level = 2
+    uc.flex.browser-wallpaper-contrast-level = 2
+    ```
+  * **Firefoxの再起動が必要です。**
+  * `../icons/wallpaper/` フォルダに `main-image-1.jpg` ～ `main-image-9.jpg` を保存すると、最大9枚の画像を切り替えて使用できます。
+  * デフォルトで **Acrylic ぼかし効果** が適用され、Mica に似た外観になります（完全に同じではありません）。
+  * **カスタム背景壁紙**機能を有効にすると、Mica の背景が上書きされます。Mica と壁紙を同時に有効にした場合は、壁紙が表示されます。  
 
-🔧 <b>v3.6.x パフォーマンス修正（v3.5.1の問題に対応）</b>
-> [!NOTE]
-> * **v3.5.1** で発生していたパフォーマンスの低下は、**v3.6.0** 以降で修正されています。
-> * 特に「**タブを一覧表示します**」パネルを開く速度が目に見えて向上しており、最新版では **v3.5.8** に比べて最大 **18倍** 高速です。
-> * 単なるパフォーマンス低下の修正にとどまらず、一部のコードをリファクタリングすることで速度をさらに最適化しました。Firefox のネイティブ UI との差は **2ms 未満** まで縮まりました。
-> * **v3.5.x** をお使いの方には、最新バージョンへのアップデートをおすすめします。
+  Acrylic ぼかしを有効にしたカスタム背景壁紙の例です。ネイティブの Mica と比べて、ぼかしの強さや色調、質感が異なります。  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-acrylic.webp" alt="Acrylic ぼかしが適用されたカスタム壁紙の例。Mica 効果に似た見た目です。" width="96%" />
+
+  Acrylic ぼかしを無効にしたカスタム壁紙の例です。背景がくっきり表示されるため、透明度の設定で文字の読みやすさを調整できます。  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/churning-in-the-chukchi-sea-no-acrylic.webp" alt="Acrylic ぼかしを無効にしたカスタム壁紙の例。背景画像がくっきり表示されます。" width="96%" />
+
+* サンプル壁紙の出典とクレジット：
+  * [a blue and purple background with wavy shapes (Unsplash)](https://unsplash.com/photos/a-blue-and-purple-background-with-wavy-shapes-1hg6NpO0kIk) – Firefox の新しいタブのカスタマイズ機能に組み込まれている背景のひとつです。
+  * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – Firefox の新しいタブのカスタマイズ機能に組み込まれている背景のひとつです。
+  * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([ダウンロード](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
+
+* Sidebery やウェブページに Mica や壁紙の背景を表示するには、`browser.tabs.allow_transparent_browser` を有効にしてください。
+  * ページの透明化には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 拡張機能が必要です。
+  * 背景が透けて読みにくくなる場合は [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) との併用がおすすめです。
+
+* 新オプション：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
+  * Sidebery とネイティブの垂直タブで使われている開閉アニメーションの速度を、ナビゲーションバーとブックマークツールバーにも適用し、すべてのアニメーション速度を統一します。
+  * 統一後は、`uc.flex.sidebery-fast-hover-expand` または `uc.flex.sidebery-slow-hover-expand` を使って、ナビゲーションバーやブックマークツールバーの速度も調整できます。
+  * Mica やカスタム壁紙を有効にすると、FlexFox が内部的にアニメーション速度を自動で統一するため、その場合はこのオプションを手動で設定する必要はありません。
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
+
+以前のバージョンの更新履歴については  
+👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
+
+<a href="#updates-top-start">⏫ アップデート一覧の先頭へ戻る</a>
+</details>
+
+<details>  
+<summary>🖌️ <b>新機能：Sidebery の背景がテーマに連動</b> <i>《クリックで展開》</i> 👇</summary>
+
+* FlexFox は、Firefox の現在のテーマに合わせて Sidebery の背景色を自動で切り替えられるようになりました。
+* この機能を有効にするには、Sidebery の **設定 → 外観 → カラースキーム** で `"firefox"` を選択してください。
+  <details><summary>Sidebery の外観設定のスクリーンショットを見る</summary>
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.  webp"alt="Sidebery の外観設定" width="50%" />
+  </details>
+
+</details>
 
 <details>  
 <summary>👻 <b>新機能：ツールバーのアイコンを自動で非表示に</b> <i>《クリックで展開》</i> 👇</summary>
@@ -205,83 +260,8 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 </details>
 
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
-
-**v3.8.2**
-* `uc.flex.enable-rounded-web-content`を有効にし、開発ツールを表示している際のシャドウ表示を改善しました。
-* 開発ツールを表示中に、ウェブページコンテナとツールが接する辺に発生していた背景色のにじみを修正しました。
-* `uc.flex.enable-rounded-web-content`の処理方法を内部的にリファクタリングしました。
-* `uc.flex.fully-hide-toolbox`および "Hide Topbar" ショートカットの動作を調整しました。
-
-**v3.8.1**
-* ページ読み込み中の背景色の処理方法を変更しました。`uc.flex.enable-rounded-web-content` の設定にかかわらず、「ウェブサイトの外観」で指定された配色モードに従うようになりました。
-
-**v3.8.0**
-* ページ読み込み時に発生していた画面のちらつきを修正しました。
-* `uc.flex.enable-rounded-web-content` が無効な場合、ページ読み込み中の背景色は「ウェブサイトの外観」で設定された配色モードに従うようになりました。有効な場合は、使用中のテーマに基づいて背景色が表示されます。
-
-**v3.7.9**
-* `uc.flex.disable-sidebery-autohide`を有効にした際に、サイドバーのストライプが展開されない不具合（v3.7.7で発生）を修正しました。
-* サイドバーのz-indexの処理ロジックを整理しました。
-* `--uc-web-content-margin-small`および`--uc-web-content-margin-large`の変数を廃止し、`--uc-web-content-margin`に統一しました。
-
-**v3.7.8**
-* v3.7.7で発生した、Sideberyを完全に非表示にしたり全画面表示にした際に、サイドバーのストライプが表示されなくなる不具合を修正しました。
-* 新しいサイドバーのレイアウトを使用していても、ネイティブ垂直タブを無効にしている場合に、サイドバーのストライプが展開しない問題を修正しました。
-* ページの影がツールバーやサイドバーの上に表示されない、または余白が正しく適用されない複数のケースを修正しました。
-
-**v3.7.7**
-* ネイティブ垂直タブやサイドバーのヘッダーを折りたたむ際に、アニメーションの遷移効果が適用されない問題を修正しました。
-* 「カーソルを合わせた時にサイドバーを展開する」を有効にした状態で、サイドバーを展開したままパネルを開くとネイティブ垂直タブに重なってしまう問題を修正しました。
-* Sideberyがアクティブなとき、ページの影がサイドバーのストライプに重ならない問題を修正しました。
-* `uc.flex.sidebery-fast-hover-expand` オプション使用時のSideberyの折りたたみアニメーションを調整しました。
-
-**v3.7.6**
-* 新しいメニューアイコンを追加し、既存のアイコン表示の不具合を修正しました。
-
-**v3.7.5**
-* v3.7.4で追加されたアニメーション効果を調整し、Sideberyが折りたたまれているときに発生していたちらつき現象を修正しました。
-
-**v3.7.4**
-* `uc.flex.sidebery-slow-hover-expand` を有効にしたとき、Sidebery が折りたたまれている状態でツリータブのルートをクリックすると、ツリー全体を折りたたむのではなく、ルートタブに切り替わるように動作が改善されました。
-
-**v3.7.3**
-* 全画面表示の際、検索バーの位置が上に寄りすぎてナビゲーションバーに重なる問題を修正しました。
-* サイドバーのツール領域とネイティブ垂直タブの間で、境界線と区切り線が二重に表示される問題を調整しました。
-* `uc.flex.sidebery-slow-hover-expand` を有効にしている場合、Sidebery が完全に展開される前にタブをクリックすると、意図せず閉じてしまうことがある問題を修正しました。
-
-**v3.7.2**
-* Sidebery の展開アニメーション中に、ツリーの接続線が早く表示されてしまう問題を修正しました。
-
-**v3.7.1**
-* 横型タブモードで `uc.flex.enable-rounded-web-content` オプションを有効にした際、ウェブコンテンツの周囲に追加される余白の背景色がツールバーと一致しない問題を修正しました。
-* `uc.flex.revert-to-original-sidebar-icon` と `uc.flex.auto-hide-navbar-icons` の両方を有効にしても、サイドバーのトグルボタンのアイコンが非表示にならない問題を修正しました。
-* 新オプション `uc.flex.remove-sidebar-stripe` を追加しました。Sidebery がアクティブなときにサイドバーのストライプを非表示にできます。サイドバーのツールや拡張機能に切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを再表示してください。  
-
-   <img src="https://github.com/yuuqilin/media-assets/blob/FlexFox/assets/remove-sidebar-stripe.gif" alt="サイドバーストライプ非表示" width="55%" />
-
-**v3.7.0**
-* Sideberyの展開・折りたたみアニメーションを改善し、ホバー時のタブのちらつきを解消しました。
-  （従来は`padding`や自動計算された`width`の変化が段階的に発生し、タブの位置が滑らかに遷移せず、不自然な揺れが生じていました。）
-* `uc.flex.sidebery-slow-hover-expand` オプション有効時に、サイドバーと Sidebery のアニメーションのタイミングが合わない問題を修正しました。
-* サイドバーのアニメーション速度に関する変数は、Sidebery 内部のアニメーションと同期させるために `uc-sidebery.css` にも定義されるようになりました。
-  `uc-variables.css` の変数を `uc-user-settings.css` にコピーしてカスタマイズしている場合は、同じ値の変数定義を `uc-sidebery.css` から `uc-custom-content.css` にもコピーしてください。その際、`@media` クエリと `#root` セレクタを含めるのを忘れないようにしてください。userChrome と userContent の間でアニメーションのタイミングを一致させるために必要です。
-
-以前のバージョンの更新履歴については  
-👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
-
-<a href="#updates-top-start">⏫ アップデート一覧の先頭へ戻る</a>
-</details>
-
 > [!IMPORTANT]
-> FlexFox を Firefox のネイティブ垂直タブと併用する場合は、「カーソルを合わせた時にサイドバーを展開する」のオプションを「サイドバーのカスタマイズ」設定から **無効** にしてください。
->
-> * このオプションを有効にすると、FlexFox 独自の最適化デザインではなく、Firefox 標準の垂直タブレイアウトに切り替わります。
-> * FlexFox の外観や動作を最大限に活かすには、通常時はこのオプションを **無効にしたまま** ご使用いただくことをおすすめします。
-> * タブ幅の調整など、Firefox 標準の機能が必要な場合は、用途や作業スタイルに応じて柔軟にこのオプションを有効にすることもできます。
+> FlexFox を垂直タブモードで使用する際は、「サイドバーのカスタマイズ」にある「カーソルを合わせた時にサイドバーを展開する」オプションを **無効** にしてください。多くの機能はこの設定が必要です。
 
 ## ✨ 特徴
 
@@ -327,10 +307,33 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 ## 💿 導入
 
-### 🚀 方法1：自動インストールと更新
+### 👷 方法1：手動インストール
 
 > [!IMPORTANT]
-> 初めて FlexFox をインストールする場合は、スクリプトの実行後に [方法2](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-2-manual-installation) の手順5以降を手動で実行してください。  
+> 1. [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) をインストール（推奨）。
+> 2. FlexFoxをダウンロード：
+>    * [FlexFox](https://github.com/yuuqilin/FlexFox/archive/refs/heads/main.zip)：通常版Firefox用
+>    * [FlexFox Beta](https://github.com/yuuqilin/FlexFox/archive/refs/heads/Beta.zip)：Firefox Beta / Nightly用
+>    * [FlexFox ESR](https://github.com/yuuqilin/FlexFox/archive/refs/heads/ESR.zip)：Firefox ESR用
+> 3. `about:support`を開き、「プロファイルフォルダー」の「フォルダーを開く」をクリック。
+> 4. `chrome` フォルダと、`scripts` フォルダ内の `user.js` をプロファイルフォルダにコピーします。
+> 5. テキストエディタで `user.js` を開き、必要な機能の `//` コメントを外します。
+>    * 以下の設定が次のようになっていることを確認してください：
+>      * `toolkit.legacyUserProfileCustomizations.stylesheets` = `true`
+>      * `svg.context-properties.content.enabled` = `true`
+>      * `sidebar.visibility` = `always-show`
+> 6. Firefoxを再起動し、その後 `user.js` を削除して、`about:config` の変更を保存できるようにします。
+> 7. Sideberyの設定：
+>    * サイドバーの歯車アイコンから設定を開く
+>    * コンフリクトを避けるため、`Styles editor` にある既存のスタイルを削除してください。
+>    * 「ヘルプ」→「アドオンデータをインポート」で、アーカイブ内の `Sidebery` フォルダにある `sidebery-settings.json` と `sidebery-styles.json` をインポート
+>    * *注*：スタイルが正しく反映されない場合は、再度インポートを試してください。
+> 8. `about:config` で `uc.flex.` を検索し、必要に応じてFlexFoxの機能を有効／無効にします。
+
+### 🚀 方法2：自動インストールと更新
+
+> [!IMPORTANT]
+> 初めて FlexFox をインストールする場合は、スクリプトの実行後に [方法1](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-1-manual-installation) の手順5以降を手動で実行してください。  
 > 以降のアップデートでは、スクリプトを再実行するだけで自動的に更新されます。手動作業は不要です。
 
 <h4>💻 PowerShellスクリプト</h4>
@@ -392,101 +395,100 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 </details>
 
----
-
-### 👷 方法2：手動インストール
-
-> [!IMPORTANT]
-> 1. [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) をインストール（推奨）。
-> 2. FlexFoxをダウンロード：
->    - [FlexFox](https://github.com/yuuqilin/FlexFox/archive/refs/heads/main.zip)：通常版Firefox用
->    - [FlexFox Beta](https://github.com/yuuqilin/FlexFox/archive/refs/heads/Beta.zip)：Firefox Beta / Nightly用
->    - [FlexFox ESR](https://github.com/yuuqilin/FlexFox/archive/refs/heads/ESR.zip)：Firefox ESR用
-> 3. `about:support`を開き、「プロファイルフォルダー」の「フォルダーを開く」をクリック。
-> 4. `chrome` フォルダと、`scripts` フォルダ内の `user.js` をプロファイルフォルダにコピーします。
-> 5. *(任意)* テキストエディタで`user.js`を編集し、必要な機能の`//`コメントを外す。
->    - 以下の設定は`true`のままにしてください：
->      - `toolkit.legacyUserProfileCustomizations.stylesheets`
->      - `svg.context-properties.content.enabled`
-> 6. Firefoxを再起動し、その後`user.js`を削除して、`about:config`の変更を保存できるようにします。
-> 7. Sideberyの設定：
->    - サイドバーの歯車アイコンから設定を開く
->    - 「ヘルプ」→「アドオンデータをインポート」で、アーカイブ内の`sidebery-settings.json`と`sidebery-styles.json`をインポート
->    - *注*：設定が反映されない場合は再度インポートしてください。
-> 8. *(任意)* `about:config`で`uc.flex.`を検索し、必要に応じてFlexFoxの機能を有効／無効にします。
-
 ## ⚙️ カスタマイズ設定
 
-### 📜 ユーザー定義スタイル（`uc-user-settings.css`、`uc-custom-content.css`）
+### 📜 ユーザー定義スタイル
 
-> [!TIP]  
-> FlexFox のコアファイルを直接編集せずに、Firefoxのインターフェースやウェブページの表示スタイルを自由にカスタマイズできます。
+> [!TIP] 
+> FlexFox のスタイルは、将来のアップデートによって上書きされる心配なく自由にカスタマイズできます。
 >
-> カスタマイズの方法：
+> * **インターフェース（chrome）** を変更するには、`components` フォルダに `uc-user-settings.css` を作成
+> * **ウェブページ（content）** を変更するには、`content` フォルダに `uc-custom-content.css` を作成
 >
-> - **Firefoxのインターフェース（chrome）**を変更するには、`components` フォルダに `uc-user-settings.css` を作成してください。
-> - **ウェブページの内容（content）**を変更するには、`content` フォルダに `uc-custom-content.css` を作成してください。
+> 変更したいスタイルや変数（例：`uc-variables.css` など）をこれらのファイルにコピーして編集してください。ここで定義した内容は FlexFox の設定を上書きします。
+> これらのファイルはアップデートの影響を受けず、変更内容はそのまま保持されます。
 >
-> 必要に応じて、`uc-variables.css` などの既存ファイルから変数やスタイルをコピーし、自分用に編集して使うことができます。これらのファイルは **既定のスタイルの後に読み込まれるため、ユーザーの設定が優先されます。**
->
-> これらのファイルは **FlexFox本体には含まれていないため、将来のアップデートで上書きされることはありません。** 一度設定すれば、以後もそのまま利用可能です。
->
-> 💡 `:root` や `:root:has(...)` のようにセレクター内で定義されているルールをコピーする場合は、文脈を保つためにセレクター全体を含めてコピーしてください。
+> 💡 スタイルをコピーする際は、セレクター全体を含めて文脈を保ってください。
+
+---
 
 ### 🧩 カスタマイズ可能な設定 (`about:config`)
 
+#### ✅ FlexFox スタイルの動作に必須
+
+| 設定名 | 値 | 説明 |
+|--------|------|--------|
+| `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` | ユーザー定義のスタイルを適用するために、`userChrome.css` を有効にします。 |
+| `svg.context-properties.content.enabled` | `true` | ライト／ダークテーマに応じてアイコンの色を自動調整できるようにします。 |
+| `sidebar.visibility` | `always-show` | FlexFoxの垂直タブの自動折りたたみ機能とレイアウトを有効にします（垂直タブモード時）。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** のチェックを外すことでも適用できます。 |
+
 #### 🪄 機能を追加・有効化するオプション
 
-| 設定名 | 説明 |
-|--------|------|
-| `uc.flex.add-ui-text-stroke` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
-| `uc.flex.fully-hide-sidebery` | Sidebery とネイティブの縦型タブを完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
-| `uc.flex.fully-hide-toolbox` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
-| `uc.flex.auto-hide-navbar-icons` | ナビゲーションバーのアイコンを通常は非表示にし、ツールバーにカーソルを合わせると再表示されます。ウィンドウ操作ボタン、URLバー、サイドバーのボタン（FlexFox ロゴ）は常に表示されますが、サイドバーのボタンがナビゲーションバーの端に配置されていない場合や、`uc.flex.revert-to-original-sidebar-icon` が有効な場合は自動的に隠れます。 |
-| `uc.flex.allow-addons-to-change-toolbar-color` | Firefox Color などの拡張機能によるツールバーの色の変更を有効にします（背景画像が設定されていない場合に必要です）。 |
-| `uc.flex.enable-gradient-highlight` | FlexFox のロゴ、サイドバーのストライプ、ブックマークの星アイコンなど、主要な UI 要素に使われるハイライトカラーにグラデーションスタイルを適用します。数値で設定でき、`0` は無効、`1` ～ `X` は異なるグラデーションスタイルを選択します。 |
-| `uc.flex.enable-colored-bookmarks-folder-icons` | ブックマークフォルダーのアイコンをカラー表示にします。数値で設定でき、`0` は無効、`1` は第1セットのアイコンを使用、`2` は第2セットのアイコンを使用し、ラベルは自動的に非表示になります。 |
-| `uc.flex.remove-bookmarks-folder-icons` | ブックマークフォルダーのアイコンを非表示にします。 |
-| `uc.flex.remove-bookmarks-labels` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
-| `uc.flex.show-flexfox-version-info-in-about-config` | `about:config` ページに FlexFox のインストール確認メッセージと現在のバージョン番号を表示します。 |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | Firefox の「展開モード」のネイティブ垂直タブにおいて、ピン留めタブと通常タブの間に区切り線を表示します（デフォルトでは非表示）。 |
-| `uc.flex.dim-urlbar-popup-backdrop` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
-| `uc.flex.move-pip-volume-to-top` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
-| `uc.flex.enable-rounded-web-content` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
+| 設定名 | 値 | 説明 |
+|--------|------|--------|
+| `uc.flex.add-ui-text-stroke` | `true` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
+| `uc.flex.fully-hide-sidebery` | `true` | Sidebery とネイティブの縦型タブを完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
+| `uc.flex.fully-hide-toolbox` | `true` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
+| `uc.flex.auto-hide-navbar-icons` | `true` | ナビゲーションバーのアイコンを通常は非表示にし、ツールバーにカーソルを合わせると再表示されます。ウィンドウ操作ボタン、URLバー、サイドバーのボタン（FlexFox ロゴ）は常に表示されますが、サイドバーのボタンがナビゲーションバーの端に配置されていない場合や、`uc.flex.revert-to-original-sidebar-icon` が有効な場合は自動的に隠れます。 |
+| `uc.flex.allow-addons-to-change-toolbar-color` | `true` | Firefox Color などの拡張機能によるツールバーの色の変更を有効にします（背景画像が設定されていない場合に必要です）。 |
+| `uc.flex.enable-gradient-highlight` | `0`-`X` | FlexFox のロゴ、サイドバーのストライプ、ブックマークの星アイコンなど、主要な UI 要素に使われるハイライトカラーにグラデーションスタイルを適用します。数値で設定でき、`0` は無効、`1` ～ `X` は異なるグラデーションスタイルを選択します。 |
+| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | ブックマークフォルダーのアイコンをカラー表示にします。数値で設定でき、`0` は無効、`1` は第1セットのアイコンを使用、`2` は第2セットのアイコンを使用し、ラベルは自動的に非表示になります。 |
+| `uc.flex.remove-bookmarks-folder-icons` | `true` | ブックマークフォルダーのアイコンを非表示にします。 |
+| `uc.flex.remove-bookmarks-labels` | `true` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
+| `uc.flex.show-flexfox-version-info-in-about-config` | `true` | `about:config` ページに FlexFox のインストール確認メッセージと現在のバージョン番号を表示します。 |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | Firefox の「展開モード」のネイティブ垂直タブにおいて、ピン留めタブと通常タブの間に区切り線を表示します（デフォルトでは非表示）。 |
+| `uc.flex.move-pip-volume-to-top` | `true` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
+| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
+| `uc.flex.enable-rounded-web-content` | `0`-`2` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
 
 #### 🚫 機能を無効化・元に戻すオプション
 
-| 設定名 | 説明 |
-|--------|------|
-| `uc.flex.disable-flexfox` | Firefox を再起動せずに、FlexFox のすべてのスタイルと機能を無効にします。 |
-| `uc.flex.skip-loading-uc-*.css` | `./components/` および `./content/` 内の特定の `uc-*.css` ファイルの読み込みをスキップします。たとえば、`uc.flex.skip-loading-uc-newtab.css` を有効にすると `./content/uc-newtab.css` が読み込まれなくなります。 |
-| `uc.flex.disable-bookmarks-autohide` | ブックマークツールバーの自動非表示を無効にします。 |
-| `uc.flex.disable-tabs-toolbar-autohide` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
-| `uc.flex.disable-findbar-autohide` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |
-| `sidebar.visibility`（`always-show`） | Firefoxのネイティブ設定です。値を `always-show` にすると、Firefox標準の垂直タブバーの自動折りたたみが無効化され、代わりにFlexFox独自の自動折りたたみ機能が有効になります。FlexFoxはアニメーションの滑らかさ、折りたたみ時の整理されたレイアウト、ピン留めタブの扱いやすさに優れています。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** のチェックを外すことで切り替えることも可能です。 |
-| `sidebar.visibility`（`expand-on-hover`） | 値を `expand-on-hover` にすると、Firefoxの垂直タブバーのネイティブな自動折りたたみ動作が有効になり、FlexFoxの機能は無効化されます。この動作は、サイドバー設定の **「カーソルを合わせた時にサイドバーを展開する」** を有効にすることで切り替え可能です。このモードでは、ネイティブの垂直タブとSideberyのどちらも、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみの状態を変更できます。 |
-| `sidebar.animation.expand-on-hover.duration-ms` | `sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーションの速度を制御するFirefoxのネイティブ設定です。 |
-| `uc.flex.disable-sidebery-autohide` | Sidebery とネイティブ縦型タブの自動折りたたみを無効にします。 |
-| `uc.flex.disable-nav-bar-first-item-right-padding` | デフォルトでは、ナビゲーションバーの最初の項目の後ろに右側の余白を追加して、垂直タブとその周辺項目との視覚的な区切りや整列を改善します。このオプションはその余白を無効にします。 |
-| `uc.flex.disable-menu-icons` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
-| `uc.flex.revert-to-original-window-controls` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
-| `uc.flex.revert-to-original-flat-corner-style` | URLバー、検索バー、検索パネルの角丸を、FlexFox 独自の大きな丸みから Firefox 標準の控えめな角丸スタイルに戻します。 |
-| `uc.flex.revert-to-original-bookmark-star-icon` | FlexFox 独自のブックマーク星アイコンを Firefox 標準のデザインに戻します。 |
-| `uc.flex.revert-to-original-sidebar-icon` | FlexFox 独自のロゴを使用したサイドバーアイコンを Firefox 標準のデザインに戻します。 |
-| `uc.flex.remove-sidebar-stripe` | Sidebery がアクティブなときにサイドバーのストライプを非表示にします。サイドバーを切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してサイドバーツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを表示します。 |
+| 設定名 | 値 | 説明 |
+|--------|------|--------|
+| `uc.flex.disable-flexfox` | `true` | Firefox を再起動せずに、FlexFox のすべてのスタイルと機能を無効にします。 |
+| `uc.flex.skip-loading-uc-*.css` | `true` | `./components/` および `./content/` 内の特定の `uc-*.css` ファイルの読み込みをスキップします。たとえば、`uc.flex.skip-loading-uc-newtab.css` を有効にすると `./content/uc-newtab.css` が読み込まれなくなります。 |
+| `uc.flex.disable-bookmarks-autohide` | `true` | ブックマークツールバーの自動非表示を無効にします。 |
+| `uc.flex.disable-tabs-toolbar-autohide` | `true` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
+| `uc.flex.disable-findbar-autohide` | `true` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |
+| `uc.flex.disable-sidebery-autohide` | `true` | Sidebery とネイティブ縦型タブの自動折りたたみを無効にします。 |
+| `uc.flex.disable-nav-bar-first-item-right-padding` | `true` | デフォルトでは、ナビゲーションバーの最初の項目の後ろに右側の余白を追加して、垂直タブとその周辺項目との視覚的な区切りや整列を改善します。このオプションはその余白を無効にします。 |
+| `uc.flex.disable-menu-icons` | `true` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
+| `uc.flex.revert-to-original-window-controls` | `true` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
+| `uc.flex.revert-to-original-flat-corner-style` | `true` | URLバー、検索バー、検索パネルの角丸を、FlexFox 独自の大きな丸みから Firefox 標準の控えめな角丸スタイルに戻します。 |
+| `uc.flex.revert-to-original-bookmark-star-icon` | `true` | FlexFox 独自のブックマーク星アイコンを Firefox 標準のデザインに戻します。 |
+| `uc.flex.revert-to-original-sidebar-icon` | `true` | FlexFox 独自のロゴを使用したサイドバーアイコンを Firefox 標準のデザインに戻します。 |
+| `uc.flex.remove-sidebar-stripe` | `true` | Sidebery がアクティブなときにサイドバーのストライプを非表示にします。サイドバーを切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してサイドバーツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを表示します。 |
 
 #### 🪛 機能を調整・変更するオプション
 
-| 設定名 | 説明 |
-|--------|------|
-| `uc.flex.increase-sidebery-expanded-width` | Sidebery の展開時の幅を広げます。また、`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` が有効な場合は、Firefox標準の縦型タブパネルの幅も広がります。 |
-| `uc.flex.increase-navbar-height` | 以前のFlexFoxバージョンで使用されていた、より厚みのあるナビゲーションバーの高さを復元します。現在のデフォルト（Firefox本来のコンパクトな高さ）を上書きします。 |
-| `uc.flex.switch-to-alternate-condensed-panel` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
-| `uc.flex.sidebery-fast-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
-| `uc.flex.sidebery-slow-hover-expand` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
-| `uc.flex.max-visible-vertical-pinned-tabs` | ネイティブの垂直タブにおいて、1列あたりに表示できるピン留めタブの最大数を設定します（数値の範囲は 4～6）。この数を超えるとスクロールバーが表示されるため、使用環境に応じて調整してください。 |
-| `uc.flex.findbar-position` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `"top-center-left"` または `"1"`（左寄せ上部）、`"top-right"` または `"2"`（右上）、`"bottom-right"` または `"3"`（右下）です。 |
-| `uc.flex.menu-item-spacing` | Firefoxのアプリメニュー、ブックマークメニュー、右クリックメニューにおける項目同士の垂直間隔を設定します。指定可能な値は文字列 `"1"` または `"small"`（狭い間隔）、`"2"` または `"medium"`（標準の間隔）、`"3"` または `"large"`（広い間隔）です。 |
+| 設定名 | 値 | 説明 |
+|--------|------|--------|
+| `uc.flex.increase-sidebery-expanded-width` | `true` | Sidebery の展開時の幅を広げます。また、`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` が有効な場合は、Firefox標準の縦型タブパネルの幅も広がります。 |
+| `uc.flex.increase-navbar-height` | `true` | 以前のFlexFoxバージョンで使用されていた、より厚みのあるナビゲーションバーの高さを復元します。現在のデフォルト（Firefox本来のコンパクトな高さ）を上書きします。 |
+| `uc.flex.switch-to-alternate-condensed-panel` | `true` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
+| `sidebar.visibility` | `expand-on-hover` | FlexFoxが提供する垂直タブの自動折りたたみ機能とレイアウトを無効にします。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** にチェックを入れることでも適用できます。このモードでは、サイドバーの幅を自由に調整したり、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみを切り替えたりできます。 |
+| `sidebar.animation.expand-on-hover.duration-ms` | `120` | `sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーションの速度を制御するFirefoxのネイティブ設定です。 |
+| `uc.flex.sidebery-fast-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
+| `uc.flex.sidebery-slow-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
+| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Sidebery／垂直タブと同じ速度でツールバーを統一。Mica またはカスタム壁紙使用時は自動適用。 |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `4`-`6` | ネイティブの垂直タブにおいて、1列あたりに表示できるピン留めタブの最大数を設定します（数値の範囲は 4～6）。この数を超えるとスクロールバーが表示されるため、使用環境に応じて調整してください。 |
+| `uc.flex.findbar-position` | `top-center-left`/<br>`top-right`/<br>`bottom-right` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `"top-center-left"` または `"1"`（左寄せ上部）、`"top-right"` または `"2"`（右上）、`"bottom-right"` または `"3"`（右下）です。 |
+| `uc.flex.menu-item-spacing` | `small`/<br>`medium`/<br>`large` | Firefoxのアプリメニュー、ブックマークメニュー、右クリックメニューにおける項目同士の垂直間隔を設定します。指定可能な値は文字列 `"1"` または `"small"`（狭い間隔）、`"2"` または `"medium"`（標準の間隔）、`"3"` または `"large"`（広い間隔）です。 |
+
+#### 🧊 背景の見た目とMica効果
+
+| 設定名 | 値 | 説明 |
+|--------|------|--------|
+| `widget.windows.mica` | `true` | Firefox のネイティブな Mica 背景効果を有効にします。有効にするには、テーマを `システムテーマ — 自動` に設定する必要があります。この機能は Windows 11 環境でのみ利用可能です。お使いのシステムが Mica をサポートしていない場合は、`uc.flex.browser-wallpaper-enabled` を使って類似の効果を模倣できます。 |
+| `widget.windows.mica.popups` | `1`/`2` | ポップアップメニューに Mica 背景効果を適用します。`0`（無効）、`1`（有効）、`2`（自動）を指定できます。 |
+| `widget.windows.mica.toplevel-backdrop` | `2` | 使用する Mica 背景の種類を指定します：`0`（自動または無効）、`1`: Mica、`2`: Acrylic、`3`: Mica Alt。FlexFox は `2`: Acrylic を前提として設計されています。 |
+| `browser.tabs.allow_transparent_browser` | `true` | Sidebery とウェブコンテンツの背景を透過させて、Mica や壁紙を表示できるようにします。**反映には Firefox の再起動が必要です。** ウェブページの透過には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) の導入が必要です。ページが読みにくくなった場合は、[Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) の併用を推奨します。 |
+| `uc.flex.browser-mica-transparency-level` | `0`-`4` | ブラウザーの Mica バックドロップマスクの透明度を調整します。数値で設定でき、0 ～ 4 を指定します。値が大きいほど、マスクの効果が薄くなり背景がより明瞭に表示されます。Firefox のデフォルトは 0 で、FlexFox のデフォルトは 2 に設定されています。 |
+| `uc.flex.browser-wallpaper-enabled` | `true` | Firefox ブラウザーの背景にカスタム壁紙を表示します。この機能では、ネイティブの Mica 効果を模倣するアクリル風のぼかしが適用されます。Mica が使用できない環境や、常に同じ背景を表示したい場合に便利です。ただし、見た目は Mica と完全には一致しません。 |
+| `uc.flex.browser-wallpaper-index` | `1`-`9` | 番号付きの壁紙画像をブラウザーの背景として指定します。設定値は数値で、1 ～ 9 を指定できます。各値は、`../icons/wallpaper/` フォルダーにある `main-image-1.jpg` ～ `main-image-9.jpg` に対応します。|
+| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | カスタム壁紙に適用されるアクリル風ぼかし効果を無効にします。 |
+| `uc.flex.browser-wallpaper-transparency-level` | `0`-`4` | ブラウザーの壁紙マスクの透明度を調整します。数値で設定でき、0 ～ 4 を指定します。値が大きいほど、マスクの効果が薄くなり壁紙がはっきり表示されます。この設定は Mica の透明度と視覚的に揃うように設計されています。FlexFox のデフォルトは 2 に設定されています。 |
+| `uc.flex.browser-wallpaper-contrast-level` | `0`-`4` | ダークモードでアクリル風ぼかし効果を使用する際、ブラウザーの壁紙のコントラストを調整します。0〜4 の数値を指定でき、値が大きいほどコントラストが強くなります。FlexFox のデフォルト値は 2 です。 |
 
 ## 🐞 既知の問題
 
