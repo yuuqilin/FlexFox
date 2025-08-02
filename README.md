@@ -18,9 +18,7 @@ It's not just a new look, it's a better way to browse.
 
 ![FlexFox with Mica effect and floating card-style web content](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/a-blue-and-purple-background-with-wavy-shapes.webp)   
 
-## 🆕 What's New
-
-**🧊 v4.0.0 – Major Feature Update**
+## **🧊 v4.0.0 – Major Feature Update**
 * Added support for the **Mica visual effect** on Windows 11.
   * To enable Mica, configure the following settings in `about:config`:
     ```
@@ -75,6 +73,20 @@ It's not just a new look, it's a better way to browse.
   * Applies the expand/collapse animation speed used by Sidebery and native vertical tabs to the navigation bar and bookmarks toolbar, unifying all animation speeds.
   * Once unified, you can use `uc.flex.sidebery-fast-hover-expand` or `uc.flex.sidebery-slow-hover-expand` to adjust the animation speed of the navigation bar and bookmarks toolbar.
   * When Mica or custom wallpaper is enabled, FlexFox will automatically unify animation speeds internally, so manual adjustment of this option is not needed in those cases.
+
+## 🆕 What's New
+
+**🦊 v4.0.1**
+* When using a Mica backdrop or custom wallpaper with `browser.tabs.allow_transparent_browser` enabled:
+  * Added translucent backgrounds for built-in pages like **Settings**, **Add-ons Manager**, and **New Tab**.  
+
+    <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/translucent-about-preferences.webp" alt="Translucent background effect applied to the Settings (`about:preferences`) page" width="96%" />
+    
+  * Enabled background blur for the address bar dropdown and the find bar.
+  * In custom wallpaper mode, the blur effect for the dropdown is fully visible, including areas over the navigation bar.
+* In custom wallpaper mode, menu transparency now follows the `uc.flex.browser-wallpaper-transparency-level` setting, keeping it consistent with the wallpaper's transparency level.
+* Added icons to three previously unthemed items in the App Menu and context menus.
+* Fixed a styling issue with the address bar caused by a selector change in Firefox Nightly v143 ([Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)).
 
 <!-- END What's New -->
 
@@ -156,8 +168,7 @@ The option accepts values from `0` (off) to `2`; higher values increase the padd
 You can further adjust the appearance by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
 
   ```css
-  --uc-web-content-margin-small
-  --uc-web-content-margin-large
+  --uc-web-content-margin
   --uc-web-content-radius-box
   ```
 
@@ -423,7 +434,7 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 #### ✅ Required for FlexFox Styles
 
 | Preference | Value | Description |
-|-----------|-------------|-------------|
+|-----------|:-------------:|-------------|
 | `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` | Enables userChrome.css for custom styles. |
 | `svg.context-properties.content.enabled` | `true` | Enables icon color to auto-adjust between light and dark themes. |
 | `sidebar.visibility` | `always-show` | Enables FlexFox's vertical tabs auto-collapse and layout in vertical tabs mode. This setting can also be applied by unchecking **“Expand sidebar on hover”** in the sidebar settings. |
@@ -431,7 +442,7 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 #### 🪄 Add or Enable Features
 
 | Preference | Value | Description |
-|-----------|-------------|-------------|
+|-----------|:-------------:|-------------|
 | `uc.flex.add-ui-text-stroke` | `true` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
 | `uc.flex.fully-hide-sidebery` | `true` | Fully hides Sidebery and native vertical tabs. They reappear when the cursor moves to the screen edge. |
 | `uc.flex.fully-hide-toolbox` | `true` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
@@ -450,7 +461,7 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 #### 🚫 Disable or Revert Features
 
 | Preference | Value | Description |
-|-----------|-------------|-------------|
+|-----------|:-------------:|-------------|
 | `uc.flex.disable-flexfox` | `true` | Disables all FlexFox styles and features without needing to restart Firefox. |
 | `uc.flex.skip-loading-uc-*.css` | `true` | Skips loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will skip loading `./content/uc-newtab.css`. |
 | `uc.flex.disable-bookmarks-autohide` | `true` | Disables auto-hide for the bookmarks toolbar. |
@@ -468,7 +479,7 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 #### 🪛 Modify or Adjust Features
 
 | Preference | Value | Description |
-|-----------|-------------|-------------|
+|-----------|:-------------:|-------------|
 | `uc.flex.increase-sidebery-expanded-width` | `true` | Increases the expanded width of Sidebery and, when `uc.flex.disable-sidebery-autohide` is enabled or `Lock Sidebery` is active, also applies the increased width to the native vertical tab panel. |
 | `uc.flex.increase-navbar-height` | `true` | Restores the thicker navbar height used in earlier FlexFox versions. This change overrides the current default, which matches Firefox's original compact height. |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
@@ -478,23 +489,23 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Unifies toolbar animation speed with Sidebery/vertical tabs. Auto-applied with Mica or custom wallpaper. |
 | `uc.flex.max-visible-vertical-pinned-tabs` | `4`-`6` | Sets the maximum number of pinned tabs visible per column in the native vertical tabs (numeric value, typically 4–6). Content beyond this limit will scroll, so adjust this to avoid scrollbars based on your usage. |
-| `uc.flex.findbar-position` | `top-center-left`/<br>`top-right`/<br>`bottom-right` | Sets the Findbar's position. Accepts string values: `"top-center-left"` or `"1"` = center-left top, `"top-right"` or `"2"` = top right, `"bottom-right"` or `"3"` = bottom right. |
-| `uc.flex.menu-item-spacing` | `small`/<br>`medium`/<br>`large` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `"1"` or `"small"` = narrow spacing, `"2"` or `"medium"` = medium spacing, `"3"` or `"large"` = wide spacing. |
+| `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the Findbar's position. Accepts string values: `'top-center-left'` or `'1'` = center-left top, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
+| `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `'1'` or `'small'` = narrow spacing, `'2'` or `'medium'` = medium spacing, `'3'` or `'large'` = wide spacing. |
 
 #### 🧊 Visual Background & Mica Effects
 
 | Preference | Value | Description |
-|-----------|-------------|-------------|
+|-----------|:-------------:|-------------|
 | `widget.windows.mica` | `true` | Enables the native Mica backdrop in Firefox. Requires the theme to be set to `System theme — auto` to take effect. This feature is only available on Windows 11. If your system does not support Mica, you can use `uc.flex.browser-wallpaper-enabled` to simulate a similar effect. |
-| `widget.windows.mica.popups` | `1`/`2` | Enables the Mica backdrop for popup menus. Accepts `0` (off), `1` (on), or `2` (auto). |
+| `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | Enables the Mica backdrop for popup menus. Accepts `0` (off), `1` (on), or `2` (auto). |
 | `widget.windows.mica.toplevel-backdrop` | `2` | Specifies the type of Mica backdrop to use: `0` (auto or none), `1`: Mica, `2`: Acrylic, `3`: Mica Alt. FlexFox is designed with the assumption that this option is set to `2`: Acrylic. |
 | `browser.tabs.allow_transparent_browser` | `true` | Enables background transparency for Sidebery and web content, allowing Mica or wallpaper to be displayed. **Takes effect after restarting Firefox.** Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) extension. If some pages become hard to read, using [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended. |
-| `uc.flex.browser-mica-transparency-level` | `0`-`4` | Adjusts the transparency level of the browser Mica backdrop mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. The default level in Firefox is 0, while FlexFox uses 2 as its default. |
+| `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | Adjusts the transparency level of the browser Mica backdrop mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. The default level in Firefox is 0, while FlexFox uses 2 as its default. |
 | `uc.flex.browser-wallpaper-enabled` | `true` | Enables a custom wallpaper as the Firefox browser background. This feature applies an acrylic-style blur to simulate the native Mica effect. It is useful when Mica is not available or when you prefer a consistent, always-visible background. Note that the visual effect may not be identical to native Mica. |
-| `uc.flex.browser-wallpaper-index` | `1`-`9` | Sets which numbered wallpaper image to use as the browser background. This numeric setting accepts values from 1 to 9. Each value corresponds to an image file named `main-image-1.jpg` through `main-image-9.jpg`, located in the `../icons/wallpaper/` folder. |
+| `uc.flex.browser-wallpaper-index` | `1`-`9`<br>(`1`) | Sets which numbered wallpaper image to use as the browser background. This numeric setting accepts values from 1 to 9. Each value corresponds to an image file named `main-image-1.jpg` through `main-image-9.jpg`, located in the `../icons/wallpaper/` folder. |
 | `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | Disables the acrylic-style blur effect applied to the custom wallpaper background. |
-| `uc.flex.browser-wallpaper-transparency-level` | `0`-`4` | Adjusts the transparency level of the browser wallpaper mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. This option is designed to visually match the Mica transparency levels. The default value in FlexFox is 2. |
-| `uc.flex.browser-wallpaper-contrast-level` | `0`-`4` | Adjusts the contrast level of the browser wallpaper when using the acrylic-style blur effect in dark mode. This numeric setting accepts values from 0 to 4, where higher values increase contrast. The default value in FlexFox is 2. |
+| `uc.flex.browser-wallpaper-transparency-level` | `0`-`4`<br>(`2`) | Adjusts the transparency level of the browser wallpaper mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. This option is designed to visually match the Mica transparency levels. The default value in FlexFox is 2. |
+| `uc.flex.browser-wallpaper-contrast-level` | `0`-`4`<br>(`2`) | Adjusts the contrast level of the browser wallpaper when using the acrylic-style blur effect in dark mode. This numeric setting accepts values from 0 to 4, where higher values increase contrast. The default value in FlexFox is 2. |
 
 ## 🐞 Known Issues
 

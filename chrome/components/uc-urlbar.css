@@ -70,13 +70,14 @@
     display: initial;
 }
 
-#urlbar-background {
+#urlbar-background,
+.urlbar-background {
     box-shadow: none !important;
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     background: var(--uc-urlbar-bg, var(--toolbar-field-background-color)) !important;
 }
 
-#urlbar[focused] #urlbar-background {
+#urlbar[focused] :where(#urlbar-background, .urlbar-background) {
     box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35) !important;
     outline: none !important;
 }
@@ -86,7 +87,7 @@
 }
 
 /* Active Address/Search Field Dropdown */
-#urlbar[breakout][breakout-extend] > #urlbar-background {
+#urlbar[breakout][breakout-extend] > :where(#urlbar-background, .urlbar-background) {
     outline: none !important;
     box-shadow:
         rgba(0, 0, 0, 0.09) 0px 2px 1px,
@@ -167,7 +168,8 @@
     border: 0 !important;
 }
 
-#urlbar-background {
+#urlbar-background,
+.urlbar-background {
     border: 0 !important;
 }
 

@@ -1,4 +1,4 @@
-﻿/*            FlexFox v4.0.0            */
+﻿/*            FlexFox v4.0.1            */
 /*      ____ _          ____            */
 /*     / __/ /__  _  __/ __/___  _  __  */
 /*    / /_/ / _ \| |/_/ /_/ __ \| |/_/  */
@@ -27,12 +27,12 @@
     (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-bookmarks.css"));
 @import url(./components/uc-sidebar.css) not
     (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-sidebar.css"));
-@import url(./components/uc-browser.css) not
-    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-browser.css"));
 @import url(./components/uc-findbar.css) not
     (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-findbar.css"));
 @import url(./components/uc-window-controls.css) not
     (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-window-controls.css"));
 @import url(./components/uc-verticalfox.css) not
     (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-verticalfox.css"));
+@import url(./components/uc-browser.css) not
+    (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-browser.css"));
 @import url(./components/uc-user-settings.css);

@@ -88,6 +88,16 @@
     }
 }
 
+/* ════════════════════════════════════════════════════════════════════
+██╗    ██╗███████╗██████╗      ██████╗ ██████╗ ███╗   ██╗████████╗███████╗███╗   ██╗████████╗
+██║    ██║██╔════╝██╔══██╗    ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔════╝████╗  ██║╚══██╔══╝
+██║ █╗ ██║█████╗  ██████╔╝    ██║     ██║   ██║██╔██╗ ██║   ██║   █████╗  ██╔██╗ ██║   ██║   
+██║███╗██║██╔══╝  ██╔══██╗    ██║     ██║   ██║██║╚██╗██║   ██║   ██╔══╝  ██║╚██╗██║   ██║   
+╚███╔███╔╝███████╗██████╔╝    ╚██████╗╚██████╔╝██║ ╚████║   ██║   ███████╗██║ ╚████║   ██║   
+ ╚══╝╚══╝ ╚══════╝╚═════╝      ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝   ╚═╝   
+                                                                                             
+═════════════════════════════════════════════════════════════════════ */
+
 /* Add margin, shadow, and rounded corners to the web content area */
 @media -moz-pref("uc.flex.enable-rounded-web-content") and (not (display-mode: fullscreen)) {
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
@@ -229,19 +239,19 @@
     }
 }
 
+/* ════════════════════════════════════════════════════════════════════
+███╗   ███╗██╗ ██████╗ █████╗     ██████╗  █████╗  ██████╗██╗  ██╗██████╗ ██████╗  ██████╗ ██████╗ 
+████╗ ████║██║██╔════╝██╔══██╗    ██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔══██╗██╔══██╗██╔═══██╗██╔══██╗
+██╔████╔██║██║██║     ███████║    ██████╔╝███████║██║     █████╔╝ ██║  ██║██████╔╝██║   ██║██████╔╝
+██║╚██╔╝██║██║██║     ██╔══██║    ██╔══██╗██╔══██║██║     ██╔═██╗ ██║  ██║██╔══██╗██║   ██║██╔═══╝ 
+██║ ╚═╝ ██║██║╚██████╗██║  ██║    ██████╔╝██║  ██║╚██████╗██║  ██╗██████╔╝██║  ██║╚██████╔╝██║     
+╚═╝     ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝     
+                                                                                                   
+═════════════════════════════════════════════════════════════════════ */
+
 /* Mica background clipping and window transparency settings */
 @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
     -moz-pref("uc.flex.browser-wallpaper-enabled") {
-    #main-window {
-        background-color: light-dark(
-            rgba(255, 255, 255, var(--uc-browser-mica-transparency)),
-            rgba(0, 0, 0, var(--uc-browser-mica-transparency))
-        ) !important;
-        /*
-        -moz-appearance: -moz-win-borderless-glass !important;
-        */
-    }
-
     #tabbrowser-tabpanels {
         background-color: transparent !important;
     }
@@ -603,8 +613,6 @@
         ) !important;
     }
 
-    /* backdrop-filter doesn't blur remote <browser> element https://bugzilla.mozilla.org/show_bug.cgi?id=1799334 */
-    /* #urlbar[breakout][breakout-extend] > #urlbar-background, */
     menupopup,
     panel:not(#autoscroller),
     tooltip,
@@ -616,7 +624,72 @@
         appearance: menupopup !important;
         --panel-shadow-margin: 0px !important;
     }
+
+    /* backdrop-filter doesn't blur remote <browser> element https://bugzilla.mozilla.org/show_bug.cgi?id=1799334 */
+    /* Needed to enable backdrop-filter effects on <browser> */
+    browser {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    #urlbar[breakout][breakout-extend] {
+        border-radius: 15px !important;
+        backdrop-filter: blur(26px) saturate(140%);
+    }
+
+    #urlbar[breakout][breakout-extend] > :where(#urlbar-background, .urlbar-background) {
+        background-color: light-dark(
+            rgba(249, 249, 251, var(--uc-urlbar-backdrop-transparency)),
+            rgba(32, 32, 32, var(--uc-urlbar-backdrop-transparency))
+        ) !important;
+        background-image: none !important;
+    }
+
+    findbar,
+    .found-matches {
+        background-color: light-dark(
+            rgba(249, 249, 251, var(--uc-urlbar-backdrop-transparency)),
+            rgba(32, 32, 32, var(--uc-urlbar-backdrop-transparency))
+        ) !important;
+        background-image: none !important;
+        backdrop-filter: blur(26px) saturate(140%);
+    }
+    findbar:has(.found-matches:not([hidden])) {
+        border-bottom-left-radius: 0px;
+    }
+    .found-matches {
+        height: 25px;
+        padding: 0px 12px 0px 10px;
+        top: 39px;
+        border-bottom-right-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
+        &::after {
+            display: none;
+        }
+    }
 }
+
+@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") {
+    @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        #main-window {
+            background-color: light-dark(
+                rgba(255, 255, 255, var(--uc-browser-mica-transparency)),
+                rgba(0, 0, 0, var(--uc-browser-mica-transparency))
+            ) !important;
+            /*
+        -moz-appearance: -moz-win-borderless-glass !important;
+        */
+        }
+    }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+██╗    ██╗ █████╗ ██╗     ██╗     ██████╗  █████╗ ██████╗ ███████╗██████╗ 
+██║    ██║██╔══██╗██║     ██║     ██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗
+██║ █╗ ██║███████║██║     ██║     ██████╔╝███████║██████╔╝█████╗  ██████╔╝
+██║███╗██║██╔══██║██║     ██║     ██╔═══╝ ██╔══██║██╔═══╝ ██╔══╝  ██╔══██╗
+╚███╔███╔╝██║  ██║███████╗███████╗██║     ██║  ██║██║     ███████╗██║  ██║
+ ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝
+                                                                          
+═════════════════════════════════════════════════════════════════════ */
 
 @media -moz-pref("uc.flex.browser-wallpaper-enabled") {
     #main-window {
@@ -634,12 +707,11 @@
         }
 
         background-image: var(--uc-acrylic-noise-image, none),
-            linear-gradient(var(--toolbar-bgcolor, Field), var(--toolbar-bgcolor, Field)),
-            var(--lwt-additional-images, none), var(--lwt-header-image, none) !important;
-        background-repeat: repeat, no-repeat, no-repeat, no-repeat !important;
+            linear-gradient(var(--toolbar-bgcolor, Field), var(--toolbar-bgcolor, Field)), var(--lwt-header-image, none) !important;
+        background-repeat: repeat, no-repeat, no-repeat !important;
         background-position: right top !important;
         background-position-y: top !important;
-        background-size: auto, cover, cover, cover !important;
+        background-size: auto, cover, cover !important;
         @media not -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
             &::before {
                 content: "";
@@ -654,6 +726,24 @@
                 }
                 pointer-events: none;
             }
+            /**
+             * Standard acrylic material design. 
+             * However, the noise layer can reduce readability when applied to a full browser background, 
+             * so it's not ideal for this use case. 
+             */
+            /*
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+                background-image: var(--uc-acrylic-noise-image, none);
+                background-repeat: repeat;
+                background-position: right top;
+                background-size: auto;
+                opacity: 0.2;
+            }
+            */
         }
     }
 

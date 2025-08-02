@@ -1,13 +1,183 @@
-/*
-@-moz-document url-prefix("http") {
-    body {
-        background-color: light-dark(#f9f9fb, #2b2a33);
-        @media (-moz-content-prefers-color-scheme: light) {
-            background-color: #f9f9fb;
+@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser"),
+    -moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser") {
+    /*
+    @-moz-document url-prefix("http") {
+        :root {
+            color-scheme: light dark;
+            background-color: light-dark(#f9f9fb, #2b2a33);
+            @media (-moz-content-prefers-color-scheme: light) {
+                background-color: #f9f9fb;
+            }
+            @media (-moz-content-prefers-color-scheme: dark) {
+                background-color: #2b2a33;
+            }
         }
-        @media (-moz-content-prefers-color-scheme: dark) {
-            background-color: #2b2a33;
+    }
+    */
+
+    @-moz-document url-prefix("about:newtab"),
+        url-prefix("about:privatebrowsing"),
+        url-prefix("about:home") {
+        body {
+            background-color: transparent !important;
+        }
+        .customize-menu {
+            height: auto !important;
+            border-radius: 5px !important;
+            margin: 6px !important;
+        }
+        .customize-menu .close-button-wrapper {
+            background-color: transparent !important;
+        }
+        .personalize-button:not(:hover) {
+            opacity: 0.2 !important;
+        }
+    }
+
+    @-moz-document url-prefix("about:preferences"),
+        url-prefix("about:addons"),
+        url-prefix("about:debugging"),
+        url-prefix("about:config"),
+        url-prefix("about:support"),
+        url-prefix("about:profiles"),
+        url-prefix("about:newtab"),
+        url-prefix("about:privatebrowsing"),
+        url-prefix("about:home") {
+        :root {
+            --in-content-page-background: transparent !important;
+            --in-content-table-background: transparent !important;
+            --in-content-background-color: transparent !important;
+            --in-content-box-info-background: color-mix(
+                in srgb,
+                var(--background-color-box) 40%,
+                transparent
+            ) !important;
+        }
+        .card {
+            background: color-mix(in srgb, var(--background-color-box) 80%, transparent) !important;
+            border: none !important;
+        }
+    }
+
+    @-moz-document url-prefix("about:preferences") {
+        #translations-manage-install-list,
+        #downloadFolder,
+        #input,
+        #handlersViewHeader,
+        #handlersView,
+        #engineList {
+            --table-row-background-color: transparent !important;
+            --table-row-background-color-alternate: transparent !important;
+            background-color: color-mix(in srgb, var(--background-color-box) 80%, transparent) !important;
+        }
+        @media not (forced-colors) {
+            .privacy-detailedoption:not(.selected) {
+                background-color: var(--in-content-box-info-background) !important;
+            }
+        }
+        .sync-info-box,
+        .featureGate {
+            background-color: var(--in-content-box-info-background) !important;
+            border: none !important;
+        }
+    }
+
+    @-moz-document url-prefix("about:addons") {
+        .sticky-container {
+            margin: 16px 0 0 27px;
+            width: calc(var(--page-main-content-width) + 1px) !important;
+            height: auto;
+            background: var(--background-color-box) !important;
+            border-radius: 4px;
+            box-shadow: var(--box-shadow-card);
+
+            .header-name {
+                margin: auto !important;
+                font-size: 1.367rem !important;
+            }
+            .more-options-button {
+                margin: auto !important;
+            }
+            .main-search {
+                margin: auto !important;
+                padding-inline-start: 10px !important;
+            }
+
+            /* Source file made available under Mozilla Public License v. 2.0 See the main repository for updates as well as full license text.
+               https://github.com/Godiesc/firefox-gx */
+
+            /* Header */
+            display: grid !important;
+            grid-template-rows: 1 !important;
+            grid-template-columns: auto auto !important;
+
+            /* Left part */
+            .main-heading {
+                grid-column: 1;
+                grid-row: 1;
+                padding-block: 20px !important;
+                margin-inline-start: 22px !important;
+
+                .spacer {
+                    max-width: 20px !important;
+                }
+            }
+
+            /* Right part */
+            .main-search {
+                justify-content: center !important;
+                display: grid !important;
+                grid-column: 2;
+                grid-row: 1;
+                padding-block: 20px !important;
+
+                .search-label {
+                    display: none !important;
+                }
+            }
+
+            /* Stycky head Style in small width resolution */
+            @media (max-width: 830px) {
+                /* Remove header label */
+                margin-inline-start: 15px !important;
+                .main-heading > .header-name {
+                    display: none !important;
+                }
+            }
+        }
+    }
+
+    @-moz-document url-prefix("about:config") {
+        :root {
+            --table-row-background-color: transparent !important;
+            --table-row-background-color-alternate: transparent !important;
+        }
+
+        @media -moz-pref("uc.flex.show-flexfox-version-info-in-about-config") {
+            body::before,
+            #toolbar::before {
+                background: color-mix(in srgb, var(--background-color-box) 80%, transparent);
+            }
+        }
+
+        #prefs {
+            background: color-mix(in srgb, var(--background-color-box) 80%, transparent) !important;
+        }
+        #prefs[has-visible-prefs] > .add {
+            & > th,
+            & > td {
+                padding-top: 0 !important;
+            }
+
+            & > th::before,
+            & > td::before {
+                display: none !important;
+            }
         }
     }
 }
-*/
+
+/* Force "uc-common.css" to show up in DevTools by using an unsupported property */
+:root {
+    -webkit-locale: show-in-devtools;
+}

@@ -277,6 +277,33 @@
     }
     --uc-web-content-radius: 8px;
 
+    /* Mica backdrop mask transparency */
+    @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        --uc-browser-mica-transparency: 0.25;
+        --uc-urlbar-backdrop-transparency: 0.75;
+        --uc-menupopup-backdrop-transparency: 0.4;
+        @media -moz-pref("uc.flex.browser-mica-transparency-level", 0) {
+            --uc-browser-mica-transparency: 0.6;
+            --uc-urlbar-backdrop-transparency: 0.95;
+            --uc-menupopup-backdrop-transparency: 0.75;
+        }
+        @media -moz-pref("uc.flex.browser-mica-transparency-level", 1) {
+            --uc-browser-mica-transparency: 0.35;
+            --uc-urlbar-backdrop-transparency: 0.85;
+            --uc-menupopup-backdrop-transparency: 0.5;
+        }
+        @media -moz-pref("uc.flex.browser-mica-transparency-level", 3) {
+            --uc-browser-mica-transparency: 0.2;
+            --uc-urlbar-backdrop-transparency: 0.7;
+            --uc-menupopup-backdrop-transparency: 0.35;
+        }
+        @media -moz-pref("uc.flex.browser-mica-transparency-level", 4) {
+            --uc-browser-mica-transparency: 0;
+            --uc-urlbar-backdrop-transparency: 0.5;
+            --uc-menupopup-backdrop-transparency: 0.15;
+        }
+    }
+
     /* Custom browser wallpaper background */
     --uc-browser-wallpaper: url("../icons/wallpaper/main-image-1.jpg"); /* Wallpaper image path */
     @media -moz-pref("uc.flex.browser-wallpaper-index", 0) {
@@ -306,55 +333,42 @@
     @media -moz-pref("uc.flex.browser-wallpaper-index", 9) {
         --uc-browser-wallpaper: url("../icons/wallpaper/main-image-9.jpg");
     }
-    
-    --uc-browser-wallpaper-transparency: 0.37; /* Default wallpaper mask transparency (lower = more visible) */
-    @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
-        --uc-browser-wallpaper-transparency: 0.62;
-    }
-    --uc-browser-wallpaper-contrast-offset: 0%; /* Default contrast level offset for wallpaper */
-    @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 0) {
-        --uc-browser-wallpaper-contrast-offset: -9%;
-    }
-    @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 1) {
-        --uc-browser-wallpaper-contrast-offset: -4.5%;
-    }
-    @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 3) {
-        --uc-browser-wallpaper-contrast-offset: 4.5%;
-    }
-    @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 4) {
-        --uc-browser-wallpaper-contrast-offset: 9%;
-    }
-    --uc-browser-wallpaper-contrast: calc(
-        82% + var(--uc-browser-wallpaper-contrast-offset)
-    ); /* Base wallpaper contrast value */
 
-    --uc-browser-wallpaper-dark-mask: 0, 0, 0;
-    --uc-browser-wallpaper-light-mask: 255, 255, 255;
-    @media -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
-        --uc-browser-wallpaper-dark-mask: 30, 30, 47;
-        --uc-browser-wallpaper-light-mask: 249, 249, 251;
-        --uc-browser-wallpaper-transparency: 0.74;
-        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 0) {
-            --uc-browser-wallpaper-transparency: 0.98;
+    @media -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        --uc-browser-wallpaper-contrast-offset: 0%; /* Default contrast level offset for wallpaper */
+        @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 0) {
+            --uc-browser-wallpaper-contrast-offset: -9%;
         }
-        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 1) {
-            --uc-browser-wallpaper-transparency: 0.9;
+        @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 1) {
+            --uc-browser-wallpaper-contrast-offset: -4.5%;
         }
-        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 3) {
-            --uc-browser-wallpaper-transparency: 0.64;
+        @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 3) {
+            --uc-browser-wallpaper-contrast-offset: 4.5%;
         }
-        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 4) {
-            --uc-browser-wallpaper-transparency: 0;
+        @media -moz-pref("uc.flex.browser-wallpaper-contrast-level", 4) {
+            --uc-browser-wallpaper-contrast-offset: 9%;
         }
-    }
+        --uc-browser-wallpaper-contrast: calc(
+            82% + var(--uc-browser-wallpaper-contrast-offset)
+        ); /* Base wallpaper contrast value */
 
-    @media not -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
+        --uc-browser-wallpaper-dark-mask: 0, 0, 0;
+        --uc-browser-wallpaper-light-mask: 255, 255, 255;
+        --uc-browser-wallpaper-transparency: 0.37; /* Default wallpaper mask transparency (lower = more visible) */
+        @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
+            --uc-browser-wallpaper-transparency: 0.62;
+        }
+        --uc-urlbar-backdrop-transparency: 0.75;
+        --uc-menupopup-backdrop-transparency: 0.4;
+
         @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 0) {
             --uc-browser-wallpaper-transparency: 0.69;
             --uc-browser-wallpaper-contrast: calc(91% + var(--uc-browser-wallpaper-contrast-offset));
             @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
                 --uc-browser-wallpaper-transparency: 0.8;
             }
+            --uc-urlbar-backdrop-transparency: 0.95;
+            --uc-menupopup-backdrop-transparency: 0.75;
         }
         @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 1) {
             --uc-browser-wallpaper-transparency: 0.44;
@@ -362,6 +376,8 @@
             @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
                 --uc-browser-wallpaper-transparency: 0.67;
             }
+            --uc-urlbar-backdrop-transparency: 0.85;
+            --uc-menupopup-backdrop-transparency: 0.5;
         }
         @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 3) {
             --uc-browser-wallpaper-transparency: 0.31;
@@ -369,6 +385,8 @@
             @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
                 --uc-browser-wallpaper-transparency: 0.58;
             }
+            --uc-urlbar-backdrop-transparency: 0.7;
+            --uc-menupopup-backdrop-transparency: 0.35;
         }
         @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 4) {
             --uc-browser-wallpaper-transparency: 0.08;
@@ -376,26 +394,28 @@
             @media (prefers-color-scheme: light), (-moz-content-prefers-color-scheme: light) {
                 --uc-browser-wallpaper-transparency: 0.49;
             }
+            --uc-urlbar-backdrop-transparency: 0.5;
+            --uc-menupopup-backdrop-transparency: 0.15;
+        }
+
+        @media -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
+            --uc-browser-wallpaper-dark-mask: 30, 30, 47;
+            --uc-browser-wallpaper-light-mask: 249, 249, 251;
+            --uc-browser-wallpaper-transparency: 0.74;
+            @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 0) {
+                --uc-browser-wallpaper-transparency: 0.98;
+            }
+            @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 1) {
+                --uc-browser-wallpaper-transparency: 0.9;
+            }
+            @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 3) {
+                --uc-browser-wallpaper-transparency: 0.64;
+            }
+            @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 4) {
+                --uc-browser-wallpaper-transparency: 0;
+            }
         }
     }
-
-    /* Mica backdrop mask transparency */
-    --uc-browser-mica-transparency: 0.25;
-    @media -moz-pref("uc.flex.browser-mica-transparency-level", 0) {
-        --uc-browser-mica-transparency: 0.6;
-    }
-    @media -moz-pref("uc.flex.browser-mica-transparency-level", 1) {
-        --uc-browser-mica-transparency: 0.35;
-    }
-    @media -moz-pref("uc.flex.browser-mica-transparency-level", 3) {
-        --uc-browser-mica-transparency: 0.2;
-    }
-    @media -moz-pref("uc.flex.browser-mica-transparency-level", 4) {
-        --uc-browser-mica-transparency: 0;
-    }
-
-    /* Popup menu backdrop transparency */
-    --uc-menupopup-backdrop-transparency: calc(var(--uc-browser-mica-transparency) + 0.15);
 
     /** 
      * These variables must stay in sync with the identical ones in uc-sidebery.css.

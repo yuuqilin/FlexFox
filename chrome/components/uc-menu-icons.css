@@ -35,6 +35,22 @@
         -moz-context-properties: fill, fill-opacity;
         fill: var(--uc-popup-menu-icon-color);
     }
+    #appMenu-empty-profiles-button {
+        background-image: url(chrome://browser/skin/fxa/avatar-empty.svg);
+        background-position: left calc(3px + var(--uc-appMenu-zoom-controls-x-offset)) center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        -moz-context-properties: fill, fill-opacity;
+        fill: var(--uc-popup-menu-icon-color);
+    }
+    #appMenu-profiles-button {
+        background-image: url(chrome://browser/skin/fxa/avatar.svg);
+        background-position: left calc(3px + var(--uc-appMenu-zoom-controls-x-offset)) center;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        -moz-context-properties: fill, fill-opacity;
+        fill: var(--uc-popup-menu-icon-color);
+    }
     .syncNowBtn {
         visibility: visible !important;
         -moz-box-ordinal-group: 0 !important;
@@ -103,6 +119,11 @@
     menuitem[data-l10n-id="text-action-select-all"] {
         background-image: url("../icons/menu/select-all-on.svg");
         background-position-x: 15.5px !important;
+    }
+    #context-add-engine {
+        background-image: url("../icons/menu/context-add-engine.svg");
+        background-position-x: 14px;
+        background-size: 18px;
     }
     #spell-check-enabled {
         background-image: url("../icons/menu/spellcheck.svg");

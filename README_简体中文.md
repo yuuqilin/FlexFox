@@ -18,9 +18,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ![启用 Mica 效果并显示卡片式网页内容的 FlexFox](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/a-blue-and-purple-background-with-wavy-shapes.webp) 
 
-## 🆕 更新内容
-
-**🧊 v4.0.0 – 主要功能更新**
+## **🧊 v4.0.0 – 主要功能更新**
 * 支持 Windows 11 的 **Mica 背景效果**。
   * 要启用 Mica，必须在 `about:config` 中设置以下项目：
     ```
@@ -75,6 +73,20 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
   * 启用后，会将 Sidebery 与原生垂直标签页使用的展开/折叠动画速度应用到导航栏和书签工具栏，统一所有动画速度。
   * 动画速度统一后，也可以使用 `uc.flex.sidebery-fast-hover-expand` 或 `uc.flex.sidebery-slow-hover-expand` 来调整导航栏和书签工具栏的动画速度。
   * 启用 Mica 或自定义壁纸时，FlexFox 会在内部自动统一动画速度，此时无需手动设置这个选项。
+
+## 🆕 更新内容
+
+**🦊 v4.0.1**
+* 使用 Mica 背景或自定义壁纸，并启用 `browser.tabs.allow_transparent_browser` 选项时：
+  * 为“设置”、“附加组件管理器”和“新标签页”等内建页面添加了半透明背景。  
+
+    <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/translucent-about-preferences.webp" alt="“设置”页面（`about:preferences`）应用了半透明背景效果" width="96%" />
+
+  * 启用了地址栏下拉菜单和查找栏的背景模糊效果。
+  * 在自定义壁纸模式下，下拉菜单在整个区域（包括导航栏上方）都能正确显示模糊效果。
+* 自定义壁纸模式下，菜单的透明度现在会根据 `uc.flex.browser-wallpaper-transparency-level` 的设置进行变化，与壁纸保持一致的透明效果。
+* 为应用菜单和右键菜单中原本缺少图标的3个项目补充了图标。
+* 修复 Firefox Nightly v143 中由于选择器变更导致地址栏样式失效的问题（[Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)）。
 
 <a id="updates-top-start"></a>
 <details>
@@ -150,8 +162,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 你可以通过将以下变量从 `uc-variables.css` 复制到 `uc-user-settings.css`，进一步调整显示效果：
 
   ```css
-  --uc-web-content-margin-small
-  --uc-web-content-margin-large
+  --uc-web-content-margin
   --uc-web-content-radius-box
   ```
 
@@ -422,7 +433,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 #### ✅ FlexFox 样式所需配置
 
 | 配置选项 | 值 | 说明 |
-|----------|------|----------|
+|----------|:------:|----------|
 | `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` | 启用 `userChrome.css` 文件，以支持自定义样式。 |
 | `svg.context-properties.content.enabled` | `true` | 允许图标颜色根据亮／暗主题自动调整。 |
 | `sidebar.visibility` | `always-show` | 启用 FlexFox 的垂直标签页自动折叠功能和布局（在垂直标签页模式下生效）。也可以在侧栏设置中取消勾选 **“悬停时展开侧栏”** 来应用此设置。 |
@@ -430,7 +441,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 #### 🪄 添加或启用选项
 
 | 配置选项 | 值 | 说明 |
-|----------|------|----------|
+|----------|:------:|----------|
 | `uc.flex.add-ui-text-stroke` | `true` | 为界面文字添加粗描边，提高低分辨率屏幕下的可读性。 |
 | `uc.flex.fully-hide-sidebery` | `true` | 完全隐藏 Sidebery 和原生垂直标签页，将鼠标移至屏幕边缘时自动显示。 |
 | `uc.flex.fully-hide-toolbox` | `true` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
@@ -449,7 +460,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 #### 🚫 停用或还原选项
 
 | 配置选项 | 值 | 说明 |
-|----------|------|----------|
+|----------|:------:|----------|
 | `uc.flex.disable-flexfox` | `true` | 无需重启 Firefox 即可停用所有 FlexFox 样式和功能。 |
 | `uc.flex.skip-loading-uc-*.css`  | `true` | 跳过加载 `./components/` 和 `./content/` 中的特定 `uc-*.css` 文件。例如将 `uc.flex.skip-loading-uc-newtab.css` 设置为 true 时，将不会加载 `./content/uc-newtab.css` 文件。 |
 | `uc.flex.disable-bookmarks-autohide` | `true` | 停用书签工具栏的自动隐藏功能。 |
@@ -467,7 +478,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 #### 🪛 修改或调整选项
 
 | 配置选项 | 值 | 说明 |
-|----------|------|----------|
+|----------|:------:|----------|
 | `uc.flex.increase-sidebery-expanded-width` | `true` | 增加 Sidebery 展开时的宽度；启用 `uc.flex.disable-sidebery-autohide` 或激活 `Lock Sidebery` 时，也会同步增加原生垂直标签页的展开宽度。 |
 | `uc.flex.increase-navbar-height` | `true` | 恢复旧版 FlexFox 中使用的较厚导航栏高度。此更改会覆盖当前默认值（与 Firefox 原始的紧凑高度一致）。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
@@ -477,23 +488,23 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.sidebery-slow-hover-expand` | `true` | 减慢 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | 将导航栏和书签栏的动画速度统一为 Sidebery／垂直标签页的速度。启用 Mica 或壁纸时自动生效。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | `4`-`6` | 设置原生垂直标签页中每列可显示的固定标签页数量上限（可选值为数值，范围 4–6）。超过该值时将出现滚动条，可根据使用习惯进行调整。 |
-| `uc.flex.findbar-position` | `top-center-left`/<br>`top-right`/<br>`bottom-right` | 设置查找栏的位置。可选值为字符串：`"top-center-left"` 或 `"1"`（顶部左侧），`"top-right"` 或 `"2"`（右上角），`"bottom-right"` 或 `"3"`（右下角）。 |
-| `uc.flex.menu-item-spacing` | `small`/<br>`medium`/<br>`large` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `"1"` 或 `"small"`（较小间距）、`"2"` 或 `"medium"`（默认间距）、`"3"` 或 `"large"`（较大间距）。 |
+| `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 设置查找栏的位置。可选值为字符串：`'top-center-left'` 或 `'1'`（顶部左侧），`'top-right'` 或 `'2'`（右上角），`'bottom-right'` 或 `'3'`（右下角）。 |
+| `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `'1'` 或 `'small'`（较小间距）、`'2'` 或 `'medium'`（默认间距）、`'3'` 或 `'large'`（较大间距）。 |
 
 #### 🧊 视觉背景和 Mica 效果
 
 | 配置选项 | 值 | 说明 |
-|----------|------|----------|
+|----------|:------:|----------|
 | `widget.windows.mica` | `true` | 启用 Firefox 原生的 Mica 背景效果。需将主题设置为 `系统主题 — 自动` 才能生效。此功能仅在 Windows 11 系统中可用。如果当前系统不支持 Mica，可使用 `uc.flex.browser-wallpaper-enabled` 来模拟类似效果。 |
-| `widget.windows.mica.popups` | `1`/`2` | 为弹出菜单启用 Mica 背景效果。可设置为 `0`（关闭）、`1`（开启）或 `2`（自动）。 |
+| `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | 为弹出菜单启用 Mica 背景效果。可设置为 `0`（关闭）、`1`（开启）或 `2`（自动）。 |
 | `widget.windows.mica.toplevel-backdrop` | `2` | 指定要使用的 Mica 背景类型：`0`（自动或不使用）、`1`: Mica、`2`: Acrylic、`3`: Mica Alt。FlexFox 是基于该选项设为 `2`: Acrylic 的前提进行设计的。 |
 | `browser.tabs.allow_transparent_browser` | `true` | 允许 Sidebery 和网页内容背景透明，可显示 Mica 或壁纸效果。**更改后需重启 Firefox 才会生效。** 若要实现网页内容透明，需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展。若部分网页因透明而难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。 |
-| `uc.flex.browser-mica-transparency-level` | `0`-`4` | 调整浏览器 Mica 背景遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，背景越清晰。Firefox 默认值为 0，而 FlexFox 的默认值为 2。 |
+| `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | 调整浏览器 Mica 背景遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，背景越清晰。Firefox 默认值为 0，而 FlexFox 的默认值为 2。 |
 | `uc.flex.browser-wallpaper-enabled` | `true` | 启用 Firefox 浏览器背景的自定义壁纸。此功能会套用 Acrylic 风格的模糊效果，用于模拟原生 Mica 效果。适用于系统不支持 Mica，或希望始终显示固定背景的情况。但请注意，模拟效果无法与原生 Mica 完全一致。 |
-| `uc.flex.browser-wallpaper-index` | `1`-`9` | 设置使用哪一张编号图片作为浏览器背景。该选项为数值类型，可设置为 1 到 9。每个数值对应使用 `../icons/wallpaper/` 文件夹中的 `main-image-1.jpg` 到 `main-image-9.jpg` 文件。|
+| `uc.flex.browser-wallpaper-index` | `1`-`9`<br>(`1`) | 设置使用哪一张编号图片作为浏览器背景。该选项为数值类型，可设置为 1 到 9。每个数值对应使用 `../icons/wallpaper/` 文件夹中的 `main-image-1.jpg` 到 `main-image-9.jpg` 文件。|
 | `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | 禁用自定义壁纸背景的 Acrylic 模糊效果。 |
-| `uc.flex.browser-wallpaper-transparency-level` | `0`-`4` | 调整浏览器壁纸遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，壁纸越清晰。该设置旨在与 Mica 背景的透明度效果保持视觉一致。FlexFox 的默认值为 2。 |
-| `uc.flex.browser-wallpaper-contrast-level` | `0`-`4` | 在深色模式下启用 Acrylic 模糊效果时，用于调整浏览器壁纸的对比度。可设置的数值范围为 0 到 4，数值越高对比度越强。FlexFox 默认值为 2。 |
+| `uc.flex.browser-wallpaper-transparency-level` | `0`-`4`<br>(`2`) | 调整浏览器壁纸遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，壁纸越清晰。该设置旨在与 Mica 背景的透明度效果保持视觉一致。FlexFox 的默认值为 2。 |
+| `uc.flex.browser-wallpaper-contrast-level` | `0`-`4`<br>(`2`) | 在深色模式下启用 Acrylic 模糊效果时，用于调整浏览器壁纸的对比度。可设置的数值范围为 0 到 4，数值越高对比度越强。FlexFox 默认值为 2。 |
 
 ## 🐞 已知问题
 
