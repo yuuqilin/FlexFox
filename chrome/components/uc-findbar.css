@@ -199,7 +199,8 @@ findbar {
 /* Modified from https://github.com/ravindUwU/firefox-refined-findbar/blob/main/src/refined-findbar.scss */
 /* aecb463 */
 
-findbar[hidden="true"] {
+/* !v143 */
+findbar:where([hidden="true"], [hidden=""]) {
     animation: findbar-scale-out 0.1s;
 }
 findbar checkbox,

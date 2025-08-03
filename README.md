@@ -76,14 +76,25 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v4.0.2**
+**🦊 v4.0.3**
+* Fixed layout issues caused by changes in Nightly v143, including misaligned theme background when the menu bar is enabled and incorrect sidebar stripe positioning when `uc.flex.disable-bookmarks-autohide` is set. [Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
+* Restored sidebar stripe color in horizontal tab mode, which was lost due to changes in Firefox 141 Beta 2. [Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
+
+<!-- END What's New -->
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
+
+<!-- END Release Note -->
+
+**v4.0.2**
 * Fixed an issue caused by changes in Nightly v143 that prevented colored bookmark subfolder icons from displaying properly. [Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
 * Restored the bottom separator for collapsed vertical tabs, which was missing due to changes in Nightly v143. [Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
 * Corrected a visual alignment issue with collapsed vertical tabs introduced in Nightly v143. Tabs and icons were slightly offset to the left and no longer centered. [Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
 
-<!-- END What's New -->
-
-**🦊 v4.0.1**
+**v4.0.1**
 * When using a Mica backdrop or custom wallpaper with `browser.tabs.allow_transparent_browser` enabled:
   * Added translucent backgrounds for built-in pages like **Settings**, **Add-ons Manager**, and **New Tab**.  
 
@@ -94,13 +105,6 @@ It's not just a new look, it's a better way to browse.
 * In custom wallpaper mode, menu transparency now follows the `uc.flex.browser-wallpaper-transparency-level` setting, keeping it consistent with the wallpaper's transparency level.
 * Added icons to three previously unthemed items in the App Menu and context menus.
 * Fixed a styling issue with the address bar caused by a selector change in Firefox Nightly v143 ([Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)).
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
-
-<!-- END Release Note -->
 
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))

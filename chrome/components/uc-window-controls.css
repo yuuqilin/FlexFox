@@ -35,22 +35,28 @@
 
 /* Adjust menubar (title bar) height */
 :root:is([tabsintitlebar], [customtitlebar]):not([customizing]):not([inFullscreen]) {
-    #navigator-toolbox #toolbar-menubar[autohide="false"] {
+    /* !v143 */
+    #navigator-toolbox #toolbar-menubar:not([autohide="true"]):not([autohide=""]) {
         margin-top: 0px;
         margin-bottom: -7px;
     }
 
-    #navigator-toolbox #toolbar-menubar[autohide="false"] > .titlebar-buttonbox-container {
+    /* !v143 */
+    #navigator-toolbox #toolbar-menubar:not([autohide="true"]):not([autohide=""]) > .titlebar-buttonbox-container {
         margin-top: -7px;
         margin-bottom: 0px;
     }
 
-    #navigator-toolbox #toolbar-menubar[autohide="true"]:not([inactive="true"]) {
+    /* !v143 */
+    #navigator-toolbox #toolbar-menubar:where([autohide="true"], [autohide=""]):not([inactive="true"]) {
         margin-top: 0px;
         margin-bottom: -23px;
     }
 
-    #navigator-toolbox #toolbar-menubar[autohide="true"]:not([inactive="true"]) > .titlebar-buttonbox-container {
+    /* !v143 */
+    #navigator-toolbox
+        #toolbar-menubar:where([autohide="true"], [autohide=""]):not([inactive="true"])
+        > .titlebar-buttonbox-container {
         margin-top: -7px;
         margin-bottom: 0px;
     }
@@ -257,7 +263,8 @@
          * i.e. it is set to "Always Show", or set to "Only Show on New Tab" and the current tab is a New Tab,
          * move Sidebery upward if it is active. 
          */
-        #navigator-toolbox:has(#PersonalToolbar[collapsed="false"])
+        /* !v143 */
+        #navigator-toolbox:has(#PersonalToolbar:not([collapsed="true"]):not([collapsed=""]))
             + #browser
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
             /*
@@ -281,7 +288,8 @@
              * i.e. it is set to "Never Show", or set to "Only Show on New Tab" and the current tab is not a New Tab,
              * no upward offset is needed for #sidebar-main.
              */
-            #navigator-toolbox:has(#PersonalToolbar[collapsed="true"]) + #browser {
+            /* !v143 */
+            #navigator-toolbox:has(#PersonalToolbar:where([collapsed="true"], [collapsed=""])) + #browser {
                 #sidebar-main {
                     margin-top: 0;
                 }

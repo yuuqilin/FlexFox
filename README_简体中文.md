@@ -76,13 +76,21 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v4.0.2**
+**🦊 v4.0.3**
+* 修复了 Nightly v143 引起的布局问题，包括启用菜单栏时主题背景图错位，以及启用 `uc.flex.disable-bookmarks-autohide` 后侧边栏条纹位置错误的问题。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
+* 修复了 Firefox 141 Beta 2 的变动导致水平标签页模式下侧边栏条纹颜色消失的问题。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
 
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>历史更新</b></summary>
+
+**v4.0.2**
 * 修复了 Nightly v143 的变动导致书签子文件夹的彩色图标无法正常显示的问题。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
 * 修复了 Nightly v143 的变动导致垂直标签页在折叠状态下底部分隔线丢失的问题。[Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
 * 修复了 Nightly v143 的变动引起的垂直标签页在折叠状态下显示错位的问题（标签页和图标未能居中，整体偏向左侧）。[Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
 
-**🦊 v4.0.1**
+**v4.0.1**
 * 使用 Mica 背景或自定义壁纸，并启用 `browser.tabs.allow_transparent_browser` 选项时：
   * 为“设置”、“附加组件管理器”和“新标签页”等内建页面添加了半透明背景。  
 
@@ -93,11 +101,6 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 * 自定义壁纸模式下，菜单的透明度现在会根据 `uc.flex.browser-wallpaper-transparency-level` 的设置进行变化，与壁纸保持一致的透明效果。
 * 为应用菜单和右键菜单中原本缺少图标的3个项目补充了图标。
 * 修复 Firefox Nightly v143 中由于选择器变更导致地址栏样式失效的问题（[Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)）。
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>历史更新</b></summary>
 
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))

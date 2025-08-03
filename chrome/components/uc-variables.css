@@ -613,7 +613,11 @@
     }
     /* When the menu bar is enabled, window control spacing is not needed. */
     &:not([inFullscreen]) {
-        #toolbar-menubar:is([autohide="false"], [autohide="true"]:not([inactive="true"])) ~ #nav-bar {
+        /* !v143 */
+        #toolbar-menubar:not([autohide="true"]):not([autohide=""]) ~ #nav-bar {
+            --uc-nav-bar-padding-right: 0px;
+        }
+        #toolbar-menubar:where([autohide="true"], [autohide=""]):not([inactive="true"]) ~ #nav-bar {
             --uc-nav-bar-padding-right: 0px;
         }
     }
@@ -1105,18 +1109,22 @@
             --uc-theme-bg-y-offset: 3px;
         }
         --uc-theme-bg-y-clip: calc(-25px - var(--uc-theme-bg-y-offset) + var(--uc-sb-theme-bg-y-offset, 0px));
-        #toolbar-menubar[autohide="false"] ~ & {
+        /* !v143 */
+        #toolbar-menubar:not([autohide="true"]):not([autohide=""]) ~ & {
             --uc-theme-bg-y-clip: calc(-46px - (2 * var(--uc-theme-bg-y-offset)) + var(--uc-sb-theme-bg-y-offset, 0px));
         }
-        #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+        /* !v143 */
+        #toolbar-menubar:where([autohide="true"], [autohide=""]):not([inactive]) ~ & {
             --uc-theme-bg-y-clip: calc(-46px - var(--uc-theme-bg-y-offset) + var(--uc-sb-theme-bg-y-offset, 0px));
         }
         @media -moz-pref("sidebar.verticalTabs") {
             --uc-theme-bg-y-clip: calc(27px + var(--uc-theme-bg-y-offset));
-            #toolbar-menubar[autohide="false"] ~ & {
+            /* !v143 */
+            #toolbar-menubar:not([autohide="true"]):not([autohide=""]) ~ & {
                 --uc-theme-bg-y-clip: calc(48px + 2 * var(--uc-theme-bg-y-offset));
             }
-            #toolbar-menubar[autohide="true"]:not([inactive]) ~ & {
+            /* !v143 */
+            #toolbar-menubar:where([autohide="true"], [autohide=""]):not([inactive]) ~ & {
                 --uc-theme-bg-y-clip: calc(44px + var(--uc-theme-bg-y-offset));
             }
         }

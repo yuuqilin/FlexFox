@@ -113,7 +113,8 @@
             max-height: 100%;
             max-width: 100%;
             min-width: var(--uc-sb-sidebar-hover-width);
-            background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color));
+            /* !v142 */
+            background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
             background-image: initial;
             transition:
                 border-bottom var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
@@ -146,7 +147,8 @@
             max-width: var(--uc-sb-sidebar-width);
             overflow: hidden;
             padding: 0 !important;
-            background-color: var(--uc-sb-sidebar-header-stripe);
+            /* !v142 */
+            background-color: var(--uc-sb-sidebar-header-stripe) !important;
             background-image: var(--uc-gradient-highlight, initial);
             will-change: min-height, max-height, min-width, overflow, background-color, opacity;
             transition:
@@ -217,7 +219,8 @@
                 max-width: var(--uc-sidebar-stripe-width);
                 overflow: hidden;
                 padding: 0 !important;
-                background-color: var(--uc-sb-sidebar-header-stripe);
+                /* !v142 */
+                background-color: var(--uc-sb-sidebar-header-stripe) !important;
                 background-image: var(--uc-gradient-highlight, inherit);
                 opacity: 1;
                 will-change: min-height, max-height, min-width, overflow, background-color, opacity;
@@ -246,7 +249,8 @@
                     max-width: var(--uc-sidebar-stripe-width);
                     overflow: hidden;
                     padding: 0 !important;
-                    background-color: var(--uc-sb-sidebar-header-stripe);
+                    /* !v142 */
+                    background-color: var(--uc-sb-sidebar-header-stripe) !important;
                     background-image: var(--uc-gradient-highlight, inherit);
                     opacity: 1;
                     will-change: min-height, max-height, min-width, overflow, background-color, opacity;

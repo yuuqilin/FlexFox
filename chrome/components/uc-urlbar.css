@@ -178,7 +178,8 @@
 }
 
 /* Show URL buttons on Hover */
-#nav-bar:not([customizing="true"])
+/* !v143 */
+#nav-bar:not([customizing="true"]):not([customizing=""])
     > #nav-bar-customization-target
     > #urlbar-container:not(:hover)
     > #urlbar:not([focused])

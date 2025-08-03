@@ -76,12 +76,21 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v4.0.2**
+**🦊 v4.0.3**
+* Nightly v143 の変更によって発生していたレイアウトの不具合を修正しました。メニューバー有効時の背景画像のズレ、および `uc.flex.disable-bookmarks-autohide` を有効にした際のサイドバーのストライプの位置ズレが含まれます。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
+* Firefox 141 Beta 2 の変更により水平タブモードで消えていたサイドバーのストライプ色を復元しました。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
+
+**v4.0.2**
 * Nightly v143 の仕様変更により、ブックマークのサブフォルダーに設定したカラーアイコンが表示されなくなっていた問題を修正しました。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
 * Nightly v143 の変更によって非表示になっていた、折りたたみ状態の垂直タブ下部のセパレーターを復元しました。[Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
 * Nightly v143 の変更により発生していた、折りたたみ状態の垂直タブの表示位置ズレを修正しました（タブやアイコンが中央から左にずれて表示されていた問題）。[Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
 
-**🦊 v4.0.1**
+**v4.0.1**
 * `browser.tabs.allow_transparent_browser` を有効にした状態で Mica バックドロップまたはカスタム壁紙を使用している場合：
   * 「設定」「アドオンマネージャー」「新しいタブ」などの組み込みページに半透明の背景を追加。  
 
@@ -92,11 +101,6 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 * カスタム壁紙モード時のメニューの透明度が `uc.flex.browser-wallpaper-transparency-level` の設定値に従うようになり、壁紙の透明度と一致するようになりました。
 * アプリメニューおよびコンテキストメニューで、これまでアイコンがなかった3項目にアイコンを追加。
 * Firefox Nightly v143 の仕様変更により、アドレスバーのスタイルが適用されなくなっていた問題を修正（[Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)）。
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
 
 以前のバージョンの更新履歴については  
 👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
