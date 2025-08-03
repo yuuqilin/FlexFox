@@ -76,6 +76,11 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
+**🦊 v4.0.2**
+* Nightly v143 の仕様変更により、ブックマークのサブフォルダーに設定したカラーアイコンが表示されなくなっていた問題を修正しました。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
+* Nightly v143 の変更によって非表示になっていた、折りたたみ状態の垂直タブ下部のセパレーターを復元しました。[Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
+* Nightly v143 の変更により発生していた、折りたたみ状態の垂直タブの表示位置ズレを修正しました（タブやアイコンが中央から左にずれて表示されていた問題）。[Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
+
 **🦊 v4.0.1**
 * `browser.tabs.allow_transparent_browser` を有効にした状態で Mica バックドロップまたはカスタム壁紙を使用している場合：
   * 「設定」「アドオンマネージャー」「新しいタブ」などの組み込みページに半透明の背景を追加。  

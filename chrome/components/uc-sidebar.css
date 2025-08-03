@@ -817,16 +817,6 @@
         }
     }
 
-    #sidebar-tools-and-extensions-splitter {
-        margin-block-end: 0 !important;
-        display: var(--uc-sb-sroot-splitter-display, block) !important;
-        border-width: 0 0 !important;
-        border-color: transparent !important;
-        &:not(:hover) {
-            background-color: transparent !important;
-        }
-    }
-
     /* Remove native vertical tabs when Sidebery is active. */
     #sidebar-main #vertical-tabs {
         display: var(--uc-sb-sidebar-stripe-display, flex) !important;
@@ -1298,6 +1288,25 @@
             }
         }
     }
+    /* Restore the pre-v143 bottom border for vertical tabs separator.
+       In v143, this border was hidden to fix the double-separator issue. */
+    #tabbrowser-tabs[orient="vertical"]:not([expanded])[overflow]::after {
+        @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
+            border-color: color-mix(in srgb, currentColor 25%, transparent) !important;
+        }
+    }
+    /* Our own fix to avoid the double separator at the bottom of vertical tabs.
+       Hiding this line (instead of the one above) more closely replicates pre-v140 behavior. */
+    #sidebar-tools-and-extensions-splitter {
+        margin-block-end: 0 !important;
+        display: var(--uc-sb-sroot-splitter-display, block) !important;
+        border-width: 0 0 !important;
+        border-color: transparent !important;
+        &:not(:hover) {
+            background-color: transparent !important;
+        }
+    }
+
     @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
         /**
          * Controls how many rows of pinned tab icons can be shown in vertical tab panel.
@@ -1475,7 +1484,11 @@
 
     /* ── ◀️ Styles for verticalTabs when the sidebar is collapsed */
     #tabbrowser-tabs[orient="vertical"]:not([expanded]) {
-        --tab-inline-padding: calc((var(--tab-collapsed-width) - var(--icon-size-default)) / 2 - 0.5px) !important;
+        /* In v143, the `--icon-size-default` variable was renamed to `--icon-size`.
+           This fallback will no longer be needed in versions v143 and later. */
+        --tab-inline-padding: calc(
+            (var(--tab-collapsed-width) - var(--icon-size-default, var(--icon-size))) / 2 - 0.5px
+        ) !important;
         --tab-collapsed-width: var(--uc-sidebar-stripe-width) !important;
         width: var(--uc-sidebar-stripe-width) !important;
         .tab-background {

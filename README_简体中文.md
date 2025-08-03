@@ -76,6 +76,12 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
+**🦊 v4.0.2**
+
+* 修复了 Nightly v143 的变动导致书签子文件夹的彩色图标无法正常显示的问题。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
+* 修复了 Nightly v143 的变动导致垂直标签页在折叠状态下底部分隔线丢失的问题。[Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
+* 修复了 Nightly v143 的变动引起的垂直标签页在折叠状态下显示错位的问题（标签页和图标未能居中，整体偏向左侧）。[Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
+
 **🦊 v4.0.1**
 * 使用 Mica 背景或自定义壁纸，并启用 `browser.tabs.allow_transparent_browser` 选项时：
   * 为“设置”、“附加组件管理器”和“新标签页”等内建页面添加了半透明背景。  

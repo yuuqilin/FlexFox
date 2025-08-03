@@ -69,17 +69,21 @@
              * Currently, the icon element is .menu-iconic-icon.
              * From v140+, .menu-icon will be used instead and .menu-iconic-icon can be removed.
              */
+            /* Use the direct descendant selector to ensure only subfolders' own .menu-icon gets the folder icon.
+               This prevents non-folder bookmark items from being mistakenly replaced with a folder icon. */
             .menu-iconic.bookmark-item[container] {
-                .menu-icon,
-                .menu-iconic-left .menu-iconic-icon {
-                    list-style-image: var(--uc-bookmark-sub-folder-icon) !important;
+                > .menu-icon,
+                > .menu-iconic-left .menu-iconic-icon {
+                    /* Starting in v143, bookmark folder icons use HTML <img> elements instead of XUL.
+                       Since <img> does not support `list-style-image`, switch to using `content` instead. */
+                    content: var(--uc-bookmark-sub-folder-icon) !important;
                 }
                 &[open] {
                     /* Use the direct child selector (">") to ensure only *open* subfolders get the open-state icon.
                    Other folder icons that are not direct children will not be affected. */
                     > .menu-icon,
                     > .menu-iconic-left .menu-iconic-icon {
-                        list-style-image: var(--uc-bookmark-sub-folder-open-icon) !important;
+                        content: var(--uc-bookmark-sub-folder-open-icon) !important;
                     }
                 }
             }
