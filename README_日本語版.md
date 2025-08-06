@@ -16,7 +16,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 カスタマイズ性の高いベースとして、理想のインターフェースを自由に作れます。  
 見た目を変えるだけではなく、ブラウジングの質そのものを高めるテーマです。  
 
-![Mica 効果とカード風に浮かぶウェブコンテンツを表示する FlexFox](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/a-blue-and-purple-background-with-wavy-shapes.webp) 
+![Mica 効果とカード風に浮かぶウェブコンテンツを表示する FlexFox](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/FlexFox-overview.webp) 
 
 ## **🧊 v4.0.0 – 主な機能アップデート**
 * Windows 11 の **Mica 背景効果** に対応しました。

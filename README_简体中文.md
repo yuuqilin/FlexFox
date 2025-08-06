@@ -16,7 +16,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 作为一个灵活的基础框架，FlexFox 让你自由定制浏览器界面，无需担心冗余或卡顿。  
 这不仅是一个外观主题，更是提升浏览效率的新方式。  
 
-![启用 Mica 效果并显示卡片式网页内容的 FlexFox](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/a-blue-and-purple-background-with-wavy-shapes.webp) 
+![启用 Mica 效果并显示卡片式网页内容的 FlexFox](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/FlexFox-overview.webp) 
 
 ## **🧊 v4.0.0 – 主要功能更新**
 * 支持 Windows 11 的 **Mica 背景效果**。

@@ -16,7 +16,7 @@ It cuts out visual noise, keeps the UI steady, and stays fast.
 Designed as a flexible base, it lets you shape your ideal interface without bloat.  
 It's not just a new look, it's a better way to browse.  
 
-![FlexFox with Mica effect and floating card-style web content](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/a-blue-and-purple-background-with-wavy-shapes.webp)   
+![FlexFox with Mica effect and floating card-style web content](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/FlexFox-overview.webp)   
 
 ## **🧊 v4.0.0 – Major Feature Update**
 * Added support for the **Mica visual effect** on Windows 11.
