@@ -366,6 +366,9 @@
 
     :root:-moz-window-inactive:not([customizing]) .titlebar-buttonbox > toolbarbutton:not(:hover) {
         list-style-image: url(../icons/window-controls/inactive.svg) !important;
+        .toolbarbutton-icon {
+            fill: none !important;
+        }
     }
 
     .titlebar-buttonbox {
@@ -398,15 +401,18 @@
         list-style-image: url(../icons/window-controls/maximize.svg) !important;
         grid-column: 1 !important;
         order: 1 !important;
+        fill: var(--uc-osx-ctrls-maximize-fill) !important;
     }
 
     :is(.titlebar-max, .uc-titlebar-max):hover {
         list-style-image: url(../icons/window-controls/maximize-hover.svg) !important;
+        stroke: var(--uc-osx-ctrls-maximize-stroke) !important;
     }
 
     :root:is([sizemode="maximized"], [inFullscreen]) :is(.titlebar-max, .uc-titlebar-max):hover,
     :is(.titlebar-restore, .uc-titlebar-restore):hover {
         list-style-image: url(../icons/window-controls/maximize-restore.svg) !important;
+        stroke: var(--uc-osx-ctrls-maximize-restore-stroke) !important;
     }
 
     .titlebar-min,
@@ -423,9 +429,11 @@
         list-style-image: url(../icons/window-controls/minimize.svg) !important;
         grid-column: 0 !important;
         order: 0 !important;
+        fill: var(--uc-osx-ctrls-minimize-fill) !important;
 
         &:hover {
             list-style-image: url(../icons/window-controls/minimize-hover.svg) !important;
+            stroke: var(--uc-osx-ctrls-minimize-stroke) !important;
         }
     }
 
@@ -443,9 +451,11 @@
         list-style-image: url(../icons/window-controls/close.svg) !important;
         grid-column: 2 !important;
         order: 2 !important;
+        fill: var(--uc-osx-ctrls-close-fill) !important;
 
         &:hover {
             list-style-image: url(../icons/window-controls/close-hover.svg) !important;
+            stroke: var(--uc-osx-ctrls-close-stroke) !important;
         }
     }
 }

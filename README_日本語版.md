@@ -66,7 +66,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
   * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([ダウンロード](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
 
 * Sidebery やウェブページに Mica や壁紙の背景を表示するには、`browser.tabs.allow_transparent_browser` を有効にしてください。
-  * ページの透明化には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 拡張機能が必要です。
+  * ページの透明化には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) または [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 拡張機能が必要です。
   * 背景が透けて読みにくくなる場合は [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) との併用がおすすめです。
 
 * 新オプション：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
@@ -76,14 +76,31 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v4.0.3**
-* Nightly v143 の変更によって発生していたレイアウトの不具合を修正しました。メニューバー有効時の背景画像のズレ、および `uc.flex.disable-bookmarks-autohide` を有効にした際のサイドバーのストライプの位置ズレが含まれます。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
-* Firefox 141 Beta 2 の変更により水平タブモードで消えていたサイドバーのストライプ色を復元しました。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
+**🦊 v4.0.4**
+* Nightly v143 の変更により、組み込みページの半透明背景が表示されなくなっていた問題を修正しました。 [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
+* v141 の変更により、テーマの背景画像がブックマークツールバーとナビゲーションバーの間でずれて、画像が途切れて見える問題を修正しました。 [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
+* ネイティブ垂直タブが折りたたみ状態のときに、タブのハイライトが中央に配置されない問題を修正しました。 #17
+* アドレスバーにフォーカスしたときの内側の陰影効果を調整しました。 #17
+* macOS 風ウィンドウ操作ボタンの色をカスタマイズできる変数を追加しました。 #17
+
+  ```css
+    --uc-osx-ctrls-close-fill
+    --uc-osx-ctrls-maximize-fill
+    --uc-osx-ctrls-minimize-fill
+    --uc-osx-ctrls-close-stroke
+    --uc-osx-ctrls-maximize-stroke
+    --uc-osx-ctrls-maximize-restore-stroke
+    --uc-osx-ctrls-minimize-stroke
+  ```
 
 <a id="updates-top-start"></a>
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v4.0.3**
+* Nightly v143 の変更によって発生していたレイアウトの不具合を修正しました。メニューバー有効時の背景画像のズレ、および `uc.flex.disable-bookmarks-autohide` を有効にした際のサイドバーのストライプの位置ズレが含まれます。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
+* Firefox 141 Beta 2 の変更により水平タブモードで消えていたサイドバーのストライプ色を復元しました。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
 
 **v4.0.2**
 * Nightly v143 の仕様変更により、ブックマークのサブフォルダーに設定したカラーアイコンが表示されなくなっていた問題を修正しました。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
@@ -502,7 +519,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `widget.windows.mica` | `true` | Firefox のネイティブな Mica 背景効果を有効にします。有効にするには、テーマを `システムテーマ — 自動` に設定する必要があります。この機能は Windows 11 環境でのみ利用可能です。お使いのシステムが Mica をサポートしていない場合は、`uc.flex.browser-wallpaper-enabled` を使って類似の効果を模倣できます。 |
 | `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | ポップアップメニューに Mica 背景効果を適用します。`0`（無効）、`1`（有効）、`2`（自動）を指定できます。 |
 | `widget.windows.mica.toplevel-backdrop` | `2` | 使用する Mica 背景の種類を指定します：`0`（自動または無効）、`1`: Mica、`2`: Acrylic、`3`: Mica Alt。FlexFox は `2`: Acrylic を前提として設計されています。 |
-| `browser.tabs.allow_transparent_browser` | `true` | Sidebery とウェブコンテンツの背景を透過させて、Mica や壁紙を表示できるようにします。**反映には Firefox の再起動が必要です。** ウェブページの透過には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) の導入が必要です。ページが読みにくくなった場合は、[Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) の併用を推奨します。 |
+| `browser.tabs.allow_transparent_browser` | `true` | Sidebery とウェブコンテンツの背景を透過させて、Mica や壁紙を表示できるようにします。**反映には Firefox の再起動が必要です。** ウェブページの透過には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) または [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) の導入が必要です。ページが読みにくくなった場合は、[Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) の併用を推奨します。 |
 | `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | ブラウザーの Mica バックドロップマスクの透明度を調整します。数値で設定でき、0 ～ 4 を指定します。値が大きいほど、マスクの効果が薄くなり背景がより明瞭に表示されます。Firefox のデフォルトは 0 で、FlexFox のデフォルトは 2 に設定されています。 |
 | `uc.flex.browser-wallpaper-enabled` | `true` | Firefox ブラウザーの背景にカスタム壁紙を表示します。この機能では、ネイティブの Mica 効果を模倣するアクリル風のぼかしが適用されます。Mica が使用できない環境や、常に同じ背景を表示したい場合に便利です。ただし、見た目は Mica と完全には一致しません。 |
 | `uc.flex.browser-wallpaper-index` | `1`-`9`<br>(`1`) | 番号付きの壁紙画像をブラウザーの背景として指定します。設定値は数値で、1 ～ 9 を指定できます。各値は、`../icons/wallpaper/` フォルダーにある `main-image-1.jpg` ～ `main-image-9.jpg` に対応します。|

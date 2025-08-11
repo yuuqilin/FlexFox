@@ -66,7 +66,7 @@ It's not just a new look, it's a better way to browse.
   * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([Download](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
 
 * To display Mica or wallpaper backgrounds behind Sidebery and web content, `browser.tabs.allow_transparent_browser` must be enabled.
-  * Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) extension.
+  * Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) or [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) extension.
   * If some pages become unreadable due to full transparency, pairing it with [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended.
 
 * New option: `uc.flex.sidebery-apply-expand-speed-to-toolbars`
@@ -76,9 +76,22 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v4.0.3**
-* Fixed layout issues caused by changes in Nightly v143, including misaligned theme background when the menu bar is enabled and incorrect sidebar stripe positioning when `uc.flex.disable-bookmarks-autohide` is set. [Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
-* Restored sidebar stripe color in horizontal tab mode, which was lost due to changes in Firefox 141 Beta 2. [Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
+**🦊 v4.0.4**
+* Fixed an issue in Nightly v143 where translucent backgrounds for built-in pages stopped working. [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
+* Fixed a problem introduced in v141 where the theme background image was misaligned between the Bookmarks Toolbar and Navigation Bar, causing a visible break. [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
+* Fixed an alignment issue where the tab highlight in collapsed native vertical tabs was not centered. #17
+* Adjusted the inner shadow effect when the address bar is focused. #17
+* Added new variables for customizing the colors of macOS-style window control buttons. #17
+
+  ```css
+    --uc-osx-ctrls-close-fill
+    --uc-osx-ctrls-maximize-fill
+    --uc-osx-ctrls-minimize-fill
+    --uc-osx-ctrls-close-stroke
+    --uc-osx-ctrls-maximize-stroke
+    --uc-osx-ctrls-maximize-restore-stroke
+    --uc-osx-ctrls-minimize-stroke
+  ```
 
 <!-- END What's New -->
 
@@ -88,6 +101,10 @@ It's not just a new look, it's a better way to browse.
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v4.0.3**
+* Fixed layout issues caused by changes in Nightly v143, including misaligned theme background when the menu bar is enabled and incorrect sidebar stripe positioning when `uc.flex.disable-bookmarks-autohide` is set. [Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
+* Restored sidebar stripe color in horizontal tab mode, which was lost due to changes in Firefox 141 Beta 2. [Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
 
 **v4.0.2**
 * Fixed an issue caused by changes in Nightly v143 that prevented colored bookmark subfolder icons from displaying properly. [Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
@@ -508,7 +525,7 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 | `widget.windows.mica` | `true` | Enables the native Mica backdrop in Firefox. Requires the theme to be set to `System theme — auto` to take effect. This feature is only available on Windows 11. If your system does not support Mica, you can use `uc.flex.browser-wallpaper-enabled` to simulate a similar effect. |
 | `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | Enables the Mica backdrop for popup menus. Accepts `0` (off), `1` (on), or `2` (auto). |
 | `widget.windows.mica.toplevel-backdrop` | `2` | Specifies the type of Mica backdrop to use: `0` (auto or none), `1`: Mica, `2`: Acrylic, `3`: Mica Alt. FlexFox is designed with the assumption that this option is set to `2`: Acrylic. |
-| `browser.tabs.allow_transparent_browser` | `true` | Enables background transparency for Sidebery and web content, allowing Mica or wallpaper to be displayed. **Takes effect after restarting Firefox.** Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) extension. If some pages become hard to read, using [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended. |
+| `browser.tabs.allow_transparent_browser` | `true` | Enables background transparency for Sidebery and web content, allowing Mica or wallpaper to be displayed. **Takes effect after restarting Firefox.** Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) or [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) extension. If some pages become hard to read, using [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended. |
 | `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | Adjusts the transparency level of the browser Mica backdrop mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. The default level in Firefox is 0, while FlexFox uses 2 as its default. |
 | `uc.flex.browser-wallpaper-enabled` | `true` | Enables a custom wallpaper as the Firefox browser background. This feature applies an acrylic-style blur to simulate the native Mica effect. It is useful when Mica is not available or when you prefer a consistent, always-visible background. Note that the visual effect may not be identical to native Mica. |
 | `uc.flex.browser-wallpaper-index` | `1`-`9`<br>(`1`) | Sets which numbered wallpaper image to use as the browser background. This numeric setting accepts values from 1 to 9. Each value corresponds to an image file named `main-image-1.jpg` through `main-image-9.jpg`, located in the `../icons/wallpaper/` folder. |

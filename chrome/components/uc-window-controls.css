@@ -195,6 +195,13 @@
         }
     }
 
+    /* Apply v141 fix [Bug 1971941] so pre-v141 builds match the new behavior */
+    #nav-bar {
+        #navigator-toolbox[tabs-hidden] > & {
+            border-top-style: none !important;
+        }
+    }
+
     /* Offset the navigator toolbox to account for the width of the vertical tabs */
     &:not([inFullscreen]) {
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {

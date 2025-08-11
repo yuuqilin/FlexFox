@@ -1496,7 +1496,7 @@
         --tab-collapsed-width: var(--uc-sidebar-stripe-width) !important;
         width: var(--uc-sidebar-stripe-width) !important;
         .tab-background {
-            margin-inline: 5px !important;
+            margin-inline: 5.5px !important;
         }
         .tab-close-button {
             width: 14px !important;

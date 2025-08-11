@@ -33,8 +33,13 @@
 
 #urlbar[focused] {
     border: 0 !important;
-    border-top: 1px solid var(--uc-urlbar-border-top, currentcolor) !important;
-    border-bottom: 1px solid var(--uc-urlbar-border-bottom, currentcolor) !important;
+    box-shadow:
+        inset 1px 1px 2px color-mix(in srgb, var(--toolbox-bgcolor) 70%, black),
+        inset -1px -1px 2px color-mix(in srgb, var(--toolbox-bgcolor) 85%, white);
+    /*
+    border-top: 1px solid var(--uc-urlbar-border-top, transparent) !important;
+    border-bottom: 1px solid var(--uc-urlbar-border-bottom, transparent) !important;
+    */
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
 }
 

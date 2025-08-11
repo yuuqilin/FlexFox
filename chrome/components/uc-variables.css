@@ -35,6 +35,7 @@
     /* 🔽 Start of color scheme definitions for FlexFox Theme */
     @media (prefers-color-scheme: dark) {
         --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
+        --uc-urlbar-outline: #414868; /* Outline color that appears when hovering over the URL bar */
 
         @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
@@ -48,7 +49,6 @@
                     --uc-urldrop-bg: #0d0d15; /* Background color of the expanded URL bar dropdown */
                     --uc-urlbar-border-top: #000; /* Top border color when the URL bar is focused */
                     --uc-urlbar-border-bottom: #404040; /* Bottom border color when the URL bar is focused */
-                    --uc-urlbar-outline: #414868; /* Outline color that appears when hovering over the URL bar */
 
                     --arrowpanel-background: var(
                         --uc-urlbar-bg
@@ -80,6 +80,7 @@
 
     @media (prefers-color-scheme: light) {
         --uc-bgcolor: #f1f5f9; /* Background color of the toolbar */
+        --uc-urlbar-outline: #94a3b8; /* Outline color that appears when hovering over the URL bar */
 
         @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
@@ -93,7 +94,6 @@
                     --uc-urldrop-bg: #cbd5e1; /* Background color of the expanded URL bar dropdown */
                     --uc-urlbar-border-top: #9ca3af; /* Top border color when the URL bar is focused */
                     --uc-urlbar-border-bottom: #fff; /* Bottom border color when the URL bar is focused */
-                    --uc-urlbar-outline: #94a3b8; /* Outline color that appears when hovering over the URL bar */
 
                     --arrowpanel-background: #e2e8f0 !important; /* Toolbar button dropdown background color */
 
@@ -442,10 +442,21 @@
         --uc-hover-toolbar-delay: 200ms;
     }
 
-    /* Size of macOS-style window control buttons */
+    /* Size and color of macOS-style window control buttons */
     @media not -moz-pref("uc.flex.revert-to-original-window-controls") {
         --uc-osx-ctrls-size: 15px;
     }
+    --uc-osx-ctrls-close-fill: #f25056;
+    --uc-osx-ctrls-maximize-fill: #39ea49;
+    /*
+    --uc-osx-ctrls-maximize-restore-fill: #39ea49;
+    */
+    --uc-osx-ctrls-minimize-fill: hsl(44, 95%, 63%);
+    --uc-osx-ctrls-close-stroke: #9f1d2b;
+    --uc-osx-ctrls-maximize-stroke: #0b7407;
+    --uc-osx-ctrls-maximize-restore-stroke: #0b7407;
+    --uc-osx-ctrls-minimize-stroke: hsl(32, 62%, 38%);
+
 
     /* Vertical spacing between items in the Firefox app menu (hamburger menu), bookmarks menu, and context menus. */
     --uc-app-menu-item-padding-block: 4px;
@@ -1118,14 +1129,14 @@
             --uc-theme-bg-y-clip: calc(-46px - var(--uc-theme-bg-y-offset) + var(--uc-sb-theme-bg-y-offset, 0px));
         }
         @media -moz-pref("sidebar.verticalTabs") {
-            --uc-theme-bg-y-clip: calc(27px + var(--uc-theme-bg-y-offset));
+            --uc-theme-bg-y-clip: calc(26px + var(--uc-theme-bg-y-offset));
             /* !v143 */
             #toolbar-menubar:not([autohide="true"]):not([autohide=""]) ~ & {
-                --uc-theme-bg-y-clip: calc(48px + 2 * var(--uc-theme-bg-y-offset));
+                --uc-theme-bg-y-clip: calc(47px + 2 * var(--uc-theme-bg-y-offset));
             }
             /* !v143 */
             #toolbar-menubar:where([autohide="true"], [autohide=""]):not([inactive]) ~ & {
-                --uc-theme-bg-y-clip: calc(44px + var(--uc-theme-bg-y-offset));
+                --uc-theme-bg-y-clip: calc(43px + var(--uc-theme-bg-y-offset));
             }
         }
     }

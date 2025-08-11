@@ -66,7 +66,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
   * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([下载](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
 
 * 要让 Sidebery 和网页内容显示 Mica 背景或壁纸，需要启用 `browser.tabs.allow_transparent_browser`。
-  * 页面透明效果需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展。
+  * 页面透明效果需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 或 [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 扩展。
   * 若部分页面显示为全透明导致难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。
 
 * 新增选项：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
@@ -76,14 +76,31 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v4.0.3**
-* 修复了 Nightly v143 引起的布局问题，包括启用菜单栏时主题背景图错位，以及启用 `uc.flex.disable-bookmarks-autohide` 后侧边栏条纹位置错误的问题。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
-* 修复了 Firefox 141 Beta 2 的变动导致水平标签页模式下侧边栏条纹颜色消失的问题。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
+**🦊 v4.0.4**
+* 修复了 Nightly v143 的变更导致内置页面半透明背景失效的问题。 [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
+* 修复了 v141 的变更导致主题背景图在书签工具栏和导航栏之间错位，出现明显断裂的问题。 [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
+* 修复了原生垂直标签页在折叠状态时标签高亮未居中的问题。#17
+* 调整了地址栏聚焦时的内凹阴影效果。#17
+* 新增以下变量，可自定义 macOS 风格窗口控制按钮的颜色。#17
+
+  ```css
+    --uc-osx-ctrls-close-fill
+    --uc-osx-ctrls-maximize-fill
+    --uc-osx-ctrls-minimize-fill
+    --uc-osx-ctrls-close-stroke
+    --uc-osx-ctrls-maximize-stroke
+    --uc-osx-ctrls-maximize-restore-stroke
+    --uc-osx-ctrls-minimize-stroke
+  ```
 
 <a id="updates-top-start"></a>
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v4.0.3**
+* 修复了 Nightly v143 引起的布局问题，包括启用菜单栏时主题背景图错位，以及启用 `uc.flex.disable-bookmarks-autohide` 后侧边栏条纹位置错误的问题。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
+* 修复了 Firefox 141 Beta 2 的变动导致水平标签页模式下侧边栏条纹颜色消失的问题。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
 
 **v4.0.2**
 * 修复了 Nightly v143 的变动导致书签子文件夹的彩色图标无法正常显示的问题。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
@@ -507,7 +524,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `widget.windows.mica` | `true` | 启用 Firefox 原生的 Mica 背景效果。需将主题设置为 `系统主题 — 自动` 才能生效。此功能仅在 Windows 11 系统中可用。如果当前系统不支持 Mica，可使用 `uc.flex.browser-wallpaper-enabled` 来模拟类似效果。 |
 | `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | 为弹出菜单启用 Mica 背景效果。可设置为 `0`（关闭）、`1`（开启）或 `2`（自动）。 |
 | `widget.windows.mica.toplevel-backdrop` | `2` | 指定要使用的 Mica 背景类型：`0`（自动或不使用）、`1`: Mica、`2`: Acrylic、`3`: Mica Alt。FlexFox 是基于该选项设为 `2`: Acrylic 的前提进行设计的。 |
-| `browser.tabs.allow_transparent_browser` | `true` | 允许 Sidebery 和网页内容背景透明，可显示 Mica 或壁纸效果。**更改后需重启 Firefox 才会生效。** 若要实现网页内容透明，需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展。若部分网页因透明而难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。 |
+| `browser.tabs.allow_transparent_browser` | `true` | 允许 Sidebery 和网页内容背景透明，可显示 Mica 或壁纸效果。**更改后需重启 Firefox 才会生效。** 若要实现网页内容透明，需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 或 [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 扩展。若部分网页因透明而难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。 |
 | `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | 调整浏览器 Mica 背景遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，背景越清晰。Firefox 默认值为 0，而 FlexFox 的默认值为 2。 |
 | `uc.flex.browser-wallpaper-enabled` | `true` | 启用 Firefox 浏览器背景的自定义壁纸。此功能会套用 Acrylic 风格的模糊效果，用于模拟原生 Mica 效果。适用于系统不支持 Mica，或希望始终显示固定背景的情况。但请注意，模拟效果无法与原生 Mica 完全一致。 |
 | `uc.flex.browser-wallpaper-index` | `1`-`9`<br>(`1`) | 设置使用哪一张编号图片作为浏览器背景。该选项为数值类型，可设置为 1 到 9。每个数值对应使用 `../icons/wallpaper/` 文件夹中的 `main-image-1.jpg` 到 `main-image-9.jpg` 文件。|
