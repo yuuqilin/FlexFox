@@ -45,7 +45,8 @@
         url-prefix("about:home") {
         :root {
             /* v143 [Bug 1980414] */
-            --background-color-canvas: transparent !important;
+            background-color: transparent !important;
+            /* --background-color-canvas: transparent !important; */
             --in-content-page-background: transparent !important;
             --in-content-table-background: transparent !important;
             --in-content-background-color: transparent !important;
@@ -81,6 +82,9 @@
         .featureGate {
             background-color: var(--in-content-box-info-background) !important;
             border: none !important;
+        }
+        .sticky-container {
+            background-color: transparent !important;
         }
     }
 
@@ -119,6 +123,7 @@
                 grid-row: 1;
                 padding-block: 20px !important;
                 margin-inline-start: 22px !important;
+                background: var(--background-color-box) !important;
 
                 .spacer {
                     max-width: 20px !important;
@@ -132,6 +137,7 @@
                 grid-column: 2;
                 grid-row: 1;
                 padding-block: 20px !important;
+                background: var(--background-color-box) !important;
 
                 .search-label {
                     display: none !important;
@@ -160,6 +166,10 @@
             #toolbar::before {
                 background: color-mix(in srgb, var(--background-color-box) 80%, transparent);
             }
+        }
+
+        #toolbar {
+            background-color: transparent !important;
         }
 
         #prefs {

@@ -76,7 +76,26 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v4.0.4**
+**🦊 v4.0.5**
+* Added support for the new collapsed tab group overflow counter introduced in v142. [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
+* Updated the appearance of tab groups, including size and alignment adjustments.
+* Unified the expanded width of native vertical tabs and Sidebery. Both now share the same width, and the option `uc.flex.increase-sidebery-expanded-width` can be used to extend the width for native vertical tabs.
+* Fixed an issue where pinned tab width changed too early when hovering over native vertical tabs.
+* Fixed a visual glitch in the translucent effect on built-in pages introduced in v4.0.4.
+* Added translucent background support for the PDF viewer window and menus when Mica or a custom wallpaper is enabled with `browser.tabs.allow_transparent_browser`.
+* Fixed misaligned menu icons at different display scaling levels.
+* Fixed native vertical tabs not centering correctly under different display scaling levels.
+
+<!-- END What's New -->
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
+
+<!-- END Release Note -->
+
+**v4.0.4**
 * Fixed an issue in Nightly v143 where translucent backgrounds for built-in pages stopped working. [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
 * Fixed a problem introduced in v141 where the theme background image was misaligned between the Bookmarks Toolbar and Navigation Bar, causing a visible break. [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
 * Fixed an alignment issue where the tab highlight in collapsed native vertical tabs was not centered. #17
@@ -92,15 +111,6 @@ It's not just a new look, it's a better way to browse.
     --uc-osx-ctrls-maximize-restore-stroke
     --uc-osx-ctrls-minimize-stroke
   ```
-
-<!-- END What's New -->
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
-
-<!-- END Release Note -->
 
 **v4.0.3**
 * Fixed layout issues caused by changes in Nightly v143, including misaligned theme background when the menu bar is enabled and incorrect sidebar stripe positioning when `uc.flex.disable-bookmarks-autohide` is set. [Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
@@ -506,7 +516,7 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.increase-sidebery-expanded-width` | `true` | Increases the expanded width of Sidebery and, when `uc.flex.disable-sidebery-autohide` is enabled or `Lock Sidebery` is active, also applies the increased width to the native vertical tab panel. |
+| `uc.flex.increase-sidebery-expanded-width` | `true` | Makes Sidebery and the native vertical tabs wider when expanded. |
 | `uc.flex.increase-navbar-height` | `true` | Restores the thicker navbar height used in earlier FlexFox versions. This change overrides the current default, which matches Firefox's original compact height. |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
 | `sidebar.visibility` | `expand-on-hover` | Disables FlexFox's vertical tabs auto-collapse and layout. This setting can also be applied by checking **“Expand sidebar on hover”** in the sidebar settings. In this mode, you can freely adjust the sidebar width and toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. |

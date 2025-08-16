@@ -76,7 +76,22 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 ## 🆕 最新情報
 
-**🦊 v4.0.4**
+**🦊 v4.0.5**
+* v142で追加された折りたたみタブグループのオーバーフローカウンターに対応しました。 [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
+* タブグループのデザインを調整し、サイズや配置を改善しました。
+* ネイティブ垂直タブとSideberyの展開幅を統一しました。両者は同じ幅になり、`uc.flex.increase-sidebery-expanded-width` オプションを使うことでネイティブ垂直タブの展開幅をさらに広げることができます。
+* ネイティブ垂直タブにカーソルを合わせた際、ピン留めタブの幅が早く変わってしまう問題を修正しました。
+* v4.0.4で導入された組み込みページの半透明効果における表示不具合を修正しました。
+* PDFビューアウィンドウとメニューに半透明背景のサポートを追加しました。Micaやカスタム壁紙が有効で、`browser.tabs.allow_transparent_browser` を使用している場合に適用されます。
+* 表示スケーリングを変更した際にメニューアイコンがずれて表示される問題を修正しました。
+* 表示スケーリングを変更した際にネイティブ垂直タブが中央に配置されない問題を修正しました。
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
+
+**v4.0.4**
 * Nightly v143 の変更により、組み込みページの半透明背景が表示されなくなっていた問題を修正しました。 [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
 * v141 の変更により、テーマの背景画像がブックマークツールバーとナビゲーションバーの間でずれて、画像が途切れて見える問題を修正しました。 [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
 * ネイティブ垂直タブが折りたたみ状態のときに、タブのハイライトが中央に配置されない問題を修正しました。 #17
@@ -92,11 +107,6 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
     --uc-osx-ctrls-maximize-restore-stroke
     --uc-osx-ctrls-minimize-stroke
   ```
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
 
 **v4.0.3**
 * Nightly v143 の変更によって発生していたレイアウトの不具合を修正しました。メニューバー有効時の背景画像のズレ、および `uc.flex.disable-bookmarks-autohide` を有効にした際のサイドバーのストライプの位置ズレが含まれます。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
@@ -500,7 +510,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 | 設定名 | 値 | 説明 |
 |--------|:------:|--------|
-| `uc.flex.increase-sidebery-expanded-width` | `true` | Sidebery の展開時の幅を広げます。また、`uc.flex.disable-sidebery-autohide` を有効にするか `Lock Sidebery` が有効な場合は、Firefox標準の縦型タブパネルの幅も広がります。 |
+| `uc.flex.increase-sidebery-expanded-width` | `true` | Sidebery と Firefox 標準の縦型タブを展開したときの幅を広くします。 |
 | `uc.flex.increase-navbar-height` | `true` | 以前のFlexFoxバージョンで使用されていた、より厚みのあるナビゲーションバーの高さを復元します。現在のデフォルト（Firefox本来のコンパクトな高さ）を上書きします。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
 | `sidebar.visibility` | `expand-on-hover` | FlexFoxが提供する垂直タブの自動折りたたみ機能とレイアウトを無効にします。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** にチェックを入れることでも適用できます。このモードでは、サイドバーの幅を自由に調整したり、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみを切り替えたりできます。 |

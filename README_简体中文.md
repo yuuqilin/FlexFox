@@ -76,7 +76,22 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v4.0.4**
+**🦊 v4.0.5**
+* 支持了 v142 新增的折叠标签组溢出计数器。 [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
+* 调整了标签组的样式，包括尺寸和对齐方式。
+* 统一了原生垂直标签页和 Sidebery 的展开宽度，现在二者使用相同的展开宽度。可通过 `uc.flex.increase-sidebery-expanded-width` 选项加宽原生垂直标签页的展开宽度。
+* 修复了鼠标悬停在原生垂直标签页时，固定标签宽度过早改变的问题。
+* 修复了 v4.0.4 中内置页面半透明效果的显示异常。
+* 为 PDF 查看器窗口和菜单添加了半透明背景支持，在启用 Mica 或自定义壁纸并打开 `browser.tabs.allow_transparent_browser` 选项时生效。
+* 修复了在不同显示缩放比例下菜单图标位置偏移的问题。
+* 修复了在不同显示缩放比例下原生垂直标签页未能正确居中的问题。
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>历史更新</b></summary>
+
+**v4.0.4**
 * 修复了 Nightly v143 的变更导致内置页面半透明背景失效的问题。 [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
 * 修复了 v141 的变更导致主题背景图在书签工具栏和导航栏之间错位，出现明显断裂的问题。 [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
 * 修复了原生垂直标签页在折叠状态时标签高亮未居中的问题。#17
@@ -92,11 +107,6 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
     --uc-osx-ctrls-maximize-restore-stroke
     --uc-osx-ctrls-minimize-stroke
   ```
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>历史更新</b></summary>
 
 **v4.0.3**
 * 修复了 Nightly v143 引起的布局问题，包括启用菜单栏时主题背景图错位，以及启用 `uc.flex.disable-bookmarks-autohide` 后侧边栏条纹位置错误的问题。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
@@ -505,7 +515,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 | 配置选项 | 值 | 说明 |
 |----------|:------:|----------|
-| `uc.flex.increase-sidebery-expanded-width` | `true` | 增加 Sidebery 展开时的宽度；启用 `uc.flex.disable-sidebery-autohide` 或激活 `Lock Sidebery` 时，也会同步增加原生垂直标签页的展开宽度。 |
+| `uc.flex.increase-sidebery-expanded-width` | `true` | 使 Sidebery 和原生垂直标签页在展开时更宽。 |
 | `uc.flex.increase-navbar-height` | `true` | 恢复旧版 FlexFox 中使用的较厚导航栏高度。此更改会覆盖当前默认值（与 Firefox 原始的紧凑高度一致）。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | 默认情况下，FlexFox 会将原生扩展面板替换为仅显示图标的面板，此时可通过右键点击图标访问扩展设置。启用此选项后，将切换为包含扩展名称和设置按钮的简洁面板，提供更具说明性的视图。 |
 | `sidebar.visibility` | `expand-on-hover` | 禁用 FlexFox 的垂直标签页自动折叠功能和布局。也可以在侧栏设置中勾选 **“悬停时展开侧栏”** 来启用此模式。启用后，可以自由调整侧栏宽度，并使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧栏切换按钮在展开和折叠状态之间切换。 |

@@ -43,4 +43,25 @@ html[mozdisallowselectionprint]:has(head link:nth-of-type(1)[href^="resource://p
             left: 0 !important;
         }
     }
+
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        @media -moz-pref("browser.tabs.allow_transparent_browser") {
+            body {
+                background-color: transparent !important;
+            }
+            #toolbarSidebar {
+                background-color: color-mix(in srgb, var(--sidebar-toolbar-bg-color) 65%, transparent) !important;
+            }
+            #sidebarContent {
+                background-color: color-mix(in srgb, var(--body-bg-color) 65%, transparent);
+            }
+            #outerContainer #mainContainer div.toolbar {
+                backdrop-filter: blur(26px) saturate(140%);
+            }
+            #toolbarContainer {
+                background-color: color-mix(in srgb, var(--toolbar-bg-color) 80%, transparent) !important;
+            }
+        }
+    }
 }

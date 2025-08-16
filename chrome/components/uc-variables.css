@@ -457,7 +457,6 @@
     --uc-osx-ctrls-maximize-restore-stroke: #0b7407;
     --uc-osx-ctrls-minimize-stroke: hsl(32, 62%, 38%);
 
-
     /* Vertical spacing between items in the Firefox app menu (hamburger menu), bookmarks menu, and context menus. */
     --uc-app-menu-item-padding-block: 4px;
     --uc-menu-item-padding-block: 2px;
@@ -822,18 +821,12 @@
     @media -moz-pref("sidebar.verticalTabs") {
         --tab-pinned-horizontal-count: 5;
         --uc-sidebar-main-width: var(--uc-sidebar-stripe-width);
-        --uc-sidebar-main-hover-clip: 1px;
-        --uc-sidebar-main-hover-width: calc(
-            var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                var(--tab-pinned-container-margin-inline-expanded) + var(--uc-sidebar-main-hover-clip)
-        );
+        --uc-sidebar-main-hover-width: var(--uc-sidebar-hover-width);
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-            --uc-sidebar-main-hover-clip: calc(var(--uc-sidebar-hover-width) - 254px);
             --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
         }
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             &[titlepreface*="\180e "] {
-                --uc-sidebar-main-hover-clip: calc(var(--uc-sidebar-hover-width) - 254px);
                 --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
             }
         }
@@ -899,7 +892,12 @@
         --uc-sidebar-main-margin-left: 0px;
         &[sidebar-positionend] {
             --uc-sidebar-main-margin-left: 0px;
-            --uc-sidebar-main-padding-inline-end: 5px;
+            --uc-sidebar-main-padding-inline-end: calc(
+                (
+                        var(--tab-collapsed-background-width) + 2 * var(--tab-inner-inline-margin) -
+                            var(--uc-sidebar-stripe-width)
+                    ) / 2 + 0.5px
+            );
             &:hover {
                 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
                     --uc-sidebar-main-padding-inline-end: calc(
@@ -918,10 +916,18 @@
 
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             :root:not([titlepreface*="\180e "]) & {
-                --uc-sidebar-main-margin-left: -6px;
+                --uc-sidebar-main-margin-left: calc(
+                    0px -
+                        (
+                            var(--tab-collapsed-background-width) + 2 * var(--tab-inner-inline-margin) -
+                                var(--uc-sidebar-stripe-width)
+                        ) / 2 + 0.5px
+                );
+                /*
                 &[sidebar-positionend] {
                     --uc-sidebar-main-margin-left: -5px;
                 }
+                */
             }
         }
     }

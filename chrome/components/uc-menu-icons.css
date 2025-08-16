@@ -18,7 +18,7 @@
 
     /* App menu */
     #appMenu-zoom-controls {
-        padding-inline-start: calc(1em + 22px + var(--uc-appMenu-zoom-controls-x-offset)) !important;
+        padding-inline-start: calc(36px + var(--uc-appMenu-zoom-controls-x-offset)) !important;
         margin-inline-start: 0px !important;
         background-image: url("chrome://global/skin/media/fullscreenEnterButton.svg");
         background-position: left calc(10px + var(--uc-appMenu-zoom-controls-x-offset)) center;
@@ -93,14 +93,14 @@
     */
     menuitem[data-l10n-id*="-copy-"][data-l10n-id*="-link"] {
         background-image: url("../icons/menu/link.svg");
-        background-position-x: 12px !important;
-        background-size: 20px !important;
+        background-position-x: 0.833em !important;
+        background-size: 19.5px !important;
     }
     #context-stripOnShareLink,
     #strip-on-share,
     menuitem[data-l10n-id="text-action-strip-on-share"] {
         background-image: url("../icons/menu/fingerprinters-disabled.svg");
-        background-position-x: 13.5px !important;
+        background-position-x: 1em !important;
         background-size: 16px !important;
     }
     #paste-and-go {
@@ -113,21 +113,21 @@
     }
     #context-delete,
     menuitem[data-l10n-id="text-action-delete"] {
-        background-position-x: 13.5px !important;
+        background-position-x: 0.95em !important;
     }
     #context-selectall,
     menuitem[data-l10n-id="text-action-select-all"] {
         background-image: url("../icons/menu/select-all-on.svg");
-        background-position-x: 15.5px !important;
+        background-position-x: 1.076em !important;
     }
     #context-add-engine {
         background-image: url("../icons/menu/context-add-engine.svg");
-        background-position-x: 14px;
+        background-position-x: 1em;
         background-size: 18px;
     }
     #spell-check-enabled {
         background-image: url("../icons/menu/spellcheck.svg");
-        background-position-x: 14px;
+        background-position-x: 1em;
         background-size: 18px;
     }
 
@@ -150,8 +150,10 @@
     }
     menuitem[data-l10n-id^="pin-"],
     .customize-context-moveToPanel,
+    #toolbar-context-move-to-panel,
     #unified-extensions-context-menu-pin-to-toolbar {
         background-image: url("chrome://newtab/content/data/content/assets/glyph-pin-16.svg");
+        background-position-x: 0.9em;
     }
     menuitem[data-l10n-id^="unpin-"],
     .customize-context-moveToToolbar {
@@ -190,7 +192,7 @@
     }
     #placesContext_new\:separator {
         background-image: url("../icons/menu/separator.svg");
-        background-position-x: 0.9em;
+        background-position-x: 0.85em;
         background-size: 20px;
     }
 
@@ -277,7 +279,7 @@
 
     #context-media-loop {
         background-image: url("../icons/menu/repeat.svg");
-        background-position-x: 12px !important;
+        background-position-x: 0.8em !important;
         background-size: 20.5px;
     }
     #context-showonlythisframe,

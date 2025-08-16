@@ -898,7 +898,9 @@
             background: inherit;
             overflow: hidden;
             /* !TEMPORARY: */
-            margin-inline-start: var(--uc-sidebar-main-margin-left);
+            &:not(:hover) {
+                margin-inline-start: var(--uc-sidebar-main-margin-left);
+            }
             min-width: /* var(--tab-collapsed-width) */ var(
                 --uc-sb-sidebar-main-width,
                 calc(var(--uc-sidebar-main-width) - var(--uc-sidebar-main-margin-left))
@@ -1015,7 +1017,7 @@
         }
 
         /* Align tools-and-extensions when Sidebery is active */
-        padding-inline: var(--uc-sb-sroot-padding-inline, var(--space-medium)) !important;
+        padding-inline: var(--uc-sb-sroot-padding-inline, calc(var(--space-medium) - 1px)) !important;
 
         /* Adjust spacing between buttons in tools-and-extensions when Sidebery is active */
         padding-block-start: var(--uc-sb-sroot-padding-block-start, var(--space-xxsmall));
@@ -1311,6 +1313,33 @@
         }
     }
 
+    @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+        #sidebar-main[sidebar-launcher-expanded] {
+            .tab-group-label {
+                box-sizing: content-box;
+                padding-block: 2.5px;
+                align-self: auto !important;
+                padding-inline: 2px !important;
+                max-width: 100% !important;
+                font-size: 1.111rem;
+            }
+        }
+    }
+    @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+        :root[titlepreface*="\180e "] {
+            #sidebar-main[sidebar-launcher-expanded] {
+                .tab-group-label {
+                    box-sizing: content-box;
+                    padding-block: 2.5px;
+                    align-self: auto !important;
+                    padding-inline: 2px !important;
+                    max-width: 100% !important;
+                    font-size: 1.111rem;
+                }
+            }
+        }
+    }
+
     @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
         /**
          * Controls how many rows of pinned tab icons can be shown in vertical tab panel.
@@ -1319,14 +1348,141 @@
         :root:not([titlepreface*="\180e "]) {
             #sidebar-main[sidebar-launcher-expanded] :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
                 max-height: calc(
-                    var(--uc-max-visible-vertical-pinned-tabs) * var(--tabstrip-min-height) + var(--space-large) + 15px
+                    var(--uc-max-visible-vertical-pinned-tabs) * var(--tab-height-with-margin-padding)
                 ) !important;
             }
             #tabbrowser-tabs[orient="vertical"][expanded] {
+                /* Keep the pinned tab grid wide enough so the second column doesn't spill into the collapsed vertical tab bar on hover */
+                min-width: 215.367px !important;
+                #pinned-tabs-container {
+                    .tab-background {
+                        max-width: 33px;
+                        transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay);
+                    }
+                    .tab-stack {
+                        transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay);
+                    }
+                }
+                #sidebar-main:hover & {
+                    #pinned-tabs-container {
+                        .tab-background {
+                            max-width: 100%;
+                            transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay);
+                        }
+                        .tab-stack {
+                            transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay);
+                        }
+                    }
+                }
+
                 /* Restore pre-v140 box-sizing and padding for tab group labels */
                 .tab-group-label {
                     box-sizing: content-box;
                     padding-block: 2.5px;
+                }
+            }
+
+            #tabbrowser-tabs[orient="vertical"] tab-group {
+                .tab-group-label {
+                    font-size: 1.111rem;
+                    &::first-letter {
+                        font: message-box;
+                        font-weight: var(--font-weight-bold);
+                        font-size: 1.111rem;
+                        font-family: sans-serif;
+                        line-height: 24px;
+                    }
+                }
+                #sidebar-main[sidebar-launcher-expanded]:not(:hover) & {
+                    .tab-group-label {
+                        padding-inline: 4px !important;
+                        padding-block: 2.5px !important;
+                        font-size-adjust: 0;
+                        /*
+                        padding-inline: 2px !important;
+                        max-width: 28px !important;
+                        */
+                        transition:
+                            align-self var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay) allow-discrete,
+                            padding-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay),
+                            max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay),
+                            font-size-adjust var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay) allow-discrete !important;
+                    }
+                    .tab-group-overflow-count-container {
+                        label {
+                            margin-inline-start: calc(0px - var(--space-xxsmall)) !important;
+                            transition: margin-inline-start var(--uc-autohide-transition-duration)
+                                var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) !important;
+                        }
+                        &::after {
+                            margin-inline-start: -8px;
+                            visibility: hidden;
+                            transition:
+                                margin-inline-start var(--uc-autohide-transition-duration)
+                                    var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay),
+                                visibility 0s var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
+                        }
+                    }
+                    > .tabbrowser-tab {
+                        margin-inline-start: 0px !important;
+                        transition:
+                            margin-inline-start var(--uc-autohide-transition-duration)
+                                var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay),
+                            min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay) !important;
+                        .tab-group-line {
+                            visibility: hidden;
+                            transition-delay: var(--uc-autohide-sidebar-delay);
+                        }
+                    }
+                }
+
+                #sidebar-main[sidebar-launcher-expanded]:hover & {
+                    .tab-group-label {
+                        align-self: auto !important;
+                        padding-inline: 2px !important;
+                        max-width: 100% !important;
+                        transition:
+                            align-self var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay) allow-discrete,
+                            padding-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay),
+                            max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay),
+                            font-size-adjust var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay) allow-discrete !important;
+                    }
+                    .tab-group-overflow-count-container {
+                        label {
+                            transition: margin-inline-start var(--uc-hover-transition-duration)
+                                var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay) !important;
+                        }
+                        &::after {
+                            margin-inline-start: 0px;
+                            transition:
+                                margin-inline-start var(--uc-hover-transition-duration)
+                                    var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
+                                visibility 0s var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+                        }
+                    }
+                    > .tabbrowser-tab {
+                        transition:
+                            margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay),
+                            min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay) !important;
+                        .tab-group-line {
+                            transition-delay: var(--uc-hover-sidebar-delay);
+                        }
+                    }
                 }
             }
 
@@ -1350,31 +1506,12 @@
                     }
                 }
 
-                #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
-                    padding-inline: 2px !important;
-                    max-width: 100% !important;
-                    transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay) !important;
-                }
-                #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
-                    transition:
-                        margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-hover-sidebar-delay),
-                        min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-hover-sidebar-delay) !important;
-                    .tab-group-line {
-                        transition-delay: var(--uc-hover-sidebar-delay);
-                    }
-                }
                 #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
                     transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay);
                 }
                 #tabbrowser-tabs[orient="vertical"]::after {
-                    width: calc(
-                        var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                            var(--tab-pinned-container-margin-inline-expanded) - 22px
-                    );
+                    width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-inner-inline-margin));
                     transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay);
                 }
@@ -1395,10 +1532,7 @@
                 @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
                     #tabbrowser-tabs[expanded]
                         > :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
-                        width: calc(
-                            var(--tab-pinned-horizontal-count) * var(--tab-pinned-min-width-expanded) + 2 *
-                                var(--tab-pinned-container-margin-inline-expanded) - 22px
-                        );
+                        width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-inner-inline-margin));
                     }
                 }
             }
@@ -1432,24 +1566,6 @@
                     }
                 }
 
-                #tabbrowser-tabs[orient="vertical"] tab-group .tab-group-label {
-                    padding-inline: 2px !important;
-                    max-width: 28px !important;
-                    transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay) !important;
-                }
-                #tabbrowser-tabs[orient="vertical"] tab-group > .tabbrowser-tab {
-                    margin-inline-start: 0px !important;
-                    transition:
-                        margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-autohide-sidebar-delay),
-                        min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-autohide-sidebar-delay) !important;
-                    .tab-group-line {
-                        visibility: hidden;
-                        transition-delay: var(--uc-autohide-sidebar-delay);
-                    }
-                }
                 #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
                     max-width: 32px;
                     transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -1515,7 +1631,10 @@
     #sidebar-main:not([sidebar-launcher-expanded]) {
         --uc-sroot-btn-padding-inline: 5.5px;
         #vertical-tabs-newtab-button {
+            margin-inline: auto !important;
+            /*
             margin-inline: 5.5px !important;
+            */
         }
         /* Move the container tab indicator to the left for Firefox v138 */
         /*
