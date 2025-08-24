@@ -86,7 +86,7 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
   * 当前标签页高亮更加明显，便于快速定位。
   * 固定标签页由背景高亮改为细致外框，避免视觉混乱。
 * 重构固定标签页面板：
-  * 新增 `uc.flex.max-visible-horizontal-pinned-tabs` 选项，可设置水平固定标签页的最大行数（2–5）。
+  * 新增 `uc.flex.max-visible-horizontal-pinned-tabs`，用于设置每行可显示的固定标签页数量（2–5，默认值 5）。
   * 适用于 Sidebery 和原生垂直标签页。
   * `uc.flex.max-visible-vertical-pinned-tabs` 新增 `0` 值（不限数量），面板可随标签数自动延长。
 * 优化固定标签页与普通标签页之间的分隔线：

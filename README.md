@@ -86,7 +86,7 @@ It's not just a new look, it's a better way to browse.
   * Clearer highlight for the active tab to make navigation easier.
   * Changed pinned tabs from bright backgrounds to subtle outlines for better clarity.
 * Reworked pinned tab panel:
-  * Added `uc.flex.max-visible-horizontal-pinned-tabs` to adjust the max visible rows (2–5) for horizontal pinned tabs.
+  * Added `uc.flex.max-visible-horizontal-pinned-tabs` to set how many pinned tabs are shown per row (2–5, default 5).
   * Works with both Sidebery and native vertical tabs.
   * Extended `uc.flex.max-visible-vertical-pinned-tabs` option to allow `0` (no limit), so the panel can expand with tab count.
 * Improved separator between pinned and regular tabs:
