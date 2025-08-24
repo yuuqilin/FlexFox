@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v143-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v144-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -76,15 +76,37 @@ It's not just a new look, it's a better way to browse.
 
 ## 🆕 What's New
 
-**🦊 v4.0.5**
-* Added support for the new collapsed tab group overflow counter introduced in v142. [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
-* Updated the appearance of tab groups, including size and alignment adjustments.
-* Unified the expanded width of native vertical tabs and Sidebery. Both now share the same width, and the option `uc.flex.increase-sidebery-expanded-width` can be used to extend the width for native vertical tabs.
-* Fixed an issue where pinned tab width changed too early when hovering over native vertical tabs.
-* Fixed a visual glitch in the translucent effect on built-in pages introduced in v4.0.4.
-* Added translucent background support for the PDF viewer window and menus when Mica or a custom wallpaper is enabled with `browser.tabs.allow_transparent_browser`.
-* Fixed misaligned menu icons at different display scaling levels.
-* Fixed native vertical tabs not centering correctly under different display scaling levels.
+**🦊 v4.5.0**
+* Rebuilt Sidebery expand/collapse animation for smoother transitions without jitter.
+* Centered and aligned Sidebery with sidebar buttons.
+* Improved appearance of native vertical tabs:
+  * Unified style with Sidebery for seamless switching.
+  * Softer tab group labels to reduce distraction.
+  * Merged sound indicator with site icon to save space.
+  * Clearer highlight for the active tab to make navigation easier.
+  * Changed pinned tabs from bright backgrounds to subtle outlines for better clarity.
+* Reworked pinned tab panel:
+  * Added `uc.flex.max-visible-horizontal-pinned-tabs` to adjust the max visible rows (2–5) for horizontal pinned tabs.
+  * Works with both Sidebery and native vertical tabs.
+  * Extended `uc.flex.max-visible-vertical-pinned-tabs` option to allow `0` (no limit), so the panel can expand with tab count.
+* Improved separator between pinned and regular tabs:
+  * Controlled by `uc.flex.show-pin-tabs-separator-in-expanded-state` (disabled by default).
+  * Shortened and centered the handle to reduce visual distraction.
+  * Expands to full length only when hovered, keeping resizing available without interfering with normal tab access.
+* Improved logic for bookmark star hover and editing states to better match expected actions.
+* Fixed background bleed issue on rounded corners when browser and website theme modes differ.
+* Fixed a regression in Nightly v144 that broke sidebar tool expansion. [Bug 1972629](https://bugzilla.mozilla.org/show_bug.cgi?id=1972629)  
+  <p>
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-resize.webp"
+         alt="New native vertical tabs design, splitter in hover state for resizing the panel"
+         height="510" hspace=15 />
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-collapsed.webp"
+         alt="New native vertical tabs design, splitter appearance with the panel collapsed"
+         height="510" hspace=15 />
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-expanded.webp"
+         alt="New native vertical tabs design, splitter appearance with the panel expanded"
+         height="510" hspace=15 />
+  </p>
 
 <!-- END What's New -->
 
@@ -94,6 +116,16 @@ It's not just a new look, it's a better way to browse.
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v4.0.5**
+* Added support for the new collapsed tab group overflow counter introduced in v142. [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
+* Updated the appearance of tab groups, including size and alignment adjustments.
+* Unified the expanded width of native vertical tabs and Sidebery. Both now share the same width, and the option `uc.flex.increase-sidebery-expanded-width` can be used to extend the width for native vertical tabs.
+* Fixed an issue where pinned tab width changed too early when hovering over native vertical tabs.
+* Fixed a visual glitch in the translucent effect on built-in pages introduced in v4.0.4.
+* Added translucent background support for the PDF viewer window and menus when Mica or a custom wallpaper is enabled with `browser.tabs.allow_transparent_browser`.
+* Fixed misaligned menu icons at different display scaling levels.
+* Fixed native vertical tabs not centering correctly under different display scaling levels.
 
 **v4.0.4**
 * Fixed an issue in Nightly v143 where translucent backgrounds for built-in pages stopped working. [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
@@ -489,7 +521,7 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 | `uc.flex.remove-bookmarks-folder-icons` | `true` | Removes folder icons from bookmarks. |
 | `uc.flex.remove-bookmarks-labels` | `true` | Removes text labels from bookmark folders. |
 | `uc.flex.show-flexfox-version-info-in-about-config` | `true` | Shows a confirmation message in the `about:config` page indicating that FlexFox is installed, along with the current version number. |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | Shows a separator between pinned and regular tabs in the native vertical tabs when in expanded state. Firefox hides this separator by default in this mode. |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | Restores the separator between pinned and regular tabs in the native vertical tabs when expanded. Unlike Firefox, which hides it until hovered, FlexFox always keeps it visible. The separator can be dragged to resize the pinned tabs panel. |
 | `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
@@ -524,7 +556,8 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 | `uc.flex.sidebery-fast-hover-expand` | `true` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Unifies toolbar animation speed with Sidebery/vertical tabs. Auto-applied with Mica or custom wallpaper. |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `4`-`6` | Sets the maximum number of pinned tabs visible per column in the native vertical tabs (numeric value, typically 4–6). Content beyond this limit will scroll, so adjust this to avoid scrollbars based on your usage. |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `2`–`5`<br>(`5`) | Sets how many pinned tabs are shown per row in both Sidebery and the native vertical tabs. The value defines the number of tabs that fit into each row before wrapping to the next line. |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`–`6`<br>(`4`) | Sets the maximum number of visible rows for pinned tabs in the native vertical tabs. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the Findbar's position. Accepts string values: `'top-center-left'` or `'1'` = center-left top, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `'1'` or `'small'` = narrow spacing, `'2'` or `'medium'` = medium spacing, `'3'` or `'large'` = wide spacing. |
 

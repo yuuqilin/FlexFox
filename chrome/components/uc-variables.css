@@ -475,18 +475,39 @@
         --uc-appMenu-zoom-controls-x-offset: 4px;
     }
 
+    /* Max visible rows in native vertical pinned tabs (before scrolling) */
+    --uc-vt-pinned-tab-max-rows: 4;
+    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 5) {
+        --uc-vt-pinned-tab-max-rows: 5;
+    }
+    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 6) {
+        --uc-vt-pinned-tab-max-rows: 6;
+    }
+
+    /* Tabs per row for native vertical pinned tabs and Sidebery (controlled by per-tab percentage width) */
+    --uc-vt-pinned-tab-max-columns: 20%;
+    @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 4) {
+        --uc-vt-pinned-tab-max-columns: 25%;
+    }
+    @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 3) {
+        --uc-vt-pinned-tab-max-columns: 33.333%;
+    }
+    @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 2) {
+        --uc-vt-pinned-tab-max-columns: 50%;
+    }
+
+    /* Border color for pinned tabs in vertical tab bar */
+    --uc-vt-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
+    /* Background color for the active tab in vertical tab bar */
+    --uc-vt-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
+    /* Inner border shadow (outline) for the active tab */
+    --uc-vt-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+    /* Drop shadow beneath the active tab */
+    --uc-vt-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+
     /* Layout of extension icons in the unified extensions panel */
     --uc-uei-icon-size: 22px; /* Size of extension icons */
     --uc-number-of-extensions-in-a-row: 4; /* Number of extension icons per row */
-
-    /* Max visible rows in native vertical pinned tabs (before scrolling) */
-    --uc-max-visible-vertical-pinned-tabs: 4;
-    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 5) {
-        --uc-max-visible-vertical-pinned-tabs: 5;
-    }
-    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 6) {
-        --uc-max-visible-vertical-pinned-tabs: 6;
-    }
 
     /* Trigger sensitivity for fully hidden Sidebery sidebar */
     /**
@@ -737,14 +758,14 @@
     --uc-sidebar-button-bg-pos: 9px 11.5px;
     --uc-sidebar-button-bg-pos-first: 13px 10px;
     --uc-sidebar-button-bg-pos-first-fs: 11px 10px;
-    --uc-sidebar-button-bg-pos-last: 9px 1.5px;
+    --uc-sidebar-button-bg-pos-last: 8.5px 1.5px;
     --uc-sidebar-button-height-last: 23px;
     @media -moz-pref("uc.flex.increase-navbar-height") {
         --uc-titlebar-buttonbox-height: 38px;
         --uc-sidebar-button-bg-pos: 9.5px 12px;
         --uc-sidebar-button-bg-pos-first: 13px 12px;
         --uc-sidebar-button-bg-pos-first-fs: 11px 12px;
-        --uc-sidebar-button-bg-pos-last: 9px 3px;
+        --uc-sidebar-button-bg-pos-last: 8.5px 3px;
         --uc-sidebar-button-height-last: 26px;
     }
 
@@ -984,7 +1005,7 @@
         }
 
         /* Adjust the top-left-right border radius of the web content area when Sidebery is active */
-        @media -moz-pref("uc.flex.enable-rounded-web-content") and (not -moz-pref("uc.flex.disable-sidebery-autohide")) {
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             &:not([titlepreface*="\180e "]) {
                 @media -moz-pref("sidebar.position_start") {
                     --uc-sb-web-content-radius-top-left: 0;

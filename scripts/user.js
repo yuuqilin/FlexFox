@@ -28,7 +28,7 @@ user_pref("uc.flex.remove-bookmarks-folder-icons",              false);
 user_pref("uc.flex.remove-bookmarks-labels",                    false);
 /* Shows a confirmation message and version number in the about:config page. */
 user_pref("uc.flex.show-flexfox-version-info-in-about-config",   true);
-/* Shows a separator between pinned and regular tabs in vertical tabs. */
+/* Show a draggable separator between pinned and regular tabs in expanded vertical tabs */
 user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
 /* Moves PiP window volume button to the top */
 user_pref("uc.flex.move-pip-volume-to-top",                     false);
@@ -80,7 +80,9 @@ user_pref("uc.flex.sidebery-fast-hover-expand",                 false);
 user_pref("uc.flex.sidebery-slow-hover-expand",                 false);
 /* Applies Sidebery's expand/collapse animation speed to the navigation bar and bookmarks toolbar. */
 user_pref("uc.flex.sidebery-apply-expand-speed-to-toolbars",    false);
-/* Sets max pinned tabs per column in native vertical tabs (numeric, 4–6). */
+/* Set tabs per row for pinned tabs in Sidebery and native vertical tabs (2–5, default 5) */
+user_pref("uc.flex.max-visible-horizontal-pinned-tabs",             5);
+/* Set max visible rows for pinned tabs in native vertical tabs (4–6, 0 = unlimited) */
 user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
 /* Sets findbar position (string: "top-center-left"/"1", "top-right"/"2", "bottom-right"/"3"). */
 user_pref("uc.flex.findbar-position",                     "top-right");

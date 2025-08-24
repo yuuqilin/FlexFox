@@ -269,20 +269,37 @@
         list-style-image: var(--uc-bookmark-star-image) !important;
         fill: color-mix(in srgb, var(--uc-bookmark-star-color) 90%, var(--uc-toolbar-bgcolor)) !important;
         @media -moz-pref("uc.flex.enable-gradient-highlight") {
-            &:not(:hover) {
-                list-style-image: none !important;
-                background: var(--uc-gradient-highlight);
-                mask-image: var(--uc-bookmark-star-image);
-                mask-position: 0px 0px;
-                mask-repeat: no-repeat;
-                mask-size: 16px;
-            }
+            list-style-image: none !important;
+            background: var(--uc-gradient-highlight);
+            mask-image: var(--uc-bookmark-star-image);
+            mask-position: 0px 0px;
+            mask-repeat: no-repeat;
+            mask-size: 16px;
         }
     }
 
-    #pageAction-panel-bookmark[starred],
-    #star-button-box:is(:hover, [open]) #star-button[starred] {
-        fill: var(--toolbarbutton-icon-fill) !important;
+    #star-button-box:is(:hover, [open]) {
+        /* Show hollow star icon on hover when the page is already bookmarked */
+        &[data-l10n-id="urlbar-star-edit-bookmark"] #star-button[starred] {
+            fill: var(--toolbarbutton-icon-fill) !important;
+            @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                list-style-image: var(--uc-bookmark-star-image) !important;
+                background: none;
+                mask-image: none;
+            }
+        }
+        /* Show filled star icon on hover when the page is not bookmarked */
+        &[data-l10n-id="urlbar-star-add-bookmark"] #star-button:not([starred]) {
+            list-style-image: none !important;
+            background: color-mix(in srgb, var(--uc-bookmark-star-color) 90%, var(--uc-toolbar-bgcolor));
+            mask-image: var(--uc-bookmark-star-image);
+            mask-position: 0px 0px;
+            mask-repeat: no-repeat;
+            mask-size: 16px;
+            @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                background: var(--uc-gradient-highlight);
+            }
+        }
     }
 
     #pageAction-panel-bookmark,

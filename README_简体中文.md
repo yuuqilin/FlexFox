@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v143-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v144-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -76,7 +76,44 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 ## 🆕 更新内容
 
-**🦊 v4.0.5**
+**🦊 v4.5.0**
+* 重写了 Sidebery 展开/折叠动画，去除抖动，使过渡更顺滑。
+* Sidebery 与侧栏按钮居中对齐。
+* 优化原生垂直标签页外观：
+  * 与 Sidebery 风格统一，切换更自然。
+  * 标签组标题背景色调柔和，减少干扰。
+  * 声音播放图标与网站图标合并，节省空间。
+  * 当前标签页高亮更加明显，便于快速定位。
+  * 固定标签页由背景高亮改为细致外框，避免视觉混乱。
+* 重构固定标签页面板：
+  * 新增 `uc.flex.max-visible-horizontal-pinned-tabs` 选项，可设置水平固定标签页的最大行数（2–5）。
+  * 适用于 Sidebery 和原生垂直标签页。
+  * `uc.flex.max-visible-vertical-pinned-tabs` 新增 `0` 值（不限数量），面板可随标签数自动延长。
+* 优化固定标签页与普通标签页之间的分隔线：
+  * 需通过 `uc.flex.show-pin-tabs-separator-in-expanded-state` 选项启用（默认关闭）。
+  * 分隔线缩短并置于中间，减少视觉干扰。
+  * 仅在悬停时才会展开为完整长度，保留高度调整功能，同时不影响日常操作。
+* 优化书签星号在悬停和编辑时的逻辑显示，更符合操作直觉。
+* 修复当浏览器和网页使用不同明暗主题时，圆角处背景溢出的显示问题。
+* 修复 Nightly v144 中导致侧栏工具无法展开的问题。 [Bug 1972629](https://bugzilla.mozilla.org/show_bug.cgi?id=1972629)  
+  <p>
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-resize.webp"
+         alt="新的原生垂直标签页设计，分隔线处于悬停状态，可拖动调整面板高度"
+         height="510" hspace=15 />
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-collapsed.webp"
+         alt="新的原生垂直标签页设计，折叠状态下的分隔线外观"
+         height="510" hspace=15 />
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-expanded.webp"
+         alt="新的原生垂直标签页设计，展开状态下的分隔线外观"
+         height="510" hspace=15 />
+  </p>
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>历史更新</b></summary>
+
+**v4.0.5**
 * 支持了 v142 新增的折叠标签组溢出计数器。 [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
 * 调整了标签组的样式，包括尺寸和对齐方式。
 * 统一了原生垂直标签页和 Sidebery 的展开宽度，现在二者使用相同的展开宽度。可通过 `uc.flex.increase-sidebery-expanded-width` 选项加宽原生垂直标签页的展开宽度。
@@ -85,11 +122,6 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 * 为 PDF 查看器窗口和菜单添加了半透明背景支持，在启用 Mica 或自定义壁纸并打开 `browser.tabs.allow_transparent_browser` 选项时生效。
 * 修复了在不同显示缩放比例下菜单图标位置偏移的问题。
 * 修复了在不同显示缩放比例下原生垂直标签页未能正确居中的问题。
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>历史更新</b></summary>
 
 **v4.0.4**
 * 修复了 Nightly v143 的变更导致内置页面半透明背景失效的问题。 [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
@@ -488,7 +520,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.remove-bookmarks-folder-icons` | `true` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | `true` | 移除书签文件夹的文字标签。 |
 | `uc.flex.show-flexfox-version-info-in-about-config` | `true` | 在 `about:config` 頁面顯示 FlexFox 已安裝的提示訊息，並附帶當前版本號。 |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | 在原生垂直标签页处于“展开模式”时，在已固定的标签页和普通标签页之间显示分隔线（默认情况下该分隔线为隐藏）。 |
+| `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | 在原生垂直标签页展开状态下显示固定标签页与普通标签页之间的分隔线。Firefox 默认只在悬停时显示，FlexFox 则始终显示。分隔线可拖动，用于调整固定标签页面板的高度。 |
 | `uc.flex.move-pip-volume-to-top` | `true` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
@@ -523,7 +555,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.sidebery-fast-hover-expand` | `true` | 加快 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | 减慢 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | 将导航栏和书签栏的动画速度统一为 Sidebery／垂直标签页的速度。启用 Mica 或壁纸时自动生效。 |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `4`-`6` | 设置原生垂直标签页中每列可显示的固定标签页数量上限（可选值为数值，范围 4–6）。超过该值时将出现滚动条，可根据使用习惯进行调整。 |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `2`–`5`<br>(`5`) | 设置 Sidebery 和原生垂直标签页的固定标签栏中，每行可显示的标签数量。超过该数值时会自动换到下一行。 |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`–`6`<br>(`4`) | 设置原生垂直标签页中固定标签页的最大可见行数。达到上限后，固定标签页面板会显示滚动条。设为 `0` 时关闭限制，面板高度会随标签数量无限扩展。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 设置查找栏的位置。可选值为字符串：`'top-center-left'` 或 `'1'`（顶部左侧），`'top-right'` 或 `'2'`（右上角），`'bottom-right'` 或 `'3'`（右下角）。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `'1'` 或 `'small'`（较小间距）、`'2'` 或 `'medium'`（默认间距）、`'3'` 或 `'large'`（较大间距）。 |
 

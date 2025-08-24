@@ -86,6 +86,22 @@
     @media (-moz-content-prefers-color-scheme: dark) {
         background-color: #202020 !important;
     }
+    /* Clip background bleed around rounded corners when the UI color scheme is opposite to the page scheme */
+    @media -moz-pref("sidebar.revamp") {
+        @media -moz-pref("sidebar.revamp.round-content-area") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
+            @media (prefers-color-scheme: dark) and (-moz-content-prefers-color-scheme: light),
+                (prefers-color-scheme: light) and (-moz-content-prefers-color-scheme: dark) {
+                clip-path: inset(
+                    0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip)) 0 0 0
+                );
+                @media not -moz-pref("sidebar.position_start") {
+                    clip-path: inset(
+                        0 round 0 var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip)) 0 0
+                    );
+                }
+            }
+        }
+    }
 }
 
 /* ════════════════════════════════════════════════════════════════════
