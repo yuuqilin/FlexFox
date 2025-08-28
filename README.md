@@ -16,7 +16,7 @@ It cuts out visual noise, keeps the UI steady, and stays fast.
 Designed as a flexible base, it lets you shape your ideal interface without bloat.  
 It's not just a new look, it's a better way to browse.  
 
-https://github.com/user-attachments/assets/bd69b970-1480-4352-acb3-e4a8c5db3c1e  
+https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a  
 
 ## 🎉 Major Feature Update
 

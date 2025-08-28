@@ -16,7 +16,7 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 カスタマイズ性の高いベースとして、理想のインターフェースを自由に作れます。  
 見た目を変えるだけではなく、ブラウジングの質そのものを高めるテーマです。  
 
-https://github.com/user-attachments/assets/bd69b970-1480-4352-acb3-e4a8c5db3c1e  
+https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a  
 
 ## 🎉 主な機能アップデート
 
