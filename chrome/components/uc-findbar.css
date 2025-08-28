@@ -68,8 +68,8 @@ findbar {
     position: absolute;
     border-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
     top: calc(var(--uc-findbar-y-position) + var(--uc-findbar-y-offset));
-    right: min(var(--uc-findbar-x-position), calc(100% - 496px));
-    width: 496px;
+    right: min(var(--uc-findbar-x-position), calc(100% - (16em + 264px)));
+    width: calc(16em + 264px);
     height: 40px;
     display: flex;
     align-items: center;

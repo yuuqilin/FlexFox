@@ -26,6 +26,20 @@
             --uc-hover-toolbar-delay: 200ms;
         }
 
+        /* Border color for pinned tabs */
+        --uc-sb-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
+        /* Border color for unloaded pinned tabs */
+        --uc-sb-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
+        /* Background color for the active tab */
+        --uc-sb-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
+        /* Inner border shadow (outline) for the active tab */
+        --uc-sb-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+        /* Drop shadow beneath the active tab */
+        --uc-sb-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+
+        --tabs-activated-bg: var(--uc-sb-active-tab-bgcolor) !important;
+        --active-el-shadow: inset var(--uc-sb-active-tab-border-shadow), var(--uc-sb-active-tab-drop-shadow) !important;
+
         /* Tabs per row for native vertical pinned tabs and Sidebery (controlled by per-tab percentage width) */
         --uc-sb-pinned-tab-max-columns: 19%;
         @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 4) {
@@ -52,6 +66,13 @@
                 -webkit-text-stroke: 0.03em;
             }
         }
+    }
+
+    .tab-wrapper .Tab .body {
+        border: 1.5px solid var(--uc-sb-pinned-tab-border-color) !important;
+    }
+    .tab-wrapper .Tab[data-discarded="true"] .body {
+        border: 1px solid var(--uc-sb-pinned-tab-unloaded-border-color) !important;
     }
 
     #root {

@@ -72,8 +72,6 @@ user_pref("uc.flex.increase-sidebery-expanded-width",           false);
 user_pref("uc.flex.increase-navbar-height",                     false);
 /* Switches to a different, condensed extension panel. */
 user_pref("uc.flex.switch-to-alternate-condensed-panel",        false);
-/* Sets animation duration for Firefox's native auto-collapse (only used if `sidebar.visibility` is set to `expand-on-hover`). */
-user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 /* Speeds up the hover expand/collapse transitions for Sidebery. */
 user_pref("uc.flex.sidebery-fast-hover-expand",                 false);
 /* Slows down the hover expand/collapse transitions for Sidebery. */
@@ -88,6 +86,14 @@ user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
 user_pref("uc.flex.findbar-position",                     "top-right");
 /* Sets vertical spacing between items in app/bookmark/context menus (string: "1"/"small", "2"/"medium", "3"/"large"). */
 user_pref("uc.flex.menu-item-spacing",                        "small");
+
+/* ⚙️ Native Firefox Settings */
+/* Fades out discarded tabs (manually unloaded) in Firefox's native vertical tabs. */
+user_pref("browser.tabs.fadeOutExplicitlyUnloadedTabs",          true);
+/* Fades out pending tabs (waiting to be restored at startup) in Firefox's native vertical tabs. */
+user_pref("browser.tabs.fadeOutUnloadedTabs",                   false);
+/* Sets animation duration for Firefox's native auto-collapse (only used if `sidebar.visibility` is set to `expand-on-hover`). */
+user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 
 /* 🧊 Visual Background & Mica Effects */
 /* Enables native Mica backdrop (Windows 11 only; requires System theme). */

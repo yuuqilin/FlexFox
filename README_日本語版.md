@@ -16,9 +16,13 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 カスタマイズ性の高いベースとして、理想のインターフェースを自由に作れます。  
 見た目を変えるだけではなく、ブラウジングの質そのものを高めるテーマです。  
 
-![Mica 効果とカード風に浮かぶウェブコンテンツを表示する FlexFox](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/FlexFox-overview.webp) 
+https://github.com/user-attachments/assets/bd69b970-1480-4352-acb3-e4a8c5db3c1e  
 
-## **🧊 v4.0.0 – 主な機能アップデート**
+## 🎉 主な機能アップデート
+
+<details>  
+<summary>🧊 <b>新機能：半透明Mica効果とカスタム壁紙背景に対応</b> <i>[クリックで展開]</i> 👇</summary>
+
 * Windows 11 の **Mica 背景効果** に対応しました。
   * 有効にするには、`about:config` に以下の設定を追加してください：
     ```
@@ -74,28 +78,25 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
   * 統一後は、`uc.flex.sidebery-fast-hover-expand` または `uc.flex.sidebery-slow-hover-expand` を使って、ナビゲーションバーやブックマークツールバーの速度も調整できます。
   * Mica やカスタム壁紙を有効にすると、FlexFox が内部的にアニメーション速度を自動で統一するため、その場合はこのオプションを手動で設定する必要はありません。
 
-## 🆕 最新情報
+</details>
 
-**🦊 v4.5.0**
-* Sidebery の展開／折りたたみアニメーションを再構築し、より滑らかで自然な動きに改善しました。
-* Sidebery をサイドバーのボタンと中央揃えで整列しました。
-* ネイティブ垂直タブの外観を最適化しました：
-  * Sidebery と統一感のあるデザインになり、切り替えがスムーズになりました。
-  * タブグループラベルの背景色を柔らかくし、閲覧中の視認性を向上させました。
-  * 音声再生アイコンをサイトアイコンと重ねて省スペース化しました。
-  * アクティブなタブが一目で分かるように強調表示を改善しました。
-  * ピン留めタブを背景色の強調から控えめな枠線表示に変更しました。
-* ピン留めタブパネルを再構築しました：
-  * `uc.flex.max-visible-horizontal-pinned-tabs` を追加。1 行に表示するピン留めタブの数を 2～5 で設定できます（既定値 5）。
-  * Sidebery とネイティブ垂直タブの両方に対応しています。
-  * `uc.flex.max-visible-vertical-pinned-tabs` は `0`（制限なし）も設定可能になり、タブ数に応じて自動的に拡張されます。
-* ピン留めタブと通常タブの間にある仕切り線を改善しました：
-  * `uc.flex.show-pin-tabs-separator-in-expanded-state` で有効化できます（デフォルトでは無効）。
-  * 長さを短くして中央に配置し、視覚的な干渉を抑えました。
-  * ホバー時のみ全体に展開されるようになり、高さ調整は可能なまま、通常のタブ操作を妨げません。
-* ブックマークスターのホバーや編集時の表示を直感的な動作に合わせて改善しました。
-* ブラウザーのテーマとウェブサイトの配色が異なる場合に発生していた角丸部分の背景のはみ出しを修正しました。
-* Nightly v144 の変更によりサイドバーのツールが展開できなかった問題を修正しました。 [Bug 1972629](https://bugzilla.mozilla.org/show_bug.cgi?id=1972629)  
+<details>  
+<summary>🧩 <b>新機能：ピン留めタブパネルのグリッドレイアウトをカスタマイズ可能に</b> <i>[クリックで展開]</i> 👇</summary>
+
+* `uc.flex.max-visible-horizontal-pinned-tabs` を追加し、ピン留めタブパネルの 1 行に表示するタブ数（横方向）を設定できます。  
+  * Sidebery とネイティブ垂直タブの両方に対応。  
+  * 設定範囲は `2`～`5`（既定値 `5`）。  
+
+* `uc.flex.max-visible-vertical-pinned-tabs` を追加し、ピン留めタブパネルの 1 列に表示するタブ数（縦方向）を設定できます。  
+  * ネイティブ垂直タブ専用で、パネルの高さを制限します。  
+  * ピン留めタブが設定値を超える場合、残りのタブはスクロールバーで表示できます。  
+  * 設定範囲は `4`～`6`（既定値 `4`）。  
+  * `0` を設定すると高さ制限が解除され、タブ数に応じて無制限に拡張します。  
+
+* `uc.flex.show-pin-tabs-separator-in-expanded-state` を追加し、釘選タブパネルの分隔線を常に表示できるようにしました。  
+  * ネイティブ垂直タブ専用。  
+  * このオプションを有効にすると高さ制限が解除され、区切り線をドラッグして高さを自由に調整できます。  
+
   <p>
     <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-resize.webp"
          alt="新しいネイティブ垂直タブの仕切り線（ホバー時／リサイズ可能状態）"
@@ -108,63 +109,6 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
          height="510" hspace=15 />
   </p>
 
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
-
-**v4.0.5**
-* v142で追加された折りたたみタブグループのオーバーフローカウンターに対応しました。 [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
-* タブグループのデザインを調整し、サイズや配置を改善しました。
-* ネイティブ垂直タブとSideberyの展開幅を統一しました。両者は同じ幅になり、`uc.flex.increase-sidebery-expanded-width` オプションを使うことでネイティブ垂直タブの展開幅をさらに広げることができます。
-* ネイティブ垂直タブにカーソルを合わせた際、ピン留めタブの幅が早く変わってしまう問題を修正しました。
-* v4.0.4で導入された組み込みページの半透明効果における表示不具合を修正しました。
-* PDFビューアウィンドウとメニューに半透明背景のサポートを追加しました。Micaやカスタム壁紙が有効で、`browser.tabs.allow_transparent_browser` を使用している場合に適用されます。
-* 表示スケーリングを変更した際にメニューアイコンがずれて表示される問題を修正しました。
-* 表示スケーリングを変更した際にネイティブ垂直タブが中央に配置されない問題を修正しました。
-
-**v4.0.4**
-* Nightly v143 の変更により、組み込みページの半透明背景が表示されなくなっていた問題を修正しました。 [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
-* v141 の変更により、テーマの背景画像がブックマークツールバーとナビゲーションバーの間でずれて、画像が途切れて見える問題を修正しました。 [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
-* ネイティブ垂直タブが折りたたみ状態のときに、タブのハイライトが中央に配置されない問題を修正しました。 #17
-* アドレスバーにフォーカスしたときの内側の陰影効果を調整しました。 #17
-* macOS 風ウィンドウ操作ボタンの色をカスタマイズできる変数を追加しました。 #17
-
-  ```css
-    --uc-osx-ctrls-close-fill
-    --uc-osx-ctrls-maximize-fill
-    --uc-osx-ctrls-minimize-fill
-    --uc-osx-ctrls-close-stroke
-    --uc-osx-ctrls-maximize-stroke
-    --uc-osx-ctrls-maximize-restore-stroke
-    --uc-osx-ctrls-minimize-stroke
-  ```
-
-**v4.0.3**
-* Nightly v143 の変更によって発生していたレイアウトの不具合を修正しました。メニューバー有効時の背景画像のズレ、および `uc.flex.disable-bookmarks-autohide` を有効にした際のサイドバーのストライプの位置ズレが含まれます。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
-* Firefox 141 Beta 2 の変更により水平タブモードで消えていたサイドバーのストライプ色を復元しました。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
-
-**v4.0.2**
-* Nightly v143 の仕様変更により、ブックマークのサブフォルダーに設定したカラーアイコンが表示されなくなっていた問題を修正しました。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
-* Nightly v143 の変更によって非表示になっていた、折りたたみ状態の垂直タブ下部のセパレーターを復元しました。[Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
-* Nightly v143 の変更により発生していた、折りたたみ状態の垂直タブの表示位置ズレを修正しました（タブやアイコンが中央から左にずれて表示されていた問題）。[Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
-
-**v4.0.1**
-* `browser.tabs.allow_transparent_browser` を有効にした状態で Mica バックドロップまたはカスタム壁紙を使用している場合：
-  * 「設定」「アドオンマネージャー」「新しいタブ」などの組み込みページに半透明の背景を追加。  
-
-    <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/translucent-about-preferences.webp" alt="「設定」ページ（`about:preferences`）に適用された半透明の背景効果" width="96%" />
-
-  * アドレスバーのドロップダウンと検索バーに背景のぼかし効果を追加。
-  * カスタム壁紙モードでは、ドロップダウン全体にぼかしが適用され、ナビゲーションバーの上にも効果が反映されます。
-* カスタム壁紙モード時のメニューの透明度が `uc.flex.browser-wallpaper-transparency-level` の設定値に従うようになり、壁紙の透明度と一致するようになりました。
-* アプリメニューおよびコンテキストメニューで、これまでアイコンがなかった3項目にアイコンを追加。
-* Firefox Nightly v143 の仕様変更により、アドレスバーのスタイルが適用されなくなっていた問題を修正（[Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)）。
-
-以前のバージョンの更新履歴については  
-👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
-
-<a href="#updates-top-start">⏫ アップデート一覧の先頭へ戻る</a>
 </details>
 
 <details>  
@@ -341,6 +285,138 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 > [!IMPORTANT]
 > FlexFox を垂直タブモードで使用する際は、「サイドバーのカスタマイズ」にある「カーソルを合わせた時にサイドバーを展開する」オプションを **無効** にしてください。多くの機能はこの設定が必要です。
+
+## 🆕 最新情報
+
+**🦊 v4.5.1**
+* Firefox v142 で発生したリグレッションを修正。「サイドバーのカスタマイズ」 → 「カーソルを合わせた時にサイドバーを展開する」を有効にすると、ネイティブ垂直タブが繰り返し展開／折りたたみされる問題が解消されました。 [Bug 1957008](https://bugzilla.mozilla.org/show_bug.cgi?id=1957008)  
+  （注意: このオプションを有効にすると FlexFox の最適化が無効化されるため、通常利用では推奨されません。）
+* 検索バーの幅を修正。文字サイズの拡大・縮小設定によって幅が長すぎたり短すぎたりする問題を解消しました。
+* ピン留めされたタブとアクティブなタブの背景色や枠線色をカスタマイズできる変数を追加しました:
+  * **ネイティブ垂直タブ** 用: `components\uc-user-settings.css` に追加してください。
+    ```css
+    /* ピン留めされたタブの枠線色 */
+    --uc-vt-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
+    /* 読み込まれていないピン留めタブの枠線色 */
+    --uc-vt-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
+    /* アクティブなタブの背景色 */
+    --uc-vt-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
+    /* アクティブなタブの内側の枠線シャドウ（アウトライン） */
+    --uc-vt-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+    /* アクティブなタブの下に表示されるドロップシャドウ */
+    --uc-vt-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+    ```
+  * **Sidebery** 用: `content\uc-custom-content.css` に追加してください。
+    ```css
+    /* ピン留めされたタブの枠線色 */
+    --uc-sb-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
+    /* 読み込まれていないピン留めタブの枠線色 */
+    --uc-sb-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
+    /* アクティブなタブの背景色 */
+    --uc-sb-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
+    /* アクティブなタブの内側の枠線シャドウ（アウトライン） */
+    --uc-sb-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+    /* アクティブなタブの下に表示されるドロップシャドウ */
+    --uc-sb-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+    ```
+* 未読み込みのタブの見た目を Sidebery と同じ挙動に変更しました:
+  * Firefox には未読み込みタブの表示を制御する 2 つの設定があります:
+    * `browser.tabs.fadeOutExplicitlyUnloadedTabs` — 破棄されたタブを制御（既定: 有効）
+    * `browser.tabs.fadeOutUnloadedTabs` — 起動時に復元される保留中のタブを制御（既定: 無効）
+  * Firefox の既定動作では、未読み込みタブのアイコンはグレースケール化されフェードアウトしますが、ラベル文字列はそのまま表示されます。
+  * FlexFox では Sidebery と同じ挙動に変更しました。アイコンはカラーのままラベルと同時にフェードアウトし、より統一感があり見やすい表示になります。
+  * Sidebery と同じ効果を得たい場合は、上記 2 つの設定を有効にしてください。利用したくない場合は無効のままで構いません。
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
+
+**v4.5.0**
+* Sidebery の展開／折りたたみアニメーションを再構築し、より滑らかで自然な動きに改善しました。
+* Sidebery をサイドバーのボタンと中央揃えで整列しました。
+* ネイティブ垂直タブの外観を最適化しました：
+  * Sidebery と統一感のあるデザインになり、切り替えがスムーズになりました。
+  * タブグループラベルの背景色を柔らかくし、閲覧中の視認性を向上させました。
+  * 音声再生アイコンをサイトアイコンと重ねて省スペース化しました。
+  * アクティブなタブが一目で分かるように強調表示を改善しました。
+  * ピン留めタブを背景色の強調から控えめな枠線表示に変更しました。
+* ピン留めタブパネルを再構築しました：
+  * `uc.flex.max-visible-horizontal-pinned-tabs` を追加。1 行に表示するピン留めタブの数を 2～5 で設定できます（既定値 5）。
+  * Sidebery とネイティブ垂直タブの両方に対応しています。
+  * `uc.flex.max-visible-vertical-pinned-tabs` は `0`（制限なし）も設定可能になり、タブ数に応じて自動的に拡張されます。
+* ピン留めタブと通常タブの間にある仕切り線を改善しました：
+  * `uc.flex.show-pin-tabs-separator-in-expanded-state` で有効化できます（デフォルトでは無効）。
+  * 長さを短くして中央に配置し、視覚的な干渉を抑えました。
+  * ホバー時のみ全体に展開されるようになり、高さ調整は可能なまま、通常のタブ操作を妨げません。
+* ブックマークスターのホバーや編集時の表示を直感的な動作に合わせて改善しました。
+* ブラウザーのテーマとウェブサイトの配色が異なる場合に発生していた角丸部分の背景のはみ出しを修正しました。
+* Nightly v144 の変更によりサイドバーのツールが展開できなかった問題を修正しました。 [Bug 1972629](https://bugzilla.mozilla.org/show_bug.cgi?id=1972629)  
+  <p>
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-resize.webp"
+         alt="新しいネイティブ垂直タブの仕切り線（ホバー時／リサイズ可能状態）"
+         height="510" hspace=15 />
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-collapsed.webp"
+         alt="新しいネイティブ垂直タブの仕切り線（パネル折りたたみ時）"
+         height="510" hspace=15 />
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-expanded.webp"
+         alt="新しいネイティブ垂直タブの仕切り線（パネル展開時）"
+         height="510" hspace=15 />
+  </p>
+
+**v4.0.5**
+* v142で追加された折りたたみタブグループのオーバーフローカウンターに対応しました。 [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
+* タブグループのデザインを調整し、サイズや配置を改善しました。
+* ネイティブ垂直タブとSideberyの展開幅を統一しました。両者は同じ幅になり、`uc.flex.increase-sidebery-expanded-width` オプションを使うことでネイティブ垂直タブの展開幅をさらに広げることができます。
+* ネイティブ垂直タブにカーソルを合わせた際、ピン留めタブの幅が早く変わってしまう問題を修正しました。
+* v4.0.4で導入された組み込みページの半透明効果における表示不具合を修正しました。
+* PDFビューアウィンドウとメニューに半透明背景のサポートを追加しました。Micaやカスタム壁紙が有効で、`browser.tabs.allow_transparent_browser` を使用している場合に適用されます。
+* 表示スケーリングを変更した際にメニューアイコンがずれて表示される問題を修正しました。
+* 表示スケーリングを変更した際にネイティブ垂直タブが中央に配置されない問題を修正しました。
+
+**v4.0.4**
+* Nightly v143 の変更により、組み込みページの半透明背景が表示されなくなっていた問題を修正しました。 [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
+* v141 の変更により、テーマの背景画像がブックマークツールバーとナビゲーションバーの間でずれて、画像が途切れて見える問題を修正しました。 [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
+* ネイティブ垂直タブが折りたたみ状態のときに、タブのハイライトが中央に配置されない問題を修正しました。 #17
+* アドレスバーにフォーカスしたときの内側の陰影効果を調整しました。 #17
+* macOS 風ウィンドウ操作ボタンの色をカスタマイズできる変数を追加しました。 #17
+
+  ```css
+    --uc-osx-ctrls-close-fill
+    --uc-osx-ctrls-maximize-fill
+    --uc-osx-ctrls-minimize-fill
+    --uc-osx-ctrls-close-stroke
+    --uc-osx-ctrls-maximize-stroke
+    --uc-osx-ctrls-maximize-restore-stroke
+    --uc-osx-ctrls-minimize-stroke
+  ```
+
+**v4.0.3**
+* Nightly v143 の変更によって発生していたレイアウトの不具合を修正しました。メニューバー有効時の背景画像のズレ、および `uc.flex.disable-bookmarks-autohide` を有効にした際のサイドバーのストライプの位置ズレが含まれます。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
+* Firefox 141 Beta 2 の変更により水平タブモードで消えていたサイドバーのストライプ色を復元しました。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
+
+**v4.0.2**
+* Nightly v143 の仕様変更により、ブックマークのサブフォルダーに設定したカラーアイコンが表示されなくなっていた問題を修正しました。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
+* Nightly v143 の変更によって非表示になっていた、折りたたみ状態の垂直タブ下部のセパレーターを復元しました。[Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
+* Nightly v143 の変更により発生していた、折りたたみ状態の垂直タブの表示位置ズレを修正しました（タブやアイコンが中央から左にずれて表示されていた問題）。[Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
+
+**v4.0.1**
+* `browser.tabs.allow_transparent_browser` を有効にした状態で Mica バックドロップまたはカスタム壁紙を使用している場合：
+  * 「設定」「アドオンマネージャー」「新しいタブ」などの組み込みページに半透明の背景を追加。  
+
+    <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/translucent-about-preferences.webp" alt="「設定」ページ（`about:preferences`）に適用された半透明の背景効果" width="96%" />
+
+  * アドレスバーのドロップダウンと検索バーに背景のぼかし効果を追加。
+  * カスタム壁紙モードでは、ドロップダウン全体にぼかしが適用され、ナビゲーションバーの上にも効果が反映されます。
+* カスタム壁紙モード時のメニューの透明度が `uc.flex.browser-wallpaper-transparency-level` の設定値に従うようになり、壁紙の透明度と一致するようになりました。
+* アプリメニューおよびコンテキストメニューで、これまでアイコンがなかった3項目にアイコンを追加。
+* Firefox Nightly v143 の仕様変更により、アドレスバーのスタイルが適用されなくなっていた問題を修正（[Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)）。
+
+以前のバージョンの更新履歴については  
+👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
+
+<a href="#updates-top-start">⏫ アップデート一覧の先頭へ戻る</a>
+</details>
 
 ## ✨ 特徴
 
@@ -545,8 +621,6 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.increase-sidebery-expanded-width` | `true` | Sidebery と Firefox 標準の縦型タブを展開したときの幅を広くします。 |
 | `uc.flex.increase-navbar-height` | `true` | 以前のFlexFoxバージョンで使用されていた、より厚みのあるナビゲーションバーの高さを復元します。現在のデフォルト（Firefox本来のコンパクトな高さ）を上書きします。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
-| `sidebar.visibility` | `expand-on-hover` | FlexFoxが提供する垂直タブの自動折りたたみ機能とレイアウトを無効にします。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** にチェックを入れることでも適用できます。このモードでは、サイドバーの幅を自由に調整したり、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみを切り替えたりできます。 |
-| `sidebar.animation.expand-on-hover.duration-ms` | `120` | `sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーションの速度を制御するFirefoxのネイティブ設定です。 |
 | `uc.flex.sidebery-fast-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Sidebery／垂直タブと同じ速度でツールバーを統一。Mica またはカスタム壁紙使用時は自動適用。 |
@@ -554,6 +628,14 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`–`6`<br>(`4`) | ネイティブ垂直タブで固定タブの行数の上限を設定します。上限を超えると固定タブパネルにスクロールバーが表示されます。`0` に設定すると制限が解除され、パネルがタブ数に応じて無制限に拡張されます。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `'top-center-left'` または `'1'`（左寄せ上部）、`'top-right'` または `'2'`（右上）、`'bottom-right'` または `'3'`（右下）です。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Firefoxのアプリメニュー、ブックマークメニュー、右クリックメニューにおける項目同士の垂直間隔を設定します。指定可能な値は文字列 `'1'` または `'small'`（狭い間隔）、`'2'` または `'medium'`（標準の間隔）、`'3'` または `'large'`（広い間隔）です。 |
+
+#### ⚙️ Firefox ネイティブ設定
+| 設定名 | 値 | 説明 |
+|--------|:------:|--------|
+| `browser.tabs.fadeOutExplicitlyUnloadedTabs` | `true` | ネイティブの Firefox 設定で、垂直サイドバー内の破棄されたタブをフェードアウト表示にします。 |
+| `browser.tabs.fadeOutUnloadedTabs` | `true` | ネイティブの Firefox 設定で、垂直サイドバー内の起動時に復元待ちのタブをフェードアウト表示にします。 |
+| `sidebar.visibility` | `expand-on-hover` | FlexFoxが提供する垂直タブの自動折りたたみ機能とレイアウトを無効にします。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** にチェックを入れることでも適用できます。このモードでは、サイドバーの幅を自由に調整したり、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみを切り替えたりできます。 |
+| `sidebar.animation.expand-on-hover.duration-ms` | `120` | ネイティブの Firefox 設定で、`sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーション速度を制御します。 |
 
 #### 🧊 背景の見た目とMica効果
 

@@ -1,7 +1,7 @@
 #sidebar-box {
     max-width: calc(100% - 496px) !important;
     @media -moz-pref("sidebar.revamp") {
-        max-width: calc(100% - var(--uc-sidebar-stripe-width) - 496px) !important;
+        max-width: calc(100% - var(--uc-sidebar-stripe-width) - (16em + 264px)) !important;
     }
     min-width: var(--uc-sidebar-stripe-width) !important;
 }
@@ -670,10 +670,8 @@
         background-image: var(--uc-sb-sidebar-main-background-image, inherit) !important;
         opacity: var(--uc-sb-sidebar-main-opacity, 1);
         will-change: min-height, max-height, overflow, background-color;
-        /*
-        &:not([sidebar-ongoing-animations]) {
-        */
-        transition:
+        @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
+            transition:
                 /*
                 min-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay),
@@ -692,25 +690,30 @@
                 background-image var(--uc-sb-sidebar-main-background-duration, 0ms) var(--uc-autohide-transition-type)
                     var(--uc-sb-sidebar-main-background-delay, 0ms) allow-discrete,
                 */
-            opacity var(--uc-sb-sidebar-main-opacity-duration, var(--uc-autohide-transition-duration))
-                var(--uc-autohide-transition-type)
-                var(--uc-sb-sidebar-main-opacity-delay, calc(var(--uc-autohide-sidebar-delay) + 10ms)),
-            /** 
+                opacity var(--uc-sb-sidebar-main-opacity-duration, var(--uc-autohide-transition-duration))
+                    var(--uc-autohide-transition-type)
+                    var(--uc-sb-sidebar-main-opacity-delay, calc(var(--uc-autohide-sidebar-delay) + 10ms)),
+                /** 
                  * Although z-index is listed as an animatable integer on MDN,
                  * Firefox treats it as a discrete property that requires 'allow-discrete'
                  * for transition delays to take effect.
                  * To avoid ambiguity, we still apply a manual delay equal to other
                  * properties' delay + duration, ensuring the change happens after animation ends.
                  */
-                z-index 0ms linear
-                calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms) allow-discrete;
-        /*
+                    z-index 0ms linear
+                    calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms)
+                    allow-discrete;
         }
-        */
         /* Enable transitions for discrete properties like overflow or background-image */
         /*
         transition-behavior: allow-discrete;
         */
+        /* !TEMPORARY: Workaround for regression introduced in v142 [Bug 1957008] */
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            transition: opacity var(--uc-sb-sidebar-main-opacity-duration, var(--uc-autohide-transition-duration))
+                var(--uc-autohide-transition-type)
+                var(--uc-sb-sidebar-main-opacity-delay, calc(var(--uc-autohide-sidebar-delay) + 10ms));
+        }
     }
     #sidebar-main:hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-height) !important;
@@ -745,10 +748,8 @@
         background-color: var(--uc-bgcolor) !important;
         background-image: inherit !important;
         opacity: 1;
-        /*
-        &:not([sidebar-ongoing-animations]) {
-        */
-        transition:
+        @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
+            transition:
                 /*
                 min-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay),
@@ -764,12 +765,15 @@
                 background-color 0ms var(--uc-autohide-transition-type) 0ms,
                 background-image 0ms var(--uc-autohide-transition-type) 0ms allow-discrete,
                 */
-            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-hover-sidebar-delay) + 10ms),
-            z-index 0s linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete;
-        /*
+                opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    calc(var(--uc-hover-sidebar-delay) + 10ms),
+                z-index 0s linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete;
         }
-        */
+        /* !TEMPORARY: Workaround for regression introduced in v142 [Bug 1957008] */
+        @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+            transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                calc(var(--uc-hover-sidebar-delay) + 10ms);
+        }
     }
 
     /*
@@ -1255,11 +1259,11 @@
     #sidebar-main[sidebar-launcher-expanded] {
         :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
             /**
-         * Use variables to pass values into the shadow trees. 
-         * These scoped variables are only defined within #pinned-tabs-container.
-         * While the style applies globally to matching <slot> elements, it only takes effect here.
-         * Other instances of slot[part="items-wrapper"] are not grid containers, so they're unaffected.
-         */
+             * Use variables to pass values into the shadow trees. 
+             * These scoped variables are only defined within #pinned-tabs-container.
+             * While the style applies globally to matching <slot> elements, it only takes effect here.
+             * Other instances of slot[part="items-wrapper"] are not grid containers, so they're unaffected.
+             */
             --uc-vt-sroot-grid-template-columns: repeat(auto-fit, minmax(var(--uc-vt-pinned-tab-max-columns), 1fr));
             @media not -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
                 --uc-vt-sroot-overflow-indicator-display: none;
@@ -1273,10 +1277,11 @@
         --uc-expanded-sroot-splitter-bgcolor: transparent;
     }
     /**
-     * Ensure pinned tabs are laid out in 5 columns even when collapsed,
-     * so expanding them doesn't shift the container height and cause the tabs to jump,
-     * which would require users to reposition their mouse.
-     * Requires Firefox v138+. 
+     * Force pinned tabs panel to use a grid layout with a fixed number of columns
+     * (defined by --uc-vt-sroot-grid-template-columns) instead of flex.
+     * This prevents the container height from changing when collapsed or expanded,
+     * so tab positions stay consistent and the mouse pointer does not need to be repositioned.
+     * Requires Firefox v138+.
      */
     slot[part="items-wrapper"] {
         grid-template-columns: var(--uc-vt-sroot-grid-template-columns, inherit) !important;
@@ -1295,12 +1300,12 @@
                 display: none !important;
             }
         }
-        /** 
-         * Restore the pre-v140 bottom border for the pinned tabs separator. 
-         * Firefox v140+ replaced #vertical-pinned-tabs-container-separator with 
-         * #vertical-pinned-tabs-splitter and removed its bottom border.
-         * This rule re-enables the separator when 
-         * `uc.flex.show-pin-tabs-separator-in-expanded-state` is set.
+        /**
+         * Restore the pinned tabs separator in expanded state.
+         * In Firefox v140+, #vertical-pinned-tabs-container-separator was renamed
+         * to #vertical-pinned-tabs-splitter and the separator was hidden.
+         * This rule shows the separator again when
+         * `uc.flex.show-pin-tabs-separator-in-expanded-state` is enabled.
          */
         @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
             /* Show pin tabs separator in expanded state */
@@ -1359,6 +1364,10 @@
         }
     }
 
+    /** 
+     * Replace the bottom border of #tabbrowser-tabs::after with a centered box-shadow line 
+     * for the tools-and-extensions separator. 
+     */
     #tabbrowser-tabs[orient="vertical"][expanded] {
         &::after {
             border-bottom: none !important;
@@ -1392,16 +1401,10 @@
         }
     }
 
-    /* Restore the pre-v143 bottom border for tools-and-extensions separator.
-       In v143, this border was hidden to fix the double-separator issue. */
-    /*
-    #tabbrowser-tabs[orient="vertical"]:not([expanded])[overflow]::after {
-        border-color: color-mix(in srgb, currentColor 25%, transparent) !important;
-    }
-    */
-
-    /* Our own fix to avoid the double separator at the bottom of vertical tabs.
-       Hiding this line (instead of the one above) more closely replicates pre-v140 behavior. */
+    /** 
+     * Hide the tools-and-extensions splitter when not hovered, 
+     * showing the separator only via #tabbrowser-tabs::after. 
+     */
     #sidebar-tools-and-extensions-splitter {
         margin-block-end: 2px !important;
         display: var(--uc-sb-sroot-splitter-display, block) !important;
@@ -1505,6 +1508,55 @@
         }
     }
 
+    /* Fade out discarded tabs (dim icon and label text) */
+    @media -moz-pref("browser.tabs.fadeOutExplicitlyUnloadedTabs") {
+        .tab-icon-image[pending][discarded] {
+            opacity: 0.48 !important;
+            transition-property: filter, opacity;
+            transition-duration: 0s !important;
+            filter: none !important;
+            @media (prefers-color-scheme: dark) {
+                filter: none !important;
+            }
+        }
+        .tabbrowser-tab[pending][discarded] {
+            .tab-text {
+                opacity: 0.52;
+            }
+            .tab-background {
+                :is(#vertical-pinned-tabs-container, #pinned-tabs-container) & {
+                    border: 1.5px solid var(--uc-vt-pinned-tab-unloaded-border-color) !important;
+                }
+            }
+        }
+    }
+
+    /* Fade out pending tabs (dim icon and label text for tabs not yet loaded on startup) */
+    @media -moz-pref("browser.tabs.fadeOutUnloadedTabs") {
+        .tab-icon-image[pending] {
+            opacity: 0.48 !important;
+            transition-property: filter, opacity;
+            transition-duration: 0s !important;
+            filter: none !important;
+            @media (prefers-color-scheme: dark) {
+                filter: none !important;
+            }
+            &[pinned]:not([discarded]) {
+                opacity: 1 !important;
+            }
+        }
+        .tab-text {
+            .tabbrowser-tab[pending] & {
+                opacity: 0.52;
+                /*
+                &[pinned] {
+                    opacity: 1;
+                }
+                */
+            }
+        }
+    }
+
     /* Hide tab audio button and use overlay icon */
     .tab-audio-button {
         :root:not([sidebar-expand-on-hover])
@@ -1534,8 +1586,8 @@
             &:is([soundplaying], [muted], [activemedia-blocked]) {
                 --audio-overlay-extra-background: transparent;
                 background-color: var(--lwt-accent-color);
-                background-image: linear-gradient(var(--audio-overlay-extra-background)),
-                    linear-gradient(var(--toolbox-bgcolor));
+                background-image:
+                    linear-gradient(var(--audio-overlay-extra-background)), linear-gradient(var(--toolbox-bgcolor));
                 -moz-context-properties: fill;
                 fill: var(--tab-selected-textcolor);
                 color-scheme: var(--tab-selected-color-scheme);
@@ -1546,11 +1598,13 @@
                 }
 
                 &[selected] {
-                    background-image: linear-gradient(var(--audio-overlay-extra-background)),
+                    background-image:
+                        linear-gradient(var(--audio-overlay-extra-background)),
                         linear-gradient(var(--tab-selected-bgcolor)), linear-gradient(var(--toolbox-bgcolor));
                 }
                 .browser-toolbox-background:-moz-window-inactive &[selected] {
-                    background-image: linear-gradient(var(--audio-overlay-extra-background)),
+                    background-image:
+                        linear-gradient(var(--audio-overlay-extra-background)),
                         linear-gradient(var(--tab-selected-bgcolor)), linear-gradient(var(--toolbox-bgcolor-inactive));
                 }
             }
@@ -1581,10 +1635,10 @@
         &:hover {
             scale: 1.05;
         }
-        --uc-tab-group-color: color-mix(in oklch, var(--tab-group-color) 90%, transparent);
+        --uc-tab-group-color: color-mix(in oklch, var(--tab-group-color) 87%, transparent);
         --uc-tab-group-color-invert: color-mix(in oklch, var(--tab-group-color-invert) 90%, transparent);
-        --uc-tab-group-color-pale: color-mix(in oklch, var(--tab-group-color-pale) 90%, transparent);
-        --tab-group-label-text-dark: color-mix(in srgb, var(--color-gray-100) 90%, transparent);
+        --uc-tab-group-color-pale: var(--tab-group-color-pale);
+        --tab-group-label-text-dark: var(--color-gray-100);
         color: light-dark(var(--uc-tab-group-color-pale), var(--tab-group-label-text-dark)) !important;
         background-color: light-dark(var(--uc-tab-group-color), var(--uc-tab-group-color-invert)) !important;
         @media (prefers-color-scheme: dark) {
@@ -1614,14 +1668,14 @@
 
             @media -moz-pref("uc.flex.disable-sidebery-autohide") {
                 align-self: auto !important;
-                padding-inline: 2px !important;
+                padding-inline: 16px !important;
                 max-width: 100% !important;
                 font-size: 1rem;
             }
             @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                 :root[titlepreface*="\180e "] & {
                     align-self: auto !important;
-                    padding-inline: 2px !important;
+                    padding-inline: 16px !important;
                     max-width: 100% !important;
                     font-size: 1rem;
                 }
@@ -1744,7 +1798,7 @@
                 #sidebar-main[sidebar-launcher-expanded]:hover & {
                     .tab-group-label {
                         align-self: auto !important;
-                        padding-inline: 2px !important;
+                        padding-inline: 16px !important;
                         font-size-adjust: none;
                         max-width: 100% !important;
                         transition:
@@ -1789,7 +1843,7 @@
                 }
             }
 
-            /* */
+            /* Set transition duration for tab animations */
             #sidebar-main[sidebar-launcher-expanded] {
                 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
                     transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -1877,9 +1931,6 @@
         --uc-expanded-sroot-btn-padding-inline: 5.5px;
         #vertical-tabs-newtab-button {
             margin-inline: auto !important;
-            /*
-            margin-inline: 5.5px !important;
-            */
         }
     }
 }

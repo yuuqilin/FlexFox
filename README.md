@@ -16,9 +16,13 @@ It cuts out visual noise, keeps the UI steady, and stays fast.
 Designed as a flexible base, it lets you shape your ideal interface without bloat.  
 It's not just a new look, it's a better way to browse.  
 
-![FlexFox with Mica effect and floating card-style web content](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/FlexFox-overview.webp)   
+https://github.com/user-attachments/assets/bd69b970-1480-4352-acb3-e4a8c5db3c1e  
 
-## **🧊 v4.0.0 – Major Feature Update**
+## 🎉 Major Feature Update
+
+<details>  
+<summary>🧊 <b>Major Update: Translucent Mica & Custom Wallpaper Backgrounds</b> <i>[Click to expand]</i> 👇</summary>
+
 * Added support for the **Mica visual effect** on Windows 11.
   * To enable Mica, configure the following settings in `about:config`:
     ```
@@ -74,28 +78,25 @@ It's not just a new look, it's a better way to browse.
   * Once unified, you can use `uc.flex.sidebery-fast-hover-expand` or `uc.flex.sidebery-slow-hover-expand` to adjust the animation speed of the navigation bar and bookmarks toolbar.
   * When Mica or custom wallpaper is enabled, FlexFox will automatically unify animation speeds internally, so manual adjustment of this option is not needed in those cases.
 
-## 🆕 What's New
+</details>
 
-**🦊 v4.5.0**
-* Rebuilt Sidebery expand/collapse animation for smoother transitions without jitter.
-* Centered and aligned Sidebery with sidebar buttons.
-* Improved appearance of native vertical tabs:
-  * Unified style with Sidebery for seamless switching.
-  * Softer tab group labels to reduce distraction.
-  * Merged sound indicator with site icon to save space.
-  * Clearer highlight for the active tab to make navigation easier.
-  * Changed pinned tabs from bright backgrounds to subtle outlines for better clarity.
-* Reworked pinned tab panel:
-  * Added `uc.flex.max-visible-horizontal-pinned-tabs` to set how many pinned tabs are shown per row (2–5, default 5).
-  * Works with both Sidebery and native vertical tabs.
-  * Extended `uc.flex.max-visible-vertical-pinned-tabs` option to allow `0` (no limit), so the panel can expand with tab count.
-* Improved separator between pinned and regular tabs:
-  * Controlled by `uc.flex.show-pin-tabs-separator-in-expanded-state` (disabled by default).
-  * Shortened and centered the handle to reduce visual distraction.
-  * Expands to full length only when hovered, keeping resizing available without interfering with normal tab access.
-* Improved logic for bookmark star hover and editing states to better match expected actions.
-* Fixed background bleed issue on rounded corners when browser and website theme modes differ.
-* Fixed a regression in Nightly v144 that broke sidebar tool expansion. [Bug 1972629](https://bugzilla.mozilla.org/show_bug.cgi?id=1972629)  
+<details>  
+<summary>🧩 <b>Major Update: Customizable Grid Layout for Pinned Tab Panel</b> <i>[Click to expand]</i> 👇</summary>
+
+* Added `uc.flex.max-visible-horizontal-pinned-tabs` to set how many pinned tabs are shown per row (horizontal).  
+  * Works with both Sidebery and native vertical tabs.  
+  * Accepts values from `2` to `5` (default `5`).  
+
+* Added `uc.flex.max-visible-vertical-pinned-tabs` to set how many pinned tabs are shown per column (vertical).  
+  * Applies only to native vertical tabs and limits the panel height.  
+  * When the number of pinned tabs exceeds the limit, the overflow can be scrolled.  
+  * Accepts values from `4` to `6` (default `4`).  
+  * Setting it to `0` disables the height limit, allowing the panel to expand freely.  
+
+* Added `uc.flex.show-pin-tabs-separator-in-expanded-state` to always display a separator for the pinned tab panel.    
+  * Applies only to native vertical tabs.  
+  * Enabling this option disables the height limit, allowing the panel height to be freely adjusted with the separator.  
+
   <p>
     <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-resize.webp"
          alt="New native vertical tabs design, splitter in hover state for resizing the panel"
@@ -108,67 +109,6 @@ It's not just a new look, it's a better way to browse.
          height="510" hspace=15 />
   </p>
 
-<!-- END What's New -->
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
-
-<!-- END Release Note -->
-
-**v4.0.5**
-* Added support for the new collapsed tab group overflow counter introduced in v142. [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
-* Updated the appearance of tab groups, including size and alignment adjustments.
-* Unified the expanded width of native vertical tabs and Sidebery. Both now share the same width, and the option `uc.flex.increase-sidebery-expanded-width` can be used to extend the width for native vertical tabs.
-* Fixed an issue where pinned tab width changed too early when hovering over native vertical tabs.
-* Fixed a visual glitch in the translucent effect on built-in pages introduced in v4.0.4.
-* Added translucent background support for the PDF viewer window and menus when Mica or a custom wallpaper is enabled with `browser.tabs.allow_transparent_browser`.
-* Fixed misaligned menu icons at different display scaling levels.
-* Fixed native vertical tabs not centering correctly under different display scaling levels.
-
-**v4.0.4**
-* Fixed an issue in Nightly v143 where translucent backgrounds for built-in pages stopped working. [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
-* Fixed a problem introduced in v141 where the theme background image was misaligned between the Bookmarks Toolbar and Navigation Bar, causing a visible break. [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
-* Fixed an alignment issue where the tab highlight in collapsed native vertical tabs was not centered. #17
-* Adjusted the inner shadow effect when the address bar is focused. #17
-* Added new variables for customizing the colors of macOS-style window control buttons. #17
-
-  ```css
-    --uc-osx-ctrls-close-fill
-    --uc-osx-ctrls-maximize-fill
-    --uc-osx-ctrls-minimize-fill
-    --uc-osx-ctrls-close-stroke
-    --uc-osx-ctrls-maximize-stroke
-    --uc-osx-ctrls-maximize-restore-stroke
-    --uc-osx-ctrls-minimize-stroke
-  ```
-
-**v4.0.3**
-* Fixed layout issues caused by changes in Nightly v143, including misaligned theme background when the menu bar is enabled and incorrect sidebar stripe positioning when `uc.flex.disable-bookmarks-autohide` is set. [Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
-* Restored sidebar stripe color in horizontal tab mode, which was lost due to changes in Firefox 141 Beta 2. [Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
-
-**v4.0.2**
-* Fixed an issue caused by changes in Nightly v143 that prevented colored bookmark subfolder icons from displaying properly. [Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
-* Restored the bottom separator for collapsed vertical tabs, which was missing due to changes in Nightly v143. [Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
-* Corrected a visual alignment issue with collapsed vertical tabs introduced in Nightly v143. Tabs and icons were slightly offset to the left and no longer centered. [Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
-
-**v4.0.1**
-* When using a Mica backdrop or custom wallpaper with `browser.tabs.allow_transparent_browser` enabled:
-  * Added translucent backgrounds for built-in pages like **Settings**, **Add-ons Manager**, and **New Tab**.  
-
-    <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/translucent-about-preferences.webp" alt="Translucent background effect applied to the Settings (`about:preferences`) page" width="96%" />
-    
-  * Enabled background blur for the address bar dropdown and the find bar.
-  * In custom wallpaper mode, the blur effect for the dropdown is fully visible, including areas over the navigation bar.
-* In custom wallpaper mode, menu transparency now follows the `uc.flex.browser-wallpaper-transparency-level` setting, keeping it consistent with the wallpaper's transparency level.
-* Added icons to three previously unthemed items in the App Menu and context menus.
-* Fixed a styling issue with the address bar caused by a selector change in Firefox Nightly v143 ([Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)).
-
-For more update logs from earlier versions,  
-👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))
-
-<a href="#updates-top-start">⏫ Back to the beginning of updates</a>
 </details>
 
 <details>  
@@ -345,6 +285,142 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 > [!IMPORTANT]
 > When using FlexFox in vertical tab mode, make sure the `Expand sidebar on hover` option in `Customize Sidebar` is **unchecked**. Most FlexFox features require this setting to work properly.
+
+## 🆕 What's New
+
+**🦊 v4.5.1**
+* Fixed a regression introduced in Firefox v142 where enabling “Customize Sidebar” → “Expand sidebar on hover” caused the native vertical tabs to repeatedly expand and collapse. [Bug 1957008](https://bugzilla.mozilla.org/show_bug.cgi?id=1957008)  
+  (Note: This option disables FlexFox optimizations, so it is not recommended for everyday use.)
+* Corrected the width of the find bar, which could display too short or too long under different text zoom levels.
+* Added new variables for customizing the background and border colors of pinned and active tabs:
+  * For **native vertical tabs**, add these to `components\uc-user-settings.css`:
+    ```css
+    /* Border color for pinned tabs */
+    --uc-vt-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
+    /* Border color for unloaded pinned tabs */
+    --uc-vt-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
+    /* Background color for the active tab */
+    --uc-vt-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
+    /* Inner border shadow (outline) for the active tab */
+    --uc-vt-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+    /* Drop shadow beneath the active tab */
+    --uc-vt-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+    ```
+  * For **Sidebery**, add these to `content\uc-custom-content.css`:
+    ```css
+    /* Border color for pinned tabs */
+    --uc-sb-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
+    /* Border color for unloaded pinned tabs */
+    --uc-sb-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
+    /* Background color for the active tab */
+    --uc-sb-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
+    /* Inner border shadow (outline) for the active tab */
+    --uc-sb-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+    /* Drop shadow beneath the active tab */
+    --uc-sb-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+    ```
+* Adjusted the appearance of unloaded tabs in native vertical tabs to match Sidebery's behavior:
+  * Firefox has two built-in preferences controlling unloaded tabs:
+    * `browser.tabs.fadeOutExplicitlyUnloadedTabs` — controls discarded tabs (default: enabled)
+    * `browser.tabs.fadeOutUnloadedTabs` — controls pending tabs restored at startup (default: disabled)
+  * In Firefox's default behavior, discarded and pending tab icons are grayscaled and faded, but the tab labels remain fully opaque.
+  * FlexFox changes this to match Sidebery: both icons and labels fade together, while icons remain in color. This provides a more consistent and recognizable look.
+  * To get the same effect as Sidebery, enable both preferences. If you prefer not to use this feature, disable them instead.
+
+<!-- END What's New -->
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
+
+<!-- END Release Note -->
+
+**v4.5.0**
+* Rebuilt Sidebery expand/collapse animation for smoother transitions without jitter.
+* Centered and aligned Sidebery with sidebar buttons.
+* Improved appearance of native vertical tabs:
+  * Unified style with Sidebery for seamless switching.
+  * Softer tab group labels to reduce distraction.
+  * Merged sound indicator with site icon to save space.
+  * Clearer highlight for the active tab to make navigation easier.
+  * Changed pinned tabs from bright backgrounds to subtle outlines for better clarity.
+* Reworked pinned tab panel:
+  * Added `uc.flex.max-visible-horizontal-pinned-tabs` to set how many pinned tabs are shown per row (2–5, default 5).
+  * Works with both Sidebery and native vertical tabs.
+  * Extended `uc.flex.max-visible-vertical-pinned-tabs` option to allow `0` (no limit), so the panel can expand with tab count.
+* Improved separator between pinned and regular tabs:
+  * Controlled by `uc.flex.show-pin-tabs-separator-in-expanded-state` (disabled by default).
+  * Shortened and centered the handle to reduce visual distraction.
+  * Expands to full length only when hovered, keeping resizing available without interfering with normal tab access.
+* Improved logic for bookmark star hover and editing states to better match expected actions.
+* Fixed background bleed issue on rounded corners when browser and website theme modes differ.
+* Fixed a regression in Nightly v144 that broke sidebar tool expansion. [Bug 1972629](https://bugzilla.mozilla.org/show_bug.cgi?id=1972629)  
+  <p>
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-resize.webp"
+         alt="New native vertical tabs design, splitter in hover state for resizing the panel"
+         height="510" hspace=15 />
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-collapsed.webp"
+         alt="New native vertical tabs design, splitter appearance with the panel collapsed"
+         height="510" hspace=15 />
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-expanded.webp"
+         alt="New native vertical tabs design, splitter appearance with the panel expanded"
+         height="510" hspace=15 />
+  </p>
+
+**v4.0.5**
+* Added support for the new collapsed tab group overflow counter introduced in v142. [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
+* Updated the appearance of tab groups, including size and alignment adjustments.
+* Unified the expanded width of native vertical tabs and Sidebery. Both now share the same width, and the option `uc.flex.increase-sidebery-expanded-width` can be used to extend the width for native vertical tabs.
+* Fixed an issue where pinned tab width changed too early when hovering over native vertical tabs.
+* Fixed a visual glitch in the translucent effect on built-in pages introduced in v4.0.4.
+* Added translucent background support for the PDF viewer window and menus when Mica or a custom wallpaper is enabled with `browser.tabs.allow_transparent_browser`.
+* Fixed misaligned menu icons at different display scaling levels.
+* Fixed native vertical tabs not centering correctly under different display scaling levels.
+
+**v4.0.4**
+* Fixed an issue in Nightly v143 where translucent backgrounds for built-in pages stopped working. [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
+* Fixed a problem introduced in v141 where the theme background image was misaligned between the Bookmarks Toolbar and Navigation Bar, causing a visible break. [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
+* Fixed an alignment issue where the tab highlight in collapsed native vertical tabs was not centered. #17
+* Adjusted the inner shadow effect when the address bar is focused. #17
+* Added new variables for customizing the colors of macOS-style window control buttons. #17
+
+  ```css
+    --uc-osx-ctrls-close-fill
+    --uc-osx-ctrls-maximize-fill
+    --uc-osx-ctrls-minimize-fill
+    --uc-osx-ctrls-close-stroke
+    --uc-osx-ctrls-maximize-stroke
+    --uc-osx-ctrls-maximize-restore-stroke
+    --uc-osx-ctrls-minimize-stroke
+  ```
+
+**v4.0.3**
+* Fixed layout issues caused by changes in Nightly v143, including misaligned theme background when the menu bar is enabled and incorrect sidebar stripe positioning when `uc.flex.disable-bookmarks-autohide` is set. [Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
+* Restored sidebar stripe color in horizontal tab mode, which was lost due to changes in Firefox 141 Beta 2. [Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
+
+**v4.0.2**
+* Fixed an issue caused by changes in Nightly v143 that prevented colored bookmark subfolder icons from displaying properly. [Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
+* Restored the bottom separator for collapsed vertical tabs, which was missing due to changes in Nightly v143. [Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
+* Corrected a visual alignment issue with collapsed vertical tabs introduced in Nightly v143. Tabs and icons were slightly offset to the left and no longer centered. [Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
+
+**v4.0.1**
+* When using a Mica backdrop or custom wallpaper with `browser.tabs.allow_transparent_browser` enabled:
+  * Added translucent backgrounds for built-in pages like **Settings**, **Add-ons Manager**, and **New Tab**.  
+
+    <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/translucent-about-preferences.webp" alt="Translucent background effect applied to the Settings (`about:preferences`) page" width="96%" />
+    
+  * Enabled background blur for the address bar dropdown and the find bar.
+  * In custom wallpaper mode, the blur effect for the dropdown is fully visible, including areas over the navigation bar.
+* In custom wallpaper mode, menu transparency now follows the `uc.flex.browser-wallpaper-transparency-level` setting, keeping it consistent with the wallpaper's transparency level.
+* Added icons to three previously unthemed items in the App Menu and context menus.
+* Fixed a styling issue with the address bar caused by a selector change in Firefox Nightly v143 ([Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)).
+
+For more update logs from earlier versions,  
+👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))
+
+<a href="#updates-top-start">⏫ Back to the beginning of updates</a>
+</details>
 
 ## ✨ Features
 
@@ -551,8 +627,6 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 | `uc.flex.increase-sidebery-expanded-width` | `true` | Makes Sidebery and the native vertical tabs wider when expanded. |
 | `uc.flex.increase-navbar-height` | `true` | Restores the thicker navbar height used in earlier FlexFox versions. This change overrides the current default, which matches Firefox's original compact height. |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
-| `sidebar.visibility` | `expand-on-hover` | Disables FlexFox's vertical tabs auto-collapse and layout. This setting can also be applied by checking **“Expand sidebar on hover”** in the sidebar settings. In this mode, you can freely adjust the sidebar width and toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. |
-| `sidebar.animation.expand-on-hover.duration-ms` | `120` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
 | `uc.flex.sidebery-fast-hover-expand` | `true` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Unifies toolbar animation speed with Sidebery/vertical tabs. Auto-applied with Mica or custom wallpaper. |
@@ -560,6 +634,14 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`–`6`<br>(`4`) | Sets the maximum number of visible rows for pinned tabs in the native vertical tabs. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the Findbar's position. Accepts string values: `'top-center-left'` or `'1'` = center-left top, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `'1'` or `'small'` = narrow spacing, `'2'` or `'medium'` = medium spacing, `'3'` or `'large'` = wide spacing. |
+
+#### ⚙️ Native Firefox Settings
+| Preference | Value | Description |
+|-----------|:-------------:|-------------|
+| `browser.tabs.fadeOutExplicitlyUnloadedTabs` | `true` | A native Firefox setting that fades out discarded tabs (manually unloaded) in the native vertical tabs. |
+| `browser.tabs.fadeOutUnloadedTabs` | `true` | A native Firefox setting that fades out pending tabs (waiting to be restored at startup) in the native vertical tabs. |
+| `sidebar.visibility` | `expand-on-hover` | Disables FlexFox's vertical tabs auto-collapse and layout. This setting can also be applied by checking **“Expand sidebar on hover”** in the sidebar settings. In this mode, you can freely adjust the sidebar width and toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. |
+| `sidebar.animation.expand-on-hover.duration-ms` | `120` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
 
 #### 🧊 Visual Background & Mica Effects
 

@@ -496,9 +496,11 @@
         --uc-vt-pinned-tab-max-columns: 50%;
     }
 
-    /* Border color for pinned tabs in vertical tab bar */
+    /* Border color for pinned tabs */
     --uc-vt-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
-    /* Background color for the active tab in vertical tab bar */
+    /* Border color for unloaded pinned tabs */
+    --uc-vt-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
+    /* Background color for the active tab */
     --uc-vt-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
     /* Inner border shadow (outline) for the active tab */
     --uc-vt-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
@@ -917,7 +919,8 @@
                 (
                         var(--tab-collapsed-background-width) + 2 * var(--tab-inner-inline-margin) -
                             var(--uc-sidebar-stripe-width)
-                    ) / 2 + 0.5px
+                    ) /
+                    2 + 0.5px
             );
             &:hover {
                 @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
@@ -942,7 +945,8 @@
                         (
                             var(--tab-collapsed-background-width) + 2 * var(--tab-inner-inline-margin) -
                                 var(--uc-sidebar-stripe-width)
-                        ) / 2 + 0.5px
+                        ) /
+                        2 + 0.5px
                 );
                 /*
                 &[sidebar-positionend] {
@@ -1174,12 +1178,12 @@
     /* Adjust horizontal offset of the bookmarks toolbar background image */
     @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
         &:not(
-                [inFullscreen],
-                [customizing],
-                [titlepreface*="\200b "],
-                [titlepreface*="\200c "],
-                [titlepreface*="\200d "]
-            ) {
+            [inFullscreen],
+            [customizing],
+            [titlepreface*="\200b "],
+            [titlepreface*="\200c "],
+            [titlepreface*="\200d "]
+        ) {
             --uc-theme-bg-x-left-start: calc(-1 * var(--uc-sb-sidebar-width, 0px));
             @media -moz-pref("sidebar.verticalTabs") {
                 --uc-theme-bg-x-left-start: calc(
