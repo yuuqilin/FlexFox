@@ -169,9 +169,11 @@
     border: 0 !important;
 }
 
+/*
 .tabbrowser-tab::after {
     border: 0 !important;
 }
+*/
 
 #urlbar-background,
 .urlbar-background {

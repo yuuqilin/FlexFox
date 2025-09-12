@@ -20,18 +20,38 @@
 */
 
 /* AUTO HIDE SIDE BAR */
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not([sidebar-launcher-expanded]) {
+    @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
+        :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            min-width: var(--uc-sidebar-stripe-width) !important;
+            width: var(--uc-sidebar-stripe-width) !important;
+            max-width: var(--uc-sidebar-stripe-width) !important;
+        }
+    }
+}
 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
     position: relative;
-    min-width: var(--uc-sb-sidebar-width) !important;
-    width: var(--uc-sb-sidebar-width) !important;
-    max-width: var(--uc-sb-sidebar-width) !important;
+    @media not -moz-pref("uc.flex.sidebery-allow-resizable-width"),
+        -moz-pref("uc.flex.fully-hide-sidebery"),
+        (display-mode: fullscreen) {
+        min-width: var(--uc-sb-sidebar-width) !important;
+        width: var(--uc-sb-sidebar-width) !important;
+        max-width: var(--uc-sb-sidebar-width) !important;
+    }
+    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            min-width: var(--uc-sb-sidebar-width) !important;
+            width: var(--uc-sb-sidebar-width) !important;
+            max-width: var(--uc-sb-sidebar-width) !important;
+        }
+    }
     background-color: transparent !important;
     /** 
      * Raise the z-index of Sidebery on hover
      * so it can appear above #tabbrowser-tabbox.
      * When not hovering, keep the z-index low so the tab box shadow stays on top. 
      */
-    @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+    @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
         :root:not([titlepreface*="\180e "]) & {
             /** 
              * Although z-index is listed as an animatable integer on MDN,
@@ -118,6 +138,14 @@
     /* Remove sidebar splitter */
     & + #sidebar-splitter {
         display: none;
+        @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
+            :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                margin-inline-start: -1px !important;
+                display: flex;
+                width: 2px !important;
+                border-width: 0px !important;
+            }
+        }
     }
 
     /* Remove sidebar stripe */
@@ -137,7 +165,7 @@
      * 2. If full hiding of Sidebery is enabled (`uc.flex.fully-hide-sidebery`), auto-hide applies regardless of auto-collapse setting.
      * 3. If in fullscreen mode (`display-mode: fullscreen`), auto-hide also applies regardless of auto-collapse setting. 
      */
-    @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
+    @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")),
         -moz-pref("uc.flex.fully-hide-sidebery"),
         (display-mode: fullscreen) {
         :root:not([sidebar-expand-on-hover], [titlepreface*="\180e "]) & {

@@ -51,6 +51,9 @@
         @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 2) {
             --uc-sb-pinned-tab-max-columns: 49%;
         }
+        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 1) {
+            --uc-sb-pinned-tab-max-columns: 100%;
+        }
     }
 
     /* Add text stroke */
@@ -307,16 +310,18 @@
                     var(--uc-hover-sidebar-delay);
             }
 
-            /** 
-             * The expanded state is determined by width > 50px, but the default collapsed width is 44px.
-             * This leaves a gap between 44px and 50px where margins and padding are unset,
-             * causing a flickering effect. We override them during hover to smooth out the transition. 
-             */
-            .ScrollBox .Tab {
-                margin-left: 7px !important;
-            }
-            .Tab:hover {
-                --tabs-inner-gap: 5px !important;
+            @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
+                /** 
+                 * The expanded state is determined by width > 50px, but the default collapsed width is 44px.
+                 * This leaves a gap between 44px and 50px where margins and padding are unset,
+                 * causing a flickering effect. We override them during hover to smooth out the transition. 
+                 */
+                .ScrollBox .Tab {
+                    margin-left: 7px !important;
+                }
+                .Tab:hover {
+                    --tabs-inner-gap: 5px !important;
+                }
             }
         }
         /* 🔼 End of hover state block */
@@ -436,6 +441,60 @@
         */
         #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
             visibility: visible;
+        }
+    }
+
+    /* Override inline styles when Sidebery is resizable and width < 50px 
+        to prevent layout shifts */
+    @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px) {
+        @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+            #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+                display: none !important;
+            }
+            #root .Tab {
+                --tabs-indent: 0px !important;
+            }
+            #root .PinnedTabsBar .Tab .fav,
+            #root .PinnedTabsBar .Tab .fav-icon {
+                width: 16px !important;
+                height: 16px !important;
+            }
+            #root {
+                .ScrollBox .Tab {
+                    margin-left: 5px !important;
+                }
+                .Tab[data-parent="true"] .exp {
+                    top: 6px !important;
+                    left: -15px !important;
+                }
+                .Tab[data-parent="true"][data-folded="false"] .exp-icon {
+                    top: 4px !important;
+                    left: 5px !important;
+                    width: 14px !important;
+                    height: 14px !important;
+                }
+                .Tab[data-parent="true"] .child-count {
+                    top: 12px !important;
+                    left: 2px !important;
+                }
+            }
+            /* Use #root.root to increase specificity and override inline :hover styles, 
+                so no extra :hover checks are needed in this mode (reducing overhead) */
+            #root.root {
+                .Tab[data-parent="true"][data-folded="false"] .exp {
+                    visibility: visible;
+                }
+                .Tab .close-icon {
+                    visibility: visible;
+                    top: -2px !important;
+                    left: -4px !important;
+                    width: 16px !important;
+                    height: 16px !important;
+                }
+                .Tab .audio {
+                    margin-left: -6px !important;
+                }
+            }
         }
     }
 

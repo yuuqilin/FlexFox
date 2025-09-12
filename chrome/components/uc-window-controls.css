@@ -62,15 +62,13 @@
     }
 }
 
-/* Reposition nav-bar window controls when native vertical tabs are enabled */
-@media -moz-pref("sidebar.verticalTabs") {
-    :root:not([inFullscreen]) #nav-bar > .titlebar-buttonbox-container {
-        margin-top: 2px;
-    }
+/* Reposition nav-bar window controls */
+:root:not([inFullscreen]) #nav-bar > .titlebar-buttonbox-container {
+    margin-top: 2px;
+}
 
-    :root[inFullscreen] #nav-bar > .titlebar-buttonbox-container {
-        margin-top: 0px;
-    }
+:root[inFullscreen] #nav-bar > .titlebar-buttonbox-container {
+    margin-top: 0px;
 }
 
 /* Fix popup position */
@@ -88,8 +86,9 @@
                                                                                                                                       
 ═════════════════════════════════════════════════════════════════════ */
 
+/*
 @media not -moz-pref("sidebar.verticalTabs") {
-    /* Fix issue with missing window controls. */
+    \/* Fix issue with missing window controls. *\/
     #titlebar,
     #TabsToolbar {
         will-change: unset !important;
@@ -97,18 +96,17 @@
         opacity: 1 !important;
     }
 
-    /* ----- Close/min/max fix ----- */
+    \/* ----- Close/min/max fix ----- *\/
     :root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
         #TabsToolbar .titlebar-buttonbox-container {
             visibility: var(--uc-windows-controls-visibility) !important;
-            /*display: block;*/
             position: var(--uc-windows-controls-position) !important;
             top: var(--uc-windows-controls-top) !important;
-            /*left: unset !important;*/
             right: calc(var(--uc-windows-controls-right) + var(--uc-sidebar-button-offset)) !important;
         }
     }
 }
+*/
 
 /*
 #TabsToolbar .titlebar-min {
@@ -134,9 +132,11 @@
 */
 
 /* Line up the Windows controls with the rest of the icons in the toolbar. */
+/*
 :root[inFullscreen] .titlebar-buttonbox-container {
     padding-top: 2px;
 }
+*/
 
 .titlebar-buttonbox {
     z-index: 3 !important;
@@ -148,6 +148,114 @@
     width: 35px;
     /* height: 38px; */
     height: var(--uc-titlebar-buttonbox-height);
+}
+
+@media not -moz-pref("sidebar.verticalTabs") {
+    /** 
+     * In horizontal tab mode, control which set of window controls is visible:
+     * 1. Hide the window controls in the tab bar and show the separate set in the navigation bar.
+     * 2. If auto-hide navbar is enabled, switch back to the tab bar window controls instead.
+     * 3. If auto-hide navbar is enabled but Sidebery is active, keep the tab bar window controls hidden.
+     *
+     * This behavior is required because the navbar is moved using transform when hidden. 
+     * The Snap Layouts flyout in Windows does not follow transformed elements, so we need 
+     * to rely on the tab bar window controls, which are not affected by transform.
+     */
+    #TabsToolbar {
+        > .titlebar-spacer[type="post-tabs"] {
+            display: none !important;
+        }
+        > .titlebar-buttonbox-container {
+            display: var(--uc-tabs-toolbar-windows-controls-display, none) !important;
+        }
+    }
+
+    #navigator-toolbox:not([tabs-hidden]) > #nav-bar > .titlebar-buttonbox-container {
+        display: var(--uc-navbar-windows-controls-display, flex) !important;
+    }
+
+    /* When auto-hide navbar is enabled, move the tab bar window controls down to the navigation bar */
+    @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") {
+        #TabsToolbar {
+            z-index: 3;
+            > .titlebar-buttonbox-container {
+                position: absolute !important;
+                top: var(--uc-tabs-toolbar-height) !important;
+                right: 0 !important;
+                @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+                    :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) & {
+                        margin-block-start: var(--uc-navbar-transform);
+                        @media not -moz-pref("uc.flex.auto-hide-window-controls") {
+                            margin-inline-end: var(--uc-tabs-toolbar-windows-controls-margin-right, -104px);
+                            opacity: var(--uc-navbar-opacity, 0);
+                            transition: var(--uc-autohide-tabs-toolbar-windows-controls-transition);
+                        }
+
+                        #navigator-toolbox:is(:hover, :focus-within) & {
+                            margin-block-start: 0;
+                            @media not -moz-pref("uc.flex.auto-hide-window-controls") {
+                                margin-inline-end: 0;
+                                opacity: 1;
+                                transition: var(--uc-hover-tabs-toolbar-windows-controls-transition);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Auto-hide window controls by leaving a small trigger area at the edge of #nav-bar. */
+@media -moz-pref("uc.flex.auto-hide-window-controls") {
+    :where(#nav-bar, #TabsToolbar) > .titlebar-buttonbox-container {
+        @media -moz-pref("sidebar.position_start") {
+            margin-inline-end: -104px;
+            opacity: 0;
+            transition:
+                margin-inline-end 0.5s ease-in-out,
+                opacity 0s 0.5s;
+
+            &:hover {
+                margin-inline-end: 0;
+                opacity: 1;
+                transition-delay: 0s, 0.4s;
+            }
+        }
+        /**
+         * When the sidebar is on the right, #sidebar-button sits at the far edge.
+         * The .titlebar-buttonbox-container would otherwise overlap it and trigger
+         * repeated expand/collapse on hover.
+         *
+         * Fix: keep only a thin strip to the left hoverable, with overflow: hidden
+         * to block child elements from interfering.
+         *
+         * Note: display: none / visibility: collapse are not options,
+         * because Firefox still shows the Snap Layouts flyout at its previous position.
+         */
+        @media not -moz-pref("sidebar.position_start") {
+            width: 4px;
+            opacity: 0;
+            transition:
+                width 0.5s ease-in-out,
+                opacity 0s 0.5s;
+            overflow: hidden;
+
+            &:hover {
+                width: 108px;
+                opacity: 1;
+                transition-delay: 0s, 0.4s;
+            }
+        }
+        @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
+            #navigator-toolbox:not(:hover, :focus-within) & {
+                transition: var(
+                    --uc-sb-tabs-toolbar-windows-controls-transition,
+                    var(--uc-autohide-tabs-toolbar-windows-controls-transition)
+                );
+            }
+        }
+    }
 }
 
 /* ════════════════════════════════════════════════════════════════════
@@ -166,10 +274,35 @@
  * However, since the title bar is not displayed in fullscreen mode, 
  * we need to add Condition B (`:root[inFullscreen]`) to account for that scenario. 
  */
+
+/* Add extra space on the right side of #nav-bar for the sidebar button */
 :root:is([tabsintitlebar], [customtitlebar]):not([customizing]),
 :root[inFullscreen] {
     #nav-bar {
+        padding-right: var(--uc-sidebar-button-offset) !important;
+        /*
         padding-right: calc(var(--uc-nav-bar-padding-right) + var(--uc-sidebar-button-offset)) !important;
+        */
+    }
+}
+
+/* When auto-hide navbar is enabled, add space to the right of #PanelUI-button
+   for the relocated tab bar window controls. Since #nav-bar has its own transition
+   when hidden, the spacing is applied to #PanelUI-button instead to keep things simpler. */
+#PanelUI-button {
+    @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
+        padding-right: var(--uc-sb-nav-bar-padding-right, var(--uc-nav-bar-padding-right));
+        @media -moz-pref("uc.flex.auto-hide-window-controls") {
+            transition: padding-right 0.5s ease-in-out;
+            #TabsToolbar:has(> .titlebar-buttonbox-container:hover) ~ #nav-bar & {
+                padding-right: var(--uc-sb-nav-bar-padding-right, 104px);
+            }
+        }
+        @media not -moz-pref("uc.flex.auto-hide-window-controls") {
+            #toolbar-menubar[inactive="true"] ~ #nav-bar & {
+                --uc-nav-bar-padding-right: 104px;
+            }
+        }
     }
 }
 
@@ -248,12 +381,12 @@
 /* Offset bookmarks toolbar horizontally when Sidebery is visible to prevent overlap with sidebar */
 @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
     :root:not(
-            [inFullscreen],
-            [customizing],
-            [titlepreface*="\200b "],
-            [titlepreface*="\200c "],
-            [titlepreface*="\200d "]
-        ) {
+        [inFullscreen],
+        [customizing],
+        [titlepreface*="\200b "],
+        [titlepreface*="\200c "],
+        [titlepreface*="\200d "]
+    ) {
         #PersonalToolbar {
             margin-left: var(--uc-personal-toolbar-offset);
             width: calc(100% - var(--uc-personal-toolbar-width));

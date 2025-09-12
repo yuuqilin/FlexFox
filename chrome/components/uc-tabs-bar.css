@@ -1,93 +1,286 @@
-/* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
-/* be179ef */
-@media not (-moz-pref("sidebar.verticalTabs") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.disable-tabs-toolbar-autohide")) {
-    :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
-        /* Hide the native horizontal tab bar */
-        &:not([customizing], [chromehidden~="menubar"]) #TabsToolbar {
-            margin-bottom: var(--uc-autohide-bottom);
-        }
-        #navigator-toolbox {
-            transition:
-                background-color var(--inactive-window-transition),
-                margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay),
-                z-index 0ms linear calc(var(--uc-autohide-toolbar-delay) + 80ms + 10ms) allow-discrete !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
-                -moz-pref("uc.flex.browser-wallpaper-enabled") {
-                transition:
-                    background-color var(--inactive-window-transition),
-                    margin-bottom var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay),
-                    z-index 0ms linear
-                        calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms)
-                        allow-discrete !important;
-            }
-        }
-        #TabsToolbar:not([customizing]) {
-            visibility: hidden;
-            transition:
-                visibility 0ms linear var(--uc-tabs-hide-animation-delay),
-                margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay) !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
-                -moz-pref("uc.flex.browser-wallpaper-enabled") {
-                transition:
-                    visibility 0ms linear var(--uc-autohide-sidebar-delay),
-                    margin-bottom var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay) !important;
-            }
-        }
-        /* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
-        #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
-            max-height: var(--tab-min-height);
-        }
-        .tab-label {
-            line-height: 20px !important;
-        }
-        &[uidensity="compact"] .tab-label {
-            line-height: 18px !important;
-        }
-        /* ---- Show tab bar on hover when Sidebery is inactive ---- */
-        &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:hover {
-            margin-bottom: var(--uc-autohide-navigator-bottom);
-        }
-        #navigator-toolbox:hover {
-            /**
-             * When automatic hiding of the bookmarks toolbar is disabled and Sidebery is active,
-             * set z-index to 0 so that Sidebery can appear above the bookmarks toolbar.
-             * In other cases, it should be set to 3 so horizontal tabs can appear above the content area.
-             */
-            --browser-area-z-index-toolbox: var(--uc-sb-bm-disable-autohide-z-index, 3);
-            transition:
-                background-color var(--inactive-window-transition),
-                margin-bottom var(--uc-tabs-hide-animation-duration) ease-out var(--uc-autohide-navigator-delay),
-                z-index 0ms linear 0ms allow-discrete /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
-                -moz-pref("uc.flex.browser-wallpaper-enabled") {
-                transition:
-                    background-color var(--inactive-window-transition),
-                    margin-bottom var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay),
-                    z-index 0ms linear 0ms allow-discrete /* calc(var(--uc-hover-sidebar-delay) - 10ms) */ !important;
-            }
-            /* Direct child selectors can be used starting from version 133 */
-            #TabsToolbar {
-                visibility: var(--uc-autohide-tabstoolbar-visibility);
-                margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
-                transition-delay: var(--uc-autohide-tabstoolbar-delay) !important;
-                @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                    -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
-                    -moz-pref("uc.flex.browser-wallpaper-enabled") {
-                    /*
-                    transition-duration: var(--uc-hover-transition-duration) !important;
-                    transition-delay: var(--uc-hover-sidebar-delay) !important;
-                    */
-                    transition:
-                        visibility 0ms linear var(--uc-hover-sidebar-delay),
-                        margin-bottom var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-hover-sidebar-delay) !important;
+@media not -moz-pref("sidebar.verticalTabs") {
+    @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+        :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
+            /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
+            /* be179ef */
+
+            @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar") and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
+                /* Hide the native horizontal tab bar */
+                &:not([customizing], [chromehidden~="menubar"]) #TabsToolbar {
+                    margin-bottom: var(--uc-autohide-bottom);
                 }
+
+                #TabsToolbar:not([customizing]) {
+                    visibility: hidden;
+                    transition: var(--uc-autohide-tabs-toolbar-transition) !important;
+                }
+                /* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
+                #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
+                    max-height: var(--tab-min-height);
+                }
+                .tab-label {
+                    line-height: 20px !important;
+                }
+                &[uidensity="compact"] .tab-label {
+                    line-height: 18px !important;
+                }
+                /* ---- Show tab bar on hover when Sidebery is inactive ---- */
+                &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:hover {
+                    margin-bottom: var(--uc-autohide-navigator-bottom);
+                }
+                #navigator-toolbox:hover {
+                    /* Direct child selectors can be used starting from version 133 */
+                    #TabsToolbar {
+                        visibility: var(--uc-autohide-tabstoolbar-visibility);
+                        margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
+                        /*
+                        transition-delay: var(--uc-autohide-tabstoolbar-delay) !important;
+                        */
+                        transition: var(--uc-hover-tabs-toolbar-transition) !important;
+                    }
+                }
+
+                /* This reorders toolbar to place tabs below other toolbars. Requires Firefox 133+ */
+                @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 1) {
+                    .global-notificationbox,
+                    #tab-notification-deck,
+                    #notifications-toolbar,
+                    #TabsToolbar {
+                        order: 1;
+                    }
+                    #PersonalToolbar {
+                        order: 2;
+                    }
+                }
+            }
+
+            /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_main_toolbar.css */
+            /* 14d2fa0 */
+
+            /* This style hides the main toolbar and shows it when the cursor is over the tabs toolbar as well as whenever the focus is inside nav-bar, such as when urlbar is focused. */
+
+            @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") {
+                /*
+                --uc-navbar-transform: -40px;
+                --uc-autohide-toolbar-delay: 1.8s;
+                --uc-autohide-toolbar-duration: 400ms;
+                */
+
+                &[uidensity="compact"] {
+                    --uc-navbar-transform: -34px;
+                }
+
+                #navigator-toolbox > div {
+                    display: contents;
+                }
+                &[sessionrestored]
+                    :where(
+                        #nav-bar,
+                        /*
+                        #PersonalToolbar,
+                        */
+                        #tab-notification-deck,
+                        .global-notificationbox,
+                        #notifications-toolbar
+                    ) {
+                    /*
+                    transform: translateY(var(--uc-navbar-transform));
+                    */
+                    transition: var(--uc-autohide-navbar-transition) !important;
+                    transform: translateY(var(--uc-navbar-transform));
+                    opacity: var(--uc-navbar-opacity, 0);
+                }
+                &:is([customizing], [chromehidden*="toolbar"])
+                    :where(
+                        #nav-bar,
+                        #PersonalToolbar,
+                        #tab-notification-deck,
+                        .global-notificationbox,
+                        #notifications-toolbar
+                    ) {
+                    transform: none !important;
+                    opacity: 1 !important;
+                }
+
+                #nav-bar:not([customizing]) {
+                    opacity: var(--uc-navbar-opacity, 0);
+                    transition: var(--uc-autohide-navbar-transition) !important;
+                    position: relative;
+                    z-index: 2;
+                }
+                /*
+                #titlebar {
+                    position: relative;
+                    z-index: 3;
+                }
+                */
+
+                /*
+                #navigator-toolbox,
+                #sidebar-box,
+                #sidebar-main,
+                #sidebar-splitter,
+                #tabbrowser-tabbox {
+                    z-index: auto !important;
+                }
+                */
+
+                /* Show when toolbox is focused, like when urlbar has received focus */
+                /*
+                #navigator-toolbox:focus-within > .browser-toolbar {
+                    transform: translateY(0);
+                    opacity: 1;
+                    transition-duration:
+                        var(--uc-autohide-toolbar-duration), var(--uc-autohide-toolbar-duration) !important;
+                    transition-delay: 0s !important;
+                }
+                */
+
+                /* Show when toolbox is hovered */
+                /*
+                #titlebar:hover ~ .browser-toolbar,
+                .browser-titlebar:hover ~ :is(#nav-bar, #PersonalToolbar),
+                #nav-bar:hover,
+                #nav-bar:hover + #PersonalToolbar {
+                */
+                #navigator-toolbox:is(:hover, :focus-within) > .browser-toolbar {
+                    --uc-tabs-toolbar-windows-controls-transition: var(--uc-hover-navbar-transition);
+                    transform: translateY(0);
+                    opacity: 1;
+                    /*
+                    transition-duration:
+                        var(--uc-autohide-toolbar-duration), var(--uc-autohide-toolbar-duration) !important;
+                    transition-delay: 0s !important;
+                    */
+                    transition: var(--uc-hover-navbar-transition) !important;
+                }
+                &[sessionrestored]:not([customizing]) #urlbar[popover] {
+                    opacity: var(--uc-navbar-opacity, 0);
+                    pointer-events: none;
+                    transition: var(--uc-autohide-navbar-transition);
+                    transform: translateY(var(--uc-navbar-transform));
+                }
+                #mainPopupSet:has(
+                        > [panelopen]:not(
+                                #ask-chat-shortcuts,
+                                #selection-shortcut-action-panel,
+                                #chat-shortcuts-options-panel,
+                                #tab-preview-panel
+                            )
+                    )
+                    ~ toolbox
+                    #urlbar[popover],
+                /*
+                .browser-titlebar:is(:hover, :focus-within) ~ #nav-bar #urlbar[popover],
+                #nav-bar:is(:hover, :focus-within) #urlbar[popover],
+                */
+                #navigator-toolbox:is(:hover, :focus-within) #urlbar[popover],
+                #urlbar-container > #urlbar[popover]:is([focused], [open]) {
+                    opacity: 1;
+                    pointer-events: auto;
+                    /*
+                    transition-delay: 0ms;
+                    */
+                    transition: var(--uc-hover-navbar-transition);
+                    transform: translateY(0);
+                }
+                /*
+                #urlbar-container > #urlbar[popover]:is([focused], [open]) {
+                    transition-duration: 100ms; \/* Faster when focused *\/
+                }
+                */
+                /* This ruleset is separate, because not having :has support breaks other selectors as well */
+                #mainPopupSet:has(
+                        > [panelopen]:not(
+                                #ask-chat-shortcuts,
+                                #selection-shortcut-action-panel,
+                                #chat-shortcuts-options-panel,
+                                #tab-preview-panel
+                            )
+                    )
+                    ~ #navigator-toolbox
+                    > .browser-toolbar {
+                    /*
+                    transition-delay: 33ms !important;
+                    */
+                    transition: var(--uc-hover-navbar-transition);
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+
+                /* If tabs are in sidebar then nav-bar doesn't normally have its own background - so we nee to add it back */
+                /*
+                #nav-bar.browser-titlebar {
+                    background: inherit;
+                }
+                #toolbar-menubar:not([autohide="true"]) ~ #nav-bar.browser-titlebar {
+                    background-position-y: -28px; \/* best guess, could vary *\/
+                    border-top: none !important;
+                }
+                */
+
+                /* Bookmarks toolbar needs so extra rules */
+                &[sessionrestored] #PersonalToolbar {
+                    transform: translateY(var(--uc-navbar-transform));
+                    /*
+                    transition: transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay) !important;
+                    */
+                    position: relative;
+                    z-index: 1;
+                }
+
+                /* Move up the content view */
+                &[sessionrestored]:not([chromehidden~="toolbar"]) > body > #browser {
+                    margin-top: var(--uc-navbar-offset-y);
+                }
+                @media -moz-pref("browser.fullscreen.autohide"), (-moz-bool-pref: "browser.fullscreen.autohide") {
+                    &[sessionrestored][sizemode="fullscreen"] > body > #browser {
+                        margin-top: revert;
+                    }
+                }
+            }
+
+            /** 
+             * Raise the z-index of #navigator-toolbox on hover
+             * so its children can appear above #tabbrowser-tabbox.
+             * When not hovering, keep the z-index low so the tab box shadow stays on top. 
+             */
+            @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar") or -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") {
+                #PersonalToolbar:not([customizing]) {
+                    transition: var(--uc-autohide-personal-toolbar-transition) !important;
+                }
+                #navigator-toolbox {
+                    --browser-area-z-index-toolbox: var(--uc-navigator-z-index);
+                    transition: var(--uc-autohide-navigator-transition) !important;
+                }
+                #navigator-toolbox:hover {
+                    /**
+                     * When automatic hiding of the bookmarks toolbar is disabled and Sidebery is active,
+                     * set z-index to 0 so that Sidebery can appear above the bookmarks toolbar.
+                     * In other cases, it should be set to 5 so horizontal tabs can appear above the content area.
+                     */
+                    --browser-area-z-index-toolbox: var(--uc-sb-bm-disable-autohide-z-index, 5);
+                    transition: var(--uc-hover-navigator-transition) /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
+
+                    #PersonalToolbar {
+                        transition: var(--uc-hover-personal-toolbar-transition) !important;
+                    }
+                }
+            }
+
+            #mainPopupSet:has(
+                    > [panelopen]:not(
+                            #ask-chat-shortcuts,
+                            #selection-shortcut-action-panel,
+                            #chat-shortcuts-options-panel,
+                            #tab-preview-panel
+                        )
+                )
+                ~ #navigator-toolbox {
+                --uc-navigator-z-index: var(--uc-sb-bm-disable-autohide-z-index, 5);
+                --uc-navbar-transform: 0;
+                --uc-navbar-opacity: 1;
+                --uc-tabs-toolbar-windows-controls-margin-right: 0;
             }
         }
     }
@@ -108,6 +301,162 @@ toolbar#TabsToolbar {
 */
 @media not -moz-pref("sidebar.verticalTabs") {
     .toolbar-items {
-        visibility: var(--uc-tab-items-visibility, inherit);
+        visibility: var(--uc-sb-tab-items-visibility, inherit);
+    }
+
+    /* Auto-collapse pinned tabs */
+    #pinned-tabs-container[orient="horizontal"] {
+        --uc-ht-sroot-pinned-tabs-overflow-display: none;
+        max-width: calc(var(--uc-ht-pinned-tab-max-columns) * 40px) !important;
+        transition: max-width calc(var(--uc-autohide-transition-duration) + 200ms) var(--uc-autohide-transition-type)
+            var(--uc-autohide-sidebar-delay);
+        &:hover {
+            max-width: 100vw !important;
+            transition: max-width calc(var(--uc-hover-transition-duration) + 885ms) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay);
+        }
+        /* Move sound-playing tabs to the beginning of the pinned tab container */
+        .tabbrowser-tab:is([soundplaying], [muted]) {
+            order: -1;
+        }
+    }
+
+    /* Hide scroll buttons and overflow shadows for pinned tabs */
+    #scrollbutton-up,
+    #scrollbutton-down,
+    spacer[part="overflow-start-indicator"],
+    spacer[part="overflow-end-indicator"] {
+        display: var(--uc-ht-sroot-pinned-tabs-overflow-display, flex);
+    }
+
+    /* Increase the selected horizontal tab's min-width so its label is easier to read */
+    @media not -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 0) {
+        .tabbrowser-tab[fadein][selected]:not([pinned]):not([style^="max-width"]) {
+            min-width: 138px !important;
+            transition: none !important;
+            @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 2),
+                -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
+                transition: 300ms ease-in-out 0ms !important;
+            }
+            @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 3),
+                -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
+                min-width: 152px !important;
+            }
+        }
+        .tabbrowser-tab[fadein]:not([selected]):not([pinned]):not([style^="max-width"]) {
+            transition: none !important;
+            @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 2),
+                -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
+                transition: 300ms ease-in-out 0ms !important;
+            }
+        }
+    }
+
+    /* Show the tab close button when hovering over non-selected tabs. */
+    @media not (-moz-pref("uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs") or -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover")) {
+        .tabbrowser-tab:not([pinned]) {
+            container-name: tab-width;
+            container-type: inline-size;
+
+            /** 
+             * If the tab width is less than 110px, shrink and move the close button 
+             * to the top-right corner to reduce accidental clicks. 
+             */
+            &:not([selected]) {
+                .tab-close-button {
+                    display: flex !important;
+                    @container tab-width (width < 110px) {
+                        position: absolute !important;
+                        inset: auto;
+                        right: 4px;
+                        top: 4px;
+                        width: 16px !important;
+                        height: 16px !important;
+                        padding: 3px !important;
+                        pointer-events: none;
+                        .tabbrowser-tab:hover & {
+                            opacity: 0.5;
+                            pointer-events: auto;
+                            /*
+                            mask-image: linear-gradient(to left, transparent, black var(--tab-label-mask-size));
+                            */
+                        }
+                        &:hover {
+                            opacity: 1 !important;
+                            /*
+                            mask-image: none !important;
+                            */
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Show Tab close button on hover */
+.tabbrowser-tab:not([pinned]) .tab-close-button {
+    /*
+    display: -moz-box !important;
+    */
+    opacity: 0;
+    visibility: collapse !important;
+    transition:
+        opacity 0.25s,
+        visibility 0.25s ease-in,
+        pointer-events 0s 0.25s allow-discrete !important;
+}
+.tabbrowser-tab:not([pinned]):hover .tab-close-button {
+    opacity: 1;
+    visibility: visible !important;
+    border-radius: 3px 3px 3px 3px !important;
+}
+
+/* Show tab close button when cursor is over the tab icon */
+@media not -moz-pref("sidebar.verticalTabs") {
+    @media -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover") {
+        .tabbrowser-tab:not([pinned]) {
+            .tab-content:has(> .tab-close-button:hover) {
+                --uc-tab-icon-image-visibility: hidden;
+            }
+            .tab-icon-image {
+                visibility: var(--uc-tab-icon-image-visibility, visible);
+            }
+
+            .tab-close-button {
+                order: -1;
+                display: flex !important;
+                position: relative;
+                margin-inline: -4px -20px !important;
+                padding-inline-start: 6px !important;
+                opacity: 0 !important;
+                width: unset !important;
+                z-index: 1;
+            }
+            .tab-close-button:hover {
+                opacity: 1 !important;
+            }
+        }
+    }
+
+    /* Makes the tab audio indicator show as overlay in all tabs, not just pinned ones */
+    .tabbrowser-tab:not([pinned]) {
+        --tab-icon-end-margin: inherit !important;
+
+        .tab-audio-button {
+            --button-size-icon-small: 16px !important;
+            --button-min-height-small: var(--button-size-icon-small) !important;
+            --button-background-color-ghost: var(--toolbox-bgcolor-inactive);
+            --button-border-radius: var(--border-radius-circle) !important;
+            --button-padding-icon: 2px;
+            --button-border: none;
+            --audio-overlay-extra-background: var(--button-background-color-ghost-hover);
+            position: absolute;
+            top: 6px;
+            margin-inline: 6px 0 !important;
+            &:hover {
+                z-index: 2;
+            }
+        }
     }
 }

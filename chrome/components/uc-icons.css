@@ -292,7 +292,9 @@
     }
 }
 
-@media not -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
+@media not -moz-pref("uc.flex.revert-to-original-sidebar-icon"),
+    -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 1),
+    -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {
     #alltabs-button {
         list-style-image: var(--uc-list-all-tabs-image) !important;
         /*

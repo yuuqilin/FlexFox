@@ -18,6 +18,42 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 
 https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a  
 
+## 🆕 最新情報
+
+**✨ v5.0.0 – 主な機能アップデート**
+
+* Sidebery に 2 種類の新しいレイアウトモードを追加
+  * `uc.flex.sidebery-allow-resizable-width` を追加：サイドバーの仕切りをドラッグして Sidebery の幅を自由に変更できます。
+  * このオプションを有効にすると Sidebery の自動折りたたみは無効になりますが、サイドバーの切り替えボタン（Firefox ロゴ）で展開／折りたたみを操作できます。
+  * 自動折りたたみを一時的に戻したい場合は、`Hide Sidebery` ショートカットを使うか、<kbd>F1</kbd> でネイティブの垂直タブに切り替えてください。
+* 水平タブに 3 種類の新しいレイアウトモードを追加し、機能を最適化
+  * 旧オプション `uc.flex.disable-tabs-toolbar-autohide` を廃止。Sidebery が有効でないときでも、水平タブはデフォルトで表示されます。
+  * `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` を追加：Sidebery が有効でないときに水平タブを自動で隠し、ナビゲーションバーにカーソルを合わせると表示します。設定値：`0` = 無効、`1` = ナビゲーションバーの下に表示、`2` = 上に表示。
+  * `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` を追加：Sidebery が有効でないときにナビゲーションバーを自動で隠し、水平タブにカーソルを合わせると表示します。設定値：`0` = 無効、`1` = 有効。前の自動非表示設定より優先されます。
+  * `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` を追加：水平タブモードで、デフォルトでは非アクティブタブにカーソルを合わせると閉じるボタンが表示されます。タブ数が増えて幅が狭くなると、誤クリックを防ぐためにボタンは自動的に縮小して右上に移動します。このオプションを有効にすると、閉じるボタンを完全に非表示にできます。
+  * `uc.flex.show-tab-close-button-on-favicon-hover` を追加：水平タブモードで、閉じるボタンをファビコンと統合してスペースを節約します。閉じるボタンはファビコンにカーソルを合わせたときのみ表示されます。このオプションを有効にすると、上記の自動縮小・移動の挙動が無効化されます。
+  * `uc.flex.increase-active-horizontal-tab-min-width` を追加：タブが狭まったときにもアクティブタブを広めに確保し、他のタブと区別しやすくなるようにします。設定値：
+    * `0` = 無効
+    * `1` = 最小幅 1.8 倍、アニメーションなし
+    * `2` = 最小幅 1.8 倍、アニメーションあり
+    * `3` = 最小幅 2 倍、アニメーションなし
+    * `4` = 最小幅 2 倍、アニメーションあり
+    * デフォルト：`1`（有効）。すべてのタブを固定幅にしたい場合は `0` を設定してください。
+  * 水平ピン留めタブは可視数を超えると自動的に折りたたまれます。可視ピン留めタブの既定値は 10 個です。`uc.flex.max-visible-horizontal-pinned-tabs` で調整できます（設定値 `1`～`5` は 2～10 個に対応）。
+* `uc.flex.auto-hide-window-controls` を追加：ナビゲーションバー上のウィンドウコントロールを自動で隠し、端にカーソルを合わせると表示します。
+* `uc.flex.show-tab-count-in-alltabs-button` を追加：「すべてのタブを一覧」ボタンに現在開いているタブの合計数を表示します。設定値：
+  * `0` = 無効
+  * `1` = アイコン＋数（全タブ）
+  * `2` = アイコン＋数（読み込み済みタブのみ）
+  * `3` = 数字のみ（全タブ）
+  * `4` = 数字のみ（読み込み済みタブのみ）
+* `uc.flex.show-tab-number-in-tab-label` を追加：ネイティブタブラベルに番号を表示し、ラベルが狭くて全文が見えないときでも素早く識別できます。
+* 水平タブ時の Firefox ロゴ表示を改善：Sidebery が有効なときのみ位置移動と拡大が行われます。
+* ネイティブ垂直タブの音量アイコンの見た目を改善し、違和感を軽減しました。
+* `uc.flex.disable-sidebery-autohide` と `Hide Sidebery` を併用した場合に発生していた Mica 背景の透過問題を修正しました。
+* UI テーマとページテーマが逆になっているとき、全画面表示でコンテンツの角丸が正しく解除されない問題を修正しました。
+* Mica バックドロップとカスタム壁紙関連のコードをリファクタリングし、パフォーマンスを約 4% 向上しました。
+
 ## 🎉 主な機能アップデート
 
 <details>  
@@ -286,9 +322,12 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 > [!IMPORTANT]
 > FlexFox を垂直タブモードで使用する際は、「サイドバーのカスタマイズ」にある「カーソルを合わせた時にサイドバーを展開する」オプションを **無効** にしてください。多くの機能はこの設定が必要です。
 
-## 🆕 最新情報
+<a id="updates-top-start"></a>
+<details>
 
-**🦊 v4.5.1**
+<summary>💬 <b>過去の更新</b></summary>
+
+**v4.5.1**
 * Firefox v142 で発生したリグレッションを修正。「サイドバーのカスタマイズ」 → 「カーソルを合わせた時にサイドバーを展開する」を有効にすると、ネイティブ垂直タブが繰り返し展開／折りたたみされる問題が解消されました。 [Bug 1957008](https://bugzilla.mozilla.org/show_bug.cgi?id=1957008)  
   （注意: このオプションを有効にすると FlexFox の最適化が無効化されるため、通常利用では推奨されません。）
 * 検索バーの幅を修正。文字サイズの拡大・縮小設定によって幅が長すぎたり短すぎたりする問題を解消しました。
@@ -326,11 +365,6 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
   * Firefox の既定動作では、未読み込みタブのアイコンはグレースケール化されフェードアウトしますが、ラベル文字列はそのまま表示されます。
   * FlexFox では Sidebery と同じ挙動に変更しました。アイコンはカラーのままラベルと同時にフェードアウトし、より統一感があり見やすい表示になります。
   * Sidebery と同じ効果を得たい場合は、上記 2 つの設定を有効にしてください。利用したくない場合は無効のままで構いません。
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
 
 **v4.5.0**
 * Sidebery の展開／折りたたみアニメーションを再構築し、より滑らかで自然な動きに改善しました。
@@ -575,7 +609,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 |--------|:------:|--------|
 | `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` | ユーザー定義のスタイルを適用するために、`userChrome.css` を有効にします。 |
 | `svg.context-properties.content.enabled` | `true` | ライト／ダークテーマに応じてアイコンの色を自動調整できるようにします。 |
-| `sidebar.visibility` | `always-show` | FlexFoxの垂直タブの自動折りたたみ機能とレイアウトを有効にします（垂直タブモード時）。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** のチェックを外すことでも適用できます。 |
+| `sidebar.visibility` | `always-show` | FlexFox の**最適化された**垂直タブの自動折りたたみ機能とレイアウトを有効にします（垂直タブモード時）。FlexFox の多くの機能はこの設定に依存しています。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** のチェックを外すことでも適用できます。 |
 
 #### 🪄 機能を追加・有効化するオプション
 
@@ -584,7 +618,10 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.add-ui-text-stroke` | `true` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
 | `uc.flex.fully-hide-sidebery` | `true` | Sidebery とネイティブの縦型タブを完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
 | `uc.flex.fully-hide-toolbox` | `true` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
+| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`2` | 水平タブモードで、Sidebery が非アクティブ時に水平タブを自動で非表示にします。ナビゲーションバーにカーソルを合わせるとタブが表示されます。値：`0` = 無効、`1` = ナビゲーションバー下に表示、`2` = ナビゲーションバー上に表示。 |
+| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | 水平タブモードで、Sidebery が非アクティブ時にナビゲーションバーを自動で非表示にします。水平タブにカーソルを合わせるとナビゲーションバーが表示されます。値：`0` = 無効、`1` = 有効。このオプションは優先度が高く、`uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` と同時に有効にした場合、そちらを上書きします。 |
 | `uc.flex.auto-hide-navbar-icons` | `true` | ナビゲーションバーのアイコンを通常は非表示にし、ツールバーにカーソルを合わせると再表示されます。ウィンドウ操作ボタン、URLバー、サイドバーのボタン（FlexFox ロゴ）は常に表示されますが、サイドバーのボタンがナビゲーションバーの端に配置されていない場合や、`uc.flex.revert-to-original-sidebar-icon` が有効な場合は自動的に隠れます。 |
+| `uc.flex.auto-hide-window-controls` | `true` | ナビゲーションバーのウィンドウ操作ボタン（最小化、最大化、閉じる）を通常は非表示にし、ナビゲーションバーの端にカーソルを合わせると再表示されます。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `true` | Firefox Color などの拡張機能によるツールバーの色の変更を有効にします（背景画像が設定されていない場合に必要です）。 |
 | `uc.flex.enable-gradient-highlight` | `0`-`X` | FlexFox のロゴ、サイドバーのストライプ、ブックマークの星アイコンなど、主要な UI 要素に使われるハイライトカラーにグラデーションスタイルを適用します。数値で設定でき、`0` は無効、`1` ～ `X` は異なるグラデーションスタイルを選択します。 |
 | `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | ブックマークフォルダーのアイコンをカラー表示にします。数値で設定でき、`0` は無効、`1` は第1セットのアイコンを使用、`2` は第2セットのアイコンを使用し、ラベルは自動的に非表示になります。 |
@@ -592,6 +629,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.remove-bookmarks-labels` | `true` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
 | `uc.flex.show-flexfox-version-info-in-about-config` | `true` | `about:config` ページに FlexFox のインストール確認メッセージと現在のバージョン番号を表示します。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | ネイティブ垂直タブの展開状態で、固定タブと通常タブの間に区切り線を表示します。Firefox では通常ホバー時のみ表示されますが、FlexFox では常に表示され、この区切り線をドラッグして固定タブパネルの高さを調整できます。 |
+| `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | 水平タブで閉じるボタンをファビコンと統合してスペースを節約します。ファビコンにカーソルを合わせるとボタンが表示されます。有効化すると、タブが狭くなったときの閉じるボタンの自動縮小・移動機能は自動的に停止します。 |
+| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`4` | 「すべてのタブを一覧表示」ボタンにタブの総数を表示します。数値で設定でき、`0` は無効、`1` はアイコンと数字を表示（すべてのタブ）、`2` はアイコンと数字を表示（読み込み済みタブのみ）、`3` は数字のみを表示（すべてのタブ）、`4` は数字のみを表示（読み込み済みタブのみ）です。 |
+| `uc.flex.show-tab-number-in-tab-label` | `true` | 各タブラベルの前に番号を表示します。ラベルの文字が狭いスペースで省略される場合でも、タブを見分けやすくなります。 |
 | `uc.flex.move-pip-volume-to-top` | `true` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
@@ -603,9 +643,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.disable-flexfox` | `true` | Firefox を再起動せずに、FlexFox のすべてのスタイルと機能を無効にします。 |
 | `uc.flex.skip-loading-uc-*.css` | `true` | `./components/` および `./content/` 内の特定の `uc-*.css` ファイルの読み込みをスキップします。たとえば、`uc.flex.skip-loading-uc-newtab.css` を有効にすると `./content/uc-newtab.css` が読み込まれなくなります。 |
 | `uc.flex.disable-bookmarks-autohide` | `true` | ブックマークツールバーの自動非表示を無効にします。 |
-| `uc.flex.disable-tabs-toolbar-autohide` | `true` | Sidebery が非アクティブなときに、ネイティブの水平タブバーが自動で隠れないようにします。 |
 | `uc.flex.disable-findbar-autohide` | `true` | 検索バー（Findbar）のフォーカスが外れたときに自動で隠れる動作を無効にします。 |
 | `uc.flex.disable-sidebery-autohide` | `true` | Sidebery とネイティブ縦型タブの自動折りたたみを無効にします。 |
+| `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `true` | FlexFoxでは、非アクティブの水平タブにカーソルを合わせると閉じるボタンが表示されます。タブが狭い場合、ボタンは縮小され右上に移動して誤クリックを防ぎます。このオプションを有効にすると、閉じるボタンは完全に表示されなくなります。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | `true` | デフォルトでは、ナビゲーションバーの最初の項目の後ろに右側の余白を追加して、垂直タブとその周辺項目との視覚的な区切りや整列を改善します。このオプションはその余白を無効にします。 |
 | `uc.flex.disable-menu-icons` | `true` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
 | `uc.flex.revert-to-original-window-controls` | `true` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
@@ -620,21 +660,24 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 |--------|:------:|--------|
 | `uc.flex.increase-sidebery-expanded-width` | `true` | Sidebery と Firefox 標準の縦型タブを展開したときの幅を広くします。 |
 | `uc.flex.increase-navbar-height` | `true` | 以前のFlexFoxバージョンで使用されていた、より厚みのあるナビゲーションバーの高さを復元します。現在のデフォルト（Firefox本来のコンパクトな高さ）を上書きします。 |
+| `uc.flex.increase-active-horizontal-tab-min-width` | `0`-`4`<br>(`1`) | 水平タブが狭くなったときにアクティブタブを広めに保ち、他のタブと区別しやすくします。値：`0` = 無効、`1` = 最小幅の1.8倍（アニメーションなし）、`2` = 1.8倍（アニメーションあり）、`3` = 2倍（アニメーションなし）、`4` = 2倍（アニメーションあり）。デフォルトで有効。すべてのタブを同じ幅にしたい場合は `0` に設定してください。 |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | デフォルトでは、FlexFox は Firefox 標準の統合拡張機能パネルをアイコンのみのビューに置き換えます。この状態では、拡張機能アイコンを右クリックすることでオプションにアクセスできます。この設定を有効にすると、拡張名やオプションボタンも表示される簡易ビューに切り替わり、より情報が分かりやすくなります。 |
+| `uc.flex.sidebery-allow-resizable-width` | `true` | サイドバー分割線をドラッグして Sidebery の幅を自由に変更できます。有効にすると Sidebery の自動折りたたみは無効になりますが、サイドバー切り替えボタン（Firefox ロゴ）で展開・折りたたみを切り替え可能です。自動折りたたみが必要な場合は、`Hide Sidebery` ショートカットや <kbd>F1</kbd> キーで原生垂直タブに切り替えて自動折りたたみできます。 | 
 | `uc.flex.sidebery-fast-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Sidebery／垂直タブと同じ速度でツールバーを統一。Mica またはカスタム壁紙使用時は自動適用。 |
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `2`-`5`<br>(`5`) | Sidebery とネイティブ垂直タブのピン留めタブについて、1 行に表示するタブの数を設定します。指定した数を超えると、自動的に次の行に折り返されます。 |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`–`6`<br>(`4`) | ネイティブ垂直タブで固定タブの行数の上限を設定します。上限を超えると固定タブパネルにスクロールバーが表示されます。`0` に設定すると制限が解除され、パネルがタブ数に応じて無制限に拡張されます。 |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | ピン留めタブの横方向の数を設定します。垂直タブでは、1 行に表示するタブ数を指定し、超えると次の行に折り返されます。水平タブでは、可視ピン留めタブ数を `設定値 × 2` に制限し、それ以上は自動で折りたたまれます。  |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`-`6`<br>(`4`) | ネイティブ垂直タブで固定タブの行数の上限を設定します。上限を超えると固定タブパネルにスクロールバーが表示されます。`0` に設定すると制限が解除され、パネルがタブ数に応じて無制限に拡張されます。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `'top-center-left'` または `'1'`（左寄せ上部）、`'top-right'` または `'2'`（右上）、`'bottom-right'` または `'3'`（右下）です。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Firefoxのアプリメニュー、ブックマークメニュー、右クリックメニューにおける項目同士の垂直間隔を設定します。指定可能な値は文字列 `'1'` または `'small'`（狭い間隔）、`'2'` または `'medium'`（標準の間隔）、`'3'` または `'large'`（広い間隔）です。 |
 
 #### ⚙️ Firefox ネイティブ設定
 | 設定名 | 値 | 説明 |
 |--------|:------:|--------|
+| `browser.sessionstore.restore_pinned_tabs_on_demand` | `true` | ピン留めされたタブは選択されたときにのみ読み込まれるため、多くのピン留めタブを持っていても Firefox の起動が遅くなりません。FlexFox のピン留めタブレイアウトや自動折りたたみ機能と組み合わせると、迅速にアクセスするために多くのタブを活用できるため、FlexFox 使用時はこのオプションの有効化を推奨します。 |
 | `browser.tabs.fadeOutExplicitlyUnloadedTabs` | `true` | ネイティブの Firefox 設定で、垂直サイドバー内の破棄されたタブをフェードアウト表示にします。 |
 | `browser.tabs.fadeOutUnloadedTabs` | `true` | ネイティブの Firefox 設定で、垂直サイドバー内の起動時に復元待ちのタブをフェードアウト表示にします。 |
-| `sidebar.visibility` | `expand-on-hover` | FlexFoxが提供する垂直タブの自動折りたたみ機能とレイアウトを無効にします。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** にチェックを入れることでも適用できます。このモードでは、サイドバーの幅を自由に調整したり、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみを切り替えたりできます。 |
+| `sidebar.visibility` | `expand-on-hover` | FlexFox が提供する**最適化された**垂直タブの自動折りたたみ機能とレイアウトを無効にします。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** にチェックを入れることでも適用できます。このモードでは、サイドバーの幅を自由に調整したり、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみを切り替えたりできます。**FlexFox の日常使用では推奨されません。** |
 | `sidebar.animation.expand-on-hover.duration-ms` | `120` | ネイティブの Firefox 設定で、`sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーション速度を制御します。 |
 
 #### 🧊 背景の見た目とMica効果

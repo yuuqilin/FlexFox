@@ -18,6 +18,44 @@ It's not just a new look, it's a better way to browse.
 
 https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a  
 
+## 🆕 What's New
+
+**✨ v5.0.0 – Major Feature Update**
+
+* Added two new layout modes for Sidebery
+  * Added `uc.flex.sidebery-allow-resizable-width`: allows adjusting Sidebery width by dragging the sidebar splitter.
+  * Enabling this option disables Sidebery's auto-collapse, but you can still toggle its expanded/collapsed state with the sidebar toggle button (Firefox Logo).
+  * To temporarily restore auto-collapse, use the `Hide Sidebery` shortcut or press <kbd>F1</kbd> to switch to native vertical tabs.
+* Added three new layout modes and optimizations for horizontal tabs
+  * Deprecated the old option `uc.flex.disable-tabs-toolbar-autohide`. Horizontal tabs are now visible by default when Sidebery is not active.
+  * Added `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`: hides horizontal tabs when Sidebery is not active and shows them on hover. Values: `0` = Off, `1` = Tabs below navbar, `2` = Tabs above navbar.
+  * Added `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`: hides the navbar when Sidebery is not active and shows it on hover. Values: `0` = Off, `1` = On. This option overrides the previous auto-hide-horizontal-tabs setting.
+  * Added `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`: in horizontal tab mode, by default FlexFox shows the close button on hover for inactive tabs. As tabs become narrower due to more tabs opening, the button automatically shrinks and moves to the top-right to prevent accidental clicks. Enable this option to completely remove the close button.
+  * Added `uc.flex.show-tab-close-button-on-favicon-hover`: in horizontal tab mode, merges the close button with the favicon to save space. The close button is shown only when hovering over the favicon. Enabling this option disables the close button's auto-shrink-and-reposition behavior described above.
+  * Added `uc.flex.increase-active-horizontal-tab-min-width`: keeps the active tab wider when horizontal tabs shrink, so its label remains distinguishable and easier to identify among other tabs. Values:
+    * `0` = Off
+    * `1` = Minimum width 1.8×, no animation
+    * `2` = Minimum width 1.8×, with animation
+    * `3` = Minimum width 2×, no animation
+    * `4` = Minimum width 2×, with animation
+    * Default: `1` (enabled). Set to `0` if you prefer all tabs to keep a fixed width.
+  * Pinned horizontal tabs now automatically collapse when exceeding the visible limit. Default visible pinned tabs is 10. Use `uc.flex.max-visible-horizontal-pinned-tabs` to adjust the setting (range `1`–`5`, corresponding to 2–10 visible pinned tabs).
+* Added `uc.flex.auto-hide-window-controls`: automatically hides window control buttons on the navbar, showing them only when hovering at the edge.
+* Added `uc.flex.show-tab-count-in-alltabs-button`: displays the total number of open tabs on the "List All Tabs" button. Values:
+  * `0` = Off
+  * `1` = Icon + number (all tabs)
+  * `2` = Icon + number (loaded tabs only)
+  * `3` = Number only (all tabs)
+  * `4` = Number only (loaded tabs only)
+* Added `uc.flex.show-tab-number-in-tab-label`: shows index numbers on native tab labels so you can quickly identify tabs when labels are too narrow to show full titles.
+* Improved Firefox logo behavior in horizontal tabs: it now only shifts and scales when Sidebery is enabled.
+* Improved the volume icon's appearance in native vertical tabs to make it look less abrupt.
+* Fixed a transparency issue with the Mica background that occurred when both `uc.flex.disable-sidebery-autohide` and `Hide Sidebery` were used.
+* Fixed fullscreen web content corner rounding not being removed correctly when UI theme and page theme were opposite.
+* Refactored Mica backdrop and custom wallpaper code, slightly improving performance (\~4%).
+
+<!-- END What's New -->
+
 ## 🎉 Major Feature Update
 
 <details>  
@@ -286,9 +324,14 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 > [!IMPORTANT]
 > When using FlexFox in vertical tab mode, make sure the `Expand sidebar on hover` option in `Customize Sidebar` is **unchecked**. Most FlexFox features require this setting to work properly.
 
-## 🆕 What's New
+<a id="updates-top-start"></a>
+<details>
 
-**🦊 v4.5.1**
+<summary>💬 <b>Previous Updates</b></summary>
+
+<!-- END Release Note -->
+
+**v4.5.1**
 * Fixed a regression introduced in Firefox v142 where enabling “Customize Sidebar” → “Expand sidebar on hover” caused the native vertical tabs to repeatedly expand and collapse. [Bug 1957008](https://bugzilla.mozilla.org/show_bug.cgi?id=1957008)  
   (Note: This option disables FlexFox optimizations, so it is not recommended for everyday use.)
 * Corrected the width of the find bar, which could display too short or too long under different text zoom levels.
@@ -326,15 +369,6 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
   * In Firefox's default behavior, discarded and pending tab icons are grayscaled and faded, but the tab labels remain fully opaque.
   * FlexFox changes this to match Sidebery: both icons and labels fade together, while icons remain in color. This provides a more consistent and recognizable look.
   * To get the same effect as Sidebery, enable both preferences. If you prefer not to use this feature, disable them instead.
-
-<!-- END What's New -->
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
-
-<!-- END Release Note -->
 
 **v4.5.0**
 * Rebuilt Sidebery expand/collapse animation for smoother transitions without jitter.
@@ -581,7 +615,7 @@ For more update logs from earlier versions,
 |-----------|:-------------:|-------------|
 | `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` | Enables userChrome.css for custom styles. |
 | `svg.context-properties.content.enabled` | `true` | Enables icon color to auto-adjust between light and dark themes. |
-| `sidebar.visibility` | `always-show` | Enables FlexFox's vertical tabs auto-collapse and layout in vertical tabs mode. This setting can also be applied by unchecking **“Expand sidebar on hover”** in the sidebar settings. |
+| `sidebar.visibility` | `always-show` | Enables FlexFox's **optimized** vertical tabs auto-collapse and layout in vertical tabs mode. Many FlexFox features rely on this setting. This can also be applied by unchecking **“Expand sidebar on hover”** in the sidebar settings. |
 
 #### 🪄 Add or Enable Features
 
@@ -590,7 +624,10 @@ For more update logs from earlier versions,
 | `uc.flex.add-ui-text-stroke` | `true` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
 | `uc.flex.fully-hide-sidebery` | `true` | Fully hides Sidebery and native vertical tabs. They reappear when the cursor moves to the screen edge. |
 | `uc.flex.fully-hide-toolbox` | `true` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
+| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`2` | Automatically hide horizontal tabs in horizontal tab mode when Sidebery is inactive. Hovering over the navbar shows the tabs. Values: `0` = disabled, `1` = tabs shown below the navbar, `2` = tabs shown above the navbar. |
+| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | Automatically hide the navbar in horizontal tab mode when Sidebery is inactive. Hovering over the horizontal tabs shows the navbar. Values: `0` = disabled, `1` = enabled. This option has higher priority; if enabled together with `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`, it overrides that option. |
 | `uc.flex.auto-hide-navbar-icons` | `true` | Hides navigation bar icons by default. They reappear when hovering over the toolbar. Window control buttons, the URL bar, and the sidebar button (FlexFox logo) remain visible, unless the sidebar button is not placed at the edge of the navigation bar or `uc.flex.revert-to-original-sidebar-icon` is enabled. |
+| `uc.flex.auto-hide-window-controls` | `true` | Hides the navigation bar window control buttons (minimize, maximize, close) by default. They reappear when hovering over the navigation bar edge. |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `true` | Allows toolbar colors set by extensions like Firefox Color to take effect, especially when no background image is selected. |
 | `uc.flex.enable-gradient-highlight` | `0`-`X` | Enables gradient styling for the highlight color used across key UI elements such as the FlexFox logo, sidebar stripe, and bookmark star icon. This numeric setting accepts 0 to disable gradients, or values 1 to X to switch between different gradient styles. |
 | `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | Enables colored icons for bookmark folders. This numeric setting accepts `0` (disabled), `1` (uses the first icon set), or `2` (uses the second icon set, with labels automatically hidden). |
@@ -598,6 +635,9 @@ For more update logs from earlier versions,
 | `uc.flex.remove-bookmarks-labels` | `true` | Removes text labels from bookmark folders. |
 | `uc.flex.show-flexfox-version-info-in-about-config` | `true` | Shows a confirmation message in the `about:config` page indicating that FlexFox is installed, along with the current version number. |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | Restores the separator between pinned and regular tabs in the native vertical tabs when expanded. Unlike Firefox, which hides it until hovered, FlexFox always keeps it visible. The separator can be dragged to resize the pinned tabs panel. |
+| `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | Merges the close button with the favicon in horizontal tabs to save space. The button appears when hovering over the favicon. Enabling this option automatically disables the close button's auto-shrink-and-reposition feature when tabs become narrow. |
+| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`4` | Shows the total number of tabs in the "List All Tabs" button. This numeric setting accepts `0` (disabled), `1` (show icon and number, all tabs), `2` (show icon and number, only loaded tabs), `3` (show number only, all tabs), or `4` (show number only, only loaded tabs). |
+| `uc.flex.show-tab-number-in-tab-label` | `true` | Shows a numeric index before each tab's label text. This can make it easier to distinguish tabs when the label text is truncated due to limited space. |
 | `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
@@ -609,9 +649,9 @@ For more update logs from earlier versions,
 | `uc.flex.disable-flexfox` | `true` | Disables all FlexFox styles and features without needing to restart Firefox. |
 | `uc.flex.skip-loading-uc-*.css` | `true` | Skips loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will skip loading `./content/uc-newtab.css`. |
 | `uc.flex.disable-bookmarks-autohide` | `true` | Disables auto-hide for the bookmarks toolbar. |
-| `uc.flex.disable-tabs-toolbar-autohide` | `true` | Prevents the native horizontal tabs from auto-hiding when Sidebery is inactive. |
 | `uc.flex.disable-findbar-autohide` | `true` | Prevents the Findbar from automatically hiding when it loses focus. |
 | `uc.flex.disable-sidebery-autohide` | `true` | Disables auto-collapse for Sidebery and native vertical tabs. |
+| `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `true` | When hovering over inactive horizontal tabs, FlexFox normally shows the close button. If the tab is very narrow, the button is shrunk and moved to the top-right corner to reduce accidental clicks. Enabling this option disables the close button entirely. |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | `true` | By default, FlexFox adds right-side padding after the first item in the navigation bar to improve visual separation and alignment between the vertical tabs and nearby items. This option disables that padding. |
 | `uc.flex.disable-menu-icons` | `true` | Disables custom icons in menus added by FlexFox. |
 | `uc.flex.revert-to-original-window-controls` | `true` | Reverts to Firefox's default window control buttons (minimize, maximize, close), replacing the macOS-style icons used by FlexFox. |
@@ -626,21 +666,24 @@ For more update logs from earlier versions,
 |-----------|:-------------:|-------------|
 | `uc.flex.increase-sidebery-expanded-width` | `true` | Makes Sidebery and the native vertical tabs wider when expanded. |
 | `uc.flex.increase-navbar-height` | `true` | Restores the thicker navbar height used in earlier FlexFox versions. This change overrides the current default, which matches Firefox's original compact height. |
+| `uc.flex.increase-active-horizontal-tab-min-width` | `0`-`4`<br>(`1`) | Keeps the active tab wider when horizontal tabs shrink, making it easier to distinguish from other tabs. Values: `0` = disabled, `1` = 1.8× without animation, `2` = 1.8× with animation, `3` = 2× without animation, `4` = 2× with animation. Enabled by default; set to `0` to keep all tabs the same width. |
 | `uc.flex.switch-to-alternate-condensed-panel` | `true` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
+| `uc.flex.sidebery-allow-resizable-width` | `true` | Allows freely resizing Sidebery by dragging the sidebar splitter. When enabled, Sidebery no longer auto-collapses, but you can still toggle its expanded/collapsed state using the sidebar toggle button (Firefox Logo). For automatic collapse, use the `Hide Sidebery` shortcut or switch to native vertical tabs (<kbd>F1</kbd>) to let tabs auto-collapse. |
 | `uc.flex.sidebery-fast-hover-expand` | `true` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Unifies toolbar animation speed with Sidebery/vertical tabs. Auto-applied with Mica or custom wallpaper. |
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `2`–`5`<br>(`5`) | Sets how many pinned tabs are shown per row in both Sidebery and the native vertical tabs. The value defines the number of tabs that fit into each row before wrapping to the next line. |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`–`6`<br>(`4`) | Sets the maximum number of visible rows for pinned tabs in the native vertical tabs. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | Sets the number of pinned tabs per row. In vertical tabs, it defines how many tabs appear per row before wrapping. In horizontal tabs, it determines the number of visible pinned tabs (`value × 2`); extra tabs are automatically collapsed. |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`-`6`<br>(`4`) | Sets the maximum number of visible rows for pinned tabs in the native vertical tabs. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the Findbar's position. Accepts string values: `'top-center-left'` or `'1'` = center-left top, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `'1'` or `'small'` = narrow spacing, `'2'` or `'medium'` = medium spacing, `'3'` or `'large'` = wide spacing. |
 
 #### ⚙️ Native Firefox Settings
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
+| `browser.sessionstore.restore_pinned_tabs_on_demand` | `true` | Loads pinned tabs only when selected, allowing you to have many pinned tabs without slowing down Firefox startup. With FlexFox, pinned tab layouts and auto-collapse features make it convenient to use many pinned tabs for quick access, so enabling this option is recommended when using FlexFox. |
 | `browser.tabs.fadeOutExplicitlyUnloadedTabs` | `true` | A native Firefox setting that fades out discarded tabs (manually unloaded) in the native vertical tabs. |
 | `browser.tabs.fadeOutUnloadedTabs` | `true` | A native Firefox setting that fades out pending tabs (waiting to be restored at startup) in the native vertical tabs. |
-| `sidebar.visibility` | `expand-on-hover` | Disables FlexFox's vertical tabs auto-collapse and layout. This setting can also be applied by checking **“Expand sidebar on hover”** in the sidebar settings. In this mode, you can freely adjust the sidebar width and toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. |
+| `sidebar.visibility` | `expand-on-hover` | Disables FlexFox's **optimized** vertical tabs auto-collapse and layout. This can also be applied by checking **“Expand sidebar on hover”** in the sidebar settings. In this mode, you can freely adjust the sidebar width and toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. **Not recommended for everyday use with FlexFox.** |
 | `sidebar.animation.expand-on-hover.duration-ms` | `120` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
 
 #### 🧊 Visual Background & Mica Effects

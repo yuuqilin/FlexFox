@@ -41,11 +41,6 @@ menupopup > menu {
     --arrowpanel-menuitem-padding: var(--uc-app-menu-item-padding-block) !important;
 }
 
-/* Enable bookmarks toolbar in full-screen mode */
-:root[inFullscreen] #navigator-toolbox #PersonalToolbar {
-    visibility: unset !important;
-}
-
 /**
  * Removes the private-browsing-mode indicator from tabs toolbar and changes the menu-button icon 
  * to the private-browsing indicator in private windows
@@ -200,6 +195,191 @@ toolbar:not(#TabsToolbar) > #search-container {
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
+            }
+        }
+    }
+}
+
+/* Show the number of tabs on the "List All Tabs" button */
+/* Modified from https://www.reddit.com/r/FirefoxCSS/comments/1f0cg89/how_to_count_open_tabs_in_firefox/ */
+/* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/tab_count_in_alltabs_button.css */
+/* 17768e9 */
+
+@media -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+    /* Use different counters depending on whether the button is placed
+       before or after the tab strip in horizontal tab mode. */
+    @media not -moz-pref("sidebar.verticalTabs") {
+        /* Forward counter: counts tabs when the button is placed after them.
+           The scope must be #navigator-toolbox since the button can be moved
+           anywhere inside it via Customize Toolbar. */
+        #navigator-toolbox {
+            counter-reset: tab-counter;
+        }
+        /* Reverse counter: counts tabs when the button is placed before them.
+           In this case the button always remains inside
+           #TabsToolbar-customization-target, so the scope can be set here. */
+        #TabsToolbar-customization-target {
+            counter-reset: reversed(tab-counter-reversed);
+        }
+        /* Adjust the reverse counter's initial value so that it equals the
+           total number of tabs. (By default it starts at tab count + 1,
+           so we subtract 1.) */
+        #tabbrowser-tabs {
+            counter-increment: tab-counter-reversed 1;
+        }
+        /*
+        .tabbrowser-tab:not([hidden]):not([pending]) {
+            &:first-of-type {
+                counter-increment: tab-counter 1 tab-counter-reversed 0;
+            }
+            &:only-of-type {
+                counter-set: tab-counter-reversed 1;
+            }
+        }
+        */
+    }
+
+    /* Use a reverse counter in vertical tab mode, since the button is always
+       placed before the tab strip. */
+    @media -moz-pref("sidebar.verticalTabs") {
+        /* Set the counter on #main-window, the common ancestor of both the
+           button and the tabs. */
+        #main-window {
+            counter-reset: reversed(tab-counter);
+        }
+        /* Adjust the reverse counter's initial value so it equals the total
+           number of tabs (default is total +1, so we subtract 1). */
+        #sidebar-main {
+            counter-increment: tab-counter 1;
+        }
+        /*
+        .tabbrowser-tab:not([pending]) {
+            &:first-of-type {
+                counter-increment: tab-counter 1 tab-counter-reversed 0;
+            }
+            &:only-of-type {
+                counter-set: tab-counter-reversed 1;
+            }
+        }
+        */
+    }
+
+    @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 1) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {
+        #alltabs-button > .toolbarbutton-badge-stack::after {
+            content: "+" counter(tab-counter);
+            position: absolute;
+            bottom: 2px;
+            right: 3px;
+            font-size: 9px;
+            line-height: 1;
+            color: var(--toolbarbutton-icon-fill);
+            pointer-events: none;
+        }
+        @media not -moz-pref("sidebar.verticalTabs") {
+            #TabsToolbar-customization-target #alltabs-button > .toolbarbutton-badge-stack::after {
+                content: "+" counter(tab-counter-reversed);
+            }
+            #TabsToolbar-customization-target #tabbrowser-tabs ~ #alltabs-button > .toolbarbutton-badge-stack::after {
+                content: "+" counter(tab-counter);
+            }
+            :root[customizing] {
+                #TabsToolbar-customization-target
+                    #tabbrowser-tabs
+                    ~ #wrapper-alltabs-button
+                    #alltabs-button
+                    > .toolbarbutton-badge-stack::after {
+                    content: "+" counter(tab-counter);
+                }
+            }
+        }
+    }
+
+    @media not (-moz-pref("uc.flex.show-tab-count-in-alltabs-button", 1) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2)) {
+        #alltabs-button > .toolbarbutton-badge-stack > .toolbarbutton-icon {
+            opacity: 0;
+        }
+        #alltabs-button > .toolbarbutton-badge-stack::before {
+            content: counter(tab-counter);
+            display: flex;
+            grid-area: 1/1;
+            justify-content: center;
+            color: var(--toolbarbutton-icon-fill);
+            border-bottom: 1px solid;
+            contain: inline-size;
+        }
+        @media not -moz-pref("sidebar.verticalTabs") {
+            #TabsToolbar-customization-target #alltabs-button > .toolbarbutton-badge-stack::before {
+                content: "+" counter(tab-counter-reversed);
+            }
+            #TabsToolbar-customization-target #tabbrowser-tabs ~ #alltabs-button > .toolbarbutton-badge-stack::before {
+                content: "+" counter(tab-counter);
+            }
+            :root[customizing] {
+                #TabsToolbar-customization-target
+                    #tabbrowser-tabs
+                    ~ #wrapper-alltabs-button
+                    #alltabs-button
+                    > .toolbarbutton-badge-stack::before {
+                    content: "+" counter(tab-counter);
+                }
+            }
+        }
+    }
+}
+
+/* Show a number before tab text*/
+@media -moz-pref("uc.flex.show-tab-number-in-tab-label") {
+    #tabbrowser-tabs {
+        counter-reset: nth-tab;
+    }
+
+    .tab-text::before {
+        content: counter(nth-tab) ".";
+        margin-right: 4px;
+        opacity: 0.9;
+    }
+}
+
+@media -moz-pref("uc.flex.show-tab-count-in-alltabs-button") or -moz-pref("uc.flex.show-tab-number-in-tab-label") {
+    @media not -moz-pref("sidebar.verticalTabs") {
+        @media not (-moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 4)) {
+            .tabbrowser-tab:not([hidden]) {
+                counter-increment: tab-counter 1 tab-counter-reversed -1 nth-tab 1;
+            }
+        }
+        @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 4) {
+            .tabbrowser-tab:not([hidden]):not([pending]) {
+                counter-increment: tab-counter 1 tab-counter-reversed -1 nth-tab 1;
+            }
+            .tabbrowser-tab[pending]:not([hidden]) {
+                counter-increment: nth-tab 1;
+            }
+        }
+    }
+
+    @media -moz-pref("sidebar.verticalTabs") {
+        @media not (-moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 4)) {
+            .tabbrowser-tab {
+                counter-increment: tab-counter -1 nth-tab 1;
+            }
+        }
+        @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 4) {
+            .tabbrowser-tab:not([pending]) {
+                counter-increment: tab-counter -1 nth-tab 1;
+            }
+            .tabbrowser-tab[pending]:not([hidden]) {
+                counter-increment: nth-tab 1;
+            }
+        }
+
+        /* Firefox hides collapsed tab-groups with display:none, excluding them
+           from the counter. Force display back and use visibility:collapse so
+           they stay hidden but still counted. */
+        tab-group {
+            #tabbrowser-tabs[orient="vertical"] &[movingtabgroup][collapsed] > .tabbrowser-tab[visuallyselected],
+            #tabbrowser-tabs[orient="vertical"] &[collapsed] > .tabbrowser-tab:not([visuallyselected]) {
+                display: flex !important;
+                visibility: collapse !important;
             }
         }
     }

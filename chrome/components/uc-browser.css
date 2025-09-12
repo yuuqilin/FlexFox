@@ -7,7 +7,8 @@
             #browser {
                 --toolbar-bgcolor: var(--uc-bgcolor) !important;
                 --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
-                background-image: var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
+                background-image:
+                    var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
                     linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
                     var(--lwt-header-image, var(--lwt-additional-images)) !important;
 
@@ -89,15 +90,22 @@
     /* Clip background bleed around rounded corners when the UI color scheme is opposite to the page scheme */
     @media -moz-pref("sidebar.revamp") {
         @media -moz-pref("sidebar.revamp.round-content-area") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
-            @media (prefers-color-scheme: dark) and (-moz-content-prefers-color-scheme: light),
-                (prefers-color-scheme: light) and (-moz-content-prefers-color-scheme: dark) {
-                clip-path: inset(
-                    0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip)) 0 0 0
-                );
-                @media not -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        0 round 0 var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip)) 0 0
-                    );
+            @media not (-moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen)) {
+                :root:not([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    @media (prefers-color-scheme: dark) and (-moz-content-prefers-color-scheme: light),
+                        (prefers-color-scheme: light) and (-moz-content-prefers-color-scheme: dark) {
+                        clip-path: inset(
+                            0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip)) 0 0
+                                0
+                        );
+                        @media not -moz-pref("sidebar.position_start") {
+                            clip-path: inset(
+                                0 round 0
+                                    var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip)) 0
+                                    0
+                            );
+                        }
+                    }
                 }
             }
         }
@@ -287,65 +295,53 @@
      */
     #tabbrowser-tabbox {
         @media -moz-pref("sidebar.position_start") {
-            clip-path: inset(
-                var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-            );
+            clip-path: var(--uc-tabbox-clip-path-start);
         }
         @media not -moz-pref("sidebar.position_start") {
-            clip-path: inset(
-                var(--uc-web-content-margin-outset-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-            );
+            clip-path: var(--uc-tabbox-clip-path-end);
         }
         will-change: clip-path;
-        transition: clip-path var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-            var(--uc-autohide-sidebar-delay);
+        transition: var(--uc-tabbox-clip-path-transition);
+    }
+
+    /* When a menu is open, clip the tab box to reveal the Mica backdrop */
+    #mainPopupSet:has(
+            > [panelopen]:not(
+                    #ask-chat-shortcuts,
+                    #selection-shortcut-action-panel,
+                    #chat-shortcuts-options-panel,
+                    #tab-preview-panel
+                )
+        )
+        ~ #browser
+        #tabbrowser-tabbox {
+        --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
+        --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+        --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
     }
 
     /* When the navigator or its child bookmark toolbar is expanded, clip the tab box to reveal the Mica backdrop */
     @media not -moz-pref("sidebar.verticalTabs") {
         #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
-            @media -moz-pref("sidebar.position_start") {
-                clip-path: inset(var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica));
-            }
-            @media not -moz-pref("sidebar.position_start") {
-                clip-path: inset(var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0);
-            }
-            transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay);
+            --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
+            --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
 
         /* Keep the tab box clipped when the navigator contains an open toolbar button */
         @media -moz-pref("uc.flex.fully-hide-toolbox") {
             #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
-                @media -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-                    );
-                }
-                @media not -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-                    );
-                }
-                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
+                --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
+                --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-toolbox") {
             :root:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
                 #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
-                    @media -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-                        );
-                    }
-                    @media not -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-                        );
-                    }
-                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay);
+                    --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
             }
         }
@@ -357,35 +353,17 @@
             -moz-pref("uc.flex.fully-hide-toolbox"),
             (display-mode: fullscreen) {
             #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
-                @media -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-                    );
-                }
-                @media not -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-                    );
-                }
-                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
+                --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
+                --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
 
             /* Keep the tab box clipped when the navigator contains an open toolbar button */
             @media -moz-pref("uc.flex.fully-hide-toolbox") {
                 #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
-                    @media -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-                        );
-                    }
-                    @media not -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-                        );
-                    }
-                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay);
+                    --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
             }
         }
@@ -397,95 +375,116 @@
     @media -moz-pref("sidebar.verticalTabs") {
         :root:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
             #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
-                @media -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-                    );
-                }
-                @media not -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-                    );
-                }
-                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
+                --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
+                --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
 
             #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
-                @media -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-                    );
-                }
-                @media not -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-                    );
-                }
-                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
+                --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
+                --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
         }
     }
 
     /* Clip the tab box when native vertical tabs are expanded to reveal the Mica backdrop */
     @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
-        @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
-            -moz-pref("uc.flex.fully-hide-sidebery"),
-            (display-mode: fullscreen) {
-            /** 
-             * The [inFullscreen] selector is required to prevent fullscreen mode 
-             * from being blocked by :not([titlepreface*="\180e "]), 
-             * ensuring styles can be applied in fullscreen state. 
-             */
-            :root:is(
-                    :not([titlepreface*="\180e "]),
-                    [titlepreface*="\200c "],
-                    [titlepreface*="\200d "],
-                    [inFullscreen]
-                ) {
-                #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-launcher-expanded]:not([sidebar-panel-open]) {
-                    @media -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-sidebar-main-hover-clip-mica)
-                        );
-                    }
-                    /*if sidebar on right*/
-                    @media not -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-web-content-margin-outset-clip-mica) var(--uc-sidebar-main-hover-clip-mica) 0 0
-                        );
-                    }
-                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay);
+        /* 
+         * Same logic exists in uc-verticalfox.css.
+         * 
+         * Auto-hide applies in three cases:
+         *   -A : auto-collapse not disabled
+         *   +B : fully-hide enabled
+         *   +C : fullscreen mode
+         * 
+         * Attribute equivalents:
+         *   -a ≈ -A   ( [titlepreface*="\180e "] )
+         *   +b ≈ +B   ( [titlepreface*="\200c "], [titlepreface*="\200d "] )
+         * 
+         * Case handling:
+         *   Style 1 uses -a to exclude the “-A + a” overlap,
+         *           but this also removes -a+B and -a+C → restored in Style 2
+         *   Style 1 also removes -a+b → restored in Style 3
+         */
+        #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-launcher-expanded]:not([sidebar-panel-open]) {
+            /* Style 1 */
+            @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
+                -moz-pref("uc.flex.fully-hide-sidebery"),
+                (display-mode: fullscreen) {
+                :root:not([titlepreface*="\180e "]) & {
+                    --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
+            }
+            /* Style 2 */
+            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+                :root[titlepreface*="\180e "] & {
+                    --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+                }
+            }
+            /* Style 3 */
+            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+                }
+            }
+        }
 
-                /** 
-                 * When the sidebar panel is open ([sidebar-panel-open]) 
-                 * and native vertical tabs are in expanded mode ([sidebar-launcher-expanded]), 
-                 * clip the sidebar panel on hover to reveal the Mica backdrop. 
-                 */
-                #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
-                        [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
-                    ) {
-                    min-width: var(--uc-sidebar-main-hover-clip-mica) !important;
-                    clip-path: inset(0 0 0 0);
-                    transition: clip-path var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay);
+        /** 
+         * When the sidebar panel is open ([sidebar-panel-open]) 
+         * and native vertical tabs are in expanded mode ([sidebar-launcher-expanded]), 
+         * clip the sidebar panel on hover to reveal the Mica backdrop. 
+         */
+        #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
+                [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+            ) {
+            min-width: var(--uc-sidebar-main-hover-clip-mica) !important;
+            /*
+            clip-path: inset(0 0 0 0);
+            */
+            @media -moz-pref("sidebar.position_start") {
+                clip-path: var(--uc-vt-sidebox-clip-path-start);
+            }
+            /*if sidebar on right*/
+            @media not -moz-pref("sidebar.position_start") {
+                clip-path: var(--uc-vt-sidebox-clip-path-end);
+            }
+            transition: var(--uc-tabbox-clip-path-transition);
+        }
+        #sidebar-main:hover
+            ~ #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
+                [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+            ) {
+            /* Style 1 */
+            @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")),
+                -moz-pref("uc.flex.fully-hide-sidebery"),
+                (display-mode: fullscreen) {
+                :root:not([titlepreface*="\180e "]) & {
+                    --uc-vt-sidebox-clip-path-start: var(--uc-hover-vt-sidebox-clip-path-start);
+                    --uc-vt-sidebox-clip-path-end: var(--uc-hover-vt-sidebox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
-                #sidebar-main:hover
-                    ~ #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
-                        [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
-                    ) {
-                    @media -moz-pref("sidebar.position_start") {
-                        clip-path: inset(0 0 0 var(--uc-sidebar-main-hover-clip-mica));
-                    }
-                    /*if sidebar on right*/
-                    @media not -moz-pref("sidebar.position_start") {
-                        clip-path: inset(0 var(--uc-sidebar-main-hover-clip-mica) 0 0);
-                    }
-                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay);
+            }
+            /* Style 2 */
+            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+                :root[titlepreface*="\180e "] & {
+                    --uc-vt-sidebox-clip-path-start: var(--uc-hover-vt-sidebox-clip-path-start);
+                    --uc-vt-sidebox-clip-path-end: var(--uc-hover-vt-sidebox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+                }
+            }
+            /* Style 3 */
+            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    --uc-vt-sidebox-clip-path-start: var(--uc-hover-vt-sidebox-clip-path-start);
+                    --uc-vt-sidebox-clip-path-end: var(--uc-hover-vt-sidebox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
             }
         }
@@ -544,42 +543,17 @@
          */
         @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
             #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
-                @media -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-web-content-margin-outset-clip-mica) 0 0
-                            var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica))
-                    );
-                }
-                /*if sidebar on right*/
-                @media not -moz-pref("sidebar.position_start") {
-                    clip-path: inset(
-                        var(--uc-web-content-margin-outset-clip-mica)
-                            var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica)) 0 0
-                    );
-                }
-                transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
+                --uc-tabbox-clip-path-start: var(--uc-hover-sidebar-main-tabbox-clip-path-start);
+                --uc-tabbox-clip-path-end: var(--uc-hover-sidebar-main-tabbox-clip-path-end);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
                 #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
-                    @media -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-web-content-margin-outset-clip-mica) 0 0
-                                var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica))
-                        );
-                    }
-                    /*if sidebar on right*/
-                    @media not -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-web-content-margin-outset-clip-mica)
-                                var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica))
-                                0 0
-                        );
-                    }
-                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay);
+                    --uc-tabbox-clip-path-start: var(--uc-hover-sidebar-main-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-sidebar-main-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
             }
         }
@@ -587,30 +561,31 @@
 
     /* Clip the tab box when Sidebery is expanded to reveal the Mica backdrop */
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
-        @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
-            -moz-pref("uc.flex.fully-hide-sidebery"),
-            (display-mode: fullscreen) {
-            /** 
-             * The [inFullscreen] selector is required to prevent fullscreen mode 
-             * from being blocked by :not([titlepreface*="\180e "]), 
-             * ensuring styles can be applied in fullscreen state. 
-             */
-            :root:is(:not([titlepreface*="\180e "]), [titlepreface*="\200c "], [titlepreface*="\200d "], [inFullscreen])
-                & {
-                &:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
-                    @media -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-sidebar-box-hover-clip-mica)
-                        );
-                    }
-                    /*if sidebar on right*/
-                    @media not -moz-pref("sidebar.position_start") {
-                        clip-path: inset(
-                            var(--uc-web-content-margin-outset-clip-mica) var(--uc-sidebar-box-hover-clip-mica) 0 0
-                        );
-                    }
-                    transition: clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-hover-sidebar-delay);
+        &:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
+            /* Style 1 */
+            @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")),
+                -moz-pref("uc.flex.fully-hide-sidebery"),
+                (display-mode: fullscreen) {
+                :root:not([titlepreface*="\180e "]) & {
+                    --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+                }
+            }
+            /* Style 2 */
+            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+                :root[titlepreface*="\180e "] & {
+                    --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+                }
+            }
+            /* Style 3 */
+            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
+                    --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
             }
         }
@@ -691,8 +666,8 @@
                 rgba(0, 0, 0, var(--uc-browser-mica-transparency))
             ) !important;
             /*
-        -moz-appearance: -moz-win-borderless-glass !important;
-        */
+            -moz-appearance: -moz-win-borderless-glass !important;
+            */
         }
     }
 }
@@ -722,7 +697,8 @@
             --uc-acrylic-noise-image: url("../icons/wallpaper/acrylic-noise.png");
         }
 
-        background-image: var(--uc-acrylic-noise-image, none),
+        background-image:
+            var(--uc-acrylic-noise-image, none),
             linear-gradient(var(--toolbar-bgcolor, Field), var(--toolbar-bgcolor, Field)), var(--lwt-header-image, none) !important;
         background-repeat: repeat, no-repeat, no-repeat !important;
         background-position: right top !important;

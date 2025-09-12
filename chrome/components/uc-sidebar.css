@@ -33,6 +33,15 @@
             background-size: 20px;
             mask-position: var(--uc-sidebar-button-bg-pos-last);
             mask-size: 20px;
+            /* In horizontal tab mode, adjust icon size only when Sidebery is active */
+            @media not -moz-pref("sidebar.verticalTabs") {
+                position: var(--uc-sb-sidebar-button-bg-pos, flex);
+                height: var(--uc-sb-sidebar-button-height-last, auto);
+                background-position: var(--uc-sb-sidebar-button-bg-pos-last, var(--uc-sidebar-button-bg-pos-last));
+                background-size: var(--uc-sb-sidebar-button-bg-size, 18px);
+                mask-position: var(--uc-sb-sidebar-button-bg-pos-last, var(--uc-sidebar-button-bg-pos-last));
+                mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
+            }
         }
         @media not -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
             fill: var(--toolbarbutton-icon-fill) !important;
@@ -63,6 +72,20 @@
                 @media (display-mode: fullscreen) {
                     background-position: var(--uc-sidebar-button-bg-pos-first-fs);
                     mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
+                }
+                /* In horizontal tab mode, adjust icon size only when Sidebery is active */
+                @media not -moz-pref("sidebar.verticalTabs") {
+                    background-position: var(
+                        --uc-sb-sidebar-button-bg-pos-first,
+                        var(--uc-sidebar-button-bg-pos-first)
+                    );
+                    background-size: var(--uc-sb-sidebar-button-bg-size, 18px);
+                    mask-position: var(--uc-sb-sidebar-button-bg-pos-first, var(--uc-sidebar-button-bg-pos-first));
+                    mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
+                    @media (display-mode: fullscreen) {
+                        background-position: var(--uc-sidebar-button-bg-pos-first-fs);
+                        mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
+                    }
                 }
             }
 
@@ -493,6 +516,8 @@
         --uc-sb-sidebar-main-hover-max-height: 100%;
         --uc-sb-sidebar-main-hover-height: fit-content;
         --uc-sb-sidebar-stripe-display: none;
+        --uc-sb-vertical-tabs-size: 0px;
+
         /*
         --uc-sb-sidebar-main-background-duration: var(--uc-autohide-transition-duration);
         --uc-sb-sidebar-main-background-delay: calc(var(--uc-autohide-sidebar-delay) + 10ms);
@@ -835,9 +860,21 @@
         }
     }
 
-    /* Remove native vertical tabs when Sidebery is active. */
-    #sidebar-main #vertical-tabs {
-        display: var(--uc-sb-sidebar-stripe-display, flex) !important;
+    /** 
+     * Native vertical tabs cannot be hidden with display:none 
+     * because tab count features would stop working. 
+     * Using visibility:collapse also causes slow scrolling 
+     * when switching between horizontal and vertical tab modes. 
+     * To avoid both issues, use size control instead. 
+     */
+    #sidebar-main[sidebar-panel-open] #vertical-tabs:not([collapse]) {
+        @media not -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+            display: var(--uc-sb-sidebar-stripe-display, flex) !important;
+        }
+        @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+            width: var(--uc-sb-vertical-tabs-size, auto);
+            height: var(--uc-sb-vertical-tabs-size, auto);
+        }
     }
 
     /* Remove sidebar stripe when Sidebery is active. */
@@ -1584,6 +1621,34 @@
             }
 
             &:is([soundplaying], [muted], [activemedia-blocked]) {
+                background-color: transparent !important;
+                background-image: none !important;
+                -moz-context-properties: fill;
+                fill: var(--tab-selected-textcolor);
+                color-scheme: var(--tab-selected-color-scheme);
+                border-radius: var(--border-radius-circle);
+
+                &[selected] {
+                    background-color: transparent !important;
+                    background-image: none !important;
+                }
+                .browser-toolbox-background:-moz-window-inactive &[selected] {
+                    background-color: transparent !important;
+                    background-image: none !important;
+                }
+                .tabbrowser-tab:hover &:not([selected]) {
+                    background-color: transparent !important;
+                    background-image: none !important;
+                }
+                .tabbrowser-tab:hover &:hover {
+                    background-color: color-mix(in srgb, currentColor 17%, transparent) !important;
+                    background-image: none !important;
+                }
+            }
+
+            /*
+            &:is([soundplaying], [muted], [activemedia-blocked]) {
+                --button-background-color-ghost-hover: color-mix(in srgb, currentColor 17%, transparent) !important;
                 --audio-overlay-extra-background: transparent;
                 background-color: var(--lwt-accent-color);
                 background-image:
@@ -1594,20 +1659,28 @@
                 border-radius: var(--border-radius-circle);
 
                 &:hover {
-                    --audio-overlay-extra-background: var(--button-background-color-ghost-hover);
+                    --audio-overlay-extra-background: var(--button-background-color-ghost-hover) !important;
                 }
 
+                .tabbrowser-tab:hover &:not([selected]) {
+                    background-image:
+                        linear-gradient(var(--audio-overlay-extra-background)),
+                        linear-gradient(var(--tab-hover-background-color)), linear-gradient(var(--toolbox-bgcolor)) !important;
+                }
                 &[selected] {
                     background-image:
                         linear-gradient(var(--audio-overlay-extra-background)),
-                        linear-gradient(var(--tab-selected-bgcolor)), linear-gradient(var(--toolbox-bgcolor));
+                        linear-gradient(var(--uc-vt-active-tab-bgcolor)),
+                        linear-gradient(var(--toolbox-bgcolor)) !important;
                 }
                 .browser-toolbox-background:-moz-window-inactive &[selected] {
                     background-image:
                         linear-gradient(var(--audio-overlay-extra-background)),
-                        linear-gradient(var(--tab-selected-bgcolor)), linear-gradient(var(--toolbox-bgcolor-inactive));
+                        linear-gradient(var(--uc-vt-active-tab-bgcolor)),
+                        linear-gradient(var(--toolbox-bgcolor-inactive)) !important;
                 }
             }
+            */
         }
     }
 
@@ -1647,7 +1720,7 @@
         &[aria-expanded="false"] {
             opacity: 0.88;
             @media (prefers-color-scheme: dark) {
-                opacity: 0.83;
+                opacity: 0.85;
             }
         }
         /* Remove border from collapsed tab groups */
@@ -1796,6 +1869,9 @@
                 }
 
                 #sidebar-main[sidebar-launcher-expanded]:hover & {
+                    .tab-group-label-container {
+                        max-width: 100% !important;
+                    }
                     .tab-group-label {
                         align-self: auto !important;
                         padding-inline: 16px !important;
