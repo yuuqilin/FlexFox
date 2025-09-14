@@ -177,26 +177,28 @@
     /* When auto-hide navbar is enabled, move the tab bar window controls down to the navigation bar */
     @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") {
         #TabsToolbar {
-            z-index: 3;
-            > .titlebar-buttonbox-container {
-                position: absolute !important;
-                top: var(--uc-tabs-toolbar-height) !important;
-                right: 0 !important;
-                @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-                    :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) & {
-                        margin-block-start: var(--uc-navbar-transform);
-                        @media not -moz-pref("uc.flex.auto-hide-window-controls") {
-                            margin-inline-end: var(--uc-tabs-toolbar-windows-controls-margin-right, -104px);
-                            opacity: var(--uc-navbar-opacity, 0);
-                            transition: var(--uc-autohide-tabs-toolbar-windows-controls-transition);
-                        }
-
-                        #navigator-toolbox:is(:hover, :focus-within) & {
-                            margin-block-start: 0;
+            :root:not([customizing]) & {
+                z-index: 3;
+                > .titlebar-buttonbox-container {
+                    position: absolute !important;
+                    top: var(--uc-tabs-toolbar-height) !important;
+                    right: 0 !important;
+                    @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+                        :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) & {
+                            margin-block-start: var(--uc-navbar-transform);
                             @media not -moz-pref("uc.flex.auto-hide-window-controls") {
-                                margin-inline-end: 0;
-                                opacity: 1;
-                                transition: var(--uc-hover-tabs-toolbar-windows-controls-transition);
+                                margin-inline-end: var(--uc-tabs-toolbar-windows-controls-margin-right, -104px);
+                                opacity: var(--uc-navbar-opacity, 0);
+                                transition: var(--uc-autohide-tabs-toolbar-windows-controls-transition);
+                            }
+
+                            #navigator-toolbox:is(:hover, :focus-within) & {
+                                margin-block-start: 0;
+                                @media not -moz-pref("uc.flex.auto-hide-window-controls") {
+                                    margin-inline-end: 0;
+                                    opacity: 1;
+                                    transition: var(--uc-hover-tabs-toolbar-windows-controls-transition);
+                                }
                             }
                         }
                     }
@@ -289,18 +291,20 @@
 /* When auto-hide navbar is enabled, add space to the right of #PanelUI-button
    for the relocated tab bar window controls. Since #nav-bar has its own transition
    when hidden, the spacing is applied to #PanelUI-button instead to keep things simpler. */
-#PanelUI-button {
-    @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
-        padding-right: var(--uc-sb-nav-bar-padding-right, var(--uc-nav-bar-padding-right));
-        @media -moz-pref("uc.flex.auto-hide-window-controls") {
-            transition: padding-right 0.5s ease-in-out;
-            #TabsToolbar:has(> .titlebar-buttonbox-container:hover) ~ #nav-bar & {
-                padding-right: var(--uc-sb-nav-bar-padding-right, 104px);
+@media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
+    #PanelUI-button {
+        :root:not([customizing]) & {
+            padding-right: var(--uc-sb-nav-bar-padding-right, var(--uc-nav-bar-padding-right));
+            @media -moz-pref("uc.flex.auto-hide-window-controls") {
+                transition: padding-right 0.5s ease-in-out;
+                #TabsToolbar:has(> .titlebar-buttonbox-container:hover) ~ #nav-bar & {
+                    padding-right: var(--uc-sb-nav-bar-padding-right, 104px);
+                }
             }
-        }
-        @media not -moz-pref("uc.flex.auto-hide-window-controls") {
-            #toolbar-menubar[inactive="true"] ~ #nav-bar & {
-                --uc-nav-bar-padding-right: 104px;
+            @media not -moz-pref("uc.flex.auto-hide-window-controls") {
+                #toolbar-menubar[inactive="true"] ~ #nav-bar & {
+                    --uc-nav-bar-padding-right: 104px;
+                }
             }
         }
     }

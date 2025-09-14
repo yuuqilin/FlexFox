@@ -262,6 +262,17 @@ toolbar:not(#TabsToolbar) > #search-container {
             }
         }
         */
+        /* !TEMPORARY: Workaround to disable v144 container changes so counters function again.
+           In v144, vertical tabs were changed to an inline-size container, which applies style containment
+           and breaks counters. At the moment this container is only used for tab-split-view-wrapper,
+           a feature not yet in Nightly, so the full impact of disabling it is unknown.
+           This workaround should be removed later once counters are moved inside vertical tabs. */
+        #vertical-tabs {
+            &[visible] {
+                container-type: normal !important;
+                container-name: vertical-tabs-container;
+            }
+        }
     }
 
     @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 1) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {

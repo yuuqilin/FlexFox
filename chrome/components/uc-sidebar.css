@@ -877,6 +877,14 @@
         }
     }
 
+    /* Fix v144 container change that broke vertical tabs' ability to size to its children */
+    #sidebar-main:not([sidebar-launcher-expanded][sidebar-panel-open]) #vertical-tabs {
+        contain-intrinsic-width: var(--uc-sidebar-stripe-width);
+        /*
+        min-width: var(--uc-sidebar-stripe-width);
+        */
+    }
+
     /* Remove sidebar stripe when Sidebery is active. */
     @media -moz-pref("uc.flex.remove-sidebar-stripe") {
         #sidebar-main {
@@ -1724,11 +1732,24 @@
             }
         }
         /* Remove border from collapsed tab groups */
-        tab-group[collapsed] > .tab-group-label-container > & {
+        /* Fix v144 change: .tab-group-label is no longer a direct descendant */
+        tab-group[collapsed] /*> .tab-group-label-container >*/ & {
             outline: none !important;
             /*
             outline: 1px solid light-dark(var(--tab-group-color), var(--tab-group-color-invert)) !important;
             */
+        }
+    }
+
+    /* Remove styles introduced for the new element in v144 */
+    .tab-group-label-hover-highlight {
+        tab-group & {
+            background-color: transparent !important;
+
+            #tabbrowser-tabs[orient="vertical"] & {
+                margin-inline: 0 !important;
+                box-shadow: none !important;
+            }
         }
     }
 

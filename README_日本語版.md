@@ -20,6 +20,20 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
+**🦊 v5.0.1**
+
+* `uc.flex.sidebery-allow-resizable-width` の使いやすさを改善しました。
+  * サイドバーボタン（Firefox ロゴ）で折りたたみ状態に切り替えた際に、Sidebery が左右に揺れて画面が大きく乱れる問題を防止しました。
+  * Sidebery の幅が狭くなった時にピン留めタブが自動で折り返され、はみ出してクリックできなくなるのを回避できるようになりました。
+* `uc.flex.max-visible-vertical-pinned-tabs` がネイティブ垂直タブだけでなく Sidebery のピン留めタブパネルにも対応するようになりました。
+  * デフォルト値は `4` で、最大 4 行まで表示され、それ以上はスクロールできます。
+  * 設定範囲が `2`～`8` に拡大されました。
+  * `0` を設定すると高さ制限が解除され、無制限に展開できます。
+* Firefox の「ツールバーカスタマイズ」モードで `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` を有効にしていると、ホバーしていない時にウィンドウ操作ボタンが消えてしまう問題を修正しました。
+* Nightly v144 の変更によってタググループラベルの外観が崩れてしまう問題を修正しました。 [Bug 1981197](https://bugzilla.mozilla.org/show_bug.cgi?id=1981197)
+* Nightly v144 の変更によって、ネイティブ垂直タブを折りたたみ状態に切り替えた時に幅が崩れてしまう問題を修正しました。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
+* Nightly v144 の変更によって `uc.flex.show-tab-count-in-alltabs-button` のカウンターが動作しなくなる問題を修正しました。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
+
 **✨ v5.0.0 – 主な機能アップデート**
 
 * Sidebery に 2 種類の新しいレイアウトモードを追加
@@ -123,10 +137,10 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * Sidebery とネイティブ垂直タブの両方に対応。  
   * 設定範囲は `2`～`5`（既定値 `5`）。  
 
-* `uc.flex.max-visible-vertical-pinned-tabs` を追加し、ピン留めタブパネルの 1 列に表示するタブ数（縦方向）を設定できます。  
-  * ネイティブ垂直タブ専用で、パネルの高さを制限します。  
-  * ピン留めタブが設定値を超える場合、残りのタブはスクロールバーで表示できます。  
-  * 設定範囲は `4`～`6`（既定値 `4`）。  
+* `uc.flex.max-visible-vertical-pinned-tabs` を追加し、ピン留めタブパネルの 1 列に表示するタブ数（縦方向）を設定できます。
+  * ネイティブ垂直タブと Sidebery の両方に対応し、パネルの高さを制限します。
+  * ピン留めタブが設定値を超える場合、残りのタブはスクロールバーで表示できます。
+  * 設定範囲は `2`～`8`（既定値 `4`）。
   * `0` を設定すると高さ制限が解除され、タブ数に応じて無制限に拡張します。  
 
 * `uc.flex.show-pin-tabs-separator-in-expanded-state` を追加し、釘選タブパネルの分隔線を常に表示できるようにしました。  
@@ -446,6 +460,62 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 * アプリメニューおよびコンテキストメニューで、これまでアイコンがなかった3項目にアイコンを追加。
 * Firefox Nightly v143 の仕様変更により、アドレスバーのスタイルが適用されなくなっていた問題を修正（[Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)）。
 
+**🧊 v4.0.0 – 主な機能アップデート**
+* Windows 11 の **Mica 背景効果** に対応しました。
+  * 有効にするには、`about:config` に以下の設定を追加してください：
+    ```
+    widget.windows.mica = true
+    widget.windows.mica.popups = 2
+    widget.windows.mica.toplevel-backdrop = 2
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-mica-transparency-level = 2
+    ```
+  * テーマは `システムテーマ — 自動` に設定しておく必要があります。他のテーマでは Mica は反映されません。
+  * **Firefoxの再起動が必要です。**
+  * 詳細設定はこちらをご覧ください: [🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
+  * 背景が他のウィンドウに隠れて見えない場合は、<kbd>Win</kbd> + <kbd>Home</kbd> キーで他のウィンドウをすべて最小化できます。マウスジェスチャーや自動化スクリプトでの操作も可能です。  
+
+  ネイティブの Mica 背景効果を表示した例です。YouTube のようなウェブページの透明効果には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 拡張機能を使用しています。  
+  
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="Firefox のツールバーやタブの後ろに Mica 背景効果が表示されている例。" width="96%" />
+
+* Mica が使用できない場合や、固定された壁紙を表示したい場合には、**カスタム背景壁紙**機能を利用できます。
+  * `about:config` に以下の設定を追加して有効にします：
+    ```
+    uc.flex.browser-wallpaper-enabled = true
+    uc.flex.browser-wallpaper-index = 1
+    uc.flex.browser-wallpaper-acrylic-disabled = false
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-wallpaper-transparency-level = 2
+    uc.flex.browser-wallpaper-contrast-level = 2
+    ```
+  * **Firefoxの再起動が必要です。**
+  * `../icons/wallpaper/` フォルダに `main-image-1.jpg` ～ `main-image-9.jpg` を保存すると、最大9枚の画像を切り替えて使用できます。
+  * デフォルトで **Acrylic ぼかし効果** が適用され、Mica に似た外観になります（完全に同じではありません）。
+  * **カスタム背景壁紙**機能を有効にすると、Mica の背景が上書きされます。Mica と壁紙を同時に有効にした場合は、壁紙が表示されます。  
+
+  Acrylic ぼかしを有効にしたカスタム背景壁紙の例です。ネイティブの Mica と比べて、ぼかしの強さや色調、質感が異なります。  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-acrylic.webp" alt="Acrylic ぼかしが適用されたカスタム壁紙の例。Mica 効果に似た見た目です。" width="96%" />
+
+  Acrylic ぼかしを無効にしたカスタム壁紙の例です。背景がくっきり表示されるため、透明度の設定で文字の読みやすさを調整できます。  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/churning-in-the-chukchi-sea-no-acrylic.webp" alt="Acrylic ぼかしを無効にしたカスタム壁紙の例。背景画像がくっきり表示されます。" width="96%" />
+
+* サンプル壁紙の出典とクレジット：
+  * [a blue and purple background with wavy shapes (Unsplash)](https://unsplash.com/photos/a-blue-and-purple-background-with-wavy-shapes-1hg6NpO0kIk) – Firefox の新しいタブのカスタマイズ機能に組み込まれている背景のひとつです。
+  * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – Firefox の新しいタブのカスタマイズ機能に組み込まれている背景のひとつです。
+  * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([ダウンロード](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
+
+* Sidebery やウェブページに Mica や壁紙の背景を表示するには、`browser.tabs.allow_transparent_browser` を有効にしてください。
+  * ページの透明化には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 拡張機能が必要です。
+  * 背景が透けて読みにくくなる場合は [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) との併用がおすすめです。
+
+* 新オプション：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
+  * Sidebery とネイティブの垂直タブで使われている開閉アニメーションの速度を、ナビゲーションバーとブックマークツールバーにも適用し、すべてのアニメーション速度を統一します。
+  * 統一後は、`uc.flex.sidebery-fast-hover-expand` または `uc.flex.sidebery-slow-hover-expand` を使って、ナビゲーションバーやブックマークツールバーの速度も調整できます。
+  * Mica やカスタム壁紙を有効にすると、FlexFox が内部的にアニメーション速度を自動で統一するため、その場合はこのオプションを手動で設定する必要はありません。
+
 以前のバージョンの更新履歴については  
 👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
 
@@ -667,7 +737,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Sidebery／垂直タブと同じ速度でツールバーを統一。Mica またはカスタム壁紙使用時は自動適用。 |
 | `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | ピン留めタブの横方向の数を設定します。垂直タブでは、1 行に表示するタブ数を指定し、超えると次の行に折り返されます。水平タブでは、可視ピン留めタブ数を `設定値 × 2` に制限し、それ以上は自動で折りたたまれます。  |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`-`6`<br>(`4`) | ネイティブ垂直タブで固定タブの行数の上限を設定します。上限を超えると固定タブパネルにスクロールバーが表示されます。`0` に設定すると制限が解除され、パネルがタブ数に応じて無制限に拡張されます。 |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | ネイティブ垂直タブと Sidebery の両方で、ピン留めタブの行数の上限を設定します。上限を超えると固定タブパネルにスクロールバーが表示されます。`0` に設定すると制限が解除され、パネルがタブ数に応じて無制限に拡張されます。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `'top-center-left'` または `'1'`（左寄せ上部）、`'top-right'` または `'2'`（右上）、`'bottom-right'` または `'3'`（右下）です。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Firefoxのアプリメニュー、ブックマークメニュー、右クリックメニューにおける項目同士の垂直間隔を設定します。指定可能な値は文字列 `'1'` または `'small'`（狭い間隔）、`'2'` または `'medium'`（標準の間隔）、`'3'` または `'large'`（広い間隔）です。 |
 

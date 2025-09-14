@@ -477,11 +477,23 @@
 
     /* Max visible rows in native vertical pinned tabs (before scrolling) */
     --uc-vt-pinned-tab-max-rows: 4;
+    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 2) {
+        --uc-vt-pinned-tab-max-rows: 2;
+    }
+    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 3) {
+        --uc-vt-pinned-tab-max-rows: 3;
+    }
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 5) {
         --uc-vt-pinned-tab-max-rows: 5;
     }
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 6) {
         --uc-vt-pinned-tab-max-rows: 6;
+    }
+    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 7) {
+        --uc-vt-pinned-tab-max-rows: 7;
+    }
+    @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 8) {
+        --uc-vt-pinned-tab-max-rows: 8;
     }
 
     /* Tabs per row for native pinned tabs and Sidebery (controlled by per-tab percentage width) */
@@ -812,8 +824,10 @@
 
     /* Initial display and positioning values for the window controls when auto-hide navbar is enabled */
     @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
-        --uc-tabs-toolbar-windows-controls-display: flex;
-        --uc-navbar-windows-controls-display: none;
+        &:not([customizing]) {
+            --uc-tabs-toolbar-windows-controls-display: flex;
+            --uc-navbar-windows-controls-display: none;
+        }
         --uc-nav-bar-padding-right: 0px;
         /*
         @media not -moz-pref("uc.flex.auto-hide-window-controls") {

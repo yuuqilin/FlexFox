@@ -7,6 +7,7 @@
          * the corresponding variables in uc-user-settings.css to keep both sides consistent. 
          */
         /* Sidebar expand/collapse animation settings */
+        --uc-sidebar-width: 44px;
         --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
         --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
         --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
@@ -54,6 +55,26 @@
         @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 1) {
             --uc-sb-pinned-tab-max-columns: 100%;
         }
+
+        --uc-sb-pinned-tab-max-rows: 4;
+        @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 2) {
+            --uc-sb-pinned-tab-max-rows: 2;
+        }
+        @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 3) {
+            --uc-sb-pinned-tab-max-rows: 3;
+        }
+        @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 5) {
+            --uc-sb-pinned-tab-max-rows: 5;
+        }
+        @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 6) {
+            --uc-sb-pinned-tab-max-rows: 6;
+        }
+        @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 7) {
+            --uc-sb-pinned-tab-max-rows: 7;
+        }
+        @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 8) {
+            --uc-sb-pinned-tab-max-rows: 8;
+        }
     }
 
     /* Add text stroke */
@@ -82,7 +103,24 @@
         .PinnedTabsBar {
             min-width: 200px;
             grid-template-columns: repeat(auto-fit, minmax(var(--uc-sb-pinned-tab-max-columns), 1fr)) !important;
+            grid-auto-rows: min-content;
+            flex-shrink: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scroll-behavior: smooth;
+            @media not -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 0) {
+                max-height: calc(var(--uc-sb-pinned-tab-max-rows) * 37px - 2px);
+            }
 
+            @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+                @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+                    @media (width < 200px) {
+                        display: flex !important;
+                        min-width: var(--uc-sidebar-width);
+                    }
+                }
+            }
             .Tab {
                 min-width: 34px !important;
                 width: 97% !important;

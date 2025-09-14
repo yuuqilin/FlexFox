@@ -20,6 +20,20 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
+**🦊 v5.0.1**
+
+* 改进了 `uc.flex.sidebery-allow-resizable-width` 的实用性
+  * 使用侧栏按钮（Firefox Logo）切换到折叠状态时，避免 Sidebery 左右晃动导致画面剧烈变化。
+  * 当 Sidebery 宽度变窄时，固定标签页会自动换行，避免超出侧栏无法点击。
+* `uc.flex.max-visible-vertical-pinned-tabs` 现在不仅支持原生垂直标签页，也能控制 Sidebery 固定标签页面板的最大高度。
+  * 默认值为 `4`（最多显示 4 行，超出时可滚动）。
+  * 数值范围扩大为 `2`–`8`。
+  * 设置为 `0` 时取消高度限制，面板可无限扩展。
+* 修复在 Firefox 的“自定义工具栏”模式下启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 时，窗口控制按钮在未悬停时会消失的问题。
+* 修复 Nightly v144 更新导致的标签组标题样式异常问题。 [Bug 1981197](https://bugzilla.mozilla.org/show_bug.cgi?id=1981197)
+* 修复 Nightly v144 更新导致原生垂直标签页切换到折叠状态时宽度塌陷的问题。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
+* 修复 Nightly v144 更新导致 `uc.flex.show-tab-count-in-alltabs-button` 的计数器功能失效的问题。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
+
 **✨ v5.0.0 – 主要功能更新**
 
 * 新增 Sidebery 的 2 种布局模式
@@ -124,10 +138,10 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * 适用于 Sidebery 和原生垂直标签页。  
   * 可设置范围 `2`–`5`（默认值 `5`）。  
 
-* 新增 `uc.flex.max-visible-vertical-pinned-tabs`，用于设置固定标签页面板每列可显示的标签数量（纵向）。  
-  * 仅适用于原生垂直标签页，用于限制面板高度。  
-  * 当固定标签页数量超过设置值时，溢出的标签可通过滚动条浏览。  
-  * 可设置范围 `4`–`6`（默认值 `4`）。  
+* 新增 `uc.flex.max-visible-vertical-pinned-tabs`，用于设置固定标签页面板每列可显示的标签数量（纵向）。
+  * 适用于原生垂直标签页和 Sidebery，用于限制面板高度。
+  * 当固定标签页数量超过设置值时，溢出的标签可通过滚动条浏览。
+  * 可设置范围 `2`–`8`（默认值 `4`）。
   * 设为 `0` 时将关闭高度限制，面板会随标签数量无限扩展。  
 
 * 新增 `uc.flex.show-pin-tabs-separator-in-expanded-state`，用于始终显示固定标签页面板的分隔线。    
@@ -446,6 +460,62 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 * 为应用菜单和右键菜单中原本缺少图标的3个项目补充了图标。
 * 修复 Firefox Nightly v143 中由于选择器变更导致地址栏样式失效的问题（[Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)）。
 
+**🧊 v4.0.0 – 主要功能更新**
+* 支持 Windows 11 的 **Mica 背景效果**。
+  * 要启用 Mica，必须在 `about:config` 中设置以下项目：
+    ```
+    widget.windows.mica = true
+    widget.windows.mica.popups = 2
+    widget.windows.mica.toplevel-backdrop = 2
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-mica-transparency-level = 2
+    ```
+  * 请将主题设置为 `系统主题 — 自动`，否则 Mica 效果将无法生效。
+  * **需要重启 Firefox 浏览器。**
+  * 详细说明请参考：[🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
+  * 若背景被其他窗口遮挡，可使用快捷键 <kbd>Win</kbd> + <kbd>Home</kbd> 最小化所有非活动窗口，也可以设置为鼠标手势或使用脚本自动执行。  
+
+  使用原生 Mica 背景的效果展示。（YouTube 网页内容的透明效果是通过搭配 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展实现的） 
+  
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="示例展示了 Firefox 标签页和工具栏背后的 Mica 背景效果。" width="96%" />
+
+* 若系统不支持 Mica，或希望使用不受窗口遮挡影响的固定壁纸，可以启用 FlexFox 提供的 **自定义浏览器壁纸** 功能。
+  * 在 `about:config` 中启用以下选项：
+    ```
+    uc.flex.browser-wallpaper-enabled = true
+    uc.flex.browser-wallpaper-index = 1
+    uc.flex.browser-wallpaper-acrylic-disabled = false
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-wallpaper-transparency-level = 2
+    uc.flex.browser-wallpaper-contrast-level = 2
+    ```
+  * **需要重启 Firefox 浏览器。**
+  * 壁纸文件需命名为 `main-image-1.jpg` 至 `main-image-9.jpg`，存放于 `../icons/wallpaper/` 文件夹中。
+  * 默认启用 **Acrylic 模糊效果**，外观类似原生 Mica，但并非完全相同。
+  * 启用 **自定义浏览器壁纸** 功能后将覆盖系统原生的 Mica 背景。如果同时启用 Mica 和壁纸，显示的是壁纸。  
+
+  启用自定义壁纸后可见，与原生 Mica 相比，模糊程度、色调和背景材质都有所不同。  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-acrylic.webp" alt="示例展示了启用 Acrylic 模糊效果的自定义壁纸，模拟了 Mica 效果的视觉风格。" width="96%" />
+
+  关闭自定义壁纸的 Acrylic 模糊效果后，背景图会变得非常清晰。可通过调整遮罩透明度来平衡网页文字的可读性。  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/churning-in-the-chukchi-sea-no-acrylic.webp" alt="启用自定义壁纸但关闭 Acrylic 模糊效果的示例，壁纸清晰可见。" width="96%" />
+
+* 示例壁纸的来源与鸣谢：
+  * [a blue and purple background with wavy shapes (Unsplash)](https://unsplash.com/photos/a-blue-and-purple-background-with-wavy-shapes-1hg6NpO0kIk) – 作为 Firefox 新标签页自定义功能中的内建背景之一提供。
+  * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – 作为 Firefox 新标签页自定义功能中的内建背景之一提供。
+  * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([下载](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
+
+* 要让 Sidebery 和网页内容显示 Mica 背景或壁纸，需要启用 `browser.tabs.allow_transparent_browser`。
+  * 页面透明效果需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展。
+  * 若部分页面显示为全透明导致难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。
+
+* 新增选项：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
+  * 启用后，会将 Sidebery 与原生垂直标签页使用的展开/折叠动画速度应用到导航栏和书签工具栏，统一所有动画速度。
+  * 动画速度统一后，也可以使用 `uc.flex.sidebery-fast-hover-expand` 或 `uc.flex.sidebery-slow-hover-expand` 来调整导航栏和书签工具栏的动画速度。
+  * 启用 Mica 或自定义壁纸时，FlexFox 会在内部自动统一动画速度，此时无需手动设置这个选项。
+
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
 
@@ -674,7 +744,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.sidebery-slow-hover-expand` | `true` | 减慢 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | 将导航栏和书签栏的动画速度统一为 Sidebery／垂直标签页的速度。启用 Mica 或壁纸时自动生效。 |
 | `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | 设置每行固定标签的数量。垂直标签页中，定义每行显示的标签数，超过会换行。水平标签页中，设置可见固定标签数量（`设置值 × 2`），超过数量会自动折叠。 |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`-`6`<br>(`4`) | 设置原生垂直标签页中固定标签页的最大可见行数。达到上限后，固定标签页面板会显示滚动条。设为 `0` 时关闭限制，面板高度会随标签数量无限扩展。 |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | 设置原生垂直标签页和 Sidebery 中固定标签页的最大可见行数。达到上限后，固定标签页面板会显示滚动条。设为 `0` 时关闭限制，面板高度会随标签数量无限扩展。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 设置查找栏的位置。可选值为字符串：`'top-center-left'` 或 `'1'`（顶部左侧），`'top-right'` 或 `'2'`（右上角），`'bottom-right'` 或 `'3'`（右下角）。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `'1'` 或 `'small'`（较小间距）、`'2'` 或 `'medium'`（默认间距）、`'3'` 或 `'large'`（较大间距）。 |
 

@@ -104,7 +104,7 @@ user_pref("uc.flex.sidebery-slow-hover-expand",                 false);
 user_pref("uc.flex.sidebery-apply-expand-speed-to-toolbars",    false);
 /* Set tabs per row for pinned tabs in Sidebery and native vertical tabs (2–5, default 5) */
 user_pref("uc.flex.max-visible-horizontal-pinned-tabs",             5);
-/* Set max visible rows for pinned tabs in native vertical tabs (4–6, 0 = unlimited) */
+/* Set max visible rows for pinned tabs in Sidebery and native vertical tabs (2–8, 0 = unlimited) */
 user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
 /* Sets findbar position (string: "top-center-left"/"1", "top-right"/"2", "bottom-right"/"3"). */
 user_pref("uc.flex.findbar-position",                     "top-right");

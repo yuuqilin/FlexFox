@@ -20,6 +20,22 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v5.0.1**
+
+* Improved usability of `uc.flex.sidebery-allow-resizable-width`
+  * Prevented Sidebery from shifting left and right when toggled into collapsed mode using the sidebar button (Firefox Logo).
+  * Pinned tabs now wrap automatically when the sidebar width becomes narrow, ensuring they remain accessible instead of overflowing.
+* Extended `uc.flex.max-visible-vertical-pinned-tabs` to also control the maximum height of pinned tabs in Sidebery.
+  * Default remains `4` (up to 4 rows visible, with scroll available for overflow).
+  * Value range expanded to `2`–`8`.
+  * Setting `0` removes the height limit, allowing unlimited expansion.
+* Fixed an issue where the window control buttons disappeared when not hovered while Firefox was in Customize Toolbar mode with `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` enabled.
+* Fixed the broken appearance of tag group labels caused by Nightly v144 changes. [Bug 1981197](https://bugzilla.mozilla.org/show_bug.cgi?id=1981197)
+* Fixed a width collapse issue in native vertical tabs when toggling to collapsed mode, caused by Nightly v144 changes. [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
+* Fixed the counter malfunction in `uc.flex.show-tab-count-in-alltabs-button` due to Nightly v144 changes. [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
+
+<!-- END What's New -->
+
 **✨ v5.0.0 – Major Feature Update**
 
 * Added two new layout modes for Sidebery
@@ -53,8 +69,6 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * Fixed a transparency issue with the Mica background that occurred when both `uc.flex.disable-sidebery-autohide` and `Hide Sidebery` were used.
 * Fixed fullscreen web content corner rounding not being removed correctly when UI theme and page theme were opposite.
 * Refactored Mica backdrop and custom wallpaper code, slightly improving performance (\~4%).
-
-<!-- END What's New -->
 
 ## 🎉 Major Feature Update
 
@@ -125,11 +139,11 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * Works with both Sidebery and native vertical tabs.  
   * Accepts values from `2` to `5` (default `5`).  
 
-* Added `uc.flex.max-visible-vertical-pinned-tabs` to set how many pinned tabs are shown per column (vertical).  
-  * Applies only to native vertical tabs and limits the panel height.  
-  * When the number of pinned tabs exceeds the limit, the overflow can be scrolled.  
-  * Accepts values from `4` to `6` (default `4`).  
-  * Setting it to `0` disables the height limit, allowing the panel to expand freely.  
+* Added `uc.flex.max-visible-vertical-pinned-tabs` to set how many pinned tabs are shown per column (vertical).
+  * Applies to both native vertical tabs and Sidebery, limiting the panel height.
+  * When the number of pinned tabs exceeds the limit, the overflow can be scrolled.
+  * Accepts values from `2` to `8` (default `4`).
+  * Setting it to `0` disables the height limit, allowing the panel to expand freely.
 
 * Added `uc.flex.show-pin-tabs-separator-in-expanded-state` to always display a separator for the pinned tab panel.    
   * Applies only to native vertical tabs.  
@@ -450,6 +464,62 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 * Added icons to three previously unthemed items in the App Menu and context menus.
 * Fixed a styling issue with the address bar caused by a selector change in Firefox Nightly v143 ([Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)).
 
+**🧊 v4.0.0 – Major Feature Update**
+* Added support for the **Mica visual effect** on Windows 11.
+  * To enable Mica, configure the following settings in `about:config`:
+    ```
+    widget.windows.mica = true
+    widget.windows.mica.popups = 2
+    widget.windows.mica.toplevel-backdrop = 2
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-mica-transparency-level = 2
+    ```
+  * Be sure to set the theme to `System theme — auto`; Mica won't take effect under other themes.
+  * **Requires restarting Firefox.**
+  * For details, see: [🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
+  * If the Mica background appears obstructed by inactive windows, you can use the shortcut <kbd>Win</kbd> + <kbd>Home</kbd> to minimize all other windows. For convenience, consider assigning this action to a mouse gesture or automation script.  
+
+  Displays the native Mica background effect. Web content transparency (as shown on YouTube) is achieved using the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) extension.  
+  
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="Example showing the native Mica background effect behind Firefox tabs and toolbars." width="96%" />
+
+* For systems that don't support Mica or prefer a fixed wallpaper, FlexFox now supports **custom background wallpapers** for the browser.
+  * Enable it via the following settings in `about:config`:
+    ```
+    uc.flex.browser-wallpaper-enabled = true
+    uc.flex.browser-wallpaper-index = 1
+    uc.flex.browser-wallpaper-acrylic-disabled = false
+    browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-wallpaper-transparency-level = 2
+    uc.flex.browser-wallpaper-contrast-level = 2
+    ```
+  * **Requires restarting Firefox.**
+  * Supports up to 9 images named `main-image-1.jpg` to `main-image-9.jpg`, placed in `../icons/wallpaper/`.
+  * Wallpapers use an **Acrylic blur effect** by default. While not identical to native Mica, it offers a similar visual style.
+  * Enabling the **custom background wallpapers** feature overrides the native Mica background. If both Mica and wallpaper are enabled, the wallpaper will be shown.  
+
+  Shows the custom background wallpaper feature with Acrylic blur enabled. Compared to native Mica, the blur, tone, and texture are distinct.  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-acrylic.webp" alt="Example showing a custom wallpaper with Acrylic blur, mimicking the Mica look without relying on Windows support." width="96%" />
+
+  A custom wallpaper with Acrylic blur disabled. The wallpaper appears sharp and clear; use the transparency level setting to maintain text readability.  
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/churning-in-the-chukchi-sea-no-acrylic.webp" alt="Example showing a custom wallpaper with Acrylic blur disabled, revealing the wallpaper in full clarity." width="96%" />
+
+* Sample wallpaper sources and credits:
+  * [a blue and purple background with wavy shapes (Unsplash)](https://unsplash.com/photos/a-blue-and-purple-background-with-wavy-shapes-1hg6NpO0kIk) – Provided as one of the built-in background options in Firefox's new tab customization.
+  * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – Provided as one of the built-in background options in Firefox's new tab customization.
+  * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([Download](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
+
+* To display Mica or wallpaper backgrounds behind Sidebery and web content, `browser.tabs.allow_transparent_browser` must be enabled.
+  * Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) extension.
+  * If some pages become unreadable due to full transparency, pairing it with [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended.
+
+* New option: `uc.flex.sidebery-apply-expand-speed-to-toolbars`
+  * Applies the expand/collapse animation speed used by Sidebery and native vertical tabs to the navigation bar and bookmarks toolbar, unifying all animation speeds.
+  * Once unified, you can use `uc.flex.sidebery-fast-hover-expand` or `uc.flex.sidebery-slow-hover-expand` to adjust the animation speed of the navigation bar and bookmarks toolbar.
+  * When Mica or custom wallpaper is enabled, FlexFox will automatically unify animation speeds internally, so manual adjustment of this option is not needed in those cases.
+
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))
 
@@ -673,7 +743,7 @@ For more update logs from earlier versions,
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Unifies toolbar animation speed with Sidebery/vertical tabs. Auto-applied with Mica or custom wallpaper. |
 | `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | Sets the number of pinned tabs per row. In vertical tabs, it defines how many tabs appear per row before wrapping. In horizontal tabs, it determines the number of visible pinned tabs (`value × 2`); extra tabs are automatically collapsed. |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`4`-`6`<br>(`4`) | Sets the maximum number of visible rows for pinned tabs in the native vertical tabs. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | Sets the maximum number of visible rows for pinned tabs in both native vertical tabs and Sidebery. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the Findbar's position. Accepts string values: `'top-center-left'` or `'1'` = center-left top, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `'1'` or `'small'` = narrow spacing, `'2'` or `'medium'` = medium spacing, `'3'` or `'large'` = wide spacing. |
 
