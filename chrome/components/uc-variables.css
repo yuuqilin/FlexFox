@@ -704,13 +704,8 @@
         not -moz-pref("sidebar.verticalTabs") {
         --uc-nav-bar-first-child-padding-right: 0px;
     }
-    @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-        &[titlepreface*="\200b "] {
-            --uc-nav-bar-first-child-padding-right: 0px;
-        }
-    }
-    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        &:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+    @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
+        &:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
             --uc-nav-bar-first-child-padding-right: 0px;
         }
     }
@@ -772,7 +767,7 @@
             }
             --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin)
                 var(--uc-web-content-margin) var(--uc-web-content-margin-side);
-            @media not -moz-pref("sidebar.position_start") {
+            &[sidebar-positionend] {
                 --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin-side)
                     var(--uc-web-content-margin) var(--uc-web-content-margin);
             }
@@ -823,10 +818,12 @@
     }
 
     /* Initial display and positioning values for the window controls when auto-hide navbar is enabled */
-    @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
+    @media not -moz-pref("sidebar.verticalTabs") {
         &:not([customizing]) {
-            --uc-tabs-toolbar-windows-controls-display: flex;
-            --uc-navbar-windows-controls-display: none;
+            @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") or -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
+                --uc-tabs-toolbar-windows-controls-display: flex;
+                --uc-navbar-windows-controls-display: none;
+            }
         }
         --uc-nav-bar-padding-right: 0px;
         /*
@@ -998,7 +995,7 @@
             var(--uc-web-content-margin-outset-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
         );
         --uc-tabbox-clip-path-transition: clip-path var(--uc-autohide-transition-duration)
-            var(--uc-autohide-transition-type) calc(var(--uc-autohide-sidebar-delay) + 30ms);
+            var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
 
         /**/
         --uc-vt-sidebox-clip-path-start: inset(0 0 0 0);
@@ -1157,22 +1154,22 @@
             }
         }
         --uc-sidebar-main-hover-clip-mica: calc(var(--uc-sidebar-main-hover-width) - var(--uc-sidebar-main-width));
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
             --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            &:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+            &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
                 --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
             }
         }
     }
 
     --uc-sidebar-box-hover-clip-mica: calc(var(--uc-sb-sidebar-hover-width) - var(--uc-sb-sidebar-width));
-    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+    @media -moz-pref("uc.flex.fully-hide-sidebery") {
         --uc-sidebar-box-hover-clip-mica: var(--uc-sb-sidebar-hover-width);
     }
     @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-        &:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+        &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
             --uc-sidebar-box-hover-clip-mica: var(--uc-sb-sidebar-hover-width);
         }
     }
@@ -1180,8 +1177,8 @@
     /* Clip navigator in vertical tabs mode */
     @media -moz-pref("sidebar.verticalTabs") {
         --uc-navigator-hover-clip-mica: calc(var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height));
-        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen)) {
-            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
+        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox")) {
+            &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
                 --uc-navigator-hover-clip-mica: var(--uc-bm-padding-box-height);
             }
         }
@@ -1194,8 +1191,8 @@
             var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height) - var(--uc-autohide-navigator-bottom)
         );
         /* Non-fullscreen mode */
-        @media not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen)) {
-            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
+        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+            &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
                 /* Default layout: only clip the bookmarks toolbar */
                 --uc-navigator-hover-clip-mica: var(--uc-bm-padding-box-height);
                 @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
@@ -1235,36 +1232,6 @@
         }
     }
 
-    /*
-    @media not -moz-pref("sidebar.verticalTabs") {
-        --uc-navigator-hover-clip-mica: calc(
-            var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height) - var(--uc-autohide-navigator-bottom)
-        );
-        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen)) {
-            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
-                --uc-navigator-hover-clip-mica: calc(
-                    var(--uc-bm-padding-box-height) - var(--uc-autohide-navigator-bottom)
-                );
-            }
-        }
-        @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not (-moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen))) {
-            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
-                --uc-navigator-hover-clip-mica: calc(
-                    0px - var(--uc-autohide-navigator-bottom) + var(--uc-sb-navigator-hover-clip-mica, 0px)
-                );
-            }
-        }
-        @media not (-moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar") or -moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen)) {
-            &:not([titlepreface*="\200b "], [titlepreface*="\200d "]) {
-                --uc-navigator-hover-clip-mica: var(--uc-bm-padding-box-height);
-                @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-                    --uc-navigator-hover-clip-mica: var(--uc-web-content-margin-outset-clip-mica);
-                }
-            }
-        }
-    }
-    */
-
     /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
     #sidebar-main {
         --uc-sidebar-main-margin-left: 0px;
@@ -1278,13 +1245,13 @@
                     2 + 0.5px
             );
             &:hover {
-                @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+                @media -moz-pref("uc.flex.fully-hide-sidebery") {
                     --uc-sidebar-main-padding-inline-end: calc(
                         var(--uc-sidebar-hover-trigger-width) - var(--uc-sidebar-stripe-width)
                     );
                 }
                 @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-                    :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                         --uc-sidebar-main-padding-inline-end: calc(
                             var(--uc-sidebar-hover-trigger-width) - var(--uc-sidebar-stripe-width)
                         );
@@ -1354,11 +1321,11 @@
             --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
         }
         /* When Sidebery is fully hidden, set width to trigger width to allow hover-triggered expansion */
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
             --uc-sb-sidebar-width: var(--uc-sidebar-hover-trigger-width);
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            &:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+            &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
                 --uc-sb-sidebar-width: var(--uc-sidebar-hover-trigger-width);
             }
         }
@@ -1454,12 +1421,14 @@
             */
 
             /* Property values for the window controls when auto-hide navbar is enabled and Sidebery is active */
-            @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
-                --uc-tabs-toolbar-windows-controls-display: none;
-                --uc-navbar-windows-controls-display: flex;
-                --uc-sb-nav-bar-padding-right: 0px;
-                --uc-sb-tabs-toolbar-windows-controls-transition:
-                    width 0.5s ease-in-out, margin-inline-end 0.5s ease-in-out, opacity 0s 0.5s;
+            @media not -moz-pref("sidebar.verticalTabs") {
+                @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") or -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
+                    --uc-tabs-toolbar-windows-controls-display: none;
+                    --uc-navbar-windows-controls-display: flex;
+                    --uc-sb-nav-bar-padding-right: 0px;
+                    --uc-sb-tabs-toolbar-windows-controls-transition:
+                        width 0.5s ease-in-out, margin-inline-end 0.5s ease-in-out, opacity 0s 0.5s;
+                }
             }
 
             /* 
@@ -1521,7 +1490,7 @@
              * reduce the navbar's trigger area so the top-aligned sidebar stripe
              * can receive hover events before the navbar expands. 
              */
-            @media (display-mode: fullscreen) {
+            &[inFullscreen] {
                 --uc-toolbox-rotation: 87deg;
             }
         }

@@ -26,21 +26,24 @@
             min-width: var(--uc-sidebar-stripe-width) !important;
             width: var(--uc-sidebar-stripe-width) !important;
             max-width: var(--uc-sidebar-stripe-width) !important;
-            margin-right: 0 !important;
+            &:not([sidebar-positionend]) {
+                margin-right: 0 !important;
+            }
+            &[sidebar-positionend] {
+                margin-left: 0 !important;
+            }
         }
     }
 }
 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
     position: relative;
-    @media not -moz-pref("uc.flex.sidebery-allow-resizable-width"),
-        -moz-pref("uc.flex.fully-hide-sidebery"),
-        (display-mode: fullscreen) {
+    @media not -moz-pref("uc.flex.sidebery-allow-resizable-width"), -moz-pref("uc.flex.fully-hide-sidebery") {
         min-width: var(--uc-sb-sidebar-width) !important;
         width: var(--uc-sb-sidebar-width) !important;
         max-width: var(--uc-sb-sidebar-width) !important;
     }
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+        :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
             min-width: var(--uc-sb-sidebar-width) !important;
             width: var(--uc-sb-sidebar-width) !important;
             max-width: var(--uc-sb-sidebar-width) !important;
@@ -69,8 +72,8 @@
                     allow-discrete,
                 clip-path var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay);
-            @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
-                :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+                :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     &:hover {
                         transition:
                             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -110,18 +113,18 @@
         }
     }
     /* No need to lower z-index when vertical tabs are fully hidden or in fullscreen */
-    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+    @media -moz-pref("uc.flex.fully-hide-sidebery") {
         --browser-area-z-index-sidebar: 3;
         z-index: 100;
     }
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+        :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
             --browser-area-z-index-sidebar: 3;
             z-index: 100;
         }
     }
 
-    @media not -moz-pref("sidebar.position_start") {
+    &[sidebar-positionend] {
         direction: rtl;
         &:-moz-locale-dir(rtl) {
             direction: ltr;
@@ -141,7 +144,12 @@
         display: none;
         @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
             :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                margin-inline-start: -1px !important;
+                #sidebar-box:not([sidebar-positionend]) + & {
+                    margin-inline-start: -1px !important;
+                }
+                #sidebar-box[sidebar-positionend] + & {
+                    margin-inline-end: -1px !important;
+                }
                 display: flex;
                 width: 2px !important;
                 border-width: 0px !important;
@@ -161,14 +169,13 @@
 
     /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */
     /* 
-     * This @media query uses three comma-separated conditions:
-     * 1. If auto-collapse is *not* disabled (`uc.flex.disable-sidebery-autohide` is false), auto-hide applies.
-     * 2. If full hiding of Sidebery is enabled (`uc.flex.fully-hide-sidebery`), auto-hide applies regardless of auto-collapse setting.
-     * 3. If in fullscreen mode (`display-mode: fullscreen`), auto-hide also applies regardless of auto-collapse setting. 
+     * These rules apply in the following cases:
+     * 1. If `uc.flex.disable-sidebery-autohide` is not enabled (auto-hide not disabled), auto-hide applies.
+     * 2. If `uc.flex.fully-hide-sidebery` is enabled (fully hide Sidebery), auto-hide applies regardless of the "disable auto-hide" setting.
+     * 3. If in fullscreen mode or when using the `Hide Sidebery` / `Hide All` shortcuts, auto-hide applies.
      */
-    @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")),
-        -moz-pref("uc.flex.fully-hide-sidebery"),
-        (display-mode: fullscreen) {
+    /* Style 1 */
+    @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
         :root:not([sidebar-expand-on-hover], [titlepreface*="\180e "]) & {
             #sidebar {
                 will-change: min-width;
@@ -190,44 +197,30 @@
             }
         }
     }
-    /* 
-     * The [titlepreface*="\180e "] attribute has the same effect as 
-     * `uc.flex.disable-sidebery-autohide`. However, unlike 
-     * `uc.flex.disable-sidebery-autohide`, it cannot be used in media 
-     * queries alongside `uc.flex.fully-hide-sidebery` and fullscreen mode.
-     * Therefore, we need to duplicate the same rules here specifically 
-     * for the [titlepreface*="\180e "] case. 
-     */
-    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-        :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]) & {
-            #sidebar {
-                will-change: min-width;
-                min-width: var(--uc-sb-sidebar-width) !important;
-                transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay) !important;
-                /*
-                @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
-                    transition: none !important;
-                }
-                */
+    /* Style 2 */
+    @media -moz-pref("uc.flex.fully-hide-sidebery") {
+        #sidebar {
+            will-change: min-width;
+            min-width: var(--uc-sb-sidebar-width) !important;
+            transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay) !important;
+            /*
+            @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
+                transition: none !important;
             }
+            */
+        }
 
-            &:hover #sidebar,
-            #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
-                min-width: var(--uc-sb-sidebar-hover-width) !important;
-                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay) !important;
-            }
+        &:hover #sidebar,
+        #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
+            min-width: var(--uc-sb-sidebar-hover-width) !important;
+            transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay) !important;
         }
     }
-    /* 
-     * The [titlepreface*="\200c "] and [titlepreface*="\200d "] attributes 
-     * behave the same as `uc.flex.fully-hide-sidebery`. For the same reason 
-     * as above, we need to duplicate the rules here specifically for these 
-     * cases, since attribute selectors can't be combined with media queries. 
-     */
+    /* Style 3 */
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+        :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
             #sidebar {
                 will-change: min-width;
                 min-width: var(--uc-sb-sidebar-width) !important;

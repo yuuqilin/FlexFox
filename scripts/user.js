@@ -73,6 +73,8 @@ user_pref("uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs", false)
 user_pref("uc.flex.disable-nav-bar-first-item-right-padding",   false);
 /* Disables custom menu icons added by FlexFox. */
 user_pref("uc.flex.disable-menu-icons",                         false);
+/* Restores the window control buttons (minimize, maximize, close) to the tab bar in horizontal tabs mode. */
+user_pref("uc.flex.restore-window-controls-on-tabbar",          false);
 /* Reverts the window control buttons (minimize, maximize, close) to Firefox's default design. */
 user_pref("uc.flex.revert-to-original-window-controls",         false);
 /* Reverts the rounded corner radius of the urlbar, searchbar, and findbar to Firefox's original flatter style. */

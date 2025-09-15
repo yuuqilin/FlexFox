@@ -38,10 +38,10 @@
         outline: none !important;
         box-shadow: none !important;
         @media -moz-pref("sidebar.revamp.round-content-area") {
-            @media -moz-pref("sidebar.position_start") {
+            &:not([sidebar-positionend]) {
                 border-start-start-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
             }
-            @media not -moz-pref("sidebar.position_start") {
+            &[sidebar-positionend] {
                 border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
             }
             @media -moz-pref("uc.flex.fully-hide-toolbox"),
@@ -90,15 +90,16 @@
     /* Clip background bleed around rounded corners when the UI color scheme is opposite to the page scheme */
     @media -moz-pref("sidebar.revamp") {
         @media -moz-pref("sidebar.revamp.round-content-area") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
-            @media not (-moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox") or (display-mode: fullscreen)) {
-                :root:not([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            @media not (-moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox")) {
+                :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "])
+                    & {
                     @media (prefers-color-scheme: dark) and (-moz-content-prefers-color-scheme: light),
                         (prefers-color-scheme: light) and (-moz-content-prefers-color-scheme: dark) {
                         clip-path: inset(
                             0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip)) 0 0
                                 0
                         );
-                        @media not -moz-pref("sidebar.position_start") {
+                        #tabbrowser-tabbox[sidebar-positionend] > & {
                             clip-path: inset(
                                 0 round 0
                                     var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip)) 0
@@ -123,9 +124,9 @@
 ═════════════════════════════════════════════════════════════════════ */
 
 /* Add margin, shadow, and rounded corners to the web content area */
-@media -moz-pref("uc.flex.enable-rounded-web-content") and (not (display-mode: fullscreen)) {
+@media -moz-pref("uc.flex.enable-rounded-web-content") {
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
-        :root:not([titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
+        :root:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
             /* Remove white overlay to match the browser margin background with the sidebar */
             @media not -moz-pref("sidebar.verticalTabs") {
                 #browser /* :not(.browser-toolbox-background) */ {
@@ -294,10 +295,10 @@
      * when the sidebar or navigator expands, allowing the Mica backdrop to show cleanly.
      */
     #tabbrowser-tabbox {
-        @media -moz-pref("sidebar.position_start") {
+        &:not([sidebar-positionend]) {
             clip-path: var(--uc-tabbox-clip-path-start);
         }
-        @media not -moz-pref("sidebar.position_start") {
+        &[sidebar-positionend] {
             clip-path: var(--uc-tabbox-clip-path-end);
         }
         will-change: clip-path;
@@ -391,27 +392,16 @@
     /* Clip the tab box when native vertical tabs are expanded to reveal the Mica backdrop */
     @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
         /* 
-         * Same logic exists in uc-verticalfox.css.
-         * 
-         * Auto-hide applies in three cases:
-         *   -A : auto-collapse not disabled
-         *   +B : fully-hide enabled
-         *   +C : fullscreen mode
-         * 
-         * Attribute equivalents:
-         *   -a ≈ -A   ( [titlepreface*="\180e "] )
-         *   +b ≈ +B   ( [titlepreface*="\200c "], [titlepreface*="\200d "] )
-         * 
-         * Case handling:
-         *   Style 1 uses -a to exclude the “-A + a” overlap,
-         *           but this also removes -a+B and -a+C → restored in Style 2
-         *   Style 1 also removes -a+b → restored in Style 3
+         * Same logic as in uc-verticalfox.css.
+         *
+         * Background is clipped to show the Mica backdrop in the following cases:
+         * 1. If `uc.flex.disable-sidebery-autohide` is not enabled (auto-hide not disabled), clipping applies.
+         * 2. If `uc.flex.fully-hide-sidebery` is enabled (fully hide Sidebery), clipping applies regardless of the "disable auto-hide" setting.
+         * 3. If in fullscreen mode or when using the `Hide Sidebery` / `Hide All` shortcuts, clipping applies.
          */
         #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-launcher-expanded]:not([sidebar-panel-open]) {
             /* Style 1 */
-            @media not -moz-pref("uc.flex.disable-sidebery-autohide"),
-                -moz-pref("uc.flex.fully-hide-sidebery"),
-                (display-mode: fullscreen) {
+            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                 :root:not([titlepreface*="\180e "]) & {
                     --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
                     --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
@@ -419,16 +409,14 @@
                 }
             }
             /* Style 2 */
-            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-                :root[titlepreface*="\180e "] & {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
+            @media -moz-pref("uc.flex.fully-hide-sidebery") {
+                --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
+                --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
             /* Style 3 */
             @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
                     --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
                     --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
@@ -448,11 +436,11 @@
             /*
             clip-path: inset(0 0 0 0);
             */
-            @media -moz-pref("sidebar.position_start") {
+            &:not([sidebar-positionend]) {
                 clip-path: var(--uc-vt-sidebox-clip-path-start);
             }
             /*if sidebar on right*/
-            @media not -moz-pref("sidebar.position_start") {
+            &[sidebar-positionend] {
                 clip-path: var(--uc-vt-sidebox-clip-path-end);
             }
             transition: var(--uc-tabbox-clip-path-transition);
@@ -461,32 +449,9 @@
             ~ #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
                 [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
             ) {
-            /* Style 1 */
-            @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")),
-                -moz-pref("uc.flex.fully-hide-sidebery"),
-                (display-mode: fullscreen) {
-                :root:not([titlepreface*="\180e "]) & {
-                    --uc-vt-sidebox-clip-path-start: var(--uc-hover-vt-sidebox-clip-path-start);
-                    --uc-vt-sidebox-clip-path-end: var(--uc-hover-vt-sidebox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
-            }
-            /* Style 2 */
-            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-                :root[titlepreface*="\180e "] & {
-                    --uc-vt-sidebox-clip-path-start: var(--uc-hover-vt-sidebox-clip-path-start);
-                    --uc-vt-sidebox-clip-path-end: var(--uc-hover-vt-sidebox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
-            }
-            /* Style 3 */
-            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                    --uc-vt-sidebox-clip-path-start: var(--uc-hover-vt-sidebox-clip-path-start);
-                    --uc-vt-sidebox-clip-path-end: var(--uc-hover-vt-sidebox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
-            }
+            --uc-vt-sidebox-clip-path-start: var(--uc-hover-vt-sidebox-clip-path-start);
+            --uc-vt-sidebox-clip-path-end: var(--uc-hover-vt-sidebox-clip-path-end);
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
     }
 
@@ -511,14 +476,14 @@
                 */
                     clip-path 0ms var(--uc-autohide-transition-type) 0ms;
         }
-        @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
-            :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
                 #sidebar-main:hover
                     ~ #sidebar-box[sidebar-panel-open][sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
-                    @media -moz-pref("sidebar.position_start") {
+                    &:not([sidebar-positionend]) {
                         clip-path: inset(0 0 0 var(--uc-sidebar-stripe-width));
                     }
-                    @media not -moz-pref("sidebar.position_start") {
+                    &[sidebar-positionend] {
                         clip-path: inset(0 var(--uc-sidebar-stripe-width) 0 0);
                     }
                     transition:
@@ -541,7 +506,7 @@
          * Clipping is only applied when --uc-sb-sidebar-main-hover-clip-mica is set, 
          * indicating Sidebery is active.
          */
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
             #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
                 --uc-tabbox-clip-path-start: var(--uc-hover-sidebar-main-tabbox-clip-path-start);
                 --uc-tabbox-clip-path-end: var(--uc-hover-sidebar-main-tabbox-clip-path-end);
@@ -549,7 +514,7 @@
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+            :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
                 #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
                     --uc-tabbox-clip-path-start: var(--uc-hover-sidebar-main-tabbox-clip-path-start);
                     --uc-tabbox-clip-path-end: var(--uc-hover-sidebar-main-tabbox-clip-path-end);
@@ -563,9 +528,7 @@
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
         &:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
             /* Style 1 */
-            @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")),
-                -moz-pref("uc.flex.fully-hide-sidebery"),
-                (display-mode: fullscreen) {
+            @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
                 :root:not([titlepreface*="\180e "]) & {
                     --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
                     --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
@@ -573,16 +536,14 @@
                 }
             }
             /* Style 2 */
-            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
-                :root[titlepreface*="\180e "] & {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
+            @media -moz-pref("uc.flex.fully-hide-sidebery") {
+                --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
+                --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
             /* Style 3 */
             @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
                     --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
                     --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);

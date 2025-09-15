@@ -233,7 +233,7 @@
                 &[sessionrestored]:not([chromehidden~="toolbar"]) > body > #browser {
                     margin-top: var(--uc-navbar-offset-y);
                 }
-                @media -moz-pref("browser.fullscreen.autohide"), (-moz-bool-pref: "browser.fullscreen.autohide") {
+                @media -moz-pref("browser.fullscreen.autohide") {
                     &[sessionrestored][sizemode="fullscreen"] > body > #browser {
                         margin-top: revert;
                     }

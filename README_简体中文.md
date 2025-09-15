@@ -20,7 +20,14 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.0.1**
+**🦊 v5.0.2**
+
+* **性能优化**: 重构部分代码。原生垂直标签页的展开/收起动画相比 v4.0.5 CPU 占用降低了 40%。性能已与 Firefox 自带的“悬停时展开侧栏”选项持平，但仍是 Sidebery 的两倍。Sidebery 比原生垂直标签页更快、功能更丰富、bug 更少，推荐使用 Sidebery。
+* **视觉优化**: 修复启用 Mica 或自定义壁纸时，收起动画出现的拖影问题。
+* **新增选项**: 添加 `uc.flex.restore-window-controls-on-tabbar`，启用后可在水平标签页模式下恢复标签栏上的窗口控制按钮。
+* **其他**: 修复了多项小问题。
+
+**v5.0.1**
 
 * 改进了 `uc.flex.sidebery-allow-resizable-width` 的实用性
   * 使用侧栏按钮（Firefox Logo）切换到折叠状态时，避免 Sidebery 左右晃动导致画面剧烈变化。
@@ -725,6 +732,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `true` | 在懸停於非活動的水平分頁時，FlexFox 會顯示關閉按鈕。當分頁寬度很窄時，按鈕會縮小並移到右上角以避免誤觸。啟用此選項後，關閉按鈕將完全不顯示。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | `true` | 默认情况下，FlexFox 会在导航栏第一个图标后添加右侧间距，以优化垂直标签页与周围项目之间的视觉间隔和对齐。此选项可停用该间距。 |
 | `uc.flex.disable-menu-icons` | `true` | 停用 FlexFox 添加的自定义选单图标。 |
+| `uc.flex.restore-window-controls-on-tabbar` | `true` | 在水平标签页模式下，将最小化、最大化、关闭按钮恢复到标签栏上。 |
 | `uc.flex.revert-to-original-window-controls` | `true` | 将 FlexFox 使用的 macOS 风格窗口按钮恢复为 Firefox 默认的最小化、最大化、关闭按钮。 |
 | `uc.flex.revert-to-original-flat-corner-style` | `true` | 将 URL 栏、搜索栏和查找栏的圆角样式恢复为 Firefox 默认的较平角设计，替代 FlexFox 使用的大圆角样式。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |

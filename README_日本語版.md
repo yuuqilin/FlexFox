@@ -20,7 +20,14 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v5.0.1**
+**🦊 v5.0.2**
+
+* **パフォーマンス**: 一部コードをリファクタリングし、ネイティブ垂直タブの展開・折りたたみアニメーションのCPU使用率を v4.0.5 と比べて40％削減しました。Firefox標準の「カーソルを合わせた時にサイドバーを展開する」オプションと同等の性能ですが、依然として Sidebery より2倍重いです。Sidebery はネイティブ垂直タブより高速で機能豊富、バグも少なく、利用を推奨します。
+* **ビジュアル**: Mica やカスタム壁紙を有効にした際に、折りたたみアニメーションで発生するゴースト（ghosting）現象を修正しました。
+* **新しいオプション**: `uc.flex.restore-window-controls-on-tabbar` を追加しました。水平タブモードでタブバー上にウィンドウコントロールボタンを復元できます。
+* **その他**: 複数の細かな不具合を修正しました。
+
+**v5.0.1**
 
 * `uc.flex.sidebery-allow-resizable-width` の使いやすさを改善しました。
   * サイドバーボタン（Firefox ロゴ）で折りたたみ状態に切り替えた際に、Sidebery が左右に揺れて画面が大きく乱れる問題を防止しました。
@@ -718,6 +725,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `true` | FlexFoxでは、非アクティブの水平タブにカーソルを合わせると閉じるボタンが表示されます。タブが狭い場合、ボタンは縮小され右上に移動して誤クリックを防ぎます。このオプションを有効にすると、閉じるボタンは完全に表示されなくなります。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | `true` | デフォルトでは、ナビゲーションバーの最初の項目の後ろに右側の余白を追加して、垂直タブとその周辺項目との視覚的な区切りや整列を改善します。このオプションはその余白を無効にします。 |
 | `uc.flex.disable-menu-icons` | `true` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
+| `uc.flex.restore-window-controls-on-tabbar` | `true` | 水平タブモードで、最小化・最大化・閉じるボタンをタブバー上に戻します。 |
 | `uc.flex.revert-to-original-window-controls` | `true` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
 | `uc.flex.revert-to-original-flat-corner-style` | `true` | URLバー、検索バー、検索パネルの角丸を、FlexFox 独自の大きな丸みから Firefox 標準の控えめな角丸スタイルに戻します。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | FlexFox 独自のブックマーク星アイコンを Firefox 標準のデザインに戻します。 |

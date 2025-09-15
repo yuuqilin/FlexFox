@@ -69,7 +69,7 @@
                 background-size: 20px;
                 mask-position: var(--uc-sidebar-button-bg-pos-first);
                 mask-size: 20px;
-                @media (display-mode: fullscreen) {
+                :root[inFullscreen] & {
                     background-position: var(--uc-sidebar-button-bg-pos-first-fs);
                     mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
                 }
@@ -82,7 +82,7 @@
                     background-size: var(--uc-sb-sidebar-button-bg-size, 18px);
                     mask-position: var(--uc-sb-sidebar-button-bg-pos-first, var(--uc-sidebar-button-bg-pos-first));
                     mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
-                    @media (display-mode: fullscreen) {
+                    :root[inFullscreen] & {
                         background-position: var(--uc-sidebar-button-bg-pos-first-fs);
                         mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
                     }
@@ -198,8 +198,8 @@
         }
 
         /* When Sidebery's auto-collapse is disabled, limit the sidebar header width to the specified value */
-        @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
-            :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
+            :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 /*
                 --sidebar-background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
                 */
@@ -209,8 +209,9 @@
                 }
             }
         }
-        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery")) {
             :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]):not(
+                    [inFullscreen],
                     [titlepreface*="\200c "],
                     [titlepreface*="\200d "]
                 )
@@ -231,7 +232,7 @@
         }
     }
 
-    @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+    @media -moz-pref("uc.flex.fully-hide-sidebery") {
         #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
             &:hover #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                 min-height: 5px;
@@ -263,7 +264,7 @@
         }
     }
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+        :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
                 &:hover #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
                     min-height: 5px;
@@ -307,7 +308,7 @@
 ═════════════════════════════════════════════════════════════════════ */
 
 /* Auto-hide sidebar in fullscreen or when Sidebery is fully hidden */
-@media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+@media -moz-pref("uc.flex.fully-hide-sidebery") {
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open],
     #sidebar-main[sidebar-launcher-expanded] {
         &:not([sidebar-positionend]) {
@@ -382,7 +383,7 @@
     }
 }
 @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-    :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) {
+    :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
         #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open],
         #sidebar-main[sidebar-launcher-expanded] {
             &:not([sidebar-positionend]) {
@@ -527,8 +528,8 @@
             --uc-sb-sidebar-main-background-image: var(--uc-gradient-highlight);
         }
         --uc-sidebar-main-stripe: var(--uc-sb-sidebar-header-stripe);
-        @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen))) {
-            :root:not([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+        @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
+            :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 /*
                 --sidebar-background-color: var(--uc-toolbar-bgcolor) !important;
                 */
@@ -536,8 +537,9 @@
             }
         }
 
-        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery")) {
             :root:is([sidebar-expand-on-hover], [titlepreface*="\180e "]):not(
+                    [inFullscreen],
                     [titlepreface*="\200c "],
                     [titlepreface*="\200d "]
                 )
@@ -548,7 +550,7 @@
                 --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
             }
         }
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
             --uc-sb-sidebar-main-opacity: 0;
             --uc-sb-sidebar-main-opacity-duration: 0ms;
             --uc-sb-sidebar-main-opacity-delay: 0ms;
@@ -558,7 +560,7 @@
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 --uc-sb-sidebar-main-opacity: 0;
                 --uc-sb-sidebar-main-opacity-duration: 0ms;
                 --uc-sb-sidebar-main-opacity-delay: 0ms;
@@ -578,7 +580,7 @@
     #sidebar-main[sidebar-panel-open]:has(
             ~ #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:hover
         ) {
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
             /* When "Disable Sidebery Collapse" is toggled via hotkey (instead of the about:config option),  
                we need to explicitly cap max-width to match the stripe width. */
             --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
@@ -596,7 +598,7 @@
             --uc-sb-sidebar-main-opacity-delay: calc(var(--uc-hover-sidebar-delay) + 10ms);
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 --uc-sb-sidebar-main-width: var(--uc-sidebar-stripe-width);
                 --uc-sb-sidebar-main-opacity: 1;
                 --uc-autohide-sidebar-delay: var(--uc-hover-sidebar-delay);
@@ -662,13 +664,13 @@
         @media -moz-pref("uc.flex.disable-sidebery-autohide") {
             z-index: var(--uc-sb-sidebar-main-z-index, --browser-area-z-index-sidebar);
         }
-        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or (display-mode: fullscreen)) {
-            :root[titlepreface*="\180e "] & {
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+            :root[titlepreface*="\180e "]:not([inFullscreen]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, --browser-area-z-index-sidebar);
             }
         }
         /* No need to lower z-index when vertical tabs are fully hidden or in fullscreen */
-        @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
             z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
             /**
              * When vertical tabs are collapsed,
@@ -679,7 +681,7 @@
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
                 &:not([sidebar-launcher-expanded]) {
                     z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
@@ -748,8 +750,8 @@
         max-height: var(--uc-sb-sidebar-main-hover-max-height) !important;
         max-width: var(--uc-sb-sidebar-main-width) !important;
         /* Raise z-index on hover so #sidebar-main appears above other elements */
-        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
-            :root:not([titlepreface*="\180e "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery")) {
+            :root:not([inFullscreen], [titlepreface*="\180e "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
                 /** 
                  * When the revamped sidebar is active but [sidebar-launcher-expanded] is missing
@@ -938,11 +940,11 @@
                     z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
                 }
             }
-            @media -moz-pref("uc.flex.fully-hide-sidebery"), (display-mode: fullscreen) {
+            @media -moz-pref("uc.flex.fully-hide-sidebery") {
                 z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
             }
             @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-                :root:is([titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
                 }
             }

@@ -20,7 +20,16 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.0.1**
+**🦊 v5.0.2**
+
+* **Performance**: Refactored parts of the code. CPU usage of the expand/collapse animation for native vertical tabs is now 40% lower compared to v4.0.5. Performance is on par with Firefox's built-in *Expand sidebar on hover* option, though still about twice as heavy as Sidebery. Sidebery is faster, more feature-rich, and more stable than native vertical tabs, and is recommended.
+* **Visuals**: Fixed ghosting artifacts in collapse animations when Mica or custom wallpapers are enabled.
+* **New option**: Added `uc.flex.restore-window-controls-on-tabbar`, which restores the window control buttons to the tab bar in horizontal tabs mode.
+* **Other**: Various minor bug fixes.
+
+<!-- END What's New -->
+
+**v5.0.1**
 
 * Improved usability of `uc.flex.sidebery-allow-resizable-width`
   * Prevented Sidebery from shifting left and right when toggled into collapsed mode using the sidebar button (Firefox Logo).
@@ -33,8 +42,6 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * Fixed the broken appearance of tag group labels caused by Nightly v144 changes. [Bug 1981197](https://bugzilla.mozilla.org/show_bug.cgi?id=1981197)
 * Fixed a width collapse issue in native vertical tabs when toggling to collapsed mode, caused by Nightly v144 changes. [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
 * Fixed the counter malfunction in `uc.flex.show-tab-count-in-alltabs-button` due to Nightly v144 changes. [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
-
-<!-- END What's New -->
 
 **✨ v5.0.0 – Major Feature Update**
 
@@ -724,6 +731,7 @@ For more update logs from earlier versions,
 | `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `true` | When hovering over inactive horizontal tabs, FlexFox normally shows the close button. If the tab is very narrow, the button is shrunk and moved to the top-right corner to reduce accidental clicks. Enabling this option disables the close button entirely. |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | `true` | By default, FlexFox adds right-side padding after the first item in the navigation bar to improve visual separation and alignment between the vertical tabs and nearby items. This option disables that padding. |
 | `uc.flex.disable-menu-icons` | `true` | Disables custom icons in menus added by FlexFox. |
+| `uc.flex.restore-window-controls-on-tabbar` | `true` | Restores the window control buttons (minimize, maximize, close) to the tab bar in horizontal tabs mode. |
 | `uc.flex.revert-to-original-window-controls` | `true` | Reverts to Firefox's default window control buttons (minimize, maximize, close), replacing the macOS-style icons used by FlexFox. |
 | `uc.flex.revert-to-original-flat-corner-style` | `true` | Reverts the rounded corner radius of the urlbar, searchbar, and findbar to Firefox's original flatter style. |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | Reverts the bookmark star icon to Firefox's default design, replacing the custom icon used by FlexFox. |
