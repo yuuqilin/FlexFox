@@ -428,18 +428,21 @@
     --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
     --uc-autohide-sidebar-delay: 28ms; /* Delay before collapsing the sidebar */
     --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar */
+    --uc-horizontal-tab-width-transition-duration: 200ms; /* Duration of width transition for horizontal tab */
 
     /* Speed up sidebar expand/collapse animation */
     @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
         --uc-hover-transition-duration: 100ms;
         --uc-autohide-sidebar-delay: 28ms;
         --uc-hover-sidebar-delay: 1ms;
+        --uc-horizontal-tab-width-transition-duration: 150ms;
     }
     /* Slow down sidebar expand/collapse animation */
     @media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
         --uc-autohide-sidebar-delay: 28ms;
         --uc-hover-sidebar-delay: 350ms;
         --uc-hover-toolbar-delay: 200ms;
+        --uc-horizontal-tab-width-transition-duration: 250ms;
     }
 
     /* Size and color of macOS-style window control buttons */
@@ -742,6 +745,9 @@
                         --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
                     }
                 }
+                @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+                    --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
+                }
             }
             @media not -moz-pref("uc.flex.fully-hide-sidebery") {
                 :root[titlepreface*="\200c "] & {
@@ -750,6 +756,9 @@
                         &:not([sidebar-launcher-expanded]) {
                             --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
                         }
+                    }
+                    @media -moz-pref("sidebar.visibility", "expand-on-hover") {
+                        --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
                     }
                 }
             }
@@ -961,31 +970,31 @@
         -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         --uc-autohide-tabs-toolbar-transition:
-            visibility 0ms linear calc(var(--uc-autohide-sidebar-delay) + 30ms),
+            visibility 0ms linear var(--uc-autohide-sidebar-delay),
             margin-bottom var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 30ms);
+                var(--uc-autohide-sidebar-delay);
         --uc-autohide-navigator-transition:
             background-color var(--inactive-window-transition),
             margin-bottom var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 30ms),
-            z-index 0ms linear calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 40ms)
+                var(--uc-autohide-sidebar-delay),
+            z-index 0ms linear calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 10ms)
                 allow-discrete;
         --uc-autohide-navbar-transition:
             transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 30ms),
+                var(--uc-autohide-sidebar-delay),
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 30ms);
+                var(--uc-autohide-sidebar-delay);
         --uc-autohide-personal-toolbar-transition:
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 30ms),
+                var(--uc-autohide-sidebar-delay),
             transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 30ms);
+                var(--uc-autohide-sidebar-delay);
         --uc-autohide-tabs-toolbar-windows-controls-transition:
             margin-block-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 30ms),
-            margin-inline-end 0s var(--uc-autohide-transition-type) calc(var(--uc-autohide-sidebar-delay) + 30ms),
+                var(--uc-autohide-sidebar-delay),
+            margin-inline-end 0s var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay),
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                calc(var(--uc-autohide-sidebar-delay) + 30ms);
+                var(--uc-autohide-sidebar-delay);
 
         /**/
         --uc-tabbox-clip-path-start: inset(
@@ -1000,6 +1009,44 @@
         /**/
         --uc-vt-sidebox-clip-path-start: inset(0 0 0 0);
         --uc-vt-sidebox-clip-path-end: inset(0 0 0 0);
+
+        /* Extra delay is required when auto-hide navbar is enabled with window controls moved to the navbar, 
+            to prevent flicker from unstable hover states */
+        @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
+            @media not -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
+                --uc-autohide-tabs-toolbar-transition:
+                    visibility 0ms linear calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    margin-bottom var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms);
+                --uc-autohide-navigator-transition:
+                    background-color var(--inactive-window-transition),
+                    margin-bottom var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    z-index 0ms linear
+                        calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration) + 38ms)
+                        allow-discrete;
+                --uc-autohide-navbar-transition:
+                    transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms);
+                --uc-autohide-personal-toolbar-transition:
+                    opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms);
+                --uc-autohide-tabs-toolbar-windows-controls-transition:
+                    margin-block-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    margin-inline-end 0s var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms);
+
+                --uc-tabbox-clip-path-transition: clip-path var(--uc-autohide-transition-duration)
+                    var(--uc-autohide-transition-type) calc(var(--uc-autohide-sidebar-delay) + 28ms);
+            }
+        }
     }
 
     /* Transition properties for toolbar hover */

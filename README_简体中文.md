@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v144-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v145-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,60 +20,22 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.0.2**
+**🦊 v5.0.3**
 
-* **性能优化**: 重构部分代码。原生垂直标签页的展开/收起动画相比 v4.0.5 CPU 占用降低了 40%。性能已与 Firefox 自带的“悬停时展开侧栏”选项持平，但仍是 Sidebery 的两倍。Sidebery 比原生垂直标签页更快、功能更丰富、bug 更少，推荐使用 Sidebery。
-* **视觉优化**: 修复启用 Mica 或自定义壁纸时，收起动画出现的拖影问题。
-* **新增选项**: 添加 `uc.flex.restore-window-controls-on-tabbar`，启用后可在水平标签页模式下恢复标签栏上的窗口控制按钮。
-* **其他**: 修复了多项小问题。
-
-**v5.0.1**
-
-* 改进了 `uc.flex.sidebery-allow-resizable-width` 的实用性
-  * 使用侧栏按钮（Firefox Logo）切换到折叠状态时，避免 Sidebery 左右晃动导致画面剧烈变化。
-  * 当 Sidebery 宽度变窄时，固定标签页会自动换行，避免超出侧栏无法点击。
-* `uc.flex.max-visible-vertical-pinned-tabs` 现在不仅支持原生垂直标签页，也能控制 Sidebery 固定标签页面板的最大高度。
-  * 默认值为 `4`（最多显示 4 行，超出时可滚动）。
-  * 数值范围扩大为 `2`–`8`。
-  * 设置为 `0` 时取消高度限制，面板可无限扩展。
-* 修复在 Firefox 的“自定义工具栏”模式下启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 时，窗口控制按钮在未悬停时会消失的问题。
-* 修复 Nightly v144 更新导致的标签组标题样式异常问题。 [Bug 1981197](https://bugzilla.mozilla.org/show_bug.cgi?id=1981197)
-* 修复 Nightly v144 更新导致原生垂直标签页切换到折叠状态时宽度塌陷的问题。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
-* 修复 Nightly v144 更新导致 `uc.flex.show-tab-count-in-alltabs-button` 的计数器功能失效的问题。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
-
-**✨ v5.0.0 – 主要功能更新**
-
-* 新增 Sidebery 的 2 种布局模式
-  * 新增选项 `uc.flex.sidebery-allow-resizable-width`：允许通过拖动分隔线自由调整 Sidebery 宽度。
-  * 启用此选项会停用 Sidebery 的自动折叠，但仍可通过侧栏切换按钮（Firefox Logo）展开或折叠侧栏。
-  * 如需临时恢复自动折叠，可使用 `Hide Sidebery` 快捷键，或按 <kbd>F1</kbd> 切换为原生垂直标签页。
-* 新增水平标签页的 3 种布局模式并进行优化
-  * 废弃旧选项 `uc.flex.disable-tabs-toolbar-autohide`。现在在 Sidebery 非活动时，水平标签页默认保持可见。
-  * 新增 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`：当 Sidebery 非活动时自动隐藏水平标签页，鼠标悬停在导航栏时显示。设置值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 显示在导航栏上方。
-  * 新增 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`：当 Sidebery 非活动时自动隐藏导航栏，鼠标悬停在水平标签页时显示。设置值：`0` = 关闭，`1` = 开启。此选项会覆盖前一项的设置。
-  * 新增 `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`：在水平标签页模式下，FlexFox 默认在非活动标签页悬停时显示关闭按钮。随着标签页数量增加而宽度变窄，关闭按钮会自动缩小并移到右上角以减少误触。启用此选项可以完全移除关闭按钮。
-  * 新增 `uc.flex.show-tab-close-button-on-favicon-hover`：在水平标签页模式下，将关闭按钮与网站图标合并以节省空间。关闭按钮仅在鼠标悬停图标时显示。启用此选项后，上述关闭按钮的自动缩小和移位行为会自动停用。
-  * 新增 `uc.flex.increase-active-horizontal-tab-min-width`：在水平标签页变窄时保持活动标签页更宽，使其标签在众多标签中仍能清楚区分，便于快速识别。设置值：
-    * `0` = 关闭
-    * `1` = 最小宽度 1.8 倍，无动画
-    * `2` = 最小宽度 1.8 倍，有动画
-    * `3` = 最小宽度 2 倍，无动画
-    * `4` = 最小宽度 2 倍，有动画
-    * 默认值：`1`（开启）。若希望所有标签保持固定宽度，请设为 `0`。
-  * 超过可见数量的水平固定标签页会自动折叠。可见固定标签页默认值为 10 个。可通过 `uc.flex.max-visible-horizontal-pinned-tabs` 调整（设置值 `1`–`5` 对应可见 2–10 个）。
-* 新增 `uc.flex.auto-hide-window-controls`：自动隐藏导航栏上的窗口控制按钮，鼠标悬停在边缘时显示。
-* 新增 `uc.flex.show-tab-count-in-alltabs-button`：在“全部标签页”按钮上显示当前打开标签页的总数。设置值：
-  * `0` = 关闭
-  * `1` = 图标 + 数字（全部标签页）
-  * `2` = 图标 + 数字（仅已加载标签页）
-  * `3` = 仅数字（全部标签页）
-  * `4` = 仅数字（仅已加载标签页）
-* 新增 `uc.flex.show-tab-number-in-tab-label`：在原生标签页标签上显示编号，标签太窄看不到完整标题时可快速定位。
-* 改进水平标签页下 Firefox Logo 的显示逻辑，只有在 Sidebery 启用时才会移动和放大。
-* 改进原生垂直标签页的音量图标外观，使其更自然。
-* 修复在启用 `uc.flex.disable-sidebery-autohide` 且使用 `Hide Sidebery` 时，Mica 背景出现透明的问题。
-* 修复全屏时 UI 主题与网页主题相反导致页面圆角未正确取消的问题。
-* 重构 Mica 背景与自定义壁纸相关代码，性能提升约 4%。
+* 改进水平标签栏的自动隐藏，在地址栏获得焦点时保持显示。
+* 活动标签宽度变化的动画速度现在可以通过 `uc.flex.sidebery-fast-hover-expand` 和 `uc.flex.sidebery-slow-hover-expand` 调整。
+* 在启用 `uc.flex.sidebery-allow-resizable-width` 并处于折叠状态时，调整了音量图标的位置。
+* 修复在同时启用“悬停时展开侧栏”和 `uc.flex.fully-hide-sidebery` 时，原生垂直标签页无法展开的问题。 (#21)
+* 修复原生垂直标签页中，从固定标签进入 DOM 全屏后退出时，标签图标会发生偏移的问题。
+* 修复创建标签组时，“完成”和“取消”按钮文字不可见的问题。
+* 修复 v5.0.2 引入的回退，当同时启用 `Lock Sidebery` 和 `Hide Sidebery` 时，原生垂直标签页无法展开的问题。
+* 修复在启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 时，鼠标悬停展开标签栏并在标签栏与导航栏之间移动时会导致闪烁的问题。
+* 新增两个右键菜单图标：“Copilot”和“将标签添加到新分组”。
+* 新增选项 `uc.flex.style-tab-group`，用于调整原生垂直标签页的标签组外观：
+  * `1`（默认）：显示展开/折叠指示器，无动画
+  * `2`：显示指示器，有展开/折叠动画
+  * `3`：标签文字居中，无指示器，无动画
+  * `4`：标签文字居中，无指示器，有动画
 
 ## 🎉 主要功能更新
 
@@ -137,18 +99,42 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 </details>
 
+<details>  
+<summary>🧩 <b>重大更新：Sidebery 与水平标签页的新布局模式</b> <i>《点击展开》</i> 👇</summary>
+
+* 新增 Sidebery 的 2 种布局模式
+  * 新增选项 `uc.flex.sidebery-allow-resizable-width`：允许通过拖动分隔线自由调整 Sidebery 宽度。
+  * 启用此选项会停用 Sidebery 的自动折叠，但仍可通过侧栏切换按钮（Firefox Logo）展开或折叠侧栏。
+  * 如需临时恢复自动折叠，可使用 `Hide Sidebery` 快捷键，或按 <kbd>F1</kbd> 切换为原生垂直标签页。
+* 新增水平标签页的 3 种布局模式并进行优化
+  * 废弃旧选项 `uc.flex.disable-tabs-toolbar-autohide`。现在在 Sidebery 非活动时，水平标签页默认保持可见。
+  * 新增 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`：当 Sidebery 非活动时自动隐藏水平标签页，鼠标悬停在导航栏时显示。设置值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 显示在导航栏上方。
+  * 新增 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`：当 Sidebery 非活动时自动隐藏导航栏，鼠标悬停在水平标签页时显示。设置值：`0` = 关闭，`1` = 开启。此选项会覆盖前一项的设置。
+  * 新增 `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`：在水平标签页模式下，FlexFox 默认在非活动标签页悬停时显示关闭按钮。随着标签页数量增加而宽度变窄，关闭按钮会自动缩小并移到右上角以减少误触。启用此选项可以完全移除关闭按钮。
+  * 新增 `uc.flex.show-tab-close-button-on-favicon-hover`：在水平标签页模式下，将关闭按钮与网站图标合并以节省空间。关闭按钮仅在鼠标悬停图标时显示。启用此选项后，上述关闭按钮的自动缩小和移位行为会自动停用。
+  * 新增 `uc.flex.increase-active-horizontal-tab-min-width`：在水平标签页变窄时保持活动标签页更宽，使其标签在众多标签中仍能清楚区分，便于快速识别。设置值：
+    * `0` = 关闭
+    * `1` = 最小宽度 1.8 倍，无动画
+    * `2` = 最小宽度 1.8 倍，有动画
+    * `3` = 最小宽度 2 倍，无动画
+    * `4` = 最小宽度 2 倍，有动画
+    * 默认值：`1`（开启）。若希望所有标签保持固定宽度，请设为 `0`。
+  * 超过可见数量的水平固定标签页会自动折叠。可见固定标签页默认值为 10 个。可通过 `uc.flex.max-visible-horizontal-pinned-tabs` 调整（设置值 `1`–`5` 对应可见 2–10 个）。
+
+</details>
 
 <details>  
 <summary>🧩 <b>重大更新：固定标签页面板的网格布局可自定义</b> <i>[点击展开]</i> 👇</summary>
 
-* 新增 `uc.flex.max-visible-horizontal-pinned-tabs`，用于设置固定标签页面板每行可显示的标签数量（横向）。  
-  * 适用于 Sidebery 和原生垂直标签页。  
-  * 可设置范围 `2`–`5`（默认值 `5`）。  
+* 新增 `uc.flex.max-visible-horizontal-pinned-tabs`，用于设置固定标签页面板每行可显示的标签数量（横向）。
+  * 可设置范围 `1`–`5`（默认值 `5`）。
+  * 在垂直标签页中，超过的固定标签会自动换行。
+  * 在水平标签页中，超过的固定标签会自动折叠（设置值对应 2–10 个可见固定标签）。
 
 * 新增 `uc.flex.max-visible-vertical-pinned-tabs`，用于设置固定标签页面板每列可显示的标签数量（纵向）。
+  * 可设置范围 `2`–`8`（默认值 `4`）。
   * 适用于原生垂直标签页和 Sidebery，用于限制面板高度。
   * 当固定标签页数量超过设置值时，溢出的标签可通过滚动条浏览。
-  * 可设置范围 `2`–`8`（默认值 `4`）。
   * 设为 `0` 时将关闭高度限制，面板会随标签数量无限扩展。  
 
 * 新增 `uc.flex.show-pin-tabs-separator-in-expanded-state`，用于始终显示固定标签页面板的分隔线。    
@@ -169,27 +155,25 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 </details>
 
-
 <details>  
-<summary>🖌️ <b>重大更新：Sidebery 背景颜色可自动跟随主题</b> <i>《点击展开》</i> 👇</summary>
+<summary>🔢 <b>重大更新：标签计数与分頁索引显示</b> <i>[点击展开]</i> 👇</summary>
 
-* FlexFox 现在可以根据当前的 Firefox 主题自动调整 Sidebery 的背景颜色。
-* 要启用此功能，请在 Sidebery 的 **设置 → 外观 → 配色模式** 中选择 `"firefox"`。
-  <details><summary>点击展开 Sidebery 外观设置截图</summary>
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.  webp"alt="Sidebery 外观设置" width="50%" />
-  </details>
+* 新增选项 `uc.flex.show-tab-count-in-alltabs-button`，可在“全部标签页”按钮上显示当前打开的标签页总数。设置值如下：
+  * `0` = 关闭
+  * `1` = 图标 + 数字（全部标签页）
+  * `2` = 图标 + 数字（仅已加载标签页）
+  * `3` = 仅数字（全部标签页）
+  * `4` = 仅数字（仅已加载标签页）
+* 新增选项 `uc.flex.show-tab-number-in-tab-label`，可在原生标签页标签上显示每个标签的索引号。标签过窄看不到完整标题时，也能快速识别标签位置。
 
 </details>
 
 <details>  
-<summary>✨ <b>重大更新：自动隐藏导航栏图标</b> <i>《点击展开》</i> 👇</summary>
+<summary>👻 <b>重大更新：自动隐藏工具栏图标及窗口控制按钮</b> <i>《点击展开》</i> 👇</summary>
 
-* 新增选项 `uc.flex.auto-hide-navbar-icons`，可将导航栏中的按钮默认隐藏，鼠标悬停时再显示。
-* 以下项目将始终保持可见：
-  * 窗口控制按钮（最小化、最大化、关闭）
-  * 地址栏
-  * 侧栏切换按钮（FlexFox 图标）
-* 如果将侧栏按钮移动到导航栏中间（不在最左或最右位置），或启用了 `uc.flex.revert-to-original-sidebar-icon`，该按钮也会跟随自动隐藏。
+* 新增选项 `uc.flex.auto-hide-navbar-icons`，可将工具栏中的图标（包括导航栏、书签栏及菜单栏的工具项）默认隐藏，当鼠标悬停在工具栏上时才显示。此选项不影响地址栏或窗口控制按钮。
+* 新增选项 `uc.flex.auto-hide-window-controls`，可将窗口控制按钮（最小化、最大化、关闭）默认隐藏，仅在鼠标悬停在工具栏边缘时显示。
+* 侧栏切换按钮（FlexFox 图标）通常始终可见。如果侧栏按钮未放在导航栏的最左或最右侧，或者启用了 `uc.flex.revert-to-original-sidebar-icon`，该按钮也会跟随自动隐藏。
 * 你可以将以下变量从 `uc-variables.css` 复制到 `uc-user-settings.css` 中修改，以自定义动画的速度和效果：
 
   ```css
@@ -200,6 +184,17 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   ```
 
 自动隐藏图标与主题背景切换效果预览： <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
+
+</details>
+
+<details>  
+<summary>🖌️ <b>重大更新：Sidebery 背景颜色可自动跟随主题</b> <i>《点击展开》</i> 👇</summary>
+
+* FlexFox 现在可以根据当前的 Firefox 主题自动调整 Sidebery 的背景颜色。
+* 要启用此功能，请在 Sidebery 的 **设置 → 外观 → 配色模式** 中选择 `"firefox"`。
+  <details><summary>点击展开 Sidebery 外观设置截图</summary>
+  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.  webp"alt="Sidebery 外观设置" width="50%" />
+  </details>
 
 </details>
 
@@ -348,180 +343,60 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <summary>💬 <b>历史更新</b></summary>
 
-**v4.5.1**
-* 修复了 Firefox v142 的一个回归问题。当启用「定制侧栏」 → 「悬停时展开侧栏」时，原生垂直标签页会不断展开和收起。 [Bug 1957008](https://bugzilla.mozilla.org/show_bug.cgi?id=1957008)  
-  （提示：启用该选项会关闭 FlexFox 的优化，不推荐日常使用时开启。）
-* 修正了查找栏在不同文字缩放设置下的宽度异常问题。
-* 新增变量，可用于自定义固定标签页与活动标签页的背景色和边框颜色：
-  * **原生垂直标签页**：请添加到 `components\uc-user-settings.css`。
-    ```css
-    /* 固定标签页的边框颜色 */
-    --uc-vt-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
-    /* 未加载的固定标签页的边框颜色 */
-    --uc-vt-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
-    /* 活动标签页的背景颜色 */
-    --uc-vt-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
-    /* 活动标签页的内边框阴影（轮廓） */
-    --uc-vt-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
-    /* 活动标签页下方的投影 */
-    --uc-vt-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
-    ```
-  * **Sidebery**：请添加到 `content\uc-custom-content.css`。
-    ```css
-    /* 固定标签页的边框颜色 */
-    --uc-sb-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
-    /* 未加载的固定标签页的边框颜色 */
-    --uc-sb-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
-    /* 活动标签页的背景颜色 */
-    --uc-sb-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
-    /* 活动标签页的内边框阴影（轮廓） */
-    --uc-sb-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
-    /* 活动标签页下方的投影 */
-    --uc-sb-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
-    ```
-* 调整了未加载标签页的样式，使其与 Sidebery 的表现一致。
-  * Firefox 内置了两个相关配置：
-    * `browser.tabs.fadeOutExplicitlyUnloadedTabs` —— 控制已卸载的标签页（默认开启）
-    * `browser.tabs.fadeOutUnloadedTabs` —— 控制启动时待恢复的标签页（默认关闭）
-  * 默认情况下，Firefox 会将未加载标签页的图标转为灰度并淡出，但标签标题保持不变。
-  * FlexFox 将其调整为 Sidebery 的方式，图标保持彩色，标签文字和图标同时淡出，整体更统一，也更易识别。
-  * 如果需要完全与 Sidebery 一致的效果，请开启这两个配置；若不需要，只需保持关闭即可。
+**v5.0.2**
 
-**v4.5.0**
-* 重写了 Sidebery 展开/折叠动画，去除抖动，使过渡更顺滑。
-* Sidebery 与侧栏按钮居中对齐。
-* 优化原生垂直标签页外观：
-  * 与 Sidebery 风格统一，切换更自然。
-  * 标签组标题背景色调柔和，减少干扰。
-  * 声音播放图标与网站图标合并，节省空间。
-  * 当前标签页高亮更加明显，便于快速定位。
-  * 固定标签页由背景高亮改为细致外框，避免视觉混乱。
-* 重构固定标签页面板：
-  * 新增 `uc.flex.max-visible-horizontal-pinned-tabs`，用于设置每行可显示的固定标签页数量（2–5，默认值 5）。
-  * 适用于 Sidebery 和原生垂直标签页。
-  * `uc.flex.max-visible-vertical-pinned-tabs` 新增 `0` 值（不限数量），面板可随标签数自动延长。
-* 优化固定标签页与普通标签页之间的分隔线：
-  * 需通过 `uc.flex.show-pin-tabs-separator-in-expanded-state` 选项启用（默认关闭）。
-  * 分隔线缩短并置于中间，减少视觉干扰。
-  * 仅在悬停时才会展开为完整长度，保留高度调整功能，同时不影响日常操作。
-* 优化书签星号在悬停和编辑时的逻辑显示，更符合操作直觉。
-* 修复当浏览器和网页使用不同明暗主题时，圆角处背景溢出的显示问题。
-* 修复 Nightly v144 中导致侧栏工具无法展开的问题。 [Bug 1972629](https://bugzilla.mozilla.org/show_bug.cgi?id=1972629)  
-  <p>
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-resize.webp"
-         alt="新的原生垂直标签页设计，分隔线处于悬停状态，可拖动调整面板高度"
-         height="510" hspace=15 />
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-collapsed.webp"
-         alt="新的原生垂直标签页设计，折叠状态下的分隔线外观"
-         height="510" hspace=15 />
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-expanded.webp"
-         alt="新的原生垂直标签页设计，展开状态下的分隔线外观"
-         height="510" hspace=15 />
-  </p>
+* **性能优化**: 重构部分代码。原生垂直标签页的展开/收起动画相比 v4.0.5 CPU 占用降低了 40%。性能已与 Firefox 自带的“悬停时展开侧栏”选项持平，但仍是 Sidebery 的两倍。Sidebery 比原生垂直标签页更快、功能更丰富、bug 更少，推荐使用 Sidebery。
+* **视觉优化**: 修复启用 Mica 或自定义壁纸时，收起动画出现的拖影问题。
+* **新增选项**: 添加 `uc.flex.restore-window-controls-on-tabbar`，启用后可在水平标签页模式下恢复标签栏上的窗口控制按钮。
+* **其他**: 修复了多项小问题。
 
-**v4.0.5**
-* 支持了 v142 新增的折叠标签组溢出计数器。 [Bug 1949401](https://bugzilla.mozilla.org/show_bug.cgi?id=1949401)
-* 调整了标签组的样式，包括尺寸和对齐方式。
-* 统一了原生垂直标签页和 Sidebery 的展开宽度，现在二者使用相同的展开宽度。可通过 `uc.flex.increase-sidebery-expanded-width` 选项加宽原生垂直标签页的展开宽度。
-* 修复了鼠标悬停在原生垂直标签页时，固定标签宽度过早改变的问题。
-* 修复了 v4.0.4 中内置页面半透明效果的显示异常。
-* 为 PDF 查看器窗口和菜单添加了半透明背景支持，在启用 Mica 或自定义壁纸并打开 `browser.tabs.allow_transparent_browser` 选项时生效。
-* 修复了在不同显示缩放比例下菜单图标位置偏移的问题。
-* 修复了在不同显示缩放比例下原生垂直标签页未能正确居中的问题。
+**v5.0.1**
 
-**v4.0.4**
-* 修复了 Nightly v143 的变更导致内置页面半透明背景失效的问题。 [Bug 1980414](https://bugzilla.mozilla.org/show_bug.cgi?id=1980414)
-* 修复了 v141 的变更导致主题背景图在书签工具栏和导航栏之间错位，出现明显断裂的问题。 [Bug 1971941](https://bugzilla.mozilla.org/show_bug.cgi?id=1971941)
-* 修复了原生垂直标签页在折叠状态时标签高亮未居中的问题。#17
-* 调整了地址栏聚焦时的内凹阴影效果。#17
-* 新增以下变量，可自定义 macOS 风格窗口控制按钮的颜色。#17
+* 改进了 `uc.flex.sidebery-allow-resizable-width` 的实用性
+  * 使用侧栏按钮（Firefox Logo）切换到折叠状态时，避免 Sidebery 左右晃动导致画面剧烈变化。
+  * 当 Sidebery 宽度变窄时，固定标签页会自动换行，避免超出侧栏无法点击。
+* `uc.flex.max-visible-vertical-pinned-tabs` 现在不仅支持原生垂直标签页，也能控制 Sidebery 固定标签页面板的最大高度。
+  * 默认值为 `4`（最多显示 4 行，超出时可滚动）。
+  * 数值范围扩大为 `2`–`8`。
+  * 设置为 `0` 时取消高度限制，面板可无限扩展。
+* 修复在 Firefox 的“自定义工具栏”模式下启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 时，窗口控制按钮在未悬停时会消失的问题。
+* 修复 Nightly v144 更新导致的标签组标题样式异常问题。 [Bug 1981197](https://bugzilla.mozilla.org/show_bug.cgi?id=1981197)
+* 修复 Nightly v144 更新导致原生垂直标签页切换到折叠状态时宽度塌陷的问题。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
+* 修复 Nightly v144 更新导致 `uc.flex.show-tab-count-in-alltabs-button` 的计数器功能失效的问题。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
 
-  ```css
-    --uc-osx-ctrls-close-fill
-    --uc-osx-ctrls-maximize-fill
-    --uc-osx-ctrls-minimize-fill
-    --uc-osx-ctrls-close-stroke
-    --uc-osx-ctrls-maximize-stroke
-    --uc-osx-ctrls-maximize-restore-stroke
-    --uc-osx-ctrls-minimize-stroke
-  ```
+**✨ v5.0.0 – 主要功能更新**
 
-**v4.0.3**
-* 修复了 Nightly v143 引起的布局问题，包括启用菜单栏时主题背景图错位，以及启用 `uc.flex.disable-bookmarks-autohide` 后侧边栏条纹位置错误的问题。[Bug 1979014](https://bugzilla.mozilla.org/show_bug.cgi?id=1979014)
-* 修复了 Firefox 141 Beta 2 的变动导致水平标签页模式下侧边栏条纹颜色消失的问题。[Bug 1973777](https://bugzilla.mozilla.org/show_bug.cgi?id=1973777)
-
-**v4.0.2**
-* 修复了 Nightly v143 的变动导致书签子文件夹的彩色图标无法正常显示的问题。[Bug 1979338](https://bugzilla.mozilla.org/show_bug.cgi?id=1979338)
-* 修复了 Nightly v143 的变动导致垂直标签页在折叠状态下底部分隔线丢失的问题。[Bug 1977243](https://bugzilla.mozilla.org/show_bug.cgi?id=1977243)
-* 修复了 Nightly v143 的变动引起的垂直标签页在折叠状态下显示错位的问题（标签页和图标未能居中，整体偏向左侧）。[Bug 1936927](https://bugzilla.mozilla.org/show_bug.cgi?id=1936927)
-
-**v4.0.1**
-* 使用 Mica 背景或自定义壁纸，并启用 `browser.tabs.allow_transparent_browser` 选项时：
-  * 为“设置”、“附加组件管理器”和“新标签页”等内建页面添加了半透明背景。  
-
-    <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/translucent-about-preferences.webp" alt="“设置”页面（`about:preferences`）应用了半透明背景效果" width="96%" />
-
-  * 启用了地址栏下拉菜单和查找栏的背景模糊效果。
-  * 在自定义壁纸模式下，下拉菜单在整个区域（包括导航栏上方）都能正确显示模糊效果。
-* 自定义壁纸模式下，菜单的透明度现在会根据 `uc.flex.browser-wallpaper-transparency-level` 的设置进行变化，与壁纸保持一致的透明效果。
-* 为应用菜单和右键菜单中原本缺少图标的3个项目补充了图标。
-* 修复 Firefox Nightly v143 中由于选择器变更导致地址栏样式失效的问题（[Bug 1980372](https://bugzilla.mozilla.org/show_bug.cgi?id=1980372)）。
-
-**🧊 v4.0.0 – 主要功能更新**
-* 支持 Windows 11 的 **Mica 背景效果**。
-  * 要启用 Mica，必须在 `about:config` 中设置以下项目：
-    ```
-    widget.windows.mica = true
-    widget.windows.mica.popups = 2
-    widget.windows.mica.toplevel-backdrop = 2
-    browser.tabs.allow_transparent_browser = true
-    uc.flex.browser-mica-transparency-level = 2
-    ```
-  * 请将主题设置为 `系统主题 — 自动`，否则 Mica 效果将无法生效。
-  * **需要重启 Firefox 浏览器。**
-  * 详细说明请参考：[🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
-  * 若背景被其他窗口遮挡，可使用快捷键 <kbd>Win</kbd> + <kbd>Home</kbd> 最小化所有非活动窗口，也可以设置为鼠标手势或使用脚本自动执行。  
-
-  使用原生 Mica 背景的效果展示。（YouTube 网页内容的透明效果是通过搭配 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展实现的） 
-  
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="示例展示了 Firefox 标签页和工具栏背后的 Mica 背景效果。" width="96%" />
-
-* 若系统不支持 Mica，或希望使用不受窗口遮挡影响的固定壁纸，可以启用 FlexFox 提供的 **自定义浏览器壁纸** 功能。
-  * 在 `about:config` 中启用以下选项：
-    ```
-    uc.flex.browser-wallpaper-enabled = true
-    uc.flex.browser-wallpaper-index = 1
-    uc.flex.browser-wallpaper-acrylic-disabled = false
-    browser.tabs.allow_transparent_browser = true
-    uc.flex.browser-wallpaper-transparency-level = 2
-    uc.flex.browser-wallpaper-contrast-level = 2
-    ```
-  * **需要重启 Firefox 浏览器。**
-  * 壁纸文件需命名为 `main-image-1.jpg` 至 `main-image-9.jpg`，存放于 `../icons/wallpaper/` 文件夹中。
-  * 默认启用 **Acrylic 模糊效果**，外观类似原生 Mica，但并非完全相同。
-  * 启用 **自定义浏览器壁纸** 功能后将覆盖系统原生的 Mica 背景。如果同时启用 Mica 和壁纸，显示的是壁纸。  
-
-  启用自定义壁纸后可见，与原生 Mica 相比，模糊程度、色调和背景材质都有所不同。  
-
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-acrylic.webp" alt="示例展示了启用 Acrylic 模糊效果的自定义壁纸，模拟了 Mica 效果的视觉风格。" width="96%" />
-
-  关闭自定义壁纸的 Acrylic 模糊效果后，背景图会变得非常清晰。可通过调整遮罩透明度来平衡网页文字的可读性。  
-
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/churning-in-the-chukchi-sea-no-acrylic.webp" alt="启用自定义壁纸但关闭 Acrylic 模糊效果的示例，壁纸清晰可见。" width="96%" />
-
-* 示例壁纸的来源与鸣谢：
-  * [a blue and purple background with wavy shapes (Unsplash)](https://unsplash.com/photos/a-blue-and-purple-background-with-wavy-shapes-1hg6NpO0kIk) – 作为 Firefox 新标签页自定义功能中的内建背景之一提供。
-  * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – 作为 Firefox 新标签页自定义功能中的内建背景之一提供。
-  * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([下载](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
-
-* 要让 Sidebery 和网页内容显示 Mica 背景或壁纸，需要启用 `browser.tabs.allow_transparent_browser`。
-  * 页面透明效果需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 扩展。
-  * 若部分页面显示为全透明导致难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。
-
-* 新增选项：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
-  * 启用后，会将 Sidebery 与原生垂直标签页使用的展开/折叠动画速度应用到导航栏和书签工具栏，统一所有动画速度。
-  * 动画速度统一后，也可以使用 `uc.flex.sidebery-fast-hover-expand` 或 `uc.flex.sidebery-slow-hover-expand` 来调整导航栏和书签工具栏的动画速度。
-  * 启用 Mica 或自定义壁纸时，FlexFox 会在内部自动统一动画速度，此时无需手动设置这个选项。
+* 新增 Sidebery 的 2 种布局模式
+  * 新增选项 `uc.flex.sidebery-allow-resizable-width`：允许通过拖动分隔线自由调整 Sidebery 宽度。
+  * 启用此选项会停用 Sidebery 的自动折叠，但仍可通过侧栏切换按钮（Firefox Logo）展开或折叠侧栏。
+  * 如需临时恢复自动折叠，可使用 `Hide Sidebery` 快捷键，或按 <kbd>F1</kbd> 切换为原生垂直标签页。
+* 新增水平标签页的 3 种布局模式并进行优化
+  * 废弃旧选项 `uc.flex.disable-tabs-toolbar-autohide`。现在在 Sidebery 非活动时，水平标签页默认保持可见。
+  * 新增 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`：当 Sidebery 非活动时自动隐藏水平标签页，鼠标悬停在导航栏时显示。设置值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 显示在导航栏上方。
+  * 新增 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`：当 Sidebery 非活动时自动隐藏导航栏，鼠标悬停在水平标签页时显示。设置值：`0` = 关闭，`1` = 开启。此选项会覆盖前一项的设置。
+  * 新增 `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`：在水平标签页模式下，FlexFox 默认在非活动标签页悬停时显示关闭按钮。随着标签页数量增加而宽度变窄，关闭按钮会自动缩小并移到右上角以减少误触。启用此选项可以完全移除关闭按钮。
+  * 新增 `uc.flex.show-tab-close-button-on-favicon-hover`：在水平标签页模式下，将关闭按钮与网站图标合并以节省空间。关闭按钮仅在鼠标悬停图标时显示。启用此选项后，上述关闭按钮的自动缩小和移位行为会自动停用。
+  * 新增 `uc.flex.increase-active-horizontal-tab-min-width`：在水平标签页变窄时保持活动标签页更宽，使其标签在众多标签中仍能清楚区分，便于快速识别。设置值：
+    * `0` = 关闭
+    * `1` = 最小宽度 1.8 倍，无动画
+    * `2` = 最小宽度 1.8 倍，有动画
+    * `3` = 最小宽度 2 倍，无动画
+    * `4` = 最小宽度 2 倍，有动画
+    * 默认值：`1`（开启）。若希望所有标签保持固定宽度，请设为 `0`。
+  * 超过可见数量的水平固定标签页会自动折叠。可见固定标签页默认值为 10 个。可通过 `uc.flex.max-visible-horizontal-pinned-tabs` 调整（设置值 `1`–`5` 对应可见 2–10 个）。
+* 新增 `uc.flex.auto-hide-window-controls`：自动隐藏导航栏上的窗口控制按钮，鼠标悬停在边缘时显示。
+* 新增 `uc.flex.show-tab-count-in-alltabs-button`：在“全部标签页”按钮上显示当前打开标签页的总数。设置值：
+  * `0` = 关闭
+  * `1` = 图标 + 数字（全部标签页）
+  * `2` = 图标 + 数字（仅已加载标签页）
+  * `3` = 仅数字（全部标签页）
+  * `4` = 仅数字（仅已加载标签页）
+* 新增 `uc.flex.show-tab-number-in-tab-label`：在原生标签页标签上显示编号，标签太窄看不到完整标题时可快速定位。
+* 改进水平标签页下 Firefox Logo 的显示逻辑，只有在 Sidebery 启用时才会移动和放大。
+* 改进原生垂直标签页的音量图标外观，使其更自然。
+* 修复在启用 `uc.flex.disable-sidebery-autohide` 且使用 `Hide Sidebery` 时，Mica 背景出现透明的问题。
+* 修复全屏时 UI 主题与网页主题相反导致页面圆角未正确取消的问题。
+* 重构 Mica 背景与自定义壁纸相关代码，性能提升约 4%。
 
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
@@ -704,8 +579,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.fully-hide-toolbox` | `true` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
 | `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`2` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏水平标签页。鼠标悬停在导航栏时显示。取值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 标签页显示在导航栏上方。 |
 | `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏导航栏。鼠标悬停在水平标签页时显示导航栏。取值：`0` = 关闭，`1` = 开启。此选项优先级较高，如果同时启用 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`，会覆盖该选项的设置。 |
-| `uc.flex.auto-hide-navbar-icons` | `true` | 默认隐藏导航栏中的图标，鼠标悬停在工具栏上时会显示。窗口控制按钮、地址栏和侧栏按钮（FlexFox 图标）始终显示，但当侧栏按钮未放在导航栏边缘，或启用了 `uc.flex.revert-to-original-sidebar-icon` 时，也会一并隐藏。 |
-| `uc.flex.auto-hide-window-controls` | `true` | 默认隐藏导航栏上的窗口控制按钮（最小化、最大化、关闭），鼠标悬停在导航栏边缘时会显示。 |
+| `uc.flex.auto-hide-navbar-icons` | `true` | 默认隐藏工具栏图标（包括导航栏、书签栏及菜单栏的工具项），鼠标悬停在工具栏上时显示。此选项不影响地址栏或窗口控制按钮。侧栏切换按钮（FlexFox 图标）通常始终可见，但当侧栏按钮未放在导航栏边缘，或启用了 `uc.flex.revert-to-original-sidebar-icon` 时，也会跟随自动隐藏。 |
+| `uc.flex.auto-hide-window-controls` | `true` | 默认隐藏窗口控制按钮（最小化、最大化、关闭），鼠标悬停在工具栏边缘时显示。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `true` | 允许 Firefox Color 等扩展修改工具栏的颜色（在未设置背景图时需要启用）。 |
 | `uc.flex.enable-gradient-highlight` | `0`-`X` | 为 FlexFox 图标、侧栏彩带、书签星形图标等主要界面元素中使用的高亮颜色启用渐变样式。此选项接受数值设置：`0` 表示关闭渐变，`1` 到 `X` 表示切换不同的渐变样式。 |
 | `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
@@ -751,10 +626,11 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.sidebery-fast-hover-expand` | `true` | 加快 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | 减慢 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | 将导航栏和书签栏的动画速度统一为 Sidebery／垂直标签页的速度。启用 Mica 或壁纸时自动生效。 |
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | 设置每行固定标签的数量。垂直标签页中，定义每行显示的标签数，超过会换行。水平标签页中，设置可见固定标签数量（`设置值 × 2`），超过数量会自动折叠。 |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | 设置原生垂直标签页和 Sidebery 中固定标签页的最大可见行数。达到上限后，固定标签页面板会显示滚动条。设为 `0` 时关闭限制，面板高度会随标签数量无限扩展。 |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | 设置每行固定标签页的最大可见数量。在垂直标签页中，超过的固定标签会自动换行。在水平标签页中，超过的固定标签会自动折叠，设置值对应 2–10 个可见固定标签。 |
+| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | 设置原生垂直标签页和 Sidebery 中每列固定标签页的最大可见数量。达到上限后，固定标签页面板会显示滚动条。设为 `0` 时关闭限制，面板会随标签数量无限扩展。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 设置查找栏的位置。可选值为字符串：`'top-center-left'` 或 `'1'`（顶部左侧），`'top-right'` 或 `'2'`（右上角），`'bottom-right'` 或 `'3'`（右下角）。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `'1'` 或 `'small'`（较小间距）、`'2'` 或 `'medium'`（默认间距）、`'3'` 或 `'large'`（较大间距）。 |
+| `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | 调整原生垂直标签页的标签组外观。取值：`1` = 显示展开／折叠指示器（无动画），`2` = 显示指示器（有动画），`3` = 标签文字居中（无指示器、无动画），`4` = 标签文字居中（无指示器、有动画）。默认值为 `1`。 |
 
 #### ⚙️ Firefox 原生选项
 | 配置选项 | 值 | 说明 |

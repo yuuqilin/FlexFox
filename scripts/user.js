@@ -112,6 +112,12 @@ user_pref("uc.flex.max-visible-vertical-pinned-tabs",               4);
 user_pref("uc.flex.findbar-position",                     "top-right");
 /* Sets vertical spacing between items in app/bookmark/context menus (string: "1"/"small", "2"/"medium", "3"/"large"). */
 user_pref("uc.flex.menu-item-spacing",                        "small");
+/* Adjusts the appearance of tab groups in native vertical tabs.
+   Values: 1 = show expand/collapse indicator without animation
+           2 = show indicator with animation
+           3 = center labels, no indicator, no animation
+           4 = center labels, no indicator, with animation */
+user_pref("uc.flex.style-tab-group",                                1);
 
 /* ⚙️ Native Firefox Settings */
 /* Improves startup speed by preventing pinned tabs from loading until selected. */

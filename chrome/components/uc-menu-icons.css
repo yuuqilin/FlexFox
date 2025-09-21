@@ -72,7 +72,7 @@
         padding-inline-start: 24px !important;
     }
 
-    /* Context mrnu */
+    /* Context menu */
     menuitem[data-l10n-id="text-action-redo"] {
         background-image: url("../icons/menu/redo.svg");
     }
@@ -202,7 +202,7 @@
         background-position-x: 0.9em;
         background-size: 18px;
     }
-    #context_moveTabToGroupNewGroup {
+    #context_moveTabToGroupNewGroup, #context_moveTabToNewGroup {
         background-image: url("../icons/menu/new-group.svg");
         background-size: 18px;
     }
@@ -253,6 +253,10 @@
     #context-ask-chat[label*="ChatGPT"],
     menuitem.ContentSelectDropdown-item-0[label="ChatGPT"] {
         background-image: url("../icons/menu/openai.svg");
+    }
+    #context-ask-chat[label*="Copilot"],
+    menuitem.ContentSelectDropdown-item-0[label="Copilot"] {
+        background-image: url("../icons/menu/copilot.svg");
     }
     #context-ask-chat[label*="Gemini"],
     menuitem.ContentSelectDropdown-item-0[label="Google Gemini"] {

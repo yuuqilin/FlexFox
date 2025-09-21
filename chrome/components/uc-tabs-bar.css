@@ -25,10 +25,10 @@
                     line-height: 18px !important;
                 }
                 /* ---- Show tab bar on hover when Sidebery is inactive ---- */
-                &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:hover {
+                &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:is(:hover, :focus-within) {
                     margin-bottom: var(--uc-autohide-navigator-bottom);
                 }
-                #navigator-toolbox:hover {
+                #navigator-toolbox:is(:hover, :focus-within) {
                     /* Direct child selectors can be used starting from version 133 */
                     #TabsToolbar {
                         visibility: var(--uc-autohide-tabstoolbar-visibility);
@@ -253,7 +253,7 @@
                     --browser-area-z-index-toolbox: var(--uc-navigator-z-index);
                     transition: var(--uc-autohide-navigator-transition) !important;
                 }
-                #navigator-toolbox:hover {
+                #navigator-toolbox:is(:hover, :focus-within) {
                     /**
                      * When automatic hiding of the bookmarks toolbar is disabled and Sidebery is active,
                      * set z-index to 0 so that Sidebery can appear above the bookmarks toolbar.
@@ -336,7 +336,7 @@ toolbar#TabsToolbar {
             transition: none !important;
             @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 2),
                 -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
-                transition: 300ms ease-in-out 0ms !important;
+                transition: var(--uc-horizontal-tab-width-transition-duration) ease-in-out 0ms !important;
             }
             @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 3),
                 -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
@@ -347,7 +347,7 @@ toolbar#TabsToolbar {
             transition: none !important;
             @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 2),
                 -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
-                transition: 300ms ease-in-out 0ms !important;
+                transition: var(--uc-horizontal-tab-width-transition-duration) ease-in-out 0ms !important;
             }
         }
     }
