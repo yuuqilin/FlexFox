@@ -56,8 +56,10 @@
         }
 
         @media -moz-pref("sidebar.verticalTabs") {
-            #PersonalToolbar {
-                --toolbar-bgcolor: transparent;
+            &:where([lwtheme-image], [style*="--lwt-additional-images"]) {
+                #PersonalToolbar {
+                    --toolbar-bgcolor: transparent;
+                }
             }
 
             #PersonalToolbar:not([customizing]) {

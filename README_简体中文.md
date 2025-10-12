@@ -20,22 +20,48 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.0.3**
+**✨ FlexFox v5.5.0 – 多项界面与交互优化**
 
-* 改进水平标签栏的自动隐藏，在地址栏获得焦点时保持显示。
-* 活动标签宽度变化的动画速度现在可以通过 `uc.flex.sidebery-fast-hover-expand` 和 `uc.flex.sidebery-slow-hover-expand` 调整。
-* 在启用 `uc.flex.sidebery-allow-resizable-width` 并处于折叠状态时，调整了音量图标的位置。
-* 修复在同时启用“悬停时展开侧栏”和 `uc.flex.fully-hide-sidebery` 时，原生垂直标签页无法展开的问题。 (#21)
-* 修复原生垂直标签页中，从固定标签进入 DOM 全屏后退出时，标签图标会发生偏移的问题。
-* 修复创建标签组时，“完成”和“取消”按钮文字不可见的问题。
-* 修复 v5.0.2 引入的回退，当同时启用 `Lock Sidebery` 和 `Hide Sidebery` 时，原生垂直标签页无法展开的问题。
-* 修复在启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 时，鼠标悬停展开标签栏并在标签栏与导航栏之间移动时会导致闪烁的问题。
-* 新增两个右键菜单图标：“Copilot”和“将标签添加到新分组”。
-* 新增选项 `uc.flex.style-tab-group`，用于调整原生垂直标签页的标签组外观：
-  * `1`（默认）：显示展开/折叠指示器，无动画
-  * `2`：显示指示器，有展开/折叠动画
-  * `3`：标签文字居中，无指示器，无动画
-  * `4`：标签文字居中，无指示器，有动画
+* 新增 `uc.flex.style-sidebar-button`，可切换侧栏切换按钮图标（`1`–`4`）：
+  * `1` = Firefox 主品牌标志（默认，与旧版相同）
+  * `2` = Firefox 浏览器标志
+  * `3` = Firefox System 1 标志
+  * `4` = Mozilla 旗帜符号
+* 新增 `uc.flex.style-toolbar-bgcolor`，切换导航栏与侧栏背景色（`1`–`2`）：
+  * `1` = Tokyo Night 主题（默认，与旧版相同）
+  * `2` = Firefox Acorn Design
+* 新增 `uc.flex.style-urlbar`，切换地址栏外观（`1`–`4`）：
+  * `1` = Flat（默认，与旧版相同）
+  * `2` = Inset（嵌入式外观，文字居中）
+  * `3` = Debossed（压印式外观，文字居中）
+  * `4` = Seamless（完全融入导航栏，文字居中）
+* 新增 `uc.flex.move-urlbar-popup-to-center`，将地址栏弹出窗口移至中央（`0`–`2`）：
+  * `0` = 不移动（默认）
+  * `1` = 聚焦时居中显示
+  * `2` = 仅在输入文字时居中显示
+* 更新 `uc.flex.dim-urlbar-popup-backdrop` 的背景暗化效果，以配合新弹窗位置（`0`–`2`）：
+  * `0` = 不暗化（默认）
+  * `1` = 暗化 35%
+  * `2` = 暗化 50%
+* 新增 `uc.flex.style-window-controls`，切换窗口控制按钮样式（`1`–`3`）：
+  * `1` = 交通灯按钮（默认，与旧版相同）
+  * `2` = Yosemite 风格按钮
+  * `3` = Yosemite GTK 主题
+* 新增 `uc.flex.style-window-controls-shift-up`，轻微上移窗口控制按钮（默认值：`False`）。
+* 新增 `uc.flex.style-window-controls-shrink-size`，缩小窗口控制按钮尺寸（默认值：`False`）。
+* 新增 `uc.flex.move-window-controls-to-left`，将窗口控制按钮移动到导航栏或水平标签栏左侧（默认值：`False`）。
+
+  * 注意：当启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 且未启用 `uc.flex.restore-window-controls-on-tabbar` 时，此选项无效。
+* 优化地址栏弹窗的阴影效果。
+* 改进 Findbar 外观，使尺寸更协调，圆角过渡更自然，新增阴影效果，并优化动画过渡。
+* 改进 `uc.flex.enable-colored-bookmarks-folder-icons`，新增对“Other Bookmarks”文件夹的支持。
+* 优化 `uc.flex.style-tab-group`，在启用动画时为指示器添加旋转动效。
+* 修复 `uc.flex.style-tab-group` = `2` 或 `4` 时，折叠状态下标签页无法显示的问题。
+* 修复启用 `uc.flex.remove-sidebar-stripe` 与 `uc.flex.show-tab-count-in-alltabs-button` 时计数不正确的问题。
+* 修复当 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` 且启用 `uc.flex.show-tab-close-button-on-favicon-hover` 时，图标无法隐藏的问题。
+* 修复 Firefox v143 更新导致的地址栏搜索引擎切换按钮样式失效问题（[Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)）。
+* 多项其他错误修复与细节改进。
+* `uc.flex.show-flexfox-version-info-in-about-config` 现在默认启用，若需关闭，请手动设置为 `False`。
 
 ## 🎉 主要功能更新
 
@@ -343,6 +369,23 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <summary>💬 <b>历史更新</b></summary>
 
+**v5.0.3**
+
+* 改进水平标签栏的自动隐藏，在地址栏获得焦点时保持显示。
+* 活动标签宽度变化的动画速度现在可以通过 `uc.flex.sidebery-fast-hover-expand` 和 `uc.flex.sidebery-slow-hover-expand` 调整。
+* 在启用 `uc.flex.sidebery-allow-resizable-width` 并处于折叠状态时，调整了音量图标的位置。
+* 修复在同时启用“悬停时展开侧栏”和 `uc.flex.fully-hide-sidebery` 时，原生垂直标签页无法展开的问题。 (#21)
+* 修复原生垂直标签页中，从固定标签进入 DOM 全屏后退出时，标签图标会发生偏移的问题。
+* 修复创建标签组时，“完成”和“取消”按钮文字不可见的问题。
+* 修复 v5.0.2 引入的回退，当同时启用 `Lock Sidebery` 和 `Hide Sidebery` 时，原生垂直标签页无法展开的问题。
+* 修复在启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 时，鼠标悬停展开标签栏并在标签栏与导航栏之间移动时会导致闪烁的问题。
+* 新增两个右键菜单图标：“Copilot”和“将标签添加到新分组”。
+* 新增选项 `uc.flex.style-tab-group`，用于调整原生垂直标签页的标签组外观：
+  * `1`（默认）：显示展开/折叠指示器，无动画
+  * `2`：显示指示器，有展开/折叠动画
+  * `3`：标签文字居中，无指示器，无动画
+  * `4`：标签文字居中，无指示器，有动画
+
 **v5.0.2**
 
 * **性能优化**: 重构部分代码。原生垂直标签页的展开/收起动画相比 v4.0.5 CPU 占用降低了 40%。性能已与 Firefox 自带的“悬停时展开侧栏”选项持平，但仍是 Sidebery 的两倍。Sidebery 比原生垂直标签页更快、功能更丰富、bug 更少，推荐使用 Sidebery。
@@ -591,9 +634,6 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | 在水平标签页中将关闭按钮与网站图标合并，以节省空间。鼠标悬停在图标上时显示关闭按钮。启用此选项后，会自动停用分页变窄时关闭按钮的自动缩小和移位功能。 |
 | `uc.flex.show-tab-count-in-alltabs-button` | `0`-`4` | 在“显示所有标签页”按钮上显示标签页总数。此选项为数值类型：`0` 关闭，`1` 显示图标和数字（所有标签页），`2` 显示图标和数字（仅加载的标签页），`3` 仅显示数字（所有标签页），`4` 仅显示数字（仅加载的标签页）。 |
 | `uc.flex.show-tab-number-in-tab-label` | `true` | 在每个标签文字前显示编号。在标签文字因空间不足而被截断时，可以更容易分辨不同的标签。 |
-| `uc.flex.move-pip-volume-to-top` | `true` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
-| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
-| `uc.flex.enable-rounded-web-content` | `0`-`2` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
 
 #### 🚫 停用或还原选项
 
@@ -630,7 +670,6 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | 设置原生垂直标签页和 Sidebery 中每列固定标签页的最大可见数量。达到上限后，固定标签页面板会显示滚动条。设为 `0` 时关闭限制，面板会随标签数量无限扩展。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 设置查找栏的位置。可选值为字符串：`'top-center-left'` 或 `'1'`（顶部左侧），`'top-right'` 或 `'2'`（右上角），`'bottom-right'` 或 `'3'`（右下角）。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `'1'` 或 `'small'`（较小间距）、`'2'` 或 `'medium'`（默认间距）、`'3'` 或 `'large'`（较大间距）。 |
-| `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | 调整原生垂直标签页的标签组外观。取值：`1` = 显示展开／折叠指示器（无动画），`2` = 显示指示器（有动画），`3` = 标签文字居中（无指示器、无动画），`4` = 标签文字居中（无指示器、有动画）。默认值为 `1`。 |
 
 #### ⚙️ Firefox 原生选项
 | 配置选项 | 值 | 说明 |
@@ -640,6 +679,22 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `browser.tabs.fadeOutUnloadedTabs` | `true` | Firefox 原生设置，用于在原生垂直标签页中淡出挂起标签页（启动时待恢复的标签页）。 |
 | `sidebar.visibility` | `expand-on-hover` | 禁用 FlexFox 的**优化版**垂直标签页自动折叠功能和布局。也可以在侧栏设置中勾选 **“悬停时展开侧栏”** 来启用此模式。启用后，可以自由调整侧栏宽度，并使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> 或侧栏切换按钮在展开和折叠状态之间切换。**不建议在日常使用中启用此选项。** |
 | `sidebar.animation.expand-on-hover.duration-ms` | `120` | Firefox 原生设置，用于控制在 `sidebar.visibility` 设置为 `expand-on-hover` 时，原生垂直标签页展开和折叠的动画速度。 |
+
+#### 界面样式与外观
+| 配置选项 | 值 | 说明 |
+|----------|:------:|----------|
+| `uc.flex.style-sidebar-button` | `1`-`4`<br>(`1`) | 切换侧栏切换按钮的图标。取值：`1` = Firefox 主品牌标志（默认，与旧版相同），`2` = Firefox 浏览器标志，`3` = Firefox System 1 标志，`4` = Mozilla 旗帜符号。 |
+| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | 切换导航栏和侧栏的背景颜色。取值：`1` = Tokyo Night 主题（默认，与旧版相同），`2` = Firefox Acorn Design。 |
+| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | 自定义地址栏的外观。取值：`1` = 扁平（默认，与旧版相同），`2` = 嵌入式（嵌入导航栏，文字居中），`3` = 压印（凹陷效果，文字居中），`4` = 无缝（完全融入导航栏，文字居中）。 |
+| `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | 调整地址栏弹窗的位置。取值：`0` = 不居中（默认），`1` = 聚焦时居中显示，`2` = 仅在输入文字时居中显示。 |
+| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
+| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | 切换窗口控制按钮的图标。取值：`1` = 信号灯按钮（默认，与旧版相同），`2` = Yosemite 风格按钮，`3` = Yosemite GTK 主题。 |
+| `uc.flex.style-window-controls-shift-up` | `true` | 使窗口控制按钮略微上移。 |
+| `uc.flex.style-window-controls-shrink-size` | `true` | 缩小窗口控制按钮的整体尺寸。 |
+| `uc.flex.move-pip-volume-to-top` | `true` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
+| `uc.flex.move-window-controls-to-left` | `true` | 将窗口控制按钮移动到导航栏或水平标签栏的最左侧。 |
+| `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | 调整原生垂直标签页的标签组外观。取值：`1` = 显示展开／折叠指示器（无动画），`2` = 显示指示器（有动画），`3` = 标签文字居中（无指示器、无动画），`4` = 标签文字居中（无指示器、有动画）。默认值为 `1`。 |
+| `uc.flex.enable-rounded-web-content` | `0`-`2` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
 
 #### 🧊 视觉背景和 Mica 效果
 
@@ -695,4 +750,11 @@ FlexFox 基于以下优秀项目的成果构建而成：
 
   <p>这些代码区块保留了原始的 MPL-2.0 许可声明，并符合其授权条款。<br>
   有关 MPL-2.0 的完整内容，请参见 <code>LICENSES/MPL-2.0.txt</code>。</p>
+
+  <p>此外，本项目还包含以下开源作品的改编图形素材：</p>
+
+  <ul>
+    <li><strong>Yosemite Buttons</strong> — 修改自 <a href="https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG">macos-traffic-light-buttons-as-SVG</a>（采用 <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> 授权）</li>
+    <li><strong>Yosemite GTK Theme</strong> — 修改自 <a href="https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716">Yosemite GTK 3.14/3.16 Theme Alpha4</a></li>
+  </ul>
 </details>

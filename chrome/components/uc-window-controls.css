@@ -23,9 +23,11 @@
             display: none !important;
         }
 
+        /*
         #navigator-toolbox[tabs-hidden] > #nav-bar > .titlebar-buttonbox-container {
             margin-left: -4px;
         }
+        */
     }
 
     #navigator-toolbox .titlebar-spacer[type="pre-tabs"] {
@@ -64,7 +66,7 @@
 
 /* Reposition nav-bar window controls */
 #nav-bar > .titlebar-buttonbox-container {
-    margin-top: 2px;
+    margin-top: var(--uc-titlebar-buttonbox-margin-top);
 }
 
 /*
@@ -140,16 +142,41 @@
 }
 */
 
+.titlebar-buttonbox-container {
+    margin-left: -4px;
+    @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
+        @media -moz-pref("sidebar.position_start") and (not -moz-pref("uc.flex.move-window-controls-to-left")) {
+            padding-right: var(--uc-web-content-margin) !important;
+        }
+    }
+    @media -moz-pref("uc.flex.move-window-controls-to-left") and (not (-moz-platform: macos)) {
+        margin-left: 4px;
+        order: -1 !important;
+        .titlebar-close {
+            order: -1 !important;
+        }
+    }
+}
+
 .titlebar-buttonbox {
     z-index: 3 !important;
     padding-right: 3px;
 }
 
-.titlebar-buttonbox * {
+.titlebar-button {
     border-radius: 5px;
-    width: 35px;
+    width: var(--uc-titlebar-buttonbox-width);
     /* height: 38px; */
     height: var(--uc-titlebar-buttonbox-height);
+    @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
+        &:hover {
+            scale: 1.2;
+        }
+        transition: scale 0.1s ease-out;
+        @media -moz-pref("uc.flex.revert-to-original-window-controls") {
+            padding: 8px 0px !important;
+        }
+    }
 }
 
 @media not -moz-pref("sidebar.verticalTabs") {
@@ -190,13 +217,19 @@
                             :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) & {
                                 margin-block-start: var(--uc-navbar-transform);
                                 @media not -moz-pref("uc.flex.auto-hide-window-controls") {
-                                    margin-inline-end: var(--uc-tabs-toolbar-windows-controls-margin-right, -104px);
+                                    margin-inline-end: var(
+                                        --uc-tabs-toolbar-windows-controls-margin-right,
+                                        calc(-1 * var(--uc-window-controls-width))
+                                    );
                                     opacity: var(--uc-navbar-opacity, 0);
                                     transition: var(--uc-autohide-tabs-toolbar-windows-controls-transition);
                                 }
 
                                 #navigator-toolbox:is(:hover, :focus-within) & {
-                                    margin-block-start: 0;
+                                    margin-block-start: 2px;
+                                    @media -moz-pref("uc.flex.style-window-controls-shift-up") {
+                                        margin-block-start: 0;
+                                    }
                                     @media not -moz-pref("uc.flex.auto-hide-window-controls") {
                                         margin-inline-end: 0;
                                         opacity: 1;
@@ -216,16 +249,31 @@
 @media -moz-pref("uc.flex.auto-hide-window-controls") {
     :where(#nav-bar, #TabsToolbar) > .titlebar-buttonbox-container {
         @media -moz-pref("sidebar.position_start") {
-            margin-inline-end: -104px;
-            opacity: 0;
-            transition:
-                margin-inline-end 0.5s ease-in-out,
-                opacity 0s 0.5s;
+            @media not -moz-pref("uc.flex.move-window-controls-to-left") {
+                margin-inline-end: calc(-1 * var(--uc-window-controls-width));
+                opacity: 0;
+                transition:
+                    margin-inline-end 0.5s ease-in-out,
+                    opacity 0s 0.5s;
 
-            &:hover {
-                margin-inline-end: 0;
-                opacity: 1;
-                transition-delay: 0s, 0.4s;
+                &:hover {
+                    margin-inline-end: 0;
+                    opacity: 1;
+                    transition-delay: 0s, 0.4s;
+                }
+            }
+            @media -moz-pref("uc.flex.move-window-controls-to-left") {
+                margin-inline-start: calc(-1 * (var(--uc-window-controls-width) + var(--uc-nav-bar-padding-left) / 2));
+                opacity: 0;
+                transition:
+                    margin-inline-start 0.5s ease-in-out,
+                    opacity 0s 0.5s;
+
+                &:hover {
+                    margin-inline-start: 0;
+                    opacity: 1;
+                    transition-delay: 0s, 0.4s;
+                }
             }
         }
         /**
@@ -248,7 +296,7 @@
             overflow: hidden;
 
             &:hover {
-                width: 108px;
+                width: calc(var(--uc-window-controls-width) + 4px);
                 opacity: 1;
                 transition-delay: 0s, 0.4s;
             }
@@ -305,12 +353,12 @@
                 @media -moz-pref("uc.flex.auto-hide-window-controls") {
                     transition: padding-right 0.5s ease-in-out;
                     #TabsToolbar:has(> .titlebar-buttonbox-container:hover) ~ #nav-bar & {
-                        padding-right: var(--uc-sb-nav-bar-padding-right, 104px);
+                        padding-right: var(--uc-sb-nav-bar-padding-right, var(--uc-window-controls-width));
                     }
                 }
                 @media not -moz-pref("uc.flex.auto-hide-window-controls") {
                     #toolbar-menubar[inactive="true"] ~ #nav-bar & {
-                        --uc-nav-bar-padding-right: 104px;
+                        --uc-nav-bar-padding-right: var(--uc-window-controls-width);
                     }
                 }
             }
@@ -323,6 +371,9 @@
     & > :is(toolbarbutton, toolbaritem):first-child,
     & > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
         padding-inline-start: var(--uc-nav-bar-padding-left) !important;
+        @media -moz-pref("uc.flex.auto-hide-window-controls") {
+            margin-inline-start: -1px !important;
+        }
     }
 }
 

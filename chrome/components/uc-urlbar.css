@@ -23,27 +23,60 @@
     border: 0 !important;
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop") {
         box-shadow: 0 0 0 100vw transparent;
-        transition: box-shadow 250ms ease-out !important;
+        transition:
+            opacity var(--inactive-window-transition),
+            box-shadow 0.3s ease-out,
+            left 0.3s ease,
+            width 0.3s ease,
+            margin-top 0.3s ease !important;
     }
 }
 
-#urlbar:not(.megabar):not([focused]):not([breakout-extend]):hover {
-    outline: 1px solid var(--uc-urlbar-outline);
+#urlbar:not(.megabar):not([focused]):not([breakout-extend]) {
+    @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4) {
+        .urlbar-input-container {
+            border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
+            transition: box-shadow 0.25s ease-out;
+        }
+    }
+    &:hover {
+        outline: 1px solid var(--uc-urlbar-outline);
+        :where(#urlbar-background, .urlbar-background) {
+            box-shadow: none !important;
+        }
+        @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4) {
+            outline: none;
+            .urlbar-input-container {
+                box-shadow:
+                    0px 0px 6px rgb(from var(--uc-urlbar-outline) r g b / 0.2),
+                    0 0 0 1px rgb(from var(--uc-urlbar-outline) r g b / 0.83) !important;
+            }
+            @media (prefers-color-scheme: dark) {
+                .urlbar-input-container {
+                    box-shadow:
+                        0px 0px 8px rgb(from var(--uc-urlbar-outline) r g b / 0.87),
+                        0 0 0 2px rgb(from var(--uc-urlbar-outline) r g b / 0.97) !important;
+                }
+            }
+        }
+    }
 }
 
+/*
 #urlbar[focused] {
     border: 0 !important;
     box-shadow:
         inset 1px 1px 2px color-mix(in srgb, var(--toolbox-bgcolor) 70%, black),
         inset -1px -1px 2px color-mix(in srgb, var(--toolbox-bgcolor) 85%, white);
-    /*
+    \/*
     border-top: 1px solid var(--uc-urlbar-border-top, transparent) !important;
     border-bottom: 1px solid var(--uc-urlbar-border-bottom, transparent) !important;
-    */
+    *\/
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
 }
+*/
 
-#urlbar[breakout][breakout-extend] {
+#urlbar:is([breakout][breakout-extend], [focused][usertyping]) {
     border: none !important;
     /*
     box-shadow:
@@ -59,8 +92,8 @@
 
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop") {
         box-shadow: 0 0 0 100vw rgba(0, 0, 0, var(--uc-urlbar-popup-dimness));
-        transition: box-shadow 250ms ease-out !important;
         /*
+        transition: box-shadow 250ms ease-out !important;
         &::backdrop {
             background-color: rgb(0 0 0 / var(--uc-urlbar-popup-dimness));
         }
@@ -78,12 +111,27 @@
 #urlbar-background,
 .urlbar-background {
     box-shadow: none !important;
+    @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) {
+        box-shadow: var(--uc-urlbar-box-shadow-2) !important;
+    }
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     background: var(--uc-urlbar-bg, var(--toolbar-field-background-color)) !important;
+    @media -moz-pref("uc.flex.style-urlbar", 3) {
+        @media not -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") {
+            @media not -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") {
+                @media not -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+                    background: transparent !important;
+                }
+            }
+        }
+    }
 }
 
 #urlbar[focused] :where(#urlbar-background, .urlbar-background) {
+    /*
     box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35) !important;
+    */
+    box-shadow: var(--uc-urlbar-box-shadow-1) !important;
     outline: none !important;
 }
 
@@ -92,14 +140,25 @@
 }
 
 /* Active Address/Search Field Dropdown */
-#urlbar[breakout][breakout-extend] > :where(#urlbar-background, .urlbar-background) {
+#urlbar:is([breakout][breakout-extend], [focused][usertyping]) > :where(#urlbar-background, .urlbar-background) {
     outline: none !important;
     box-shadow:
-        rgba(0, 0, 0, 0.09) 0px 2px 1px,
-        rgba(0, 0, 0, 0.09) 0px 4px 2px,
-        rgba(0, 0, 0, 0.09) 0px 8px 4px,
-        rgba(0, 0, 0, 0.09) 0px 16px 8px,
-        rgba(0, 0, 0, 0.09) 0px 32px 16px !important;
+        rgba(0, 0, 0, 0.09) 0px 1px 1px,
+        rgba(0, 0, 0, 0.09) 0px 2px 2px,
+        rgba(0, 0, 0, 0.09) 0px 4px 4px,
+        rgba(0, 0, 0, 0.09) 0px 8px 8px,
+        rgba(0, 0, 0, 0.09) 0px 16px 16px,
+        rgba(0, 0, 0, 0.09) 0px 32px 32px !important;
+    @media -moz-pref("uc.flex.move-urlbar-popup-to-center") {
+        @media not -moz-pref("uc.flex.move-urlbar-popup-to-center", 2) {
+            box-shadow: var(--uc-urlbar-popup-box-shadow), var(--uc-urlbar-popup-outline) !important;
+        }
+        @media -moz-pref("uc.flex.move-urlbar-popup-to-center", 2) {
+            #urlbar[focused][usertyping] & {
+                box-shadow: var(--uc-urlbar-popup-box-shadow), var(--uc-urlbar-popup-outline) !important;
+            }
+        }
+    }
     /*
     box-shadow: none !important;
     */
@@ -123,7 +182,10 @@
 }
 
 /* Idendity icon button */
+/*
 #identity-icon-box.identity-box-button {
+*/
+#identity-icon-box {
     margin: 3px 3px 3px 3px;
     border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
     background-color: var(--uc-identity-btn-bgcolor) !important;
@@ -180,45 +242,306 @@
     border: 0 !important;
 }
 
+/*
 #urlbar[open] > .urlbarView > .urlbarView-body-outer > .urlbarView-body-inner {
+*/
+#urlbar[open] .urlbarView-body-inner {
     border-top: 0 !important;
 }
 
-/* Show URL buttons on Hover */
-/* !v143 */
-#nav-bar:not([customizing="true"]):not([customizing=""])
-    > #nav-bar-customization-target
-    > #urlbar-container:not(:hover)
-    > #urlbar:not([focused])
-    > .urlbar-input-container {
-    > #page-action-buttons
-        > *:not(
-            #userContext-icons,
-            #reader-mode-button[readeractive],
-            #picture-in-picture-button[pipactive],
-            #translations-button[open],
-            #urlbar-zoom-button:not([hidden]),
-            #star-button-box
-        ),
-    > #page-action-buttons > #star-button-box:not([open]) > #star-button:not([starred]),
-    > #tracking-protection-icon-container:not([open]) {
-        opacity: 0;
-        transition: opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
+@media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
+    .urlbarView-row {
+        border-radius: calc(var(--uc-urlbar-popup-border-radius) - 2 * var(--urlbarView-row-gutter)) !important;
     }
-    > #identity-box {
-        > #identity-permission-box:not([open]),
-        > #notification-popup-box:not([open]) {
-            visibility: collapse;
-            opacity: 0;
-            transition:
-                opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type),
-                visibility var(--uc-collapse-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
+}
+
+@media -moz-pref("uc.flex.move-urlbar-popup-to-center") {
+    #urlbar {
+        margin-top: 0 !important;
+        transition:
+            opacity var(--inactive-window-transition),
+            box-shadow 0.3s ease-out,
+            left 0.3s ease,
+            width 0.3s ease,
+            translate 0.3s ease !important;
+    }
+
+    @media not -moz-pref("uc.flex.move-urlbar-popup-to-center", 2) {
+        #urlbar:is([breakout][breakout-extend], [focused][usertyping]) {
+            height: auto !important;
+            left: 28vw !important;
+            width: 44vw !important;
+            translate: 0 20vh !important;
+
+            .urlbar-input-container > *:not(.urlbar-input-box) {
+                height: 32px;
+                margin-block: auto !important;
+            }
+
+            .urlbar-input-container {
+                height: 50px !important;
+                padding-inline: 15px !important;
+            }
+
+            &[usertyping]:not([persistsearchterms]) #urlbar-input,
+            #urlbar-input::placeholder {
+                font-size: 1.35em !important;
+            }
+
+            .urlbarView-body-outer {
+                padding: 0 8px !important;
+            }
+
+            .urlbarView-body-inner {
+                border-top: 1px solid rgba(105, 105, 105, 0.2) !important;
+            }
+
+            .urlbarView-row-inner {
+                flex-wrap: nowrap !important;
+            }
+
+            .urlbarView-row[has-url]:not([type="switchtab"], [type="remotetab"]:not(:hover)) .urlbarView-no-wrap {
+                max-width: 70% !important;
+                flex-basis: 0 !important;
+            }
+
+            .urlbarView-row[has-url] .urlbarView-title-separator {
+                display: block !important;
+            }
+
+            .urlbarView-row[has-url] .urlbarView-url {
+                margin-left: 0px !important;
+            }
+        }
+    }
+    @media -moz-pref("uc.flex.move-urlbar-popup-to-center", 2) {
+        #urlbar[focused][usertyping] {
+            height: auto !important;
+            left: 28vw !important;
+            width: 44vw !important;
+            translate: 0 20vh !important;
+
+            .urlbar-input-container > *:not(.urlbar-input-box) {
+                height: 32px;
+                margin-block: auto !important;
+            }
+
+            .urlbar-input-container {
+                height: 50px !important;
+                padding-inline: 15px !important;
+            }
+
+            &[usertyping]:not([persistsearchterms]) #urlbar-input,
+            #urlbar-input::placeholder {
+                font-size: 1.35em !important;
+            }
+
+            .urlbarView-body-outer {
+                padding: 0 8px !important;
+            }
+
+            .urlbarView-body-inner {
+                border-top: 1px solid rgba(105, 105, 105, 0.2) !important;
+            }
+
+            .urlbarView-row-inner {
+                flex-wrap: nowrap !important;
+            }
+
+            .urlbarView-row[has-url]:not([type="switchtab"], [type="remotetab"]:not(:hover)) .urlbarView-no-wrap {
+                max-width: 70% !important;
+                flex-basis: 0 !important;
+            }
+
+            .urlbarView-row[has-url] .urlbarView-title-separator {
+                display: block !important;
+            }
+
+            .urlbarView-row[has-url] .urlbarView-url {
+                margin-left: 0px !important;
+            }
         }
     }
 }
 
-#urlbar-container:hover {
-    transition: opacity var(--uc-hover-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
+/* Show URL buttons on Hover */
+/* !v143 */
+@media not (-moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4)) {
+    #nav-bar:not([customizing="true"]):not([customizing=""])
+        > #nav-bar-customization-target
+        > #urlbar-container:not(:hover)
+        > #urlbar:not([focused])
+        > .urlbar-input-container {
+        > #page-action-buttons
+            > *:not(
+                #userContext-icons,
+                #reader-mode-button[readeractive],
+                #picture-in-picture-button[pipactive],
+                #translations-button[open],
+                #urlbar-zoom-button:not([hidden]),
+                #star-button-box
+            ),
+        > #page-action-buttons > #star-button-box:not([open]) > #star-button:not([starred]),
+        > #tracking-protection-icon-container:not([open]) {
+            opacity: 0;
+            transition: opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
+        }
+        > #identity-box {
+            > #identity-permission-box:not([open]),
+            > #notification-popup-box:not([open]) {
+                visibility: collapse;
+                opacity: 0;
+                transition:
+                    opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type),
+                    visibility var(--uc-collapse-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
+            }
+        }
+    }
+
+    #urlbar-container:hover {
+        transition: opacity var(--uc-hover-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
+    }
+}
+
+@media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4) {
+    #urlbar:not([breakout][breakout-extend], [focused][usertyping]) {
+        .urlbar-input {
+            text-align: center !important;
+            margin-bottom: 1px !important;
+        }
+
+        /*
+        .urlbar-input::placeholder,
+        .searchbar-textbox::placeholder {
+            text-align: left !important;
+        }
+        */
+
+        &[unifiedsearchbutton-available] {
+            .urlbar-input-box {
+                margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px);
+            }
+            #userContext-icons:not([hidden]) {
+                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px)) !important;
+            }
+            #userContext-icons[hidden] ~ #urlbar-zoom-button:not([hidden]) {
+                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px)) !important;
+            }
+        }
+
+        #identity-box[pageproxystate="valid"] {
+            ~ .urlbar-input-box {
+                margin-inline-end: calc(var(--identity-box-margin-inline) + 5px);
+            }
+            ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
+                margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 5px) !important;
+            }
+            &:is(.chromeUI) {
+                ~ .urlbar-input-box {
+                    margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px);
+                }
+                ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
+                    margin-inline-start: calc(
+                        -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px)
+                    ) !important;
+                }
+            }
+        }
+
+        #identity-permission-box,
+        #notification-popup-box,
+        #tracking-protection-icon-container {
+            margin-inline-start: calc(-16px - 2 * var(--urlbar-icon-padding));
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
+            #identity-icon-box {
+                margin-inline-start: calc(-16px - 2 * var(--urlbar-icon-padding));
+                opacity: 0;
+                transition: 0.3s;
+            }
+        }
+
+        #blocked-permissions-container {
+            display: none;
+        }
+
+        @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) {
+            .urlbar-page-action:where(:not(#star-button-box, [open])) {
+                margin-inline-end: calc(-16px - 2 * var(--urlbar-icon-padding));
+                opacity: 0;
+                transition: 0.3s;
+            }
+        }
+
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
+            .urlbar-page-action:not([open]),
+            #urlbar-zoom-button {
+                margin-inline-end: calc(-16px - 2 * var(--urlbar-icon-padding));
+                opacity: 0;
+                transition: 0.3s;
+            }
+        }
+
+        &[open] #tracking-protection-icon-container,
+        &:hover #tracking-protection-icon-container,
+        #tracking-protection-icon-container[open] {
+            opacity: 1;
+            margin-inline-start: 0 !important;
+        }
+
+        &[open] #identity-permission-box,
+        &[open] #notification-popup-box,
+        &:hover #identity-permission-box,
+        &:hover #notification-popup-box,
+        #identity-permission-box[open],
+        #notification-popup-box[open] {
+            opacity: 1;
+            margin-inline-start: 0 !important;
+        }
+
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
+            &[open] #identity-icon-box,
+            &:hover #identity-icon-box,
+            #identity-icon-box[open] {
+                opacity: 1;
+                margin-inline-start: 0 !important;
+            }
+        }
+
+        &[open] .urlbar-page-action,
+        &:hover .urlbar-page-action,
+        .urlbar-page-action[open] {
+            opacity: 1;
+            margin-inline-end: 0 !important;
+        }
+
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
+            &[open] #urlbar-zoom-button,
+            &:hover #urlbar-zoom-button {
+                opacity: 1;
+                margin-inline-end: 6px !important;
+            }
+        }
+
+        @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) {
+            &:-moz-window-inactive:hover .urlbar-page-action:not(#star-button-box),
+            &:-moz-window-inactive:hover #identity-permission-box,
+            &:-moz-window-inactive:hover #notification-popup-box {
+                opacity: unset !important;
+            }
+        }
+
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
+            &:-moz-window-inactive:hover .urlbar-page-action,
+            &:-moz-window-inactive:hover #identity-permission-box,
+            &:-moz-window-inactive:hover #notification-popup-box {
+                opacity: unset !important;
+            }
+        }
+    }
 }
 
 /* Searchmode Switcher */
@@ -244,7 +567,7 @@
     }
 }
 
-#searchmode-switcher-chicklet {
+.searchmode-switcher-chicklet {
     margin-top: 3px;
     height: 25px !important;
     background-color: transparent !important;
@@ -256,11 +579,14 @@
 }
 
 #urlbar-zoom-button {
-    background-color: var(--uc-toolbar-bgcolor) !important;
+    background-color: var(--uc-identity-btn-bgcolor) !important;
     border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
     opacity: 0.8;
     &:hover {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
+    }
+    .toolbarbutton-text {
+        margin-bottom: 1px;
     }
 }
 
@@ -321,10 +647,13 @@
 
 /* Searchbar color */
 #searchbar {
-    background-color: var(--uc-urlbar-bg-transparent, var(--toolbar-field-background-color)) !important;
+    background-color: var(--uc-searchbar-bgcolor, var(--toolbar-field-background-color)) !important;
     background-clip: border-box;
     border: 1px solid var(--toolbar-field-border-color);
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
+    @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) {
+        box-shadow: var(--uc-urlbar-box-shadow-2) !important;
+    }
 }
 
 #PopupSearchAutoComplete {
@@ -332,6 +661,6 @@
     --panel-shadow-margin: 0px !important;
     background-color: var(--uc-toolbar-bgcolor);
     --panel-color: var(--toolbar-field-focus-color);
-    --panel-background: var(--uc-urlbar-bg-transparent, var(--toolbar-field-focus-background-color)) !important;
+    --panel-background: var(--uc-searchbar-bgcolor, var(--toolbar-field-focus-background-color)) !important;
     --panel-border-color: var(--arrowpanel-border-color);
 }

@@ -161,7 +161,7 @@
             --table-row-background-color-alternate: transparent !important;
         }
 
-        @media -moz-pref("uc.flex.show-flexfox-version-info-in-about-config") {
+        @media not -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", false) {
             body::before,
             #toolbar::before {
                 background: color-mix(in srgb, var(--background-color-box) 80%, transparent);

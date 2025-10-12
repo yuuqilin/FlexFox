@@ -20,22 +20,48 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v5.0.3**
+**✨ FlexFox v5.5.0 – UI / UX の改善**
 
-* URL バーにフォーカスしている時は、水平タブバーが常に表示されるように改善しました。
-* アクティブなタブの幅が変化する際のアニメーション速度を、`uc.flex.sidebery-fast-hover-expand` と `uc.flex.sidebery-slow-hover-expand` で調整できるようになりました。
-* `uc.flex.sidebery-allow-resizable-width` を有効にして折りたたみ状態にした時の音量アイコンの位置を調整しました。
-* 「カーソルを合わせた時にサイドバーを展開する」と `uc.flex.fully-hide-sidebery` を同時に有効にすると、ネイティブ垂直タブが展開できない不具合を修正しました。 (#21)
-* ネイティブ垂直タブで、ピン留めタブから DOM フルスクリーンに入って終了した後にアイコンがずれる不具合を修正しました。
-* タブグループ作成時に「完了」と「キャンセル」ボタンの文字が表示されない不具合を修正しました。
-* v5.0.2 で発生したリグレッションを修正しました。`Lock Sidebery` と `Hide Sidebery` を同時に有効にすると、ネイティブ垂直タブが展開できなくなる問題です。
-* `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` を有効にした状態で、タブバーを展開するためにカーソルを合わせた際に、タブバーとナビゲーションバーの間を移動すると点滅する問題を修正しました。
-* コンテキストメニューに「Copilot」と「新しいグループにタブを追加」のアイコンを追加しました。
-* ネイティブ垂直タブのタブグループの外観を変更できるオプション `uc.flex.style-tab-group` を追加しました：
-  * `1`（デフォルト）：展開/折りたたみインジケーターあり、アニメーションなし
-  * `2`：インジケーターあり、展開/折りたたみアニメーションあり
-  * `3`：ラベル中央揃え、インジケーターなし、アニメーションなし
-  * `4`：ラベル中央揃え、インジケーターなし、アニメーションあり
+* `uc.flex.style-sidebar-button` を追加。サイドバー切り替えボタンのアイコンを変更可能 (`1`～`4`)。
+  * `1` = Firefox Master Brand Logo（既定、従来と同じ）
+  * `2` = Firefox Browser Logo
+  * `3` = Firefox System 1 Logo
+  * `4` = Mozilla Flag Symbol
+* `uc.flex.style-toolbar-bgcolor` を追加。ナビゲーションバーとサイドバーの背景色を変更可能 (`1`～`2`)。
+  * `1` = Tokyo Night テーマ（既定、従来と同じ）
+  * `2` = Firefox Acorn Design
+* `uc.flex.style-urlbar` を追加。URLバーの外観を切り替え可能 (`1`～`4`)。
+  * `1` = Flat（既定、従来と同じ）
+  * `2` = Inset（バーが埋め込まれたデザイン、中央揃えの文字）
+  * `3` = Debossed（凹んだデザイン、中央揃えの文字）
+  * `4` = Seamless（ナビゲーションバーと完全に一体化、中央揃えの文字）
+* `uc.flex.move-urlbar-popup-to-center` を追加。URLバーのポップアップ位置を調整 (`0`～`2`)。
+  * `0` = 無効（既定）
+  * `1` = フォーカス時に中央へ移動
+  * `2` = 入力中のみ中央へ移動
+* `uc.flex.dim-urlbar-popup-backdrop` の背景暗化効果を新しい挙動に合わせて更新 (`0`～`2`)。
+  * `0` = 暗化なし（既定）
+  * `1` = 35% 暗化
+  * `2` = 50% 暗化
+* `uc.flex.style-window-controls` を追加。ウィンドウコントロールのアイコンを変更可能 (`1`～`3`)。
+  * `1` = Traffic Light Buttons（既定、従来と同じ）
+  * `2` = Yosemite Window Buttons
+  * `3` = Yosemite GTK テーマ
+* `uc.flex.style-window-controls-shift-up` を追加。ウィンドウコントロールをわずかに上方向へ移動（既定値: `False`）。
+* `uc.flex.style-window-controls-shrink-size` を追加。ウィンドウコントロールを小型化（既定値: `False`）。
+* `uc.flex.move-window-controls-to-left` を追加。ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端へ移動（既定値: `False`）。
+
+  * 注: `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` が有効で、かつ `uc.flex.restore-window-controls-on-tabbar` が無効の場合、この設定は反映されません。
+* URLバーのポップアップのシャドウを改善。
+* Findbar の外観を調整し、サイズや角の滑らかさ、陰影、アニメーションの動きを最適化。
+* `uc.flex.enable-colored-bookmarks-folder-icons` が “Other Bookmarks” フォルダーに対応。
+* `uc.flex.style-tab-group` のアニメーション有効時、インジケーターに回転エフェクトを追加。
+* `uc.flex.style-tab-group` = `2` または `4` のとき、折りたたまれたタブが表示されない問題を修正。
+* `uc.flex.remove-sidebar-stripe` と `uc.flex.show-tab-count-in-alltabs-button` を併用した際のカウント不具合を修正。
+* `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` かつ `uc.flex.show-tab-close-button-on-favicon-hover` が有効な場合に、アイコンが隠れない問題を修正。
+* Firefox v143 による URL バー内の検索エンジン切り替えボタンのスタイル崩れを修正（[Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)）。
+* その他多数のバグ修正と調整。
+* `uc.flex.show-flexfox-version-info-in-about-config` が既定で有効化されました。無効にするには `False` に設定してください。
 
 ## 🎉 主な機能アップデート
 
@@ -345,6 +371,23 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 <summary>💬 <b>過去の更新</b></summary>
 
+**v5.0.3**
+
+* URL バーにフォーカスしている時は、水平タブバーが常に表示されるように改善しました。
+* アクティブなタブの幅が変化する際のアニメーション速度を、`uc.flex.sidebery-fast-hover-expand` と `uc.flex.sidebery-slow-hover-expand` で調整できるようになりました。
+* `uc.flex.sidebery-allow-resizable-width` を有効にして折りたたみ状態にした時の音量アイコンの位置を調整しました。
+* 「カーソルを合わせた時にサイドバーを展開する」と `uc.flex.fully-hide-sidebery` を同時に有効にすると、ネイティブ垂直タブが展開できない不具合を修正しました。 (#21)
+* ネイティブ垂直タブで、ピン留めタブから DOM フルスクリーンに入って終了した後にアイコンがずれる不具合を修正しました。
+* タブグループ作成時に「完了」と「キャンセル」ボタンの文字が表示されない不具合を修正しました。
+* v5.0.2 で発生したリグレッションを修正しました。`Lock Sidebery` と `Hide Sidebery` を同時に有効にすると、ネイティブ垂直タブが展開できなくなる問題です。
+* `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` を有効にした状態で、タブバーを展開するためにカーソルを合わせた際に、タブバーとナビゲーションバーの間を移動すると点滅する問題を修正しました。
+* コンテキストメニューに「Copilot」と「新しいグループにタブを追加」のアイコンを追加しました。
+* ネイティブ垂直タブのタブグループの外観を変更できるオプション `uc.flex.style-tab-group` を追加しました：
+  * `1`（デフォルト）：展開/折りたたみインジケーターあり、アニメーションなし
+  * `2`：インジケーターあり、展開/折りたたみアニメーションあり
+  * `3`：ラベル中央揃え、インジケーターなし、アニメーションなし
+  * `4`：ラベル中央揃え、インジケーターなし、アニメーションあり
+
 **v5.0.2**
 
 * **パフォーマンス**: 一部コードをリファクタリングし、ネイティブ垂直タブの展開・折りたたみアニメーションのCPU使用率を v4.0.5 と比べて40％削減しました。Firefox標準の「カーソルを合わせた時にサイドバーを展開する」オプションと同等の性能ですが、依然として Sidebery より2倍重いです。Sidebery はネイティブ垂直タブより高速で機能豊富、バグも少なく、利用を推奨します。
@@ -586,9 +629,6 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | 水平タブで閉じるボタンをファビコンと統合してスペースを節約します。ファビコンにカーソルを合わせるとボタンが表示されます。有効化すると、タブが狭くなったときの閉じるボタンの自動縮小・移動機能は自動的に停止します。 |
 | `uc.flex.show-tab-count-in-alltabs-button` | `0`-`4` | 「すべてのタブを一覧表示」ボタンにタブの総数を表示します。数値で設定でき、`0` は無効、`1` はアイコンと数字を表示（すべてのタブ）、`2` はアイコンと数字を表示（読み込み済みタブのみ）、`3` は数字のみを表示（すべてのタブ）、`4` は数字のみを表示（読み込み済みタブのみ）です。 |
 | `uc.flex.show-tab-number-in-tab-label` | `true` | 各タブラベルの前に番号を表示します。ラベルの文字が狭いスペースで省略される場合でも、タブを見分けやすくなります。 |
-| `uc.flex.move-pip-volume-to-top` | `true` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
-| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
-| `uc.flex.enable-rounded-web-content` | `0`-`2` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
 
 #### 🚫 機能を無効化・元に戻すオプション
 
@@ -625,7 +665,6 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | ネイティブ垂直タブと Sidebery の両方で、1 列あたりに表示できるピン留めタブの最大数を設定します。上限を超えると固定タブパネルにスクロールバーが表示されます。`0` に設定すると制限が解除され、パネルが無制限に拡張されます。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `'top-center-left'` または `'1'`（左寄せ上部）、`'top-right'` または `'2'`（右上）、`'bottom-right'` または `'3'`（右下）です。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Firefoxのアプリメニュー、ブックマークメニュー、右クリックメニューにおける項目同士の垂直間隔を設定します。指定可能な値は文字列 `'1'` または `'small'`（狭い間隔）、`'2'` または `'medium'`（標準の間隔）、`'3'` または `'large'`（広い間隔）です。 |
-| `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | ネイティブ垂直タブのタブグループの外観を調整します。値：`1` = 展開／折りたたみインジケーターを表示（アニメーションなし）、`2` = インジケーターを表示（アニメーションあり）、`3` = ラベルを中央揃え（インジケーターなし・アニメーションなし）、`4` = ラベルを中央揃え（インジケーターなし・アニメーションあり）。デフォルトは `1` です。 |
 
 #### ⚙️ Firefox ネイティブ設定
 | 設定名 | 値 | 説明 |
@@ -635,6 +674,22 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `browser.tabs.fadeOutUnloadedTabs` | `true` | ネイティブの Firefox 設定で、垂直サイドバー内の起動時に復元待ちのタブをフェードアウト表示にします。 |
 | `sidebar.visibility` | `expand-on-hover` | FlexFox が提供する**最適化された**垂直タブの自動折りたたみ機能とレイアウトを無効にします。この設定は、サイドバーの設定画面で **「カーソルを合わせた時にサイドバーを展開する」** にチェックを入れることでも適用できます。このモードでは、サイドバーの幅を自由に調整したり、<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd>キーやサイドバーの切り替えボタンで展開・折りたたみを切り替えたりできます。**FlexFox の日常使用では推奨されません。** |
 | `sidebar.animation.expand-on-hover.duration-ms` | `120` | ネイティブの Firefox 設定で、`sidebar.visibility` が `expand-on-hover` に設定されているときに、垂直サイドバーの展開・折りたたみにかかるアニメーション速度を制御します。 |
+
+#### 🎨 UIのスタイルと外観
+| 設定名 | 値 | 説明 |
+|--------|:------:|--------|
+| `uc.flex.style-sidebar-button` | `1`-`4`<br>(`1`) | サイドバー切り替えボタンのアイコンを変更します。値：`1` = Firefox マスターブランドロゴ（デフォルト、従来と同じ）、`2` = Firefox ブラウザロゴ、`3` = Firefox System 1 ロゴ、`4` = Mozilla フラッグシンボル。 |
+| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | ナビゲーションバーとサイドバーの背景色を切り替えます。値：`1` = Tokyo Night テーマ（デフォルト、従来と同じ）、`2` = Firefox Acorn Design。 |
+| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | URL バーの外観をカスタマイズします。値：`1` = フラット（デフォルト、従来と同じ）、`2` = インセット（ナビゲーションバーに埋め込まれたような見た目、中央揃えのテキスト）、`3` = デボス（押し込まれたような見た目、中央揃えのテキスト）、`4` = シームレス（ナビゲーションバーに完全に溶け込む、中央揃えのテキスト）。 |
+| `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | URL バーのポップアップ位置を調整します。値：`0` = 無効（デフォルト）、`1` = フォーカス時に中央へ表示、`2` = 入力中のみ中央へ表示。 |
+| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
+| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | ウィンドウコントロールアイコンを切り替えます。値：`1` = トラフィックライトボタン（デフォルト、従来と同じ）、`2` = Yosemite ウィンドウボタン、`3` = Yosemite GTK テーマ。 |
+| `uc.flex.style-window-controls-shift-up` | `true` | ウィンドウコントロールを少し上に移動します。 |
+| `uc.flex.style-window-controls-shrink-size` | `true` | ウィンドウコントロールのサイズを小さくします。 |
+| `uc.flex.move-window-controls-to-left` | `true` | ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端に移動します。 |
+| `uc.flex.move-pip-volume-to-top` | `true` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
+| `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | ネイティブ垂直タブのタブグループの外観を調整します。値：`1` = 展開／折りたたみインジケーターを表示（アニメーションなし）、`2` = インジケーターを表示（アニメーションあり）、`3` = ラベルを中央揃え（インジケーターなし・アニメーションなし）、`4` = ラベルを中央揃え（インジケーターなし・アニメーションあり）。デフォルトは `1` です。 |
+| `uc.flex.enable-rounded-web-content` | `0`-`2` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
 
 #### 🧊 背景の見た目とMica効果
 
@@ -693,4 +748,11 @@ FlexFox は、以下の優れたプロジェクトの成果を基盤に構築さ
 
   <p>該当するコードには元の MPL-2.0 のライセンス表記が保持されており、ライセンス条件を遵守しています。<br>
   MPL-2.0 の全文は <code>LICENSES/MPL-2.0.txt</code> をご覧ください。</p>
+
+  <p>また、本プロジェクトには以下のオープンソース作品を改変したグラフィック素材が含まれています：</p>
+
+  <ul>
+    <li><strong>Yosemite Buttons</strong> — <a href="https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG">macos-traffic-light-buttons-as-SVG</a> を基に改変（<a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> のもとでライセンス）</li>
+    <li><strong>Yosemite GTK Theme</strong> — <a href="https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716">Yosemite GTK 3.14/3.16 Theme Alpha4</a> を基に改変</li>
+  </ul>
 </details>

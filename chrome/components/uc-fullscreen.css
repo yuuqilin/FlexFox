@@ -67,7 +67,11 @@
         /* Use !important to override the transition styles in Nightly (v135) */
         transition:
             transform 82ms linear var(--uc-autohide-toolbox-delay),
-            opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms) !important;
+            opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms),
+            box-shadow 0.3s ease-out,
+            left 0.3s ease,
+            width 0.3s ease,
+            translate 0.3s ease !important;
         @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
             -moz-pref("uc.flex.browser-wallpaper-enabled") {
@@ -96,7 +100,16 @@
         pointer-events: auto;
         opacity: 1;
         /* Use !important to override the transition styles in Nightly (v135) */
+        /*
         transition-delay: 33ms !important;
+        */
+        transition:
+            transform 82ms linear 33ms,
+            opacity 0ms 33ms,
+            box-shadow 0.3s ease-out,
+            left 0.3s ease,
+            width 0.3s ease,
+            translate 0.3s ease !important;
         @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
             -moz-pref("uc.flex.browser-wallpaper-enabled") {
@@ -104,7 +117,11 @@
                 transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay),
                 opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay) !important;
+                    var(--uc-hover-sidebar-delay),
+                box-shadow 0.3s ease-out,
+                left 0.3s ease,
+                width 0.3s ease,
+                translate 0.3s ease !important;
         }
         transform: rotateX(0deg);
     }

@@ -1,6 +1,7 @@
 @namespace htmlNs url("http://www.w3.org/1999/xhtml");
 /* Auto hide findbar when unfocused */
 @media not -moz-pref("uc.flex.disable-findbar-autohide") {
+    /*
     @keyframes findbar-hide-when-unfocused {
         0% {
             opacity: 1;
@@ -13,10 +14,14 @@
         100% {
         }
     }
+    */
     findbar:not(:focus-within) {
+        /*
         animation:
             findbar-scale-out 0.1s,
             findbar-hide-when-unfocused 0.1s;
+        */
+        animation: findbar-slide-out 0.3s;
         height: 0;
         opacity: 0;
         pointer-events: none;
@@ -32,11 +37,13 @@
 
 findbar checkbox {
     padding: 1.5px 6px;
-    border-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
+    margin-block-end: 0.5px !important;
+    border-radius: var(--uc-findbar-inner-border-radius);
     color: var(--button-color);
     background-color: var(--button-bgcolor);
 }
 
+/*
 @keyframes findbar-scale-in {
     0% {
         transform: scaleY(0);
@@ -58,6 +65,31 @@ findbar checkbox {
         transform: scaleY(0);
     }
 }
+*/
+
+@keyframes findbar-slide-in {
+    0%,
+    30% {
+        translate: 100%;
+        opacity: 0;
+    }
+    100% {
+        translate: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes findbar-slide-out {
+    100% {
+        translate: 100%;
+        opacity: 0;
+    }
+    0% {
+        translate: 0;
+        opacity: 1;
+        height: auto;
+    }
+}
 
 /* Modified from https://github.com/nuclearcodecat/shimmer/blob/main/userChrome.css */
 /* https://github.com/nuclearcodecat/shimmer/blob/main/LICENSE */
@@ -66,17 +98,18 @@ findbar checkbox {
 findbar {
     --button-bgcolor: var(--uc-urlbar-bg, var(--button-background-color));
     position: absolute;
-    border-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
+    border-radius: var(--uc-findbar-outer-border-radius);
     top: calc(var(--uc-findbar-y-position) + var(--uc-findbar-y-offset));
-    right: min(var(--uc-findbar-x-position), calc(100% - (16em + 264px)));
-    width: calc(16em + 264px);
-    height: 40px;
+    right: min(var(--uc-findbar-x-position), calc(100% - (16em + 260px)));
+    width: calc(16em + 260px);
+    height: 36px;
     display: flex;
     align-items: center;
     transform-origin: top center;
-    animation: findbar-scale-in 0.1s;
+    animation: findbar-slide-in 0.3s;
     background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)) !important;
-    background-image: linear-gradient(
+    background-image:
+        linear-gradient(
             var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)),
             var(--uc-findbar-bgcolor, var(--toolbar-bgcolor))
         ),
@@ -84,6 +117,7 @@ findbar {
     border: 0;
     border-top-color: transparent !important;
     overflow-x: visible;
+    filter: drop-shadow(rgb(from var(--uc-urlbar-outline) r g b / 0.7) 0px 0px 0.5px);
 }
 
 .findbar-container,
@@ -138,8 +172,10 @@ findbar {
 }
 
 .findbar-textbox {
-    border-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius)) !important;
+    border-radius: var(--uc-findbar-inner-border-radius) !important;
+    /*
     padding: 5px 8px !important;
+    */
     width: 16em !important;
     height: 26px;
 }
@@ -149,8 +185,8 @@ findbar {
 }
 
 .findbar-find-next {
-    border-top-right-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius)) !important;
-    border-bottom-right-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius)) !important;
+    border-top-right-radius: var(--uc-findbar-inner-border-radius) !important;
+    border-bottom-right-radius: var(--uc-findbar-inner-border-radius) !important;
     height: 26px;
 }
 
@@ -161,17 +197,22 @@ findbar {
     background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)) !important;
     /* wasn't square for some reason */
     width: auto !important;
+    padding: 4px !important;
+    .toolbarbutton-icon {
+        width: 12px;
+        height: 12px;
+    }
 }
 
 /* move matched amount below main findbar */
 .found-matches {
-    height: 42px;
+    height: 40px;
     position: absolute;
     padding: 20px 16px 3px 10px;
     top: 16px;
     background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor));
     left: 0px;
-    border-bottom-left-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
+    border-bottom-left-radius: var(--uc-findbar-outer-border-radius);
     border-bottom-right-radius: 20px;
     z-index: 9;
 }
@@ -185,11 +226,11 @@ findbar {
     position: absolute;
     display: block;
     content: "";
-    width: 16px;
+    width: 22px;
     height: 22px;
     background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor));
     right: -6px;
-    top: 10px;
+    top: 7px;
     transform: rotate(45deg);
 }
 .findbar-textbox {
@@ -201,18 +242,25 @@ findbar {
 
 /* !v143 */
 findbar:where([hidden="true"], [hidden=""]) {
-    animation: findbar-scale-out 0.1s;
+    animation: findbar-slide-out 0.3s;
 }
 findbar checkbox,
 findbar [anonid="findbar-textbox-wrapper"] toolbarbutton,
 findbar [anonid="findbar-textbox-wrapper"] htmlNs|input {
     border: 1px solid ThreeDShadow;
 }
+/*
 findbar {
     gap: 8px;
     padding: 6px;
     padding-inline-start: 8px;
     padding-inline-end: 8px;
+}
+*/
+findbar {
+    gap: 6px;
+    padding-block: 4px !important;
+    padding-inline: 6px;
 }
 findbar > * {
     margin-inline-start: 0 !important;

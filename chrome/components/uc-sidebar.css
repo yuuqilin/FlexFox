@@ -1,7 +1,7 @@
 #sidebar-box {
     max-width: calc(100% - 496px) !important;
     @media -moz-pref("sidebar.revamp") {
-        max-width: calc(100% - var(--uc-sidebar-stripe-width) - (16em + 264px)) !important;
+        max-width: calc(100% - var(--uc-sidebar-stripe-width) - (16em + 260px)) !important;
     }
     min-width: var(--uc-sidebar-stripe-width) !important;
 }
@@ -66,15 +66,19 @@
             */
             &:first-child {
                 background-position: var(--uc-sidebar-button-bg-pos-first);
-                background-size: 20px;
                 mask-position: var(--uc-sidebar-button-bg-pos-first);
-                mask-size: 20px;
+                @media not -moz-pref("uc.flex.move-window-controls-to-left"),
+                    -moz-pref("uc.flex.auto-hide-window-controls") {
+                    background-size: 20px;
+                    mask-size: 20px;
+                }
                 :root[inFullscreen] & {
                     background-position: var(--uc-sidebar-button-bg-pos-first-fs);
                     mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
                 }
                 /* In horizontal tab mode, adjust icon size only when Sidebery is active */
-                @media not -moz-pref("sidebar.verticalTabs") {
+                @media not (-moz-pref("sidebar.verticalTabs") or -moz-pref("uc.flex.move-window-controls-to-left")),
+                    -moz-pref("uc.flex.auto-hide-window-controls") and (not -moz-pref("sidebar.verticalTabs")) {
                     background-position: var(
                         --uc-sb-sidebar-button-bg-pos-first,
                         var(--uc-sidebar-button-bg-pos-first)
@@ -86,6 +90,15 @@
                         background-position: var(--uc-sidebar-button-bg-pos-first-fs);
                         mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
                     }
+                }
+            }
+
+            &:not([checked="true"]) {
+                @media -moz-pref("uc.flex.style-sidebar-button", 3) {
+                    --uc-flexfox-logo-image: url("../icons/toolbarbutton/firefox-newaita-mono.svg");
+                }
+                @media -moz-pref("uc.flex.style-sidebar-button", 4) {
+                    --toolbarbutton-icon-fill: rgb(105, 105, 105) !important;
                 }
             }
 
@@ -500,6 +513,8 @@
         --uc-sb-sidebar-main-hover-max-height: 100%;
         --uc-sb-sidebar-main-hover-height: fit-content;
         --uc-sb-sidebar-stripe-display: none;
+        --uc-sb-sidebar-stripe-visibility: collapse;
+        --uc-sb-moz-button-visibility: hidden;
         --uc-sb-vertical-tabs-size: 0px;
 
         /*
@@ -906,7 +921,12 @@
     /* Remove sidebar stripe when Sidebery is active. */
     @media -moz-pref("uc.flex.remove-sidebar-stripe") {
         #sidebar-main {
-            display: var(--uc-sb-sidebar-stripe-display, flex) !important;
+            @media not -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+                display: var(--uc-sb-sidebar-stripe-display, flex) !important;
+            }
+            @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+                visibility: var(--uc-sb-sidebar-stripe-visibility, visible);
+            }
         }
     }
 
@@ -1100,14 +1120,12 @@
         padding-block-start: var(--uc-sb-sroot-padding-block-start, var(--space-xxsmall));
 
         /* Obsolete */
-        /*
         > moz-button[view="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
-            \/* --button-outer-padding-block-end: 0; *\/
+            /* --button-outer-padding-block-end: 0; */
             .tools-and-extensions.actions-list:not(:hover) & {
-                visibility: hidden;
+                visibility: var(--uc-sb-moz-button-visibility);
             }
         }
-        */
         /*
         > moz-button {
             &:nth-last-child(2) {
@@ -1192,7 +1210,7 @@
                 --button-outer-padding-block-end: var(--uc-sb-sroot-btn-padding-block-end-sidebery, var(--space-small));
                 */
                 .tools-and-extensions.actions-list:not(:hover) & {
-                    visibility: hidden;
+                    visibility: var(--uc-sb-moz-button-visibility);
                 }
             }
             /* Reduce bottom padding if the last element is no longer the one displayed at the bottom */
@@ -1655,7 +1673,7 @@
             &:is([soundplaying], [muted], [activemedia-blocked]) {
                 background-color: transparent !important;
                 background-image: none !important;
-                -moz-context-properties: fill;
+                -moz-context-properties: fill, fill-opacity;
                 fill: var(--tab-selected-textcolor);
                 color-scheme: var(--tab-selected-color-scheme);
                 border-radius: var(--border-radius-circle);
@@ -1685,7 +1703,7 @@
                 background-color: var(--lwt-accent-color);
                 background-image:
                     linear-gradient(var(--audio-overlay-extra-background)), linear-gradient(var(--toolbox-bgcolor));
-                -moz-context-properties: fill;
+                -moz-context-properties: fill, fill-opacity;
                 fill: var(--tab-selected-textcolor);
                 color-scheme: var(--tab-selected-color-scheme);
                 border-radius: var(--border-radius-circle);
@@ -1860,17 +1878,65 @@
         }
     }
 
+    /* rotate jumpy icon */
+    @keyframes iconAnimation-open {
+        0% {
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            transform: rotate(360deg) scale(1.1);
+            /* Jumpy scaling */
+        }
+
+        75% {
+            transform: rotate(360deg) scale(0.9);
+        }
+
+        100% {
+            transform: rotate(360deg) scale(1);
+        }
+    }
+
+    /* rotate jumpy icon inverted */
+    @keyframes iconAnimation-close {
+        0% {
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            transform: rotate(-360deg) scale(1.1);
+            /* Jumpy scaling */
+        }
+
+        75% {
+            transform: rotate(-360deg) scale(0.9);
+        }
+
+        100% {
+            transform: rotate(-360deg) scale(1);
+        }
+    }
+
     /* Expand/collapse animation for tab groups */
     @media -moz-pref("uc.flex.style-tab-group", 2) or -moz-pref("uc.flex.style-tab-group", 4) {
         tab-group {
             display: flex !important;
             flex-direction: column;
-            max-height: 40px !important;
+            max-height: 120px !important;
             overflow: hidden;
             transition: max-height 50ms ease;
             &:not([collapsed]) {
-                max-height: 100vh !important;
+                max-height: 100% !important;
                 transition: max-height 800ms ease;
+            }
+            &[collapsed] .tab-group-label::before {
+                animation: iconAnimation-close 700ms ease-in-out forwards;
+                animation-fill-mode: forwards;
+            }
+            &:not([collapsed]) .tab-group-label::before {
+                animation: iconAnimation-open 800ms ease-in-out forwards;
+                animation-fill-mode: forwards;
             }
         }
     }

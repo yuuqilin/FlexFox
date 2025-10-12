@@ -20,22 +20,48 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.0.3**
+**✨ FlexFox v5.5.0 – UI and UX Enhancements**
 
-* Improved auto-hide of the horizontal tab bar so it stays visible when the URL bar is focused.
-* Added controls to adjust the animation speed of active tab width changes with `uc.flex.sidebery-fast-hover-expand` and `uc.flex.sidebery-slow-hover-expand`.
-* Adjusted the volume icon position in collapsed mode when `uc.flex.sidebery-allow-resizable-width` is enabled.
-* Fixed native vertical tabs not expanding when “Expand sidebar on hover” and `uc.flex.fully-hide-sidebery` were both enabled. (#21)
-* Fixed tab icon misalignment in native vertical tabs after entering and exiting DOM fullscreen from a pinned tab.
-* Fixed missing text on the “Done” and “Cancel” buttons when creating a tab group.
-* Fixed a regression in v5.0.2 where native vertical tabs would not expand with both `Lock Sidebery` and `Hide Sidebery` enabled.
-* Fixed a flicker issue when hovering to expand the tab bar with `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` enabled, caused by moving the mouse across the tab bar and navbar.
-* Added two new context menu icons: “Copilot” and “Add Tab to New Group”.
-* Added option `uc.flex.style-tab-group` to customize tab group appearance in native vertical tabs:
-  * `1` (default): expand/collapse indicator, no animation
-  * `2`: indicator with expand/collapse animation
-  * `3`: centered label, no indicator, no animation
-  * `4`: centered label, no indicator, with animation
+* Added `uc.flex.style-sidebar-button` to switch the sidebar toggle icon (`1`–`4`):
+  * `1` = Firefox Master Brand Logo (default, same as before)
+  * `2` = Firefox Browser Logo
+  * `3` = Firefox System 1 Logo
+  * `4` = Mozilla Flag Symbol
+* Added `uc.flex.style-toolbar-bgcolor` to change the background color of the navbar and sidebar (`1`–`2`):
+  * `1` = Tokyo Night theme (default, same as before)
+  * `2` = Firefox Acorn Design
+* Added `uc.flex.style-urlbar` to customize the URL bar appearance (`1`–`4`):
+  * `1` = Flat (default, same as before)
+  * `2` = Inset (embedded look with centered text)
+  * `3` = Debossed (pressed-in look with centered text)
+  * `4` = Seamless (fully merged into the navbar, centered text)
+* Added `uc.flex.move-urlbar-popup-to-center` to reposition the URL bar popup (`0`–`2`):
+  * `0` = Disabled (default)
+  * `1` = Center when focused
+  * `2` = Center only when typing
+* Updated `uc.flex.dim-urlbar-popup-backdrop` to match the new popup behavior (`0`–`2`):
+  * `0` = No dimming (default)
+  * `1` = 35% dim when open
+  * `2` = 50% dim when open
+* Added `uc.flex.style-window-controls` to switch the window control icons (`1`–`3`):
+  * `1` = Traffic Light Buttons (default, same as before)
+  * `2` = Yosemite Window Buttons
+  * `3` = Yosemite GTK Theme
+* Added `uc.flex.style-window-controls-shift-up` to slightly raise the window controls (default: `False`).
+* Added `uc.flex.style-window-controls-shrink-size` to reduce the size of window controls (default: `False`).
+* Added `uc.flex.move-window-controls-to-left` to move window controls to the left edge of the navbar or horizontal tab bar (default: `False`).
+
+  * Note: This option has no effect when `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` is enabled without `uc.flex.restore-window-controls-on-tabbar`.
+* Improved the shadow rendering of the URL bar popup.
+* Refined the Findbar's design for better proportions, smoother corner transitions, added depth shadows, and more fluid open/close animations.
+* Improved `uc.flex.enable-colored-bookmarks-folder-icons` with support for the “Other Bookmarks” folder.
+* Enhanced `uc.flex.style-tab-group` with rotation animations for group indicators when animation is enabled.
+* Fixed an issue where folded tabs would not display when `uc.flex.style-tab-group` = `2` or `4`.
+* Fixed a counting issue when both `uc.flex.remove-sidebar-stripe` and `uc.flex.show-tab-count-in-alltabs-button` were enabled.
+* Fixed an issue where tab favicons failed to hide when `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` with `uc.flex.show-tab-close-button-on-favicon-hover`.
+* Fixed the broken style of the search engine switch button in the URL bar caused by Firefox v143 ([Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)).
+* Various minor bug fixes and improvements.
+* `uc.flex.show-flexfox-version-info-in-about-config` is now enabled by default. Set it to `False` to disable.
 
 <!-- END What's New -->
 
@@ -349,6 +375,23 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 <!-- END Release Note -->
 
+**v5.0.3**
+
+* Improved auto-hide of the horizontal tab bar so it stays visible when the URL bar is focused.
+* Added controls to adjust the animation speed of active tab width changes with `uc.flex.sidebery-fast-hover-expand` and `uc.flex.sidebery-slow-hover-expand`.
+* Adjusted the volume icon position in collapsed mode when `uc.flex.sidebery-allow-resizable-width` is enabled.
+* Fixed native vertical tabs not expanding when “Expand sidebar on hover” and `uc.flex.fully-hide-sidebery` were both enabled. (#21)
+* Fixed tab icon misalignment in native vertical tabs after entering and exiting DOM fullscreen from a pinned tab.
+* Fixed missing text on the “Done” and “Cancel” buttons when creating a tab group.
+* Fixed a regression in v5.0.2 where native vertical tabs would not expand with both `Lock Sidebery` and `Hide Sidebery` enabled.
+* Fixed a flicker issue when hovering to expand the tab bar with `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` enabled, caused by moving the mouse across the tab bar and navbar.
+* Added two new context menu icons: “Copilot” and “Add Tab to New Group”.
+* Added option `uc.flex.style-tab-group` to customize tab group appearance in native vertical tabs:
+  * `1` (default): expand/collapse indicator, no animation
+  * `2`: indicator with expand/collapse animation
+  * `3`: centered label, no indicator, no animation
+  * `4`: centered label, no indicator, with animation
+
 **v5.0.2**
 
 * **Performance**: Refactored parts of the code. CPU usage of the expand/collapse animation for native vertical tabs is now 40% lower compared to v4.0.5. Performance is on par with Firefox's built-in *Expand sidebar on hover* option, though still about twice as heavy as Sidebery. Sidebery is faster, more feature-rich, and more stable than native vertical tabs, and is recommended.
@@ -592,9 +635,6 @@ For more update logs from earlier versions,
 | `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | Merges the close button with the favicon in horizontal tabs to save space. The button appears when hovering over the favicon. Enabling this option automatically disables the close button's auto-shrink-and-reposition feature when tabs become narrow. |
 | `uc.flex.show-tab-count-in-alltabs-button` | `0`-`4` | Shows the total number of open tabs on the "List All Tabs" button. Values: 0 = Off, 1 = Icon + number (all tabs), 2 = Icon + number (loaded tabs only), 3 = Number only (all tabs), 4 = Number only (loaded tabs only). |
 | `uc.flex.show-tab-number-in-tab-label` | `true` | Shows a numeric index before each tab's label text. This can make it easier to distinguish tabs when the label text is truncated due to limited space. |
-| `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
-| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
-| `uc.flex.enable-rounded-web-content` | `0`-`2` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
 
 #### 🚫 Disable or Revert Features
 
@@ -631,7 +671,6 @@ For more update logs from earlier versions,
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | Sets the maximum number of visible pinned tabs per column in both native vertical tabs and Sidebery. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the Findbar's position. Accepts string values: `'top-center-left'` or `'1'` = center-left top, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `'1'` or `'small'` = narrow spacing, `'2'` or `'medium'` = medium spacing, `'3'` or `'large'` = wide spacing. |
-| `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | Adjusts the appearance of tab groups in native vertical tabs. Values: `1` = show expand/collapse indicator without animation, `2` = show indicator with animation, `3` = center tab labels with no indicator and no animation, `4` = center labels with no indicator and with animation. Default is `1`. |
 
 #### ⚙️ Native Firefox Settings
 | Preference | Value | Description |
@@ -641,6 +680,22 @@ For more update logs from earlier versions,
 | `browser.tabs.fadeOutUnloadedTabs` | `true` | A native Firefox setting that fades out pending tabs (waiting to be restored at startup) in the native vertical tabs. |
 | `sidebar.visibility` | `expand-on-hover` | Disables FlexFox's **optimized** vertical tabs auto-collapse and layout. This can also be applied by checking **“Expand sidebar on hover”** in the sidebar settings. In this mode, you can freely adjust the sidebar width and toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. **Not recommended for everyday use with FlexFox.** |
 | `sidebar.animation.expand-on-hover.duration-ms` | `120` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
+
+#### 🎨 UI Style & Appearance
+| Preference | Value | Description |
+|-----------|:-------------:|-------------|
+| `uc.flex.style-sidebar-button` | `1`-`4`<br>(`1`) | Switches the sidebar toggle icon. Values: `1` = Firefox Master Brand Logo (default, same as before), `2` = Firefox Browser Logo, `3` = Firefox System 1 Logo, `4` = Mozilla Flag Symbol. |
+| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | Changes the background color of the navbar and sidebar. Values: `1` = Tokyo Night theme (default, same as before), `2` = Firefox Acorn Design. |
+| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | Customizes the appearance of the URL bar. Values: `1` = Flat (default, same as before), `2` = Inset (embedded look with centered text), `3` = Debossed (pressed-in look with centered text), `4` = Seamless (fully merged into the navbar, centered text). |
+| `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | Repositions the URL bar popup. Values: `0` = Disabled (default), `1` = Center when focused, `2` = Center only when typing. |
+| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
+| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | Switches the window control icons. Values: `1` = Traffic Light Buttons (default, same as before), `2` = Yosemite Window Buttons, `3` = Yosemite GTK Theme. |
+| `uc.flex.style-window-controls-shift-up` | `true` | Slightly raises the position of the window controls. |
+| `uc.flex.style-window-controls-shrink-size` | `true` | Reduces the overall size of the window controls. |
+| `uc.flex.move-window-controls-to-left` | `true` | Moves the window controls to the left edge of the navbar or horizontal tab bar. |
+| `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
+| `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | Adjusts the appearance of tab groups in native vertical tabs. Values: `1` = show expand/collapse indicator without animation, `2` = show indicator with animation, `3` = center tab labels with no indicator and no animation, `4` = center labels with no indicator and with animation. Default is `1`. |
+| `uc.flex.enable-rounded-web-content` | `0`-`2` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
 
 #### 🧊 Visual Background & Mica Effects
 
@@ -677,6 +732,11 @@ FlexFox is also inspired by the ideas and aesthetics of these projects:
 - [shimmer](https://github.com/nuclearcodecat/shimmer)
 - [firefox-gx](https://github.com/Godiesc/firefox-gx)
 
+Additional icon assets in FlexFox are adapted from the following open-source projects:
+
+* **Yosemite Buttons** — modified from [macos-traffic-light-buttons-as-SVG](https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG), originally licensed under the [Creative Commons Attribution 3.0 License](https://creativecommons.org/licenses/by/3.0/).
+* **Yosemite GTK** — modified from [Yosemite GTK 3.14/3.16 Theme Alpha4](https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716).
+
 Much appreciation goes to all these creators for sharing their work with the community.
 
 <details>
@@ -696,4 +756,12 @@ Much appreciation goes to all these creators for sharing their work with the com
 
   <p>All such sections retain the original MPL-2.0 license notice and comply with its terms.<br>
   For the full text of the MPL-2.0, please see <code>LICENSES/MPL-2.0.txt</code>.</p>
+
+  <p>In addition, this project includes modified graphical assets derived from the following open-source works:</p>
+
+  <ul>
+    <li><strong>Yosemite Buttons</strong> — based on <a href="https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG">macos-traffic-light-buttons-as-SVG</a> (licensed under <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>)</li>
+    <li><strong>Yosemite GTK Theme</strong> — based on <a href="https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716">Yosemite GTK 3.14/3.16 Theme Alpha4</a></li>
+  </ul>
+
 </details>

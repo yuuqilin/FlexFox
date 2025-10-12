@@ -27,12 +27,20 @@
             --uc-hover-toolbar-delay: 200ms;
         }
 
+        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+            --frame-bg: light-dark(#f5f6f6, #26252e) !important;
+            --toolbar-bg: light-dark(#f5f6f6, #26252e) !important;
+            --bg: light-dark(#f5f6f6, #26252e) !important;
+        }
+
+        /* Border color for navigation bar */
+        --uc-sb-navigation-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.45));
         /* Border color for pinned tabs */
         --uc-sb-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
         /* Border color for unloaded pinned tabs */
         --uc-sb-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
         /* Background color for the active tab */
-        --uc-sb-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
+        --uc-sb-active-tab-bgcolor: light-dark(#ea4c895e, #9059ff80);
         /* Inner border shadow (outline) for the active tab */
         --uc-sb-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
         /* Drop shadow beneath the active tab */
@@ -90,6 +98,10 @@
                 -webkit-text-stroke: 0.03em;
             }
         }
+    }
+
+    .NavigationBar {
+        border-bottom: 1px solid var(--uc-sb-navigation-border-color) !important;
     }
 
     .tab-wrapper .Tab .body {
@@ -398,10 +410,12 @@
             height: 40px !important;
             padding: 3px 0px 2.5px 5px !important;
             margin-bottom: 4px !important;
+            /*
             border-bottom: 1px solid #ced1d4 !important;
             @media (prefers-color-scheme: dark) {
                 border-bottom: 1px solid #686869b3 !important;
             }
+            */
             overflow: hidden;
             &:not(:hover) {
                 transition:

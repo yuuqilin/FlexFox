@@ -36,6 +36,10 @@
     @media (prefers-color-scheme: dark) {
         --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
         --uc-urlbar-outline: #414868; /* Outline color that appears when hovering over the URL bar */
+        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+            --uc-bgcolor: /* #2b2a33 */ #26252e;
+            --uc-urlbar-outline: #454c6c;
+        }
 
         @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
@@ -47,12 +51,28 @@
 
                     --uc-urlbar-bg: #0d0d15; /* Background color of the URL bar */
                     --uc-urldrop-bg: #0d0d15; /* Background color of the expanded URL bar dropdown */
-                    --uc-urlbar-border-top: #000; /* Top border color when the URL bar is focused */
-                    --uc-urlbar-border-bottom: #404040; /* Bottom border color when the URL bar is focused */
+                    @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                        --uc-urlbar-bg: /* #121212 */ #191917;
+                        --uc-urldrop-bg: /* #121212 */ #191917;
+                    }
+                    @media -moz-pref("uc.flex.style-urlbar", 3) {
+                        --uc-urlbar-bg: #171722;
+                        --uc-urldrop-bg: #171722;
+                        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                            --uc-urlbar-bg: #201f23;
+                            --uc-urldrop-bg: #201f23;
+                        }
+                    }
+                    @media -moz-pref("uc.flex.style-urlbar", 4) {
+                        --uc-urlbar-bg: var(--uc-bgcolor);
+                    }
 
                     --arrowpanel-background: var(
                         --uc-urlbar-bg
                     ) !important; /* Toolbar button dropdown background color */
+                    @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                        --arrowpanel-background: #191917 !important;
+                    }
                     --arrowpanel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
 
                     --identity-btn-hover-color: rgba(
@@ -63,6 +83,9 @@
 
                     /* Unused legacy vars – kept in case fallback is needed */
                     /*
+                    --uc-urlbar-border-top: #000; \/* Top border color when the URL bar is focused *\/
+                    --uc-urlbar-border-bottom: #404040; \/* Bottom border color when the URL bar is focused *\/
+
                     --urlbar-height: 30px;
                     --button-hover-bgcolor: rgba(159, 159, 159, 0.35) !important;
                     --button-active-bgcolor: rgba(255, 255, 255, 0.2) !important;
@@ -81,6 +104,10 @@
     @media (prefers-color-scheme: light) {
         --uc-bgcolor: #f1f5f9; /* Background color of the toolbar */
         --uc-urlbar-outline: #94a3b8; /* Outline color that appears when hovering over the URL bar */
+        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+            --uc-bgcolor: #f5f6f6;
+            --uc-urlbar-outline: #a8a8a6;
+        }
 
         @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
@@ -92,15 +119,34 @@
 
                     --uc-urlbar-bg: #cbd5e1; /* Background color of the URL bar */
                     --uc-urldrop-bg: #cbd5e1; /* Background color of the expanded URL bar dropdown */
-                    --uc-urlbar-border-top: #9ca3af; /* Top border color when the URL bar is focused */
-                    --uc-urlbar-border-bottom: #fff; /* Bottom border color when the URL bar is focused */
+                    @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                        --uc-urlbar-bg: #d9d9d7;
+                        --uc-urldrop-bg: #d9d9d7;
+                    }
+                    @media -moz-pref("uc.flex.style-urlbar", 3) {
+                        --uc-urlbar-bg: #dee5ed;
+                        --uc-urldrop-bg: #dee5ed;
+                        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                            --uc-urlbar-bg: #e7e8e7;
+                            --uc-urldrop-bg: #e7e8e7;
+                        }
+                    }
+                    @media -moz-pref("uc.flex.style-urlbar", 4) {
+                        --uc-urlbar-bg: var(--uc-bgcolor);
+                    }
 
                     --arrowpanel-background: #e2e8f0 !important; /* Toolbar button dropdown background color */
+                    @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                        --arrowpanel-background: #f8f8f8 !important;
+                    }
 
                     --identity-btn-hover-color: white !important; /* Hover color for the URL bar lock icon */
 
                     /* Unused legacy vars – kept in case fallback is needed */
                     /*
+                    --uc-urlbar-border-top: #9ca3af; \/* Top border color when the URL bar is focused *\/
+                    --uc-urlbar-border-bottom: #fff; \/* Bottom border color when the URL bar is focused *\/
+
                     --button-hover-bgcolor: #9699a3 !important;
                     --button-hover-bgcolor: #cbd5e1 !important;
                     --button-active-bgcolor: #cbd5e1 !important;
@@ -127,10 +173,10 @@
        like the logo, stripe, and bookmark star.
     ════════════════════════════════════════════════════════════════════ */
     /* 🔽 Start of layout and highlight definitions */
-    --uc-bookmark-star-color: light-dark(#ea4c89, #9651ff); /* Color of the bookmark star icon in the address bar */
+    --uc-bookmark-star-color: light-dark(#ea4c89, #9059ff); /* Color of the bookmark star icon in the address bar */
     --uc-bookmark-star-image: url("../icons/bookmark/bookmark.svg"); /* SVG image used for the bookmark star icon in the address bar */
 
-    --uc-sidebar-header-stripe: light-dark(#ea4c89, #9651ff); /* Color of the sidebar header stripe */
+    --uc-sidebar-header-stripe: light-dark(#ea4c89, #9059ff); /* Color of the sidebar header stripe */
     --uc-sidebar-width: 44px; /* Width when Sidebery or vertical tabs are collapsed */
     --uc-sidebar-hover-width: 220px; /* Width when Sidebery is expanded */
     /* Increase expanded width of Sidebery */
@@ -151,13 +197,30 @@
             var(--uc-toolbar-bgcolor)
         ); /* Adjusted logo color for dark theme */
     }
+    @media -moz-pref("uc.flex.style-sidebar-button", 4) {
+        --uc-flexfox-logo-color: #333336 !important;
+        @media (prefers-color-scheme: dark) {
+            --uc-flexfox-logo-color: #00d230 !important;
+        }
+    }
     --uc-flexfox-logo-image: url("../icons/toolbarbutton/flexfox.svg"); /* SVG image used for the FlexFox logo shown in the sidebar button */
+    @media -moz-pref("uc.flex.style-sidebar-button", 2) {
+        --uc-flexfox-logo-image: url("../icons/toolbarbutton/firefox-custom.svg");
+    }
+    @media -moz-pref("uc.flex.style-sidebar-button", 3) {
+        --uc-flexfox-logo-image: url("../icons/toolbarbutton/firefox-newaita.svg");
+    }
+    @media -moz-pref("uc.flex.style-sidebar-button", 4) {
+        --uc-flexfox-logo-image: url("../icons/toolbarbutton/mozilla.org.svg");
+    }
 
     /* List all tabs button */
+    /*
     --uc-list-all-tabs-color: var(--uc-flexfox-logo-color);
     @media (prefers-color-scheme: dark) {
         --uc-list-all-tabs-color: #b584ff;
     }
+    */
     --uc-list-all-tabs-image: url("../icons/toolbarbutton/list-all-tabs.svg");
 
     /* Gradient highlight color (used when gradient highlight is enabled) */
@@ -182,6 +245,7 @@
     --uc-bookmark-folder-color-7: #85caf4; /* Color for the seventh bookmark folder */
     --uc-bookmark-folder-color-8: #717cf4; /* Color for the eighth bookmark folder */
     --uc-bookmark-folder-color-9: #8f7044; /* Color for the ninth bookmark folder */
+    --uc-bookmark-folder-color-10: #7cb85a; /* Color for the other bookmark folder */
 
     --uc-bookmark-folder-size: 20px; /* Size of the bookmark folder icon */
     --uc-bookmark-folder-position: 0px 0px; /* Position of the bookmark folder icon */
@@ -203,6 +267,7 @@
         --uc-bookmark-folder-icon-7: url("../icons/bookmark/folder.svg");
         --uc-bookmark-folder-icon-8: url("../icons/bookmark/folder.svg");
         --uc-bookmark-folder-icon-9: url("../icons/bookmark/folder.svg");
+        --uc-bookmark-folder-icon-10: url("../icons/bookmark/folder.svg");
     }
     /* Folder icons used with colored folder setting 2 */
     @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
@@ -216,6 +281,83 @@
         --uc-bookmark-folder-icon-7: url("../icons/bookmark/folder-7.svg");
         --uc-bookmark-folder-icon-8: url("../icons/bookmark/folder-8.svg");
         --uc-bookmark-folder-icon-9: url("../icons/bookmark/folder-9.svg");
+        --uc-bookmark-folder-icon-10: url("../icons/bookmark/folder-10.svg");
+    }
+
+    /* Size and color of macOS-style window control buttons */
+    @media not -moz-pref("uc.flex.revert-to-original-window-controls") {
+        --uc-osx-ctrls-size: 15px;
+        @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
+            --uc-osx-ctrls-size: 12px;
+        }
+    }
+    --uc-osx-ctrls-close-fill: #f25056;
+    --uc-osx-ctrls-maximize-fill: #39ea49;
+    /*
+    --uc-osx-ctrls-maximize-restore-fill: #39ea49;
+    */
+    --uc-osx-ctrls-minimize-fill: hsl(44, 95%, 63%);
+    --uc-osx-ctrls-close-stroke: #9f1d2b;
+    --uc-osx-ctrls-maximize-stroke: #0b7407;
+    --uc-osx-ctrls-maximize-restore-stroke: #0b7407;
+    --uc-osx-ctrls-minimize-stroke: hsl(32, 62%, 38%);
+
+    --uc-osx-ctrls-close-icon: url(../icons/window-controls/close.svg);
+    --uc-osx-ctrls-close-hover-icon: url(../icons/window-controls/close-hover.svg);
+    --uc-osx-ctrls-close-active-icon: url(../icons/window-controls/close-hover.svg);
+    --uc-osx-ctrls-maximize-icon: url(../icons/window-controls/maximize.svg);
+    --uc-osx-ctrls-maximize-hover-icon: url(../icons/window-controls/maximize-hover.svg);
+    --uc-osx-ctrls-maximize-hover-flipped-icon: url(../icons/window-controls/maximize-hover-flipped.svg);
+    --uc-osx-ctrls-maximize-active-icon: url(../icons/window-controls/maximize-hover.svg);
+    --uc-osx-ctrls-maximize-active-flipped-icon: url(../icons/window-controls/maximize-hover-flipped.svg);
+    --uc-osx-ctrls-maximize-restore-icon: url(../icons/window-controls/maximize-restore.svg);
+    --uc-osx-ctrls-maximize-restore-flipped-icon: url(../icons/window-controls/maximize-restore.svg);
+    --uc-osx-ctrls-maximize-restore-active-icon: url(../icons/window-controls/maximize-restore.svg);
+    --uc-osx-ctrls-maximize-restore-active-flipped-icon: url(../icons/window-controls/maximize-restore.svg);
+    --uc-osx-ctrls-minimize-icon: url(../icons/window-controls/minimize.svg);
+    --uc-osx-ctrls-minimize-hover-icon: url(../icons/window-controls/minimize-hover.svg);
+    --uc-osx-ctrls-minimize-active-icon: url(../icons/window-controls/minimize-hover.svg);
+    --uc-osx-ctrls-inactive-icon: url(../icons/window-controls/inactive.svg);
+
+    @media -moz-pref("uc.flex.style-window-controls", 2) {
+        --uc-osx-ctrls-close-icon: url(../icons/window-controls/Yosemite/close-normal.svg);
+        --uc-osx-ctrls-close-hover-icon: url(../icons/window-controls/Yosemite/close-hover.svg);
+        --uc-osx-ctrls-close-active-icon: url(../icons/window-controls/Yosemite/close-press.svg);
+        --uc-osx-ctrls-maximize-icon: url(../icons/window-controls/Yosemite/maximize-normal.svg);
+        --uc-osx-ctrls-maximize-hover-icon: url(../icons/window-controls/Yosemite/maximize-hover.svg);
+        --uc-osx-ctrls-maximize-hover-flipped-icon: url(../icons/window-controls/Yosemite/maximize-hover-flipped.svg);
+        --uc-osx-ctrls-maximize-active-icon: url(../icons/window-controls/Yosemite/maximize-press.svg);
+        --uc-osx-ctrls-maximize-active-flipped-icon: url(../icons/window-controls/Yosemite/maximize-press-flipped.svg);
+        --uc-osx-ctrls-maximize-restore-icon: url(../icons/window-controls/Yosemite/maximize-restore.svg);
+        --uc-osx-ctrls-maximize-restore-flipped-icon: url(../icons/window-controls/Yosemite/maximize-restore-flipped.svg);
+        --uc-osx-ctrls-maximize-restore-active-icon: url(../icons/window-controls/Yosemite/maximize-restore-press.svg);
+        --uc-osx-ctrls-maximize-restore-active-flipped-icon: url(../icons/window-controls/Yosemite/maximize-restore-press-flipped.svg);
+        --uc-osx-ctrls-minimize-icon: url(../icons/window-controls/Yosemite/minimize-normal.svg);
+        --uc-osx-ctrls-minimize-hover-icon: url(../icons/window-controls/Yosemite/minimize-hover.svg);
+        --uc-osx-ctrls-minimize-active-icon: url(../icons/window-controls/Yosemite/minimize-press.svg);
+        --uc-osx-ctrls-inactive-icon: url(../icons/window-controls/Yosemite/all-three-nofocus.svg);
+    }
+
+    @media -moz-pref("uc.flex.style-window-controls", 3) {
+        --uc-osx-ctrls-close-icon: url(../icons/window-controls/Yosemite-GTK/close.svg);
+        --uc-osx-ctrls-close-hover-icon: url(../icons/window-controls/Yosemite-GTK/close_prelight.svg);
+        --uc-osx-ctrls-close-active-icon: url(../icons/window-controls/Yosemite-GTK/close_pressed.svg);
+        --uc-osx-ctrls-maximize-icon: url(../icons/window-controls/Yosemite-GTK/maximize.svg);
+        --uc-osx-ctrls-maximize-hover-icon: url(../icons/window-controls/Yosemite-GTK/maximize_prelight.svg);
+        --uc-osx-ctrls-maximize-hover-flipped-icon: url(../icons/window-controls/Yosemite-GTK/maximize_prelight_flipped.svg);
+        --uc-osx-ctrls-maximize-active-icon: url(../icons/window-controls/Yosemite-GTK/maximize_pressed.svg);
+        --uc-osx-ctrls-maximize-active-flipped-icon: url(../icons/window-controls/Yosemite-GTK/maximize_pressed_flipped.svg);
+        --uc-osx-ctrls-maximize-restore-icon: url(../icons/window-controls/Yosemite-GTK/maximize_restore_prelight.svg);
+        --uc-osx-ctrls-maximize-restore-flipped-icon: url(../icons/window-controls/Yosemite-GTK/maximize_restore_prelight_flipped.svg);
+        --uc-osx-ctrls-maximize-restore-active-icon: url(../icons/window-controls/Yosemite-GTK/maximize_restore_pressed.svg);
+        --uc-osx-ctrls-maximize-restore-active-flipped-icon: url(../icons/window-controls/Yosemite-GTK/maximize_restore_pressed_flipped.svg);
+        --uc-osx-ctrls-minimize-icon: url(../icons/window-controls/Yosemite-GTK/min.svg);
+        --uc-osx-ctrls-minimize-hover-icon: url(../icons/window-controls/Yosemite-GTK/min_prelight.svg);
+        --uc-osx-ctrls-minimize-active-icon: url(../icons/window-controls/Yosemite-GTK/min_pressed.svg);
+        --uc-osx-ctrls-inactive-icon: url(../icons/window-controls/Yosemite-GTK/light.svg);
+        @media (prefers-color-scheme: dark) {
+            --uc-osx-ctrls-inactive-icon: url(../icons/window-controls/Yosemite-GTK/dark.svg);
+        }
     }
 
     /* 
@@ -247,18 +389,21 @@
     }
 
     /* Corner radius settings for the urlbar, searchbar, findbar, and their icons */
+    --uc-findbar-outer-border-radius: 4px;
+    --uc-findbar-inner-border-radius: 4px;
     @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
         --uc-urlbar-border-radius: 30px;
         --uc-urlbar-popup-border-radius: 15px;
         --uc-urlbar-icon-radius: 16px;
         --uc-urlbar-icon-inner-radius: 6px;
         --uc-searchbar-popup-border-radius: 12px;
-        --uc-findbar-border-radius: 8px;
+        --uc-findbar-outer-border-radius: 8px;
+        --uc-findbar-inner-border-radius: 5px;
     }
 
     /* Adjusts background darkness behind the urlbar popup. Higher values = darker background. */
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop", 1) {
-        --uc-urlbar-popup-dimness: 0.25;
+        --uc-urlbar-popup-dimness: 0.35;
     }
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop", 2) {
         --uc-urlbar-popup-dimness: 0.5;
@@ -445,21 +590,6 @@
         --uc-horizontal-tab-width-transition-duration: 250ms;
     }
 
-    /* Size and color of macOS-style window control buttons */
-    @media not -moz-pref("uc.flex.revert-to-original-window-controls") {
-        --uc-osx-ctrls-size: 15px;
-    }
-    --uc-osx-ctrls-close-fill: #f25056;
-    --uc-osx-ctrls-maximize-fill: #39ea49;
-    /*
-    --uc-osx-ctrls-maximize-restore-fill: #39ea49;
-    */
-    --uc-osx-ctrls-minimize-fill: hsl(44, 95%, 63%);
-    --uc-osx-ctrls-close-stroke: #9f1d2b;
-    --uc-osx-ctrls-maximize-stroke: #0b7407;
-    --uc-osx-ctrls-maximize-restore-stroke: #0b7407;
-    --uc-osx-ctrls-minimize-stroke: hsl(32, 62%, 38%);
-
     /* Vertical spacing between items in the Firefox app menu (hamburger menu), bookmarks menu, and context menus. */
     --uc-app-menu-item-padding-block: 4px;
     --uc-menu-item-padding-block: 2px;
@@ -524,7 +654,7 @@
     /* Border color for unloaded pinned tabs */
     --uc-vt-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
     /* Background color for the active tab */
-    --uc-vt-active-tab-bgcolor: light-dark(#ea4c895e, #9651ff80);
+    --uc-vt-active-tab-bgcolor: light-dark(#ea4c895e, #9059ff80);
     /* Inner border shadow (outline) for the active tab */
     --uc-vt-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
     /* Drop shadow beneath the active tab */
@@ -702,14 +832,15 @@
     --uc-nav-bar-second-bookmarks-padding-left: 6px;
     /* When vertical tabs are not enabled, the extra spacing above is unnecessary */
     @media -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding"),
+        -moz-pref("uc.flex.move-window-controls-to-left") and (not -moz-pref("uc.flex.auto-hide-window-controls")),
         -moz-pref("uc.flex.fully-hide-toolbox"),
         -moz-pref("uc.flex.fully-hide-sidebery"),
         not -moz-pref("sidebar.verticalTabs") {
-        --uc-nav-bar-first-child-padding-right: 0px;
+        --uc-nav-bar-first-child-padding-right: 2px;
     }
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
         &:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-            --uc-nav-bar-first-child-padding-right: 0px;
+            --uc-nav-bar-first-child-padding-right: 2px;
         }
     }
 
@@ -800,6 +931,33 @@
         --uc-nav-bar-height: 43px;
         --uc-titlebar-buttonbox-height: 38px;
     }
+    --uc-window-controls-width: 104px;
+    --uc-titlebar-buttonbox-margin-top: 2px;
+    @media -moz-pref("uc.flex.style-window-controls-shift-up") {
+        --uc-titlebar-buttonbox-margin-top: 0;
+    }
+    --uc-titlebar-buttonbox-width: 35px;
+    @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
+        @media not -moz-pref("uc.flex.revert-to-original-window-controls") {
+            --uc-window-controls-width: calc(59px + var(--uc-web-content-margin));
+            @media -moz-pref("uc.flex.move-window-controls-to-left") {
+                --uc-window-controls-width: 59px;
+            }
+            --uc-titlebar-buttonbox-width: 20px;
+        }
+        @media -moz-pref("uc.flex.revert-to-original-window-controls") {
+            --uc-window-controls-width: calc(71px + var(--uc-web-content-margin));
+            @media -moz-pref("uc.flex.move-window-controls-to-left") {
+                --uc-window-controls-width: 71px;
+            }
+            --uc-titlebar-buttonbox-margin-top: 8px;
+            @media -moz-pref("uc.flex.style-window-controls-shift-up") {
+                --uc-titlebar-buttonbox-margin-top: 6px;
+            }
+            --uc-titlebar-buttonbox-width: 24px;
+            --uc-titlebar-buttonbox-height: 24px;
+        }
+    }
 
     /* Position of the sidebar button icon */
     --uc-sidebar-button-bg-pos: 10px 11px;
@@ -887,8 +1045,41 @@
     --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
     */
 
-    /* Translucent background color for the #searchbar input field */
-    --uc-urlbar-bg-transparent: color-mix(in srgb, var(--uc-urlbar-bg) 50%, transparent);
+    /* Background color for the #searchbar input field */
+    --uc-searchbar-bgcolor: color-mix(in srgb, var(--uc-urlbar-bg) 50%, transparent);
+
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
+            --uc-urlbar-bg: transparent;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        --uc-urlbar-box-shadow-1:
+            inset 1px 1px 2.5px 1.5px rgba(0, 0, 0, 0.5), 0px 1px 0.5px 0.5px rgba(255, 255, 255, 0.1);
+        --uc-urlbar-box-shadow-2: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.4), 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+        --uc-urlbar-popup-box-shadow: 0 45px 65px rgba(12, 12, 16, 0.45);
+        --uc-urlbar-popup-outline: 0 0 0 1px rgba(65, 72, 104, 0.45);
+        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+            --uc-urlbar-popup-outline: 0 0 0 1px rgba(69, 76, 108, 0.45);
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        --uc-urlbar-box-shadow-1:
+            inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35), 1px 1px 0px 0.1px rgba(255, 255, 255, 0.05);
+        --uc-urlbar-box-shadow-2: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+        @media -moz-pref("uc.flex.style-urlbar", 3) {
+            --uc-urlbar-box-shadow-2:
+                inset 0.5px 0.5px 1px 0px rgba(0, 0, 0, 0.1), 1px 1px 0px 1px rgba(255, 255, 255, 0.4);
+        }
+        --uc-urlbar-popup-box-shadow: 0 45px 65px rgba(12, 12, 16, 0.35);
+        --uc-urlbar-popup-outline: 0 0 0 1px rgba(148, 163, 184, 0.4);
+        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+            --uc-urlbar-popup-outline: 0 0 0 1px rgba(168, 168, 166, 0.4);
+        }
+    }
 
     /* Default background colors for the identity button and findbar when a theme is active */
     &[lwtheme] {
@@ -910,25 +1101,25 @@
     }
 
     /* Adjust findbar position to avoid being overlapped when top toolbar height changes */
-    --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1.5px);
+    --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1px);
     &[inFullscreen] {
-        --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 1.5px);
+        --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 1px);
     }
     &:not([inFullscreen]) {
         @media -moz-pref("uc.flex.fully-hide-toolbox") {
-            --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 9.5px);
+            --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 9px);
         }
         @media not -moz-pref("uc.flex.fully-hide-toolbox") {
             &:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
                 --uc-findbar-y-offset: calc(
-                    var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 9.5px
+                    var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 9px
                 );
             }
         }
         @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
             &:not([customizing]) {
                 /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
-                --uc-findbar-y-offset: calc(-1 * var(--uc-bm-padding) - 1.5px);
+                --uc-findbar-y-offset: calc(-1 * var(--uc-bm-padding) - 1px);
             }
         }
     }

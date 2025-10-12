@@ -603,6 +603,8 @@
             rgba(32, 32, 32, var(--uc-urlbar-backdrop-transparency))
         ) !important;
         background-image: none !important;
+    }
+    findbar {
         backdrop-filter: blur(26px) saturate(140%);
     }
     findbar:has(.found-matches:not([hidden])) {
@@ -610,9 +612,9 @@
     }
     .found-matches {
         height: 25px;
-        padding: 0px 12px 0px 10px;
-        top: 39px;
-        border-bottom-right-radius: var(--uc-findbar-border-radius, var(--toolbarbutton-border-radius));
+        padding: 2px 12px 0px 10px;
+        top: 35px;
+        border-bottom-right-radius: var(--uc-findbar-outer-border-radius);
         &::after {
             display: none;
         }

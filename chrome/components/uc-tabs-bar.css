@@ -420,7 +420,7 @@ toolbar#TabsToolbar {
                 --uc-tab-icon-image-visibility: hidden;
             }
             .tab-icon-image {
-                visibility: var(--uc-tab-icon-image-visibility, visible);
+                visibility: var(--uc-tab-icon-image-visibility, unset);
             }
 
             .tab-close-button {

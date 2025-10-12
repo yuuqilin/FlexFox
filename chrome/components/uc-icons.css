@@ -290,6 +290,68 @@
             }
         }
     }
+
+    #OtherBookmarks {
+        &[open] {
+            > .toolbarbutton-icon {
+                --uc-bookmark-folder-icon-10: var(--uc-bookmark-folder-open-icon);
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+                    background-position: var(--uc-bookmark-folder-open-position);
+                    background-size: var(--uc-bookmark-folder-open-size);
+                    mask-position: var(--uc-bookmark-folder-open-position);
+                    mask-size: var(--uc-bookmark-folder-open-size);
+                }
+            }
+        }
+        > .toolbarbutton-icon {
+            list-style-image: none !important;
+            background-position: var(--uc-bookmark-folder-position);
+            background-repeat: no-repeat;
+            background-size: 16px;
+            mask-position: var(--uc-bookmark-folder-position);
+            mask-repeat: no-repeat;
+            mask-size: 16px;
+            @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+                width: var(--uc-bookmark-folder-size) !important;
+                height: var(--uc-bookmark-folder-size) !important;
+                background-size: var(--uc-bookmark-folder-size);
+                mask-size: var(--uc-bookmark-folder-size);
+            }
+            /*transform: scale(1.4);*/
+        }
+
+        :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+            fill: var(--uc-bookmark-folder-color-10);
+        }
+        > .toolbarbutton-icon {
+            background-image: var(--uc-bookmark-folder-icon-10);
+            /*
+            @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                background: var(--uc-gradient-highlight);
+                mask-image: var(--uc-bookmark-folder-icon-9);
+            }
+            */
+        }
+
+        @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+            padding: var(--uc-bookmark-folder-padding) !important;
+        }
+    }
+
+    #OtherBookmarksPopup {
+        .menu-iconic.bookmark-item[container] {
+            > .menu-icon,
+            > .menu-iconic-left .menu-iconic-icon {
+                content: var(--uc-bookmark-sub-folder-icon) !important;
+            }
+            &[open] {
+                > .menu-icon,
+                > .menu-iconic-left .menu-iconic-icon {
+                    content: var(--uc-bookmark-sub-folder-open-icon) !important;
+                }
+            }
+        }
+    }
 }
 
 @media not -moz-pref("uc.flex.revert-to-original-sidebar-icon"),
@@ -367,7 +429,7 @@
     }
 
     :root:-moz-window-inactive:not([customizing]) .titlebar-buttonbox > toolbarbutton:not(:hover) {
-        list-style-image: url(../icons/window-controls/inactive.svg) !important;
+        list-style-image: var(--uc-osx-ctrls-inactive-icon) !important;
         .toolbarbutton-icon {
             fill: none !important;
         }
@@ -400,20 +462,20 @@
         margin-top: 0px !important;
         margin-bottom: 0px !important;
         background-color: transparent !important;
-        list-style-image: url(../icons/window-controls/maximize.svg) !important;
+        list-style-image: var(--uc-osx-ctrls-maximize-icon) !important;
         grid-column: 1 !important;
         order: 1 !important;
         fill: var(--uc-osx-ctrls-maximize-fill) !important;
     }
 
     :is(.titlebar-max, .uc-titlebar-max):hover {
-        list-style-image: url(../icons/window-controls/maximize-hover.svg) !important;
+        list-style-image: var(--uc-osx-ctrls-maximize-hover-icon) !important;
         stroke: var(--uc-osx-ctrls-maximize-stroke) !important;
     }
 
     :root:is([sizemode="maximized"], [inFullscreen]) :is(.titlebar-max, .uc-titlebar-max):hover,
     :is(.titlebar-restore, .uc-titlebar-restore):hover {
-        list-style-image: url(../icons/window-controls/maximize-restore.svg) !important;
+        list-style-image: var(--uc-osx-ctrls-maximize-restore-icon) !important;
         stroke: var(--uc-osx-ctrls-maximize-restore-stroke) !important;
     }
 
@@ -428,13 +490,13 @@
         margin-top: 0px !important;
         margin-bottom: 0px !important;
         background-color: transparent !important;
-        list-style-image: url(../icons/window-controls/minimize.svg) !important;
+        list-style-image: var(--uc-osx-ctrls-minimize-icon) !important;
         grid-column: 0 !important;
         order: 0 !important;
         fill: var(--uc-osx-ctrls-minimize-fill) !important;
 
         &:hover {
-            list-style-image: url(../icons/window-controls/minimize-hover.svg) !important;
+            list-style-image: var(--uc-osx-ctrls-minimize-hover-icon) !important;
             stroke: var(--uc-osx-ctrls-minimize-stroke) !important;
         }
     }
@@ -450,14 +512,46 @@
         margin-top: 0px !important;
         margin-bottom: 0px !important;
         background-color: transparent !important;
-        list-style-image: url(../icons/window-controls/close.svg) !important;
+        list-style-image: var(--uc-osx-ctrls-close-icon) !important;
         grid-column: 2 !important;
         order: 2 !important;
         fill: var(--uc-osx-ctrls-close-fill) !important;
 
         &:hover {
-            list-style-image: url(../icons/window-controls/close-hover.svg) !important;
+            list-style-image: var(--uc-osx-ctrls-close-hover-icon) !important;
             stroke: var(--uc-osx-ctrls-close-stroke) !important;
+        }
+    }
+
+    .titlebar-max:active {
+        list-style-image: var(--uc-osx-ctrls-maximize-active-icon) !important;
+    }
+    .titlebar-restore:active {
+        list-style-image: var(--uc-osx-ctrls-maximize-restore-active-icon) !important;
+    }
+    .titlebar-min:active {
+        list-style-image: var(--uc-osx-ctrls-minimize-active-icon) !important;
+    }
+    .titlebar-close:active {
+        list-style-image: var(--uc-osx-ctrls-close-active-icon) !important;
+    }
+
+    @media -moz-pref("uc.flex.move-window-controls-to-left") and (not (-moz-platform: macos)) {
+        .titlebar-max {
+            &:hover {
+                list-style-image: var(--uc-osx-ctrls-maximize-hover-flipped-icon) !important;
+            }
+            &:active {
+                list-style-image: var(--uc-osx-ctrls-maximize-active-flipped-icon) !important;
+            }
+        }
+        .titlebar-restore {
+            &:hover {
+                list-style-image: var(--uc-osx-ctrls-maximize-restore-flipped-icon) !important;
+            }
+            &:active {
+                list-style-image: var(--uc-osx-ctrls-maximize-restore-active-flipped-icon) !important;
+            }
         }
     }
 }
