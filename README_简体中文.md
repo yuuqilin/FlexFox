@@ -20,6 +20,13 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
+**🦊 v5.5.1**
+* 修复启用 `uc.flex.remove-sidebar-stripe` 时，Sidebery 面板上下边框颜色不一致的问题。
+* 修复启用 `uc.flex.move-urlbar-popup-to-center` 并使用水平标签页时，地址栏过渡动画消失的问题。
+* 修复因 Nightly v145 更新导致垂直标签页中标签组标题圆角与其他标签页不一致的问题。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
+* 修复因 Nightly v145 更新导致地址栏图标圆角消失的问题。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
+* 新增选项 `uc.flex.enable-rounded-web-content-at-sidebery-corner`，当启用 `uc.flex.enable-rounded-web-content` 时，也会让网页内容在贴近 Sidebery 彩带的一角显示圆角效果。
+
 **✨ FlexFox v5.5.0 – 多项界面与交互优化**
 
 * 新增 `uc.flex.style-sidebar-button`，可切换侧栏切换按钮图标（`1`–`4`）：
@@ -695,6 +702,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.move-window-controls-to-left` | `true` | 将窗口控制按钮移动到导航栏或水平标签栏的最左侧。 |
 | `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | 调整原生垂直标签页的标签组外观。取值：`1` = 显示展开／折叠指示器（无动画），`2` = 显示指示器（有动画），`3` = 标签文字居中（无指示器、无动画），`4` = 标签文字居中（无指示器、有动画）。默认值为 `1`。 |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
+| `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | 当启用 `uc.flex.enable-rounded-web-content` 时，让网页内容在贴近 Sidebery 彩带的一角也显示圆角效果。 |
 
 #### 🧊 视觉背景和 Mica 效果
 
@@ -731,6 +739,13 @@ FlexFox 基于以下优秀项目的成果构建而成：
 - [shimmer](https://github.com/nuclearcodecat/shimmer)
 - [firefox-gx](https://github.com/Godiesc/firefox-gx)
 
+FlexFox 使用的附加图标资源：
+
+- **Custom Brand Icons** — 修改自 elax46 的 [custom-brand-icons](https://github.com/elax46/custom-brand-icons)。  
+- **Newaita** — 修改自 cbrnix 的 [Newaita](https://github.com/cbrnix/Newaita)。  
+- **Yosemite Buttons** — 修改自 Doublefire-Chen 的 [macos-traffic-light-buttons-as-SVG](https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG)。  
+- **Yosemite GTK Theme** — 修改自 kxmylo 的 [Yosemite GTK 3.14/3.16 Theme Alpha4](https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716)。
+
 感谢所有开源贡献者的努力与分享。
 
 <details>
@@ -751,10 +766,11 @@ FlexFox 基于以下优秀项目的成果构建而成：
   <p>这些代码区块保留了原始的 MPL-2.0 许可声明，并符合其授权条款。<br>
   有关 MPL-2.0 的完整内容，请参见 <code>LICENSES/MPL-2.0.txt</code>。</p>
 
-  <p>此外，本项目还包含以下开源作品的改编图形素材：</p>
-
+  <p>本项目包含以下授权的附加图形资源：</p>
+  
   <ul>
-    <li><strong>Yosemite Buttons</strong> — 修改自 <a href="https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG">macos-traffic-light-buttons-as-SVG</a>（采用 <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> 授权）</li>
-    <li><strong>Yosemite GTK Theme</strong> — 修改自 <a href="https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716">Yosemite GTK 3.14/3.16 Theme Alpha4</a></li>
+    <li><strong>Custom Brand Icons</strong> — 使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 授权</li>
+    <li><strong>Newaita</strong> — 使用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> 授权</li>
+    <li><strong>Yosemite Buttons</strong> — 使用 <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> 授权</li>
   </ul>
 </details>

@@ -1752,6 +1752,7 @@
     /* Tab group: Soften tab group label colors to make them less prominent */
     .tab-group-label {
         --tab-group-label-animation-duration: 150ms;
+        border-radius: 4px !important;
         transition:
             scale 300ms ease 0s,
             box-shadow var(--tab-group-label-animation-duration) !important;

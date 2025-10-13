@@ -157,7 +157,7 @@
                 &[sessionrestored]:not([customizing]) #urlbar[popover] {
                     opacity: var(--uc-navbar-opacity, 0);
                     pointer-events: none;
-                    transition: var(--uc-autohide-navbar-transition);
+                    transition: var(--uc-autohide-urlbar-transition) !important;
                     transform: translateY(var(--uc-navbar-transform));
                 }
                 #mainPopupSet:has(
@@ -181,7 +181,7 @@
                     /*
                     transition-delay: 0ms;
                     */
-                    transition: var(--uc-hover-navbar-transition);
+                    transition: var(--uc-hover-urlbar-transition) !important;
                     transform: translateY(0);
                 }
                 /*

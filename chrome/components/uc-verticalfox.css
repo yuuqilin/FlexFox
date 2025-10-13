@@ -160,7 +160,7 @@
     /* Remove sidebar stripe */
     @media -moz-pref("uc.flex.remove-sidebar-stripe") {
         #sidebar {
-            border-top: 1px solid light-dark(#ced1d4, #686869b3) !important;
+            border-top: 1px solid light-dark(#ced1d4, rgba(172, 112, 255, 0.45)) !important;
         }
         #sidebar-header {
             display: none;

@@ -23,12 +23,7 @@
     border: 0 !important;
     @media -moz-pref("uc.flex.dim-urlbar-popup-backdrop") {
         box-shadow: 0 0 0 100vw transparent;
-        transition:
-            opacity var(--inactive-window-transition),
-            box-shadow 0.3s ease-out,
-            left 0.3s ease,
-            width 0.3s ease,
-            margin-top 0.3s ease !important;
+        transition: var(--uc-autohide-urlbar-transition) !important;
     }
 }
 
@@ -187,7 +182,7 @@
 */
 #identity-icon-box {
     margin: 3px 3px 3px 3px;
-    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
+    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
     background-color: var(--uc-identity-btn-bgcolor) !important;
     opacity: 0.8;
 }
@@ -199,7 +194,7 @@
 
 /* Track protection icon */
 #tracking-protection-icon-container {
-    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
+    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
 }
 
 #tracking-protection-icon-container:hover {
@@ -208,7 +203,7 @@
 
 /* Star button */
 #star-button-box {
-    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
+    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
 }
 
 #star-button-box {
@@ -258,12 +253,7 @@
 @media -moz-pref("uc.flex.move-urlbar-popup-to-center") {
     #urlbar {
         margin-top: 0 !important;
-        transition:
-            opacity var(--inactive-window-transition),
-            box-shadow 0.3s ease-out,
-            left 0.3s ease,
-            width 0.3s ease,
-            translate 0.3s ease !important;
+        transition: var(--uc-autohide-urlbar-transition) !important;
     }
 
     @media not -moz-pref("uc.flex.move-urlbar-popup-to-center", 2) {
@@ -271,7 +261,7 @@
             height: auto !important;
             left: 28vw !important;
             width: 44vw !important;
-            translate: 0 20vh !important;
+            margin-top: 20vh !important;
 
             .urlbar-input-container > *:not(.urlbar-input-box) {
                 height: 32px;
@@ -319,7 +309,7 @@
             height: auto !important;
             left: 28vw !important;
             width: 44vw !important;
-            translate: 0 20vh !important;
+            margin-top: 20vh !important;
 
             .urlbar-input-container > *:not(.urlbar-input-box) {
                 height: 32px;
@@ -558,10 +548,10 @@
     margin-top: 3px !important;
     height: 25px !important;
     background-color: transparent !important;
-    border-top-left-radius: var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius)) !important;
-    border-bottom-left-radius: var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius)) !important;
-    border-top-right-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius)) !important;
-    border-bottom-right-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius)) !important;
+    border-top-left-radius: var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    border-bottom-left-radius: var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    border-top-right-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    border-bottom-right-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
     }
@@ -571,7 +561,7 @@
     margin-top: 3px;
     height: 25px !important;
     background-color: transparent !important;
-    border-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius)) !important;
+    border-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
     padding-left: 6px;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
@@ -580,7 +570,7 @@
 
 #urlbar-zoom-button {
     background-color: var(--uc-identity-btn-bgcolor) !important;
-    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius)) !important;
+    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
     opacity: 0.8;
     &:hover {
         background-color: var(--urlbar-box-hover-bgcolor) !important;

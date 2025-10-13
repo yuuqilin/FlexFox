@@ -1148,6 +1148,10 @@
     --uc-autohide-navbar-transition:
         transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay),
         opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay);
+    --uc-autohide-urlbar-transition:
+        transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay),
+        opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay), box-shadow 0.3s ease-out,
+        left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
     --uc-autohide-personal-toolbar-transition:
         opacity var(--uc-autohide-toolbar-duration) linear var(--uc-autohide-toolbar-delay),
         transform var(--uc-autohide-toolbar-duration) linear var(--uc-autohide-toolbar-delay);
@@ -1175,6 +1179,12 @@
                 var(--uc-autohide-sidebar-delay),
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay);
+        --uc-autohide-urlbar-transition:
+            transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay),
+            opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay),
+            box-shadow 0.3s ease-out, left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
         --uc-autohide-personal-toolbar-transition:
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
@@ -1221,6 +1231,12 @@
                         calc(var(--uc-autohide-sidebar-delay) + 28ms),
                     opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         calc(var(--uc-autohide-sidebar-delay) + 28ms);
+                --uc-autohide-urlbar-transition:
+                    transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    box-shadow 0.3s ease-out, left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
                 --uc-autohide-personal-toolbar-transition:
                     opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         calc(var(--uc-autohide-sidebar-delay) + 28ms),
@@ -1251,6 +1267,10 @@
     --uc-hover-navbar-transition:
         transform var(--uc-autohide-toolbar-duration) ease var(--uc-hover-toolbar-delay),
         opacity var(--uc-autohide-toolbar-duration) ease var(--uc-hover-toolbar-delay);
+    --uc-hover-urlbar-transition:
+        transform var(--uc-autohide-toolbar-duration) ease var(--uc-hover-toolbar-delay),
+        opacity var(--uc-autohide-toolbar-duration) ease var(--uc-hover-toolbar-delay), box-shadow 0.3s ease-out,
+        left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
     --uc-hover-personal-toolbar-transition:
         opacity var(--uc-autohide-toolbar-duration) linear var(--uc-hover-toolbar-delay),
         transform var(--uc-autohide-toolbar-duration) linear var(--uc-hover-toolbar-delay);
@@ -1276,6 +1296,11 @@
             transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay),
             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+        --uc-hover-urlbar-transition:
+            transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay),
+            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
+            box-shadow 0.3s ease-out, left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
         --uc-hover-personal-toolbar-transition:
             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
             transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -1578,7 +1603,7 @@
         }
 
         /* Adjust the top-left-right border radius of the web content area when Sidebery is active */
-        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width") or -moz-pref("uc.flex.enable-rounded-web-content-at-sidebery-corner")) {
             &:not([titlepreface*="\180e "]) {
                 @media -moz-pref("sidebar.position_start") {
                     --uc-sb-web-content-radius-top-left: 0;

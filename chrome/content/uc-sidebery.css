@@ -34,7 +34,7 @@
         }
 
         /* Border color for navigation bar */
-        --uc-sb-navigation-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.45));
+        --uc-sb-navigation-border-color: light-dark(#ced1d4, rgba(172, 112, 255, 0.45));
         /* Border color for pinned tabs */
         --uc-sb-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
         /* Border color for unloaded pinned tabs */

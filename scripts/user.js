@@ -162,6 +162,8 @@ user_pref("uc.flex.move-pip-volume-to-top",                     false);
 user_pref("uc.flex.style-tab-group",                                1);
 /* Adds margin, shadow, and rounded corners to web content (0 = off, 1–2 = more margin). */
 user_pref("uc.flex.enable-rounded-web-content",                     0);
+/* Also rounds the web content corner next to the Sidebery colored stripe when rounded web content is enabled. */
+user_pref("uc.flex.enable-rounded-web-content-at-sidebery-corner", false);
 
 /* 🧊 Visual Background & Mica Effects */
 /* Enables native Mica backdrop (Windows 11 only; requires System theme). */

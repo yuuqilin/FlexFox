@@ -20,6 +20,13 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
+**🦊 v5.5.1**
+* `uc.flex.remove-sidebar-stripe` を有効にした際、Sidebery パネルの上下の境界線の色が一致しない問題を修正しました。
+* `uc.flex.move-urlbar-popup-to-center` を有効にして水平タブを使用している場合に、URL バーのアニメーション遷移が消える問題を修正しました。
+* Nightly v145 の更新により発生した、縦型タブのタブグループラベルの角丸が他のタブと一致しない問題を修正しました。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
+* Nightly v145 の更新により発生した、URL バーのアイコンの角丸が消える問題を修正しました。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
+* 新しいオプション `uc.flex.enable-rounded-web-content-at-sidebery-corner` を追加しました。`uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプ側の角にも角丸効果を適用します。
+
 **✨ FlexFox v5.5.0 – UI / UX の改善**
 
 * `uc.flex.style-sidebar-button` を追加。サイドバー切り替えボタンのアイコンを変更可能 (`1`～`4`)。
@@ -690,6 +697,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.move-pip-volume-to-top` | `true` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
 | `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | ネイティブ垂直タブのタブグループの外観を調整します。値：`1` = 展開／折りたたみインジケーターを表示（アニメーションなし）、`2` = インジケーターを表示（アニメーションあり）、`3` = ラベルを中央揃え（インジケーターなし・アニメーションなし）、`4` = ラベルを中央揃え（インジケーターなし・アニメーションあり）。デフォルトは `1` です。 |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
+| `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | `uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプに接する側の角にも角丸効果を適用します。 |
 
 #### 🧊 背景の見た目とMica効果
 
@@ -729,6 +737,13 @@ FlexFox は、以下の優れたプロジェクトの成果を基盤に構築さ
 - [shimmer](https://github.com/nuclearcodecat/shimmer)
 - [firefox-gx](https://github.com/Godiesc/firefox-gx)
 
+FlexFox で使用している追加アイコン:
+
+- **Custom Brand Icons** — elax46 の [custom-brand-icons](https://github.com/elax46/custom-brand-icons) を元に改変。  
+- **Newaita** — cbrnix の [Newaita](https://github.com/cbrnix/Newaita) を元に改変。  
+- **Yosemite Buttons** — Doublefire-Chen の [macos-traffic-light-buttons-as-SVG](https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG) を元に改変。  
+- **Yosemite GTK Theme** — kxmylo の [Yosemite GTK 3.14/3.16 Theme Alpha4](https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716) を元に改変。
+
 これらの素晴らしい制作者の皆様に、心から感謝いたします。
 
 <details>
@@ -749,10 +764,11 @@ FlexFox は、以下の優れたプロジェクトの成果を基盤に構築さ
   <p>該当するコードには元の MPL-2.0 のライセンス表記が保持されており、ライセンス条件を遵守しています。<br>
   MPL-2.0 の全文は <code>LICENSES/MPL-2.0.txt</code> をご覧ください。</p>
 
-  <p>また、本プロジェクトには以下のオープンソース作品を改変したグラフィック素材が含まれています：</p>
-
+  <p>このプロジェクトには、以下のライセンスで提供される追加のグラフィック資産が含まれます:</p>
+  
   <ul>
-    <li><strong>Yosemite Buttons</strong> — <a href="https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG">macos-traffic-light-buttons-as-SVG</a> を基に改変（<a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a> のもとでライセンス）</li>
-    <li><strong>Yosemite GTK Theme</strong> — <a href="https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716">Yosemite GTK 3.14/3.16 Theme Alpha4</a> を基に改変</li>
+    <li><strong>Custom Brand Icons</strong> — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> に基づくライセンス </li>
+    <li><strong>Newaita</strong> — <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a> に基づくライセンス</li>
+    <li><strong>Yosemite Buttons</strong> — <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> に基づくライセンス</li>
   </ul>
 </details>

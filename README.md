@@ -20,6 +20,15 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v5.5.1**
+* Fixed inconsistent top and bottom border colors in the Sidebery panel when `uc.flex.remove-sidebar-stripe` is enabled.
+* Fixed a missing animation issue with the URL bar transition when using horizontal tabs with `uc.flex.move-urlbar-popup-to-center` enabled.
+* Fixed mismatched corner rounding on tab group labels in vertical tabs introduced by Nightly v145. [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
+* Fixed missing rounded corners on URL bar icons introduced by Nightly v145. [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
+* Added a new option `uc.flex.enable-rounded-web-content-at-sidebery-corner`, which also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe when `uc.flex.enable-rounded-web-content` is enabled.
+
+<!-- END What's New -->
+
 **✨ FlexFox v5.5.0 – UI and UX Enhancements**
 
 * Added `uc.flex.style-sidebar-button` to switch the sidebar toggle icon (`1`–`4`):
@@ -62,8 +71,6 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * Fixed the broken style of the search engine switch button in the URL bar caused by Firefox v143 ([Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)).
 * Various minor bug fixes and improvements.
 * `uc.flex.show-flexfox-version-info-in-about-config` is now enabled by default. Set it to `False` to disable.
-
-<!-- END What's New -->
 
 ## 🎉 Major Feature Update
 
@@ -696,6 +703,7 @@ For more update logs from earlier versions,
 | `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
 | `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | Adjusts the appearance of tab groups in native vertical tabs. Values: `1` = show expand/collapse indicator without animation, `2` = show indicator with animation, `3` = center tab labels with no indicator and no animation, `4` = center labels with no indicator and with animation. Default is `1`. |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
+| `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | When `uc.flex.enable-rounded-web-content` is enabled, also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe. |
 
 #### 🧊 Visual Background & Mica Effects
 
@@ -732,10 +740,12 @@ FlexFox is also inspired by the ideas and aesthetics of these projects:
 - [shimmer](https://github.com/nuclearcodecat/shimmer)
 - [firefox-gx](https://github.com/Godiesc/firefox-gx)
 
-Additional icon assets in FlexFox are adapted from the following open-source projects:
+Additional icon assets used in FlexFox:
 
-* **Yosemite Buttons** — modified from [macos-traffic-light-buttons-as-SVG](https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG), originally licensed under the [Creative Commons Attribution 3.0 License](https://creativecommons.org/licenses/by/3.0/).
-* **Yosemite GTK** — modified from [Yosemite GTK 3.14/3.16 Theme Alpha4](https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716).
+- **Custom Brand Icons** — modified from elax46's [custom-brand-icons](https://github.com/elax46/custom-brand-icons).  
+- **Newaita** — modified from cbrnix's [Newaita](https://github.com/cbrnix/Newaita).  
+- **Yosemite Buttons** — modified from Doublefire-Chen's [macos-traffic-light-buttons-as-SVG](https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG).  
+- **Yosemite GTK Theme** — modified from kxmylo's [Yosemite GTK 3.14/3.16 Theme Alpha4](https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716).
 
 Much appreciation goes to all these creators for sharing their work with the community.
 
@@ -757,11 +767,11 @@ Much appreciation goes to all these creators for sharing their work with the com
   <p>All such sections retain the original MPL-2.0 license notice and comply with its terms.<br>
   For the full text of the MPL-2.0, please see <code>LICENSES/MPL-2.0.txt</code>.</p>
 
-  <p>In addition, this project includes modified graphical assets derived from the following open-source works:</p>
-
+  <p>This project includes additional graphical assets with the following licenses:</p>
+  
   <ul>
-    <li><strong>Yosemite Buttons</strong> — based on <a href="https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG">macos-traffic-light-buttons-as-SVG</a> (licensed under <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>)</li>
-    <li><strong>Yosemite GTK Theme</strong> — based on <a href="https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716">Yosemite GTK 3.14/3.16 Theme Alpha4</a></li>
+    <li><strong>Custom Brand Icons</strong> — licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></ li>
+    <li><strong>Newaita</strong> — licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></li>
+    <li><strong>Yosemite Buttons</strong> — licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></li>
   </ul>
-
 </details>
