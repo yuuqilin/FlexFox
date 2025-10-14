@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v145-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v146-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,12 +20,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v5.5.1**
-* `uc.flex.remove-sidebar-stripe` を有効にした際、Sidebery パネルの上下の境界線の色が一致しない問題を修正しました。
-* `uc.flex.move-urlbar-popup-to-center` を有効にして水平タブを使用している場合に、URL バーのアニメーション遷移が消える問題を修正しました。
-* Nightly v145 の更新により発生した、縦型タブのタブグループラベルの角丸が他のタブと一致しない問題を修正しました。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
-* Nightly v145 の更新により発生した、URL バーのアイコンの角丸が消える問題を修正しました。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
-* 新しいオプション `uc.flex.enable-rounded-web-content-at-sidebery-corner` を追加しました。`uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプ側の角にも角丸効果を適用します。
+**🦊 v5.5.2**
+* `uc.flex.move-urlbar-popup-to-center` を有効にした際、全画面表示または `Hide Topbar` モードで URL バーのトランジションアニメーションが消えてしまう問題を修正しました。
+* 水平タブレイアウト時に、サイドバーのヘッダー枠線の色が Sidebery と一致しない問題を修正しました。
+* 以下の動画は、v5.5.x 系で追加された複数の UI オプションを組み合わせて実現できる外観を紹介しています。
+
+https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
 **✨ FlexFox v5.5.0 – UI / UX の改善**
 
@@ -377,6 +377,13 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v5.5.1**
+* `uc.flex.remove-sidebar-stripe` を有効にした際、Sidebery パネルの上下の境界線の色が一致しない問題を修正しました。
+* `uc.flex.move-urlbar-popup-to-center` を有効にして水平タブを使用している場合に、URL バーのアニメーション遷移が消える問題を修正しました。
+* Nightly v145 の更新により発生した、縦型タブのタブグループラベルの角丸が他のタブと一致しない問題を修正しました。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
+* Nightly v145 の更新により発生した、URL バーのアイコンの角丸が消える問題を修正しました。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
+* 新しいオプション `uc.flex.enable-rounded-web-content-at-sidebery-corner` を追加しました。`uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプ側の角にも角丸効果を適用します。
 
 **v5.0.3**
 

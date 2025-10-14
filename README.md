@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v145-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v146-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,12 +20,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.5.1**
-* Fixed inconsistent top and bottom border colors in the Sidebery panel when `uc.flex.remove-sidebar-stripe` is enabled.
-* Fixed a missing animation issue with the URL bar transition when using horizontal tabs with `uc.flex.move-urlbar-popup-to-center` enabled.
-* Fixed mismatched corner rounding on tab group labels in vertical tabs introduced by Nightly v145. [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
-* Fixed missing rounded corners on URL bar icons introduced by Nightly v145. [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
-* Added a new option `uc.flex.enable-rounded-web-content-at-sidebery-corner`, which also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe when `uc.flex.enable-rounded-web-content` is enabled.
+**🦊 v5.5.2**
+* Fixed the issue where the URL bar transition animation disappeared when `uc.flex.move-urlbar-popup-to-center` was enabled in fullscreen or `Hide Topbar` mode.
+* Fixed the sidebar header border color mismatch with Sidebery in horizontal tab layout mode.
+* The video below demonstrates the visual result achieved by combining several new UI options introduced in the v5.5.x series.
+
+https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
 <!-- END What's New -->
 
@@ -381,6 +381,13 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v5.5.1**
+* Fixed inconsistent top and bottom border colors in the Sidebery panel when `uc.flex.remove-sidebar-stripe` is enabled.
+* Fixed a missing animation issue with the URL bar transition when using horizontal tabs with `uc.flex.move-urlbar-popup-to-center` enabled.
+* Fixed mismatched corner rounding on tab group labels in vertical tabs introduced by Nightly v145. [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
+* Fixed missing rounded corners on URL bar icons introduced by Nightly v145. [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
+* Added a new option `uc.flex.enable-rounded-web-content-at-sidebery-corner`, which also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe when `uc.flex.enable-rounded-web-content` is enabled.
 
 **v5.0.3**
 

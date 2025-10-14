@@ -291,6 +291,7 @@
         }
     }
 
+    /* Replace icon for the other bookmarks folder. */
     #OtherBookmarks {
         &[open] {
             > .toolbarbutton-icon {
@@ -338,6 +339,7 @@
         }
     }
 
+    /* Replace icons for all subfolders. */
     #OtherBookmarksPopup {
         .menu-iconic.bookmark-item[container] {
             > .menu-icon,

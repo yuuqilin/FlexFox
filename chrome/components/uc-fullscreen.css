@@ -39,6 +39,8 @@
         background-color: var(--lwt-accent-color, black) !important;
         */
         background-color: var(--toolbox-bgcolor) !important;
+        transition: var(--uc-autohide-navbar-transition) !important;
+        /*
         transition:
             transform 82ms linear,
             opacity 82ms linear !important;
@@ -52,6 +54,7 @@
                 opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay) !important;
         }
+        */
         transform-origin: top;
         transform: rotateX(var(--uc-toolbox-rotation));
         opacity: 0;
@@ -65,6 +68,8 @@
         pointer-events: none;
         opacity: 0;
         /* Use !important to override the transition styles in Nightly (v135) */
+        transition: var(--uc-autohide-urlbar-transition) !important;
+        /*
         transition:
             transform 82ms linear var(--uc-autohide-toolbox-delay),
             opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms),
@@ -81,6 +86,7 @@
                 opacity 0ms var(--uc-autohide-transition-type)
                     calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration)) !important;
         }
+        */
         transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
         transform: rotateX(89.9deg);
     }
@@ -103,6 +109,8 @@
         /*
         transition-delay: 33ms !important;
         */
+        transition: var(--uc-hover-urlbar-transition) !important;
+        /*
         transition:
             transform 82ms linear 33ms,
             opacity 0ms 33ms,
@@ -123,6 +131,7 @@
                 width 0.3s ease,
                 translate 0.3s ease !important;
         }
+        */
         transform: rotateX(0deg);
     }
 
@@ -137,6 +146,8 @@
         ~ toolbox,
     #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
     #navigator-toolbox:is(:hover, :focus-within, [movingtab]) {
+        transition: var(--uc-hover-navbar-transition) !important;
+        /*
         transition-delay: 33ms !important;
         @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
@@ -147,6 +158,7 @@
                 opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;
         }
+        */
         transform: rotateX(0);
         opacity: 1;
     }

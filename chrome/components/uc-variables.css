@@ -660,6 +660,9 @@
     /* Drop shadow beneath the active tab */
     --uc-vt-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
 
+    /* Border color for the sidebar header */
+    --uc-sidebar-header-border-color: light-dark(#ced1d4, rgba(172, 112, 255, 0.45));
+
     /* Layout of extension icons in the unified extensions panel */
     --uc-uei-icon-size: 22px; /* Size of extension icons */
     --uc-number-of-extensions-in-a-row: 4; /* Number of extension icons per row */
@@ -1048,6 +1051,7 @@
     /* Background color for the #searchbar input field */
     --uc-searchbar-bgcolor: color-mix(in srgb, var(--uc-urlbar-bg) 50%, transparent);
 
+    /* Make the urlbar background transparent when transparency or wallpaper is enabled */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         @media -moz-pref("uc.flex.style-urlbar", 4) {
@@ -1055,6 +1059,7 @@
         }
     }
 
+    /* Box shadows for the urlbar and urlbar popup */
     @media (prefers-color-scheme: dark) {
         --uc-urlbar-box-shadow-1:
             inset 1px 1px 2.5px 1.5px rgba(0, 0, 0, 0.5), 0px 1px 0.5px 0.5px rgba(255, 255, 255, 0.1);

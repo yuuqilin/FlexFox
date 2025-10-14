@@ -27,6 +27,7 @@
     }
 }
 
+/* Glow outline when hovering over the unfocused urlbar */
 #urlbar:not(.megabar):not([focused]):not([breakout-extend]) {
     @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4) {
         .urlbar-input-container {
@@ -103,6 +104,7 @@
     display: initial;
 }
 
+/* Background color for the urlbar */
 #urlbar-background,
 .urlbar-background {
     box-shadow: none !important;
@@ -111,6 +113,8 @@
     }
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     background: var(--uc-urlbar-bg, var(--toolbar-field-background-color)) !important;
+    /* In style mode 3, make the urlbar background fully transparent when using a non-default theme 
+       so that the theme's background image shows through, creating a recessed embossed look with shadows */
     @media -moz-pref("uc.flex.style-urlbar", 3) {
         @media not -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") {
             @media not -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") {
@@ -182,7 +186,12 @@
 */
 #identity-icon-box {
     margin: 3px 3px 3px 3px;
-    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    /* The variable --urlbar-icon-border-radius was deprecated after v145 and replaced with --urlbar-inner-border-radius. 
+       This fallback can be removed once support for older versions is no longer needed. */
+    border-radius: var(
+        --uc-urlbar-icon-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
     background-color: var(--uc-identity-btn-bgcolor) !important;
     opacity: 0.8;
 }
@@ -194,7 +203,10 @@
 
 /* Track protection icon */
 #tracking-protection-icon-container {
-    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    border-radius: var(
+        --uc-urlbar-icon-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
 }
 
 #tracking-protection-icon-container:hover {
@@ -203,7 +215,10 @@
 
 /* Star button */
 #star-button-box {
-    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    border-radius: var(
+        --uc-urlbar-icon-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
 }
 
 #star-button-box {
@@ -244,12 +259,14 @@
     border-top: 0 !important;
 }
 
+/* Adjust the corner radius of urlbar popup items to visually match the popup's overall roundness */
 @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
     .urlbarView-row {
         border-radius: calc(var(--uc-urlbar-popup-border-radius) - 2 * var(--urlbarView-row-gutter)) !important;
     }
 }
 
+/* Move the urlbar popup to the center of the window */
 @media -moz-pref("uc.flex.move-urlbar-popup-to-center") {
     #urlbar {
         margin-top: 0 !important;
@@ -261,6 +278,9 @@
             height: auto !important;
             left: 28vw !important;
             width: 44vw !important;
+            /* translate: 0 20vh !important; */
+            /* Since uc-tabs-bar.css also applies translateY to move the urlbar and must stay in sync with the navbar transition, 
+               margin-top is used here instead to reduce animation complexity. */
             margin-top: 20vh !important;
 
             .urlbar-input-container > *:not(.urlbar-input-box) {
@@ -309,6 +329,7 @@
             height: auto !important;
             left: 28vw !important;
             width: 44vw !important;
+            /* translate: 0 20vh !important; */
             margin-top: 20vh !important;
 
             .urlbar-input-container > *:not(.urlbar-input-box) {
@@ -548,10 +569,22 @@
     margin-top: 3px !important;
     height: 25px !important;
     background-color: transparent !important;
-    border-top-left-radius: var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
-    border-bottom-left-radius: var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
-    border-top-right-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
-    border-bottom-right-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    border-top-left-radius: var(
+        --uc-urlbar-border-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
+    border-bottom-left-radius: var(
+        --uc-urlbar-border-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
+    border-top-right-radius: var(
+        --uc-urlbar-icon-inner-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
+    border-bottom-right-radius: var(
+        --uc-urlbar-icon-inner-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
     }
@@ -561,7 +594,10 @@
     margin-top: 3px;
     height: 25px !important;
     background-color: transparent !important;
-    border-radius: var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    border-radius: var(
+        --uc-urlbar-icon-inner-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
     padding-left: 6px;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
@@ -570,7 +606,10 @@
 
 #urlbar-zoom-button {
     background-color: var(--uc-identity-btn-bgcolor) !important;
-    border-radius: var(--uc-urlbar-icon-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+    border-radius: var(
+        --uc-urlbar-icon-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
     opacity: 0.8;
     &:hover {
         background-color: var(--urlbar-box-hover-bgcolor) !important;

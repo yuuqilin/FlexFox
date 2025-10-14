@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v145-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v146-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,12 +20,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.5.1**
-* 修复启用 `uc.flex.remove-sidebar-stripe` 时，Sidebery 面板上下边框颜色不一致的问题。
-* 修复启用 `uc.flex.move-urlbar-popup-to-center` 并使用水平标签页时，地址栏过渡动画消失的问题。
-* 修复因 Nightly v145 更新导致垂直标签页中标签组标题圆角与其他标签页不一致的问题。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
-* 修复因 Nightly v145 更新导致地址栏图标圆角消失的问题。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
-* 新增选项 `uc.flex.enable-rounded-web-content-at-sidebery-corner`，当启用 `uc.flex.enable-rounded-web-content` 时，也会让网页内容在贴近 Sidebery 彩带的一角显示圆角效果。
+**🦊 v5.5.2**
+* 修复启用 `uc.flex.move-urlbar-popup-to-center` 后，在全屏或 `Hide Topbar` 模式下 URL 栏过渡动画消失的问题。
+* 修复在水平标签页布局下，侧栏标题边框颜色与 Sidebery 不一致的问题。
+* 下方视频展示了在 v5.5.x 系列中，通过组合多个新增 UI 选项所能实现的界面效果。
+
+https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
 **✨ FlexFox v5.5.0 – 多项界面与交互优化**
 
@@ -375,6 +375,13 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v5.5.1**
+* 修复启用 `uc.flex.remove-sidebar-stripe` 时，Sidebery 面板上下边框颜色不一致的问题。
+* 修复启用 `uc.flex.move-urlbar-popup-to-center` 并使用水平标签页时，地址栏过渡动画消失的问题。
+* 修复因 Nightly v145 更新导致垂直标签页中标签组标题圆角与其他标签页不一致的问题。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
+* 修复因 Nightly v145 更新导致地址栏图标圆角消失的问题。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
+* 新增选项 `uc.flex.enable-rounded-web-content-at-sidebery-corner`，当启用 `uc.flex.enable-rounded-web-content` 时，也会让网页内容在贴近 Sidebery 彩带的一角显示圆角效果。
 
 **v5.0.3**
 

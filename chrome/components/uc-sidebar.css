@@ -143,9 +143,7 @@
     /* Expand sidebar header on hover */
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
         #sidebar-header:is(:hover, :has(#sidebar-switcher-target.active)) {
-            @media (prefers-color-scheme: light) {
-                --sidebar-border-color: #ced1d4;
-            }
+            border-bottom: 1px solid var(--uc-sidebar-header-border-color) !important;
             max-height: 100%;
             max-width: 100%;
             min-width: var(--uc-sb-sidebar-hover-width);
