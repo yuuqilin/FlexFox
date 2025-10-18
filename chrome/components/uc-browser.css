@@ -190,7 +190,7 @@
                 border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 overflow: hidden;
-                box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
+                box-shadow: 0 1.5px 9px light-dark(rgba(12, 12, 16, 0.15), rgba(12, 12, 16, 0.25));
                 @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
                     box-shadow: 0 1.5px 9px red;
                 }

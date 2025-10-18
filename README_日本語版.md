@@ -20,10 +20,14 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v5.5.2**
-* `uc.flex.move-urlbar-popup-to-center` を有効にした際、全画面表示または `Hide Topbar` モードで URL バーのトランジションアニメーションが消えてしまう問題を修正しました。
-* 水平タブレイアウト時に、サイドバーのヘッダー枠線の色が Sidebery と一致しない問題を修正しました。
-* 以下の動画は、v5.5.x 系で追加された複数の UI オプションを組み合わせて実現できる外観を紹介しています。
+**🦊 v5.5.3**
+
+* ナビゲーションバーの自動非表示時に `uc.flex.move-window-controls-to-left` が無効になる問題を修正。
+* 複数のウィンドウ関連オプション併用時のツールバーアイコンの間隔を調整。
+* タスクバータブの余白と配置を改善（角丸コンテンツや水平タブ使用時）。
+* ネイティブタブの右クリックメニューに AI 項目のアイコンを追加。
+
+以下の動画は、v5.5.x 系で追加された複数の UI オプションを組み合わせて実現できる外観を紹介しています。
 
 https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
@@ -57,8 +61,6 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * `uc.flex.style-window-controls-shift-up` を追加。ウィンドウコントロールをわずかに上方向へ移動（既定値: `False`）。
 * `uc.flex.style-window-controls-shrink-size` を追加。ウィンドウコントロールを小型化（既定値: `False`）。
 * `uc.flex.move-window-controls-to-left` を追加。ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端へ移動（既定値: `False`）。
-
-  * 注: `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` が有効で、かつ `uc.flex.restore-window-controls-on-tabbar` が無効の場合、この設定は反映されません。
 * URLバーのポップアップのシャドウを改善。
 * Findbar の外観を調整し、サイズや角の滑らかさ、陰影、アニメーションの動きを最適化。
 * `uc.flex.enable-colored-bookmarks-folder-icons` が “Other Bookmarks” フォルダーに対応。
@@ -378,12 +380,62 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 <summary>💬 <b>過去の更新</b></summary>
 
+**v5.5.2**
+* `uc.flex.move-urlbar-popup-to-center` を有効にした際、全画面表示または `Hide Topbar` モードで URL バーのトランジションアニメーションが消えてしまう問題を修正しました。
+* 水平タブレイアウト時に、サイドバーのヘッダー枠線の色が Sidebery と一致しない問題を修正しました。
+* 以下の動画は、v5.5.x 系で追加された複数の UI オプションを組み合わせて実現できる外観を紹介しています。
+
+https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
+
 **v5.5.1**
 * `uc.flex.remove-sidebar-stripe` を有効にした際、Sidebery パネルの上下の境界線の色が一致しない問題を修正しました。
 * `uc.flex.move-urlbar-popup-to-center` を有効にして水平タブを使用している場合に、URL バーのアニメーション遷移が消える問題を修正しました。
 * Nightly v145 の更新により発生した、縦型タブのタブグループラベルの角丸が他のタブと一致しない問題を修正しました。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
 * Nightly v145 の更新により発生した、URL バーのアイコンの角丸が消える問題を修正しました。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
 * 新しいオプション `uc.flex.enable-rounded-web-content-at-sidebery-corner` を追加しました。`uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプ側の角にも角丸効果を適用します。
+
+**✨ FlexFox v5.5.0 – UI / UX の改善**
+
+* `uc.flex.style-sidebar-button` を追加。サイドバー切り替えボタンのアイコンを変更可能 (`1`～`4`)。
+  * `1` = Firefox Master Brand Logo（既定、従来と同じ）
+  * `2` = Firefox Browser Logo
+  * `3` = Firefox System 1 Logo
+  * `4` = Mozilla Flag Symbol
+* `uc.flex.style-toolbar-bgcolor` を追加。ナビゲーションバーとサイドバーの背景色を変更可能 (`1`～`2`)。
+  * `1` = Tokyo Night テーマ（既定、従来と同じ）
+  * `2` = Firefox Acorn Design
+* `uc.flex.style-urlbar` を追加。URLバーの外観を切り替え可能 (`1`～`4`)。
+  * `1` = Flat（既定、従来と同じ）
+  * `2` = Inset（バーが埋め込まれたデザイン、中央揃えの文字）
+  * `3` = Debossed（凹んだデザイン、中央揃えの文字）
+  * `4` = Seamless（ナビゲーションバーと完全に一体化、中央揃えの文字）
+* `uc.flex.move-urlbar-popup-to-center` を追加。URLバーのポップアップ位置を調整 (`0`～`2`)。
+  * `0` = 無効（既定）
+  * `1` = フォーカス時に中央へ移動
+  * `2` = 入力中のみ中央へ移動
+* `uc.flex.dim-urlbar-popup-backdrop` の背景暗化効果を新しい挙動に合わせて更新 (`0`～`2`)。
+  * `0` = 暗化なし（既定）
+  * `1` = 35% 暗化
+  * `2` = 50% 暗化
+* `uc.flex.style-window-controls` を追加。ウィンドウコントロールのアイコンを変更可能 (`1`～`3`)。
+  * `1` = Traffic Light Buttons（既定、従来と同じ）
+  * `2` = Yosemite Window Buttons
+  * `3` = Yosemite GTK テーマ
+* `uc.flex.style-window-controls-shift-up` を追加。ウィンドウコントロールをわずかに上方向へ移動（既定値: `False`）。
+* `uc.flex.style-window-controls-shrink-size` を追加。ウィンドウコントロールを小型化（既定値: `False`）。
+* `uc.flex.move-window-controls-to-left` を追加。ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端へ移動（既定値: `False`）。
+
+  * 注: `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` が有効で、かつ `uc.flex.restore-window-controls-on-tabbar` が無効の場合、この設定は反映されません。
+* URLバーのポップアップのシャドウを改善。
+* Findbar の外観を調整し、サイズや角の滑らかさ、陰影、アニメーションの動きを最適化。
+* `uc.flex.enable-colored-bookmarks-folder-icons` が “Other Bookmarks” フォルダーに対応。
+* `uc.flex.style-tab-group` のアニメーション有効時、インジケーターに回転エフェクトを追加。
+* `uc.flex.style-tab-group` = `2` または `4` のとき、折りたたまれたタブが表示されない問題を修正。
+* `uc.flex.remove-sidebar-stripe` と `uc.flex.show-tab-count-in-alltabs-button` を併用した際のカウント不具合を修正。
+* `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` かつ `uc.flex.show-tab-close-button-on-favicon-hover` が有効な場合に、アイコンが隠れない問題を修正。
+* Firefox v143 による URL バー内の検索エンジン切り替えボタンのスタイル崩れを修正（[Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)）。
+* その他多数のバグ修正と調整。
+* `uc.flex.show-flexfox-version-info-in-about-config` が既定で有効化されました。無効にするには `False` に設定してください。
 
 **v5.0.3**
 

@@ -20,14 +20,18 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.5.2**
-* Fixed the issue where the URL bar transition animation disappeared when `uc.flex.move-urlbar-popup-to-center` was enabled in fullscreen or `Hide Topbar` mode.
-* Fixed the sidebar header border color mismatch with Sidebery in horizontal tab layout mode.
-* The video below demonstrates the visual result achieved by combining several new UI options introduced in the v5.5.x series.
+**🦊 v5.5.3**
 
-https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
+* Fixed `uc.flex.move-window-controls-to-left` not working when the navbar was auto-hidden.
+* Adjusted toolbar icon spacing when combining multiple options like window control and rounded content settings.
+* Improved layout for taskbar tabs with rounded content or horizontal tab mode.
+* Added icons for AI items in the native tab context menu.
 
 <!-- END What's New -->
+
+The video below demonstrates the visual result achieved by combining several new UI options introduced in the v5.5.x series.
+
+https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
 **✨ FlexFox v5.5.0 – UI and UX Enhancements**
 
@@ -59,8 +63,6 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * Added `uc.flex.style-window-controls-shift-up` to slightly raise the window controls (default: `False`).
 * Added `uc.flex.style-window-controls-shrink-size` to reduce the size of window controls (default: `False`).
 * Added `uc.flex.move-window-controls-to-left` to move window controls to the left edge of the navbar or horizontal tab bar (default: `False`).
-
-  * Note: This option has no effect when `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` is enabled without `uc.flex.restore-window-controls-on-tabbar`.
 * Improved the shadow rendering of the URL bar popup.
 * Refined the Findbar's design for better proportions, smoother corner transitions, added depth shadows, and more fluid open/close animations.
 * Improved `uc.flex.enable-colored-bookmarks-folder-icons` with support for the “Other Bookmarks” folder.
@@ -382,12 +384,62 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 <!-- END Release Note -->
 
+**v5.5.2**
+* Fixed the issue where the URL bar transition animation disappeared when `uc.flex.move-urlbar-popup-to-center` was enabled in fullscreen or `Hide Topbar` mode.
+* Fixed the sidebar header border color mismatch with Sidebery in horizontal tab layout mode.
+* The video below demonstrates the visual result achieved by combining several new UI options introduced in the v5.5.x series.
+
+https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
+
 **v5.5.1**
 * Fixed inconsistent top and bottom border colors in the Sidebery panel when `uc.flex.remove-sidebar-stripe` is enabled.
 * Fixed a missing animation issue with the URL bar transition when using horizontal tabs with `uc.flex.move-urlbar-popup-to-center` enabled.
 * Fixed mismatched corner rounding on tab group labels in vertical tabs introduced by Nightly v145. [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
 * Fixed missing rounded corners on URL bar icons introduced by Nightly v145. [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
 * Added a new option `uc.flex.enable-rounded-web-content-at-sidebery-corner`, which also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe when `uc.flex.enable-rounded-web-content` is enabled.
+
+**✨ FlexFox v5.5.0 – UI and UX Enhancements**
+
+* Added `uc.flex.style-sidebar-button` to switch the sidebar toggle icon (`1`–`4`):
+  * `1` = Firefox Master Brand Logo (default, same as before)
+  * `2` = Firefox Browser Logo
+  * `3` = Firefox System 1 Logo
+  * `4` = Mozilla Flag Symbol
+* Added `uc.flex.style-toolbar-bgcolor` to change the background color of the navbar and sidebar (`1`–`2`):
+  * `1` = Tokyo Night theme (default, same as before)
+  * `2` = Firefox Acorn Design
+* Added `uc.flex.style-urlbar` to customize the URL bar appearance (`1`–`4`):
+  * `1` = Flat (default, same as before)
+  * `2` = Inset (embedded look with centered text)
+  * `3` = Debossed (pressed-in look with centered text)
+  * `4` = Seamless (fully merged into the navbar, centered text)
+* Added `uc.flex.move-urlbar-popup-to-center` to reposition the URL bar popup (`0`–`2`):
+  * `0` = Disabled (default)
+  * `1` = Center when focused
+  * `2` = Center only when typing
+* Updated `uc.flex.dim-urlbar-popup-backdrop` to match the new popup behavior (`0`–`2`):
+  * `0` = No dimming (default)
+  * `1` = 35% dim when open
+  * `2` = 50% dim when open
+* Added `uc.flex.style-window-controls` to switch the window control icons (`1`–`3`):
+  * `1` = Traffic Light Buttons (default, same as before)
+  * `2` = Yosemite Window Buttons
+  * `3` = Yosemite GTK Theme
+* Added `uc.flex.style-window-controls-shift-up` to slightly raise the window controls (default: `False`).
+* Added `uc.flex.style-window-controls-shrink-size` to reduce the size of window controls (default: `False`).
+* Added `uc.flex.move-window-controls-to-left` to move window controls to the left edge of the navbar or horizontal tab bar (default: `False`).
+
+  * Note: This option has no effect when `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` is enabled without `uc.flex.restore-window-controls-on-tabbar`.
+* Improved the shadow rendering of the URL bar popup.
+* Refined the Findbar's design for better proportions, smoother corner transitions, added depth shadows, and more fluid open/close animations.
+* Improved `uc.flex.enable-colored-bookmarks-folder-icons` with support for the “Other Bookmarks” folder.
+* Enhanced `uc.flex.style-tab-group` with rotation animations for group indicators when animation is enabled.
+* Fixed an issue where folded tabs would not display when `uc.flex.style-tab-group` = `2` or `4`.
+* Fixed a counting issue when both `uc.flex.remove-sidebar-stripe` and `uc.flex.show-tab-count-in-alltabs-button` were enabled.
+* Fixed an issue where tab favicons failed to hide when `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` with `uc.flex.show-tab-close-button-on-favicon-hover`.
+* Fixed the broken style of the search engine switch button in the URL bar caused by Firefox v143 ([Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)).
+* Various minor bug fixes and improvements.
+* `uc.flex.show-flexfox-version-info-in-about-config` is now enabled by default. Set it to `False` to disable.
 
 **v5.0.3**
 

@@ -139,9 +139,9 @@
             background-image: url("chrome://devtools/skin/images/pane-collapse.svg");
         }
         &:is(
-                [data-l10n-id="toolbar-context-turn-on-vertical-tabs"],
-                [data-l10n-id="sidebar-context-menu-enable-vertical-tabs"]
-            ) {
+            [data-l10n-id="toolbar-context-turn-on-vertical-tabs"],
+            [data-l10n-id="sidebar-context-menu-enable-vertical-tabs"]
+        ) {
             background-image: url("chrome://devtools/skin/images/pane-collapse.svg");
             @media not -moz-pref("sidebar.position_start") {
                 background-image: url("chrome://devtools/skin/images/pane-expand.svg");
@@ -202,7 +202,8 @@
         background-position-x: 0.9em;
         background-size: 18px;
     }
-    #context_moveTabToGroupNewGroup, #context_moveTabToNewGroup {
+    #context_moveTabToGroupNewGroup,
+    #context_moveTabToNewGroup {
         background-image: url("../icons/menu/new-group.svg");
         background-size: 18px;
     }
@@ -247,26 +248,32 @@
     }
 
     #context-ask-chat[label*="Claude"],
+    #context_askChat[label*="Claude"],
     menuitem.ContentSelectDropdown-item-0[label="Anthropic Claude"] {
         background-image: url("../icons/menu/claude.svg");
     }
     #context-ask-chat[label*="ChatGPT"],
+    #context_askChat[label*="ChatGPT"],
     menuitem.ContentSelectDropdown-item-0[label="ChatGPT"] {
         background-image: url("../icons/menu/openai.svg");
     }
     #context-ask-chat[label*="Copilot"],
+    #context_askChat[label*="Copilot"],
     menuitem.ContentSelectDropdown-item-0[label="Copilot"] {
         background-image: url("../icons/menu/copilot.svg");
     }
     #context-ask-chat[label*="Gemini"],
+    #context_askChat[label*="Gemini"],
     menuitem.ContentSelectDropdown-item-0[label="Google Gemini"] {
         background-image: url("../icons/menu/gemini.svg");
     }
     #context-ask-chat[label*="HuggingChat"],
+    #context_askChat[label*="HuggingChat"],
     menuitem.ContentSelectDropdown-item-0[label="HuggingChat"] {
         background-image: url("../icons/menu/hugging-chat.svg");
     }
     #context-ask-chat[label*="Mistral"],
+    #context_askChat[label*="Mistral"],
     menuitem.ContentSelectDropdown-item-0[label="Le Chat Mistral"] {
         background-image: url("../icons/menu/mistral.svg");
     }

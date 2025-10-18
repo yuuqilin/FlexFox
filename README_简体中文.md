@@ -20,10 +20,14 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.5.2**
-* 修复启用 `uc.flex.move-urlbar-popup-to-center` 后，在全屏或 `Hide Topbar` 模式下 URL 栏过渡动画消失的问题。
-* 修复在水平标签页布局下，侧栏标题边框颜色与 Sidebery 不一致的问题。
-* 下方视频展示了在 v5.5.x 系列中，通过组合多个新增 UI 选项所能实现的界面效果。
+**🦊 v5.5.3**
+
+* 修复在自动隐藏导航栏时 `uc.flex.move-window-controls-to-left` 失效的问题。
+* 优化多项窗口相关选项同时启用时的工具栏图标间距。
+* 改进任务栏标签的边距与布局（在启用圆角内容或水平标签页时）。
+* 为原生标签页右键菜单添加 AI 项目的图标。
+
+下方视频展示了在 v5.5.x 系列中，通过组合多个新增 UI 选项所能实现的界面效果。
 
 https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
@@ -57,8 +61,6 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * 新增 `uc.flex.style-window-controls-shift-up`，轻微上移窗口控制按钮（默认值：`False`）。
 * 新增 `uc.flex.style-window-controls-shrink-size`，缩小窗口控制按钮尺寸（默认值：`False`）。
 * 新增 `uc.flex.move-window-controls-to-left`，将窗口控制按钮移动到导航栏或水平标签栏左侧（默认值：`False`）。
-
-  * 注意：当启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 且未启用 `uc.flex.restore-window-controls-on-tabbar` 时，此选项无效。
 * 优化地址栏弹窗的阴影效果。
 * 改进 Findbar 外观，使尺寸更协调，圆角过渡更自然，新增阴影效果，并优化动画过渡。
 * 改进 `uc.flex.enable-colored-bookmarks-folder-icons`，新增对“Other Bookmarks”文件夹的支持。
@@ -376,12 +378,62 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <summary>💬 <b>历史更新</b></summary>
 
+**v5.5.2**
+* 修复启用 `uc.flex.move-urlbar-popup-to-center` 后，在全屏或 `Hide Topbar` 模式下 URL 栏过渡动画消失的问题。
+* 修复在水平标签页布局下，侧栏标题边框颜色与 Sidebery 不一致的问题。
+* 下方视频展示了在 v5.5.x 系列中，通过组合多个新增 UI 选项所能实现的界面效果。
+
+https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
+
 **v5.5.1**
 * 修复启用 `uc.flex.remove-sidebar-stripe` 时，Sidebery 面板上下边框颜色不一致的问题。
 * 修复启用 `uc.flex.move-urlbar-popup-to-center` 并使用水平标签页时，地址栏过渡动画消失的问题。
 * 修复因 Nightly v145 更新导致垂直标签页中标签组标题圆角与其他标签页不一致的问题。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
 * 修复因 Nightly v145 更新导致地址栏图标圆角消失的问题。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
 * 新增选项 `uc.flex.enable-rounded-web-content-at-sidebery-corner`，当启用 `uc.flex.enable-rounded-web-content` 时，也会让网页内容在贴近 Sidebery 彩带的一角显示圆角效果。
+
+**✨ FlexFox v5.5.0 – 多项界面与交互优化**
+
+* 新增 `uc.flex.style-sidebar-button`，可切换侧栏切换按钮图标（`1`–`4`）：
+  * `1` = Firefox 主品牌标志（默认，与旧版相同）
+  * `2` = Firefox 浏览器标志
+  * `3` = Firefox System 1 标志
+  * `4` = Mozilla 旗帜符号
+* 新增 `uc.flex.style-toolbar-bgcolor`，切换导航栏与侧栏背景色（`1`–`2`）：
+  * `1` = Tokyo Night 主题（默认，与旧版相同）
+  * `2` = Firefox Acorn Design
+* 新增 `uc.flex.style-urlbar`，切换地址栏外观（`1`–`4`）：
+  * `1` = Flat（默认，与旧版相同）
+  * `2` = Inset（嵌入式外观，文字居中）
+  * `3` = Debossed（压印式外观，文字居中）
+  * `4` = Seamless（完全融入导航栏，文字居中）
+* 新增 `uc.flex.move-urlbar-popup-to-center`，将地址栏弹出窗口移至中央（`0`–`2`）：
+  * `0` = 不移动（默认）
+  * `1` = 聚焦时居中显示
+  * `2` = 仅在输入文字时居中显示
+* 更新 `uc.flex.dim-urlbar-popup-backdrop` 的背景暗化效果，以配合新弹窗位置（`0`–`2`）：
+  * `0` = 不暗化（默认）
+  * `1` = 暗化 35%
+  * `2` = 暗化 50%
+* 新增 `uc.flex.style-window-controls`，切换窗口控制按钮样式（`1`–`3`）：
+  * `1` = 交通灯按钮（默认，与旧版相同）
+  * `2` = Yosemite 风格按钮
+  * `3` = Yosemite GTK 主题
+* 新增 `uc.flex.style-window-controls-shift-up`，轻微上移窗口控制按钮（默认值：`False`）。
+* 新增 `uc.flex.style-window-controls-shrink-size`，缩小窗口控制按钮尺寸（默认值：`False`）。
+* 新增 `uc.flex.move-window-controls-to-left`，将窗口控制按钮移动到导航栏或水平标签栏左侧（默认值：`False`）。
+
+  * 注意：当启用 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` 且未启用 `uc.flex.restore-window-controls-on-tabbar` 时，此选项无效。
+* 优化地址栏弹窗的阴影效果。
+* 改进 Findbar 外观，使尺寸更协调，圆角过渡更自然，新增阴影效果，并优化动画过渡。
+* 改进 `uc.flex.enable-colored-bookmarks-folder-icons`，新增对“Other Bookmarks”文件夹的支持。
+* 优化 `uc.flex.style-tab-group`，在启用动画时为指示器添加旋转动效。
+* 修复 `uc.flex.style-tab-group` = `2` 或 `4` 时，折叠状态下标签页无法显示的问题。
+* 修复启用 `uc.flex.remove-sidebar-stripe` 与 `uc.flex.show-tab-count-in-alltabs-button` 时计数不正确的问题。
+* 修复当 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` 且启用 `uc.flex.show-tab-close-button-on-favicon-hover` 时，图标无法隐藏的问题。
+* 修复 Firefox v143 更新导致的地址栏搜索引擎切换按钮样式失效问题（[Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)）。
+* 多项其他错误修复与细节改进。
+* `uc.flex.show-flexfox-version-info-in-about-config` 现在默认启用，若需关闭，请手动设置为 `False`。
 
 **v5.0.3**
 

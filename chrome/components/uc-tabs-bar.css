@@ -1,6 +1,6 @@
 @media not -moz-pref("sidebar.verticalTabs") {
     @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-        :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
+        :root:not([taskbartab], [inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
             /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
             /* be179ef */
 

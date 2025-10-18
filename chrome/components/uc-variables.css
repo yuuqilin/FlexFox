@@ -793,11 +793,13 @@
     --uc-sidebar-button-offset: 0px;
     /* If the sidebar button is the last item in the nav bar, leave room for it. */
     @media not -moz-pref("sidebar.position_start") {
-        #nav-bar:has(> #nav-bar-customization-target > #sidebar-button:last-child) {
-            --uc-sidebar-button-offset: var(--uc-sidebar-stripe-width, 0px);
-            /* In horizontal tab mode, shift the sidebar button only when Sidebery is active */
-            @media not -moz-pref("sidebar.verticalTabs") {
-                --uc-sidebar-button-offset: var(--uc-sb-sidebar-button-offset, 0px);
+        &:not([taskbartab]) {
+            #nav-bar:has(> #nav-bar-customization-target > #sidebar-button:last-child) {
+                --uc-sidebar-button-offset: var(--uc-sidebar-stripe-width, 0px);
+                /* In horizontal tab mode, shift the sidebar button only when Sidebery is active */
+                @media not -moz-pref("sidebar.verticalTabs") {
+                    --uc-sidebar-button-offset: var(--uc-sb-sidebar-button-offset, 0px);
+                }
             }
         }
     }
@@ -825,9 +827,9 @@
     */
 
     /* Shift the nav bar to align the first item with the vertical tabs */
-    --uc-nav-bar-padding-left: 6px;
+    --uc-nav-bar-first-child-padding-left: 6px;
     &[inFullscreen] {
-        --uc-nav-bar-padding-left: 5px;
+        --uc-nav-bar-first-child-padding-left: 5px;
     }
 
     /* Add right-side spacing after the first item to align nearby items with the vertical tabs */
@@ -914,6 +916,10 @@
                 --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin-side)
                     var(--uc-web-content-margin) var(--uc-web-content-margin);
             }
+            :root[taskbartab] & {
+                --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin)
+                    var(--uc-web-content-margin) var(--uc-web-content-margin);
+            }
         }
     }
 
@@ -995,8 +1001,9 @@
                 --uc-navbar-windows-controls-display: none;
             }
         }
-        --uc-nav-bar-padding-right: 0px;
+        --uc-window-controls-offset: 0px;
         /*
+        --uc-nav-bar-padding-right: 0px;
         @media not -moz-pref("uc.flex.auto-hide-window-controls") {
             &:has(#toolbar-menubar[inactive="true"]) {
                 --uc-nav-bar-padding-right: 104px;
@@ -1061,9 +1068,10 @@
 
     /* Box shadows for the urlbar and urlbar popup */
     @media (prefers-color-scheme: dark) {
-        --uc-urlbar-box-shadow-1:
+        --uc-urlbar-focus-box-shadow:
             inset 1px 1px 2.5px 1.5px rgba(0, 0, 0, 0.5), 0px 1px 0.5px 0.5px rgba(255, 255, 255, 0.1);
-        --uc-urlbar-box-shadow-2: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.4), 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+        --uc-urlbar-inset-box-shadow:
+            inset 1px 1px 2px 1px rgba(0, 0, 0, 0.4), 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
         --uc-urlbar-popup-box-shadow: 0 45px 65px rgba(12, 12, 16, 0.45);
         --uc-urlbar-popup-outline: 0 0 0 1px rgba(65, 72, 104, 0.45);
         @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
@@ -1072,11 +1080,11 @@
     }
 
     @media (prefers-color-scheme: light) {
-        --uc-urlbar-box-shadow-1:
+        --uc-urlbar-focus-box-shadow:
             inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35), 1px 1px 0px 0.1px rgba(255, 255, 255, 0.05);
-        --uc-urlbar-box-shadow-2: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+        --uc-urlbar-inset-box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
         @media -moz-pref("uc.flex.style-urlbar", 3) {
-            --uc-urlbar-box-shadow-2:
+            --uc-urlbar-inset-box-shadow:
                 inset 0.5px 0.5px 1px 0px rgba(0, 0, 0, 0.1), 1px 1px 0px 1px rgba(255, 255, 255, 0.4);
         }
         --uc-urlbar-popup-box-shadow: 0 45px 65px rgba(12, 12, 16, 0.35);
@@ -1162,8 +1170,9 @@
         transform var(--uc-autohide-toolbar-duration) linear var(--uc-autohide-toolbar-delay);
     --uc-autohide-tabs-toolbar-windows-controls-transition:
         margin-block-start var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay),
-        margin-inline-end 0s ease var(--uc-autohide-toolbar-delay),
-        opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay);
+        margin-inline 0s ease var(--uc-autohide-toolbar-delay),
+        opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay),
+        padding-inline-start 0.1s ease-in-out 0.4s;
 
     /* Unified autohide transition timing for the toolbar */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
@@ -1198,9 +1207,10 @@
         --uc-autohide-tabs-toolbar-windows-controls-transition:
             margin-block-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
-            margin-inline-end 0s var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay),
+            margin-inline 0s var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay),
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay);
+                var(--uc-autohide-sidebar-delay),
+            padding-inline-start 0.1s ease-in-out 0.4s;
 
         /**/
         --uc-tabbox-clip-path-start: inset(
@@ -1250,10 +1260,10 @@
                 --uc-autohide-tabs-toolbar-windows-controls-transition:
                     margin-block-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         calc(var(--uc-autohide-sidebar-delay) + 28ms),
-                    margin-inline-end 0s var(--uc-autohide-transition-type)
-                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    margin-inline 0s var(--uc-autohide-transition-type) calc(var(--uc-autohide-sidebar-delay) + 28ms),
                     opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        calc(var(--uc-autohide-sidebar-delay) + 28ms);
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms),
+                    padding-inline-start 0.1s ease-in-out 0.4s;
 
                 --uc-tabbox-clip-path-transition: clip-path var(--uc-autohide-transition-duration)
                     var(--uc-autohide-transition-type) calc(var(--uc-autohide-sidebar-delay) + 28ms);
@@ -1281,8 +1291,9 @@
         transform var(--uc-autohide-toolbar-duration) linear var(--uc-hover-toolbar-delay);
     --uc-hover-tabs-toolbar-windows-controls-transition:
         margin-block-start var(--uc-autohide-toolbar-duration) ease var(--uc-hover-toolbar-delay),
-        margin-inline-end 0s ease var(--uc-hover-toolbar-delay),
-        opacity var(--uc-autohide-toolbar-duration) ease var(--uc-hover-toolbar-delay);
+        margin-inline 0s ease var(--uc-hover-toolbar-delay),
+        opacity var(--uc-autohide-toolbar-duration) ease var(--uc-hover-toolbar-delay),
+        padding-inline-start 0.1s ease-in-out 0.4s;
 
     /* Unified hover transition timing for the toolbar */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
@@ -1313,8 +1324,9 @@
         --uc-hover-tabs-toolbar-windows-controls-transition:
             margin-block var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay),
-            margin-inline-end 0s var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
-            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+            margin-inline 0s var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
+            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
+            padding-inline-start 0.1s ease-in-out 0.4s;
 
         /**/
         --uc-hover-navigator-tabbox-clip-path-start: inset(
@@ -1693,9 +1705,10 @@
                 @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") or -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
                     --uc-tabs-toolbar-windows-controls-display: none;
                     --uc-navbar-windows-controls-display: flex;
-                    --uc-sb-nav-bar-padding-right: 0px;
+                    --uc-sb-nav-bar-padding-inline: 0px;
                     --uc-sb-tabs-toolbar-windows-controls-transition:
-                        width 0.5s ease-in-out, margin-inline-end 0.5s ease-in-out, opacity 0s 0.5s;
+                        width 0.5s ease-in-out, margin-inline 0.5s ease-in-out, opacity 0s 0.5s,
+                        padding-inline-start 0.1s ease-in-out 0.4s;
                 }
             }
 

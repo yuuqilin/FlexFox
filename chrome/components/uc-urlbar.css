@@ -109,7 +109,7 @@
 .urlbar-background {
     box-shadow: none !important;
     @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) {
-        box-shadow: var(--uc-urlbar-box-shadow-2) !important;
+        box-shadow: var(--uc-urlbar-inset-box-shadow) !important;
     }
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     background: var(--uc-urlbar-bg, var(--toolbar-field-background-color)) !important;
@@ -130,7 +130,7 @@
     /*
     box-shadow: inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35) !important;
     */
-    box-shadow: var(--uc-urlbar-box-shadow-1) !important;
+    box-shadow: var(--uc-urlbar-focus-box-shadow) !important;
     outline: none !important;
 }
 
@@ -226,7 +226,7 @@
 }
 
 /* | Borders | */
-
+/*
 .tabbrowser-tab::after {
     border: 0 !important;
 }
@@ -241,7 +241,6 @@
     border: 0 !important;
 }
 
-/*
 .tabbrowser-tab::after {
     border: 0 !important;
 }
@@ -681,7 +680,7 @@
     border: 1px solid var(--toolbar-field-border-color);
     border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
     @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) {
-        box-shadow: var(--uc-urlbar-box-shadow-2) !important;
+        box-shadow: var(--uc-urlbar-inset-box-shadow) !important;
     }
 }
 
