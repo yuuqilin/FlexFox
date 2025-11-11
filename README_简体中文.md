@@ -20,12 +20,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.5.3**
-
-* 修复在自动隐藏导航栏时 `uc.flex.move-window-controls-to-left` 失效的问题。
-* 优化多项窗口相关选项同时启用时的工具栏图标间距。
-* 改进任务栏标签的边距与布局（在启用圆角内容或水平标签页时）。
-* 为原生标签页右键菜单添加 AI 项目的图标。
+**🦊 v5.5.4**
+* 新增对 Firefox v145 引入的 **标签组预览面板** 功能的支持。
+  * 可以通过 Firefox 自带的选项 `browser.tabs.groups.hoverPreview.enabled` 关闭此功能。
+* 修复在启用 `uc.flex.style-window-controls-shrink-size` 时，Windows 11 上无法显示 Snap 布局悬浮菜单的问题。
+* 调整了原生垂直标签页中固定标签、普通标签及标签组的间距，使界面看起来更加精致、协调。
+* 新增对 Firefox v146 引入的 **标签分屏视图** 功能的支持。
 
 下方视频展示了在 v5.5.x 系列中，通过组合多个新增 UI 选项所能实现的界面效果。
 
@@ -377,6 +377,12 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v5.5.3**
+* 修复在自动隐藏导航栏时 `uc.flex.move-window-controls-to-left` 失效的问题。
+* 优化多项窗口相关选项同时启用时的工具栏图标间距。
+* 改进任务栏标签的边距与布局（在启用圆角内容或水平标签页时）。
+* 为原生标签页右键菜单添加 AI 项目的图标。
 
 **v5.5.2**
 * 修复启用 `uc.flex.move-urlbar-popup-to-center` 后，在全屏或 `Hide Topbar` 模式下 URL 栏过渡动画消失的问题。

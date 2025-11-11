@@ -76,7 +76,7 @@ toolbar:not(#TabsToolbar) > #search-container {
 }
 
 /* Add the missing top border for non-maximized windows */
-#main-window[sizemode="normal"]:is([tabsintitlebar], [customtitlebar]) {
+#main-window[sizemode="normal"][customtitlebar] {
     border-top: 1px solid rgb(67, 72, 76);
 }
 

@@ -20,12 +20,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.5.3**
-
-* Fixed `uc.flex.move-window-controls-to-left` not working when the navbar was auto-hidden.
-* Adjusted toolbar icon spacing when combining multiple options like window control and rounded content settings.
-* Improved layout for taskbar tabs with rounded content or horizontal tab mode.
-* Added icons for AI items in the native tab context menu.
+**🦊 v5.5.4**
+* Added support for the new **tab group preview panel** introduced in Firefox v145.
+  * You can turn off this Firefox feature with the built-in preference `browser.tabs.groups.hoverPreview.enabled`.
+* Fixed an issue on Windows 11 where the Snap Layouts fly-out menu would not appear when `uc.flex.style-window-controls-shrink-size` was enabled.
+* Adjusted the spacing of pinned tabs, regular tabs, and tab groups in native vertical tabs to achieve a more refined and polished appearance.
+* Added support for the **tab split view** feature introduced in Firefox v146.
 
 <!-- END What's New -->
 
@@ -383,6 +383,12 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v5.5.3**
+* Fixed `uc.flex.move-window-controls-to-left` not working when the navbar was auto-hidden.
+* Adjusted toolbar icon spacing when combining multiple options like window control and rounded content settings.
+* Improved layout for taskbar tabs with rounded content or horizontal tab mode.
+* Added icons for AI items in the native tab context menu.
 
 **v5.5.2**
 * Fixed the issue where the URL bar transition animation disappeared when `uc.flex.move-urlbar-popup-to-center` was enabled in fullscreen or `Hide Topbar` mode.

@@ -252,6 +252,10 @@
             }
         }
 
+        .split-view-splitter {
+            opacity: 0;
+        }
+
         /* Round the corners of the status panel */
         #statuspanel-label {
             border-bottom-left-radius: var(--uc-web-content-radius);
@@ -311,7 +315,8 @@
                     #ask-chat-shortcuts,
                     #selection-shortcut-action-panel,
                     #chat-shortcuts-options-panel,
-                    #tab-preview-panel
+                    #tab-preview-panel,
+                    #tabgroup-preview-panel
                 )
         )
         ~ #browser

@@ -108,12 +108,6 @@
                     position: relative;
                     z-index: 2;
                 }
-                /*
-                #titlebar {
-                    position: relative;
-                    z-index: 3;
-                }
-                */
 
                 /*
                 #navigator-toolbox,
@@ -138,7 +132,6 @@
 
                 /* Show when toolbox is hovered */
                 /*
-                #titlebar:hover ~ .browser-toolbar,
                 .browser-titlebar:hover ~ :is(#nav-bar, #PersonalToolbar),
                 #nav-bar:hover,
                 #nav-bar:hover + #PersonalToolbar {
@@ -165,7 +158,8 @@
                                 #ask-chat-shortcuts,
                                 #selection-shortcut-action-panel,
                                 #chat-shortcuts-options-panel,
-                                #tab-preview-panel
+                                #tab-preview-panel,
+                                #tabgroup-preview-panel
                             )
                     )
                     ~ toolbox
@@ -195,7 +189,8 @@
                                 #ask-chat-shortcuts,
                                 #selection-shortcut-action-panel,
                                 #chat-shortcuts-options-panel,
-                                #tab-preview-panel
+                                #tab-preview-panel,
+                                #tabgroup-preview-panel
                             )
                     )
                     ~ #navigator-toolbox
@@ -273,7 +268,8 @@
                             #ask-chat-shortcuts,
                             #selection-shortcut-action-panel,
                             #chat-shortcuts-options-panel,
-                            #tab-preview-panel
+                            #tab-preview-panel,
+                            #tabgroup-preview-panel
                         )
                 )
                 ~ #navigator-toolbox {

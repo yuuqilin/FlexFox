@@ -33,6 +33,22 @@
             --bg: light-dark(#f5f6f6, #26252e) !important;
         }
 
+        @media (prefers-color-scheme: dark) {
+            --uc-tab-bgcolor: #0d0d15; /* Background color of tabs */
+            @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                --uc-tab-bgcolor: /* #121212 */ #191917;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            --uc-tab-bgcolor: #cbd5e1; /* Background color of tabs */
+            @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                --uc-tab-bgcolor: #d9d9d7;
+            }
+        }
+
+        /* Background color for pinned tabs */
+        --uc-sb-pinned-tab-bgcolor: var(--uc-tab-bgcolor);
         /* Border color for navigation bar */
         --uc-sb-navigation-border-color: light-dark(#ced1d4, rgba(172, 112, 255, 0.45));
         /* Border color for pinned tabs */

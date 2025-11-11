@@ -20,12 +20,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v5.5.3**
-
-* ナビゲーションバーの自動非表示時に `uc.flex.move-window-controls-to-left` が無効になる問題を修正。
-* 複数のウィンドウ関連オプション併用時のツールバーアイコンの間隔を調整。
-* タスクバータブの余白と配置を改善（角丸コンテンツや水平タブ使用時）。
-* ネイティブタブの右クリックメニューに AI 項目のアイコンを追加。
+**🦊 v5.5.4**
+* Firefox v145で追加された**タブグループのプレビューパネル**に対応しました。
+  * この機能は、Firefoxの設定項目 `browser.tabs.groups.hoverPreview.enabled` で無効化できます。
+* `uc.flex.style-window-controls-shrink-size` を有効にした際、Windows 11で Snap Layouts のフライアウトメニューが表示されない問題を修正しました。
+* ネイティブ垂直タブにおけるピン留めタブ、通常タブ、タブグループの間隔を微調整し、より洗練された見た目にしました。
+* Firefox v146で導入された**タブスプリットビュー**機能に対応しました。
 
 以下の動画は、v5.5.x 系で追加された複数の UI オプションを組み合わせて実現できる外観を紹介しています。
 
@@ -379,6 +379,12 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v5.5.3**
+* ナビゲーションバーの自動非表示時に `uc.flex.move-window-controls-to-left` が無効になる問題を修正。
+* 複数のウィンドウ関連オプション併用時のツールバーアイコンの間隔を調整。
+* タスクバータブの余白と配置を改善（角丸コンテンツや水平タブ使用時）。
+* ネイティブタブの右クリックメニューに AI 項目のアイコンを追加。
 
 **v5.5.2**
 * `uc.flex.move-urlbar-popup-to-center` を有効にした際、全画面表示または `Hide Topbar` モードで URL バーのトランジションアニメーションが消えてしまう問題を修正しました。

@@ -36,9 +36,11 @@
     @media (prefers-color-scheme: dark) {
         --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
         --uc-urlbar-outline: #414868; /* Outline color that appears when hovering over the URL bar */
+        --uc-tab-bgcolor: #0d0d15; /* Background color of tabs */
         @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
             --uc-bgcolor: /* #2b2a33 */ #26252e;
             --uc-urlbar-outline: #454c6c;
+            --uc-tab-bgcolor: #1a140d;
         }
 
         @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
@@ -104,9 +106,11 @@
     @media (prefers-color-scheme: light) {
         --uc-bgcolor: #f1f5f9; /* Background color of the toolbar */
         --uc-urlbar-outline: #94a3b8; /* Outline color that appears when hovering over the URL bar */
+        --uc-tab-bgcolor: #cbd5e1; /* Background color of tabs */
         @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
             --uc-bgcolor: #f5f6f6;
             --uc-urlbar-outline: #a8a8a6;
+            --uc-tab-bgcolor: #d9d8dd;
         }
 
         @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
@@ -630,18 +634,18 @@
     }
 
     /* Tabs per row for native pinned tabs and Sidebery (controlled by per-tab percentage width) */
-    --uc-vt-pinned-tab-max-columns: 20%;
+    --uc-vt-pinned-tab-max-columns: 19%;
     --uc-ht-pinned-tab-max-columns: 10;
     @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 4) {
-        --uc-vt-pinned-tab-max-columns: 25%;
+        --uc-vt-pinned-tab-max-columns: 24%;
         --uc-ht-pinned-tab-max-columns: 8;
     }
     @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 3) {
-        --uc-vt-pinned-tab-max-columns: 33.333%;
+        --uc-vt-pinned-tab-max-columns: 32%;
         --uc-ht-pinned-tab-max-columns: 6;
     }
     @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 2) {
-        --uc-vt-pinned-tab-max-columns: 50%;
+        --uc-vt-pinned-tab-max-columns: 49%;
         --uc-ht-pinned-tab-max-columns: 4;
     }
     @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 1) {
@@ -659,6 +663,15 @@
     --uc-vt-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
     /* Drop shadow beneath the active tab */
     --uc-vt-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+    @media -moz-pref("uc.flex.style-tab-items", 2) {
+        --uc-vt-active-tab-bgcolor: light-dark(#ea4c895e, #9059ff80);
+        --uc-vt-active-tab-border-shadow: 0 0 0 1px var(--uc-vt-pinned-tab-border-color);
+        --uc-vt-active-tab-drop-shadow: 0px 0px 4px
+            light-dark(
+                color-mix(in srgb, var(--uc-sidebar-header-stripe) 66%, white),
+                color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, white)
+            );
+    }
 
     /* Border color for the sidebar header */
     --uc-sidebar-header-border-color: light-dark(#ced1d4, rgba(172, 112, 255, 0.45));
@@ -1058,9 +1071,38 @@
     /* Background color for the #searchbar input field */
     --uc-searchbar-bgcolor: color-mix(in srgb, var(--uc-urlbar-bg) 50%, transparent);
 
-    /* Make the urlbar background transparent when transparency or wallpaper is enabled */
+    /* Background color for pinned tabs */
+    --uc-vt-pinned-tab-bgcolor: light-dark(
+        rgb(from var(--uc-tab-bgcolor) r g b / 0.9),
+        rgb(from var(--uc-tab-bgcolor) r g b / 0.8)
+    );
+    --uc-tab-shadow-color: light-dark(
+        rgb(from var(--uc-tab-bgcolor) r g b / 0.5),
+        rgb(from var(--uc-tab-bgcolor) r g b / 0.4)
+    );
+
+    /* Background color for the tab split view */
+    --uc-tab-split-view-bgcolor: light-dark(
+        rgb(from var(--uc-tab-bgcolor) r g b / 0.77),
+        rgb(from var(--uc-tab-bgcolor) r g b / 0.65)
+    );
+
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        --uc-vt-pinned-tab-bgcolor: light-dark(
+            rgb(from var(--uc-tab-bgcolor) r g b / 0.55),
+            rgb(from var(--uc-tab-bgcolor) r g b / 0.55)
+        );
+        --uc-tab-shadow-color: light-dark(
+            rgb(from var(--uc-tab-bgcolor) r g b / 0.3),
+            rgb(from var(--uc-tab-bgcolor) r g b / 0.275)
+        );
+
+        --uc-tab-split-view-bgcolor: light-dark(
+            rgb(from var(--uc-tab-bgcolor) r g b / 0.55),
+            rgb(from var(--uc-tab-bgcolor) r g b / 0.4)
+        );
+        /* Make the urlbar background transparent when transparency or wallpaper is enabled */
         @media -moz-pref("uc.flex.style-urlbar", 4) {
             --uc-urlbar-bg: transparent;
         }

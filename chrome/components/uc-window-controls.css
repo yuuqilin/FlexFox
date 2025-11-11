@@ -1,7 +1,7 @@
 /* Modified from https://github.com/christorange/VerticalFox/blob/main/windows/userChrome.css */
 
 /* Hide menubar window controls when menubar is inactive */
-:root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
+:root[customtitlebar]:not([customizing]) {
     &:not([inFullscreen]) {
         #toolbar-menubar[inactive="true"] > .titlebar-buttonbox-container {
             display: none !important;
@@ -32,7 +32,7 @@
 }
 
 /* Adjust menubar (title bar) height */
-:root:is([tabsintitlebar], [customtitlebar]):not([customizing]):not([inFullscreen]) {
+:root[customtitlebar]:not([customizing]):not([inFullscreen]) {
     /* !v143 */
     #navigator-toolbox #toolbar-menubar:not([autohide="true"]):not([autohide=""]) {
         margin-top: 0px;
@@ -89,7 +89,6 @@
 /*
 @media not -moz-pref("sidebar.verticalTabs") {
     \/* Fix issue with missing window controls. *\/
-    #titlebar,
     #TabsToolbar {
         will-change: unset !important;
         transition: none !important;
@@ -97,7 +96,7 @@
     }
 
     \/* ----- Close/min/max fix ----- *\/
-    :root:is([tabsintitlebar], [customtitlebar]):not([customizing]) {
+    :root[customtitlebar]:not([customizing]) {
         #TabsToolbar .titlebar-buttonbox-container {
             visibility: var(--uc-windows-controls-visibility) !important;
             position: var(--uc-windows-controls-position) !important;
@@ -145,7 +144,7 @@
     }
     @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
         @media -moz-pref("sidebar.position_start") and (not -moz-pref("uc.flex.move-window-controls-to-left")) {
-            padding-right: var(--uc-web-content-margin) !important;
+            padding-right: var(--uc-web-content-margin);
         }
     }
     @media -moz-pref("uc.flex.move-window-controls-to-left") and (not (-moz-platform: macos)) {
@@ -168,10 +167,12 @@
     /* height: 38px; */
     height: var(--uc-titlebar-buttonbox-height);
     @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
-        &:hover {
+        .toolbarbutton-icon {
+            transition: scale 0.1s ease-out;
+        }
+        &:hover .toolbarbutton-icon {
             scale: 1.2;
         }
-        transition: scale 0.1s ease-out;
         @media -moz-pref("uc.flex.revert-to-original-window-controls") {
             padding: 8px 0px !important;
         }
@@ -211,13 +212,13 @@
                 :root:not([customizing]) & {
                     z-index: 3;
                     > .titlebar-buttonbox-container {
-                        position: absolute !important;
-                        top: var(--uc-tabs-toolbar-height) !important;
+                        position: absolute;
+                        top: var(--uc-tabs-toolbar-height);
                         @media not -moz-pref("uc.flex.move-window-controls-to-left") {
-                            right: 0 !important;
+                            right: 0;
                         }
                         @media -moz-pref("uc.flex.move-window-controls-to-left") {
-                            left: 0 !important;
+                            left: 0;
                         }
                         @media not -moz-pref("uc.flex.fully-hide-toolbox") {
                             :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) & {
@@ -346,7 +347,7 @@
  */
 
 /* Add extra space on the right side of #nav-bar for the sidebar button */
-:root:is([tabsintitlebar], [customtitlebar]):not([customizing]),
+:root[customtitlebar]:not([customizing]),
 :root[inFullscreen] {
     #nav-bar {
         padding-right: var(--uc-sidebar-button-offset) !important;
@@ -371,7 +372,7 @@
     @media not -moz-pref("uc.flex.move-window-controls-to-left"), -moz-pref("uc.flex.auto-hide-window-controls") {
         &[taskbartab] {
             #taskbar-tabs-favicon {
-                padding-inline-start: var(--uc-web-content-margin) !important;
+                padding-inline-start: var(--uc-web-content-margin);
             }
         }
     }
@@ -383,15 +384,12 @@
     @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and -moz-pref("uc.flex.move-window-controls-to-left") {
         @media not -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
             #navigator-toolbox:not([tabs-hidden]) #nav-bar-customization-target {
-                padding-left: var(--uc-sb-nav-bar-padding-inline, var(--uc-window-controls-offset)) !important;
+                padding-left: var(--uc-sb-nav-bar-padding-inline, var(--uc-window-controls-offset));
                 @media -moz-pref("uc.flex.auto-hide-window-controls") {
-                    padding-left: 0 !important;
+                    padding-left: 0;
                     transition: padding-left 0.5s ease-in-out;
                     #TabsToolbar:has(> .titlebar-buttonbox-container:hover) ~ #nav-bar & {
-                        padding-left: var(
-                            --uc-sb-nav-bar-padding-inline,
-                            calc(var(--uc-window-controls-width) + 4px)
-                        ) !important;
+                        padding-left: var(--uc-sb-nav-bar-padding-inline, calc(var(--uc-window-controls-width) + 4px));
                     }
                 }
                 @media not -moz-pref("uc.flex.auto-hide-window-controls") {
