@@ -127,6 +127,19 @@
         border: 1px solid var(--uc-sb-pinned-tab-unloaded-border-color) !important;
     }
 
+    /* Prevent a gap below the new tab button */
+    .TabsPanel .new-tab-btns {
+        bottom: -1px !important;
+        padding-bottom: 1px !important;
+    }
+
+    /* Restore the original bottom-bar-space height used before Sidebery v5.3.3.26 */
+    /*
+    .TabsPanel .bottom-bar-space {
+        height: calc(var(--tabs-height) + var(--general-margin)) !important;
+    }
+    */
+
     #root {
         .PinnedTabsBar {
             min-width: 200px;

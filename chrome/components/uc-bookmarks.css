@@ -91,12 +91,30 @@
         #navigator-toolbox:is(:hover, :focus-within) {
             border-bottom-color: transparent !important;
         }
+        #mainPopupSet:has(
+                > [panelopen]:not(
+                        #ask-chat-shortcuts,
+                        #selection-shortcut-action-panel,
+                        #chat-shortcuts-options-panel,
+                        #tab-preview-panel
+                    ),
+                > #tab-group-editor > [panelopen]
+            )
+            ~ #navigator-toolbox
+            > #PersonalToolbar,
         #navigator-toolbox:hover > #PersonalToolbar {
             /*
             transition-delay: var(--uc-hover-toolbar-delay) !important;
             */
             transition: var(--uc-hover-personal-toolbar-transition) !important;
             transform: rotateX(var(--uc-autohide-toolbar-hover-rotation, 0));
+        }
+        @media not -moz-pref("sidebar.verticalTabs") {
+            #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                ~ #navigator-toolbox
+                > #PersonalToolbar {
+                transform: rotateX(var(--uc-autohide-toolbar-focus-rotation, 0));
+            }
         }
 
         #navigator-toolbox:hover > #nav-bar:focus-within + #PersonalToolbar {
@@ -115,6 +133,20 @@
         #navigator-toolbox:hover {
             --browser-area-z-index-toolbox: 5;
             transition: var(--uc-hover-navigator-transition) /* calc(var(--uc-hover-toolbar-delay) - 10ms) */ !important;
+        }
+
+        /* Since the tabs toolbar and navigator can lose hover state at the same time, 
+           and the tabs toolbar uses hover transition timing even when not hovered, 
+           the navigator in its non-hover state must also use hover transition timing to keep both animations synchronized. */
+        @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) and (not -moz-pref("sidebar.verticalTabs")) {
+            &:not([taskbartab]) {
+                #PersonalToolbar:not([customizing]) {
+                    transition: var(--uc-hover-personal-toolbar-transition) !important;
+                }
+                #navigator-toolbox {
+                    transition: var(--uc-hover-navigator-transition) !important;
+                }
+            }
         }
     }
 }

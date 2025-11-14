@@ -694,6 +694,15 @@
         --uc-sidebar-hover-trigger-width: 1px;
     }
 
+    /**
+     * Controls how close the cursor must be to the window edge to trigger the tabs toolbar
+     * when the `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` is set to 3. 
+     */
+    --uc-tabstoolbar-hover-trigger-width: 4px;
+    &[sizemode="normal"] {
+        --uc-tabstoolbar-hover-trigger-width: 10px;
+    }
+
     /* Trigger sensitivity for fully hidden top toolbar */
     /**
      * Controls how close the cursor must be to the top edge to trigger the toolbar
@@ -1377,6 +1386,12 @@
         --uc-hover-navigator-tabbox-clip-path-end: inset(
             var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
         );
+        --uc-hover-tabstoolbar-tabbox-clip-path-start: inset(
+            var(--uc-tabstoolbar-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
+        );
+        --uc-hover-tabstoolbar-tabbox-clip-path-end: inset(
+            var(--uc-tabstoolbar-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
+        );
         --uc-hover-tabbox-clip-path-transition: clip-path var(--uc-hover-transition-duration)
             var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
 
@@ -1421,7 +1436,8 @@
                     #selection-shortcut-action-panel,
                     #chat-shortcuts-options-panel,
                     #tab-preview-panel
-                )
+                ),
+            > #tab-group-editor > [panelopen]
         ) {
             --uc-navigator-z-index: var(--uc-sb-bm-disable-autohide-z-index, 5);
             --uc-autohide-tabs-toolbar-transition: var(--uc-hover-tabs-toolbar-transition);
@@ -1512,6 +1528,9 @@
         --uc-navigator-hover-clip-mica: calc(
             var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height) - var(--uc-autohide-navigator-bottom)
         );
+        --uc-tabstoolbar-hover-clip-mica: calc(
+            var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height) - var(--uc-autohide-navigator-bottom)
+        );
         /* Non-fullscreen mode */
         @media not -moz-pref("uc.flex.fully-hide-toolbox") {
             &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
@@ -1527,11 +1546,27 @@
                  * only the bookmarks toolbar is clipped. 
                  */
                 @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar") and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
-                    --uc-navigator-hover-clip-mica: calc(
+                    /* When the "hide horizontal tabs" option is not set to 3, 
+                       hovering over the navigator shows the tab bar, so the tab bar height needs to be clipped. */
+                    @media not -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
+                        --uc-navigator-hover-clip-mica: calc(
+                            var(--uc-bm-padding-box-height) - var(--uc-autohide-navigator-bottom)
+                        );
+                        @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
+                            --uc-navigator-hover-clip-mica: calc(
+                                0px - var(--uc-autohide-navigator-bottom) + var(--uc-sb-navigator-hover-clip-mica, 0px)
+                            );
+                        }
+                    }
+                    /* When the "hide horizontal tabs" option is set to 3, hovering over the navigator does not show the tab bar, 
+                       so no tab bar clipping is needed and the default layout is used.
+                       Hovering over the tabs toolbar will reveal the tab bar, 
+                       so the following variable is used to additionally clip the tab bar height. */
+                    --uc-tabstoolbar-hover-clip-mica: calc(
                         var(--uc-bm-padding-box-height) - var(--uc-autohide-navigator-bottom)
                     );
                     @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-                        --uc-navigator-hover-clip-mica: calc(
+                        --uc-tabstoolbar-hover-clip-mica: calc(
                             0px - var(--uc-autohide-navigator-bottom) + var(--uc-sb-navigator-hover-clip-mica, 0px)
                         );
                     }

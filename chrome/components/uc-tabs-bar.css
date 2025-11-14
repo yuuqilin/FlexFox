@@ -2,7 +2,7 @@
     @media not -moz-pref("uc.flex.fully-hide-toolbox") {
         :root:not([taskbartab], [inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
             /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_tabstoolbar_v2.css */
-            /* be179ef */
+            /* 2f30a22 */
 
             @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar") and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
                 /* Hide the native horizontal tab bar */
@@ -13,6 +13,27 @@
                 #TabsToolbar:not([customizing]) {
                     visibility: hidden;
                     transition: var(--uc-autohide-tabs-toolbar-transition) !important;
+                }
+                /* Add a hover target pseudo-element to capture hovering */
+                @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
+                    #toolbar-menubar:is([autohide=""], [autohide="true"]) + #TabsToolbar:not(:hover) {
+                        -moz-window-dragging: no-drag !important;
+                    }
+                    #toolbar-menubar:is([autohide=""], [autohide="true"]) + #TabsToolbar:not([customizing])::before {
+                        content: "";
+                        display: flex;
+                        position: absolute;
+                        height: var(--uc-tabstoolbar-hover-trigger-width);
+                        width: 100vw;
+                        visibility: visible;
+                    }
+                    #TabsToolbar:not([customizing]) {
+                        position: relative;
+                        z-index: 1;
+                        /* When the tabs toolbar loses hover while the navigator may still be hovered, 
+                           use the hover-state transition timing even when not hovered so their animations stay synchronized. */
+                        transition: var(--uc-hover-tabs-toolbar-transition) !important;
+                    }
                 }
                 /* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
                 #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
@@ -25,18 +46,35 @@
                     line-height: 18px !important;
                 }
                 /* ---- Show tab bar on hover when Sidebery is inactive ---- */
-                &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:is(:hover, :focus-within) {
-                    margin-bottom: var(--uc-autohide-navigator-bottom);
+                @media not -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
+                    #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                        ~ #navigator-toolbox,
+                    &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:is(:hover, :focus-within) {
+                        margin-bottom: var(--uc-autohide-navigator-bottom);
+                        /* Direct child selectors can be used starting from version 133 */
+                        #TabsToolbar {
+                            visibility: var(--uc-autohide-tabstoolbar-visibility);
+                            margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
+                            /*
+                            transition-delay: var(--uc-autohide-tabstoolbar-delay) !important;
+                            */
+                            transition: var(--uc-hover-tabs-toolbar-transition) !important;
+                        }
+                    }
                 }
-                #navigator-toolbox:is(:hover, :focus-within) {
-                    /* Direct child selectors can be used starting from version 133 */
-                    #TabsToolbar {
-                        visibility: var(--uc-autohide-tabstoolbar-visibility);
-                        margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
-                        /*
-                        transition-delay: var(--uc-autohide-tabstoolbar-delay) !important;
-                        */
-                        transition: var(--uc-hover-tabs-toolbar-transition) !important;
+
+                @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
+                    #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                        ~ #navigator-toolbox,
+                    &:not([customizing], [chromehidden~="menubar"])
+                        #navigator-toolbox:has(> :is(#toolbar-menubar, #TabsToolbar):hover),
+                    #navigator-toolbox[movingtab] {
+                        margin-bottom: var(--uc-autohide-navigator-bottom);
+                        #TabsToolbar {
+                            visibility: var(--uc-autohide-tabstoolbar-visibility);
+                            margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
+                            transition: var(--uc-hover-tabs-toolbar-transition) !important;
+                        }
                     }
                 }
 
@@ -55,7 +93,7 @@
             }
 
             /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_main_toolbar.css */
-            /* 14d2fa0 */
+            /* 8d3c6ab */
 
             /* This style hides the main toolbar and shows it when the cursor is over the tabs toolbar as well as whenever the focus is inside nav-bar, such as when urlbar is focused. */
 
@@ -158,9 +196,9 @@
                                 #ask-chat-shortcuts,
                                 #selection-shortcut-action-panel,
                                 #chat-shortcuts-options-panel,
-                                #tab-preview-panel,
-                                #tabgroup-preview-panel
-                            )
+                                #tab-preview-panel
+                            ),
+                        > #tab-group-editor > [panelopen]
                     )
                     ~ toolbox
                     #urlbar[popover],
@@ -189,9 +227,9 @@
                                 #ask-chat-shortcuts,
                                 #selection-shortcut-action-panel,
                                 #chat-shortcuts-options-panel,
-                                #tab-preview-panel,
-                                #tabgroup-preview-panel
-                            )
+                                #tab-preview-panel
+                            ),
+                        > #tab-group-editor > [panelopen]
                     )
                     ~ #navigator-toolbox
                     > .browser-toolbar {
@@ -208,7 +246,7 @@
                 #nav-bar.browser-titlebar {
                     background: inherit;
                 }
-                #toolbar-menubar:not([autohide="true"]) ~ #nav-bar.browser-titlebar {
+                #toolbar-menubar:not([autohide=""], [autohide="true"]) ~ #nav-bar.browser-titlebar {
                     background-position-y: -28px; \/* best guess, could vary *\/
                     border-top: none !important;
                 }
@@ -248,6 +286,19 @@
                     --browser-area-z-index-toolbox: var(--uc-navigator-z-index);
                     transition: var(--uc-autohide-navigator-transition) !important;
                 }
+                /* Since the tabs toolbar and navigator can lose hover state at the same time, 
+                   and the tabs toolbar uses hover transition timing even when not hovered, 
+                   the navigator in its non-hover state must also use hover transition timing to keep both animations synchronized. */
+                @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
+                    #PersonalToolbar:not([customizing]) {
+                        transition: var(--uc-hover-personal-toolbar-transition) !important;
+                    }
+                    #navigator-toolbox {
+                        transition: var(--uc-hover-navigator-transition) !important;
+                    }
+                }
+                #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                    ~ #navigator-toolbox,
                 #navigator-toolbox:is(:hover, :focus-within) {
                     /**
                      * When automatic hiding of the bookmarks toolbar is disabled and Sidebery is active,
@@ -268,9 +319,9 @@
                             #ask-chat-shortcuts,
                             #selection-shortcut-action-panel,
                             #chat-shortcuts-options-panel,
-                            #tab-preview-panel,
-                            #tabgroup-preview-panel
-                        )
+                            #tab-preview-panel
+                        ),
+                    > #tab-group-editor > [panelopen]
                 )
                 ~ #navigator-toolbox {
                 --uc-navigator-z-index: var(--uc-sb-bm-disable-autohide-z-index, 5);

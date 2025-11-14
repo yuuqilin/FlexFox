@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v146-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v147-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,12 +20,17 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.5.4**
-* Added support for the new **tab group preview panel** introduced in Firefox v145.
-  * You can turn off this Firefox feature with the built-in preference `browser.tabs.groups.hoverPreview.enabled`.
-* Fixed an issue on Windows 11 where the Snap Layouts fly-out menu would not appear when `uc.flex.style-window-controls-shrink-size` was enabled.
-* Adjusted the spacing of pinned tabs, regular tabs, and tab groups in native vertical tabs to achieve a more refined and polished appearance.
-* Added support for the **tab split view** feature introduced in Firefox v146.
+**🦊 v5.6.0**
+* Expanded the behavior of `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`.
+  A new third mode is now available when this option is set to `3` in horizontal tab mode.
+  This mode uses the same layout as mode `2`, but hovering over the navigation bar will no longer reveal the tab bar. The tab bar only appears when the cursor reaches the very top edge of the screen. This avoids accidental tab bar activation when using the bookmarks toolbar or interacting with the navigation bar.
+  The trigger height can be customized with `--uc-tabstoolbar-hover-trigger-width`.
+* Added support for the new **Tab Group Preview Panel** introduced in Firefox v145 when using horizontal tabs.
+  The preview panel now works consistently in both vertical and horizontal tab modes, allowing tab selection and switching from within the panel.
+* The above improvements are based on work from [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks). Special thanks to **@MrOtherGuy** for the help.
+* Fixed an issue where notification banners in the navigation bar failed to keep the bookmarks toolbar visible when Mica or a custom wallpaper was enabled. This caused unnecessary clipping of the content area.
+* Fixed a regression in Firefox v146 that left a gap below Sidebery's New Tab Button.
+* Fixed a regression in Firefox v147 where rounded corners and shadows for the web content area stopped working. Related to [Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635).
 
 <!-- END What's New -->
 
@@ -145,7 +150,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
   * To temporarily restore auto-collapse, use the `Hide Sidebery` shortcut or press <kbd>F1</kbd> to switch to native vertical tabs.
 * Added three new layout modes and optimizations for horizontal tabs
   * Deprecated the old option `uc.flex.disable-tabs-toolbar-autohide`. Horizontal tabs are now visible by default when Sidebery is not active.
-  * Added `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`: hides horizontal tabs when Sidebery is not active and shows them on hover. Values: `0` = Off, `1` = Tabs below navbar, `2` = Tabs above navbar.
+  * Added `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`: hides horizontal tabs when Sidebery is not active and shows them on hover. Values: `0` = Off, `1` = Tabs below navbar, `2` = Tabs above navbar, `3` = Same layout as `2`, but the tab bar appears only when the cursor reaches the top edge of the screen to avoid accidental activation when accessing bookmarks or the navbar.
   * Added `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`: hides the navbar when Sidebery is not active and shows it on hover. Values: `0` = Off, `1` = On. This option overrides the previous auto-hide-horizontal-tabs setting.
   * Added `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`: in horizontal tab mode, by default FlexFox shows the close button on hover for inactive tabs. As tabs become narrower due to more tabs opening, the button automatically shrinks and moves to the top-right to prevent accidental clicks. Enable this option to completely remove the close button.
   * Added `uc.flex.show-tab-close-button-on-favicon-hover`: in horizontal tab mode, merges the close button with the favicon to save space. The close button is shown only when hovering over the favicon. Enabling this option disables the close button's auto-shrink-and-reposition behavior described above.
@@ -383,6 +388,13 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v5.5.4**
+* Added support for the new **tab group preview panel** introduced in Firefox v145.
+  * You can turn off this Firefox feature with the built-in preference `browser.tabs.groups.hoverPreview.enabled`.
+* Fixed an issue on Windows 11 where the Snap Layouts fly-out menu would not appear when `uc.flex.style-window-controls-shrink-size` was enabled.
+* Adjusted the spacing of pinned tabs, regular tabs, and tab groups in native vertical tabs to achieve a more refined and polished appearance.
+* Added support for the **tab split view** feature introduced in Firefox v146.
 
 **v5.5.3**
 * Fixed `uc.flex.move-window-controls-to-left` not working when the navbar was auto-hidden.
@@ -693,7 +705,7 @@ For more update logs from earlier versions,
 | `uc.flex.add-ui-text-stroke` | `true` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
 | `uc.flex.fully-hide-sidebery` | `true` | Fully hides Sidebery and native vertical tabs. They reappear when the cursor moves to the screen edge. |
 | `uc.flex.fully-hide-toolbox` | `true` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
-| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`2` | Automatically hide horizontal tabs in horizontal tab mode when Sidebery is inactive. Hovering over the navbar shows the tabs. Values: `0` = disabled, `1` = tabs shown below the navbar, `2` = tabs shown above the navbar. |
+| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3` | Automatically hide horizontal tabs in horizontal tab mode when Sidebery is inactive. Hovering over the navbar shows the tabs. Values: `0` = disabled, `1` = tabs shown below the navbar, `2` = tabs shown above the navbar, `3` = same as `2` but shows only when the cursor reaches the top edge of the screen to avoid accidental triggers. |
 | `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | Automatically hide the navbar in horizontal tab mode when Sidebery is inactive. Hovering over the horizontal tabs shows the navbar. Values: `0` = disabled, `1` = enabled. This option has higher priority; if enabled together with `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`, it overrides that option. |
 | `uc.flex.auto-hide-navbar-icons` | `true` | Hides toolbar item icons (including icons on the navigation bar, bookmarks toolbar, and menu bar) by default. They reappear when hovering over the toolbar. This option does not affect the URL bar or window control buttons. The sidebar button (FlexFox logo) is normally always visible, but if it is not placed at the edge of the navigation bar or `uc.flex.revert-to-original-sidebar-icon` is enabled, it will also follow the auto-hide behavior. |
 | `uc.flex.auto-hide-window-controls` | `true` | Hides the window control buttons (minimize, maximize, close) by default. They reappear when hovering over the edge of the toolbar. |

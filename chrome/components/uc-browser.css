@@ -34,7 +34,9 @@
 
 /* Remove the border and rounded corners from the webpage content area */
 @media -moz-pref("sidebar.revamp") {
-    #tabbrowser-tabbox {
+    /* !TEMPORARY: The following #tabbrowser-tabbox rules will no longer be needed starting from v147. */
+    #tabbrowser-tabbox,
+    .browserContainer {
         outline: none !important;
         box-shadow: none !important;
         @media -moz-pref("sidebar.revamp.round-content-area") {
@@ -134,6 +136,7 @@
                 }
             }
 
+            /* !TEMPORARY: The following #tabbrowser-tabbox rules will no longer be needed starting from v147. */
             #tabbrowser-tabbox {
                 box-shadow: none !important;
                 outline: none !important;
@@ -161,6 +164,27 @@
             }
 
             .browserContainer {
+                /* !TEMPORARY: Fix for Nightly v147 change that broke border-radius. 
+                    This is still under development and the fix may need adjustments in the future. */
+                background: transparent !important;
+                @media -moz-pref("sidebar.revamp") {
+                    outline: none !important;
+                    box-shadow: none !important;
+                }
+                @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.revamp.round-content-area") {
+                    overflow: unset !important;
+                    /*
+                    :root:not([inDOMFullscreen]) #tabbrowser-tabbox[sidebar-shown] & {
+                        @media -moz-pref("sidebar.position_start") {
+                            border-start-start-radius: 0 !important;
+                        }
+                        @media not -moz-pref("sidebar.position_start") {
+                            border-start-end-radius: 0 !important;
+                        }
+                    }
+                    */
+                }
+
                 /**
                  * When DevTools and Sidebery are docked on the same side, 
                  * the corresponding corner of the web content container should always be rounded. 
@@ -315,9 +339,9 @@
                     #ask-chat-shortcuts,
                     #selection-shortcut-action-panel,
                     #chat-shortcuts-options-panel,
-                    #tab-preview-panel,
-                    #tabgroup-preview-panel
-                )
+                    #tab-preview-panel
+                ),
+            #tab-group-editor > [panelopen]
         )
         ~ #browser
         #tabbrowser-tabbox {
@@ -328,10 +352,26 @@
 
     /* When the navigator or its child bookmark toolbar is expanded, clip the tab box to reveal the Mica backdrop */
     @media not -moz-pref("sidebar.verticalTabs") {
+        #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+            ~ #browser
+            #tabbrowser-tabbox,
         #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
             --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
             --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
             --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+        }
+
+        /* When the "hide horizontal tabs" option is set to 3, the tab bar only appears when hovering over the tabs toolbar.
+           In this case, the following variables are used to apply additional clipping. */
+        @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
+            #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                ~ #browser
+                #tabbrowser-tabbox,
+            #navigator-toolbox:has(> :is(#toolbar-menubar, #TabsToolbar):hover) ~ #browser #tabbrowser-tabbox,
+            #navigator-toolbox[movingtab] ~ #browser #tabbrowser-tabbox {
+                --uc-tabbox-clip-path-start: var(--uc-hover-tabstoolbar-tabbox-clip-path-start);
+                --uc-tabbox-clip-path-end: var(--uc-hover-tabstoolbar-tabbox-clip-path-end);
+            }
         }
 
         /* Keep the tab box clipped when the navigator contains an open toolbar button */

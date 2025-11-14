@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v146-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v147-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,12 +20,18 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.5.4**
-* 新增对 Firefox v145 引入的 **标签组预览面板** 功能的支持。
-  * 可以通过 Firefox 自带的选项 `browser.tabs.groups.hoverPreview.enabled` 关闭此功能。
-* 修复在启用 `uc.flex.style-window-controls-shrink-size` 时，Windows 11 上无法显示 Snap 布局悬浮菜单的问题。
-* 调整了原生垂直标签页中固定标签、普通标签及标签组的间距，使界面看起来更加精致、协调。
-* 新增对 Firefox v146 引入的 **标签分屏视图** 功能的支持。
+**🦊 v5.6.0**
+* 扩展了 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` 的功能。
+  在水平标签页模式下将此选项设为 `3` 时，可启用新的第三种模式。
+  此模式的布局与模式 `2` 相同，但将鼠标移动到导航栏上时不会再触发标签栏显示，只有当鼠标移动到屏幕顶部边缘时才会显示标签栏。
+  这样可以避免在使用书签栏或操作导航栏时误触发标签栏，导致鼠标位置被迫重新调整。
+  触发距离可通过 `--uc-tabstoolbar-hover-trigger-width` 自行调整。
+* 为 Firefox v145 新增的 **标签组预览面板** 添加了在水平标签页模式下的支持。
+  现在在垂直和水平两种模式中，都可以正常在预览面板中点击和切换标签页。
+* 以上功能基于 [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks)，感谢 **@MrOtherGuy** 的协助。
+* 修复启用 Mica 或自定义壁纸时，导航栏通知无法保持书签栏显示，导致内容区域被额外裁切的问题。
+* 修复 Firefox v146 的变更导致 Sidebery 的新建标签按钮底部出现缝隙的问题。
+* 修复 Firefox v147 的变更导致网页内容区域的圆角与阴影失效的问题。相关问题：[Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635)
 
 下方视频展示了在 v5.5.x 系列中，通过组合多个新增 UI 选项所能实现的界面效果。
 
@@ -143,7 +149,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
   * 如需临时恢复自动折叠，可使用 `Hide Sidebery` 快捷键，或按 <kbd>F1</kbd> 切换为原生垂直标签页。
 * 新增水平标签页的 3 种布局模式并进行优化
   * 废弃旧选项 `uc.flex.disable-tabs-toolbar-autohide`。现在在 Sidebery 非活动时，水平标签页默认保持可见。
-  * 新增 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`：当 Sidebery 非活动时自动隐藏水平标签页，鼠标悬停在导航栏时显示。设置值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 显示在导航栏上方。
+  * 新增 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`：当 Sidebery 非活动时自动隐藏水平标签页，鼠标悬停在导航栏时显示。设置值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 显示在导航栏上方，`3` = 布局与 `2` 相同，但只有鼠标移动到屏幕顶部边缘时才会显示，用于避免在使用书签或访问导航栏时误触触发标签栏。
   * 新增 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`：当 Sidebery 非活动时自动隐藏导航栏，鼠标悬停在水平标签页时显示。设置值：`0` = 关闭，`1` = 开启。此选项会覆盖前一项的设置。
   * 新增 `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`：在水平标签页模式下，FlexFox 默认在非活动标签页悬停时显示关闭按钮。随着标签页数量增加而宽度变窄，关闭按钮会自动缩小并移到右上角以减少误触。启用此选项可以完全移除关闭按钮。
   * 新增 `uc.flex.show-tab-close-button-on-favicon-hover`：在水平标签页模式下，将关闭按钮与网站图标合并以节省空间。关闭按钮仅在鼠标悬停图标时显示。启用此选项后，上述关闭按钮的自动缩小和移位行为会自动停用。
@@ -377,6 +383,13 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v5.5.4**
+* 新增对 Firefox v145 引入的 **标签组预览面板** 功能的支持。
+  * 可以通过 Firefox 自带的选项 `browser.tabs.groups.hoverPreview.enabled` 关闭此功能。
+* 修复在启用 `uc.flex.style-window-controls-shrink-size` 时，Windows 11 上无法显示 Snap 布局悬浮菜单的问题。
+* 调整了原生垂直标签页中固定标签、普通标签及标签组的间距，使界面看起来更加精致、协调。
+* 新增对 Firefox v146 引入的 **标签分屏视图** 功能的支持。
 
 **v5.5.3**
 * 修复在自动隐藏导航栏时 `uc.flex.move-window-controls-to-left` 失效的问题。
@@ -692,7 +705,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 | `uc.flex.add-ui-text-stroke` | `true` | 为界面文字添加粗描边，提高低分辨率屏幕下的可读性。 |
 | `uc.flex.fully-hide-sidebery` | `true` | 完全隐藏 Sidebery 和原生垂直标签页，将鼠标移至屏幕边缘时自动显示。 |
 | `uc.flex.fully-hide-toolbox` | `true` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
-| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`2` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏水平标签页。鼠标悬停在导航栏时显示。取值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 标签页显示在导航栏上方。 |
+| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏水平标签页。鼠标悬停在导航栏时显示。取值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 标签页显示在导航栏上方，`3` = 与 `2` 相同，但只在鼠标移动到屏幕顶部边缘时显示，以避免误触。 |
 | `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏导航栏。鼠标悬停在水平标签页时显示导航栏。取值：`0` = 关闭，`1` = 开启。此选项优先级较高，如果同时启用 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`，会覆盖该选项的设置。 |
 | `uc.flex.auto-hide-navbar-icons` | `true` | 默认隐藏工具栏图标（包括导航栏、书签栏及菜单栏的工具项），鼠标悬停在工具栏上时显示。此选项不影响地址栏或窗口控制按钮。侧栏切换按钮（FlexFox 图标）通常始终可见，但当侧栏按钮未放在导航栏边缘，或启用了 `uc.flex.revert-to-original-sidebar-icon` 时，也会跟随自动隐藏。 |
 | `uc.flex.auto-hide-window-controls` | `true` | 默认隐藏窗口控制按钮（最小化、最大化、关闭），鼠标悬停在工具栏边缘时显示。 |

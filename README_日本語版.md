@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v146-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v147-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -20,12 +20,18 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v5.5.4**
-* Firefox v145で追加された**タブグループのプレビューパネル**に対応しました。
-  * この機能は、Firefoxの設定項目 `browser.tabs.groups.hoverPreview.enabled` で無効化できます。
-* `uc.flex.style-window-controls-shrink-size` を有効にした際、Windows 11で Snap Layouts のフライアウトメニューが表示されない問題を修正しました。
-* ネイティブ垂直タブにおけるピン留めタブ、通常タブ、タブグループの間隔を微調整し、より洗練された見た目にしました。
-* Firefox v146で導入された**タブスプリットビュー**機能に対応しました。
+**🦊 v5.6.0**
+* `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` の動作を拡張しました。
+  水平タブモードでこの設定値を `3` にすると、新しい第3モードが有効になります。
+  レイアウトはモード `2` と同じですが、ナビゲーションバーにカーソルを合わせてもタブバーは表示されず、画面の最上部にカーソルが到達した時だけタブバーが表示されます。
+  ブックマークツールバーやナビゲーションバーを操作した際にタブバーが意図せず表示され、カーソル位置がずれる問題を避けられます。
+  タブバーを表示する判定位置は `--uc-tabstoolbar-hover-trigger-width` で調整できます。
+* Firefox v145 の新機能「タブグループプレビューパネル」に、水平方向タブモードでの対応を追加しました。
+  プレビューパネル内のタブを問題なく選択・切り替えでき、垂直タブ・水平タブのどちらでも一貫した動作になります。
+* 上記の変更は [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks) をベースにしています。協力いただいた **@MrOtherGuy** に感謝します。
+* Mica またはカスタム壁紙使用時に、ナビゲーションバーの通知がブックマークツールバーの表示を維持できず、コンテンツ領域が不必要に切り取られてしまう問題を修正しました。
+* Firefox v146 の変更が原因で、Sidebery の新しいタブボタン下部に隙間が生じていた問題を修正しました。
+* Firefox v147 の変更により、コンテンツ領域の角丸とシャドウが無効化されていた問題を修正しました。関連バグ: [Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635)
 
 以下の動画は、v5.5.x 系で追加された複数の UI オプションを組み合わせて実現できる外観を紹介しています。
 
@@ -143,7 +149,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
   * 自動折りたたみを一時的に戻したい場合は、`Hide Sidebery` ショートカットを使うか、<kbd>F1</kbd> でネイティブの垂直タブに切り替えてください。
 * 水平タブに 3 種類の新しいレイアウトモードを追加し、機能を最適化
   * 旧オプション `uc.flex.disable-tabs-toolbar-autohide` を廃止。Sidebery が有効でないときでも、水平タブはデフォルトで表示されます。
-  * `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` を追加：Sidebery が有効でないときに水平タブを自動で隠し、ナビゲーションバーにカーソルを合わせると表示します。設定値：`0` = 無効、`1` = ナビゲーションバーの下に表示、`2` = 上に表示。
+  * `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` を追加：Sidebery が有効でないときに水平タブを自動で隠し、ナビゲーションバーにカーソルを合わせると表示します。設定値：`0` = 無効、`1` = ナビゲーションバーの下に表示、`2` = 上に表示、`3` = レイアウトは `2` と同じですが、画面最上部にカーソルが届いた時だけ表示され、ブックマークやナビゲーションバー操作時の誤表示を防ぎます。
   * `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` を追加：Sidebery が有効でないときにナビゲーションバーを自動で隠し、水平タブにカーソルを合わせると表示します。設定値：`0` = 無効、`1` = 有効。前の自動非表示設定より優先されます。
   * `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` を追加：水平タブモードで、デフォルトでは非アクティブタブにカーソルを合わせると閉じるボタンが表示されます。タブ数が増えて幅が狭くなると、誤クリックを防ぐためにボタンは自動的に縮小して右上に移動します。このオプションを有効にすると、閉じるボタンを完全に非表示にできます。
   * `uc.flex.show-tab-close-button-on-favicon-hover` を追加：水平タブモードで、閉じるボタンをファビコンと統合してスペースを節約します。閉じるボタンはファビコンにカーソルを合わせたときのみ表示されます。このオプションを有効にすると、上記の自動縮小・移動の挙動が無効化されます。
@@ -379,6 +385,13 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v5.5.4**
+* Firefox v145で追加された**タブグループのプレビューパネル**に対応しました。
+  * この機能は、Firefoxの設定項目 `browser.tabs.groups.hoverPreview.enabled` で無効化できます。
+* `uc.flex.style-window-controls-shrink-size` を有効にした際、Windows 11で Snap Layouts のフライアウトメニューが表示されない問題を修正しました。
+* ネイティブ垂直タブにおけるピン留めタブ、通常タブ、タブグループの間隔を微調整し、より洗練された見た目にしました。
+* Firefox v146で導入された**タブスプリットビュー**機能に対応しました。
 
 **v5.5.3**
 * ナビゲーションバーの自動非表示時に `uc.flex.move-window-controls-to-left` が無効になる問題を修正。
@@ -687,7 +700,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 | `uc.flex.add-ui-text-stroke` | `true` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
 | `uc.flex.fully-hide-sidebery` | `true` | Sidebery とネイティブの縦型タブを完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
 | `uc.flex.fully-hide-toolbox` | `true` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
-| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`2` | 水平タブモードで、Sidebery が非アクティブ時に水平タブを自動で非表示にします。ナビゲーションバーにカーソルを合わせるとタブが表示されます。値：`0` = 無効、`1` = ナビゲーションバー下に表示、`2` = ナビゲーションバー上に表示。 |
+| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3` | 水平タブモードで、Sidebery が非アクティブ時に水平タブを自動で非表示にします。ナビゲーションバーにカーソルを合わせるとタブが表示されます。値：`0` = 無効、`1` = ナビゲーションバー下に表示、`2` = ナビゲーションバー上に表示、`3` = `2` と同じですが、画面最上部にカーソルが届いた時のみ表示され、誤表示を防ぎます。 |
 | `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | 水平タブモードで、Sidebery が非アクティブ時にナビゲーションバーを自動で非表示にします。水平タブにカーソルを合わせるとナビゲーションバーが表示されます。値：`0` = 無効、`1` = 有効。このオプションは優先度が高く、`uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` と同時に有効にした場合、そちらを上書きします。 |
 | `uc.flex.auto-hide-navbar-icons` | `true` | ツールバーのアイコン（ナビゲーションバー、ブックマークツールバー、メニューバーのアイテムを含む）を既定で非表示にし、ツールバーにカーソルを合わせると再表示されます。このオプションは URL バーやウィンドウ操作ボタンには影響しません。サイドバー切り替えボタン（FlexFoxロゴ）は通常常に表示されますが、ナビゲーションバーの端に配置されていない場合、または `uc.flex.revert-to-original-sidebar-icon` が有効な場合は自動非表示の対象となります。 |
 | `uc.flex.auto-hide-window-controls` | `true` | ウィンドウ操作ボタン（最小化・最大化・閉じる）を既定で非表示にし、ツールバーの端にカーソルを合わせると再表示されます。 |

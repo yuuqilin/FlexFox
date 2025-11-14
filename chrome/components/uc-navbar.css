@@ -95,7 +95,7 @@ toolbarbutton:hover {
 }
 
 /* Modified from https://github.com/MrOtherGuy/firefox-csshacks/blob/master/chrome/autohide_toolbox.css */
-/* 8d3c6ab */
+/* 2f30a22 */
 
 /* Hide the whole toolbar area unless urlbar is focused or cursor is over the toolbar */
 /* Dimensions on non-Win10 OS probably needs to be adjusted */
@@ -171,9 +171,9 @@ toolbarbutton:hover {
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel,
-                        #tabgroup-preview-panel
-                    )
+                        #tab-preview-panel
+                    ),
+                > #tab-group-editor > [panelopen]
             )
             ~ toolbox
             #urlbar[popover],
@@ -213,9 +213,9 @@ toolbarbutton:hover {
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel,
-                        #tabgroup-preview-panel
-                    )
+                        #tab-preview-panel
+                    ),
+                > #tab-group-editor > [panelopen]
             )
             ~ toolbox,
         #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
@@ -329,9 +329,9 @@ toolbarbutton:hover {
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel,
-                        #tabgroup-preview-panel
-                    )
+                        #tab-preview-panel
+                    ),
+                > #tab-group-editor > [panelopen]
             )
             ~ toolbox
             #urlbar[popover],
@@ -375,9 +375,9 @@ toolbarbutton:hover {
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel,
-                        #tabgroup-preview-panel
-                    )
+                        #tab-preview-panel
+                    ),
+                > #tab-group-editor > [panelopen]
             )
             ~ toolbox,
         #navigator-toolbox:has(#urlbar:is([open], [focus-within])),
