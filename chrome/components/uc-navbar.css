@@ -171,7 +171,8 @@ toolbarbutton:hover {
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel
+                        #tab-preview-panel,
+                        #tabgroup-preview-panel
                     ),
                 > #tab-group-editor > [panelopen]
             )
@@ -206,6 +207,16 @@ toolbarbutton:hover {
             */
             transform: rotateX(0deg);
         }
+        @media not -moz-pref("sidebar.verticalTabs") {
+            #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                ~ toolbox
+                #urlbar[popover] {
+                pointer-events: auto;
+                opacity: 1;
+                transition: var(--uc-hover-urlbar-transition) !important;
+                transform: rotateX(0deg);
+            }
+        }
 
         :root[window-modal-open] #navigator-toolbox,
         #mainPopupSet:has(
@@ -213,7 +224,8 @@ toolbarbutton:hover {
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel
+                        #tab-preview-panel,
+                        #tabgroup-preview-panel
                     ),
                 > #tab-group-editor > [panelopen]
             )
@@ -235,6 +247,14 @@ toolbarbutton:hover {
             */
             transform: rotateX(0);
             opacity: 1;
+        }
+        @media not -moz-pref("sidebar.verticalTabs") {
+            #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                ~ #navigator-toolbox {
+                transition: var(--uc-hover-navbar-transition) !important;
+                transform: rotateX(0);
+                opacity: 1;
+            }
         }
 
         #navigator-toolbox > * {
@@ -329,7 +349,8 @@ toolbarbutton:hover {
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel
+                        #tab-preview-panel,
+                        #tabgroup-preview-panel
                     ),
                 > #tab-group-editor > [panelopen]
             )
@@ -368,6 +389,16 @@ toolbarbutton:hover {
             */
             transform: rotateX(0deg);
         }
+        @media not -moz-pref("sidebar.verticalTabs") {
+            #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                ~ toolbox
+                #urlbar[popover] {
+                pointer-events: auto;
+                opacity: 1;
+                transition: var(--uc-hover-urlbar-transition) !important;
+                transform: rotateX(0deg);
+            }
+        }
 
         :root[window-modal-open] #navigator-toolbox,
         #mainPopupSet:has(
@@ -375,7 +406,8 @@ toolbarbutton:hover {
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel
+                        #tab-preview-panel,
+                        #tabgroup-preview-panel
                     ),
                 > #tab-group-editor > [panelopen]
             )
@@ -397,6 +429,14 @@ toolbarbutton:hover {
             */
             transform: rotateX(0);
             opacity: 1;
+        }
+        @media not -moz-pref("sidebar.verticalTabs") {
+            #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+                ~ #navigator-toolbox {
+                transition: var(--uc-hover-navbar-transition) !important;
+                transform: rotateX(0);
+                opacity: 1;
+            }
         }
 
         #navigator-toolbox > * {

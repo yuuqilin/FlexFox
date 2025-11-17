@@ -356,6 +356,19 @@
 :root[customtitlebar]:not([customizing]),
 :root[inFullscreen] {
     #nav-bar {
+        --uc-sidebar-button-offset: 0px;
+        /* If the sidebar button is the last item in the nav bar, leave room for it. */
+        @media not -moz-pref("sidebar.position_start") {
+            :root:not([taskbartab]) & {
+                &:has(> #nav-bar-customization-target > #sidebar-button:last-child) {
+                    --uc-sidebar-button-offset: var(--uc-sidebar-stripe-width, 0px);
+                    /* In horizontal tab mode, shift the sidebar button only when Sidebery is active */
+                    @media not -moz-pref("sidebar.verticalTabs") {
+                        --uc-sidebar-button-offset: var(--uc-sb-sidebar-button-offset, 0px);
+                    }
+                }
+            }
+        }
         padding-right: var(--uc-sidebar-button-offset) !important;
         /*
         padding-right: calc(var(--uc-nav-bar-padding-right) + var(--uc-sidebar-button-offset)) !important;

@@ -20,7 +20,13 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.6.0**
+**🦊 v5.6.1**
+* Fixed a regression in v5.6.0 where tabs lost their Mica background when the **Tab Group Preview Panel** was shown with Mica and Vertical Tabs enabled.
+* Added support for showing the **Tab Group Preview Panel** in `uc.flex.fully-hide-toolbox`, `Hide Topbar`, `Hide All`, and fullscreen modes.
+
+<!-- END What's New -->
+
+**v5.6.0**
 * Expanded the behavior of `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`.
   A new third mode is now available when this option is set to `3` in horizontal tab mode.
   This mode uses the same layout as mode `2`, but hovering over the navigation bar will no longer reveal the tab bar. The tab bar only appears when the cursor reaches the very top edge of the screen. This avoids accidental tab bar activation when using the bookmarks toolbar or interacting with the navigation bar.
@@ -31,8 +37,6 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * Fixed an issue where notification banners in the navigation bar failed to keep the bookmarks toolbar visible when Mica or a custom wallpaper was enabled. This caused unnecessary clipping of the content area.
 * Fixed a regression in Firefox v146 that left a gap below Sidebery's New Tab Button.
 * Fixed a regression in Firefox v147 where rounded corners and shadows for the web content area stopped working. Related to [Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635).
-
-<!-- END What's New -->
 
 The video below demonstrates the visual result achieved by combining several new UI options introduced in the v5.5.x series.
 

@@ -96,7 +96,8 @@
                         #ask-chat-shortcuts,
                         #selection-shortcut-action-panel,
                         #chat-shortcuts-options-panel,
-                        #tab-preview-panel
+                        #tab-preview-panel,
+                        #tabgroup-preview-panel
                     ),
                 > #tab-group-editor > [panelopen]
             )

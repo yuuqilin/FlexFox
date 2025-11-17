@@ -20,7 +20,11 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.6.0**
+**🦊 v5.6.1**
+* 修复了 v5.6.0 中出现的回归问题。在启用 Mica 和垂直标签页时打开标签组预览面板，会导致标签页失去 Mica 背景。
+* 新增在 `uc.flex.fully-hide-toolbox`、`Hide Topbar`、`Hide All` 以及全屏模式下显示标签组预览面板的支持。
+
+**v5.6.0**
 * 扩展了 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` 的功能。
   在水平标签页模式下将此选项设为 `3` 时，可启用新的第三种模式。
   此模式的布局与模式 `2` 相同，但将鼠标移动到导航栏上时不会再触发标签栏显示，只有当鼠标移动到屏幕顶部边缘时才会显示标签栏。

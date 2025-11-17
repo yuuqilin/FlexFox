@@ -812,19 +812,6 @@
     /*
     --uc-nav-bar-padding-right: 0px;
     */
-    --uc-sidebar-button-offset: 0px;
-    /* If the sidebar button is the last item in the nav bar, leave room for it. */
-    @media not -moz-pref("sidebar.position_start") {
-        &:not([taskbartab]) {
-            #nav-bar:has(> #nav-bar-customization-target > #sidebar-button:last-child) {
-                --uc-sidebar-button-offset: var(--uc-sidebar-stripe-width, 0px);
-                /* In horizontal tab mode, shift the sidebar button only when Sidebery is active */
-                @media not -moz-pref("sidebar.verticalTabs") {
-                    --uc-sidebar-button-offset: var(--uc-sb-sidebar-button-offset, 0px);
-                }
-            }
-        }
-    }
 
     /* When native vertical tabs are enabled, window control spacing is not needed. */
     /*
@@ -1427,6 +1414,12 @@
     }
 
     /* Use hover transition timing when a menu is open */
+    /** 
+     * The following block was disabled because testing showed that sibling selectors
+     * are still much faster than using :root:has() to pass variables to descendants.
+     * Since #mainPopupSet appears before the main toolbar elements, using a sibling
+     * selector to propagate the state to the toolbars is more efficient. 
+     */
     /*
     @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
         &:has(
