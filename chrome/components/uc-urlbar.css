@@ -185,7 +185,7 @@
 #identity-icon-box.identity-box-button {
 */
 #identity-icon-box {
-    margin: 3px 3px 3px 3px;
+    margin: 2px 3px 2px 3px;
     /* The variable --urlbar-icon-border-radius was deprecated after v145 and replaced with --urlbar-inner-border-radius. 
        This fallback can be removed once support for older versions is no longer needed. */
     border-radius: var(

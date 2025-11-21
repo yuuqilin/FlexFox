@@ -1,3 +1,7 @@
+#link-preview-panel {
+    --panel-border-radius: 0 !important;
+}
+
 /* Modified from https://gist.github.com/emvaized/a379d61ed8970e5711ca7278a39c1895/ */
 
 /* Iconic Firefox (https://gist.github.com/emvaized/a379d61ed8970e5711ca7278a39c1895/) */
@@ -120,6 +124,14 @@
         background-image: url("../icons/menu/select-all-on.svg");
         background-position-x: 1.076em !important;
     }
+    #context-previewlink {
+        background-image: url("../icons/menu/context-preview-link.svg");
+        background-position-x: 0.75em;
+        background-size: 21px;
+    }
+    #context-visual-search {
+        background-image: url("../icons/menu/google-lens-logo.svg");
+    }
     #context-add-engine {
         background-image: url("../icons/menu/context-add-engine.svg");
         background-position-x: 1em;
@@ -207,13 +219,30 @@
         background-image: url("../icons/menu/new-group.svg");
         background-size: 18px;
     }
-    #context_ungroupTab {
+    #context_ungroupTab,
+    #context_ungroupSplitView {
         background-image: url("../icons/menu/ungroup-tab.svg");
+        background-position-x: 0.9em;
+        background-size: 18px;
+    }
+    #context_moveTabToSplitView {
+        background-image: url("../icons/menu/context-move-tab-to-split-view.svg");
+        background-position-x: 0.9em;
+        background-size: 18px;
+    }
+    #context_separateSplitView {
+        background-image: url("../icons/menu/context-separate-split-view.svg");
         background-position-x: 0.9em;
         background-size: 18px;
     }
     #context_unloadTab {
         background-image: url("../icons/menu/quit.svg");
+    }
+    #context_addNote,
+    #context_editNote {
+        background-image: url("../icons/menu/context-add-note.svg");
+        background-position-x: 0.9em;
+        background-size: 20px;
     }
     #context_selectAllTabs {
         background-image: url("../icons/menu/select-all-tabs-rounded.svg");

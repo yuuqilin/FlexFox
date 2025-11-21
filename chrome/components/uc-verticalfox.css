@@ -106,7 +106,7 @@
             }
             /* Keep Sidebery visible when the sidebar header menu is open */
             @media not -moz-pref("sidebar.revamp") {
-                &:has(#sidebar-switcher-target.active) {
+                &:has(> #sidebar-header > #sidebar-switcher-target.active) {
                     z-index: 100;
                 }
             }
@@ -190,7 +190,7 @@
             }
 
             &:hover #sidebar,
-            #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
+            #sidebar-header:has(> #sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;
@@ -212,7 +212,7 @@
         }
 
         &:hover #sidebar,
-        #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
+        #sidebar-header:has(> #sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
             min-width: var(--uc-sb-sidebar-hover-width) !important;
             transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay) !important;
@@ -234,7 +234,7 @@
             }
 
             &:hover #sidebar,
-            #sidebar-header:has(#sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
+            #sidebar-header:has(> #sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
                 min-width: var(--uc-sb-sidebar-hover-width) !important;
                 transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay) !important;

@@ -20,29 +20,41 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.6.1**
-* Fixed a regression in v5.6.0 where tabs lost their Mica background when the **Tab Group Preview Panel** was shown with Mica and Vertical Tabs enabled.
-* Added support for showing the **Tab Group Preview Panel** in `uc.flex.fully-hide-toolbox`, `Hide Topbar`, `Hide All`, and fullscreen modes.
+**🦊 v5.6.2**
+* Added `uc.flex.enable-translucent-urlbar-popup-and-menus`: enables a translucent and blurred background for the urlbar popup and various menus. FlexFox normally applies these effects only when Mica or a custom wallpaper is active, and this option allows you to use the translucent popup and menu background even without them. If Mica or a custom wallpaper is already enabled, you don't need this option.
+* Added support for v146's new feature “Preview Link”.
+* Added menu icons for the new context menu items “Search Image with Google Lens”, “Add Split View”, “Preview Link”, and “Add Note”.
+* Fixed broken support for “Tab Split View” in vertical tab mode caused by changes in v146. [Bug 1991763](https://bugzilla.mozilla.org/show_bug.cgi?id=1991763)
+  * Tab Split View is unavailable on v145. Starting with v146, it can be enabled by turning on the native preference `browser.tabs.splitView.enabled`.
+  * The feature is still under development. Its appearance differs between v146 and v147. FlexFox is optimized for v147. It works on v146, but the visuals may not be fully polished.
+* Fixed an issue caused by changes in v146 where a black line appeared at the bottom of the sidebar stripe when expanding the sidebar header in horizontal tab mode.
+* Fixed an issue where the shadow of Web Developer Tools would not display when `uc.flex.enable-rounded-web-content` is enabled on Nightly v147.
+
+The video below demonstrates the new features introduced in the v5.6.x series, including the new auto-hide mode for horizontal tabs, translucent backgrounds for the urlbar popup and menus, and the tab style of Tab Split View.
+
+https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 
 <!-- END What's New -->
-
-**v5.6.0**
-* Expanded the behavior of `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`.
-  A new third mode is now available when this option is set to `3` in horizontal tab mode.
-  This mode uses the same layout as mode `2`, but hovering over the navigation bar will no longer reveal the tab bar. The tab bar only appears when the cursor reaches the very top edge of the screen. This avoids accidental tab bar activation when using the bookmarks toolbar or interacting with the navigation bar.
-  The trigger height can be customized with `--uc-tabstoolbar-hover-trigger-width`.
-* Added support for the new **Tab Group Preview Panel** introduced in Firefox v145 when using horizontal tabs.
-  The preview panel now works consistently in both vertical and horizontal tab modes, allowing tab selection and switching from within the panel.
-* The above improvements are based on work from [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks). Special thanks to **@MrOtherGuy** for the help.
-* Fixed an issue where notification banners in the navigation bar failed to keep the bookmarks toolbar visible when Mica or a custom wallpaper was enabled. This caused unnecessary clipping of the content area.
-* Fixed a regression in Firefox v146 that left a gap below Sidebery's New Tab Button.
-* Fixed a regression in Firefox v147 where rounded corners and shadows for the web content area stopped working. Related to [Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635).
 
 The video below demonstrates the visual result achieved by combining several new UI options introduced in the v5.5.x series.
 
 https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
-**✨ FlexFox v5.5.0 – UI and UX Enhancements**
+## 🎉 Major Feature Update
+
+<details>  
+<summary>🧩 <b>Major Update: Auto-Hide Horizontal Tabs Gains a New Mode</b> <i>[Click to expand]</i> 👇</summary>
+
+* Added a new mode to `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`.
+  * Set this option to `3` to enable the new mode.
+  * This mode uses the same layout as mode `2`, but hovering over the navigation bar will no longer reveal the tab bar. The tab bar only appears when the cursor reaches the very top edge of the screen.
+  * This prevents accidental tab bar activation when interacting with the bookmarks toolbar or navigation buttons, avoiding the need to reposition the cursor.
+  * The trigger distance from the top edge can be customized with `--uc-tabstoolbar-hover-trigger-width`.
+
+</details>
+
+<details>  
+<summary>✨ <b>Major Update: New UI & UX Style Customization Options</b> <i>[Click to expand]</i> 👇</summary>
 
 * Added `uc.flex.style-sidebar-button` to switch the sidebar toggle icon (`1`–`4`):
   * `1` = Firefox Master Brand Logo (default, same as before)
@@ -72,18 +84,8 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * Added `uc.flex.style-window-controls-shift-up` to slightly raise the window controls (default: `False`).
 * Added `uc.flex.style-window-controls-shrink-size` to reduce the size of window controls (default: `False`).
 * Added `uc.flex.move-window-controls-to-left` to move window controls to the left edge of the navbar or horizontal tab bar (default: `False`).
-* Improved the shadow rendering of the URL bar popup.
-* Refined the Findbar's design for better proportions, smoother corner transitions, added depth shadows, and more fluid open/close animations.
-* Improved `uc.flex.enable-colored-bookmarks-folder-icons` with support for the “Other Bookmarks” folder.
-* Enhanced `uc.flex.style-tab-group` with rotation animations for group indicators when animation is enabled.
-* Fixed an issue where folded tabs would not display when `uc.flex.style-tab-group` = `2` or `4`.
-* Fixed a counting issue when both `uc.flex.remove-sidebar-stripe` and `uc.flex.show-tab-count-in-alltabs-button` were enabled.
-* Fixed an issue where tab favicons failed to hide when `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` with `uc.flex.show-tab-close-button-on-favicon-hover`.
-* Fixed the broken style of the search engine switch button in the URL bar caused by Firefox v143 ([Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)).
-* Various minor bug fixes and improvements.
-* `uc.flex.show-flexfox-version-info-in-about-config` is now enabled by default. Set it to `False` to disable.
 
-## 🎉 Major Feature Update
+</details>
 
 <details>  
 <summary>🧊 <b>Major Update: Translucent Mica & Custom Wallpaper Backgrounds</b> <i>[Click to expand]</i> 👇</summary>
@@ -393,147 +395,21 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 <!-- END Release Note -->
 
-**v5.5.4**
-* Added support for the new **tab group preview panel** introduced in Firefox v145.
-  * You can turn off this Firefox feature with the built-in preference `browser.tabs.groups.hoverPreview.enabled`.
-* Fixed an issue on Windows 11 where the Snap Layouts fly-out menu would not appear when `uc.flex.style-window-controls-shrink-size` was enabled.
-* Adjusted the spacing of pinned tabs, regular tabs, and tab groups in native vertical tabs to achieve a more refined and polished appearance.
-* Added support for the **tab split view** feature introduced in Firefox v146.
+**v5.6.1**
+* Fixed a regression in v5.6.0 where tabs lost their Mica background when the **Tab Group Preview Panel** was shown with Mica and Vertical Tabs enabled.
+* Added support for showing the **Tab Group Preview Panel** in `uc.flex.fully-hide-toolbox`, `Hide Topbar`, `Hide All`, and fullscreen modes.
 
-**v5.5.3**
-* Fixed `uc.flex.move-window-controls-to-left` not working when the navbar was auto-hidden.
-* Adjusted toolbar icon spacing when combining multiple options like window control and rounded content settings.
-* Improved layout for taskbar tabs with rounded content or horizontal tab mode.
-* Added icons for AI items in the native tab context menu.
-
-**v5.5.2**
-* Fixed the issue where the URL bar transition animation disappeared when `uc.flex.move-urlbar-popup-to-center` was enabled in fullscreen or `Hide Topbar` mode.
-* Fixed the sidebar header border color mismatch with Sidebery in horizontal tab layout mode.
-* The video below demonstrates the visual result achieved by combining several new UI options introduced in the v5.5.x series.
-
-https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
-
-**v5.5.1**
-* Fixed inconsistent top and bottom border colors in the Sidebery panel when `uc.flex.remove-sidebar-stripe` is enabled.
-* Fixed a missing animation issue with the URL bar transition when using horizontal tabs with `uc.flex.move-urlbar-popup-to-center` enabled.
-* Fixed mismatched corner rounding on tab group labels in vertical tabs introduced by Nightly v145. [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
-* Fixed missing rounded corners on URL bar icons introduced by Nightly v145. [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
-* Added a new option `uc.flex.enable-rounded-web-content-at-sidebery-corner`, which also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe when `uc.flex.enable-rounded-web-content` is enabled.
-
-**✨ FlexFox v5.5.0 – UI and UX Enhancements**
-
-* Added `uc.flex.style-sidebar-button` to switch the sidebar toggle icon (`1`–`4`):
-  * `1` = Firefox Master Brand Logo (default, same as before)
-  * `2` = Firefox Browser Logo
-  * `3` = Firefox System 1 Logo
-  * `4` = Mozilla Flag Symbol
-* Added `uc.flex.style-toolbar-bgcolor` to change the background color of the navbar and sidebar (`1`–`2`):
-  * `1` = Tokyo Night theme (default, same as before)
-  * `2` = Firefox Acorn Design
-* Added `uc.flex.style-urlbar` to customize the URL bar appearance (`1`–`4`):
-  * `1` = Flat (default, same as before)
-  * `2` = Inset (embedded look with centered text)
-  * `3` = Debossed (pressed-in look with centered text)
-  * `4` = Seamless (fully merged into the navbar, centered text)
-* Added `uc.flex.move-urlbar-popup-to-center` to reposition the URL bar popup (`0`–`2`):
-  * `0` = Disabled (default)
-  * `1` = Center when focused
-  * `2` = Center only when typing
-* Updated `uc.flex.dim-urlbar-popup-backdrop` to match the new popup behavior (`0`–`2`):
-  * `0` = No dimming (default)
-  * `1` = 35% dim when open
-  * `2` = 50% dim when open
-* Added `uc.flex.style-window-controls` to switch the window control icons (`1`–`3`):
-  * `1` = Traffic Light Buttons (default, same as before)
-  * `2` = Yosemite Window Buttons
-  * `3` = Yosemite GTK Theme
-* Added `uc.flex.style-window-controls-shift-up` to slightly raise the window controls (default: `False`).
-* Added `uc.flex.style-window-controls-shrink-size` to reduce the size of window controls (default: `False`).
-* Added `uc.flex.move-window-controls-to-left` to move window controls to the left edge of the navbar or horizontal tab bar (default: `False`).
-
-  * Note: This option has no effect when `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` is enabled without `uc.flex.restore-window-controls-on-tabbar`.
-* Improved the shadow rendering of the URL bar popup.
-* Refined the Findbar's design for better proportions, smoother corner transitions, added depth shadows, and more fluid open/close animations.
-* Improved `uc.flex.enable-colored-bookmarks-folder-icons` with support for the “Other Bookmarks” folder.
-* Enhanced `uc.flex.style-tab-group` with rotation animations for group indicators when animation is enabled.
-* Fixed an issue where folded tabs would not display when `uc.flex.style-tab-group` = `2` or `4`.
-* Fixed a counting issue when both `uc.flex.remove-sidebar-stripe` and `uc.flex.show-tab-count-in-alltabs-button` were enabled.
-* Fixed an issue where tab favicons failed to hide when `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` with `uc.flex.show-tab-close-button-on-favicon-hover`.
-* Fixed the broken style of the search engine switch button in the URL bar caused by Firefox v143 ([Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)).
-* Various minor bug fixes and improvements.
-* `uc.flex.show-flexfox-version-info-in-about-config` is now enabled by default. Set it to `False` to disable.
-
-**v5.0.3**
-
-* Improved auto-hide of the horizontal tab bar so it stays visible when the URL bar is focused.
-* Added controls to adjust the animation speed of active tab width changes with `uc.flex.sidebery-fast-hover-expand` and `uc.flex.sidebery-slow-hover-expand`.
-* Adjusted the volume icon position in collapsed mode when `uc.flex.sidebery-allow-resizable-width` is enabled.
-* Fixed native vertical tabs not expanding when “Expand sidebar on hover” and `uc.flex.fully-hide-sidebery` were both enabled. (#21)
-* Fixed tab icon misalignment in native vertical tabs after entering and exiting DOM fullscreen from a pinned tab.
-* Fixed missing text on the “Done” and “Cancel” buttons when creating a tab group.
-* Fixed a regression in v5.0.2 where native vertical tabs would not expand with both `Lock Sidebery` and `Hide Sidebery` enabled.
-* Fixed a flicker issue when hovering to expand the tab bar with `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` enabled, caused by moving the mouse across the tab bar and navbar.
-* Added two new context menu icons: “Copilot” and “Add Tab to New Group”.
-* Added option `uc.flex.style-tab-group` to customize tab group appearance in native vertical tabs:
-  * `1` (default): expand/collapse indicator, no animation
-  * `2`: indicator with expand/collapse animation
-  * `3`: centered label, no indicator, no animation
-  * `4`: centered label, no indicator, with animation
-
-**v5.0.2**
-
-* **Performance**: Refactored parts of the code. CPU usage of the expand/collapse animation for native vertical tabs is now 40% lower compared to v4.0.5. Performance is on par with Firefox's built-in *Expand sidebar on hover* option, though still about twice as heavy as Sidebery. Sidebery is faster, more feature-rich, and more stable than native vertical tabs, and is recommended.
-* **Visuals**: Fixed ghosting artifacts in collapse animations when Mica or custom wallpapers are enabled.
-* **New option**: Added `uc.flex.restore-window-controls-on-tabbar`, which restores the window control buttons to the tab bar in horizontal tabs mode.
-* **Other**: Various minor bug fixes.
-
-**v5.0.1**
-
-* Improved usability of `uc.flex.sidebery-allow-resizable-width`
-  * Prevented Sidebery from shifting left and right when toggled into collapsed mode using the sidebar button (Firefox Logo).
-  * Pinned tabs now wrap automatically when the sidebar width becomes narrow, ensuring they remain accessible instead of overflowing.
-* Extended `uc.flex.max-visible-vertical-pinned-tabs` to also control the maximum height of pinned tabs in Sidebery.
-  * Default remains `4` (up to 4 rows visible, with scroll available for overflow).
-  * Value range expanded to `2`–`8`.
-  * Setting `0` removes the height limit, allowing unlimited expansion.
-* Fixed an issue where the window control buttons disappeared when not hovered while Firefox was in Customize Toolbar mode with `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` enabled.
-* Fixed the broken appearance of tag group labels caused by Nightly v144 changes. [Bug 1981197](https://bugzilla.mozilla.org/show_bug.cgi?id=1981197)
-* Fixed a width collapse issue in native vertical tabs when toggling to collapsed mode, caused by Nightly v144 changes. [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
-* Fixed the counter malfunction in `uc.flex.show-tab-count-in-alltabs-button` due to Nightly v144 changes. [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
-
-**✨ v5.0.0 – Major Feature Update**
-
-* Added two new layout modes for Sidebery
-  * Added `uc.flex.sidebery-allow-resizable-width`: allows adjusting Sidebery width by dragging the sidebar splitter.
-  * Enabling this option disables Sidebery's auto-collapse, but you can still toggle its expanded/collapsed state with the sidebar toggle button (Firefox Logo).
-  * To temporarily restore auto-collapse, use the `Hide Sidebery` shortcut or press <kbd>F1</kbd> to switch to native vertical tabs.
-* Added three new layout modes and optimizations for horizontal tabs
-  * Deprecated the old option `uc.flex.disable-tabs-toolbar-autohide`. Horizontal tabs are now visible by default when Sidebery is not active.
-  * Added `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`: hides horizontal tabs when Sidebery is not active and shows them on hover. Values: `0` = Off, `1` = Tabs below navbar, `2` = Tabs above navbar.
-  * Added `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`: hides the navbar when Sidebery is not active and shows it on hover. Values: `0` = Off, `1` = On. This option overrides the previous auto-hide-horizontal-tabs setting.
-  * Added `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`: in horizontal tab mode, by default FlexFox shows the close button on hover for inactive tabs. As tabs become narrower due to more tabs opening, the button automatically shrinks and moves to the top-right to prevent accidental clicks. Enable this option to completely remove the close button.
-  * Added `uc.flex.show-tab-close-button-on-favicon-hover`: in horizontal tab mode, merges the close button with the favicon to save space. The close button is shown only when hovering over the favicon. Enabling this option disables the close button's auto-shrink-and-reposition behavior described above.
-  * Added `uc.flex.increase-active-horizontal-tab-min-width`: keeps the active tab wider when horizontal tabs shrink, so its label remains distinguishable and easier to identify among other tabs. Values:
-    * `0` = Off
-    * `1` = Minimum width 1.8×, no animation
-    * `2` = Minimum width 1.8×, with animation
-    * `3` = Minimum width 2×, no animation
-    * `4` = Minimum width 2×, with animation
-    * Default: `1` (enabled). Set to `0` if you prefer all tabs to keep a fixed width.
-  * Pinned horizontal tabs now automatically collapse when exceeding the visible limit. Default visible pinned tabs is 10. Use `uc.flex.max-visible-horizontal-pinned-tabs` to adjust the setting (range `1`–`5`, corresponding to 2–10 visible pinned tabs).
-* Added `uc.flex.auto-hide-window-controls`: automatically hides window control buttons on the navbar, showing them only when hovering at the edge.
-* Added `uc.flex.show-tab-count-in-alltabs-button`: displays the total number of open tabs on the "List All Tabs" button. Values:
-  * `0` = Off
-  * `1` = Icon + number (all tabs)
-  * `2` = Icon + number (loaded tabs only)
-  * `3` = Number only (all tabs)
-  * `4` = Number only (loaded tabs only)
-* Added `uc.flex.show-tab-number-in-tab-label`: shows index numbers on native tab labels so you can quickly identify tabs when labels are too narrow to show full titles.
-* Improved Firefox logo behavior in horizontal tabs: it now only shifts and scales when Sidebery is enabled.
-* Improved the volume icon's appearance in native vertical tabs to make it look less abrupt.
-* Fixed a transparency issue with the Mica background that occurred when both `uc.flex.disable-sidebery-autohide` and `Hide Sidebery` were used.
-* Fixed fullscreen web content corner rounding not being removed correctly when UI theme and page theme were opposite.
-* Refactored Mica backdrop and custom wallpaper code, slightly improving performance (\~4%).
+**v5.6.0**
+* Expanded the behavior of `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`.
+  A new third mode is now available when this option is set to `3` in horizontal tab mode.
+  This mode uses the same layout as mode `2`, but hovering over the navigation bar will no longer reveal the tab bar. The tab bar only appears when the cursor reaches the very top edge of the screen. This avoids accidental tab bar activation when using the bookmarks toolbar or interacting with the navigation bar.
+  The trigger height can be customized with `--uc-tabstoolbar-hover-trigger-width`.
+* Added support for the new **Tab Group Preview Panel** introduced in Firefox v145 when using horizontal tabs.
+  The preview panel now works consistently in both vertical and horizontal tab modes, allowing tab selection and switching from within the panel.
+* The above improvements are based on work from [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks). Special thanks to **@MrOtherGuy** for the help.
+* Fixed an issue where notification banners in the navigation bar failed to keep the bookmarks toolbar visible when Mica or a custom wallpaper was enabled. This caused unnecessary clipping of the content area.
+* Fixed a regression in Firefox v146 that left a gap below Sidebery's New Tab Button.
+* Fixed a regression in Firefox v147 where rounded corners and shadows for the web content area stopped working. Related to [Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635).
 
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))
@@ -785,6 +661,7 @@ For more update logs from earlier versions,
 | `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | Adjusts the appearance of tab groups in native vertical tabs. Values: `1` = show expand/collapse indicator without animation, `2` = show indicator with animation, `3` = center tab labels with no indicator and no animation, `4` = center labels with no indicator and with animation. Default is `1`. |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | When `uc.flex.enable-rounded-web-content` is enabled, also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe. |
+| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | Enables a translucent and blurred background for the URL bar popup and various menus. FlexFox normally enables this effect only when Mica or a custom wallpaper is active, but this option allows it to be enabled even without them. |
 
 #### 🧊 Visual Background & Mica Effects
 

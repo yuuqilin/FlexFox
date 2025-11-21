@@ -20,28 +20,39 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v5.6.1**
-* v5.6.0 で発生した不具合を修正しました。Mica と垂直タブを有効にした状態でタブグループのプレビューパネルを開くと、タブの Mica 背景が消えてしまう問題がありました。
-* `uc.flex.fully-hide-toolbox`、`Hide Topbar`、`Hide All`、全画面表示モードでもタブグループのプレビューパネルが正しく表示されるようになりました。
+**🦊 v5.6.2**
+* `uc.flex.enable-translucent-urlbar-popup-and-menus` を追加：URL バーのポップアップや各種メニューに半透明とぼかしの背景を適用します。通常、FlexFox は Mica またはカスタム壁紙を使用している場合のみこれらの効果を有効化しますが、このオプションを使えば Mica や壁紙がなくても半透明のポップアップとメニューを使用できます。すでに Mica またはカスタム壁紙を有効にしている場合は設定する必要はありません。
+* v146 の新機能「リンク先をプレビュー」に対応しました。
+* 右クリックメニューの新しい項目「Google Lens で画像を検索」、「分割ビューを追加」、「リンク先をプレビュー」、「ノートを追加」のアイコンを追加しました。
+* v146 の変更により、垂直タブ使用時の「分割ビュー」が動作しなくなっていた問題を修正しました。 [Bug 1991763](https://bugzilla.mozilla.org/show_bug.cgi?id=1991763)
+  * 「分割ビュー」は v145 では利用できません。v146 以降では、ネイティブ設定 `browser.tabs.splitView.enabled` を有効化することで使用できます。
+  * この機能は開発中のため、v146 と v147 では外観が少し異なります。FlexFox は v147 を基準に最適化しており、v146 でも動作しますが見た目が完全ではない場合があります。
+* v146 の変更によって、水平タブ使用時にサイドバーのヘッダーを展開するとサイドバーのストライプの下部に黒い線が表示されてしまう問題を修正しました。
+* Nightly v147 の変更により、`uc.flex.enable-rounded-web-content` を有効にした際に開発者ツールの影が表示されなくなる問題を修正しました。
 
-**v5.6.0**
-* `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` の動作を拡張しました。
-  水平タブモードでこの設定値を `3` にすると、新しい第3モードが有効になります。
-  レイアウトはモード `2` と同じですが、ナビゲーションバーにカーソルを合わせてもタブバーは表示されず、画面の最上部にカーソルが到達した時だけタブバーが表示されます。
-  ブックマークツールバーやナビゲーションバーを操作した際にタブバーが意図せず表示され、カーソル位置がずれる問題を避けられます。
-  タブバーを表示する判定位置は `--uc-tabstoolbar-hover-trigger-width` で調整できます。
-* Firefox v145 の新機能「タブグループプレビューパネル」に、水平方向タブモードでの対応を追加しました。
-  プレビューパネル内のタブを問題なく選択・切り替えでき、垂直タブ・水平タブのどちらでも一貫した動作になります。
-* 上記の変更は [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks) をベースにしています。協力いただいた **@MrOtherGuy** に感謝します。
-* Mica またはカスタム壁紙使用時に、ナビゲーションバーの通知がブックマークツールバーの表示を維持できず、コンテンツ領域が不必要に切り取られてしまう問題を修正しました。
-* Firefox v146 の変更が原因で、Sidebery の新しいタブボタン下部に隙間が生じていた問題を修正しました。
-* Firefox v147 の変更により、コンテンツ領域の角丸とシャドウが無効化されていた問題を修正しました。関連バグ: [Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635)
+以下の動画では、v5.6.x シリーズで追加された新機能を紹介しています。水平タブの自動非表示に追加された新モード、URL バーのポップアップとメニューの半透明化、そして Tab Split View のタブスタイルが確認できます。
+
+https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 
 以下の動画は、v5.5.x 系で追加された複数の UI オプションを組み合わせて実現できる外観を紹介しています。
 
 https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
-**✨ FlexFox v5.5.0 – UI / UX の改善**
+## 🎉 主な機能アップデート
+
+<details>  
+<summary>🧩 <b>新機能：水平タブの自動非表示に新モードを追加</b> <i>[クリックで展開]</i> 👇</summary>
+
+* `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` に新しいモードを追加しました。
+  * この設定値を `3` にすると、新モードが有効になります。
+  * レイアウトはモード `2` と同じですが、ナビゲーションバーにカーソルを合わせてもタブバーは表示されず、画面の最上部にカーソルが到達した時だけタブバーが表示されます。
+  * ブックマークツールバーやナビゲーションボタンを操作した際にタブバーが誤って表示されるのを防ぎ、カーソルの再配置を避けられます。
+  * 表示判定の高さは `--uc-tabstoolbar-hover-trigger-width` で調整できます。
+
+</details>
+
+<details>  
+<summary>✨ <b>新機能：UI・UXスタイル調整オプションの追加</b> <i>[クリックで展開]</i> 👇</summary>
 
 * `uc.flex.style-sidebar-button` を追加。サイドバー切り替えボタンのアイコンを変更可能 (`1`～`4`)。
   * `1` = Firefox Master Brand Logo（既定、従来と同じ）
@@ -71,18 +82,8 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * `uc.flex.style-window-controls-shift-up` を追加。ウィンドウコントロールをわずかに上方向へ移動（既定値: `False`）。
 * `uc.flex.style-window-controls-shrink-size` を追加。ウィンドウコントロールを小型化（既定値: `False`）。
 * `uc.flex.move-window-controls-to-left` を追加。ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端へ移動（既定値: `False`）。
-* URLバーのポップアップのシャドウを改善。
-* Findbar の外観を調整し、サイズや角の滑らかさ、陰影、アニメーションの動きを最適化。
-* `uc.flex.enable-colored-bookmarks-folder-icons` が “Other Bookmarks” フォルダーに対応。
-* `uc.flex.style-tab-group` のアニメーション有効時、インジケーターに回転エフェクトを追加。
-* `uc.flex.style-tab-group` = `2` または `4` のとき、折りたたまれたタブが表示されない問題を修正。
-* `uc.flex.remove-sidebar-stripe` と `uc.flex.show-tab-count-in-alltabs-button` を併用した際のカウント不具合を修正。
-* `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` かつ `uc.flex.show-tab-close-button-on-favicon-hover` が有効な場合に、アイコンが隠れない問題を修正。
-* Firefox v143 による URL バー内の検索エンジン切り替えボタンのスタイル崩れを修正（[Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)）。
-* その他多数のバグ修正と調整。
-* `uc.flex.show-flexfox-version-info-in-about-config` が既定で有効化されました。無効にするには `False` に設定してください。
 
-## 🎉 主な機能アップデート
+</details>
 
 <details>  
 <summary>🧊 <b>新機能：半透明Mica効果とカスタム壁紙背景に対応</b> <i>[クリックで展開]</i> 👇</summary>
@@ -390,147 +391,22 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 <summary>💬 <b>過去の更新</b></summary>
 
-**v5.5.4**
-* Firefox v145で追加された**タブグループのプレビューパネル**に対応しました。
-  * この機能は、Firefoxの設定項目 `browser.tabs.groups.hoverPreview.enabled` で無効化できます。
-* `uc.flex.style-window-controls-shrink-size` を有効にした際、Windows 11で Snap Layouts のフライアウトメニューが表示されない問題を修正しました。
-* ネイティブ垂直タブにおけるピン留めタブ、通常タブ、タブグループの間隔を微調整し、より洗練された見た目にしました。
-* Firefox v146で導入された**タブスプリットビュー**機能に対応しました。
+**v5.6.1**
+* v5.6.0 で発生した不具合を修正しました。Mica と垂直タブを有効にした状態でタブグループのプレビューパネルを開くと、タブの Mica 背景が消えてしまう問題がありました。
+* `uc.flex.fully-hide-toolbox`、`Hide Topbar`、`Hide All`、全画面表示モードでもタブグループのプレビューパネルが正しく表示されるようになりました。
 
-**v5.5.3**
-* ナビゲーションバーの自動非表示時に `uc.flex.move-window-controls-to-left` が無効になる問題を修正。
-* 複数のウィンドウ関連オプション併用時のツールバーアイコンの間隔を調整。
-* タスクバータブの余白と配置を改善（角丸コンテンツや水平タブ使用時）。
-* ネイティブタブの右クリックメニューに AI 項目のアイコンを追加。
-
-**v5.5.2**
-* `uc.flex.move-urlbar-popup-to-center` を有効にした際、全画面表示または `Hide Topbar` モードで URL バーのトランジションアニメーションが消えてしまう問題を修正しました。
-* 水平タブレイアウト時に、サイドバーのヘッダー枠線の色が Sidebery と一致しない問題を修正しました。
-* 以下の動画は、v5.5.x 系で追加された複数の UI オプションを組み合わせて実現できる外観を紹介しています。
-
-https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
-
-**v5.5.1**
-* `uc.flex.remove-sidebar-stripe` を有効にした際、Sidebery パネルの上下の境界線の色が一致しない問題を修正しました。
-* `uc.flex.move-urlbar-popup-to-center` を有効にして水平タブを使用している場合に、URL バーのアニメーション遷移が消える問題を修正しました。
-* Nightly v145 の更新により発生した、縦型タブのタブグループラベルの角丸が他のタブと一致しない問題を修正しました。 [Bug 1989112](https://bugzilla.mozilla.org/show_bug.cgi?id=1989112)
-* Nightly v145 の更新により発生した、URL バーのアイコンの角丸が消える問題を修正しました。 [Bug 1992450](https://bugzilla.mozilla.org/show_bug.cgi?id=1992450)
-* 新しいオプション `uc.flex.enable-rounded-web-content-at-sidebery-corner` を追加しました。`uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプ側の角にも角丸効果を適用します。
-
-**✨ FlexFox v5.5.0 – UI / UX の改善**
-
-* `uc.flex.style-sidebar-button` を追加。サイドバー切り替えボタンのアイコンを変更可能 (`1`～`4`)。
-  * `1` = Firefox Master Brand Logo（既定、従来と同じ）
-  * `2` = Firefox Browser Logo
-  * `3` = Firefox System 1 Logo
-  * `4` = Mozilla Flag Symbol
-* `uc.flex.style-toolbar-bgcolor` を追加。ナビゲーションバーとサイドバーの背景色を変更可能 (`1`～`2`)。
-  * `1` = Tokyo Night テーマ（既定、従来と同じ）
-  * `2` = Firefox Acorn Design
-* `uc.flex.style-urlbar` を追加。URLバーの外観を切り替え可能 (`1`～`4`)。
-  * `1` = Flat（既定、従来と同じ）
-  * `2` = Inset（バーが埋め込まれたデザイン、中央揃えの文字）
-  * `3` = Debossed（凹んだデザイン、中央揃えの文字）
-  * `4` = Seamless（ナビゲーションバーと完全に一体化、中央揃えの文字）
-* `uc.flex.move-urlbar-popup-to-center` を追加。URLバーのポップアップ位置を調整 (`0`～`2`)。
-  * `0` = 無効（既定）
-  * `1` = フォーカス時に中央へ移動
-  * `2` = 入力中のみ中央へ移動
-* `uc.flex.dim-urlbar-popup-backdrop` の背景暗化効果を新しい挙動に合わせて更新 (`0`～`2`)。
-  * `0` = 暗化なし（既定）
-  * `1` = 35% 暗化
-  * `2` = 50% 暗化
-* `uc.flex.style-window-controls` を追加。ウィンドウコントロールのアイコンを変更可能 (`1`～`3`)。
-  * `1` = Traffic Light Buttons（既定、従来と同じ）
-  * `2` = Yosemite Window Buttons
-  * `3` = Yosemite GTK テーマ
-* `uc.flex.style-window-controls-shift-up` を追加。ウィンドウコントロールをわずかに上方向へ移動（既定値: `False`）。
-* `uc.flex.style-window-controls-shrink-size` を追加。ウィンドウコントロールを小型化（既定値: `False`）。
-* `uc.flex.move-window-controls-to-left` を追加。ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端へ移動（既定値: `False`）。
-
-  * 注: `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` が有効で、かつ `uc.flex.restore-window-controls-on-tabbar` が無効の場合、この設定は反映されません。
-* URLバーのポップアップのシャドウを改善。
-* Findbar の外観を調整し、サイズや角の滑らかさ、陰影、アニメーションの動きを最適化。
-* `uc.flex.enable-colored-bookmarks-folder-icons` が “Other Bookmarks” フォルダーに対応。
-* `uc.flex.style-tab-group` のアニメーション有効時、インジケーターに回転エフェクトを追加。
-* `uc.flex.style-tab-group` = `2` または `4` のとき、折りたたまれたタブが表示されない問題を修正。
-* `uc.flex.remove-sidebar-stripe` と `uc.flex.show-tab-count-in-alltabs-button` を併用した際のカウント不具合を修正。
-* `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` = `2` かつ `uc.flex.show-tab-close-button-on-favicon-hover` が有効な場合に、アイコンが隠れない問題を修正。
-* Firefox v143 による URL バー内の検索エンジン切り替えボタンのスタイル崩れを修正（[Bug 1980913](https://bugzilla.mozilla.org/show_bug.cgi?id=1980913)）。
-* その他多数のバグ修正と調整。
-* `uc.flex.show-flexfox-version-info-in-about-config` が既定で有効化されました。無効にするには `False` に設定してください。
-
-**v5.0.3**
-
-* URL バーにフォーカスしている時は、水平タブバーが常に表示されるように改善しました。
-* アクティブなタブの幅が変化する際のアニメーション速度を、`uc.flex.sidebery-fast-hover-expand` と `uc.flex.sidebery-slow-hover-expand` で調整できるようになりました。
-* `uc.flex.sidebery-allow-resizable-width` を有効にして折りたたみ状態にした時の音量アイコンの位置を調整しました。
-* 「カーソルを合わせた時にサイドバーを展開する」と `uc.flex.fully-hide-sidebery` を同時に有効にすると、ネイティブ垂直タブが展開できない不具合を修正しました。 (#21)
-* ネイティブ垂直タブで、ピン留めタブから DOM フルスクリーンに入って終了した後にアイコンがずれる不具合を修正しました。
-* タブグループ作成時に「完了」と「キャンセル」ボタンの文字が表示されない不具合を修正しました。
-* v5.0.2 で発生したリグレッションを修正しました。`Lock Sidebery` と `Hide Sidebery` を同時に有効にすると、ネイティブ垂直タブが展開できなくなる問題です。
-* `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` を有効にした状態で、タブバーを展開するためにカーソルを合わせた際に、タブバーとナビゲーションバーの間を移動すると点滅する問題を修正しました。
-* コンテキストメニューに「Copilot」と「新しいグループにタブを追加」のアイコンを追加しました。
-* ネイティブ垂直タブのタブグループの外観を変更できるオプション `uc.flex.style-tab-group` を追加しました：
-  * `1`（デフォルト）：展開/折りたたみインジケーターあり、アニメーションなし
-  * `2`：インジケーターあり、展開/折りたたみアニメーションあり
-  * `3`：ラベル中央揃え、インジケーターなし、アニメーションなし
-  * `4`：ラベル中央揃え、インジケーターなし、アニメーションあり
-
-**v5.0.2**
-
-* **パフォーマンス**: 一部コードをリファクタリングし、ネイティブ垂直タブの展開・折りたたみアニメーションのCPU使用率を v4.0.5 と比べて40％削減しました。Firefox標準の「カーソルを合わせた時にサイドバーを展開する」オプションと同等の性能ですが、依然として Sidebery より2倍重いです。Sidebery はネイティブ垂直タブより高速で機能豊富、バグも少なく、利用を推奨します。
-* **ビジュアル**: Mica やカスタム壁紙を有効にした際に、折りたたみアニメーションで発生するゴースト（ghosting）現象を修正しました。
-* **新しいオプション**: `uc.flex.restore-window-controls-on-tabbar` を追加しました。水平タブモードでタブバー上にウィンドウコントロールボタンを復元できます。
-* **その他**: 複数の細かな不具合を修正しました。
-
-**v5.0.1**
-
-* `uc.flex.sidebery-allow-resizable-width` の使いやすさを改善しました。
-  * サイドバーボタン（Firefox ロゴ）で折りたたみ状態に切り替えた際に、Sidebery が左右に揺れて画面が大きく乱れる問題を防止しました。
-  * Sidebery の幅が狭くなった時にピン留めタブが自動で折り返され、はみ出してクリックできなくなるのを回避できるようになりました。
-* `uc.flex.max-visible-vertical-pinned-tabs` がネイティブ垂直タブだけでなく Sidebery のピン留めタブパネルにも対応するようになりました。
-  * デフォルト値は `4` で、最大 4 行まで表示され、それ以上はスクロールできます。
-  * 設定範囲が `2`～`8` に拡大されました。
-  * `0` を設定すると高さ制限が解除され、無制限に展開できます。
-* Firefox の「ツールバーカスタマイズ」モードで `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` を有効にしていると、ホバーしていない時にウィンドウ操作ボタンが消えてしまう問題を修正しました。
-* Nightly v144 の変更によってタググループラベルの外観が崩れてしまう問題を修正しました。 [Bug 1981197](https://bugzilla.mozilla.org/show_bug.cgi?id=1981197)
-* Nightly v144 の変更によって、ネイティブ垂直タブを折りたたみ状態に切り替えた時に幅が崩れてしまう問題を修正しました。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
-* Nightly v144 の変更によって `uc.flex.show-tab-count-in-alltabs-button` のカウンターが動作しなくなる問題を修正しました。 [Bug 1985296](https://bugzilla.mozilla.org/show_bug.cgi?id=1985296)
-
-**✨ v5.0.0 – 主な機能アップデート**
-
-* Sidebery に 2 種類の新しいレイアウトモードを追加
-  * `uc.flex.sidebery-allow-resizable-width` を追加：サイドバーの仕切りをドラッグして Sidebery の幅を自由に変更できます。
-  * このオプションを有効にすると Sidebery の自動折りたたみは無効になりますが、サイドバーの切り替えボタン（Firefox ロゴ）で展開／折りたたみを操作できます。
-  * 自動折りたたみを一時的に戻したい場合は、`Hide Sidebery` ショートカットを使うか、<kbd>F1</kbd> でネイティブの垂直タブに切り替えてください。
-* 水平タブに 3 種類の新しいレイアウトモードを追加し、機能を最適化
-  * 旧オプション `uc.flex.disable-tabs-toolbar-autohide` を廃止。Sidebery が有効でないときでも、水平タブはデフォルトで表示されます。
-  * `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` を追加：Sidebery が有効でないときに水平タブを自動で隠し、ナビゲーションバーにカーソルを合わせると表示します。設定値：`0` = 無効、`1` = ナビゲーションバーの下に表示、`2` = 上に表示。
-  * `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` を追加：Sidebery が有効でないときにナビゲーションバーを自動で隠し、水平タブにカーソルを合わせると表示します。設定値：`0` = 無効、`1` = 有効。前の自動非表示設定より優先されます。
-  * `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` を追加：水平タブモードで、デフォルトでは非アクティブタブにカーソルを合わせると閉じるボタンが表示されます。タブ数が増えて幅が狭くなると、誤クリックを防ぐためにボタンは自動的に縮小して右上に移動します。このオプションを有効にすると、閉じるボタンを完全に非表示にできます。
-  * `uc.flex.show-tab-close-button-on-favicon-hover` を追加：水平タブモードで、閉じるボタンをファビコンと統合してスペースを節約します。閉じるボタンはファビコンにカーソルを合わせたときのみ表示されます。このオプションを有効にすると、上記の自動縮小・移動の挙動が無効化されます。
-  * `uc.flex.increase-active-horizontal-tab-min-width` を追加：タブが狭まったときにもアクティブタブを広めに確保し、他のタブと区別しやすくなるようにします。設定値：
-    * `0` = 無効
-    * `1` = 最小幅 1.8 倍、アニメーションなし
-    * `2` = 最小幅 1.8 倍、アニメーションあり
-    * `3` = 最小幅 2 倍、アニメーションなし
-    * `4` = 最小幅 2 倍、アニメーションあり
-    * デフォルト：`1`（有効）。すべてのタブを固定幅にしたい場合は `0` を設定してください。
-  * 水平ピン留めタブは可視数を超えると自動的に折りたたまれます。可視ピン留めタブの既定値は 10 個です。`uc.flex.max-visible-horizontal-pinned-tabs` で調整できます（設定値 `1`～`5` は 2～10 個に対応）。
-* `uc.flex.auto-hide-window-controls` を追加：ナビゲーションバー上のウィンドウコントロールを自動で隠し、端にカーソルを合わせると表示します。
-* `uc.flex.show-tab-count-in-alltabs-button` を追加：「すべてのタブを一覧」ボタンに現在開いているタブの合計数を表示します。設定値：
-  * `0` = 無効
-  * `1` = アイコン＋数（全タブ）
-  * `2` = アイコン＋数（読み込み済みタブのみ）
-  * `3` = 数字のみ（全タブ）
-  * `4` = 数字のみ（読み込み済みタブのみ）
-* `uc.flex.show-tab-number-in-tab-label` を追加：ネイティブタブラベルに番号を表示し、ラベルが狭くて全文が見えないときでも素早く識別できます。
-* 水平タブ時の Firefox ロゴ表示を改善：Sidebery が有効なときのみ位置移動と拡大が行われます。
-* ネイティブ垂直タブの音量アイコンの見た目を改善し、違和感を軽減しました。
-* `uc.flex.disable-sidebery-autohide` と `Hide Sidebery` を併用した場合に発生していた Mica 背景の透過問題を修正しました。
-* UI テーマとページテーマが逆になっているとき、全画面表示でコンテンツの角丸が正しく解除されない問題を修正しました。
-* Mica バックドロップとカスタム壁紙関連のコードをリファクタリングし、パフォーマンスを約 4% 向上しました。
+**v5.6.0**
+* `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` の動作を拡張しました。
+  水平タブモードでこの設定値を `3` にすると、新しい第3モードが有効になります。
+  レイアウトはモード `2` と同じですが、ナビゲーションバーにカーソルを合わせてもタブバーは表示されず、画面の最上部にカーソルが到達した時だけタブバーが表示されます。
+  ブックマークツールバーやナビゲーションバーを操作した際にタブバーが意図せず表示され、カーソル位置がずれる問題を避けられます。
+  タブバーを表示する判定位置は `--uc-tabstoolbar-hover-trigger-width` で調整できます。
+* Firefox v145 の新機能「タブグループプレビューパネル」に、水平方向タブモードでの対応を追加しました。
+  プレビューパネル内のタブを問題なく選択・切り替えでき、垂直タブ・水平タブのどちらでも一貫した動作になります。
+* 上記の変更は [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks) をベースにしています。協力いただいた **@MrOtherGuy** に感謝します。
+* Mica またはカスタム壁紙使用時に、ナビゲーションバーの通知がブックマークツールバーの表示を維持できず、コンテンツ領域が不必要に切り取られてしまう問題を修正しました。
+* Firefox v146 の変更が原因で、Sidebery の新しいタブボタン下部に隙間が生じていた問題を修正しました。
+* Firefox v147 の変更により、コンテンツ領域の角丸とシャドウが無効化されていた問題を修正しました。関連バグ: [Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635)
 
 以前のバージョンの更新履歴については  
 👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
@@ -780,6 +656,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 | `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | ネイティブ垂直タブのタブグループの外観を調整します。値：`1` = 展開／折りたたみインジケーターを表示（アニメーションなし）、`2` = インジケーターを表示（アニメーションあり）、`3` = ラベルを中央揃え（インジケーターなし・アニメーションなし）、`4` = ラベルを中央揃え（インジケーターなし・アニメーションあり）。デフォルトは `1` です。 |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | `uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプに接する側の角にも角丸効果を適用します。 |
+| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | URL バーのポップアップや各種メニューに半透明かつぼかしの背景を適用します。FlexFox では通常 Mica またはカスタム壁紙使用時にのみ有効ですが、このオプションを使うことでそれらなしでも適用できます。 |
 
 #### 🧊 背景の見た目とMica効果
 

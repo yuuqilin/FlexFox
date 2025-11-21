@@ -12,7 +12,7 @@
 
                 #TabsToolbar:not([customizing]) {
                     visibility: hidden;
-                    transition: var(--uc-autohide-tabs-toolbar-transition) !important;
+                    transition: var(--uc-autohide-tabstoolbar-transition) !important;
                 }
                 /* Add a hover target pseudo-element to capture hovering */
                 @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
@@ -32,7 +32,7 @@
                         z-index: 1;
                         /* When the tabs toolbar loses hover while the navigator may still be hovered, 
                            use the hover-state transition timing even when not hovered so their animations stay synchronized. */
-                        transition: var(--uc-hover-tabs-toolbar-transition) !important;
+                        transition: var(--uc-hover-tabstoolbar-transition) !important;
                     }
                 }
                 /* These rules make sure that height of tabs toolbar doesn't exceed tab-min-height */
@@ -58,7 +58,7 @@
                             /*
                             transition-delay: var(--uc-autohide-tabstoolbar-delay) !important;
                             */
-                            transition: var(--uc-hover-tabs-toolbar-transition) !important;
+                            transition: var(--uc-hover-tabstoolbar-transition) !important;
                         }
                     }
                 }
@@ -73,7 +73,7 @@
                         #TabsToolbar {
                             visibility: var(--uc-autohide-tabstoolbar-visibility);
                             margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
-                            transition: var(--uc-hover-tabs-toolbar-transition) !important;
+                            transition: var(--uc-hover-tabstoolbar-transition) !important;
                         }
                     }
                 }
@@ -175,7 +175,7 @@
                 #nav-bar:hover + #PersonalToolbar {
                 */
                 #navigator-toolbox:is(:hover, :focus-within) > .browser-toolbar {
-                    --uc-tabs-toolbar-windows-controls-transition: var(--uc-hover-navbar-transition);
+                    --uc-tabstoolbar-windows-controls-transition: var(--uc-hover-navbar-transition);
                     transform: translateY(0);
                     opacity: 1;
                     /*
@@ -327,7 +327,7 @@
                 --uc-navigator-z-index: var(--uc-sb-bm-disable-autohide-z-index, 5);
                 --uc-navbar-transform: 0;
                 --uc-navbar-opacity: 1;
-                --uc-tabs-toolbar-windows-controls-margin-right: 0;
+                --uc-tabstoolbar-windows-controls-margin-right: 0;
             }
         }
     }

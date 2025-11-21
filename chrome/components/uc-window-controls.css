@@ -18,12 +18,6 @@
         #navigator-toolbox > #TabsToolbar > .titlebar-buttonbox-container {
             display: none !important;
         }
-
-        /*
-        #navigator-toolbox > #nav-bar > .titlebar-spacer[type="post-tabs"] {
-            display: none !important;
-        }
-        */
     }
 
     #navigator-toolbox .titlebar-spacer {
@@ -64,12 +58,6 @@
 #nav-bar > .titlebar-buttonbox-container {
     margin-top: var(--uc-titlebar-buttonbox-margin-top);
 }
-
-/*
-:root[inFullscreen] #nav-bar > .titlebar-buttonbox-container {
-    margin-top: 0px;
-}
-*/
 
 /* Fix popup position */
 #appMenu-popup {
@@ -191,13 +179,8 @@
      * to rely on the tab bar window controls, which are not affected by transform.
      */
     #TabsToolbar {
-        /*
-        > .titlebar-spacer[type="post-tabs"] {
-            display: none !important;
-        }
-        */
         > .titlebar-buttonbox-container {
-            display: var(--uc-tabs-toolbar-windows-controls-display, none) !important;
+            display: var(--uc-tabstoolbar-windows-controls-display, none) !important;
         }
     }
 
@@ -213,7 +196,7 @@
                     z-index: 3;
                     > .titlebar-buttonbox-container {
                         position: absolute;
-                        top: var(--uc-tabs-toolbar-height);
+                        top: var(--uc-tabstoolbar-height);
                         @media not -moz-pref("uc.flex.move-window-controls-to-left") {
                             right: 0;
                         }
@@ -225,11 +208,11 @@
                                 margin-block-start: var(--uc-navbar-transform);
                                 @media not -moz-pref("uc.flex.auto-hide-window-controls") {
                                     margin-inline-end: var(
-                                        --uc-tabs-toolbar-windows-controls-margin-right,
+                                        --uc-tabstoolbar-windows-controls-margin-right,
                                         calc(-1 * var(--uc-window-controls-width))
                                     );
                                     opacity: var(--uc-navbar-opacity, 0);
-                                    transition: var(--uc-autohide-tabs-toolbar-windows-controls-transition);
+                                    transition: var(--uc-autohide-tabstoolbar-windows-controls-transition);
                                 }
 
                                 #mainPopupSet:has(
@@ -246,7 +229,7 @@
                                     @media not -moz-pref("uc.flex.auto-hide-window-controls") {
                                         margin-inline-end: 0;
                                         opacity: 1;
-                                        transition: var(--uc-hover-tabs-toolbar-windows-controls-transition);
+                                        transition: var(--uc-hover-tabstoolbar-windows-controls-transition);
                                     }
                                 }
                             }
@@ -326,8 +309,8 @@
             @media not -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
                 #navigator-toolbox:not(:hover, :focus-within) & {
                     transition: var(
-                        --uc-sb-tabs-toolbar-windows-controls-transition,
-                        var(--uc-autohide-tabs-toolbar-windows-controls-transition)
+                        --uc-sb-tabstoolbar-windows-controls-transition,
+                        var(--uc-autohide-tabstoolbar-windows-controls-transition)
                     );
                 }
             }
@@ -356,23 +339,7 @@
 :root[customtitlebar]:not([customizing]),
 :root[inFullscreen] {
     #nav-bar {
-        --uc-sidebar-button-offset: 0px;
-        /* If the sidebar button is the last item in the nav bar, leave room for it. */
-        @media not -moz-pref("sidebar.position_start") {
-            :root:not([taskbartab]) & {
-                &:has(> #nav-bar-customization-target > #sidebar-button:last-child) {
-                    --uc-sidebar-button-offset: var(--uc-sidebar-stripe-width, 0px);
-                    /* In horizontal tab mode, shift the sidebar button only when Sidebery is active */
-                    @media not -moz-pref("sidebar.verticalTabs") {
-                        --uc-sidebar-button-offset: var(--uc-sb-sidebar-button-offset, 0px);
-                    }
-                }
-            }
-        }
         padding-right: var(--uc-sidebar-button-offset) !important;
-        /*
-        padding-right: calc(var(--uc-nav-bar-padding-right) + var(--uc-sidebar-button-offset)) !important;
-        */
     }
 }
 
@@ -550,7 +517,7 @@
          * move Sidebery upward if it is active. 
          */
         /* !v143 */
-        #navigator-toolbox:has(#PersonalToolbar:not([collapsed="true"]):not([collapsed=""]))
+        #navigator-toolbox:has(> #PersonalToolbar:not([collapsed="true"]):not([collapsed=""]))
             + #browser
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
             /*
@@ -575,7 +542,7 @@
              * no upward offset is needed for #sidebar-main.
              */
             /* !v143 */
-            #navigator-toolbox:has(#PersonalToolbar:where([collapsed="true"], [collapsed=""])) + #browser {
+            #navigator-toolbox:has(> #PersonalToolbar:where([collapsed="true"], [collapsed=""])) + #browser {
                 #sidebar-main {
                     margin-top: 0;
                 }

@@ -164,6 +164,8 @@ user_pref("uc.flex.style-tab-group",                                1);
 user_pref("uc.flex.enable-rounded-web-content",                     0);
 /* Also rounds the web content corner next to the Sidebery colored stripe when rounded web content is enabled. */
 user_pref("uc.flex.enable-rounded-web-content-at-sidebery-corner", false);
+/* Enables translucent and blurred background for the URL bar popup and menus, even without Mica or a custom wallpaper. */
+user_pref("uc.flex.enable-translucent-urlbar-popup-and-menus",     false);
 
 /* 🧊 Visual Background & Mica Effects */
 /* Enables native Mica backdrop (Windows 11 only; requires System theme). */

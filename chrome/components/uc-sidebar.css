@@ -142,7 +142,7 @@
 
     /* Expand sidebar header on hover */
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
-        #sidebar-header:is(:hover, :has(#sidebar-switcher-target.active)) {
+        #sidebar-header:is(:hover, :has(> #sidebar-switcher-target.active)) {
             border-bottom: 1px solid var(--uc-sidebar-header-border-color) !important;
             max-height: 100%;
             max-width: 100%;
@@ -174,7 +174,7 @@
 
         /* Modified from https://www.reddit.com/r/FirefoxCSS/comments/77ehp1/how_to_hide_the_title_of_webextension_sidebars/ */
         /* Minimize sidebar header to a stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
-        #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
+        #sidebar-header:not(:hover):has(> #sidebar-switcher-target:not(.active)) {
             min-height: 5px;
             max-height: 5px;
             min-width: var(--uc-sb-sidebar-width);
@@ -214,7 +214,7 @@
                 /*
                 --sidebar-background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
                 */
-                #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
+                #sidebar-header:not(:hover):has(> #sidebar-switcher-target:not(.active)) {
                     max-width: var(--uc-sidebar-stripe-width);
                     min-width: var(--uc-sidebar-stripe-width);
                 }
@@ -230,7 +230,7 @@
                 /*
                 --sidebar-background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
                 */
-                #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
+                #sidebar-header:not(:hover):has(> #sidebar-switcher-target:not(.active)) {
                     max-width: var(--uc-sidebar-stripe-width);
                     min-width: var(--uc-sidebar-stripe-width);
                 }
@@ -239,13 +239,13 @@
 
         /* Remove header's bottom line */
         #sidebar-header:not(:hover) {
-            border-bottom: none !important;
+            border-bottom: 0px solid transparent !important;
         }
     }
 
     @media -moz-pref("uc.flex.fully-hide-sidebery") {
         #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
-            &:hover #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
+            &:hover #sidebar-header:not(:hover):has(> #sidebar-switcher-target:not(.active)) {
                 min-height: 5px;
                 max-height: 5px;
                 min-width: var(--uc-sidebar-stripe-width);
@@ -277,7 +277,7 @@
     @media not -moz-pref("uc.flex.fully-hide-sidebery") {
         :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
             #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][sidebar-panel-open] {
-                &:hover #sidebar-header:not(:hover):has(#sidebar-switcher-target:not(.active)) {
+                &:hover #sidebar-header:not(:hover):has(> #sidebar-switcher-target:not(.active)) {
                     min-height: 5px;
                     max-height: 5px;
                     min-width: var(--uc-sidebar-stripe-width);
@@ -465,10 +465,6 @@
         --uc-sb-sidebar-main-stripe-height: 5px;
         @media -moz-pref("uc.flex.remove-sidebar-stripe") {
             --uc-sb-sidebar-main-stripe-height: 0px;
-        }
-
-        ~ #tabbrowser-tabbox {
-            --uc-sb-tabbox-border-radius: 0px;
         }
     }
     #sidebar-main[sidebar-panel-open]:has(
@@ -1873,7 +1869,7 @@
                 background-image: url("../icons/tab-group/tab-group-expanded.svg");
                 background-position: 1px 6px;
                 background-repeat: no-repeat;
-                background-size: 11px;
+                background-size: 11.25px;
                 fill: currentColor;
                 opacity: 0;
             }
@@ -2001,7 +1997,9 @@
 
     /* !TEMPORARY: Support for Split View in Nightly v146. This is a temporary style since the feature may still change in future builds. */
     tab-group > tab-split-view-wrapper {
+        /*
         margin-block: 2px !important;
+        */
 
         #tabbrowser-tabs[orient="vertical"] & {
             margin-inline-start: 0 !important;
@@ -2020,9 +2018,10 @@
 
     .tab-group-line {
         inset-block: -3px -3px !important;
+        inset-inline-start: 0 !important;
     }
 
-    #tabbrowser-tabs .tab-split-view-container {
+    #tabbrowser-tabs tab-split-view-wrapper {
         /*
             @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                 :root:not([titlepreface*="\180e "]) & {
@@ -2090,7 +2089,7 @@
             transition: var(--uc-tab-split-view-transition);
         }
 
-        tab-split-view-wrapper:not([hasactivetab]) > & {
+        &:not([hasactivetab]) {
             .tabbrowser-tab {
                 &:hover .tab-background:not([multiselected]) {
                     background-color: var(--tab-hover-background-color) !important;
@@ -2292,7 +2291,7 @@
                         }
                     }
                     > .tabbrowser-tab,
-                    .tab-split-view-container > .tabbrowser-tab {
+                    > tab-split-view-wrapper > .tabbrowser-tab {
                         margin-inline-start: 0px !important;
                         transition:
                             margin-inline-start var(--uc-autohide-transition-duration)
@@ -2378,7 +2377,7 @@
                         }
                     }
                     > .tabbrowser-tab,
-                    .tab-split-view-container > .tabbrowser-tab {
+                    > tab-split-view-wrapper > .tabbrowser-tab {
                         margin-inline-start: var(--space-medium) !important;
                         transition:
                             margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
