@@ -192,13 +192,17 @@
         --uc-urlbar-icon-radius,
         var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
     ) !important;
-    background-color: var(--uc-identity-btn-bgcolor) !important;
-    opacity: 0.8;
+    @media not -moz-pref("uc.flex.style-urlbar", 0) {
+        background-color: var(--uc-identity-btn-bgcolor) !important;
+        opacity: 0.8;
+    }
 }
 
 #identity-icon-box.identity-box-button:hover {
     cursor: pointer;
-    background-color: var(--identity-btn-hover-color, var(--urlbar-box-hover-bgcolor)) !important;
+    @media not -moz-pref("uc.flex.style-urlbar", 0) {
+        background-color: var(--identity-btn-hover-color, var(--urlbar-box-hover-bgcolor)) !important;
+    }
 }
 
 /* Track protection icon */
@@ -376,7 +380,7 @@
 
 /* Show URL buttons on Hover */
 /* !v143 */
-@media not (-moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4)) {
+@media not (-moz-pref("uc.flex.style-urlbar", 0) or -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4)) {
     #nav-bar:not([customizing="true"]):not([customizing=""])
         > #nav-bar-customization-target
         > #urlbar-container:not(:hover)
