@@ -20,15 +20,46 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v5.6.2**
-* `uc.flex.enable-translucent-urlbar-popup-and-menus` を追加：URL バーのポップアップや各種メニューに半透明とぼかしの背景を適用します。通常、FlexFox は Mica またはカスタム壁紙を使用している場合のみこれらの効果を有効化しますが、このオプションを使えば Mica や壁紙がなくても半透明のポップアップとメニューを使用できます。すでに Mica またはカスタム壁紙を有効にしている場合は設定する必要はありません。
-* v146 の新機能「リンク先をプレビュー」に対応しました。
-* 右クリックメニューの新しい項目「Google Lens で画像を検索」、「分割ビューを追加」、「リンク先をプレビュー」、「ノートを追加」のアイコンを追加しました。
-* v146 の変更により、垂直タブ使用時の「分割ビュー」が動作しなくなっていた問題を修正しました。 [Bug 1991763](https://bugzilla.mozilla.org/show_bug.cgi?id=1991763)
-  * 「分割ビュー」は v145 では利用できません。v146 以降では、ネイティブ設定 `browser.tabs.splitView.enabled` を有効化することで使用できます。
-  * この機能は開発中のため、v146 と v147 では外観が少し異なります。FlexFox は v147 を基準に最適化しており、v146 でも動作しますが見た目が完全ではない場合があります。
-* v146 の変更によって、水平タブ使用時にサイドバーのヘッダーを展開するとサイドバーのストライプの下部に黒い線が表示されてしまう問題を修正しました。
-* Nightly v147 の変更により、`uc.flex.enable-rounded-web-content` を有効にした際に開発者ツールの影が表示されなくなる問題を修正しました。
+**🦊 v5.7.0**
+
+**新機能**
+
+* `uc.flex.style-web-content-outline` を追加しました。Web コンテンツ領域の枠線を設定できます（`0`～`2`）:
+  * `0` = 枠線なし（既定）
+  * `1` = 「分割ビュー」でフォーカス中のコンテンツにのみ強調枠線を表示
+  * `2` = すべてのコンテンツに薄い枠線を表示
+
+**変更点**
+
+* `uc.flex.revert-to-original-flat-corner-style` をブール値から数値（`0`～`3`）に変更し、動作を拡張しました。
+  * Firefox v145 で既定の角丸が 4px から 8px に変更されたため、このオプションで旧仕様の角丸に戻せます。
+  * 旧バージョンから更新する場合は、従来のオプションを削除し、新しい数値オプションとして登録し直してください。
+  * `0` = URL バーと検索バーに FlexFox の角丸（9999px、既定）を適用
+  * `1` = すべての要素を v145 以降の 8px 角丸に統一
+  * `2` = すべての要素を v145 以前の直角（4px）に統一
+  * `3` = URL バーと検索バーのみ FlexFox の角丸、その他は直角に設定
+* `uc.flex.style-urlbar` の範囲を `1`～`4` から `0`～`4` に拡張しました。
+  * `0` = スタイル `1` と同じレイアウトですが、URL バー内のアイコンが自動的に非表示になりません。
+* `uc.flex.max-visible-horizontal-pinned-tabs` の範囲を `1`～`5` から `0`～`5` に拡張しました。
+  * `0` にすると水平タブモードでのピン留めタブの自動折りたたみが無効になります。
+
+**互換性**
+
+* Firefox v146 の 「分割ビュー」 に水平タブモードでも対応しました。
+  FlexFox は縦型タブと横型タブのどちらでも分割ビューを利用できます。
+
+**修正**
+
+* v5.0.2 のロールバックにより、`uc.flex.enable-rounded-web-content` 無効時に左上の角丸が欠け、色がはみ出す問題を修正しました。
+* Firefox Nightly v147 の変更によって発生した角丸欠落と色のにじみを修正しました。
+
+**補足**
+
+* v5.6.2 で追加された `uc.flex.enable-translucent-urlbar-popup-and-menus` は、Mica やカスタム壁紙を使用していない状況でも、URL バーとメニューに半透明の背景を適用できます。前回の更新ログでは触れていませんでしたが、この背景の透明度は Mica 使用時と同様に、`uc.flex.browser-mica-transparency-level` で調整できます。数値範囲は `0`〜`4`、デフォルトは `2`、数値が大きいほど透明になります。
+
+下の動画では、Web コンテンツ領域の枠線効果、v145 以前の角丸なし UI の再現、URL バーとメニューの透明度調整など、v5.7.0 のいくつかのオプションを紹介しています。
+
+https://github.com/user-attachments/assets/b9bfb50c-f7e2-45bc-8959-9f6ed51a6a87
 
 以下の動画では、v5.6.x シリーズで追加された新機能を紹介しています。水平タブの自動非表示に追加された新モード、URL バーのポップアップとメニューの半透明化、そして Tab Split View のタブスタイルが確認できます。
 
@@ -62,7 +93,8 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * `uc.flex.style-toolbar-bgcolor` を追加。ナビゲーションバーとサイドバーの背景色を変更可能 (`1`～`2`)。
   * `1` = Tokyo Night テーマ（既定、従来と同じ）
   * `2` = Firefox Acorn Design
-* `uc.flex.style-urlbar` を追加。URLバーの外観を切り替え可能 (`1`～`4`)。
+* `uc.flex.style-urlbar` を追加。URLバーの外観を切り替え可能 (`0`～`4`)。
+  * `0` = Flat（アイコンは常に表示）
   * `1` = Flat（既定、従来と同じ）
   * `2` = Inset（バーが埋め込まれたデザイン、中央揃えの文字）
   * `3` = Debossed（凹んだデザイン、中央揃えの文字）
@@ -82,6 +114,10 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * `uc.flex.style-window-controls-shift-up` を追加。ウィンドウコントロールをわずかに上方向へ移動（既定値: `False`）。
 * `uc.flex.style-window-controls-shrink-size` を追加。ウィンドウコントロールを小型化（既定値: `False`）。
 * `uc.flex.move-window-controls-to-left` を追加。ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端へ移動（既定値: `False`）。
+* `uc.flex.style-web-content-outline` を追加。Web コンテンツ領域の枠線を調整できます（`0`～`2`）。
+  * `0` = 枠線なし（既定）
+  * `1` = Tab Split View でフォーカス中の Web コンテンツのみ強調枠線を表示
+  * `2` = すべての Web コンテンツに枠線を表示
 
 </details>
 
@@ -165,7 +201,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
     * `3` = 最小幅 2 倍、アニメーションなし
     * `4` = 最小幅 2 倍、アニメーションあり
     * デフォルト：`1`（有効）。すべてのタブを固定幅にしたい場合は `0` を設定してください。
-  * 水平ピン留めタブは可視数を超えると自動的に折りたたまれます。可視ピン留めタブの既定値は 10 個です。`uc.flex.max-visible-horizontal-pinned-tabs` で調整できます（設定値 `1`～`5` は 2～10 個に対応）。
+  * 水平ピン留めタブは可視数を超えると自動的に折りたたまれます。可視ピン留めタブの既定値は 10 個です。`uc.flex.max-visible-horizontal-pinned-tabs` で調整できます（設定値 `0`～`5` は 2～10 個に対応。`0` に設定すると水平タブでの自動折りたたみを無効化）。
 
 </details>
 
@@ -173,9 +209,10 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 <summary>🧩 <b>新機能：ピン留めタブパネルのグリッドレイアウトをカスタマイズ可能に</b> <i>[クリックで展開]</i> 👇</summary>
 
 * `uc.flex.max-visible-horizontal-pinned-tabs` を追加し、ピン留めタブパネルの 1 行に表示するタブ数（横方向）を設定できます。
-  * 設定範囲は `1`～`5`（既定値 `5`）。
+  * 設定範囲は `0`～`5`（既定値 `5`）。
   * 垂直タブでは、超過したピン留めタブは次の行に折り返されます。
   * 水平タブでは、超過したピン留めタブは自動で折りたたまれます（設定値により表示タブ数 2～10 に相当）。
+  * `0` に設定すると水平タブでの自動折りたたみを無効化。
 
 * `uc.flex.max-visible-vertical-pinned-tabs` を追加し、ピン留めタブパネルの 1 列に表示するタブ数（縦方向）を設定できます。
   * 設定範囲は `2`～`8`（既定値 `4`）。
@@ -287,9 +324,18 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 </details>
 
 <details>  
-<summary>🪄 <b>新機能：角丸なしのフラットなデザインに切り替え可能</b> <i>《クリックで展開》</i> 👇</summary>
+<summary>🪄 <b>新機能：オリジナルのフラット角スタイルを復元</b> <i>《クリックで展開》</i> 👇</summary>
 
-新しく追加された `uc.flex.revert-to-original-flat-corner-style` オプションを有効にすると、Firefox標準のフラットな角のスタイルに戻すことができます。FlexFox独自の丸みを帯びたデザインを使わず、よりシャープな外観を好む方におすすめです。
+新しいオプション `uc.flex.revert-to-original-flat-corner-style` が追加されました。これを有効にすると、URLバーと検索バーの FlexFox 大丸角（9999px）を無効化し、Firefox 本来のフラット角スタイルに戻すことができます。
+
+Firefox v145 では標準の角丸が 4px から 8px に変更され、より丸みのあるデザインになりました。これに対応するため、このオプションは従来のオン/オフ形式から数値設定（`0`～`3`）へ拡張されています。旧バージョンからアップグレードした場合は、以前のブール値設定を削除し、新しい数値形式で作り直してください。
+
+**選択可能な値**
+
+* `0` = URLバーと検索バーに FlexFox の大丸角スタイル（9999px、デフォルト）
+* `1` = Firefox v145 以降の丸角スタイル（全要素 8px）
+* `2` = v145 以前のフラット角スタイル（全要素 4px）
+* `3` = URLバーと検索バーは FlexFox の大丸角、その他の要素は v145 以前のフラット角スタイル
 
 さらにカスタマイズしたい場合は、アドレスバー・検索バー・検索ウィンドウの角丸のサイズを調整するために、`uc-variables.css` の以下の変数を `uc-user-settings.css` にコピーして編集してください：
 
@@ -390,6 +436,20 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 <details>
 
 <summary>💬 <b>過去の更新</b></summary>
+
+**v5.6.2**
+* `uc.flex.enable-translucent-urlbar-popup-and-menus` を追加：URL バーのポップアップや各種メニューに半透明とぼかしの背景を適用します。通常、FlexFox は Mica またはカスタム壁紙を使用している場合のみこれらの効果を有効化しますが、このオプションを使えば Mica や壁紙がなくても半透明のポップアップとメニューを使用できます。すでに Mica またはカスタム壁紙を有効にしている場合は設定する必要はありません。
+* v146 の新機能「リンク先をプレビュー」に対応しました。
+* 右クリックメニューの新しい項目「Google Lens で画像を検索」、「分割ビューを追加」、「リンク先をプレビュー」、「ノートを追加」のアイコンを追加しました。
+* v146 の変更により、垂直タブ使用時の「分割ビュー」が動作しなくなっていた問題を修正しました。 [Bug 1991763](https://bugzilla.mozilla.org/show_bug.cgi?id=1991763)
+  * 「分割ビュー」は v145 では利用できません。v146 以降では、ネイティブ設定 `browser.tabs.splitView.enabled` を有効化することで使用できます。
+  * この機能は開発中のため、v146 と v147 では外観が少し異なります。FlexFox は v147 を基準に最適化しており、v146 でも動作しますが見た目が完全ではない場合があります。
+* v146 の変更によって、水平タブ使用時にサイドバーのヘッダーを展開するとサイドバーのストライプの下部に黒い線が表示されてしまう問題を修正しました。
+* Nightly v147 の変更により、`uc.flex.enable-rounded-web-content` を有効にした際に開発者ツールの影が表示されなくなる問題を修正しました。
+
+以下の動画では、v5.6.x シリーズで追加された新機能を紹介しています。水平タブの自動非表示に追加された新モード、URL バーのポップアップとメニューの半透明化、そして Tab Split View のタブスタイルが確認できます。
+
+https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 
 **v5.6.1**
 * v5.6.0 で発生した不具合を修正しました。Mica と垂直タブを有効にした状態でタブグループのプレビューパネルを開くと、タブの Mica 背景が消えてしまう問題がありました。
@@ -609,7 +669,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.disable-menu-icons` | `true` | FlexFox によって追加されたメニューのカスタムアイコンを無効にします。 |
 | `uc.flex.restore-window-controls-on-tabbar` | `true` | 水平タブモードで、最小化・最大化・閉じるボタンをタブバー上に戻します。 |
 | `uc.flex.revert-to-original-window-controls` | `true` | FlexFox 独自の macOS風ウィンドウコントロールアイコンを Firefox 標準の最小化・最大化・閉じるボタンに戻します。 |
-| `uc.flex.revert-to-original-flat-corner-style` | `true` | URLバー、検索バー、検索パネルの角丸を、FlexFox 独自の大きな丸みから Firefox 標準の控えめな角丸スタイルに戻します。 |
+| `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | URLバー・検索バーを含む各 UI 要素の角形状を、Firefox 本来のフラットな角スタイルへ戻します。値：`0` = FlexFox の大きな角丸（9999px、デフォルト）、`1` = Firefox v145+ の角丸スタイル（8px）、`2` = v145 以前のフラットな角（4px）、`3` = URLバー／検索バーのみ FlexFox の大きな角丸で、その他は v145 以前のフラット角。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | FlexFox 独自のブックマーク星アイコンを Firefox 標準のデザインに戻します。 |
 | `uc.flex.revert-to-original-sidebar-icon` | `true` | FlexFox 独自のロゴを使用したサイドバーアイコンを Firefox 標準のデザインに戻します。 |
 | `uc.flex.remove-sidebar-stripe` | `true` | Sidebery がアクティブなときにサイドバーのストライプを非表示にします。サイドバーを切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してサイドバーツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを表示します。 |
@@ -626,7 +686,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.sidebery-fast-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を高速化します。 |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Sidebery とネイティブ垂直タブの自動展開・折りたたみの動作を低速化します。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Sidebery／垂直タブと同じ速度でツールバーを統一。Mica またはカスタム壁紙使用時は自動適用。 |
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | ピン留めタブの 1 行あたりの最大表示数を設定します。垂直タブでは超過したピン留めタブは次の行に折り返されます。水平タブでは超過したピン留めタブは自動で折りたたまれ、設定値により表示数は 2～10 に相当します。 |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | ピン留めタブの 1 行あたりの最大表示数を設定します。垂直タブでは超過したピン留めタブは次の行に折り返されます。水平タブでは超過したピン留めタブは自動で折りたたまれ、設定値により表示数は 2～10 に相当します。`0` に設定すると水平タブでの自動折りたたみを無効化。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | ネイティブ垂直タブと Sidebery の両方で、1 列あたりに表示できるピン留めタブの最大数を設定します。上限を超えると固定タブパネルにスクロールバーが表示されます。`0` に設定すると制限が解除され、パネルが無制限に拡張されます。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 検索バー（Findbar）の表示位置を設定します。指定可能な値は文字列 `'top-center-left'` または `'1'`（左寄せ上部）、`'top-right'` または `'2'`（右上）、`'bottom-right'` または `'3'`（右下）です。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Firefoxのアプリメニュー、ブックマークメニュー、右クリックメニューにおける項目同士の垂直間隔を設定します。指定可能な値は文字列 `'1'` または `'small'`（狭い間隔）、`'2'` または `'medium'`（標準の間隔）、`'3'` または `'large'`（広い間隔）です。 |
@@ -645,7 +705,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 |--------|:------:|--------|
 | `uc.flex.style-sidebar-button` | `1`-`4`<br>(`1`) | サイドバー切り替えボタンのアイコンを変更します。値：`1` = Firefox マスターブランドロゴ（デフォルト、従来と同じ）、`2` = Firefox ブラウザロゴ、`3` = Firefox System 1 ロゴ、`4` = Mozilla フラッグシンボル。 |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | ナビゲーションバーとサイドバーの背景色を切り替えます。値：`1` = Tokyo Night テーマ（デフォルト、従来と同じ）、`2` = Firefox Acorn Design。 |
-| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | URL バーの外観をカスタマイズします。値：`1` = フラット（デフォルト、従来と同じ）、`2` = インセット（ナビゲーションバーに埋め込まれたような見た目、中央揃えのテキスト）、`3` = デボス（押し込まれたような見た目、中央揃えのテキスト）、`4` = シームレス（ナビゲーションバーに完全に溶け込む、中央揃えのテキスト）。 |
+| `uc.flex.style-urlbar` | `0`-`4`<br>(`1`) | URL バーの外観をカスタマイズします。値：`0` = フラット（アイコンは常に表示）、`1` = フラット（デフォルト、従来と同じ）、`2` = インセット（ナビゲーションバーに埋め込まれたような見た目、中央揃えのテキスト）、`3` = デボス（押し込まれたような見た目、中央揃えのテキスト）、`4` = シームレス（ナビゲーションバーに完全に溶け込む、中央揃えのテキスト）。 |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | URL バーのポップアップ位置を調整します。値：`0` = 無効（デフォルト）、`1` = フォーカス時に中央へ表示、`2` = 入力中のみ中央へ表示。 |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
 | `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | ウィンドウコントロールアイコンを切り替えます。値：`1` = トラフィックライトボタン（デフォルト、従来と同じ）、`2` = Yosemite ウィンドウボタン、`3` = Yosemite GTK テーマ。 |
@@ -654,9 +714,10 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.move-window-controls-to-left` | `true` | ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端に移動します。 |
 | `uc.flex.move-pip-volume-to-top` | `true` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
 | `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | ネイティブ垂直タブのタブグループの外観を調整します。値：`1` = 展開／折りたたみインジケーターを表示（アニメーションなし）、`2` = インジケーターを表示（アニメーションあり）、`3` = ラベルを中央揃え（インジケーターなし・アニメーションなし）、`4` = ラベルを中央揃え（インジケーターなし・アニメーションあり）。デフォルトは `1` です。 |
+| `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | Web コンテンツ領域の枠線を調整します。値：`0` = 枠線なし（デフォルト）、`1` = Tab Split View でフォーカス中の Web コンテンツのみ強調枠線を表示、`2` = すべての Web コンテンツに枠線を表示。 |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | `uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプに接する側の角にも角丸効果を適用します。 |
-| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | URL バーのポップアップや各種メニューに半透明かつぼかしの背景を適用します。FlexFox では通常 Mica またはカスタム壁紙使用時にのみ有効ですが、このオプションを使うことでそれらなしでも適用できます。 |
+| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | URL バーのポップアップや各種メニューに半透明かつぼかしの背景を適用します。FlexFox では通常 Mica またはカスタム壁紙使用時にのみ有効ですが、このオプションを使うことでそれらなしでも適用できます。背景の透明度は `uc.flex.browser-mica-transparency-level` で調整可能で、値の範囲は `0`～`4`、大きいほど透明になります。 |
 
 #### 🧊 背景の見た目とMica効果
 

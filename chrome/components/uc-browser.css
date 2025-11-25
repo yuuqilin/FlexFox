@@ -35,17 +35,16 @@
 /* Remove the border and rounded corners from the webpage content area */
 @media -moz-pref("sidebar.revamp") {
     /* !TEMPORARY: The following #tabbrowser-tabbox rules will no longer be needed starting from v147. */
-    #tabbrowser-tabbox,
-    .browserContainer {
+    #tabbrowser-tabbox {
         outline: none !important;
         box-shadow: none !important;
         @media -moz-pref("sidebar.revamp.round-content-area") {
-            overflow: unset !important;
-
-            &:not([sidebar-positionend]) {
+            /* Use media queries instead of attribute selectors (e.g. [sidebar-positionend]) 
+                to prevent the fullscreen rules below from being overridden */
+            @media -moz-pref("sidebar.position_start") {
                 border-start-start-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
             }
-            &[sidebar-positionend] {
+            @media not -moz-pref("sidebar.position_start") {
                 border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
             }
             @media -moz-pref("uc.flex.fully-hide-toolbox"),
@@ -60,6 +59,163 @@
             }
         }
     }
+}
+
+/* !TEMPORARY: Fix for Nightly v147 change that broke border-radius. 
+    This is still under development and the fix may need adjustments in the future. */
+/*
+@media -moz-pref("sidebar.revamp") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
+    \/* Restore the pre-v147 rule to prevent overflow *\/
+    #tabbrowser-tabbox {
+        overflow: clip;
+    }
+}
+*/
+
+.browserContainer {
+    background: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+    overflow: unset !important;
+    @media -moz-pref("sidebar.revamp.round-content-area") {
+        /* Use media queries instead of attribute selectors (e.g. [sidebar-positionend]) 
+            to prevent the fullscreen rules below from being overridden */
+        @media -moz-pref("sidebar.position_start") {
+            border-start-start-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+        }
+        @media not -moz-pref("sidebar.position_start") {
+            border-start-end-radius: var(--uc-sb-tabbox-border-radius, var(--border-radius-medium)) !important;
+        }
+        @media -moz-pref("uc.flex.fully-hide-toolbox"),
+            -moz-pref("uc.flex.fully-hide-sidebery"),
+            (display-mode: fullscreen) {
+            border-radius: 0 !important;
+        }
+        @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
+            :root:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                border-radius: 0 !important;
+            }
+        }
+    }
+    @media -moz-pref("uc.flex.style-web-content-outline") {
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
+            :root:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                &::after {
+                    @media -moz-pref("uc.flex.style-web-content-outline", 2) {
+                        @media not -moz-pref("uc.flex.enable-rounded-web-content") {
+                            border-top: var(--border-width) solid var(--uc-urlbar-outline);
+                            @media -moz-pref("sidebar.position_start") {
+                                border-left: var(--border-width) solid var(--uc-urlbar-outline);
+                            }
+                            @media not -moz-pref("sidebar.position_start") {
+                                border-right: var(--border-width) solid var(--uc-urlbar-outline);
+                            }
+                        }
+                        @media -moz-pref("uc.flex.enable-rounded-web-content") {
+                            border: var(--border-width) solid var(--uc-urlbar-outline);
+                        }
+                    }
+
+                    @media -moz-pref("sidebar.revamp") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
+                        @media -moz-pref("sidebar.revamp.round-content-area") {
+                            @media -moz-pref("sidebar.position_start") {
+                                border-start-start-radius: var(
+                                    --uc-sb-tabbox-border-radius,
+                                    var(--border-radius-medium)
+                                ) !important;
+                            }
+                            @media not -moz-pref("sidebar.position_start") {
+                                border-start-end-radius: var(
+                                    --uc-sb-tabbox-border-radius,
+                                    var(--border-radius-medium)
+                                ) !important;
+                            }
+                        }
+                    }
+                    @media -moz-pref("uc.flex.enable-rounded-web-content") {
+                        border-radius: var(--uc-web-content-radius);
+                        border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
+                        border-top-right-radius: var(
+                            --uc-sb-web-content-radius-top-right,
+                            var(--uc-web-content-radius)
+                        );
+                    }
+                }
+
+                @media -moz-pref("uc.flex.style-web-content-outline", 2) {
+                    @media not -moz-pref("uc.flex.enable-rounded-web-content") {
+                        .split-view-panel[column="0"] &::after {
+                            border-right: var(--border-width) solid var(--uc-urlbar-outline);
+                        }
+                        .split-view-panel[column="1"] &::after {
+                            border-left: var(--border-width) solid var(--uc-urlbar-outline);
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Add an element selector to increase specificity and override the rule above */
+        #tabbrowser-tabpanels > .split-view-panel.deck-selected &::after {
+            border: var(--focus-outline);
+        }
+
+        @media -moz-pref("sidebar.revamp") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
+            @media -moz-pref("sidebar.revamp.round-content-area") {
+                .browserSidebarContainer.split-view-panel[column="1"] &::after {
+                    @media -moz-pref("sidebar.position_start") {
+                        border-start-start-radius: 0 !important;
+                    }
+                }
+                .browserSidebarContainer.split-view-panel[column="0"] &::after {
+                    @media not -moz-pref("sidebar.position_start") {
+                        border-start-end-radius: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* !TEMPORARY: The .browserStack rule below is only used in v146 and can be removed in v147. */
+.browserStack {
+    outline: none !important;
+}
+
+.split-view-splitter {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+.split-view-panel {
+    margin: 0 !important;
+
+    &:not(.deck-selected) {
+        overflow: unset !important;
+    }
+
+    @media not -moz-pref("uc.flex.enable-rounded-web-content"),
+        -moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery") {
+        > split-view-footer {
+            border-end-end-radius: 0 !important;
+        }
+    }
+    :root:where([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+        > split-view-footer {
+            border-end-end-radius: 0 !important;
+        }
+    }
+}
+
+#statuspanel-label,
+split-view-footer {
+    border-color: var(--uc-urlbar-outline) !important;
 }
 
 /* Remove white flash before page load */
@@ -91,44 +247,28 @@
     @media (-moz-content-prefers-color-scheme: dark) {
         background-color: #202020 !important;
     }
-    /* Clip background bleed around rounded corners when the UI color scheme is opposite to the page scheme */
+    /* Clip background bleed around rounded corners ~~when the UI color scheme is opposite to the page scheme~~ */
     @media -moz-pref("sidebar.revamp") {
         @media -moz-pref("sidebar.revamp.round-content-area") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
             @media not (-moz-pref("uc.flex.fully-hide-sidebery") or -moz-pref("uc.flex.fully-hide-toolbox")) {
                 :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "])
                     & {
+                    /*
                     @media (prefers-color-scheme: dark) and (-moz-content-prefers-color-scheme: light),
                         (prefers-color-scheme: light) and (-moz-content-prefers-color-scheme: dark) {
+                    */
+                    clip-path: inset(
+                        0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip)) 0 0 0
+                    );
+                    #tabbrowser-tabbox[sidebar-positionend] > & {
                         clip-path: inset(
-                            0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip)) 0 0
-                                0
+                            0 round 0 var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip))
+                                0 0
                         );
-                        #tabbrowser-tabbox[sidebar-positionend] > & {
-                            clip-path: inset(
-                                0 round 0
-                                    var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip)) 0
-                                    0
-                            );
+                        /*
                         }
+                        */
                     }
-                }
-            }
-        }
-    }
-
-    /* !TEMPORARY: Fix for Nightly v147 change that broke border-radius. 
-        This is still under development and the fix may need adjustments in the future. */
-    &[splitview] {
-        > .split-view-panel {
-            margin: 0 !important;
-
-            &:not(.deck-selected) {
-                overflow: unset !important;
-            }
-
-            @media not -moz-pref("uc.flex.enable-rounded-web-content") {
-                > split-view-footer {
-                    border-end-end-radius: 0 !important;
                 }
             }
         }
@@ -184,27 +324,6 @@
             }
 
             .browserContainer {
-                /* !TEMPORARY: Fix for Nightly v147 change that broke border-radius. 
-                    This is still under development and the fix may need adjustments in the future. */
-                background: transparent !important;
-                @media -moz-pref("sidebar.revamp") {
-                    outline: none !important;
-                    box-shadow: none !important;
-                }
-                @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.revamp.round-content-area") {
-                    overflow: unset !important;
-                    /*
-                    :root:not([inDOMFullscreen]) #tabbrowser-tabbox[sidebar-shown] & {
-                        @media -moz-pref("sidebar.position_start") {
-                            border-start-start-radius: 0 !important;
-                        }
-                        @media not -moz-pref("sidebar.position_start") {
-                            border-start-end-radius: 0 !important;
-                        }
-                    }
-                    */
-                }
-
                 /**
                  * When DevTools and Sidebery are docked on the same side, 
                  * the corresponding corner of the web content container should always be rounded. 
@@ -303,10 +422,6 @@
             .devtools-horizontal-splitter {
                 opacity: 0;
             }
-        }
-
-        .split-view-splitter {
-            opacity: 0;
         }
 
         /* Round the corners of the status panel */

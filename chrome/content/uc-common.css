@@ -189,6 +189,21 @@
     }
 }
 
+/* Restore corner radius values used before v145 */
+@media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) or -moz-pref("uc.flex.revert-to-original-flat-corner-style", 3) {
+    @-moz-document url-prefix("about:"), url-prefix("chrome:") {
+        :root {
+            --border-radius-medium: 4px !important;
+        }
+    }
+
+    @-moz-document url(about:newtab), url(about:home) {
+        .top-site-outer .tile {
+            border-radius: 8px !important;
+        }
+    }
+}
+
 /* Force "uc-common.css" to show up in DevTools by using an unsupported property */
 :root {
     -webkit-locale: show-in-devtools;

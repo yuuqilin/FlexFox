@@ -393,16 +393,34 @@
     }
 
     /* Corner radius settings for the urlbar, searchbar, findbar, and their icons */
-    --uc-findbar-outer-border-radius: 4px;
-    --uc-findbar-inner-border-radius: 4px;
-    @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
+    --uc-findbar-outer-border-radius: 8px;
+    --uc-findbar-inner-border-radius: 5px;
+    @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style"),
+        -moz-pref("uc.flex.revert-to-original-flat-corner-style", 3) {
         --uc-urlbar-border-radius: 30px;
         --uc-urlbar-popup-border-radius: 15px;
         --uc-urlbar-icon-radius: 16px;
         --uc-urlbar-icon-inner-radius: 6px;
         --uc-searchbar-popup-border-radius: 12px;
-        --uc-findbar-outer-border-radius: 8px;
-        --uc-findbar-inner-border-radius: 5px;
+    }
+
+    /* Restore corner radius values used before v145 */
+    @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) or -moz-pref("uc.flex.revert-to-original-flat-corner-style", 3) {
+        /*
+        --tab-border-radius: 4px !important;
+        --toolbarbutton-border-radius: 4px !important;
+        */
+        --button-border-radius: 4px !important;
+        /*
+        --border-radius-medium: 4px !important;
+        --arrowpanel-border-radius: 8px;
+        --arrowpanel-menuitem-border-radius: 4px;
+        */
+    }
+
+    @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
+        --uc-findbar-outer-border-radius: 4px;
+        --uc-findbar-inner-border-radius: 4px;
     }
 
     /* Adjusts background darkness behind the urlbar popup. Higher values = darker background. */
@@ -425,6 +443,9 @@
         --uc-web-content-margin: 8px;
     }
     --uc-web-content-radius: 8px;
+    @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
+        --uc-web-content-radius: 4px;
+    }
 
     /* Mica backdrop mask transparency */
     @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
@@ -924,6 +945,9 @@
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
         ~ #tabbrowser-tabbox[sidebar-panel-open] {
         --uc-sb-tabbox-border-radius: 0px;
+        @media -moz-pref("uc.flex.enable-rounded-web-content-at-sidebery-corner") {
+            --uc-sb-tabbox-border-radius: var(--border-radius-medium);
+        }
 
         @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width") or -moz-pref("uc.flex.enable-rounded-web-content-at-sidebery-corner")) {
             :root:not([titlepreface*="\180e "]) & {

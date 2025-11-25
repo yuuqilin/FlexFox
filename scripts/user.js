@@ -71,8 +71,12 @@ user_pref("uc.flex.disable-menu-icons",                         false);
 user_pref("uc.flex.restore-window-controls-on-tabbar",          false);
 /* Reverts the window control buttons (minimize, maximize, close) to Firefox's default design. */
 user_pref("uc.flex.revert-to-original-window-controls",         false);
-/* Reverts the rounded corner radius of the urlbar, searchbar, and findbar to Firefox's original flatter style. */
-user_pref("uc.flex.revert-to-original-flat-corner-style",       false);
+/* Restores Firefox's original flat corner styles.
+   0 = FlexFox rounded (default)
+   1 = Firefox v145+ rounded (8px)
+   2 = Pre-v145 flat (4px)
+   3 = FlexFox rounded for URL/Search Bar only */
+user_pref("uc.flex.revert-to-original-flat-corner-style",           0);
 /* Reverts the bookmark star icon to Firefox's default design. */
 user_pref("uc.flex.revert-to-original-bookmark-star-icon",      false);
 /* Reverts the sidebar button icon to Firefox's default design. */
@@ -160,6 +164,11 @@ user_pref("uc.flex.move-pip-volume-to-top",                     false);
            3 = center labels, no indicator, no animation
            4 = center labels, no indicator, with animation */
 user_pref("uc.flex.style-tab-group",                                1);
+/* Controls the outline of the web content area.
+   0 = No outline (default)
+   1 = Highlighted outline only on the focused panel in Tab Split View
+   2 = Outline shown on all web content panels */
+user_pref("uc.flex.style-web-content-outline",                      0);
 /* Adds margin, shadow, and rounded corners to web content (0 = off, 1–2 = more margin). */
 user_pref("uc.flex.enable-rounded-web-content",                     0);
 /* Also rounds the web content corner next to the Sidebery colored stripe when rounded web content is enabled. */

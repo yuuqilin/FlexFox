@@ -20,21 +20,52 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.6.2**
-* Added `uc.flex.enable-translucent-urlbar-popup-and-menus`: enables a translucent and blurred background for the urlbar popup and various menus. FlexFox normally applies these effects only when Mica or a custom wallpaper is active, and this option allows you to use the translucent popup and menu background even without them. If Mica or a custom wallpaper is already enabled, you don't need this option.
-* Added support for v146's new feature “Preview Link”.
-* Added menu icons for the new context menu items “Search Image with Google Lens”, “Add Split View”, “Preview Link”, and “Add Note”.
-* Fixed broken support for “Tab Split View” in vertical tab mode caused by changes in v146. [Bug 1991763](https://bugzilla.mozilla.org/show_bug.cgi?id=1991763)
-  * Tab Split View is unavailable on v145. Starting with v146, it can be enabled by turning on the native preference `browser.tabs.splitView.enabled`.
-  * The feature is still under development. Its appearance differs between v146 and v147. FlexFox is optimized for v147. It works on v146, but the visuals may not be fully polished.
-* Fixed an issue caused by changes in v146 where a black line appeared at the bottom of the sidebar stripe when expanding the sidebar header in horizontal tab mode.
-* Fixed an issue where the shadow of Web Developer Tools would not display when `uc.flex.enable-rounded-web-content` is enabled on Nightly v147.
+**🦊 v5.7.0**
+
+**New**
+
+* Added `uc.flex.style-web-content-outline` to control the outline of the web content area (`0`–`2`):
+  * `0` = No outline (default)
+  * `1` = Shows a highlighted outline only on the focused web content panel in Tab Split View
+  * `2` = Shows an outline on all web content panels
+
+**Changes**
+
+* Updated `uc.flex.revert-to-original-flat-corner-style` from a boolean to a numeric option (`0`–`3`) and expanded its behavior:
+  * Firefox v145 changed the default corner radius from 4px to 8px. This option lets users restore older radii.
+  * Users upgrading from older versions should delete the previous option and recreate it as a numeric entry.
+  * `0` = FlexFox rounded style for the URL Bar and Search Bar (9999px, default)
+  * `1` = Firefox v145+ rounded style for all elements (8px)
+  * `2` = Pre-v145 square style for all elements (4px)
+  * `3` = FlexFox rounded style for the URL Bar and Search Bar while other elements use the pre-v145 square style
+* Extended `uc.flex.style-urlbar` from `1`–`4` to `0`–`4`:
+  * `0` = Same layout as style `1` but the icons inside the URL bar never auto-hide.
+* Extended `uc.flex.max-visible-horizontal-pinned-tabs` from `1`–`5` to `0`–`5`:
+  * `0` disables automatic collapsing of pinned tabs in horizontal tab mode.
+
+**Compatibility**
+
+* Added support for Firefox v146 “Tab Split View” in horizontal tab mode.
+  FlexFox now supports Tab Split View in both vertical and horizontal tab layouts.
+
+**Fixes**
+
+* Fixed a v5.0.2 regression that caused missing top-left rounding and color overflow when `uc.flex.enable-rounded-web-content` was disabled.
+* Fixed rounding and color overflow issues introduced by Firefox Nightly v147.
+
+**Notes**
+
+* The option `uc.flex.enable-translucent-urlbar-popup-and-menus`, introduced in v5.6.2, allows the URL bar and menus to use a translucent background even when Mica or custom wallpapers are not enabled. The previous changelog did not mention that its transparency level can be adjusted with `uc.flex.browser-mica-transparency-level`, which works the same way as when Mica is active. The range is `0` to `4`, the default is `2`, and higher values produce a more transparent background.
+
+The video below demonstrates several v5.7.0 options, including the web content border effect, restoring the pre-v145 square UI, and adjusting the URL bar and menu transparency.
+
+https://github.com/user-attachments/assets/b9bfb50c-f7e2-45bc-8959-9f6ed51a6a87
+
+<!-- END What's New -->
 
 The video below demonstrates the new features introduced in the v5.6.x series, including the new auto-hide mode for horizontal tabs, translucent backgrounds for the urlbar popup and menus, and the tab style of Tab Split View.
 
 https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
-
-<!-- END What's New -->
 
 The video below demonstrates the visual result achieved by combining several new UI options introduced in the v5.5.x series.
 
@@ -64,7 +95,8 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * Added `uc.flex.style-toolbar-bgcolor` to change the background color of the navbar and sidebar (`1`–`2`):
   * `1` = Tokyo Night theme (default, same as before)
   * `2` = Firefox Acorn Design
-* Added `uc.flex.style-urlbar` to customize the URL bar appearance (`1`–`4`):
+* Added `uc.flex.style-urlbar` to customize the URL bar appearance (`0`–`4`):
+  * `0` = Flat (icons are always visible)
   * `1` = Flat (default, same as before)
   * `2` = Inset (embedded look with centered text)
   * `3` = Debossed (pressed-in look with centered text)
@@ -84,6 +116,10 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * Added `uc.flex.style-window-controls-shift-up` to slightly raise the window controls (default: `False`).
 * Added `uc.flex.style-window-controls-shrink-size` to reduce the size of window controls (default: `False`).
 * Added `uc.flex.move-window-controls-to-left` to move window controls to the left edge of the navbar or horizontal tab bar (default: `False`).
+* Added `uc.flex.style-web-content-outline` to control the outline of the web content area (`0`–`2`):
+  * `0` = No outline (default)
+  * `1` = Shows a highlighted outline only on the focused web content panel in Tab Split View
+  * `2` = Shows an outline on all web content panels
 
 </details>
 
@@ -167,7 +203,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
     * `3` = Minimum width 2×, no animation
     * `4` = Minimum width 2×, with animation
     * Default: `1` (enabled). Set to `0` if you prefer all tabs to keep a fixed width.
-  * Pinned horizontal tabs now automatically collapse when exceeding the visible limit. Default visible pinned tabs is 10. Use `uc.flex.max-visible-horizontal-pinned-tabs` to adjust the setting (range `1`–`5`, corresponding to 2–10 visible pinned tabs).
+  * Pinned horizontal tabs now automatically collapse when exceeding the visible limit. Default visible pinned tabs is 10. Use `uc.flex.max-visible-horizontal-pinned-tabs` to adjust the setting (range `0`–`5`, corresponding to 2–10 visible pinned tabs; `0` disables auto-collapse in horizontal tabs).
 
 </details>
 
@@ -175,9 +211,10 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 <summary>🧩 <b>Major Update: Customizable Grid Layout for Pinned Tab Panel</b> <i>[Click to expand]</i> 👇</summary>
 
 * Added `uc.flex.max-visible-horizontal-pinned-tabs` to set how many pinned tabs are shown per row (horizontal).
-  * Accepts values from `1` to `5` (default `5`).
+  * Accepts values from `0` to `5` (default `5`).
   * In vertical tabs, extra pinned tabs wrap to the next row.
   * In horizontal tabs, extra pinned tabs are automatically collapsed (value corresponds to 2–10 visible pinned tabs).
+  * `0` disables auto-collapse in horizontal tabs.
 
 * Added `uc.flex.max-visible-vertical-pinned-tabs` to set how many pinned tabs are shown per column (vertical).
   * Accepts values from `2` to `8` (default `4`).
@@ -289,9 +326,18 @@ Below is a preview of FlexFox with this feature enabled (`uc.flex.enable-rounded
 </details>
 
 <details>  
-<summary>🪄 <b>Major Update: Optional Flat Corner Style</b> <i>[Click to expand]</i> 👇</summary>
+<summary>🪄 <b>Major Update: Restore Original Flat Corner Styles</b> <i>[Click to expand]</i> 👇</summary>
 
-You can now restore Firefox's original flat corner style by enabling the `uc.flex.revert-to-original-flat-corner-style` option. This replaces FlexFox's rounded design with the default, sharper look.
+A new option `uc.flex.revert-to-original-flat-corner-style` has been added. Enabling it disables FlexFox's large rounded corners on the URL Bar and Search Bar (9999px) and restores Firefox's native flat corner look.
+
+With Firefox v145, the default corner radius was increased from 4px to 8px, making the native design more rounded. To support both styles, this option has been expanded from a boolean to a numeric setting (`0`–`3`). Users upgrading from older versions should remove the previous boolean entry and recreate it as a numeric value.
+
+**Available values**
+
+* `0` = FlexFox rounded style for the URL Bar and Search Bar (9999px, default)
+* `1` = Firefox v145+ rounded style for all elements (8px)
+* `2` = Pre-v145 flat style for all elements (4px)
+* `3` = FlexFox rounded style for the URL Bar and Search Bar while other elements use the pre-v145 flat style
 
 For further customization, you can fine-tune the corner radius of the address bar, search bar, and find bar by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
 
@@ -394,6 +440,20 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v5.6.2**
+* Added `uc.flex.enable-translucent-urlbar-popup-and-menus`: enables a translucent and blurred background for the urlbar popup and various menus. FlexFox normally applies these effects only when Mica or a custom wallpaper is active, and this option allows you to use the translucent popup and menu background even without them. If Mica or a custom wallpaper is already enabled, you don't need this option.
+* Added support for v146's new feature “Preview Link”.
+* Added menu icons for the new context menu items “Search Image with Google Lens”, “Add Split View”, “Preview Link”, and “Add Note”.
+* Fixed broken support for “Tab Split View” in vertical tab mode caused by changes in v146. [Bug 1991763](https://bugzilla.mozilla.org/show_bug.cgi?id=1991763)
+  * Tab Split View is unavailable on v145. Starting with v146, it can be enabled by turning on the native preference `browser.tabs.splitView.enabled`.
+  * The feature is still under development. Its appearance differs between v146 and v147. FlexFox is optimized for v147. It works on v146, but the visuals may not be fully polished.
+* Fixed an issue caused by changes in v146 where a black line appeared at the bottom of the sidebar stripe when expanding the sidebar header in horizontal tab mode.
+* Fixed an issue where the shadow of Web Developer Tools would not display when `uc.flex.enable-rounded-web-content` is enabled on Nightly v147.
+
+The video below demonstrates the new features introduced in the v5.6.x series, including the new auto-hide mode for horizontal tabs, translucent backgrounds for the urlbar popup and menus, and the tab style of Tab Split View.
+
+https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 
 **v5.6.1**
 * Fixed a regression in v5.6.0 where tabs lost their Mica background when the **Tab Group Preview Panel** was shown with Mica and Vertical Tabs enabled.
@@ -614,7 +674,7 @@ For more update logs from earlier versions,
 | `uc.flex.disable-menu-icons` | `true` | Disables custom icons in menus added by FlexFox. |
 | `uc.flex.restore-window-controls-on-tabbar` | `true` | Restores the window control buttons (minimize, maximize, close) to the tab bar in horizontal tabs mode. |
 | `uc.flex.revert-to-original-window-controls` | `true` | Reverts to Firefox's default window control buttons (minimize, maximize, close), replacing the macOS-style icons used by FlexFox. |
-| `uc.flex.revert-to-original-flat-corner-style` | `true` | Reverts the rounded corner radius of the urlbar, searchbar, and findbar to Firefox's original flatter style. |
+| `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | Restores Firefox's original flat corner styles for the urlbar, searchbar, and other UI elements. Values: `0` = FlexFox rounded style (9999px, default), `1` = Firefox v145+ rounded style for all elements (8px), `2` = Pre-v145 flat style for all elements (4px), `3` = FlexFox rounded urlbar/searchbar with pre-v145 flat corners elsewhere. |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | Reverts the bookmark star icon to Firefox's default design, replacing the custom icon used by FlexFox. |
 | `uc.flex.revert-to-original-sidebar-icon` | `true` | Reverts the sidebar button icon to Firefox's default design, replacing the FlexFox logo. |
 | `uc.flex.remove-sidebar-stripe` | `true` | Removes the sidebar stripe when Sidebery is active. To switch sidebar tools, press <kbd>F1</kbd> in vertical tabs mode to show the sidebar tool buttons, or <kbd>Ctrl</kbd> + <kbd>B</kbd> in horizontal tabs mode to restore the sidebar header. |
@@ -631,7 +691,7 @@ For more update logs from earlier versions,
 | `uc.flex.sidebery-fast-hover-expand` | `true` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Unifies toolbar animation speed with Sidebery/vertical tabs. Auto-applied with Mica or custom wallpaper. |
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | Sets the maximum number of visible pinned tabs per row. In vertical tabs, extra pinned tabs wrap to the next row. In horizontal tabs, extra pinned tabs are automatically collapsed, with the setting corresponding to 2–10 visible pinned tabs. |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | Sets the maximum number of visible pinned tabs per row. In vertical tabs, extra pinned tabs wrap to the next row. In horizontal tabs, extra pinned tabs are automatically collapsed, with the setting corresponding to 2–10 visible pinned tabs. Setting `0` disables auto-collapse in horizontal tabs. |
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | Sets the maximum number of visible pinned tabs per column in both native vertical tabs and Sidebery. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the Findbar's position. Accepts string values: `'top-center-left'` or `'1'` = center-left top, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `'1'` or `'small'` = narrow spacing, `'2'` or `'medium'` = medium spacing, `'3'` or `'large'` = wide spacing. |
@@ -650,7 +710,7 @@ For more update logs from earlier versions,
 |-----------|:-------------:|-------------|
 | `uc.flex.style-sidebar-button` | `1`-`4`<br>(`1`) | Switches the sidebar toggle icon. Values: `1` = Firefox Master Brand Logo (default, same as before), `2` = Firefox Browser Logo, `3` = Firefox System 1 Logo, `4` = Mozilla Flag Symbol. |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | Changes the background color of the navbar and sidebar. Values: `1` = Tokyo Night theme (default, same as before), `2` = Firefox Acorn Design. |
-| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | Customizes the appearance of the URL bar. Values: `1` = Flat (default, same as before), `2` = Inset (embedded look with centered text), `3` = Debossed (pressed-in look with centered text), `4` = Seamless (fully merged into the navbar, centered text). |
+| `uc.flex.style-urlbar` | `0`-`4`<br>(`1`) | Customizes the appearance of the URL bar. Values: `0` = Flat (icons are always visible), `1` = Flat (default, same as before), `2` = Inset (embedded look with centered text), `3` = Debossed (pressed-in look with centered text), `4` = Seamless (fully merged into the navbar, centered text). |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | Repositions the URL bar popup. Values: `0` = Disabled (default), `1` = Center when focused, `2` = Center only when typing. |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
 | `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | Switches the window control icons. Values: `1` = Traffic Light Buttons (default, same as before), `2` = Yosemite Window Buttons, `3` = Yosemite GTK Theme. |
@@ -659,9 +719,10 @@ For more update logs from earlier versions,
 | `uc.flex.move-window-controls-to-left` | `true` | Moves the window controls to the left edge of the navbar or horizontal tab bar. |
 | `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
 | `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | Adjusts the appearance of tab groups in native vertical tabs. Values: `1` = show expand/collapse indicator without animation, `2` = show indicator with animation, `3` = center tab labels with no indicator and no animation, `4` = center labels with no indicator and with animation. Default is `1`. |
+| `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | Controls the outline of the web content area. Values: `0` = No outline (default), `1` = Shows a highlighted outline only on the focused web content panel in Tab Split View, `2` = Shows an outline on all web content panels. |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | When `uc.flex.enable-rounded-web-content` is enabled, also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe. |
-| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | Enables a translucent and blurred background for the URL bar popup and various menus. FlexFox normally enables this effect only when Mica or a custom wallpaper is active, but this option allows it to be enabled even without them. |
+| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | Enables a translucent and blurred background for the URL bar popup and various menus. FlexFox normally enables this effect only when Mica or a custom wallpaper is active, but this option allows it to be enabled even without them. The transparency level of the background can be adjusted using `uc.flex.browser-mica-transparency-level` (range `0`–`4`, higher values are more transparent). |
 
 #### 🧊 Visual Background & Mica Effects
 

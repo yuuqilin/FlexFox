@@ -352,19 +352,21 @@ toolbar#TabsToolbar {
     }
 
     /* Auto-collapse pinned tabs */
-    #pinned-tabs-container[orient="horizontal"] {
-        --uc-ht-sroot-pinned-tabs-overflow-display: none;
-        max-width: calc(var(--uc-ht-pinned-tab-max-columns) * 40px) !important;
-        transition: max-width calc(var(--uc-autohide-transition-duration) + 200ms) var(--uc-autohide-transition-type)
-            var(--uc-autohide-sidebar-delay);
-        &:hover {
-            max-width: 100vw !important;
-            transition: max-width calc(var(--uc-hover-transition-duration) + 885ms) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay);
-        }
-        /* Move sound-playing tabs to the beginning of the pinned tab container */
-        .tabbrowser-tab:is([soundplaying], [muted]) {
-            order: -1;
+    @media not -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 0) {
+        #pinned-tabs-container[orient="horizontal"] {
+            --uc-ht-sroot-pinned-tabs-overflow-display: none;
+            max-width: calc(var(--uc-ht-pinned-tab-max-columns) * 40px) !important;
+            transition: max-width calc(var(--uc-autohide-transition-duration) + 200ms)
+                var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
+            &:hover {
+                max-width: 100vw !important;
+                transition: max-width calc(var(--uc-hover-transition-duration) + 885ms)
+                    var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+            }
+            /* Move sound-playing tabs to the beginning of the pinned tab container */
+            .tabbrowser-tab:is([soundplaying], [muted]) {
+                order: -1;
+            }
         }
     }
 
@@ -378,24 +380,35 @@ toolbar#TabsToolbar {
 
     /* Increase the selected horizontal tab's min-width so its label is easier to read */
     @media not -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 0) {
-        .tabbrowser-tab[fadein][selected]:not([pinned]):not([style^="max-width"]) {
-            min-width: 138px !important;
-            transition: none !important;
-            @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 2),
-                -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
-                transition: var(--uc-horizontal-tab-width-transition-duration) ease-in-out 0ms !important;
-            }
+        #tabbrowser-tabs {
+            --uc-active-horizontal-tab-min-width: calc(var(--tab-min-width-pref, var(--tab-min-width)) * 1.8);
+            --uc-horizontal-tab-width-transition: none;
             @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 3),
                 -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
-                min-width: 152px !important;
+                --uc-active-horizontal-tab-min-width: calc(var(--tab-min-width-pref, var(--tab-min-width)) * 2);
             }
-        }
-        .tabbrowser-tab[fadein]:not([selected]):not([pinned]):not([style^="max-width"]) {
-            transition: none !important;
             @media -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 2),
                 -moz-pref("uc.flex.increase-active-horizontal-tab-min-width", 4) {
-                transition: var(--uc-horizontal-tab-width-transition-duration) ease-in-out 0ms !important;
+                --uc-horizontal-tab-width-transition:
+                    min-width var(--uc-horizontal-tab-width-transition-duration) ease-out,
+                    max-width var(--uc-horizontal-tab-width-transition-duration) ease-out;
             }
+        }
+        .tabbrowser-tab[fadein][selected]:not([pinned]):not([style^="max-width"]) {
+            min-width: var(--uc-active-horizontal-tab-min-width) !important;
+            transition: var(--uc-horizontal-tab-width-transition) !important;
+        }
+        .tabbrowser-tab[fadein]:not([selected]):not([pinned]):not([style^="max-width"]) {
+            transition: var(--uc-horizontal-tab-width-transition) !important;
+        }
+        tab-split-view-wrapper {
+            &[hasactivetab] {
+                min-width: calc(
+                    var(--tab-min-width-pref, var(--tab-min-width)) + var(--uc-active-horizontal-tab-min-width) + 6px
+                ) !important;
+            }
+            grid-template-columns: auto auto !important;
+            transition: var(--uc-horizontal-tab-width-transition) !important;
         }
     }
 
@@ -417,6 +430,10 @@ toolbar#TabsToolbar {
                         inset: auto;
                         right: 4px;
                         top: 4px;
+                        tab-split-view-wrapper & {
+                            right: 4px;
+                            top: -2px;
+                        }
                         width: 16px !important;
                         height: 16px !important;
                         padding: 3px !important;

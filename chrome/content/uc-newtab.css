@@ -2,7 +2,8 @@
 @-moz-document url-prefix("about:newtab"),
 url-prefix("about:home") {
     :root {
-        @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
+        @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style"),
+            -moz-pref("uc.flex.revert-to-original-flat-corner-style", 3) {
             --uc-search-wrapper-radius: 99px;
         }
     }
@@ -106,7 +107,8 @@ url-prefix("about:home") {
         @media -moz-pref("browser.theme.dark-private-windows") {
             color-scheme: dark !important;
         }
-        @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
+        @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style"),
+            -moz-pref("uc.flex.revert-to-original-flat-corner-style", 3) {
             --uc-search-wrapper-radius: 99px;
         }
     }

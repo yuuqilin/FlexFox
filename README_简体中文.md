@@ -20,15 +20,46 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v5.6.2**
-* 新增选项 `uc.flex.enable-translucent-urlbar-popup-and-menus`：为地址栏的弹出面板和各类菜单启用半透明和模糊背景。FlexFox 默认只有在启用 Mica 或自定义壁纸时才会应用这些效果，而使用此选项后，即使没有启用 Mica 或壁纸，也能单独启用半透明的弹出面板和菜单。如果你已经启用了 Mica 或自定义壁纸，则无需再设置这个选项。
-* 添加对 v146 新功能「预览链接」的支持。
-* 为右键菜单的新项目「使用 Google Lens 搜图」、「添加分屏」、「预览链接」、「添加笔记」添加了菜单图标。
-* 修复 v146 的变更导致垂直标签页模式下「分屏视图」无法正常工作的问题。
-  * 「分屏视图」在 v145 中无法使用。从 v146 开始，可以通过开启原生设置 `browser.tabs.splitView.enabled` 来启用。
-  * 由于该功能仍在开发中，v146 与 v147 的界面外观有所不同。FlexFox 以 v147 为主要优化目标，在 v146 上也能使用，但外观可能不够完整。
-* 修复因 v146 的变更导致在水平标签页模式下展开侧栏表头时侧栏彩带底部出现黑线的问题。
-* 修复 Nightly v147 的变更导致在启用 `uc.flex.enable-rounded-web-content` 时开发者工具的阴影无法显示的问题。
+**🦊 v5.7.0**
+
+**新增**
+
+* 新增 `uc.flex.style-web-content-outline`，用于设置网页内容区域的边框（`0`–`2`）：
+  * `0` = 无边框（默认）
+  * `1` = 在 “分屏视图” 中，仅为当前聚焦的内容区域显示高亮边框
+  * `2` = 为所有内容区域显示淡色边框
+
+**变更**
+
+* `uc.flex.revert-to-original-flat-corner-style` 从布尔值改为数值（`0`–`3`）并扩展了作用范围：
+  * Firefox v145 将默认圆角从 4px 调整为 8px，此选项可用于恢复旧圆角。
+  * 旧版本用户请删除原有选项，并以数值类型重新建立。
+  * `0` = URL Bar 与 Search Bar 使用 FlexFox 的圆角（9999px，默认）
+  * `1` = 所有元素使用 v145+ 的 8px 圆角样式
+  * `2` = 所有元素使用 v145 之前的直角（4px）
+  * `3` = URL Bar 与 Search Bar 使用 FlexFox 的圆角，其余使用直角
+* 扩展 `uc.flex.style-urlbar` 的范围，由 `1`–`4` 改为 `0`–`4`：
+  * `0` = 布局与样式 `1` 相同，但 URL Bar 内的图标不会自动隐藏。
+* 扩展 `uc.flex.max-visible-horizontal-pinned-tabs` 的范围，由 `1`–`5` 改为 `0`–`5`：
+  * `0` 会停用水平标签模式的自动折叠功能。
+
+**兼容性**
+
+* 新增对 Firefox v146 “分屏视图” 的水平标签模式支持。
+  FlexFox 现在在垂直与水平标签模式下都完整支持分屏视图。
+
+**修复**
+
+* 修复 v5.0.2 回退导致在未启用 `uc.flex.enable-rounded-web-content` 时，左上角圆角消失及颜色溢出的问题。
+* 修复 Firefox Nightly v147 变更导致的圆角缺失与颜色溢出问题。
+
+**说明**
+
+* v5.6.2 新增的 `uc.flex.enable-translucent-urlbar-popup-and-menus` 可以在未启用 Mica 或自定义壁纸的情况下，让地址栏和菜单使用半透明背景。上一次的更新日志没有说明，这项半透明效果的透明度与启用 Mica 时相同，可以通过 `uc.flex.browser-mica-transparency-level` 调整，数值范围为 `0`–`4`，默认值为 `2`，数值越大背景越透明。
+
+下方视频展示了 v5.7.0 的几个选项，包括网页内容区域的边框效果、还原 v145 之前的直角 UI，以及调整地址栏和菜单的背景透明度。
+
+https://github.com/user-attachments/assets/b9bfb50c-f7e2-45bc-8959-9f6ed51a6a87
 
 下方视频演示了 v5.6.x 系列新增的功能，包括水平标签页自动隐藏的新模式、地址栏弹出面板和菜单的半透明效果，以及 Tab Split View 的标签样式。
 
@@ -62,7 +93,8 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * 新增 `uc.flex.style-toolbar-bgcolor`，切换导航栏与侧栏背景色（`1`–`2`）：
   * `1` = Tokyo Night 主题（默认，与旧版相同）
   * `2` = Firefox Acorn Design
-* 新增 `uc.flex.style-urlbar`，切换地址栏外观（`1`–`4`）：
+* 新增 `uc.flex.style-urlbar`，切换地址栏外观（`0`–`4`）：
+  * `0` = Flat（图标始终可见）
   * `1` = Flat（默认，与旧版相同）
   * `2` = Inset（嵌入式外观，文字居中）
   * `3` = Debossed（压印式外观，文字居中）
@@ -82,6 +114,10 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 * 新增 `uc.flex.style-window-controls-shift-up`，轻微上移窗口控制按钮（默认值：`False`）。
 * 新增 `uc.flex.style-window-controls-shrink-size`，缩小窗口控制按钮尺寸（默认值：`False`）。
 * 新增 `uc.flex.move-window-controls-to-left`，将窗口控制按钮移动到导航栏或水平标签栏左侧（默认值：`False`）。
+* 新增 `uc.flex.style-web-content-outline`，用于控制网页内容区域的边框（`0`–`2`）：
+  * `0` = 无边框（默认）
+  * `1` = 仅在 Tab Split View 中聚焦的网页内容上显示高亮边框
+  * `2` = 在所有网页内容上显示边框
 
 </details>
 
@@ -165,7 +201,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
     * `3` = 最小宽度 2 倍，无动画
     * `4` = 最小宽度 2 倍，有动画
     * 默认值：`1`（开启）。若希望所有标签保持固定宽度，请设为 `0`。
-  * 超过可见数量的水平固定标签页会自动折叠。可见固定标签页默认值为 10 个。可通过 `uc.flex.max-visible-horizontal-pinned-tabs` 调整（设置值 `1`–`5` 对应可见 2–10 个）。
+  * 超过可见数量的水平固定标签页会自动折叠。可见固定标签页默认值为 10 个。可通过 `uc.flex.max-visible-horizontal-pinned-tabs` 调整（设置值 `0`–`5` 对应可见 2–10 个；设置 `0` 可在水平标签页中禁用自动折叠）。
 
 </details>
 
@@ -173,9 +209,10 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 <summary>🧩 <b>重大更新：固定标签页面板的网格布局可自定义</b> <i>[点击展开]</i> 👇</summary>
 
 * 新增 `uc.flex.max-visible-horizontal-pinned-tabs`，用于设置固定标签页面板每行可显示的标签数量（横向）。
-  * 可设置范围 `1`–`5`（默认值 `5`）。
+  * 可设置范围 `0`–`5`（默认值 `5`）。
   * 在垂直标签页中，超过的固定标签会自动换行。
   * 在水平标签页中，超过的固定标签会自动折叠（设置值对应 2–10 个可见固定标签）。
+  * 设置 `0` 可在水平标签页中禁用自动折叠。
 
 * 新增 `uc.flex.max-visible-vertical-pinned-tabs`，用于设置固定标签页面板每列可显示的标签数量（纵向）。
   * 可设置范围 `2`–`8`（默认值 `4`）。
@@ -285,11 +322,20 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 </details>
 
 <details>  
-<summary>🪄 <b>重大更新：支持还原原生平角风格</b> <i>《点击展开》</i> 👇</summary>
+<summary>🪄 <b>重大更新：还原原生平角样式</b> <i>《点击展开》</i> 👇</summary>
 
-现在可以通过启用 `uc.flex.revert-to-original-flat-corner-style` 选项，将界面样式切换回 Firefox 默认的平直角风格，替代 FlexFox 的圆角设计。如果你偏好更加简洁、锐利的视觉效果，这个选项非常适合。
+新增了一个选项 `uc.flex.revert-to-original-flat-corner-style`。启用后可停用 URL 栏和搜索栏的 FlexFox 大圆角（9999px），还原为 Firefox 原生的平角样式。
 
-如需进一步自定义，你可以将下列变量从 `uc-variables.css` 复制到 `uc-user-settings.css` 中，精细调整地址栏、搜索栏和查找栏的圆角大小：
+在 Firefox v145 中，默认圆角由 4px 提升至 8px，使原生设计更加圆润。为了同时支持旧版与新版样式，此选项从布尔值扩展为数值设置（`0`–`3`）。从旧版本升级的用户请删除原有的布尔值设置，并按照新的数值形式重新创建。
+
+**可选数值**
+
+* `0` = URL 栏和搜索栏使用 FlexFox 大圆角（9999px，默认）
+* `1` = Firefox v145+ 的圆角样式（所有元素 8px）
+* `2` = v145 前的平角样式（所有元素 4px）
+* `3` = URL 栏和搜索栏使用 FlexFox 大圆角，其他元素使用 v145 前的平角样式
+
+如需进一步调整 URL 栏、搜索栏和查找栏的圆角尺寸，可以将下列变量从 `uc-variables.css` 复制到 `uc-user-settings.css` 并进行修改：
 
 ```css
 --uc-urlbar-border-radius
@@ -388,6 +434,20 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
+
+**v5.6.2**
+* 新增选项 `uc.flex.enable-translucent-urlbar-popup-and-menus`：为地址栏的弹出面板和各类菜单启用半透明和模糊背景。FlexFox 默认只有在启用 Mica 或自定义壁纸时才会应用这些效果，而使用此选项后，即使没有启用 Mica 或壁纸，也能单独启用半透明的弹出面板和菜单。如果你已经启用了 Mica 或自定义壁纸，则无需再设置这个选项。
+* 添加对 v146 新功能「预览链接」的支持。
+* 为右键菜单的新项目「使用 Google Lens 搜图」、「添加分屏」、「预览链接」、「添加笔记」添加了菜单图标。
+* 修复 v146 的变更导致垂直标签页模式下「分屏视图」无法正常工作的问题。
+  * 「分屏视图」在 v145 中无法使用。从 v146 开始，可以通过开启原生设置 `browser.tabs.splitView.enabled` 来启用。
+  * 由于该功能仍在开发中，v146 与 v147 的界面外观有所不同。FlexFox 以 v147 为主要优化目标，在 v146 上也能使用，但外观可能不够完整。
+* 修复因 v146 的变更导致在水平标签页模式下展开侧栏表头时侧栏彩带底部出现黑线的问题。
+* 修复 Nightly v147 的变更导致在启用 `uc.flex.enable-rounded-web-content` 时开发者工具的阴影无法显示的问题。
+
+下方视频演示了 v5.6.x 系列新增的功能，包括水平标签页自动隐藏的新模式、地址栏弹出面板和菜单的半透明效果，以及 Tab Split View 的标签样式。
+
+https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 
 **v5.6.1**
 * 修复了 v5.6.0 中出现的回归问题。在启用 Mica 和垂直标签页时打开标签组预览面板，会导致标签页失去 Mica 背景。
@@ -614,7 +674,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.disable-menu-icons` | `true` | 停用 FlexFox 添加的自定义选单图标。 |
 | `uc.flex.restore-window-controls-on-tabbar` | `true` | 在水平标签页模式下，将最小化、最大化、关闭按钮恢复到标签栏上。 |
 | `uc.flex.revert-to-original-window-controls` | `true` | 将 FlexFox 使用的 macOS 风格窗口按钮恢复为 Firefox 默认的最小化、最大化、关闭按钮。 |
-| `uc.flex.revert-to-original-flat-corner-style` | `true` | 将 URL 栏、搜索栏和查找栏的圆角样式恢复为 Firefox 默认的较平角设计，替代 FlexFox 使用的大圆角样式。 |
+| `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | 将 URL 栏、搜索栏及其他界面元素的样式恢复为 Firefox 原生的平角设计。数值：`0` = FlexFox 大圆角（9999px，默认），`1` = Firefox v145+ 的圆角样式（8px），`2` = v145 之前的平角样式（4px），`3` = URL 栏／搜索栏使用 FlexFox 大圆角，其他元素使用 v145 之前的平角样式。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |
 | `uc.flex.revert-to-original-sidebar-icon` | `true` | 将 FlexFox 使用的侧栏按钮图标恢复为 Firefox 默认设计。 |
 | `uc.flex.remove-sidebar-stripe` | `true` | Sidebery 激活时移除侧边栏彩带。若需切换侧边栏工具，垂直标签页模式下可按 <kbd>F1</kbd> 显示侧边栏工具按钮，水平标签页模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。 |
@@ -631,7 +691,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.sidebery-fast-hover-expand` | `true` | 加快 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
 | `uc.flex.sidebery-slow-hover-expand` | `true` | 减慢 Sidebery 与原生垂直标签页的自动展开/折叠速度。 |
 | `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | 将导航栏和书签栏的动画速度统一为 Sidebery／垂直标签页的速度。启用 Mica 或壁纸时自动生效。 |
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `1`-`5`<br>(`5`) | 设置每行固定标签页的最大可见数量。在垂直标签页中，超过的固定标签会自动换行。在水平标签页中，超过的固定标签会自动折叠，设置值对应 2–10 个可见固定标签。 |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | 设置每行固定标签页的最大可见数量。在垂直标签页中，超过的固定标签会自动换行。在水平标签页中，超过的固定标签会自动折叠，设置值对应 2–10 个可见固定标签。设置 `0` 可在水平标签页中禁用自动折叠。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | 设置原生垂直标签页和 Sidebery 中每列固定标签页的最大可见数量。达到上限后，固定标签页面板会显示滚动条。设为 `0` 时关闭限制，面板会随标签数量无限扩展。 |
 | `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 设置查找栏的位置。可选值为字符串：`'top-center-left'` 或 `'1'`（顶部左侧），`'top-right'` 或 `'2'`（右上角），`'bottom-right'` 或 `'3'`（右下角）。 |
 | `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | 设置 Firefox 的应用菜单、书签菜单和右键菜单中项目之间的垂直间距。可选值为字符串 `'1'` 或 `'small'`（较小间距）、`'2'` 或 `'medium'`（默认间距）、`'3'` 或 `'large'`（较大间距）。 |
@@ -650,7 +710,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 |----------|:------:|----------|
 | `uc.flex.style-sidebar-button` | `1`-`4`<br>(`1`) | 切换侧栏切换按钮的图标。取值：`1` = Firefox 主品牌标志（默认，与旧版相同），`2` = Firefox 浏览器标志，`3` = Firefox System 1 标志，`4` = Mozilla 旗帜符号。 |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | 切换导航栏和侧栏的背景颜色。取值：`1` = Tokyo Night 主题（默认，与旧版相同），`2` = Firefox Acorn Design。 |
-| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | 自定义地址栏的外观。取值：`1` = 扁平（默认，与旧版相同），`2` = 嵌入式（嵌入导航栏，文字居中），`3` = 压印（凹陷效果，文字居中），`4` = 无缝（完全融入导航栏，文字居中）。 |
+| `uc.flex.style-urlbar` | `0`-`4`<br>(`1`) | 自定义地址栏的外观。取值：`0` = 扁平（图标始终可见），`1` = 扁平（默认，与旧版相同），`2` = 嵌入式（嵌入导航栏，文字居中），`3` = 压印（凹陷效果，文字居中），`4` = 无缝（完全融入导航栏，文字居中）。 |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | 调整地址栏弹窗的位置。取值：`0` = 不居中（默认），`1` = 聚焦时居中显示，`2` = 仅在输入文字时居中显示。 |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
 | `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | 切换窗口控制按钮的图标。取值：`1` = 信号灯按钮（默认，与旧版相同），`2` = Yosemite 风格按钮，`3` = Yosemite GTK 主题。 |
@@ -659,9 +719,10 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.move-pip-volume-to-top` | `true` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
 | `uc.flex.move-window-controls-to-left` | `true` | 将窗口控制按钮移动到导航栏或水平标签栏的最左侧。 |
 | `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | 调整原生垂直标签页的标签组外观。取值：`1` = 显示展开／折叠指示器（无动画），`2` = 显示指示器（有动画），`3` = 标签文字居中（无指示器、无动画），`4` = 标签文字居中（无指示器、有动画）。默认值为 `1`。 |
+| `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | 控制网页内容区域的边框。取值：`0` = 无边框（默认），`1` = 仅在 Tab Split View 中聚焦的网页内容上显示高亮边框，`2` = 在所有网页内容上显示边框。 |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | 当启用 `uc.flex.enable-rounded-web-content` 时，让网页内容在贴近 Sidebery 彩带的一角也显示圆角效果。 |
-| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | 为地址栏弹出面板和各类菜单启用半透明和模糊背景。FlexFox 默认仅在启用 Mica 或自定义壁纸时才启用此效果，但使用此选项可在没有它们的情况下也启用。 |
+| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | 为地址栏弹出面板和各类菜单启用半透明和模糊背景。FlexFox 默认仅在启用 Mica 或自定义壁纸时才启用此效果，但使用此选项可在没有它们的情况下也启用。背景透明度可通过 `uc.flex.browser-mica-transparency-level` 调整，范围 `0`–`4`，数值越大越透明。 |
 
 #### 🧊 视觉背景和 Mica 效果
 
