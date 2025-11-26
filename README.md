@@ -20,6 +20,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v5.7.1**
+* Fixed a regression introduced in v5.5.4. When the tab-group expand and collapse animation was disabled, collapsing a tab group left extra vertical space below it. This caused inconsistent spacing between tabs and tab groups.
+* Improved the expand and collapse animation for tab groups to provide a smoother visual transition.
+
+<!-- END What's New -->
+
 **🦊 v5.7.0**
 
 **New**
@@ -60,8 +66,6 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 The video below demonstrates several v5.7.0 options, including the web content border effect, restoring the pre-v145 square UI, and adjusting the URL bar and menu transparency.
 
 https://github.com/user-attachments/assets/b9bfb50c-f7e2-45bc-8959-9f6ed51a6a87
-
-<!-- END What's New -->
 
 The video below demonstrates the new features introduced in the v5.6.x series, including the new auto-hide mode for horizontal tabs, translucent backgrounds for the urlbar popup and menus, and the tab style of Tab Split View.
 

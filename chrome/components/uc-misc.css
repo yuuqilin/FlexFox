@@ -386,6 +386,7 @@ toolbar:not(#TabsToolbar) > #search-container {
         /* Firefox hides collapsed tab-groups with display:none, excluding them
            from the counter. Force display back and use visibility:collapse so
            they stay hidden but still counted. */
+        /*
         tab-group {
             #tabbrowser-tabs[orient="vertical"] &[movingtabgroup][collapsed] > .tabbrowser-tab[visuallyselected],
             #tabbrowser-tabs[orient="vertical"] &[collapsed] > .tabbrowser-tab:not([visuallyselected]) {
@@ -393,5 +394,6 @@ toolbar:not(#TabsToolbar) > #search-container {
                 visibility: collapse !important;
             }
         }
+        */
     }
 }

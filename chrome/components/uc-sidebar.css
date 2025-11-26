@@ -1338,8 +1338,6 @@
     /* ── ▶️ Styles for verticalTabs when the sidebar is expanded */
     /* TEMPORARY: Since Firefox v141, #vertical-pinned-tabs-container renamed to #pinned-tabs-container (Bug 1964534) */
     #sidebar-main[sidebar-launcher-expanded] {
-        --uc-vt-sroot-gap: 1px 0px;
-
         :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
             /**
              * Use variables to pass values into the shadow trees. 
@@ -1351,6 +1349,7 @@
             @media not -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
                 --uc-vt-sroot-overflow-indicator-display: none;
             }
+            --uc-vt-sroot-gap: 1px 0px;
         }
         --uc-expanded-sroot-splitter-width: 10px;
         --uc-expanded-sroot-splitter-hover-width: calc(
@@ -1377,7 +1376,7 @@
 
     /* Adjust pinned tabs divider */
     #tabbrowser-tabs[orient="vertical"][expanded] {
-        gap: 5px !important;
+        gap: 4px !important;
 
         @media not -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
             :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
@@ -1603,7 +1602,7 @@
     /* Reduce spacing between vertical tabs */
     #tabbrowser-arrowscrollbox .tabbrowser-tab {
         #tabbrowser-tabs[orient="vertical"][expanded] & {
-            padding-block: 0.5px !important;
+            padding-block: 1.5px !important;
         }
     }
 
@@ -1975,6 +1974,24 @@
     /* Tab group: Expand/collapse animation */
     @media -moz-pref("uc.flex.style-tab-group", 2) or -moz-pref("uc.flex.style-tab-group", 4) {
         tab-group {
+            .tabbrowser-tab {
+                min-height: 36px;
+                max-height: 36px;
+            }
+            &[collapsed] {
+                #tabbrowser-tabs #tabbrowser-arrowscrollbox & .tabbrowser-tab:not([selected]) {
+                    display: flex !important;
+                    min-height: 0;
+                    max-height: 0;
+                    padding-block: 0px !important;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+            }
+        }
+
+        tab-group {
+            /*
             display: flex !important;
             flex-direction: column;
             max-height: 200px !important;
@@ -1984,12 +2001,13 @@
                 max-height: 100% !important;
                 transition: max-height 800ms ease;
             }
+            */
             &[collapsed] .tab-group-label::before {
-                animation: iconAnimation-close 700ms ease-in-out forwards;
+                animation: iconAnimation-close 500ms ease-in-out forwards;
                 animation-fill-mode: forwards;
             }
             &:not([collapsed]) .tab-group-label::before {
-                animation: iconAnimation-open 800ms ease-in-out forwards;
+                animation: iconAnimation-open 500ms ease-in-out forwards;
                 animation-fill-mode: forwards;
             }
         }
@@ -2297,7 +2315,11 @@
                             margin-inline-start var(--uc-autohide-transition-duration)
                                 var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay),
                             min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                                var(--uc-autohide-sidebar-delay) !important;
+                                var(--uc-autohide-sidebar-delay),
+                            min-height 150ms ease,
+                            max-height 150ms ease,
+                            padding-block 150ms ease,
+                            opacity 150ms ease !important;
                         .tab-group-line {
                             visibility: hidden;
                             transition: visibility 0s var(--uc-autohide-sidebar-delay);
@@ -2383,7 +2405,11 @@
                             margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                 var(--uc-hover-sidebar-delay),
                             min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                                var(--uc-hover-sidebar-delay) !important;
+                                var(--uc-hover-sidebar-delay),
+                            min-height 150ms ease,
+                            max-height 150ms ease,
+                            padding-block 150ms ease,
+                            opacity 150ms ease !important;
                         .tab-group-line {
                             visibility: visible;
                             transition: visibility 0s var(--uc-hover-sidebar-delay);
