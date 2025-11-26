@@ -20,14 +20,11 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.7.2**
-* Fixed a regression introduced in v5.7.1 where tabs inside tab groups were displayed with an incorrect height.
+**🦊 v5.7.3**
+* Fixed a regression introduced in v5.7.1 where Tab Split View inside tab groups was displayed with an incorrect height.
+* Added expand and collapse animations for Tab Split View inside tab groups. The animations are enabled when `uc.flex.style-tab-group` is set to `2` or `4`.
 
 <!-- END What's New -->
-
-**🦊 v5.7.1**
-* Fixed a regression introduced in v5.5.4. When the tab-group expand and collapse animation was disabled, collapsing a tab group left extra vertical space below it. This caused inconsistent spacing between tabs and tab groups.
-* Improved the expand and collapse animation for tab groups to provide a smoother visual transition.
 
 **🦊 v5.7.0**
 
@@ -447,6 +444,13 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v5.7.2**
+* Fixed a regression introduced in v5.7.1 where tabs inside tab groups were displayed with an incorrect height.
+
+**v5.7.1**
+* Fixed a regression introduced in v5.5.4. When the tab-group expand and collapse animation was disabled, collapsing a tab group left extra vertical space below it. This caused inconsistent spacing between tabs and tab groups.
+* Improved the expand and collapse animation for tab groups to provide a smoother visual transition.
 
 **v5.6.2**
 * Added `uc.flex.enable-translucent-urlbar-popup-and-menus`: enables a translucent and blurred background for the urlbar popup and various menus. FlexFox normally applies these effects only when Mica or a custom wallpaper is active, and this option allows you to use the translucent popup and menu background even without them. If Mica or a custom wallpaper is already enabled, you don't need this option.

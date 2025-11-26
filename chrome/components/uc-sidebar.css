@@ -1601,7 +1601,7 @@
 
     /* Reduce spacing between vertical tabs */
     #tabbrowser-arrowscrollbox .tabbrowser-tab {
-        #tabbrowser-tabs[orient="vertical"][expanded] & {
+        #tabbrowser-tabs[expanded] & {
             padding-block: 1.5px !important;
         }
     }
@@ -1978,12 +1978,28 @@
                 min-height: 39px;
                 max-height: 39px;
             }
+            tab-split-view-wrapper {
+                display: grid !important;
+                min-height: 68px;
+                max-height: 68px;
+                transition:
+                    min-height 150ms ease,
+                    max-height 150ms ease,
+                    opacity 150ms ease;
+            }
             &[collapsed] {
-                #tabbrowser-tabs #tabbrowser-arrowscrollbox & .tabbrowser-tab:not([selected]) {
+                #tabbrowser-tabs #tabbrowser-arrowscrollbox & > .tabbrowser-tab:not([selected]),
+                > tab-split-view-wrapper:not([hasactivetab]) > .tabbrowser-tab:not([selected]) {
                     display: flex !important;
                     min-height: 0;
                     max-height: 0;
                     padding-block: 0px !important;
+                    opacity: 0;
+                    pointer-events: none;
+                }
+                > tab-split-view-wrapper:not([hasactivetab]) {
+                    min-height: 0;
+                    max-height: 0;
                     opacity: 0;
                     pointer-events: none;
                 }
@@ -2125,6 +2141,11 @@
         }
 
         > .tabbrowser-tab {
+            #tabbrowser-tabs[expanded] & {
+                min-height: 34px;
+                max-height: 34px;
+                padding-block: 0 !important;
+            }
             tab-group & {
                 @media -moz-pref("uc.flex.disable-sidebery-autohide") {
                     margin-inline-start: var(--space-medium) !important;
