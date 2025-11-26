@@ -1981,7 +1981,7 @@
             tab-split-view-wrapper {
                 display: grid !important;
                 min-height: 68px;
-                max-height: 68px;
+                max-height: 72px;
                 transition:
                     min-height 150ms ease,
                     max-height 150ms ease,
