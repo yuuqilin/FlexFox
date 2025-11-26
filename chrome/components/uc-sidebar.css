@@ -1975,8 +1975,8 @@
     @media -moz-pref("uc.flex.style-tab-group", 2) or -moz-pref("uc.flex.style-tab-group", 4) {
         tab-group {
             .tabbrowser-tab {
-                min-height: 36px;
-                max-height: 36px;
+                min-height: 39px;
+                max-height: 39px;
             }
             &[collapsed] {
                 #tabbrowser-tabs #tabbrowser-arrowscrollbox & .tabbrowser-tab:not([selected]) {

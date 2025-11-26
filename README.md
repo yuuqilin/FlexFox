@@ -20,11 +20,14 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v5.7.2**
+* Fixed a regression introduced in v5.7.1 where tabs inside tab groups were displayed with an incorrect height.
+
+<!-- END What's New -->
+
 **🦊 v5.7.1**
 * Fixed a regression introduced in v5.5.4. When the tab-group expand and collapse animation was disabled, collapsing a tab group left extra vertical space below it. This caused inconsistent spacing between tabs and tab groups.
 * Improved the expand and collapse animation for tab groups to provide a smoother visual transition.
-
-<!-- END What's New -->
 
 **🦊 v5.7.0**
 
