@@ -118,6 +118,56 @@
 
     .NavigationBar {
         border-bottom: 1px solid var(--uc-sb-navigation-border-color) !important;
+        margin-bottom: 2px !important;
+    }
+
+    /* Adjust spacing and layout of the search bar */
+    #search_bar {
+        margin-bottom: 2px;
+
+        @media (max-width: 50px) {
+            @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+                #root:not(:hover) & {
+                    &::before {
+                        left: 5px !important;
+                        width: 34px !important;
+                    }
+                    .search-icon {
+                        margin-left: 25px;
+                    }
+                    .placeholder,
+                    .clear-btn {
+                        visibility: hidden;
+                    }
+                }
+            }
+            @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+                @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
+                    &::before {
+                        left: 5px !important;
+                        width: 34px !important;
+                    }
+                    .search-icon {
+                        margin-left: 25px;
+                    }
+                    .placeholder,
+                    .clear-btn {
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
+
+    .PinnedTabsBar {
+        margin-bottom: 2px;
+    }
+
+    .AnimatedTabList {
+        margin-top: -2px;
+        .Tab {
+            padding-block: 2px;
+        }
     }
 
     .tab-wrapper .Tab .body {
@@ -210,6 +260,25 @@
             transition:
                 height 50ms ease-in-out 5ms,
                 padding-left 0s var(--uc-autohide-transition-type) 0s !important;
+        }
+        #search_bar {
+            &::before {
+                transition:
+                    left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay);
+            }
+            .search-icon {
+                transition: margin-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type) 0s;
+            }
+            .placeholder,
+            .clear-btn {
+                transition:
+                    opacity var(--d-fast),
+                    transform var(--d-fast),
+                    visibility 0s var(--uc-autohide-transition-type) 0s !important;
+            }
         }
         /* Override inline padding-left transition time to avoid pinned tabs jitter caused by delayed shifting */
         .PinnedTabsBar {
@@ -314,6 +383,27 @@
                     height 50ms ease-in-out 5ms,
                     padding-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
+            }
+            #search_bar {
+                &::before {
+                    transition:
+                        left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay),
+                        width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay);
+                }
+                .search-icon {
+                    transition: margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-hover-sidebar-delay) - 28ms);
+                }
+                .placeholder,
+                .clear-btn {
+                    transition:
+                        opacity var(--d-fast),
+                        transform var(--d-fast),
+                        visibility var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            calc(var(--uc-hover-sidebar-delay) + 28ms) !important;
+                }
             }
             /*
             .PinnedTabsBar {
@@ -438,7 +528,7 @@
             max-height: 40px;
             height: 40px !important;
             padding: 3px 0px 2.5px 5px !important;
-            margin-bottom: 4px !important;
+            margin-bottom: 2px !important;
             /*
             border-bottom: 1px solid #ced1d4 !important;
             @media (prefers-color-scheme: dark) {

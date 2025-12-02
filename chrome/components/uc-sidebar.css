@@ -1900,7 +1900,7 @@
                     max-width: 100% !important;
 
                     &::before {
-                        left: calc((var(--uc-sidebar-main-hover-width) - var(--space-medium)) / 2);
+                        left: calc((var(--uc-sidebar-main-hover-width) - 2 * var(--space-medium)) / 2 - 3px);
                         transform: translateX(-50%);
                     }
                 }
@@ -1922,7 +1922,7 @@
                         max-width: 100% !important;
 
                         &::before {
-                            left: calc((var(--uc-sidebar-main-hover-width) - var(--space-medium)) / 2);
+                            left: calc((var(--uc-sidebar-main-hover-width) - 2 * var(--space-medium)) / 2 - 3px);
                             transform: translateX(-50%);
                         }
                     }
@@ -1976,12 +1976,17 @@
         tab-group {
             .tabbrowser-tab {
                 min-height: 39px;
-                max-height: 39px;
+                max-height: 40px;
+                transition:
+                    min-height 150ms ease,
+                    max-height 150ms ease,
+                    padding-block 150ms ease,
+                    opacity 150ms ease !important;
             }
             tab-split-view-wrapper {
                 display: grid !important;
                 min-height: 68px;
-                max-height: 72px;
+                max-height: 84px;
                 transition:
                     min-height 150ms ease,
                     max-height 150ms ease,
@@ -2143,7 +2148,7 @@
         > .tabbrowser-tab {
             #tabbrowser-tabs[expanded] & {
                 min-height: 34px;
-                max-height: 34px;
+                max-height: 40px;
                 padding-block: 0 !important;
             }
             tab-group & {
@@ -2394,7 +2399,7 @@
                                     var(--uc-hover-sidebar-delay) allow-discrete !important;
 
                             &::before {
-                                left: calc((var(--uc-sidebar-main-hover-width) - var(--space-medium)) / 2);
+                                left: calc((var(--uc-sidebar-main-hover-width) - 2 * var(--space-medium)) / 2 - 3px);
                                 transform: translateX(-50%);
                                 transition:
                                     left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)

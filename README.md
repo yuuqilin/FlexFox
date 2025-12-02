@@ -20,14 +20,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v5.7.4**
-* Fixed a regression introduced in v5.7.3 where Tab Split View caused background overflow inside tab groups.
+**🦊 v5.7.5**
+* Fixed an issue where the expand and collapse animations for tab groups stopped working when `uc.flex.disable-sidebery-autohide` or `Lock Sidebery` was enabled.
+* Fixed the misalignment of the expand/collapse indicator when tab group labels were centered and the label field was left empty.
+* Adjusted the spacing for Sidebery's navigation bar and pinned tab panels. Added layout support for the Sidebery Search Bar along with a new expand and collapse animation.
 
 <!-- END What's New -->
-
-**🦊 v5.7.3**
-* Fixed a regression introduced in v5.7.1 that caused Tab Split View to be displayed with an incorrect height.
-* Added expand and collapse animations for Tab Split View inside tab groups. The animations are enabled when `uc.flex.style-tab-group` is set to `2` or `4`.
 
 **🦊 v5.7.0**
 
@@ -447,6 +445,13 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
+
+**v5.7.4**
+* Fixed a regression introduced in v5.7.3 where Tab Split View caused background overflow inside tab groups.
+
+**v5.7.3**
+* Fixed a regression introduced in v5.7.1 that caused Tab Split View to be displayed with an incorrect height.
+* Added expand and collapse animations for Tab Split View inside tab groups. The animations are enabled when `uc.flex.style-tab-group` is set to `2` or `4`.
 
 **v5.7.2**
 * Fixed a regression introduced in v5.7.1 where tabs inside tab groups were displayed with an incorrect height.
