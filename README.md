@@ -20,12 +20,23 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v6.0.0 Preview**
+* Added ten new optional color themes.
+* Added new optional tab group styles and animation effects.
+* Added new optional tab color styles.
+* Added new optional icon sets for the Sidebery navigation panel.
+* Removed legacy internal Sidebery styles and fully migrated them to `userContent.css`.
+
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/4ac81ef0-fc09-44fe-8ae5-aacff088656b" />
+
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/f6064db5-0229-44d2-9e0c-ade49d054a35" />
+
+<!-- END What's New -->
+
 **🦊 v5.7.5**
 * Fixed an issue where the expand and collapse animations for tab groups stopped working when `uc.flex.disable-sidebery-autohide` or `Lock Sidebery` was enabled.
 * Fixed the misalignment of the expand/collapse indicator when tab group labels were centered and the label field was left empty.
 * Adjusted the spacing for Sidebery's navigation bar and pinned tab panels. Added layout support for the Sidebery Search Bar along with a new expand and collapse animation.
-
-<!-- END What's New -->
 
 **🦊 v5.7.0**
 

@@ -20,6 +20,17 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
+**🦊 v6.0.0 预览**
+* 新增 10 种可选的配色主题。
+* 新增可选的标签组样式与动画效果。
+* 新增可选的标签页配色样式。
+* 新增可选的 Sidebery 导航面板图标。
+* 移除旧版遗留的 Sidebery 内部样式，并完全迁移到 `userContent.css`。
+
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/4ac81ef0-fc09-44fe-8ae5-aacff088656b" />
+
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/f6064db5-0229-44d2-9e0c-ade49d054a35" />
+
 **🦊 v5.7.5**
 * 修复启用 `uc.flex.disable-sidebery-autohide` 或 `Lock Sidebery` 时，标签组的展开 / 折叠动画失效的问题。
 * 修复将标签组标题设为居中且未输入文字时，展开 / 折叠指示器未能正确居中的问题。

@@ -20,6 +20,17 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
+**🦊 v6.0.0 プレビュー**
+* 選択可能な10種類のカラーテーマを追加しました。
+* タブグループの新しいスタイルとアニメーション効果を追加しました。
+* タブの配色スタイルを追加しました。
+* Sidebery ナビゲーションパネル用のアイコンセットを追加しました。
+* 従来の Sidebery 内部スタイルを削除し、すべてを `userContent.css` に移行しました。
+
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/4ac81ef0-fc09-44fe-8ae5-aacff088656b" />
+
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/f6064db5-0229-44d2-9e0c-ade49d054a35" />
+
 **🦊 v5.7.5**
 * `uc.flex.disable-sidebery-autohide` または `Lock Sidebery` を有効にした際に、タブグループの展開・折りたたみアニメーションが動作しなくなる問題を修正しました。
 * タブグループのラベルを中央揃えにして文字を入力していない場合、展開・折りたたみインジケーターが中央に配置されない問題を修正しました。
