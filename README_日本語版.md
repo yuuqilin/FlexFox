@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v147-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v148-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -26,6 +26,11 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * タブの配色スタイルを追加しました。
 * Sidebery ナビゲーションパネル用のアイコンセットを追加しました。
 * 従来の Sidebery 内部スタイルを削除し、すべてを `userContent.css` に移行しました。
+* 新たに10種類のオプションのグラデーションカラーを追加しました。
+* 「List All Tabs」ボタン用のオプションアイコンを追加しました。
+* v6.0.0 はまだ GitHub に公開されていません。機能自体はほぼ完成していますが、現在デバッグ作業を進めています。以下はプレビュー画像です。
+
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/b9325623-244c-4881-aefb-5ea93fba6875" />
 
 <img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/4ac81ef0-fc09-44fe-8ae5-aacff088656b" />
 

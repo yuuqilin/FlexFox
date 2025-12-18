@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v147-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v148-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -26,6 +26,11 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * Added new optional tab color styles.
 * Added new optional icon sets for the Sidebery navigation panel.
 * Removed legacy internal Sidebery styles and fully migrated them to `userContent.css`.
+* Added ten new optional gradient color sets.
+* Added optional icon styles for the "List All Tabs" button.
+* v6.0.0 has not been pushed to GitHub yet. The feature set is largely complete, but some debugging is still in progress. Preview screenshots are shown below.
+
+<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/b9325623-244c-4881-aefb-5ea93fba6875" />
 
 <img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/4ac81ef0-fc09-44fe-8ae5-aacff088656b" />
 
