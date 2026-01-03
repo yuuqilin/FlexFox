@@ -60,6 +60,12 @@
 }
 
 /* Enable colored bookmarks folder icons */
+@media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+    .bookmark-item[container="true"] .menu-icon {
+        fill: var(--toolbarbutton-icon-fill);
+    }
+}
+
 @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
     #PlacesToolbarItems,
     #PlacesChevronPopup {
@@ -137,160 +143,6 @@
         }
     }
 
-    #PlacesToolbarItems,
-    #PlacesChevronPopup {
-        > .bookmark-item[container]:nth-of-type(9n + 1) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-1);
-            }
-            /*
-             * Use the direct child selector (">") to ensure only top-level bookmark folders
-             * get their folder icon replaced (folder-icon-1).
-             * In the toolbar, the icon element is .toolbarbutton-icon.
-             * In the overflow menu, it is .menu-iconic-icon.
-             * From v140+, .menu-icon will be used instead and .menu-iconic-icon can be removed.
-             */
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-1);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-1);
-                }
-                */
-            }
-        }
-
-        > .bookmark-item[container]:nth-of-type(9n + 2) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-2);
-            }
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-2);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-2);
-                }
-                */
-            }
-        }
-
-        > .bookmark-item[container]:nth-of-type(9n + 3) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-3);
-            }
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-3);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-3);
-                }
-                */
-            }
-        }
-
-        > .bookmark-item[container]:nth-of-type(9n + 4) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-4);
-            }
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-4);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-4);
-                }
-                */
-            }
-        }
-
-        > .bookmark-item[container]:nth-of-type(9n + 5) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-5);
-            }
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-5);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-5);
-                }
-                */
-            }
-        }
-
-        > .bookmark-item[container]:nth-of-type(9n + 6) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-6);
-            }
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-6);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-6);
-                }
-                */
-            }
-        }
-
-        > .bookmark-item[container]:nth-of-type(9n + 7) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-7);
-            }
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-7);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-7);
-                }
-                */
-            }
-        }
-
-        > .bookmark-item[container]:nth-of-type(9n + 8) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-8);
-            }
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-8);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-8);
-                }
-                */
-            }
-        }
-
-        > .bookmark-item[container]:nth-of-type(9n + 9) {
-            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-                fill: var(--uc-bookmark-folder-color-9);
-            }
-            > :is(.toolbarbutton-icon, .menu-icon),
-            > .menu-iconic-left .menu-iconic-icon {
-                background-image: var(--uc-bookmark-folder-icon-9);
-                /*
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                    background: var(--uc-gradient-highlight);
-                    mask-image: var(--uc-bookmark-folder-icon-9);
-                }
-                */
-            }
-        }
-    }
-
     /* Replace icon for the other bookmarks folder. */
     #OtherBookmarks {
         &[open] {
@@ -321,17 +173,8 @@
             /*transform: scale(1.4);*/
         }
 
-        :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
-            fill: var(--uc-bookmark-folder-color-10);
-        }
         > .toolbarbutton-icon {
             background-image: var(--uc-bookmark-folder-icon-10);
-            /*
-            @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                background: var(--uc-gradient-highlight);
-                mask-image: var(--uc-bookmark-folder-icon-9);
-            }
-            */
         }
 
         @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
@@ -356,11 +199,257 @@
     }
 }
 
-@media not -moz-pref("uc.flex.revert-to-original-sidebar-icon"),
-    -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 1),
-    -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {
+@media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons"),
+    -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+    #PlacesToolbarItems,
+    #PlacesChevronPopup {
+        > .bookmark-item[container]:nth-of-type(9n + 1) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-1);
+            }
+            /*
+             * Use the direct child selector (">") to ensure only top-level bookmark folders
+             * get their folder icon replaced (folder-icon-1).
+             * In the toolbar, the icon element is .toolbarbutton-icon.
+             * In the overflow menu, it is .menu-iconic-icon.
+             * From v140+, .menu-icon will be used instead and .menu-iconic-icon can be removed.
+             */
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-1);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-1) !important;
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 2) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-2);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-2);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-2) !important;
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 3) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-3);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-3);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-3) !important;
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 4) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-4);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-4);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-4) !important;
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 5) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-5);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-5);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-5) !important;
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 6) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-6);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-6);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-6) !important;
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 7) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-7);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-7);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-7) !important;
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 8) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-8);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-8);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-8) !important;
+            }
+        }
+
+        > .bookmark-item[container]:nth-of-type(9n + 9) {
+            :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                fill: var(--uc-bookmark-folder-color-9);
+            }
+            > :is(.toolbarbutton-icon, .menu-icon),
+            > .menu-iconic-left .menu-iconic-icon {
+                background-image: var(--uc-bookmark-folder-icon-9);
+            }
+            .bookmark-item[container]::after {
+                fill: var(--uc-bookmark-folder-color-9) !important;
+            }
+        }
+    }
+
+    #OtherBookmarks {
+        :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+            fill: var(--uc-bookmark-folder-color-10);
+        }
+        .bookmark-item[container]::after {
+            fill: var(--uc-bookmark-folder-color-10) !important;
+        }
+    }
+}
+
+@media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") and -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons"),
+    -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+    #PlacesToolbarItems > .bookmark-item[container],
+    #PlacesChevronPopup > .bookmark-item[container],
+    #OtherBookmarks {
+        > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+            opacity: var(--uc-bookmark-folder-opacity);
+        }
+    }
+}
+
+@media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+    #PlacesToolbarItems,
+    #PlacesChevronPopup {
+        > .bookmark-item[container] {
+            > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                list-style-image: none !important;
+                content: none !important;
+                mask-image: var(--bookmark-item-icon);
+            }
+            &:nth-of-type(9n + 1) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-1), var(--uc-gradient-end-1));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-1);
+                }
+            }
+            &:nth-of-type(9n + 2) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-2), var(--uc-gradient-end-2));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-2);
+                }
+            }
+            &:nth-of-type(9n + 3) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-3), var(--uc-gradient-end-3));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-3);
+                }
+            }
+            &:nth-of-type(9n + 4) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-4), var(--uc-gradient-end-4));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-4);
+                }
+            }
+            &:nth-of-type(9n + 5) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-5), var(--uc-gradient-end-5));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-5);
+                }
+            }
+            &:nth-of-type(9n + 6) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-6), var(--uc-gradient-end-6));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-6);
+                }
+            }
+            &:nth-of-type(9n + 7) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-7), var(--uc-gradient-end-7));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-7);
+                }
+            }
+            &:nth-of-type(9n + 8) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-8), var(--uc-gradient-end-8));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-8);
+                }
+            }
+            &:nth-of-type(9n + 9) > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+                background: linear-gradient(60deg in oklab, var(--uc-gradient-start-9), var(--uc-gradient-end-9));
+                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                    mask-image: var(--uc-bookmark-folder-icon-9);
+                }
+            }
+        }
+    }
+    #OtherBookmarks {
+        > :is(.toolbarbutton-icon, .menu-iconic-icon, .menu-icon) {
+            list-style-image: none !important;
+            mask-image: var(--bookmark-item-icon);
+            background: linear-gradient(60deg in oklab, var(--uc-gradient-start-10), var(--uc-gradient-end-10));
+            @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
+                mask-image: var(--uc-bookmark-folder-icon-10);
+            }
+        }
+    }
+}
+
+@media not -moz-pref("uc.flex.style-all-tabs-button", 0) {
     #alltabs-button {
         list-style-image: var(--uc-list-all-tabs-image) !important;
+        @media not -moz-pref("uc.flex.style-all-tabs-button", 2) {
+            @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+                .toolbarbutton-icon {
+                    transform: translateY(-5%);
+                }
+            }
+        }
+        @media -moz-pref("uc.flex.style-all-tabs-button", 2) {
+            /*
+            @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+                .toolbarbutton-icon {
+                    transform: translateY(5%);
+                }
+            }
+            */
+            @media not -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+                .toolbarbutton-icon {
+                    transform: translateY(-25%);
+                }
+            }
+        }
         /*
         @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
             :root:not([customizing]) &:is(:first-child, :nth-child(2)) {

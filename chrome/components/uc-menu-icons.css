@@ -77,6 +77,28 @@
     }
 
     /* Context menu */
+    /* Override the icon colors for menu navigation buttons and arrow indicators */
+    @media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+        #context-navigation .menu-icon,
+        menupopup > menu::after,
+        #protections-popup-mainView .subviewbutton-nav:not(.notFound)::after,
+        .widget-overflow-list .subviewbutton-nav::after,
+        .PanelUI-subView .subviewbutton-nav::after,
+        .subviewbutton:not(.tab-group-icon),
+        .syncNowBtn {
+            fill: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-flexfox-logo-color-mix)) !important;
+        }
+        /* Keep this separate from the rule above and avoid using !important to prevent overriding colored bookmark folder icons */
+        .menuitem-iconic,
+        #BMB_bookmarksPopup .menu-icon {
+            fill: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-flexfox-logo-color-mix));
+        }
+        /*
+        panel toolbarseparator {
+            color: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-flexfox-logo-color-mix)) !important;
+        }
+        */
+    }
     menuitem[data-l10n-id="text-action-redo"] {
         background-image: url("../icons/menu/redo.svg");
     }
@@ -185,7 +207,8 @@
     #placesContext_openBookmarkContainer\:tabs {
         background-image: url("chrome://browser/skin/open.svg");
     }
-    #placesContext_open {
+    #placesContext_open,
+    #context-openlinkincurrent {
         background-image: url("../icons/menu/open-in-window.svg");
     }
     #placesContext_open\:newcontainertab {
@@ -332,9 +355,6 @@
         background-image: url("../icons/menu/password-hide.svg");
     }
 
-    :root {
-        --uc-popup-menu-icon-color: color-mix(in srgb, currentColor 85%, transparent);
-    }
     .subviewbutton:not(.subviewbutton-iconic, [checked="true"], [targetURI]) > .toolbarbutton-icon,
     .subviewbutton:not(.subviewbutton-iconic, [checked="true"], [targetURI]) > .protections-popup-footer-icon {
         width: 16px;

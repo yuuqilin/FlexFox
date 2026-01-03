@@ -8,10 +8,7 @@ html[mozdisallowselectionprint]:has(head link:nth-of-type(1)[href^="resource://p
         opacity: 0;
         transition: opacity 48ms ease-out 200ms;
     }
-    .toolbar:is(
-        :hover,
-        :has(.toolbarButtonWithContainer > .toggled, #secondaryToolbarToggleButton.toggled)
-    ) {
+    .toolbar:is(:hover, :has(.toolbarButtonWithContainer > .toggled, #secondaryToolbarToggleButton.toggled)) {
         opacity: 1;
     }
 
@@ -49,16 +46,16 @@ html[mozdisallowselectionprint]:has(head link:nth-of-type(1)[href^="resource://p
                 background-color: transparent !important;
             }
             #toolbarSidebar {
-                background-color: color-mix(in srgb, var(--sidebar-toolbar-bg-color) 65%, transparent) !important;
+                background-color: rgb(from var(--sidebar-toolbar-bg-color) r g b / calc(alpha * 0.65)) !important;
             }
             #sidebarContent {
-                background-color: color-mix(in srgb, var(--body-bg-color) 65%, transparent);
+                background-color: rgb(from var(--body-bg-color) r g b / calc(alpha * 0.65));
             }
             #outerContainer #mainContainer div.toolbar {
                 backdrop-filter: blur(26px) saturate(140%);
             }
             #toolbarContainer {
-                background-color: color-mix(in srgb, var(--toolbar-bg-color) 80%, transparent) !important;
+                background-color: rgb(from var(--toolbar-bg-color) r g b / calc(alpha * 0.8)) !important;
             }
         }
     }

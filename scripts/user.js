@@ -25,8 +25,6 @@ user_pref("uc.flex.auto-hide-navbar-icons",                     false);
 user_pref("uc.flex.auto-hide-window-controls",                  false);
 /* Allows toolbar colors from extensions like Firefox Color to apply when no background image is set. */
 user_pref("uc.flex.allow-addons-to-change-toolbar-color",       false);
-/* Sets gradient style for the highlight color (0 = off, 1–X = select style). Applies to logo, stripe, and star icon. */
-user_pref("uc.flex.enable-gradient-highlight",                      0);
 /* Enables colored icons for bookmark folders.
    0 = disabled, 1 = use first icon set, 2 = use second icon set (labels auto-hidden). */
 user_pref("uc.flex.enable-colored-bookmarks-folder-icons",          0);
@@ -41,11 +39,9 @@ user_pref("uc.flex.show-pin-tabs-separator-in-expanded-state",  false);
 /* Shows the tab close button when hovering over a tab's favicon in horizontal tabs mode. */
 user_pref("uc.flex.show-tab-close-button-on-favicon-hover",     false);
 /* Shows the total number of tabs in the "List All Tabs" button.
-   0 = disabled
-   1 = show icon and number (all tabs)
-   2 = show icon and number (only loaded tabs)
-   3 = show number only (all tabs)
-   4 = show number only (only loaded tabs) */
+   0 = off
+   1 = show count of all tabs
+   2 = show count of loaded tabs only */
 user_pref("uc.flex.show-tab-count-in-alltabs-button",               0);
 /* Shows a numeric index before each tab's label text. */
 user_pref("uc.flex.show-tab-number-in-tab-label",               false);
@@ -79,8 +75,6 @@ user_pref("uc.flex.revert-to-original-window-controls",         false);
 user_pref("uc.flex.revert-to-original-flat-corner-style",           0);
 /* Reverts the bookmark star icon to Firefox's default design. */
 user_pref("uc.flex.revert-to-original-bookmark-star-icon",      false);
-/* Reverts the sidebar button icon to Firefox's default design. */
-user_pref("uc.flex.revert-to-original-sidebar-icon",            false);
 /* Removes the sidebar stripe when Sidebery is active. */
 user_pref("uc.flex.remove-sidebar-stripe",                      false);
 
@@ -122,12 +116,31 @@ user_pref("browser.tabs.fadeOutUnloadedTabs",                   false);
 user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 
 /* 🎨 UI Style & Appearance */
+/* Sets the icon for the “List All Tabs” button.
+   0 = Firefox default, 1 = Filter (default), 2 = Chevron */
+user_pref("uc.flex.style-all-tabs-button",                          1);
 /* Switches the sidebar toggle icon.
+   0 = Firefox default icon
    1 = Firefox Master Brand (default)
    2 = Firefox Browser
    3 = Firefox System 1
    4 = Mozilla Flag */
 user_pref("uc.flex.style-sidebar-button",                           1);
+/* Controls the sidebar stripe color, sidebar button, and bookmark star.
+   0 = Classic (default), 1 = Red, 2 = Orange, 3 = Yellow, 4 = Green,
+   5 = Cyan, 6 = Blue, 7 = Violet, 8 = Purple, 9 = Pink, 10 = Gray */
+user_pref("uc.flex.style-sidebar-stripe-color",                     0);
+/* Applies sidebar stripe color to all icons.
+   In Dark Mode, also affects URL bar and web area borders. */
+user_pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons",  false);
+/* Applies a gradient based on sidebar stripe color.
+   Gradient affects sidebar stripe, sidebar button, bookmark star and folder icons. */
+user_pref("uc.flex.style-sidebar-stripe-color-use-gradient",        false);
+/* Sets the navigation icon when Sidebery is collapsed.
+   0 = Active panel icon (default), 1 = Sidebery Logo, 2 = Chevron */
+user_pref("uc.flex.style-sidebery-nav-icon",                        0);
+/* Uses the color of the current active panel for the Sidebery nav icon. */
+user_pref("uc.flex.style-sidebery-nav-icon-use-active-panel-color", false);
 /* Changes navbar and sidebar background.
    1 = Tokyo Night (default)
    2 = Firefox Acorn Design */
@@ -158,12 +171,18 @@ user_pref("uc.flex.style-window-controls-shrink-size",          false);
 user_pref("uc.flex.move-window-controls-to-left",               false);
 /* Moves PiP window volume button to the top */
 user_pref("uc.flex.move-pip-volume-to-top",                     false);
-/* Adjusts the appearance of tab groups in native vertical tabs.
-   Values: 1 = show expand/collapse indicator without animation
-           2 = show indicator with animation
-           3 = center labels, no indicator, no animation
-           4 = center labels, no indicator, with animation */
-user_pref("uc.flex.style-tab-group",                                1);
+/* Sets appearance of vertical tab items (Sidebery & native vertical tabs).
+   1 = Pinned tabs use borders only (default), 
+   2 = Pinned tabs use background only; tabs include hover animation and borders/highlights match sidebar stripe */
+user_pref("uc.flex.style-tab-items",                                1);
+/* Sets appearance of native vertical tab groups.
+   0 = Tree layout no indicator, 1 = Tree with triangle (default), 2 = Box with folder icon */
+user_pref("uc.flex.style-tab-groups",                               1);
+/* Sets expand/collapse transition and rotating indicator for native vertical tab groups.
+   0 = No transition, 1 = Transition only, 2 = Transition + rotating indicator (default) */
+user_pref("uc.flex.style-tab-groups-add-transition",                2);
+/* Centers the label text of native vertical tab groups. */
+user_pref("uc.flex.style-tab-groups-center-label-text",         false);
 /* Controls the outline of the web content area.
    0 = No outline (default)
    1 = Highlighted outline only on the focused panel in Tab Split View

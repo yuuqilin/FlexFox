@@ -117,7 +117,7 @@ findbar {
     border: 0;
     border-top-color: transparent !important;
     overflow-x: visible;
-    filter: drop-shadow(rgb(from var(--uc-urlbar-outline) r g b / 0.7) 0px 0px 0.5px);
+    filter: drop-shadow(rgb(from var(--uc-findbar-outline) r g b / calc(alpha * 0.7)) 0px 0px 0.5px);
 }
 
 .findbar-container,
@@ -248,6 +248,11 @@ findbar checkbox,
 findbar [anonid="findbar-textbox-wrapper"] toolbarbutton,
 findbar [anonid="findbar-textbox-wrapper"] htmlNs|input {
     border: 1px solid ThreeDShadow;
+    /*
+    @media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+        border-color: var(--uc-urlbar-outline) !important;
+    }
+    */
 }
 /*
 findbar {

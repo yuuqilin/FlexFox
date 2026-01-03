@@ -353,9 +353,9 @@ split-view-footer {
                 border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 overflow: hidden;
-                box-shadow: 0 1.5px 9px light-dark(rgba(12, 12, 16, 0.15), rgba(12, 12, 16, 0.25));
+                box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                 @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
-                    box-shadow: 0 1.5px 9px red;
+                    box-shadow: var(--uc-web-content-box-shadow-depth) red;
                 }
 
                 @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser")) {
@@ -393,18 +393,18 @@ split-view-footer {
                 @media -moz-pref("devtools.toolbox.host", "left") {
                     border-top-right-radius: var(--uc-web-content-radius);
                     margin-right: var(--uc-web-content-margin);
-                    box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
+                    box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                     @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
-                        box-shadow: 0 1.5px 9px red;
+                        box-shadow: var(--uc-web-content-box-shadow-depth) red;
                     }
                 }
                 /* When DevTools is docked on the right, override sharp corner with a rounded one and add left margin */
                 @media -moz-pref("devtools.toolbox.host", "right") {
                     border-top-left-radius: var(--uc-web-content-radius);
                     margin-left: var(--uc-web-content-margin);
-                    box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
+                    box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                     @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
-                        box-shadow: 0 1.5px 9px red;
+                        box-shadow: var(--uc-web-content-box-shadow-depth) red;
                     }
                 }
             }
@@ -412,9 +412,9 @@ split-view-footer {
             .devtools-toolbox-bottom-iframe {
                 border-radius: var(--uc-web-content-radius);
                 margin-top: var(--uc-web-content-margin);
-                box-shadow: 0 1.5px 9px light-dark(#00000026, #00000040);
+                box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                 @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
-                    box-shadow: 0 1.5px 9px red;
+                    box-shadow: var(--uc-web-content-box-shadow-depth) red;
                 }
             }
 

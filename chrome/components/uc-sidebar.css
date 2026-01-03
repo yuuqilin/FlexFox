@@ -16,7 +16,7 @@
     &:not(:hover) {
         --toolbarbutton-active-background: transparent !important;
     }
-    @media not -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
+    @media not -moz-pref("uc.flex.style-sidebar-button", 0) {
         :root[customizing] & {
             list-style-image: var(--uc-flexfox-logo-image) !important;
         }
@@ -43,7 +43,7 @@
                 mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
             }
         }
-        @media not -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
+        @media not -moz-pref("uc.flex.style-sidebar-button", 0) {
             fill: var(--toolbarbutton-icon-fill) !important;
             list-style-image: none !important;
             background-image: var(--uc-flexfox-logo-image);
@@ -94,6 +94,12 @@
             }
 
             &:not([checked="true"]) {
+                /* When `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` is enabled, 
+                 * --toolbarbutton-icon-fill is overridden in :root.  
+                 * We reassign it on the endpoint element so that icons in the non-checked state 
+                 * (:not([checked="true"])) are properly displayed as highlighted.
+                 */
+                --toolbarbutton-icon-fill: light-dark(rgb(91, 91, 102), rgb(251, 251, 254));
                 @media -moz-pref("uc.flex.style-sidebar-button", 3) {
                     --uc-flexfox-logo-image: url("../icons/toolbarbutton/firefox-newaita-mono.svg");
                 }
@@ -104,9 +110,10 @@
 
             &[checked="true"] {
                 fill: var(--uc-flexfox-logo-color) !important;
-                @media -moz-pref("uc.flex.enable-gradient-highlight") {
+                @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                    fill: light-dark(rgb(91, 91, 102), rgb(251, 251, 254)) !important;
                     &:not(:hover) {
-                        background: var(--uc-gradient-highlight);
+                        background: var(--uc-sidebar-stripe-gradient);
                         mask-image: var(--uc-flexfox-logo-image);
                     }
                 }
@@ -183,7 +190,9 @@
             padding: 0 !important;
             /* !v142 */
             background-color: var(--uc-sb-sidebar-header-stripe) !important;
-            background-image: var(--uc-gradient-highlight, initial);
+            @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                background: var(--uc-sidebar-stripe-gradient) !important;
+            }
             will-change: min-height, max-height, min-width, overflow, background-color, opacity;
             transition:
                 max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
@@ -256,7 +265,9 @@
                 padding: 0 !important;
                 /* !v142 */
                 background-color: var(--uc-sb-sidebar-header-stripe) !important;
-                background-image: var(--uc-gradient-highlight, inherit);
+                @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                    background: var(--uc-sidebar-stripe-gradient) !important;
+                }
                 opacity: 1;
                 will-change: min-height, max-height, min-width, overflow, background-color, opacity;
                 transition:
@@ -286,7 +297,9 @@
                     padding: 0 !important;
                     /* !v142 */
                     background-color: var(--uc-sb-sidebar-header-stripe) !important;
-                    background-image: var(--uc-gradient-highlight, inherit);
+                    @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                        background: var(--uc-sidebar-stripe-gradient) !important;
+                    }
                     opacity: 1;
                     will-change: min-height, max-height, min-width, overflow, background-color, opacity;
                     transition:
@@ -515,11 +528,14 @@
         --uc-sb-sidebar-main-background-duration: var(--uc-autohide-transition-duration);
         --uc-sb-sidebar-main-background-delay: calc(var(--uc-autohide-sidebar-delay) + 10ms);
         */
+        /* Make sidebar-main background transparent when Sidebery is active to avoid color overlap with #sidebar-main */
+        --uc-sb-sidebar-main-background-color: transparent;
         --uc-sb-sidebar-main-background-image: none;
-        @media -moz-pref("uc.flex.enable-gradient-highlight") {
-            --uc-sb-sidebar-main-background-image: var(--uc-gradient-highlight);
-        }
         --uc-sidebar-main-stripe: var(--uc-sb-sidebar-header-stripe);
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+            --uc-sb-sidebar-main-background-image: var(--uc-sidebar-stripe-gradient);
+            --uc-sidebar-main-stripe: transparent;
+        }
         @media -moz-pref("uc.flex.disable-sidebery-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
             :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                 /*
@@ -602,26 +618,6 @@
             }
         }
     }
-
-    /** 
-     * !TEMPORARY: When sidebar.visibility is set to always-show, 
-     * Firefox assigns --sidebar-launcher-collapsed-width the same value 
-     * as --uc-sidebar-width. However, switching to expand-on-hover does 
-     * not automatically update this variable to reflect the new sidebar width. 
-     * To address this, we have to override the variable manually. 
-     * Note that this value should ideally be calculated dynamically by Firefox, 
-     * so our hardcoded fallback may not match the actual sidebar width across 
-     * different system environments. This can cause layout shifts when the 
-     * sidebar expands. 
-     */
-    /*
-    @media -moz-pref("sidebar.visibility", "expand-on-hover") {
-        #sidebar-box,
-        #tabbrowser-tabbox {
-            --sidebar-launcher-collapsed-width: calc(var(--uc-sidebar-stripe-width) + 11.0667px) !important;
-        }
-    }
-    */
 
     /* 🔼 [BLOCK A] End of variable definitions for active Sidebery */
 
@@ -904,14 +900,6 @@
         }
     }
 
-    /* Fix v144 container change that broke vertical tabs' ability to size to its children */
-    #sidebar-main:not([sidebar-launcher-expanded][sidebar-panel-open]) #vertical-tabs {
-        contain-intrinsic-width: var(--uc-sidebar-stripe-width);
-        /*
-        min-width: var(--uc-sidebar-stripe-width);
-        */
-    }
-
     /* Remove sidebar stripe when Sidebery is active. */
     @media -moz-pref("uc.flex.remove-sidebar-stripe") {
         #sidebar-main {
@@ -979,19 +967,24 @@
                 }
             }
             */
-            /* This transition is already covered by the one defined above, so it's commented out. */
-            /* transition: z-index 0s linear var(--uc-sb-sidebar-main-z-delay) allow-discrete; */
+            /* These properties are already covered by the rules defined above, so they are commented out. */
+            /*
+            transition: z-index 0s linear var(--uc-sb-sidebar-main-z-delay) allow-discrete;
             background: inherit;
+            */
         }
 
         sidebar-main[expanded] {
             --tab-pinned-horizontal-count: 5; /* This needs to match whatever is used in sidebar-main.css - currently 5 */
-            background: inherit;
+            background: var(--uc-sb-sidebar-main-background-color, inherit);
             overflow: hidden;
             /* !TEMPORARY: */
+            /*
             &:not(:hover) {
                 margin-inline-start: var(--uc-sidebar-main-margin-left);
             }
+            */
+            margin-inline-start: var(--uc-sidebar-main-margin-left);
             min-width: /* var(--tab-collapsed-width) */ var(
                 --uc-sb-sidebar-main-width,
                 calc(var(--uc-sidebar-main-width) - var(--uc-sidebar-main-margin-left))
@@ -1023,6 +1016,7 @@
             }
         }
         sidebar-main[expanded]:hover {
+            margin-inline-start: 0;
             min-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-hover-width));
             /* transition-delay: 0ms !important; */
             transition:
@@ -1076,8 +1070,10 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 box-shadow: 0 -10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
-                background-image: var(--uc-gradient-highlight, none);
                 background-color: var(--uc-sb-sidebar-header-stripe);
+                @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                    background: var(--uc-sidebar-stripe-gradient);
+                }
                 /*
                 @media (prefers-color-scheme: dark) {
                     background-color: rgba(255, 255, 255, 0.06);
@@ -1096,8 +1092,10 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 box-shadow: 0 10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
-                background-image: var(--uc-gradient-highlight, none);
                 background-color: var(--uc-sb-sidebar-header-stripe);
+                @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                    background: var(--uc-sidebar-stripe-gradient);
+                }
                 /*
                 @media (prefers-color-scheme: dark) {
                     background-color: rgba(255, 255, 255, 0.06);
@@ -1146,8 +1144,10 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 box-shadow: 0 -10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
-                background-image: var(--uc-gradient-highlight, none);
                 background-color: var(--uc-sb-sidebar-header-stripe);
+                @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                    background: var(--uc-sidebar-stripe-gradient);
+                }
                 /*
                 @media (prefers-color-scheme: dark) {
                     background-color: rgba(255, 255, 255, 0.06);
@@ -1166,8 +1166,10 @@
                 background-color: rgba(0, 0, 0, 0.1);
                 box-shadow: 0 10px 20px 28px rgba(0, 0, 0, 0.1);
                 */
-                background-image: var(--uc-gradient-highlight, none);
                 background-color: var(--uc-sb-sidebar-header-stripe);
+                @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                    background: var(--uc-sidebar-stripe-gradient);
+                }
                 /*
                 @media (prefers-color-scheme: dark) {
                     background-color: rgba(255, 255, 255, 0.06);
@@ -1394,7 +1396,7 @@
             /* Show pin tabs separator in expanded state */
             :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
                 &:not(:hover) {
-                    box-shadow: inset 0 0.8px 0 0 var(--uc-vt-pinned-tab-border-color);
+                    box-shadow: inset 0 0.8px 0 0 var(--uc-vt-splitter-color);
                     /*
                     color: var(--toolbox-textcolor) !important;
                     border-bottom: var(--tabstrip-inner-border) !important;
@@ -1455,7 +1457,7 @@
         &::after {
             border-bottom: none !important;
             height: 1.2px;
-            box-shadow: inset 0 0.8px 0 0 var(--uc-vt-pinned-tab-border-color) !important;
+            box-shadow: inset 0 0.8px 0 0 var(--uc-vt-splitter-color) !important;
 
             width: 10px;
             margin-inline: calc(50% - 5px) !important;
@@ -1515,9 +1517,44 @@
         }
     }
 
+    /** 
+     * !TEMPORARY:
+     * Fixes a regression introduced in Nightly v148 where removing
+     * `pointer-events: none` from the tab hover preview panel causes
+     * native vertical tabs to lose their hover state and collapse.
+     *
+     * This is a simple rollback to the old behavior so the sidebar
+     * can stay expanded for now. It is safe temporarily because the
+     * planned interactive controls for the preview panel are not yet
+     * available in Nightly.
+     *
+     * This will need a proper solution later: once the preview panel
+     * supports interaction, the sidebar should remain expanded while
+     * the preview is open instead of disabling pointer events again.
+     */
+    #tab-preview-panel {
+        pointer-events: none;
+    }
+
     /* Keep the pinned tab grid wide enough so the second column doesn't spill into the collapsed vertical tab bar on hover */
+    /*
     #tabbrowser-tabs[orient="vertical"][expanded] {
         min-width: var(--uc-sidebar-main-hover-width) !important;
+    }
+    */
+    /* Fix v144 container change that broke vertical tabs' ability to size to its children */
+    /*
+    #sidebar-main:not([sidebar-launcher-expanded][sidebar-panel-open]) #vertical-tabs {
+    */
+    #sidebar-main[sidebar-launcher-expanded] #vertical-tabs {
+        /*
+        contain-intrinsic-width: var(--uc-sidebar-stripe-width);
+        */
+        /* Set the width on the parent #vertical-tabs so the child #tabbrowser-tabs
+           no longer needs its own width, and ensure #vertical-tabs is wide enough
+           to prevent vertical tabs from shifting when switching between native
+           vertical tabs and Sidebery with `uc.flex.show-tab-count-in-alltabs-button` enabled. */
+        min-width: var(--uc-sidebar-main-hover-width);
     }
 
     /* Pinned tabs panel: set max height, tighten spacing, and style pinned tab borders/background */
@@ -1574,26 +1611,25 @@
                 transition:
                     max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay),
-                    background-color 0.8s,
+                    background-color 0.06s,
                     box-shadow 0.8s;
 
-                .tabbrowser-tab:not(:hover) &:not([selected], [multiselected]) {
+                .tabbrowser-tab &:not([selected], [multiselected]) {
                     background-color: var(--uc-vt-pinned-tab-bgcolor) !important;
                     box-shadow: 0px 0px 0px transparent;
                 }
+                .tabbrowser-tab[discarded] & {
+                    background-color: var(--uc-vt-pinned-tab-unloaded-bgcolor) !important;
+                }
 
-                .tabbrowser-tab:hover & {
-                    background-color: rgb(from var(--uc-vt-pinned-tab-bgcolor) r g b / 0.25) !important;
-                    box-shadow: 0px 0px 4px
-                        light-dark(
-                            color-mix(in srgb, var(--uc-sidebar-header-stripe) 66%, white),
-                            color-mix(in srgb, var(--uc-sidebar-header-stripe) 50%, white)
-                        );
+                .tabbrowser-tab:hover &:not([selected], [multiselected]) {
+                    background-color: var(--uc-vt-pinned-tab-hover-bgcolor) !important;
+                    box-shadow: var(--uc-vt-pinned-tab-box-shadow);
                     transition:
                         max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                             var(--uc-hover-sidebar-delay),
-                        background-color 0.2s,
-                        box-shadow 0.2s;
+                        background-color 0s,
+                        box-shadow 0.1s;
                 }
             }
         }
@@ -1610,32 +1646,32 @@
     .tab-background {
         border-radius: 4px !important;
         &:is([selected], [multiselected]) {
-            box-shadow:
-                inset var(--uc-vt-active-tab-border-shadow),
-                var(--uc-vt-active-tab-drop-shadow) !important;
+            box-shadow: var(--uc-vt-active-tab-border-shadow), var(--uc-vt-active-tab-drop-shadow) !important;
 
             outline-color: transparent !important;
         }
         &[selected] {
             background-color: var(--uc-vt-active-tab-bgcolor) !important;
         }
-        &[multiselected] {
-            background-color: color-mix(in srgb, var(--uc-vt-active-tab-bgcolor) 75%, transparent) !important;
+        &[multiselected]:not([selected]) {
+            background-color: rgb(from var(--uc-vt-active-tab-bgcolor) r g b / calc(alpha * 0.65)) !important;
         }
 
         @media -moz-pref("uc.flex.style-tab-items", 2) {
-            &:is([selected], [multiselected]) {
-                box-shadow:
-                    inset var(--uc-vt-active-tab-border-shadow),
-                    var(--uc-vt-active-tab-drop-shadow) !important;
+            background-color: transparent !important;
+            transition:
+                max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                background-color 0.06s,
+                box-shadow 0.06s;
 
-                outline-color: transparent !important;
-            }
-            &[selected] {
-                background-color: var(--uc-vt-active-tab-bgcolor) !important;
-            }
-            &[multiselected] {
-                background-color: color-mix(in srgb, var(--uc-vt-active-tab-bgcolor) 75%, transparent) !important;
+            .tabbrowser-tab:hover &:not([selected], [multiselected]) {
+                background-color: var(--uc-vt-tab-hover-bgcolor) !important;
+                transition:
+                    max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay),
+                    background-color 0s,
+                    box-shadow 0.1s;
             }
         }
     }
@@ -1743,14 +1779,14 @@
                     background-image: none !important;
                 }
                 .tabbrowser-tab:hover &:hover {
-                    background-color: color-mix(in srgb, currentColor 17%, transparent) !important;
+                    background-color: rgb(from currentColor r g b / calc(alpha * 0.17)) !important;
                     background-image: none !important;
                 }
             }
 
             /*
             &:is([soundplaying], [muted], [activemedia-blocked]) {
-                --button-background-color-ghost-hover: color-mix(in srgb, currentColor 17%, transparent) !important;
+                --button-background-color-ghost-hover: rgb(from currentColor r g b / calc(alpha * 0.17)) !important;
                 --audio-overlay-extra-background: transparent;
                 background-color: var(--lwt-accent-color);
                 background-image:
@@ -1802,19 +1838,25 @@
     }
 
     /* Tab group: Soften tab group label colors to make them less prominent */
+    tab-group {
+        --uc-tab-group-line-visibility: visible;
+        --uc-tab-group-color: oklch(from var(--tab-group-color) l c h / calc(alpha * 0.87));
+        --uc-tab-group-color-invert: oklch(from var(--tab-group-color-invert) l c h / calc(alpha * 0.9));
+        --uc-tab-group-color-pale: var(--tab-group-color-pale);
+        --tab-group-label-text-dark: var(--color-gray-100);
+    }
+
     .tab-group-label {
         --tab-group-label-animation-duration: 150ms;
         border-radius: 4px !important;
         transition:
             scale 300ms ease 0s,
             box-shadow var(--tab-group-label-animation-duration) !important;
-        &:hover {
-            scale: 1.05;
+        @media not -moz-pref("uc.flex.style-tab-groups", 2) {
+            &:hover {
+                scale: 1.05;
+            }
         }
-        --uc-tab-group-color: color-mix(in oklch, var(--tab-group-color) 87%, transparent);
-        --uc-tab-group-color-invert: color-mix(in oklch, var(--tab-group-color-invert) 90%, transparent);
-        --uc-tab-group-color-pale: var(--tab-group-color-pale);
-        --tab-group-label-text-dark: var(--color-gray-100);
         color: light-dark(var(--uc-tab-group-color-pale), var(--tab-group-label-text-dark)) !important;
         background-color: light-dark(var(--uc-tab-group-color), var(--uc-tab-group-color-invert)) !important;
         @media (prefers-color-scheme: dark) {
@@ -1838,18 +1880,38 @@
 
     /* Remove styles introduced for the new element in v144 */
     .tab-group-label-hover-highlight {
-        tab-group & {
+        @media not -moz-pref("uc.flex.style-tab-groups", 2) {
             background-color: transparent !important;
-
-            #tabbrowser-tabs[orient="vertical"] & {
-                margin-inline: 0 !important;
-                box-shadow: none !important;
+        }
+        @media -moz-pref("uc.flex.style-tab-items", 2) and -moz-pref("uc.flex.style-tab-groups", 2) {
+            transition: background-color 0.06s;
+            tab-group[collapsed] &:hover {
+                background-color: var(--uc-vt-tab-hover-bgcolor) !important;
             }
+        }
+        tab-group[collapsed][hasactivetab] & {
+            background-color: transparent !important;
+        }
+
+        #tabbrowser-tabs[orient="vertical"] & {
+            margin-inline: 0 !important;
+            box-shadow: none !important;
         }
     }
 
     /* Tab group: Size and center tab group labels */
     .tab-group-label {
+        --uc-tab-group-label-padding-inline: 32px 16px;
+        --uc-tab-group-label-padding-inline-total: 48px;
+        @media -moz-pref("uc.flex.style-tab-groups", 0) {
+            --uc-tab-group-label-padding-inline: calc(var(--tab-inline-padding) - var(--space-medium));
+            --uc-tab-group-label-padding-inline-total: calc(2 * (var(--tab-inline-padding) - var(--space-medium)));
+        }
+        @media -moz-pref("uc.flex.style-tab-groups-center-label-text") {
+            --uc-tab-group-label-padding-inline: 32px 26px;
+            --uc-tab-group-label-padding-inline-total: 58px;
+        }
+
         #sidebar-main[sidebar-launcher-expanded] & {
             /* Restore pre-v140 box-sizing and padding for tab group labels */
             box-sizing: content-box;
@@ -1859,75 +1921,235 @@
             -moz-context-properties: fill, fill-opacity;
 
             /* Expanded state indicator */
-            &::before {
-                position: absolute;
-                content: "";
-                left: 10px;
-                width: 24px;
-                height: 24px;
-                background-image: url("../icons/tab-group/tab-group-expanded.svg");
-                background-position: 1px 6px;
-                background-repeat: no-repeat;
-                background-size: 11.25px;
-                fill: currentColor;
-                opacity: 0;
-            }
-            /* Collapsed state indicator */
-            &[aria-expanded="false"]::before {
-                background-image: url("../icons/tab-group/tab-group-collapsed.svg");
-                background-position: 0 6px;
-                background-size: 12px;
-            }
-            /* Always show indicator when there is no label text */
-            tab-group[label="\200b "] &::before {
-                opacity: 1;
+            @media not -moz-pref("uc.flex.style-tab-groups", 0) {
+                &::before {
+                    position: absolute;
+                    content: "";
+                    left: 4px;
+                    width: 24px;
+                    height: 24px;
+                    background-image: url("../icons/tab-group/tab-group-expanded.svg");
+                    background-position: 7px 6px;
+                    background-repeat: no-repeat;
+                    background-size: 11.25px;
+                    fill: currentColor;
+                    opacity: 0;
+                }
+                /* Collapsed state indicator */
+                &[aria-expanded="false"]::before {
+                    background-image: url("../icons/tab-group/tab-group-collapsed.svg");
+                    background-position: 6px 6px;
+                    background-size: 12px;
+                }
+                /* Always show indicator when there is no label text */
+                tab-group[label="\200b "] &::before {
+                    opacity: 1;
+                }
             }
 
             /* Keep expanded layout when auto-collapse is disabled */
             @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-                @media not (-moz-pref("uc.flex.style-tab-group", 3) or -moz-pref("uc.flex.style-tab-group", 4)) {
-                    width: calc(100% - 48px - var(--space-medium));
+                @media not -moz-pref("uc.flex.style-tab-groups-center-label-text") {
+                    width: calc(100% - var(--uc-tab-group-label-padding-inline-total));
                     text-align: start !important;
-                    padding-inline: 32px 16px !important;
+                    padding-inline: var(--uc-tab-group-label-padding-inline) !important;
 
                     &::before {
                         opacity: 1;
                     }
                 }
-                @media -moz-pref("uc.flex.style-tab-group", 3) or -moz-pref("uc.flex.style-tab-group", 4) {
-                    align-self: auto !important;
-                    padding-inline: 16px !important;
-                    max-width: 100% !important;
-
-                    &::before {
-                        left: calc((var(--uc-sidebar-main-hover-width) - 2 * var(--space-medium)) / 2 - 3px);
-                        transform: translateX(-50%);
-                    }
-                }
-            }
-            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-                :root[titlepreface*="\180e "] & {
-                    @media not (-moz-pref("uc.flex.style-tab-group", 3) or -moz-pref("uc.flex.style-tab-group", 4)) {
-                        width: calc(100% - 48px - var(--space-medium));
-                        text-align: start !important;
-                        padding-inline: 32px 16px !important;
+                @media -moz-pref("uc.flex.style-tab-groups-center-label-text") {
+                    @media not -moz-pref("uc.flex.style-tab-groups", 0) {
+                        width: calc(100% - var(--uc-tab-group-label-padding-inline-total));
+                        text-align: center !important;
+                        padding-inline: var(--uc-tab-group-label-padding-inline) !important;
 
                         &::before {
                             opacity: 1;
                         }
                     }
-                    @media -moz-pref("uc.flex.style-tab-group", 3) or -moz-pref("uc.flex.style-tab-group", 4) {
+                    @media -moz-pref("uc.flex.style-tab-groups", 0) {
                         align-self: auto !important;
                         padding-inline: 16px !important;
                         max-width: 100% !important;
 
+                        /*
                         &::before {
                             left: calc((var(--uc-sidebar-main-hover-width) - 2 * var(--space-medium)) / 2 - 3px);
                             transform: translateX(-50%);
                         }
+                        */
                     }
                 }
             }
+            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                :root[titlepreface*="\180e "] & {
+                    @media not -moz-pref("uc.flex.style-tab-groups-center-label-text") {
+                        width: calc(100% - var(--uc-tab-group-label-padding-inline-total));
+                        text-align: start !important;
+                        padding-inline: var(--uc-tab-group-label-padding-inline) !important;
+
+                        &::before {
+                            opacity: 1;
+                        }
+                    }
+                    @media -moz-pref("uc.flex.style-tab-groups-center-label-text") {
+                        @media not -moz-pref("uc.flex.style-tab-groups", 0) {
+                            width: calc(100% - var(--uc-tab-group-label-padding-inline-total));
+                            text-align: center !important;
+                            padding-inline: var(--uc-tab-group-label-padding-inline) !important;
+
+                            &::before {
+                                opacity: 1;
+                            }
+                        }
+                        @media -moz-pref("uc.flex.style-tab-groups", 0) {
+                            align-self: auto !important;
+                            padding-inline: 16px !important;
+                            max-width: 100% !important;
+
+                            /*
+                            &::before {
+                                left: calc((var(--uc-sidebar-main-hover-width) - 2 * var(--space-medium)) / 2 - 3px);
+                                transform: translateX(-50%);
+                            }
+                            */
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**/
+    .tab-group-line {
+        inset-block: -3px -3px !important;
+        inset-inline-start: 0 !important;
+    }
+
+    @media -moz-pref("uc.flex.style-tab-groups", 2) {
+        tab-group {
+            --uc-tab-in-tab-group-margin-inline: 0;
+            --uc-tab-group-line-visibility: hidden;
+            /**
+             * When a tab group is dragged, it leaves the normal flow and following tabs
+             * receive inline `top` and `translateY` to keep their positions. Making the
+             * group a flex container breaks Firefox's size calculation and causes the
+             * dragged group to offset, so we only apply `display: flex` when it is not moving.
+             */
+            &:not([movingtabgroup]) {
+                display: flex !important;
+            }
+            flex-direction: column;
+            position: relative;
+            /*
+            border-start-start-radius: 6px;
+            border-start-end-radius: 6px;
+            */
+            border-radius: 6px;
+            margin-inline-start: calc(var(--space-medium) + 0.8px);
+            margin-inline-end: calc(var(--space-medium) + 0.8px);
+            margin-block: var(--space-small);
+            background-color: transparent;
+            /* Use box-shadow instead of border to inset the visual border and
+               avoid vertical tabs shifting when hovering a selected tab in a tab group. */
+            /*
+            border: 1px solid transparent;
+            filter: drop-shadow(0px 0px 10px color-mix(in srgb, var(--tab-group-color) 60%, white 50%)) brightness(1);
+            */
+            &:not([collapsed]),
+            &[hasactivetab] {
+                padding: 0 0 3px 0;
+                margin-block-end: calc(var(--space-small) - 3px);
+                background-color: rgb(from var(--tab-group-color) r g b / 0.2);
+                /*
+                border-radius: 6px;
+                border: 1px solid color-mix(in srgb, var(--tab-group-color) 70%, black 10%);
+                box-shadow: 0 0px 2px color-mix(in srgb, var(--tab-group-color) 70%, black 10%);
+                */
+                box-shadow: var(--uc-tab-group-box-shadow);
+                @media (prefers-color-scheme: dark) {
+                    background-color: color-mix(
+                        in srgb,
+                        color-mix(in srgb, var(--tab-group-color) 15%, black 35%),
+                        white 5%
+                    );
+                    /*
+                    border: 1px solid color-mix(in srgb, var(--tab-group-color) 70%, white);
+                    */
+                }
+                /*
+                filter: drop-shadow(0px 0px 10px color-mix(in srgb, var(--tab-group-color) 0%, white 0%)) brightness(1);
+                */
+                .tab-group-label-container {
+                    /*
+                    padding-block-end: 0 !important;
+                    */
+                    padding-block: 1px !important;
+                    margin-block-end: var(--space-small);
+                    background-color: color-mix(
+                        in srgb,
+                        color-mix(in srgb, var(--tab-group-color) 9%, black),
+                        white 3%
+                    );
+                    filter: drop-shadow(
+                            0px 0px 1px
+                                color-mix(in srgb, color-mix(in srgb, var(--tab-group-color) 9%, black), white 3%)
+                        )
+                        brightness(1.2);
+                    @media (prefers-color-scheme: dark) {
+                        filter: drop-shadow(0px 0px 5px color-mix(in srgb, var(--tab-group-color) 90%, white))
+                            brightness(1.2);
+                    }
+                }
+                .tab-group-label {
+                    color: color-mix(in srgb, var(--tab-group-color) 40%, white) !important;
+                }
+            }
+        }
+        .tab-group-label-container {
+            margin-inline-start: 0 !important;
+            margin-block-start: 0 !important;
+            border-start-start-radius: 5px;
+            border-start-end-radius: 5px;
+            tab-group[collapsed]:not([hasactivetab]) & {
+                border-radius: 5px;
+            }
+        }
+        .tab-group-label {
+            color: light-dark(var(--tab-group-color), var(--tab-group-color-pale)) !important;
+            background-color: transparent !important;
+            margin-inline-end: 0 !important;
+            @media (prefers-color-scheme: dark) {
+                filter: drop-shadow(0px 0px 4px color-mix(in srgb, var(--tab-group-color) 30%, white 30%)) brightness(1);
+            }
+            tab-group[collapsed]:not([hasactivetab]):hover & {
+                filter: drop-shadow(0.5px 0.5px 0px color-mix(in srgb, var(--tab-group-color) 90%, white 10%))
+                    brightness(1.2);
+                @media (prefers-color-scheme: dark) {
+                    filter: drop-shadow(0px 0px 3px color-mix(in srgb, var(--tab-group-color) 90%, white 10%))
+                        brightness(1.2);
+                }
+            }
+            #sidebar-main[sidebar-launcher-expanded] & {
+                &::before {
+                    background-image: url("../icons/tab-group/tab-group-folder-expanded.svg");
+                    background-position: 2px 2px;
+                    background-size: 20px;
+                }
+                &[aria-expanded="false"]::before {
+                    background-image: url("../icons/tab-group/tab-group-folder-collapsed.svg");
+                    background-position: 2px 2px;
+                    background-size: 20px;
+                }
+            }
+        }
+        .tabbrowser-tab {
+            margin-inline-start: var(--uc-tab-in-tab-group-margin-inline) !important;
+        }
+        .tab-group-line,
+        .tab-group-overflow-count-container::after {
+            visibility: hidden;
         }
     }
 
@@ -1972,7 +2194,7 @@
     }
 
     /* Tab group: Expand/collapse animation */
-    @media -moz-pref("uc.flex.style-tab-group", 2) or -moz-pref("uc.flex.style-tab-group", 4) {
+    @media not -moz-pref("uc.flex.style-tab-groups-add-transition", 0) {
         tab-group {
             .tabbrowser-tab {
                 min-height: 39px;
@@ -2011,25 +2233,27 @@
             }
         }
 
-        tab-group {
-            /*
-            display: flex !important;
-            flex-direction: column;
-            max-height: 200px !important;
-            overflow: hidden;
-            transition: max-height 50ms ease;
-            &:not([collapsed]) {
-                max-height: 100% !important;
-                transition: max-height 800ms ease;
-            }
-            */
-            &[collapsed] .tab-group-label::before {
-                animation: iconAnimation-close 500ms ease-in-out forwards;
-                animation-fill-mode: forwards;
-            }
-            &:not([collapsed]) .tab-group-label::before {
-                animation: iconAnimation-open 500ms ease-in-out forwards;
-                animation-fill-mode: forwards;
+        @media not -moz-pref("uc.flex.style-tab-groups-add-transition", 1) {
+            tab-group {
+                /*
+                display: flex !important;
+                flex-direction: column;
+                max-height: 200px !important;
+                overflow: hidden;
+                transition: max-height 50ms ease;
+                &:not([collapsed]) {
+                    max-height: 100% !important;
+                    transition: max-height 800ms ease;
+                }
+                */
+                &[collapsed] .tab-group-label::before {
+                    animation: iconAnimation-close 500ms ease-in-out forwards;
+                    animation-fill-mode: forwards;
+                }
+                &:not([collapsed]) .tab-group-label::before {
+                    animation: iconAnimation-open 500ms ease-in-out forwards;
+                    animation-fill-mode: forwards;
+                }
             }
         }
     }
@@ -2053,11 +2277,6 @@
 
     tab-group[collapsed] > tab-split-view-wrapper[hasactivetab] {
         margin-block-end: 0px !important;
-    }
-
-    .tab-group-line {
-        inset-block: -3px -3px !important;
-        inset-inline-start: 0 !important;
     }
 
     #tabbrowser-tabs tab-split-view-wrapper {
@@ -2084,48 +2303,62 @@
         border-radius: 0 !important;
         background-color: transparent !important;
         position: relative;
-        --uc-tab-split-view-width: calc(var(--uc-sidebar-main-hover-width) - 6 * var(--space-xsmall));
-        --uc-tab-split-view-margin-inline: calc(3 * var(--space-xsmall));
+        --uc-split-view-width: calc(100% - 6 * var(--space-xsmall));
+        --uc-split-view-margin-inline: calc(3 * var(--space-xsmall));
         tab-group & {
-            --uc-tab-group-split-view-bgcolor: light-dark(
+            --uc-split-view-in-tab-group-bgcolor: light-dark(
                 rgb(from var(--tab-group-color) r g b / 0.2),
                 rgb(from var(--tab-group-color-invert) r g b / 0.2)
             );
-            --uc-tab-split-view-width: calc(var(--uc-sidebar-main-hover-width) - 9 * var(--space-xsmall));
-            --uc-tab-split-view-margin-inline: calc(6 * var(--space-xsmall));
+            --uc-split-view-width: calc(100% - 9 * var(--space-xsmall));
+            --uc-split-view-margin-inline: calc(6 * var(--space-xsmall));
+            --uc-tab-in-split-view-margin-inline: var(--space-medium);
+            @media -moz-pref("uc.flex.style-tab-groups", 2) {
+                --uc-split-view-width: calc(100% - 6 * var(--space-xsmall));
+                --uc-split-view-margin-inline: calc(3 * var(--space-xsmall));
+                --uc-tab-in-split-view-margin-inline: 0;
+            }
         }
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             :root:not([titlepreface*="\180e "]) #sidebar-main:not(:hover) & {
-                --uc-tab-split-view-width: 32px;
-                --uc-tab-split-view-margin-inline: calc(3 * var(--space-xsmall));
+                --uc-split-view-width: 32px;
+                --uc-split-view-margin-inline: calc(3 * var(--space-xsmall));
+                /* Use variable overriding to set a transparent background when the sidebar is collapsed, 
+                   simplifying property declarations and selector complexity. */
+                --uc-split-view-bgcolor: transparent;
+                --uc-split-view-in-tab-group-bgcolor: transparent;
             }
         }
-        --uc-tab-split-view-transition:
+        --uc-split-view-transition:
             width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             margin-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay),
+            background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay);
         #sidebar-main:hover & {
-            --uc-tab-split-view-transition:
+            --uc-split-view-transition:
                 width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay),
                 margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay);
         }
         &::before {
             content: "";
             position: absolute;
-            background-color: var(--uc-tab-group-split-view-bgcolor, var(--uc-tab-split-view-bgcolor));
+            background-color: var(--uc-split-view-in-tab-group-bgcolor, var(--uc-split-view-bgcolor));
             /*
                 background-color: var(--tab-hover-background-color);
                 border: 1.5px solid var(--uc-vt-pinned-tab-border-color);
                 */
             inset: 0;
-            width: var(--uc-tab-split-view-width);
+            width: var(--uc-split-view-width);
             margin-block: 2px;
-            margin-inline: var(--uc-tab-split-view-margin-inline);
+            margin-inline: var(--uc-split-view-margin-inline);
             border-radius: 4px;
-            transition: var(--uc-tab-split-view-transition);
+            transition: var(--uc-split-view-transition);
         }
 
         &:not([hasactivetab]) {
@@ -2153,11 +2386,11 @@
             }
             tab-group & {
                 @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-                    margin-inline-start: var(--space-medium) !important;
+                    margin-inline-start: var(--uc-tab-in-split-view-margin-inline) !important;
                 }
                 @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                     :root[titlepreface*="\180e "] & {
-                        margin-inline-start: var(--space-medium) !important;
+                        margin-inline-start: var(--uc-tab-in-split-view-margin-inline) !important;
                     }
                 }
             }
@@ -2193,7 +2426,7 @@
                         transition:
                             max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                 var(--uc-autohide-sidebar-delay),
-                            background-color 0.8s,
+                            background-color 0.06s,
                             box-shadow 0.8s;
                     }
                     .tab-stack {
@@ -2223,8 +2456,15 @@
                         transition:
                             max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                 var(--uc-hover-sidebar-delay),
-                            background-color 0.2s,
-                            box-shadow 0.2s;
+                            background-color 0.06s,
+                            box-shadow 0.8s;
+                        .tabbrowser-tab:hover &:not([selected], [multiselected]) {
+                            transition:
+                                max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-hover-sidebar-delay),
+                                background-color 0s,
+                                box-shadow 0.1s;
+                        }
                     }
                     .tab-stack {
                         transition:
@@ -2245,6 +2485,49 @@
 
             /* Tab group: Animate tab group expand/collapse and show first character when collapsed */
             #tabbrowser-tabs[orient="vertical"] tab-group {
+                @media -moz-pref("uc.flex.style-tab-groups", 2) {
+                    margin-inline-start: 0;
+                    background-color: transparent;
+                    /*
+                    border: 1px solid transparent;
+                    */
+                    box-shadow: none;
+                    transition:
+                        margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        border var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        box-shadow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay);
+                    .tab-group-label-container {
+                        margin-inline-start: var(--space-medium) !important;
+                        background-color: transparent;
+                        @media (prefers-color-scheme: light) {
+                            filter: none;
+                        }
+                        transition:
+                            margin-inline-start var(--uc-autohide-transition-duration)
+                                var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay),
+                            background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay),
+                            filter var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay);
+                    }
+                    .tab-group-label {
+                        @media (prefers-color-scheme: light) {
+                            tab-group:not([collapsed]) &,
+                            tab-group[hasactivetab] & {
+                                filter: drop-shadow(
+                                        0.5px 0.5px 0px color-mix(in srgb, var(--tab-group-color) 90%, white 10%)
+                                    )
+                                    brightness(1.2);
+                            }
+                        }
+                        color: light-dark(var(--tab-group-color), var(--tab-group-color-pale)) !important;
+                    }
+                }
                 .tab-group-label {
                     --tab-group-label-animation-duration: 150ms;
                     min-width: 24px !important;
@@ -2259,14 +2542,21 @@
                     .tab-group-label {
                         padding-inline: 4px !important;
                         font-size-adjust: 0;
+                        width: 24px;
 
-                        @media not (-moz-pref("uc.flex.style-tab-group", 3) or -moz-pref("uc.flex.style-tab-group", 4)) {
-                            width: 24px;
+                        &::before {
+                            transition: opacity var(--uc-autohide-transition-duration)
+                                var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
+                        }
+
+                        @media not -moz-pref("uc.flex.style-tab-groups-center-label-text") {
                             transition:
                                 scale 300ms ease 0s,
                                 box-shadow var(--tab-group-label-animation-duration),
                                 text-align var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-autohide-sidebar-delay) allow-discrete,
+                                color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-autohide-sidebar-delay),
                                 padding-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-autohide-sidebar-delay),
                                 width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -2274,10 +2564,6 @@
                                 font-size-adjust var(--uc-autohide-transition-duration)
                                     var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) allow-discrete !important;
 
-                            &::before {
-                                transition: opacity var(--uc-autohide-transition-duration)
-                                    var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
-                            }
                             /*
                             &::before {
                                 position: absolute;
@@ -2296,19 +2582,22 @@
                             }
                             */
                         }
-                        @media -moz-pref("uc.flex.style-tab-group", 3) or -moz-pref("uc.flex.style-tab-group", 4) {
+                        @media -moz-pref("uc.flex.style-tab-groups-center-label-text") {
                             transition:
                                 scale 300ms ease 0s,
                                 box-shadow var(--tab-group-label-animation-duration),
-                                align-self var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                text-align var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-autohide-sidebar-delay) allow-discrete,
+                                color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-autohide-sidebar-delay),
                                 padding-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-autohide-sidebar-delay),
-                                max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-autohide-sidebar-delay),
                                 font-size-adjust var(--uc-autohide-transition-duration)
                                     var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) allow-discrete !important;
 
+                            /*
                             &::before {
                                 transition:
                                     left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -2316,6 +2605,7 @@
                                     transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                         var(--uc-autohide-sidebar-delay);
                             }
+                            */
                         }
                     }
 
@@ -2337,9 +2627,13 @@
                     > .tabbrowser-tab,
                     > tab-split-view-wrapper > .tabbrowser-tab {
                         margin-inline-start: 0px !important;
+                        margin-inline-end: var(
+                            --uc-tab-in-split-view-margin-inline,
+                            var(--uc-tab-in-tab-group-margin-inline, var(--space-medium))
+                        ) !important;
                         transition:
-                            margin-inline-start var(--uc-autohide-transition-duration)
-                                var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay),
+                            margin-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay),
                             min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                 var(--uc-autohide-sidebar-delay),
                             min-height 150ms ease,
@@ -2354,20 +2648,88 @@
                 }
 
                 #sidebar-main[sidebar-launcher-expanded]:hover & {
+                    @media -moz-pref("uc.flex.style-tab-groups", 2) {
+                        margin-inline-start: calc(var(--space-medium) + 0.8px);
+                        transition:
+                            margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay),
+                            background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay),
+                            border var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay),
+                            box-shadow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay);
+                        &:not([collapsed]),
+                        &[hasactivetab] {
+                            background-color: rgb(from var(--tab-group-color) r g b / 0.2);
+                            /*
+                            border: 1px solid color-mix(in srgb, var(--tab-group-color) 70%, black 10%);
+                            box-shadow: 0 0px 2px color-mix(in srgb, var(--tab-group-color) 70%, black 10%);
+                            */
+                            box-shadow: var(--uc-tab-group-box-shadow);
+                            @media (prefers-color-scheme: dark) {
+                                background-color: color-mix(
+                                    in srgb,
+                                    color-mix(in srgb, var(--tab-group-color) 15%, black 35%),
+                                    white 5%
+                                );
+                                /*
+                                border: 1px solid color-mix(in srgb, var(--tab-group-color) 70%, white);
+                                */
+                            }
+                            .tab-group-label-container {
+                                background-color: color-mix(
+                                    in srgb,
+                                    color-mix(in srgb, var(--tab-group-color) 9%, black),
+                                    white 3%
+                                );
+                                filter: drop-shadow(
+                                        0px 0px 1px
+                                            color-mix(
+                                                in srgb,
+                                                color-mix(in srgb, var(--tab-group-color) 9%, black),
+                                                white 3%
+                                            )
+                                    )
+                                    brightness(1.2);
+                                @media (prefers-color-scheme: dark) {
+                                    filter: drop-shadow(
+                                            0px 0px 5px color-mix(in srgb, var(--tab-group-color) 90%, white)
+                                        )
+                                        brightness(1.2);
+                                }
+                            }
+                            .tab-group-label {
+                                color: color-mix(in srgb, var(--tab-group-color) 40%, white) !important;
+                            }
+                        }
+                        .tab-group-label-container {
+                            margin-inline-start: 0 !important;
+                            transition:
+                                margin-inline-start var(--uc-hover-transition-duration)
+                                    var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
+                                background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-hover-sidebar-delay),
+                                filter var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-hover-sidebar-delay);
+                        }
+                    }
                     .tab-group-label-container {
                         max-width: 100% !important;
                     }
                     .tab-group-label {
-                        @media not (-moz-pref("uc.flex.style-tab-group", 3) or -moz-pref("uc.flex.style-tab-group", 4)) {
-                            width: calc(100% - 48px - var(--space-medium));
+                        @media not -moz-pref("uc.flex.style-tab-groups-center-label-text") {
+                            width: calc(100% - var(--uc-tab-group-label-padding-inline-total));
                             text-align: start !important;
-                            padding-inline: 32px 16px !important;
+                            padding-inline: var(--uc-tab-group-label-padding-inline) !important;
                             font-size-adjust: none;
                             transition:
                                 scale 300ms ease 0s,
                                 box-shadow var(--tab-group-label-animation-duration),
                                 text-align var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-hover-sidebar-delay) allow-discrete,
+                                color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-hover-sidebar-delay),
                                 padding-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-hover-sidebar-delay),
                                 width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
@@ -2381,23 +2743,38 @@
                                     var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
                             }
                         }
-                        @media -moz-pref("uc.flex.style-tab-group", 3) or -moz-pref("uc.flex.style-tab-group", 4) {
-                            align-self: auto !important;
-                            padding-inline: 16px !important;
+                        @media -moz-pref("uc.flex.style-tab-groups-center-label-text") {
                             font-size-adjust: none;
-                            max-width: 100% !important;
+                            text-align: center !important;
+                            @media not -moz-pref("uc.flex.style-tab-groups", 0) {
+                                width: calc(100% - var(--uc-tab-group-label-padding-inline-total));
+                                padding-inline: var(--uc-tab-group-label-padding-inline) !important;
+
+                                &::before {
+                                    opacity: 1;
+                                    transition: opacity var(--uc-hover-transition-duration)
+                                        var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+                                }
+                            }
+                            @media -moz-pref("uc.flex.style-tab-groups", 0) {
+                                width: calc(100% - var(--space-medium) - 32px);
+                                padding-inline: 16px !important;
+                            }
                             transition:
                                 scale 300ms ease 0s,
                                 box-shadow var(--tab-group-label-animation-duration),
-                                align-self var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                text-align var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-hover-sidebar-delay) allow-discrete,
+                                color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-hover-sidebar-delay),
                                 padding-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-hover-sidebar-delay),
                                 font-size-adjust var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                     var(--uc-hover-sidebar-delay) allow-discrete !important;
 
+                            /*
                             &::before {
                                 left: calc((var(--uc-sidebar-main-hover-width) - 2 * var(--space-medium)) / 2 - 3px);
                                 transform: translateX(-50%);
@@ -2407,6 +2784,7 @@
                                     transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                         var(--uc-hover-sidebar-delay);
                             }
+                            */
                         }
                     }
                     .tab-group-overflow-count-container {
@@ -2417,7 +2795,7 @@
                         }
                         &::after {
                             margin-inline-start: 0px;
-                            visibility: visible;
+                            visibility: var(--uc-tab-group-line-visibility);
                             transition:
                                 margin-inline-start var(--uc-hover-transition-duration)
                                     var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
@@ -2426,9 +2804,13 @@
                     }
                     > .tabbrowser-tab,
                     > tab-split-view-wrapper > .tabbrowser-tab {
-                        margin-inline-start: var(--space-medium) !important;
+                        margin-inline-start: var(
+                            --uc-tab-in-split-view-margin-inline,
+                            var(--uc-tab-in-tab-group-margin-inline, var(--space-medium))
+                        ) !important;
+                        margin-inline-end: 0 !important;
                         transition:
-                            margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                 var(--uc-hover-sidebar-delay),
                             min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                                 var(--uc-hover-sidebar-delay),
@@ -2437,7 +2819,7 @@
                             padding-block 150ms ease,
                             opacity 150ms ease !important;
                         .tab-group-line {
-                            visibility: visible;
+                            visibility: var(--uc-tab-group-line-visibility);
                             transition: visibility 0s var(--uc-hover-sidebar-delay);
                         }
                     }
@@ -2464,8 +2846,15 @@
 
                 #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
                     max-width: 32px;
+                    /*
                     transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay);
+                    */
+                    transition:
+                        max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        background-color 0.06s,
+                        box-shadow 0.06s;
                 }
             }
 
@@ -2488,8 +2877,22 @@
 
                 #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
                     max-width: 100%;
+                    /*
                     transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay);
+                    */
+                    transition:
+                        max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-hover-sidebar-delay),
+                        background-color 0.06s,
+                        box-shadow 0.06s;
+                    .tabbrowser-tab:hover &:not([selected], [multiselected]) {
+                        transition:
+                            max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-hover-sidebar-delay),
+                            background-color 0s,
+                            box-shadow 0.1s;
+                    }
                 }
 
                 .tabbrowser-tab .tab-stack {

@@ -161,6 +161,9 @@
     @media -moz-pref("uc.flex.remove-sidebar-stripe") {
         #sidebar {
             border-top: 1px solid light-dark(#ced1d4, rgba(172, 112, 255, 0.45)) !important;
+            @media -moz-pref("uc.flex.style-sidebar-stripe-color") and (prefers-color-scheme: dark) {
+                border-top: 1px solid rgb(from var(--uc-sidebar-header-stripe) r g b / 0.45) !important;
+            }
         }
         #sidebar-header {
             display: none;
@@ -178,6 +181,24 @@
     @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
         :root:not([sidebar-expand-on-hover], [titlepreface*="\180e "]) & {
             #sidebar {
+                /* Add rounded corners to Sidebery; currently only the top corners are applied */
+                @media -moz-pref("uc.flex.enable-rounded-web-content") and (not -moz-pref("uc.flex.remove-sidebar-stripe")) {
+                    #sidebar-box:not([sidebar-positionend]) & {
+                        border-top-right-radius: calc(var(--uc-web-content-radius) + 2px) !important;
+                        /*
+                        border-bottom-right-radius: calc(var(--uc-web-content-radius) + 2px) !important;
+                        */
+                    }
+                    #sidebar-box[sidebar-positionend] & {
+                        border-top-left-radius: calc(var(--uc-web-content-radius) + 2px) !important;
+                        /*
+                        border-bottom-left-radius: calc(var(--uc-web-content-radius) + 2px) !important;
+                        */
+                    }
+                    /*
+                    height: calc(100% - var(--uc-web-content-margin));
+                    */
+                }
                 will-change: min-width;
                 min-width: var(--uc-sb-sidebar-width) !important;
                 transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)

@@ -18,95 +18,192 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 
 https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a  
 
+> [!IMPORTANT]
+> FlexFox 的大部分功能只有在「定制侧栏」中的「悬停时展开侧栏」选项 **未勾选** 时才能正常运作。「定制侧栏」可以在导航栏侧栏切换按钮的右键菜单中找到。该选项在 Firefox 中默认未勾选。如果你之前曾手动启用过，请取消勾选以保证 FlexFox 正常工作。
+
 ## 🆕 更新内容
 
-**🦊 v6.0.0 预览**
-* 新增 10 种可选的配色主题。
-* 新增可选的标签组样式与动画效果。
-* 新增可选的标签页配色样式。
-* 新增可选的 Sidebery 导航面板图标。
-* 移除旧版遗留的 Sidebery 内部样式，并完全迁移到 `userContent.css`。
-* 新增 10 组可选的渐变色方案。
-* 新增可选的 “List All Tabs” 按钮图标。
-* v6.0.0 尚未推送至 GitHub。整体功能已基本完成，目前仍在进行少量调试，以下为部分预览截图。
+> [!IMPORTANT]
+> **本次更新包含不兼容变更。** 部分选项已被废弃或调整，旧的 Sidebery 样式也已不再使用。更新前请仔细阅读本次更新日志。
+>
+> 更新后，为避免冲突，请务必 **删除 Sidebery 样式编辑器中的旧样式**。
+> 打开 **Sidebery 导航栏 → 设置（齿轮图标）→ 样式编辑器**，然后删除 **侧边栏** 和 **分组页面** 两个页面中的所有旧样式。
 
-<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/b9325623-244c-4881-aefb-5ea93fba6875" />
+### 🎨 新增：10 种可选颜色主题
 
-<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/4ac81ef0-fc09-44fe-8ae5-aacff088656b" />
+![Image](https://github.com/user-attachments/assets/f5b4550d-8bd6-4f41-8206-7114399d69fe)
 
-<img width="1920" height="1020" alt="Image" src="https://github.com/user-attachments/assets/f6064db5-0229-44d2-9e0c-ade49d054a35" />
+* 新增选项 `uc.flex.style-sidebar-stripe-color`：
 
-**🦊 v5.7.5**
-* 修复启用 `uc.flex.disable-sidebery-autohide` 或 `Lock Sidebery` 时，标签组的展开 / 折叠动画失效的问题。
-* 修复将标签组标题设为居中且未输入文字时，展开 / 折叠指示器未能正确居中的问题。
-* 调整 Sidebery 导航栏和固定面板的布局间距，新增对 Sidebery 搜索栏的布局支持，并为搜索栏加入展开 / 折叠动画。
+  * 控制侧边栏彩带、侧边栏按钮（Firefox 图标）以及地址栏书签星标的颜色。
+  * 在暗色模式下，还会应用于标签页的边框、背景、高亮和 Sidebery 导航图标。
+  * 数值：`0` = Classic（与旧版相同，默认值）；`1` = Red；`2` = Orange；`3` = Yellow；`4` = Green；`5` = Cyan；`6` = Blue；`7` = Violet；`8` = Purple；`9` = Pink；`10` = Gray。
 
-**🦊 v5.7.0**
+* 新增选项 `uc.flex.style-sidebar-stripe-color-apply-to-all-icons`（布尔值）：
 
-**新增**
+  * 将侧边栏彩带颜色应用到所有图标。
+  * 在暗色模式下，也会应用于地址栏和网页区域的边框。
+  * 当启用 `uc.flex.revert-to-original-bookmark-star-icon` 时，此选项也会覆盖 Firefox 默认的书签星标颜色。
 
-* 新增 `uc.flex.style-web-content-outline`，用于设置网页内容区域的边框（`0`–`2`）：
-  * `0` = 无边框（默认）
-  * `1` = 在 “分屏视图” 中，仅为当前聚焦的内容区域显示高亮边框
-  * `2` = 为所有内容区域显示淡色边框
+* 新增选项 `uc.flex.style-sidebar-stripe-color-use-gradient`（布尔值）：
 
-**变更**
+  * 根据 `uc.flex.style-sidebar-stripe-color` 选择的颜色应用对应的渐变样式。
+  * 渐变颜色会作用于侧边栏彩带、侧边栏按钮图标（Firefox 图标）、地址栏书签星标以及书签文件夹图标。
 
-* `uc.flex.revert-to-original-flat-corner-style` 从布尔值改为数值（`0`–`3`）并扩展了作用范围：
-  * Firefox v145 将默认圆角从 4px 调整为 8px，此选项可用于恢复旧圆角。
-  * 旧版本用户请删除原有选项，并以数值类型重新建立。
-  * `0` = URL Bar 与 Search Bar 使用 FlexFox 的圆角（9999px，默认）
-  * `1` = 所有元素使用 v145+ 的 8px 圆角样式
-  * `2` = 所有元素使用 v145 之前的直角（4px）
-  * `3` = URL Bar 与 Search Bar 使用 FlexFox 的圆角，其余使用直角
-* 扩展 `uc.flex.style-urlbar` 的范围，由 `1`–`4` 改为 `0`–`4`：
-  * `0` = 布局与样式 `1` 相同，但 URL Bar 内的图标不会自动隐藏。
-* 扩展 `uc.flex.max-visible-horizontal-pinned-tabs` 的范围，由 `1`–`5` 改为 `0`–`5`：
-  * `0` 会停用水平标签模式的自动折叠功能。
+---
 
-**兼容性**
+### 🗂 新增：“列出所有标签页”按钮图标
 
-* 新增对 Firefox v146 “分屏视图” 的水平标签模式支持。
-  FlexFox 现在在垂直与水平标签模式下都完整支持分屏视图。
+<img width="106" height="108" alt="Image" src="https://github.com/user-attachments/assets/b9f8d20d-aa84-4310-97df-b34506971ac6" />
+<img width="106" height="108" alt="Image" src="https://github.com/user-attachments/assets/033c7c53-fb3f-4546-8f04-69ad0f9d7046" />
+<img width="106" height="108" alt="Image" src="https://github.com/user-attachments/assets/d0932b40-5608-4797-934e-0e1c86ab6a71" />
 
-**修复**
+* 新增选项 `uc.flex.style-all-tabs-button`：
 
-* 修复 v5.0.2 回退导致在未启用 `uc.flex.enable-rounded-web-content` 时，左上角圆角消失及颜色溢出的问题。
-* 修复 Firefox Nightly v147 变更导致的圆角缺失与颜色溢出问题。
+  * 设置 “列出所有标签页” 按钮的图标。
+  * 数值：
 
-**说明**
+    * `0` = Firefox 默认图标
+    * `1` = 筛选图标（与旧版相同，默认值）
+    * `2` = V 形箭头图标
 
-* v5.6.2 新增的 `uc.flex.enable-translucent-urlbar-popup-and-menus` 可以在未启用 Mica 或自定义壁纸的情况下，让地址栏和菜单使用半透明背景。上一次的更新日志没有说明，这项半透明效果的透明度与启用 Mica 时相同，可以通过 `uc.flex.browser-mica-transparency-level` 调整，数值范围为 `0`–`4`，默认值为 `2`，数值越大背景越透明。
+---
 
-下方视频展示了 v5.7.0 的几个选项，包括网页内容区域的边框效果、还原 v145 之前的直角 UI，以及调整地址栏和菜单的背景透明度。
+### 📌 新增：Sidebery 收起状态的导航图标
 
-https://github.com/user-attachments/assets/b9bfb50c-f7e2-45bc-8959-9f6ed51a6a87
+<img width="56" height="106" alt="Image" src="https://github.com/user-attachments/assets/3ed3abf5-b7bb-4dd5-a0e4-99e4060ea7ee" />
+<img width="56" height="106" alt="Image" src="https://github.com/user-attachments/assets/166ee87e-4f87-4bff-8989-49f2332e18f8" />
+<img width="56" height="106" alt="Image" src="https://github.com/user-attachments/assets/aac5d1da-0b86-4d28-9db0-1e513b55ccea" />
 
-下方视频演示了 v5.6.x 系列新增的功能，包括水平标签页自动隐藏的新模式、地址栏弹出面板和菜单的半透明效果，以及 Tab Split View 的标签样式。
+* 新增选项 `uc.flex.style-sidebery-nav-icon`：
 
-https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
+  * 设置 Sidebery 收起状态下显示的导航图标。
+  * 数值：
 
-下方视频展示了在 v5.5.x 系列中，通过组合多个新增 UI 选项所能实现的界面效果。
+    * `0` = 使用当前活动面板图标（新默认值）
+    * `1` = Sidebery Logo
+    * `2` = V 形箭头图标（旧默认值）
 
-https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
+* 新增选项 `uc.flex.style-sidebery-nav-icon-use-active-panel-color`（布尔值）：
+
+  * 让导航图标使用当前活动面板所设置的颜色。
+
+---
+
+### 📑 新增：标签页的边框与背景样式
+
+<img width="276" height="298" alt="Image" src="https://github.com/user-attachments/assets/7f4b1374-a183-46f5-86e3-810a88d5a62a" />
+<img width="276" height="298" alt="Image" src="https://github.com/user-attachments/assets/9717eac6-f2d7-4752-95ec-d64b222dc08a" />
+<img width="276" height="298" alt="Image" src="https://github.com/user-attachments/assets/99f9f4e6-60d5-4be0-9589-51d108ec199b" />
+
+*(仅限原生垂直标签页和 Sidebery)*
+
+* 新增选项 `uc.flex.style-tab-items`：
+
+  * 设置标签页的外观。
+  * 数值：
+
+    * `1` = 固定标签页： 仅显示边框，无背景。亮色模式下边框颜色与地址栏边框一致，暗色模式下与侧边栏彩带一致。（与旧版相同，默认值）
+
+    * `2` = 固定标签页： 仅显示背景，无边框。亮色模式下背景颜色与地址栏背景一致，暗色模式下与侧边栏彩带一致。
+
+      标签页： 所有标签页都带有平滑的悬停过渡动画，其边框和高亮使用侧边栏彩带的颜色。
+
+---
+
+### 🗃 新增：标签页群组样式
+
+![Image](https://github.com/user-attachments/assets/631e6805-63c3-432d-9988-e551c62f01c7)
+
+*(仅限原生垂直标签页)*
+
+* 新增选项 `uc.flex.style-tab-groups`：
+
+  * 设置标签页群组的外观。
+  * 数值：
+
+    * `0` = 树状布局，无展开/折叠指示图标
+    * `1` = 树状布局，带三角指示图标（与旧版相同，默认值）
+    * `2` = 盒子布局，带文件夹图标
+
+* 新增选项 `uc.flex.style-tab-groups-add-transition`：
+
+  * 设置标签页群组展开/折叠时的过渡动画和旋转指示图标的效果。
+  * 数值：
+
+    * `0` = 不启用动画
+    * `1` = 启用展开/折叠动画
+    * `2` = 启用动画 + 旋转指示图标（默认值）
+
+* 新增选项 `uc.flex.style-tab-groups-center-label-text`（布尔值）：
+
+  * 设置标签页群组的标签文字居中显示。
+
+---
+
+### ⚠️ 不兼容变更
+
+#### 已废弃选项
+
+以下选项已废弃且不再生效，请从 Firefox 高级首选项（about:config）中移除：
+
+* `uc.flex.style-tab-group`
+
+  * 功能已由以下选项替代：
+
+    * `uc.flex.style-tab-groups`
+    * `uc.flex.style-tab-groups-add-transition`
+    * `uc.flex.style-tab-groups-center-label-text`
+
+* `uc.flex.enable-gradient-highlight`
+
+  * 改由 `uc.flex.style-sidebar-stripe-color-use-gradient` 控制
+
+* `uc.flex.revert-to-original-sidebar-icon`
+
+  * 功能已合并至 `uc.flex.style-sidebar-button = 0`
+
+#### 更新选项
+
+* `uc.flex.style-sidebar-button`
+
+  * 数值范围由 `1–4` 更新为 `0–4`
+  * `0` = Firefox 默认图标
+
+* `uc.flex.show-tab-count-in-alltabs-button`
+
+  * 数值范围由 `0–4` 更新为 `0–2`
+  * `0` = 不显示标签页计数（默认值）
+  * `1` = 显示所有标签页数量
+  * `2` = 仅显示已加载标签页数量
+  * 图标外观由 `uc.flex.style-all-tabs-button` 控制
+
+#### 移除选项
+
+* 旧版通过 `sidebery-styles.json` 导入到 Sidebery 样式编辑器的样式已全部迁移至 `uc-sidebery.css`。从 v6 开始，FlexFox 不再依赖 Sidebery 样式编辑器注入的样式。
+
+  * 升级自旧版本的用户请在更新后删除 Sidebery 样式编辑器中的旧版样式，以避免冗馀的 CSS 负担及样式冲突。
+  * v6 及以后版本不再提供 `sidebery-styles.json`，新安装只需导入 `sidebery-settings.json`。
+  * 此后用户可以通过 `uc.flex.skip-loading-uc-sidebery.css` 完全停用 FlexFox 默认的 Sidebery 样式，从而更灵活地搭配其他自定义样式。
+
+---
+
+### 🛠 改进与修复
+
+* 多项视觉细节优化和问题修复。
+* 为 Nightly v148 新增的地址栏 Trust Panel 功能提供样式支持。该功能由 `browser.urlbar.trustPanel.featureGate` 控制，并将在 v148 中默认启用。
+* 修复 Nightly v148 引起的回退：当鼠标移动到原生垂直标签页的固定标签页上时，标签栏无法保持悬停状态并会自动折叠的问题。
+  相关： [Bug 2000063](https://bugzilla.mozilla.org/show_bug.cgi?id=2000063)
+
+---
 
 ## 🎉 主要功能更新
 
 <details>  
-<summary>🧩 <b>重大更新：水平标签页自动隐藏功能新增模式</b> <i>[点击展开]</i> 👇</summary>
-
-* 为 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` 添加了一个新模式。
-  * 将此选项设为 `3` 可启用新模式。
-  * 此模式的布局与模式 `2` 相同，但将鼠标移到导航栏时不会触发显示标签栏，只有当鼠标移到屏幕顶部边缘时才会显示标签栏。
-  * 这样可以避免在使用书签栏或导航按钮时误触发标签栏，导致鼠标需要重新定位。
-  * 触发距离（离屏幕顶部的距离）可通过 `--uc-tabstoolbar-hover-trigger-width` 自行调整。
-
-</details>
-
-<details>  
 <summary>✨ <b>重大更新：全新的 UI/UX 样式自定义选项</b> <i>[点击展开]</i> 👇</summary>
 
-* 新增 `uc.flex.style-sidebar-button`，可切换侧栏切换按钮图标（`1`–`4`）：
+* 新增 `uc.flex.style-sidebar-button`，可切换侧栏切换按钮图标（`0`–`4`）：
+  * `0` = Firefox 默认图标
   * `1` = Firefox 主品牌标志（默认，与旧版相同）
   * `2` = Firefox 浏览器标志
   * `3` = Firefox System 1 标志
@@ -200,6 +297,8 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
   * 动画速度统一后，也可以使用 `uc.flex.sidebery-fast-hover-expand` 或 `uc.flex.sidebery-slow-hover-expand` 来调整导航栏和书签工具栏的动画速度。
   * 启用 Mica 或自定义壁纸时，FlexFox 会在内部自动统一动画速度，此时无需手动设置这个选项。
 
+* 新增 `uc.flex.enable-translucent-urlbar-popup-and-menus`：为地址栏弹出面板和各类菜单启用半透明与模糊背景。FlexFox 默认只会在启用 Mica 或自定义壁纸时应用这些效果，而通过此选项，即使没有启用 Mica 或壁纸，也能单独启用半透明的弹出面板和菜单。背景透明度可通过 `uc.flex.browser-mica-transparency-level` 调整，范围为 `0`–`4`，数值越大越透明。如果你已经启用了 Mica 或自定义壁纸，则无需再设置这个选项。
+
 </details>
 
 <details>  
@@ -211,7 +310,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
   * 如需临时恢复自动折叠，可使用 `Hide Sidebery` 快捷键，或按 <kbd>F1</kbd> 切换为原生垂直标签页。
 * 新增水平标签页的 3 种布局模式并进行优化
   * 废弃旧选项 `uc.flex.disable-tabs-toolbar-autohide`。现在在 Sidebery 非活动时，水平标签页默认保持可见。
-  * 新增 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`：当 Sidebery 非活动时自动隐藏水平标签页，鼠标悬停在导航栏时显示。设置值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 显示在导航栏上方，`3` = 布局与 `2` 相同，但只有鼠标移动到屏幕顶部边缘时才会显示，用于避免在使用书签或访问导航栏时误触触发标签栏。
+  * 新增 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`：当 Sidebery 非活动时自动隐藏水平标签页，鼠标悬停在导航栏时显示。设置值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 显示在导航栏上方，`3` = 布局与 `2` 相同，但只有鼠标移动到屏幕顶部边缘时才会显示，用于避免在使用书签或访问导航栏时误触触发标签栏。触发距离（距屏幕顶部的高度范围）可通过 `--uc-tabstoolbar-hover-trigger-width` 进行调整。
   * 新增 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`：当 Sidebery 非活动时自动隐藏导航栏，鼠标悬停在水平标签页时显示。设置值：`0` = 关闭，`1` = 开启。此选项会覆盖前一项的设置。
   * 新增 `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`：在水平标签页模式下，FlexFox 默认在非活动标签页悬停时显示关闭按钮。随着标签页数量增加而宽度变窄，关闭按钮会自动缩小并移到右上角以减少误触。启用此选项可以完全移除关闭按钮。
   * 新增 `uc.flex.show-tab-close-button-on-favicon-hover`：在水平标签页模式下，将关闭按钮与网站图标合并以节省空间。关闭按钮仅在鼠标悬停图标时显示。启用此选项后，上述关闭按钮的自动缩小和移位行为会自动停用。
@@ -264,10 +363,8 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
 * 新增选项 `uc.flex.show-tab-count-in-alltabs-button`，可在“全部标签页”按钮上显示当前打开的标签页总数。设置值如下：
   * `0` = 关闭
-  * `1` = 图标 + 数字（全部标签页）
-  * `2` = 图标 + 数字（仅已加载标签页）
-  * `3` = 仅数字（全部标签页）
-  * `4` = 仅数字（仅已加载标签页）
+  * `1` = 显示所有标签页数量
+  * `2` = 仅显示已加载标签页数量
 * 新增选项 `uc.flex.show-tab-number-in-tab-label`，可在原生标签页标签上显示每个标签的索引号。标签过窄看不到完整标题时，也能快速识别标签位置。
 
 </details>
@@ -277,7 +374,7 @@ https://github.com/user-attachments/assets/76110885-18c4-4667-87b3-bb7f7764d452
 
 * 新增选项 `uc.flex.auto-hide-navbar-icons`，可将工具栏中的图标（包括导航栏、书签栏及菜单栏的工具项）默认隐藏，当鼠标悬停在工具栏上时才显示。此选项不影响地址栏或窗口控制按钮。
 * 新增选项 `uc.flex.auto-hide-window-controls`，可将窗口控制按钮（最小化、最大化、关闭）默认隐藏，仅在鼠标悬停在工具栏边缘时显示。
-* 侧栏切换按钮（FlexFox 图标）通常始终可见。如果侧栏按钮未放在导航栏的最左或最右侧，或者启用了 `uc.flex.revert-to-original-sidebar-icon`，该按钮也会跟随自动隐藏。
+* 侧栏切换按钮（FlexFox 图标）通常始终可见。如果侧栏按钮未放在导航栏的最左或最右侧，或者 `uc.flex.style-sidebar-button` 设置为 `0`，该按钮也会跟随自动隐藏。
 * 你可以将以下变量从 `uc-variables.css` 复制到 `uc-user-settings.css` 中修改，以自定义动画的速度和效果：
 
   ```css
@@ -448,51 +545,10 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 </details>
 
-> [!IMPORTANT]
-> 日常使用 FlexFox 的垂直标签页模式时，请确保「定制侧栏」中的「悬停时展开侧栏」选项已**取消勾选**。大多数功能依赖此设置才能正常工作。
-
 <a id="updates-top-start"></a>
 <details>
 
 <summary>💬 <b>历史更新</b></summary>
-
-**v5.7.2**
-* 修复了 v5.7.1 中出现的标签组内标签高度显示异常的问题。
-
-**v5.7.1**
-* 修复了 v5.5.4 中出现的布局问题。当关闭标签组的展开/折叠动画时，折叠后的标签组下方会出现多余空白，导致标签组与标签页之间的间距不一致。
-* 优化标签组的展开和折叠动画，使过渡更加平滑自然。
-
-**v5.6.2**
-* 新增选项 `uc.flex.enable-translucent-urlbar-popup-and-menus`：为地址栏的弹出面板和各类菜单启用半透明和模糊背景。FlexFox 默认只有在启用 Mica 或自定义壁纸时才会应用这些效果，而使用此选项后，即使没有启用 Mica 或壁纸，也能单独启用半透明的弹出面板和菜单。如果你已经启用了 Mica 或自定义壁纸，则无需再设置这个选项。
-* 添加对 v146 新功能「预览链接」的支持。
-* 为右键菜单的新项目「使用 Google Lens 搜图」、「添加分屏」、「预览链接」、「添加笔记」添加了菜单图标。
-* 修复 v146 的变更导致垂直标签页模式下「分屏视图」无法正常工作的问题。
-  * 「分屏视图」在 v145 中无法使用。从 v146 开始，可以通过开启原生设置 `browser.tabs.splitView.enabled` 来启用。
-  * 由于该功能仍在开发中，v146 与 v147 的界面外观有所不同。FlexFox 以 v147 为主要优化目标，在 v146 上也能使用，但外观可能不够完整。
-* 修复因 v146 的变更导致在水平标签页模式下展开侧栏表头时侧栏彩带底部出现黑线的问题。
-* 修复 Nightly v147 的变更导致在启用 `uc.flex.enable-rounded-web-content` 时开发者工具的阴影无法显示的问题。
-
-下方视频演示了 v5.6.x 系列新增的功能，包括水平标签页自动隐藏的新模式、地址栏弹出面板和菜单的半透明效果，以及 Tab Split View 的标签样式。
-
-https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
-
-**v5.6.1**
-* 修复了 v5.6.0 中出现的回归问题。在启用 Mica 和垂直标签页时打开标签组预览面板，会导致标签页失去 Mica 背景。
-* 新增在 `uc.flex.fully-hide-toolbox`、`Hide Topbar`、`Hide All` 以及全屏模式下显示标签组预览面板的支持。
-
-**v5.6.0**
-* 扩展了 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` 的功能。
-  在水平标签页模式下将此选项设为 `3` 时，可启用新的第三种模式。
-  此模式的布局与模式 `2` 相同，但将鼠标移动到导航栏上时不会再触发标签栏显示，只有当鼠标移动到屏幕顶部边缘时才会显示标签栏。
-  这样可以避免在使用书签栏或操作导航栏时误触发标签栏，导致鼠标位置被迫重新调整。
-  触发距离可通过 `--uc-tabstoolbar-hover-trigger-width` 自行调整。
-* 为 Firefox v145 新增的 **标签组预览面板** 添加了在水平标签页模式下的支持。
-  现在在垂直和水平两种模式中，都可以正常在预览面板中点击和切换标签页。
-* 以上功能基于 [firefox-csshacks](https://github.com/MrOtherGuy/firefox-csshacks)，感谢 **@MrOtherGuy** 的协助。
-* 修复启用 Mica 或自定义壁纸时，导航栏通知无法保持书签栏显示，导致内容区域被额外裁切的问题。
-* 修复 Firefox v146 的变更导致 Sidebery 的新建标签按钮底部出现缝隙的问题。
-* 修复 Firefox v147 的变更导致网页内容区域的圆角与阴影失效的问题。相关问题：[Bug 1941635](https://bugzilla.mozilla.org/show_bug.cgi?id=1941635)
 
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
@@ -549,25 +605,27 @@ https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 ### 👷 方法一：手动安装
 
 > [!IMPORTANT]
+>
 > 1. 安装 [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/)（可选，但推荐）。
-> 2. 下载对应版本的 FlexFox：
->    * [FlexFox](https://github.com/yuuqilin/FlexFox/archive/refs/heads/main.zip)：标准版 Firefox 使用
->    * [FlexFox Beta](https://github.com/yuuqilin/FlexFox/archive/refs/heads/Beta.zip)：Firefox Beta / Nightly 使用
->    * [FlexFox ESR](https://github.com/yuuqilin/FlexFox/archive/refs/heads/ESR.zip)：Firefox ESR 使用
-> 3. 打开 `about:support`，找到 **配置文件夹**，点击 **打开文件夹**。
-> 4. 将 `chrome` 文件夹和 `scripts` 文件夹中的 `user.js` 文件复制到配置文件夹中。
-> 5. 使用文本编辑器打开 `user.js`，删除注释 `//` 以启用额外功能。
->    * 确保以下选项设置为对应的值：
+> 2. 请从项目的 **Releases** 页面下载最新发布版本的 FlexFox：
+>    [https://github.com/yuuqilin/FlexFox/releases](https://github.com/yuuqilin/FlexFox/releases)
+>    根据你所使用的 Firefox 版本选择对应的构建。
+> 3. 打开 `about:support`，找到 **配置文件夹**，点击 **打开文件夹** 进入你的 Firefox 配置目录。
+> 4. 将下载包中 `scripts` 文件夹里的 `chrome` 文件夹与 `user.js` 文件复制到配置文件夹中。
+> 5. 使用文本编辑器打开 `user.js`，删除 `//` 注释以启用对应功能。
+>
+>    * 请确保以下选项设定为：
+>
 >      * `toolkit.legacyUserProfileCustomizations.stylesheets` = `true`
 >      * `svg.context-properties.content.enabled` = `true`
 >      * `sidebar.visibility` = `always-show`
-> 6. 重启 Firefox，然后删除 `user.js` 文件，以便后续对 `about:config` 的更改能被正常保存。
+> 6. 重启 Firefox，然后删除 `user.js`，以便之后通过 `about:config` 所做的修改能够正常保存。
 > 7. 配置 Sidebery：
->    * 点击侧边栏齿轮图标进入设置
->    * 清除 `Styles editor` 中已有的样式，以避免冲突
->    * 前往 `帮助` > `导入插件数据`，导入下载包中 `Sidebery` 文件夹内的 `sidebery-settings.json` 和 `sidebery-styles.json`
->    * *注意*：如果导入的样式没有正常生效，请尝试重新导入一次
-> 8. 打开 `about:config`，搜索 `uc.flex.`，按需启用或关闭功能。
+>
+>    * 点击侧边栏中的齿轮图标进入设置
+>    * 清除 `样式编辑器` 中已有样式以避免冲突
+>    * 前往 `帮助` → `导入`，导入压缩包中 `Sidebery` 文件夹里的 `sidebery-settings.json`
+> 8. 打开 `about:config`，搜索 `uc.flex.`，按需求启用或关闭对应功能。
 
 ---
 
@@ -675,17 +733,16 @@ https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 | `uc.flex.fully-hide-toolbox` | `true` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
 | `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏水平标签页。鼠标悬停在导航栏时显示。取值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 标签页显示在导航栏上方，`3` = 与 `2` 相同，但只在鼠标移动到屏幕顶部边缘时显示，以避免误触。 |
 | `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏导航栏。鼠标悬停在水平标签页时显示导航栏。取值：`0` = 关闭，`1` = 开启。此选项优先级较高，如果同时启用 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`，会覆盖该选项的设置。 |
-| `uc.flex.auto-hide-navbar-icons` | `true` | 默认隐藏工具栏图标（包括导航栏、书签栏及菜单栏的工具项），鼠标悬停在工具栏上时显示。此选项不影响地址栏或窗口控制按钮。侧栏切换按钮（FlexFox 图标）通常始终可见，但当侧栏按钮未放在导航栏边缘，或启用了 `uc.flex.revert-to-original-sidebar-icon` 时，也会跟随自动隐藏。 |
+| `uc.flex.auto-hide-navbar-icons` | `true` | 默认隐藏工具栏图标（包括导航栏、书签栏及菜单栏的工具项），鼠标悬停在工具栏上时显示。此选项不影响地址栏或窗口控制按钮。侧栏切换按钮（FlexFox 图标）通常始终可见，但当侧栏按钮未放在导航栏边缘，或 `uc.flex.style-sidebar-button` 设置为 `0` 时，也会跟随自动隐藏。 |
 | `uc.flex.auto-hide-window-controls` | `true` | 默认隐藏窗口控制按钮（最小化、最大化、关闭），鼠标悬停在工具栏边缘时显示。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `true` | 允许 Firefox Color 等扩展修改工具栏的颜色（在未设置背景图时需要启用）。 |
-| `uc.flex.enable-gradient-highlight` | `0`-`X` | 为 FlexFox 图标、侧栏彩带、书签星形图标等主要界面元素中使用的高亮颜色启用渐变样式。此选项接受数值设置：`0` 表示关闭渐变，`1` 到 `X` 表示切换不同的渐变样式。 |
 | `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
 | `uc.flex.remove-bookmarks-folder-icons` | `true` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | `true` | 移除书签文件夹的文字标签。 |
 | `uc.flex.show-flexfox-version-info-in-about-config` | `true` | 在 `about:config` 頁面顯示 FlexFox 已安裝的提示訊息，並附帶當前版本號。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | 在原生垂直标签页展开状态下显示固定标签页与普通标签页之间的分隔线。Firefox 默认只在悬停时显示，FlexFox 则始终显示。分隔线可拖动，用于调整固定标签页面板的高度。 |
 | `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | 在水平标签页中将关闭按钮与网站图标合并，以节省空间。鼠标悬停在图标上时显示关闭按钮。启用此选项后，会自动停用分页变窄时关闭按钮的自动缩小和移位功能。 |
-| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`4` | 在“显示所有标签页”按钮上显示标签页总数。此选项为数值类型：`0` 关闭，`1` 显示图标和数字（所有标签页），`2` 显示图标和数字（仅加载的标签页），`3` 仅显示数字（所有标签页），`4` 仅显示数字（仅加载的标签页）。 |
+| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2` | 在“显示所有标签页”按钮上显示标签页总数。此选项为数值类型：`0` = 关闭，`1` = 显示所有标签页数量，`2` = 仅显示已加载标签页数量。 |
 | `uc.flex.show-tab-number-in-tab-label` | `true` | 在每个标签文字前显示编号。在标签文字因空间不足而被截断时，可以更容易分辨不同的标签。 |
 
 #### 🚫 停用或还原选项
@@ -704,7 +761,6 @@ https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 | `uc.flex.revert-to-original-window-controls` | `true` | 将 FlexFox 使用的 macOS 风格窗口按钮恢复为 Firefox 默认的最小化、最大化、关闭按钮。 |
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | 将 URL 栏、搜索栏及其他界面元素的样式恢复为 Firefox 原生的平角设计。数值：`0` = FlexFox 大圆角（9999px，默认），`1` = Firefox v145+ 的圆角样式（8px），`2` = v145 之前的平角样式（4px），`3` = URL 栏／搜索栏使用 FlexFox 大圆角，其他元素使用 v145 之前的平角样式。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |
-| `uc.flex.revert-to-original-sidebar-icon` | `true` | 将 FlexFox 使用的侧栏按钮图标恢复为 Firefox 默认设计。 |
 | `uc.flex.remove-sidebar-stripe` | `true` | Sidebery 激活时移除侧边栏彩带。若需切换侧边栏工具，垂直标签页模式下可按 <kbd>F1</kbd> 显示侧边栏工具按钮，水平标签页模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。 |
 
 #### 🪛 修改或调整选项
@@ -736,7 +792,13 @@ https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 #### 界面样式与外观
 | 配置选项 | 值 | 说明 |
 |----------|:------:|----------|
-| `uc.flex.style-sidebar-button` | `1`-`4`<br>(`1`) | 切换侧栏切换按钮的图标。取值：`1` = Firefox 主品牌标志（默认，与旧版相同），`2` = Firefox 浏览器标志，`3` = Firefox System 1 标志，`4` = Mozilla 旗帜符号。 |
+| `uc.flex.style-all-tabs-button` | `0`-`2`<br>(`1`) | 设置“列出所有标签页”按钮的图标。取值：`0` = Firefox 默认图标，`1` = 筛选图标（默认，与旧版相同），`2` = V 形箭头图标。 |
+| `uc.flex.style-sidebar-button` | `0`-`4`<br>(`1`) | 切换侧栏切换按钮的图标。取值：`0` = Firefox 默认图标，`1` = Firefox 主品牌标志（默认，与旧版相同），`2` = Firefox 浏览器标志，`3` = Firefox System 1 标志，`4` = Mozilla 旗帜符号。 |
+| `uc.flex.style-sidebar-stripe-color` | `0`-`10`<br>(`0`) | 控制侧边栏彩带、侧边栏按钮（Firefox 图标）以及书签星标图标的颜色。在暗色模式下，还会应用到标签页边框、背景、高亮以及 Sidebery 导航图标。取值：`0` = Classic（默认，与旧版相同），`1` = Red，`2` = Orange，`3` = Yellow，`4` = Green，`5` = Cyan，`6` = Blue，`7` = Violet，`8` = Purple，`9` = Pink，`10` = Gray。 |
+| `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` | `true` | 将侧边栏彩带颜色应用到所有图标。在暗色模式下，还会应用到地址栏和网页区域边框。即使启用 `uc.flex.revert-to-original-bookmark-star-icon`，此选项仍会覆盖 Firefox 默认的书签星标颜色。 |
+| `uc.flex.style-sidebar-stripe-color-use-gradient` | `true` | 根据 `uc.flex.style-sidebar-stripe-color` 所选颜色应用对应的渐变样式。渐变效果会作用于侧边栏彩带、侧边栏按钮图标（Firefox 图标）、书签星标以及书签文件夹图标。 |
+| `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | 设置 Sidebery 收起状态下显示的导航图标。取值：`0` = 使用当前活动面板图标（新默认值），`1` = Sidebery Logo，`2` = V 形箭头图标（旧默认值）。 |
+| `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `true` | 让导航图标使用当前活动面板所设置的颜色。 |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | 切换导航栏和侧栏的背景颜色。取值：`1` = Tokyo Night 主题（默认，与旧版相同），`2` = Firefox Acorn Design。 |
 | `uc.flex.style-urlbar` | `0`-`4`<br>(`1`) | 自定义地址栏的外观。取值：`0` = 扁平（图标始终可见），`1` = 扁平（默认，与旧版相同），`2` = 嵌入式（嵌入导航栏，文字居中），`3` = 压印（凹陷效果，文字居中），`4` = 无缝（完全融入导航栏，文字居中）。 |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | 调整地址栏弹窗的位置。取值：`0` = 不居中（默认），`1` = 聚焦时居中显示，`2` = 仅在输入文字时居中显示。 |
@@ -746,7 +808,10 @@ https://github.com/user-attachments/assets/74a7ee92-cc47-4864-9fb2-eaf663f0a160
 | `uc.flex.style-window-controls-shrink-size` | `true` | 缩小窗口控制按钮的整体尺寸。 |
 | `uc.flex.move-pip-volume-to-top` | `true` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
 | `uc.flex.move-window-controls-to-left` | `true` | 将窗口控制按钮移动到导航栏或水平标签栏的最左侧。 |
-| `uc.flex.style-tab-group` | `1`-`4`<br>(`1`) | 调整原生垂直标签页的标签组外观。取值：`1` = 显示展开／折叠指示器（无动画），`2` = 显示指示器（有动画），`3` = 标签文字居中（无指示器、无动画），`4` = 标签文字居中（无指示器、有动画）。默认值为 `1`。 |
+| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | 设置垂直标签页的外观。取值：`1` = 固定标签页仅显示边框且无背景（默认，与旧版相同），`2` = 固定标签页仅显示背景且无边框。标签页具有平滑的悬停过渡动画，边框与高亮会使用侧边栏彩带颜色。 |
+| `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | 设置原生垂直标签页的标签页群组外观。取值：`0` = 树状布局，无展开/折叠指示图标，`1` = 树状布局，带三角指示图标（默认，与旧版相同），`2` = 盒子布局，带文件夹图标。 |
+| `uc.flex.style-tab-groups-add-transition` | `0`-`2`<br>(`2`) | 设置原生垂直标签页的标签页群组展开/折叠时的过渡动画和旋转指示图标效果。取值：`0` = 不启用动画，`1` = 启用展开/折叠动画，`2` = 启用动画 + 旋转指示图标（默认）。 |
+| `uc.flex.style-tab-groups-center-label-text` | `true` | 设置原生垂直标签页的标签页群组标签文字居中显示。 |
 | `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | 控制网页内容区域的边框。取值：`0` = 无边框（默认），`1` = 仅在 Tab Split View 中聚焦的网页内容上显示高亮边框，`2` = 在所有网页内容上显示边框。 |
 | `uc.flex.enable-rounded-web-content` | `0`-`2` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | 当启用 `uc.flex.enable-rounded-web-content` 时，让网页内容在贴近 Sidebery 彩带的一角也显示圆角效果。 |

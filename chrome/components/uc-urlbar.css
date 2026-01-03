@@ -44,14 +44,21 @@
             outline: none;
             .urlbar-input-container {
                 box-shadow:
-                    0px 0px 6px rgb(from var(--uc-urlbar-outline) r g b / 0.2),
-                    0 0 0 1px rgb(from var(--uc-urlbar-outline) r g b / 0.83) !important;
+                    0px 0px 5px -2px rgba(12, 12, 16, 0.8),
+                    0 0 0 1px rgb(from var(--uc-urlbar-outline) r g b / 0.93) !important;
             }
             @media (prefers-color-scheme: dark) {
                 .urlbar-input-container {
+                    /*
                     box-shadow:
-                        0px 0px 8px rgb(from var(--uc-urlbar-outline) r g b / 0.87),
-                        0 0 0 2px rgb(from var(--uc-urlbar-outline) r g b / 0.97) !important;
+                        0px 0px 8px rgb(from var(--uc-urlbar-outline) r g b / calc(alpha * 0.87)),
+                        0 0 0 2px rgb(from var(--uc-urlbar-outline) r g b / calc(alpha * 0.97)) !important;
+                    */
+                    box-shadow:
+                        0px 0px 8px
+                            color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 77%, white) 82%, transparent),
+                        0 0 0 2px
+                            color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 87%, white) 92%, transparent) !important;
                 }
             }
         }
@@ -184,7 +191,9 @@
 /*
 #identity-icon-box.identity-box-button {
 */
-#identity-icon-box {
+#identity-icon-box,
+#trust-icon-container {
+    height: 26px !important;
     margin: 2px 3px 2px 3px;
     /* The variable --urlbar-icon-border-radius was deprecated after v145 and replaced with --urlbar-inner-border-radius. 
        This fallback can be removed once support for older versions is no longer needed. */
@@ -198,7 +207,8 @@
     }
 }
 
-#identity-icon-box.identity-box-button:hover {
+#identity-icon-box.identity-box-button:hover,
+#trust-icon-container:hover {
     cursor: pointer;
     @media not -moz-pref("uc.flex.style-urlbar", 0) {
         background-color: var(--identity-btn-hover-color, var(--urlbar-box-hover-bgcolor)) !important;
@@ -417,6 +427,26 @@
     }
 }
 
+/** 
+ * When the web content is an extension page, #identity-box.extensionPage becomes visible.
+ * In this case, we hide the trust icon to save space. As with similar cases elsewhere,
+ * we define variables on the parent element and pass them to #trust-icon-container,
+ * instead of directly styling the child inside :has(). This avoids unnecessary
+ * performance costs from selector evaluation.
+ */
+@media -moz-pref("browser.urlbar.trustPanel.featureGate") {
+    .urlbar-input-container:has(> .extensionPage) {
+        --uc-trust-icon-margin-inline-start: calc(-19px - 2 * var(--urlbar-icon-padding));
+        --uc-trust-icon-bgcolor: transparent;
+        --uc-trust-icon-opacity: 0;
+    }
+    @media not -moz-pref("uc.flex.style-urlbar", 0) {
+        #trust-icon-container {
+            background-color: var(--uc-trust-icon-bgcolor, var(--uc-identity-btn-bgcolor)) !important;
+        }
+    }
+}
+
 @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4) {
     #urlbar:not([breakout][breakout-extend], [focused][usertyping]) {
         .urlbar-input {
@@ -471,7 +501,8 @@
         }
 
         @media -moz-pref("uc.flex.style-urlbar", 4) {
-            #identity-icon-box {
+            #identity-icon-box,
+            #trust-icon-container {
                 margin-inline-start: calc(-16px - 2 * var(--urlbar-icon-padding));
                 opacity: 0;
                 transition: 0.3s;
@@ -517,9 +548,9 @@
         }
 
         @media -moz-pref("uc.flex.style-urlbar", 4) {
-            &[open] #identity-icon-box,
-            &:hover #identity-icon-box,
-            #identity-icon-box[open] {
+            &[open] :where(#identity-icon-box, #trust-icon-container),
+            &:hover :where(#identity-icon-box, #trust-icon-container),
+            :where(#identity-icon-box[open], #trust-icon-container[open]) {
                 opacity: 1;
                 margin-inline-start: 0 !important;
             }
@@ -553,6 +584,19 @@
             &:-moz-window-inactive:hover #identity-permission-box,
             &:-moz-window-inactive:hover #notification-popup-box {
                 opacity: unset !important;
+            }
+        }
+
+        @media -moz-pref("browser.urlbar.trustPanel.featureGate") {
+            #trust-icon-container {
+                margin-inline-start: var(--uc-trust-icon-margin-inline-start, 3px);
+                opacity: var(--uc-trust-icon-opacity, 1);
+                transition: 0.3s;
+                #urlbar:where([open], :hover) &,
+                &[open] {
+                    margin-inline-start: 3px;
+                    opacity: 1;
+                }
             }
         }
     }
@@ -623,48 +667,71 @@
 }
 
 /* Bookmark Star Icon */
-@media not -moz-pref("uc.flex.revert-to-original-bookmark-star-icon") {
+#pageAction-panel-bookmark,
+#star-button {
+    list-style-image: var(--uc-bookmark-star-empty-image) !important;
+}
+
+#pageAction-panel-bookmark[starred],
+#star-button[starred] {
+    list-style-image: var(--uc-bookmark-star-image) !important;
+    @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+        list-style-image: none !important;
+        mask-image: var(--uc-bookmark-star-image);
+        mask-position: 0px 0px;
+        mask-repeat: no-repeat;
+        mask-size: 16px;
+    }
+}
+
+#star-button-box:is(:hover, [open]) {
+    /* Show hollow star icon on hover when the page is already bookmarked */
+    &[data-l10n-id="urlbar-star-edit-bookmark"] #star-button[starred] {
+        list-style-image: var(--uc-bookmark-star-image) !important;
+        mask-image: none;
+        /*
+        fill: var(--toolbarbutton-icon-fill) !important;
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+        }
+        */
+        fill: light-dark(rgb(91, 91, 102), rgb(251, 251, 254)) !important;
+    }
+    /* Show filled star icon on hover when the page is not bookmarked */
+    &[data-l10n-id="urlbar-star-add-bookmark"] #star-button:not([starred]) {
+        list-style-image: none !important;
+        mask-image: var(--uc-bookmark-star-image);
+        mask-position: 0px 0px;
+        mask-repeat: no-repeat;
+        mask-size: 16px;
+        background: var(--toolbarbutton-icon-fill-attention);
+    }
+}
+
+@media not -moz-pref("uc.flex.revert-to-original-bookmark-star-icon"),
+    -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons"),
+    -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
     #pageAction-panel-bookmark[starred],
     #star-button[starred] {
-        list-style-image: var(--uc-bookmark-star-image) !important;
-        fill: color-mix(in srgb, var(--uc-bookmark-star-color) 90%, var(--uc-toolbar-bgcolor)) !important;
-        @media -moz-pref("uc.flex.enable-gradient-highlight") {
-            list-style-image: none !important;
-            background: var(--uc-gradient-highlight);
-            mask-image: var(--uc-bookmark-star-image);
-            mask-position: 0px 0px;
-            mask-repeat: no-repeat;
-            mask-size: 16px;
+        fill: rgb(from var(--uc-bookmark-star-color) r g b / var(--uc-bookmark-star-color-mix)) !important;
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+            background: var(--uc-sidebar-stripe-gradient);
         }
     }
 
     #star-button-box:is(:hover, [open]) {
         /* Show hollow star icon on hover when the page is already bookmarked */
         &[data-l10n-id="urlbar-star-edit-bookmark"] #star-button[starred] {
-            fill: var(--toolbarbutton-icon-fill) !important;
-            @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                list-style-image: var(--uc-bookmark-star-image) !important;
+            @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
                 background: none;
-                mask-image: none;
             }
         }
         /* Show filled star icon on hover when the page is not bookmarked */
         &[data-l10n-id="urlbar-star-add-bookmark"] #star-button:not([starred]) {
-            list-style-image: none !important;
-            background: color-mix(in srgb, var(--uc-bookmark-star-color) 90%, var(--uc-toolbar-bgcolor));
-            mask-image: var(--uc-bookmark-star-image);
-            mask-position: 0px 0px;
-            mask-repeat: no-repeat;
-            mask-size: 16px;
-            @media -moz-pref("uc.flex.enable-gradient-highlight") {
-                background: var(--uc-gradient-highlight);
+            background: rgb(from var(--uc-bookmark-star-color) r g b / var(--uc-bookmark-star-color-mix));
+            @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+                background: var(--uc-sidebar-stripe-gradient);
             }
         }
-    }
-
-    #pageAction-panel-bookmark,
-    #star-button {
-        list-style-image: url("../icons/bookmark/bookmark-empty.svg") !important;
     }
 }
 
@@ -676,6 +743,17 @@
     transition: opacity 0.15s ease;
 }
 */
+
+/* Override the icon colors in the URL bar */
+@media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+    #identity-box,
+    #trust-icon-container,
+    #tracking-protection-icon-container,
+    .urlbar-page-action > .urlbar-icon {
+        --uc-flexfox-logo-color-mix: 100%;
+        fill: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-flexfox-logo-color-mix)) !important;
+    }
+}
 
 /* Searchbar color */
 #searchbar {

@@ -7,7 +7,7 @@
          * Firefox icons take priority over any custom font.
          */
         /* font-family: Segoe Fluent Icons, Segoe MDL2 Assets, <your custom font>, !important; */
-        text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
+        text-shadow: 0 0 0.03em rgb(from currentColor r g b / calc(alpha * 0.8));
         /* -webkit-text-stroke: 0.015em; */
     }
 
@@ -206,6 +206,12 @@ toolbar:not(#TabsToolbar) > #search-container {
 /* 17768e9 */
 
 @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
+    :root {
+        --uc-alltabs-button-content: "+";
+        @media -moz-pref("uc.flex.style-all-tabs-button", 2) {
+            --uc-alltabs-button-content: "";
+        }
+    }
     /* Use different counters depending on whether the button is placed
        before or after the tab strip in horizontal tab mode. */
     @media not -moz-pref("sidebar.verticalTabs") {
@@ -275,23 +281,30 @@ toolbar:not(#TabsToolbar) > #search-container {
         }
     }
 
-    @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 1) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {
+    @media not -moz-pref("uc.flex.style-all-tabs-button", 0) {
         #alltabs-button > .toolbarbutton-badge-stack::after {
-            content: "+" counter(tab-counter);
+            content: var(--uc-alltabs-button-content) counter(tab-counter);
             position: absolute;
-            bottom: 2px;
-            right: 3px;
-            font-size: 9px;
+            @media not -moz-pref("uc.flex.style-all-tabs-button", 2) {
+                bottom: 2px;
+                right: 3px;
+            }
+            @media -moz-pref("uc.flex.style-all-tabs-button", 2) {
+                top: 6px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            font-size: 10px;
             line-height: 1;
             color: var(--toolbarbutton-icon-fill);
             pointer-events: none;
         }
         @media not -moz-pref("sidebar.verticalTabs") {
             #TabsToolbar-customization-target #alltabs-button > .toolbarbutton-badge-stack::after {
-                content: "+" counter(tab-counter-reversed);
+                content: var(--uc-alltabs-button-content) counter(tab-counter-reversed);
             }
             #TabsToolbar-customization-target #tabbrowser-tabs ~ #alltabs-button > .toolbarbutton-badge-stack::after {
-                content: "+" counter(tab-counter);
+                content: var(--uc-alltabs-button-content) counter(tab-counter);
             }
             :root[customizing] {
                 #TabsToolbar-customization-target
@@ -299,13 +312,13 @@ toolbar:not(#TabsToolbar) > #search-container {
                     ~ #wrapper-alltabs-button
                     #alltabs-button
                     > .toolbarbutton-badge-stack::after {
-                    content: "+" counter(tab-counter);
+                    content: var(--uc-alltabs-button-content) counter(tab-counter);
                 }
             }
         }
     }
 
-    @media not (-moz-pref("uc.flex.show-tab-count-in-alltabs-button", 1) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2)) {
+    @media -moz-pref("uc.flex.style-all-tabs-button", 0) {
         #alltabs-button > .toolbarbutton-badge-stack > .toolbarbutton-icon {
             opacity: 0;
         }
@@ -320,10 +333,10 @@ toolbar:not(#TabsToolbar) > #search-container {
         }
         @media not -moz-pref("sidebar.verticalTabs") {
             #TabsToolbar-customization-target #alltabs-button > .toolbarbutton-badge-stack::before {
-                content: "+" counter(tab-counter-reversed);
+                content: var(--uc-alltabs-button-content) counter(tab-counter-reversed);
             }
             #TabsToolbar-customization-target #tabbrowser-tabs ~ #alltabs-button > .toolbarbutton-badge-stack::before {
-                content: "+" counter(tab-counter);
+                content: var(--uc-alltabs-button-content) counter(tab-counter);
             }
             :root[customizing] {
                 #TabsToolbar-customization-target
@@ -331,7 +344,7 @@ toolbar:not(#TabsToolbar) > #search-container {
                     ~ #wrapper-alltabs-button
                     #alltabs-button
                     > .toolbarbutton-badge-stack::before {
-                    content: "+" counter(tab-counter);
+                    content: var(--uc-alltabs-button-content) counter(tab-counter);
                 }
             }
         }
@@ -353,12 +366,12 @@ toolbar:not(#TabsToolbar) > #search-container {
 
 @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button") or -moz-pref("uc.flex.show-tab-number-in-tab-label") {
     @media not -moz-pref("sidebar.verticalTabs") {
-        @media not (-moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 4)) {
+        @media not -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {
             .tabbrowser-tab:not([hidden]) {
                 counter-increment: tab-counter 1 tab-counter-reversed -1 nth-tab 1;
             }
         }
-        @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 4) {
+        @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {
             .tabbrowser-tab:not([hidden]):not([pending]) {
                 counter-increment: tab-counter 1 tab-counter-reversed -1 nth-tab 1;
             }
@@ -369,12 +382,12 @@ toolbar:not(#TabsToolbar) > #search-container {
     }
 
     @media -moz-pref("sidebar.verticalTabs") {
-        @media not (-moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 4)) {
+        @media not -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {
             .tabbrowser-tab {
                 counter-increment: tab-counter -1 nth-tab 1;
             }
         }
-        @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) or -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 4) {
+        @media -moz-pref("uc.flex.show-tab-count-in-alltabs-button", 2) {
             .tabbrowser-tab:not([pending]) {
                 counter-increment: tab-counter -1 nth-tab 1;
             }

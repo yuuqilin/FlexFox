@@ -44,7 +44,7 @@
                 opacity: 0 !important;
                 transition: opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
             }
-            @media -moz-pref("uc.flex.revert-to-original-sidebar-icon") {
+            @media -moz-pref("uc.flex.style-sidebar-button", 0) {
                 #sidebar-button {
                     opacity: 0 !important;
                     transition: opacity var(--uc-autohide-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);

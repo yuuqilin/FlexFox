@@ -50,14 +50,12 @@
             --in-content-page-background: transparent !important;
             --in-content-table-background: transparent !important;
             --in-content-background-color: transparent !important;
-            --in-content-box-info-background: color-mix(
-                in srgb,
-                var(--background-color-box) 40%,
-                transparent
+            --in-content-box-info-background: rgb(
+                from var(--background-color-box) r g b / calc(alpha * 0.4)
             ) !important;
         }
         .card {
-            background: color-mix(in srgb, var(--background-color-box) 80%, transparent) !important;
+            background: rgb(from var(--background-color-box) r g b / calc(alpha * 0.8)) !important;
             border: none !important;
         }
     }
@@ -71,7 +69,7 @@
         #engineList {
             --table-row-background-color: transparent !important;
             --table-row-background-color-alternate: transparent !important;
-            background-color: color-mix(in srgb, var(--background-color-box) 80%, transparent) !important;
+            background-color: rgb(from var(--background-color-box) r g b / calc(alpha * 0.8)) !important;
         }
         @media not (forced-colors) {
             .privacy-detailedoption:not(.selected) {
@@ -164,7 +162,7 @@
         @media not -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", false) {
             body::before,
             #toolbar::before {
-                background: color-mix(in srgb, var(--background-color-box) 80%, transparent);
+                background: rgb(from var(--background-color-box) r g b / calc(alpha * 0.8));
             }
         }
 
@@ -173,7 +171,7 @@
         }
 
         #prefs {
-            background: color-mix(in srgb, var(--background-color-box) 80%, transparent) !important;
+            background: rgb(from var(--background-color-box) r g b / calc(alpha * 0.8)) !important;
         }
         #prefs[has-visible-prefs] > .add {
             & > th,

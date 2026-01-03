@@ -1,5 +1,669 @@
+@-moz-document regexp("^moz-extension://.*?/sidebery/group.html.*?"), regexp("^moz-extension://.*?/sidebar/sidebar.html")
+{
+    #root {
+        /* FlexFox UI color tokens. 
+           These values must stay in sync with the tokens defined in
+           uc-variables.css in the browser chrome. */
+        --uc-color-light-red: #a82037; /* --color-red-70 */
+        --uc-color-light-orange: #d05500; /* --color-orange-60 */
+        --uc-color-light-yellow: #8a6200; /* --color-yellow-60 */
+        --uc-color-light-green: #007a34; /* --color-green-70 */
+        --uc-color-light-cyan: #007992; /* --color-cyan-70 */
+        --uc-color-light-blue: #0057c0; /* --color-blue-70 */
+        --uc-color-light-violet: #5e46bf; /* --color-violet-70 */
+        --uc-color-light-purple: #8634a3; /* --color-purple-70 */
+        --uc-color-light-pink: #d0457c; /* --color-pink-50 */
+        --uc-color-light-gray: #4b4d53; /* --color-gray-70 */
+        --uc-color-dark-red: #fe4f6d; /* --color-red-50 */
+        --uc-color-dark-orange: #fd7700; /* --color-orange-40 */
+        --uc-color-dark-yellow: #da9900; /* --color-yellow-40 */
+        --uc-color-dark-green: #03b432; /* --color-green-50 */
+        --uc-color-dark-cyan: #00b5d2; /* --color-cyan-50 */
+        --uc-color-dark-blue: #3e98ff; /* --color-blue-50 */
+        --uc-color-dark-violet: #a37cff; /* --color-violet-50 */
+        --uc-color-dark-purple: #c872ec; /* --color-purple-40 */
+        --uc-color-dark-pink: #f66098; /* --color-pink-40 */
+        --uc-color-dark-gray: #909299; /* --color-gray-60 */
+        @media (prefers-color-scheme: light) {
+            --uc-color-light-dark-1: var(--uc-color-light-red);
+            --uc-color-light-dark-2: var(--uc-color-light-orange);
+            --uc-color-light-dark-3: var(--uc-color-light-yellow);
+            --uc-color-light-dark-4: var(--uc-color-light-green);
+            --uc-color-light-dark-5: var(--uc-color-light-cyan);
+            --uc-color-light-dark-6: var(--uc-color-light-blue);
+            --uc-color-light-dark-7: var(--uc-color-light-violet);
+            --uc-color-light-dark-8: var(--uc-color-light-purple);
+            --uc-color-light-dark-9: var(--uc-color-light-pink);
+            --uc-color-light-dark-10: var(--uc-color-light-gray);
+            --uc-color-light-dark-0: #ea4c89;
+        }
+        @media (prefers-color-scheme: dark) {
+            --uc-color-light-dark-1: var(--uc-color-dark-red);
+            --uc-color-light-dark-2: var(--uc-color-dark-orange);
+            --uc-color-light-dark-3: var(--uc-color-dark-yellow);
+            --uc-color-light-dark-4: var(--uc-color-dark-green);
+            --uc-color-light-dark-5: var(--uc-color-dark-cyan);
+            --uc-color-light-dark-6: var(--uc-color-dark-blue);
+            --uc-color-light-dark-7: var(--uc-color-dark-violet);
+            --uc-color-light-dark-8: var(--uc-color-dark-purple);
+            --uc-color-light-dark-9: var(--uc-color-dark-pink);
+            --uc-color-light-dark-10: var(--uc-color-dark-gray);
+            --uc-color-light-dark-0: #9059ff;
+        }
+
+        /* FlexFox UI gradient color tokens */
+        /* 1. Red */
+        --uc-gradient-start-1: light-dark(oklch(0.566 0.1816 5.04), oklch(0.6782 0.2099 24.69));
+        --uc-gradient-end-1: light-dark(oklch(0.5988 0.1558 33.06), oklch(0.8556 0.1451 81.73));
+        /* 2. Orange */
+        --uc-gradient-start-2: light-dark(oklch(0.6811 0.1461 59.81), oklch(0.8556 0.1451 81.73));
+        --uc-gradient-end-2: light-dark(oklch(0.6485 0.1533 42.43), oklch(0.7122 0.1824 33.03));
+        /* 3. Yellow */
+        --uc-gradient-start-3: light-dark(oklch(0.6855 0.1337 107.43), oklch(0.7664 0.1486 46.23));
+        --uc-gradient-end-3: light-dark(oklch(0.6423 0.1116 81.41), oklch(0.8667 0.1472 85.25));
+        /* 4. Green */
+        --uc-gradient-start-4: light-dark(oklch(0.6412 0.1436 153.34), oklch(0.8242 0.2686 142.65));
+        --uc-gradient-end-4: light-dark(oklch(0.6654 0.1018 194.98), oklch(0.8205 0.1336 214.91));
+        /* 5. Cyan */
+        --uc-gradient-start-5: light-dark(oklch(0.6675 0.1021 204.07), oklch(0.8704 0.1354 194.95));
+        --uc-gradient-end-5: light-dark(oklch(0.6145 0.1204 243.39), oklch(0.693 0.1555 273.17));
+        /* 6. Blue */
+        --uc-gradient-start-6: light-dark(oklch(0.5658 0.1547 272.08), oklch(0.7188 0.1522 289.66));
+        --uc-gradient-end-6: light-dark(oklch(0.5745 0.15 252.25), oklch(0.778 0.1266 233.52));
+        /* 7. Violet */
+        --uc-gradient-start-7: light-dark(oklch(0.5895 0.1551 288.36), oklch(0.7324 0.1829 313.44));
+        --uc-gradient-end-7: light-dark(oklch(0.5794 0.1922 304.04), oklch(0.6219 0.2033 270.83));
+        /* 8. Purple */
+        --uc-gradient-start-8: light-dark(oklch(0.5952 0.1456 305.51), oklch(0.7385 0.2252 320.7));
+        --uc-gradient-end-8: light-dark(oklch(0.6353 0.1823 327.46), oklch(0.6903 0.2124 4.32));
+        /* 9. Pink */
+        --uc-gradient-start-9: light-dark(oklch(0.6827 0.1833 327.35), oklch(0.6993 0.2221 353.69));
+        --uc-gradient-end-9: light-dark(oklch(0.6515 0.1528 6.67), oklch(0.8128 0.1365 63.73));
+        /* 10. Gray */
+        --uc-gradient-start-10: light-dark(oklch(0.5392 0.0706 303.2), oklch(0.7677 0.0522 285.11));
+        --uc-gradient-end-10: light-dark(oklch(0.5556 0.0678 269.9), oklch(0.7329 0.0734 299.86));
+        /* 0. Default */
+        --uc-gradient-start-0: light-dark(oklch(0.4978 0.1866 27.42), oklch(0.9695 0.1963 109.56));
+        --uc-gradient-end-0: light-dark(oklch(0.6383 0.2057 25.98 / 75%), oklch(0.6495 0.2379 19.2));
+
+        /**/
+        --uc-sidebar-header-stripe: var(--uc-color-light-dark-0); /* Color of the sidebar header stripe */
+        --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-0);
+        --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-0);
+
+        /* Use FlexFox UI color tokens for the sidebar stripe */
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 1) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-1);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-1);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-1);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 2) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-2);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-2);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-2);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 3) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-3);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-3);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-3);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 4) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-4);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-4);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-4);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 5) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-5);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-5);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-5);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 6) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-6);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-6);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-6);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 7) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-7);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-7);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-7);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 8) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-8);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-8);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-8);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 9) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-9);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-9);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-9);
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 10) {
+            --uc-sidebar-header-stripe: var(--uc-color-light-dark-10);
+            --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-10);
+            --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-10);
+        }
+    }
+}
+
 @-moz-document regexp("^moz-extension://.*?/sidebar/sidebar.html")
 {
+    /* ══════════════════════════════════════════════════════════════════════════
+       ██╗     ███████╗ ██████╗  █████╗  ██████╗██╗   ██╗    ███████╗████████╗██╗   ██╗██╗     ███████╗███████╗
+       ██║     ██╔════╝██╔════╝ ██╔══██╗██╔════╝╚██╗ ██╔╝    ██╔════╝╚══██╔══╝╚██╗ ██╔╝██║     ██╔════╝██╔════╝
+       ██║     █████╗  ██║  ███╗███████║██║      ╚████╔╝     ███████╗   ██║    ╚████╔╝ ██║     █████╗  ███████╗
+       ██║     ██╔══╝  ██║   ██║██╔══██║██║       ╚██╔╝      ╚════██║   ██║     ╚██╔╝  ██║     ██╔══╝  ╚════██║
+       ███████╗███████╗╚██████╔╝██║  ██║╚██████╗   ██║       ███████║   ██║      ██║   ███████╗███████╗███████║
+       ╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝   ╚═╝       ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝╚══════╝
+                                                                                                               
+       These rules come from Sidebery's pre-v6 internal styles.  
+       They were fully migrated to uc-sidebery.css after v6 and are merged with the Override Styles below.
+    ═══════════════════════════════════════════════════════════════════════════ */
+
+    /* For FlexFox >= v1.1.0 */
+    /* Remove text stroke */
+    /*
+    * {
+        font-family: !important;
+        text-shadow: none;
+        -webkit-text-stroke: 0;
+    }
+    */
+
+    /* Add a background image */
+    /*
+    #root {
+        --bg-img: url("data:image/png;base64,Insert your background image's BASE64 code here") !important;
+        --bg-size: cover !important;
+        background-image: var(--bg-img) !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .NavigationBar {
+        background-color: transparent;
+    }
+
+    .PinnedTabsBar {
+        background-color: transparent;
+    }
+
+    .new-tab-btns {
+        background-color: transparent !important;
+    }
+
+    .new-tab-btns::after {
+        display: none !important;
+    }
+
+    .bottom-space {
+        background-color: transparent !important;
+    }
+    */
+
+    #root {
+        /* Tab and PinnedTab height adjustment */
+        --tabs-height: 33px !important;
+        --tabs-pinned-height: var(--tabs-height) !important;
+        --tabs-pinned-width: 40px !important;
+
+        /* Light and Dark Theme base settings */
+        --frame-bg: light-dark(#f1f5f9, #1a1b26) !important;
+        --toolbar-bg: light-dark(#f1f5f9, #1a1b26) !important;
+        --bg: light-dark(#f1f5f9, #1a1b26) !important;
+        /*
+        --warn: light-dark(#fca5a5, #8c4351) !important;
+        */
+        --warn: light-dark(hsl(0 50% 60%), hsl(0 60% 50%)) !important;
+        @media (prefers-color-scheme: dark) {
+            --tabs-fg: #d4d4d4 !important;
+            --tabs-bg-hover: #3b3948 !important;
+            --tabs-activated-bg: #5b5b66 !important;
+            --nav-btn-activated-bg: #1f222f !important;
+            --panel-btn: #f2f2f2 !important;
+        }
+    }
+
+    /* Override the color of selected tabs */
+    #root[data-act-el-color-scheme="light"] {
+        --frame-fg: #333;
+        --active-el-fg: #000;
+        /*
+        --tabs-activated-bg: #ea4c895e !important;
+        --active-el-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6), 0 1px 3px -1px rgba(0, 0, 0, 0.196);
+        */
+    }
+    /*
+    #root[data-act-el-color-scheme="dark"] {
+        --tabs-activated-bg: #9651ff80 !important;
+        --active-el-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.467), 0 1px 3px -1px rgba(0, 0, 0, 0.212);
+    }
+    */
+
+    #root[data-frame-color-scheme="light"] .Tab[data-colorized="true"] {
+        --tabs-color-layer-opacity: 0;
+        --tabs-activated-color-layer-opacity: 0;
+    }
+
+    /* #root[data-frame-color-scheme="light"] */
+    .Tab:is([data-active="true"], [data-selected="true"]) .color-layer {
+        @media (prefers-color-scheme: dark) {
+            --tabs-activated-color-layer-opacity: 0;
+        }
+        opacity: var(--tabs-activated-color-layer-opacity) !important;
+    }
+
+    .Tab[data-selected="true"] .body {
+        --frame-el-overlay-selected-border: var(--active-el-shadow);
+        /*
+        background-color: color-mix(in srgb, var(--tabs-activated-bg) 90%, transparent) !important;
+        @media (prefers-color-scheme: dark) {
+            background-color: color-mix(in srgb, var(--tabs-activated-bg) 85%, transparent) !important;
+        }
+        */
+        box-shadow: var(--active-el-shadow) !important;
+    }
+
+    /* Apply gradient color transitions to group folder text labels */
+    .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
+        --tabs-normal-fg: light-dark(hsl(0 73% 41%), transparent) !important;
+        --tabs-activated-fg: light-dark(hsl(0 73% 41%), transparent) !important;
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color") {
+            --tabs-normal-fg: light-dark(var(--uc-sidebar-header-stripe), transparent) !important;
+            --tabs-activated-fg: light-dark(var(--uc-sidebar-header-stripe), transparent) !important;
+        }
+        /*filter: contrast(120%);*/
+        display: flex;
+        @media (prefers-color-scheme: dark) {
+            --tabs-normal-fg: transparent !important;
+            --tabs-activated-fg: transparent !important;
+            background: linear-gradient(
+                70deg in oklab,
+                var(--uc-sidebar-stripe-gradient-start),
+                var(--uc-sidebar-stripe-gradient-end)
+            ) !important;
+            background-clip: text !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-stroke-color: transparent;
+        }
+    }
+
+    /* Align the background color length with the text length */
+    .Tab[data-group="true"][data-parent="true"] .body .t-box {
+        display: flex;
+    }
+
+    /* Apply gradient color transitions to group folder icons */
+    .Tab[data-group="true"][data-parent="true"] .body .fav > svg {
+        background: linear-gradient(
+            45deg in oklab,
+            var(--uc-sidebar-stripe-gradient-end),
+            var(--uc-sidebar-stripe-gradient-start)
+        ) !important;
+        @media (prefers-color-scheme: dark), -moz-pref("uc.flex.style-sidebar-stripe-color") {
+            background-image: linear-gradient(
+                60deg in oklab,
+                var(--uc-sidebar-stripe-gradient-end),
+                var(--uc-sidebar-stripe-gradient-start)
+            ) !important;
+        }
+        fill: transparent !important;
+        mask: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9ncm91cCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTYgMTYiIHN0eWxlPSIvKiEgbWFzazogbGluZWFyLWdyYWRpZW50KCA0NWRlZywgaHNsKDQyMCAxMDAlIDYyJSksIGhzbCgzNTAgMTAwJSA1OSUpICk7ICovIj48cGF0aCBkPSJNMCAzYzAtMS4xLjktMiAyLTJoNC41OWExIDEgMCAwIDEgLjcuM2wxLjQyIDEuNGExIDEgMCAwIDAgLjcuM2g1LjA5Yy44MyAwIDEuNS42NyAxLjUgMS41djhjMCAuODMtLjY3IDEuNS0xLjUgMS41aC0xM0ExLjUgMS41IDAgMCAxIDAgMTIuNVYzWiI+PC9wYXRoPjwvc3ZnPg==");
+    }
+
+    /* Invert GitHub's black favicon in light themes */
+    @media (prefers-color-scheme: light) and -moz-pref("layout.css.prefers-color-scheme.content-override", 0) {
+        .Tab
+            .fav-icon[src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNiAwQzcuMTYgMCAwIDcuMTYgMCAxNkMwIDIzLjA4IDQuNTggMjkuMDYgMTAuOTQgMzEuMThDMTEuNzQgMzEuMzIgMTIuMDQgMzAuODQgMTIuMDQgMzAuNDJDMTIuMDQgMzAuMDQgMTIuMDIgMjguNzggMTIuMDIgMjcuNDRDOCAyOC4xOCA2Ljk2IDI2LjQ2IDYuNjQgMjUuNTZDNi40NiAyNS4xIDUuNjggMjMuNjggNSAyMy4zQzQuNDQgMjMgMy42NCAyMi4yNiA0Ljk4IDIyLjI0QzYuMjQgMjIuMjIgNy4xNCAyMy40IDcuNDQgMjMuODhDOC44OCAyNi4zIDExLjE4IDI1LjYyIDEyLjEgMjUuMkMxMi4yNCAyNC4xNiAxMi42NiAyMy40NiAxMy4xMiAyMy4wNkM5LjU2IDIyLjY2IDUuODQgMjEuMjggNS44NCAxNS4xNkM1Ljg0IDEzLjQyIDYuNDYgMTEuOTggNy40OCAxMC44NkM3LjMyIDEwLjQ2IDYuNzYgOC44MiA3LjY0IDYuNjJDNy42NCA2LjYyIDguOTggNi4yIDEyLjA0IDguMjZDMTMuMzIgNy45IDE0LjY4IDcuNzIgMTYuMDQgNy43MkMxNy40IDcuNzIgMTguNzYgNy45IDIwLjA0IDguMjZDMjMuMSA2LjE4IDI0LjQ0IDYuNjIgMjQuNDQgNi42MkMyNS4zMiA4LjgyIDI0Ljc2IDEwLjQ2IDI0LjYgMTAuODZDMjUuNjIgMTEuOTggMjYuMjQgMTMuNCAyNi4yNCAxNS4xNkMyNi4yNCAyMS4zIDIyLjUgMjIuNjYgMTguOTQgMjMuMDZDMTkuNTIgMjMuNTYgMjAuMDIgMjQuNTIgMjAuMDIgMjYuMDJDMjAuMDIgMjguMTYgMjAgMjkuODggMjAgMzAuNDJDMjAgMzAuODQgMjAuMyAzMS4zNCAyMS4xIDMxLjE4QzI3LjQyIDI5LjA2IDMyIDIzLjA2IDMyIDE2QzMyIDcuMTYgMjQuODQgMCAxNiAwVjBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K"] {
+            filter: invert();
+        }
+    }
+
+    #root .Tab {
+        --tabs-indent: 7px;
+    }
+
+    /* TABS */
+
+    /* ? */
+    .Tab .lvl-wrapper:after {
+        display: none;
+    }
+
+    .Tab {
+        /*
+        margin: auto;
+        */
+        width: 94% !important;
+        border-radius: 3px;
+    }
+
+    /* Styling the tab close button */
+    .Tab .close > svg:hover {
+        border-radius: 3px;
+        background: var(--warn) !important;
+        opacity: 80% !important;
+    }
+
+    .Tab .title {
+        overflow: hidden !important;
+    }
+
+    /* PINNED TABS */
+
+    /*
+    .PinnedTabsBar {
+        background-color: var(--bg) !important;
+    }
+    */
+
+    .tab-wrapper {
+        /*
+        margin: 0px 0px 2px 0px;
+        */
+        border-radius: 3px;
+    }
+
+    .tab-wrapper .Tab .body {
+        /*
+        border: 1.5px solid rgba(0, 0, 0, 0.22);
+        */
+        border-radius: 5px !important;
+    }
+
+    .tab-wrapper .Tab[data-discarded="true"] .body {
+        /*
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        */
+        border-radius: 5px !important;
+    }
+
+    /* NAV BAR */
+
+    /* Change the navigation panel icon when Sidebery is collapsed */
+    @media (max-width: 50px) {
+        #root:not([data-nav-inline="true"]) .nav-item:is(:not([data-class="panel"]), [data-active="false"]) {
+            display: none !important;
+        }
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] {
+            /*
+            padding-right: 10px;
+            padding-bottom: 2px;
+            */
+            background-color: transparent !important;
+            box-shadow: none !important;
+        }
+        /*
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > svg {
+            width: 0px !important;
+            height: 0px !important;
+            padding: 0 0 16px 16px !important;
+            background-image: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9leHBhbmQiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0ibTMuMTcgNi43My42Ni0xLjEzTDggOS4zbDQuMTctMy43LjY2IDEuMTNMOCAxMS4wM2wtNC44My00LjNaIj48L3BhdGg+PC9zdmc+");
+            background-repeat: no-repeat;
+        }
+        */
+        /*
+        @media (prefers-color-scheme: dark) {
+            #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > svg {
+                filter: invert(100%);
+            }
+        }
+        */
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > :is(.len, .audio) {
+            display: none !important;
+        }
+    }
+    #root:not([data-nav-inline="true"]) .NavigationBar:not(:hover) {
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    /* !
+    #root:not([data-nav-inline="true"]) .NavigationBar {
+        height: 40px !important;
+        padding: 3px 0px 0px 5px !important;
+        \/* background-color: # !important; *\/
+        margin-bottom: 4px;
+        border-bottom: 1px solid light-dark(#ced1d4, #686869b3);
+        transition: height 50ms ease-in-out 5ms;
+    }
+    */
+
+    /* !
+    #root:not(:hover) .NavigationBar {
+        height: 40px !important;
+        padding: 3px 0px 0px 6.5px !important;
+        \/* background-color: # !important; *\/
+        margin-bottom: 4px;
+        border-bottom: 1px solid light-dark(#ced1d4, #686869b3);
+        transition: height 50ms ease-in-out 5ms;
+    }
+    */
+
+    /*
+    #root:not([data-nav-inline="true"]) .NavigationBar:hover {
+        height: 100% !important;
+        transition: height 50ms ease-in-out 10ms;
+    }
+    */
+
+    #root:not([data-nav-inline="true"]) .NavigationBar .nav-item {
+        --nav-btn-height: 33px;
+        --nav-btn-width: 38px;
+        /*
+        margin: 0 1px 1px;
+        */
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar .nav-item[data-class="space"] {
+        width: 38px !important;
+        flex-grow: 0 !important;
+    }
+
+    #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+        width: 22px !important;
+        height: 22px !important;
+        transition:
+            width 50ms ease-in-out 10ms,
+            height 50ms ease-in-out 10ms !important;
+    }
+
+    /* ? */
+    .NavigationBar .panel-btn:hover {
+        border-radius: 3px !important;
+        background-color: var(--tabs-bg-hover) !important;
+    }
+
+    /* ? */
+    .NavigationBar .panel-btn[data-active="true"] {
+        border-radius: 3px !important;
+        background-color: var(--bg) !important;
+    }
+
+    /* ? */
+    .NavigationBar .panel-btn[data-active="true"]:hover {
+        border-radius: 3px !important;
+        background-color: var(--tabs-bg-hover) !important;
+    }
+
+    /* ? */
+    .NavigationBar .panel-btn > svg,
+    .NavigationBar .panel-btn > img {
+        fill: var(--panel-btn) !important;
+    }
+
+    /* SIDEBAR HACK PATCHES */
+
+    @media (max-width: 50px) {
+        /* Fix to tab tree identation when minimised */
+        #root:not(:hover) .Tab {
+            --tabs-indent: 0px;
+        }
+
+        /* ? */
+        .Tab[data-lvl] > div.lvl-wrapper {
+            right: -2px;
+        }
+
+        .Tab {
+            max-width: 34px;
+        }
+
+        .Tab .fav {
+            z-index: 1;
+        }
+
+        .Tab .audio {
+            z-index: 1;
+            margin-left: -12px;
+            height: 26px;
+        }
+
+        .Tab .title {
+            display: none;
+        }
+
+        /*
+        .tab-wrapper {
+            margin-left: 5px;
+        }
+        */
+
+        /* ? */
+        .NavigationBar .settings-btn {
+            display: none;
+        }
+    }
+
+    /* OPTIONAL */
+
+    /* Make pinned tabs wrap when minimised */
+    .PinnedTabsBar {
+        display: grid !important;
+        grid-auto-flow: row;
+        /*
+        grid-template-columns: repeat(5, auto);
+        */
+        /* flex-wrap: nowrap !important;
+            flex-direction: column;
+            overflow: hidden; */
+    }
+
+    #root:not(:hover) .PinnedTabsBar {
+        will-change: padding-left;
+    }
+
+    #root:not(:hover) .PinnedTabsBar .Tab .fav,
+    #root:not(:hover) .PinnedTabsBar .Tab .fav-icon {
+        will-change: width, height;
+    }
+
+    #root:hover .PinnedTabsBar .Tab .fav,
+    #root:hover .PinnedTabsBar .Tab .fav-icon {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    /*
+    #root:hover .PinnedTabsBar {
+        padding-left: 4px;
+    }
+    */
+
+    #root:not(:hover) .tab-wrapper {
+        overflow: hidden !important;
+        /*
+        min-width: var(--tabs-pinned-width) !important;
+        */
+    }
+    /*
+    #root:not(:hover) .PinnedTabsBar {
+        margin-left: 2px !important;
+    }
+    #root:not(:hover) .TabsPanel .new-tab-btns {
+        margin-left: -1px !important;
+    }
+    #root:not(:hover) .tool-btn > svg {
+        margin-left: 7px !important;
+    }
+    */
+    #root:not(:hover) .ScrollBox .Tab {
+        --tabs-inner-gap: 7px;
+        /*
+        margin-left: 4px;
+        */
+    }
+
+    /* Optional patch for better tab notifications on pinned tabs */
+
+    /* ?
+    .tab-wrapper[data-audible] .fav > img,
+    .tab-wrapper[data-muted] .fav > img,
+    .tab-wrapper[data-loading] .fav > img {
+        mask: none;
+    }
+    */
+
+    .tab-wrapper .fav > img {
+        mask: none;
+    }
+
+    .tab-wrapper[data-updated="true"] .fav > img {
+        mask: radial-gradient(
+            circle at calc(100% - 2px) calc(100% - 2px),
+            rgba(0, 0, 0, 0.141),
+            rgba(0, 0, 0, 0.141) 4px,
+            #000 5px,
+            #000
+        );
+    }
+
+    /* ?
+    .tab-wrapper .audio-badge {
+        top: 5px;
+    }
+
+    .tab-wrapper .update-badge {
+        opacity: 0;
+    }
+
+    .tab-wrapper[data-updated="true"] .update-badge {
+        opacity: 100;
+    }
+    */
+
+    .Tab .title {
+        transition: margin-left 300ms ease !important;
+    }
+    /*
+    .Tab:hover {
+        --tabs-inner-gap: 8px;
+    }
+    */
+    .Tab:hover .title {
+        margin-left: 8px;
+    }
+
+    .Tab[data-discarded="true"] .title {
+        opacity: 80%;
+    }
+
+    /* Hide tree indent lines when Sidebery is collapsed */
+    /*
+    #root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+        display: none;
+    }
+    */
+
+    /* ══════════════════════════════════════════════════════════════════════════
+        ██████╗ ██╗   ██╗███████╗██████╗ ██████╗ ██╗██████╗ ███████╗    ███████╗████████╗██╗   ██╗██╗     ███████╗███████╗
+       ██╔═══██╗██║   ██║██╔════╝██╔══██╗██╔══██╗██║██╔══██╗██╔════╝    ██╔════╝╚══██╔══╝╚██╗ ██╔╝██║     ██╔════╝██╔════╝
+       ██║   ██║██║   ██║█████╗  ██████╔╝██████╔╝██║██║  ██║█████╗      ███████╗   ██║    ╚████╔╝ ██║     █████╗  ███████╗
+       ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗██╔══██╗██║██║  ██║██╔══╝      ╚════██║   ██║     ╚██╔╝  ██║     ██╔══╝  ╚════██║
+       ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║██║  ██║██║██████╔╝███████╗    ███████║   ██║      ██║   ███████╗███████╗███████║
+        ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═════╝ ╚══════╝    ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝╚══════╝
+                                                                                                                          
+       These rules override Sidebery's pre-v6 internal styles and include updated styles such as new animation effects.
+    ═══════════════════════════════════════════════════════════════════════════ */
+
     #root {
         /** 
          * These variables must stay in sync with the identical ones in uc-variables.css.
@@ -33,53 +697,7 @@
             --bg: light-dark(#f5f6f6, #26252e) !important;
         }
 
-        @media (prefers-color-scheme: dark) {
-            --uc-tab-bgcolor: #0d0d15; /* Background color of tabs */
-            @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-                --uc-tab-bgcolor: /* #121212 */ #191917;
-            }
-        }
-
-        @media (prefers-color-scheme: light) {
-            --uc-tab-bgcolor: #cbd5e1; /* Background color of tabs */
-            @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-                --uc-tab-bgcolor: #d9d9d7;
-            }
-        }
-
-        /* Background color for pinned tabs */
-        --uc-sb-pinned-tab-bgcolor: var(--uc-tab-bgcolor);
-        /* Border color for navigation bar */
-        --uc-sb-navigation-border-color: light-dark(#ced1d4, rgba(172, 112, 255, 0.45));
-        /* Border color for pinned tabs */
-        --uc-sb-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
-        /* Border color for unloaded pinned tabs */
-        --uc-sb-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
-        /* Background color for the active tab */
-        --uc-sb-active-tab-bgcolor: light-dark(#ea4c895e, #9059ff80);
-        /* Inner border shadow (outline) for the active tab */
-        --uc-sb-active-tab-border-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
-        /* Drop shadow beneath the active tab */
-        --uc-sb-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
-
-        --tabs-activated-bg: var(--uc-sb-active-tab-bgcolor) !important;
-        --active-el-shadow: inset var(--uc-sb-active-tab-border-shadow), var(--uc-sb-active-tab-drop-shadow) !important;
-
-        /* Tabs per row for native vertical pinned tabs and Sidebery (controlled by per-tab percentage width) */
-        --uc-sb-pinned-tab-max-columns: 19%;
-        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 4) {
-            --uc-sb-pinned-tab-max-columns: 24%;
-        }
-        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 3) {
-            --uc-sb-pinned-tab-max-columns: 32%;
-        }
-        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 2) {
-            --uc-sb-pinned-tab-max-columns: 49%;
-        }
-        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 1) {
-            --uc-sb-pinned-tab-max-columns: 100%;
-        }
-
+        /* Max visible rows in native vertical pinned tabs and Sidebery (before scrolling) */
         --uc-sb-pinned-tab-max-rows: 4;
         @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 2) {
             --uc-sb-pinned-tab-max-rows: 2;
@@ -99,31 +717,170 @@
         @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 8) {
             --uc-sb-pinned-tab-max-rows: 8;
         }
+
+        /* Tabs per row for native vertical pinned tabs and Sidebery (controlled by per-tab percentage width) */
+        --uc-sb-pinned-tab-max-columns: 19%;
+        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 4) {
+            --uc-sb-pinned-tab-max-columns: 24%;
+        }
+        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 3) {
+            --uc-sb-pinned-tab-max-columns: 32%;
+        }
+        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 2) {
+            --uc-sb-pinned-tab-max-columns: 49%;
+        }
+        @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 1) {
+            --uc-sb-pinned-tab-max-columns: 100%;
+        }
+
+        /* Blend ratios for icons, borders, pinned tabs, active tabs, and background colors */
+        --uc-sb-nav-icon-color-mix: 77%; /* Synced with `--uc-flexfox-logo-color-mix` */
+        --uc-sb-pinned-tab-border-color-mix: 70%;
+        --uc-sb-pinned-tab-unloaded-border-color-mix: 28%;
+        --uc-sb-active-tab-color-mix: 37%;
+        @media (prefers-color-scheme: dark) {
+            --uc-sb-nav-icon-color-mix: 100%;
+            --uc-sb-active-tab-color-mix: 50%;
+        }
+
+        /* Icon color for the Navigation Bar */
+        --uc-sb-nav-icon-color: light-dark(#888, #9059ff);
+        @media -moz-pref("uc.flex.style-sidebery-nav-icon", 2) {
+            --uc-sb-nav-icon-color: currentColor;
+        }
+        /* Color for the splitter in the navigation bar. Synced with `--uc-sidebar-header-border-color` */
+        --uc-sb-navbar-border-color: light-dark(#ced1d4, rgba(172, 112, 255, 0.45));
+
+        /* Border color for pinned tabs */
+        --uc-sb-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
+        /* Border color for unloaded pinned tabs */
+        --uc-sb-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
+        /* Apply the sidebar stripe color to pinned tab borders in dark mode */
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color") {
+            @media (prefers-color-scheme: dark) {
+                --uc-sb-nav-icon-color: rgb(
+                    from var(--uc-sidebar-header-stripe) r g b / var(--uc-sb-nav-icon-color-mix)
+                );
+                --uc-sb-navbar-border-color: rgb(from var(--uc-sidebar-header-stripe) r g b / 45%);
+                --uc-sb-pinned-tab-border-color: rgb(
+                    from var(--uc-sidebar-header-stripe) r g b / var(--uc-sb-pinned-tab-border-color-mix)
+                );
+                --uc-sb-pinned-tab-unloaded-border-color: rgb(
+                    from var(--uc-sidebar-header-stripe) r g b / var(--uc-sb-pinned-tab-unloaded-border-color-mix)
+                );
+            }
+        }
+
+        /* Background color for pinned tabs */
+        --uc-sb-pinned-tab-bgcolor: light-dark(
+            rgb(from var(--uc-sb-tab-bgcolor) r g b / 0.9),
+            rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 87%, white) r g b / 0.2)
+        );
+        --uc-sb-pinned-tab-unloaded-bgcolor: light-dark(
+            rgb(from var(--uc-sb-tab-bgcolor) r g b / 0.1),
+            rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 87%, white) r g b / 0.05)
+        );
+        --uc-sb-pinned-tab-hover-bgcolor: light-dark(
+            rgb(from color-mix(in srgb, var(--uc-sb-tab-bgcolor) 77%, black) r g b / 0.3),
+            rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.3)
+        );
+        --uc-sb-pinned-tab-box-shadow: 0px 0px 2px color-mix(in srgb, var(--uc-sb-tab-bgcolor) 25%, black);
+        @media (prefers-color-scheme: dark) {
+            --uc-sb-pinned-tab-box-shadow: 0px 0px 3px color-mix(in srgb, var(--uc-sidebar-header-stripe) 15%, white);
+        }
+        /* Background color for regular tabs */
+        --uc-sb-tab-bgcolor: #cbd5e1;
+        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+            --uc-sb-tab-bgcolor: #d9d8dd;
+        }
+        --uc-sb-tab-hover-bgcolor: var(--uc-sb-pinned-tab-hover-bgcolor);
+
+        /* Background color for the active tab */
+        --uc-sb-active-tab-bgcolor: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-sb-active-tab-color-mix));
+        /* Inner border shadow (outline) for the active tab */
+        --uc-sb-active-tab-border-shadow: inset 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+        /* Drop shadow beneath the active tab */
+        --uc-sb-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+        @media -moz-pref("uc.flex.style-tab-items", 2) {
+            --uc-sb-active-tab-border-shadow: inset 0 0 0 1px
+                color-mix(in srgb, var(--uc-sidebar-header-stripe) 40%, black 10%);
+            --uc-sb-active-tab-drop-shadow: inset 0 0px 2px
+                color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, black 10%);
+            @media (prefers-color-scheme: dark) {
+                --uc-sb-active-tab-border-shadow: inset 0 0 0 1px var(--uc-sb-pinned-tab-border-color);
+                --uc-sb-active-tab-drop-shadow: 0px 0px 3px -1px
+                    color-mix(in srgb, var(--uc-sidebar-header-stripe) 75%, white);
+            }
+            --frame-el-overlay-hover-bg: transparent !important;
+            /*
+            --frame-el-overlay-clicked-bg: transparent !important;
+            */
+            --frame-el-overlay-clicked-bg: light-dark(
+                rgb(from color-mix(in srgb, var(--uc-sb-tab-bgcolor) 77%, black) r g b / 0.1),
+                rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.1)
+            ) !important;
+        }
+
+        /* Use FlexFox's UI color tokens for the sidebar stripe */
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 1) {
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 2) {
+            --uc-sb-pinned-tab-border-color-mix: 65%;
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 3) {
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 4) {
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 5) {
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 6) {
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 7) {
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 8) {
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 9) {
+            --uc-sb-pinned-tab-border-color-mix: 65%;
+        }
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 10) {
+            --uc-sb-pinned-tab-border-color-mix: 60%;
+            --uc-sb-pinned-tab-unloaded-border-color-mix: 23%;
+        }
+
+        --tabs-activated-bg: var(--uc-sb-active-tab-bgcolor) !important;
+        --active-el-shadow: var(--uc-sb-active-tab-border-shadow), var(--uc-sb-active-tab-drop-shadow) !important;
+        .Tab[data-colorized="true"] {
+            --tabs-activated-shadow: var(--active-el-shadow) !important;
+        }
     }
 
     /* Add text stroke */
     @media -moz-pref("uc.flex.add-ui-text-stroke") {
         * {
             /* font-family: <your custom font> !important; */
-            text-shadow: 0 0 0.03em color-mix(in srgb, currentColor 80%, transparent);
+            text-shadow: 0 0 0.03em rgb(from currentColor r g b / calc(alpha * 0.8));
             /* -webkit-text-stroke: 0.015em; */
         }
+    }
+
+    .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
+        @media (prefers-color-scheme: light) {
+            text-shadow: 0 0 0.03em rgb(from currentColor r g b / calc(alpha * 0.8));
+        }
         @media (prefers-color-scheme: dark) {
-            .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
-                text-shadow: none;
-                -webkit-text-stroke: 0.03em;
-            }
+            text-shadow: none;
+            -webkit-text-stroke: 0.03em;
         }
     }
 
     .NavigationBar {
-        border-bottom: 1px solid var(--uc-sb-navigation-border-color) !important;
-        margin-bottom: 2px !important;
+        border-bottom: 1px solid var(--uc-sb-navbar-border-color) !important;
+        margin-bottom: 0px !important;
     }
 
     /* Adjust spacing and layout of the search bar */
-    #search_bar {
-        margin-bottom: 2px;
+    #search_bar[data-showed="true"] {
+        margin-top: 4px;
 
         @media (max-width: 50px) {
             @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
@@ -159,28 +916,97 @@
         }
     }
 
+    .top-horizontal-box {
+        margin-bottom: 0 !important;
+    }
+
     .PinnedTabsBar {
-        margin-bottom: 2px;
+        margin-block: 2px;
     }
 
     .AnimatedTabList {
-        margin-top: -2px;
+        margin-top: 2px;
         .Tab {
             padding-block: 2px;
         }
     }
+    .PinnedTabsBar ~ .ScrollBox .AnimatedTabList {
+        margin-top: -2px;
+    }
 
     .tab-wrapper .Tab .body {
-        border: 1.5px solid var(--uc-sb-pinned-tab-border-color) !important;
+        @media not -moz-pref("uc.flex.style-tab-items", 2) {
+            border: 1.5px solid var(--uc-sb-pinned-tab-border-color) !important;
+        }
+        @media -moz-pref("uc.flex.style-tab-items", 2) {
+            border: none !important;
+            transition:
+                opacity var(--d-fast),
+                transform var(--d-fast),
+                background-color 0.06s,
+                box-shadow 0.8s !important;
+            .Tab:not([data-active="true"], [data-selected="true"]) & {
+                background-color: var(--uc-sb-pinned-tab-bgcolor) !important;
+                box-shadow: 0px 0px 0px transparent !important;
+            }
+            .Tab[data-discarded="true"] & {
+                background-color: var(--uc-sb-pinned-tab-unloaded-bgcolor) !important;
+            }
+
+            .Tab:not([data-active="true"], [data-selected="true"]):hover & {
+                background-color: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
+                box-shadow: var(--uc-sb-pinned-tab-box-shadow) !important;
+                transition:
+                    opacity var(--d-fast),
+                    transform var(--d-fast),
+                    background-color 0s,
+                    box-shadow 0.1s !important;
+            }
+        }
     }
     .tab-wrapper .Tab[data-discarded="true"] .body {
         border: 1px solid var(--uc-sb-pinned-tab-unloaded-border-color) !important;
+    }
+
+    .Tab[data-selected="true"][data-active="true"] .body {
+        background-color: var(--tabs-activated-bg) !important;
+        --frame-el-overlay-selected-bg: transparent;
+    }
+    .Tab[data-selected="true"][data-active="false"] .body {
+        background-color: rgb(from var(--tabs-activated-bg) r g b / calc(alpha * 0.65)) !important;
+    }
+
+    .AnimatedTabList .Tab .body {
+        @media -moz-pref("uc.flex.style-tab-items", 2) {
+            transition:
+                opacity var(--d-fast),
+                transform var(--d-fast),
+                background-color 0.06s,
+                box-shadow 0.06s !important;
+
+            .Tab:not([data-active="true"], [data-selected="true"]):hover & {
+                background-color: var(--uc-sb-tab-hover-bgcolor) !important;
+                transition:
+                    opacity var(--d-fast),
+                    transform var(--d-fast),
+                    background-color 0s,
+                    box-shadow 0.1s !important;
+            }
+        }
     }
 
     /* Prevent a gap below the new tab button */
     .TabsPanel .new-tab-btns {
         bottom: -1px !important;
         padding-bottom: 1px !important;
+    }
+
+    @media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+        .tool-btn > svg,
+        .new-tab-btn > svg,
+        .new-tab-btn > img {
+            fill: var(--uc-sb-nav-icon-color) !important;
+        }
     }
 
     /* Restore the original bottom-bar-space height used before Sidebery v5.3.3.26 */
@@ -191,17 +1017,23 @@
     */
 
     #root {
+        /*
+        --tabs-margin: 2.5px !important;
+        */
+
         .PinnedTabsBar {
             min-width: 200px;
             grid-template-columns: repeat(auto-fit, minmax(var(--uc-sb-pinned-tab-max-columns), 1fr)) !important;
             grid-auto-rows: min-content;
+            column-gap: 0 !important;
+            row-gap: 0 !important;
             flex-shrink: 0;
             overflow-x: hidden;
             overflow-y: auto;
             scrollbar-width: thin;
             scroll-behavior: smooth;
             @media not -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 0) {
-                max-height: calc(var(--uc-sb-pinned-tab-max-rows) * 37px - 2px);
+                max-height: calc(var(--uc-sb-pinned-tab-max-rows) * 38px - 0px);
             }
 
             @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
@@ -216,14 +1048,20 @@
                 min-width: 34px !important;
                 width: 97% !important;
             }
+            .tab-wrapper {
+                min-width: var(--tabs-pinned-width) !important;
+                margin: 2px 0 !important;
+                padding: 0.5px 2px;
+            }
         }
 
         /* Center items when collapsed, overriding inline styles */
         /* Navbar dropdown arrow icon */
-        @media (max-width: 50px) {
-            &:not([data-nav-inline="true"]) .nav-item[data-active="true"] {
-                padding-right: 9px !important;
-            }
+        &:not([data-nav-inline="true"]) .nav-item[data-active="true"] {
+            padding: 0px !important;
+        }
+        &:not([data-nav-inline="true"]) .NavigationBar .nav-item {
+            margin: 0 1px !important;
         }
 
         /* Reset inline offsets for all elements except .ScrollBox .Tab */
@@ -246,7 +1084,7 @@
         }
 
         .PinnedTabsBar {
-            padding: 0 3px 0 5px !important;
+            padding: 0 3px !important;
         }
 
         .BottomBar {
@@ -284,10 +1122,10 @@
         .PinnedTabsBar {
             transition: none !important;
             /*
-                padding var(--d-fast),
-                padding-left 0s var(--uc-autohide-transition-type) 0s,
-                margin-left 0s var(--uc-autohide-transition-type) 0s !important;
-                */
+            padding var(--d-fast),
+            padding-left 0s var(--uc-autohide-transition-type) 0s,
+            margin-left 0s var(--uc-autohide-transition-type) 0s !important;
+            */
         }
 
         /* Commented out: skipping width/height transitions when collapsed to avoid excessive visual distraction */
@@ -424,13 +1262,13 @@
                     height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
+            /*
             .tab-wrapper {
                 min-width: var(--tabs-pinned-width);
-                /*
                 transition: margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay);
-                */
             }
+            */
             /*
             .TabsPanel .new-tab-btns {
                 transition:
@@ -511,7 +1349,7 @@
      * when the navbar has fewer than one row of panels and is hovered. 
      */
     #root:not([data-nav-inline="true"]) .NavigationBar {
-        padding: 3px 0px 2.5px 6.5px !important;
+        padding: 3px 0px 3px 2px !important;
         .nav-item[data-active="true"] > svg {
             width: 16px !important;
             height: 16px !important;
@@ -522,13 +1360,49 @@
         }
     }
 
+    /* Override inline styles so the NavigationBar uses the original tab panel icon
+       instead of FlexFox's default dropdown arrow when Sidebery is collapsed */
+    @media (max-width: 50px) {
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > svg {
+            padding: 0 !important;
+            background-image: none !important;
+            filter: none !important;
+
+            @media -moz-pref("uc.flex.style-sidebery-nav-icon") {
+                background: var(--uc-sb-nav-icon-color) !important;
+                @media -moz-pref("uc.flex.style-sidebery-nav-icon", 1) {
+                    mask-image: url("../icons/sidebery/logo.svg");
+                }
+                @media -moz-pref("uc.flex.style-sidebery-nav-icon", 2) {
+                    mask-image: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9leHBhbmQiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZD0ibTMuMTcgNi43My42Ni0xLjEzTDggOS4zbDQuMTctMy43LjY2IDEuMTNMOCAxMS4wM2wtNC44My00LjNaIj48L3BhdGg+PC9zdmc+");
+                }
+                @media -moz-pref("uc.flex.style-sidebery-nav-icon-use-active-panel-color") {
+                    background: var(--color, var(--nav-btn-fg)) !important;
+                }
+                mask-position: 0 0;
+                mask-repeat: no-repeat;
+            }
+
+            > use {
+                @media -moz-pref("uc.flex.style-sidebery-nav-icon") {
+                    visibility: hidden;
+                }
+                @media not -moz-pref("uc.flex.style-sidebery-nav-icon") {
+                    @media -moz-pref("uc.flex.style-sidebery-nav-icon-use-active-panel-color", false) {
+                        fill: var(--uc-sb-nav-icon-color) !important;
+                    }
+                }
+            }
+        }
+    }
+
     /* When Sidebery's auto-collapse is disabled, stop the transition effect when hovering over Sidebery */
     @media (width > 50px) {
         #root:not([data-nav-inline="true"]) .NavigationBar {
             max-height: 40px;
-            height: 40px !important;
-            padding: 3px 0px 2.5px 5px !important;
-            margin-bottom: 2px !important;
+            height: auto !important;
+            padding: 3px 0px 3px 4px !important;
+            margin-bottom: 0px !important;
             /*
             border-bottom: 1px solid #ced1d4 !important;
             @media (prefers-color-scheme: dark) {
@@ -722,8 +1596,113 @@
     }
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+    ██████╗ ██████╗  ██████╗ ██╗   ██╗██████╗     ███████╗████████╗██╗   ██╗██╗     ███████╗███████╗
+   ██╔════╝ ██╔══██╗██╔═══██╗██║   ██║██╔══██╗    ██╔════╝╚══██╔══╝╚██╗ ██╔╝██║     ██╔════╝██╔════╝
+   ██║  ███╗██████╔╝██║   ██║██║   ██║██████╔╝    ███████╗   ██║    ╚████╔╝ ██║     █████╗  ███████╗
+   ██║   ██║██╔══██╗██║   ██║██║   ██║██╔═══╝     ╚════██║   ██║     ╚██╔╝  ██║     ██╔══╝  ╚════██║
+   ╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║         ███████║   ██║      ██║   ███████╗███████╗███████║
+    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝         ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝╚══════╝
+                                                                                                    
+═══════════════════════════════════════════════════════════════════════════ */
+
 @-moz-document regexp("^moz-extension://.*?/sidebery/group.html.*?")
 {
+    /* For FlexFox >= v1.1.0 */
+    /*
+    #body {
+        --bg-size: 0px 0px;
+        --bg-img: url("");
+    }
+    */
+
+    body {
+        --max-width: 75% !important;
+        /*
+        position: relative;
+        display: flex;
+        width: calc(100% - 16px);
+        height: auto;
+        min-height: 100%;
+        */
+        font-family: sans-serif !important;
+        /*
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        opacity: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8px;
+        margin: 0;
+        background-color: var(--toolbar-bg);
+        */
+    }
+
+    .title-box {
+        /*
+        position: relative;
+        width: 100%;
+        max-width: var(--max-width);
+        */
+        margin: 24px 0 28px !important;
+    }
+
+    #root[data-toolbar-color-scheme="light"] {
+        #title {
+            color: hsl(0 73% 41%) !important;
+            /*
+            text-align: center;
+            */
+            @media -moz-pref("uc.flex.style-sidebar-stripe-color") {
+                color: transparent !important;
+                background: linear-gradient(
+                    70deg in oklab,
+                    var(--uc-sidebar-stripe-gradient-start),
+                    var(--uc-sidebar-stripe-gradient-end)
+                ) !important;
+                -webkit-background-clip: text !important;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+
+    #root[data-toolbar-color-scheme="dark"] {
+        --toolbar-bg: #2b2a33 !important;
+        #title {
+            background: linear-gradient(
+                70deg in oklab,
+                var(--uc-sidebar-stripe-gradient-start),
+                var(--uc-sidebar-stripe-gradient-end)
+            ) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent;
+            /*
+            text-align: center;
+            */
+        }
+    }
+
+    body[data-layout="grid"] .tabs {
+        grid-template-columns: 1fr 1fr 1fr 1fr !important;
+        /*
+        grid-gap: 12px;
+        */
+    }
+
+    #tabs .tab {
+        height: 35vh !important;
+    }
+
+    #tabs .bg {
+        height: 18.5vh !important;
+        opacity: 1 !important;
+        position: unset !important;
+        /*
+        border-radius: 5.5px;
+        */
+    }
+
     /* Allow group page backgrounds to show Mica backdrop or a custom wallpaper */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser") {
