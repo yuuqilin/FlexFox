@@ -23,6 +23,11 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v6.0.1**
+- Fixed layout and styling inconsistencies in Sidebery when **Density** is set to values other than **Default**.
+
+<!-- END What's New -->
+
 ## 🦊 v6.0.0 – Major Feature Update
 
 > [!IMPORTANT]
@@ -567,6 +572,8 @@ For more update logs from earlier versions,
 
 <a href="#updates-top-start">⏫ Back to the beginning of updates</a>
 </details>
+
+---
 
 ## ✨ Features
 

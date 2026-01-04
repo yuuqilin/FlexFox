@@ -23,11 +23,18 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
+**🦊 v6.0.1**
+- 修复了在将 Sidebery 的 **排列方式** 设置为 **默认** 以外选项时出现的布局与样式不一致问题。
+
+## 🦊 v6.0.0 – 重大功能更新
+
 > [!IMPORTANT]
 > **本次更新包含不兼容变更。** 部分选项已被废弃或调整，旧的 Sidebery 样式也已不再使用。更新前请仔细阅读本次更新日志。
 >
 > 更新后，为避免冲突，请务必 **删除 Sidebery 样式编辑器中的旧样式**。
 > 打开 **Sidebery 导航栏 → 设置（齿轮图标）→ 样式编辑器**，然后删除 **侧边栏** 和 **分组页面** 两个页面中的所有旧样式。
+
+---
 
 ### 🎨 新增：10 种可选颜色主题
 
@@ -555,6 +562,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <a href="#updates-top-start">⏫ 返回更新记录顶部</a>
 </details>
+
+---
 
 ## ✨ 功能亮点
 

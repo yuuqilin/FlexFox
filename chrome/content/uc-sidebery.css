@@ -204,6 +204,12 @@
         --tabs-height: 33px !important;
         --tabs-pinned-height: var(--tabs-height) !important;
         --tabs-pinned-width: 40px !important;
+        &[data-density="compact"] {
+            --tabs-height: 28px !important;
+        }
+        &[data-density="loose"] {
+            --tabs-height: 34px !important;
+        }
 
         /* Light and Dark Theme base settings */
         --frame-bg: light-dark(#f1f5f9, #1a1b26) !important;
@@ -366,14 +372,14 @@
         /*
         border: 1.5px solid rgba(0, 0, 0, 0.22);
         */
-        border-radius: 5px !important;
+        border-radius: 5px;
     }
 
     .tab-wrapper .Tab[data-discarded="true"] .body {
         /*
         border: 1px solid rgba(0, 0, 0, 0.1);
         */
-        border-radius: 5px !important;
+        border-radius: 5px;
     }
 
     /* NAV BAR */
@@ -847,6 +853,14 @@
             --uc-sb-pinned-tab-unloaded-border-color-mix: 23%;
         }
 
+        --general-border-radius: 5px !important;
+        &[data-density="compact"] {
+            --general-border-radius: 4px !important;
+        }
+        &[data-density="loose"] {
+            --general-border-radius: 6px !important;
+        }
+
         --tabs-activated-bg: var(--uc-sb-active-tab-bgcolor) !important;
         --active-el-shadow: var(--uc-sb-active-tab-border-shadow), var(--uc-sb-active-tab-drop-shadow) !important;
         .Tab[data-colorized="true"] {
@@ -995,6 +1009,12 @@
         }
     }
 
+    /* Prevent gaps between the background fill and the border */
+    .color-layer {
+        border-radius: calc(var(--tabs-border-radius) - 1px) !important;
+        box-shadow: none !important;
+    }
+
     /* Prevent a gap below the new tab button */
     .TabsPanel .new-tab-btns {
         bottom: -1px !important;
@@ -1020,6 +1040,13 @@
         /*
         --tabs-margin: 2.5px !important;
         */
+        --uc-sb-pinned-tab-height: 38px;
+        &[data-density="compact"] {
+            --uc-sb-pinned-tab-height: 33px;
+        }
+        &[data-density="loose"] {
+            --uc-sb-pinned-tab-height: 39px;
+        }
 
         .PinnedTabsBar {
             min-width: 200px;
@@ -1033,7 +1060,7 @@
             scrollbar-width: thin;
             scroll-behavior: smooth;
             @media not -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 0) {
-                max-height: calc(var(--uc-sb-pinned-tab-max-rows) * 38px - 0px);
+                max-height: calc(var(--uc-sb-pinned-tab-max-rows) * var(--uc-sb-pinned-tab-height) - 0px);
             }
 
             @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {

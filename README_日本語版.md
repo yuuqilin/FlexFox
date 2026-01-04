@@ -23,6 +23,9 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
+**🦊 v6.0.1**
+- Sidebery の **密度** を **デフォルト** 以外に設定した際に発生していたレイアウトや表示の不整合を修正しました。
+
 ## 🦊 v6.0.0 – 主要機能アップデート
 
 > [!IMPORTANT]
@@ -565,6 +568,8 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 <a href="#updates-top-start">⏫ アップデート一覧の先頭へ戻る</a>
 </details>
+
+---
 
 ## ✨ 特徴
 
