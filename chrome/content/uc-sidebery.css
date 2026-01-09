@@ -817,7 +817,10 @@
                 --uc-sb-active-tab-drop-shadow: 0px 0px 3px -1px
                     color-mix(in srgb, var(--uc-sidebar-header-stripe) 75%, white);
             }
-            --frame-el-overlay-hover-bg: transparent !important;
+            --frame-el-overlay-hover-bg: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
+            .panel-box {
+                --frame-el-overlay-hover-bg: transparent !important;
+            }
             /*
             --frame-el-overlay-clicked-bg: transparent !important;
             */
@@ -1017,6 +1020,9 @@
 
     /* Prevent a gap below the new tab button */
     .TabsPanel .new-tab-btns {
+        @media -moz-pref("uc.flex.style-tab-items", 2) {
+            --frame-el-overlay-hover-bg: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
+        }
         bottom: -1px !important;
         padding-bottom: 1px !important;
     }

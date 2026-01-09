@@ -93,11 +93,11 @@
                 }
             }
 
-            &:not([checked="true"]) {
+            &:not([checked]) {
                 /* When `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` is enabled, 
                  * --toolbarbutton-icon-fill is overridden in :root.  
                  * We reassign it on the endpoint element so that icons in the non-checked state 
-                 * (:not([checked="true"])) are properly displayed as highlighted.
+                 * (:not([checked])) are properly displayed as highlighted.
                  */
                 --toolbarbutton-icon-fill: light-dark(rgb(91, 91, 102), rgb(251, 251, 254));
                 @media -moz-pref("uc.flex.style-sidebar-button", 3) {
@@ -108,7 +108,7 @@
                 }
             }
 
-            &[checked="true"] {
+            &[checked] {
                 fill: var(--uc-flexfox-logo-color) !important;
                 @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
                     fill: light-dark(rgb(91, 91, 102), rgb(251, 251, 254)) !important;
@@ -1536,12 +1536,6 @@
         pointer-events: none;
     }
 
-    /* Keep the pinned tab grid wide enough so the second column doesn't spill into the collapsed vertical tab bar on hover */
-    /*
-    #tabbrowser-tabs[orient="vertical"][expanded] {
-        min-width: var(--uc-sidebar-main-hover-width) !important;
-    }
-    */
     /* Fix v144 container change that broke vertical tabs' ability to size to its children */
     /*
     #sidebar-main:not([sidebar-launcher-expanded][sidebar-panel-open]) #vertical-tabs {
@@ -1550,11 +1544,23 @@
         /*
         contain-intrinsic-width: var(--uc-sidebar-stripe-width);
         */
-        /* Set the width on the parent #vertical-tabs so the child #tabbrowser-tabs
-           no longer needs its own width, and ensure #vertical-tabs is wide enough
-           to prevent vertical tabs from shifting when switching between native
-           vertical tabs and Sidebery with `uc.flex.show-tab-count-in-alltabs-button` enabled. */
+        /* 
+         * Ensure #vertical-tabs has a stable minimum width to avoid layout shifts when
+         * switching between native vertical tabs and Sidebery, especially with
+         * `uc.flex.show-tab-count-in-alltabs-button` enabled. This works together with
+         * the min-width on #tabbrowser-tabs to keep the layout consistent. 
+         */
         min-width: var(--uc-sidebar-main-hover-width);
+    }
+
+    /** 
+     * Prevent the pinned tab grid from compressing and forcing the second column
+     * into the collapsed vertical tab bar. Even though #vertical-tabs has a
+     * min-width, the splitter can temporarily exceed it on hover, so we still give
+     * #tabbrowser-tabs its own min-width to keep the pinned icons stable. 
+     */
+    #tabbrowser-tabs[orient="vertical"][expanded] {
+        min-width: var(--uc-sidebar-main-hover-width) !important;
     }
 
     /* Pinned tabs panel: set max height, tighten spacing, and style pinned tab borders/background */

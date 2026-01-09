@@ -23,8 +23,30 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v6.0.1**
-- 修复了在将 Sidebery 的 **排列方式** 设置为 **默认** 以外选项时出现的布局与样式不一致问题。
+## 🦊 v6.0.2
+
+### ⚠️ 不兼容变更
+
+* 调整了 `uc.flex.style-urlbar` 选项的取值范围及其功能行为。
+  * 取值范围由原来的 `0`–`4` 修改为 `1`–`4`。原本数值 `0` 的功能已拆分为新的选项 `uc.flex.auto-hide-urlbar-icons`。
+  * 原先包含在数值 `2`–`4` 中的文字居中功能，已拆分为新的选项 `uc.flex.style-urlbar-center-text`。
+  * 调整后的取值仅用于控制地址栏的外观：
+    * `1` = Flat（默认，与旧版相同）
+    * `2` = Inset（嵌入式外观）
+    * `3` = Debossed（凹陷式外观）
+    * `4` = Seamless（与导航栏完全融合的外观）
+
+### ✨ 新增
+
+* 新增 `uc.flex.auto-hide-urlbar-icons` (布尔值)，此选项默认启用，会自动隐藏地址栏图标，并在鼠标悬停于地址栏时以从左右滑入的动画方式显示。
+* 新增 `uc.flex.style-urlbar-center-text` (布尔值)，用于将地址栏文字居中显示。
+
+### 🛠️ 修复
+
+* 修复当 `uc.flex.style-urlbar` 设置为 `4` 时，Trust Panel 图标无法隐藏的问题。
+* 修复当 `uc.flex.style-tab-items` 设置为 `2` 时，Sidebery 底部按钮无法显示悬停高亮的问题。 (#31)
+* 修复在启用 `uc.flex.show-pin-tabs-separator-in-expanded-state` 时，鼠标悬停展开固定标签页分隔线会导致固定标签页发生偏移的问题。
+* 修复因 Firefox Nightly v148 的变更，导致侧栏切换按钮（Firefox 图标）以及查找栏按钮缺失背景颜色和悬停高亮的问题。 ([Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041))
 
 ## 🦊 v6.0.0 – 重大功能更新
 
@@ -218,12 +240,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * 新增 `uc.flex.style-toolbar-bgcolor`，切换导航栏与侧栏背景色（`1`–`2`）：
   * `1` = Tokyo Night 主题（默认，与旧版相同）
   * `2` = Firefox Acorn Design
-* 新增 `uc.flex.style-urlbar`，切换地址栏外观（`0`–`4`）：
-  * `0` = Flat（图标始终可见）
+* 新增 `uc.flex.style-urlbar`，切换地址栏外观（`1`–`4`）：
   * `1` = Flat（默认，与旧版相同）
-  * `2` = Inset（嵌入式外观，文字居中）
-  * `3` = Debossed（压印式外观，文字居中）
-  * `4` = Seamless（完全融入导航栏，文字居中）
+  * `2` = Inset（嵌入式外观）
+  * `3` = Debossed（凹陷式外观）
+  * `4` = Seamless（与导航栏完全融合的外观）
+* 新增 `uc.flex.style-urlbar-center-text`，将地址栏文字居中（默认值：`False`）。
 * 新增 `uc.flex.move-urlbar-popup-to-center`，将地址栏弹出窗口移至中央（`0`–`2`）：
   * `0` = 不移动（默认）
   * `1` = 聚焦时居中显示
@@ -379,8 +401,9 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 <details>  
 <summary>👻 <b>重大更新：自动隐藏工具栏图标及窗口控制按钮</b> <i>《点击展开》</i> 👇</summary>
 
-* 新增选项 `uc.flex.auto-hide-navbar-icons`，可将工具栏中的图标（包括导航栏、书签栏及菜单栏的工具项）默认隐藏，当鼠标悬停在工具栏上时才显示。此选项不影响地址栏或窗口控制按钮。
-* 新增选项 `uc.flex.auto-hide-window-controls`，可将窗口控制按钮（最小化、最大化、关闭）默认隐藏，仅在鼠标悬停在工具栏边缘时显示。
+* 新增选项 `uc.flex.auto-hide-navbar-icons`，用于隐藏工具栏中的图标（包括导航栏、书签栏及菜单栏的工具项），并在鼠标悬停时显示。此选项不影响地址栏或窗口控制按钮。
+* 新增选项 `uc.flex.auto-hide-urlbar-icons`，此选项默认启用，会自动隐藏地址栏图标，并在鼠标悬停于地址栏时以从左右滑入的动画方式显示。
+* 新增选项 `uc.flex.auto-hide-window-controls`，用于隐藏窗口控制按钮（最小化、最大化、关闭），并在鼠标悬停在导航栏边缘时显示。
 * 侧栏切换按钮（FlexFox 图标）通常始终可见。如果侧栏按钮未放在导航栏的最左或最右侧，或者 `uc.flex.style-sidebar-button` 设置为 `0`，该按钮也会跟随自动隐藏。
 * 你可以将以下变量从 `uc-variables.css` 复制到 `uc-user-settings.css` 中修改，以自定义动画的速度和效果：
 
@@ -557,6 +580,9 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <summary>💬 <b>历史更新</b></summary>
 
+**v6.0.1**
+- 修复了在将 Sidebery 的 **排列方式** 设置为 **默认** 以外选项时出现的布局与样式不一致问题。
+
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
 
@@ -616,9 +642,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 > [!IMPORTANT]
 >
 > 1. 安装 [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/)（可选，但推荐）。
-> 2. 请从项目的 **Releases** 页面下载最新发布版本的 FlexFox：
->    [https://github.com/yuuqilin/FlexFox/releases](https://github.com/yuuqilin/FlexFox/releases)
->    根据你所使用的 Firefox 版本选择对应的构建。
+> 2. 请从项目的 **[Releases](https://github.com/yuuqilin/FlexFox/releases)** 页面下载最新版本的 FlexFox。
 > 3. 打开 `about:support`，找到 **配置文件夹**，点击 **打开文件夹** 进入你的 Firefox 配置目录。
 > 4. 将下载包中 `scripts` 文件夹里的 `chrome` 文件夹与 `user.js` 文件复制到配置文件夹中。
 > 5. 使用文本编辑器打开 `user.js`，删除 `//` 注释以启用对应功能。
@@ -740,18 +764,19 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.add-ui-text-stroke` | `true` | 为界面文字添加粗描边，提高低分辨率屏幕下的可读性。 |
 | `uc.flex.fully-hide-sidebery` | `true` | 完全隐藏 Sidebery 和原生垂直标签页，将鼠标移至屏幕边缘时自动显示。 |
 | `uc.flex.fully-hide-toolbox` | `true` | 完全隐藏顶部所有工具栏（标签栏、导航栏、书签工具栏），将鼠标移至屏幕顶部时自动显示。 |
-| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏水平标签页。鼠标悬停在导航栏时显示。取值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 标签页显示在导航栏上方，`3` = 与 `2` 相同，但只在鼠标移动到屏幕顶部边缘时显示，以避免误触。 |
-| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏导航栏。鼠标悬停在水平标签页时显示导航栏。取值：`0` = 关闭，`1` = 开启。此选项优先级较高，如果同时启用 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`，会覆盖该选项的设置。 |
-| `uc.flex.auto-hide-navbar-icons` | `true` | 默认隐藏工具栏图标（包括导航栏、书签栏及菜单栏的工具项），鼠标悬停在工具栏上时显示。此选项不影响地址栏或窗口控制按钮。侧栏切换按钮（FlexFox 图标）通常始终可见，但当侧栏按钮未放在导航栏边缘，或 `uc.flex.style-sidebar-button` 设置为 `0` 时，也会跟随自动隐藏。 |
-| `uc.flex.auto-hide-window-controls` | `true` | 默认隐藏窗口控制按钮（最小化、最大化、关闭），鼠标悬停在工具栏边缘时显示。 |
+| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3`<br>(`0`) | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏水平标签页。鼠标悬停在导航栏时显示。取值：`0` = 关闭，`1` = 标签页显示在导航栏下方，`2` = 标签页显示在导航栏上方，`3` = 与 `2` 相同，但只在鼠标移动到屏幕顶部边缘时显示，以避免误触。 |
+| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1`<br>(`0`) | 在水平标签页模式下，当 Sidebery 非活动时自动隐藏导航栏。鼠标悬停在水平标签页时显示导航栏。取值：`0` = 关闭，`1` = 开启。此选项优先级较高，如果同时启用 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`，会覆盖该选项的设置。 |
+| `uc.flex.auto-hide-navbar-icons` | `true` | 隐藏工具栏中的图标（包括导航栏、书签栏及菜单栏的工具项），鼠标悬停在工具栏上时显示。此选项不影响地址栏或窗口控制按钮。侧栏切换按钮（FlexFox 图标）通常始终可见，但当侧栏按钮未放在导航栏边缘，或 `uc.flex.style-sidebar-button` 设置为 `0` 时，也会跟随自动隐藏。 |
+| `uc.flex.auto-hide-urlbar-icons` | `true` | 隐藏地址栏中的图标，并在鼠标悬停于地址栏时以从左右滑入的动画方式显示。此选项默认启用，如希望图标始终显示，请将其设置为 `false`。 |
+| `uc.flex.auto-hide-window-controls` | `true` | 隐藏窗口控制按钮（最小化、最大化、关闭），鼠标悬停在导航栏边缘时显示。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `true` | 允许 Firefox Color 等扩展修改工具栏的颜色（在未设置背景图时需要启用）。 |
-| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
+| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2`<br>(`0`) | 启用彩色书签文件夹图标。此选项为数值类型：`0` 表示关闭，`1` 使用第一组图标，`2` 使用第二组图标（并自动隐藏标签）。 |
 | `uc.flex.remove-bookmarks-folder-icons` | `true` | 移除书签文件夹的图标。 |
 | `uc.flex.remove-bookmarks-labels` | `true` | 移除书签文件夹的文字标签。 |
 | `uc.flex.show-flexfox-version-info-in-about-config` | `true` | 在 `about:config` 頁面顯示 FlexFox 已安裝的提示訊息，並附帶當前版本號。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | 在原生垂直标签页展开状态下显示固定标签页与普通标签页之间的分隔线。Firefox 默认只在悬停时显示，FlexFox 则始终显示。分隔线可拖动，用于调整固定标签页面板的高度。 |
 | `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | 在水平标签页中将关闭按钮与网站图标合并，以节省空间。鼠标悬停在图标上时显示关闭按钮。启用此选项后，会自动停用分页变窄时关闭按钮的自动缩小和移位功能。 |
-| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2` | 在“显示所有标签页”按钮上显示标签页总数。此选项为数值类型：`0` = 关闭，`1` = 显示所有标签页数量，`2` = 仅显示已加载标签页数量。 |
+| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2`<br>(`0`) | 在“显示所有标签页”按钮上显示标签页总数。此选项为数值类型：`0` = 关闭，`1` = 显示所有标签页数量，`2` = 仅显示已加载标签页数量。 |
 | `uc.flex.show-tab-number-in-tab-label` | `true` | 在每个标签文字前显示编号。在标签文字因空间不足而被截断时，可以更容易分辨不同的标签。 |
 
 #### 🚫 停用或还原选项
@@ -801,28 +826,29 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 #### 界面样式与外观
 | 配置选项 | 值 | 说明 |
 |----------|:------:|----------|
-| `uc.flex.style-all-tabs-button` | `0`-`2`<br>(`1`) | 设置“列出所有标签页”按钮的图标。取值：`0` = Firefox 默认图标，`1` = 筛选图标（默认，与旧版相同），`2` = V 形箭头图标。 |
-| `uc.flex.style-sidebar-button` | `0`-`4`<br>(`1`) | 切换侧栏切换按钮的图标。取值：`0` = Firefox 默认图标，`1` = Firefox 主品牌标志（默认，与旧版相同），`2` = Firefox 浏览器标志，`3` = Firefox System 1 标志，`4` = Mozilla 旗帜符号。 |
-| `uc.flex.style-sidebar-stripe-color` | `0`-`10`<br>(`0`) | 控制侧边栏彩带、侧边栏按钮（Firefox 图标）以及书签星标图标的颜色。在暗色模式下，还会应用到标签页边框、背景、高亮以及 Sidebery 导航图标。取值：`0` = Classic（默认，与旧版相同），`1` = Red，`2` = Orange，`3` = Yellow，`4` = Green，`5` = Cyan，`6` = Blue，`7` = Violet，`8` = Purple，`9` = Pink，`10` = Gray。 |
+| `uc.flex.style-all-tabs-button` | `0`-`2`<br>(`1`) | 设置“列出所有标签页”按钮的图标。取值：`0` = Firefox 默认图标，`1` = 筛选图标（默认），`2` = V 形箭头图标。 |
+| `uc.flex.style-sidebar-button` | `0`-`4`<br>(`1`) | 切换侧栏切换按钮的图标。取值：`0` = Firefox 默认图标，`1` = Firefox 主品牌标志（默认），`2` = Firefox 浏览器标志，`3` = Firefox System 1 标志，`4` = Mozilla 旗帜符号。 |
+| `uc.flex.style-sidebar-stripe-color` | `0`-`10`<br>(`0`) | 控制侧边栏彩带、侧边栏按钮（Firefox 图标）以及书签星标图标的颜色。在暗色模式下，还会应用到标签页边框、背景、高亮以及 Sidebery 导航图标。取值：`0` = Classic（默认），`1` = Red，`2` = Orange，`3` = Yellow，`4` = Green，`5` = Cyan，`6` = Blue，`7` = Violet，`8` = Purple，`9` = Pink，`10` = Gray。 |
 | `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` | `true` | 将侧边栏彩带颜色应用到所有图标。在暗色模式下，还会应用到地址栏和网页区域边框。即使启用 `uc.flex.revert-to-original-bookmark-star-icon`，此选项仍会覆盖 Firefox 默认的书签星标颜色。 |
 | `uc.flex.style-sidebar-stripe-color-use-gradient` | `true` | 根据 `uc.flex.style-sidebar-stripe-color` 所选颜色应用对应的渐变样式。渐变效果会作用于侧边栏彩带、侧边栏按钮图标（Firefox 图标）、书签星标以及书签文件夹图标。 |
 | `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | 设置 Sidebery 收起状态下显示的导航图标。取值：`0` = 使用当前活动面板图标（新默认值），`1` = Sidebery Logo，`2` = V 形箭头图标（旧默认值）。 |
 | `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `true` | 让导航图标使用当前活动面板所设置的颜色。 |
-| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | 切换导航栏和侧栏的背景颜色。取值：`1` = Tokyo Night 主题（默认，与旧版相同），`2` = Firefox Acorn Design。 |
-| `uc.flex.style-urlbar` | `0`-`4`<br>(`1`) | 自定义地址栏的外观。取值：`0` = 扁平（图标始终可见），`1` = 扁平（默认，与旧版相同），`2` = 嵌入式（嵌入导航栏，文字居中），`3` = 压印（凹陷效果，文字居中），`4` = 无缝（完全融入导航栏，文字居中）。 |
+| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | 切换导航栏和侧栏的背景颜色。取值：`1` = Tokyo Night 主题（默认），`2` = Firefox Acorn Design。 |
+| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | 自定义地址栏的外观。取值：`1` = 扁平（默认），`2` = 嵌入（嵌入式外观），`3` = 压印（凹陷式外观），`4` = 无缝（与导航栏完全融合的外观）。 |
+| `uc.flex.style-urlbar-center-text` | `true` | 将地址栏中的文字居中显示。 |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | 调整地址栏弹窗的位置。取值：`0` = 不居中（默认），`1` = 聚焦时居中显示，`2` = 仅在输入文字时居中显示。 |
-| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
-| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | 切换窗口控制按钮的图标。取值：`1` = 信号灯按钮（默认，与旧版相同），`2` = Yosemite 风格按钮，`3` = Yosemite GTK 主题。 |
+| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2`<br>(`0`) | 当地址栏展开下拉列表时使背景变暗。此选项接受数值 `0`（关闭）到 `2`，数值越大，背景越暗。 |
+| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | 切换窗口控制按钮的图标。取值：`1` = 信号灯按钮（默认），`2` = Yosemite 风格按钮，`3` = Yosemite GTK 主题。 |
 | `uc.flex.style-window-controls-shift-up` | `true` | 使窗口控制按钮略微上移。 |
 | `uc.flex.style-window-controls-shrink-size` | `true` | 缩小窗口控制按钮的整体尺寸。 |
 | `uc.flex.move-pip-volume-to-top` | `true` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
 | `uc.flex.move-window-controls-to-left` | `true` | 将窗口控制按钮移动到导航栏或水平标签栏的最左侧。 |
-| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | 设置垂直标签页的外观。取值：`1` = 固定标签页仅显示边框且无背景（默认，与旧版相同），`2` = 固定标签页仅显示背景且无边框。标签页具有平滑的悬停过渡动画，边框与高亮会使用侧边栏彩带颜色。 |
-| `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | 设置原生垂直标签页的标签页群组外观。取值：`0` = 树状布局，无展开/折叠指示图标，`1` = 树状布局，带三角指示图标（默认，与旧版相同），`2` = 盒子布局，带文件夹图标。 |
+| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | 设置垂直标签页的外观。取值：`1` = 固定标签页仅显示边框且无背景（默认），`2` = 固定标签页仅显示背景且无边框。标签页具有平滑的悬停过渡动画，边框与高亮会使用侧边栏彩带颜色。 |
+| `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | 设置原生垂直标签页的标签页群组外观。取值：`0` = 树状布局，无展开/折叠指示图标，`1` = 树状布局，带三角指示图标（默认），`2` = 盒子布局，带文件夹图标。 |
 | `uc.flex.style-tab-groups-add-transition` | `0`-`2`<br>(`2`) | 设置原生垂直标签页的标签页群组展开/折叠时的过渡动画和旋转指示图标效果。取值：`0` = 不启用动画，`1` = 启用展开/折叠动画，`2` = 启用动画 + 旋转指示图标（默认）。 |
 | `uc.flex.style-tab-groups-center-label-text` | `true` | 设置原生垂直标签页的标签页群组标签文字居中显示。 |
 | `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | 控制网页内容区域的边框。取值：`0` = 无边框（默认），`1` = 仅在 Tab Split View 中聚焦的网页内容上显示高亮边框，`2` = 在所有网页内容上显示边框。 |
-| `uc.flex.enable-rounded-web-content` | `0`-`2` | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
+| `uc.flex.enable-rounded-web-content` | `0`-`2`<br>(`0`) | 为网页内容区域添加边距、阴影和圆角效果。此选项为数值型，接受 `0`（关闭）到 `2`，数值越大，边距越宽。 |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | 当启用 `uc.flex.enable-rounded-web-content` 时，让网页内容在贴近 Sidebery 彩带的一角也显示圆角效果。 |
 | `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | 为地址栏弹出面板和各类菜单启用半透明和模糊背景。FlexFox 默认仅在启用 Mica 或自定义壁纸时才启用此效果，但使用此选项可在没有它们的情况下也启用。背景透明度可通过 `uc.flex.browser-mica-transparency-level` 调整，范围 `0`–`4`，数值越大越透明。 |
 

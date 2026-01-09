@@ -23,8 +23,30 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v6.0.1**
-- Fixed layout and styling inconsistencies in Sidebery when **Density** is set to values other than **Default**.
+## 🦊 v6.0.2
+
+### ⚠️ Breaking Changes
+
+* The `uc.flex.style-urlbar` option has been reworked, including changes to its value range and behavior.
+  * The value range has changed from `0`–`4` to `1`–`4`. The previous behavior of value `0` has been moved to a new option, `uc.flex.auto-hide-urlbar-icons`.
+  * The text-centering behavior previously included in values `2`–`4` has been separated into a new option, `uc.flex.style-urlbar-center-text`.
+  * The updated values now control the URL bar appearance only:
+    * `1` = Flat (default, same as before)
+    * `2` = Inset (embedded look)
+    * `3` = Debossed (pressed-in look)
+    * `4` = Seamless (fully merged into the navigation bar)
+
+### ✨ New
+
+* Added `uc.flex.auto-hide-urlbar-icons` (Boolean), enabled by default, which automatically hides URL bar icons and reveals them with a slide-in animation from both sides when hovering over the URL bar.
+* Added `uc.flex.style-urlbar-center-text` (Boolean) to center the URL bar text.
+
+### 🛠️ Fixed
+
+* Fixed an issue where the Trust Panel icon could not be hidden when `uc.flex.style-urlbar` was set to `4`.
+* Fixed an issue where Sidebery bottom buttons did not show hover highlights when `uc.flex.style-tab-items` was set to `2`. (#31)
+* Fixed an issue where pinned tabs shifted when expanding the pinned tabs separator on hover with `uc.flex.show-pin-tabs-separator-in-expanded-state` enabled.
+* Fixed missing background colors and hover highlights for the Sidebar Toggle Button (Firefox logo) and find bar buttons caused by changes in Firefox Nightly v148. ([Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041))
 
 <!-- END What's New -->
 
@@ -224,12 +246,12 @@ The following options are deprecated and no longer have any effect. Please remov
 * Added `uc.flex.style-toolbar-bgcolor` to change the background color of the navbar and sidebar (`1`–`2`):
   * `1` = Tokyo Night theme (default, same as before)
   * `2` = Firefox Acorn Design
-* Added `uc.flex.style-urlbar` to customize the URL bar appearance (`0`–`4`):
-  * `0` = Flat (icons are always visible)
+* Added `uc.flex.style-urlbar` to customize the URL bar appearance (`1`–`4`):
   * `1` = Flat (default, same as before)
-  * `2` = Inset (embedded look with centered text)
-  * `3` = Debossed (pressed-in look with centered text)
-  * `4` = Seamless (fully merged into the navbar, centered text)
+  * `2` = Inset (embedded look)
+  * `3` = Debossed (pressed-in look)
+  * `4` = Seamless (fully merged into the navigation bar)
+* Added `uc.flex.style-urlbar-center-text` to center the URL bar text (default: `False`).
 * Added `uc.flex.move-urlbar-popup-to-center` to reposition the URL bar popup (`0`–`2`):
   * `0` = Disabled (default)
   * `1` = Center when focused
@@ -385,8 +407,9 @@ The following options are deprecated and no longer have any effect. Please remov
 <details>  
 <summary>👻 <b>Major Update: Auto-Hide Toolbar Icons & Window Controls</b> <i>[Click to expand]</i> 👇</summary>
 
-* Added the `uc.flex.auto-hide-navbar-icons` option to hide toolbar item icons (including icons on the navigation bar, bookmarks toolbar, and menu bar) by default and reveal them on hover. This option does not affect the URL bar or window control buttons.
-* Added the `uc.flex.auto-hide-window-controls` option to hide window control buttons (minimize, maximize, close) by default and show them only when hovering at the edge of the toolbar.
+* Added the `uc.flex.auto-hide-navbar-icons` option to hide toolbar item icons (including icons on the navigation bar, bookmarks toolbar, and menu bar) and reveal them on hover. This option does not affect the URL bar or window control buttons.
+* Added the `uc.flex.auto-hide-urlbar-icons` option, enabled by default, which hides URL bar icons and reveals them with a slide-in animation from both sides when hovering over the URL bar.
+* Added the `uc.flex.auto-hide-window-controls` option to hide the window control buttons (minimize, maximize, close) and reveal them when hovering over the edge of the navigation bar.
 * The Sidebar toggle button (FlexFox logo) is normally always visible. If it is not placed at the far left or right edge of the navigation bar, or if `uc.flex.style-sidebar-button` is set to `0`, it will follow the auto-hide behavior.
 * You can adjust the animation timing and easing by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
 
@@ -567,6 +590,9 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 <!-- END Release Note -->
 
+**v6.0.1**
+- Fixed layout and styling inconsistencies in Sidebery when **Density** is set to values other than **Default**.
+
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))
 
@@ -624,9 +650,7 @@ For more update logs from earlier versions,
 > [!IMPORTANT]
 >
 > 1. Install [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) (optional but recommended).
-> 2. Download the latest FlexFox release from the project's **Releases** page:
->    [https://github.com/yuuqilin/FlexFox/releases](https://github.com/yuuqilin/FlexFox/releases)
->    Select the appropriate version for your Firefox edition.
+> 2. Download the latest FlexFox release from the project's **[Releases](https://github.com/yuuqilin/FlexFox/releases)** page.
 > 3. Open `about:support`, find **Profile Folder**, and click **Open Folder** to access your Firefox profile directory.
 > 4. Copy the `chrome` folder and the `user.js` file from the `scripts` directory into your Firefox profile folder.
 > 5. Open `user.js` in a text editor and remove `//` comment markers to enable additional features.
@@ -745,18 +769,19 @@ For more update logs from earlier versions,
 | `uc.flex.add-ui-text-stroke` | `true` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
 | `uc.flex.fully-hide-sidebery` | `true` | Fully hides Sidebery and native vertical tabs. They reappear when the cursor moves to the screen edge. |
 | `uc.flex.fully-hide-toolbox` | `true` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
-| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3` | Automatically hide horizontal tabs in horizontal tab mode when Sidebery is inactive. Hovering over the navbar shows the tabs. Values: `0` = disabled, `1` = tabs shown below the navbar, `2` = tabs shown above the navbar, `3` = same as `2` but shows only when the cursor reaches the top edge of the screen to avoid accidental triggers. |
-| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | Automatically hide the navbar in horizontal tab mode when Sidebery is inactive. Hovering over the horizontal tabs shows the navbar. Values: `0` = disabled, `1` = enabled. This option has higher priority; if enabled together with `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`, it overrides that option. |
-| `uc.flex.auto-hide-navbar-icons` | `true` | Hides toolbar item icons (including icons on the navigation bar, bookmarks toolbar, and menu bar) by default. They reappear when hovering over the toolbar. This option does not affect the URL bar or window control buttons. The sidebar button (FlexFox logo) is normally always visible, but if it is not placed at the edge of the navigation bar, or if `uc.flex.style-sidebar-button` is set to `0`, it will also follow the auto-hide behavior. |
-| `uc.flex.auto-hide-window-controls` | `true` | Hides the window control buttons (minimize, maximize, close) by default. They reappear when hovering over the edge of the toolbar. |
+| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3`<br>(`0`) | Automatically hide horizontal tabs in horizontal tab mode when Sidebery is inactive. Hovering over the navbar shows the tabs. Values: `0` = disabled, `1` = tabs shown below the navbar, `2` = tabs shown above the navbar, `3` = same as `2` but shows only when the cursor reaches the top edge of the screen to avoid accidental triggers. |
+| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1`<br>(`0`) | Automatically hide the navbar in horizontal tab mode when Sidebery is inactive. Hovering over the horizontal tabs shows the navbar. Values: `0` = disabled, `1` = enabled. This option has higher priority; if enabled together with `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`, it overrides that option. |
+| `uc.flex.auto-hide-navbar-icons` | `true` | Hides toolbar item icons (including icons on the navigation bar, bookmarks toolbar, and menu bar). They reappear when hovering over the toolbar. This option does not affect the URL bar or window control buttons. The sidebar button (FlexFox logo) is normally always visible, but if it is not placed at the edge of the navigation bar, or if `uc.flex.style-sidebar-button` is set to `0`, it will also follow the auto-hide behavior. |
+| `uc.flex.auto-hide-urlbar-icons` | `true` | Hides URL bar icons and reveals them with a slide-in animation from both sides when hovering over the URL bar. Enabled by default; set to `false` to keep icons always visible. |
+| `uc.flex.auto-hide-window-controls` | `true` | Hides the window control buttons (minimize, maximize, close) and reveals them when hovering over the edge of the navigation bar. |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `true` | Allows toolbar colors set by extensions like Firefox Color to take effect, especially when no background image is selected. |
-| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | Enables colored icons for bookmark folders. This numeric setting accepts `0` (disabled), `1` (uses the first icon set), or `2` (uses the second icon set, with labels automatically hidden). |
+| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2`<br>(`0`) | Enables colored icons for bookmark folders. This numeric setting accepts `0` (disabled), `1` (uses the first icon set), or `2` (uses the second icon set, with labels automatically hidden). |
 | `uc.flex.remove-bookmarks-folder-icons` | `true` | Removes folder icons from bookmarks. |
 | `uc.flex.remove-bookmarks-labels` | `true` | Removes text labels from bookmark folders. |
 | `uc.flex.show-flexfox-version-info-in-about-config` | `true` | Shows a confirmation message in the `about:config` page indicating that FlexFox is installed, along with the current version number. |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | Restores the separator between pinned and regular tabs in the native vertical tabs when expanded. Unlike Firefox, which hides it until hovered, FlexFox always keeps it visible. The separator can be dragged to resize the pinned tabs panel. |
 | `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | Merges the close button with the favicon in horizontal tabs to save space. The button appears when hovering over the favicon. Enabling this option automatically disables the close button's auto-shrink-and-reposition feature when tabs become narrow. |
-| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2` | Shows the total number of open tabs on the "List All Tabs" button. Values: `0` = Off, `1` = Show count of all tabs, `2` = Show count of loaded tabs only. |
+| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2`<br>(`0`) | Shows the total number of open tabs on the "List All Tabs" button. Values: `0` = Off, `1` = Show count of all tabs, `2` = Show count of loaded tabs only. |
 | `uc.flex.show-tab-number-in-tab-label` | `true` | Shows a numeric index before each tab's label text. This can make it easier to distinguish tabs when the label text is truncated due to limited space. |
 
 #### 🚫 Disable or Revert Features
@@ -806,28 +831,29 @@ For more update logs from earlier versions,
 #### 🎨 UI Style & Appearance
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.style-all-tabs-button` | `0`-`2`<br>(`1`) | Sets the icon for the “List All Tabs” button. Values: `0` = Firefox default icon, `1` = Filter (default, same as previous versions), `2` = Chevron. |
-| `uc.flex.style-sidebar-button` | `0`-`4`<br>(`1`) | Switches the sidebar toggle icon. Values: `0` = Firefox default icon, `1` = Firefox Master Brand Logo (default, same as before), `2` = Firefox Browser Logo, `3` = Firefox System 1 Logo, `4` = Mozilla Flag Symbol. |
-| `uc.flex.style-sidebar-stripe-color` | `0`-`10`<br>(`0`) | Controls the color of the sidebar stripe, sidebar button (Firefox logo), and the bookmark star icon. In Dark Mode, it also applies to tab borders, backgrounds, highlights, and the Sidebery navigation icon. Values: `0` = Classic (default, same as previous versions), `1` = Red, `2` = Orange, `3` = Yellow, `4` = Green, `5` = Cyan, `6` = Blue, `7` = Violet, `8` = Purple, `9` = Pink, `10` = Gray. |
+| `uc.flex.style-all-tabs-button` | `0`-`2`<br>(`1`) | Sets the icon for the “List All Tabs” button. Values: `0` = Firefox default icon, `1` = Filter (default), `2` = Chevron. |
+| `uc.flex.style-sidebar-button` | `0`-`4`<br>(`1`) | Switches the sidebar toggle icon. Values: `0` = Firefox default icon, `1` = Firefox Master Brand Logo (default), `2` = Firefox Browser Logo, `3` = Firefox System 1 Logo, `4` = Mozilla Flag Symbol. |
+| `uc.flex.style-sidebar-stripe-color` | `0`-`10`<br>(`0`) | Controls the color of the sidebar stripe, sidebar button (Firefox logo), and the bookmark star icon. In Dark Mode, it also applies to tab borders, backgrounds, highlights, and the Sidebery navigation icon. Values: `0` = Classic (default), `1` = Red, `2` = Orange, `3` = Yellow, `4` = Green, `5` = Cyan, `6` = Blue, `7` = Violet, `8` = Purple, `9` = Pink, `10` = Gray. |
 | `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` | `true` | Applies the sidebar stripe color to all icons. In Dark Mode, it also applies to URL bar and web area borders. This option also overrides Firefox's default bookmark star color even when `uc.flex.revert-to-original-bookmark-star-icon` is enabled. |
 | `uc.flex.style-sidebar-stripe-color-use-gradient` | `true` | Applies a gradient variant based on the color selected in `uc.flex.style-sidebar-stripe-color`. The gradient is applied to the sidebar stripe, sidebar button icon (Firefox logo), bookmark star icon, and bookmark folder icons. |
 | `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | Sets the navigation icon shown when Sidebery is collapsed. Values: `0` = Use active panel icon (new default), `1` = Sidebery Logo, `2` = Chevron (previous default). |
 | `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `true` | Uses the color defined by the current active panel for the navigation icon. |
-| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | Changes the background color of the navbar and sidebar. Values: `1` = Tokyo Night theme (default, same as before), `2` = Firefox Acorn Design. |
-| `uc.flex.style-urlbar` | `0`-`4`<br>(`1`) | Customizes the appearance of the URL bar. Values: `0` = Flat (icons are always visible), `1` = Flat (default, same as before), `2` = Inset (embedded look with centered text), `3` = Debossed (pressed-in look with centered text), `4` = Seamless (fully merged into the navbar, centered text). |
+| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | Changes the background color of the navbar and sidebar. Values: `1` = Tokyo Night theme (default), `2` = Firefox Acorn Design. |
+| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | Customizes the appearance of the URL bar. Values: `1` = Flat (default), `2` = Inset (embedded look), `3` = Debossed (pressed-in look), `4` = Seamless (fully merged into the navigation bar). |
+| `uc.flex.style-urlbar-center-text` | `true` | Centers the text in the URL bar. |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | Repositions the URL bar popup. Values: `0` = Disabled (default), `1` = Center when focused, `2` = Center only when typing. |
-| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
-| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | Switches the window control icons. Values: `1` = Traffic Light Buttons (default, same as before), `2` = Yosemite Window Buttons, `3` = Yosemite GTK Theme. |
+| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2`<br>(`0`) | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
+| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | Switches the window control icons. Values: `1` = Traffic Light Buttons (default), `2` = Yosemite Window Buttons, `3` = Yosemite GTK Theme. |
 | `uc.flex.style-window-controls-shift-up` | `true` | Slightly raises the position of the window controls. |
 | `uc.flex.style-window-controls-shrink-size` | `true` | Reduces the overall size of the window controls. |
 | `uc.flex.move-window-controls-to-left` | `true` | Moves the window controls to the left edge of the navbar or horizontal tab bar. |
 | `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
-| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | Sets the appearance of vertical tab items. Values: `1` = Pinned tabs use borders only with no background (default, same as previous versions), `2` = Pinned tabs use background only with no borders; tabs include smooth hover transition animations, and their tab borders and highlights match the sidebar stripe color. |
-| `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | Sets the appearance of native vertical tab groups. Values: `0` = Tree layout, no expand/collapse indicator, `1` = Tree layout with triangle indicator (default, same as previous versions), `2` = Box layout with folder icon. |
+| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | Sets the appearance of vertical tab items. Values: `1` = Pinned tabs use borders only with no background (default), `2` = Pinned tabs use background only with no borders; tabs include smooth hover transition animations, and their tab borders and highlights match the sidebar stripe color. |
+| `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | Sets the appearance of native vertical tab groups. Values: `0` = Tree layout, no expand/collapse indicator, `1` = Tree layout with triangle indicator (default), `2` = Box layout with folder icon. |
 | `uc.flex.style-tab-groups-add-transition` | `0`-`2`<br>(`2`) | Sets the expand/collapse transition and rotating indicator animation for native vertical tab groups. Values: `0` = No transition, `1` = Enable expand/collapse transition, `2` = Enable transition + rotating indicator (default). |
 | `uc.flex.style-tab-groups-center-label-text` | `true` | Centers the label text of native vertical tab groups. |
 | `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | Controls the outline of the web content area. Values: `0` = No outline (default), `1` = Shows a highlighted outline only on the focused web content panel in Tab Split View, `2` = Shows an outline on all web content panels. |
-| `uc.flex.enable-rounded-web-content` | `0`-`2` | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
+| `uc.flex.enable-rounded-web-content` | `0`-`2`<br>(`0`) | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | When `uc.flex.enable-rounded-web-content` is enabled, also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe. |
 | `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | Enables a translucent and blurred background for the URL bar popup and various menus. FlexFox normally enables this effect only when Mica or a custom wallpaper is active, but this option allows it to be enabled even without them. The transparency level of the background can be adjusted using `uc.flex.browser-mica-transparency-level` (range `0`–`4`, higher values are more transparent). |
 

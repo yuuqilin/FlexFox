@@ -316,14 +316,14 @@ findbar checkbox:hover {
 findbar checkbox:active {
     background-color: var(--button-background-color-active, var(--button-active-bgcolor));
 }
-findbar checkbox[checked="true"] {
+findbar checkbox[checked] {
     color: var(--button-text-color-primary, var(--button-primary-color));
     background-color: var(--color-accent-primary, var(--button-primary-bgcolor));
 }
-findbar checkbox[checked="true"]:hover {
+findbar checkbox[checked]:hover {
     background-color: var(--color-accent-primary-hover, var(--button-primary-hover-bgcolor));
 }
-findbar checkbox[checked="true"]:active {
+findbar checkbox[checked]:active {
     background-color: var(--color-accent-primary-active, var(--button-primary-active-bgcolor));
 }
 findbar checkbox:focus-visible {

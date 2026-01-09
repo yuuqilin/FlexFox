@@ -291,7 +291,7 @@
 
     /* !TEMPORARY: This rule is still needed in v140+, as the issue wasn't fully fixed. 
    If Firefox addresses this properly in a future update, this rule can be removed. */
-    menupopup:not(.in-menulist, [aria-label]) > menuitem[checked="true"] {
+    menupopup:not(.in-menulist, [aria-label]) > menuitem:is([checked=""], [checked="true"]) {
         > .menu-icon {
             list-style-image: none !important;
             display: none !important;
@@ -347,11 +347,11 @@
     }
     #context-showonlythisframe,
     #context-media-showcontrols,
-    #toolbar-context-always-open-downloads-panel:not([checked="true"]) {
+    #toolbar-context-always-open-downloads-panel:not([checked]) {
         background-image: url("../icons/menu/password.svg");
     }
     #context-media-hidecontrols,
-    #toolbar-context-autohide-downloads-button:not([checked="true"]) {
+    #toolbar-context-autohide-downloads-button:not([checked]) {
         background-image: url("../icons/menu/password-hide.svg");
     }
 
@@ -680,7 +680,7 @@
     #repair-text-encoding {
         background-image: url("chrome://browser/skin/characterEncoding.svg");
     }
-    #fullScreenItem:not([checked="true"]) {
+    #fullScreenItem:not([checked]) {
         background-image: url("chrome://browser/skin/fullscreen.svg");
     }
     #menu_readerModeItem {
@@ -970,7 +970,7 @@
         padding-inline-start: 1em !important;
     }
     */
-    #context-video-pictureinpicture:not([checked="true"]) {
+    #context-video-pictureinpicture:not([checked]) {
         background-image: url("chrome://global/skin/media/picture-in-picture-open.svg");
     }
     #spell-dictionaries {

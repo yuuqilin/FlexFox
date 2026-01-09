@@ -23,8 +23,30 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v6.0.1**
-- Sidebery の **密度** を **デフォルト** 以外に設定した際に発生していたレイアウトや表示の不整合を修正しました。
+## 🦊 v6.0.2
+
+### ⚠️ 互換性のない変更
+
+* `uc.flex.style-urlbar` オプションの値の範囲および動作仕様を変更しました。
+  * 値の範囲を従来の `0`～`4` から `1`～`4` に変更しました。値 `0` が持っていた機能は、新しいオプション `uc.flex.auto-hide-urlbar-icons` に分離されています。
+  * 値 `2`～`4` に含まれていたテキスト中央揃えの機能は、新しいオプション `uc.flex.style-urlbar-center-text` に分離されました。
+  * 変更後の値は、URL バーの外観のみを制御します。
+    * `1` = Flat（既定、従来と同じ）
+    * `2` = Inset（バーが埋め込まれたデザイン）
+    * `3` = Debossed（凹んだデザイン）
+    * `4` = Seamless（ナビゲーションバーと一体化したデザイン）
+
+### ✨ 新機能
+
+* `uc.flex.auto-hide-urlbar-icons` (Boolean) を追加しました。既定で有効で、アドレスバーのアイコンを自動的に非表示にし、アドレスバーにカーソルを合わせると左右からスライドするアニメーションで表示されます。
+* `uc.flex.style-urlbar-center-text` (Boolean) を追加しました。URL バーのテキストを中央揃えにします。
+
+### 🛠️ 修正
+
+* `uc.flex.style-urlbar` を `4` に設定した場合に、Trust Panel アイコンが非表示にならない問題を修正しました。
+* `uc.flex.style-tab-items` を `2` に設定した場合に、Sidebery の下部ボタンでホバー時のハイライトが表示されない問題を修正しました。 (#31)
+* `uc.flex.show-pin-tabs-separator-in-expanded-state` が有効な場合に、ピン留めタブの区切り線をカーソルで展開するとピン留めタブがずれる問題を修正しました。
+* Firefox Nightly v148 の変更により、サイドバートグルボタン（Firefox ロゴ）および検索バーのボタンで背景色とホバー時のハイライトが表示されなくなる問題を修正しました。 ([Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041))
 
 ## 🦊 v6.0.0 – 主要機能アップデート
 
@@ -222,12 +244,12 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * `uc.flex.style-toolbar-bgcolor` を追加。ナビゲーションバーとサイドバーの背景色を変更可能 (`1`～`2`)。
   * `1` = Tokyo Night テーマ（既定、従来と同じ）
   * `2` = Firefox Acorn Design
-* `uc.flex.style-urlbar` を追加。URLバーの外観を切り替え可能 (`0`～`4`)。
-  * `0` = Flat（アイコンは常に表示）
+* `uc.flex.style-urlbar` を追加。URLバーの外観を切り替え可能（`1`～`4`）：
   * `1` = Flat（既定、従来と同じ）
-  * `2` = Inset（バーが埋め込まれたデザイン、中央揃えの文字）
-  * `3` = Debossed（凹んだデザイン、中央揃えの文字）
-  * `4` = Seamless（ナビゲーションバーと完全に一体化、中央揃えの文字）
+  * `2` = Inset（バーが埋め込まれたデザイン）
+  * `3` = Debossed（凹んだデザイン）
+  * `4` = Seamless（ナビゲーションバーと一体化したデザイン）
+* `uc.flex.style-urlbar-center-text` を追加し、URLバーの文字を中央揃えにします（既定値: `False`）。
 * `uc.flex.move-urlbar-popup-to-center` を追加。URLバーのポップアップ位置を調整 (`0`～`2`)。
   * `0` = 無効（既定）
   * `1` = フォーカス時に中央へ移動
@@ -383,8 +405,9 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 <details>  
 <summary>👻 <b>新機能：ツールバーのアイコンとウィンドウ操作ボタンを自動で非表示</b> <i>《クリックで展開》</i> 👇</summary>
 
-* `uc.flex.auto-hide-navbar-icons` オプションを追加しました。このオプションを有効にすると、ツールバー上のアイコン（ナビゲーションバー、ブックマークツールバー、メニューバーのアイテムを含む）が既定で非表示になり、ホバー時に表示されます。URLバーやウィンドウ操作ボタンには影響しません。
-* `uc.flex.auto-hide-window-controls` オプションを追加しました。このオプションを有効にすると、ウィンドウ操作ボタン（最小化・最大化・閉じる）が既定で非表示になり、ツールバーの端にカーソルを合わせたときのみ表示されます。
+* `uc.flex.auto-hide-navbar-icons` オプションを追加しました。ツールバー上のアイコン（ナビゲーションバー、ブックマークツールバー、メニューバーのアイテムを含む）を非表示にし、ホバー時に表示されます。URLバーやウィンドウ操作ボタンには影響しません。
+* `uc.flex.auto-hide-urlbar-icons` オプションを追加しました。既定で有効になっており、アドレスバー内のアイコンを自動的に非表示にし、カーソルを合わせると左右からスライドするアニメーションで表示されます。
+* `uc.flex.auto-hide-window-controls` オプションを追加しました。ウィンドウ操作ボタン（最小化・最大化・閉じる）を非表示にし、ナビゲーションバーの端にカーソルを合わせると表示されます。
 * サイドバー切り替えボタン（FlexFoxロゴ）は通常常に表示されます。ナビゲーションバーの端（最左端または最右端）に配置されていない場合、または `uc.flex.style-sidebar-button` が `0` に設定されている場合、このボタンも自動非表示の対象となります。
 * アニメーションの速度やイージングは、`uc-variables.css` の以下の変数を `uc-user-settings.css` にコピーして調整できます：
 
@@ -563,6 +586,9 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 <summary>💬 <b>過去の更新</b></summary>
 
+**v6.0.1**
+- Sidebery の **密度** を **デフォルト** 以外に設定した際に発生していたレイアウトや表示の不整合を修正しました。
+
 以前のバージョンの更新履歴については  
 👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。
 
@@ -620,9 +646,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 > [!IMPORTANT]
 >
 > 1. [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) をインストール（推奨）。
-> 2. プロジェクトの **Releases** ページから最新の FlexFox をダウンロードしてください：
->    [https://github.com/yuuqilin/FlexFox/releases](https://github.com/yuuqilin/FlexFox/releases)
->    使用中の Firefox の種類に合ったバージョンを選択してください。
+> 2. プロジェクトの **[Releases](https://github.com/yuuqilin/FlexFox/releases)** ページから最新の FlexFox をダウンロードしてください。
 > 3. `about:support` を開き、「プロファイルフォルダー」の「フォルダーを開く」をクリックします。
 > 4. ダウンロードしたアーカイブの `scripts` フォルダから、`chrome` フォルダと `user.js` をプロファイルフォルダへコピーします。
 > 5. テキストエディタで `user.js` を開き、有効にしたい機能の `//` コメントを外します。
@@ -739,18 +763,19 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.add-ui-text-stroke` | `true` | UIテキストに太めのアウトラインを追加し、特に低解像度の画面での視認性を向上させます。 |
 | `uc.flex.fully-hide-sidebery` | `true` | Sidebery とネイティブの縦型タブを完全に非表示にします。マウスカーソルを画面端に移動すると再表示されます。 |
 | `uc.flex.fully-hide-toolbox` | `true` | 上部のすべてのツールバー（水平タブバー、ナビゲーションバー、ブックマークツールバー）を完全に非表示にします。マウスカーソルを画面上端に移動すると再表示されます。 |
-| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3` | 水平タブモードで、Sidebery が非アクティブ時に水平タブを自動で非表示にします。ナビゲーションバーにカーソルを合わせるとタブが表示されます。値：`0` = 無効、`1` = ナビゲーションバー下に表示、`2` = ナビゲーションバー上に表示、`3` = `2` と同じですが、画面最上部にカーソルが届いた時のみ表示され、誤表示を防ぎます。 |
-| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1` | 水平タブモードで、Sidebery が非アクティブ時にナビゲーションバーを自動で非表示にします。水平タブにカーソルを合わせるとナビゲーションバーが表示されます。値：`0` = 無効、`1` = 有効。このオプションは優先度が高く、`uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` と同時に有効にした場合、そちらを上書きします。 |
-| `uc.flex.auto-hide-navbar-icons` | `true` | ツールバーのアイコン（ナビゲーションバー、ブックマークツールバー、メニューバーのアイテムを含む）を既定で非表示にし、ツールバーにカーソルを合わせると再表示されます。このオプションは URL バーやウィンドウ操作ボタンには影響しません。サイドバー切り替えボタン（FlexFoxロゴ）は通常常に表示されますが、ナビゲーションバーの端に配置されていない場合、または `uc.flex.style-sidebar-button` が `0` に設定されている場合は自動非表示の対象となります。 |
-| `uc.flex.auto-hide-window-controls` | `true` | ウィンドウ操作ボタン（最小化・最大化・閉じる）を既定で非表示にし、ツールバーの端にカーソルを合わせると再表示されます。 |
+| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3`<br>(`0`) | 水平タブモードで、Sidebery が非アクティブ時に水平タブを自動で非表示にします。ナビゲーションバーにカーソルを合わせるとタブが表示されます。値：`0` = 無効、`1` = ナビゲーションバー下に表示、`2` = ナビゲーションバー上に表示、`3` = `2` と同じですが、画面最上部にカーソルが届いた時のみ表示され、誤表示を防ぎます。 |
+| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1`<br>(`0`) | 水平タブモードで、Sidebery が非アクティブ時にナビゲーションバーを自動で非表示にします。水平タブにカーソルを合わせるとナビゲーションバーが表示されます。値：`0` = 無効、`1` = 有効。このオプションは優先度が高く、`uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` と同時に有効にした場合、そちらを上書きします。 |
+| `uc.flex.auto-hide-navbar-icons` | `true` | ツールバーのアイコン（ナビゲーションバー、ブックマークツールバー、メニューバーのアイテムを含む）を非表示にし、ツールバーにカーソルを合わせると再表示されます。このオプションは URL バーやウィンドウ操作ボタンには影響しません。サイドバー切り替えボタン（FlexFox ロゴ）は通常常に表示されますが、ナビゲーションバーの端に配置されていない場合、または `uc.flex.style-sidebar-button` が `0` に設定されている場合は、自動非表示の対象となります。 |
+| `uc.flex.auto-hide-urlbar-icons` | `true` | アドレスバー内のアイコンを非表示にし、アドレスバーにカーソルを合わせると左右からスライドするアニメーションで表示します。既定で有効で、常に表示したい場合は `false` に設定してください。 |
+| `uc.flex.auto-hide-window-controls` | `true` | ウィンドウ操作ボタン（最小化・最大化・閉じる）を非表示にし、ナビゲーションバーの端にカーソルを合わせると再表示されます。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `true` | Firefox Color などの拡張機能によるツールバーの色の変更を有効にします（背景画像が設定されていない場合に必要です）。 |
-| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2` | ブックマークフォルダーのアイコンをカラー表示にします。数値で設定でき、`0` は無効、`1` は第1セットのアイコンを使用、`2` は第2セットのアイコンを使用し、ラベルは自動的に非表示になります。 |
+| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2`<br>(`0`) | ブックマークフォルダーのアイコンをカラー表示にします。数値で設定でき、`0` は無効、`1` は第1セットのアイコンを使用、`2` は第2セットのアイコンを使用し、ラベルは自動的に非表示になります。 |
 | `uc.flex.remove-bookmarks-folder-icons` | `true` | ブックマークフォルダーのアイコンを非表示にします。 |
 | `uc.flex.remove-bookmarks-labels` | `true` | ブックマークフォルダーのラベル（テキスト）を非表示にします。 |
 | `uc.flex.show-flexfox-version-info-in-about-config` | `true` | `about:config` ページに FlexFox のインストール確認メッセージと現在のバージョン番号を表示します。 |
 | `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | ネイティブ垂直タブの展開状態で、固定タブと通常タブの間に区切り線を表示します。Firefox では通常ホバー時のみ表示されますが、FlexFox では常に表示され、この区切り線をドラッグして固定タブパネルの高さを調整できます。 |
 | `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | 水平タブで閉じるボタンをファビコンと統合してスペースを節約します。ファビコンにカーソルを合わせるとボタンが表示されます。有効化すると、タブが狭くなったときの閉じるボタンの自動縮小・移動機能は自動的に停止します。 |
-| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2` | 「すべてのタブを一覧表示」ボタンにタブの総数を表示します。数値で設定でき、`0` は無効、`1` はすべてのタブ数を表示、`2` は読み込み済みタブのみ表示です。 |
+| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2`<br>(`0`) | 「すべてのタブを一覧表示」ボタンにタブの総数を表示します。数値で設定でき、`0` は無効、`1` はすべてのタブ数を表示、`2` は読み込み済みタブのみ表示です。 |
 | `uc.flex.show-tab-number-in-tab-label` | `true` | 各タブラベルの前に番号を表示します。ラベルの文字が狭いスペースで省略される場合でも、タブを見分けやすくなります。 |
 
 #### 🚫 機能を無効化・元に戻すオプション
@@ -800,28 +825,29 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 #### 🎨 UIのスタイルと外観
 | 設定名 | 値 | 説明 |
 |--------|:------:|--------|
-| `uc.flex.style-all-tabs-button` | `0`-`2`<br>(`1`) | 「すべてのタブを表示」ボタンのアイコンを設定します。値：`0` = Firefox デフォルトアイコン、`1` = フィルター（デフォルト／従来と同じ）、`2` = シェブロン。 |
-| `uc.flex.style-sidebar-button` | `0`-`4`<br>(`1`) | サイドバー切り替えボタンのアイコンを変更します。値：`0` = Firefox デフォルトのアイコン、`1` = Firefox マスターブランドロゴ（デフォルト、従来と同じ）、`2` = Firefox ブラウザロゴ、`3` = Firefox System 1 ロゴ、`4` = Mozilla フラッグシンボル。 |
-| `uc.flex.style-sidebar-stripe-color` | `0`-`10`<br>(`0`) | サイドバーのストライプ、サイドバーボタン（Firefox ロゴ）、ブックマークスターアイコンの色を制御します。ダークモードでは、タブの枠線、背景、ハイライト、さらに Sidebery のナビゲーションアイコンにも適用されます。値：`0` = クラシック（デフォルト／従来と同じ）、`1` = レッド、`2` = オレンジ、`3` = イエロー、`4` = グリーン、`5` = シアン、`6` = ブルー、`7` = バイオレット、`8` = パープル、`9` = ピンク、`10` = グレー。 |
+| `uc.flex.style-all-tabs-button` | `0`-`2`<br>(`1`) | 「すべてのタブを表示」ボタンのアイコンを設定します。値：`0` = Firefox デフォルトアイコン、`1` = フィルター（デフォルト）、`2` = シェブロン。 |
+| `uc.flex.style-sidebar-button` | `0`-`4`<br>(`1`) | サイドバー切り替えボタンのアイコンを変更します。値：`0` = Firefox デフォルトのアイコン、`1` = Firefox マスターブランドロゴ（デフォルト）、`2` = Firefox ブラウザロゴ、`3` = Firefox System 1 ロゴ、`4` = Mozilla フラッグシンボル。 |
+| `uc.flex.style-sidebar-stripe-color` | `0`-`10`<br>(`0`) | サイドバーのストライプ、サイドバーボタン（Firefox ロゴ）、ブックマークスターアイコンの色を制御します。ダークモードでは、タブの枠線、背景、ハイライト、さらに Sidebery のナビゲーションアイコンにも適用されます。値：`0` = クラシック（デフォルト）、`1` = レッド、`2` = オレンジ、`3` = イエロー、`4` = グリーン、`5` = シアン、`6` = ブルー、`7` = バイオレット、`8` = パープル、`9` = ピンク、`10` = グレー。 |
 | `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` | `true` | サイドバーのストライプカラーをすべてのアイコンに適用します。ダークモードでは、アドレスバーや Web 領域の枠線にも適用されます。また、`uc.flex.revert-to-original-bookmark-star-icon` が有効な場合でも、Firefox デフォルトのブックマークスターの色を上書きします。 |
 | `uc.flex.style-sidebar-stripe-color-use-gradient` | `true` | `uc.flex.style-sidebar-stripe-color` で選択した色に基づいたグラデーション表現を適用します。サイドバーストライプ、サイドバーボタンアイコン（Firefox ロゴ）、ブックマークスターアイコン、ブックマークフォルダアイコンに適用されます。 |
 | `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | Sidebery が折りたたまれている時に表示されるナビゲーションアイコンを設定します。値：`0` = アクティブパネルのアイコンを使用（新しいデフォルト）、`1` = Sidebery ロゴ、`2` = シェブロン（以前のデフォルト）。 |
 | `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `true` | 現在のアクティブパネルの色をナビゲーションアイコンに適用します。 |
-| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | ナビゲーションバーとサイドバーの背景色を切り替えます。値：`1` = Tokyo Night テーマ（デフォルト、従来と同じ）、`2` = Firefox Acorn Design。 |
-| `uc.flex.style-urlbar` | `0`-`4`<br>(`1`) | URL バーの外観をカスタマイズします。値：`0` = フラット（アイコンは常に表示）、`1` = フラット（デフォルト、従来と同じ）、`2` = インセット（ナビゲーションバーに埋め込まれたような見た目、中央揃えのテキスト）、`3` = デボス（押し込まれたような見た目、中央揃えのテキスト）、`4` = シームレス（ナビゲーションバーに完全に溶け込む、中央揃えのテキスト）。 |
+| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | ナビゲーションバーとサイドバーの背景色を切り替えます。値：`1` = Tokyo Night テーマ（デフォルト）、`2` = Firefox Acorn Design。 |
+| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | URL バーの外観をカスタマイズします。値：`1` = フラット（デフォルト）、`2` = インセット（バーが埋め込まれたデザイン）、`3` = デボス（凹んだデザイン）、`4` = シームレス（ナビゲーションバーと一体化したデザイン）。 |
+| `uc.flex.style-urlbar-center-text` | `true` | URL バーの文字を中央揃えにします。 |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | URL バーのポップアップ位置を調整します。値：`0` = 無効（デフォルト）、`1` = フォーカス時に中央へ表示、`2` = 入力中のみ中央へ表示。 |
-| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2` | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
-| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | ウィンドウコントロールアイコンを切り替えます。値：`1` = トラフィックライトボタン（デフォルト、従来と同じ）、`2` = Yosemite ウィンドウボタン、`3` = Yosemite GTK テーマ。 |
+| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2`<br>(`0`) | URL バーのドロップダウンが表示されている間、背景を暗くします。数値で設定でき、`0` は無効、`1` ～ `2` は暗さの強さを示します。値が大きいほど暗くなります。 |
+| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | ウィンドウコントロールアイコンを切り替えます。値：`1` = トラフィックライトボタン（デフォルト）、`2` = Yosemite ウィンドウボタン、`3` = Yosemite GTK テーマ。 |
 | `uc.flex.style-window-controls-shift-up` | `true` | ウィンドウコントロールを少し上に移動します。 |
 | `uc.flex.style-window-controls-shrink-size` | `true` | ウィンドウコントロールのサイズを小さくします。 |
 | `uc.flex.move-window-controls-to-left` | `true` | ウィンドウコントロールをナビゲーションバーまたは水平タブバーの左端に移動します。 |
 | `uc.flex.move-pip-volume-to-top` | `true` | ピクチャ・イン・ピクチャ（PiP）ウィンドウ内の音量調整ボタンを上部に移動します。 |
-| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | 垂直のタブ項目の見た目を設定します。値：`1` = ピン留めタブは枠線のみで背景なし（デフォルト／従来と同じ）、`2` = ピン留めタブは背景のみで枠線なし。タブには滑らかなホバーアニメーションが適用され、枠線とハイライトはサイドバーストライプの色に一致します。 |
-| `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | 原生垂直タブのタブグループの見た目を設定します。値：`0` = ツリーレイアウト（展開/折りたたみインジケーターなし）、`1` = ツリーレイアウト（三角形のインジケーター付き、デフォルト／従来と同じ）、`2` = ボックスレイアウト（フォルダアイコン付き）。 |
+| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | 垂直のタブ項目の見た目を設定します。値：`1` = ピン留めタブは枠線のみで背景なし（デフォルト）、`2` = ピン留めタブは背景のみで枠線なし。タブには滑らかなホバーアニメーションが適用され、枠線とハイライトはサイドバーストライプの色に一致します。 |
+| `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | 原生垂直タブのタブグループの見た目を設定します。値：`0` = ツリーレイアウト（展開/折りたたみインジケーターなし）、`1` = ツリーレイアウト（三角形のインジケーター付き、デフォルト）、`2` = ボックスレイアウト（フォルダアイコン付き）。 |
 | `uc.flex.style-tab-groups-add-transition` | `0`-`2`<br>(`2`) | 原生垂直タブのタブグループの展開・折りたたみ時のトランジションと回転インジケーターのアニメーションを設定します。値：`0` = トランジションなし、`1` = 展開/折りたたみトランジションを有効化、`2` = トランジション + 回転インジケーター（デフォルト）。 |
 | `uc.flex.style-tab-groups-center-label-text` | `true` | 原生垂直タブのタブグループのラベルテキストを中央揃えにします。 |
 | `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | Web コンテンツ領域の枠線を調整します。値：`0` = 枠線なし（デフォルト）、`1` = Tab Split View でフォーカス中の Web コンテンツのみ強調枠線を表示、`2` = すべての Web コンテンツに枠線を表示。 |
-| `uc.flex.enable-rounded-web-content` | `0`-`2` | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
+| `uc.flex.enable-rounded-web-content` | `0`-`2`<br>(`0`) | Web コンテンツ領域にマージン、影、四隅の角丸を追加します。数値で設定でき、`0` は無効、`1` ～ `2` はマージンの大きさを調整します。値が大きいほどスペースが広がります。 |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | `uc.flex.enable-rounded-web-content` が有効な場合、Sidebery のカラーストライプに接する側の角にも角丸効果を適用します。 |
 | `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | URL バーのポップアップや各種メニューに半透明かつぼかしの背景を適用します。FlexFox では通常 Mica またはカスタム壁紙使用時にのみ有効ですが、このオプションを使うことでそれらなしでも適用できます。背景の透明度は `uc.flex.browser-mica-transparency-level` で調整可能で、値の範囲は `0`～`4`、大きいほど透明になります。 |
 

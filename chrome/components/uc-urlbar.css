@@ -29,37 +29,32 @@
 
 /* Glow outline when hovering over the unfocused urlbar */
 #urlbar:not(.megabar):not([focused]):not([breakout-extend]) {
-    @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4) {
-        .urlbar-input-container {
-            border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
-            transition: box-shadow 0.25s ease-out;
-        }
+    .urlbar-input-container {
+        border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
+        transition: box-shadow 0.25s ease-out;
     }
     &:hover {
-        outline: 1px solid var(--uc-urlbar-outline);
         :where(#urlbar-background, .urlbar-background) {
             box-shadow: none !important;
         }
-        @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4) {
-            outline: none;
+
+        .urlbar-input-container {
+            box-shadow:
+                0px 0px 5px -2px rgba(12, 12, 16, 0.8),
+                0 0 0 1px rgb(from var(--uc-urlbar-outline) r g b / 0.93) !important;
+        }
+        @media (prefers-color-scheme: dark) {
             .urlbar-input-container {
-                box-shadow:
-                    0px 0px 5px -2px rgba(12, 12, 16, 0.8),
-                    0 0 0 1px rgb(from var(--uc-urlbar-outline) r g b / 0.93) !important;
-            }
-            @media (prefers-color-scheme: dark) {
-                .urlbar-input-container {
-                    /*
+                /*
                     box-shadow:
                         0px 0px 8px rgb(from var(--uc-urlbar-outline) r g b / calc(alpha * 0.87)),
                         0 0 0 2px rgb(from var(--uc-urlbar-outline) r g b / calc(alpha * 0.97)) !important;
                     */
-                    box-shadow:
-                        0px 0px 8px
-                            color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 77%, white) 82%, transparent),
-                        0 0 0 2px
-                            color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 87%, white) 92%, transparent) !important;
-                }
+                box-shadow:
+                    0px 0px 8px
+                        color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 77%, white) 82%, transparent),
+                    0 0 0 2px
+                        color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 87%, white) 92%, transparent) !important;
             }
         }
     }
@@ -201,18 +196,14 @@
         --uc-urlbar-icon-radius,
         var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
     ) !important;
-    @media not -moz-pref("uc.flex.style-urlbar", 0) {
-        background-color: var(--uc-identity-btn-bgcolor) !important;
-        opacity: 0.8;
-    }
+    background-color: var(--uc-identity-btn-bgcolor) !important;
+    opacity: 0.8;
 }
 
 #identity-icon-box.identity-box-button:hover,
 #trust-icon-container:hover {
     cursor: pointer;
-    @media not -moz-pref("uc.flex.style-urlbar", 0) {
-        background-color: var(--identity-btn-hover-color, var(--urlbar-box-hover-bgcolor)) !important;
-    }
+    background-color: var(--identity-btn-hover-color, var(--urlbar-box-hover-bgcolor)) !important;
 }
 
 /* Track protection icon */
@@ -390,6 +381,7 @@
 
 /* Show URL buttons on Hover */
 /* !v143 */
+/*
 @media not (-moz-pref("uc.flex.style-urlbar", 0) or -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4)) {
     #nav-bar:not([customizing="true"]):not([customizing=""])
         > #nav-bar-customization-target
@@ -426,29 +418,36 @@
         transition: opacity var(--uc-hover-navbar-icons-duration) var(--uc-autohide-navbar-icons-type);
     }
 }
+*/
 
-/** 
- * When the web content is an extension page, #identity-box.extensionPage becomes visible.
- * In this case, we hide the trust icon to save space. As with similar cases elsewhere,
- * we define variables on the parent element and pass them to #trust-icon-container,
- * instead of directly styling the child inside :has(). This avoids unnecessary
- * performance costs from selector evaluation.
- */
+/* Hide the Trust Panel icon */
 @media -moz-pref("browser.urlbar.trustPanel.featureGate") {
-    .urlbar-input-container:has(> .extensionPage) {
-        --uc-trust-icon-margin-inline-start: calc(-19px - 2 * var(--urlbar-icon-padding));
-        --uc-trust-icon-bgcolor: transparent;
-        --uc-trust-icon-opacity: 0;
-    }
-    @media not -moz-pref("uc.flex.style-urlbar", 0) {
-        #trust-icon-container {
-            background-color: var(--uc-trust-icon-bgcolor, var(--uc-identity-btn-bgcolor)) !important;
+    .urlbar-input-container {
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
+            --uc-trust-icon-margin-inline-start: calc(-19px - 2 * var(--urlbar-icon-padding));
+            --uc-trust-icon-opacity: 0;
         }
+        /** 
+         * When the web content is an extension page, #identity-box.extensionPage becomes visible.
+         * In this case, we hide the trust icon to save space. As with similar cases elsewhere,
+         * we define variables on the parent element and pass them to #trust-icon-container,
+         * instead of directly styling the child inside :has(). This avoids unnecessary
+         * performance costs from selector evaluation.
+         */
+        &:has(> .extensionPage) {
+            --uc-trust-icon-margin-inline-start: calc(-19px - 2 * var(--urlbar-icon-padding));
+            --uc-trust-icon-bgcolor: transparent;
+            --uc-trust-icon-opacity: 0;
+        }
+    }
+    #trust-icon-container {
+        background-color: var(--uc-trust-icon-bgcolor, var(--uc-identity-btn-bgcolor)) !important;
     }
 }
 
-@media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) or -moz-pref("uc.flex.style-urlbar", 4) {
-    #urlbar:not([breakout][breakout-extend], [focused][usertyping]) {
+#urlbar:not([breakout][breakout-extend], [focused][usertyping]) {
+    /* Center the URL bar text */
+    @media -moz-pref("uc.flex.style-urlbar-center-text") {
         .urlbar-input {
             text-align: center !important;
             margin-bottom: 1px !important;
@@ -491,7 +490,10 @@
                 }
             }
         }
+    }
 
+    /* Hide URL bar icons */
+    @media not -moz-pref("uc.flex.auto-hide-urlbar-icons", false), -moz-pref("uc.flex.style-urlbar", 4) {
         #identity-permission-box,
         #notification-popup-box,
         #tracking-protection-icon-container {
@@ -513,7 +515,7 @@
             display: none;
         }
 
-        @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) {
+        @media not -moz-pref("uc.flex.style-urlbar", 4) {
             .urlbar-page-action:where(:not(#star-button-box, [open])) {
                 margin-inline-end: calc(-16px - 2 * var(--urlbar-icon-padding));
                 opacity: 0;
@@ -548,11 +550,11 @@
         }
 
         @media -moz-pref("uc.flex.style-urlbar", 4) {
-            &[open] :where(#identity-icon-box, #trust-icon-container),
-            &:hover :where(#identity-icon-box, #trust-icon-container),
-            :where(#identity-icon-box[open], #trust-icon-container[open]) {
-                opacity: 1;
-                margin-inline-start: 0 !important;
+            &[open] :is(#identity-icon-box, #trust-icon-container),
+            &:hover :is(#identity-icon-box, #trust-icon-container),
+            :is(#identity-icon-box[open], #trust-icon-container[open]) {
+                opacity: 0.8;
+                margin-inline-start: 3px !important;
             }
         }
 
@@ -571,7 +573,7 @@
             }
         }
 
-        @media -moz-pref("uc.flex.style-urlbar", 2) or -moz-pref("uc.flex.style-urlbar", 3) {
+        @media not -moz-pref("uc.flex.style-urlbar", 4) {
             &:-moz-window-inactive:hover .urlbar-page-action:not(#star-button-box),
             &:-moz-window-inactive:hover #identity-permission-box,
             &:-moz-window-inactive:hover #notification-popup-box {

@@ -13,15 +13,17 @@ user_pref("uc.flex.add-ui-text-stroke",                         false);
 user_pref("uc.flex.fully-hide-sidebery",                        false);
 /* Fully hides the top tab bar, navigation bar, and bookmarks toolbar. */
 user_pref("uc.flex.fully-hide-toolbox",                         false);
-/* Auto-hide tabs in horizontal tab mode when Sidebery is inactive; 
+/* Auto-hides tabs in horizontal tab mode when Sidebery is inactive; 
    0 = off, 1 = below navbar, 2 = above navbar */
 user_pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar",      0);
-/* Auto-hide navbar in horizontal tab mode when Sidebery is inactive; 
+/* Auto-hides navbar in horizontal tab mode when Sidebery is inactive; 
    0 = off, 1 = on; overrides horizontal tabs setting if both enabled */
 user_pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs",      0);
 /* Auto-hides navigation bar icons until the cursor hovers over the toolbar. */
 user_pref("uc.flex.auto-hide-navbar-icons",                     false);
-/* Hide navigation bar window controls (minimize, maximize, close); show on navigation bar edge hover. */
+/* Auto-hides URL bar icons and reveals them with a slide-in animation on hover. */
+user_pref("uc.flex.auto-hide-urlbar-icons",                      true);
+/* Auto-hides the window control buttons (minimize, maximize, close) and shows them on navigation bar edge hover. */
 user_pref("uc.flex.auto-hide-window-controls",                  false);
 /* Allows toolbar colors from extensions like Firefox Color to apply when no background image is set. */
 user_pref("uc.flex.allow-addons-to-change-toolbar-color",       false);
@@ -147,10 +149,12 @@ user_pref("uc.flex.style-sidebery-nav-icon-use-active-panel-color", false);
 user_pref("uc.flex.style-toolbar-bgcolor",                          1);
 /* Customizes the URL bar appearance.
    1 = Flat (default)
-   2 = Inset (centered text)
-   3 = Debossed (centered text)
-   4 = Seamless (centered text) */
+   2 = Inset (embedded look)
+   3 = Debossed (pressed-in look)
+   4 = Seamless (fully merged into the navigation bar) */
 user_pref("uc.flex.style-urlbar",                                   1);
+/* Centers the text in the URL bar. */
+user_pref("uc.flex.style-urlbar-center-text",                   false);
 /* Centers the URL bar popup.
    0 = Disabled (default)
    1 = When focused
