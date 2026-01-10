@@ -1178,7 +1178,7 @@
     --uc-web-content-margin-outset-clip-mica: calc(-1 * var(--uc-web-content-margin));
     /* Card-style shadow for web content */
     --uc-web-content-box-shadow-depth: 1.5px 1.5px 5px -1px;
-    @media -moz-pref("sidebar.position_start") {
+    @media not -moz-pref("sidebar.position_start") {
         --uc-web-content-box-shadow-depth: -1.5px 1.5px 5px -1px;
     }
     --uc-web-content-box-shadow-color: light-dark(rgba(12, 12, 16, 0.15), rgba(12, 12, 16, 0.25));

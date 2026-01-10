@@ -23,6 +23,9 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v6.0.3**
+* Fixed an issue where the shadow was rendered on the wrong side when `uc.flex.enable-rounded-web-content` was enabled.
+
 ## 🦊 v6.0.2
 
 ### ⚠️ Breaking Changes

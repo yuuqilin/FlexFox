@@ -23,6 +23,9 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
+**🦊 v6.0.3**
+* 修复启用 `uc.flex.enable-rounded-web-content` 时，阴影显示在错误一侧的问题。
+
 ## 🦊 v6.0.2
 
 ### ⚠️ 不兼容变更
