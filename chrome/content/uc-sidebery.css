@@ -818,9 +818,6 @@
                     color-mix(in srgb, var(--uc-sidebar-header-stripe) 75%, white);
             }
             --frame-el-overlay-hover-bg: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
-            .panel-box {
-                --frame-el-overlay-hover-bg: transparent !important;
-            }
             /*
             --frame-el-overlay-clicked-bg: transparent !important;
             */
@@ -828,6 +825,21 @@
                 rgb(from color-mix(in srgb, var(--uc-sb-tab-bgcolor) 77%, black) r g b / 0.1),
                 rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.1)
             ) !important;
+        }
+        /**
+         * Sidebery uses `--frame-el-overlay-hover-bg` on `.body::before`
+         * to define the hover background color.
+         *
+         * We redefine this variable on an ancestor element to make the
+         * pseudo-element transparent and let `.body` handle the hover
+         * background instead.
+         *
+         * This allows us to override transitions only on `.body`, avoiding
+         * the need to define transitions on both `.body` and `.body::before`,
+         * which helps reduce overhead.
+         */
+        .panel-box {
+            --frame-el-overlay-hover-bg: transparent !important;
         }
 
         /* Use FlexFox's UI color tokens for the sidebar stripe */
@@ -952,16 +964,27 @@
     }
 
     .tab-wrapper .Tab .body {
-        @media not -moz-pref("uc.flex.style-tab-items", 2) {
-            border: 1.5px solid var(--uc-sb-pinned-tab-border-color) !important;
-        }
-        @media -moz-pref("uc.flex.style-tab-items", 2) {
-            border: none !important;
+        @media not -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
             transition:
                 opacity var(--d-fast),
                 transform var(--d-fast),
                 background-color 0.06s,
                 box-shadow 0.8s !important;
+            .Tab:hover & {
+                transition:
+                    opacity var(--d-fast),
+                    transform var(--d-fast),
+                    background-color 0s,
+                    box-shadow 0.1s !important;
+            }
+        }
+
+        @media not -moz-pref("uc.flex.style-tab-items", 2) {
+            border: 1.5px solid var(--uc-sb-pinned-tab-border-color) !important;
+        }
+        @media -moz-pref("uc.flex.style-tab-items", 2) {
+            border: none !important;
+
             .Tab:not([data-active="true"], [data-selected="true"]) & {
                 background-color: var(--uc-sb-pinned-tab-bgcolor) !important;
                 box-shadow: 0px 0px 0px transparent !important;
@@ -973,11 +996,6 @@
             .Tab:not([data-active="true"], [data-selected="true"]):hover & {
                 background-color: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
                 box-shadow: var(--uc-sb-pinned-tab-box-shadow) !important;
-                transition:
-                    opacity var(--d-fast),
-                    transform var(--d-fast),
-                    background-color 0s,
-                    box-shadow 0.1s !important;
             }
         }
     }
@@ -985,6 +1003,21 @@
         border: 1px solid var(--uc-sb-pinned-tab-unloaded-border-color) !important;
     }
 
+    /**
+     * Directly overriding the background color on `.body` would require
+     * `!important`, which would then force additional rules to also use
+     * `!important`.
+     *
+     * Instead, we redefine the `--tabs-normal-bg` variable on the target
+     * element and control the background color through the variable,
+     * reducing overall rule complexity and overhead.
+     */
+    .Tab .body {
+        --tabs-normal-bg: transparent;
+        .Tab:not([data-active="true"], [data-selected="true"]):hover & {
+            --tabs-normal-bg: light-dark(rgba(0, 0, 0, 0.071), rgba(255, 255, 255, 0.086));
+        }
+    }
     .Tab[data-selected="true"][data-active="true"] .body {
         background-color: var(--tabs-activated-bg) !important;
         --frame-el-overlay-selected-bg: transparent;
@@ -994,20 +1027,24 @@
     }
 
     .AnimatedTabList .Tab .body {
-        @media -moz-pref("uc.flex.style-tab-items", 2) {
+        @media not -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
             transition:
                 opacity var(--d-fast),
                 transform var(--d-fast),
                 background-color 0.06s,
                 box-shadow 0.06s !important;
-
-            .Tab:not([data-active="true"], [data-selected="true"]):hover & {
-                background-color: var(--uc-sb-tab-hover-bgcolor) !important;
+            .Tab:hover & {
                 transition:
                     opacity var(--d-fast),
                     transform var(--d-fast),
                     background-color 0s,
                     box-shadow 0.1s !important;
+            }
+        }
+
+        @media -moz-pref("uc.flex.style-tab-items", 2) {
+            .Tab:not([data-active="true"], [data-selected="true"]):hover & {
+                background-color: var(--uc-sb-tab-hover-bgcolor) !important;
             }
         }
     }
@@ -1020,6 +1057,12 @@
 
     /* Prevent a gap below the new tab button */
     .TabsPanel .new-tab-btns {
+        /**
+         * Since `--frame-el-overlay-hover-bg` was redefined as transparent
+         * on an ancestor element, it must be restored on `.new-tab-btns`,
+         * as this element does not use a transparent hover background.
+         */
+        --frame-el-overlay-hover-bg: light-dark(rgba(0, 0, 0, 0.071), rgba(255, 255, 255, 0.086)) !important;
         @media -moz-pref("uc.flex.style-tab-items", 2) {
             --frame-el-overlay-hover-bg: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
         }

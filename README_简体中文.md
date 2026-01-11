@@ -23,38 +23,23 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v6.0.3**
-* 修复启用 `uc.flex.enable-rounded-web-content` 时，阴影显示在错误一侧的问题。
+## 🦊 v6.0.4
 
-## 🦊 v6.0.2
+### ✨ 新增（仅限原生垂直标签页和 Sidebery）
 
-### ⚠️ 不兼容变更
+![Image](https://github.com/user-attachments/assets/596ef515-6d39-4a00-a7eb-c7e60c13f68d)
 
-* 调整了 `uc.flex.style-urlbar` 选项的取值范围及其功能行为。
-  * 取值范围由原来的 `0`–`4` 修改为 `1`–`4`。原本数值 `0` 的功能已拆分为新的选项 `uc.flex.auto-hide-urlbar-icons`。
-  * 原先包含在数值 `2`–`4` 中的文字居中功能，已拆分为新的选项 `uc.flex.style-urlbar-center-text`。
-  * 调整后的取值仅用于控制地址栏的外观：
-    * `1` = Flat（默认，与旧版相同）
-    * `2` = Inset（嵌入式外观）
-    * `3` = Debossed（凹陷式外观）
-    * `4` = Seamless（与导航栏完全融合的外观）
+* 新增选项 `uc.flex.style-tab-items-add-hover-trail`（布尔值）：
 
-### ✨ 新增
+  * 控制标签页悬停时的拖尾效果。
+  * 过去该效果仅在 `uc.flex.style-tab-items = 2` 时启用。
+  * 现在可以在任意标签样式下独立开启或关闭该效果。
+  * 默认启用，设置为 `false` 可关闭。
 
-* 新增 `uc.flex.auto-hide-urlbar-icons` (布尔值)，此选项默认启用，会自动隐藏地址栏图标，并在鼠标悬停于地址栏时以从左右滑入的动画方式显示。
-* 新增 `uc.flex.style-urlbar-center-text` (布尔值)，用于将地址栏文字居中显示。
-
-### 🛠️ 修复
-
-* 修复当 `uc.flex.style-urlbar` 设置为 `4` 时，Trust Panel 图标无法隐藏的问题。
-* 修复当 `uc.flex.style-tab-items` 设置为 `2` 时，Sidebery 底部按钮无法显示悬停高亮的问题。 (#31)
-* 修复在启用 `uc.flex.show-pin-tabs-separator-in-expanded-state` 时，鼠标悬停展开固定标签页分隔线会导致固定标签页发生偏移的问题。
-* 修复因 Firefox Nightly v148 的变更，导致侧栏切换按钮（Firefox 图标）以及查找栏按钮缺失背景颜色和悬停高亮的问题。 ([Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041))
-
-## 🦊 v6.0.0 – 重大功能更新
+## 🦊 v6.x.x 系列 – 重大功能更新
 
 > [!IMPORTANT]
-> **本次更新包含不兼容变更。** 部分选项已被废弃或调整，旧的 Sidebery 样式也已不再使用。更新前请仔细阅读本次更新日志。
+> **v6.x.x 系列引入了多项不兼容的变更。** 部分选项已被弃用或调整，旧的 Sidebery 样式不再使用。更新前请仔细阅读本更新日志。
 >
 > 更新后，为避免冲突，请务必 **删除 Sidebery 样式编辑器中的旧样式**。
 > 打开 **Sidebery 导航栏 → 设置（齿轮图标）→ 样式编辑器**，然后删除 **侧边栏** 和 **分组页面** 两个页面中的所有旧样式。
@@ -135,11 +120,16 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * 设置标签页的外观。
   * 数值：
 
-    * `1` = 固定标签页： 仅显示边框，无背景。亮色模式下边框颜色与地址栏边框一致，暗色模式下与侧边栏彩带一致。（与旧版相同，默认值）
+    * `1` = 固定标签页仅显示边框且无背景。亮色模式下边框颜色与地址栏边框一致，暗色模式下与侧边栏彩带一致。（与旧版相同，默认值）
 
-    * `2` = 固定标签页： 仅显示背景，无边框。亮色模式下背景颜色与地址栏背景一致，暗色模式下与侧边栏彩带一致。
+    * `2` = 固定标签页仅显示背景且无边框。亮色模式下背景颜色与地址栏背景一致，暗色模式下与侧边栏彩带一致。
 
-      标签页： 所有标签页都带有平滑的悬停过渡动画，其边框和高亮使用侧边栏彩带的颜色。
+      所有标签页的边框和高亮使用侧边栏彩带的颜色。
+
+* 新增选项 `uc.flex.style-tab-items-add-hover-trail`（布尔值）：
+
+  * 为标签页添加鼠标悬停时的拖尾效果。
+  * 默认启用，设置为 `false` 可关闭此效果。
 
 ---
 
@@ -170,6 +160,20 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * 新增选项 `uc.flex.style-tab-groups-center-label-text`（布尔值）：
 
   * 设置标签页群组的标签文字居中显示。
+
+---
+
+### 🔍 新增: 地址栏显示与布局
+
+* 新增选项 `uc.flex.auto-hide-urlbar-icons` (布尔值):
+
+  * 默认启用。
+  * 自动隐藏地址栏图标。
+  * 鼠标悬停于地址栏时，图标会以从左右滑入的动画方式显示。
+
+* 新增选项 `uc.flex.style-urlbar-center-text` (布尔值):
+
+  * 将地址栏文字居中显示。
 
 ---
 
@@ -210,6 +214,17 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * `2` = 仅显示已加载标签页数量
   * 图标外观由 `uc.flex.style-all-tabs-button` 控制
 
+* `uc.flex.style-urlbar`
+
+  * 数值范围由 `0–4` 更新为 `1–4`。
+  * 原本数值 `0` 所包含的功能已拆分为新的选项 `uc.flex.auto-hide-urlbar-icons`。
+  * 原先包含在数值 `2–4` 中的文字居中功能，已拆分为新的选项 `uc.flex.style-urlbar-center-text`。
+  * 更新后的数值仅用于控制地址栏的外观：
+    * `1` = Flat（默认，与旧版相同）
+    * `2` = Inset（嵌入式外观）
+    * `3` = Debossed（凹陷式外观）
+    * `4` = Seamless（与导航栏完全融合的外观）
+
 #### 移除选项
 
 * 旧版通过 `sidebery-styles.json` 导入到 Sidebery 样式编辑器的样式已全部迁移至 `uc-sidebery.css`。从 v6 开始，FlexFox 不再依赖 Sidebery 样式编辑器注入的样式。
@@ -217,15 +232,6 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * 升级自旧版本的用户请在更新后删除 Sidebery 样式编辑器中的旧版样式，以避免冗馀的 CSS 负担及样式冲突。
   * v6 及以后版本不再提供 `sidebery-styles.json`，新安装只需导入 `sidebery-settings.json`。
   * 此后用户可以通过 `uc.flex.skip-loading-uc-sidebery.css` 完全停用 FlexFox 默认的 Sidebery 样式，从而更灵活地搭配其他自定义样式。
-
----
-
-### 🛠 改进与修复
-
-* 多项视觉细节优化和问题修复。
-* 为 Nightly v148 新增的地址栏 Trust Panel 功能提供样式支持。该功能由 `browser.urlbar.trustPanel.featureGate` 控制，并将在 v148 中默认启用。
-* 修复 Nightly v148 引起的回退：当鼠标移动到原生垂直标签页的固定标签页上时，标签栏无法保持悬停状态并会自动折叠的问题。
-  相关： [Bug 2000063](https://bugzilla.mozilla.org/show_bug.cgi?id=2000063)
 
 ---
 
@@ -583,9 +589,6 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 <summary>💬 <b>历史更新</b></summary>
 
-**v6.0.1**
-- 修复了在将 Sidebery 的 **排列方式** 设置为 **默认** 以外选项时出现的布局与样式不一致问题。
-
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))
 
@@ -846,7 +849,8 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.style-window-controls-shrink-size` | `true` | 缩小窗口控制按钮的整体尺寸。 |
 | `uc.flex.move-pip-volume-to-top` | `true` | 将画中画（PiP）窗口中的音量控制按钮移至顶部。 |
 | `uc.flex.move-window-controls-to-left` | `true` | 将窗口控制按钮移动到导航栏或水平标签栏的最左侧。 |
-| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | 设置垂直标签页的外观。取值：`1` = 固定标签页仅显示边框且无背景（默认），`2` = 固定标签页仅显示背景且无边框。标签页具有平滑的悬停过渡动画，边框与高亮会使用侧边栏彩带颜色。 |
+| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | 设置垂直标签页的外观。取值：`1` = 固定标签页仅显示边框且无背景（默认），`2` = 固定标签页仅显示背景且无边框。所有标签页的边框和高亮使用侧边栏彩带的颜色。 |
+| `uc.flex.style-tab-items-add-hover-trail` | `true` | 为垂直标签页添加鼠标悬停时的拖尾效果。默认启用，设置为 `false` 可关闭此效果。 |
 | `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | 设置原生垂直标签页的标签页群组外观。取值：`0` = 树状布局，无展开/折叠指示图标，`1` = 树状布局，带三角指示图标（默认），`2` = 盒子布局，带文件夹图标。 |
 | `uc.flex.style-tab-groups-add-transition` | `0`-`2`<br>(`2`) | 设置原生垂直标签页的标签页群组展开/折叠时的过渡动画和旋转指示图标效果。取值：`0` = 不启用动画，`1` = 启用展开/折叠动画，`2` = 启用动画 + 旋转指示图标（默认）。 |
 | `uc.flex.style-tab-groups-center-label-text` | `true` | 设置原生垂直标签页的标签页群组标签文字居中显示。 |

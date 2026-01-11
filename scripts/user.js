@@ -176,9 +176,11 @@ user_pref("uc.flex.move-window-controls-to-left",               false);
 /* Moves PiP window volume button to the top */
 user_pref("uc.flex.move-pip-volume-to-top",                     false);
 /* Sets appearance of vertical tab items (Sidebery & native vertical tabs).
-   1 = Pinned tabs use borders only (default), 
-   2 = Pinned tabs use background only; tabs include hover animation and borders/highlights match sidebar stripe */
+   1 = Pinned tabs use borders only (default),
+   2 = Pinned tabs use background only; all tabs use the sidebar stripe color for borders and highlights */
 user_pref("uc.flex.style-tab-items",                                1);
+/* Applies a trailing effect when hovering over vertical tabs. */
+user_pref("uc.flex.style-tab-items-add-hover-trail",             true);
 /* Sets appearance of native vertical tab groups.
    0 = Tree layout no indicator, 1 = Tree with triangle (default), 2 = Box with folder icon */
 user_pref("uc.flex.style-tab-groups",                               1);

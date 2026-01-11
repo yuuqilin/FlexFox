@@ -23,40 +23,25 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v6.0.3**
-* Fixed an issue where the shadow was rendered on the wrong side when `uc.flex.enable-rounded-web-content` was enabled.
+## 🦊 v6.0.4
 
-## 🦊 v6.0.2
+### ✨ New (Native Vertical Tabs and Sidebery only)
 
-### ⚠️ Breaking Changes
+![Image](https://github.com/user-attachments/assets/596ef515-6d39-4a00-a7eb-c7e60c13f68d)
 
-* The `uc.flex.style-urlbar` option has been reworked, including changes to its value range and behavior.
-  * The value range has changed from `0`–`4` to `1`–`4`. The previous behavior of value `0` has been moved to a new option, `uc.flex.auto-hide-urlbar-icons`.
-  * The text-centering behavior previously included in values `2`–`4` has been separated into a new option, `uc.flex.style-urlbar-center-text`.
-  * The updated values now control the URL bar appearance only:
-    * `1` = Flat (default, same as before)
-    * `2` = Inset (embedded look)
-    * `3` = Debossed (pressed-in look)
-    * `4` = Seamless (fully merged into the navigation bar)
+* Added a new option `uc.flex.style-tab-items-add-hover-trail` (Boolean):
 
-### ✨ New
-
-* Added `uc.flex.auto-hide-urlbar-icons` (Boolean), enabled by default, which automatically hides URL bar icons and reveals them with a slide-in animation from both sides when hovering over the URL bar.
-* Added `uc.flex.style-urlbar-center-text` (Boolean) to center the URL bar text.
-
-### 🛠️ Fixed
-
-* Fixed an issue where the Trust Panel icon could not be hidden when `uc.flex.style-urlbar` was set to `4`.
-* Fixed an issue where Sidebery bottom buttons did not show hover highlights when `uc.flex.style-tab-items` was set to `2`. (#31)
-* Fixed an issue where pinned tabs shifted when expanding the pinned tabs separator on hover with `uc.flex.show-pin-tabs-separator-in-expanded-state` enabled.
-* Fixed missing background colors and hover highlights for the Sidebar Toggle Button (Firefox logo) and find bar buttons caused by changes in Firefox Nightly v148. ([Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041))
+  * Controls the trailing effect when hovering over tabs. 
+  * Previously, this effect was only active when `uc.flex.style-tab-items = 2`.
+  * Now, the effect can be independently enabled or disabled for any tab style.
+  * Enabled by default. Set to `false` to disable it.
 
 <!-- END What's New -->
 
-## 🦊 v6.0.0 – Major Feature Update
+## 🦊 v6.x.x Series – Major Feature Update
 
 > [!IMPORTANT]
-> **This update includes several incompatible changes.** Some options have been deprecated or updated, and older Sidebery styles are no longer used. Please read this changelog carefully before updating.
+> **The v6.x.x series introduces several incompatible changes.** Some options have been deprecated or updated, and older Sidebery styles are no longer used. Please read this changelog carefully before updating.
 >
 > After upgrading, **you must remove the old styles from the Sidebery Styles Editor** to avoid conflicts.
 > Go to **Sidebery Navigation bar → Settings (gear icon) → Styles editor**, then delete all legacy styles in the **Sidebar** and **Group Page** tabs.
@@ -139,11 +124,16 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * Sets the appearance of tab items.
   * Values:
 
-    * `1` = Pinned tabs: Borders only, no background. In light mode, the border color matches the URL bar border. In dark mode, it matches the sidebar stripe. (Same as previous versions, default)
+    * `1` = Pinned tabs use borders only, with no background. In light mode, the border color matches the URL bar border. In dark mode, it matches the sidebar stripe. (Same as previous versions, default)
 
-    * `2` = Pinned tabs: Background only, no borders. In light mode, the background color matches the URL bar background. In dark mode, it matches the sidebar stripe.
+    * `2` = Pinned tabs use background only, with no borders. In light mode, the background color matches the URL bar background. In dark mode, it matches the sidebar stripe.
 
-      Tabs: Feature smooth hover transition animations, and their borders and highlights use the sidebar stripe color.
+      For all tabs, borders and highlights use the sidebar stripe color.
+
+* Added `uc.flex.style-tab-items-add-hover-trail` (Boolean):
+
+  * Applies a trailing effect when hovering over tabs.
+  * This effect is enabled by default. Set to `false` to disable it.
 
 ---
 
@@ -174,6 +164,20 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 * Added `uc.flex.style-tab-groups-center-label-text` (Boolean):
 
   * Centers the tab group label text.
+
+---
+
+### 🔍 New: URL Bar Behavior & Layout
+
+* Added `uc.flex.auto-hide-urlbar-icons` (Boolean):
+
+  * Enabled by default.
+  * Automatically hides URL bar icons.
+  * Reveals icons with a slide-in animation from both sides when hovering over the URL bar.
+
+* Added `uc.flex.style-urlbar-center-text` (Boolean):
+
+  * Centers the URL bar text.
 
 ---
 
@@ -214,6 +218,17 @@ The following options are deprecated and no longer have any effect. Please remov
   * `2` = Show count of loaded tabs only
   * Icon appearance is now controlled by `uc.flex.style-all-tabs-button`.
 
+* `uc.flex.style-urlbar`
+
+  * Value range updated from `0–4` to `1–4`.
+  * The previous behavior of value `0` has been moved to a new option, `uc.flex.auto-hide-urlbar-icons`.
+  * The text-centering behavior previously included in values `2–4` has been separated into a new option, `uc.flex.style-urlbar-center-text`.
+  * The updated values now control the URL bar appearance only:
+    * `1` = Flat (default, same as before)
+    * `2` = Inset (embedded look)
+    * `3` = Debossed (pressed-in look)
+    * `4` = Seamless (fully merged into the navigation bar)
+
 #### Removed
 
 * The old Sidebery styles that were previously imported through `sidebery-styles.json` have now been fully migrated to `uc-sidebery.css`. Starting from v6, FlexFox no longer relies on styles injected via the Sidebery Styles Editor.
@@ -223,17 +238,6 @@ The following options are deprecated and no longer have any effect. Please remov
   * After that, you can completely disable FlexFox's default Sidebery styling with `uc.flex.skip-loading-uc-sidebery.css`, allowing more flexibility when combining other custom styles.
 
 ---
-
-### 🛠 Improvements and Fixes
-
-* Various visual refinements and bug fixes.
-* Added styling support for the new **Trust Panel** feature introduced in Nightly v148. This feature is controlled by `browser.urlbar.trustPanel.featureGate` and will be enabled by default in v148.
-* Fixed a regression introduced in Nightly v148: when hovering over pinned tabs in native vertical tabs, the sidebar would not maintain the hover state and would automatically collapse.
-  Related: [Bug 2000063](https://bugzilla.mozilla.org/show_bug.cgi?id=2000063).
-
----
-
-<!-- END What's New -->
 
 ## 🎉 Major Feature Update
 
@@ -593,9 +597,6 @@ To change the default hotkeys, click the gear icon in the top-right corner and s
 
 <!-- END Release Note -->
 
-**v6.0.1**
-- Fixed layout and styling inconsistencies in Sidebery when **Density** is set to values other than **Default**.
-
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))
 
@@ -851,7 +852,8 @@ For more update logs from earlier versions,
 | `uc.flex.style-window-controls-shrink-size` | `true` | Reduces the overall size of the window controls. |
 | `uc.flex.move-window-controls-to-left` | `true` | Moves the window controls to the left edge of the navbar or horizontal tab bar. |
 | `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
-| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | Sets the appearance of vertical tab items. Values: `1` = Pinned tabs use borders only with no background (default), `2` = Pinned tabs use background only with no borders; tabs include smooth hover transition animations, and their tab borders and highlights match the sidebar stripe color. |
+| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | Sets the appearance of vertical tab items. Values: `1` = Pinned tabs use borders only with no background (default), `2` = Pinned tabs use background only with no borders; all tabs use the sidebar stripe color for their borders and highlights. |
+| `uc.flex.style-tab-items-add-hover-trail` | `true` | Applies a trailing effect when hovering over vertical tabs. Enabled by default; set to `false` to disable the effect. |
 | `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | Sets the appearance of native vertical tab groups. Values: `0` = Tree layout, no expand/collapse indicator, `1` = Tree layout with triangle indicator (default), `2` = Box layout with folder icon. |
 | `uc.flex.style-tab-groups-add-transition` | `0`-`2`<br>(`2`) | Sets the expand/collapse transition and rotating indicator animation for native vertical tab groups. Values: `0` = No transition, `1` = Enable expand/collapse transition, `2` = Enable transition + rotating indicator (default). |
 | `uc.flex.style-tab-groups-center-label-text` | `true` | Centers the label text of native vertical tab groups. |
