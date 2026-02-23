@@ -25,7 +25,7 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 **🦊 v6.0.5**
 
-* Firefox v148 の変更により発生した回帰を修正しました。新しいタブページの検索ボックスのスタイルが適用されなくなっていました。（[Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041)）
+* Firefox v148 の変更により発生した回帰を修正しました。新しいタブページの検索ボックスのスタイルが適用されなくなっていました。([Bug 2002027](https://bugzilla.mozilla.org/show_bug.cgi?id=2002027))
 * `uc.flex.style-urlbar-center-text` を有効にした際のアドレスバーのテキスト中央配置の計算方法を調整しました。
 
 ## 🦊 v6.0.4

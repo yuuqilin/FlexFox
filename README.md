@@ -25,7 +25,7 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 **🦊 v6.0.5**
 
-* Fixed a regression introduced by Firefox v148 changes that caused the New Tab page search box styling to stop working. ([Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041))
+* Fixed a regression introduced by Firefox v148 changes that caused the New Tab page search box styling to stop working. ([Bug 2002027](https://bugzilla.mozilla.org/show_bug.cgi?id=2002027))
 * Adjusted the text centering calculation in the address bar when `uc.flex.style-urlbar-center-text` is enabled.
 
 <!-- END What's New -->

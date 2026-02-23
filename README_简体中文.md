@@ -25,7 +25,7 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 **🦊 v6.0.5**
 
-* 修复由 Firefox v148 变更引入的回退问题，该问题导致新标签页搜索框样式失效。（[Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041)）
+* 修复由 Firefox v148 变更引入的回退问题，该问题导致新标签页搜索框样式失效。([Bug 2002027](https://bugzilla.mozilla.org/show_bug.cgi?id=2002027))
 * 调整启用 `uc.flex.style-urlbar-center-text` 时地址栏文字居中的计算方式。
 
 ## 🦊 v6.0.4
