@@ -194,7 +194,7 @@ findbar {
     background: var(--toolbarbutton-hover-background) !important;
 }
 .findbar-closebutton {
-    background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)) !important;
+    background-color: var(--button-background-color, var(--toolbar-bgcolor)) !important;
     /* wasn't square for some reason */
     width: auto !important;
     padding: 4px !important;

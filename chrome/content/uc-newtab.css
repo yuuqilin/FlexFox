@@ -8,6 +8,44 @@ url-prefix("about:home") {
         }
     }
     /* Search bar. */
+    /* Firefox v148 moved .search-handoff-button into a shadow DOM. This requires un-nesting the button and using CSS variables to pass states from the parent container. */
+    content-search-handoff-ui[fakefocus]:not([disabled]) {
+        --uc-search-handoff-outline: 2px solid var(--newtab-primary-action-background);
+        --uc-search-handoff-outline-offset: -1px;
+    }
+    content-search-handoff-ui[disabled] {
+        --uc-search-handoff-opacity: 0;
+    }
+
+    .search-handoff-button {
+        border-color: transparent !important;
+        outline: var(--uc-search-handoff-outline, none);
+        outline-offset: var(--uc-search-handoff-outline-offset, 0);
+        opacity: var(--uc-search-handoff-opacity, 1) !important;
+
+        border-radius: var(--uc-search-wrapper-radius, var(--border-radius-medium)) !important;
+        background-position: 12px !important;
+        padding-inline-start: 48px !important;
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
+        --elevation: 4;
+        box-shadow:
+            0 0 calc((var(--elevation) * 0.225px) + 2px) rgb(0 0 0 / 0.11),
+            0 calc(var(--elevation) * 0.4px) calc((var(--elevation) * 0.9px)) rgb(0 0 0 / 0.13) !important;
+
+        &:hover {
+            --elevation: 6;
+        }
+    }
+
+    .search-handoff-button .fake-caret {
+        position: absolute;
+        margin-top: 0 !important;
+
+        inset-inline-start: 48px !important;
+        top: 13px !important;
+    }
+
     .search-wrapper {
         & .search-handoff-button {
             border-radius: var(--uc-search-wrapper-radius, var(--border-radius-medium)) !important;
@@ -116,36 +154,41 @@ url-prefix("about:home") {
     /* Private browsing search bar. */
     .search-inner-wrapper {
         height: 44px !important;
+    }
 
-        .search-handoff-button,
-        .search-handoff-button:active,
-        .search-handoff-button:enabled:hover:active {
-            background-color: var(--uc-background-color-secondary) !important;
-            border: 0 !important;
-            border-radius: var(--uc-search-wrapper-radius, var(--border-radius-medium)) !important;
-            padding-inline-start: 48px !important;
-            --elevation: 4;
-            box-shadow:
-                0 0 calc((var(--elevation) * 0.225px) + 2px) rgb(0 0 0 / 0.11),
-                0 calc(var(--elevation) * 0.4px) calc((var(--elevation) * 0.9px)) rgb(0 0 0 / 0.13) !important;
+    .search-handoff-button,
+    .search-handoff-button:active,
+    .search-handoff-button:enabled:hover:active {
+        background-color: var(--uc-background-color-secondary) !important;
+        border: 0 !important;
+        border-radius: var(--uc-search-wrapper-radius, var(--border-radius-medium)) !important;
+        padding-inline-start: 48px !important;
+        --elevation: 4;
+        box-shadow:
+            0 0 calc((var(--elevation) * 0.225px) + 2px) rgb(0 0 0 / 0.11),
+            0 calc(var(--elevation) * 0.4px) calc((var(--elevation) * 0.9px)) rgb(0 0 0 / 0.13) !important;
 
-            &:hover {
-                --elevation: 6;
-            }
+        &:hover {
+            --elevation: 6;
+        }
 
-            &.focused:not(.disabled) {
-                box-shadow: none !important;
-                outline: 2px solid var(--in-content-focus-outline-color) !important;
-                outline-offset: -1px !important;
-            }
+        &.focused:not(.disabled) {
+            box-shadow: none !important;
+            outline: 2px solid var(--focus-outline-color) !important;
+            outline-offset: -1px !important;
+        }
 
-            &.disabled {
-                opacity: 0 !important;
-            }
+        &.disabled {
+            opacity: 0 !important;
+        }
 
-            & .fake-textbox {
-                color: var(--in-content-page-color) !important;
-            }
+        & .fake-textbox {
+            color: var(--content-search-handoff-ui-background-color, var(--in-content-page-color)) !important;
+        }
+
+        & .fake-caret {
+            top: 13px !important;
+            background: #fbfbfe !important;
         }
     }
 

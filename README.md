@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v148-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v149-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -23,6 +23,13 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v6.0.5**
+
+* Fixed a regression introduced by Firefox v148 changes that caused the New Tab page search box styling to stop working. ([Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041))
+* Adjusted the text centering calculation in the address bar when `uc.flex.style-urlbar-center-text` is enabled.
+
+<!-- END What's New -->
+
 ## 🦊 v6.0.4
 
 ### ✨ New (Native Vertical Tabs and Sidebery only)
@@ -35,8 +42,6 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * Previously, this effect was only active when `uc.flex.style-tab-items = 2`.
   * Now, the effect can be independently enabled or disabled for any tab style.
   * Enabled by default. Set to `false` to disable it.
-
-<!-- END What's New -->
 
 ## 🦊 v6.x.x Series – Major Feature Update
 

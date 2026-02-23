@@ -462,22 +462,22 @@
 
         &[unifiedsearchbutton-available] {
             .urlbar-input-box {
-                margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px);
+                margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 23px);
             }
             #userContext-icons:not([hidden]) {
-                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px)) !important;
+                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 23px)) !important;
             }
             #userContext-icons[hidden] ~ #urlbar-zoom-button:not([hidden]) {
-                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px)) !important;
+                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 23px)) !important;
             }
         }
 
         #identity-box[pageproxystate="valid"] {
             ~ .urlbar-input-box {
-                margin-inline-end: calc(var(--identity-box-margin-inline) + 5px);
+                margin-inline-end: calc(var(--identity-box-margin-inline) + 6px);
             }
             ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
-                margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 5px) !important;
+                margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 6px) !important;
             }
             &:is(.chromeUI) {
                 ~ .urlbar-input-box {
@@ -650,6 +650,20 @@
     padding-left: 6px;
     &:hover:not([open="true"]) {
         background-color: var(--urlbar-box-hover-bgcolor) !important;
+    }
+}
+
+#urlbar-revert-button {
+    border-radius: var(
+        --uc-urlbar-icon-radius,
+        var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+    ) !important;
+}
+
+@media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+    .urlbar-icon,
+    .searchmode-switcher-icon {
+        fill: var(--toolbarbutton-icon-fill) !important;
     }
 }
 

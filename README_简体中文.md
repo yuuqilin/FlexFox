@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v148-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v149-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -22,6 +22,11 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 > FlexFox 的大部分功能只有在「定制侧栏」中的「悬停时展开侧栏」选项 **未勾选** 时才能正常运作。「定制侧栏」可以在导航栏侧栏切换按钮的右键菜单中找到。该选项在 Firefox 中默认未勾选。如果你之前曾手动启用过，请取消勾选以保证 FlexFox 正常工作。
 
 ## 🆕 更新内容
+
+**🦊 v6.0.5**
+
+* 修复由 Firefox v148 变更引入的回退问题，该问题导致新标签页搜索框样式失效。（[Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041)）
+* 调整启用 `uc.flex.style-urlbar-center-text` 时地址栏文字居中的计算方式。
 
 ## 🦊 v6.0.4
 

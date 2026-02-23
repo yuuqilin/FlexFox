@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v148-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v149-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -22,6 +22,11 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 > FlexFox の多くの機能は、「サイドバーのカスタマイズ」にある「カーソルを合わせた時にサイドバーを展開する」オプションのチェックを **外す** ことで正しく動作します。「サイドバーのカスタマイズ」はナビゲーションバーのサイドバー切替ボタンの右クリックメニューから開けます。このオプションは Firefox の初期設定でチェックが外れています。以前にチェックしていた場合は、外すことで FlexFox が正常に機能します。
 
 ## 🆕 最新情報
+
+**🦊 v6.0.5**
+
+* Firefox v148 の変更により発生した回帰を修正しました。新しいタブページの検索ボックスのスタイルが適用されなくなっていました。（[Bug 2008041](https://bugzilla.mozilla.org/show_bug.cgi?id=2008041)）
+* `uc.flex.style-urlbar-center-text` を有効にした際のアドレスバーのテキスト中央配置の計算方法を調整しました。
 
 ## 🦊 v6.0.4
 
