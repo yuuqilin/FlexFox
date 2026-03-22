@@ -374,8 +374,8 @@
         background-position: left 1em center;
         background-repeat: no-repeat;
         background-size: 16px;
-        -moz-context-properties: fill, fill-opacity;
-        fill: var(--uc-popup-menu-icon-color);
+        -moz-context-properties: fill, fill-opacity !important;
+        fill: var(--uc-popup-menu-icon-color) !important;
     }
     #fxa-manage-account-button > vbox > label {
         margin-inline-start: 24px !important;

@@ -515,7 +515,7 @@
         --uc-sb-sidebar-main-position: absolute;
         --uc-sb-sidebar-main-width: var(--uc-sb-sidebar-width);
         --uc-sb-sidebar-main-overflow: hidden;
-        --uc-sb-sidebar-main-z-index: calc(var(--browser-area-z-index-toolbox-while-animating) + 1);
+        --uc-sb-sidebar-main-z-index: calc(var(--browser-area-z-index-sidebar-expand-on-hover) + 1);
         --uc-sb-sidebar-main-hover-min-height: auto;
         --uc-sb-sidebar-main-hover-max-height: 100%;
         --uc-sb-sidebar-main-hover-height: fit-content;
@@ -671,7 +671,7 @@
         }
         /* No need to lower z-index when vertical tabs are fully hidden or in fullscreen */
         @media -moz-pref("uc.flex.fully-hide-sidebery") {
-            z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+            z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar-expand-on-hover));
             /**
              * When vertical tabs are collapsed,
              * lower z-index if Sidebery is inactive to let the tab box shadow appear above.
@@ -685,7 +685,7 @@
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar-expand-on-hover));
                 &:not([sidebar-launcher-expanded]) {
                     z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar));
                 }
@@ -758,7 +758,7 @@
         /* Raise z-index on hover so #sidebar-main appears above other elements */
         @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.fully-hide-sidebery")) {
             :root:not([inFullscreen], [titlepreface*="\180e "], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar-expand-on-hover));
                 /** 
                  * When the revamped sidebar is active but [sidebar-launcher-expanded] is missing
                  * (collapsed vertical tabs or vertical tabs disabled),
@@ -955,15 +955,15 @@
             /*
             @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                 :root:not([titlepreface*="\180e "]) &:hover {
-                    z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                    z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar-expand-on-hover));
                 }
             }
             @media -moz-pref("uc.flex.fully-hide-sidebery") {
-                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar-expand-on-hover));
             }
             @media not -moz-pref("uc.flex.fully-hide-sidebery") {
                 :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                    z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-toolbox-while-animating));
+                    z-index: var(--uc-sb-sidebar-main-z-index, var(--browser-area-z-index-sidebar-expand-on-hover));
                 }
             }
             */

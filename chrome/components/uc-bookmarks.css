@@ -151,3 +151,49 @@
         }
     }
 }
+
+/* The expanded Bookmarks Toolbar overlaps the web content outline.
+   Add a bottom border on the toolbar to simulate the covered top outline.
+
+   When auto-hide is disabled, the toolbar no longer overlaps the content,
+   so this fix would normally be unnecessary. However, when combined with
+   Hide Topbar, the toolbar becomes part of the top toolbox and is hidden
+   together, then overlaps the content again when shown.
+
+   Instead of maintaining separate rules for each case, we rely on layout behavior:
+   with auto-hide disabled, the toolbar is static and the pseudo-element attaches
+   to <body>, so it is not visible. When Hide Topbar is enabled, the parent
+   (#navigator-toolbox) becomes fixed, allowing the pseudo-element to render
+   correctly at the toolbar bottom.
+
+   This avoids extra conditional rules and keeps the CSS simpler. */
+@media -moz-pref("uc.flex.style-web-content-outline", 2) {
+    @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
+        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") and -moz-pref("uc.flex.fully-hide-toolbox")) {
+            :root:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                #PersonalToolbar {
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        @media -moz-pref("sidebar.position_start") {
+                            margin-right: var(--uc-web-content-margin);
+                        }
+                        @media not -moz-pref("sidebar.position_start") {
+                            margin-left: var(--uc-web-content-margin);
+                        }
+                        pointer-events: none;
+                        border-bottom: var(--border-width) solid var(--uc-urlbar-outline);
+                        @media -moz-pref("uc.flex.fully-hide-sidebery") {
+                            margin: 0 var(--uc-web-content-margin) 0;
+                        }
+                    }
+
+                    :root[titlepreface*="\200c "] &::after {
+                        margin: 0 var(--uc-web-content-margin) 0;
+                    }
+                }
+            }
+        }
+    }
+}

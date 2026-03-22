@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v149-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v150-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -23,23 +23,14 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v6.0.5**
+**🦊 v6.0.6**
 
-* 修复由 Firefox v148 变更引入的回退问题，该问题导致新标签页搜索框样式失效。([Bug 2002027](https://bugzilla.mozilla.org/show_bug.cgi?id=2002027))
-* 调整启用 `uc.flex.style-urlbar-center-text` 时地址栏文字居中的计算方式。
-
-## 🦊 v6.0.4
-
-### ✨ 新增（仅限原生垂直标签页和 Sidebery）
-
-![Image](https://github.com/user-attachments/assets/596ef515-6d39-4a00-a7eb-c7e60c13f68d)
-
-* 新增选项 `uc.flex.style-tab-items-add-hover-trail`（布尔值）：
-
-  * 控制标签页悬停时的拖尾效果。
-  * 过去该效果仅在 `uc.flex.style-tab-items = 2` 时启用。
-  * 现在可以在任意标签样式下独立开启或关闭该效果。
-  * 默认启用，设置为 `false` 可关闭。
+- 改进：启用网页内容外框（`uc.flex.style-web-content-outline = 2`）时，展开自动隐藏的书签栏不再覆盖顶部边框。
+- 修复：
+  - 原生垂直标签页无法展开。（Nightly v150，[Bug 2013773](https://bugzilla.mozilla.org/show_bug.cgi?id=2013773)）
+  - 右键菜单图标无法应用 `uc.flex.style-sidebar-stripe-color` 指定的颜色。（Beta v149，[Bug 2012180](https://bugzilla.mozilla.org/show_bug.cgi?id=2012180)）
+  - 恢复分屏视图中“在页面中查找”的复选框。（Release v147，[Bug 1987142](https://bugzilla.mozilla.org/show_bug.cgi?id=1987142)）
+- 临时缓解：启用 `uc.flex.enable-rounded-web-content` 时，网页内容无法完全实现圆角。
 
 ## 🦊 v6.x.x 系列 – 重大功能更新
 

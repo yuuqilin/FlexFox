@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v149-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v150-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -23,23 +23,14 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v6.0.5**
+**🦊 v6.0.6**
 
-* Firefox v148 の変更により発生した回帰を修正しました。新しいタブページの検索ボックスのスタイルが適用されなくなっていました。([Bug 2002027](https://bugzilla.mozilla.org/show_bug.cgi?id=2002027))
-* `uc.flex.style-urlbar-center-text` を有効にした際のアドレスバーのテキスト中央配置の計算方法を調整しました。
-
-## 🦊 v6.0.4
-
-### ✨ 新機能（ネイティブ垂直タブおよび Sidebery のみ）
-
-![Image](https://github.com/user-attachments/assets/596ef515-6d39-4a00-a7eb-c7e60c13f68d)
-
-* 新しいオプション `uc.flex.style-tab-items-add-hover-trail`（Boolean）を追加:
-
-  * タブにホバー時のトレイル効果を制御します。
-  * これまでは `uc.flex.style-tab-items = 2` の場合にのみ有効でした。
-  * 現在は、任意のタブスタイルで独立して有効化または無効化できます。
-  * デフォルトで有効。`false` に設定すると無効化できます。
+- 改善: Web コンテンツにアウトライン（`uc.flex.style-web-content-outline = 2`）を適用した際、自動非表示のブックマークツールバーを展開しても上部の枠線が覆われないようにしました。
+- 修正:
+  - ネイティブ垂直タブが展開できない問題を修正しました。（Nightly v150、[Bug 2013773](https://bugzilla.mozilla.org/show_bug.cgi?id=2013773)）
+  - コンテキストメニューのアイコンに `uc.flex.style-sidebar-stripe-color` の色が適用されない問題を修正しました。（Beta v149、[Bug 2012180](https://bugzilla.mozilla.org/show_bug.cgi?id=2012180)）
+  - 「分割ビュー」での「ページ内検索」のチェックボックスを再表示しました。（Release v147、[Bug 1987142](https://bugzilla.mozilla.org/show_bug.cgi?id=1987142)）
+- 一時的な対応: `uc.flex.enable-rounded-web-content` を有効にしている場合、Web コンテンツの角丸が完全に適用されない問題を一時的に緩和しました。
 
 ## 🦊 v6.x.x 系列 – 主要機能アップデート
 

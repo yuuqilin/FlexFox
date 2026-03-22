@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v149-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v150-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -23,25 +23,16 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v6.0.5**
+**🦊 v6.0.6**
 
-* Fixed a regression introduced by Firefox v148 changes that caused the New Tab page search box styling to stop working. ([Bug 2002027](https://bugzilla.mozilla.org/show_bug.cgi?id=2002027))
-* Adjusted the text centering calculation in the address bar when `uc.flex.style-urlbar-center-text` is enabled.
+- Improvement: When applying a web content outline (`uc.flex.style-web-content-outline = 2`), the expanded auto-hidden Bookmarks Toolbar no longer covers the top border.
+- Fixes:
+  - Native vertical tabs could not expand. (Nightly v150, [Bug 2013773](https://bugzilla.mozilla.org/show_bug.cgi?id=2013773))
+  - Context menu icons were not tinted by `uc.flex.style-sidebar-stripe-color`. (Beta v149, [Bug 2012180](https://bugzilla.mozilla.org/show_bug.cgi?id=2012180))
+  - Restored the Find in Page checkboxes in Split View. (Release v147, [Bug 1987142](https://bugzilla.mozilla.org/show_bug.cgi?id=1987142))
+- Temporary mitigation: Web content cannot be fully rounded when `uc.flex.enable-rounded-web-content` is enabled.
 
 <!-- END What's New -->
-
-## 🦊 v6.0.4
-
-### ✨ New (Native Vertical Tabs and Sidebery only)
-
-![Image](https://github.com/user-attachments/assets/596ef515-6d39-4a00-a7eb-c7e60c13f68d)
-
-* Added a new option `uc.flex.style-tab-items-add-hover-trail` (Boolean):
-
-  * Controls the trailing effect when hovering over tabs. 
-  * Previously, this effect was only active when `uc.flex.style-tab-items = 2`.
-  * Now, the effect can be independently enabled or disabled for any tab style.
-  * Enabled by default. Set to `false` to disable it.
 
 ## 🦊 v6.x.x Series – Major Feature Update
 

@@ -43,6 +43,12 @@ findbar checkbox {
     background-color: var(--button-bgcolor);
 }
 
+/* !TEMPORARY: Restore Find in Page checkboxes hidden by Firefox v147 during Mozilla's redesign.
+   Remove this rule in the future once they are officially restored. */
+.split-view-panel .findbar-container > checkbox {
+    display: flex !important;
+}
+
 /*
 @keyframes findbar-scale-in {
     0% {

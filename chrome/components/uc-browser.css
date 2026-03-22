@@ -375,11 +375,14 @@ split-view-footer {
                                 background-color: #202020;
                             }
                             /* Clips background bleed around rounded corners */
+                            /* !TEMPORARY: Temporarily disabled, waiting for Mozilla to fix the clip-path issue */
+                            /*
                             clip-path: inset(
                                 0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip))
                                     var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip))
                                     var(--uc-web-content-radius-clip) var(--uc-web-content-radius-clip)
                             );
+                            */
                         }
                     }
                 }
