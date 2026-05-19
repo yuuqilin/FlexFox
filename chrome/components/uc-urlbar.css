@@ -64,8 +64,8 @@
 #urlbar[focused] {
     border: 0 !important;
     box-shadow:
-        inset 1px 1px 2px color-mix(in srgb, var(--toolbox-bgcolor) 70%, black),
-        inset -1px -1px 2px color-mix(in srgb, var(--toolbox-bgcolor) 85%, white);
+        inset 1px 1px 2px color-mix(in srgb, var(--toolbox-background-color) 70%, black),
+        inset -1px -1px 2px color-mix(in srgb, var(--toolbox-background-color) 85%, white);
     \/*
     border-top: 1px solid var(--uc-urlbar-border-top, transparent) !important;
     border-bottom: 1px solid var(--uc-urlbar-border-bottom, transparent) !important;
@@ -203,7 +203,7 @@
 #identity-icon-box.identity-box-button:hover,
 #trust-icon-container:hover {
     cursor: pointer;
-    background-color: var(--identity-btn-hover-color, var(--urlbar-box-hover-bgcolor)) !important;
+    background-color: var(--identity-btn-hover-color, var(--urlbar-box-background-color-hover)) !important;
 }
 
 /* Track protection icon */
@@ -606,18 +606,22 @@
 
 /* Searchmode Switcher */
 #urlbar[pageproxystate="valid"]:not([breakout-extend]):not([focused]):not([searchmode])
-    #urlbar-searchmode-switcher:not([open]) {
+    .searchmode-switcher:not([open]) {
     display: none;
 }
 
-#urlbar:is([pageproxystate="invalid"], [searchmode]) #urlbar-searchmode-switcher {
+#urlbar:is([pageproxystate="invalid"], [searchmode]) .searchmode-switcher {
     margin-left: 3px !important;
 }
 
-#urlbar-searchmode-switcher {
+/* v151 removed the '#urlbar-searchmode-switcher' ID and refactored '.searchmode-switcher' using Shadow DOM */
+.searchmode-switcher {
     margin-top: 3px !important;
     height: 25px !important;
     background-color: transparent !important;
+    --button-background-color: transparent !important;
+
+    /* !TEMPORARY: These legacy container border-radius rules can be removed in v151+ */
     border-top-left-radius: var(
         --uc-urlbar-border-radius,
         var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
@@ -634,8 +638,22 @@
         --uc-urlbar-icon-inner-radius,
         var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
     ) !important;
+
+    /* In v151+, the border-radius of '.searchmode-switcher' is customized by passing variables into the Shadow DOM */
+    --button-border-radius: var(
+            --uc-urlbar-border-radius,
+            var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
+        )
+        var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius)))
+        var(--uc-urlbar-icon-inner-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius)))
+        var(--uc-urlbar-border-radius, var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))) !important;
+
     &:hover:not([open="true"]) {
-        background-color: var(--urlbar-box-hover-bgcolor) !important;
+        background-color: var(--urlbar-box-background-color-hover) !important;
+        --button-background-color: var(--urlbar-box-background-color-hover) !important;
+        @media (prefers-color-scheme: dark) {
+            --button-background-color: color-mix(in srgb, currentColor 22%, transparent) !important;
+        }
     }
 }
 
@@ -649,7 +667,7 @@
     ) !important;
     padding-left: 6px;
     &:hover:not([open="true"]) {
-        background-color: var(--urlbar-box-hover-bgcolor) !important;
+        background-color: var(--urlbar-box-background-color-hover) !important;
     }
 }
 
@@ -675,7 +693,7 @@
     ) !important;
     opacity: 0.8;
     &:hover {
-        background-color: var(--urlbar-box-hover-bgcolor) !important;
+        background-color: var(--urlbar-box-background-color-hover) !important;
     }
     .toolbarbutton-text {
         margin-bottom: 1px;
@@ -784,9 +802,13 @@
 
 #PopupSearchAutoComplete {
     border-radius: var(--uc-searchbar-popup-border-radius, var(--toolbarbutton-border-radius));
+    /* !TEMPORARY: */
     --panel-shadow-margin: 0px !important;
+    --panel-box-shadow-margin: 0px !important;
     background-color: var(--uc-toolbar-bgcolor);
     --panel-color: var(--toolbar-field-focus-color);
     --panel-background: var(--uc-searchbar-bgcolor, var(--toolbar-field-focus-background-color)) !important;
+    /*
     --panel-border-color: var(--arrowpanel-border-color);
+    */
 }

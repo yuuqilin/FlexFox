@@ -200,32 +200,38 @@
         background-image: url("../icons/menu/calendar-agenda.svg");
     }
     #toolbar-context-customize-sidebar {
-        background-image: url("chrome://browser/skin/sidebars.svg");
+        background-image: url("../icons/menu/sidebars.svg");
     }
 
     /* Places toolbar menu */
-    #placesContext_openBookmarkContainer\:tabs {
+    #placesContext_openBookmarkContainer\:tabs,
+    #sidebar-bookmarks-context-open-all-bookmarks {
         background-image: url("chrome://browser/skin/open.svg");
     }
     #placesContext_open,
     #context-openlinkincurrent {
         background-image: url("../icons/menu/open-in-window.svg");
     }
-    #placesContext_open\:newcontainertab {
+    #placesContext_open\:newcontainertab,
+    #sidebar-bookmarks-context-open-in-container-tab {
         background-image: url("../icons/menu/reopen-in-container.svg");
     }
-    #placesContext_sortBy\:name {
+    #placesContext_sortBy\:name,
+    #sidebar-bookmarks-context-sort-by-name {
         background-image: url("../icons/menu/sort-alpha-down.svg");
         background-position-x: 0.9em;
         background-size: 20px;
     }
-    #placesContext_new\:bookmark {
+    #placesContext_new\:bookmark,
+    #sidebar-bookmarks-context-add-bookmark {
         background-image: url("chrome://browser/skin/bookmark-hollow.svg");
     }
-    #placesContext_new\:folder {
+    #placesContext_new\:folder,
+    #sidebar-bookmarks-context-add-folder {
         background-image: url("chrome://devtools/skin/images/folder.svg");
     }
-    #placesContext_new\:separator {
+    #placesContext_new\:separator,
+    #sidebar-bookmarks-context-add-separator {
         background-image: url("../icons/menu/separator.svg");
         background-position-x: 0.85em;
         background-size: 20px;
@@ -340,7 +346,8 @@
         background-image: url("../icons/menu/duckduckgo.svg");
     }
 
-    #context-media-loop {
+    #context-media-loop,
+    #context_reverseSplitView {
         background-image: url("../icons/menu/repeat.svg");
         background-position-x: 0.8em !important;
         background-size: 20.5px;
@@ -488,6 +495,9 @@
     .subviewbutton[command="cmd_CustomizeToolbars"] {
         list-style-image: url("chrome://browser/skin/customize.svg");
     }
+    .subviewbutton[command="cmd_openAboutTranslations"] {
+        list-style-image: url("chrome://browser/skin/translations.svg");
+    }
     .subviewbutton[oncommand="switchToTabHavingURI('about:performance', true)"] {
         list-style-image: url("chrome://global/skin/icons/performance.svg");
     }
@@ -554,7 +564,7 @@
         list-style-image: url("chrome://browser/skin/sidebars-right.svg");
     }
     #sidebar-reverse-position[label="Move Sidebar to Left"] {
-        list-style-image: url("chrome://browser/skin/sidebars.svg");
+        list-style-image: url("../icons/menu/sidebars.svg");
     }
     .subviewbutton[data-l10n-id="sidebar-menu-close"] {
         list-style-image: url("chrome://global/skin/icons/close.svg");
@@ -640,7 +650,8 @@
     .customize-context-removeExtension,
     menuitem[data-l10n-id="toolbar-context-menu-remove-from-toolbar"],
     .downloadDeleteFileMenuItem,
-    menuitem[id^="placesContext_delete"] {
+    menuitem[id^="placesContext_delete"],
+    #sidebar-bookmarks-context-delete-bookmark {
         background-image: url("chrome://global/skin/icons/delete.svg");
     }
     #menu_find,
@@ -658,7 +669,7 @@
     }
     #viewSidebarMenuMenu,
     #BMB_viewBookmarksSidebar {
-        background-image: url("chrome://browser/skin/sidebars.svg");
+        background-image: url("../icons/menu/sidebars.svg");
     }
     #menu_bookmarksSidebar:not([checked="true"]),
     menuitem[data-l10n-id="menu-bookmark-edit"] {
@@ -878,7 +889,8 @@
     #disableForOriginMenuItem {
         background-image: url("chrome://browser/skin/notification-icons/desktop-notification-blocked.svg");
     }
-    menuitem[data-l10n-id^="places-edit-"] {
+    menuitem[data-l10n-id^="places-edit-"],
+    #sidebar-bookmarks-context-edit-bookmark {
         background-image: url("chrome://global/skin/icons/edit.svg");
     }
     #context-translate-selection {

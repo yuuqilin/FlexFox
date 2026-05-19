@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v150-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v153-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -23,14 +23,19 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
-**🦊 v6.0.6**
+**🦊 v6.0.7**
 
-- Improvement: When applying a web content outline (`uc.flex.style-web-content-outline = 2`), the expanded auto-hidden Bookmarks Toolbar no longer covers the top border.
-- Fixes:
-  - Native vertical tabs could not expand. (Nightly v150, [Bug 2013773](https://bugzilla.mozilla.org/show_bug.cgi?id=2013773))
-  - Context menu icons were not tinted by `uc.flex.style-sidebar-stripe-color`. (Beta v149, [Bug 2012180](https://bugzilla.mozilla.org/show_bug.cgi?id=2012180))
-  - Restored the Find in Page checkboxes in Split View. (Release v147, [Bug 1987142](https://bugzilla.mozilla.org/show_bug.cgi?id=1987142))
-- Temporary mitigation: Web content cannot be fully rounded when `uc.flex.enable-rounded-web-content` is enabled.
+- Fixed an issue introduced in v149 where the "prevent white background flashing while tabs are loading" feature stopped working. [Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)
+- Fixed an issue introduced in v150 where the navigation bar lost the theme background image when expanded in horizontal tabs mode. [Bug 1952602](https://bugzilla.mozilla.org/show_bug.cgi?id=1952602)
+- Fixed an issue introduced in v151 that broke the styling of the Search Mode Switcher. [Bug 1998985](https://bugzilla.mozilla.org/show_bug.cgi?id=1998985)
+- Fixed an issue introduced in v151 that broke the styling of the URL bar. [Bug 2008598](https://bugzilla.mozilla.org/show_bug.cgi?id=2008598)
+- Fixed an issue introduced in v151 where the `uc.flex.menu-item-spacing` option and panel styling no longer worked. [Bug 2019097](https://bugzilla.mozilla.org/show_bug.cgi?id=2019097)
+- Fixed an issue introduced in v152 where Findbar buttons no longer showed hover highlights. [Bug 2017970](https://bugzilla.mozilla.org/show_bug.cgi?id=2017970)
+- Fixed an issue introduced in v152 where the tab hover background transition animation no longer worked. [Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
+- Fixed issues introduced in Nightly v152 where toolbar background colors disappeared and theme background images became misaligned. [Bug 2034495](https://bugzilla.mozilla.org/show_bug.cgi?id=2034495)
+- Fixed a misaligned bottom outline when the bookmarks toolbar is expanded in horizontal tabs mode.
+- Fixed a misaligned bookmarks toolbar background image when `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3`.
+- Added icons for several new menu items introduced in recent Firefox versions.
 
 <!-- END What's New -->
 

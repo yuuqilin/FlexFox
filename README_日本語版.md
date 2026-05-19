@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v150-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v153-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -23,14 +23,19 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
-**🦊 v6.0.6**
+**🦊 v6.0.7**
 
-- 改善: Web コンテンツにアウトライン（`uc.flex.style-web-content-outline = 2`）を適用した際、自動非表示のブックマークツールバーを展開しても上部の枠線が覆われないようにしました。
-- 修正:
-  - ネイティブ垂直タブが展開できない問題を修正しました。（Nightly v150、[Bug 2013773](https://bugzilla.mozilla.org/show_bug.cgi?id=2013773)）
-  - コンテキストメニューのアイコンに `uc.flex.style-sidebar-stripe-color` の色が適用されない問題を修正しました。（Beta v149、[Bug 2012180](https://bugzilla.mozilla.org/show_bug.cgi?id=2012180)）
-  - 「分割ビュー」での「ページ内検索」のチェックボックスを再表示しました。（Release v147、[Bug 1987142](https://bugzilla.mozilla.org/show_bug.cgi?id=1987142)）
-- 一時的な対応: `uc.flex.enable-rounded-web-content` を有効にしている場合、Web コンテンツの角丸が完全に適用されない問題を一時的に緩和しました。
+- v149 の不具合により、「タブ読み込み中の白い背景のちらつきを防ぐ」機能が動作しなくなっていた問題を修正しました。[Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)
+- v150 の変更により、水平タブモードでナビゲーションバーを展開した際に、テーマの背景画像が表示されなくなる問題を修正しました。[Bug 1952602](https://bugzilla.mozilla.org/show_bug.cgi?id=1952602)
+- v151 の変更により、Search Mode Switcher のスタイルが適用されなくなっていた問題を修正しました。[Bug 1998985](https://bugzilla.mozilla.org/show_bug.cgi?id=1998985)
+- v151 の変更により、URL バーのスタイルが適用されなくなっていた問題を修正しました。[Bug 2008598](https://bugzilla.mozilla.org/show_bug.cgi?id=2008598)
+- v151 の変更により、`uc.flex.menu-item-spacing` オプションおよびパネルのスタイルが動作しなくなっていた問題を修正しました。[Bug 2019097](https://bugzilla.mozilla.org/show_bug.cgi?id=2019097)
+- v152 の変更により、Findbar ボタンのホバー時のハイライトが表示されなくなっていた問題を修正しました。[Bug 2017970](https://bugzilla.mozilla.org/show_bug.cgi?id=2017970)
+- v152 の変更により、タブにカーソルを合わせた際の背景色トランジションアニメーションが動作しなくなっていた問題を修正しました。[Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
+- Nightly v152 の変更により、ツールバーの背景色が消失し、テーマの背景画像がずれる問題を修正しました。[Bug 2034495](https://bugzilla.mozilla.org/show_bug.cgi?id=2034495)
+- 水平タブモードでブックマークツールバーを展開した際に、下部のアウトラインがずれる問題を修正しました。
+- `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` 使用時に、ブックマークツールバーの背景画像がずれる問題を修正しました。
+- 最近の Firefox バージョンで追加された複数のメニュー項目にアイコンを追加しました。
 
 ## 🦊 v6.x.x 系列 – 主要機能アップデート
 

@@ -5,11 +5,14 @@
         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
         :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
             #browser {
+                /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
                 --toolbar-bgcolor: var(--uc-bgcolor) !important;
                 --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
+                --toolbar-background-color: var(--uc-bgcolor) !important;
+                --toolbox-background-color-inactive: var(--uc-bgcolor) !important;
                 background-image:
                     var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                    linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
+                    linear-gradient(var(--uc-bgcolor), var(--uc-bgcolor)),
                     var(--lwt-header-image, var(--lwt-additional-images)) !important;
 
                 /* Ensure the background color of the sidebar stripe area matches the sidebar when the window is inactive */
@@ -375,14 +378,11 @@ split-view-footer {
                                 background-color: #202020;
                             }
                             /* Clips background bleed around rounded corners */
-                            /* !TEMPORARY: Temporarily disabled, waiting for Mozilla to fix the clip-path issue */
-                            /*
                             clip-path: inset(
                                 0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip))
                                     var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip))
                                     var(--uc-web-content-radius-clip) var(--uc-web-content-radius-clip)
                             );
-                            */
                         }
                     }
                 }
@@ -795,7 +795,9 @@ split-view-footer {
             rgba(32, 32, 32, var(--uc-menupopup-backdrop-transparency))
         ) !important;
         appearance: menupopup !important;
+        /* !TEMPORARY: v151 renames '--panel-shadow-margin' to '--panel-box-shadow-margin'; compatibility declarations for older versions can be removed in v151+. */
         --panel-shadow-margin: 0px !important;
+        --panel-box-shadow-margin: 0px !important;
     }
 
     /* backdrop-filter doesn't blur remote <browser> element https://bugzilla.mozilla.org/show_bug.cgi?id=1799334 */
@@ -844,7 +846,12 @@ split-view-footer {
 
 @media -moz-pref("uc.flex.browser-wallpaper-enabled") {
     #main-window {
+        /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
         --toolbar-bgcolor: light-dark(
+            rgba(var(--uc-browser-wallpaper-light-mask), var(--uc-browser-wallpaper-transparency)),
+            rgba(var(--uc-browser-wallpaper-dark-mask), var(--uc-browser-wallpaper-transparency))
+        ) !important;
+        --toolbar-background-color: light-dark(
             rgba(var(--uc-browser-wallpaper-light-mask), var(--uc-browser-wallpaper-transparency)),
             rgba(var(--uc-browser-wallpaper-dark-mask), var(--uc-browser-wallpaper-transparency))
         ) !important;
@@ -859,7 +866,8 @@ split-view-footer {
 
         background-image:
             var(--uc-acrylic-noise-image, none),
-            linear-gradient(var(--toolbar-bgcolor, Field), var(--toolbar-bgcolor, Field)), var(--lwt-header-image, none) !important;
+            linear-gradient(var(--toolbar-background-color, Field), var(--toolbar-background-color, Field)),
+            var(--lwt-header-image, none) !important;
         background-repeat: repeat, no-repeat, no-repeat !important;
         background-position: right top !important;
         background-position-y: top !important;
@@ -901,15 +909,21 @@ split-view-footer {
 
     @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
         #navigator-toolbox {
+            /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
             --toolbox-bgcolor: transparent !important;
             --toolbox-bgcolor-inactive: transparent !important;
+            --toolbox-background-color: transparent !important;
+            --toolbox-background-color-inactive: transparent !important;
         }
         #sidebar-main {
             --uc-bgcolor: transparent;
         }
         #browser {
+            /* !TEMPORARY: */
             --toolbox-bgcolor: transparent !important;
             --toolbox-bgcolor-inactive: transparent !important;
+            --toolbox-background-color: transparent !important;
+            --toolbox-background-color-inactive: transparent !important;
         }
     }
 }

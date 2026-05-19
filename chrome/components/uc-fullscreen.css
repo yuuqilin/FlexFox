@@ -38,7 +38,7 @@
         /*
         background-color: var(--lwt-accent-color, black) !important;
         */
-        background-color: var(--toolbox-bgcolor) !important;
+        background-color: var(--toolbox-background-color) !important;
         transition: var(--uc-autohide-navbar-transition) !important;
         /*
         transition:

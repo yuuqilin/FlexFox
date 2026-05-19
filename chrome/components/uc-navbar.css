@@ -19,14 +19,38 @@
         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
         :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
             #navigator-toolbox {
+                /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
                 --toolbar-bgcolor: var(--uc-bgcolor) !important;
                 --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
+                --toolbar-background-color: var(--uc-bgcolor) !important;
+                --toolbox-background-color-inactive: var(--uc-bgcolor) !important;
                 background-image:
                     var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                    linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
+                    linear-gradient(var(--uc-bgcolor), var(--uc-bgcolor)),
                     var(--lwt-header-image, var(--lwt-additional-images)) !important;
             }
         }
+    }
+}
+
+/** 
+ * In v150, theme background images were moved to the body element, 
+ * causing the navigator area to lose its background image when expanded. 
+ * Reattach the background image to the navigator here. 
+ */
+#navigator-toolbox {
+    :root[lwtheme] & {
+        background-image: var(--lwt-additional-images);
+        background-repeat: var(--lwt-background-tiling);
+        background-position: var(--lwt-background-alignment);
+    }
+
+    :root[lwtheme-image] & {
+        background-image: var(--lwt-header-image), var(--lwt-additional-images);
+        background-repeat: no-repeat, var(--lwt-background-tiling);
+        background-position:
+            right top,
+            var(--lwt-background-alignment);
     }
 }
 
@@ -108,7 +132,7 @@ toolbarbutton:hover {
             /*
             background-color: var(--lwt-accent-color, black) !important;
             */
-            background-color: var(--toolbox-bgcolor) !important;
+            background-color: var(--toolbox-background-color) !important;
             transition: var(--uc-autohide-navbar-transition) !important;
             /*
             transition:
@@ -290,7 +314,7 @@ toolbarbutton:hover {
             /*
             background-color: var(--lwt-accent-color, black) !important;
             */
-            background-color: var(--toolbox-bgcolor) !important;
+            background-color: var(--toolbox-background-color) !important;
             transition: var(--uc-autohide-navbar-transition) !important;
             /*
             transition:

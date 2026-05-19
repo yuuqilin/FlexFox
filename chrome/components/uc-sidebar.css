@@ -6,6 +6,16 @@
     min-width: var(--uc-sidebar-stripe-width) !important;
 }
 
+/* Add some spacing between the splitter and the web content area */
+#sidebar-splitter {
+    @media -moz-pref("uc.flex.style-web-content-outline") and (not -moz-pref("sidebar.revamp")) {
+        width: var(--space-medium) !important;
+        border-inline: calc((var(--space-medium) - var(--splitter-width)) / 2) solid transparent !important;
+        background-clip: padding-box;
+        margin-block-end: var(--space-small) !important;
+    }
+}
+
 /* Remove background fill from sidebar buttons */
 #sidebar-button {
     /* Fix missing icon height caused by a regression in Nightly 142 */
@@ -14,7 +24,9 @@
         height: 16px;
     }
     &:not(:hover) {
+        /* !TEMPORARY: v152 renames '--toolbarbutton-*-background' to '--toolbarbutton-background-color-*'; compatibility declarations for older versions can be removed in v152+. */
         --toolbarbutton-active-background: transparent !important;
+        --toolbarbutton-background-color-active: transparent !important;
     }
     @media not -moz-pref("uc.flex.style-sidebar-button", 0) {
         :root[customizing] & {
@@ -624,9 +636,12 @@
     /* 🔽 [BLOCK B] Start of rules for active Sidebery */
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
     #sidebar-main {
-        --uc-bgcolor: var(--toolbox-bgcolor);
-        &:-moz-window-inactive {
-            --uc-bgcolor: var(--toolbox-bgcolor-inactive);
+        --uc-bgcolor: transparent;
+        @media -moz-pref("sidebar.verticalTabs") {
+            --uc-bgcolor: var(--toolbox-background-color);
+            &:-moz-window-inactive {
+                --uc-bgcolor: var(--toolbox-background-color-inactive);
+            }
         }
         @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
             position: var(--uc-sb-sidebar-main-position, static) !important;
@@ -1816,7 +1831,7 @@
                 --audio-overlay-extra-background: transparent;
                 background-color: var(--lwt-accent-color);
                 background-image:
-                    linear-gradient(var(--audio-overlay-extra-background)), linear-gradient(var(--toolbox-bgcolor));
+                    linear-gradient(var(--audio-overlay-extra-background)), linear-gradient(var(--toolbox-background-color));
                 -moz-context-properties: fill, fill-opacity;
                 fill: var(--tab-selected-textcolor);
                 color-scheme: var(--tab-selected-color-scheme);
@@ -1829,19 +1844,19 @@
                 .tabbrowser-tab:hover &:not([selected]) {
                     background-image:
                         linear-gradient(var(--audio-overlay-extra-background)),
-                        linear-gradient(var(--tab-hover-background-color)), linear-gradient(var(--toolbox-bgcolor)) !important;
+                        linear-gradient(var(--tab-background-color-hover)), linear-gradient(var(--toolbox-background-color)) !important;
                 }
                 &[selected] {
                     background-image:
                         linear-gradient(var(--audio-overlay-extra-background)),
                         linear-gradient(var(--uc-vt-active-tab-bgcolor)),
-                        linear-gradient(var(--toolbox-bgcolor)) !important;
+                        linear-gradient(var(--toolbox-background-color)) !important;
                 }
                 .browser-toolbox-background:-moz-window-inactive &[selected] {
                     background-image:
                         linear-gradient(var(--audio-overlay-extra-background)),
                         linear-gradient(var(--uc-vt-active-tab-bgcolor)),
-                        linear-gradient(var(--toolbox-bgcolor-inactive)) !important;
+                        linear-gradient(var(--toolbox-background-color-inactive)) !important;
                 }
             }
             */
@@ -2376,7 +2391,7 @@
             position: absolute;
             background-color: var(--uc-split-view-in-tab-group-bgcolor, var(--uc-split-view-bgcolor));
             /*
-                background-color: var(--tab-hover-background-color);
+                background-color: var(--tab-background-color-hover);
                 border: 1.5px solid var(--uc-vt-pinned-tab-border-color);
                 */
             inset: 0;
@@ -2390,7 +2405,7 @@
         &:not([hasactivetab]) {
             .tabbrowser-tab {
                 &:hover .tab-background:not([multiselected]) {
-                    background-color: var(--tab-hover-background-color) !important;
+                    background-color: var(--tab-background-color-hover) !important;
                 }
 
                 &:first-child {

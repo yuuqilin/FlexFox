@@ -111,7 +111,7 @@
     }
     #unified-extensions-view > .panel-header + toolbarseparator {
         border: none !important;
-        margin: 0 0 var(--arrowpanel-menuitem-margin-inline) !important;
+        margin: 0 0 var(--panel-menuitem-margin-inline) !important;
     }
     #unified-extensions-view .unified-extensions-item {
         margin-block: 0 !important;
@@ -121,7 +121,7 @@
     }
     #unified-extensions-view .unified-extensions-item-menu-button {
         list-style-image: url("chrome://global/skin/icons/more.svg") !important;
-        padding: 0 0 0 var(--arrowpanel-menuitem-margin-inline) !important;
+        padding: 0 0 0 var(--panel-menuitem-margin-inline) !important;
     }
     #unified-extensions-view .unified-extensions-item-menu-button > .toolbarbutton-icon {
         border: none !important;

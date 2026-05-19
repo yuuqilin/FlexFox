@@ -74,6 +74,11 @@
                             visibility: var(--uc-autohide-tabstoolbar-visibility);
                             margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
                             transition: var(--uc-hover-tabstoolbar-transition) !important;
+                            & ~ #PersonalToolbar {
+                                --uc-theme-bg-y-clip: calc(
+                                    -25px - var(--uc-theme-bg-y-offset) + var(--uc-sb-theme-bg-y-offset, 0px)
+                                );
+                            }
                         }
                     }
                 }
@@ -510,7 +515,7 @@ toolbar#TabsToolbar {
         .tab-audio-button {
             --button-size-icon-small: 16px !important;
             --button-min-height-small: var(--button-size-icon-small) !important;
-            --button-background-color-ghost: var(--toolbox-bgcolor-inactive);
+            --button-background-color-ghost: var(--toolbox-background-color-inactive);
             --button-border-radius: var(--border-radius-circle) !important;
             --button-padding-icon: 2px;
             --button-border: none;

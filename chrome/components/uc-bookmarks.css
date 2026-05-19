@@ -7,6 +7,9 @@
             /* 0deg = "show" ; 90deg = "hide" ;  Set the following to control when bookmarks are shown */
             --uc-autohide-toolbar-focus-rotation: 0deg; /* urlbar is focused */
             --uc-autohide-toolbar-hover-rotation: 0deg; /* cursor is over the toolbar area */
+            /* !TEMPORARY: v152 renames '--toolbarbutton-*-padding' to '--toolbarbutton-padding-*'; compatibility declarations for older versions can be removed in v152+. */
+            --toolbarbutton-padding-inner: 4px;
+            --toolbarbutton-padding-outer: 2px;
         }
 
         #PersonalToolbar:not([customizing]) {
@@ -23,8 +26,8 @@
             --uc-bg-y: calc(
                 -2 *
                     (
-                        var(--tab-block-margin) + var(--toolbarbutton-inner-padding) +
-                            var(--toolbarbutton-outer-padding)
+                        var(--tab-block-margin) + var(--toolbarbutton-padding-inner) +
+                            var(--toolbarbutton-padding-outer)
                     ) -
                     var(--tab-min-height) + var(--uc-theme-bg-y-clip) - var(--bookmark-block-padding)
             );
@@ -37,7 +40,7 @@
                 @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
                     background-image:
                         var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                        linear-gradient(var(--toolbar-bgcolor), var(--toolbar-bgcolor)),
+                        linear-gradient(var(--toolbar-background-color), var(--toolbar-background-color)),
                         var(--lwt-header-image, var(--lwt-additional-images)) !important;
                 }
             }
@@ -58,7 +61,10 @@
         @media -moz-pref("sidebar.verticalTabs") {
             &:where([lwtheme-image], [style*="--lwt-additional-images"]) {
                 #PersonalToolbar {
+                    /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
                     --toolbar-bgcolor: transparent;
+                    --toolbar-background-color: transparent;
+                    --toolbox-background-color: transparent;
                 }
             }
 
@@ -66,14 +72,16 @@
                 background-color: inherit !important;
                 margin-bottom: calc(0px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
                 --uc-bg-y: calc(
-                    0px - (2 * var(--toolbarbutton-inner-padding) + var(--toolbarbutton-outer-padding)) -
+                    0px - (2 * var(--toolbarbutton-padding-inner) + var(--toolbarbutton-padding-outer)) -
                         var(--uc-theme-bg-y-clip) - var(--bookmark-block-padding)
                 );
             }
         }
 
         &[uidensity="compact"] #PersonalToolbar {
+            /* !TEMPORARY: v152 renames '--toolbarbutton-*-padding' to '--toolbarbutton-padding-*'; compatibility declarations for older versions can be removed in v152+. */
             --toolbarbutton-outer-padding: 1px !important;
+            --toolbarbutton-padding-outer: 1px !important;
         }
         #PlacesToolbarItems > .bookmark-item,
         #OtherBookmarks,
@@ -176,21 +184,26 @@
                         content: "";
                         position: absolute;
                         inset: 0;
-                        @media -moz-pref("sidebar.position_start") {
-                            margin-right: var(--uc-web-content-margin);
-                        }
-                        @media not -moz-pref("sidebar.position_start") {
-                            margin-left: var(--uc-web-content-margin);
-                        }
+                        margin: 0 var(--uc-personal-toolbar-outline-margin-side) 0;
                         pointer-events: none;
                         border-bottom: var(--border-width) solid var(--uc-urlbar-outline);
-                        @media -moz-pref("uc.flex.fully-hide-sidebery") {
-                            margin: 0 var(--uc-web-content-margin) 0;
-                        }
                     }
 
-                    :root[titlepreface*="\200c "] &::after {
-                        margin: 0 var(--uc-web-content-margin) 0;
+                    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+                        :root:not([titlepreface*="\200c "]) &::after {
+                            @media -moz-pref("sidebar.position_start") {
+                                margin-left: var(
+                                    --uc-sb-personal-toolbar-outline-margin-side,
+                                    var(--uc-personal-toolbar-outline-margin-side)
+                                );
+                            }
+                            @media not -moz-pref("sidebar.position_start") {
+                                margin-right: var(
+                                    --uc-sb-personal-toolbar-outline-margin-side,
+                                    var(--uc-personal-toolbar-outline-margin-side)
+                                );
+                            }
+                        }
                     }
                 }
             }

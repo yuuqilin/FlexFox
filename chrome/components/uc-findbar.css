@@ -113,11 +113,11 @@ findbar {
     align-items: center;
     transform-origin: top center;
     animation: findbar-slide-in 0.3s;
-    background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)) !important;
+    background-color: var(--uc-findbar-bgcolor, var(--toolbar-background-color)) !important;
     background-image:
         linear-gradient(
-            var(--uc-findbar-bgcolor, var(--toolbar-bgcolor)),
-            var(--uc-findbar-bgcolor, var(--toolbar-bgcolor))
+            var(--uc-findbar-bgcolor, var(--toolbar-background-color)),
+            var(--uc-findbar-bgcolor, var(--toolbar-background-color))
         ),
         var(--lwt-additional-images) !important;
     border: 0;
@@ -197,10 +197,10 @@ findbar {
 }
 
 .findbar-closebutton:hover {
-    background: var(--toolbarbutton-hover-background) !important;
+    background: var(--toolbarbutton-background-color-hover) !important;
 }
 .findbar-closebutton {
-    background-color: var(--button-background-color, var(--toolbar-bgcolor)) !important;
+    background-color: var(--button-background-color, var(--toolbar-background-color)) !important;
     /* wasn't square for some reason */
     width: auto !important;
     padding: 4px !important;
@@ -216,7 +216,7 @@ findbar {
     position: absolute;
     padding: 20px 16px 3px 10px;
     top: 16px;
-    background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor));
+    background-color: var(--uc-findbar-bgcolor, var(--toolbar-background-color));
     left: 0px;
     border-bottom-left-radius: var(--uc-findbar-outer-border-radius);
     border-bottom-right-radius: 20px;
@@ -234,7 +234,7 @@ findbar {
     content: "";
     width: 22px;
     height: 22px;
-    background-color: var(--uc-findbar-bgcolor, var(--toolbar-bgcolor));
+    background-color: var(--uc-findbar-bgcolor, var(--toolbar-background-color));
     right: -6px;
     top: 7px;
     transform: rotate(45deg);

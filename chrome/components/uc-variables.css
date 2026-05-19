@@ -72,10 +72,15 @@
                     --arrowpanel-background: var(
                         --uc-urlbar-bg
                     ) !important; /* Toolbar button dropdown background color */
+                    --panel-background-color: var(
+                        --uc-urlbar-bg
+                    ) !important; /* Toolbar button dropdown background color */
                     @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
                         --arrowpanel-background: #191917 !important;
+                        --panel-background-color: #191917 !important;
                     }
                     --arrowpanel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
+                    --panel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
 
                     --identity-btn-hover-color: rgba(
                         117,
@@ -140,8 +145,10 @@
                     }
 
                     --arrowpanel-background: #e2e8f0 !important; /* Toolbar button dropdown background color */
+                    --panel-background-color: #e2e8f0 !important; /* Toolbar button dropdown background color */
                     @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
                         --arrowpanel-background: #f8f8f8 !important;
+                        --panel-background-color: #f8f8f8 !important;
                     }
 
                     --identity-btn-hover-color: white !important; /* Hover color for the URL bar lock icon */
@@ -778,6 +785,8 @@
         --border-radius-medium: 4px !important;
         --arrowpanel-border-radius: 8px;
         --arrowpanel-menuitem-border-radius: 4px;
+        --panel-border-radius: 8px;
+        --panel-menuitem-border-radius: 4px;
         */
     }
 
@@ -980,6 +989,7 @@
 
     /* Vertical spacing between items in the Firefox app menu (hamburger menu), bookmarks menu, and context menus. */
     --uc-app-menu-item-padding-block: 4px;
+    --uc-app-menu-item-padding-inline: 4px;
     --uc-menu-item-padding-block: 2px;
     --uc-content-area-context-menu-item-padding-block: 2px;
     --uc-appMenu-zoom-controls-x-offset: 0px;
@@ -1125,6 +1135,25 @@
 
     ════════════════════════════════════════════════════════════════════ */
     /* 🔽 Begin initializing block */
+    /**
+     * !TEMPORARY:
+     * The tokens on the right below were renamed to the tokens on the left in newer Firefox versions.
+     * FlexFox has already been updated to use the new token names, but older Firefox versions do not define them.
+     * To maintain compatibility, these declarations map the new tokens to the old values.
+     * Since they are not overridden with !important,
+     * they automatically become inactive in newer versions where the new tokens already exist.
+     * These compatibility declarations can be removed once support for older Firefox versions is dropped.
+     */
+    /* v151+ */
+    --urlbar-box-background-color-hover: var(--urlbar-box-hover-bgcolor);
+    --panel-menuitem-margin-inline: var(--arrowpanel-menuitem-margin-inline);
+    /* v152+ */
+    --toolbar-background-color: var(--toolbar-bgcolor);
+    --toolbox-background-color: var(--toolbox-bgcolor);
+    --toolbox-background-color-inactive: var(--toolbox-bgcolor-inactive);
+    --toolbarbutton-background-color-hover: var(--toolbarbutton-hover-background);
+    --tab-background-color-hover: var(--tab-hover-background-color);
+
     --uc-toolbar-bgcolor: var(--uc-bgcolor); /* Internal fallback; must match --uc-bgcolor */
     --uc-sidebar-stripe-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
 
@@ -1533,6 +1562,7 @@
         opacity var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay), box-shadow 0.3s ease-out,
         left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
     --uc-autohide-personal-toolbar-transition:
+        background-image var(--uc-autohide-toolbar-duration) linear var(--uc-autohide-toolbar-delay) allow-discrete,
         opacity var(--uc-autohide-toolbar-duration) linear var(--uc-autohide-toolbar-delay),
         transform var(--uc-autohide-toolbar-duration) linear var(--uc-autohide-toolbar-delay);
     --uc-autohide-tabstoolbar-windows-controls-transition:
@@ -1567,6 +1597,8 @@
                 var(--uc-autohide-sidebar-delay),
             box-shadow 0.3s ease-out, left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
         --uc-autohide-personal-toolbar-transition:
+            background-image var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-autohide-sidebar-delay) allow-discrete,
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -1620,6 +1652,8 @@
                         calc(var(--uc-autohide-sidebar-delay) + 28ms),
                     box-shadow 0.3s ease-out, left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
                 --uc-autohide-personal-toolbar-transition:
+                    background-image var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        calc(var(--uc-autohide-sidebar-delay) + 28ms) allow-discrete,
                     opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         calc(var(--uc-autohide-sidebar-delay) + 28ms),
                     transform var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -1654,6 +1688,7 @@
         opacity var(--uc-autohide-toolbar-duration) ease var(--uc-hover-toolbar-delay), box-shadow 0.3s ease-out,
         left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
     --uc-hover-personal-toolbar-transition:
+        background-image var(--uc-autohide-toolbar-duration) linear var(--uc-hover-toolbar-delay) allow-discrete,
         opacity var(--uc-autohide-toolbar-duration) linear var(--uc-hover-toolbar-delay),
         transform var(--uc-autohide-toolbar-duration) linear var(--uc-hover-toolbar-delay);
     --uc-hover-tabstoolbar-windows-controls-transition:
@@ -1685,6 +1720,8 @@
             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
             box-shadow 0.3s ease-out, left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
         --uc-hover-personal-toolbar-transition:
+            background-image var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                var(--uc-hover-sidebar-delay) allow-discrete,
             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
             transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-hover-sidebar-delay);
@@ -1965,6 +2002,7 @@
         }
 
         @media not -moz-pref("sidebar.verticalTabs") {
+            --uc-sb-personal-toolbar-outline-margin-side: 0px;
             --uc-sb-navbar-hover-clip-mica: 0px;
             /* If Sidebery is active while horizontal tabs are fully hidden, 
                 the clipped height doesn't need to account for the tab bar */
@@ -2083,6 +2121,16 @@
     --uc-navigator-width: var(--uc-sb-sidebar-offset, 0px);
     --uc-personal-toolbar-offset: var(--uc-sb-sidebar-offset, 0px);
     --uc-personal-toolbar-width: var(--uc-sb-sidebar-offset, 0px);
+    --uc-personal-toolbar-outline-margin-side: 0px;
+    @media -moz-pref("uc.flex.enable-rounded-web-content") {
+        --uc-personal-toolbar-outline-margin-side: var(--uc-web-content-margin);
+    }
+    @media -moz-pref("sidebar.revamp") and (not -moz-pref("sidebar.verticalTabs")) {
+        --uc-personal-toolbar-outline-margin-side: 0px;
+    }
+    @media -moz-pref("sidebar.verticalTabs") {
+        --uc-sb-personal-toolbar-outline-margin-side: 0px;
+    }
 
     /* Adjust vertical offset of the bookmarks toolbar background image */
     #PersonalToolbar {
@@ -2091,6 +2139,9 @@
             --uc-theme-bg-y-offset: 3px;
         }
         --uc-theme-bg-y-clip: calc(-25px - var(--uc-theme-bg-y-offset) + var(--uc-sb-theme-bg-y-offset, 0px));
+        @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
+            --uc-theme-bg-y-clip: calc(19px + var(--uc-theme-bg-y-offset));
+        }
         /* !v143 */
         #toolbar-menubar:not([autohide="true"]):not([autohide=""]) ~ & {
             --uc-theme-bg-y-clip: calc(-46px - (2 * var(--uc-theme-bg-y-offset)) + var(--uc-sb-theme-bg-y-offset, 0px));
@@ -2181,6 +2232,7 @@
                     --uc-personal-toolbar-width: 0px;
                     --uc-theme-bg-x-left-start: 0px;
                     --uc-theme-bg-x-right-end: 0px;
+                    --uc-sb-personal-toolbar-outline-margin-side: var(--uc-web-content-margin);
                 }
             }
 

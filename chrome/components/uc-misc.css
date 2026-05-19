@@ -37,8 +37,10 @@ menupopup > menu {
 }
 
 /* Reduce Hamburger menu spacing */
+/* !TEMPORARY: 'arrowpanel-*' tokens were renamed to 'panel-*' in v151; legacy 'arrowpanel-*' declarations can be removed in v151+. */
 :root {
     --arrowpanel-menuitem-padding: var(--uc-app-menu-item-padding-block) !important;
+    --panel-menuitem-padding: var(--uc-app-menu-item-padding-block) var(--uc-app-menu-item-padding-inline) !important;
 }
 
 /**

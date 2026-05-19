@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v150-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v153-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -23,14 +23,19 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
-**🦊 v6.0.6**
+**🦊 v6.0.7**
 
-- 改进：启用网页内容外框（`uc.flex.style-web-content-outline = 2`）时，展开自动隐藏的书签栏不再覆盖顶部边框。
-- 修复：
-  - 原生垂直标签页无法展开。（Nightly v150，[Bug 2013773](https://bugzilla.mozilla.org/show_bug.cgi?id=2013773)）
-  - 右键菜单图标无法应用 `uc.flex.style-sidebar-stripe-color` 指定的颜色。（Beta v149，[Bug 2012180](https://bugzilla.mozilla.org/show_bug.cgi?id=2012180)）
-  - 恢复分屏视图中“在页面中查找”的复选框。（Release v147，[Bug 1987142](https://bugzilla.mozilla.org/show_bug.cgi?id=1987142)）
-- 临时缓解：启用 `uc.flex.enable-rounded-web-content` 时，网页内容无法完全实现圆角。
+- 修复了因 v149 的 bug 导致“防止标签页加载过程中出现白色背景闪烁”功能失效的问题。[Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)
+- 修复了因 v150 的变更导致水平标签页模式下，导航栏展开时丢失主题背景图片的问题。[Bug 1952602](https://bugzilla.mozilla.org/show_bug.cgi?id=1952602)
+- 修复了因 v151 的变更导致 Search Mode Switcher 样式失效的问题。[Bug 1998985](https://bugzilla.mozilla.org/show_bug.cgi?id=1998985)
+- 修复了因 v151 的变更导致 URL 栏样式失效的问题。[Bug 2008598](https://bugzilla.mozilla.org/show_bug.cgi?id=2008598)
+- 修复了因 v151 的变更导致 `uc.flex.menu-item-spacing` 选项失效，以及面板样式失效的问题。[Bug 2019097](https://bugzilla.mozilla.org/show_bug.cgi?id=2019097)
+- 修复了因 v152 的变更导致 Findbar 按钮悬停高亮消失的问题。[Bug 2017970](https://bugzilla.mozilla.org/show_bug.cgi?id=2017970)
+- 修复了因 v152 的变更导致标签页悬停时的背景颜色过渡动画失效的问题。[Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
+- 修复了因 Nightly v152 的变更导致工具栏背景颜色消失，以及主题背景图片错位的问题。[Bug 2034495](https://bugzilla.mozilla.org/show_bug.cgi?id=2034495)
+- 修复了水平标签页模式下，书签工具栏展开时底部边框（outline）错位的问题。
+- 修复了 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` 时，书签工具栏背景图片错位的问题。
+- 为多个 Firefox 新版本新增的菜单项添加了图标。
 
 ## 🦊 v6.x.x 系列 – 重大功能更新
 
