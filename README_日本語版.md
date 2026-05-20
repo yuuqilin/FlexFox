@@ -23,6 +23,13 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 最新情報
 
+**🦊 v6.0.8**
+
+- v150 の変更により、カスタム壁紙機能が動作しなくなっていた問題を修正しました。[Bug 2005854](https://bugzilla.mozilla.org/show_bug.cgi?id=2005854)
+- `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` と `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs = 1` を同時に有効化した際に、ブックマークツールバーの背景画像がずれる問題を修正しました。
+- 新しいタブページおよびアドオンマネージャーのスタイルを調整しました。
+- コンテキストメニュー項目のアイコンを追加しました。
+
 **🦊 v6.0.7**
 
 - v149 の不具合により、「タブ読み込み中の白い背景のちらつきを防ぐ」機能が動作しなくなっていた問題を修正しました。[Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)

@@ -908,6 +908,10 @@ split-view-footer {
     }
 
     @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
+        body {
+            background-image: none !important;
+            background-color: transparent !important;
+        }
         #navigator-toolbox {
             /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
             --toolbox-bgcolor: transparent !important;

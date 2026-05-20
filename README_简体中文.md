@@ -23,6 +23,13 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 更新内容
 
+**🦊 v6.0.8**
+
+- 修复了因 v150 的变更导致 Custom Wallpaper（自定义壁纸）功能失效的问题。[Bug 2005854](https://bugzilla.mozilla.org/show_bug.cgi?id=2005854)
+- 修复了同时启用 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` 和 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs = 1` 时，书签工具栏背景图片错位的问题。
+- 调整了新标签页和附加组件管理器的样式。
+- 为一个右键菜单项添加了图标。
+
 **🦊 v6.0.7**
 
 - 修复了因 v149 的 bug 导致“防止标签页加载过程中出现白色背景闪烁”功能失效的问题。[Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)

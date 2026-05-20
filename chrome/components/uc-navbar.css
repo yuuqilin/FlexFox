@@ -38,19 +38,21 @@
  * causing the navigator area to lose its background image when expanded. 
  * Reattach the background image to the navigator here. 
  */
-#navigator-toolbox {
-    :root[lwtheme] & {
-        background-image: var(--lwt-additional-images);
-        background-repeat: var(--lwt-background-tiling);
-        background-position: var(--lwt-background-alignment);
-    }
+@media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
+    #navigator-toolbox {
+        :root[lwtheme] & {
+            background-image: var(--lwt-additional-images);
+            background-repeat: var(--lwt-background-tiling);
+            background-position: var(--lwt-background-alignment);
+        }
 
-    :root[lwtheme-image] & {
-        background-image: var(--lwt-header-image), var(--lwt-additional-images);
-        background-repeat: no-repeat, var(--lwt-background-tiling);
-        background-position:
-            right top,
-            var(--lwt-background-alignment);
+        :root[lwtheme-image] & {
+            background-image: var(--lwt-header-image), var(--lwt-additional-images);
+            background-repeat: no-repeat, var(--lwt-background-tiling);
+            background-position:
+                right top,
+                var(--lwt-background-alignment);
+        }
     }
 }
 

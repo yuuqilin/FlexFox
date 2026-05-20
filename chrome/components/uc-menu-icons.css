@@ -254,7 +254,8 @@
         background-position-x: 0.9em;
         background-size: 18px;
     }
-    #context_moveTabToSplitView {
+    #context_moveTabToSplitView,
+    #context-openlinkinsplitview {
         background-image: url("../icons/menu/context-move-tab-to-split-view.svg");
         background-position-x: 0.9em;
         background-size: 18px;

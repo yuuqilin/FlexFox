@@ -23,6 +23,15 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 
 ## 🆕 What's New
 
+**🦊 v6.0.8**
+
+- Fixed an issue introduced in v150 that broke the Custom Wallpaper feature. [Bug 2005854](https://bugzilla.mozilla.org/show_bug.cgi?id=2005854)
+- Fixed a misaligned bookmarks toolbar background image when both `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` and `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs = 1` are enabled.
+- Updated the styling for the New Tab page and the Add-ons Manager.
+- Added an icon for a context menu item.
+
+<!-- END What's New -->
+
 **🦊 v6.0.7**
 
 - Fixed an issue introduced in v149 where the "prevent white background flashing while tabs are loading" feature stopped working. [Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)
@@ -37,8 +46,6 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 - Fixed a misaligned bookmarks toolbar background image when `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3`.
 - Added icons for several new menu items introduced in recent Firefox versions.
 
-<!-- END What's New -->
-
 ## 🦊 v6.x.x Series – Major Feature Update
 
 > [!IMPORTANT]
@@ -47,7 +54,7 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
 > After upgrading, **you must remove the old styles from the Sidebery Styles Editor** to avoid conflicts.
 > Go to **Sidebery Navigation bar → Settings (gear icon) → Styles editor**, then delete all legacy styles in the **Sidebar** and **Group Page** tabs.
 >
-> For other languages: **[日本語](https://github.com/yuuqilin/FlexFox/blob/main/README_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-%E6%9C%80%E6%96%B0%E6%83%85%E5%A0%B1)** | **[简体中文](https://github.com/yuuqilin/FlexFox/blob/main/README_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-%E6%9B%B4%E6%96%B0%E5%86%85%E5%AE%B9)**
+> For other languages: **[日本語](https://github.com/yuuqilin/FlexFox/blob/main/README_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v6xx-%E7%B3%BB%E5%88%97--%E4%B8%BB%E8%A6%81%E6%A9%9F%E8%83%BD%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88)** | **[简体中文](https://github.com/yuuqilin/FlexFox/blob/main/README_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v6xx-%E7%B3%BB%E5%88%97--%E9%87%8D%E5%A4%A7%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0)**
 
 ---
 

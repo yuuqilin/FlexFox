@@ -2139,7 +2139,7 @@
             --uc-theme-bg-y-offset: 3px;
         }
         --uc-theme-bg-y-clip: calc(-25px - var(--uc-theme-bg-y-offset) + var(--uc-sb-theme-bg-y-offset, 0px));
-        @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
+        @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
             --uc-theme-bg-y-clip: calc(19px + var(--uc-theme-bg-y-offset));
         }
         /* !v143 */

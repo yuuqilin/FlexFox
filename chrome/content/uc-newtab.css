@@ -134,6 +134,13 @@ url-prefix("about:home") {
             gap: 12px !important;
         }
     }
+
+    /* Make the customize menu appear as a floating card and match the web content area's border radius */
+    .customize-menu {
+        border-radius: 5px !important;
+        margin: 6px !important;
+        min-height: calc(100% - var(--space-medium) - 6px) !important;
+    }
 }
 
 /* private browsing newtab */
