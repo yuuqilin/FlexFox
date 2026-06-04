@@ -202,7 +202,7 @@ user_pref("uc.flex.enable-rounded-web-content-at-sidebery-corner", false);
 user_pref("uc.flex.enable-translucent-urlbar-popup-and-menus",     false);
 
 /* 🧊 Visual Background & Mica Effects */
-/* Enables native Mica backdrop (Windows 11 only; requires System theme). */
+/* Enables native Mica backdrop (Windows 11 only; requires System theme or custom force option). */
 user_pref("widget.windows.mica",                                false);
 /* Enables Mica for popup menus (0 = off, 1 = on, 2 = auto). */
 user_pref("widget.windows.mica.popups",                             2);
@@ -210,14 +210,22 @@ user_pref("widget.windows.mica.popups",                             2);
 user_pref("widget.windows.mica.toplevel-backdrop",                  2);
 /* Allows full transparency for sidebars and panels (required for Mica and wallpaper in Sidebery). */
 user_pref("browser.tabs.allow_transparent_browser",             false);
+/* Sets the color scheme used by Solid Page (0 = force dark, 1 = force light, 2 = follow Firefox's Website appearance setting). */
+user_pref("uc.flex.browser-solid-page-color-scheme",                1);
+/* Forces Mica backdrop on all themes (requires `widget.windows.mica` to be true). */
+user_pref("uc.flex.browser-mica-force-enabled-on-all-themes",   false);
 /* Sets Mica mask transparency level (0–4; higher = clearer). */
 user_pref("uc.flex.browser-mica-transparency-level",                2);
 /* Enables custom wallpaper as browser background. */
 user_pref("uc.flex.browser-wallpaper-enabled",                  false);
-/* Selects which image to use when multiple wallpapers are defined. */
-user_pref("uc.flex.browser-wallpaper-index",                        1);
+/* Selects the wallpaper index (0 = current theme background, 1-9 = use main-image-1.jpg through main-image-9.jpg). */
+user_pref("uc.flex.browser-wallpaper-index",                        0);
+/* Enables SVG wallpaper support for files named main-image-1.svg through main-image-9.svg. */
+user_pref("uc.flex.browser-wallpaper-svg-enabled",              false);
 /* Disables acrylic-style blur effect on custom wallpaper. */
 user_pref("uc.flex.browser-wallpaper-acrylic-disabled",         false);
+/* Sets wallpaper horizontal alignment when images are cropped to fit the browser window (string: "auto"/"0", "left"/"1", "center"/"2", "right"/"3"). */
+user_pref("uc.flex.browser-wallpaper-align-horizontal",        "auto");
 /* Sets wallpaper mask transparency level (0–4; higher = clearer). */
 user_pref("uc.flex.browser-wallpaper-transparency-level",           2);
 /* Sets wallpaper contrast level in dark mode with acrylic (0–4; higher = more contrast). */

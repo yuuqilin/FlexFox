@@ -16,40 +16,136 @@ It cuts out visual noise, keeps the UI steady, and stays fast.
 Designed as a flexible base, it lets you shape your ideal interface without bloat.  
 It's not just a new look, it's a better way to browse.  
 
-https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a  
+![FlexFox v6.5](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-v6.5.0.webp)  
 
 > [!IMPORTANT]
 > FlexFox features work correctly only if the `Expand sidebar on hover` option in `Customize Sidebar` is **unchecked**. You can find `Customize Sidebar` in the right-click menu of the sidebar toggle button in the navigation bar. This option is unchecked by default in Firefox. If you have previously enabled it, please uncheck it to ensure FlexFox functions properly.
 
 ## 🆕 What's New
 
-**🦊 v6.0.8**
+## 🦊 v6.5.0 Series – Major Feature Update
 
-- Fixed an issue introduced in v150 that broke the Custom Wallpaper feature. [Bug 2005854](https://bugzilla.mozilla.org/show_bug.cgi?id=2005854)
-- Fixed a misaligned bookmarks toolbar background image when both `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` and `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs = 1` are enabled.
-- Updated the styling for the New Tab page and the Add-ons Manager.
-- Added an icon for a context menu item.
+### 🎬 Feature Showcase Video
+
+Watch the v6.5 feature showcase:
+
+https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
+
+For better video quality, watch on YouTube:
+
+[YouTube Link](https://www.youtube.com/watch?v=lhf1mpXDIOM)
+
+### 🧊 Improved: Mica Backdrop Works with All Themes
+
+* Added `uc.flex.browser-mica-force-enabled-on-all-themes`:
+
+  * By default, Firefox only enables the Mica backdrop when the theme is set to `System theme — auto`.
+  * This option allows Mica to work with any Firefox theme.
+  * It decouples the Mica backdrop from the Windows light/dark theme setting, allowing Mica to match the active Firefox theme instead.
+  * Requires the native Firefox preference `widget.windows.mica` to be enabled.
+
+### 🖼️ Improved: Animated Wallpaper Support
+
+* Expanded `uc.flex.browser-wallpaper-enabled`:
+
+  * Wallpapers now support multiple image formats, including animated images.
+  * JPG / WebP / PNG / APNG / AVIF / GIF / Animated WebP:
+
+    * Rename the file to `main-image-*.jpg`, where `*` corresponds to index `1-9`.
+    * The file extension must always remain `.jpg`.
+    * Place the file in `../icons/wallpaper/`.
+  * SVG:
+
+    * Rename the file to `main-image-*.svg`.
+    * The file extension must be `.svg`.
+    * Requires `uc.flex.browser-wallpaper-svg-enabled` to be enabled.
+  * Animated wallpaper resources can be downloaded from [Motion Backgrounds](https://motionbgs.com/).
+  * MP4 videos can be converted into animated WebP images using [FFmpeg](https://ffmpeg.org/) or [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/).
+  * Wallpapers use an acrylic blur effect by default to mimic the Mica appearance.
+  * To display wallpapers without blur, enable `uc.flex.browser-wallpaper-acrylic-disabled`.
+
+### 🖼️ Improved: Use the Current Theme Background as Wallpaper
+
+* Expanded `uc.flex.browser-wallpaper-index`:
+
+  * The value range has been expanded from `1-9` to `0-9`.
+  * The default value is now `0`.
+  * Setting the value to `0` uses the current Firefox theme background as the browser wallpaper.
+  * Values `1-9` continue to use custom wallpapers while preserving the active theme colors.
+
+* Added `uc.flex.browser-wallpaper-align-horizontal`:
+
+  * Controls horizontal alignment when wallpapers are cropped to fit the browser window.
+  * String values:
+
+    * `'auto'` or `'0'` = Automatic (default)
+    * `'left'` or `'1'` = Align left
+    * `'center'` or `'2'` = Center
+    * `'right'` or `'3'` = Align right
+
+### 👁️ Improved: Lightweight Fix for Transparent Pages
+
+* Added the `Solid Page` shortcut and toolbar button:
+
+  * Displaying Mica or wallpapers inside the sidebar and web content area requires enabling `browser.tabs.allow_transparent_browser`.
+  * Some websites become fully transparent when this preference is enabled, making content difficult to read.
+  * This limitation has historically reduced the practicality of Mica and wallpaper features for daily browsing.
+  * [UltimaDark](https://addons.mozilla.org/firefox/addon/ultimadark/) or [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) can solve this issue.
+  * However, these extensions may impact page loading performance.
+  * v6.5 introduces a lightweight built-in solution called `Solid Page`.
+  * It does not support per-site settings, but provides an instant toggle for applying a solid page background.
+  * The feature has virtually no performance impact.
+  * To use it, install [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) and configure it using the image below.
+  * Remember to click `Apply changes` in the upper-left corner for the configuration to take effect.
+  * The default shortcut is <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd> and can be customized through **Manage Extension Shortcuts** in the gear button menu.
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended-solid-page.webp" alt="userchrome-toggle-extended-solid-page.webp" width="50%" />  
+
+* Added `uc.flex.browser-solid-page-color-scheme`:
+
+  * Controls the color scheme used by `Solid Page`.
+  * Values:
+
+    * `0` = Force dark
+    * `1` = Force light (default)
+    * `2` = Follow Firefox's 'Website appearance' setting
+
+### 📄 Improved: More Pages Support Mica and Wallpapers
+
+* All built-in `about:` pages now support Mica backdrops and wallpapers.
+* A complete list can be viewed from `about:about`.
+* Added support for Sidebery Group Pages.
+
+### 🛠️ Fixed
+
+* Fixed missing traffic-light window controls on macOS. (#35)
+* Fixed sidebar button styling issues on macOS.
+* Fixed horizontal tabs not expanding correctly on macOS.
+* Fixed multiple cases where toolbar and sidebar expansion backgrounds became transparent.
+* Fixed several layout issues when the bookmark toolbar display mode was not set to `Always Show`.
+* Fixed multiple layout issues when using horizontal tabs together with the revamped sidebar.
+* Fixed a regression introduced in v6.0.7 that broke URL bar button styling on Firefox ESR 140.
+* Fixed sidebar button styling issues caused by Firefox Beta 152 changes. [Bug 2028947](https://bugzilla.mozilla.org/show_bug.cgi?id=2028947)
+* Fixed `about:` page styling issues caused by Firefox Nightly 153 changes. [Bug 1987439](https://bugzilla.mozilla.org/show_bug.cgi?id=1987439)
+
+### ⚡ Optimized
+
+* Refactored a large amount of code to reduce complexity and improve maintainability.
+* However, there are no noticeable performance improvements.
 
 <!-- END What's New -->
 
-**🦊 v6.0.7**
+---
 
-- Fixed an issue introduced in v149 where the "prevent white background flashing while tabs are loading" feature stopped working. [Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)
-- Fixed an issue introduced in v150 where the navigation bar lost the theme background image when expanded in horizontal tabs mode. [Bug 1952602](https://bugzilla.mozilla.org/show_bug.cgi?id=1952602)
-- Fixed an issue introduced in v151 that broke the styling of the Search Mode Switcher. [Bug 1998985](https://bugzilla.mozilla.org/show_bug.cgi?id=1998985)
-- Fixed an issue introduced in v151 that broke the styling of the URL bar. [Bug 2008598](https://bugzilla.mozilla.org/show_bug.cgi?id=2008598)
-- Fixed an issue introduced in v151 where the `uc.flex.menu-item-spacing` option and panel styling no longer worked. [Bug 2019097](https://bugzilla.mozilla.org/show_bug.cgi?id=2019097)
-- Fixed an issue introduced in v152 where Findbar buttons no longer showed hover highlights. [Bug 2017970](https://bugzilla.mozilla.org/show_bug.cgi?id=2017970)
-- Fixed an issue introduced in v152 where the tab hover background transition animation no longer worked. [Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
-- Fixed issues introduced in Nightly v152 where toolbar background colors disappeared and theme background images became misaligned. [Bug 2034495](https://bugzilla.mozilla.org/show_bug.cgi?id=2034495)
-- Fixed a misaligned bottom outline when the bookmarks toolbar is expanded in horizontal tabs mode.
-- Fixed a misaligned bookmarks toolbar background image when `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3`.
-- Added icons for several new menu items introduced in recent Firefox versions.
+## 🎉 Major Feature Update
 
-## 🦊 v6.x.x Series – Major Feature Update
+<details>  
+<summary>🎨 <b>Major Update: Tab Styling, Sidebery Layouts & Toolbar UI Customization</b> <i>[Click to expand]</i> 👇</summary>
+
+## 🦊 v6.0.x Series – Major Feature Update
 
 > [!IMPORTANT]
-> **The v6.x.x series introduces several incompatible changes.** Some options have been deprecated or updated, and older Sidebery styles are no longer used. Please read this changelog carefully before updating.
+> **The v6.0.x series introduces several incompatible changes.** Some options have been deprecated or updated, and older Sidebery styles are no longer used. Please read this changelog carefully before updating.
 >
 > After upgrading, **you must remove the old styles from the Sidebery Styles Editor** to avoid conflicts.
 > Go to **Sidebery Navigation bar → Settings (gear icon) → Styles editor**, then delete all legacy styles in the **Sidebar** and **Group Page** tabs.
@@ -245,9 +341,7 @@ The following options are deprecated and no longer have any effect. Please remov
   * From v6 onward, `sidebery-styles.json` is no longer provided. New installations only need to import `sidebery-settings.json`.
   * After that, you can completely disable FlexFox's default Sidebery styling with `uc.flex.skip-loading-uc-sidebery.css`, allowing more flexibility when combining other custom styles.
 
----
-
-## 🎉 Major Feature Update
+</details>
 
 <details>  
 <summary>✨ <b>Major Update: New UI & UX Style Customization Options</b> <i>[Click to expand]</i> 👇</summary>
@@ -299,9 +393,10 @@ The following options are deprecated and no longer have any effect. Please remov
     widget.windows.mica.popups = 2
     widget.windows.mica.toplevel-backdrop = 2
     browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-mica-force-enabled-on-all-themes = true
     uc.flex.browser-mica-transparency-level = 2
     ```
-  * Be sure to set the theme to `System theme — auto`; Mica won't take effect under other themes.
+  * By default, Mica requires the theme to be set to `System theme — auto`. Enabling `uc.flex.browser-mica-force-enabled-on-all-themes` allows the Mica light/dark appearance to follow the active Firefox theme instead of the Windows system theme.
   * **Requires restarting Firefox.**
   * For details, see: [🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
   * If the Mica background appears obstructed by inactive windows, you can use the shortcut <kbd>Win</kbd> + <kbd>Home</kbd> to minimize all other windows. For convenience, consider assigning this action to a mouse gesture or automation script.  
@@ -310,20 +405,32 @@ The following options are deprecated and no longer have any effect. Please remov
   
   <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="Example showing the native Mica background effect behind Firefox tabs and toolbars." width="96%" />
 
-* For systems that don't support Mica or prefer a fixed wallpaper, FlexFox now supports **custom background wallpapers** for the browser.
+* FlexFox supports **custom browser wallpapers**, allowing the entire browser interface to display a persistent background image independent of other windows.
   * Enable it via the following settings in `about:config`:
     ```
     uc.flex.browser-wallpaper-enabled = true
     uc.flex.browser-wallpaper-index = 1
+    uc.flex.browser-wallpaper-svg-enabled = false
     uc.flex.browser-wallpaper-acrylic-disabled = false
+    uc.flex.browser-wallpaper-align-horizontal = auto
     browser.tabs.allow_transparent_browser = true
     uc.flex.browser-wallpaper-transparency-level = 2
     uc.flex.browser-wallpaper-contrast-level = 2
     ```
-  * **Requires restarting Firefox.**
-  * Supports up to 9 images named `main-image-1.jpg` to `main-image-9.jpg`, placed in `../icons/wallpaper/`.
-  * Wallpapers use an **Acrylic blur effect** by default. While not identical to native Mica, it offers a similar visual style.
-  * Enabling the **custom background wallpapers** feature overrides the native Mica background. If both Mica and wallpaper are enabled, the wallpaper will be shown.  
+* **Requires restarting Firefox.**
+* Browser wallpapers can be combined with any Firefox theme, allowing custom background images while preserving the current theme's colors, accents, borders, and text styling.
+  * `uc.flex.browser-wallpaper-index = 0` uses the current Firefox theme background image as the wallpaper for the entire browser interface.
+  * `uc.flex.browser-wallpaper-index = 1-9` selects the corresponding wallpaper file (`main-image-1` through `main-image-9`).
+* The wallpaper feature supports multiple image formats, including animated images.
+  * JPG / WebP / PNG / APNG / AVIF / GIF / Animated WebP:
+    * Rename the image to `main-image-*.jpg` (**all formats must be renamed to `.jpg`**)
+    * Place it in `../icons/wallpaper/`
+  * SVG:
+    * Rename the image to `main-image-*.svg`
+    * Place it in the same directory
+    * Enable `uc.flex.browser-wallpaper-svg-enabled = true`
+* Wallpapers use an **Acrylic blur effect** by default to mimic the appearance of Mica. This effect can be disabled for a sharp, unblurred wallpaper.
+* Enabling **custom browser wallpapers** overrides the native Mica background. If both Mica and wallpapers are enabled, the wallpaper will be displayed.
 
   Shows the custom background wallpaper feature with Acrylic blur enabled. Compared to native Mica, the blur, tone, and texture are distinct.  
 
@@ -338,9 +445,21 @@ The following options are deprecated and no longer have any effect. Please remov
   * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – Provided as one of the built-in background options in Firefox's new tab customization.
   * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([Download](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
 
+* Creating animated wallpapers:
+  * Animated wallpapers can be created from MP4 videos using [FFmpeg](https://ffmpeg.org/) or [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/).
+  * Live wallpaper videos are available from websites such as [Motion Backgrounds](https://motionbgs.com/).
+  * WebP is recommended because it typically requires fewer resources than APNG while providing comparable visual quality.
+
 * To display Mica or wallpaper backgrounds behind Sidebery and web content, `browser.tabs.allow_transparent_browser` must be enabled.
   * Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) or [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) extension.
-  * If some pages become unreadable due to full transparency, pairing it with [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended.
+  * If some pages become unreadable due to full transparency, pairing it with [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended for domain-specific memory. Alternatively, if you prefer not to install heavy extensions, you can use FlexFox's built-in `Solid Page` shortcut via the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension to instantly toggle a solid background. While it does not remember settings per website, it offers a lightweight, temporary fix for unreadable pages.
+  * To use the `Solid Page` shortcut, install the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension and configure it as shown below. Remember to click the `Apply changes` button in the upper-left corner to make the settings take effect. Once configured, you can toggle the solid background using the shortcut or the extension's toolbar button. The default shortcut is <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd>, which can be customized via the gear icon's menu by selecting **Manage Extension Shortcuts**.
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended-solid-page.webp" alt="userchrome-toggle-extended-solid-page.webp" width="50%" />  
+
+    | Shortcut | Label | Action |
+    | --- | --- | --- |
+    | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd> | Solid Page | Toggle a solid background color for the web content area when Mica or custom wallpaper transparency makes text difficult to read. This temporarily restores contrast and readability. The background color scheme can be configured via `uc.flex.browser-solid-page-color-scheme`. |
 
 * New option: `uc.flex.sidebery-apply-expand-speed-to-toolbars`
   * Applies the expand/collapse animation speed used by Sidebery and native vertical tabs to the navigation bar and bookmarks toolbar, unifying all animation speeds.
@@ -874,14 +993,18 @@ For more update logs from earlier versions,
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `widget.windows.mica` | `true` | Enables the native Mica backdrop in Firefox. Requires the theme to be set to `System theme — auto` to take effect. This feature is only available on Windows 11. If your system does not support Mica, you can use `uc.flex.browser-wallpaper-enabled` to simulate a similar effect. |
+| `widget.windows.mica` | `true` | Enables the native Mica backdrop in Firefox. Requires the theme to be set to `System theme — auto` to take effect, or can be extended to all themes by enabling `uc.flex.browser-mica-force-enabled-on-all-themes` below. This feature is only available on Windows 11. Note that it will be overridden if `uc.flex.browser-wallpaper-enabled` is enabled. |
 | `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | Enables the Mica backdrop for popup menus. Accepts `0` (off), `1` (on), or `2` (auto). |
 | `widget.windows.mica.toplevel-backdrop` | `2` | Specifies the type of Mica backdrop to use: `0` (auto or none), `1`: Mica, `2`: Acrylic, `3`: Mica Alt. FlexFox is designed with the assumption that this option is set to `2`: Acrylic. |
 | `browser.tabs.allow_transparent_browser` | `true` | Enables background transparency for Sidebery and web content, allowing Mica or wallpaper to be displayed. **Takes effect after restarting Firefox.** Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) or [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) extension. If some pages become hard to read, using [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended. |
+| `uc.flex.browser-solid-page-color-scheme` | `0`-`2`<br>(`1`) | Sets the background color scheme used when the `Solid Page` shortcut is active. Values: `0` = Force dark mode, `1` = Force light mode (default), `2` = Follow Firefox's Website appearance setting. This restores text readability when Mica or custom wallpaper makes web content transparent. |
+| `uc.flex.browser-mica-force-enabled-on-all-themes` | `true` | Forces the native Mica backdrop to work across all Firefox themes. This allows the Mica light/dark appearance to follow the active Firefox theme instead of the Windows system theme. **This option requires `widget.windows.mica` to be set to `true` to take effect, and will be overridden if `uc.flex.browser-wallpaper-enabled` is enabled.** |
 | `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | Adjusts the transparency level of the browser Mica backdrop mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. The default level in Firefox is 0, while FlexFox uses 2 as its default. |
-| `uc.flex.browser-wallpaper-enabled` | `true` | Enables a custom wallpaper as the Firefox browser background. This feature applies an acrylic-style blur to simulate the native Mica effect. It is useful when Mica is not available or when you prefer a consistent, always-visible background. Note that the visual effect may not be identical to native Mica. |
-| `uc.flex.browser-wallpaper-index` | `1`-`9`<br>(`1`) | Sets which numbered wallpaper image to use as the browser background. This numeric setting accepts values from 1 to 9. Each value corresponds to an image file named `main-image-1.jpg` through `main-image-9.jpg`, located in the `../icons/wallpaper/` folder. |
-| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | Disables the acrylic-style blur effect applied to the custom wallpaper background. |
+| `uc.flex.browser-wallpaper-enabled` | `true` | Enables custom browser wallpapers, allowing the entire Firefox interface to display a persistent background image. Supports both static and animated wallpapers. **Enabling this will override the Mica backdrop settings above.** |
+| `uc.flex.browser-wallpaper-index` | `0`-`9`<br>(`0`) | Selects the wallpaper source. `0` uses the current Firefox theme background as the wallpaper for the entire browser interface. Values `1`–`9` select custom wallpaper files from `../icons/wallpaper/` using the filenames `main-image-1.jpg` through `main-image-9.jpg`. All wallpaper files must be renamed to `.jpg`, regardless of their original format. Supported image formats include JPG, WebP, Animated WebP, PNG, APNG, AVIF, GIF. |
+| `uc.flex.browser-wallpaper-svg-enabled` | `true` | Enables SVG wallpaper support. When enabled, SVG wallpapers can be used by placing files named `main-image-1.svg` through `main-image-9.svg` in `../icons/wallpaper/`. |
+| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | Disables the acrylic-style blur effect applied to browser wallpapers. By default, wallpapers use an acrylic blur to mimic the appearance of Mica. Enabling this option displays wallpapers in their original sharp appearance. |
+| `uc.flex.browser-wallpaper-align-horizontal` | `'auto'`\|<br>`'left'`\|<br>`'center'`\|<br>`'right'` | Sets the horizontal alignment used when wallpaper images are cropped to fit the browser window. Accepts string values: `'auto'` or `'0'` = automatic alignment (default), `'left'` or `'1'` = align left, `'center'` or `'2'` = center alignment, `'right'` or `'3'` = align right. |
 | `uc.flex.browser-wallpaper-transparency-level` | `0`-`4`<br>(`2`) | Adjusts the transparency level of the browser wallpaper mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. This option is designed to visually match the Mica transparency levels. The default value in FlexFox is 2. |
 | `uc.flex.browser-wallpaper-contrast-level` | `0`-`4`<br>(`2`) | Adjusts the contrast level of the browser wallpaper when using the acrylic-style blur effect in dark mode. This numeric setting accepts values from 0 to 4, where higher values increase contrast. The default value in FlexFox is 2. |
 

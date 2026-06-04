@@ -43,7 +43,7 @@
             --uc-findbar-outline: #454c6c;
         }
 
-        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
                 -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
                 -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -118,7 +118,7 @@
             --uc-findbar-outline: #a8a8a6;
         }
 
-        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
                 -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
                 -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -847,9 +847,19 @@
     }
 
     /* Custom browser wallpaper background */
-    --uc-browser-wallpaper: url("../icons/wallpaper/main-image-1.jpg"); /* Wallpaper image path */
-    @media -moz-pref("uc.flex.browser-wallpaper-index", 0) {
-        --uc-browser-wallpaper: none;
+    /* Firefox detects image formats from file contents rather than file extensions.
+     * Supported formats can be renamed to .jpg and will still decode correctly.
+     *
+     * Multi-layer fallbacks increased CPU usage due to additional background layer
+     * processing, so only a single wallpaper layer is used.
+     */
+    /*
+    --uc-browser-wallpaper:
+        url("../icons/wallpaper/main-image-1.webp"), url("../icons/wallpaper/main-image-1.png"),
+        url("../icons/wallpaper/main-image-1.jpg"); \/* Wallpaper image path *\/
+    */
+    @media -moz-pref("uc.flex.browser-wallpaper-index", 1) {
+        --uc-browser-wallpaper: url("../icons/wallpaper/main-image-1.jpg");
     }
     @media -moz-pref("uc.flex.browser-wallpaper-index", 2) {
         --uc-browser-wallpaper: url("../icons/wallpaper/main-image-2.jpg");
@@ -874,6 +884,46 @@
     }
     @media -moz-pref("uc.flex.browser-wallpaper-index", 9) {
         --uc-browser-wallpaper: url("../icons/wallpaper/main-image-9.jpg");
+    }
+
+    @media -moz-pref("uc.flex.browser-wallpaper-svg-enabled") {
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 1) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-1.svg");
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 2) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-2.svg");
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 3) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-3.svg");
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 4) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-4.svg");
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 5) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-5.svg");
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 6) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-6.svg");
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 7) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-7.svg");
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 8) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-8.svg");
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 9) {
+            --uc-browser-wallpaper: url("../icons/wallpaper/main-image-9.svg");
+        }
+    }
+
+    @media -moz-pref("uc.flex.browser-wallpaper-align-horizontal", "right") or -moz-pref("uc.flex.browser-wallpaper-align-horizontal", "3") {
+        --uc-browser-wallpaper-align-x: right;
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-align-horizontal", "center") or -moz-pref("uc.flex.browser-wallpaper-align-horizontal", "2") {
+        --uc-browser-wallpaper-align-x: center;
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-align-horizontal", "left") or -moz-pref("uc.flex.browser-wallpaper-align-horizontal", "1") {
+        --uc-browser-wallpaper-align-x: left;
     }
 
     @media -moz-pref("uc.flex.browser-wallpaper-enabled") {
@@ -1032,6 +1082,9 @@
     &[sizemode="normal"] {
         --uc-tabstoolbar-hover-trigger-width: 10px;
     }
+    @media (-moz-platform: macos) {
+        --uc-tabstoolbar-hover-trigger-width: 10px;
+    }
 
     /* Trigger sensitivity for fully hidden top toolbar */
     /**
@@ -1186,12 +1239,237 @@
         -moz-pref("uc.flex.move-window-controls-to-left") and (not -moz-pref("uc.flex.auto-hide-window-controls")),
         -moz-pref("uc.flex.fully-hide-toolbox"),
         -moz-pref("uc.flex.fully-hide-sidebery"),
-        not -moz-pref("sidebar.verticalTabs") {
+        not -moz-pref("sidebar.verticalTabs"),
+        (-moz-platform: macos) {
         --uc-nav-bar-first-child-padding-right: 2px;
     }
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
         &:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
             --uc-nav-bar-first-child-padding-right: 2px;
+        }
+    }
+
+    /* Toolbar sizing */
+    --uc-tabstoolbar-height: calc(2 * var(--tab-block-margin) + var(--tab-min-height));
+    #urlbar-container,
+    #urlbar {
+        --urlbar-height: 32px !important;
+        --urlbar-container-height: 40px !important;
+        @media -moz-pref("uc.flex.increase-navbar-height") {
+            --urlbar-container-height: 43px !important;
+        }
+    }
+
+    --uc-nav-bar-height: 40px;
+    --uc-titlebar-buttonbox-height: 35px;
+    @media -moz-pref("uc.flex.increase-navbar-height") {
+        --uc-nav-bar-height: 43px;
+        --uc-titlebar-buttonbox-height: 38px;
+    }
+    --uc-window-controls-width: 104px;
+    --uc-titlebar-buttonbox-margin-top: 2px;
+    @media -moz-pref("uc.flex.style-window-controls-shift-up") {
+        --uc-titlebar-buttonbox-margin-top: 0px;
+    }
+    --uc-titlebar-buttonbox-width: 35px;
+    @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
+        @media not -moz-pref("uc.flex.revert-to-original-window-controls") {
+            --uc-window-controls-width: calc(59px + var(--uc-web-content-margin));
+            @media -moz-pref("uc.flex.move-window-controls-to-left") {
+                --uc-window-controls-width: 59px;
+            }
+            --uc-titlebar-buttonbox-width: 20px;
+        }
+        @media -moz-pref("uc.flex.revert-to-original-window-controls") {
+            --uc-window-controls-width: calc(71px + var(--uc-web-content-margin));
+            @media -moz-pref("uc.flex.move-window-controls-to-left") {
+                --uc-window-controls-width: 71px;
+            }
+            --uc-titlebar-buttonbox-margin-top: 8px;
+            @media -moz-pref("uc.flex.style-window-controls-shift-up") {
+                --uc-titlebar-buttonbox-margin-top: 6px;
+            }
+            --uc-titlebar-buttonbox-width: 24px;
+            --uc-titlebar-buttonbox-height: 24px;
+        }
+    }
+    @media (-moz-platform: macos) {
+        --uc-titlebar-buttonbox-margin-top: 0px;
+    }
+
+    /* Initial display and positioning values for the window controls when auto-hide navbar is enabled */
+    @media not -moz-pref("sidebar.verticalTabs") {
+        &:not([customizing]) {
+            @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") or -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
+                --uc-tabstoolbar-windows-controls-display: flex;
+                --uc-navbar-windows-controls-display: none;
+            }
+        }
+        --uc-window-controls-offset: 0px;
+    }
+
+    /* Position of the sidebar button icon */
+    --uc-sidebar-button-bg-pos: 10px 11px;
+    --uc-sidebar-button-bg-pos-first: 13px 10px;
+    --uc-sidebar-button-bg-pos-first-fs: 11px 10px;
+    --uc-sidebar-button-bg-pos-last: 8.5px 1.5px;
+    --uc-sidebar-button-height-last: 23px;
+    @media -moz-pref("uc.flex.increase-navbar-height") {
+        --uc-sidebar-button-bg-pos: 10px 12px;
+        --uc-sidebar-button-bg-pos-first: 13px 12px;
+        --uc-sidebar-button-bg-pos-first-fs: 11px 12px;
+        --uc-sidebar-button-bg-pos-last: 8.5px 3px;
+        --uc-sidebar-button-height-last: 26px;
+    }
+    /* Position of the sidebar button icon in horizontal tab mode */
+    @media not -moz-pref("sidebar.verticalTabs") {
+        --uc-sidebar-button-bg-pos-first: 14px 11px;
+        --uc-sidebar-button-bg-pos-first-fs: 12px 11px;
+        --uc-sidebar-button-bg-pos-last: 10px 11px;
+        @media -moz-pref("uc.flex.increase-navbar-height") {
+            --uc-sidebar-button-bg-pos-first: 14px 13px;
+            --uc-sidebar-button-bg-pos-first-fs: 12px 13px;
+            --uc-sidebar-button-bg-pos-last: 10px 12px;
+        }
+    }
+
+    --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
+    --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
+    &[uidensity="touch"] {
+        --uc-bm-padding: 7px;
+    }
+    /*
+    --bookmarks-toolbar-overlapping-browser-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding)) !important;
+    */
+    /* Calculates the total bookmarks toolbar height to be clipped when Mica or custom wallpaper is enabled. */
+    --uc-personal-toolbar-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding));
+    /* No clipping is required when the bookmarks toolbar is not set to "always" show. */
+    @media not -moz-pref("browser.toolbars.bookmarks.visibility", "always") {
+        --uc-personal-toolbar-height: 0px;
+    }
+    /* Calculates the offset required when bookmarks toolbar auto-hide is disabled. */
+    @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not -moz-pref("uc.flex.fully-hide-toolbox")) {
+        &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
+            --uc-bm-disable-autohide-offset: calc(-1 * (var(--uc-bm-height) + 2 * var(--uc-bm-padding)));
+        }
+    }
+    /* Removes the offset when Sidebery resizable width is enabled. */
+    @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
+        @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+            &:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                --uc-bm-disable-autohide-offset: 0px;
+            }
+        }
+    }
+
+    /* Initial values for variables required by uc-tabs-bar.css (autohide horizontal tabs) */
+    --uc-autohide-bottom: calc(0px - var(--uc-tabstoolbar-height));
+    --uc-autohide-navigator-bottom: var(--uc-autohide-bottom);
+    --uc-autohide-tabstoolbar-bottom: 0px;
+    --uc-navbar-transform: calc(-1 * var(--uc-nav-bar-height));
+    --uc-navbar-offset-y: calc(-1 * var(--uc-nav-bar-height));
+    /*
+    --uc-autohide-navigator-delay: 0s;
+    */
+    --uc-autohide-tabstoolbar-visibility: visible;
+    /* Default delay for visibility (18ms) and margin-bottom (0ms) transitions */
+    /*
+    --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
+    */
+
+    /* Background color for the #searchbar input field */
+    --uc-searchbar-bgcolor: rgb(from var(--uc-urlbar-bg) r g b / calc(alpha * 0.5));
+
+    /* Make the urlbar background transparent when Mica or wallpaper is enabled */
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+        -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        --uc-sidebar-header-bgcolor: transparent;
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
+            --uc-urlbar-bg: transparent;
+        }
+    }
+
+    /* Box shadows for the urlbar and urlbar popup */
+    @media (prefers-color-scheme: dark) {
+        --uc-urlbar-focus-box-shadow:
+            inset 1px 1px 2.5px 1.5px rgba(0, 0, 0, 0.5), 0px 1px 0.5px 0.5px rgba(255, 255, 255, 0.1);
+        --uc-urlbar-inset-box-shadow:
+            inset 1px 1px 2px 1px rgba(0, 0, 0, 0.4), 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
+        --uc-urlbar-popup-box-shadow: 0 45px 65px rgba(12, 12, 16, 0.45);
+        --uc-urlbar-popup-outline: 0 0 0 1px rgba(65, 72, 104, 0.45);
+        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+            --uc-urlbar-popup-outline: 0 0 0 1px rgba(69, 76, 108, 0.45);
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        --uc-urlbar-focus-box-shadow:
+            inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35), 1px 1px 0px 0.1px rgba(255, 255, 255, 0.05);
+        --uc-urlbar-inset-box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+        @media -moz-pref("uc.flex.style-urlbar", 3) {
+            --uc-urlbar-inset-box-shadow:
+                inset 0.5px 0.5px 1px 0px rgba(0, 0, 0, 0.1), 1px 1px 0px 1px rgba(255, 255, 255, 0.4);
+        }
+        --uc-urlbar-popup-box-shadow: 0 45px 65px rgba(12, 12, 16, 0.35);
+        --uc-urlbar-popup-outline: 0 0 0 1px rgba(148, 163, 184, 0.4);
+        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+            --uc-urlbar-popup-outline: 0 0 0 1px rgba(168, 168, 166, 0.4);
+        }
+    }
+
+    /* Default background colors for the identity button and findbar when a theme is active */
+    &[lwtheme] {
+        --uc-identity-btn-bgcolor: inherit;
+        --uc-findbar-bgcolor: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
+    }
+
+    /* Override the default background color with a custom value when add-on color changes are not allowed */
+    @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
+            -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+            -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+            &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                /* Lighten the background color of the identity button to increase visual distinction */
+                --uc-identity-btn-bgcolor: light-dark(
+                    var(--uc-toolbar-bgcolor),
+                    color-mix(in srgb, var(--uc-toolbar-bgcolor) 92%, white)
+                );
+                --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);
+                --uc-sidebar-header-bgcolor: var(--uc-toolbar-bgcolor);
+            }
+        }
+    }
+
+    /* Adjust findbar position to avoid being overlapped when top toolbar height changes */
+    findbar {
+        /* Override --uc-personal-toolbar-height only within findbar. The findbar
+           should not reserve space for the bookmarks toolbar when bookmarks
+           auto-hide is disabled, but the original variable value must remain
+           unchanged elsewhere because it is still used by other layout and
+           clipping calculations. */
+        @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not -moz-pref("browser.toolbars.bookmarks.visibility", "always")) {
+            :root:not([customizing]) & {
+                --uc-personal-toolbar-height: 0px;
+            }
+        }
+
+        /* Position calculations are scoped to findbar so local variable overrides
+        are reflected in the computed values. */
+        --uc-findbar-y-offset: calc(var(--uc-personal-toolbar-height) - 5px);
+        :root[inFullscreen] & {
+            --uc-findbar-y-offset: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 5px);
+        }
+        :root:not([inFullscreen]) & {
+            @media -moz-pref("uc.flex.fully-hide-toolbox") {
+                --uc-findbar-y-offset: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 13px);
+            }
+            :root[titlepreface*="\200b "] & {
+                --uc-findbar-y-offset: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 13px);
+            }
+            :root[titlepreface*="\200d "] & {
+                --uc-findbar-y-offset: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 5px);
+            }
         }
     }
 
@@ -1329,210 +1607,6 @@
         }
     }
 
-    /* Toolbar sizing */
-    --uc-tabstoolbar-height: calc(2 * var(--tab-block-margin) + var(--tab-min-height));
-    #urlbar-container,
-    #urlbar {
-        --urlbar-height: 32px !important;
-        --urlbar-container-height: 40px !important;
-        @media -moz-pref("uc.flex.increase-navbar-height") {
-            --urlbar-container-height: 43px !important;
-        }
-    }
-
-    --uc-nav-bar-height: 40px;
-    --uc-titlebar-buttonbox-height: 35px;
-    @media -moz-pref("uc.flex.increase-navbar-height") {
-        --uc-nav-bar-height: 43px;
-        --uc-titlebar-buttonbox-height: 38px;
-    }
-    --uc-window-controls-width: 104px;
-    --uc-titlebar-buttonbox-margin-top: 2px;
-    @media -moz-pref("uc.flex.style-window-controls-shift-up") {
-        --uc-titlebar-buttonbox-margin-top: 0;
-    }
-    --uc-titlebar-buttonbox-width: 35px;
-    @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
-        @media not -moz-pref("uc.flex.revert-to-original-window-controls") {
-            --uc-window-controls-width: calc(59px + var(--uc-web-content-margin));
-            @media -moz-pref("uc.flex.move-window-controls-to-left") {
-                --uc-window-controls-width: 59px;
-            }
-            --uc-titlebar-buttonbox-width: 20px;
-        }
-        @media -moz-pref("uc.flex.revert-to-original-window-controls") {
-            --uc-window-controls-width: calc(71px + var(--uc-web-content-margin));
-            @media -moz-pref("uc.flex.move-window-controls-to-left") {
-                --uc-window-controls-width: 71px;
-            }
-            --uc-titlebar-buttonbox-margin-top: 8px;
-            @media -moz-pref("uc.flex.style-window-controls-shift-up") {
-                --uc-titlebar-buttonbox-margin-top: 6px;
-            }
-            --uc-titlebar-buttonbox-width: 24px;
-            --uc-titlebar-buttonbox-height: 24px;
-        }
-    }
-
-    /* Position of the sidebar button icon */
-    --uc-sidebar-button-bg-pos: 10px 11px;
-    --uc-sidebar-button-bg-pos-first: 13px 10px;
-    --uc-sidebar-button-bg-pos-first-fs: 11px 10px;
-    --uc-sidebar-button-bg-pos-last: 8.5px 1.5px;
-    --uc-sidebar-button-height-last: 23px;
-    @media -moz-pref("uc.flex.increase-navbar-height") {
-        --uc-sidebar-button-bg-pos: 10px 12px;
-        --uc-sidebar-button-bg-pos-first: 13px 12px;
-        --uc-sidebar-button-bg-pos-first-fs: 11px 12px;
-        --uc-sidebar-button-bg-pos-last: 8.5px 3px;
-        --uc-sidebar-button-height-last: 26px;
-    }
-    /* Position of the sidebar button icon in horizontal tab mode */
-    @media not -moz-pref("sidebar.verticalTabs") {
-        --uc-sidebar-button-bg-pos-first: 14px 11px;
-        --uc-sidebar-button-bg-pos-first-fs: 12px 11px;
-        --uc-sidebar-button-bg-pos-last: 10px 11px;
-        @media -moz-pref("uc.flex.increase-navbar-height") {
-            --uc-sidebar-button-bg-pos-first: 14px 13px;
-            --uc-sidebar-button-bg-pos-first-fs: 12px 13px;
-            --uc-sidebar-button-bg-pos-last: 10px 12px;
-        }
-    }
-
-    /* Initial display and positioning values for the window controls when auto-hide navbar is enabled */
-    @media not -moz-pref("sidebar.verticalTabs") {
-        &:not([customizing]) {
-            @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") or -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
-                --uc-tabstoolbar-windows-controls-display: flex;
-                --uc-navbar-windows-controls-display: none;
-            }
-        }
-        --uc-window-controls-offset: 0px;
-    }
-
-    --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
-    --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
-    &[uidensity="touch"] {
-        --uc-bm-padding: 7px;
-    }
-    /*
-    --bookmarks-toolbar-overlapping-browser-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding)) !important;
-    */
-    --uc-bm-padding-box-height: calc(var(--uc-bm-height) + 2 * var(--uc-bm-padding));
-    @media -moz-pref("uc.flex.disable-bookmarks-autohide") and (not -moz-pref("uc.flex.fully-hide-toolbox")) {
-        &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
-            --uc-bm-disable-autohide-offset: calc(-1 * (var(--uc-bm-padding-box-height)));
-        }
-    }
-    @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
-        &:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-            @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-                --uc-bm-disable-autohide-offset: 0px;
-            }
-        }
-    }
-
-    /* Initial values for variables required by uc-tabs-bar.css (autohide horizontal tabs) */
-    --uc-autohide-bottom: calc(0px - var(--uc-tabstoolbar-height));
-    --uc-autohide-navigator-bottom: var(--uc-autohide-bottom);
-    --uc-autohide-tabstoolbar-bottom: 0px;
-    --uc-navbar-transform: calc(-1 * var(--uc-nav-bar-height));
-    --uc-navbar-offset-y: calc(-1 * var(--uc-nav-bar-height));
-    /*
-    --uc-autohide-navigator-delay: 0s;
-    */
-    --uc-autohide-tabstoolbar-visibility: visible;
-    /* Default delay for visibility (18ms) and margin-bottom (0ms) transitions */
-    /*
-    --uc-autohide-tabstoolbar-delay: 18ms, 0ms;
-    */
-
-    /* Background color for the #searchbar input field */
-    --uc-searchbar-bgcolor: rgb(from var(--uc-urlbar-bg) r g b / calc(alpha * 0.5));
-
-    /* Make the urlbar background transparent when Mica or wallpaper is enabled */
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-        -moz-pref("uc.flex.browser-wallpaper-enabled") {
-        @media -moz-pref("uc.flex.style-urlbar", 4) {
-            --uc-urlbar-bg: transparent;
-        }
-    }
-
-    /* Box shadows for the urlbar and urlbar popup */
-    @media (prefers-color-scheme: dark) {
-        --uc-urlbar-focus-box-shadow:
-            inset 1px 1px 2.5px 1.5px rgba(0, 0, 0, 0.5), 0px 1px 0.5px 0.5px rgba(255, 255, 255, 0.1);
-        --uc-urlbar-inset-box-shadow:
-            inset 1px 1px 2px 1px rgba(0, 0, 0, 0.4), 0px 1px 0px 0px rgba(255, 255, 255, 0.1);
-        --uc-urlbar-popup-box-shadow: 0 45px 65px rgba(12, 12, 16, 0.45);
-        --uc-urlbar-popup-outline: 0 0 0 1px rgba(65, 72, 104, 0.45);
-        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-            --uc-urlbar-popup-outline: 0 0 0 1px rgba(69, 76, 108, 0.45);
-        }
-    }
-
-    @media (prefers-color-scheme: light) {
-        --uc-urlbar-focus-box-shadow:
-            inset 1px 1px 1px 0px rgba(0, 0, 0, 0.35), 1px 1px 0px 0.1px rgba(255, 255, 255, 0.05);
-        --uc-urlbar-inset-box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
-        @media -moz-pref("uc.flex.style-urlbar", 3) {
-            --uc-urlbar-inset-box-shadow:
-                inset 0.5px 0.5px 1px 0px rgba(0, 0, 0, 0.1), 1px 1px 0px 1px rgba(255, 255, 255, 0.4);
-        }
-        --uc-urlbar-popup-box-shadow: 0 45px 65px rgba(12, 12, 16, 0.35);
-        --uc-urlbar-popup-outline: 0 0 0 1px rgba(148, 163, 184, 0.4);
-        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-            --uc-urlbar-popup-outline: 0 0 0 1px rgba(168, 168, 166, 0.4);
-        }
-    }
-
-    /* Default background colors for the identity button and findbar when a theme is active */
-    &[lwtheme] {
-        --uc-identity-btn-bgcolor: inherit;
-        --uc-findbar-bgcolor: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
-    }
-
-    /* Override the default background color with a custom value when add-on color changes are not allowed */
-    @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
-        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
-            -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
-            -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
-            &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-                /* Lighten the background color of the identity button to increase visual distinction */
-                --uc-identity-btn-bgcolor: light-dark(
-                    var(--uc-toolbar-bgcolor),
-                    color-mix(in srgb, var(--uc-toolbar-bgcolor) 92%, white)
-                );
-                --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);
-                --uc-sidebar-header-bgcolor: var(--uc-toolbar-bgcolor);
-            }
-        }
-    }
-
-    /* Adjust findbar position to avoid being overlapped when top toolbar height changes */
-    --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) - 1px);
-    &[inFullscreen] {
-        --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 1px);
-    }
-    &:not([inFullscreen]) {
-        @media -moz-pref("uc.flex.fully-hide-toolbox") {
-            --uc-findbar-y-offset: calc(var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 9px);
-        }
-        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-            &:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
-                --uc-findbar-y-offset: calc(
-                    var(--uc-bm-padding) + var(--uc-bm-height) + var(--uc-nav-bar-height) - 9px
-                );
-            }
-        }
-        @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-            &:not([customizing]) {
-                /* Recalculate the findbar position if "uc.flex.disable-bookmarks-autohide" is enabled */
-                --uc-findbar-y-offset: calc(-1 * var(--uc-bm-padding) - 1px);
-            }
-        }
-    }
-
     /* ════════════════════════════════════════════════════════════════════
         ↕️ Expand/collapse transition animation
     ════════════════════════════════════════════════════════════════════ */
@@ -1573,6 +1647,7 @@
 
     /* Unified autohide transition timing for the toolbar */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
         -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         --uc-autohide-tabstoolbar-transition:
@@ -1610,20 +1685,6 @@
             opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             padding-inline-start 0.1s ease-in-out 0.4s;
-
-        /**/
-        --uc-tabbox-clip-path-start: inset(
-            var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-        );
-        --uc-tabbox-clip-path-end: inset(
-            var(--uc-web-content-margin-outset-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-        );
-        --uc-tabbox-clip-path-transition: clip-path var(--uc-autohide-transition-duration)
-            var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
-
-        /**/
-        --uc-vt-sidebox-clip-path-start: inset(0 0 0 0);
-        --uc-vt-sidebox-clip-path-end: inset(0 0 0 0);
 
         /* Extra delay is required when auto-hide navbar is enabled with window controls moved to the navbar, 
             to prevent flicker from unstable hover states */
@@ -1665,9 +1726,6 @@
                     opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         calc(var(--uc-autohide-sidebar-delay) + 28ms),
                     padding-inline-start 0.1s ease-in-out 0.4s;
-
-                --uc-tabbox-clip-path-transition: clip-path var(--uc-autohide-transition-duration)
-                    var(--uc-autohide-transition-type) calc(var(--uc-autohide-sidebar-delay) + 28ms);
             }
         }
     }
@@ -1699,6 +1757,7 @@
 
     /* Unified hover transition timing for the toolbar */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
         -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         --uc-hover-tabstoolbar-transition:
@@ -1731,54 +1790,170 @@
             margin-inline 0s var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
             opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
             padding-inline-start 0.1s ease-in-out 0.4s;
-
-        /**/
-        --uc-hover-navigator-tabbox-clip-path-start: inset(
-            var(--uc-navigator-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-        );
-        --uc-hover-navigator-tabbox-clip-path-end: inset(
-            var(--uc-navigator-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-        );
-        --uc-hover-tabstoolbar-tabbox-clip-path-start: inset(
-            var(--uc-tabstoolbar-hover-clip-mica) 0 0 var(--uc-web-content-margin-outset-clip-mica)
-        );
-        --uc-hover-tabstoolbar-tabbox-clip-path-end: inset(
-            var(--uc-tabstoolbar-hover-clip-mica) var(--uc-web-content-margin-outset-clip-mica) 0 0
-        );
-        --uc-hover-tabbox-clip-path-transition: clip-path var(--uc-hover-transition-duration)
-            var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
-
-        /**/
-        --uc-hover-vt-tabbox-clip-path-start: inset(
-            var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-sidebar-main-hover-clip-mica)
-        );
-        --uc-hover-vt-tabbox-clip-path-end: inset(
-            var(--uc-web-content-margin-outset-clip-mica) var(--uc-sidebar-main-hover-clip-mica) 0 0
-        );
-
-        /**/
-        --uc-hover-vt-sidebox-clip-path-start: inset(0 0 0 var(--uc-sidebar-main-hover-clip-mica));
-        --uc-hover-vt-sidebox-clip-path-end: inset(0 var(--uc-sidebar-main-hover-clip-mica) 0 0);
-
-        /**/
-        --uc-hover-sidebar-main-tabbox-clip-path-start: inset(
-            var(--uc-web-content-margin-outset-clip-mica) 0 0
-                var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica))
-        );
-        --uc-hover-sidebar-main-tabbox-clip-path-end: inset(
-            var(--uc-web-content-margin-outset-clip-mica)
-                var(--uc-sb-sidebar-main-hover-clip-mica, var(--uc-web-content-margin-outset-clip-mica)) 0 0
-        );
-
-        /**/
-        --uc-hover-sidebery-tabbox-clip-path-start: inset(
-            var(--uc-web-content-margin-outset-clip-mica) 0 0 var(--uc-sidebar-box-hover-clip-mica)
-        );
-        --uc-hover-sidebery-tabbox-clip-path-end: inset(
-            var(--uc-web-content-margin-outset-clip-mica) var(--uc-sidebar-box-hover-clip-mica) 0 0
-        );
     }
 
+    /* ════════════════════════════════════════════════════════════════════
+        ✂️ Mica backdrop clipping dimensions and transition
+    ════════════════════════════════════════════════════════════════════ */
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+        -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
+        -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        /**/
+        --uc-tabbox-clip-path-top: var(--uc-web-content-margin-outset-clip-mica);
+        --uc-tabbox-clip-path-side: var(--uc-web-content-margin-outset-clip-mica);
+        /**/
+        --uc-vt-sidebox-clip-path-top: 0;
+        --uc-vt-sidebox-clip-path-side: 0;
+
+        --uc-tabbox-clip-path-transition: clip-path var(--uc-autohide-transition-duration)
+            var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
+
+        /* Extra delay is required when auto-hide navbar is enabled with window controls moved to the navbar, 
+            to prevent flicker from unstable hover states */
+        @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") and (not -moz-pref("sidebar.verticalTabs")) {
+            @media not -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
+                --uc-tabbox-clip-path-transition: clip-path var(--uc-autohide-transition-duration)
+                    var(--uc-autohide-transition-type) calc(var(--uc-autohide-sidebar-delay) + 28ms);
+            }
+        }
+
+        /**/
+        --uc-hover-tabbox-clip-path-transition: clip-path var(--uc-hover-transition-duration)
+            var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+    }
+
+    /* Clip the Mica background when hovering the navigator in horizontal tabs mode */
+    @media not -moz-pref("sidebar.verticalTabs") {
+        /* Fullscreen mode: clip all toolbars */
+        --uc-tabstoolbar-hover-clip-mica: calc(0px - var(--uc-autohide-navigator-bottom));
+        --uc-navigator-hover-clip-mica: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height));
+        /* Non-fullscreen mode */
+        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+            &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
+                /* Default layout: only clip the bookmarks toolbar */
+                --uc-tabstoolbar-hover-clip-mica: 0px;
+                --uc-navigator-hover-clip-mica: var(--uc-personal-toolbar-height);
+                /* When the bookmarks toolbar is not auto-hidden, hovering the navigator
+                    does not expand the toolbox, so only the default outset clipping is used. */
+                @media -moz-pref("uc.flex.disable-bookmarks-autohide") or (not -moz-pref("browser.toolbars.bookmarks.visibility", "always")) {
+                    --uc-navigator-hover-clip-mica: var(--uc-web-content-margin-outset-clip-mica);
+                }
+
+                /* When the tab bar is hidden, clip the tab bar and bookmarks toolbar.
+                   If Sidebery is active, the tab bar clipping is no longer needed and
+                   --uc-autohide-navigator-bottom automatically resolves to 0. */
+                @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar") and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
+                    --uc-tabstoolbar-hover-clip-mica: calc(0px - var(--uc-autohide-navigator-bottom));
+                    --uc-navigator-hover-clip-mica: var(--uc-personal-toolbar-height);
+                    /* When bookmarks toolbar auto-hide is disabled, bookmarks toolbar clipping
+                       is no longer needed. If Sidebery is active, tab bar clipping is also no
+                       longer needed, and the Sidebery variable automatically restores the
+                       default outset clipping. */
+                    @media -moz-pref("uc.flex.disable-bookmarks-autohide") or (not -moz-pref("browser.toolbars.bookmarks.visibility", "always")) {
+                        --uc-navigator-hover-clip-mica: 0px;
+                        --uc-tabstoolbar-hover-clip-mica: calc(
+                            0px - var(--uc-autohide-navigator-bottom) + var(--uc-sb-navigator-hover-clip-offset, 0px)
+                        );
+                    }
+                }
+                /* When the tab bar is hidden with mode 3, hovering the navigator does not expand
+                   the tab bar, so the navigator clipping is set to the default outset clipping.
+                   When hovering the tab bar, the toolbox expands; the tab bar clipping subtracts
+                   the default outset clipping to cancel the offset added by the navigator clipping. */
+                @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
+                    @media -moz-pref("uc.flex.disable-bookmarks-autohide") or (not -moz-pref("browser.toolbars.bookmarks.visibility", "always")) {
+                        --uc-navigator-hover-clip-mica: var(--uc-web-content-margin-outset-clip-mica);
+                        --uc-tabstoolbar-hover-clip-mica: calc(
+                            0px - var(--uc-autohide-navigator-bottom) - var(--uc-web-content-margin-outset-clip-mica) +
+                                var(--uc-sb-navigator-hover-clip-offset, 0px)
+                        );
+                    }
+                }
+
+                /* When the navbar is hidden, clip the navbar and bookmarks toolbar.
+                   If Sidebery is active, navbar clipping is no longer needed and
+                   the Sidebery variable automatically resolves to 0. */
+                @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") {
+                    --uc-tabstoolbar-hover-clip-mica: 0px;
+                    --uc-navigator-hover-clip-mica: calc(
+                        var(--uc-personal-toolbar-height) +
+                            var(--uc-sb-navigator-hover-clip-offset, var(--uc-nav-bar-height))
+                    );
+                    /* When bookmarks toolbar auto-hide is disabled, bookmarks toolbar clipping
+                       is no longer needed. If Sidebery is active, navbar clipping is also no
+                       longer needed, and the Sidebery variable automatically restores the
+                       default outset clipping. */
+                    @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
+                        --uc-navigator-hover-clip-mica: var(
+                            --uc-sb-navigator-hover-clip-offset,
+                            var(--uc-nav-bar-height)
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    /* Clip the Mica background when hovering the navigator in vertical tabs mode */
+    @media -moz-pref("sidebar.verticalTabs") {
+        --uc-navigator-hover-clip-mica: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height));
+        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+            &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
+                --uc-navigator-hover-clip-mica: var(--uc-personal-toolbar-height);
+
+                @media -moz-pref("uc.flex.disable-bookmarks-autohide") or (not -moz-pref("browser.toolbars.bookmarks.visibility", "always")) {
+                    --uc-navigator-hover-clip-mica: var(--uc-web-content-margin-outset-clip-mica);
+                }
+            }
+        }
+    }
+
+    /* Clip the Mica background when hovering the #sidebar-main in vertical tabs mode */
+    /** 
+     * Background is clipped to show the Mica backdrop in the following cases:
+     * 1. If `uc.flex.disable-sidebery-autohide` is not enabled (auto-hide not disabled), clipping applies.
+     * 2. If `uc.flex.fully-hide-sidebery` is enabled (fully hide Sidebery), clipping applies regardless of the "disable auto-hide" setting.
+     * 3. If in fullscreen mode or when using the `Hide Sidebery` / `Hide All` shortcuts, clipping applies.
+     */
+    @media -moz-pref("sidebar.verticalTabs") {
+        /* Style 1 */
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+            /* Use `:where` so Style 2 can override Style 1 */
+            &:where(:not([titlepreface*="\180e "])) {
+                --uc-sidebar-main-hover-clip-mica: calc(
+                    var(--uc-sidebar-main-hover-width) - var(--uc-sidebar-main-width)
+                );
+            }
+        }
+        /* Style 2 */
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
+            --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
+        }
+        /* Style 3 */
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
+            }
+        }
+    }
+
+    /* Clip the Mica background when hovering the Sidebery */
+    @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
+        &:where(:not([titlepreface*="\180e "])) {
+            --uc-sidebar-box-hover-clip-mica: calc(var(--uc-sb-sidebar-hover-width) - var(--uc-sb-sidebar-width));
+        }
+    }
+    @media -moz-pref("uc.flex.fully-hide-sidebery") {
+        --uc-sidebar-box-hover-clip-mica: var(--uc-sb-sidebar-hover-width);
+    }
+    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+        &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
+            --uc-sidebar-box-hover-clip-mica: var(--uc-sb-sidebar-hover-width);
+        }
+    }
+
+    /**/
     @media -moz-pref("sidebar.verticalTabs") {
         --tab-pinned-horizontal-count: 5;
         --uc-sidebar-main-width: var(--uc-sidebar-stripe-width);
@@ -1789,102 +1964,6 @@
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             &[titlepreface*="\180e "] {
                 --uc-sidebar-main-width: var(--uc-sidebar-main-hover-width);
-            }
-        }
-        --uc-sidebar-main-hover-clip-mica: calc(var(--uc-sidebar-main-hover-width) - var(--uc-sidebar-main-width));
-        @media -moz-pref("uc.flex.fully-hide-sidebery") {
-            --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
-        }
-        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-            &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-                --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
-            }
-        }
-    }
-
-    --uc-sidebar-box-hover-clip-mica: calc(var(--uc-sb-sidebar-hover-width) - var(--uc-sb-sidebar-width));
-    @media -moz-pref("uc.flex.fully-hide-sidebery") {
-        --uc-sidebar-box-hover-clip-mica: var(--uc-sb-sidebar-hover-width);
-    }
-    @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-        &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-            --uc-sidebar-box-hover-clip-mica: var(--uc-sb-sidebar-hover-width);
-        }
-    }
-
-    /* Clip navigator in vertical tabs mode */
-    @media -moz-pref("sidebar.verticalTabs") {
-        --uc-navigator-hover-clip-mica: calc(var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height));
-        @media not (-moz-pref("uc.flex.disable-bookmarks-autohide") or -moz-pref("uc.flex.fully-hide-toolbox")) {
-            &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
-                --uc-navigator-hover-clip-mica: var(--uc-bm-padding-box-height);
-            }
-        }
-    }
-
-    /* Clip navigator in horizontal tabs mode */
-    @media not -moz-pref("sidebar.verticalTabs") {
-        /* Fullscreen mode: clip all toolbars */
-        --uc-navigator-hover-clip-mica: calc(
-            var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height) - var(--uc-autohide-navigator-bottom)
-        );
-        --uc-tabstoolbar-hover-clip-mica: calc(
-            var(--uc-bm-padding-box-height) + var(--uc-nav-bar-height) - var(--uc-autohide-navigator-bottom)
-        );
-        /* Non-fullscreen mode */
-        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-            &:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
-                /* Default layout: only clip the bookmarks toolbar */
-                --uc-navigator-hover-clip-mica: var(--uc-bm-padding-box-height);
-                @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-                    --uc-navigator-hover-clip-mica: var(--uc-web-content-margin-outset-clip-mica);
-                }
-
-                /** 
-                 * When the tab bar is hidden: clip the tab bar height.
-                 * Due to variable behavior, if Sidebery is active and the tab bar is not shown,
-                 * only the bookmarks toolbar is clipped. 
-                 */
-                @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar") and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
-                    /* When the "hide horizontal tabs" option is not set to 3, 
-                       hovering over the navigator shows the tab bar, so the tab bar height needs to be clipped. */
-                    @media not -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
-                        --uc-navigator-hover-clip-mica: calc(
-                            var(--uc-bm-padding-box-height) - var(--uc-autohide-navigator-bottom)
-                        );
-                        @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-                            --uc-navigator-hover-clip-mica: calc(
-                                0px - var(--uc-autohide-navigator-bottom) + var(--uc-sb-navbar-hover-clip-mica, 0px)
-                            );
-                        }
-                    }
-                    /* When the "hide horizontal tabs" option is set to 3, hovering over the navigator does not show the tab bar, 
-                       so no tab bar clipping is needed and the default layout is used.
-                       Hovering over the tabs toolbar will reveal the tab bar, 
-                       so the following variable is used to additionally clip the tab bar height. */
-                    --uc-tabstoolbar-hover-clip-mica: calc(
-                        var(--uc-bm-padding-box-height) - var(--uc-autohide-navigator-bottom)
-                    );
-                    @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-                        --uc-tabstoolbar-hover-clip-mica: calc(
-                            0px - var(--uc-autohide-navigator-bottom) + var(--uc-sb-navbar-hover-clip-mica, 0px)
-                        );
-                    }
-                }
-
-                /** 
-                 * When the navbar is hidden: clip the navbar height.
-                 * Due to variable behavior, if Sidebery is active, the navbar is not hidden
-                 * and only the bookmarks toolbar is clipped. 
-                 */
-                @media -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs") {
-                    --uc-navigator-hover-clip-mica: calc(
-                        var(--uc-bm-padding-box-height) + var(--uc-sb-navbar-hover-clip-mica, var(--uc-nav-bar-height))
-                    );
-                    @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-                        --uc-navigator-hover-clip-mica: var(--uc-sb-navbar-hover-clip-mica, var(--uc-nav-bar-height));
-                    }
-                }
             }
         }
     }
@@ -1995,25 +2074,49 @@
             }
         }
 
+        /* 
+         * These rules apply in the following cases:
+         * 1. If `uc.flex.disable-sidebery-autohide` is not enabled (auto-hide not disabled), auto-hide applies.
+         * 2. If `uc.flex.fully-hide-sidebery` is enabled (fully hide Sidebery), auto-hide applies regardless of the "disable auto-hide" setting.
+         * 3. If in fullscreen mode or when using the `Hide Sidebery` / `Hide All` shortcuts, auto-hide applies.
+         */
+        /* Style 1 */
+        @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
+            &:where(:not([sidebar-expand-on-hover], [titlepreface*="\180e "])) {
+                --uc-sb-hover-width: var(--uc-sb-sidebar-hover-width);
+            }
+        }
+        /* Style 2 */
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
+            --uc-sb-hover-width: var(--uc-sb-sidebar-hover-width);
+        }
+        /* Style 3 */
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                --uc-sb-hover-width: var(--uc-sb-sidebar-hover-width);
+            }
+        }
+
         /* If Sidebery is active and either fully hidden or in fullscreen mode, 
             clip the background to reveal the Mica backdrop */
-        @media -moz-pref("sidebar.verticalTabs") {
+        @media -moz-pref("sidebar.revamp") {
             --uc-sb-sidebar-main-hover-clip-mica: var(--uc-sidebar-stripe-width);
         }
 
         @media not -moz-pref("sidebar.verticalTabs") {
-            --uc-sb-personal-toolbar-outline-margin-side: 0px;
-            --uc-sb-navbar-hover-clip-mica: 0px;
-            /* If Sidebery is active while horizontal tabs are fully hidden, 
-                the clipped height doesn't need to account for the tab bar */
-            @media -moz-pref("uc.flex.disable-bookmarks-autohide") {
-                --uc-sb-navbar-hover-clip-mica: var(--uc-web-content-margin-outset-clip-mica);
+            --uc-sb-tabbox-clip-path-top: 0;
+            --uc-sb-navigator-hover-clip-offset: 0px;
+            @media -moz-pref("uc.flex.disable-bookmarks-autohide") or (not -moz-pref("browser.toolbars.bookmarks.visibility", "always")) {
+                --uc-sb-navigator-hover-clip-offset: var(--uc-web-content-margin-outset-clip-mica);
             }
+            --uc-personal-toolbar-outline-margin-offset: 0px;
 
             /* Position of the sidebar button icon in horizontal tab mode when Sidebery is active */
             --uc-sb-sidebar-button-offset: var(--uc-sidebar-stripe-width);
             --uc-sb-sidebar-button-bg-pos: absolute;
-            --uc-sb-sidebar-button-bg-size: 20px;
+            @media not ((-moz-platform: macos) and -moz-pref("sidebar.position_start")) {
+                --uc-sb-sidebar-button-bg-size: 20px;
+            }
             --uc-sb-sidebar-button-bg-pos-first: 13px 10px;
             --uc-sb-sidebar-button-bg-pos-first-fs: 11px 10px;
             --uc-sb-sidebar-button-bg-pos-last: 8.5px 1.5px;
@@ -2125,11 +2228,8 @@
     @media -moz-pref("uc.flex.enable-rounded-web-content") {
         --uc-personal-toolbar-outline-margin-side: var(--uc-web-content-margin);
     }
-    @media -moz-pref("sidebar.revamp") and (not -moz-pref("sidebar.verticalTabs")) {
-        --uc-personal-toolbar-outline-margin-side: 0px;
-    }
-    @media -moz-pref("sidebar.verticalTabs") {
-        --uc-sb-personal-toolbar-outline-margin-side: 0px;
+    @media -moz-pref("sidebar.revamp") {
+        --uc-personal-toolbar-outline-margin-offset: 0px;
     }
 
     /* Adjust vertical offset of the bookmarks toolbar background image */
@@ -2213,28 +2313,6 @@
                 --uc-sb-sidebar-offset,
                 var(--uc-sidebar-main-collapsed-width, var(--uc-sidebar-main-width))
             );
-            /** 
-             * When "Hide tabs and sidebar" is enabled in sidebar settings
-             * and the sidebar toggle button is in a collapsed state,
-             * the sidebar is fully hidden, so all offsets are set to 0 
-             */
-            @media -moz-pref("sidebar.visibility", "hide-sidebar") {
-                /**
-                 * Using #navigator-toolbox:has(#sidebar-button:not([expanded])) could avoid the cost of :root:has(),
-                 * but it stops working if #sidebar-button is placed inside #customization-container,
-                 * since it's no longer part of the active DOM.
-                 * Given that the rule is behind a @media query and uses variable forwarding to limit scope,
-                 * the overall performance impact of :root:has() is minimal in most cases,
-                 * so we chose the more robust :root:has() version here.
-                 */
-                &:has(> body > #browser > #sidebar-main[hidden]) {
-                    --uc-personal-toolbar-offset: 0px;
-                    --uc-personal-toolbar-width: 0px;
-                    --uc-theme-bg-x-left-start: 0px;
-                    --uc-theme-bg-x-right-end: 0px;
-                    --uc-sb-personal-toolbar-outline-margin-side: var(--uc-web-content-margin);
-                }
-            }
 
             /* 
              * When Sidebery is set to stay expanded (via uc.flex.disable-sidebery-autohide)
@@ -2283,6 +2361,30 @@
             }
         }
     }
+
+    /** 
+     * When "Hide tabs and sidebar" is enabled in sidebar settings
+     * and the sidebar toggle button is in a collapsed state,
+     * the sidebar is fully hidden, so all offsets are set to 0 
+     */
+    @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.visibility", "hide-sidebar") {
+        /**
+         * Using #navigator-toolbox:has(#sidebar-button:not([expanded])) could avoid the cost of :root:has(),
+         * but it stops working if #sidebar-button is placed inside #customization-container,
+         * since it's no longer part of the active DOM.
+         * Given that the rule is behind a @media query and uses variable forwarding to limit scope,
+         * the overall performance impact of :root:has() is minimal in most cases,
+         * so we chose the more robust :root:has() version here.
+         */
+        &:has(> body > #browser > #sidebar-main[hidden]) {
+            --uc-personal-toolbar-offset: 0px;
+            --uc-personal-toolbar-width: 0px;
+            --uc-theme-bg-x-left-start: 0px;
+            --uc-theme-bg-x-right-end: 0px;
+            --uc-personal-toolbar-outline-margin-offset: var(--uc-web-content-margin);
+        }
+    }
+
     /**
      * When the sidebar is positioned on the right ([sidebar-positionend]),
      * ensure the following variables take precedence over all previous cases.

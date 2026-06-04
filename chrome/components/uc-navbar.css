@@ -13,7 +13,7 @@
 */
 
 /* Override toolbar color if there's no theme background image. */
-@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
         -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -38,20 +38,22 @@
  * causing the navigator area to lose its background image when expanded. 
  * Reattach the background image to the navigator here. 
  */
-@media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
-    #navigator-toolbox {
-        :root[lwtheme] & {
-            background-image: var(--lwt-additional-images);
-            background-repeat: var(--lwt-background-tiling);
-            background-position: var(--lwt-background-alignment);
-        }
+@media not (-moz-pref("sidebar.verticalTabs") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
+    @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
+        #navigator-toolbox {
+            :root[lwtheme] & {
+                background-image: var(--lwt-additional-images);
+                background-repeat: var(--lwt-background-tiling);
+                background-position: var(--lwt-background-alignment);
+            }
 
-        :root[lwtheme-image] & {
-            background-image: var(--lwt-header-image), var(--lwt-additional-images);
-            background-repeat: no-repeat, var(--lwt-background-tiling);
-            background-position:
-                right top,
-                var(--lwt-background-alignment);
+            :root[lwtheme-image] & {
+                background-image: var(--lwt-header-image), var(--lwt-additional-images);
+                background-repeat: no-repeat, var(--lwt-background-tiling);
+                background-position:
+                    right top,
+                    var(--lwt-background-alignment);
+            }
         }
     }
 }
@@ -142,6 +144,7 @@ toolbarbutton:hover {
                 opacity 82ms linear !important;
             transition-delay: var(--uc-autohide-toolbox-delay) !important;
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -174,6 +177,7 @@ toolbarbutton:hover {
                 width 0.3s ease,
                 translate 0.3s ease !important;
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -222,6 +226,7 @@ toolbarbutton:hover {
                 width 0.3s ease,
                 translate 0.3s ease !important;
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -262,6 +267,7 @@ toolbarbutton:hover {
             /*
             transition-delay: 33ms !important;
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -324,6 +330,7 @@ toolbarbutton:hover {
                 opacity 82ms linear !important;
             transition-delay: var(--uc-autohide-toolbox-delay) !important;
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -356,6 +363,7 @@ toolbarbutton:hover {
                 width 0.3s ease,
                 translate 0.3s ease !important;
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -400,6 +408,7 @@ toolbarbutton:hover {
                 width 0.3s ease,
                 translate 0.3s ease !important;
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -444,6 +453,7 @@ toolbarbutton:hover {
             /*
             transition-delay: 33ms !important;
             @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:

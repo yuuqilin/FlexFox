@@ -79,7 +79,7 @@
             &:first-child {
                 background-position: var(--uc-sidebar-button-bg-pos-first);
                 mask-position: var(--uc-sidebar-button-bg-pos-first);
-                @media not -moz-pref("uc.flex.move-window-controls-to-left"),
+                @media not (-moz-pref("uc.flex.move-window-controls-to-left") or (-moz-platform: macos)),
                     -moz-pref("uc.flex.auto-hide-window-controls") {
                     background-size: 20px;
                     mask-size: 20px;
@@ -105,7 +105,12 @@
                 }
             }
 
-            &:not([checked]) {
+            /* Since v152, the [checked] attribute is removed in horizontal tabs mode, requiring [data-l10n-id] as a fallback. */
+            &:where(
+                :not([checked]),
+                [data-l10n-id="sidebar-widget-expand-sidebar2"],
+                [data-l10n-id="sidebar-widget-show-sidebar2"]
+            ) {
                 /* When `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` is enabled, 
                  * --toolbarbutton-icon-fill is overridden in :root.  
                  * We reassign it on the endpoint element so that icons in the non-checked state 
@@ -120,7 +125,11 @@
                 }
             }
 
-            &[checked] {
+            &:where(
+                [checked],
+                [data-l10n-id="sidebar-widget-collapse-sidebar2"],
+                [data-l10n-id="sidebar-widget-hide-sidebar2"]
+            ) {
                 fill: var(--uc-flexfox-logo-color) !important;
                 @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
                     fill: light-dark(rgb(91, 91, 102), rgb(251, 251, 254)) !important;

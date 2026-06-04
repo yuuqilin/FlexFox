@@ -40,6 +40,7 @@ html[mozdisallowselectionprint]:has(head link:nth-of-type(1)[href^="resource://p
     }
 
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         @media -moz-pref("browser.tabs.allow_transparent_browser") {
             body {

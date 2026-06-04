@@ -170,18 +170,10 @@
         }
     }
 
-    /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */
-    /* 
-     * These rules apply in the following cases:
-     * 1. If `uc.flex.disable-sidebery-autohide` is not enabled (auto-hide not disabled), auto-hide applies.
-     * 2. If `uc.flex.fully-hide-sidebery` is enabled (fully hide Sidebery), auto-hide applies regardless of the "disable auto-hide" setting.
-     * 3. If in fullscreen mode or when using the `Hide Sidebery` / `Hide All` shortcuts, auto-hide applies.
-     */
-    /* Style 1 */
+    /* Add rounded corners to Sidebery; currently only the top corners are applied */
     @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
         :root:not([sidebar-expand-on-hover], [titlepreface*="\180e "]) & {
             #sidebar {
-                /* Add rounded corners to Sidebery; currently only the top corners are applied */
                 @media -moz-pref("uc.flex.enable-rounded-web-content") and (not -moz-pref("uc.flex.remove-sidebar-stripe")) {
                     #sidebar-box:not([sidebar-positionend]) & {
                         border-top-right-radius: calc(var(--uc-web-content-radius) + 2px) !important;
@@ -199,68 +191,22 @@
                     height: calc(100% - var(--uc-web-content-margin));
                     */
                 }
-                will-change: min-width;
-                min-width: var(--uc-sb-sidebar-width) !important;
-                transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay) !important;
-                /*
-                @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
-                    transition: none !important;
-                }
-                */
-            }
-
-            &:hover #sidebar,
-            #sidebar-header:has(> #sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
-                min-width: var(--uc-sb-sidebar-hover-width) !important;
-                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay) !important;
             }
         }
     }
-    /* Style 2 */
-    @media -moz-pref("uc.flex.fully-hide-sidebery") {
-        #sidebar {
-            will-change: min-width;
-            min-width: var(--uc-sb-sidebar-width) !important;
-            transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay) !important;
-            /*
-            @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
-                transition: none !important;
-            }
-            */
-        }
 
-        &:hover #sidebar,
-        #sidebar-header:has(> #sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
-            min-width: var(--uc-sb-sidebar-hover-width) !important;
-            transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay) !important;
-        }
+    /* Hide Sidebery when auto-collapse is disabled but full hiding of Sidebery or fullscreen mode is enabled */
+    #sidebar {
+        will-change: min-width;
+        min-width: var(--uc-sb-sidebar-width) !important;
+        transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+            var(--uc-autohide-sidebar-delay) !important;
     }
-    /* Style 3 */
-    @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-        :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-            #sidebar {
-                will-change: min-width;
-                min-width: var(--uc-sb-sidebar-width) !important;
-                transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-autohide-sidebar-delay) !important;
-                /*
-                @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
-                    transition: none !important;
-                }
-                */
-            }
-
-            &:hover #sidebar,
-            #sidebar-header:has(> #sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
-                min-width: var(--uc-sb-sidebar-hover-width) !important;
-                transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay) !important;
-            }
-        }
+    &:hover #sidebar,
+    #sidebar-header:has(> #sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
+        min-width: var(--uc-sb-hover-width, auto) !important;
+        transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+            var(--uc-hover-sidebar-delay) !important;
     }
 
     .sidebar-panel {

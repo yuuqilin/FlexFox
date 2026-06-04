@@ -1,5 +1,5 @@
 /* Override browser color if there's no theme background image. */
-@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
         -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -278,6 +278,23 @@ split-view-footer {
     }
 }
 
+/* Solid Page background color overrides for web content area */
+#main-window[titlepreface*="\200f "] #tabbrowser-tabpanels {
+    background-color: #f9f9fb !important;
+    @media -moz-pref("uc.flex.browser-solid-page-color-scheme", 0) {
+        background-color: #202020 !important;
+    }
+    @media -moz-pref("uc.flex.browser-solid-page-color-scheme", 2) {
+        background-color: light-dark(#f9f9fb, #202020) !important;
+        @media (-moz-content-prefers-color-scheme: light) {
+            background-color: #f9f9fb !important;
+        }
+        @media (-moz-content-prefers-color-scheme: dark) {
+            background-color: #202020 !important;
+        }
+    }
+}
+
 /* ════════════════════════════════════════════════════════════════════
 ██╗    ██╗███████╗██████╗      ██████╗ ██████╗ ███╗   ██╗████████╗███████╗███╗   ██╗████████╗
 ██║    ██║██╔════╝██╔══██╗    ██╔════╝██╔═══██╗████╗  ██║╚══██╔══╝██╔════╝████╗  ██║╚══██╔══╝
@@ -315,7 +332,7 @@ split-view-footer {
                 margin: var(--uc-web-content-margin-box);
 
                 background-color: transparent !important;
-                @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+                @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
                     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
                         -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
                         -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
@@ -358,31 +375,37 @@ split-view-footer {
                 overflow: hidden;
                 box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                 @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
-                    box-shadow: var(--uc-web-content-box-shadow-depth) red;
+                    box-shadow: 0px 0px 10px red;
                 }
 
                 @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser")) {
                     @media not (-moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser")) {
-                        &::before {
-                            content: "";
-                            position: absolute;
-                            inset: 0;
-                            z-index: -1;
-                            pointer-events: none;
-                            /* Background shown while loading pages */
-                            background-color: light-dark(#f9f9fb, #202020);
-                            @media (-moz-content-prefers-color-scheme: light) {
-                                background-color: #f9f9fb;
+                        @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("browser.tabs.allow_transparent_browser")) {
+                            &::before {
+                                content: "";
+                                position: absolute;
+                                inset: 0;
+                                z-index: -1;
+                                pointer-events: none;
+                                /* Background shown while loading pages */
+                                background-color: light-dark(#f9f9fb, #202020);
+                                @media (-moz-content-prefers-color-scheme: light) {
+                                    background-color: #f9f9fb;
+                                }
+                                @media (-moz-content-prefers-color-scheme: dark) {
+                                    background-color: #202020;
+                                }
+                                /* Clips background bleed around rounded corners */
+                                clip-path: inset(
+                                    0 round
+                                        var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip))
+                                        var(
+                                            --uc-sb-web-content-radius-top-right-clip,
+                                            var(--uc-web-content-radius-clip)
+                                        )
+                                        var(--uc-web-content-radius-clip) var(--uc-web-content-radius-clip)
+                                );
                             }
-                            @media (-moz-content-prefers-color-scheme: dark) {
-                                background-color: #202020;
-                            }
-                            /* Clips background bleed around rounded corners */
-                            clip-path: inset(
-                                0 round var(--uc-sb-web-content-radius-top-left-clip, var(--uc-web-content-radius-clip))
-                                    var(--uc-sb-web-content-radius-top-right-clip, var(--uc-web-content-radius-clip))
-                                    var(--uc-web-content-radius-clip) var(--uc-web-content-radius-clip)
-                            );
                         }
                     }
                 }
@@ -398,7 +421,7 @@ split-view-footer {
                     margin-right: var(--uc-web-content-margin);
                     box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                     @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
-                        box-shadow: var(--uc-web-content-box-shadow-depth) red;
+                        box-shadow: 0px 0px 10px red;
                     }
                 }
                 /* When DevTools is docked on the right, override sharp corner with a rounded one and add left margin */
@@ -407,7 +430,7 @@ split-view-footer {
                     margin-left: var(--uc-web-content-margin);
                     box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                     @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
-                        box-shadow: var(--uc-web-content-box-shadow-depth) red;
+                        box-shadow: 0px 0px 10px red;
                     }
                 }
             }
@@ -417,7 +440,7 @@ split-view-footer {
                 margin-top: var(--uc-web-content-margin);
                 box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                 @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
-                    box-shadow: var(--uc-web-content-box-shadow-depth) red;
+                    box-shadow: 0px 0px 10px red;
                 }
             }
 
@@ -451,6 +474,7 @@ split-view-footer {
 
 /* Mica background clipping and window transparency settings */
 @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
     -moz-pref("uc.flex.browser-wallpaper-enabled") {
     #tabbrowser-tabpanels {
         background-color: transparent !important;
@@ -471,71 +495,157 @@ split-view-footer {
      */
     #tabbrowser-tabbox {
         &:not([sidebar-positionend]) {
-            clip-path: var(--uc-tabbox-clip-path-start);
+            clip-path: inset(var(--uc-tabbox-clip-path-top) 0 0 var(--uc-tabbox-clip-path-side));
         }
         &[sidebar-positionend] {
-            clip-path: var(--uc-tabbox-clip-path-end);
+            clip-path: inset(var(--uc-tabbox-clip-path-top) var(--uc-tabbox-clip-path-side) 0 0);
         }
         will-change: clip-path;
         transition: var(--uc-tabbox-clip-path-transition);
     }
 
+    /**
+     * In horizontal tabs mode with revamped sidebar enabled, the expanded navigator overlaps #sidebar-main.
+     * Therefore, #sidebar-main requires the same clipping as #tabbrowser-tabbox,
+     * using '--uc-sb-tabbox-clip-path-top' variables to handle whether Sidebery is active.
+     */
+    @media -moz-pref("sidebar.revamp") and (not -moz-pref("sidebar.verticalTabs")) {
+        #sidebar-main {
+            clip-path: inset(var(--uc-sb-tabbox-clip-path-top, var(--uc-tabbox-clip-path-top)) 0 0 0);
+            will-change: min-height, max-height, overflow, background-color, clip-path;
+            transition: var(--uc-tabbox-clip-path-transition);
+        }
+    }
+
+    /** 
+     * In horizontal tabs mode, the expanded navigator overlaps an open sidebar
+     * panel. Non-Sidebery panels therefore require the same clipping used by
+     * #tabbrowser-tabbox so the Mica backdrop remains visible behind the
+     * expanded toolbars. 
+     */
+    @media not -moz-pref("sidebar.verticalTabs") {
+        #sidebar-box[sidebar-panel-open]:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]) {
+            clip-path: inset(var(--uc-tabbox-clip-path-top) 0 0 0);
+            transition: var(--uc-tabbox-clip-path-transition);
+        }
+    }
+
     /* When a menu is open, clip the tab box to reveal the Mica backdrop */
-    #mainPopupSet:has(
-            > [panelopen]:not(
-                    #ask-chat-shortcuts,
-                    #selection-shortcut-action-panel,
-                    #chat-shortcuts-options-panel,
-                    #tab-preview-panel,
-                    #tabgroup-preview-panel
-                ),
-            #tab-group-editor > [panelopen]
-        )
-        ~ #browser
-        #tabbrowser-tabbox {
-        --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
-        --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
-        --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+    @media not -moz-pref("sidebar.verticalTabs") {
+        #mainPopupSet:has(
+                > [panelopen]:not(
+                        #ask-chat-shortcuts,
+                        #selection-shortcut-action-panel,
+                        #chat-shortcuts-options-panel,
+                        #tab-preview-panel
+                    ),
+                #tab-group-editor > [panelopen]
+            )
+            ~ #browser {
+            --uc-tabbox-clip-path-top: calc(
+                var(--uc-tabstoolbar-hover-clip-mica) + var(--uc-navigator-hover-clip-mica)
+            );
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+            @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
+                --uc-tabbox-clip-path-top: var(--uc-navigator-hover-clip-mica);
+            }
+        }
+
+        @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
+            #mainPopupSet:has(:is(#tabgroup-preview-panel[panelopen], #tab-group-editor > [panelopen])) ~ #browser {
+                --uc-tabbox-clip-path-top: calc(
+                    var(--uc-tabstoolbar-hover-clip-mica) + var(--uc-navigator-hover-clip-mica)
+                );
+            }
+        }
+    }
+
+    /** 
+     * In vertical tabs mode, #tabgroup-preview-panel and #tab-group-editor are
+     * anchored to the sidebar instead of the top toolbar area. Opening these
+     * panels does not require the navigator to expand, so they are handled
+     * separately and excluded from this selector. 
+     */
+    @media -moz-pref("sidebar.verticalTabs") {
+        #mainPopupSet:has(
+                > [panelopen]:not(
+                        #ask-chat-shortcuts,
+                        #selection-shortcut-action-panel,
+                        #chat-shortcuts-options-panel,
+                        #tab-preview-panel,
+                        #tabgroup-preview-panel
+                    )
+            )
+            ~ #browser {
+            --uc-tabbox-clip-path-top: var(--uc-navigator-hover-clip-mica);
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+        }
     }
 
     /* When the navigator or its child bookmark toolbar is expanded, clip the tab box to reveal the Mica backdrop */
     @media not -moz-pref("sidebar.verticalTabs") {
-        #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
-            ~ #browser
-            #tabbrowser-tabbox,
-        #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
-            --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
-            --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
+        #navigator-toolbox:hover ~ #browser {
+            --uc-tabbox-clip-path-top: calc(
+                var(--uc-tabstoolbar-hover-clip-mica) + var(--uc-navigator-hover-clip-mica)
+            );
             --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
 
-        /* When the "hide horizontal tabs" option is set to 3, the tab bar only appears when hovering over the tabs toolbar.
-           In this case, the following variables are used to apply additional clipping. */
-        @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
-            #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
-                ~ #browser
-                #tabbrowser-tabbox,
-            #navigator-toolbox:has(> :is(#toolbar-menubar, #TabsToolbar):hover) ~ #browser #tabbrowser-tabbox,
-            #navigator-toolbox[movingtab] ~ #browser #tabbrowser-tabbox {
-                --uc-tabbox-clip-path-start: var(--uc-hover-tabstoolbar-tabbox-clip-path-start);
-                --uc-tabbox-clip-path-end: var(--uc-hover-tabstoolbar-tabbox-clip-path-end);
-            }
+        /** 
+         * When the navigator expands, apply the same clipping to open non-Sidebery
+         * sidebar panels so they remain aligned with #tabbrowser-tabbox and reveal
+         * the Mica backdrop correctly. 
+         */
+        #navigator-toolbox:hover
+            ~ #browser
+            #sidebar-box[sidebar-panel-open]:not(
+                [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+            ) {
+            --uc-tabbox-clip-path-top: calc(
+                var(--uc-tabstoolbar-hover-clip-mica) + var(--uc-navigator-hover-clip-mica)
+            );
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
 
-        /* Keep the tab box clipped when the navigator contains an open toolbar button */
-        @media -moz-pref("uc.flex.fully-hide-toolbox") {
-            #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
-                --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
-                --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
-                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-            }
-        }
-        @media not -moz-pref("uc.flex.fully-hide-toolbox") {
-            :root:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
-                #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+        /** 
+         * When "hide horizontal tabs" is set to 3, the tab bar only expands when hovering over the tabs toolbar.
+         * By default, only the navigator height is clipped. When explicitly hovering over the tabs toolbar,
+         * both the navigator and tabs toolbar heights are combined to clip the full top toolbox area.
+         */
+        @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) and (not -moz-pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs")) {
+            @media not -moz-pref("uc.flex.fully-hide-toolbox") {
+                :root:not([inFullscreen], [titlepreface*="\200b "], [titlepreface*="\200d "]) {
+                    #navigator-toolbox:hover ~ #browser {
+                        --uc-tabbox-clip-path-top: var(--uc-navigator-hover-clip-mica);
+                    }
+                    #navigator-toolbox:has(> :is(#toolbar-menubar, #TabsToolbar):hover) ~ #browser,
+                    #navigator-toolbox[movingtab] ~ #browser {
+                        --uc-tabbox-clip-path-top: calc(
+                            var(--uc-tabstoolbar-hover-clip-mica) + var(--uc-navigator-hover-clip-mica)
+                        );
+                    }
+
+                    #navigator-toolbox:hover
+                        ~ #browser
+                        #sidebar-box[sidebar-panel-open]:not(
+                            [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+                        ) {
+                        --uc-tabbox-clip-path-top: var(--uc-navigator-hover-clip-mica);
+                    }
+                    #navigator-toolbox:has(> :is(#toolbar-menubar, #TabsToolbar):hover)
+                        ~ #browser
+                        #sidebar-box[sidebar-panel-open]:not(
+                            [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+                        ),
+                    #navigator-toolbox[movingtab]
+                        ~ #browser
+                        #sidebar-box[sidebar-panel-open]:not(
+                            [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+                        ) {
+                        --uc-tabbox-clip-path-top: calc(
+                            var(--uc-tabstoolbar-hover-clip-mica) + var(--uc-navigator-hover-clip-mica)
+                        );
+                    }
                 }
             }
         }
@@ -543,78 +653,20 @@ split-view-footer {
 
     /* When the navigator or its child bookmark toolbar is expanded, clip the tab box to reveal the Mica backdrop */
     @media -moz-pref("sidebar.verticalTabs") {
-        @media not -moz-pref("uc.flex.disable-bookmarks-autohide"),
-            -moz-pref("uc.flex.fully-hide-toolbox"),
-            (display-mode: fullscreen) {
-            #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
-                --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
-                --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
-                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-            }
-
-            /* Keep the tab box clipped when the navigator contains an open toolbar button */
-            @media -moz-pref("uc.flex.fully-hide-toolbox") {
-                #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
-            }
-        }
-    }
-    /** 
-     * Repeat the styles above using the selector for the "Hide Topbar" shortcut,
-     * which has the same effect as @media -moz-pref("uc.flex.fully-hide-toolbox"). 
-     */
-    @media -moz-pref("sidebar.verticalTabs") {
-        :root:is([titlepreface*="\200b "], [titlepreface*="\200d "]) {
-            #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
-                --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
-                --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
-                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-            }
-
-            #navigator-toolbox:has(toolbarbutton[open]) ~ #browser #tabbrowser-tabbox {
-                --uc-tabbox-clip-path-start: var(--uc-hover-navigator-tabbox-clip-path-start);
-                --uc-tabbox-clip-path-end: var(--uc-hover-navigator-tabbox-clip-path-end);
-                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-            }
+        #navigator-toolbox:hover ~ #browser #tabbrowser-tabbox {
+            --uc-tabbox-clip-path-top: var(--uc-navigator-hover-clip-mica);
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
     }
 
     /* Clip the tab box when native vertical tabs are expanded to reveal the Mica backdrop */
     @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
-        /* 
-         * Same logic as in uc-verticalfox.css.
-         *
-         * Background is clipped to show the Mica backdrop in the following cases:
-         * 1. If `uc.flex.disable-sidebery-autohide` is not enabled (auto-hide not disabled), clipping applies.
-         * 2. If `uc.flex.fully-hide-sidebery` is enabled (fully hide Sidebery), clipping applies regardless of the "disable auto-hide" setting.
-         * 3. If in fullscreen mode or when using the `Hide Sidebery` / `Hide All` shortcuts, clipping applies.
-         */
         #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-launcher-expanded]:not([sidebar-panel-open]) {
-            /* Style 1 */
-            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-                :root:not([titlepreface*="\180e "]) & {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
-            }
-            /* Style 2 */
-            @media -moz-pref("uc.flex.fully-hide-sidebery") {
-                --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
-                --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
-                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-            }
-            /* Style 3 */
-            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-                :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-vt-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-vt-tabbox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
-            }
+            --uc-tabbox-clip-path-side: var(
+                --uc-sidebar-main-hover-clip-mica,
+                var(--uc-web-content-margin-outset-clip-mica)
+            );
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
 
         /** 
@@ -626,15 +678,12 @@ split-view-footer {
                 [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
             ) {
             min-width: var(--uc-sidebar-main-hover-clip-mica) !important;
-            /*
-            clip-path: inset(0 0 0 0);
-            */
             &:not([sidebar-positionend]) {
-                clip-path: var(--uc-vt-sidebox-clip-path-start);
+                clip-path: inset(var(--uc-vt-sidebox-clip-path-top) 0 0 var(--uc-vt-sidebox-clip-path-side));
             }
             /*if sidebar on right*/
             &[sidebar-positionend] {
-                clip-path: var(--uc-vt-sidebox-clip-path-end);
+                clip-path: inset(var(--uc-vt-sidebox-clip-path-top) var(--uc-vt-sidebox-clip-path-side) 0 0);
             }
             transition: var(--uc-tabbox-clip-path-transition);
         }
@@ -642,8 +691,15 @@ split-view-footer {
             ~ #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
                 [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
             ) {
-            --uc-vt-sidebox-clip-path-start: var(--uc-hover-vt-sidebox-clip-path-start);
-            --uc-vt-sidebox-clip-path-end: var(--uc-hover-vt-sidebox-clip-path-end);
+            --uc-vt-sidebox-clip-path-side: var(--uc-sidebar-main-hover-clip-mica);
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+        }
+        #navigator-toolbox:hover
+            ~ #browser
+            #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
+                [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+            ) {
+            --uc-vt-sidebox-clip-path-top: var(--uc-navigator-hover-clip-mica);
             --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
     }
@@ -652,7 +708,7 @@ split-view-footer {
      * When using Sidebery as the sidebar panel, 
      * clip Sidebery on hover over the sidebar stripe to reveal the Mica backdrop. 
      */
-    @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
+    @media -moz-pref("sidebar.revamp") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
         #sidebar-box[sidebar-panel-open][sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
             &:not(:hover) {
                 clip-path: inset(0 0 0 0);
@@ -701,16 +757,14 @@ split-view-footer {
          */
         @media -moz-pref("uc.flex.fully-hide-sidebery") {
             #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
-                --uc-tabbox-clip-path-start: var(--uc-hover-sidebar-main-tabbox-clip-path-start);
-                --uc-tabbox-clip-path-end: var(--uc-hover-sidebar-main-tabbox-clip-path-end);
+                --uc-tabbox-clip-path-side: var(--uc-sb-sidebar-main-hover-clip-mica);
                 --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
                 #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-sidebar-main-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-sidebar-main-tabbox-clip-path-end);
+                    --uc-tabbox-clip-path-side: var(--uc-sb-sidebar-main-hover-clip-mica);
                     --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
             }
@@ -720,28 +774,11 @@ split-view-footer {
     /* Clip the tab box when Sidebery is expanded to reveal the Mica backdrop */
     #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
         &:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
-            /* Style 1 */
-            @media not (-moz-pref("uc.flex.disable-sidebery-autohide") or -moz-pref("uc.flex.sidebery-allow-resizable-width")) {
-                :root:not([titlepreface*="\180e "]) & {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
-            }
-            /* Style 2 */
-            @media -moz-pref("uc.flex.fully-hide-sidebery") {
-                --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
-                --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
-                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-            }
-            /* Style 3 */
-            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
-                :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                    --uc-tabbox-clip-path-start: var(--uc-hover-sidebery-tabbox-clip-path-start);
-                    --uc-tabbox-clip-path-end: var(--uc-hover-sidebery-tabbox-clip-path-end);
-                    --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
-                }
-            }
+            --uc-tabbox-clip-path-side: var(
+                --uc-sidebar-box-hover-clip-mica,
+                var(--uc-web-content-margin-outset-clip-mica)
+            );
+            --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
     }
 
@@ -776,6 +813,7 @@ split-view-footer {
 }
 
 @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
     -moz-pref("uc.flex.browser-wallpaper-enabled"),
     -moz-pref("uc.flex.enable-translucent-urlbar-popup-and-menus") {
     .toolbar-menupopup,
@@ -820,7 +858,8 @@ split-view-footer {
     }
 }
 
-@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") {
+@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") {
     @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
         #main-window {
             background-color: light-dark(
@@ -830,6 +869,21 @@ split-view-footer {
             /*
             -moz-appearance: -moz-win-borderless-glass !important;
             */
+        }
+    }
+}
+
+@media -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (not -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+    @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
+        :root,
+        body {
+            background: transparent !important;
+            --toolbar-bgcolor: transparent !important;
+            --toolbox-bgcolor: transparent !important;
+            --toolbox-bgcolor-inactive: transparent !important;
+            --toolbar-background-color: transparent !important;
+            --toolbox-background-color: transparent !important;
+            --toolbox-background-color-inactive: transparent !important;
         }
     }
 }
@@ -845,7 +899,7 @@ split-view-footer {
 ═════════════════════════════════════════════════════════════════════ */
 
 @media -moz-pref("uc.flex.browser-wallpaper-enabled") {
-    #main-window {
+    body {
         /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
         --toolbar-bgcolor: light-dark(
             rgba(var(--uc-browser-wallpaper-light-mask), var(--uc-browser-wallpaper-transparency)),
@@ -858,20 +912,26 @@ split-view-footer {
         /*
         -moz-appearance: -moz-win-borderless-glass !important;
         */
-        --lwt-header-image: var(--uc-browser-wallpaper, none) !important;
-        --lwt-additional-images: var(--uc-browser-wallpaper, none) !important;
-        @media not -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
-            --uc-acrylic-noise-image: url("../icons/wallpaper/acrylic-noise.png");
+        @media not -moz-pref("uc.flex.browser-wallpaper-index", 0) {
+            --lwt-header-image: var(--uc-browser-wallpaper, none) !important;
+            --lwt-additional-images: var(--uc-browser-wallpaper, none) !important;
+            @media not -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
+                --uc-acrylic-noise-image: url("../icons/wallpaper/acrylic-noise.png");
+            }
         }
 
         background-image:
             var(--uc-acrylic-noise-image, none),
             linear-gradient(var(--toolbar-background-color, Field), var(--toolbar-background-color, Field)),
-            var(--lwt-header-image, none) !important;
-        background-repeat: repeat, no-repeat, no-repeat !important;
-        background-position: right top !important;
+            var(--lwt-header-image, var(--lwt-additional-images, none)) !important;
+        background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat !important;
+        background-position-x: var(--uc-browser-wallpaper-align-x, right) !important;
         background-position-y: top !important;
-        background-size: auto, cover, cover !important;
+        @media -moz-pref("uc.flex.browser-wallpaper-index", 0) {
+            background-position-x: var(--uc-browser-wallpaper-align-x, center) !important;
+            background-position-y: center !important;
+        }
+        background-size: auto, cover, cover, cover, cover !important;
         @media not -moz-pref("uc.flex.browser-wallpaper-acrylic-disabled") {
             &::before {
                 content: "";
@@ -906,28 +966,27 @@ split-view-footer {
             */
         }
     }
+}
 
-    @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
-        body {
-            background-image: none !important;
-            background-color: transparent !important;
-        }
-        #navigator-toolbox {
-            /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
-            --toolbox-bgcolor: transparent !important;
-            --toolbox-bgcolor-inactive: transparent !important;
-            --toolbox-background-color: transparent !important;
-            --toolbox-background-color-inactive: transparent !important;
-        }
-        #sidebar-main {
-            --uc-bgcolor: transparent;
-        }
-        #browser {
-            /* !TEMPORARY: */
-            --toolbox-bgcolor: transparent !important;
-            --toolbox-bgcolor-inactive: transparent !important;
-            --toolbox-background-color: transparent !important;
-            --toolbox-background-color-inactive: transparent !important;
-        }
+@media -moz-pref("uc.flex.browser-wallpaper-enabled"),
+    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("widget.windows.mica") {
+    #navigator-toolbox {
+        /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
+        --toolbox-bgcolor: transparent !important;
+        --toolbox-bgcolor-inactive: transparent !important;
+        --toolbox-background-color: transparent !important;
+        --toolbox-background-color-inactive: transparent !important;
+        background-image: none !important;
+        background-color: transparent !important;
+    }
+    #sidebar-main {
+        --uc-bgcolor: transparent;
+    }
+    #browser {
+        /* !TEMPORARY: */
+        --toolbox-bgcolor: transparent !important;
+        --toolbox-bgcolor-inactive: transparent !important;
+        --toolbox-background-color: transparent !important;
+        --toolbox-background-color-inactive: transparent !important;
     }
 }

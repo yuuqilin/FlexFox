@@ -606,16 +606,29 @@
 
 /* Searchmode Switcher */
 #urlbar[pageproxystate="valid"]:not([breakout-extend]):not([focused]):not([searchmode])
-    .searchmode-switcher:not([open]) {
+    .urlbar-input-container
+    > .chromeclass-toolbar-additional:not([open]) {
     display: none;
 }
 
-#urlbar:is([pageproxystate="invalid"], [searchmode]) .searchmode-switcher {
+#urlbar:is([pageproxystate="invalid"], [searchmode]) .urlbar-input-container > .chromeclass-toolbar-additional {
     margin-left: 3px !important;
 }
 
-/* v151 removed the '#urlbar-searchmode-switcher' ID and refactored '.searchmode-switcher' using Shadow DOM */
-.searchmode-switcher {
+/**
+ * !TEMPORARY:
+ * In v151, Firefox replaced the XUL-based '#urlbar-searchmode-switcher'
+ * with the HTML-based '.searchmode-switcher' component and refactored it using Shadow DOM.
+ *
+ * Firefox ESR v140 does not include the '.searchmode-switcher' class,
+ * so selecting it directly would break compatibility with older versions.
+ * The '.chromeclass-toolbar-additional' class is shared by both implementations,
+ * so this selector is currently used to support both ESR v140 and v151+.
+ *
+ * Once support for ESR v140 is dropped, this selector can be simplified to:
+ * '.searchmode-switcher'
+ */
+.urlbar-input-container > .chromeclass-toolbar-additional {
     margin-top: 3px !important;
     height: 25px !important;
     background-color: transparent !important;

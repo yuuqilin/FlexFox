@@ -37,7 +37,7 @@
                 var(--lwt-background-alignment, top left);
             background-position-y: top, top, var(--uc-bg-y), var(--uc-bg-y), var(--uc-bg-y);
             @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
-                @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                @media not (-moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
                     background-image:
                         var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
                         linear-gradient(var(--toolbar-background-color), var(--toolbar-background-color)),
@@ -99,18 +99,6 @@
         #navigator-toolbox:is(:hover, :focus-within) {
             border-bottom-color: transparent !important;
         }
-        #mainPopupSet:has(
-                > [panelopen]:not(
-                        #ask-chat-shortcuts,
-                        #selection-shortcut-action-panel,
-                        #chat-shortcuts-options-panel,
-                        #tab-preview-panel,
-                        #tabgroup-preview-panel
-                    ),
-                > #tab-group-editor > [panelopen]
-            )
-            ~ #navigator-toolbox
-            > #PersonalToolbar,
         #navigator-toolbox:hover > #PersonalToolbar {
             /*
             transition-delay: var(--uc-hover-toolbar-delay) !important;
@@ -119,9 +107,34 @@
             transform: rotateX(var(--uc-autohide-toolbar-hover-rotation, 0));
         }
         @media not -moz-pref("sidebar.verticalTabs") {
-            #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
+            #mainPopupSet:has(
+                    > [panelopen]:not(
+                            #ask-chat-shortcuts,
+                            #selection-shortcut-action-panel,
+                            #chat-shortcuts-options-panel,
+                            #tab-preview-panel
+                        ),
+                    > #tab-group-editor > [panelopen]
+                )
                 ~ #navigator-toolbox
                 > #PersonalToolbar {
+                transition: var(--uc-hover-personal-toolbar-transition) !important;
+                transform: rotateX(var(--uc-autohide-toolbar-focus-rotation, 0));
+            }
+        }
+        @media -moz-pref("sidebar.verticalTabs") {
+            #mainPopupSet:has(
+                    > [panelopen]:not(
+                            #ask-chat-shortcuts,
+                            #selection-shortcut-action-panel,
+                            #chat-shortcuts-options-panel,
+                            #tab-preview-panel,
+                            #tabgroup-preview-panel
+                        )
+                )
+                ~ #navigator-toolbox
+                > #PersonalToolbar {
+                transition: var(--uc-hover-personal-toolbar-transition) !important;
                 transform: rotateX(var(--uc-autohide-toolbar-focus-rotation, 0));
             }
         }
@@ -193,15 +206,17 @@
                         :root:not([titlepreface*="\200c "]) &::after {
                             @media -moz-pref("sidebar.position_start") {
                                 margin-left: var(
-                                    --uc-sb-personal-toolbar-outline-margin-side,
+                                    --uc-personal-toolbar-outline-margin-offset,
                                     var(--uc-personal-toolbar-outline-margin-side)
                                 );
+                                margin-right: var(--uc-personal-toolbar-outline-margin-side);
                             }
                             @media not -moz-pref("sidebar.position_start") {
                                 margin-right: var(
-                                    --uc-sb-personal-toolbar-outline-margin-side,
+                                    --uc-personal-toolbar-outline-margin-offset,
                                     var(--uc-personal-toolbar-outline-margin-side)
                                 );
+                                margin-left: var(--uc-personal-toolbar-outline-margin-side);
                             }
                         }
                     }

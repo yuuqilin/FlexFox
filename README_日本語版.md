@@ -16,38 +16,134 @@ FlexFox は Firefox をより快適で賢く、使いやすいブラウザに変
 カスタマイズ性の高いベースとして、理想のインターフェースを自由に作れます。  
 見た目を変えるだけではなく、ブラウジングの質そのものを高めるテーマです。  
 
-https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a  
+![FlexFox v6.5](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-v6.5.0.webp)  
 
 > [!IMPORTANT]
 > FlexFox の多くの機能は、「サイドバーのカスタマイズ」にある「カーソルを合わせた時にサイドバーを展開する」オプションのチェックを **外す** ことで正しく動作します。「サイドバーのカスタマイズ」はナビゲーションバーのサイドバー切替ボタンの右クリックメニューから開けます。このオプションは Firefox の初期設定でチェックが外れています。以前にチェックしていた場合は、外すことで FlexFox が正常に機能します。
 
 ## 🆕 最新情報
 
-**🦊 v6.0.8**
+## 🦊 v6.5.0 シリーズ – メジャーアップデート
 
-- v150 の変更により、カスタム壁紙機能が動作しなくなっていた問題を修正しました。[Bug 2005854](https://bugzilla.mozilla.org/show_bug.cgi?id=2005854)
-- `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` と `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs = 1` を同時に有効化した際に、ブックマークツールバーの背景画像がずれる問題を修正しました。
-- 新しいタブページおよびアドオンマネージャーのスタイルを調整しました。
-- コンテキストメニュー項目のアイコンを追加しました。
+### 🎬 機能紹介動画
 
-**🦊 v6.0.7**
+v6.5 の新機能紹介動画:
 
-- v149 の不具合により、「タブ読み込み中の白い背景のちらつきを防ぐ」機能が動作しなくなっていた問題を修正しました。[Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)
-- v150 の変更により、水平タブモードでナビゲーションバーを展開した際に、テーマの背景画像が表示されなくなる問題を修正しました。[Bug 1952602](https://bugzilla.mozilla.org/show_bug.cgi?id=1952602)
-- v151 の変更により、Search Mode Switcher のスタイルが適用されなくなっていた問題を修正しました。[Bug 1998985](https://bugzilla.mozilla.org/show_bug.cgi?id=1998985)
-- v151 の変更により、URL バーのスタイルが適用されなくなっていた問題を修正しました。[Bug 2008598](https://bugzilla.mozilla.org/show_bug.cgi?id=2008598)
-- v151 の変更により、`uc.flex.menu-item-spacing` オプションおよびパネルのスタイルが動作しなくなっていた問題を修正しました。[Bug 2019097](https://bugzilla.mozilla.org/show_bug.cgi?id=2019097)
-- v152 の変更により、Findbar ボタンのホバー時のハイライトが表示されなくなっていた問題を修正しました。[Bug 2017970](https://bugzilla.mozilla.org/show_bug.cgi?id=2017970)
-- v152 の変更により、タブにカーソルを合わせた際の背景色トランジションアニメーションが動作しなくなっていた問題を修正しました。[Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
-- Nightly v152 の変更により、ツールバーの背景色が消失し、テーマの背景画像がずれる問題を修正しました。[Bug 2034495](https://bugzilla.mozilla.org/show_bug.cgi?id=2034495)
-- 水平タブモードでブックマークツールバーを展開した際に、下部のアウトラインがずれる問題を修正しました。
-- `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` 使用時に、ブックマークツールバーの背景画像がずれる問題を修正しました。
-- 最近の Firefox バージョンで追加された複数のメニュー項目にアイコンを追加しました。
+https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
-## 🦊 v6.x.x 系列 – 主要機能アップデート
+より高画質で視聴する場合:
+
+[YouTube Link](https://www.youtube.com/watch?v=lhf1mpXDIOM)
+
+### 🧊 改善: Mica バックドロップがすべてのテーマで利用可能に
+
+* `uc.flex.browser-mica-force-enabled-on-all-themes` を追加:
+
+  * Firefox の Mica バックドロップは、既定では `システムテーマ — 自動` の場合のみ有効です。
+  * このオプションを有効にすると、すべてのテーマで Mica を利用できます。
+  * Windows のライト / ダークテーマ設定と Mica を切り離し、現在の Firefox テーマカラーと組み合わせて利用できます。
+  * Firefox ネイティブ設定 `widget.windows.mica` を有効にする必要があります。
+
+### 🖼️ 改善: アニメーション壁紙に対応
+
+* `uc.flex.browser-wallpaper-enabled` を拡張:
+
+  * 壁紙は複数の画像形式に対応し、アニメーション画像も利用できます。
+  * JPG / WebP / PNG / APNG / AVIF / GIF / Animated WebP:
+
+    * ファイル名を `main-image-*.jpg` に変更します。`*` は `1-9` のインデックス番号です。
+    * 拡張子は常に `.jpg` を使用します。
+    * `../icons/wallpaper/` に配置します。
+  * SVG:
+
+    * ファイル名を `main-image-*.svg` に変更します。
+    * 拡張子は `.svg` である必要があります。
+    * `uc.flex.browser-wallpaper-svg-enabled` を有効にする必要があります。
+  * アニメーション壁紙素材は [Motion Backgrounds](https://motionbgs.com/) から入手できます。
+  * [FFmpeg](https://ffmpeg.org/) または [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/) を使用して MP4 をアニメーション WebP に変換できます。
+  * 壁紙には既定で Mica の見た目を再現するための Acrylic ブラー効果が適用されます。
+  * ぼかしのない壁紙を表示するには `uc.flex.browser-wallpaper-acrylic-disabled` を有効にしてください。
+
+### 🖼️ 改善: 現在のテーマ背景を壁紙として使用可能に
+
+* `uc.flex.browser-wallpaper-index` を拡張:
+
+  * 値の範囲を `1-9` から `0-9` に拡張しました。
+  * 既定値は `0` に変更されました。
+  * `0` を指定すると、現在の Firefox テーマの背景画像をブラウザー全体の壁紙として使用します。
+  * `1-9` を指定すると、現在のテーマカラーと組み合わせてカスタム壁紙を利用できます。
+
+* `uc.flex.browser-wallpaper-align-horizontal` を追加:
+
+  * 壁紙をウィンドウサイズに合わせてトリミングする際の水平方向の配置を設定します。
+  * 文字列値:
+
+    * `'auto'` または `'0'` = 自動 (既定)
+    * `'left'` または `'1'` = 左寄せ
+    * `'center'` または `'2'` = 中央揃え
+    * `'right'` または `'3'` = 右寄せ
+
+### 👁️ 改善: 透明ページを修正する軽量機能
+
+* ショートカットとツールバーボタン `Solid Page` を追加:
+
+  * サイドバーや Web コンテンツ領域に Mica や壁紙を表示するには、`browser.tabs.allow_transparent_browser` を有効にする必要があります。
+  * 有効化すると、一部のサイトでは背景色がなくなり完全に透明になる場合があります。
+  * この副作用により、Mica や壁紙機能は日常利用では実用性が低くなっていました。
+  * [UltimaDark](https://addons.mozilla.org/firefox/addon/ultimadark/) や [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) を利用すると修正できます。
+  * ただし、これらの拡張機能はページ読み込み速度に影響する場合があります。
+  * v6.5 では軽量な修正機能 `Solid Page` を追加しました。
+  * サイトごとの設定は記憶できませんが、ワンクリックで実色背景へ切り替えられます。
+  * パフォーマンスへの影響はありません。
+  * 使用するには [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) をインストールし、下の画像を参考に設定してください。
+  * 左上の `Apply changes` を押して設定を適用してください。
+  * 既定のショートカットは <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd> です。必要に応じて歯車ボタンのメニュー内にある **拡張機能のショートカットキーの管理** から変更できます。
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended-solid-page.webp" alt="userchrome-toggle-extended-solid-page.webp" width="50%" />  
+
+* `uc.flex.browser-solid-page-color-scheme` を追加:
+
+  * `Solid Page` のカラースキームを設定します。
+  * 値:
+
+    * `0` = 強制ダーク
+    * `1` = 強制ライト (既定)
+    * `2` = Firefox の「ウェブサイトの外観」設定に従う
+
+### 📄 改善: Mica と壁紙を表示できるページを拡充
+
+* すべての Firefox 組み込み `about:` ページが Mica と壁紙に対応しました。
+* 一覧は `about:about` で確認できます。
+* Sidebery のグループページにも対応しました。
+
+### 🛠️ 修正
+
+* macOS で信号機ボタンが消える問題を修正しました。 (#35)
+* macOS でサイドバーボタンのスタイルが適用されない問題を修正しました。
+* macOS で水平タブが展開できない問題を修正しました。
+* ツールバーやサイドバー展開時の背景が透明になる複数の問題を修正しました。
+* ブックマークツールバーが `常に表示する` 以外の場合に発生する複数のレイアウト問題を修正しました。
+* 水平タブと新しいサイドバーを併用した際の複数のレイアウト問題を修正しました。
+* v6.0.7 の回帰により ESR v140 の URL バーボタンスタイルが失われる問題を修正しました。
+* Firefox Beta v152 の変更によるサイドバーボタンスタイルの問題を修正しました。[Bug 2028947](https://bugzilla.mozilla.org/show_bug.cgi?id=2028947)
+* Firefox Nightly v153 の変更による `about:` ページのスタイル問題を修正しました。[Bug 1987439](https://bugzilla.mozilla.org/show_bug.cgi?id=1987439)
+
+### ⚡ 最適化
+
+* 大規模なコードリファクタリングを行い、複雑さを軽減して保守性を向上させました。
+* ただし、目立ったパフォーマンス向上はありません。
+
+---
+
+## 🎉 主な機能アップデート
+
+<details>  
+<summary>🎨 <b>新機能：タブのスタイル、Sideberyのレイアウト、ツールバーUIのカスタマイズ機能</b> <i>[クリックで展開]</i> 👇</summary>
+
+## 🦊 v6.0.x 系列 – 主要機能アップデート
 
 > [!IMPORTANT]
-> **v6.x.x 系列では、互換性のない変更がいくつか導入されています。** 一部のオプションは廃止または変更され、古い Sidebery スタイルは使用されなくなりました。アップデートの前に、この変更履歴をよくお読みください。
+> **v6.0.x 系列では、互換性のない変更がいくつか導入されています。** 一部のオプションは廃止または変更され、古い Sidebery スタイルは使用されなくなりました。アップデートの前に、この変更履歴をよくお読みください。
 >
 > アップデート後は、競合を防ぐために **必ず Sidebery のスタイルエディターから古いスタイルを削除してください。**
 > **Sidebery のナビゲーションバー → 設定（歯車アイコン） → スタイルエディター** に進み、**「サイドバー」** と **「グループページ」** のタブ内に残っている旧スタイルをすべて削除してください。
@@ -245,9 +341,7 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * v6 以降は `sidebery-styles.json` は提供されません。新規導入の場合は `sidebery-settings.json` をインポートするだけで完了します。
   * その後、`uc.flex.skip-loading-uc-sidebery.css` を使用することで、FlexFox のデフォルト Sidebery スタイルを完全に無効化でき、他のカスタムスタイルとの組み合わせをより柔軟に行えます。
 
----
-
-## 🎉 主な機能アップデート
+</details>
 
 <details>  
 <summary>✨ <b>新機能：UI・UXスタイル調整オプションの追加</b> <i>[クリックで展開]</i> 👇</summary>
@@ -299,9 +393,10 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
     widget.windows.mica.popups = 2
     widget.windows.mica.toplevel-backdrop = 2
     browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-mica-force-enabled-on-all-themes = true
     uc.flex.browser-mica-transparency-level = 2
     ```
-  * テーマは `システムテーマ — 自動` に設定しておく必要があります。他のテーマでは Mica は反映されません。
+  * デフォルトでは、Mica を有効にするにはテーマを `システムテーマ — 自動` に設定する必要があります。`uc.flex.browser-mica-force-enabled-on-all-themes` を有効にすると、Mica のライト / ダーク表示が Windows のシステムテーマではなく、現在の Firefox テーマに追従するようになります。
   * **Firefoxの再起動が必要です。**
   * 詳細設定はこちらをご覧ください: [🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
   * 背景が他のウィンドウに隠れて見えない場合は、<kbd>Win</kbd> + <kbd>Home</kbd> キーで他のウィンドウをすべて最小化できます。マウスジェスチャーや自動化スクリプトでの操作も可能です。  
@@ -310,20 +405,32 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   
   <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="Firefox のツールバーやタブの後ろに Mica 背景効果が表示されている例。" width="96%" />
 
-* Mica が使用できない場合や、固定された壁紙を表示したい場合には、**カスタム背景壁紙**機能を利用できます。
-  * `about:config` に以下の設定を追加して有効にします：
+* FlexFox は **カスタムブラウザー壁紙** をサポートしており、他のウィンドウの影響を受けずに、ブラウザー全体へ常に背景画像を表示できます。
+  * `about:config` で以下の設定を有効にします：
     ```
     uc.flex.browser-wallpaper-enabled = true
     uc.flex.browser-wallpaper-index = 1
+    uc.flex.browser-wallpaper-svg-enabled = false
     uc.flex.browser-wallpaper-acrylic-disabled = false
+    uc.flex.browser-wallpaper-align-horizontal = auto
     browser.tabs.allow_transparent_browser = true
     uc.flex.browser-wallpaper-transparency-level = 2
     uc.flex.browser-wallpaper-contrast-level = 2
     ```
-  * **Firefoxの再起動が必要です。**
-  * `../icons/wallpaper/` フォルダに `main-image-1.jpg` ～ `main-image-9.jpg` を保存すると、最大9枚の画像を切り替えて使用できます。
-  * デフォルトで **Acrylic ぼかし効果** が適用され、Mica に似た外観になります（完全に同じではありません）。
-  * **カスタム背景壁紙**機能を有効にすると、Mica の背景が上書きされます。Mica と壁紙を同時に有効にした場合は、壁紙が表示されます。  
+* **Firefox の再起動が必要です。**
+* ブラウザー壁紙は Firefox テーマと組み合わせて使用でき、現在のテーマの配色、アクセントカラー、境界線、テキストスタイルを維持したままカスタム壁紙を適用できます。
+  * `uc.flex.browser-wallpaper-index = 0` を指定すると、現在の Firefox テーマの背景画像がブラウザー全体の壁紙として使用されます。
+  * `uc.flex.browser-wallpaper-index = 1-9` を指定すると、対応する壁紙ファイル（`main-image-1` ～ `main-image-9`）が使用されます。
+* 壁紙機能は静止画像および動的画像を含む複数の画像形式に対応しています。
+  * JPG / WebP / PNG / APNG / AVIF / GIF / Animated WebP の場合：
+    * ファイル名を `main-image-*.jpg` に変更してください（**すべての形式は `.jpg` にリネームする必要があります**）
+    * `../icons/wallpaper/` に配置します
+  * SVG の場合：
+    * ファイル名を `main-image-*.svg` に変更してください
+    * 同じディレクトリに配置します
+    * `uc.flex.browser-wallpaper-svg-enabled = true` を有効にしてください
+* 壁紙にはデフォルトで **Acrylic ぼかし効果** が適用され、Mica に近い外観を再現します。必要に応じて無効化し、鮮明な壁紙表示にすることもできます。
+* **カスタムブラウザー壁紙** を有効にすると、ネイティブ Mica 背景は上書きされます。Mica と壁紙を同時に有効にした場合は、壁紙が表示されます。
 
   Acrylic ぼかしを有効にしたカスタム背景壁紙の例です。ネイティブの Mica と比べて、ぼかしの強さや色調、質感が異なります。  
 
@@ -338,9 +445,21 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – Firefox の新しいタブのカスタマイズ機能に組み込まれている背景のひとつです。
   * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([ダウンロード](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
 
+* アニメーション壁紙の作成:
+  * アニメーション壁紙は、MP4 動画を [FFmpeg](https://ffmpeg.org/) または [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/) を使って変換することで作成できます。
+  * [Motion Backgrounds](https://motionbgs.com/) などのサイトでは、ライブ壁紙用の動画素材を入手できます。
+  * WebP は APNG と同等の画質を維持しながら、一般的に消費リソースが少ないため推奨されています。
+
 * Sidebery やウェブページに Mica や壁紙の背景を表示するには、`browser.tabs.allow_transparent_browser` を有効にしてください。
   * ページの透明化には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) または [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 拡張機能が必要です。
-  * 背景が透けて読みにくくなる場合は [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) との併用がおすすめです。
+  * 背景が透けて読みにくくなる場合は、ドメインごとに設定を記憶できる [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) との併用がおすすめです。また、他の拡張機能を増やしたくない場合は、FlexFox と [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 拡張機能を組み合わせることで、`Solid Page` ショートカットによる簡易的な背景色の切り替えが可能です。サイトごとの記憶機能はありませんが、読みにくいサイトに遭遇した際、一時的かつ迅速に視認性を改善できます。
+  * `Solid Page` ショートカットを使用するには、[UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 拡張機能をインストールし、下図のように設定してください。設定後は必ず左上の `Apply changes` ボタンを押して設定を反映させてください。設定完了後、ショートカットまたは拡張機能のボタンから背景の不透明化（実色）を切り替えられるようになります。デフォルトのショートカットは <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd> です。変更する場合は、右上の歯車アイコンのメニューにある **拡張機能のショートカットキーの管理** から行ってください。
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended-solid-page.webp" alt="userchrome-toggle-extended-solid-page.webp" width="50%" />  
+
+    | Shortcut | Label | Action |
+    | --- | --- | --- |
+    | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd> | Solid Page | Mica やカスタム壁紙の透明化によりウェブコンテンツエリアの文字が読みにくくなった際、背景を一時的に不透明（実色）に切り替えて視認性を改善します。背景のカラースキームは `uc.flex.browser-solid-page-color-scheme` で設定可能です。 |
 
 * 新オプション：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
   * Sidebery とネイティブの垂直タブで使われている開閉アニメーションの速度を、ナビゲーションバーとブックマークツールバーにも適用し、すべてのアニメーション速度を統一します。
@@ -870,14 +989,18 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 
 | 設定名 | 値 | 説明 |
 |--------|:------:|--------|
-| `widget.windows.mica` | `true` | Firefox のネイティブな Mica 背景効果を有効にします。有効にするには、テーマを `システムテーマ — 自動` に設定する必要があります。この機能は Windows 11 環境でのみ利用可能です。お使いのシステムが Mica をサポートしていない場合は、`uc.flex.browser-wallpaper-enabled` を使って類似の効果を模倣できます。 |
+| `widget.windows.mica` | `true` | Firefox のネイティブな Mica 背景効果を有効にします。有効にするにはテーマを `システムテーマ — 自動` に設定する必要がありますが、下方の `uc.flex.browser-mica-force-enabled-on-all-themes` を有効にすればすべてのテーマに適用できます。Windows 11 環境でのみ利用可能です。なお、`uc.flex.browser-wallpaper-enabled` が有効な場合は壁紙が優先されます。 |
 | `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | ポップアップメニューに Mica 背景効果を適用します。`0`（無効）、`1`（有効）、`2`（自動）を指定できます。 |
 | `widget.windows.mica.toplevel-backdrop` | `2` | 使用する Mica 背景の種類を指定します：`0`（自動または無効）、`1`: Mica、`2`: Acrylic、`3`: Mica Alt。FlexFox は `2`: Acrylic を前提として設計されています。 |
 | `browser.tabs.allow_transparent_browser` | `true` | Sidebery とウェブコンテンツの背景を透過させて、Mica や壁紙を表示できるようにします。**反映には Firefox の再起動が必要です。** ウェブページの透過には [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) または [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) の導入が必要です。ページが読みにくくなった場合は、[Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) の併用を推奨します。 |
+| `uc.flex.browser-solid-page-color-scheme` | `0`-`2`<br>(`1`) | `Solid Page` ショートカットが有効な場合の背景カラースキームを設定します。値：`0` = ダークモードを強制、`1` = ライトモードを強制（デフォルト）、`2` = Firefox の「ウェブサイトの外観」設定に追従。Mica やカスタム壁紙によってウェブコンテンツが透明化し、文字が読みにくくなった際の視認性を改善します。 |
+| `uc.flex.browser-mica-force-enabled-on-all-themes` | `true` | すべての Firefox テーマでネイティブな Mica 背景効果を強制的に有効にします。これにより、Mica のライト / ダーク表示が Windows のシステムテーマではなく、現在の Firefox テーマに追従するようになります。**この機能は `widget.windows.mica` が `true` の場合のみ有効で、`uc.flex.browser-wallpaper-enabled` が有効な場合は壁紙が優先されます。** |
 | `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | ブラウザーの Mica バックドロップマスクの透明度を調整します。数値で設定でき、0 ～ 4 を指定します。値が大きいほど、マスクの効果が薄くなり背景がより明瞭に表示されます。Firefox のデフォルトは 0 で、FlexFox のデフォルトは 2 に設定されています。 |
-| `uc.flex.browser-wallpaper-enabled` | `true` | Firefox ブラウザーの背景にカスタム壁紙を表示します。この機能では、ネイティブの Mica 効果を模倣するアクリル風のぼかしが適用されます。Mica が使用できない環境や、常に同じ背景を表示したい場合に便利です。ただし、見た目は Mica と完全には一致しません。 |
-| `uc.flex.browser-wallpaper-index` | `1`-`9`<br>(`1`) | 番号付きの壁紙画像をブラウザーの背景として指定します。設定値は数値で、1 ～ 9 を指定できます。各値は、`../icons/wallpaper/` フォルダーにある `main-image-1.jpg` ～ `main-image-9.jpg` に対応します。|
-| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | カスタム壁紙に適用されるアクリル風ぼかし効果を無効にします。 |
+| `uc.flex.browser-wallpaper-enabled` | `true` | カスタムブラウザー壁紙を有効にし、Firefox のインターフェース全体に常時背景画像を表示します。静止画およびアニメーション壁紙に対応しています。**有効にすると、上記の Mica 背景設定は上書きされます。** |
+| `uc.flex.browser-wallpaper-index` | `0`-`9`<br>(`0`) | 使用する壁紙ソースを指定します。`0` は現在の Firefox テーマの背景画像をブラウザー全体の壁紙として使用します。`1`～`9` は `../icons/wallpaper/` フォルダー内の `main-image-1.jpg` ～ `main-image-9.jpg` を使用します。すべての壁紙ファイルは元の形式に関係なく `.jpg` にリネームする必要があります。対応形式は JPG、WebP、Animated WebP、PNG、APNG、AVIF、GIF です。 |
+| `uc.flex.browser-wallpaper-svg-enabled` | `true` | SVG 壁紙のサポートを有効にします。有効にすると、`../icons/wallpaper/` に配置した `main-image-1.svg` ～ `main-image-9.svg` を壁紙として使用できます。 |
+| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | ブラウザー壁紙に適用されるアクリル風ぼかし効果を無効にします。既定では Mica に近い外観を再現するため、アクリル風のぼかし効果が適用されます。このオプションを有効にすると、壁紙が本来の鮮明な状態で表示されます。 |
+| `uc.flex.browser-wallpaper-align-horizontal` | `'auto'`\|<br>`'left'`\|<br>`'center'`\|<br>`'right'` | 壁紙画像がブラウザーウィンドウに合わせてトリミングされる際の水平方向の配置を設定します。指定可能な値は文字列 `'auto'` または `'0'`（自動配置・既定値）、`'left'` または `'1'`（左寄せ）、`'center'` または `'2'`（中央揃え）、`'right'` または `'3'`（右寄せ）です。|
 | `uc.flex.browser-wallpaper-transparency-level` | `0`-`4`<br>(`2`) | ブラウザーの壁紙マスクの透明度を調整します。数値で設定でき、0 ～ 4 を指定します。値が大きいほど、マスクの効果が薄くなり壁紙がはっきり表示されます。この設定は Mica の透明度と視覚的に揃うように設計されています。FlexFox のデフォルトは 2 に設定されています。 |
 | `uc.flex.browser-wallpaper-contrast-level` | `0`-`4`<br>(`2`) | ダークモードでアクリル風ぼかし効果を使用する際、ブラウザーの壁紙のコントラストを調整します。0〜4 の数値を指定でき、値が大きいほどコントラストが強くなります。FlexFox のデフォルト値は 2 です。 |
 

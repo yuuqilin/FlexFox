@@ -3,22 +3,26 @@
 /* Hide menubar window controls when menubar is inactive */
 :root[customtitlebar]:not([customizing]) {
     &:not([inFullscreen]) {
-        #toolbar-menubar[inactive="true"] > .titlebar-buttonbox-container {
-            display: none !important;
-        }
+        @media not (-moz-platform: macos) {
+            #toolbar-menubar[inactive="true"] > .titlebar-buttonbox-container {
+                display: none !important;
+            }
 
-        /* Hide TabsToolbar and nav-bar window controls when menubar is active */
-        #toolbar-menubar:not([inactive="true"]) ~ :is(#TabsToolbar, #nav-bar) > .titlebar-buttonbox-container {
-            display: none !important;
+            /* Hide TabsToolbar and nav-bar window controls when menubar is active */
+            #toolbar-menubar:not([inactive="true"]) ~ :is(#TabsToolbar, #nav-bar) > .titlebar-buttonbox-container {
+                display: none !important;
+            }
         }
     }
 
     /* Hide TabsToolbar window controls when native vertical tabs are enabled */
+    /*
     @media -moz-pref("sidebar.verticalTabs") {
         #navigator-toolbox > #TabsToolbar > .titlebar-buttonbox-container {
             display: none !important;
         }
     }
+    */
 
     #navigator-toolbox .titlebar-spacer {
         display: none !important;
@@ -125,21 +129,23 @@
 }
 */
 
-.titlebar-buttonbox-container {
-    margin-left: -4px;
-    @media -moz-pref("uc.flex.restore-window-controls-on-tabbar") and (not -moz-pref("sidebar.verticalTabs")) {
-        margin-left: 0px;
-    }
-    @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
-        @media -moz-pref("sidebar.position_start") and (not -moz-pref("uc.flex.move-window-controls-to-left")) {
-            padding-right: var(--uc-web-content-margin);
+@media not (-moz-platform: macos) {
+    .titlebar-buttonbox-container {
+        margin-left: -4px;
+        @media -moz-pref("uc.flex.restore-window-controls-on-tabbar") and (not -moz-pref("sidebar.verticalTabs")) {
+            margin-left: 0px;
         }
-    }
-    @media -moz-pref("uc.flex.move-window-controls-to-left") and (not (-moz-platform: macos)) {
-        margin-left: 4px;
-        order: -1 !important;
-        .titlebar-close {
+        @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
+            @media -moz-pref("sidebar.position_start") and (not -moz-pref("uc.flex.move-window-controls-to-left")) {
+                padding-right: var(--uc-web-content-margin);
+            }
+        }
+        @media -moz-pref("uc.flex.move-window-controls-to-left") {
+            margin-left: 4px;
             order: -1 !important;
+            .titlebar-close {
+                order: -1 !important;
+            }
         }
     }
 }

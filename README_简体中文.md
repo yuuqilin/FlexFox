@@ -16,38 +16,134 @@ FlexFox 让 Firefox 变得更快、更智能，也更顺手。
 作为一个灵活的基础框架，FlexFox 让你自由定制浏览器界面，无需担心冗余或卡顿。  
 这不仅是一个外观主题，更是提升浏览效率的新方式。  
 
-https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a  
+![FlexFox v6.5](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-v6.5.0.webp)  
 
 > [!IMPORTANT]
 > FlexFox 的大部分功能只有在「定制侧栏」中的「悬停时展开侧栏」选项 **未勾选** 时才能正常运作。「定制侧栏」可以在导航栏侧栏切换按钮的右键菜单中找到。该选项在 Firefox 中默认未勾选。如果你之前曾手动启用过，请取消勾选以保证 FlexFox 正常工作。
 
 ## 🆕 更新内容
 
-**🦊 v6.0.8**
+## 🦊 v6.5.0 系列 – 重大功能更新
 
-- 修复了因 v150 的变更导致 Custom Wallpaper（自定义壁纸）功能失效的问题。[Bug 2005854](https://bugzilla.mozilla.org/show_bug.cgi?id=2005854)
-- 修复了同时启用 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` 和 `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs = 1` 时，书签工具栏背景图片错位的问题。
-- 调整了新标签页和附加组件管理器的样式。
-- 为一个右键菜单项添加了图标。
+### 🎬 功能演示视频
 
-**🦊 v6.0.7**
+v6.5 新功能演示：
 
-- 修复了因 v149 的 bug 导致“防止标签页加载过程中出现白色背景闪烁”功能失效的问题。[Bug 2027798](https://bugzilla.mozilla.org/show_bug.cgi?id=2027798)
-- 修复了因 v150 的变更导致水平标签页模式下，导航栏展开时丢失主题背景图片的问题。[Bug 1952602](https://bugzilla.mozilla.org/show_bug.cgi?id=1952602)
-- 修复了因 v151 的变更导致 Search Mode Switcher 样式失效的问题。[Bug 1998985](https://bugzilla.mozilla.org/show_bug.cgi?id=1998985)
-- 修复了因 v151 的变更导致 URL 栏样式失效的问题。[Bug 2008598](https://bugzilla.mozilla.org/show_bug.cgi?id=2008598)
-- 修复了因 v151 的变更导致 `uc.flex.menu-item-spacing` 选项失效，以及面板样式失效的问题。[Bug 2019097](https://bugzilla.mozilla.org/show_bug.cgi?id=2019097)
-- 修复了因 v152 的变更导致 Findbar 按钮悬停高亮消失的问题。[Bug 2017970](https://bugzilla.mozilla.org/show_bug.cgi?id=2017970)
-- 修复了因 v152 的变更导致标签页悬停时的背景颜色过渡动画失效的问题。[Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
-- 修复了因 Nightly v152 的变更导致工具栏背景颜色消失，以及主题背景图片错位的问题。[Bug 2034495](https://bugzilla.mozilla.org/show_bug.cgi?id=2034495)
-- 修复了水平标签页模式下，书签工具栏展开时底部边框（outline）错位的问题。
-- 修复了 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar = 3` 时，书签工具栏背景图片错位的问题。
-- 为多个 Firefox 新版本新增的菜单项添加了图标。
+https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
-## 🦊 v6.x.x 系列 – 重大功能更新
+如需更好的画质，请在 YouTube 观看：
+
+[YouTube Link](https://www.youtube.com/watch?v=lhf1mpXDIOM)
+
+### 🧊 改进：Mica 背景支持所有主题
+
+* 新增 `uc.flex.browser-mica-force-enabled-on-all-themes`：
+
+  * Firefox 默认仅在主题设置为 `系统主题 — 自动` 时启用 Mica 背景。
+  * 启用此选项后，Mica 可在所有主题下生效。
+  * 可将 Mica 与 Windows 的亮色 / 暗色主题设置解耦，改为使用当前 Firefox 主题配色。
+  * 需要同时启用 Firefox 原生选项 `widget.windows.mica`。
+
+### 🖼️ 改进：支持动态壁纸
+
+* 扩展 `uc.flex.browser-wallpaper-enabled`：
+
+  * 壁纸现已支持多种图片格式，包括动态图片。
+  * JPG / WebP / PNG / APNG / AVIF / GIF / Animated WebP：
+
+    * 将文件重命名为 `main-image-*.jpg`，其中 `*` 对应索引编号 `1-9`。
+    * 文件扩展名统一使用 `.jpg`。
+    * 放置于 `../icons/wallpaper/` 目录。
+  * SVG：
+
+    * 将文件重命名为 `main-image-*.svg`。
+    * 文件扩展名必须为 `.svg`。
+    * 需要同时启用 `uc.flex.browser-wallpaper-svg-enabled`。
+  * 动态壁纸素材可从 [Motion Backgrounds](https://motionbgs.com/) 下载。
+  * 可使用 [FFmpeg](https://ffmpeg.org/) 或 [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/) 将 MP4 转换为动态 WebP 图片。
+  * 壁纸默认启用 Acrylic 模糊效果，以模拟 Mica 的视觉效果。
+  * 如需显示清晰的壁纸，请启用 `uc.flex.browser-wallpaper-acrylic-disabled`。
+
+### 🖼️ 改进：支持使用当前主题背景作为壁纸
+
+* 扩展 `uc.flex.browser-wallpaper-index`：
+
+  * 数值范围由 `1-9` 扩展为 `0-9`。
+  * 默认值改为 `0`。
+  * 设置为 `0` 时，将使用当前 Firefox 主题背景图片作为整个浏览器的壁纸。
+  * 设置为 `1-9` 时，可使用自定义壁纸搭配当前主题配色。
+
+* 新增 `uc.flex.browser-wallpaper-align-horizontal`：
+
+  * 设置壁纸适应浏览器窗口时的水平对齐方式。
+  * 字符串值：
+
+    * `'auto'` 或 `'0'` = 自动（默认）
+    * `'left'` 或 `'1'` = 左对齐
+    * `'center'` 或 `'2'` = 居中
+    * `'right'` 或 `'3'` = 右对齐
+
+### 👁️ 改进：轻量级透明网页修复功能
+
+* 新增快捷键和工具栏按钮 `Solid Page`：
+
+  * 侧边栏和网页内容区域显示 Mica 或壁纸时，需要启用 `browser.tabs.allow_transparent_browser`。
+  * 启用后，部分网站会因为缺少实色背景而完全透明，导致内容难以阅读。
+  * 这一副作用降低了 Mica 和壁纸功能在日常浏览中的实用性。
+  * 使用 [UltimaDark](https://addons.mozilla.org/firefox/addon/ultimadark/) 或 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 可以解决这一问题。
+  * 不过这些扩展可能会影响页面加载性能。
+  * v6.5 新增轻量级修复功能 `Solid Page`。
+  * 虽然无法保存网站级设置，但可快速切换实色背景。
+  * 对性能没有任何影响。
+  * 使用方法：安装 [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/)，并参考下方图片进行配置。
+  * 请记得点击左上角的 `Apply changes` 使配置生效。
+  * 默认快捷键为 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd>，可在齿轮按钮菜单中的 **管理扩展快捷键** 里修改。
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended-solid-page.webp" alt="userchrome-toggle-extended-solid-page.webp" width="50%" />  
+
+* 新增 `uc.flex.browser-solid-page-color-scheme`：
+
+  * 设置 `Solid Page` 的颜色方案。
+  * 数值：
+
+    * `0` = 强制深色
+    * `1` = 强制浅色（默认）
+    * `2` = 跟随 Firefox 的“网站外观”设置
+
+### 📄 改进：增加支持显示 Mica 和壁纸的页面
+
+* 所有 Firefox 内置 `about:` 页面现已支持 Mica 和壁纸。
+* 完整列表可通过 `about:about` 查看。
+* 新增对 Sidebery Group Page（分组页面）的支持。
+
+### 🛠️ 修复
+
+* 修复 macOS 下红绿灯按钮消失的问题。 (#35)
+* 修复 macOS 下侧边栏按钮样式失效的问题。
+* 修复 macOS 下水平标签页无法展开的问题。
+* 修复多种情况下工具栏和侧边栏展开背景变透明的问题。
+* 修复书签工具栏显示模式不是 `始终显示` 时引发的多个布局问题。
+* 修复使用水平标签页并启用新版侧边栏时的多个布局问题。
+* 修复 v6.0.7 引入的回归问题，导致 Firefox ESR 140 地址栏按钮样式失效。
+* 修复 Firefox Beta v152 变更导致的侧边栏按钮样式问题。[Bug 2028947](https://bugzilla.mozilla.org/show_bug.cgi?id=2028947)
+* 修复 Firefox Nightly v153 变更导致的 `about:` 页面样式问题。[Bug 1987439](https://bugzilla.mozilla.org/show_bug.cgi?id=1987439)
+
+### ⚡ 优化
+
+* 重构了大量代码，降低复杂度并提高可维护性。
+* 但没有明显的性能提升。
+
+---
+
+## 🎉 主要功能更新
+
+<details>  
+<summary>🎨 <b>重大更新：标签页样式、Sidebery 布局与工具栏 UI 自定义功能</b> <i>[点击展开]</i> 👇</summary>
+
+## 🦊 v6.0.x 系列 – 重大功能更新
 
 > [!IMPORTANT]
-> **v6.x.x 系列引入了多项不兼容的变更。** 部分选项已被弃用或调整，旧的 Sidebery 样式不再使用。更新前请仔细阅读本更新日志。
+> **v6.0.x 系列引入了多项不兼容的变更。** 部分选项已被弃用或调整，旧的 Sidebery 样式不再使用。更新前请仔细阅读本更新日志。
 >
 > 更新后，为避免冲突，请务必 **删除 Sidebery 样式编辑器中的旧样式**。
 > 打开 **Sidebery 导航栏 → 设置（齿轮图标）→ 样式编辑器**，然后删除 **侧边栏** 和 **分组页面** 两个页面中的所有旧样式。
@@ -241,9 +337,7 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * v6 及以后版本不再提供 `sidebery-styles.json`，新安装只需导入 `sidebery-settings.json`。
   * 此后用户可以通过 `uc.flex.skip-loading-uc-sidebery.css` 完全停用 FlexFox 默认的 Sidebery 样式，从而更灵活地搭配其他自定义样式。
 
----
-
-## 🎉 主要功能更新
+</details>
 
 <details>  
 <summary>✨ <b>重大更新：全新的 UI/UX 样式自定义选项</b> <i>[点击展开]</i> 👇</summary>
@@ -295,9 +389,10 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
     widget.windows.mica.popups = 2
     widget.windows.mica.toplevel-backdrop = 2
     browser.tabs.allow_transparent_browser = true
+    uc.flex.browser-mica-force-enabled-on-all-themes = true
     uc.flex.browser-mica-transparency-level = 2
     ```
-  * 请将主题设置为 `系统主题 — 自动`，否则 Mica 效果将无法生效。
+  * 默认情况下，Mica 需要将主题设置为 `系统主题 — 自动` 才能生效。启用 `uc.flex.browser-mica-force-enabled-on-all-themes` 后，Mica 的亮色 / 暗色外观将不再跟随 Windows 系统主题，而是跟随当前 Firefox 主题。
   * **需要重启 Firefox 浏览器。**
   * 详细说明请参考：[🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
   * 若背景被其他窗口遮挡，可使用快捷键 <kbd>Win</kbd> + <kbd>Home</kbd> 最小化所有非活动窗口，也可以设置为鼠标手势或使用脚本自动执行。  
@@ -306,20 +401,32 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   
   <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="示例展示了 Firefox 标签页和工具栏背后的 Mica 背景效果。" width="96%" />
 
-* 若系统不支持 Mica，或希望使用不受窗口遮挡影响的固定壁纸，可以启用 FlexFox 提供的 **自定义浏览器壁纸** 功能。
-  * 在 `about:config` 中启用以下选项：
+* FlexFox 支持 **自定义浏览器壁纸**，可让整个浏览器界面始终显示固定背景，不受其他窗口影响。
+  * 在 `about:config` 中启用以下设置：
     ```
     uc.flex.browser-wallpaper-enabled = true
     uc.flex.browser-wallpaper-index = 1
+    uc.flex.browser-wallpaper-svg-enabled = false
     uc.flex.browser-wallpaper-acrylic-disabled = false
+    uc.flex.browser-wallpaper-align-horizontal = auto
     browser.tabs.allow_transparent_browser = true
     uc.flex.browser-wallpaper-transparency-level = 2
     uc.flex.browser-wallpaper-contrast-level = 2
     ```
-  * **需要重启 Firefox 浏览器。**
-  * 壁纸文件需命名为 `main-image-1.jpg` 至 `main-image-9.jpg`，存放于 `../icons/wallpaper/` 文件夹中。
-  * 默认启用 **Acrylic 模糊效果**，外观类似原生 Mica，但并非完全相同。
-  * 启用 **自定义浏览器壁纸** 功能后将覆盖系统原生的 Mica 背景。如果同时启用 Mica 和壁纸，显示的是壁纸。  
+* **需要重启 Firefox 浏览器。**
+* 浏览器壁纸可与任何 Firefox 主题搭配使用，在保留当前主题配色、强调色、边框和文字样式的同时使用自定义背景图片。
+  * 当 `uc.flex.browser-wallpaper-index = 0` 时，将使用当前 Firefox 主题的背景图片作为整个浏览器的壁纸。
+  * 当 `uc.flex.browser-wallpaper-index = 1-9` 时，将使用对应编号的壁纸文件（`main-image-1` 至 `main-image-9`）。
+* 壁纸功能支持多种图像格式，包括静态与动态图片。
+  * JPG / WebP / PNG / APNG / AVIF / GIF / Animated WebP：
+    * 将图片重命名为 `main-image-*.jpg`（**所有格式必须统一重命名为 `.jpg`**）
+    * 放入 `../icons/wallpaper/` 目录
+  * SVG：
+    * 将图片重命名为 `main-image-*.svg`
+    * 放入相同目录
+    * 启用 `uc.flex.browser-wallpaper-svg-enabled = true`
+* 壁纸默认启用 **Acrylic 模糊效果**，用于模拟 Mica 风格。可根据需要关闭以获得清晰显示效果。
+* 启用 **自定义浏览器壁纸** 功能后将覆盖原生 Mica 背景。如果同时启用 Mica 和壁纸，将显示壁纸。
 
   启用自定义壁纸后可见，与原生 Mica 相比，模糊程度、色调和背景材质都有所不同。  
 
@@ -334,9 +441,21 @@ https://github.com/user-attachments/assets/23d73b36-d2d4-4660-af5b-cde686d0934a
   * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – 作为 Firefox 新标签页自定义功能中的内建背景之一提供。
   * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([下载](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
 
+* 创建动态壁纸：
+  * 可使用 [FFmpeg](https://ffmpeg.org/) 或 [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/) 将 MP4 视频转换为动态壁纸格式。
+  * [Motion Backgrounds](https://motionbgs.com/) 等网站提供适合作为动态壁纸的视频素材。
+  * 推荐使用 WebP，在提供接近 APNG 画质的同时，通常能够占用更少的系统资源。
+
 * 要让 Sidebery 和网页内容显示 Mica 背景或壁纸，需要启用 `browser.tabs.allow_transparent_browser`。
   * 页面透明效果需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 或 [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 扩展。
-  * 若部分页面显示为全透明导致难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。
+  * 若部分页面显示为全透明导致难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用以保存特定网站的配置。此外，如果您不想安装额外的扩展，也可以利用 FlexFox 搭配 [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 扩展，通过 `Solid Page` 快捷键简易地切换背景颜色。虽然它无法像 Dark Reader 那样记忆哪些网站需要纯色背景，但在遇到难以阅读的网站时，可以作为一种轻量、快速的临时解决方案。
+  * 要使用 `Solid Page` 快捷键，安装好 [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) 扩展后请如下图进行设置，并且记得按下左上角的 `Apply changes` 使设置生效。设置后即可使用快捷键或扩展按钮切换纯色背景。默认快捷键为 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd>，可通过右上角齿轮按钮的弹出菜单 **管理扩展快捷键** 进行修改。
+
+    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended-solid-page.webp" alt="userchrome-toggle-extended-solid-page.webp" width="50%" />  
+
+    | Shortcut | Label | Action |
+    | --- | --- | --- |
+    | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd> | Solid Page | 当启用 Mica 背景或自定义壁纸导致网页内容区域的文字难以阅读时，可通过此快捷键切换为纯色背景，从而暂时禁用透明效果并恢复文本可读性。背景色彩方案可通过 `uc.flex.browser-solid-page-color-scheme` 进行配置。 |
 
 * 新增选项：`uc.flex.sidebery-apply-expand-speed-to-toolbars`
   * 启用后，会将 Sidebery 与原生垂直标签页使用的展开/折叠动画速度应用到导航栏和书签工具栏，统一所有动画速度。
@@ -871,14 +990,18 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 
 | 配置选项 | 值 | 说明 |
 |----------|:------:|----------|
-| `widget.windows.mica` | `true` | 启用 Firefox 原生的 Mica 背景效果。需将主题设置为 `系统主题 — 自动` 才能生效。此功能仅在 Windows 11 系统中可用。如果当前系统不支持 Mica，可使用 `uc.flex.browser-wallpaper-enabled` 来模拟类似效果。 |
+| `widget.windows.mica` | `true` | 启用 Firefox 原生的 Mica 背景效果。默认需将主题设置为 `系统主题 — 自动` 才能生效，亦可配合下方的 `uc.flex.browser-mica-force-enabled-on-all-themes` 扩展至所有主题。此功能仅在 Windows 11 系统中可用。注意，若启用了 `uc.flex.browser-wallpaper-enabled`，此效果将被自定义壁纸覆盖。 |
 | `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | 为弹出菜单启用 Mica 背景效果。可设置为 `0`（关闭）、`1`（开启）或 `2`（自动）。 |
 | `widget.windows.mica.toplevel-backdrop` | `2` | 指定要使用的 Mica 背景类型：`0`（自动或不使用）、`1`: Mica、`2`: Acrylic、`3`: Mica Alt。FlexFox 是基于该选项设为 `2`: Acrylic 的前提进行设计的。 |
 | `browser.tabs.allow_transparent_browser` | `true` | 允许 Sidebery 和网页内容背景透明，可显示 Mica 或壁纸效果。**更改后需重启 Firefox 才会生效。** 若要实现网页内容透明，需安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 或 [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 扩展。若部分网页因透明而难以阅读，建议搭配 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) 使用。 |
+| `uc.flex.browser-solid-page-color-scheme` | `0`-`2`<br>(`1`) | 设置启用 `Solid Page` 快捷键时的背景色彩方案。取值：`0` = 强制暗色，`1` = 强制亮色（默认），`2` = 跟随 Firefox 的“网站外观”设置。用于解决因 Mica 或自定义壁纸导致网页背景透明、文字难以阅读的问题。 |
+| `uc.flex.browser-mica-force-enabled-on-all-themes` | `true` | 强制在所有 Firefox 主题下启用原生 Mica 背景效果。启用后，Mica 的亮色 / 暗色外观将不再跟随 Windows 系统主题，而是跟随当前 Firefox 主题。**此选项需配合 `widget.windows.mica` 设为 `true` 时方可生效，且会被 `uc.flex.browser-wallpaper-enabled` 优先覆盖。** |
 | `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | 调整浏览器 Mica 背景遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，背景越清晰。Firefox 默认值为 0，而 FlexFox 的默认值为 2。 |
-| `uc.flex.browser-wallpaper-enabled` | `true` | 启用 Firefox 浏览器背景的自定义壁纸。此功能会套用 Acrylic 风格的模糊效果，用于模拟原生 Mica 效果。适用于系统不支持 Mica，或希望始终显示固定背景的情况。但请注意，模拟效果无法与原生 Mica 完全一致。 |
-| `uc.flex.browser-wallpaper-index` | `1`-`9`<br>(`1`) | 设置使用哪一张编号图片作为浏览器背景。该选项为数值类型，可设置为 1 到 9。每个数值对应使用 `../icons/wallpaper/` 文件夹中的 `main-image-1.jpg` 到 `main-image-9.jpg` 文件。|
-| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | 禁用自定义壁纸背景的 Acrylic 模糊效果。 |
+| `uc.flex.browser-wallpaper-enabled` | `true` | 启用自定义浏览器壁纸，使整个 Firefox 界面始终显示固定背景。支持静态壁纸和动态壁纸。**启用此选项将覆盖上方的 Mica 背景设置。** |
+| `uc.flex.browser-wallpaper-index` | `0`-`9`<br>(`0`) | 选择壁纸来源。`0` 表示使用当前 Firefox 主题的背景图片作为整个浏览器界面的壁纸；`1`～`9` 表示使用 `../icons/wallpaper/` 文件夹中的 `main-image-1.jpg` 至 `main-image-9.jpg`。所有壁纸文件必须统一重命名为 `.jpg`，不论原始格式为何。支持 JPG、WebP、Animated WebP、PNG、APNG、AVIF 和 GIF 格式。 |
+| `uc.flex.browser-wallpaper-svg-enabled` | `true` | 启用 SVG 壁纸支持。启用后，可使用放置于 `../icons/wallpaper/` 目录中的 `main-image-1.svg` 至 `main-image-9.svg` 作为壁纸。 |
+| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | 禁用浏览器壁纸的 Acrylic 模糊效果。默认情况下会应用 Acrylic 风格的模糊，以模拟 Mica 的视觉效果。启用此选项后，壁纸将以原始清晰状态显示。 |
+| `uc.flex.browser-wallpaper-align-horizontal` | `'auto'`\|<br>`'left'`\|<br>`'center'`\|<br>`'right'` | 设置壁纸图片在适应浏览器窗口发生裁切时的水平对齐方式。可选值为字符串：`'auto'` 或 `'0'`（自动对齐，默认）、`'left'` 或 `'1'`（左对齐）、`'center'` 或 `'2'`（居中对齐）、`'right'` 或 `'3'`（右对齐）。 |
 | `uc.flex.browser-wallpaper-transparency-level` | `0`-`4`<br>(`2`) | 调整浏览器壁纸遮罩的透明度。此选项为数值类型，接受 0 到 4 的数值，数值越大，遮罩效果越弱，壁纸越清晰。该设置旨在与 Mica 背景的透明度效果保持视觉一致。FlexFox 的默认值为 2。 |
 | `uc.flex.browser-wallpaper-contrast-level` | `0`-`4`<br>(`2`) | 在深色模式下启用 Acrylic 模糊效果时，用于调整浏览器壁纸的对比度。可设置的数值范围为 0 到 4，数值越高对比度越强。FlexFox 默认值为 2。 |
 

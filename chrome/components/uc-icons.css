@@ -527,7 +527,9 @@
     }
 
     .titlebar-buttonbox {
-        appearance: none !important;
+        @media not (-moz-platform: macos) {
+            appearance: none !important;
+        }
 
         .titlebar-button > .toolbarbutton-icon {
             /* Workaround for regression introduced in Nightly v141 (Bug 1789579) */

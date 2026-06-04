@@ -1661,13 +1661,25 @@
 
     /* Allow Sidebery's background to show Mica backdrop or a custom wallpaper */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
-        #root {
+        #root.root {
             --frame-bg: transparent !important;
             --toolbar-bg: transparent !important;
         }
         :root {
             background-color: transparent !important;
+        }
+        .new-tab-btns[data-new-tab-bar-position="after_tabs"] {
+            justify-content: center;
+            align-items: center;
+
+            &::before {
+                box-shadow: none !important;
+            }
+            .new-tab-btn {
+                margin-inline: calc(33.33% + 2px) !important;
+            }
         }
     }
 }
@@ -1781,8 +1793,9 @@
 
     /* Allow group page backgrounds to show Mica backdrop or a custom wallpaper */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser"),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("browser.tabs.allow_transparent_browser"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser") {
-        #root {
+        #root.root {
             --frame-bg: transparent !important;
             --toolbar-bg: transparent !important;
         }

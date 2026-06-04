@@ -16,10 +16,12 @@
                 }
                 /* Add a hover target pseudo-element to capture hovering */
                 @media -moz-pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar", 3) {
-                    #toolbar-menubar:is([autohide=""], [autohide="true"]) + #TabsToolbar:not(:hover) {
+                    /* Includes [collapsed] because #toolbar-menubar on macOS relies on this attribute instead of [autohide]. */
+                    #toolbar-menubar:is([autohide=""], [autohide="true"], [collapsed]) + #TabsToolbar:not(:hover) {
                         -moz-window-dragging: no-drag !important;
                     }
-                    #toolbar-menubar:is([autohide=""], [autohide="true"]) + #TabsToolbar:not([customizing])::before {
+                    #toolbar-menubar:is([autohide=""], [autohide="true"], [collapsed])
+                        + #TabsToolbar:not([customizing])::before {
                         content: "";
                         display: flex;
                         position: absolute;
@@ -352,6 +354,11 @@ toolbar#TabsToolbar {
 }
 */
 @media not -moz-pref("sidebar.verticalTabs") {
+    @media (-moz-platform: macos) {
+        #TabsToolbar {
+            min-height: 0 !important;
+        }
+    }
     .toolbar-items {
         visibility: var(--uc-sb-tab-items-visibility, inherit);
     }
