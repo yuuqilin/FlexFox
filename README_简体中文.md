@@ -135,6 +135,54 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ---
 
+**🦊 v6.5.1**
+
+* 修复了 Beta v152 中引入的问题：书签菜单的背景模糊效果消失，以及面板边框颜色外溢。([Bug 2017979](https://bugzilla.mozilla.org/show_bug.cgi?id=2017979))
+* 调整 macOS 下 Sidebar Button 的位置。(#35)
+
+**Credits**
+
+以下资源曾用于 v6.5 更新日志中的 **🎬 Feature Showcase Video**。
+
+由于原更新日志遗漏了相关署名信息，因此在此补充列出，方便有需要的用户查找视频中使用的主题、壁纸、软件和音乐来源。
+
+**Firefox 主题**
+
+* Animated│Geometric Hexagon
+
+  * https://addons.mozilla.org/firefox/addon/animated-geometric-hexagon
+
+* Black Rain (Animated) Night Edition
+
+  * https://addons.mozilla.org/firefox/addon/blk-r-animated-night-edition
+
+**动态壁纸软件**
+
+* Lively Wallpaper
+
+  * https://github.com/rocksdanister/lively
+
+**静态壁纸**
+
+* Opera GX
+
+  * https://www.opera.com/gx
+
+**动态壁纸**
+
+* Summer Village Coastal Live Wallpaper
+
+  * https://moewalls.com/lifestyle/summer-village-coastal-live-wallpaper
+
+**背景音乐**
+
+* Malmen, Joule - "Tomorrow Without You" (XM, 2009) [Oscilloscope Visualization]
+
+  * https://www.youtube.com/watch?v=5kwlIAVPYmg
+
+
+---
+
 ## 🎉 主要功能更新
 
 <details>  

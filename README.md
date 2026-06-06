@@ -133,6 +133,52 @@ For better video quality, watch on YouTube:
 * Refactored a large amount of code to reduce complexity and improve maintainability.
 * However, there are no noticeable performance improvements.
 
+---
+
+**🦊 v6.5.1**
+
+* Fixed an issue introduced in Beta v152 where bookmark menu blur effects disappeared and panel border colors could bleed outside the panel. ([Bug 2017979](https://bugzilla.mozilla.org/show_bug.cgi?id=2017979))
+* Adjusted the Sidebar Button position on macOS. (#35)
+
+**Credits**
+
+The following credits were omitted from the original v6.5 release notes and are provided here for anyone looking for the themes, wallpapers, software, or music featured in the **🎬 Feature Showcase Video**.
+
+**Firefox Themes**
+
+* Animated│Geometric Hexagon
+
+  * https://addons.mozilla.org/firefox/addon/animated-geometric-hexagon
+
+* Black Rain (Animated) Night Edition
+
+  * https://addons.mozilla.org/firefox/addon/blk-r-animated-night-edition
+
+**Animated Wallpaper Software**
+
+* Lively Wallpaper
+
+  * https://github.com/rocksdanister/lively
+
+**Static Wallpaper**
+
+* Opera GX
+
+  * https://www.opera.com/gx
+
+**Animated Wallpaper**
+
+* Summer Village Coastal Live Wallpaper
+
+  * https://moewalls.com/lifestyle/summer-village-coastal-live-wallpaper
+
+**Background Music**
+
+* Malmen, Joule - "Tomorrow Without You" (XM, 2009) [Oscilloscope Visualization]
+
+  * https://www.youtube.com/watch?v=5kwlIAVPYmg
+
+
 <!-- END What's New -->
 
 ---

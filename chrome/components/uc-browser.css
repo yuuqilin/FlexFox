@@ -818,7 +818,12 @@ split-view-footer {
     -moz-pref("uc.flex.enable-translucent-urlbar-popup-and-menus") {
     .toolbar-menupopup,
     menupopup {
+        /* !TEMPORARY: */
         --panel-background: light-dark(
+            rgba(249, 249, 251, var(--uc-menupopup-backdrop-transparency)),
+            rgba(32, 32, 32, var(--uc-menupopup-backdrop-transparency))
+        ) !important;
+        --panel-background-color: light-dark(
             rgba(249, 249, 251, var(--uc-menupopup-backdrop-transparency)),
             rgba(32, 32, 32, var(--uc-menupopup-backdrop-transparency))
         ) !important;
@@ -833,9 +838,14 @@ split-view-footer {
             rgba(32, 32, 32, var(--uc-menupopup-backdrop-transparency))
         ) !important;
         appearance: menupopup !important;
+        /*
+        -moz-default-appearance: menupopup !important;
+        */
+
         /* !TEMPORARY: v151 renames '--panel-shadow-margin' to '--panel-box-shadow-margin'; compatibility declarations for older versions can be removed in v151+. */
         --panel-shadow-margin: 0px !important;
         --panel-box-shadow-margin: 0px !important;
+        --panel-border-color: transparent !important;
     }
 
     /* backdrop-filter doesn't blur remote <browser> element https://bugzilla.mozilla.org/show_bug.cgi?id=1799334 */

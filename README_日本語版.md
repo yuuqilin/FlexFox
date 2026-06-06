@@ -135,6 +135,52 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ---
 
+**🦊 v6.5.1**
+
+* Beta v152 で導入された、ブックマークメニューのブラー効果が消失し、パネルの枠線カラーがはみ出して表示される問題を修正しました。([Bug 2017979](https://bugzilla.mozilla.org/show_bug.cgi?id=2017979))
+* macOS における Sidebar Button の位置を調整しました。(#35)
+
+**Credits**
+
+以下は、v6.5 のリリースノートに掲載した **🎬 Feature Showcase Video** で使用したリソースのクレジットです。初版のリリースノートで記載が漏れていたため、動画内で使用したテーマ、壁紙、ソフトウェア、音楽の出典を補足いたします。
+
+**Firefox テーマ**
+
+* Animated│Geometric Hexagon
+
+  * https://addons.mozilla.org/firefox/addon/animated-geometric-hexagon
+
+* Black Rain (Animated) Night Edition
+
+  * https://addons.mozilla.org/firefox/addon/blk-r-animated-night-edition
+
+**ライブ壁紙ソフトウェア**
+
+* Lively Wallpaper
+
+  * https://github.com/rocksdanister/lively
+
+**静止画壁紙**
+
+* Opera GX
+
+  * https://www.opera.com/gx
+
+**ライブ壁紙**
+
+* Summer Village Coastal Live Wallpaper
+
+  * https://moewalls.com/lifestyle/summer-village-coastal-live-wallpaper
+
+**BGM**
+
+* Malmen, Joule - "Tomorrow Without You" (XM, 2009) [Oscilloscope Visualization]
+
+  * https://www.youtube.com/watch?v=5kwlIAVPYmg
+
+
+---
+
 ## 🎉 主な機能アップデート
 
 <details>  

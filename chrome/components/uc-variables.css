@@ -1236,12 +1236,15 @@
     --uc-nav-bar-second-bookmarks-padding-left: 6px;
     /* When vertical tabs are not enabled, the extra spacing above is unnecessary */
     @media -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding"),
-        -moz-pref("uc.flex.move-window-controls-to-left") and (not -moz-pref("uc.flex.auto-hide-window-controls")),
+        -moz-pref("uc.flex.move-window-controls-to-left"),
         -moz-pref("uc.flex.fully-hide-toolbox"),
         -moz-pref("uc.flex.fully-hide-sidebery"),
         not -moz-pref("sidebar.verticalTabs"),
         (-moz-platform: macos) {
         --uc-nav-bar-first-child-padding-right: 2px;
+    }
+    @media -moz-pref("uc.flex.auto-hide-window-controls") {
+        --uc-nav-bar-first-child-padding-right: 6px;
     }
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
         &:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
@@ -2127,6 +2130,16 @@
                 --uc-sb-sidebar-button-bg-pos-last: 8.5px 3px;
                 --uc-sb-sidebar-button-height-last: 26px;
             }
+            @media (-moz-platform: macos) {
+                --uc-sidebar-button-bg-pos-first: 14px 11px;
+                --uc-sidebar-button-bg-pos-first-fs: 12px 11px;
+                --uc-sidebar-button-bg-pos-last: 10px 11px;
+                @media -moz-pref("uc.flex.increase-navbar-height") {
+                    --uc-sidebar-button-bg-pos-first: 14px 13px;
+                    --uc-sidebar-button-bg-pos-first-fs: 12px 13px;
+                    --uc-sidebar-button-bg-pos-last: 10px 12px;
+                }
+            }
 
             /* Property values for the window controls when auto-hide navbar is enabled and Sidebery is active */
             @media not -moz-pref("sidebar.verticalTabs") {
@@ -2145,8 +2158,10 @@
              * add spacing after the first item to align with Sidebery's layout. 
              */
             @media not (-moz-pref("uc.flex.disable-nav-bar-first-item-right-padding") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
-                &:not([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-                    --uc-nav-bar-first-child-padding-right: 6px;
+                @media not (-moz-pref("uc.flex.move-window-controls-to-left") or (-moz-platform: macos)) {
+                    &:not([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                        --uc-nav-bar-first-child-padding-right: 6px;
+                    }
                 }
             }
             /* Adjust vertical offset of the bookmarks toolbar background image */

@@ -820,7 +820,9 @@
     --panel-box-shadow-margin: 0px !important;
     background-color: var(--uc-toolbar-bgcolor);
     --panel-color: var(--toolbar-field-focus-color);
+    --panel-text-color: var(--toolbar-field-focus-color);
     --panel-background: var(--uc-searchbar-bgcolor, var(--toolbar-field-focus-background-color)) !important;
+    --panel-background-color: var(--uc-searchbar-bgcolor, var(--toolbar-field-focus-background-color)) !important;
     /*
     --panel-border-color: var(--arrowpanel-border-color);
     */
