@@ -1226,13 +1226,13 @@
     }
 
     /* Shift the nav bar to align the first item with the vertical tabs */
-    --uc-nav-bar-first-child-padding-left: 6px;
+    --uc-nav-bar-first-child-margin-left: 4px;
     &[inFullscreen] {
-        --uc-nav-bar-first-child-padding-left: 5px;
+        --uc-nav-bar-first-child-margin-left: 3px;
     }
 
     /* Add right-side spacing after the first item to align nearby items with the vertical tabs */
-    --uc-nav-bar-first-child-padding-right: 6px;
+    --uc-nav-bar-first-child-margin-right: 4px;
     --uc-nav-bar-second-bookmarks-padding-left: 6px;
     /* When vertical tabs are not enabled, the extra spacing above is unnecessary */
     @media -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding"),
@@ -1241,14 +1241,14 @@
         -moz-pref("uc.flex.fully-hide-sidebery"),
         not -moz-pref("sidebar.verticalTabs"),
         (-moz-platform: macos) {
-        --uc-nav-bar-first-child-padding-right: 2px;
+        --uc-nav-bar-first-child-margin-right: 0px;
     }
     @media -moz-pref("uc.flex.auto-hide-window-controls") {
-        --uc-nav-bar-first-child-padding-right: 6px;
+        --uc-nav-bar-first-child-margin-right: 4px;
     }
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
         &:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-            --uc-nav-bar-first-child-padding-right: 2px;
+            --uc-nav-bar-first-child-margin-right: 0px;
         }
     }
 
@@ -1312,29 +1312,8 @@
     }
 
     /* Position of the sidebar button icon */
-    --uc-sidebar-button-bg-pos: 10px 11px;
-    --uc-sidebar-button-bg-pos-first: 13px 10px;
-    --uc-sidebar-button-bg-pos-first-fs: 11px 10px;
-    --uc-sidebar-button-bg-pos-last: 8.5px 1.5px;
-    --uc-sidebar-button-height-last: 23px;
-    @media -moz-pref("uc.flex.increase-navbar-height") {
-        --uc-sidebar-button-bg-pos: 10px 12px;
-        --uc-sidebar-button-bg-pos-first: 13px 12px;
-        --uc-sidebar-button-bg-pos-first-fs: 11px 12px;
-        --uc-sidebar-button-bg-pos-last: 8.5px 3px;
-        --uc-sidebar-button-height-last: 26px;
-    }
-    /* Position of the sidebar button icon in horizontal tab mode */
-    @media not -moz-pref("sidebar.verticalTabs") {
-        --uc-sidebar-button-bg-pos-first: 14px 11px;
-        --uc-sidebar-button-bg-pos-first-fs: 12px 11px;
-        --uc-sidebar-button-bg-pos-last: 10px 11px;
-        @media -moz-pref("uc.flex.increase-navbar-height") {
-            --uc-sidebar-button-bg-pos-first: 14px 13px;
-            --uc-sidebar-button-bg-pos-first-fs: 12px 13px;
-            --uc-sidebar-button-bg-pos-last: 10px 12px;
-        }
-    }
+    --uc-sidebar-button-bg-pos: 50% 50%;
+    --uc-sidebar-button-bg-pos-edge: calc(50% + 1px) 50%;
 
     --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
     --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
@@ -2120,26 +2099,7 @@
             @media not ((-moz-platform: macos) and -moz-pref("sidebar.position_start")) {
                 --uc-sb-sidebar-button-bg-size: 20px;
             }
-            --uc-sb-sidebar-button-bg-pos-first: 13px 10px;
-            --uc-sb-sidebar-button-bg-pos-first-fs: 11px 10px;
-            --uc-sb-sidebar-button-bg-pos-last: 8.5px 1.5px;
-            --uc-sb-sidebar-button-height-last: 23px;
-            @media -moz-pref("uc.flex.increase-navbar-height") {
-                --uc-sb-sidebar-button-bg-pos-first: 13px 12px;
-                --uc-sb-sidebar-button-bg-pos-first-fs: 11px 12px;
-                --uc-sb-sidebar-button-bg-pos-last: 8.5px 3px;
-                --uc-sb-sidebar-button-height-last: 26px;
-            }
-            @media (-moz-platform: macos) {
-                --uc-sidebar-button-bg-pos-first: 14px 11px;
-                --uc-sidebar-button-bg-pos-first-fs: 12px 11px;
-                --uc-sidebar-button-bg-pos-last: 10px 11px;
-                @media -moz-pref("uc.flex.increase-navbar-height") {
-                    --uc-sidebar-button-bg-pos-first: 14px 13px;
-                    --uc-sidebar-button-bg-pos-first-fs: 12px 13px;
-                    --uc-sidebar-button-bg-pos-last: 10px 12px;
-                }
-            }
+            --uc-sb-sidebar-button-bg-pos-edge: calc(50% + 1px) 50%;
 
             /* Property values for the window controls when auto-hide navbar is enabled and Sidebery is active */
             @media not -moz-pref("sidebar.verticalTabs") {
@@ -2160,7 +2120,7 @@
             @media not (-moz-pref("uc.flex.disable-nav-bar-first-item-right-padding") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
                 @media not (-moz-pref("uc.flex.move-window-controls-to-left") or (-moz-platform: macos)) {
                     &:not([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-                        --uc-nav-bar-first-child-padding-right: 6px;
+                        --uc-nav-bar-first-child-margin-right: 4px;
                     }
                 }
             }
@@ -2405,7 +2365,7 @@
      * ensure the following variables take precedence over all previous cases.
      */
     @media not -moz-pref("sidebar.position_start") {
-        --uc-nav-bar-first-child-padding-right: 0px;
+        --uc-nav-bar-first-child-margin-right: 0px;
         --uc-navigator-offset: 0px;
         --uc-personal-toolbar-offset: 0px;
     }

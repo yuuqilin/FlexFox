@@ -37,21 +37,20 @@
     :root:not([customizing]) #nav-bar-customization-target & {
         &[sidebar-positionend]:last-child {
             position: absolute;
-            top: 8px;
+            top: 0;
             right: 4px;
             width: 36px;
-            height: var(--uc-sidebar-button-height-last);
-            background-position: var(--uc-sidebar-button-bg-pos-last);
+            height: var(--uc-nav-bar-height);
+            background-position: var(--uc-sidebar-button-bg-pos-edge);
             background-size: 20px;
-            mask-position: var(--uc-sidebar-button-bg-pos-last);
+            mask-position: var(--uc-sidebar-button-bg-pos-edge);
             mask-size: 20px;
             /* In horizontal tab mode, adjust icon size only when Sidebery is active */
             @media not -moz-pref("sidebar.verticalTabs") {
                 position: var(--uc-sb-sidebar-button-bg-pos, flex);
-                height: var(--uc-sb-sidebar-button-height-last, auto);
-                background-position: var(--uc-sb-sidebar-button-bg-pos-last, var(--uc-sidebar-button-bg-pos-last));
+                background-position: var(--uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                 background-size: var(--uc-sb-sidebar-button-bg-size, 18px);
-                mask-position: var(--uc-sb-sidebar-button-bg-pos-last, var(--uc-sidebar-button-bg-pos-last));
+                mask-position: var(---uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                 mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
             }
         }
@@ -77,31 +76,20 @@
             }
             */
             &:first-child {
-                background-position: var(--uc-sidebar-button-bg-pos-first);
-                mask-position: var(--uc-sidebar-button-bg-pos-first);
+                background-position: var(--uc-sidebar-button-bg-pos-edge);
+                mask-position: var(--uc-sidebar-button-bg-pos-edge);
                 @media not (-moz-pref("uc.flex.move-window-controls-to-left") or (-moz-platform: macos)),
                     -moz-pref("uc.flex.auto-hide-window-controls") {
                     background-size: 20px;
                     mask-size: 20px;
                 }
-                :root[inFullscreen] & {
-                    background-position: var(--uc-sidebar-button-bg-pos-first-fs);
-                    mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
-                }
                 /* In horizontal tab mode, adjust icon size only when Sidebery is active */
                 @media not (-moz-pref("sidebar.verticalTabs") or -moz-pref("uc.flex.move-window-controls-to-left")),
                     -moz-pref("uc.flex.auto-hide-window-controls") and (not -moz-pref("sidebar.verticalTabs")) {
-                    background-position: var(
-                        --uc-sb-sidebar-button-bg-pos-first,
-                        var(--uc-sidebar-button-bg-pos-first)
-                    );
+                    background-position: var(--uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                     background-size: var(--uc-sb-sidebar-button-bg-size, 18px);
-                    mask-position: var(--uc-sb-sidebar-button-bg-pos-first, var(--uc-sidebar-button-bg-pos-first));
+                    mask-position: var(--uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                     mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
-                    :root[inFullscreen] & {
-                        background-position: var(--uc-sidebar-button-bg-pos-first-fs);
-                        mask-position: var(--uc-sidebar-button-bg-pos-first-fs);
-                    }
                 }
             }
 

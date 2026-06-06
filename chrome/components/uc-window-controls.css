@@ -420,7 +420,8 @@
 #nav-bar-customization-target {
     & > :is(toolbarbutton, toolbaritem):first-child,
     & > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
-        padding-inline-start: var(--uc-nav-bar-first-child-padding-left) !important;
+        padding-inline: 2px !important;
+        margin-inline-start: var(--uc-nav-bar-first-child-margin-left) !important;
         /**
          * Since a 1px shift is reserved earlier for hover when window controls are on the left,
          * apply a -1px offset to the navbar to keep the sidebar button properly aligned.
@@ -438,7 +439,7 @@
         /* Add right padding to the first item in the nav bar for alignment with the vertical tabs */
         &:not([inFullscreen]) {
             #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):first-child:not(#personal-bookmarks) {
-                padding-right: var(--uc-nav-bar-first-child-padding-right) !important;
+                margin-right: var(--uc-nav-bar-first-child-margin-right) !important;
             }
         }
         /* If the second item is the bookmarks toolbar, add extra left padding for proper spacing */
