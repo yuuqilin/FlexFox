@@ -429,7 +429,7 @@
          * are absolutely positioned, but it's left as-is for simplicity.
          */
         @media -moz-pref("uc.flex.auto-hide-window-controls") and -moz-pref("uc.flex.move-window-controls-to-left") {
-            margin-inline-start: -1px !important;
+            margin-inline-start: calc(var(--uc-nav-bar-first-child-margin-left) - 1px) !important;
         }
     }
 }

@@ -43,7 +43,8 @@
                     [data-l10n-args='{"value":"false"}'],
                     [data-l10n-args='{"value":"0"}'],
                     [data-l10n-args='{"value":"top-right"}'],
-                    [data-l10n-args='{"value":"small"}']
+                    [data-l10n-args='{"value":"small"}'],
+                    [data-l10n-args='{"value":"auto"}']
                 )
         ) {
         --uc-pref-custom-bg: light-dark(#ea4c895e, #9059ff80);
