@@ -91,6 +91,12 @@
                     mask-position: var(--uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                     mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
                 }
+                @media (-moz-platform: macos) {
+                    background-position: var(--uc-sidebar-button-bg-pos);
+                    background-size: 18px;
+                    mask-position: var(--uc-sidebar-button-bg-pos);
+                    mask-size: 18px;
+                }
             }
 
             /* Since v152, the [checked] attribute is removed in horizontal tabs mode, requiring [data-l10n-id] as a fallback. */
