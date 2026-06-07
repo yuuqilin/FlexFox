@@ -1227,8 +1227,11 @@
 
     /* Shift the nav bar to align the first item with the vertical tabs */
     --uc-nav-bar-first-child-margin-left: 4px;
-    &[inFullscreen] {
+    @media (display-mode: fullscreen) {
         --uc-nav-bar-first-child-margin-left: 3px;
+    }
+    @media (-moz-platform: macos) {
+        --uc-nav-bar-first-child-margin-left: 6px;
     }
 
     /* Add right-side spacing after the first item to align nearby items with the vertical tabs */
