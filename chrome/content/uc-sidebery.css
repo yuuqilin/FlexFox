@@ -324,7 +324,7 @@
     }
 
     #root .Tab {
-        --tabs-indent: 7px;
+        --tabs-indent: 10px !important;
     }
 
     /* TABS */
@@ -338,7 +338,7 @@
         /*
         margin: auto;
         */
-        width: 94% !important;
+        width: calc(100% - 2 * var(--uc-sb-tabs-margin)) !important;
         border-radius: 3px;
     }
 
@@ -464,12 +464,16 @@
         flex-grow: 0 !important;
     }
 
-    #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
-        width: 22px !important;
-        height: 22px !important;
-        transition:
-            width 50ms ease-in-out 10ms,
-            height 50ms ease-in-out 10ms !important;
+    @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
+        @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
+            #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+                width: 22px !important;
+                height: 22px !important;
+                transition:
+                    width 50ms ease-in-out 10ms,
+                    height 50ms ease-in-out 10ms !important;
+            }
+        }
     }
 
     /* ? */
@@ -501,7 +505,7 @@
     @media (max-width: 50px) {
         /* Fix to tab tree identation when minimised */
         #root:not(:hover) .Tab {
-            --tabs-indent: 0px;
+            --tabs-indent: 0px !important;
         }
 
         /* ? */
@@ -562,10 +566,14 @@
         will-change: width, height;
     }
 
-    #root:hover .PinnedTabsBar .Tab .fav,
-    #root:hover .PinnedTabsBar .Tab .fav-icon {
-        width: 20px !important;
-        height: 20px !important;
+    @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
+        @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
+            #root:hover .PinnedTabsBar .Tab .fav,
+            #root:hover .PinnedTabsBar .Tab .fav-icon {
+                width: 20px !important;
+                height: 20px !important;
+            }
+        }
     }
 
     /*
@@ -881,6 +889,9 @@
         .Tab[data-colorized="true"] {
             --tabs-activated-shadow: var(--active-el-shadow) !important;
         }
+
+        --uc-sb-tabs-margin: 5px;
+        --uc-sb-navbar-padding: 3px 2px;
     }
 
     /* Add text stroke */
@@ -1101,7 +1112,7 @@
             min-width: 200px;
             grid-template-columns: repeat(auto-fit, minmax(var(--uc-sb-pinned-tab-max-columns), 1fr)) !important;
             grid-auto-rows: min-content;
-            column-gap: 0 !important;
+            column-gap: 2px !important;
             row-gap: 0 !important;
             flex-shrink: 0;
             overflow-x: hidden;
@@ -1122,7 +1133,7 @@
             }
             .Tab {
                 min-width: 34px !important;
-                width: 97% !important;
+                width: 100% !important;
             }
             .tab-wrapper {
                 min-width: var(--tabs-pinned-width) !important;
@@ -1147,7 +1158,7 @@
             }
 
             .ScrollBox .Tab {
-                margin-left: 5px !important;
+                margin-inline: var(--uc-sb-tabs-margin) !important;
             }
 
             .TabsPanel .new-tab-btns {
@@ -1400,7 +1411,7 @@
                  * causing a flickering effect. We override them during hover to smooth out the transition. 
                  */
                 .ScrollBox .Tab {
-                    margin-left: 7px !important;
+                    margin-inline: var(--uc-sb-tabs-margin) !important;
                 }
                 .Tab:hover {
                     --tabs-inner-gap: 5px !important;
@@ -1425,14 +1436,18 @@
      * when the navbar has fewer than one row of panels and is hovered. 
      */
     #root:not([data-nav-inline="true"]) .NavigationBar {
-        padding: 3px 0px 3px 2px !important;
+        padding: var(--uc-sb-navbar-padding) !important;
         .nav-item[data-active="true"] > svg {
             width: 16px !important;
             height: 16px !important;
         }
-        &:hover .nav-item[data-active="true"] > svg {
-            width: 22px !important;
-            height: 22px !important;
+        @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
+            @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
+                &:hover .nav-item[data-active="true"] > svg {
+                    width: 22px !important;
+                    height: 22px !important;
+                }
+            }
         }
     }
 
@@ -1477,7 +1492,7 @@
         #root:not([data-nav-inline="true"]) .NavigationBar {
             max-height: 40px;
             height: auto !important;
-            padding: 3px 0px 3px 4px !important;
+            padding: var(--uc-sb-navbar-padding) !important;
             margin-bottom: 0px !important;
             /*
             border-bottom: 1px solid #ced1d4 !important;
@@ -1509,12 +1524,14 @@
                 height 50ms ease-in-out 50ms !important;
         }
 
-        #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
-            width: 22px;
-            height: 22px;
-            transition:
-                width 50ms ease-in-out 120ms,
-                height 50ms ease-in-out 120ms !important;
+        @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
+            #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+                width: 22px;
+                height: 22px;
+                transition:
+                    width 50ms ease-in-out 120ms,
+                    height 50ms ease-in-out 120ms !important;
+            }
         }
 
         #root[data-nav-inline="true"] .NavigationBar {
@@ -1524,10 +1541,12 @@
             border-bottom: none !important;
         }
 
-        #root .PinnedTabsBar .Tab .fav,
-        #root .PinnedTabsBar .Tab .fav-icon {
-            width: 20px !important;
-            height: 20px !important;
+        @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
+            #root .PinnedTabsBar .Tab .fav,
+            #root .PinnedTabsBar .Tab .fav-icon {
+                width: 20px !important;
+                height: 20px !important;
+            }
         }
 
         /*
@@ -1552,7 +1571,7 @@
         /* Add higher specificity (.root) to override the previous centering rules applied with :not(:hover) */
         #root.root .ScrollBox .Tab {
             --tabs-inner-gap: 5px !important;
-            margin-left: 7px !important;
+            margin-inline: var(--uc-sb-tabs-margin) !important;
         }
 
         /*
@@ -1582,7 +1601,7 @@
             }
             #root {
                 .ScrollBox .Tab {
-                    margin-left: 5px !important;
+                    margin-inline: var(--uc-sb-tabs-margin) !important;
                 }
                 .Tab[data-parent="true"] .exp {
                     top: 6px !important;
