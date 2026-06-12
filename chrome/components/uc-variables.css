@@ -1206,6 +1206,7 @@
     --toolbox-background-color-inactive: var(--toolbox-bgcolor-inactive);
     --toolbarbutton-background-color-hover: var(--toolbarbutton-hover-background);
     --tab-background-color-hover: var(--tab-hover-background-color);
+    --tab-group-counter-size: 24px;
 
     --uc-toolbar-bgcolor: var(--uc-bgcolor); /* Internal fallback; must match --uc-bgcolor */
     --uc-sidebar-stripe-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */

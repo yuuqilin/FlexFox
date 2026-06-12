@@ -1671,7 +1671,7 @@
 
     /* Reduce spacing between vertical tabs */
     #tabbrowser-arrowscrollbox .tabbrowser-tab {
-        #tabbrowser-tabs[expanded] & {
+        #tabbrowser-tabs[orient="vertical"] & {
             padding-block: 1.5px !important;
         }
     }
@@ -1877,8 +1877,10 @@
     }
 
     /* Tab group: Add spacing below tab groups so tabs align evenly */
-    tab-group[collapsed]:not([hasactivetab]) + :where(.tabbrowser-tab, tab-split-view-wrapper) {
-        margin-top: var(--space-small) !important;
+    @media not -moz-pref("uc.flex.style-tab-groups", 2) {
+        tab-group[collapsed]:not([hasactivetab]) + :where(.tabbrowser-tab, tab-split-view-wrapper) {
+            margin-top: var(--space-small) !important;
+        }
     }
 
     /* Tab group: Soften tab group label colors to make them less prominent */
@@ -1897,7 +1899,7 @@
             scale 300ms ease 0s,
             box-shadow var(--tab-group-label-animation-duration) !important;
         @media not -moz-pref("uc.flex.style-tab-groups", 2) {
-            &:hover {
+            #tabbrowser-tabs[expanded] &:hover {
                 scale: 1.05;
             }
         }
@@ -1938,6 +1940,7 @@
         }
 
         #tabbrowser-tabs[orient="vertical"] & {
+            padding-block: 1.5px;
             margin-inline: 0 !important;
             box-shadow: none !important;
         }
@@ -1956,7 +1959,7 @@
             --uc-tab-group-label-padding-inline-total: 58px;
         }
 
-        #sidebar-main[sidebar-launcher-expanded] & {
+        #tabbrowser-tabs[orient="vertical"] & {
             /* Restore pre-v140 box-sizing and padding for tab group labels */
             box-sizing: content-box;
             padding-block: 2.5px;
@@ -1966,6 +1969,7 @@
 
             /* Expanded state indicator */
             @media not -moz-pref("uc.flex.style-tab-groups", 0) {
+                position: relative;
                 &::before {
                     position: absolute;
                     content: "";
@@ -2093,7 +2097,7 @@
             border-radius: 6px;
             margin-inline-start: calc(var(--space-medium) + 0.8px);
             margin-inline-end: calc(var(--space-medium) + 0.8px);
-            margin-block: var(--space-small);
+            margin-block: 3.5px;
             background-color: transparent;
             /* Use box-shadow instead of border to inset the visual border and
                avoid vertical tabs shifting when hovering a selected tab in a tab group. */
@@ -2175,7 +2179,7 @@
                         brightness(1.2);
                 }
             }
-            #sidebar-main[sidebar-launcher-expanded] & {
+            #tabbrowser-tabs[orient="vertical"] & {
                 &::before {
                     background-image: url("../icons/tab-group/tab-group-folder-expanded.svg");
                     background-position: 2px 2px;
@@ -2191,9 +2195,11 @@
         .tabbrowser-tab {
             margin-inline-start: var(--uc-tab-in-tab-group-margin-inline) !important;
         }
-        .tab-group-line,
-        .tab-group-overflow-count-container::after {
-            visibility: hidden;
+        #tabbrowser-tabs[expanded] {
+            .tab-group-line,
+            .tab-group-overflow-count-container::after {
+                visibility: hidden;
+            }
         }
     }
 
@@ -2424,7 +2430,7 @@
         }
 
         > .tabbrowser-tab {
-            #tabbrowser-tabs[expanded] & {
+            #tabbrowser-tabs[orient="vertical"] & {
                 min-height: 34px;
                 max-height: 40px;
                 padding-block: 0 !important;
@@ -2992,9 +2998,69 @@
          * Adjusted to 8px for a look closer to the previous layout. 
          */
         .tab-group-label {
-            margin-inline: 8px !important;
+            margin-inline: auto !important;
+            box-sizing: content-box;
+            padding-block: 2.5px !important;
+            /* Centering compensation for fractional UI scaling like 1.25x */
+            /*
+            text-indent: 1px;
+            */
+            &::first-letter {
+                font-family: inherit !important;
+                font-weight: var(--font-weight-bold) !important;
+            }
+        }
+        .tab-group-label-container {
+            tab-group:not([collapsed]) > &::after,
+            tab-group[collapsed][hasactivetab]:not([movingtabgroup]) > &::after {
+                inset-inline: 0px auto !important;
+            }
+        }
+        .tab-group-overflow-count-container {
+            &::after {
+                inset-inline: 0px auto !important;
+            }
+        }
+        .tab-group-overflow-count {
+            margin-inline-start: calc(0px + (var(--tab-min-height) - var(--tab-group-counter-size)) / 2) !important;
+        }
+        tab-split-view-wrapper {
+            /* !TEMPORARY: */
+            .tabbrowser-tab .tab-background {
+                width: var(--tab-collapsed-background-width) !important;
+            }
+            .tabbrowser-tab .tab-content {
+                width: 100% !important;
+            }
+        }
+        tab-split-view-wrapper::before {
+            width: var(--tab-collapsed-background-width);
+            margin-inline: calc((100% - var(--tab-collapsed-background-width)) / 2);
+        }
+
+        @media -moz-pref("uc.flex.style-tab-groups", 2) {
+            tab-group {
+                margin-inline: 0;
+                @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                    :root:not([titlepreface*="\180e "]) & {
+                        .tab-group-label-container {
+                            margin-inline-start: 0 !important;
+                        }
+                    }
+                }
+            }
+            .tab-group-label-container {
+                tab-group:not([collapsed]) > &::after,
+                tab-group[collapsed][hasactivetab]:not([movingtabgroup]) > &::after {
+                    inset-block-end: calc(-1 * var(--space-small)) !important;
+                }
+            }
+            .tab-group-label-hover-highlight {
+                margin-inline: calc((100% - var(--tab-collapsed-background-width)) / 2) !important;
+            }
         }
     }
+
     #sidebar-main:not([sidebar-launcher-expanded]) {
         --uc-expanded-sroot-btn-padding-inline: 5.5px;
         #vertical-tabs-newtab-button {

@@ -416,7 +416,7 @@
     }
 }
 
-/* Add left padding to the first item in the nav bar for alignment with the vertical tabs */
+/* Add left marign to the first item in the nav bar for alignment with the vertical tabs */
 #nav-bar-customization-target {
     & > :is(toolbarbutton, toolbaritem):first-child,
     & > toolbarpaletteitem:first-child > :is(toolbarbutton, toolbaritem) {
@@ -436,7 +436,7 @@
 
 :root:not([customizing]) {
     @media not -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding") {
-        /* Add right padding to the first item in the nav bar for alignment with the vertical tabs */
+        /* Add right margin to the first item in the nav bar for alignment with the vertical tabs */
         &:not([inFullscreen]) {
             #nav-bar-customization-target > :is(toolbarbutton, toolbaritem):first-child:not(#personal-bookmarks) {
                 margin-right: var(--uc-nav-bar-first-child-margin-right) !important;

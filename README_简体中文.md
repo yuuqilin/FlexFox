@@ -135,10 +135,15 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ---
 
-**🦊 v6.5.1**
+**🦊 v6.5.2**
 
-* 修复了 Beta v152 中引入的问题：书签菜单的背景模糊效果消失，以及面板边框颜色外溢。([Bug 2017979](https://bugzilla.mozilla.org/show_bug.cgi?id=2017979))
-* 调整 macOS 下 Sidebar Button 的位置。(#35)
+* 添加原生垂直标签页在折叠模式下的布局支持。点击侧栏按钮可切换折叠模式（图标会变为灰阶显示，侧栏保持折叠状态）。
+* 新增选项 `uc.flex.sidebery-disable-icon-scaling`。设为 `true` 可禁用 Sidebery 固定标签页和标签面板的图标放大效果。
+* 移除 Sidebery 顶层标签页展开时的额外缩进。 (#35)
+* 修复 Sidebery 顶层标签页显示双重树状引导线的问题。 (#35)
+* 修复 macOS 上 Sidebar Button 图标对齐和间距异常的问题。 (#35)
+
+---
 
 **Credits**
 

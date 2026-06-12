@@ -135,10 +135,17 @@ For better video quality, watch on YouTube:
 
 ---
 
-**🦊 v6.5.1**
+**🦊 v6.5.2**
 
-* Fixed an issue introduced in Beta v152 where bookmark menu blur effects disappeared and panel border colors could bleed outside the panel. ([Bug 2017979](https://bugzilla.mozilla.org/show_bug.cgi?id=2017979))
-* Adjusted the Sidebar Button position on macOS. (#35)
+* Added collapsed mode layout support for Native Vertical Tabs. Collapsed mode can be toggled using the Sidebar Button (the icon turns grayscale and the sidebar remains collapsed).
+* Added a new preference: `uc.flex.sidebery-disable-icon-scaling`. Set it to `true` to disable icon scaling for Sidebery pinned tabs and tab panels.
+* Removed the extra indentation applied to Sidebery top-level tabs when expanded. (#35)
+* Fixed an issue where Sidebery top-level tabs could display duplicate tree guide lines. (#35)
+* Fixed Sidebar Button icon alignment and spacing issues on macOS. (#35)
+
+<!-- END What's New -->
+
+---
 
 **Credits**
 
@@ -177,9 +184,6 @@ The following credits were omitted from the original v6.5 release notes and are 
 * Malmen, Joule - "Tomorrow Without You" (XM, 2009) [Oscilloscope Visualization]
 
   * https://www.youtube.com/watch?v=5kwlIAVPYmg
-
-
-<!-- END What's New -->
 
 ---
 
