@@ -1955,7 +1955,7 @@
     }
 
     /* !TEMPORARY: This variable is a temporary solution and might be removed later. */
-    #sidebar-main {
+    :is(#sidebar-main, #sidebar-container) {
         --uc-sidebar-main-margin-left: 0px;
         &[sidebar-positionend] {
             --uc-sidebar-main-margin-left: 0px;
@@ -2301,7 +2301,7 @@
                 - If Sidebery is inactive, the offset falls back to the native collapsed sidebar (stripe) width. 
              */
             @media not -moz-pref("sidebar.visibility", "hide-sidebar") {
-                &:has(> body > #browser > #sidebar-main:not([sidebar-launcher-expanded])) {
+                &:has(> body > #browser > :is(#sidebar-main, #sidebar-container):not([sidebar-launcher-expanded])) {
                     @media -moz-pref("uc.flex.disable-sidebery-autohide") {
                         --uc-sidebar-main-collapsed-width: var(--uc-sidebar-stripe-width);
                         @media -moz-pref("sidebar.position_start") {
@@ -2355,7 +2355,7 @@
          * the overall performance impact of :root:has() is minimal in most cases,
          * so we chose the more robust :root:has() version here.
          */
-        &:has(> body > #browser > #sidebar-main[hidden]) {
+        &:has(> body > #browser > :is(#sidebar-main, #sidebar-container)[hidden]) {
             --uc-personal-toolbar-offset: 0px;
             --uc-personal-toolbar-width: 0px;
             --uc-theme-bg-x-left-start: 0px;

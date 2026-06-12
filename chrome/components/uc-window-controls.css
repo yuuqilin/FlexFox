@@ -550,7 +550,7 @@
              */
             /* !v143 */
             #navigator-toolbox:has(> #PersonalToolbar:where([collapsed="true"], [collapsed=""])) + #browser {
-                #sidebar-main {
+                :is(#sidebar-main, #sidebar-container) {
                     margin-top: 0;
                 }
             }

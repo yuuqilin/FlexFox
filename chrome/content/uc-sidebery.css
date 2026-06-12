@@ -679,6 +679,12 @@
     ═══════════════════════════════════════════════════════════════════════════ */
 
     #root {
+        --uc-sb-tabs-margin: 2px;
+        --uc-sb-navbar-padding: 3px 2px;
+        @media (width > 50px) {
+            --uc-sb-navbar-padding: 3px 3px;
+        }
+
         /** 
          * These variables must stay in sync with the identical ones in uc-variables.css.
          * If you copy and modify them in uc-custom-content.css, be sure to also update
@@ -889,9 +895,6 @@
         .Tab[data-colorized="true"] {
             --tabs-activated-shadow: var(--active-el-shadow) !important;
         }
-
-        --uc-sb-tabs-margin: 5px;
-        --uc-sb-navbar-padding: 3px 2px;
     }
 
     /* Add text stroke */
@@ -1172,6 +1175,10 @@
 
         .PinnedTabsBar {
             padding: 0 3px !important;
+        }
+
+        .ScrollBox {
+            padding-inline: 3px !important;
         }
 
         .BottomBar {

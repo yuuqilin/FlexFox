@@ -510,7 +510,7 @@ split-view-footer {
      * using '--uc-sb-tabbox-clip-path-top' variables to handle whether Sidebery is active.
      */
     @media -moz-pref("sidebar.revamp") and (not -moz-pref("sidebar.verticalTabs")) {
-        #sidebar-main {
+        :is(#sidebar-main, #sidebar-container) {
             clip-path: inset(var(--uc-sb-tabbox-clip-path-top, var(--uc-tabbox-clip-path-top)) 0 0 0);
             will-change: min-height, max-height, overflow, background-color, clip-path;
             transition: var(--uc-tabbox-clip-path-transition);
@@ -661,7 +661,8 @@ split-view-footer {
 
     /* Clip the tab box when native vertical tabs are expanded to reveal the Mica backdrop */
     @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
-        #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-launcher-expanded]:not([sidebar-panel-open]) {
+        :is(#sidebar-main, #sidebar-container):hover
+            ~ #tabbrowser-tabbox[sidebar-launcher-expanded]:not([sidebar-panel-open]) {
             --uc-tabbox-clip-path-side: var(
                 --uc-sidebar-main-hover-clip-mica,
                 var(--uc-web-content-margin-outset-clip-mica)
@@ -687,7 +688,7 @@ split-view-footer {
             }
             transition: var(--uc-tabbox-clip-path-transition);
         }
-        #sidebar-main:hover
+        :is(#sidebar-main, #sidebar-container):hover
             ~ #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
                 [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
             ) {
@@ -727,7 +728,7 @@ split-view-footer {
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-                #sidebar-main:hover
+                :is(#sidebar-main, #sidebar-container):hover
                     ~ #sidebar-box[sidebar-panel-open][sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
                     &:not([sidebar-positionend]) {
                         clip-path: inset(0 0 0 var(--uc-sidebar-stripe-width));
@@ -756,14 +757,14 @@ split-view-footer {
          * indicating Sidebery is active.
          */
         @media -moz-pref("uc.flex.fully-hide-sidebery") {
-            #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
+            :is(#sidebar-main, #sidebar-container):hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
                 --uc-tabbox-clip-path-side: var(--uc-sb-sidebar-main-hover-clip-mica);
                 --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
             }
         }
         @media not -moz-pref("uc.flex.fully-hide-sidebery") {
             :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-                #sidebar-main:hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
+                :is(#sidebar-main, #sidebar-container):hover ~ #tabbrowser-tabbox[sidebar-panel-open] {
                     --uc-tabbox-clip-path-side: var(--uc-sb-sidebar-main-hover-clip-mica);
                     --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
@@ -989,7 +990,7 @@ split-view-footer {
         background-image: none !important;
         background-color: transparent !important;
     }
-    #sidebar-main {
+    :is(#sidebar-main, #sidebar-container) {
         --uc-bgcolor: transparent;
     }
     #browser {

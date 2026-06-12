@@ -382,7 +382,7 @@
         }
 
         @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
-            #sidebar-main[sidebar-launcher-expanded] {
+            :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] {
                 position: absolute !important;
                 &:not([sidebar-positionend]) {
                     left: 0px;
@@ -438,7 +438,7 @@
         }
 
         @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
-            #sidebar-main[sidebar-launcher-expanded] {
+            :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] {
                 position: absolute !important;
                 &:not([sidebar-positionend]) {
                     left: 0px;
@@ -495,7 +495,7 @@
             --uc-sb-sidebar-main-stripe-height: 0px;
         }
     }
-    #sidebar-main[sidebar-panel-open]:has(
+    :is(#sidebar-main, #sidebar-container)[sidebar-panel-open]:has(
             ~ #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
         ) {
         /**
@@ -600,7 +600,7 @@
         */
     }
 
-    #sidebar-main[sidebar-panel-open]:has(
+    :is(#sidebar-main, #sidebar-container)[sidebar-panel-open]:has(
             ~ #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:hover
         ) {
         @media -moz-pref("uc.flex.fully-hide-sidebery") {
@@ -638,7 +638,7 @@
 
     /* 🔽 [BLOCK B] Start of rules for active Sidebery */
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
-    #sidebar-main {
+    :is(#sidebar-main, #sidebar-container) {
         --uc-bgcolor: transparent;
         @media -moz-pref("sidebar.verticalTabs") {
             --uc-bgcolor: var(--toolbox-background-color);
@@ -766,7 +766,7 @@
                 var(--uc-sb-sidebar-main-opacity-delay, calc(var(--uc-autohide-sidebar-delay) + 10ms));
         }
     }
-    #sidebar-main:hover {
+    :is(#sidebar-main, #sidebar-container):hover {
         min-height: var(--uc-sb-sidebar-main-hover-min-height) !important;
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
             height: var(--uc-sb-sidebar-main-hover-height);
@@ -908,7 +908,7 @@
      * when switching between horizontal and vertical tab modes. 
      * To avoid both issues, use size control instead. 
      */
-    #sidebar-main[sidebar-panel-open] #vertical-tabs:not([collapse]) {
+    :is(#sidebar-main, #sidebar-container)[sidebar-panel-open] #vertical-tabs:not([collapse]) {
         @media not -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
             display: var(--uc-sb-sidebar-stripe-display, flex) !important;
         }
@@ -920,7 +920,7 @@
 
     /* Remove sidebar stripe when Sidebery is active. */
     @media -moz-pref("uc.flex.remove-sidebar-stripe") {
-        #sidebar-main {
+        :is(#sidebar-main, #sidebar-container) {
             @media not -moz-pref("uc.flex.show-tab-count-in-alltabs-button") {
                 display: var(--uc-sb-sidebar-stripe-display, flex) !important;
             }
@@ -949,7 +949,7 @@
          * This ensures that even when overridden, the correct behavior still applies
          * based on whether Sidebery is active or not.
          */
-        #sidebar-main[sidebar-launcher-expanded] {
+        :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] {
             overflow: var(--uc-sb-sidebar-main-overflow, visible) !important;
             /**
              * When the native vertical tabs are placed on the right side, 
@@ -1297,13 +1297,13 @@
             }
         }
         /* Force .tools-and-extensions into a horizontal layout when the sidebar is expanded */
-        #sidebar-main {
+        :is(#sidebar-main, #sidebar-container) {
             --uc-expanded-sroot-flex-direction: column;
         }
-        #sidebar-main[sidebar-launcher-expanded] {
+        :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] {
             --uc-expanded-sroot-flex-direction: row-reverse;
         }
-        #sidebar-main:not([sidebar-launcher-expanded]) {
+        :is(#sidebar-main, #sidebar-container):not([sidebar-launcher-expanded]) {
             --uc-sb-sroot-btn-padding-inline-start: 5.5px;
             --uc-sb-sroot-btn-padding-block-start: var(--space-small);
             --uc-sb-sroot-btn-padding-block-start-2nd-type: var(--space-small);
@@ -1357,7 +1357,7 @@
 @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
     /* ── ▶️ Styles for verticalTabs when the sidebar is expanded */
     /* TEMPORARY: Since Firefox v141, #vertical-pinned-tabs-container renamed to #pinned-tabs-container (Bug 1964534) */
-    #sidebar-main[sidebar-launcher-expanded] {
+    :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] {
         :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
             /**
              * Use variables to pass values into the shadow trees. 
@@ -1448,7 +1448,7 @@
                     :root:not([titlepreface*="\180e "]) & {
                         width: 24px;
                         margin-inline: calc(var(--tab-inner-inline-margin) + 4px) !important;
-                        #sidebar-main:hover & {
+                        :is(#sidebar-main, #sidebar-container):hover & {
                             width: 10px;
                             margin-inline: calc(50% - 5px) !important;
                             transition:
@@ -1491,7 +1491,7 @@
                     width: 24px;
                     margin-inline: calc(var(--tab-inner-inline-margin) + 3px) !important;
                 }
-                #sidebar-main:hover &::after {
+                :is(#sidebar-main, #sidebar-container):hover &::after {
                     width: 10px;
                     margin-inline: calc(50% - 5px) !important;
                     transition:
@@ -1556,9 +1556,9 @@
 
     /* Fix v144 container change that broke vertical tabs' ability to size to its children */
     /*
-    #sidebar-main:not([sidebar-launcher-expanded][sidebar-panel-open]) #vertical-tabs {
+    :is(#sidebar-main, #sidebar-container):not([sidebar-launcher-expanded][sidebar-panel-open]) #vertical-tabs {
     */
-    #sidebar-main[sidebar-launcher-expanded] #vertical-tabs {
+    :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] #vertical-tabs {
         /*
         contain-intrinsic-width: var(--uc-sidebar-stripe-width);
         */
@@ -1583,7 +1583,7 @@
 
     /* Pinned tabs panel: set max height, tighten spacing, and style pinned tab borders/background */
     :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
-        #sidebar-main[sidebar-launcher-expanded] & {
+        :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] & {
             @media not -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
                 height: fit-content !important;
                 min-height: fit-content !important;
@@ -2335,12 +2335,12 @@
                 :root:not([titlepreface*="\180e "]) & {
                     transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay);
-                    #sidebar-main:not(:hover) & {
+                    :is(#sidebar-main, #sidebar-container):not(:hover) & {
                         width: calc(
                             var(--uc-sidebar-stripe-width) - var(--tab-inner-inline-margin) + var(--space-xsmall) / 2
                         ) !important;
                     }
-                    #sidebar-main:hover & {
+                    :is(#sidebar-main, #sidebar-container):hover & {
                         transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                             var(--uc-hover-sidebar-delay);
                     }
@@ -2371,7 +2371,7 @@
             }
         }
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-            :root:not([titlepreface*="\180e "]) #sidebar-main:not(:hover) & {
+            :root:not([titlepreface*="\180e "]) :is(#sidebar-main, #sidebar-container):not(:hover) & {
                 --uc-split-view-width: 32px;
                 --uc-split-view-margin-inline: calc(3 * var(--space-xsmall));
                 /* Use variable overriding to set a transparent background when the sidebar is collapsed, 
@@ -2387,7 +2387,7 @@
                 var(--uc-autohide-sidebar-delay),
             background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay);
-        #sidebar-main:hover & {
+        :is(#sidebar-main, #sidebar-container):hover & {
             --uc-split-view-transition:
                 width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay),
@@ -2474,7 +2474,7 @@
         :root:not([titlepreface*="\180e "]) {
             /* Pinned tabs panel */
             :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
-                #sidebar-main[sidebar-launcher-expanded] & {
+                :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] & {
                     .tab-background {
                         max-width: 33px;
                         transition:
@@ -2492,7 +2492,7 @@
                             max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                                 var(--uc-autohide-sidebar-delay);
                         /* Exclude :hover to avoid overriding other hover styles due to high specificity */
-                        #sidebar-main:not(:hover) & {
+                        :is(#sidebar-main, #sidebar-container):not(:hover) & {
                             min-width: 40px;
                             max-width: 40px;
                         }
@@ -2504,7 +2504,7 @@
                     }
                 }
 
-                #sidebar-main[sidebar-launcher-expanded]:hover & {
+                :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded]:hover & {
                     .tab-background {
                         max-width: 100%;
                         transition:
@@ -2600,7 +2600,7 @@
                         line-height: 24px;
                     }
                 }
-                #sidebar-main[sidebar-launcher-expanded] & {
+                :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] & {
                     .tab-group-label {
                         padding-inline: 4px !important;
                         font-size-adjust: 0;
@@ -2709,7 +2709,7 @@
                     }
                 }
 
-                #sidebar-main[sidebar-launcher-expanded]:hover & {
+                :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded]:hover & {
                     @media -moz-pref("uc.flex.style-tab-groups", 2) {
                         margin-inline-start: calc(var(--space-medium) + 0.8px);
                         transition:
@@ -2889,7 +2889,7 @@
             }
 
             /* Set transition duration for tab animations */
-            #sidebar-main[sidebar-launcher-expanded] {
+            :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] {
                 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
                     transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay) !important;
@@ -2920,7 +2920,7 @@
                 }
             }
 
-            #sidebar-main[sidebar-launcher-expanded]:hover {
+            :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded]:hover {
                 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
                     transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
@@ -3061,7 +3061,7 @@
         }
     }
 
-    #sidebar-main:not([sidebar-launcher-expanded]) {
+    :is(#sidebar-main, #sidebar-container):not([sidebar-launcher-expanded]) {
         --uc-expanded-sroot-btn-padding-inline: 5.5px;
         #vertical-tabs-newtab-button {
             margin-inline: auto !important;

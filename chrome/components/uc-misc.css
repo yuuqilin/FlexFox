@@ -259,7 +259,7 @@ toolbar:not(#TabsToolbar) > #search-container {
         }
         /* Adjust the reverse counter's initial value so it equals the total
            number of tabs (default is total +1, so we subtract 1). */
-        #sidebar-main {
+        :is(#sidebar-main, #sidebar-container) {
             counter-increment: tab-counter 1;
         }
         /*
