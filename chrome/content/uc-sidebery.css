@@ -476,6 +476,15 @@
         }
     }
 
+    /* Explicitly restore the original icon size to override legacy scaling rules remaining in 
+        the Sidebery Style Editor from older FlexFox versions */
+    @media -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
+        #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+            width: 16px !important;
+            height: 16px !important;
+        }
+    }
+
     /* ? */
     .NavigationBar .panel-btn:hover {
         border-radius: 3px !important;
@@ -573,6 +582,16 @@
                 width: 20px !important;
                 height: 20px !important;
             }
+        }
+    }
+
+    /* Explicitly restore the original icon size to override legacy scaling rules remaining in 
+        the Sidebery Style Editor from older FlexFox versions */
+    @media -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
+        #root:hover .PinnedTabsBar .Tab .fav,
+        #root:hover .PinnedTabsBar .Tab .fav-icon {
+            width: 16px !important;
+            height: 16px !important;
         }
     }
 
