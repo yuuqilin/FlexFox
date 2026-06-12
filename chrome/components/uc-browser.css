@@ -7,8 +7,10 @@
             #browser {
                 /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
                 --toolbar-bgcolor: var(--uc-bgcolor) !important;
+                --toolbox-bgcolor: var(--uc-bgcolor) !important;
                 --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
                 --toolbar-background-color: var(--uc-bgcolor) !important;
+                --toolbox-background-color: var(--uc-bgcolor) !important;
                 --toolbox-background-color-inactive: var(--uc-bgcolor) !important;
                 background-image:
                     var(--toolbar-bgimage, linear-gradient(transparent, transparent)),

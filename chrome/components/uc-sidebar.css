@@ -100,8 +100,17 @@
             }
 
             /* Since v152, the [checked] attribute is removed in horizontal tabs mode, requiring [data-l10n-id] as a fallback. */
+            /** 
+             * We must explicitly exclude the [data-l10n-id="collapse/hide"] case used in the other rule below. 
+             * Relying only on :not([checked]) would incorrectly match all non-checked states, including collapse/hide, 
+             * causing unintended style overrides. 
+             */
             &:where(
-                :not([checked]),
+                :not(
+                    [checked],
+                    [data-l10n-id="sidebar-widget-collapse-sidebar2"],
+                    [data-l10n-id="sidebar-widget-hide-sidebar2"]
+                ),
                 [data-l10n-id="sidebar-widget-expand-sidebar2"],
                 [data-l10n-id="sidebar-widget-show-sidebar2"]
             ) {
@@ -639,12 +648,9 @@
     /* 🔽 [BLOCK B] Start of rules for active Sidebery */
     /* When Sidebery is active, shrink the revamped sidebar into a stripe and move it above Sidebery */
     :is(#sidebar-main, #sidebar-container) {
-        --uc-bgcolor: transparent;
-        @media -moz-pref("sidebar.verticalTabs") {
-            --uc-bgcolor: var(--toolbox-background-color);
-            &:-moz-window-inactive {
-                --uc-bgcolor: var(--toolbox-background-color-inactive);
-            }
+        --uc-bgcolor: var(--toolbox-background-color);
+        &:-moz-window-inactive {
+            --uc-bgcolor: var(--toolbox-background-color-inactive);
         }
         @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
             position: var(--uc-sb-sidebar-main-position, static) !important;
