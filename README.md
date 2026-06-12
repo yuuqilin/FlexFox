@@ -982,6 +982,7 @@ For more update logs from earlier versions,
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | Restores Firefox's original flat corner styles for the urlbar, searchbar, and other UI elements. Values: `0` = FlexFox rounded style (9999px, default), `1` = Firefox v145+ rounded style for all elements (8px), `2` = Pre-v145 flat style for all elements (4px), `3` = FlexFox rounded urlbar/searchbar with pre-v145 flat corners elsewhere. |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | Reverts the bookmark star icon to Firefox's default design, replacing the custom icon used by FlexFox. |
 | `uc.flex.remove-sidebar-stripe` | `true` | Removes the sidebar stripe when Sidebery is active. To switch sidebar tools, press <kbd>F1</kbd> in vertical tabs mode to show the sidebar tool buttons, or <kbd>Ctrl</kbd> + <kbd>B</kbd> in horizontal tabs mode to restore the sidebar header. |
+| `uc.flex.sidebery-disable-icon-scaling` | `true` | Disables icon scaling for Sidebery pinned tabs and tab panels when expanded. |
 
 #### 🪛 Modify or Adjust Features
 

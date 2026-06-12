@@ -183,7 +183,6 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
   * https://www.youtube.com/watch?v=5kwlIAVPYmg
 
-
 ---
 
 ## 🎉 主な機能アップデート
@@ -979,6 +978,7 @@ FlexFox は [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addo
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | URLバー・検索バーを含む各 UI 要素の角形状を、Firefox 本来のフラットな角スタイルへ戻します。値：`0` = FlexFox の大きな角丸（9999px、デフォルト）、`1` = Firefox v145+ の角丸スタイル（8px）、`2` = v145 以前のフラットな角（4px）、`3` = URLバー／検索バーのみ FlexFox の大きな角丸で、その他は v145 以前のフラット角。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | FlexFox 独自のブックマーク星アイコンを Firefox 標準のデザインに戻します。 |
 | `uc.flex.remove-sidebar-stripe` | `true` | Sidebery がアクティブなときにサイドバーのストライプを非表示にします。サイドバーを切り替えるには、縦型タブモードでは <kbd>F1</kbd> を押してサイドバーツールボタンを表示し、横型タブモードでは <kbd>Ctrl</kbd> + <kbd>B</kbd> を押してサイドバーヘッダーを表示します。 |
+| `uc.flex.sidebery-disable-icon-scaling` | `true` | 展開時の Sidebery のピン留めタブおよびタブパネルのアイコン拡大を無効化します。 |
 
 #### 🪛 機能を調整・変更するオプション
 

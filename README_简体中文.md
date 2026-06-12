@@ -185,7 +185,6 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
   * https://www.youtube.com/watch?v=5kwlIAVPYmg
 
-
 ---
 
 ## 🎉 主要功能更新
@@ -982,6 +981,7 @@ FlexFox 现在支持扩展 [UserChrome Toggle Extended](https://addons.mozilla.o
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | 将 URL 栏、搜索栏及其他界面元素的样式恢复为 Firefox 原生的平角设计。数值：`0` = FlexFox 大圆角（9999px，默认），`1` = Firefox v145+ 的圆角样式（8px），`2` = v145 之前的平角样式（4px），`3` = URL 栏／搜索栏使用 FlexFox 大圆角，其他元素使用 v145 之前的平角样式。 |
 | `uc.flex.revert-to-original-bookmark-star-icon` | `true` | 将 FlexFox 使用的书签星形图标恢复为 Firefox 默认设计。 |
 | `uc.flex.remove-sidebar-stripe` | `true` | Sidebery 激活时移除侧边栏彩带。若需切换侧边栏工具，垂直标签页模式下可按 <kbd>F1</kbd> 显示侧边栏工具按钮，水平标签页模式下可按 <kbd>Ctrl</kbd> + <kbd>B</kbd> 恢复显示侧边栏表头。 |
+| `uc.flex.sidebery-disable-icon-scaling` | `true` | 禁用 Sidebery 固定标签页和标签面板在展开状态下的图标放大效果。 |
 
 #### 🪛 修改或调整选项
 

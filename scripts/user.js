@@ -79,6 +79,8 @@ user_pref("uc.flex.revert-to-original-flat-corner-style",           0);
 user_pref("uc.flex.revert-to-original-bookmark-star-icon",      false);
 /* Removes the sidebar stripe when Sidebery is active. */
 user_pref("uc.flex.remove-sidebar-stripe",                      false);
+/* Disable icon scaling for Sidebery pinned tabs and tab panels when expanded */
+user_pref("uc.flex.sidebery-disable-icon-scaling",              false);
 
 /* 🪛 Modify or Adjust Features */
 /* Increases Sidebery's expanded width; also applies to native vertical tabs when kept open. */
