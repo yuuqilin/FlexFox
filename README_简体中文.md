@@ -135,13 +135,19 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ---
 
-**🦊 v6.5.2**
+**🦊 v6.5.3**
 
-* 添加原生垂直标签页在折叠模式下的布局支持。点击侧栏按钮可切换折叠模式（图标会变为灰阶显示，侧栏保持折叠状态）。
-* 新增选项 `uc.flex.sidebery-disable-icon-scaling`。设为 `true` 可禁用 Sidebery 固定标签页和标签面板的图标放大效果。
-* 移除 Sidebery 顶层标签页展开时的额外缩进。 (#35)
-* 修复 Sidebery 顶层标签页显示双重树状引导线的问题。 (#35)
-* 修复 macOS 上 Sidebar Button 图标对齐和间距异常的问题。 (#35)
+* 优化地址栏按钮的尺寸和间距，使整体布局更加整齐美观。
+* 修复因 Nightly v153 变更导致地址栏按钮位置偏移的问题。([Bug 2039721](https://bugzilla.mozilla.org/show_bug.cgi?id=2039721))
+* 修复因 Nightly v153 变更导致 FlexFox 在原生垂直标签页模式下样式完全失效的问题。([Bug 1904860](https://bugzilla.mozilla.org/show_bug.cgi?id=1904860))
+* 修复 v6.0.7 引入的回退：在水平标签页模式下展开 Sidebar Stripe 后，背景消失并变为透明。
+* 修复 v6.5.0 引入的回退：在水平标签页模式下使用 `uc.flex.style-sidebar-button = 3` 时，图标会变为灰色。
+* 修复 Sidebery 中树状分支线重复显示以及分支线断裂的问题。
+* 修复当 Sidebery 样式编辑器中残留旧样式时，导致 `uc.flex.sidebery-disable-icon-scaling` 选项失效的问题。
+虽然 FlexFox v6 目前仍兼容旧版本注入到 Sidebery 样式编辑器中的样式，但为了避免未来发生冲突、减少重复样式处理并提升运行性能，建议在升级到 v6 后务必清除这些遗留的旧样式。
+打开 Sidebery 导航栏 → 设置（齿轮图标）→ 样式编辑器，然后删除“侧边栏”和“分组页面”两个页面中的所有旧样式。
+关于 v6 的不兼容性变更详情，请参阅 v6.0.0 发布日志：
+[https://github.com/yuuqilin/FlexFox/releases/tag/v6.0.0](https://github.com/yuuqilin/FlexFox/releases/tag/v6.0.0)
 
 ---
 

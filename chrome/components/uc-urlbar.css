@@ -188,8 +188,10 @@
 */
 #identity-icon-box,
 #trust-icon-container {
+    /*
     height: 26px !important;
-    margin: 2px 3px 2px 3px;
+    */
+    margin-inline: 3px;
     /* The variable --urlbar-icon-border-radius was deprecated after v145 and replaced with --urlbar-inner-border-radius. 
        This fallback can be removed once support for older versions is no longer needed. */
     border-radius: var(
@@ -206,6 +208,28 @@
     background-color: var(--identity-btn-hover-color, var(--urlbar-box-background-color-hover)) !important;
 }
 
+/* !TEMPORARY: */
+#trust-icon-container,
+#tracking-protection-icon-container,
+#identity-box,
+#urlbar-label-box,
+#urlbar-search-mode-indicator,
+#urlbar-revert-button-container,
+.urlbar-page-action,
+.urlbar-go-button,
+.search-go-button {
+    /* !TEMPORARY: `--urlbar-container-border-width` was renamed to `--urlbar-input-container-border-width` in v153 */
+    height: calc(
+        var(--urlbar-height) - 2 *
+            (var(--urlbar-input-container-border-width, var(--urlbar-container-border-width)) + 2px)
+    ) !important;
+}
+
+/* !TEMPORARY: The following rules can be removed in v153+ */
+.urlbar-input-container {
+    align-items: center;
+}
+
 /* Track protection icon */
 #tracking-protection-icon-container {
     border-radius: var(
@@ -220,6 +244,7 @@
 
 /* Star button */
 #star-button-box {
+    margin-inline-end: 3px;
     border-radius: var(
         --uc-urlbar-icon-radius,
         var(--urlbar-icon-border-radius, var(--urlbar-inner-border-radius))
@@ -462,30 +487,30 @@
 
         &[unifiedsearchbutton-available] {
             .urlbar-input-box {
-                margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 23px);
+                margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px);
             }
             #userContext-icons:not([hidden]) {
-                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 23px)) !important;
+                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px)) !important;
             }
             #userContext-icons[hidden] ~ #urlbar-zoom-button:not([hidden]) {
-                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 23px)) !important;
+                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px)) !important;
             }
         }
 
         #identity-box[pageproxystate="valid"] {
             ~ .urlbar-input-box {
-                margin-inline-end: calc(var(--identity-box-margin-inline) + 6px);
+                margin-inline-end: calc(var(--identity-box-margin-inline) + 0px);
             }
             ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
-                margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 6px) !important;
+                margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 0px) !important;
             }
             &:is(.chromeUI) {
                 ~ .urlbar-input-box {
-                    margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px);
+                    margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 46px);
                 }
                 ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
                     margin-inline-start: calc(
-                        -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 59px)
+                        -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 46px)
                     ) !important;
                 }
             }
@@ -558,9 +583,9 @@
             }
         }
 
-        &[open] .urlbar-page-action,
-        &:hover .urlbar-page-action,
-        .urlbar-page-action[open] {
+        &[open] .urlbar-page-action:not(#star-button-box),
+        &:hover .urlbar-page-action:not(#star-button-box),
+        .urlbar-page-action[open]:not(#star-button-box) {
             opacity: 1;
             margin-inline-end: 0 !important;
         }
@@ -629,7 +654,7 @@
  * '.searchmode-switcher'
  */
 .urlbar-input-container > .chromeclass-toolbar-additional {
-    margin-top: 3px !important;
+    margin-block: 3px !important;
     height: 25px !important;
     background-color: transparent !important;
     --button-background-color: transparent !important;
