@@ -10,7 +10,7 @@ if (!releaseTag) {
   process.exit(1);
 }
 
-const readmePath = path.resolve('README.md');
+const changelogPath = path.resolve('docs/CHANGELOG.md');
 const outputDir = path.resolve('.github/release-notes');
 const outputPath = path.join(outputDir, `${releaseTag}.md`);
 
@@ -20,7 +20,7 @@ const outputPath = path.join(outputDir, `${releaseTag}.md`);
  * @returns {Promise<Object>} - Object mapping section names to extracted content.
  */
 async function extractSectionsSequentially(sections) {
-  const stream = fs.createReadStream(readmePath, 'utf-8');
+  const stream = fs.createReadStream(changelogPath, 'utf-8');
   const rl = readline.createInterface({ input: stream, crlfDelay: Infinity });
 
   let currentSection = null;

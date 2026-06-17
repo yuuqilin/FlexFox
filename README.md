@@ -9,23 +9,19 @@
 
 <br>
 
-[English](./README.md) | [日本語](./README_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md) | [简体中文](./README_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md) | [Wiki](https://github.com/yuuqilin/FlexFox/wiki)
+[English](./README.md) | [日本語](./README_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md) | [简体中文](./README_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md) | [Wiki](https://github.com/yuuqilin/FlexFox/wiki) 
 
-FlexFox makes Firefox faster, smarter, and easier to use.  
-It cuts out visual noise, keeps the UI steady, and stays fast.  
-Designed as a flexible base, it lets you shape your ideal interface without bloat.  
-It's not just a new look, it's a better way to browse.  
+FlexFox is a Firefox userChrome theme focused on maximizing usable screen space while preserving accessibility. Toolbars and sidebars automatically collapse when not in use and expand as overlays without shifting page layout. When Sidebery is enabled, native tabs are automatically hidden to maintain a single tab system, avoiding redundant interface elements. It supports extensive customization through preferences and is designed as a flexible foundation for different browsing workflows.
 
 ![FlexFox v6.5](https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/FlexFox-v6.5.0.webp)  
 
 > [!IMPORTANT]
-> FlexFox features work correctly only if the `Expand sidebar on hover` option in `Customize Sidebar` is **unchecked**. You can find `Customize Sidebar` in the right-click menu of the sidebar toggle button in the navigation bar. This option is unchecked by default in Firefox. If you have previously enabled it, please uncheck it to ensure FlexFox functions properly.
+>
+> * **Changed Firefox's `Expand sidebar on hover` setting?** Disable it. FlexFox requires this option to remain unchecked.
+> * **Upgrading from a version earlier than v6?** Remove all legacy styles from the Sidebery Styles Editor.
+> * **Recommended setup:** Use Firefox's vertical tabs mode, ideally together with Sidebery, for the most complete feature set and best overall experience.
 
-## 🆕 What's New
-
-## 🦊 v6.5.0 Series – Major Feature Update
-
-### 🎬 Feature Showcase Video
+## 🎬 Feature Showcase Video
 
 Watch the v6.5 feature showcase:
 
@@ -35,1035 +31,222 @@ For better video quality, watch on YouTube:
 
 [YouTube Link](https://www.youtube.com/watch?v=lhf1mpXDIOM)
 
-### 🧊 Improved: Mica Backdrop Works with All Themes
+<details>
+<summary><b>Quick setup for the showcase video</b> 👇</summary>
 
-* Added `uc.flex.browser-mica-force-enabled-on-all-themes`:
+The default FlexFox appearance is minimal by design.  
+If you want to quickly reproduce the interface shown in the preview video, you can apply the settings below.
 
-  * By default, Firefox only enables the Mica backdrop when the theme is set to `System theme — auto`.
-  * This option allows Mica to work with any Firefox theme.
-  * It decouples the Mica backdrop from the Windows light/dark theme setting, allowing Mica to match the active Firefox theme instead.
-  * Requires the native Firefox preference `widget.windows.mica` to be enabled.
+For full customization details, please refer to the Options section later in this README.
 
-### 🖼️ Improved: Animated Wallpaper Support
+```
+uc.flex.browser-wallpaper-acrylic-disabled = false (some scenes: true)
+uc.flex.browser-wallpaper-enabled = true
+uc.flex.browser-wallpaper-index = 0 (some scenes: custom wallpaper index)
+uc.flex.browser-wallpaper-transparency-level = 2 (some scenes: 4)
+uc.flex.enable-colored-bookmarks-folder-icons = 2
+uc.flex.enable-rounded-web-content = 2
+uc.flex.enable-rounded-web-content-at-sidebery-corner = true
+uc.flex.enable-translucent-urlbar-popup-and-menus = true
+uc.flex.move-urlbar-popup-to-center = 1
+uc.flex.move-window-controls-to-left = true
+uc.flex.show-tab-count-in-alltabs-button = 2
+uc.flex.style-all-tabs-button = 2
+uc.flex.style-sidebar-button = 2
+uc.flex.style-sidebar-stripe-color = 9
+uc.flex.style-sidebar-stripe-color-apply-to-all-icons = true
+uc.flex.style-sidebar-stripe-color-use-gradient = true
+uc.flex.style-tab-groups = 2
+uc.flex.style-tab-items = 2
+uc.flex.style-urlbar = 2
+uc.flex.style-urlbar-center-text = true
+uc.flex.style-web-content-outline = 2
+uc.flex.style-window-controls = 2
+uc.flex.style-window-controls-shrink-size = true
+```
+</details>
 
-* Expanded `uc.flex.browser-wallpaper-enabled`:
+## 🆕 What's New
 
-  * Wallpapers now support multiple image formats, including animated images.
-  * JPG / WebP / PNG / APNG / AVIF / GIF / Animated WebP:
-
-    * Rename the file to `main-image-*.jpg`, where `*` corresponds to index `1-9`.
-    * The file extension must always remain `.jpg`.
-    * Place the file in `../icons/wallpaper/`.
-  * SVG:
-
-    * Rename the file to `main-image-*.svg`.
-    * The file extension must be `.svg`.
-    * Requires `uc.flex.browser-wallpaper-svg-enabled` to be enabled.
-  * Animated wallpaper resources can be downloaded from [Motion Backgrounds](https://motionbgs.com/).
-  * MP4 videos can be converted into animated WebP images using [FFmpeg](https://ffmpeg.org/) or [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/).
-  * Wallpapers use an acrylic blur effect by default to mimic the Mica appearance.
-  * To display wallpapers without blur, enable `uc.flex.browser-wallpaper-acrylic-disabled`.
-
-### 🖼️ Improved: Use the Current Theme Background as Wallpaper
-
-* Expanded `uc.flex.browser-wallpaper-index`:
-
-  * The value range has been expanded from `1-9` to `0-9`.
-  * The default value is now `0`.
-  * Setting the value to `0` uses the current Firefox theme background as the browser wallpaper.
-  * Values `1-9` continue to use custom wallpapers while preserving the active theme colors.
-
-* Added `uc.flex.browser-wallpaper-align-horizontal`:
-
-  * Controls horizontal alignment when wallpapers are cropped to fit the browser window.
-  * String values:
-
-    * `'auto'` or `'0'` = Automatic (default)
-    * `'left'` or `'1'` = Align left
-    * `'center'` or `'2'` = Center
-    * `'right'` or `'3'` = Align right
-
-### 👁️ Improved: Lightweight Fix for Transparent Pages
-
-* Added the `Solid Page` shortcut and toolbar button:
-
-  * Displaying Mica or wallpapers inside the sidebar and web content area requires enabling `browser.tabs.allow_transparent_browser`.
-  * Some websites become fully transparent when this preference is enabled, making content difficult to read.
-  * This limitation has historically reduced the practicality of Mica and wallpaper features for daily browsing.
-  * [UltimaDark](https://addons.mozilla.org/firefox/addon/ultimadark/) or [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) can solve this issue.
-  * However, these extensions may impact page loading performance.
-  * v6.5 introduces a lightweight built-in solution called `Solid Page`.
-  * It does not support per-site settings, but provides an instant toggle for applying a solid page background.
-  * The feature has virtually no performance impact.
-  * To use it, install [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) and configure it using the image below.
-  * Remember to click `Apply changes` in the upper-left corner for the configuration to take effect.
-  * The default shortcut is <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd> and can be customized through **Manage Extension Shortcuts** in the gear button menu.
-
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended-solid-page.webp" alt="userchrome-toggle-extended-solid-page.webp" width="50%" />  
-
-* Added `uc.flex.browser-solid-page-color-scheme`:
-
-  * Controls the color scheme used by `Solid Page`.
-  * Values:
-
-    * `0` = Force dark
-    * `1` = Force light (default)
-    * `2` = Follow Firefox's 'Website appearance' setting
-
-### 📄 Improved: More Pages Support Mica and Wallpapers
-
-* All built-in `about:` pages now support Mica backdrops and wallpapers.
-* A complete list can be viewed from `about:about`.
-* Added support for Sidebery Group Pages.
-
-### 🛠️ Fixed
-
-* Fixed missing traffic-light window controls on macOS. (#35)
-* Fixed sidebar button styling issues on macOS.
-* Fixed horizontal tabs not expanding correctly on macOS.
-* Fixed multiple cases where toolbar and sidebar expansion backgrounds became transparent.
-* Fixed several layout issues when the bookmark toolbar display mode was not set to `Always Show`.
-* Fixed multiple layout issues when using horizontal tabs together with the revamped sidebar.
-* Fixed a regression introduced in v6.0.7 that broke URL bar button styling on Firefox ESR 140.
-* Fixed sidebar button styling issues caused by Firefox Beta 152 changes. [Bug 2028947](https://bugzilla.mozilla.org/show_bug.cgi?id=2028947)
-* Fixed `about:` page styling issues caused by Firefox Nightly 153 changes. [Bug 1987439](https://bugzilla.mozilla.org/show_bug.cgi?id=1987439)
-
-### ⚡ Optimized
-
-* Refactored a large amount of code to reduce complexity and improve maintainability.
-* However, there are no noticeable performance improvements.
-
----
-
-**🦊 v6.5.3**
-
-* Improved address bar button sizes and spacing for a cleaner, more aligned layout.
-* Fixed misaligned address bar buttons caused by changes in Nightly v153. ([Bug 2039721](https://bugzilla.mozilla.org/show_bug.cgi?id=2039721))
-* Fixed a Nightly v153 compatibility issue that completely broke FlexFox styles when using native vertical tabs. ([Bug 1904860](https://bugzilla.mozilla.org/show_bug.cgi?id=1904860))
-* Fixed a v6.0.7 regression where expanding the Sidebar Stripe caused its background to turn transparent in horizontal tab mode.
-* Fixed a v6.5.0 regression where icons turned grayscale when `uc.flex.style-sidebar-button = 3` was applied in horizontal tab mode.
-* Fixed duplicated and broken tree guide lines in Sidebery.
-* Fixed an issue where legacy styles left in the Sidebery Styles editor prevented the `uc.flex.sidebery-disable-icon-scaling` option from working correctly.
-Although v6 remains compatible with legacy styles injected into the Sidebery Styles editor, clearing them is strongly recommended to avoid future conflicts, reduce duplicate style processing, and improve performance.
-Go to **Sidebery Navigation bar → Settings (gear icon) → Styles editor**, then delete all legacy styles in the **Sidebar** and **Group Page** tabs.
-For more details regarding v6 breaking changes, please refer to the v6.0.0 release notes:
-https://github.com/yuuqilin/FlexFox/releases/tag/v6.0.0
+**🦊 Latest: v6.5.3** — See [Full Changelog](./docs/CHANGELOG.md) for details.
 
 <!-- END What's New -->
 
----
-
-**Credits**
-
-The following credits were omitted from the original v6.5 release notes and are provided here for anyone looking for the themes, wallpapers, software, or music featured in the **🎬 Feature Showcase Video**.
-
-**Firefox Themes**
-
-* Animated│Geometric Hexagon
-
-  * https://addons.mozilla.org/firefox/addon/animated-geometric-hexagon
-
-* Black Rain (Animated) Night Edition
-
-  * https://addons.mozilla.org/firefox/addon/blk-r-animated-night-edition
-
-**Animated Wallpaper Software**
-
-* Lively Wallpaper
-
-  * https://github.com/rocksdanister/lively
-
-**Static Wallpaper**
-
-* Opera GX
-
-  * https://www.opera.com/gx
-
-**Animated Wallpaper**
-
-* Summer Village Coastal Live Wallpaper
-
-  * https://moewalls.com/lifestyle/summer-village-coastal-live-wallpaper
-
-**Background Music**
-
-* Malmen, Joule - "Tomorrow Without You" (XM, 2009) [Oscilloscope Visualization]
-
-  * https://www.youtube.com/watch?v=5kwlIAVPYmg
-
----
-
-## 🎉 Major Feature Update
-
-<details>  
-<summary>🎨 <b>Major Update: Tab Styling, Sidebery Layouts & Toolbar UI Customization</b> <i>[Click to expand]</i> 👇</summary>
-
-## 🦊 v6.0.x Series – Major Feature Update
-
-> [!IMPORTANT]
-> **The v6.0.x series introduces several incompatible changes.** Some options have been deprecated or updated, and older Sidebery styles are no longer used. Please read this changelog carefully before updating.
->
-> After upgrading, **you must remove the old styles from the Sidebery Styles Editor** to avoid conflicts.
-> Go to **Sidebery Navigation bar → Settings (gear icon) → Styles editor**, then delete all legacy styles in the **Sidebar** and **Group Page** tabs.
->
-> For other languages: **[日本語](https://github.com/yuuqilin/FlexFox/blob/main/README_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v6xx-%E7%B3%BB%E5%88%97--%E4%B8%BB%E8%A6%81%E6%A9%9F%E8%83%BD%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88)** | **[简体中文](https://github.com/yuuqilin/FlexFox/blob/main/README_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v6xx-%E7%B3%BB%E5%88%97--%E9%87%8D%E5%A4%A7%E5%8A%9F%E8%83%BD%E6%9B%B4%E6%96%B0)**
-
----
-
-### 🎨 New: 10 Optional Color Themes
-
-![Image](https://github.com/user-attachments/assets/f5b4550d-8bd6-4f41-8206-7114399d69fe)
-
-* Added `uc.flex.style-sidebar-stripe-color`:
-
-  * Controls the color of the sidebar stripe, sidebar button (Firefox logo), and the bookmark star icon.
-  * In Dark Mode, it also applies to tab borders, backgrounds, highlights, and the Sidebery navigation icon.
-  * Values: `0` = Classic (same as previous versions, default); `1` = Red; `2` = Orange; `3` = Yellow; `4` = Green; `5` = Cyan; `6` = Blue; `7` = Violet; `8` = Purple; `9` = Pink; `10` = Gray.
-
-* Added `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` (Boolean):
-
-  * Applies the sidebar stripe color to all icons.
-  * In Dark Mode, it also applies to URL bar and web area borders.
-  * This option also overrides Firefox's default bookmark star icon color (when `uc.flex.revert-to-original-bookmark-star-icon` is enabled).
-
-* Added `uc.flex.style-sidebar-stripe-color-use-gradient` (Boolean):
-
-  * Applies a gradient variant based on the color selected in `uc.flex.style-sidebar-stripe-color`.
-  * These gradient colors apply to the sidebar stripe, sidebar button icon (Firefox logo), bookmark star icon, and bookmark folder icons.
-
----
-
-### 🗂 New: “List All Tabs” Button Icons
-
-<img width="106" height="108" alt="Image" src="https://github.com/user-attachments/assets/b9f8d20d-aa84-4310-97df-b34506971ac6" />
-<img width="106" height="108" alt="Image" src="https://github.com/user-attachments/assets/033c7c53-fb3f-4546-8f04-69ad0f9d7046" />
-<img width="106" height="108" alt="Image" src="https://github.com/user-attachments/assets/d0932b40-5608-4797-934e-0e1c86ab6a71" />
-
-* Added `uc.flex.style-all-tabs-button`:
-
-  * Sets the icon for the “List All Tabs” button.
-  * Values:
-
-    * `0` = Firefox default icon
-    * `1` = Filter (same as previous versions, default)
-    * `2` = Chevron
-
----
-
-### 📌 New: Sidebery Collapsed Navigation Icons
-
-<img width="56" height="106" alt="Image" src="https://github.com/user-attachments/assets/3ed3abf5-b7bb-4dd5-a0e4-99e4060ea7ee" />
-<img width="56" height="106" alt="Image" src="https://github.com/user-attachments/assets/166ee87e-4f87-4bff-8989-49f2332e18f8" />
-<img width="56" height="106" alt="Image" src="https://github.com/user-attachments/assets/aac5d1da-0b86-4d28-9db0-1e513b55ccea" />
-
-* Added `uc.flex.style-sidebery-nav-icon`:
-
-  * Sets the navigation icon shown when Sidebery is collapsed.
-  * Values:
-
-    * `0` = Use active panel icon (new default)
-    * `1` = Sidebery Logo
-    * `2` = Chevron (previous default)
-
-* Added `uc.flex.style-sidebery-nav-icon-use-active-panel-color` (Boolean):
-
-  * Sets the navigation icon to use the color defined by the current active panel.
-
----
-
-### 📑 New: Tab Border and Background Styles
-
-<img width="276" height="298" alt="Image" src="https://github.com/user-attachments/assets/7f4b1374-a183-46f5-86e3-810a88d5a62a" />
-<img width="276" height="298" alt="Image" src="https://github.com/user-attachments/assets/9717eac6-f2d7-4752-95ec-d64b222dc08a" />
-<img width="276" height="298" alt="Image" src="https://github.com/user-attachments/assets/99f9f4e6-60d5-4be0-9589-51d108ec199b" />
-
-*(Native Vertical Tabs and Sidebery only)*
-
-* Added `uc.flex.style-tab-items`:
-
-  * Sets the appearance of tab items.
-  * Values:
-
-    * `1` = Pinned tabs use borders only, with no background. In light mode, the border color matches the URL bar border. In dark mode, it matches the sidebar stripe. (Same as previous versions, default)
-
-    * `2` = Pinned tabs use background only, with no borders. In light mode, the background color matches the URL bar background. In dark mode, it matches the sidebar stripe.
-
-      For all tabs, borders and highlights use the sidebar stripe color.
-
-* Added `uc.flex.style-tab-items-add-hover-trail` (Boolean):
-
-  * Applies a trailing effect when hovering over tabs.
-  * This effect is enabled by default. Set to `false` to disable it.
-
----
-
-### 🗃 New: Tab Group Styles
-
-![Image](https://github.com/user-attachments/assets/631e6805-63c3-432d-9988-e551c62f01c7)
-
-*(Native Vertical Tabs only)*
-
-* Added `uc.flex.style-tab-groups`:
-
-  * Sets the appearance of tab groups.
-  * Values:
-
-    * `0` = Tree layout, no expand/collapse indicator
-    * `1` = Tree layout with triangle indicator (same as previous versions, default)
-    * `2` = Box layout with folder icon
-
-* Added `uc.flex.style-tab-groups-add-transition`:
-
-  * Sets the expand/collapse transition and rotating indicator animation for tab groups.
-  * Values:
-
-    * `0` = No transition
-    * `1` = Enable expand/collapse transition
-    * `2` = Enable transition + rotating indicator (default)
-
-* Added `uc.flex.style-tab-groups-center-label-text` (Boolean):
-
-  * Centers the tab group label text.
-
----
-
-### 🔍 New: URL Bar Behavior & Layout
-
-* Added `uc.flex.auto-hide-urlbar-icons` (Boolean):
-
-  * Enabled by default.
-  * Automatically hides URL bar icons.
-  * Reveals icons with a slide-in animation from both sides when hovering over the URL bar.
-
-* Added `uc.flex.style-urlbar-center-text` (Boolean):
-
-  * Centers the URL bar text.
-
----
-
-### ⚠️ Breaking Changes
-
-#### Deprecated
-
-The following options are deprecated and no longer have any effect. Please remove them from your Firefox preferences (about:config):
-
-* `uc.flex.style-tab-group`
-
-  * Replaced by:
-
-    * `uc.flex.style-tab-groups`
-    * `uc.flex.style-tab-groups-add-transition`
-    * `uc.flex.style-tab-groups-center-label-text`
-
-* `uc.flex.enable-gradient-highlight`
-
-  * Replaced by `uc.flex.style-sidebar-stripe-color-use-gradient`
-
-* `uc.flex.revert-to-original-sidebar-icon`
-
-  * Its functionality is now included under `uc.flex.style-sidebar-button = 0`.
-
-#### Updated
-
-* `uc.flex.style-sidebar-button`
-
-  * Value range updated from `1–4` to `0–4`
-  * `0` = Firefox default icon
-
-* `uc.flex.show-tab-count-in-alltabs-button`
-
-  * Value range updated from `0–4` to `0–2`
-  * `0` = Do not display tab counter (default)
-  * `1` = Show count of all tabs
-  * `2` = Show count of loaded tabs only
-  * Icon appearance is now controlled by `uc.flex.style-all-tabs-button`.
-
-* `uc.flex.style-urlbar`
-
-  * Value range updated from `0–4` to `1–4`.
-  * The previous behavior of value `0` has been moved to a new option, `uc.flex.auto-hide-urlbar-icons`.
-  * The text-centering behavior previously included in values `2–4` has been separated into a new option, `uc.flex.style-urlbar-center-text`.
-  * The updated values now control the URL bar appearance only:
-    * `1` = Flat (default, same as before)
-    * `2` = Inset (embedded look)
-    * `3` = Debossed (pressed-in look)
-    * `4` = Seamless (fully merged into the navigation bar)
-
-#### Removed
-
-* The old Sidebery styles that were previously imported through `sidebery-styles.json` have now been fully migrated to `uc-sidebery.css`. Starting from v6, FlexFox no longer relies on styles injected via the Sidebery Styles Editor.
-
-  * If you are upgrading from an earlier version, please delete the legacy styles still remaining in the Sidebery Styles Editor after updating to avoid unnecessary CSS overhead and potential conflicts.
-  * From v6 onward, `sidebery-styles.json` is no longer provided. New installations only need to import `sidebery-settings.json`.
-  * After that, you can completely disable FlexFox's default Sidebery styling with `uc.flex.skip-loading-uc-sidebery.css`, allowing more flexibility when combining other custom styles.
-
-</details>
-
-<details>  
-<summary>✨ <b>Major Update: New UI & UX Style Customization Options</b> <i>[Click to expand]</i> 👇</summary>
-
-* Added `uc.flex.style-sidebar-button` to switch the sidebar toggle icon (`0`–`4`):
-  * `0` = Firefox default icon
-  * `1` = Firefox Master Brand Logo (default, same as before)
-  * `2` = Firefox Browser Logo
-  * `3` = Firefox System 1 Logo
-  * `4` = Mozilla Flag Symbol
-* Added `uc.flex.style-toolbar-bgcolor` to change the background color of the navbar and sidebar (`1`–`2`):
-  * `1` = Tokyo Night theme (default, same as before)
-  * `2` = Firefox Acorn Design
-* Added `uc.flex.style-urlbar` to customize the URL bar appearance (`1`–`4`):
-  * `1` = Flat (default, same as before)
-  * `2` = Inset (embedded look)
-  * `3` = Debossed (pressed-in look)
-  * `4` = Seamless (fully merged into the navigation bar)
-* Added `uc.flex.style-urlbar-center-text` to center the URL bar text (default: `False`).
-* Added `uc.flex.move-urlbar-popup-to-center` to reposition the URL bar popup (`0`–`2`):
-  * `0` = Disabled (default)
-  * `1` = Center when focused
-  * `2` = Center only when typing
-* Updated `uc.flex.dim-urlbar-popup-backdrop` to match the new popup behavior (`0`–`2`):
-  * `0` = No dimming (default)
-  * `1` = 35% dim when open
-  * `2` = 50% dim when open
-* Added `uc.flex.style-window-controls` to switch the window control icons (`1`–`3`):
-  * `1` = Traffic Light Buttons (default, same as before)
-  * `2` = Yosemite Window Buttons
-  * `3` = Yosemite GTK Theme
-* Added `uc.flex.style-window-controls-shift-up` to slightly raise the window controls (default: `False`).
-* Added `uc.flex.style-window-controls-shrink-size` to reduce the size of window controls (default: `False`).
-* Added `uc.flex.move-window-controls-to-left` to move window controls to the left edge of the navbar or horizontal tab bar (default: `False`).
-* Added `uc.flex.style-web-content-outline` to control the outline of the web content area (`0`–`2`):
-  * `0` = No outline (default)
-  * `1` = Shows a highlighted outline only on the focused web content panel in Tab Split View
-  * `2` = Shows an outline on all web content panels
-
-</details>
-
-<details>  
-<summary>🧊 <b>Major Update: Translucent Mica & Custom Wallpaper Backgrounds</b> <i>[Click to expand]</i> 👇</summary>
-
-* Added support for the **Mica visual effect** on Windows 11.
-  * To enable Mica, configure the following settings in `about:config`:
-    ```
-    widget.windows.mica = true
-    widget.windows.mica.popups = 2
-    widget.windows.mica.toplevel-backdrop = 2
-    browser.tabs.allow_transparent_browser = true
-    uc.flex.browser-mica-force-enabled-on-all-themes = true
-    uc.flex.browser-mica-transparency-level = 2
-    ```
-  * By default, Mica requires the theme to be set to `System theme — auto`. Enabling `uc.flex.browser-mica-force-enabled-on-all-themes` allows the Mica light/dark appearance to follow the active Firefox theme instead of the Windows system theme.
-  * **Requires restarting Firefox.**
-  * For details, see: [🧊 Visual Background & Mica Effects](https://github.com/yuuqilin/FlexFox#-visual-background--mica-effects)
-  * If the Mica background appears obstructed by inactive windows, you can use the shortcut <kbd>Win</kbd> + <kbd>Home</kbd> to minimize all other windows. For convenience, consider assigning this action to a mouse gesture or automation script.  
-
-  Displays the native Mica background effect. Web content transparency (as shown on YouTube) is achieved using the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) extension.  
-  
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-mica.webp" alt="Example showing the native Mica background effect behind Firefox tabs and toolbars." width="96%" />
-
-* FlexFox supports **custom browser wallpapers**, allowing the entire browser interface to display a persistent background image independent of other windows.
-  * Enable it via the following settings in `about:config`:
-    ```
-    uc.flex.browser-wallpaper-enabled = true
-    uc.flex.browser-wallpaper-index = 1
-    uc.flex.browser-wallpaper-svg-enabled = false
-    uc.flex.browser-wallpaper-acrylic-disabled = false
-    uc.flex.browser-wallpaper-align-horizontal = auto
-    browser.tabs.allow_transparent_browser = true
-    uc.flex.browser-wallpaper-transparency-level = 2
-    uc.flex.browser-wallpaper-contrast-level = 2
-    ```
-* **Requires restarting Firefox.**
-* Browser wallpapers can be combined with any Firefox theme, allowing custom background images while preserving the current theme's colors, accents, borders, and text styling.
-  * `uc.flex.browser-wallpaper-index = 0` uses the current Firefox theme background image as the wallpaper for the entire browser interface.
-  * `uc.flex.browser-wallpaper-index = 1-9` selects the corresponding wallpaper file (`main-image-1` through `main-image-9`).
-* The wallpaper feature supports multiple image formats, including animated images.
-  * JPG / WebP / PNG / APNG / AVIF / GIF / Animated WebP:
-    * Rename the image to `main-image-*.jpg` (**all formats must be renamed to `.jpg`**)
-    * Place it in `../icons/wallpaper/`
-  * SVG:
-    * Rename the image to `main-image-*.svg`
-    * Place it in the same directory
-    * Enable `uc.flex.browser-wallpaper-svg-enabled = true`
-* Wallpapers use an **Acrylic blur effect** by default to mimic the appearance of Mica. This effect can be disabled for a sharp, unblurred wallpaper.
-* Enabling **custom browser wallpapers** overrides the native Mica background. If both Mica and wallpapers are enabled, the wallpaper will be displayed.
-
-  Shows the custom background wallpaper feature with Acrylic blur enabled. Compared to native Mica, the blur, tone, and texture are distinct.  
-
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/seashore-acrylic.webp" alt="Example showing a custom wallpaper with Acrylic blur, mimicking the Mica look without relying on Windows support." width="96%" />
-
-  A custom wallpaper with Acrylic blur disabled. The wallpaper appears sharp and clear; use the transparency level setting to maintain text readability.  
-
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/churning-in-the-chukchi-sea-no-acrylic.webp" alt="Example showing a custom wallpaper with Acrylic blur disabled, revealing the wallpaper in full clarity." width="96%" />
-
-* Sample wallpaper sources and credits:
-  * [a blue and purple background with wavy shapes (Unsplash)](https://unsplash.com/photos/a-blue-and-purple-background-with-wavy-shapes-1hg6NpO0kIk) – Provided as one of the built-in background options in Firefox's new tab customization.
-  * [Seashore Waves (Unsplash)](https://unsplash.com/photos/seashore-DA_tplYgTow) – Provided as one of the built-in background options in Firefox's new tab customization.
-  * [Churning in the Chukchi Sea (NASA)](https://www.visibleearth.nasa.gov/images/92412/churning-in-the-chukchi-sea/92412t) ([Download](https://www.bing.com/th/id/OBTQ.BTF2993094BEFFA1DE53FBFEA6FF54B81C71E858DDE1458F62454AF39BE5112D33?qlt=100&w=3840&h=2160&rs=1&c=4))
-
-* Creating animated wallpapers:
-  * Animated wallpapers can be created from MP4 videos using [FFmpeg](https://ffmpeg.org/) or [ScreenToGif](https://github.com/NickeManarin/ScreenToGif/).
-  * Live wallpaper videos are available from websites such as [Motion Backgrounds](https://motionbgs.com/).
-  * WebP is recommended because it typically requires fewer resources than APNG while providing comparable visual quality.
-
-* To display Mica or wallpaper backgrounds behind Sidebery and web content, `browser.tabs.allow_transparent_browser` must be enabled.
-  * Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) or [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) extension.
-  * If some pages become unreadable due to full transparency, pairing it with [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended for domain-specific memory. Alternatively, if you prefer not to install heavy extensions, you can use FlexFox's built-in `Solid Page` shortcut via the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension to instantly toggle a solid background. While it does not remember settings per website, it offers a lightweight, temporary fix for unreadable pages.
-  * To use the `Solid Page` shortcut, install the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension and configure it as shown below. Remember to click the `Apply changes` button in the upper-left corner to make the settings take effect. Once configured, you can toggle the solid background using the shortcut or the extension's toolbar button. The default shortcut is <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd>, which can be customized via the gear icon's menu by selecting **Manage Extension Shortcuts**.
-
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended-solid-page.webp" alt="userchrome-toggle-extended-solid-page.webp" width="50%" />  
-
-    | Shortcut | Label | Action |
-    | --- | --- | --- |
-    | <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>6</kbd> | Solid Page | Toggle a solid background color for the web content area when Mica or custom wallpaper transparency makes text difficult to read. This temporarily restores contrast and readability. The background color scheme can be configured via `uc.flex.browser-solid-page-color-scheme`. |
-
-* New option: `uc.flex.sidebery-apply-expand-speed-to-toolbars`
-  * Applies the expand/collapse animation speed used by Sidebery and native vertical tabs to the navigation bar and bookmarks toolbar, unifying all animation speeds.
-  * Once unified, you can use `uc.flex.sidebery-fast-hover-expand` or `uc.flex.sidebery-slow-hover-expand` to adjust the animation speed of the navigation bar and bookmarks toolbar.
-  * When Mica or custom wallpaper is enabled, FlexFox will automatically unify animation speeds internally, so manual adjustment of this option is not needed in those cases.
-
-* Added `uc.flex.enable-translucent-urlbar-popup-and-menus`: enables a translucent and blurred background for the URL bar popup and various menus. FlexFox normally applies these effects only when Mica or a custom wallpaper is active, and this option allows you to use the translucent popup and menu background even without them. The transparency level of the background can be adjusted using `uc.flex.browser-mica-transparency-level` (range `0`–`4`, higher values are more transparent). If Mica or a custom wallpaper is already enabled, you don't need this option.
-
-</details>
-
-<details>  
-<summary>🧩 <b>Major Update: New Layout Modes for Sidebery & Horizontal Tabs</b> <i>[Click to expand]</i> 👇</summary>
-
-* Added two new layout modes for Sidebery
-  * Added `uc.flex.sidebery-allow-resizable-width`: allows adjusting Sidebery width by dragging the sidebar splitter.
-  * Enabling this option disables Sidebery's auto-collapse, but you can still toggle its expanded/collapsed state with the sidebar toggle button (Firefox Logo).
-  * To temporarily restore auto-collapse, use the `Hide Sidebery` shortcut or press <kbd>F1</kbd> to switch to native vertical tabs.
-* Added three new layout modes and optimizations for horizontal tabs
-  * Deprecated the old option `uc.flex.disable-tabs-toolbar-autohide`. Horizontal tabs are now visible by default when Sidebery is not active.
-  * Added `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`: hides horizontal tabs when Sidebery is not active and shows them on hover. Values: `0` = Off, `1` = Tabs below navbar, `2` = Tabs above navbar, `3` = Same layout as `2`, but the tab bar appears only when the cursor reaches the top edge of the screen to avoid accidental activation when accessing bookmarks or the navbar. The trigger distance from the top edge can be customized with `--uc-tabstoolbar-hover-trigger-width`.
-  * Added `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs`: hides the navbar when Sidebery is not active and shows it on hover. Values: `0` = Off, `1` = On. This option overrides the previous auto-hide-horizontal-tabs setting.
-  * Added `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs`: in horizontal tab mode, by default FlexFox shows the close button on hover for inactive tabs. As tabs become narrower due to more tabs opening, the button automatically shrinks and moves to the top-right to prevent accidental clicks. Enable this option to completely remove the close button.
-  * Added `uc.flex.show-tab-close-button-on-favicon-hover`: in horizontal tab mode, merges the close button with the favicon to save space. The close button is shown only when hovering over the favicon. Enabling this option disables the close button's auto-shrink-and-reposition behavior described above.
-  * Added `uc.flex.increase-active-horizontal-tab-min-width`: keeps the active tab wider when horizontal tabs shrink, so its label remains distinguishable and easier to identify among other tabs. Values:
-    * `0` = Off
-    * `1` = Minimum width 1.8×, no animation
-    * `2` = Minimum width 1.8×, with animation
-    * `3` = Minimum width 2×, no animation
-    * `4` = Minimum width 2×, with animation
-    * Default: `1` (enabled). Set to `0` if you prefer all tabs to keep a fixed width.
-  * Pinned horizontal tabs now automatically collapse when exceeding the visible limit. Default visible pinned tabs is 10. Use `uc.flex.max-visible-horizontal-pinned-tabs` to adjust the setting (range `0`–`5`, corresponding to 2–10 visible pinned tabs; `0` disables auto-collapse in horizontal tabs).
-
-</details>
-
-<details>  
-<summary>🧩 <b>Major Update: Customizable Grid Layout for Pinned Tab Panel</b> <i>[Click to expand]</i> 👇</summary>
-
-* Added `uc.flex.max-visible-horizontal-pinned-tabs` to set how many pinned tabs are shown per row (horizontal).
-  * Accepts values from `0` to `5` (default `5`).
-  * In vertical tabs, extra pinned tabs wrap to the next row.
-  * In horizontal tabs, extra pinned tabs are automatically collapsed (value corresponds to 2–10 visible pinned tabs).
-  * `0` disables auto-collapse in horizontal tabs.
-
-* Added `uc.flex.max-visible-vertical-pinned-tabs` to set how many pinned tabs are shown per column (vertical).
-  * Accepts values from `2` to `8` (default `4`).
-  * Applies to both native vertical tabs and Sidebery, limiting the panel height.
-  * When the number of pinned tabs exceeds the limit, the overflow can be scrolled.
-  * Setting it to `0` disables the height limit, allowing the panel to expand freely.
-
-* Added `uc.flex.show-pin-tabs-separator-in-expanded-state` to always display a separator for the pinned tab panel.    
-  * Applies only to native vertical tabs.  
-  * Enabling this option disables the height limit, allowing the panel height to be freely adjusted with the separator.  
-
-  <p>
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-resize.webp"
-         alt="New native vertical tabs design, splitter in hover state for resizing the panel"
-         height="510" hspace=15 />
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-collapsed.webp"
-         alt="New native vertical tabs design, splitter appearance with the panel collapsed"
-         height="510" hspace=15 />
-    <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/new-vt-splitter-expanded.webp"
-         alt="New native vertical tabs design, splitter appearance with the panel expanded"
-         height="510" hspace=15 />
-  </p>
-
-</details>
-
-<details>  
-<summary>🔢 <b>Major Update: Tab Counters & Tab Indexes</b> <i>[Click to expand]</i> 👇</summary>
-
-* Added the `uc.flex.show-tab-count-in-alltabs-button` option to display the total number of open tabs on the "List All Tabs" button. Values:
-  * `0` = Off
-  * `1` = Show count of all tabs
-  * `2` = Show count of loaded tabs only
-* Added the `uc.flex.show-tab-number-in-tab-label` option to display the index number of each tab on its native tab label. This helps quickly identify tabs when the label is too narrow to show the full title.
-
-</details>
-
-<details>  
-<summary>👻 <b>Major Update: Auto-Hide Toolbar Icons & Window Controls</b> <i>[Click to expand]</i> 👇</summary>
-
-* Added the `uc.flex.auto-hide-navbar-icons` option to hide toolbar item icons (including icons on the navigation bar, bookmarks toolbar, and menu bar) and reveal them on hover. This option does not affect the URL bar or window control buttons.
-* Added the `uc.flex.auto-hide-urlbar-icons` option, enabled by default, which hides URL bar icons and reveals them with a slide-in animation from both sides when hovering over the URL bar.
-* Added the `uc.flex.auto-hide-window-controls` option to hide the window control buttons (minimize, maximize, close) and reveal them when hovering over the edge of the navigation bar.
-* The Sidebar toggle button (FlexFox logo) is normally always visible. If it is not placed at the far left or right edge of the navigation bar, or if `uc.flex.style-sidebar-button` is set to `0`, it will follow the auto-hide behavior.
-* You can adjust the animation timing and easing by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
-
-  ```css
-  --uc-autohide-navbar-icons-duration
-  --uc-hover-navbar-icons-duration
-  --uc-autohide-navbar-icons-type
-  --uc-collapse-navbar-icons-duration
-  ```
-
-Preview of auto-hide behavior and theme-based Sidebery background switching: <video src="https://github.com/user-attachments/assets/070f798d-2925-4681-ac50-7cd4b36936e7" controls></video>
-
-</details>
-
-<details>  
-<summary>🖌️ <b>Major Update: Sidebery Background Now Theme-Aware</b> <i>[Click to expand]</i> 👇</summary>
-
-* FlexFox can now automatically adjust the background color of Sidebery based on the current Firefox theme.
-* To enable this feature, go to Sidebery's **Settings → Appearance → Color scheme** and select `"firefox"`.
-  <details><summary>Click to view Sidebery appearance settings screenshot</summary>
-  <img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/sidebery-appearance-settings.webp"alt="Sidebery appearance settings" width="50%" />
-  </details>
-
-</details>
-
-<details>  
-<summary>🧩 <b>Major Update: Adjustable Menu Item Spacing</b> <i>[Click to expand]</i> 👇</summary>
-
-* Added the `uc.flex.menu-item-spacing` option to control spacing between menu items.  
-  Accepts the following string values:  
-  `"1"` or `"small"` = compact spacing (default; same as earlier versions)  
-  `"2"` or `"medium"` = moderately spaced  
-  `"3"` or `"large"` = Firefox default (widest spacing)  
-
-* You can fine-tune the spacing for individual menus by copying these variables from `uc-variables.css` and editing them in `uc-user-settings.css`:
-
-  ```css
-  --uc-app-menu-item-padding-block
-  --uc-menu-item-padding-block
-  --uc-content-area-context-menu-item-padding-block
-  --uc-appMenu-zoom-controls-x-offset
-  ```
-
-</details>
-
-<details>  
-<summary>🪄 <b>Major Update: Rounded & Floating Web Content</b> <i>[Click to expand]</i> 👇</summary>
-
-A new visual option has been added: `uc.flex.enable-rounded-web-content`.
-
-When enabled, this adds padding around the main content area and applies rounded corners and drop shadows, giving web pages a floating, card-like appearance. This style is inspired by the visual aesthetics of Zen and Microsoft Edge.
-
-The option accepts values from `0` (off) to `2`; higher values increase the padding around the page content.
-
-You can further adjust the appearance by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
-
-  ```css
-  --uc-web-content-margin
-  --uc-web-content-radius-box
-  ```
-
-Below is a preview of FlexFox with this feature enabled (`uc.flex.enable-rounded-web-content = 1`):
-
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/flexfox-rounded-web-content.webp" alt="Rounded web content preview in FlexFox" width="96%" />
-
-</details>
-
-<details>  
-<summary>🪄 <b>Major Update: Restore Original Flat Corner Styles</b> <i>[Click to expand]</i> 👇</summary>
-
-A new option `uc.flex.revert-to-original-flat-corner-style` has been added. Enabling it disables FlexFox's large rounded corners on the URL Bar and Search Bar (9999px) and restores Firefox's native flat corner look.
-
-With Firefox v145, the default corner radius was increased from 4px to 8px, making the native design more rounded. To support both styles, this option has been expanded from a boolean to a numeric setting (`0`–`3`). Users upgrading from older versions should remove the previous boolean entry and recreate it as a numeric value.
-
-**Available values**
-
-* `0` = FlexFox rounded style for the URL Bar and Search Bar (9999px, default)
-* `1` = Firefox v145+ rounded style for all elements (8px)
-* `2` = Pre-v145 flat style for all elements (4px)
-* `3` = FlexFox rounded style for the URL Bar and Search Bar while other elements use the pre-v145 flat style
-
-For further customization, you can fine-tune the corner radius of the address bar, search bar, and find bar by copying the following variables from `uc-variables.css` into `uc-user-settings.css`:
-
-```css
---uc-urlbar-border-radius
---uc-urlbar-popup-border-radius
---uc-urlbar-icon-radius
---uc-urlbar-icon-inner-radius
---uc-searchbar-popup-border-radius
---uc-findbar-border-radius
-```
-
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-original-flat-corner-style.webp" alt="Firefox original flat corner style preview" width="72%" />
-
-</details>
-
-<details>
-<summary>🎨 <b>Major Update: Firefox Color Support</b> <i>[Click to expand]</i> 👇</summary>
-
-FlexFox now supports [Firefox Color](https://color.firefox.com/), so you can freely customize your browser's appearance with live previews.
-
-To make Firefox Color work with FlexFox, choose any background image from the **Custom backgrounds** tab on the Firefox Color site, or enable the `uc.flex.allow-addons-to-change-toolbar-color` setting. Without either of these, your color changes won't take effect.
-
-<p>Here's how FlexFox looks with the <a href="https://github.com/rose-pine/firefox">Rosé Pine Moon</a> theme applied via Firefox Color:</p>
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/firefox-color-rose-pine-moon.webp" alt="FlexFox with Rosé Pine Moon theme" width="96%" />
-
-</details>
-
-<details>
-<summary>🌈 <b>Major Update: Custom Bookmark Folder Icons</b> <i>[Click to expand]</i> 👇</summary>
-
-A new numeric option `uc.flex.enable-colored-bookmarks-folder-icons` has been added:
-
-  - `0`: Disabled
-  - `1`: Enables the first set of colored folder icons
-  - `2`: Enables the second set of icons and automatically hides folder labels for a cleaner look
-
-**Visual Examples:**
-Below is the default Firefox bookmark folder icon:  
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-1.webp" alt="colored-bookmarks-folder-1" width="65%" />
-
-Enabling `uc.flex.remove-bookmarks-folder-icons` will hide the folder icon and show only text labels:  
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-2.webp" alt="colored-bookmarks-folder-2" width="65%" />
-
-Setting `uc.flex.enable-colored-bookmarks-folder-icons` to `1` applies the first set of colored icons:  
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-3.webp" alt="colored-bookmarks-folder-3" width="65%" />
-
-Using `1` together with `uc.flex.remove-bookmarks-labels` removes text labels and shows only icons:  
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-4.webp" alt="colored-bookmarks-folder-4" width="65%" />
-
-Setting it to `2` automatically hides labels and enables the second set of icons:  
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/colored-bookmarks-folder-5.webp" alt="colored-bookmarks-folder-5" width="65%" />
-
-You can customize the icon's color, size, and position by editing the `--uc-bookmark-folder-*` variables, and replace the `folder*.svg` files in the `../icons/bookmark/` directory to use your own icons.
-
-</details>
-
-<details>  
-<summary>🚀 <b>Major Update: Native Vertical Tabs Integrated with Sidebery</b> <i>[Click to expand]</i> 👇</summary>
-
-* FlexFox now integrates native vertical tabs with Sidebery. When Sidebery is active, the native vertical tabs are automatically hidden, and the sidebar toolbar is collapsed into a colored stripe positioned above Sidebery.
-* When Sidebery becomes inactive, such as when a sidebar tool or extension is opened, the native vertical tabs are automatically restored. This provides a usable fallback when Sidebery is not available.
-* Native vertical tabs now share the same layout and behavior as Sidebery. They support the same variables for width, transition speed, and trigger area. Features such as locking the sidebar open, fully hiding it, and auto-hiding in fullscreen mode (<kbd>F11</kbd>) are also supported. Transitions between the two are seamless, providing a consistent user experience.
-
-</details>
-
-<details>
-<summary>🚀 <b>Major Update: Layout Switching via Hotkeys</b> <i>[Click to expand]</i> 👇</summary>
-
-FlexFox now supports the [UserChrome Toggle Extended](https://addons.mozilla.org/firefox/addon/userchrome-toggle-extended/) extension.
-After installing and configuring the extension as shown below:  
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-extended.webp" alt="userchrome-toggle-extended.webp" width="65%" />  
-Make sure to click the `Apply changes` button in the upper-left corner. The settings won't take effect until you do.
-
-Once set up, you can switch between four UI layout modes using keyboard shortcuts:
-
-| Shortcut | Label | Action |
-| -------- | ----- | ------ |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>1</kbd> | Lock Sidebery | Toggle between auto-collapsing and keeping open, for both Sidebery and native vertical tabs. Layout behaves like the `uc.flex.disable-sidebery-autohide` option. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>2</kbd> | Hide Topbar | Toggle full hiding of all top toolbars (tabs, navigation bar, bookmarks bar). When hidden, moving your mouse to the top edge will reveal them. Matches `uc.flex.fully-hide-toolbox`. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>3</kbd> | Hide Sidebery | Toggle fully hiding Sidebery and native vertical tabs. When hidden, they reappear when the mouse reaches the screen edge. Matches `uc.flex.fully-hide-sidebery`. |
-| <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>4</kbd> | Hide All | Toggle hiding all toolbars and the sidebar (Sidebery or native vertical tabs), leaving only the webpage visible. When hidden, move the mouse to the screen edge to show them. Equivalent to `uc.flex.fully-hide-toolbox` + `uc.flex.fully-hide-sidebery`. |
-
-> [!IMPORTANT]
-> Options set in `about:config` take priority. If a related option is enabled there, it will override the toggle behavior and lock the layout state. To enable hotkey switching, make sure the corresponding option is set to `false`.
-
-In addition to using keyboard shortcuts, you can also switch layouts using the toggle button provided by the UserChrome Toggle Extended extension.  
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/userchrome-toggle-button.webp" alt="userchrome-toggle-button" width="28.3%" />  
-To change the default hotkeys, click the gear icon in the top-right corner and select **Manage Extension Shortcuts** from the menu.  
-<img src="https://github.com/yuuqilin/media-assets/raw/FlexFox/assets/shortcut-settings.webp" alt="shortcut-settings" width="50%" />
-
-</details>
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
-
-<!-- END Release Note -->
-
-For more update logs from earlier versions,  
-👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))
-
-<a href="#updates-top-start">⏫ Back to the beginning of updates</a>
-</details>
-
----
-
 ## ✨ Features
 
-### 🌟 Minimalism
-
-> *Maximize your view.*
-
-- Freely collapse or hide the toolbar and sidebar independently.  
-  > *You can freely choose to hide the sidebar, the navigation bar, or both, depending on how you want to organize your workspace.*
-
-- Focus entirely on content when everything is hidden.  
-  > *Turn pages into sticky-note-like windows on your desktop, making it easy to compare pages side by side without unnecessary browser UI. You can also maximize the page area without entering fullscreen, keeping the desktop environment accessible.*
-
-### 🌟 Stability
-
-> *Stay steady.*
-
-- UI elements expand without shifting the page layout.  
-  > *Collapsed toolbars or sidebars float over the page instead of pushing it aside, avoiding disruptive visual jumps.*
-
-- Tabs stay exactly where they were after unfolding.  
-  > *When vertical tabs expand, they smoothly stretch without shifting their positions, so there is no jumping and no need to reposition your mouse.*
-
-### 🌟 Adaptability
-
-> *Adapts on its own.*
-
-- Automatically hides native tabs when Sidebery is active.  
-  > *Prevents redundant UI elements by showing only what is needed.*
-
-- Compatible with different Firefox setups.  
-  > *Whether your sidebar is on the left or right, and whether you show the title bar, menu bar, or bookmarks bar, FlexFox adapts without breaking the layout.*
-
-### 🌟 Flexibility
-
-> *Shape it your way.*
-
-- Quickly enable or disable features through `about:config`.  
-  > *You can customize FlexFox to fit your needs by disabling any feature you don't want, while keeping Firefox's original behavior intact.*
-
-- Deep customization through your own user styles.  
-  > *FlexFox loads user styles after its own, so you can safely override any setting and keep your changes across future updates.*
-
-## 💿 Deployment
-
-### 👷 Method 1: Manual Installation
-
-> [!IMPORTANT]
->
-> 1. Install [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) (optional but recommended).
-> 2. Download the latest FlexFox release from the project's **[Releases](https://github.com/yuuqilin/FlexFox/releases)** page.
-> 3. Open `about:support`, find **Profile Folder**, and click **Open Folder** to access your Firefox profile directory.
-> 4. Copy the `chrome` folder and the `user.js` file from the `scripts` directory into your Firefox profile folder.
-> 5. Open `user.js` in a text editor and remove `//` comment markers to enable additional features.
->
->    * Make sure the following settings are set as shown:
->
->      * `toolkit.legacyUserProfileCustomizations.stylesheets` = `true`
->      * `svg.context-properties.content.enabled` = `true`
->      * `sidebar.visibility` = `always-show`
-> 6. Restart Firefox, then delete `user.js` so that any manual changes made in `about:config` can persist.
-> 7. Configure Sidebery:
->
->    * Open Sidebery settings (gear icon in the sidebar).
->    * Clear any existing styles in the `Styles editor` to avoid conflicts.
->    * Go to `Help` → `Import addon data`, then import `sidebery-settings.json` from the `Sidebery` folder in the downloaded archive.
-> 8. Open `about:config` and search for `uc.flex.` to toggle FlexFox features.
-
----
-
-### 🚀 Method 2: Automatic Installation and Updates
-
-> [!IMPORTANT]
-> If this is your first time installing FlexFox, please proceed to [Method 1](https://github.com/yuuqilin/FlexFox?tab=readme-ov-file#-method-1-manual-installation) and follow the steps starting from Step 5 **after** running the script.  
-> For future updates, simply re-running the script will be enough, and you won't need to repeat the manual steps.
-
-<h4>💻 PowerShell Script</h4>
-<details>
-<summary><i>[Click to expand]</i> 👇</summary>
-
-- **Online deployment** – Run this command in a PowerShell window:
-  ```powershell
-   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
-  ```
-  **Silent online deployment**:
-  ```powershell
-   $env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
-  ```
-
-- **Local deployment** – Download the [`deploy-userchrome.ps1`](https://github.com/yuuqilin/FlexFox/raw/refs/heads/main/deploy-userchrome.ps1) script and run it in PowerShell:
-  ```powershell
-   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
-  ```
-  **Silent local deployment**:
-  ```powershell
-   $env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
-  ```
-
-- **Scheduled or Run dialog deployment** – Use the following for silent deployment:
-  ```powershell
-   powershell -ExecutionPolicy Bypass -Command "$env:FLEXFOX_INSTALL_MODE = 'silent'; .\deploy-userchrome.ps1"
-  ```
-
-</details>
-
-<h4>🔃 Git Pull</h4>
-<details>
-<summary><i>[Click to expand]</i> 👇</summary>
-
-- Use one of the `git-pull-chrome-only` scripts inside the `scripts` folder, depending on your environment. These scripts will:
-  - Automatically set your Firefox profile folder as a Git working directory
-  - Track the FlexFox repository as a remote
-  - Download and update only the `chrome` folder (excluding all other files)
-
-- Alternatively, you can manually add the remote repository to your Firefox profile folder:
-
-  **First-time setup (initialize the profile folder):**
-  ```bash
-  git init
-  git remote add origin https://github.com/yuuqilin/FlexFox.git
-  git sparse-checkout init --no-cone
-  git sparse-checkout set /chrome
-  git fetch origin
-  git checkout -b main origin/main
-  ```
-
-  **Manual update (after setup):**
-  ```bash
-  git fetch origin
-  git checkout main
-  git merge origin/main --allow-unrelated-histories
-  ```
-
-</details>
+* Auto-collapsing tabs, toolbars, and sidebars.
+* Expands as an overlay without shifting webpage content or causing layout jumps.
+* Quickly hide or show tabs and toolbars using keyboard shortcuts or toolbar buttons.
+* Automatically hides native tabs when Sidebery is enabled to maximize screen space.
+* Optional translucent blur effects for menus, panels, and address bar popups.
+* Support for Windows Mica and custom browser wallpapers.
+* 11 built-in accent colors with full light and dark mode support, compatible with any Firefox theme.
+* Customizable icons for sidebar buttons, bookmark folders, bookmark stars, window controls, and more.
+* Optional auto-hide for toolbar buttons and window controls, keeping the interface minimal while remaining easily accessible.
+* Extensive appearance customization through Firefox preferences, including:
+  * Rounded or squared UI element corners
+  * Menu spacing
+  * Webpage content margins and borders
+  * Flat or embossed address bar styles
+  * Tab borders and background colors
+  * Animation and transition effects
+* Customizable pinned tab layout and area height.
+* Floating search box.
+* Support for custom style overrides to personalize or extend the default theme.
+* Additional quality-of-life enhancements, including:
+  * Preventing white flashes while pages are loading
+  * Displaying the total number of open tabs on the "List All Tabs" button
+* Browsing experience improvements, including:
+  * Enhanced active tab visibility for easier navigation between related tabs
+  * Grid-based pinned tabs that save space, support large pinned tab collections, and prevent tab shifting when sidebars expand, reducing mouse repositioning
+* Minimal performance overhead.
 
 ## ⚙️ Options
 
-### 📜 User-Customizable Styles
+FlexFox leaves the native Firefox interface largely undisturbed by default, enabling only the core layout features and essential styles upon installation.
 
-> [!TIP]  
-> You can customize FlexFox styles without worrying about future updates overwriting your changes.
->
-> * To modify **interface (chrome)** styles, create `uc-user-settings.css` in the `components` folder
-> * To modify **webpage (content)** styles, create `uc-custom-content.css` in the `content` folder
->
-> Copy the styles or variables you want to change (e.g. from `uc-variables.css`) into these files. Rules defined here will override FlexFox's defaults.
-> These files are not touched during updates, so your changes will remain intact.
->
-> 💡 When copying styles, make sure to include the full selector to preserve context.
-
----
+To reproduce many of the layouts and interface customizations shown in the previews, or to modify and revert specific design changes, you can use the following two independent systems.
 
 ### 🧩 Configurable Preferences (`about:config`)
 
-#### ✅ Required for FlexFox Styles
+Most of FlexFox's features, layout toggles, and appearance adjustments are integrated directly into Firefox's preferences system. This allows you to customize browser behavior, enable optional interface enhancements, or restore specific elements back to their native Firefox appearance without modifying any code.
 
-| Preference | Value | Description |
-|-----------|:-------------:|-------------|
-| `toolkit.legacyUserProfileCustomizations.stylesheets` | `true` | Enables userChrome.css for custom styles. |
-| `svg.context-properties.content.enabled` | `true` | Enables icon color to auto-adjust between light and dark themes. |
-| `sidebar.visibility` | `always-show` | Enables FlexFox's **optimized** vertical tabs auto-collapse and layout in vertical tabs mode. Many FlexFox features rely on this setting. This can also be applied by unchecking **“Expand sidebar on hover”** in the sidebar settings. |
+To access these preferences, enter `about:config` in the address bar and press Enter. If you imported the provided `user.js` during installation, searching for `uc.flex` will display all available FlexFox preferences. You can also manually create preferences using the option names listed in the documentation.
 
-#### 🪄 Add or Enable Features
+For a complete list of available options, supported values, and detailed descriptions, please refer to:
 
-| Preference | Value | Description |
-|-----------|:-------------:|-------------|
-| `uc.flex.add-ui-text-stroke` | `true` | Adds a bold outline to UI text for improved legibility, especially at low screen resolutions. |
-| `uc.flex.fully-hide-sidebery` | `true` | Fully hides Sidebery and native vertical tabs. They reappear when the cursor moves to the screen edge. |
-| `uc.flex.fully-hide-toolbox` | `true` | Completely hides all top toolbars (native horizontal tabs, navigation bar, bookmarks toolbar); they reappear when the cursor reaches the top edge of the screen. |
-| `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3`<br>(`0`) | Automatically hide horizontal tabs in horizontal tab mode when Sidebery is inactive. Hovering over the navbar shows the tabs. Values: `0` = disabled, `1` = tabs shown below the navbar, `2` = tabs shown above the navbar, `3` = same as `2` but shows only when the cursor reaches the top edge of the screen to avoid accidental triggers. |
-| `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1`<br>(`0`) | Automatically hide the navbar in horizontal tab mode when Sidebery is inactive. Hovering over the horizontal tabs shows the navbar. Values: `0` = disabled, `1` = enabled. This option has higher priority; if enabled together with `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`, it overrides that option. |
-| `uc.flex.auto-hide-navbar-icons` | `true` | Hides toolbar item icons (including icons on the navigation bar, bookmarks toolbar, and menu bar). They reappear when hovering over the toolbar. This option does not affect the URL bar or window control buttons. The sidebar button (FlexFox logo) is normally always visible, but if it is not placed at the edge of the navigation bar, or if `uc.flex.style-sidebar-button` is set to `0`, it will also follow the auto-hide behavior. |
-| `uc.flex.auto-hide-urlbar-icons` | `true` | Hides URL bar icons and reveals them with a slide-in animation from both sides when hovering over the URL bar. Enabled by default; set to `false` to keep icons always visible. |
-| `uc.flex.auto-hide-window-controls` | `true` | Hides the window control buttons (minimize, maximize, close) and reveals them when hovering over the edge of the navigation bar. |
-| `uc.flex.allow-addons-to-change-toolbar-color` | `true` | Allows toolbar colors set by extensions like Firefox Color to take effect, especially when no background image is selected. |
-| `uc.flex.enable-colored-bookmarks-folder-icons` | `0`-`2`<br>(`0`) | Enables colored icons for bookmark folders. This numeric setting accepts `0` (disabled), `1` (uses the first icon set), or `2` (uses the second icon set, with labels automatically hidden). |
-| `uc.flex.remove-bookmarks-folder-icons` | `true` | Removes folder icons from bookmarks. |
-| `uc.flex.remove-bookmarks-labels` | `true` | Removes text labels from bookmark folders. |
-| `uc.flex.show-flexfox-version-info-in-about-config` | `true` | Shows a confirmation message in the `about:config` page indicating that FlexFox is installed, along with the current version number. |
-| `uc.flex.show-pin-tabs-separator-in-expanded-state` | `true` | Restores the separator between pinned and regular tabs in the native vertical tabs when expanded. Unlike Firefox, which hides it until hovered, FlexFox always keeps it visible. The separator can be dragged to resize the pinned tabs panel. |
-| `uc.flex.show-tab-close-button-on-favicon-hover` | `true` | Merges the close button with the favicon in horizontal tabs to save space. The button appears when hovering over the favicon. Enabling this option automatically disables the close button's auto-shrink-and-reposition feature when tabs become narrow. |
-| `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2`<br>(`0`) | Shows the total number of open tabs on the "List All Tabs" button. Values: `0` = Off, `1` = Show count of all tabs, `2` = Show count of loaded tabs only. |
-| `uc.flex.show-tab-number-in-tab-label` | `true` | Shows a numeric index before each tab's label text. This can make it easier to distinguish tabs when the label text is truncated due to limited space. |
+📄 **See the full configuration guide:** [docs/OPTIONS.md](docs/OPTIONS.md)
 
-#### 🚫 Disable or Revert Features
+### 📜 User-Customizable Styles
 
-| Preference | Value | Description |
-|-----------|:-------------:|-------------|
-| `uc.flex.disable-flexfox` | `true` | Disables all FlexFox styles and features without needing to restart Firefox. |
-| `uc.flex.skip-loading-uc-*.css` | `true` | Skips loading specific `uc-*.css` files under `./components/` and `./content/`. For example, enabling `uc.flex.skip-loading-uc-newtab.css` will skip loading `./content/uc-newtab.css`. |
-| `uc.flex.disable-bookmarks-autohide` | `true` | Disables auto-hide for the bookmarks toolbar. |
-| `uc.flex.disable-findbar-autohide` | `true` | Prevents the Findbar from automatically hiding when it loses focus. |
-| `uc.flex.disable-sidebery-autohide` | `true` | Disables auto-collapse for Sidebery and native vertical tabs. |
-| `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `true` | When hovering over inactive horizontal tabs, FlexFox normally shows the close button. If the tab is very narrow, the button is shrunk and moved to the top-right corner to reduce accidental clicks. Enabling this option disables the close button entirely. |
-| `uc.flex.disable-nav-bar-first-item-right-padding` | `true` | By default, FlexFox adds right-side padding after the first item in the navigation bar to improve visual separation and alignment between the vertical tabs and nearby items. This option disables that padding. |
-| `uc.flex.disable-menu-icons` | `true` | Disables custom icons in menus added by FlexFox. |
-| `uc.flex.restore-window-controls-on-tabbar` | `true` | Restores the window control buttons (minimize, maximize, close) to the tab bar in horizontal tabs mode. |
-| `uc.flex.revert-to-original-window-controls` | `true` | Reverts to Firefox's default window control buttons (minimize, maximize, close), replacing the macOS-style icons used by FlexFox. |
-| `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | Restores Firefox's original flat corner styles for the urlbar, searchbar, and other UI elements. Values: `0` = FlexFox rounded style (9999px, default), `1` = Firefox v145+ rounded style for all elements (8px), `2` = Pre-v145 flat style for all elements (4px), `3` = FlexFox rounded urlbar/searchbar with pre-v145 flat corners elsewhere. |
-| `uc.flex.revert-to-original-bookmark-star-icon` | `true` | Reverts the bookmark star icon to Firefox's default design, replacing the custom icon used by FlexFox. |
-| `uc.flex.remove-sidebar-stripe` | `true` | Removes the sidebar stripe when Sidebery is active. To switch sidebar tools, press <kbd>F1</kbd> in vertical tabs mode to show the sidebar tool buttons, or <kbd>Ctrl</kbd> + <kbd>B</kbd> in horizontal tabs mode to restore the sidebar header. |
-| `uc.flex.sidebery-disable-icon-scaling` | `true` | Disables icon scaling for Sidebery pinned tabs and tab panels when expanded. |
+For modifications beyond the built-in preference system, FlexFox provides dedicated user customization files for both interface and webpage styling.
 
-#### 🪛 Modify or Adjust Features
+* To modify **interface (chrome)** styles, create `uc-user-settings.css` in the `components` folder
+* To modify **webpage (content)** styles, create `uc-custom-content.css` in the `content` folder
 
-| Preference | Value | Description |
-|-----------|:-------------:|-------------|
-| `uc.flex.increase-sidebery-expanded-width` | `true` | Makes Sidebery and the native vertical tabs wider when expanded. |
-| `uc.flex.increase-navbar-height` | `true` | Restores the thicker navbar height used in earlier FlexFox versions. This change overrides the current default, which matches Firefox's original compact height. |
-| `uc.flex.increase-active-horizontal-tab-min-width` | `0`-`4`<br>(`1`) | Keeps the active tab wider when horizontal tabs shrink, making it easier to distinguish from other tabs. Values: `0` = disabled, `1` = 1.8× without animation, `2` = 1.8× with animation, `3` = 2× without animation, `4` = 2× with animation. Enabled by default; set to `0` to keep all tabs the same width. |
-| `uc.flex.switch-to-alternate-condensed-panel` | `true` | By default, FlexFox replaces the native unified extensions panel with an icon-only view. In this case, right-click an icon to access extension options. This option switches to an alternate condensed panel that includes extension names and option buttons for a more descriptive view. |
-| `uc.flex.sidebery-allow-resizable-width` | `true` | Allows freely resizing Sidebery by dragging the sidebar splitter. When enabled, Sidebery no longer auto-collapses, but you can still toggle its expanded/collapsed state using the sidebar toggle button (Firefox Logo). For automatic collapse, use the `Hide Sidebery` shortcut or switch to native vertical tabs (<kbd>F1</kbd>) to let tabs auto-collapse. |
-| `uc.flex.sidebery-fast-hover-expand` | `true` | Speeds up auto-expand/collapse for Sidebery and native vertical tabs. |
-| `uc.flex.sidebery-slow-hover-expand` | `true` | Slows down auto-expand/collapse for Sidebery and native vertical tabs. |
-| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `true` | Unifies toolbar animation speed with Sidebery/vertical tabs. Auto-applied with Mica or custom wallpaper. |
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | Sets the maximum number of visible pinned tabs per row. In vertical tabs, extra pinned tabs wrap to the next row. In horizontal tabs, extra pinned tabs are automatically collapsed, with the setting corresponding to 2–10 visible pinned tabs. Setting `0` disables auto-collapse in horizontal tabs. |
-| `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | Sets the maximum number of visible pinned tabs per column in both native vertical tabs and Sidebery. When the limit is reached, the pinned tabs panel becomes scrollable. Set to `0` to remove the limit and let the panel expand freely. |
-| `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the Findbar's position. Accepts string values: `'top-center-left'` or `'1'` = center-left top, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
-| `uc.flex.menu-item-spacing` | `'small'`\|<br>`'medium'`\|<br>`'large'` | Sets the vertical spacing between items in the Firefox app menu, bookmarks menu, and context menus. Accepts string values: `'1'` or `'small'` = narrow spacing, `'2'` or `'medium'` = medium spacing, `'3'` or `'large'` = wide spacing. |
+Styles and variables copied into these files will override FlexFox's defaults. Since these files are user-managed and not included in the project source, they remain unaffected by future updates.
 
-#### ⚙️ Native Firefox Settings
-| Preference | Value | Description |
-|-----------|:-------------:|-------------|
-| `browser.sessionstore.restore_pinned_tabs_on_demand` | `true` | Loads pinned tabs only when selected, allowing you to have many pinned tabs without slowing down Firefox startup. With FlexFox, pinned tab layouts and auto-collapse features make it convenient to use many pinned tabs for quick access, so enabling this option is recommended when using FlexFox. |
-| `browser.tabs.fadeOutExplicitlyUnloadedTabs` | `true` | A native Firefox setting that fades out discarded tabs (manually unloaded) in the native vertical tabs. |
-| `browser.tabs.fadeOutUnloadedTabs` | `true` | A native Firefox setting that fades out pending tabs (waiting to be restored at startup) in the native vertical tabs. |
-| `sidebar.visibility` | `expand-on-hover` | Disables FlexFox's **optimized** vertical tabs auto-collapse and layout. This can also be applied by checking **“Expand sidebar on hover”** in the sidebar settings. In this mode, you can freely adjust the sidebar width and toggle between expanded and collapsed states using <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> or the sidebar toggle button. **Not recommended for everyday use with FlexFox.** |
-| `sidebar.animation.expand-on-hover.duration-ms` | `120` | A native Firefox setting that defines the animation speed for expanding and collapsing the vertical tabs when `sidebar.visibility` is set to `expand-on-hover`. |
+When reusing styles from existing FlexFox files (such as `uc-variables.css`), copy the complete selector or rule block to preserve the original context and dependencies.
 
-#### 🎨 UI Style & Appearance
-| Preference | Value | Description |
-|-----------|:-------------:|-------------|
-| `uc.flex.style-all-tabs-button` | `0`-`2`<br>(`1`) | Sets the icon for the “List All Tabs” button. Values: `0` = Firefox default icon, `1` = Filter (default), `2` = Chevron. |
-| `uc.flex.style-sidebar-button` | `0`-`4`<br>(`1`) | Switches the sidebar toggle icon. Values: `0` = Firefox default icon, `1` = Firefox Master Brand Logo (default), `2` = Firefox Browser Logo, `3` = Firefox System 1 Logo, `4` = Mozilla Flag Symbol. |
-| `uc.flex.style-sidebar-stripe-color` | `0`-`10`<br>(`0`) | Controls the color of the sidebar stripe, sidebar button (Firefox logo), and the bookmark star icon. In Dark Mode, it also applies to tab borders, backgrounds, highlights, and the Sidebery navigation icon. Values: `0` = Classic (default), `1` = Red, `2` = Orange, `3` = Yellow, `4` = Green, `5` = Cyan, `6` = Blue, `7` = Violet, `8` = Purple, `9` = Pink, `10` = Gray. |
-| `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` | `true` | Applies the sidebar stripe color to all icons. In Dark Mode, it also applies to URL bar and web area borders. This option also overrides Firefox's default bookmark star color even when `uc.flex.revert-to-original-bookmark-star-icon` is enabled. |
-| `uc.flex.style-sidebar-stripe-color-use-gradient` | `true` | Applies a gradient variant based on the color selected in `uc.flex.style-sidebar-stripe-color`. The gradient is applied to the sidebar stripe, sidebar button icon (Firefox logo), bookmark star icon, and bookmark folder icons. |
-| `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | Sets the navigation icon shown when Sidebery is collapsed. Values: `0` = Use active panel icon (new default), `1` = Sidebery Logo, `2` = Chevron (previous default). |
-| `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `true` | Uses the color defined by the current active panel for the navigation icon. |
-| `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | Changes the background color of the navbar and sidebar. Values: `1` = Tokyo Night theme (default), `2` = Firefox Acorn Design. |
-| `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | Customizes the appearance of the URL bar. Values: `1` = Flat (default), `2` = Inset (embedded look), `3` = Debossed (pressed-in look), `4` = Seamless (fully merged into the navigation bar). |
-| `uc.flex.style-urlbar-center-text` | `true` | Centers the text in the URL bar. |
-| `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | Repositions the URL bar popup. Values: `0` = Disabled (default), `1` = Center when focused, `2` = Center only when typing. |
-| `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2`<br>(`0`) | Darkens the background when the URL bar dropdown is open. This numeric setting accepts values from `0` (disabled) to `2`, where higher values apply stronger dimming. |
-| `uc.flex.style-window-controls` | `1`-`3`<br>(`1`) | Switches the window control icons. Values: `1` = Traffic Light Buttons (default), `2` = Yosemite Window Buttons, `3` = Yosemite GTK Theme. |
-| `uc.flex.style-window-controls-shift-up` | `true` | Slightly raises the position of the window controls. |
-| `uc.flex.style-window-controls-shrink-size` | `true` | Reduces the overall size of the window controls. |
-| `uc.flex.move-window-controls-to-left` | `true` | Moves the window controls to the left edge of the navbar or horizontal tab bar. |
-| `uc.flex.move-pip-volume-to-top` | `true` | Moves the volume control button in Picture-in-Picture (PiP) windows to the top. |
-| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | Sets the appearance of vertical tab items. Values: `1` = Pinned tabs use borders only with no background (default), `2` = Pinned tabs use background only with no borders; all tabs use the sidebar stripe color for their borders and highlights. |
-| `uc.flex.style-tab-items-add-hover-trail` | `true` | Applies a trailing effect when hovering over vertical tabs. Enabled by default; set to `false` to disable the effect. |
-| `uc.flex.style-tab-groups` | `0`-`2`<br>(`1`) | Sets the appearance of native vertical tab groups. Values: `0` = Tree layout, no expand/collapse indicator, `1` = Tree layout with triangle indicator (default), `2` = Box layout with folder icon. |
-| `uc.flex.style-tab-groups-add-transition` | `0`-`2`<br>(`2`) | Sets the expand/collapse transition and rotating indicator animation for native vertical tab groups. Values: `0` = No transition, `1` = Enable expand/collapse transition, `2` = Enable transition + rotating indicator (default). |
-| `uc.flex.style-tab-groups-center-label-text` | `true` | Centers the label text of native vertical tab groups. |
-| `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | Controls the outline of the web content area. Values: `0` = No outline (default), `1` = Shows a highlighted outline only on the focused web content panel in Tab Split View, `2` = Shows an outline on all web content panels. |
-| `uc.flex.enable-rounded-web-content` | `0`-`2`<br>(`0`) | Adds margin, shadow, and rounded corners to the web content area. This numeric setting accepts values from `0` (disabled) to `2`, where higher values increase margin. |
-| `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `true` | When `uc.flex.enable-rounded-web-content` is enabled, also applies a rounded corner to the web content area on the side adjacent to the Sidebery colored stripe. |
-| `uc.flex.enable-translucent-urlbar-popup-and-menus` | `true` | Enables a translucent and blurred background for the URL bar popup and various menus. FlexFox normally enables this effect only when Mica or a custom wallpaper is active, but this option allows it to be enabled even without them. The transparency level of the background can be adjusted using `uc.flex.browser-mica-transparency-level` (range `0`–`4`, higher values are more transparent). |
+## 💿 Installation and Updates
 
-#### 🧊 Visual Background & Mica Effects
+### 👷 Manual Installation
 
-| Preference | Value | Description |
-|-----------|:-------------:|-------------|
-| `widget.windows.mica` | `true` | Enables the native Mica backdrop in Firefox. Requires the theme to be set to `System theme — auto` to take effect, or can be extended to all themes by enabling `uc.flex.browser-mica-force-enabled-on-all-themes` below. This feature is only available on Windows 11. Note that it will be overridden if `uc.flex.browser-wallpaper-enabled` is enabled. |
-| `widget.windows.mica.popups` | `1`\|`2`<br>(`2`) | Enables the Mica backdrop for popup menus. Accepts `0` (off), `1` (on), or `2` (auto). |
-| `widget.windows.mica.toplevel-backdrop` | `2` | Specifies the type of Mica backdrop to use: `0` (auto or none), `1`: Mica, `2`: Acrylic, `3`: Mica Alt. FlexFox is designed with the assumption that this option is set to `2`: Acrylic. |
-| `browser.tabs.allow_transparent_browser` | `true` | Enables background transparency for Sidebery and web content, allowing Mica or wallpaper to be displayed. **Takes effect after restarting Firefox.** Web content transparency requires the [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) or [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) extension. If some pages become hard to read, using [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) is recommended. |
-| `uc.flex.browser-solid-page-color-scheme` | `0`-`2`<br>(`1`) | Sets the background color scheme used when the `Solid Page` shortcut is active. Values: `0` = Force dark mode, `1` = Force light mode (default), `2` = Follow Firefox's Website appearance setting. This restores text readability when Mica or custom wallpaper makes web content transparent. |
-| `uc.flex.browser-mica-force-enabled-on-all-themes` | `true` | Forces the native Mica backdrop to work across all Firefox themes. This allows the Mica light/dark appearance to follow the active Firefox theme instead of the Windows system theme. **This option requires `widget.windows.mica` to be set to `true` to take effect, and will be overridden if `uc.flex.browser-wallpaper-enabled` is enabled.** |
-| `uc.flex.browser-mica-transparency-level` | `0`-`4`<br>(`2`) | Adjusts the transparency level of the browser Mica backdrop mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. The default level in Firefox is 0, while FlexFox uses 2 as its default. |
-| `uc.flex.browser-wallpaper-enabled` | `true` | Enables custom browser wallpapers, allowing the entire Firefox interface to display a persistent background image. Supports both static and animated wallpapers. **Enabling this will override the Mica backdrop settings above.** |
-| `uc.flex.browser-wallpaper-index` | `0`-`9`<br>(`0`) | Selects the wallpaper source. `0` uses the current Firefox theme background as the wallpaper for the entire browser interface. Values `1`–`9` select custom wallpaper files from `../icons/wallpaper/` using the filenames `main-image-1.jpg` through `main-image-9.jpg`. All wallpaper files must be renamed to `.jpg`, regardless of their original format. Supported image formats include JPG, WebP, Animated WebP, PNG, APNG, AVIF, GIF. |
-| `uc.flex.browser-wallpaper-svg-enabled` | `true` | Enables SVG wallpaper support. When enabled, SVG wallpapers can be used by placing files named `main-image-1.svg` through `main-image-9.svg` in `../icons/wallpaper/`. |
-| `uc.flex.browser-wallpaper-acrylic-disabled` | `true` | Disables the acrylic-style blur effect applied to browser wallpapers. By default, wallpapers use an acrylic blur to mimic the appearance of Mica. Enabling this option displays wallpapers in their original sharp appearance. |
-| `uc.flex.browser-wallpaper-align-horizontal` | `'auto'`\|<br>`'left'`\|<br>`'center'`\|<br>`'right'` | Sets the horizontal alignment used when wallpaper images are cropped to fit the browser window. Accepts string values: `'auto'` or `'0'` = automatic alignment (default), `'left'` or `'1'` = align left, `'center'` or `'2'` = center alignment, `'right'` or `'3'` = align right. |
-| `uc.flex.browser-wallpaper-transparency-level` | `0`-`4`<br>(`2`) | Adjusts the transparency level of the browser wallpaper mask. This numeric setting accepts values from 0 to 4, where higher values increase clarity and reduce the mask effect. This option is designed to visually match the Mica transparency levels. The default value in FlexFox is 2. |
-| `uc.flex.browser-wallpaper-contrast-level` | `0`-`4`<br>(`2`) | Adjusts the contrast level of the browser wallpaper when using the acrylic-style blur effect in dark mode. This numeric setting accepts values from 0 to 4, where higher values increase contrast. The default value in FlexFox is 2. |
+1. Install [Sidebery](https://addons.mozilla.org/firefox/addon/sidebery/) (optional but recommended).
+
+2. Download the latest FlexFox release from the project's **[Releases](https://github.com/yuuqilin/FlexFox/releases)** page.
+
+3. Open `about:support`, locate **Profile Folder**, and click **Open Folder** to access your Firefox profile directory.
+
+4. Copy the `chrome` folder from the archive root and the `user.js` file from the `scripts` directory into your Firefox profile folder.
+
+5. (Optional) Open `user.js` in a text editor.
+
+   The file contains both FlexFox preferences (`uc.flex.*`) and optional native Firefox preferences. FlexFox preferences are imported automatically, while native Firefox preferences are provided as commented entries. Remove the leading `//` only for the native Firefox preferences you wish to change, then verify that the following required preferences remain configured as shown:
+
+   ```text
+   toolkit.legacyUserProfileCustomizations.stylesheets = true
+   svg.context-properties.content.enabled = true
+   sidebar.visibility = always-show
+   ```
+
+6. Restart Firefox, then delete `user.js`.
+
+   Do not skip this step. If `user.js` remains in your profile folder, its settings will be reapplied every time Firefox starts, resetting your preferences and preventing changes made in `about:config` from taking effect.
+
+7. Configure Sidebery:
+
+   * Open **Settings** (gear icon).
+   * Clear any existing styles from **Styles Editor**.
+   * Go to **Help → Import addon data**.
+   * Import `sidebery-settings.json` from the `Sidebery` folder in the downloaded archive.
+
+8. Open `about:config` and search for `uc.flex` to view and adjust FlexFox preferences.
+
+### 🚀 Automated Installation and Updates
+
+FlexFox can be installed and updated automatically using either PowerShell scripts or Git.
+
+If this is your first installation, run one of the methods below and then continue with **Manual Installation** starting from Step 5.
+
+For future updates, simply re-run the same method. No additional manual steps are required.
+
+#### 💻 PowerShell Script
+
+<details>
+<summary><i>[Click to expand]</i> 👇</summary>
+
+Run one of the commands below in a PowerShell window.
+
+Silent installation automatically uses the default installation path without prompting for input, making it suitable for scheduled or unattended updates.
+
+**Online installation**
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
+```
+
+**Silent online installation**
+
+```powershell
+$env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
+```
+
+**Local installation**
+
+Download [`deploy-userchrome.ps1`](https://github.com/yuuqilin/FlexFox/raw/refs/heads/main/deploy-userchrome.ps1) and run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
+```
+
+**Silent local installation**
+
+```powershell
+$env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
+```
+
+**Scheduled Task or Run dialog**
+
+```powershell
+powershell -ExecutionPolicy Bypass -Command "$env:FLEXFOX_INSTALL_MODE = 'silent'; .\deploy-userchrome.ps1"
+```
+
+</details>
+
+#### 🔃 Git Pull
+
+<details>
+<summary><i>[Click to expand]</i> 👇</summary>
+
+Use one of the Git pull scripts included in the `scripts` folder for your environment. These scripts will:
+
+* Automatically set your Firefox profile folder as a Git working directory
+* Track the FlexFox repository as a remote
+* Download and update only the `chrome` folder
+
+Alternatively, you can configure this manually:
+
+**First-time setup**
+
+```bash
+git init
+git remote add origin https://github.com/yuuqilin/FlexFox.git
+git sparse-checkout init --no-cone
+git sparse-checkout set /chrome
+git fetch origin
+git checkout -b main origin/main
+```
+
+**Manual update**
+
+```bash
+git fetch origin
+git checkout main
+git merge origin/main --allow-unrelated-histories
+```
+
+</details>
 
 ## 🐞 Known Issues
 
