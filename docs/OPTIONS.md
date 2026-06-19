@@ -1,4 +1,4 @@
-# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox Preferences
+# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox Preferences List
 
 [English](./OPTIONS.md) | [日本語](./OPTIONS_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md) | [简体中文](./OPTIONS_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)
 
@@ -63,8 +63,8 @@ Preferences are organized by the browser component or interface area they affect
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.fully-hide-sidebery` | `false` | Completely hides Sidebery and native vertical tabs until the cursor approaches the screen edge. The activation area can be adjusted using `--uc-sidebar-hover-trigger-width`. Enabling this option overrides the `Hide Sidebery` shortcut, preventing it from toggling between hidden and visible states. Using the keyboard shortcut is recommended for switching layouts. See [Layout Switching via Hotkeys](). |
-| `uc.flex.disable-sidebery-autohide` | `false` | Keeps Sidebery and native vertical tabs permanently expanded instead of auto-collapsing. Enabling this option overrides the `Lock Sidebery` shortcut, preventing it from toggling between collapsed and expanded states. Using the keyboard shortcut is recommended for switching layouts. See [Layout Switching via Hotkeys](). |
+| `uc.flex.fully-hide-sidebery` | `false` | Completely hides Sidebery and native vertical tabs until the cursor approaches the screen edge. The activation area can be adjusted using `--uc-sidebar-hover-trigger-width`. Enabling this option overrides the `Hide Sidebery` shortcut, preventing it from toggling between hidden and visible states. For normal use, keep this option disabled and switch layouts using keyboard shortcuts instead. See the [Layout Switching](USAGE.md#-layout-switching) section for setup instructions. |
+| `uc.flex.disable-sidebery-autohide` | `false` | Keeps Sidebery and native vertical tabs permanently expanded instead of auto-collapsing. Enabling this option overrides the `Lock Sidebery` shortcut, preventing it from toggling between collapsed and expanded states. For normal use, keep this option disabled and switch layouts using keyboard shortcuts instead. See the [Layout Switching](USAGE.md#-layout-switching) section for setup instructions. |
 | `uc.flex.increase-sidebery-expanded-width` | `false` | Increases the width of Sidebery and native vertical tabs when expanded. |
 | `uc.flex.sidebery-fast-hover-expand` | `false` | Speeds up the expand and collapse animations for Sidebery and native vertical tabs. |
 | `uc.flex.sidebery-slow-hover-expand` | `false` | Slows down the expand and collapse animations for Sidebery and native vertical tabs. |
@@ -75,7 +75,7 @@ Preferences are organized by the browser component or interface area they affect
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.sidebery-disable-icon-scaling` | `false` | Removes the subtle icon enlargement effect for Sidebery pinned tabs and navigation panels when expanded. |
-| `uc.flex.sidebery-allow-resizable-width` | `false` | Disables Sidebery auto-collapse and allows its width to be adjusted by dragging the sidebar splitter. You can still quickly expand or collapse Sidebery using the sidebar toggle button (Firefox logo). This option is only available when Firefox is set to vertical tabs mode and has no effect in horizontal tabs mode. |
+| `uc.flex.sidebery-allow-resizable-width` | `false` | Disables Sidebery auto-collapse and allows its width to be adjusted by dragging the sidebar splitter. You can still quickly switch between expanded and collapsed states using the sidebar toggle button (Firefox logo). To temporarily restore the auto-hide behavior and save screen space, use the `Hide Sidebery` shortcut to switch between resizable and auto-hide modes. This option is available only when Firefox is set to vertical tabs mode and has no effect in horizontal tabs mode. |
 | `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | Sets the navigation icon shown when Sidebery is collapsed. Values: `0` = Use active panel icon (new default), `1` = Sidebery Logo, `2` = Chevron (previous default). |
 | `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `false` | Applies the color of the currently active panel to the navigation icon. |
 
@@ -107,7 +107,7 @@ Preferences are organized by the browser component or interface area they affect
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | Sets the maximum number of pinned tabs displayed per row. In vertical tabs mode, additional pinned tabs wrap to the next row. In horizontal tabs mode, additional pinned tabs are automatically collapsed. Values correspond to 2–10 visible pinned tabs in horizontal tabs mode. Set to `0` to disable auto-collapse. |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | Sets the maximum number of pinned tabs displayed per row. In vertical tabs mode, additional pinned tabs wrap to the next row. Values `1`-`5` display 1-5 pinned tabs per row. In horizontal tabs mode, additional pinned tabs collapse automatically. `0` disables auto-collapse, while values `1`-`5` correspond to 2-10 visible pinned tabs. |
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | Sets the maximum number of pinned tabs displayed per column. When the limit is reached, the pinned tabs container becomes scrollable. Set to `0` to remove the limit and allow the container to expand indefinitely. This option has no effect in horizontal tabs mode. |
 
 
@@ -163,7 +163,7 @@ Preferences are organized by the browser component or interface area they affect
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.fully-hide-toolbox` | `false` | Completely hides all top toolbars. They reappear when the cursor approaches the top edge of the screen. The activation area can be adjusted using `--uc-toolbox-rotation`. Enabling this option overrides the `Hide Topbar` shortcut, preventing it from toggling between hidden and visible states. Using the keyboard shortcut is recommended for switching layouts. See [Layout Switching via Hotkeys](). |
+| `uc.flex.fully-hide-toolbox` | `false` | Completely hides all top toolbars. They reappear when the cursor approaches the top edge of the screen. The activation area can be adjusted using `--uc-toolbox-rotation`. Enabling this option overrides the `Hide Topbar` shortcut, preventing it from toggling between hidden and visible states. For normal use, keep this option disabled and switch layouts using keyboard shortcuts instead. See the [Layout Switching](USAGE.md#-layout-switching) section for setup instructions. |
 | `uc.flex.disable-bookmarks-autohide` | `false` | Disables the auto-hide behavior of the bookmarks toolbar. By default, FlexFox shows the bookmarks toolbar only when hovering over the navigation bar, so it does not take up screen space even when Firefox is set to always display bookmarks. |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | `false` | By default, FlexFox adds extra spacing after the first item in the navigation bar (the Firefox logo by default) to visually connect it with the vertical tabs below. Enable this option to remove that spacing. The spacing adjusts automatically based on whether vertical tabs are enabled, so changing the default value is usually unnecessary. |
 | `uc.flex.increase-navbar-height` | `false` | Slightly increases the height of the navigation bar by 3px. This option is kept for compatibility with older FlexFox and VerticalFox styles and usually does not need to be changed. |
@@ -262,7 +262,7 @@ Preferences are organized by the browser component or interface area they affect
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.add-ui-text-stroke` | `false` | Adds an outline to UI text to improve readability, especially on low-resolution displays. |
-| `uc.flex.allow-addons-to-change-toolbar-color` | `false` | FlexFox automatically applies colors from themes that include a background image. If a theme does not define a background image, its toolbar colors may not be applied correctly. Enable this option to force toolbar colors from extensions or themes to take effect. To avoid potential conflicts, using a background image is recommended instead. For example, when using Firefox Color, simply assign any solid-color image as the theme background and FlexFox will automatically apply the configured colors. |
+| `uc.flex.allow-addons-to-change-toolbar-color` | `false` | FlexFox automatically applies colors from themes that include a background image. If a theme does not define a background image, its toolbar colors may not be applied correctly. Enable this option to force toolbar colors from extensions or themes to take effect. To avoid potential conflicts, using a background image is recommended instead. For example, when using [Firefox Color](https://color.firefox.com/), simply assign any solid-color image as the theme background and FlexFox will automatically apply the configured colors. |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | When using Firefox's built-in Light or Dark themes, applies one of the following toolbar color schemes: `1` = Tokyo Night theme (default), `2` = Firefox Acorn Design. |
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | Sets the corner style used throughout the interface. Values: `0` = Small rounded corners (FlexFox default), `1` = Large rounded corners (Firefox default), `2` = Square corners (legacy Firefox style), `3` = Small rounded corners for the address bar with square corners elsewhere. |
 

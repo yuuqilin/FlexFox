@@ -1,4 +1,4 @@
-# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox 选项总表
+# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox 可配置选项列表
 
 [English](./OPTIONS.md) | [日本語](./OPTIONS_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md) | [简体中文](./OPTIONS_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)
 
@@ -63,8 +63,8 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.fully-hide-sidebery` | `false` | 完全隐藏 Sidebery 和原生垂直标签页，仅在鼠标靠近屏幕边缘时显示。触发区域可通过 `--uc-sidebar-hover-trigger-width` 进行调整。启用此选项后，会覆盖 `Hide Sidebery` 快捷键，导致无法通过快捷键在隐藏和显示之间切换。建议使用快捷键切换布局，详见 [Layout Switching via Hotkeys]()。 |
-| `uc.flex.disable-sidebery-autohide` | `false` | 停用 Sidebery 和原生垂直标签页的自动折叠功能，并保持始终展开的布局。启用此选项后，会覆盖 `Lock Sidebery` 快捷键，导致无法通过快捷键在自动折叠和保持展开之间切换。建议使用快捷键切换布局，详见 [Layout Switching via Hotkeys]()。 |
+| `uc.flex.fully-hide-sidebery` | `false` | 完全隐藏 Sidebery 和原生垂直标签页，仅在鼠标靠近屏幕边缘时显示。触发区域可通过 `--uc-sidebar-hover-trigger-width` 进行调整。启用此选项后，会覆盖 `Hide Sidebery` 快捷键，导致无法通过快捷键在隐藏和显示之间切换。日常使用建议保持此选项为 `false`，并通过快捷键切换布局。具体设置方法请参见“[布局切换](USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-布局切换)”。 |
+| `uc.flex.disable-sidebery-autohide` | `false` | 停用 Sidebery 和原生垂直标签页的自动折叠功能，并保持始终展开的布局。启用此选项后，会覆盖 `Lock Sidebery` 快捷键，导致无法通过快捷键在自动折叠和保持展开之间切换。日常使用建议保持此选项为 `false`，并通过快捷键切换布局。具体设置方法请参见“[布局切换](USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-布局切换)”。 |
 | `uc.flex.increase-sidebery-expanded-width` | `false` | 增加 Sidebery 和原生垂直标签页展开时的宽度。 |
 | `uc.flex.sidebery-fast-hover-expand` | `false` | 加快 Sidebery 和原生垂直标签页的展开和折叠速度。 |
 | `uc.flex.sidebery-slow-hover-expand` | `false` | 减慢 Sidebery 和原生垂直标签页的展开和折叠速度。 |
@@ -75,7 +75,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.sidebery-disable-icon-scaling` | `false` | 移除 Sidebery 固定标签页和导航面板在展开时的轻微图标放大效果。 |
-| `uc.flex.sidebery-allow-resizable-width` | `false` | 停用 Sidebery 的自动折叠功能，并允许通过拖动侧栏分隔线调整宽度。仍可使用侧栏切换按钮（Firefox 标志）快速切换展开和折叠状态。此选项仅在 Firefox 的标签页模式设为垂直标签页时生效，在水平标签页模式下无效。 |
+| `uc.flex.sidebery-allow-resizable-width` | `false` | 停用 Sidebery 的自动折叠功能，并允许通过拖动侧栏分隔线自由调整宽度。仍可使用侧栏切换按钮（Firefox 标志）快速切换展开和折叠状态。如果希望临时恢复自动隐藏以节省屏幕空间，可使用 `Hide Sidebery` 快捷键在可调整宽度模式和自动隐藏模式之间切换。此选项仅在 Firefox 的标签页模式设为垂直标签页时生效，在水平标签页模式下无效。 |
 | `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | 设置 Sidebery 收起状态下显示的导航图标。取值：`0` = 使用当前活动面板图标（新默认值），`1` = Sidebery 标志，`2` = V 形箭头图标（旧默认值）。 |
 | `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `false` | 将当前活动面板的颜色应用到导航图标。 |
 
@@ -107,7 +107,7 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | 设置固定标签页容器每行显示的最大标签数量。在垂直标签页模式下，超过上限的固定标签会自动换行；在水平标签页模式下，超过上限的固定标签会自动折叠。设置值对应水平标签页模式下 2–10 个可见固定标签。设为 `0` 可关闭自动折叠。 |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | 设置固定标签页每行显示的最大数量。在垂直标签页模式下，超出上限的固定标签会自动换行。`1`–`5` 分别对应每行显示 1–5 个固定标签。在水平标签页模式下，超出上限的固定标签会自动折叠。`0` 表示关闭自动折叠，`1`–`5` 分别对应显示 2–10 个固定标签。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | 设置固定标签页容器每列显示的最大标签数量。达到上限后，固定标签页容器会显示滚动条。设为 `0` 时，将取消高度限制，容器会随标签数量自动扩展。此选项在水平标签页模式下无效。 |
 
 </details>
@@ -162,7 +162,7 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.fully-hide-toolbox` | `false` | 完全隐藏浏览器顶部的所有工具栏，仅在鼠标靠近屏幕顶部边缘时显示。触发区域可通过 `--uc-toolbox-rotation` 进行调整。启用此选项后，会覆盖 `Hide Topbar` 快捷键，导致无法通过快捷键在隐藏和显示之间切换。建议使用快捷键切换布局，详见 [Layout Switching via Hotkeys]()。 |
+| `uc.flex.fully-hide-toolbox` | `false` | 完全隐藏浏览器顶部的所有工具栏，仅在鼠标靠近屏幕顶部边缘时显示。触发区域可通过 `--uc-toolbox-rotation` 进行调整。启用此选项后，会覆盖 `Hide Topbar` 快捷键，导致无法通过快捷键在隐藏和显示之间切换。日常使用建议保持此选项为 `false`，并通过快捷键切换布局。具体设置方法请参见“[布局切换](USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-布局切换)”。 |
 | `uc.flex.disable-bookmarks-autohide` | `false` | 停用书签工具栏的自动隐藏功能。默认情况下，FlexFox 仅在鼠标悬停于导航栏时显示书签工具栏，因此即使在 Firefox 中将书签工具栏设为“始终显示”，也不会占用额外的屏幕空间。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | `false` | 默认情况下，FlexFox 会在导航栏第一个项目（默认为 Firefox 标志）右侧添加额外间距，使其与下方的垂直标签页在视觉上形成统一整体。启用此选项可移除该间距。间距会根据是否启用垂直标签页自动调整，通常无需修改默认值。 |
 | `uc.flex.increase-navbar-height` | `false` | 启用后会将导航栏高度增加 3px。此选项仅为兼容旧版 FlexFox 和 VerticalFox 样式而保留，通常无需修改默认值。 |
@@ -261,7 +261,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.add-ui-text-stroke` | `false` | 为界面文字添加描边，以提高可读性，尤其适用于低分辨率屏幕。 |
-| `uc.flex.allow-addons-to-change-toolbar-color` | `false` | FlexFox 会自动检测带有背景图片的主题，并应用其配色规则。如果主题未设置背景图片，工具栏颜色可能无法正确生效。启用此选项后，可强制应用扩展或主题设置的工具栏颜色。为避免潜在冲突，建议优先为主题设置背景图片，而不是启用此选项。例如使用 Firefox Color 时，无需启用此设置，只需选择任意一张纯色图片作为背景，FlexFox 即可自动识别并应用所配置的颜色。 |
+| `uc.flex.allow-addons-to-change-toolbar-color` | `false` | FlexFox 会自动检测带有背景图片的主题，并应用其配色规则。如果主题未设置背景图片，工具栏颜色可能无法正确生效。启用此选项后，可强制应用扩展或主题设置的工具栏颜色。为避免潜在冲突，建议优先为主题设置背景图片，而不是启用此选项。例如使用 [Firefox Color](https://color.firefox.com/) 时，无需启用此设置，只需选择任意一张纯色图片作为背景，FlexFox 即可自动识别并应用所配置的颜色。 |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | 使用 Firefox 内置亮色或暗色主题时，为工具栏应用以下配色方案：`1` = Tokyo Night 主题（默认），`2` = Firefox Acorn Design。 |
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | 设置整个界面的圆角样式。取值：`0` = 小圆角（FlexFox 默认），`1` = 大圆角（Firefox 默认），`2` = 直角（旧版 Firefox 风格），`3` = 地址栏使用小圆角，其余界面使用直角。 |
 

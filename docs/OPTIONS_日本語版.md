@@ -1,4 +1,4 @@
-# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox 設定一覧
+# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox 設定オプション一覧
 
 [English](./OPTIONS.md) | [日本語](./OPTIONS_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md) | [简体中文](./OPTIONS_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)
 
@@ -63,8 +63,8 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.fully-hide-sidebery` | `false` | Sidebery とネイティブ垂直タブを完全に非表示にし、マウスカーソルを画面端に近づけたときだけ表示します。表示を開始する範囲は `--uc-sidebar-hover-trigger-width` で調整できます。この設定を有効にすると、`Hide Sidebery` ショートカットは上書きされ、表示と非表示を切り替えられなくなります。レイアウトの切り替えにはショートカットの使用を推奨します。詳しくは [Layout Switching via Hotkeys]() を参照してください。 |
-| `uc.flex.disable-sidebery-autohide` | `false` | Sidebery とネイティブ垂直タブの自動折りたたみを無効にし、常に展開された状態を維持します。この設定を有効にすると、`Lock Sidebery` ショートカットは上書きされ、自動折りたたみと固定表示を切り替えられなくなります。レイアウトの切り替えにはショートカットの使用を推奨します。詳しくは [Layout Switching via Hotkeys]() を参照してください。 |
+| `uc.flex.fully-hide-sidebery` | `false` | Sidebery とネイティブ垂直タブを完全に非表示にし、マウスカーソルを画面端に近づけたときだけ表示します。表示を開始する範囲は `--uc-sidebar-hover-trigger-width` で調整できます。この設定を有効にすると、`Hide Sidebery` ショートカットは上書きされ、表示と非表示を切り替えられなくなります。通常はこの設定を無効のままにし、ショートカットでレイアウトを切り替えることをおすすめします。設定方法については、「[レイアウトの切り替え](USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-レイアウトの切り替え)」を参照してください。 |
+| `uc.flex.disable-sidebery-autohide` | `false` | Sidebery とネイティブ垂直タブの自動折りたたみを無効にし、常に展開された状態を維持します。この設定を有効にすると、`Lock Sidebery` ショートカットは上書きされ、自動折りたたみと固定表示を切り替えられなくなります。通常はこの設定を無効のままにし、ショートカットでレイアウトを切り替えることをおすすめします。設定方法については、「[レイアウトの切り替え](USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-レイアウトの切り替え)」を参照してください。 |
 | `uc.flex.increase-sidebery-expanded-width` | `false` | Sidebery とネイティブ垂直タブを展開したときの幅を広げます。 |
 | `uc.flex.sidebery-fast-hover-expand` | `false` | Sidebery とネイティブ垂直タブの展開・折りたたみアニメーションを高速化します。 |
 | `uc.flex.sidebery-slow-hover-expand` | `false` | Sidebery とネイティブ垂直タブの展開・折りたたみアニメーションを低速化します。 |
@@ -75,7 +75,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.sidebery-disable-icon-scaling` | `false` | Sidebery のピン留めタブおよびナビゲーションパネルを展開した際の、アイコンのわずかな拡大効果を無効にします。 |
-| `uc.flex.sidebery-allow-resizable-width` | `false` | Sidebery の自動折りたたみを無効にし、サイドバーの境界線をドラッグして幅を調整できるようにします。サイドバー切り替えボタン（Firefox ロゴ）を使って、展開状態と折りたたみ状態をすばやく切り替えることもできます。この設定は、Firefox のタブ表示モードが垂直タブの場合にのみ有効で、横型タブモードでは効果がありません。 |
+| `uc.flex.sidebery-allow-resizable-width` | `false` | Sidebery の自動折りたたみを無効にし、サイドバーの境界線をドラッグして幅を調整できるようにします。サイドバー切り替えボタン（Firefox ロゴ）を使って、展開状態と折りたたみ状態をすばやく切り替えることもできます。一時的に自動非表示へ戻して画面スペースを確保したい場合は、`Hide Sidebery` ショートカットを使用して、リサイズ可能モードと自動非表示モードを切り替えられます。この設定は Firefox のタブ表示モードが垂直タブの場合にのみ有効で、横型タブモードでは効果がありません。 |
 | `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | Sidebery が折りたたまれている時に表示されるナビゲーションアイコンを設定します。値：`0` = アクティブなパネルのアイコンを使用（新しいデフォルト）、`1` = Sidebery ロゴ、`2` = シェブロン（以前のデフォルト）。 |
 | `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `false` | 現在アクティブなパネルの色をナビゲーションアイコンに適用します。 |
 
@@ -107,7 +107,7 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | ピン留めタブを 1 行あたりに表示する最大数を設定します。垂直タブモードでは、上限を超えたタブは次の行に折り返されます。水平タブモードでは、上限を超えたタブは自動的に折りたたまれます。設定値は、水平タブモードでの表示数 2～10 個に対応しています。`0` に設定すると、自動折りたたみを無効にします。 |
+| `uc.flex.max-visible-horizontal-pinned-tabs` | `0`-`5`<br>(`5`) | ピン留めタブを 1 行あたりに表示する最大数を設定します。垂直タブモードでは、上限を超えたタブは次の行に折り返されます。`1`～`5` は 1 行あたり 1～5 個のピン留めタブを表示します。水平タブモードでは、上限を超えたタブは自動的に折りたたまれます。`0` は自動折りたたみを無効にし、`1`～`5` は 2～10 個の表示数に対応します。 |
 | `uc.flex.max-visible-vertical-pinned-tabs` | `0` \|<br>`2`-`8`<br>(`4`) | ピン留めタブを 1 列あたりに表示する最大数を設定します。上限に達すると、ピン留めタブコンテナにスクロールバーが表示されます。`0` に設定すると上限がなくなり、コンテナの高さはタブ数に応じて自動的に拡張されます。この設定は、水平タブモードでは効果がありません。 |
 
 </details>
@@ -162,7 +162,7 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.fully-hide-toolbox` | `false` | ブラウザー上部のすべてのツールバーを完全に非表示にし、マウスカーソルを画面上端に近づけたときだけ表示します。反応範囲は `--uc-toolbox-rotation` で調整できます。この設定を有効にすると、`Hide Topbar` ショートカットは上書きされ、表示と非表示を切り替えられなくなります。レイアウトの切り替えにはショートカットの使用を推奨します。詳しくは [Layout Switching via Hotkeys]() を参照してください。 |
+| `uc.flex.fully-hide-toolbox` | `false` | ブラウザー上部のすべてのツールバーを完全に非表示にし、マウスカーソルを画面上端に近づけたときだけ表示します。反応範囲は `--uc-toolbox-rotation` で調整できます。この設定を有効にすると、`Hide Topbar` ショートカットは上書きされ、表示と非表示を切り替えられなくなります。通常はこの設定を無効のままにし、ショートカットでレイアウトを切り替えることをおすすめします。設定方法については、「[レイアウトの切り替え](USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-レイアウトの切り替え)」を参照してください。 |
 | `uc.flex.disable-bookmarks-autohide` | `false` | ブックマークツールバーの自動非表示を無効にします。FlexFox では、デフォルトでブックマークツールバーはナビゲーションバーにカーソルを合わせたときのみ表示されるため、Firefox の設定を「常に表示」にしていても画面スペースを占有しません。 |
 | `uc.flex.disable-nav-bar-first-item-right-padding` | `false` | デフォルトでは、ナビゲーションバーの最初の項目（標準では Firefox ロゴ）の右側に余白を追加し、下部の垂直タブと視覚的に一体化するよう調整されています。この設定を有効にすると、その余白を無効にします。余白の量は垂直タブの有効・無効に応じて自動調整されるため、通常は変更する必要はありません。 |
 | `uc.flex.increase-navbar-height` | `false` | ナビゲーションバーの高さを 3px 拡大します。この設定は、旧バージョンの FlexFox および VerticalFox スタイルとの互換性のために残されており、通常は変更する必要はありません。 |
@@ -261,7 +261,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.add-ui-text-stroke` | `false` | UI テキストにアウトラインを追加し、特に低解像度環境での視認性を向上させます。 |
-| `uc.flex.allow-addons-to-change-toolbar-color` | `false` | FlexFox は、背景画像を含むテーマを自動的に検出し、その配色を適用します。背景画像が設定されていないテーマでは、ツールバーの色が正しく反映されない場合があります。この設定を有効にすると、拡張機能やテーマによるツールバーの色設定を強制的に適用します。競合を避けるため、この設定を使用する代わりに背景画像を設定することを推奨します。たとえば Firefox Color を使用する場合は、単色の画像をテーマの背景として設定するだけで、FlexFox が自動的に配色を適用します。 |
+| `uc.flex.allow-addons-to-change-toolbar-color` | `false` | FlexFox は、背景画像を含むテーマを自動的に検出し、その配色を適用します。背景画像が設定されていないテーマでは、ツールバーの色が正しく反映されない場合があります。この設定を有効にすると、拡張機能やテーマによるツールバーの色設定を強制的に適用します。競合を避けるため、この設定を使用する代わりに背景画像を設定することを推奨します。たとえば [Firefox Color](https://color.firefox.com/) を使用する場合は、単色の画像をテーマの背景として設定するだけで、FlexFox が自動的に配色を適用します。 |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | Firefox 標準のライトテーマまたはダークテーマ使用時に、ツールバーへ次の配色を適用します。`1` = Tokyo Night テーマ（デフォルト）、`2` = Firefox Acorn Design。 |
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | インターフェース全体の角のスタイルを設定します。値：`0` = 小さな角丸（FlexFox デフォルト）、`1` = 大きな角丸（Firefox デフォルト）、`2` = 直角（旧 Firefox スタイル）、`3` = アドレスバーのみ小さな角丸、その他は直角。 |
 

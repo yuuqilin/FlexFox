@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v153-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v154-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -30,41 +30,6 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 For better video quality, watch on YouTube:
 
 [YouTube Link](https://www.youtube.com/watch?v=lhf1mpXDIOM)
-
-<details>
-<summary><b>Quick setup for the showcase video</b> 👇</summary>
-
-The default FlexFox appearance is minimal by design.  
-If you want to quickly reproduce the interface shown in the preview video, you can apply the settings below.
-
-For full customization details, please refer to the Options section later in this README.
-
-```
-uc.flex.browser-wallpaper-acrylic-disabled = false (some scenes: true)
-uc.flex.browser-wallpaper-enabled = true
-uc.flex.browser-wallpaper-index = 0 (some scenes: custom wallpaper index)
-uc.flex.browser-wallpaper-transparency-level = 2 (some scenes: 4)
-uc.flex.enable-colored-bookmarks-folder-icons = 2
-uc.flex.enable-rounded-web-content = 2
-uc.flex.enable-rounded-web-content-at-sidebery-corner = true
-uc.flex.enable-translucent-urlbar-popup-and-menus = true
-uc.flex.move-urlbar-popup-to-center = 1
-uc.flex.move-window-controls-to-left = true
-uc.flex.show-tab-count-in-alltabs-button = 2
-uc.flex.style-all-tabs-button = 2
-uc.flex.style-sidebar-button = 2
-uc.flex.style-sidebar-stripe-color = 9
-uc.flex.style-sidebar-stripe-color-apply-to-all-icons = true
-uc.flex.style-sidebar-stripe-color-use-gradient = true
-uc.flex.style-tab-groups = 2
-uc.flex.style-tab-items = 2
-uc.flex.style-urlbar = 2
-uc.flex.style-urlbar-center-text = true
-uc.flex.style-web-content-outline = 2
-uc.flex.style-window-controls = 2
-uc.flex.style-window-controls-shrink-size = true
-```
-</details>
 
 ## 🆕 What's New
 
@@ -113,9 +78,10 @@ Most of FlexFox's features, layout toggles, and appearance adjustments are integ
 
 To access these preferences, enter `about:config` in the address bar and press Enter. If you imported the provided `user.js` during installation, searching for `uc.flex` will display all available FlexFox preferences. You can also manually create preferences using the option names listed in the documentation.
 
-For a complete list of available options, supported values, and detailed descriptions, please refer to:
-
-📄 **See the full configuration guide:** [docs/OPTIONS.md](docs/OPTIONS.md)
+> [!TIP]
+> For the complete list of available options, supported values, and detailed descriptions, see:
+>
+> **📄 [Preferences List](docs/OPTIONS.md)**
 
 ### 📜 User-Customizable Styles
 
@@ -127,6 +93,18 @@ For modifications beyond the built-in preference system, FlexFox provides dedica
 Styles and variables copied into these files will override FlexFox's defaults. Since these files are user-managed and not included in the project source, they remain unaffected by future updates.
 
 When reusing styles from existing FlexFox files (such as `uc-variables.css`), copy the complete selector or rule block to preserve the original context and dependencies.
+
+## 📖 Usage Guides
+
+* [How to recreate the interface shown in the preview video](docs/USAGE.md#-recreating-the-preview-interface)
+
+* [How to hide toolbars and sidebars using keyboard shortcuts or toolbar buttons](docs/USAGE.md#-layout-switching)
+
+* [How to make Sidebery follow your Firefox theme background](docs/USAGE.md#-firefox-themes-and-sidebery)
+
+* [How to enable Mica or custom wallpapers in Sidebery and web content](docs/USAGE.md#️-transparent-web-content-mica-and-wallpapers)
+
+* [How to improve readability after enabling transparent web content](docs/USAGE.md#-improving-readability-in-transparent-web-content)
 
 ## 💿 Installation and Updates
 
@@ -275,13 +253,13 @@ Additional icon assets used in FlexFox:
 - **Yosemite Buttons** — modified from Doublefire-Chen's [macos-traffic-light-buttons-as-SVG](https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG).  
 - **Yosemite GTK Theme** — modified from kxmylo's [Yosemite GTK 3.14/3.16 Theme Alpha4](https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716).
 
-Much appreciation goes to all these creators for sharing their work with the community.
+Special thanks to all these creators for sharing their work with the community.
 
 <details>
   <summary><h2 style="display: inline;">📄 LICENSE</h2></summary>
   <hr style="border: none; border-top: 1px solid #d0d7de; margin: 16px 0;">
   <p>This project is primarily licensed under the MIT License.<br>
-  However, parts of the source code (see below) incorporate code originally licensed under the Mozilla Public License 2.0 (MPL-2.0).</p>
+  However, parts of the source code (see below) include code originally licensed under the Mozilla Public License 2.0 (MPL-2.0).</p>
 
   <p>Specifically, some integrated code sections in <code>uc-sidebar.css</code> are derived from the following project:</p>
 
@@ -298,7 +276,7 @@ Much appreciation goes to all these creators for sharing their work with the com
   <p>This project includes additional graphical assets with the following licenses:</p>
   
   <ul>
-    <li><strong>Custom Brand Icons</strong> — licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></ li>
+    <li><strong>Custom Brand Icons</strong> — licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></li>
     <li><strong>Newaita</strong> — licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></li>
     <li><strong>Yosemite Buttons</strong> — licensed under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></li>
   </ul>

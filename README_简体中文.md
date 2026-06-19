@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（简体中文版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v153-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v154-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -30,41 +30,6 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 如需更好的画质，请在 YouTube 观看：
 
 [YouTube Link](https://www.youtube.com/watch?v=lhf1mpXDIOM)
-
-<details>
-<summary><b>快速还原演示视频界面</b> 👇</summary>
-
-FlexFox 默认只启用最基础的界面修改，因此外观会比较简洁。  
-如果你想快速还原演示视频中的效果，可以直接使用以下设置。
-
-更完整的自定义说明请参考本 README 下方的选项部分。
-
-```
-uc.flex.browser-wallpaper-acrylic-disabled = false (some scenes: true)
-uc.flex.browser-wallpaper-enabled = true
-uc.flex.browser-wallpaper-index = 0 (some scenes: custom wallpaper index)
-uc.flex.browser-wallpaper-transparency-level = 2 (some scenes: 4)
-uc.flex.enable-colored-bookmarks-folder-icons = 2
-uc.flex.enable-rounded-web-content = 2
-uc.flex.enable-rounded-web-content-at-sidebery-corner = true
-uc.flex.enable-translucent-urlbar-popup-and-menus = true
-uc.flex.move-urlbar-popup-to-center = 1
-uc.flex.move-window-controls-to-left = true
-uc.flex.show-tab-count-in-alltabs-button = 2
-uc.flex.style-all-tabs-button = 2
-uc.flex.style-sidebar-button = 2
-uc.flex.style-sidebar-stripe-color = 9
-uc.flex.style-sidebar-stripe-color-apply-to-all-icons = true
-uc.flex.style-sidebar-stripe-color-use-gradient = true
-uc.flex.style-tab-groups = 2
-uc.flex.style-tab-items = 2
-uc.flex.style-urlbar = 2
-uc.flex.style-urlbar-center-text = true
-uc.flex.style-web-content-outline = 2
-uc.flex.style-window-controls = 2
-uc.flex.style-window-controls-shrink-size = true
-```
-</details>
 
 ## 🆕 更新内容
 
@@ -113,9 +78,10 @@ FlexFox 的大部分功能、布局开关以及界面调整都直接集成在 Fi
 
 要访问这些选项，请在地址栏输入 `about:config` 并按回车。如果安装时导入了附带的 `user.js` 文件，在搜索框中输入 `uc.flex` 即可列出所有 FlexFox 选项。你也可以根据文档中提供的选项名称手动创建对应的首选项。
 
-有关所有可用选项、支持的取值范围以及详细功能说明，请参阅以下文档：
-
-📄 **完整配置说明：** [docs/OPTIONS_简体中文.md](docs/OPTIONS_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)
+> [!TIP]
+> 有关所有可用选项、支持的取值范围以及详细功能说明，请参阅以下文档：
+>
+> **📄 [可配置选项列表](docs/OPTIONS_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)**
 
 ### 📜 用户自定义样式
 
@@ -127,6 +93,18 @@ FlexFox 的大部分功能、布局开关以及界面调整都直接集成在 Fi
 添加到这些文件中的样式和变量将覆盖 FlexFox 的默认设置。由于这些文件由用户自行管理，且不属于项目源码的一部分，因此在后续更新过程中不会被覆盖。
 
 如果需要复用 FlexFox 现有文件中的样式（例如 `uc-variables.css`），建议复制完整的选择器或规则块，以保留原有的上下文和依赖关系。
+
+## 📖 使用指南
+
+* [如何快速还原演示视频中的界面效果](docs/USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-还原演示视频中的界面效果)
+
+* [如何使用快捷键或工具栏按钮隐藏工具栏和侧边栏](docs/USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-布局切换)
+
+* [如何让 Sidebery 显示 Firefox 主题背景](docs/USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-firefox-主题与-sidebery)
+
+* [如何为 Sidebery 和网页内容启用 Mica 背景或自定义壁纸](docs/USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#️-透明网页mica-与自定义壁纸)
+
+* [启用透明网页后，如何改善文字可读性](docs/USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-改善透明网页的可读性)
 
 ## 💿 安装与更新
 
@@ -275,11 +253,11 @@ FlexFox 使用的附加图标资源：
 - **Yosemite Buttons** — 修改自 Doublefire-Chen 的 [macos-traffic-light-buttons-as-SVG](https://github.com/Doublefire-Chen/macos-traffic-light-buttons-as-SVG)。  
 - **Yosemite GTK Theme** — 修改自 kxmylo 的 [Yosemite GTK 3.14/3.16 Theme Alpha4](https://www.deviantart.com/kxmylo/art/Yosemite-GTK-3-14-3-16-Theme-Alpha4-575639716)。
 
-感谢所有开源贡献者的努力与分享。
+感谢所有创作者的分享与贡献。
 
 <details>
   <summary><h2 style="display: inline;">📄 许可证</h2></summary>
-  <hr style="border: none; border-top: 0.1px solid #d0d7de; margin: 16px 0;">
+  <hr style="border: none; border-top: 1px solid #d0d7de; margin: 16px 0;">
   <p>本项目主要基于 MIT 许可证进行授权。<br>
   不过，部分源代码（见下文）整合了原本采用 Mozilla Public License 2.0（MPL-2.0）授权的代码。</p>
 
@@ -295,7 +273,7 @@ FlexFox 使用的附加图标资源：
   <p>这些代码区块保留了原始的 MPL-2.0 许可声明，并符合其授权条款。<br>
   有关 MPL-2.0 的完整内容，请参见 <code>LICENSES/MPL-2.0.txt</code>。</p>
 
-  <p>本项目包含以下授权的附加图形资源：</p>
+  <p>本项目包含以下附加图标资源：</p>
   
   <ul>
     <li><strong>Custom Brand Icons</strong> — 使用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 授权</li>

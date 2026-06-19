@@ -1,7 +1,7 @@
 # <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v153-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v154-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -30,41 +30,6 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 より高画質で視聴する場合:
 
 [YouTube Link](https://www.youtube.com/watch?v=lhf1mpXDIOM)
-
-<details>
-<summary><b>デモ動画と同じ見た目にするクイック設定</b> 👇</summary>
-
-FlexFox は初期状態では最小限の変更のみが有効になっています。  
-デモ動画と同じUIをすぐに再現したい場合は、以下の設定を適用してください。
-
-詳細なカスタマイズについては、このREADME下部のオプションを参照してください。
-
-```
-uc.flex.browser-wallpaper-acrylic-disabled = false (some scenes: true)
-uc.flex.browser-wallpaper-enabled = true
-uc.flex.browser-wallpaper-index = 0 (some scenes: custom wallpaper index)
-uc.flex.browser-wallpaper-transparency-level = 2 (some scenes: 4)
-uc.flex.enable-colored-bookmarks-folder-icons = 2
-uc.flex.enable-rounded-web-content = 2
-uc.flex.enable-rounded-web-content-at-sidebery-corner = true
-uc.flex.enable-translucent-urlbar-popup-and-menus = true
-uc.flex.move-urlbar-popup-to-center = 1
-uc.flex.move-window-controls-to-left = true
-uc.flex.show-tab-count-in-alltabs-button = 2
-uc.flex.style-all-tabs-button = 2
-uc.flex.style-sidebar-button = 2
-uc.flex.style-sidebar-stripe-color = 9
-uc.flex.style-sidebar-stripe-color-apply-to-all-icons = true
-uc.flex.style-sidebar-stripe-color-use-gradient = true
-uc.flex.style-tab-groups = 2
-uc.flex.style-tab-items = 2
-uc.flex.style-urlbar = 2
-uc.flex.style-urlbar-center-text = true
-uc.flex.style-web-content-outline = 2
-uc.flex.style-window-controls = 2
-uc.flex.style-window-controls-shrink-size = true
-```
-</details>
 
 ## 🆕 最新情報
 
@@ -113,9 +78,10 @@ FlexFox の機能、レイアウト切り替え、および外観の調整項目
 
 これらの設定へアクセスするには、アドレスバーに `about:config` と入力して Enter キーを押してください。インストール時に付属の `user.js` を読み込んでいる場合は、検索欄に `uc.flex` と入力すると FlexFox の設定項目が一覧表示されます。また、ドキュメントに記載された設定名を使用して手動で追加することもできます。
 
-利用可能なオプション、設定可能な値、および各機能の詳細な説明については、以下のドキュメントを参照してください。
-
-📄 **設定オプション一覧:** [docs/OPTIONS_日本語版.md](docs/OPTIONS_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md)
+> [!TIP]
+> 利用可能なオプション、設定可能な値、および各機能の詳細な説明については、以下のドキュメントを参照してください。
+>
+> **📄 [設定オプション一覧](docs/OPTIONS_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md)**
 
 ### 📜 ユーザー定義スタイル
 
@@ -127,6 +93,18 @@ FlexFox の機能、レイアウト切り替え、および外観の調整項目
 これらのファイルに追加したスタイルや変数は、FlexFox のデフォルト設定より優先して適用されます。また、これらのファイルはプロジェクト本体には含まれていないため、アップデートによって上書きされることはありません。
 
 既存の FlexFox ファイル（`uc-variables.css` など）からスタイルを再利用する場合は、元のコンテキストや依存関係を維持するため、セレクターまたはルール全体をコピーしてください。
+
+## 📖 使い方ガイド
+
+* [デモ動画と同じインターフェースを再現する方法](docs/USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-デモ動画のインターフェースを再現する)
+
+* [キーボードショートカットやツールバーボタンでツールバーとサイドバーを非表示にする方法](docs/USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-レイアウトの切り替え)
+
+* [Sidebery に Firefox テーマの背景を反映させる方法](docs/USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-firefox-テーマと-sidebery)
+
+* [Sidebery とウェブコンテンツで Mica 背景やカスタム壁紙を表示する方法](docs/USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#️-透過表示micaカスタム壁紙)
+
+* [ウェブコンテンツの透過を有効にした後、文字を読みやすくする方法](docs/USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-透過表示時の視認性改善)
 
 ## 💿 インストールとアップデート
 
@@ -271,7 +249,7 @@ FlexFox は、以下の優れたプロジェクトの成果を基盤に構築さ
 - [shimmer](https://github.com/nuclearcodecat/shimmer)
 - [firefox-gx](https://github.com/Godiesc/firefox-gx)
 
-FlexFox で使用している追加アイコン:
+FlexFox で使用している追加アイコン素材:
 
 - **Custom Brand Icons** — elax46 の [custom-brand-icons](https://github.com/elax46/custom-brand-icons) を元に改変。  
 - **Newaita** — cbrnix の [Newaita](https://github.com/cbrnix/Newaita) を元に改変。  
@@ -298,7 +276,7 @@ FlexFox で使用している追加アイコン:
   <p>該当するコードには元の MPL-2.0 のライセンス表記が保持されており、ライセンス条件を遵守しています。<br>
   MPL-2.0 の全文は <code>LICENSES/MPL-2.0.txt</code> をご覧ください。</p>
 
-  <p>このプロジェクトには、以下のライセンスで提供される追加のグラフィック資産が含まれます:</p>
+  <p>本プロジェクトには、以下のライセンスで提供される追加のアイコン素材が含まれています:</p>
   
   <ul>
     <li><strong>Custom Brand Icons</strong> — <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> に基づくライセンス </li>
