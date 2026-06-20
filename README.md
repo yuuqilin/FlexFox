@@ -1,4 +1,4 @@
-# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
+﻿# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox
 
 <div>
  <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v154-orange?logo=firefox"></a>
@@ -17,8 +17,8 @@ FlexFox is a Firefox userChrome theme focused on maximizing usable screen space 
 
 > [!IMPORTANT]
 >
-> * **Changed Firefox's `Expand sidebar on hover` setting?** Disable it. FlexFox requires this option to remain unchecked.
-> * **Upgrading from a version earlier than v6?** Remove all legacy styles from the Sidebery Styles Editor.
+> * **Changed Firefox's `Expand sidebar on hover` setting?** Disable it. FlexFox requires this option to remain unchecked. ([Guide](docs/USAGE.md#️-firefox-sidebar-settings))
+> * **Upgrading from a version earlier than v6?** Remove all legacy styles from the Sidebery Styles Editor. ([Guide](docs/USAGE.md#-upgrading-from-pre-v6-versions))
 > * **Recommended setup:** Use Firefox's vertical tabs mode, ideally together with Sidebery, for the most complete feature set and best overall experience.
 
 ## 🎬 Feature Showcase Video
@@ -33,7 +33,7 @@ For better video quality, watch on YouTube:
 
 ## 🆕 What's New
 
-**🦊 Latest: v6.5.3** — See [Full Changelog](./docs/CHANGELOG.md) for details.
+**🦊 Latest: v6.5.4** — See [Full Changelog](./docs/CHANGELOG.md) for details.
 
 <!-- END What's New -->
 

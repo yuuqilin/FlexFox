@@ -1,4 +1,4 @@
-# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
+﻿# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
  <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v154-orange?logo=firefox"></a>
@@ -17,8 +17,8 @@ FlexFox は、アクセシビリティを維持しながら画面の有効スペ
 
 > [!IMPORTANT]
 >
-> * **「カーソルを合わせた時にサイドバーを展開する」を有効にしていますか？** 無効にしてください。FlexFox を正しく動作させるには、このオプションをオフのままにする必要があります。
-> * **v6 より前のバージョンからアップデートしますか？** Sidebery のスタイルエディターから古いスタイルをすべて削除してください。
+> * **「カーソルを合わせた時にサイドバーを展開する」を有効にしていますか？** 無効にしてください。FlexFox を正しく動作させるには、このオプションをオフのままにする必要があります。（[ガイド](docs/USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#️-firefox-サイドバーの設定)）
+> * **v6 より前のバージョンからアップデートしますか？** Sidebery のスタイルエディターから古いスタイルをすべて削除してください。（[ガイド](docs/USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v6-より前のバージョンからアップデートする)）
 > * **推奨構成:** Firefox の垂直タブモードを使用し、可能であれば Sidebery を併用してください。最も多くの機能を利用でき、完成度の高い体験が得られます。
 
 ## 🎬 機能紹介動画
@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ## 🆕 最新情報
 
-**🦊 最新バージョン: v6.5.3** — 詳細は[更新履歴](./docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md)をご覧ください。
+**🦊 最新バージョン: v6.5.4** — 詳細は[更新履歴](./docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md)をご覧ください。
 
 <!-- END What's New -->
 

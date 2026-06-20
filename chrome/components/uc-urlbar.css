@@ -502,7 +502,7 @@
                 margin-inline-end: calc(var(--identity-box-margin-inline) + 0px);
             }
             ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
-                margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 0px) !important;
+                margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 6px) !important;
             }
             &:is(.chromeUI) {
                 ~ .urlbar-input-box {

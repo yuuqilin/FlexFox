@@ -24,8 +24,7 @@ async function extractSectionsSequentially(sections) {
   const rl = readline.createInterface({ input: stream, crlfDelay: Infinity });
 
   let currentSection = null;
-  let results = {};
-  let collecting = false;
+  const results = {};
 
   for await (const line of rl) {
     // Start of new section
@@ -34,35 +33,30 @@ async function extractSectionsSequentially(sections) {
         if (line.includes(section.start)) {
           currentSection = section;
           results[section.name] = [];
-          collecting = true;
           break;
         }
       }
       continue;
     }
 
-    if (collecting) {
-      // Abort condition (only for some sections like history)
-      if (currentSection.abortOn && line.includes(currentSection.abortOn)) {
-        results[currentSection.name] = '';
-        currentSection = null;
-        collecting = false;
-        continue;
-      }
-
-      // End of section
-      if (line.includes(currentSection.end)) {
-        results[currentSection.name] = results[currentSection.name].join('\n').trim();
-        currentSection = null;
-        collecting = false;
-        continue;
-      }
-
-      results[currentSection.name].push(line);
+    // Abort condition, used for sections that should be skipped in some contexts
+    if (currentSection.abortOn && line.includes(currentSection.abortOn)) {
+      results[currentSection.name] = '';
+      currentSection = null;
+      continue;
     }
+
+    // End of section
+    if (line.includes(currentSection.end)) {
+      results[currentSection.name] = results[currentSection.name].join('\n').trim();
+      currentSection = null;
+      continue;
+    }
+
+    results[currentSection.name].push(line);
   }
 
-  // Finalize any section still being collected (e.g. no end marker)
+  // Finalize any section still being collected, for example when no end marker exists
   for (const section of sections) {
     if (Array.isArray(results[section.name])) {
       results[section.name] = results[section.name].join('\n').trim();
@@ -74,6 +68,10 @@ async function extractSectionsSequentially(sections) {
 
 (async () => {
   try {
+    if (!fs.existsSync(changelogPath)) {
+      throw new Error(`CHANGELOG not found: ${changelogPath}`);
+    }
+
     // Define the two sections to extract, in order
     const sections = [
       {
@@ -105,9 +103,10 @@ async function extractSectionsSequentially(sections) {
     // Write to file
     await fs.promises.mkdir(outputDir, { recursive: true });
     await fs.promises.writeFile(outputPath, combined, 'utf8');
+
     console.log(`✅ Release notes written to ${outputPath}`);
   } catch (err) {
-    console.error('❌ Error extracting release notes:', err);
+    console.error('❌ Error extracting release notes:', err.message || err);
     process.exit(1);
   }
 })();

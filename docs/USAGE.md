@@ -8,11 +8,41 @@ For a complete reference of preferences and supported values, see [Preferences L
 
 ## 📚 Table of Contents
 
+- [Firefox Sidebar Settings](#️-firefox-sidebar-settings)
+- [Upgrading from Pre-v6 Versions](#-upgrading-from-pre-v6-versions)
 - [Recreating the Preview Interface](#-recreating-the-preview-interface)
 - [Layout Switching](#-layout-switching)
 - [Firefox Themes and Sidebery](#-firefox-themes-and-sidebery)
 - [Transparent Web Content, Mica, and Wallpapers](#️-transparent-web-content-mica-and-wallpapers)
 - [Improving Readability in Transparent Web Content](#-improving-readability-in-transparent-web-content)
+
+---
+
+## 🖱️ Firefox Sidebar Settings
+
+### Why doesn't FlexFox work correctly after enabling Firefox's `Expand sidebar on hover` option?
+
+FlexFox uses its own sidebar auto-hide and layout switching system. Firefox's built-in **Expand sidebar on hover** option changes the sidebar behavior and can interfere with several FlexFox features.
+
+This option is disabled by default and should remain unchecked for the best experience.
+
+To check the setting, right-click the **Sidebar toggle button** (Firefox logo) in the navigation bar, select **Customize Sidebar**, then make sure **Expand sidebar on hover** is unchecked.
+
+---
+
+## 🧹 Upgrading from Pre-v6 Versions
+
+### Why do I need to remove legacy FlexFox styles from the Sidebery Styles Editor?
+
+Before v6, FlexFox used `sidebery-styles.json` to inject custom CSS through the Sidebery Styles Editor.
+
+Starting with v6, all built-in Sidebery styles have been migrated to `uc-sidebery.css`. Legacy styles previously imported into the Sidebery Styles Editor are no longer used.
+
+Although these legacy styles remain compatible for now, removing them is strongly recommended to avoid duplicate style processing and potential conflicts with future updates.
+
+Open **Sidebery → Settings (gear icon) → Styles editor**, then delete all FlexFox-related styles from the **Sidebar** and **Group Page** tabs.
+
+Because all FlexFox Sidebery styles are now managed through `uc-sidebery.css`, enabling `uc.flex.skip-loading-uc-sidebery.css` completely disables FlexFox's Sidebery integration, making it easier to use your own custom styles or combine FlexFox with other style packs.
 
 ---
 
@@ -185,4 +215,3 @@ After enabling transparent web content, some websites may become difficult to re
    * Has no impact on page loading performance
    * See [Layout Switching](#-layout-switching) for setup instructions
    * The default background color is white and can be changed using `uc.flex.browser-solid-page-color-scheme`
-   
