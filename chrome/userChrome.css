@@ -1,10 +1,13 @@
-﻿/*            FlexFox v6.5.4            */
-/*      ____ _          ____            */
-/*     / __/ /__  _  __/ __/___  _  __  */
-/*    / /_/ / _ \| |/_/ /_/ __ \| |/_/  */
-/*   / __/ /  __/>  </ __/ /_/ />  <    */
-/*  /_/ \__\___/_/|_|_/  \____/_/|_|    */
-/*  __________________________________  */
+﻿/*                FlexFox v6.5.5               */
+/*     ____ _              ____                */
+/*    |  __| |  ___ __  __|  __| ___ __  __    */
+/*    | |_ | | / _ \\ \/ /| |_  / _ \\ \/ /    */
+/*    |  _|| ||  __/ >  < |  _|| (_) |>  <     */
+/*    |_|  |_| \___|/_/\_\|_|   \___//_/\_\    */
+/*                                             */
+/*    Maximize your view, shape it your way.   */
+/*     https://github.com/yuuqilin/FlexFox     */
+/*                                             */
 @import url(./components/uc-variables.css) not
     (-moz-pref("uc.flex.disable-flexfox") or -moz-pref("uc.flex.skip-loading-uc-variables.css"));
 @import url(./components/uc-icons.css) not

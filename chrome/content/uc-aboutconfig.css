@@ -1,37 +1,69 @@
 ﻿@-moz-document url("about:config") {
     /* Display FlexFox installation message */
-    @media not -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", false) {
-        body:lang(ja) {
-            &::before {
-                content: "🎉  FlexFox v6.5.4 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
-            }
-        }
-        body:lang(zh-CN) {
-            &::before {
-                content: "🎉  FlexFox v6.5.4 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
-            }
-        }
-        body:lang(zh-tw) {
-            &::before {
-                content: "🎉  FlexFox v6.5.4 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
+    @media not (-moz-pref("uc.flex.show-flexfox-version-info-in-about-config", false) or -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 0)) {
+        @media not -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 1) {
+            body::before {
+                /* !-- Start of version info 2 -- */
+                content: " ____ _              ____            \A|  __| |  ___ __  __|  __| ___ __  __\A| |_ | | / _ \\\\ \\/ /| |_  / _ \\\\ \\/ /\A|  _|| ||  __/ >  < |  _|| (_) |>  < \A|_|  |_| \\___|/_/\\_\\|_|   \\___//_/\\_\\\A\Av6.5.5\A\AMaximize your view, shape it your way.\A\Ahttps://github.com/yuuqilin/FlexFox";
+                /* !-- End of version info 2 -- */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                margin: 10px 10px 0px 10px;
+                padding-block-end: 14px;
+                width: calc(100% - 20px);
+                box-sizing: border-box;
+
+                /**/
+                color: light-dark(var(--text-color), cyan);
+                background-color: var(--table-row-background-color);
+                border: var(--prefs-table-border);
+                border-color: light-dark(var(--border-color), cyan);
+                border-radius: 4px;
+                white-space: pre;
+                line-height: 1;
+                font-family:
+                    Consolas, Menlo, Monaco, "Courier New", "DejaVu Sans Mono", "Liberation Mono", "Ubuntu Mono",
+                    monospace !important;
+                font-size: var(--font-size-root);
             }
         }
 
-        body::before {
-            content: "🎉  FlexFox v6.5.4 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
-            /* !-- End of version info -- */
-            display: block;
-            margin: 10px 10px 0px 10px;
-            padding: 12px 30px;
-            /**/
-            color: var(--text-color, var(--in-content-text-color));
-            background-color: var(--table-row-background-color);
-            border: var(--prefs-table-border);
-            border-radius: 4px;
-            white-space: pre-line;
-            line-height: 1.6;
-            font-family: monospace;
-            font-size: var(--font-size-root);
+        @media -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 1) {
+            /* !-- Start of version info 1 -- */
+            body:lang(ja) {
+                &::before {
+                    content: "🎉  FlexFox v6.5.5 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
+                }
+            }
+            body:lang(zh-CN) {
+                &::before {
+                    content: "🎉  FlexFox v6.5.5 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
+                }
+            }
+            body:lang(zh-tw) {
+                &::before {
+                    content: "🎉  FlexFox v6.5.5 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
+                }
+            }
+
+            body::before {
+                content: "🎉  FlexFox v6.5.5 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
+                /* !-- End of version info 1 -- */
+                display: block;
+                margin: 10px 10px 0px 10px;
+                padding: 12px 30px;
+                /**/
+                color: var(--text-color, var(--in-content-text-color));
+                background-color: var(--table-row-background-color);
+                border: var(--prefs-table-border);
+                border-radius: 4px;
+                white-space: pre-line;
+                line-height: 1.6;
+                font-family: monospace;
+                font-size: var(--font-size-root);
+            }
         }
     }
 
@@ -151,30 +183,282 @@
             pointer-events: none;
         }
     }
-}
 
-@keyframes messageFadeOut {
-    0%,
-    96% {
-        max-height: 200px;
-        padding: 12px 32px;
-        margin-bottom: 8px;
-        border-width: 2px;
-        opacity: 1;
-        visibility: visible;
-    }
-    99.99% {
-        padding: 0px 32px;
-        margin-bottom: 0;
-        border-width: 0px 2px;
+    @keyframes messageFadeOut {
+        0%,
+        96% {
+            max-height: 200px;
+            padding: 12px 32px;
+            margin-bottom: 8px;
+            border-width: 2px;
+            opacity: 1;
+            visibility: visible;
+        }
+        99.99% {
+            padding: 0px 32px;
+            margin-bottom: 0;
+            border-width: 0px 2px;
+        }
+
+        100% {
+            max-height: 0;
+            padding: 0;
+            margin-bottom: 0;
+            border-width: 0;
+            opacity: 0;
+            visibility: collapse;
+        }
     }
 
-    100% {
-        max-height: 0;
-        padding: 0;
-        margin-bottom: 0;
-        border-width: 0;
-        opacity: 0;
-        visibility: collapse;
+    /* Display FlexFox's preference descriptions on the right side of the preferences list */
+    @media not (-moz-pref("uc.flex.show-flexfox-version-info-in-about-config", false) or -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 0) or -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 1)) {
+        body {
+            /* Initial state for the preference description (hidden) */
+            --uc-prefs-desc-width: 0vw;
+            --uc-prefs-desc-height: 0px;
+            --uc-prefs-desc-margin: 0px;
+            --uc-prefs-desc-padding: 0px;
+            --uc-prefs-desc-border: 0px;
+            --uc-prefs-desc-opacity: 0;
+            --uc-prefs-desc-pointer: none;
+            --uc-prefs-desc-delay: 0s; /* No delay when hiding */
+
+            /* Split body into 2 columns and 4 rows */
+            display: grid;
+            grid-template-columns: minmax(644px, 1fr) minmax(
+                    0,
+                    calc(var(--uc-prefs-desc-width) + var(--uc-prefs-desc-margin))
+                );
+            grid-template-rows: auto auto auto auto;
+            align-items: start;
+
+            transition: grid-template-columns 0.4s ease;
+        }
+
+        /* Expanded state for the preference description (visible) */
+        body:has(> #prefs[has-visible-prefs]) {
+            --uc-prefs-desc-width: 30vw;
+            --uc-prefs-desc-height: auto;
+            --uc-prefs-desc-margin: 10px;
+            --uc-prefs-desc-padding: 0px 15px 54px 15px;
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("browser.tabs.allow_transparent_browser"),
+                -moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser") {
+                --uc-prefs-desc-padding: 0px 15px 40px 15px;
+            }
+            --uc-prefs-desc-border: 1px;
+            --uc-prefs-desc-opacity: 1;
+            /*
+            --uc-prefs-desc-pointer: auto;
+            */
+            --uc-prefs-desc-delay: 0.15s; /* Opacity transition delay when showing */
+        }
+
+        /* Place the FlexFox version info in the first row */
+        body::before {
+            grid-column: 1 / -1;
+            grid-row: 1;
+        }
+
+        #toolbar {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            margin-bottom: 10px !important;
+        }
+
+        /* Place the preferences list in the third row, left column */
+        #prefs {
+            grid-column: 1 / -1;
+            grid-row: 3;
+            width: 100% !important;
+            margin-top: 0 !important;
+        }
+
+        #prefs th {
+            width: 40%;
+        }
+
+        #prefs .cell-reset {
+            padding-right: var(--uc-prefs-desc-width) !important;
+            transition: padding-right 0.4s ease;
+        }
+
+        .config-background-wrapper {
+            grid-column: 1;
+            grid-row: 4;
+        }
+
+        /* Place the FlexFox preference description in the third row, right column */
+        body:lang(ja) {
+            &::after {
+                content: "▸ UI文字に縁取りを追加\A" "▸ 拡張機能のツールバー色を適用\A" "▸ 0無効、1下、2上、3画面端\A"
+                    "▸ 0無効、1タブ上で表示\A" "▸ ホバー時にツールバーアイコンをフェード表示\A"
+                    "▸ URLバーアイコンをホバーで表示\A" "▸ 画面端ホバーまでウィンドウボタンを隠す\A"
+                    "▸ 全テーマでMicaを強制有効化\A" "▸ 0-4 背景の透過量\A" "▸ 0黒、1白、2Firefox設定準拠\A"
+                    "▸ 壁紙のAcrylicぼかしを無効化\A" "▸ 0自動、1左、2中央、3右\A" "▸ 0-4 ダーク時のコントラスト\A"
+                    "▸ ブラウザー壁紙を有効化\A" "▸ 0テーマ、1-9カスタム画像\A" "▸ SVG壁紙を有効化\A"
+                    "▸ 0-4 壁紙の透過量\A" "▸ 0無効、1弱、2強\A" "▸ ブックマークバーを常に表示\A"
+                    "▸ 検索バーを常に表示\A" "▸ FlexFoxを即座に無効化\A" "▸ メニューやパネルのアイコンを非表示\A"
+                    "▸ ナビバー先頭項目の後ろの余白を削除\A" "▸ 垂直タブを常に展開表示\A"
+                    "▸ 非アクティブタブの閉じるを非表示\A" "▸ 0標準、1単色、2パターン\A"
+                    "▸ 0無効、1-2 Webコンテンツ領域の余白拡大\A" "▸ Webコンテンツ領域のすべての角を丸める\A"
+                    "▸ 半透明メニューとポップアップ\A" "▸ 1左上、2右上、3右下\A" "▸ 画面端ホバーまで垂直タブを隠す\A"
+                    "▸ 画面端ホバーまで上部ツールバーを隠す\A" "▸ 0無効、1-4幅拡大、2/4はアニメ\A"
+                    "▸ ナビバー高さを3px増加\A" "▸ サイドバー展開幅を拡大\A" "▸ 0無制限、1-5個、横タブ2倍\A"
+                    "▸ 0無制限、2-8個ピン留めタブ\A" "▸ 1狭い、2標準、3広い\A" "▸ PiP音量ボタンを上へ移動\A"
+                    "▸ 0無効、1フォーカス時、2入力時\A" "▸ ウィンドウボタンを左側へ移動\A"
+                    "▸ ブックマークフォルダーを非表示\A" "▸ ブックマーク名を非表示\A" "▸ サイドバーストライプを削除\A"
+                    "▸ 水平タブバーにウィンドウボタンを表示\A" "▸ 標準ブックマークスターへ戻す\A"
+                    "▸ 0小さい角丸、1大きい角丸、2四角、3URLのみ\A" "▸ 標準ウィンドウボタンへ戻す\A"
+                    "▸ 0非表示、1版のみ、2説明付き\A" "▸ ピン留めタブのサイズ変更バー表示\A"
+                    "▸ タブアイコンのホバーで閉じるボタン表示\A" "▸ 0無効、1全タブ、2読込済み\A"
+                    "▸ タブ名の前に番号を表示\A" "▸ Sidebery幅の手動変更を許可\A" "▸ ツールバー速度を同期\A"
+                    "▸ Sideberyアイコン拡大を無効化\A" "▸ サイドバー速度を高速化\A" "▸ サイドバー速度を低速化\A"
+                    "▸ 0標準、1フィルター、2山形\A" "▸ 0標準、1ブランド、2ブラウザー、3Sys、4旗\A"
+                    "▸ 0クラシック、1-10アクセント色\A" "▸ アクセント色を全アイコンへ適用\A"
+                    "▸ グラデーション色を使用\A" "▸ 0パネル、1ロゴ、2山形\A" "▸ アクティブ色をナビアイコンへ適用\A"
+                    "▸ 0ツリー、1三角、2フォルダー\A" "▸ 0なし、1展開/折りたたみ、2+インジケータ回転\A"
+                    "▸ タブグループ名を中央配置\A" "▸ 1ピン留めは枠線、2背景ハイライト\A"
+                    "▸ タブ間移動時に残像ハイライトを追加\A" "▸ 1Tokyo Night、2Firefox Acorn\A"
+                    "▸ 1フラット、2凹み、3刻印、4シームレス\A" "▸ URLバー文字を中央配置\A" "▸ 0無効、1選択中、2全て\A"
+                    "▸ 1Traffic、2Yosemite、3GTK\A" "▸ ウィンドウボタンを上へ戻す\A" "▸ ウィンドウボタンを縮小\A"
+                    "▸ コンパクト拡張パネルを使用\A";
+            }
+        }
+        body:lang(zh-CN) {
+            &::after {
+                content: "▸ 为UI文字添加描边\A" "▸ 应用扩展修改的工具栏颜色\A" "▸ 0关闭，1下方，2上方，3顶部边缘\A"
+                    "▸ 0关闭，1悬停标签页时显示\A" "▸ 悬停时渐显工具栏图标\A" "▸ 悬停时滑出地址栏图标\A"
+                    "▸ 仅在边缘悬停时显示窗口按钮\A" "▸ 在所有主题上强制启用Mica\A" "▸ 0-4 透出更多背景\A"
+                    "▸ 0黑色，1白色，2跟随Firefox\A" "▸ 禁用壁纸Acrylic模糊效果\A" "▸ 0自动，1左侧，2居中，3右侧\A"
+                    "▸ 0-4 提高深色模式对比度\A" "▸ 启用浏览器壁纸\A" "▸ 0主题，1-9自定义图片\A" "▸ 启用SVG壁纸\A"
+                    "▸ 0-4 透出更多壁纸\A" "▸ 0关闭，1轻度，2强烈\A" "▸ 始终显示书签工具栏\A" "▸ 始终显示查找栏\A"
+                    "▸ 立即禁用全部FlexFox样式\A" "▸ 隐藏菜单和面板图标\A" "▸ 移除导航栏首项后的间距\A"
+                    "▸ 垂直标签页始终展开\A" "▸ 隐藏非活动标签页关闭按钮\A" "▸ 0默认，1纯色，2图案图标\A"
+                    "▸ 0关闭，1-2增大网页内容区边距\A" "▸ 圆角化整个网页内容区域\A" "▸ 启用半透明弹出层和菜单\A"
+                    "▸ 1左上，2右上，3右下\A" "▸ 仅在边缘悬停时显示垂直标签页\A" "▸ 仅在边缘悬停时显示顶部工具栏\A"
+                    "▸ 0关闭，1-4越宽，2/4带动画\A" "▸ 导航栏高度增加3px\A" "▸ 增大侧栏展开宽度\A"
+                    "▸ 0不限，1-5个，水平标签页2倍\A" "▸ 0不限，2-8个固定标签页\A" "▸ 1紧凑，2默认，3宽松\A"
+                    "▸ 将PiP音量按钮移到顶部\A" "▸ 0关闭，1聚焦时，2输入时\A" "▸ 将窗口按钮移到左侧\A"
+                    "▸ 隐藏书签文件夹图标\A" "▸ 隐藏书签名称\A" "▸ 移除侧栏彩带\A" "▸ 在水平标签栏显示窗口按钮\A"
+                    "▸ 恢复默认收藏夹星标\A" "▸ 0小圆角，1大圆角，2直角，3仅网址栏\A" "▸ 恢复默认窗口按钮样式\A"
+                    "▸ 0隐藏、1仅版本、2附选项说明\A" "▸ 显示固定标签页调整分隔条\A" "▸ 悬停标签页图标时显示关闭按钮\A"
+                    "▸ 0关闭，1全部标签页，2已加载\A" "▸ 在标签名称前显示编号\A" "▸ 允许手动调整Sidebery宽度\A"
+                    "▸ 同步工具栏与侧栏动画速度\A" "▸ 禁用Sidebery图标放大\A" "▸ 加快侧栏动画速度\A"
+                    "▸ 减慢侧栏动画速度\A" "▸ 0默认，1筛选器，2箭头\A" "▸ 0默认，1品牌，2浏览器，3系统，4旗帜\A"
+                    "▸ 0经典，1-10强调色\A" "▸ 将强调色应用到全部图标\A" "▸ 使用渐变强调色\A" "▸ 0面板，1标志，2箭头\A"
+                    "▸ 导航图标使用当前面板颜色\A" "▸ 0树状，1三角，2文件夹\A" "▸ 0无，1展开/折叠，2加指示器旋转\A"
+                    "▸ 标签组名称居中显示\A" "▸ 1固定标签页边框，2背景高亮\A" "▸ 在标签页间移动时添加拖尾高亮\A"
+                    "▸ 1Tokyo Night，2Firefox Acorn\A" "▸ 1平面，2内嵌，3凹刻，4无缝\A" "▸ 地址栏文字居中显示\A"
+                    "▸ 0关闭，1当前面板，2全部\A" "▸ 1Traffic，2Yosemite，3GTK\A" "▸ 恢复较高的窗口按钮位置\A"
+                    "▸ 缩小窗口按钮尺寸\A" "▸ 使用紧凑版扩展面板\A";
+            }
+        }
+        body:lang(zh-tw) {
+            &::after {
+                content: "▸ 為UI文字加入描邊效果\A" "▸ 套用擴充功能變更的工具列色彩\A"
+                    "▸ 0關閉、1下方、2上方、3頂端邊緣\A" "▸ 0關閉、1懸停分頁時顯示\A" "▸ 懸停時淡入工具列圖示\A"
+                    "▸ 懸停時滑出網址列圖示\A" "▸ 僅在邊緣懸停時顯示視窗按鈕\A" "▸ 在所有主題強制啟用Mica\A"
+                    "▸ 0-4 透出更多背景\A" "▸ 0黑色、1白色、2跟隨Firefox\A" "▸ 停用壁紙Acrylic模糊效果\A"
+                    "▸ 0自動、1靠左、2置中、3靠右\A" "▸ 0-4 提高深色模式對比度\A" "▸ 啟用瀏覽器壁紙功能\A"
+                    "▸ 0主題、1-9自訂圖片\A" "▸ 啟用SVG壁紙\A" "▸ 0-4 透出更多桌布\A" "▸ 0關閉、1輕度、2強烈\A"
+                    "▸ 永遠顯示書籤工具列\A" "▸ 永遠顯示搜尋列\A" "▸ 立即停用所有FlexFox樣式\A" "▸ 隱藏選單與面板圖示\A"
+                    "▸ 移除導覽列首項後方間距\A" "▸ 垂直分頁永遠維持展開\A" "▸ 隱藏非作用中分頁關閉鈕\A"
+                    "▸ 0預設、1單色、2圖案圖示\A" "▸ 0關閉、1-2增加網頁內容區邊距\A" "▸ 將整個網頁內容區域圓角化\A"
+                    "▸ 啟用半透明彈出層與選單\A" "▸ 1左上、2右上、3右下\A" "▸ 僅在邊緣懸停時顯示垂直分頁\A"
+                    "▸ 僅在邊緣懸停時顯示頂端工具列\A" "▸ 0關閉、1-4越寬、2/4帶動畫\A" "▸ 導覽列高度增加3px\A"
+                    "▸ 增加側邊欄展開寬度\A" "▸ 0不限、1-5個、水平分頁2倍\A" "▸ 0不限、2-8個釘選分頁\A"
+                    "▸ 1緊湊、2標準、3寬鬆\A" "▸ 將PiP音量按鈕移至頂部\A" "▸ 0關閉、1聚焦時、2輸入時\A"
+                    "▸ 將視窗按鈕移到左側\A" "▸ 隱藏書籤資料夾圖示\A" "▸ 隱藏書籤名稱文字\A" "▸ 移除側邊欄彩帶\A"
+                    "▸ 在水平分頁列顯示視窗按鈕\A" "▸ 恢復預設書籤星號圖示\A" "▸ 0小圓角、1大圓角、2直角、3僅網址列\A"
+                    "▸ 恢復預設視窗控制按鈕\A" "▸ 0隱藏、1僅版本、2附選項說明\A" "▸ 顯示固定分頁調整分隔條\A"
+                    "▸ 懸停分頁圖示時顯示關閉按鈕\A" "▸ 0關閉、1全部分頁、2已載入\A" "▸ 在分頁標題前顯示編號\A"
+                    "▸ 允許手動調整Sidebery寬度\A" "▸ 同步工具列與側欄動畫速度\A" "▸ 停用Sidebery圖示放大\A"
+                    "▸ 加快側欄動畫速度\A" "▸ 減慢側欄動畫速度\A" "▸ 0預設、1篩選器、2箭頭\A"
+                    "▸ 0預設、1品牌、2瀏覽器、3系統、4旗幟\A" "▸ 0經典、1-10強調色\A" "▸ 將強調色套用至所有圖示\A"
+                    "▸ 使用漸層強調色\A" "▸ 0面板、1標誌、2箭頭\A" "▸ 導覽圖示使用目前面板色彩\A"
+                    "▸ 0樹狀、1三角形、2資料夾\A" "▸ 0無、1展開/摺疊、2加指示器旋轉\A" "▸ 分頁群組名稱置中顯示\A"
+                    "▸ 1釘選分頁邊框、2背景高亮\A" "▸ 在分頁間移動時加入拖尾高亮\A" "▸ 1Tokyo Night、2Firefox Acorn\A"
+                    "▸ 1平面、2內嵌、3凹刻、4無縫\A" "▸ 網址列文字置中顯示\A" "▸ 0關閉、1目前分頁、2全部\A"
+                    "▸ 1Traffic、2Yosemite、3GTK\A" "▸ 恢復較高的視窗按鈕位置\A" "▸ 縮小視窗按鈕尺寸\A"
+                    "▸ 使用精簡版擴充功能面板\A";
+            }
+        }
+
+        body::after {
+            content: "▸ Add outline to UI text\A" "▸ Force add-on toolbar colors\A"
+                "▸ 0 off, 1 below, 2 above, 3 top edge\A" "▸ 0 off, 1 show navbar on tab hover\A"
+                "▸ Fade in toolbar icons on hover\A" "▸ Slide URL bar icons in on hover\A"
+                "▸ Hide window controls until edge hover\A" "▸ Force Mica on all themes\A"
+                "▸ 0-4 reveal more background\A" "▸ 0 black, 1 white, 2 follow Firefox\A"
+                "▸ Disable wallpaper acrylic blur\A" "▸ 0 auto, 1 left, 2 center, 3 right\A"
+                "▸ 0-4 increase dark-mode contrast\A" "▸ Enable custom browser wallpapers\A"
+                "▸ 0 theme, 1-9 custom images\A" "▸ Enable SVG wallpapers\A" "▸ 0-4 reveal more wallpaper\A"
+                "▸ 0 off, 1 light dim, 2 strong dim\A" "▸ Keep bookmarks toolbar visible\A" "▸ Keep Findbar visible\A"
+                "▸ Disable all FlexFox styles instantly\A" "▸ Remove icons from menus and panels\A"
+                "▸ Remove spacing after first navbar item\A" "▸ Keep vertical tabs always expanded\A"
+                "▸ Hide close buttons on inactive tabs\A" "▸ 0 default, 1 solid, 2 patterned icons\A"
+                "▸ 0 off, 1-2 larger web-content margins\A" "▸ Round all web-content area corners\A"
+                "▸ Enable translucent popups and menus\A" "▸ 1 top-left, 2 top-right, 3 bottom-right\A"
+                "▸ Hide vertical tabs until edge hover\A" "▸ Hide top toolbars until edge hover\A"
+                "▸ 0 off, 1-4 wider, 2/4 animated\A" "▸ Increase navbar height by 3px\A"
+                "▸ Increase expanded sidebar width\A" "▸ 0 unlimited, 1-5 tabs, horizontal 2x\A"
+                "▸ 0 unlimited, 2-8 pinned tabs\A" "▸ 1 small, 2 medium, 3 large spacing\A"
+                "▸ Move PiP volume button to top\A" "▸ 0 off, 1 on focus, 2 while typing\A"
+                "▸ Move window controls to the left\A" "▸ Hide bookmark folder icons\A" "▸ Hide bookmark labels\A"
+                "▸ Remove the sidebar stripe\A" "▸ Show window buttons on horizontal tab bar\A"
+                "▸ Restore default bookmark star\A" "▸ 0 small corners, 1 large, 2 square, 3 URL\A"
+                "▸ Restore default window controls\A" "▸ 0 hide, 1 version, 2 version + descriptions\A"
+                "▸ Show pinned-tabs resize separator\A" "▸ Show tab close button on favicon hover\A"
+                "▸ 0 off, 1 all tabs, 2 loaded only\A" "▸ Show tab numbers in labels\A"
+                "▸ Allow manual Sidebery width resizing\A" "▸ Sync toolbar speed with sidebar\A"
+                "▸ Disable Sidebery icon enlargement\A" "▸ Speed up sidebar animations\A"
+                "▸ Slow down sidebar animations\A" "▸ 0 default, 1 filter, 2 chevron\A"
+                "▸ 0 default, 1 brand, 2 browser, 3 sys, 4 flag\A" "▸ 0 classic, 1-10 accent colors\A"
+                "▸ Apply accent color to all icons\A" "▸ Use gradient accent color\A" "▸ 0 panel, 1 logo, 2 chevron\A"
+                "▸ Use active panel color for nav icon\A" "▸ 0 tree, 1 triangle, 2 folder box\A"
+                "▸ 0 none, 1 expand/collapse, 2 + indicator\A" "▸ Center tab group labels\A"
+                "▸ 1 pinned border, 2 pinned background\A" "▸ Add cursor-trail highlight across tabs\A"
+                "▸ 1 Tokyo Night, 2 Firefox Acorn\A" "▸ 1 flat, 2 inset, 3 debossed, 4 seamless\A"
+                "▸ Center URL bar text\A" "▸ 0 off, 1 focused, 2 all outlines\A" "▸ 1 traffic, 2 Yosemite, 3 GTK\A"
+                "▸ Restore higher window control position\A" "▸ Shrink window controls\A"
+                "▸ Use compact extensions panel\A";
+
+            grid-column: 2;
+            grid-row: 3 / span 2;
+            position: relative;
+            box-sizing: border-box;
+
+            width: var(--uc-prefs-desc-width);
+            height: var(--uc-prefs-desc-height);
+            margin: 0 var(--uc-prefs-desc-margin) var(--uc-prefs-desc-margin) 0;
+            padding: var(--uc-prefs-desc-padding);
+            /*
+            border: var(--uc-prefs-desc-border) solid var(--border-color);
+
+            border-radius: 4px;
+            */
+            white-space: pre-wrap;
+            line-height: calc(2.1em + 8px);
+            overflow: hidden;
+
+            /*
+            background-color: var(--background-color-box);
+            */
+            background-color: transparent;
+            color: var(--text-color);
+            z-index: 0;
+
+            opacity: var(--uc-prefs-desc-opacity);
+            pointer-events: var(--uc-prefs-desc-pointer);
+
+            transition:
+                width 0.4s ease,
+                height 0.4s ease,
+                margin 0.4s ease,
+                padding 0.4s ease,
+                border-width 0.4s ease,
+                opacity 0.25s ease var(--uc-prefs-desc-delay);
+        }
     }
 }

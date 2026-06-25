@@ -273,7 +273,7 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.show-flexfox-version-info-in-about-config` | `true` | `about:config` にインストール済みの FlexFox のバージョン情報を表示します。最新リリースのバージョンと比較し、更新が必要かどうかを確認できます。 |
+| `uc.flex.show-flexfox-version-info-in-about-config` | `0`-`2`<br>(`2`) | `about:config` に表示される FlexFox のバージョン項目を制御します。`0` = 非表示、`1` = バージョンのみ表示、`2` = バージョンと設定項目の説明を表示（デフォルト）。設定項目の説明は完全な `uc.flex` 一覧に合わせて配置されるため、対応を保つには `user.js` をインポートするか、すべての FlexFox 設定項目を手動で追加してください。 |
 | `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2`<br>(`0`) | 「すべてのタブを一覧表示」ボタンに現在開いているタブ数を表示します。値：`0` = 無効、`1` = すべてのタブ数を表示、`2` = 読み込み済みタブのみ表示。 |
 | `uc.flex.show-tab-number-in-tab-label` | `false` | 各タブのラベルの先頭に番号を表示します。この設定はネイティブタブでのみ有効です。タブの幅が狭く、ラベルの内容を識別しにくい場合でも、目的のタブをすばやく見つけやすくなります。 |
 | `uc.flex.move-pip-volume-to-top` | `false` | ピクチャーインピクチャ（PiP）ウィンドウの音量ボタンを上部に移動します。 |
@@ -312,7 +312,7 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `browser.tabs.allow_transparent_browser` | `false` | ウェブコンテンツと Sidebery の背景を透過し、Mica やカスタム壁紙を表示できるようにします。**設定を反映するには Firefox の再起動が必要です。** FlexFox はすべての組み込み `about:*` ページの透過表示に対応しています。対応ページの一覧は `about:about` で確認できます。通常のウェブサイトを透過表示するには、[Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) または [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 拡張機能が必要です。透過によって文字が読みにくくなる場合は、[UltimaDark](https://addons.mozilla.org/firefox/addon/ultimadark/) や [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) を利用するか、ツールバーボタンまたはショートカットキーで FlexFox の `Solid Page` 機能に切り替えてください。詳しくは [Layout Switching via Hotkeys]() を参照してください。 |
+| `browser.tabs.allow_transparent_browser` | `false` | ウェブコンテンツと Sidebery の背景を透過し、Mica やカスタム壁紙を表示できるようにします。**設定を反映するには Firefox の再起動が必要です。** FlexFox はすべての組み込み `about:*` ページの透過表示に対応しています。対応ページの一覧は `about:about` で確認できます。通常のウェブサイトを透過表示するには、[Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) または [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 拡張機能が必要です。透過によって文字が読みにくくなる場合は、[UltimaDark](https://addons.mozilla.org/firefox/addon/ultimadark/) や [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/) を利用するか、ツールバーボタンまたはショートカットキーで FlexFox の `Solid Page` 機能に切り替えてください。詳しくは「[透明なウェブコンテンツの可読性を向上させる](USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-透過表示時の視認性改善)」を参照してください。 |
 | `uc.flex.browser-solid-page-color-scheme` | `0`-`2`<br>(`1`) | `Solid Page` 使用時の背景色を設定します。値：`0` = 黒、`1` = 白（デフォルト）、`2` = Firefox の「ウェブサイトの外観」設定に従う。 |
 | `uc.flex.enable-translucent-urlbar-popup-and-menus` | `false` | Mica やカスタム壁紙を使用せずに、メニュー、パネル、URL バーのポップアップに半透明効果を適用します。透明度は `uc.flex.browser-mica-transparency-level` で調整できます。Mica またはカスタム壁紙を使用している場合、この効果は自動的に有効になるため、このオプションは機能しません。 |
 

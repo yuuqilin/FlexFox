@@ -273,7 +273,7 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.show-flexfox-version-info-in-about-config` | `true` | 在 `about:config` 页面显示已安装的 FlexFox 版本信息，方便与最新发布版本进行比较，确认是否需要更新。 |
+| `uc.flex.show-flexfox-version-info-in-about-config` | `0`-`2`<br>(`2`) | 控制 `about:config` 中 FlexFox 版本条目的显示方式。`0` = 不显示版本信息，`1` = 仅显示版本信息，`2` = 显示版本信息及选项说明（默认）。选项说明会按照完整的 `uc.flex` 列表对齐显示，因此需要导入 `user.js`，或手动补齐所有 FlexFox 选项，才能保持对应关系。 |
 | `uc.flex.show-tab-count-in-alltabs-button` | `0`-`2`<br>(`0`) | 在“显示所有标签页”按钮上显示当前打开的标签页数量。取值：`0` = 关闭，`1` = 显示所有标签页数量，`2` = 仅显示已加载标签页数量。 |
 | `uc.flex.show-tab-number-in-tab-label` | `false` | 在标签页标题前显示编号。此选项仅适用于原生标签页，可帮助快速定位特定标签页，尤其适合标签页宽度过窄、无法显示足够标题信息时使用。 |
 | `uc.flex.move-pip-volume-to-top` | `false` | 将画中画（PiP）窗口中的音量控制按钮移动到顶部。 |
@@ -312,7 +312,7 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `browser.tabs.allow_transparent_browser` | `false` | 允许网页内容和 Sidebery 背景透明，以显示 Mica 或自定义壁纸。**修改后需要重新启动 Firefox 才会生效。** FlexFox 支持所有内置 `about:*` 页面透明化，可通过 `about:about` 查看完整列表。普通网页需要安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 或 [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 扩展才能实现透明效果。如果透明背景导致文字难以阅读，可使用 [UltimaDark](https://addons.mozilla.org/firefox/addon/ultimadark/) 或 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/)，也可以通过工具栏按钮或快捷键切换 FlexFox 内置的 `Solid Page` 功能。详见 [Layout Switching via Hotkeys]()。 |
+| `browser.tabs.allow_transparent_browser` | `false` | 允许网页内容和 Sidebery 背景透明，以显示 Mica 或自定义壁纸。**修改后需要重新启动 Firefox 才会生效。** FlexFox 支持所有内置 `about:*` 页面透明化，可通过 `about:about` 查看完整列表。普通网页需要安装 [Transparent Zen](https://addons.mozilla.org/firefox/addon/transparent-zen/) 或 [Zen Internet](https://addons.mozilla.org/firefox/addon/zen-internet/) 扩展才能实现透明效果。如果透明背景导致文字难以阅读，可使用 [UltimaDark](https://addons.mozilla.org/firefox/addon/ultimadark/) 或 [Dark Reader](https://addons.mozilla.org/firefox/addon/darkreader/)，也可以通过工具栏按钮或快捷键切换 FlexFox 内置的 `Solid Page` 功能。详见“[改善透明网页中的文字可读性](USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-改善透明网页的可读性)”。 |
 | `uc.flex.browser-solid-page-color-scheme` | `0`-`2`<br>(`1`) | 设置 `Solid Page` 使用的纯色背景。取值：`0` = 黑色，`1` = 白色（默认），`2` = 跟随 Firefox“网站外观”设置。 |
 | `uc.flex.enable-translucent-urlbar-popup-and-menus` | `false` | 在不使用 Mica 或自定义壁纸的情况下，为菜单、面板和地址栏弹出面板启用半透明效果。透明度可通过 `uc.flex.browser-mica-transparency-level` 调整。启用 Mica 或自定义壁纸后，此效果会自动生效，因此此选项不会产生作用。 |
 

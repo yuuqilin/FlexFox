@@ -33,7 +33,7 @@ For better video quality, watch on YouTube:
 
 ## 🆕 What's New
 
-**🦊 Latest: v6.5.4** — See [Full Changelog](./docs/CHANGELOG.md) for details.
+**🦊 Latest: v6.5.5** — See [Full Changelog](./docs/CHANGELOG.md) for details.
 
 <!-- END What's New -->
 
@@ -116,7 +116,7 @@ When reusing styles from existing FlexFox files (such as `uc-variables.css`), co
 
 3. Open `about:support`, locate **Profile Folder**, and click **Open Folder** to access your Firefox profile directory.
 
-4. Copy the `chrome` folder from the archive root and the `user.js` file from the `scripts` directory into your Firefox profile folder.
+4. Copy the `chrome` folder and `user.js` file from the archive root into your Firefox profile folder.
 
 5. (Optional) Open `user.js` in a text editor.
 
@@ -156,38 +156,33 @@ For future updates, simply re-run the same method. No additional manual steps ar
 
 Run one of the commands below in a PowerShell window.
 
-Silent installation automatically uses the default installation path without prompting for input, making it suitable for scheduled or unattended updates.
+These commands support the following command-line options:
+
+* `-ProfilePath 'path'` / `--profile-path 'path'`
+  * Specifies the Firefox profile folder for installation, bypassing the path selection prompt.
+
+* `-Silent` / `--silent`
+  * Performs a silent installation using the specified profile. If `-ProfilePath` is omitted, the first detected Firefox profile is used. This option skips all prompts and will not copy `user.js`.
+  * Suitable for scheduled tasks or unattended updates.
 
 **Online installation**
 
 ```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
-```
-
-**Silent online installation**
-
-```powershell
-$env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & ([scriptblock]::Create(((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/install-flexfox.ps1')) -replace '^\uFEFF', ''))
 ```
 
 **Local installation**
 
-Download [`deploy-userchrome.ps1`](https://github.com/yuuqilin/FlexFox/raw/refs/heads/main/deploy-userchrome.ps1) and run:
+Download [`install-flexfox.ps1`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/install-flexfox.ps1) and run:
 
 ```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\install-flexfox.ps1'
 ```
 
-**Silent local installation**
+**Local scheduled silent update**
 
 ```powershell
-$env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
-```
-
-**Scheduled Task or Run dialog**
-
-```powershell
-powershell -ExecutionPolicy Bypass -Command "$env:FLEXFOX_INSTALL_MODE = 'silent'; .\deploy-userchrome.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Path\To\install-flexfox.ps1" -ProfilePath "C:\Path\To\Firefox\Profile" -Silent
 ```
 
 </details>
@@ -197,31 +192,57 @@ powershell -ExecutionPolicy Bypass -Command "$env:FLEXFOX_INSTALL_MODE = 'silent
 <details>
 <summary><i>[Click to expand]</i> 👇</summary>
 
-Use one of the Git pull scripts included in the `scripts` folder for your environment. These scripts will:
+Choose the appropriate script for your operating system to initialize your Firefox profile folder as a Git working directory or update an existing one. These scripts track the FlexFox repository and update only the `chrome` folder, ignoring other project files.
 
-* Automatically set your Firefox profile folder as a Git working directory
-* Track the FlexFox repository as a remote
-* Download and update only the `chrome` folder
+* Windows: [`git-pull-chrome-only.ps1`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.ps1)
+* macOS / Linux: [`git-pull-chrome-only.sh`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.sh)
 
-Alternatively, you can configure this manually:
+On the first run, the script prompts you to select or enter your Firefox profile folder. Subsequent runs automatically update the previously configured directory. If multiple working directories are detected, you will be prompted to choose one.
+
+The scripts support the following command-line options:
+
+* `-ProfilePath 'path'` / `--profile-path 'path'`
+  * Specifies the target Firefox profile folder, bypassing the interactive prompt.
+
+* `-Silent` / `--silent`
+  * Performs a silent update using the specified profile. If `-ProfilePath` is omitted, the previously configured directory is used. If no managed working directory is found or multiple managed working directories are detected, the script displays an error message and exits without updating.
+  * Suitable for scheduled tasks or unattended updates. Use it alongside the profile path option to keep the target explicit.
+
+Untracked custom files, including `components/uc-user-settings.css` and `content/uc-custom-content.css`, are preserved during updates. If tracked FlexFox files contain uncommitted changes, the update stops without modifying them.
+
+If a Git merge conflict occurs, interactive mode allows you to abort and restore the previous state, or retain the conflict for manual resolution. Silent mode automatically aborts the merge, restores the previous state, reports the conflict, and exits.
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\git-pull-chrome-only.ps1' -ProfilePath 'C:\Path\To\Firefox\Profile' -Silent
+```
+
+```bash
+bash "/path/to/git-pull-chrome-only.sh" --profile-path "/path/to/firefox/profile" --silent
+```
+
+Alternatively, you can manually initialize and configure the working directory using standard Git commands:
 
 **First-time setup**
 
 ```bash
 git init
 git remote add origin https://github.com/yuuqilin/FlexFox.git
+git remote set-branches origin main
+git config remote.origin.tagOpt --no-tags
 git sparse-checkout init --no-cone
 git sparse-checkout set /chrome
-git fetch origin
+git fetch --no-tags origin
 git checkout -b main origin/main
 ```
 
 **Manual update**
 
 ```bash
-git fetch origin
+git fetch --no-tags --prune origin
 git checkout main
-git merge origin/main --allow-unrelated-histories
+git sparse-checkout set /chrome
+git merge --no-edit origin/main
+git sparse-checkout reapply
 ```
 
 </details>

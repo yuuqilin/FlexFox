@@ -252,8 +252,11 @@ user_pref("uc.flex.style-toolbar-bgcolor",                          1);
 user_pref("uc.flex.revert-to-original-flat-corner-style",           0);
 
 /* 🧰 Utilities & Extras */
-/* Shows the installed FlexFox version in about:config. */
-user_pref("uc.flex.show-flexfox-version-info-in-about-config",   true);
+/* Controls the FlexFox version entry shown in about:config.
+   0 = Hide version information
+   1 = Show version only
+   2 = Show version and preference descriptions (default) */
+user_pref("uc.flex.show-flexfox-version-info-in-about-config",      2);
 /* Shows the tab count on the "List All Tabs" button.
    0 = Off
    1 = All tabs

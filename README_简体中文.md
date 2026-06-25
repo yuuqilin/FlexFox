@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ## 🆕 更新内容
 
-**🦊 最新版本：v6.5.4** — 详细内容请参阅[更新日志](./docs/CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)。
+**🦊 最新版本：v6.5.5** — 详细内容请参阅[更新日志](./docs/CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)。
 
 <!-- END What's New -->
 
@@ -116,7 +116,7 @@ FlexFox 的大部分功能、布局开关以及界面调整都直接集成在 Fi
 
 3. 打开 `about:support`，找到 **配置文件夹**，点击 **打开文件夹** 进入 Firefox 配置目录。
 
-4. 将压缩包根目录中的 `chrome` 文件夹，以及 `scripts` 文件夹内的 `user.js` 复制到 Firefox 配置目录中。
+4. 将压缩包根目录中的 `chrome` 文件夹和 `user.js` 复制到 Firefox 配置目录中。
 
 5. （可选）使用文本编辑器打开 `user.js`。
 
@@ -154,40 +154,35 @@ FlexFox 支持通过 PowerShell 脚本或 Git 实现自动安装和更新。
 <details>
 <summary><i>[点击展开]</i> 👇</summary>
 
-在 PowerShell 窗口中执行以下任一命令。
+请在 PowerShell 窗口中运行以下任一命令。
 
-静默安装会自动使用默认安装路径且不显示交互提示，适合定期更新或无人值守部署。
+这些命令支持以下命令行选项：
+
+* `-ProfilePath 'path'` / `--profile-path 'path'`
+  * 指定用于安装的 Firefox 配置文件夹，跳过路径选择提示。
+
+* `-Silent` / `--silent`
+  * 使用指定的配置文件夹执行静默安装。如果省略 `-ProfilePath`，则使用第一个检测到的 Firefox 配置文件夹。此选项会跳过所有提示，且不会复制 `user.js`。
+  * 适用于计划任务或无人值守更新。
 
 **在线安装**
 
 ```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
-```
-
-**静默在线安装**
-
-```powershell
-$env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/deploy-userchrome.ps1') -replace '(?s)<#.*?#>', '')
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & ([scriptblock]::Create(((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/install-flexfox.ps1')) -replace '^\uFEFF', ''))
 ```
 
 **本地安装**
 
-下载 [`deploy-userchrome.ps1`](https://github.com/yuuqilin/FlexFox/raw/refs/heads/main/deploy-userchrome.ps1) 并执行：
+下载 [`install-flexfox.ps1`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/install-flexfox.ps1) 并运行：
 
 ```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\install-flexfox.ps1'
 ```
 
-**静默本地安装**
+**本地计划静默更新**
 
 ```powershell
-$env:FLEXFOX_INSTALL_MODE = 'silent'; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .\deploy-userchrome.ps1
-```
-
-**计划任务或“运行”对话框**
-
-```powershell
-powershell -ExecutionPolicy Bypass -Command "$env:FLEXFOX_INSTALL_MODE = 'silent'; .\deploy-userchrome.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Path\To\install-flexfox.ps1" -ProfilePath "C:\Path\To\Firefox\Profile" -Silent
 ```
 
 </details>
@@ -197,31 +192,57 @@ powershell -ExecutionPolicy Bypass -Command "$env:FLEXFOX_INSTALL_MODE = 'silent
 <details>
 <summary><i>[点击展开]</i> 👇</summary>
 
-请根据你的使用环境选择 `scripts` 文件夹中的 Git Pull 脚本。这些脚本会自动完成以下操作：
+请根据您的操作系统选择合适的脚本，将 Firefox 配置文件夹初始化为 Git 工作目录，或更新已有的工作目录。这些脚本会跟踪 FlexFox 仓库，且仅更新 `chrome` 文件夹，忽略其他项目文件。
 
-* 将 Firefox 配置目录设置为 Git 工作目录
-* 将 FlexFox 仓库添加为远程仓库
-* 仅下载并更新 `chrome` 文件夹
+* Windows: [`git-pull-chrome-only.ps1`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.ps1)
+* macOS / Linux: [`git-pull-chrome-only.sh`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.sh)
 
-你也可以选择手动完成这些设置。
+首次运行时，脚本会提示您选择或输入 Firefox 配置文件夹。后续运行将自动更新先前配置的工作目录。如果检测到多个工作目录，脚本将提示您选择其中一个。
+
+这些脚本支持以下命令行选项：
+
+* `-ProfilePath 'path'` / `--profile-path 'path'`
+  * 指定目标 Firefox 配置文件夹，跳过交互式提示。
+
+* `-Silent` / `--silent`
+  * 使用指定的配置文件夹执行静默更新。如果省略 `-ProfilePath`，则使用先前配置的工作目录。如果未找到受管理的工作目录或检测到多个受管理的工作目录，脚本将显示错误信息并退出，不执行更新。
+  * 适用于计划任务或无人值守更新。建议与配置文件路径选项配合使用，以明确指定目标。
+
+更新时，脚本会保留未跟踪的自定义文件，包括 `components/uc-user-settings.css` 和 `content/uc-custom-content.css`。如果已跟踪的 FlexFox 文件存在未提交的修改，脚本将停止更新，且不会修改这些文件。
+
+如果发生 Git 合并冲突，交互模式允许您中止合并并恢复到先前状态，或者保留冲突以便手动解决。静默模式将自动中止合并、恢复到先前状态、提示发生了冲突，然后退出。
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\git-pull-chrome-only.ps1' -ProfilePath 'C:\Path\To\Firefox\Profile' -Silent
+```
+
+```bash
+bash "/path/to/git-pull-chrome-only.sh" --profile-path "/path/to/firefox/profile" --silent
+```
+
+或者，您也可以使用标准的 Git 命令手动初始化并配置工作目录：
 
 **首次设置**
 
 ```bash
 git init
 git remote add origin https://github.com/yuuqilin/FlexFox.git
+git remote set-branches origin main
+git config remote.origin.tagOpt --no-tags
 git sparse-checkout init --no-cone
 git sparse-checkout set /chrome
-git fetch origin
+git fetch --no-tags origin
 git checkout -b main origin/main
 ```
 
 **手动更新**
 
 ```bash
-git fetch origin
+git fetch --no-tags --prune origin
 git checkout main
-git merge origin/main --allow-unrelated-histories
+git sparse-checkout set /chrome
+git merge --no-edit origin/main
+git sparse-checkout reapply
 ```
 
 </details>
