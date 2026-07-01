@@ -4,7 +4,49 @@
 
 ## 🆕 最新情報
 
-## **🦊 v6.5.5**
+## **🦊 v6.5.6**
+
+### 更新
+
+* Sidebery の動作と表示の一貫性を改善しました。
+
+  * Sidebery の展開・折りたたみアニメーションをより滑らかにし、レイアウト処理の負荷を軽減しました。
+  * 検索ボックスの展開・折りたたみ時に発生していた反動のような動きを修正し、幅を下のタブ一覧と揃えました。
+  * 分割ビュー使用時の角丸処理を改善しました。Sidebery に隣接するウェブコンテンツのみ隣接側の角を直角にし、もう一方の分割ビューは四隅の角丸を維持するようになりました。
+  * `uc.flex.sidebery-allow-resizable-width` を有効にした折りたたみ状態で、閉じるボタンとツリー分岐の展開ボタンの位置を調整し、タブアイコン付近での誤クリックを減らしました。
+  * `uc.flex.sidebery-allow-resizable-width` を有効にした折りたたみ状態で、ナビゲーションバーのタブパネルを正しく展開できない問題を修正しました。
+  * 角丸ウェブコンテンツの余白を有効にしている場合に、Sidebery のパネル設定ダイアログで上側と側面の余白が消えていた問題を修正しました。
+
+* `uc.flex.enable-rounded-web-content` の動作を改善し、サイドバーパネルの下側余白をウェブコンテンツ領域と揃えるようにしました。これにより、両方の高さが視覚的に揃います。
+
+### 変更
+
+* ネイティブ垂直タブが折りたたまれている間は、リサイズ用の分割線を表示しないようにしました。分割線はサイドバー展開時のみ表示され、折りたたみ時の見た目がよりすっきりします。
+
+### 修正
+
+* v6.5.0 で発生した回帰を修正しました。`uc.flex.sidebery-allow-resizable-width` と `Lock Sidebery` を同時に有効にすると、ピン留めタブが自動的に折り返されない問題がありました。
+
+* v6.5.3 で発生した回帰を修正しました。Sidebery の新しいタブボタンの左右に影がはみ出して表示される問題がありました。
+
+* Firefox Beta v153 の変更により、PDF ツールバーの自動非表示が機能しなくなっていた問題を修正しました。 [Bug 2045670](https://bugzilla.mozilla.org/show_bug.cgi?id=2045670)
+
+* Firefox Beta v153 の変更により、`view-opentabs.svg` アイコンが変形していた問題を修正しました。 [Bug 2032258](https://bugzilla.mozilla.org/show_bug.cgi?id=2032258)
+
+* Firefox Nightly v154 の変更により、Sidebery の展開時にタブが上下に揺れる問題を修正しました。 [Bug 2048146](https://bugzilla.mozilla.org/show_bug.cgi?id=2048146)
+
+* Firefox Nightly v154 で追加された App メニューの「PDF を編集...」項目にアイコンを追加しました。 [Bug 2047915](https://bugzilla.mozilla.org/show_bug.cgi?id=2047915)
+
+<!-- END What's New -->
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
+
+<!-- END Release Note -->
+
+## **v6.5.5**
 
 ![プレビュー: about:config の設定項目説明](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/about-config-preference-descriptions.webp)
 
@@ -44,15 +86,6 @@
 ### 削除
 
 - ルートフォルダーの `deploy-userchrome.ps1` を削除しました。
-
-<!-- END What's New -->
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
-
-<!-- END Release Note -->
 
 **v6.5.4**
 

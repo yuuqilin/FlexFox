@@ -32,8 +32,8 @@
         fill: var(--uc-popup-menu-icon-color);
     }
     #appMenuRecentlyClosedTabs {
-        background-image: url("chrome://browser/content/firefoxview/view-opentabs.svg");
-        background-position: left calc(2.5px + var(--uc-appMenu-zoom-controls-x-offset)) center;
+        background-image: url("../icons/menu/view-opentabs.svg");
+        background-position: left calc(3px + var(--uc-appMenu-zoom-controls-x-offset)) center;
         background-repeat: no-repeat;
         background-size: 18px;
         -moz-context-properties: fill, fill-opacity;
@@ -62,6 +62,14 @@
         margin-block-start: 2px;
         order: 0 !important;
     }
+    #appmenu-edit-pdf-button {
+        background-image: url("../icons/menu/context-add-note.svg");
+        background-position: left calc(2px + var(--uc-appMenu-zoom-controls-x-offset)) center;
+        background-repeat: no-repeat;
+        background-size: 22px;
+        -moz-context-properties: fill, fill-opacity;
+        fill: var(--uc-popup-menu-icon-color);
+    }
     #BMB_searchBookmarks {
         background-image: url("chrome://global/skin/icons/search-glass.svg");
     }
@@ -70,11 +78,13 @@
         background-image: url("chrome://global/skin/icons/settings.svg");
     }
     .subviewbutton[data-l10n-id*="-manage-"] {
-        background-position-x: 0.5em;
+        background-position-x: 0.3em;
     }
+    /*
     #unified-extensions-view #unified-extensions-manage-extensions {
         padding-inline-start: 24px !important;
     }
+    */
 
     /* Context menu */
     /* Override the icon colors for menu navigation buttons and arrow indicators */
@@ -119,8 +129,8 @@
     */
     menuitem[data-l10n-id*="-copy-"][data-l10n-id*="-link"] {
         background-image: url("../icons/menu/link.svg");
-        background-position-x: 0.833em !important;
-        background-size: 19.5px !important;
+        background-position-x: 0.8em !important;
+        background-size: 20px !important;
     }
     #context-stripOnShareLink,
     #strip-on-share,
@@ -351,7 +361,7 @@
     #context_reverseSplitView {
         background-image: url("../icons/menu/repeat.svg");
         background-position-x: 0.8em !important;
-        background-size: 20.5px;
+        background-size: 21px;
     }
     #context-showonlythisframe,
     #context-media-showcontrols,

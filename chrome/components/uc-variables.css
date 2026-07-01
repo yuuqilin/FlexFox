@@ -1543,6 +1543,11 @@
                 --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin)
                     var(--uc-web-content-margin) var(--uc-web-content-margin);
             }
+            /* Restore full web content margins for popup windows without the toolbar or location bar. */
+            :root[chromehidden~="location"][chromehidden~="toolbar"] & {
+                --uc-web-content-margin-box: var(--uc-web-content-margin) var(--uc-web-content-margin)
+                    var(--uc-web-content-margin) var(--uc-web-content-margin);
+            }
         }
     }
 
@@ -1939,7 +1944,11 @@
         }
     }
 
-    /**/
+    /* 
+     * Firefox centers collapsed sidebar content using --tab-collapsed-width.
+     * FlexFox uses --uc-sidebar-stripe-width instead, so compensate for half of
+     * the width difference to keep the collapsed Sidebery content visually centered.
+     */
     @media -moz-pref("sidebar.verticalTabs") {
         --tab-pinned-horizontal-count: 5;
         --uc-sidebar-main-width: var(--uc-sidebar-stripe-width);
@@ -1960,11 +1969,7 @@
         &[sidebar-positionend] {
             --uc-sidebar-main-margin-left: 0px;
             --uc-sidebar-main-padding-inline-end: calc(
-                (
-                        var(--tab-collapsed-background-width) + 2 * var(--tab-inner-inline-margin) -
-                            var(--uc-sidebar-stripe-width)
-                    ) /
-                    2 + 0.5px
+                (var(--tab-collapsed-width) - var(--uc-sidebar-stripe-width)) / 2 + 0.5px
             );
             &:hover {
                 @media -moz-pref("uc.flex.fully-hide-sidebery") {
@@ -1982,15 +1987,11 @@
             }
         }
 
+        /* */
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             :root:not([titlepreface*="\180e "]) & {
                 --uc-sidebar-main-margin-left: calc(
-                    0px -
-                        (
-                            var(--tab-collapsed-background-width) + 2 * var(--tab-inner-inline-margin) -
-                                var(--uc-sidebar-stripe-width)
-                        ) /
-                        2 + 0.5px
+                    0px - (var(--tab-collapsed-width) - var(--uc-sidebar-stripe-width)) / 2 + 0.5px
                 );
                 /*
                 &[sidebar-positionend] {
@@ -2035,11 +2036,13 @@
             --uc-sidebar-hover-width
         ); /* Load user-defined value for internal calculations */
         /* When Sidebery autohide is disabled, fix its width to the expanded value */
-        @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-            --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
-        }
-        &:is([sidebar-expand-on-hover], [titlepreface*="\180e "]) {
-            --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
+        @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+            @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+                --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
+            }
+            &:is([sidebar-expand-on-hover], [titlepreface*="\180e "]) {
+                --uc-sb-sidebar-width: var(--uc-sb-sidebar-hover-width);
+            }
         }
         /* When Sidebery is fully hidden, set width to trigger width to allow hover-triggered expansion */
         @media -moz-pref("uc.flex.fully-hide-sidebery") {

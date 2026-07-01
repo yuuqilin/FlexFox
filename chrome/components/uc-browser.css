@@ -318,6 +318,13 @@ split-view-footer {
                 }
             }
 
+            /* Match the sidebar panel's bottom spacing with the web content area. */
+            @media -moz-pref("sidebar.revamp") {
+                #sidebar-box:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]) {
+                    padding-block-end: var(--uc-web-content-margin) !important;
+                }
+            }
+
             /* !TEMPORARY: The following #tabbrowser-tabbox rules will no longer be needed starting from v147. */
             #tabbrowser-tabbox {
                 box-shadow: none !important;
@@ -341,6 +348,28 @@ split-view-footer {
                         :root:not([lwtheme-image], [style*="--lwt-additional-images"]) & {
                             background-color: var(--uc-bgcolor) !important;
                         }
+                    }
+                }
+            }
+
+            /* Keep the split view pane that is not adjacent to Sidebery rounded on all corners. */
+            .browserSidebarContainer.split-view-panel[column="1"] {
+                @media -moz-pref("sidebar.position_start") {
+                    .browserContainer::after {
+                        border-start-start-radius: var(--uc-web-content-radius) !important;
+                    }
+                    .browserStack {
+                        border-start-start-radius: var(--uc-web-content-radius) !important;
+                    }
+                }
+            }
+            .browserSidebarContainer.split-view-panel[column="0"] {
+                .browserContainer::after {
+                    border-start-end-radius: var(--uc-web-content-radius) !important;
+                }
+                .browserStack {
+                    @media not -moz-pref("sidebar.position_start") {
+                        border-start-end-radius: var(--uc-web-content-radius) !important;
                     }
                 }
             }

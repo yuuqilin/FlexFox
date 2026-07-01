@@ -330,7 +330,7 @@
     /* TABS */
 
     /* ? */
-    .Tab .lvl-wrapper:after {
+    .Tab .lvl-wrapper::after {
         display: none;
     }
 
@@ -372,23 +372,25 @@
         /*
         border: 1.5px solid rgba(0, 0, 0, 0.22);
         */
-        border-radius: 5px;
+        border-radius: var(--general-border-radius) !important;
     }
 
     .tab-wrapper .Tab[data-discarded="true"] .body {
         /*
         border: 1px solid rgba(0, 0, 0, 0.1);
         */
-        border-radius: 5px;
+        border-radius: var(--general-border-radius) !important;
     }
 
     /* NAV BAR */
 
     /* Change the navigation panel icon when Sidebery is collapsed */
     @media (max-width: 50px) {
+        /*
         #root:not([data-nav-inline="true"]) .nav-item:is(:not([data-class="panel"]), [data-active="false"]) {
             display: none !important;
         }
+        */
         #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] {
             /*
             padding-right: 10px;
@@ -413,14 +415,18 @@
             }
         }
         */
+        /*
         #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > :is(.len, .audio) {
             display: none !important;
         }
+        */
     }
+    /*
     #root:not([data-nav-inline="true"]) .NavigationBar:not(:hover) {
         flex-wrap: nowrap;
         overflow: hidden;
     }
+    */
 
     /* !
     #root:not([data-nav-inline="true"]) .NavigationBar {
@@ -536,9 +542,11 @@
             height: 26px;
         }
 
+        /*
         .Tab .title {
             display: none;
         }
+        */
 
         /*
         .tab-wrapper {
@@ -602,7 +610,7 @@
     */
 
     #root:not(:hover) .tab-wrapper {
-        overflow: hidden !important;
+        overflow: visible !important;
         /*
         min-width: var(--tabs-pinned-width) !important;
         */
@@ -618,12 +626,12 @@
         margin-left: 7px !important;
     }
     */
+    /*
     #root:not(:hover) .ScrollBox .Tab {
         --tabs-inner-gap: 7px;
-        /*
         margin-left: 4px;
-        */
     }
+    */
 
     /* Optional patch for better tab notifications on pinned tabs */
 
@@ -663,10 +671,10 @@
     }
     */
 
+    /*
     .Tab .title {
         transition: margin-left 300ms ease !important;
     }
-    /*
     .Tab:hover {
         --tabs-inner-gap: 8px;
     }
@@ -681,7 +689,7 @@
 
     /* Hide tree indent lines when Sidebery is collapsed */
     /*
-    #root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+    #root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
         display: none;
     }
     */
@@ -698,7 +706,14 @@
     ═══════════════════════════════════════════════════════════════════════════ */
 
     #root {
-        --uc-sb-tabs-margin: 2px;
+        --uc-sb-tabs-margin: 5px;
+        --uc-sb-sidebery-default-tabs-margin: 2px;
+        /*
+         * Sidebery positions tree level marks based on its default 2px tab margin.
+         * FlexFox uses a fixed 5px tab margin, so the tree line needs a 3px offset
+         * to stay visually aligned.
+         */
+        --uc-sb-tree-line-indent-offset: calc(var(--uc-sb-tabs-margin) - var(--uc-sb-sidebery-default-tabs-margin));
         --uc-sb-navbar-padding: 3px 2px;
         @media (width > 50px) {
             --uc-sb-navbar-padding: 3px 3px;
@@ -711,6 +726,10 @@
          */
         /* Sidebar expand/collapse animation settings */
         --uc-sidebar-width: 44px;
+        --uc-sidebar-hover-width: 220px;
+        @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
+            --uc-sidebar-hover-width: 260px;
+        }
         --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
         --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
         --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
@@ -940,19 +959,56 @@
         margin-bottom: 0px !important;
     }
 
+    /* Override Sidebery's inline display: none and hide nav items by clipping instead. */
+    #root:not([data-nav-inline="true"]) .NavigationBar:not(:hover) .main-items {
+        @media not -moz-pref("uc.flex.sidebery-allow-resizable-width"), (width <= 50px) {
+            flex-wrap: nowrap !important;
+        }
+        overflow: hidden;
+    }
+
+    #root.root:not([data-nav-inline="true"]) .nav-item {
+        display: flex !important;
+    }
+
+    @media (max-width: 50px) {
+        #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > :is(.len, .audio) {
+            display: block !important;
+            visibility: hidden;
+        }
+        .Tab .title {
+            display: block !important;
+            visibility: hidden;
+        }
+    }
+
+    /* Adjust tree guide line positioning to account for FlexFox's custom tab margin. */
+    #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
+        left: calc((var(--tabs-indent) + var(--uc-sb-tree-line-indent-offset)) / -2) !important;
+    }
+
     /* Adjust spacing and layout of the search bar */
     #search_bar[data-showed="true"] {
         margin-top: 4px;
+        margin-inline: 3px;
+        min-width: calc(var(--uc-sidebar-hover-width) - 2 * 3px) !important;
+        &::before {
+            left: 2px !important;
+            width: calc(100% - 2 * 2px) !important;
+        }
+        .search-icon,
+        .placeholder {
+            margin-inline: 4px;
+        }
 
         @media (max-width: 50px) {
             @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
                 #root:not(:hover) & {
                     &::before {
-                        left: 5px !important;
                         width: 34px !important;
                     }
-                    .search-icon {
-                        margin-left: 25px;
+                    .input {
+                        opacity: 0;
                     }
                     .placeholder,
                     .clear-btn {
@@ -963,11 +1019,10 @@
             @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
                 @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
                     &::before {
-                        left: 5px !important;
                         width: 34px !important;
                     }
-                    .search-icon {
-                        margin-left: 25px;
+                    .input {
+                        opacity: 0;
                     }
                     .placeholder,
                     .clear-btn {
@@ -993,7 +1048,7 @@
         }
     }
     .PinnedTabsBar ~ .ScrollBox .AnimatedTabList {
-        margin-top: -2px;
+        margin-top: 0;
     }
 
     .tab-wrapper .Tab .body {
@@ -1099,8 +1154,11 @@
         @media -moz-pref("uc.flex.style-tab-items", 2) {
             --frame-el-overlay-hover-bg: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
         }
+        padding-inline: var(--uc-sb-tabs-margin) !important;
+        /*
         bottom: -1px !important;
         padding-bottom: 1px !important;
+        */
     }
 
     @media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
@@ -1131,11 +1189,11 @@
         }
 
         .PinnedTabsBar {
-            min-width: 200px;
+            min-width: var(--uc-sidebar-hover-width);
             grid-template-columns: repeat(auto-fit, minmax(var(--uc-sb-pinned-tab-max-columns), 1fr)) !important;
             grid-auto-rows: min-content;
             column-gap: 2px !important;
-            row-gap: 0 !important;
+            row-gap: 1px !important;
             flex-shrink: 0;
             overflow-x: hidden;
             overflow-y: auto;
@@ -1147,7 +1205,7 @@
 
             @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
                 @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
-                    @media (width < 200px) {
+                    @media (width < 220px) {
                         display: flex !important;
                         min-width: var(--uc-sidebar-width);
                     }
@@ -1160,7 +1218,7 @@
             .tab-wrapper {
                 min-width: var(--tabs-pinned-width) !important;
                 margin: 2px 0 !important;
-                padding: 0.5px 2px;
+                padding: 0px 2px;
             }
         }
 
@@ -1196,10 +1254,6 @@
             padding: 0 3px !important;
         }
 
-        .ScrollBox {
-            padding-inline: 3px !important;
-        }
-
         .BottomBar {
             padding: 0 7px var(--general-margin) !important;
         }
@@ -1210,18 +1264,15 @@
         .NavigationBar {
             transition:
                 height 50ms ease-in-out 5ms,
-                padding-left 0s var(--uc-autohide-transition-type) 0s !important;
+                padding 0s var(--uc-autohide-transition-type) 0s !important;
         }
         #search_bar {
             &::before {
-                transition:
-                    left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay),
-                    width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay);
+                transition: width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay);
             }
-            .search-icon {
-                transition: margin-left var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type) 0s;
+            .input {
+                transition: opacity var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type) 0s;
             }
             .placeholder,
             .clear-btn {
@@ -1287,15 +1338,19 @@
                     var(--uc-autohide-sidebar-delay) !important;
         }
         */
+        .Tab .title {
+            transition:
+                transform var(--d-fast),
+                margin-left 300ms ease !important;
+        }
         .Tab[data-pin="false"] .fav {
-            transition: margin var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay);
+            transition: margin 300ms ease;
         }
         .Tab .audio {
             transition: margin-left 0s var(--uc-autohide-transition-type) 0s;
         }
 
-        &[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+        &[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
             /* Override inline styles */
             display: block !important;
 
@@ -1332,19 +1387,16 @@
             .NavigationBar {
                 transition:
                     height 50ms ease-in-out 5ms,
-                    padding-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    padding var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             #search_bar {
                 &::before {
-                    transition:
-                        left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-hover-sidebar-delay),
-                        width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                            var(--uc-hover-sidebar-delay);
+                    transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay);
                 }
-                .search-icon {
-                    transition: margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                .input {
+                    transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         calc(var(--uc-hover-sidebar-delay) - 28ms);
                 }
                 .placeholder,
@@ -1415,16 +1467,24 @@
                     width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
-            .Tab[data-pin="false"] .fav {
-                transition: margin var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
+            /*
+            .Tab .title {
+                transition:
+                    transform var(--d-fast),
+                    margin-left 300ms ease,
+                    visibility var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-hover-sidebar-delay) !important;
             }
+            .Tab[data-pin="false"] .fav {
+                transition: margin 300ms ease;
+            }
+            */
             .Tab .audio {
                 margin-left: 0 !important;
                 transition: margin-left 0s var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
             }
 
-            &[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+            &[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
                 visibility: visible;
                 transition: visibility var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay);
@@ -1439,29 +1499,42 @@
                 .ScrollBox .Tab {
                     margin-inline: var(--uc-sb-tabs-margin) !important;
                 }
+                /*
                 .Tab:hover {
                     --tabs-inner-gap: 5px !important;
                 }
+                */
             }
         }
         /* 🔼 End of hover state block */
 
+        & .ScrollBox .Tab {
+            --tabs-inner-gap: 7px !important;
+        }
+
         /* .fav uses --tabs-inner-gap for horizontal margins; override to restore original value after hover changes to prevent label shifting */
+        /*
         .Tab[data-pin="false"] .fav {
             --tabs-inner-gap: 7px !important;
         }
+        */
 
         /* .audio uses --tabs-inner-gap for left position; override to restore original value after hover changes to prevent shifting */
+        /*
         .Tab .audio {
             --tabs-inner-gap: 7px !important;
         }
+        */
     }
 
-    /** 
-     * Override inline styles to fix bottom padding and prevent tabs from shifting up
-     * when the navbar has fewer than one row of panels and is hovered. 
-     */
     #root:not([data-nav-inline="true"]) .NavigationBar {
+        /**
+         * Keep the collapsed navbar at a stable 40px height.
+         * At fractional UI scales, the bottom border can resolve below 1 CSS px,
+         * leaving the content-sized height slightly under 40px and causing tabs
+         * to shift during sidebar expansion.
+         */
+        min-height: 40px;
         padding: var(--uc-sb-navbar-padding) !important;
         .nav-item[data-active="true"] > svg {
             width: 16px !important;
@@ -1596,16 +1669,18 @@
 
         /* Add higher specificity (.root) to override the previous centering rules applied with :not(:hover) */
         #root.root .ScrollBox .Tab {
+            /*
             --tabs-inner-gap: 5px !important;
+            */
             margin-inline: var(--uc-sb-tabs-margin) !important;
         }
 
         /*
-        #root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+        #root[data-tabs-tree-lvl-marks="true"]:not(:hover) .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
             display: block !important;
         }
         */
-        #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
+        #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
             visibility: visible;
         }
     }
@@ -1614,8 +1689,8 @@
         to prevent layout shifts */
     @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px) {
         @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
-            #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body:after {
-                display: none !important;
+            #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
+                visibility: hidden;
             }
             #root .Tab {
                 --tabs-indent: 0px !important;
@@ -1631,7 +1706,7 @@
                 }
                 .Tab[data-parent="true"] .exp {
                     top: 6px !important;
-                    left: -15px !important;
+                    left: -18px !important;
                 }
                 .Tab[data-parent="true"][data-folded="false"] .exp-icon {
                     top: 4px !important;
@@ -1641,7 +1716,7 @@
                 }
                 .Tab[data-parent="true"] .child-count {
                     top: 12px !important;
-                    left: 2px !important;
+                    left: -1px !important;
                 }
             }
             /* Use #root.root to increase specificity and override inline :hover styles, 
@@ -1652,8 +1727,8 @@
                 }
                 .Tab .close-icon {
                     visibility: visible;
-                    top: -2px !important;
-                    left: -4px !important;
+                    top: -4px !important;
+                    left: -9px !important;
                     width: 16px !important;
                     height: 16px !important;
                 }

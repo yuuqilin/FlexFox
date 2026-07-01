@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ## 🆕 最新情報
 
-**🦊 最新バージョン: v6.5.5** — 詳細は[更新履歴](./docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md)をご覧ください。
+**🦊 最新バージョン: v6.5.6** — 詳細は[更新履歴](./docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md)をご覧ください。
 
 <!-- END What's New -->
 

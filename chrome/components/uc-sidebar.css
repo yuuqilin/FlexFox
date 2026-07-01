@@ -1009,12 +1009,10 @@
             }
             */
             margin-inline-start: var(--uc-sidebar-main-margin-left);
-            min-width: /* var(--tab-collapsed-width) */ var(
-                --uc-sb-sidebar-main-width,
-                calc(var(--uc-sidebar-main-width) - var(--uc-sidebar-main-margin-left))
-            );
+            padding-inline-end: calc(0px - var(--uc-sidebar-main-margin-left));
+            min-width: /* var(--tab-collapsed-width) */ var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-width));
             /* transition: min-width var(--uc-tabs-hide-animation-duration) ease-out var(--uc-tabs-hide-animation-delay); */
-            will-change: margin-inline-start, min-width, overflow, transform;
+            will-change: margin-inline-start, padding-inline-end, min-width, overflow, transform;
             transition:
                 margin-inline-start var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay),
@@ -1035,12 +1033,13 @@
             &[sidebar-positionend] {
                 padding-inline-end: var(--uc-sidebar-main-padding-inline-end, 0);
                 /* Newly added 'transform' uses initial transition values as it's not defined above */
-                transition-property: margin-inline-start, min-width, overflow, transform;
+                transition-property: margin-inline-start, padding-inline-end, min-width, overflow, transform;
                 border-inline-width: 0.01px 0;
             }
         }
         sidebar-main[expanded]:hover {
             margin-inline-start: 0;
+            padding-inline-end: 0;
             min-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-hover-width));
             /* transition-delay: 0ms !important; */
             transition:
@@ -1372,9 +1371,8 @@
              * Other instances of slot[part="items-wrapper"] are not grid containers, so they're unaffected.
              */
             --uc-vt-sroot-grid-template-columns: repeat(auto-fit, minmax(var(--uc-vt-pinned-tab-max-columns), 1fr));
-            @media not -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
-                --uc-vt-sroot-overflow-indicator-display: none;
-            }
+            --uc-vt-sroot-overflow-indicator-display: none;
+
             --uc-vt-sroot-gap: 1px 0px;
         }
         --uc-expanded-sroot-splitter-width: 10px;
@@ -1383,6 +1381,20 @@
         );
         --uc-expanded-sroot-splitter-margin-inline: calc(50% - 5px);
         --uc-expanded-sroot-splitter-bgcolor: transparent;
+        --uc-expanded-sroot-splitter-opacity: 1;
+        @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+            :root:not([titlepreface*="\180e "]) & {
+                --uc-expanded-sroot-splitter-opacity: 0;
+                &:hover {
+                    --uc-expanded-sroot-splitter-opacity: 1;
+                    --uc-expanded-sroot-splitter-opacity-transition: var(--uc-hover-transition-duration)
+                        var(--uc-autohide-transition-type)
+                        calc(var(--uc-hover-sidebar-delay) + var(--uc-hover-transition-duration));
+                }
+            }
+        }
+        --uc-expanded-sroot-splitter-opacity-transition: var(--uc-autohide-transition-duration)
+            var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
     }
     /**
      * Force pinned tabs panel to use a grid layout with a fixed number of columns
@@ -1400,10 +1412,11 @@
         display: var(--uc-vt-sroot-overflow-indicator-display, flex);
     }
 
-    /* Adjust pinned tabs divider */
     #tabbrowser-tabs[orient="vertical"][expanded] {
+        /* Reduce spacing between vertical tabs */
         gap: 4px !important;
 
+        /* Adjust pinned tabs divider */
         @media not -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
             :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
                 display: none !important;
@@ -1419,6 +1432,8 @@
         @media -moz-pref("uc.flex.show-pin-tabs-separator-in-expanded-state") {
             /* Show pin tabs separator in expanded state */
             :is(#vertical-pinned-tabs-container-separator, #vertical-pinned-tabs-splitter) {
+                margin-block: -4px;
+                padding-block: 1px;
                 &:not(:hover) {
                     box-shadow: inset 0 0.8px 0 0 var(--uc-vt-splitter-color);
                     /*
@@ -1450,10 +1465,11 @@
                         margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                             var(--uc-hover-sidebar-delay);
                 }
+                /*
                 @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                     :root:not([titlepreface*="\180e "]) & {
                         width: 24px;
-                        margin-inline: calc(var(--tab-inner-inline-margin) + 4px) !important;
+                        margin-inline: calc(var(--tab-inner-inline-margin) + 3px) !important;
                         :is(#sidebar-main, #sidebar-container):hover & {
                             width: 10px;
                             margin-inline: calc(50% - 5px) !important;
@@ -1469,6 +1485,7 @@
                         }
                     }
                 }
+                */
             }
         }
     }
@@ -1479,9 +1496,11 @@
      */
     #tabbrowser-tabs[orient="vertical"][expanded] {
         &::after {
+            display: none;
+            /*
             border-bottom: none !important;
             height: 1.2px;
-            box-shadow: inset 0 0.8px 0 0 var(--uc-vt-splitter-color) !important;
+            box-shadow: inset 0 -0.8px 0 0 var(--uc-vt-splitter-color) !important;
 
             width: 10px;
             margin-inline: calc(50% - 5px) !important;
@@ -1490,7 +1509,9 @@
                     var(--uc-autohide-sidebar-delay),
                 margin-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay);
+            */
         }
+        /*
         @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
             :root:not([titlepreface*="\180e "]) & {
                 &::after {
@@ -1508,6 +1529,7 @@
                 }
             }
         }
+        */
     }
 
     /** 
@@ -1515,10 +1537,13 @@
      * showing the separator only via #tabbrowser-tabs::after. 
      */
     #sidebar-tools-and-extensions-splitter {
-        margin-block-end: 2px !important;
+        margin-block: 0 !important;
+        padding-block: 1px;
         display: var(--uc-sb-sroot-splitter-display, block) !important;
-        border-width: 0 0 !important;
+        border-top: none !important;
         border-color: transparent !important;
+        box-shadow: inset 0 -0.8px 0 0 var(--uc-vt-splitter-color);
+        opacity: var(--uc-expanded-sroot-splitter-opacity);
 
         width: var(--uc-expanded-sroot-splitter-width, auto);
         margin-inline: var(--uc-expanded-sroot-splitter-margin-inline, var(--tab-inner-inline-margin)) !important;
@@ -1526,7 +1551,8 @@
             width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
             margin-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay);
+                var(--uc-autohide-sidebar-delay),
+            opacity var(--uc-expanded-sroot-splitter-opacity-transition);
         &:not(:hover) {
             background-color: var(--uc-expanded-sroot-splitter-bgcolor, threedface) !important;
         }
@@ -1537,7 +1563,8 @@
                 width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-hover-sidebar-delay),
                 margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay);
+                    var(--uc-hover-sidebar-delay),
+                opacity var(--uc-expanded-sroot-splitter-opacity-transition);
         }
     }
 
@@ -1607,10 +1634,10 @@
 
             /* Pass variables into the shadow DOM to control grid container spacing */
             --tab-pinned-container-margin-inline-expanded: calc(var(--space-small) - 0.5px) !important;
-            /* The extra 1px increment must correspond to the margin-block adjustment
-               of .tab-background, where the default 2px margin is subtracted and doubled */
+            /* Keep this in sync with the .tab-background margin-block adjustment below,
+                 which adds 0.5px to the default vertical margin on each side. */
             --tab-height-with-margin-padding: calc(
-                1px + var(--tab-min-height) + (2 * var(--tab-block-margin))
+                var(--tab-min-height) + (2 * (var(--tab-block-margin) + 0.5px))
             ) !important;
 
             .tabbrowser-tab {
@@ -1620,15 +1647,15 @@
                 margin-block: 2px !important;
                 */
             }
-            /* The 1.5px top margin must complement .tab-background's margin-block
-               so that their combined spacing equals 4px */
+            /* Preserve the original 4px top spacing.
+                .tab-background now provides 2.5px, so the container adds the remaining 1.5px. */
             margin-block-start: 1.5px;
         }
 
         .tab-background {
-            /* Slightly increase the default 2px margin to reduce .tab-background height
-                and preserve space for its shadow */
-            margin-block: 2.5px !important;
+            /* Add 0.5px to the default 2px value of --tab-block-margin so the
+                .tab-background shadow has enough space to render without clipping. */
+            margin-block: calc((var(--tab-block-margin) + 0.5px)) !important;
             border-radius: 5px !important;
             transition:
                 max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
@@ -1678,8 +1705,13 @@
     /* Reduce spacing between vertical tabs */
     #tabbrowser-arrowscrollbox .tabbrowser-tab {
         #tabbrowser-tabs[orient="vertical"] & {
-            padding-block: 1.5px !important;
+            padding-block: 2px 1px !important;
         }
+    }
+    #pinned-tabs-container[orient="vertical"]:not(:empty)
+        ~ #tabbrowser-arrowscrollbox
+        .tabbrowser-tab:nth-child(1 of :not([hidden], [pinned])) {
+        padding-block-start: 0px !important;
     }
 
     /* Selected tabs: Style borders, backgrounds, and the container tab indicator for selected or multi-selected tabs */
@@ -1728,7 +1760,7 @@
     .tab-context-line {
         .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background:is([selected], [multiselected]) > & {
             #tabbrowser-tabs[orient="vertical"] & {
-                margin: 3px 0.5px !important;
+                margin: 3px 0px !important;
             }
         }
     }

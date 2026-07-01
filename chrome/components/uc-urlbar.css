@@ -2,7 +2,7 @@
 /* Fix urlbar height issue after v133 */
 @media -moz-pref("uc.flex.increase-navbar-height") {
     #urlbar-container {
-        padding-top: 5.5px !important;
+        padding-block: 5.5px !important;
     }
 }
 

@@ -4,7 +4,49 @@
 
 ## 🆕 What's New
 
-## **🦊 v6.5.5**
+## **🦊 v6.5.6**
+
+### Updated
+
+* Improved Sidebery behavior and visual consistency.
+
+  * Improved the smoothness of Sidebery expand and collapse animations while reducing layout cost.
+  * Fixed the search box bounce during expand and collapse animations, and aligned its width with the tab list below.
+  * Refined Split View support so only the web content area adjacent to Sidebery uses squared corners. The other split view pane now keeps rounded corners on all sides.
+  * Adjusted the close button and tree branch expand button positions when `uc.flex.sidebery-allow-resizable-width` is enabled in collapsed mode, reducing accidental clicks near tab icons.
+  * Fixed the tab panel in the navigation bar not expanding correctly in collapsed mode when `uc.flex.sidebery-allow-resizable-width` is enabled.
+  * Restored the missing top and side margins in Sidebery’s panel settings dialog when rounded web content margins are enabled.
+
+* Improved `uc.flex.enable-rounded-web-content` by synchronizing the bottom margin of sidebar panels with the web content area, keeping both areas visually aligned.
+
+### Changed
+
+* Native vertical tabs no longer show the resize splitter while collapsed. The splitter is now shown only when the sidebar is expanded, keeping the collapsed layout cleaner.
+
+### Fixed
+
+* Fixed a regression introduced in v6.5.0 where pinned tabs could not wrap automatically when `uc.flex.sidebery-allow-resizable-width` and `Lock Sidebery` were enabled at the same time.
+
+* Fixed a regression introduced in v6.5.3 where the Sidebery new tab button showed shadow overflow on both sides.
+
+* Fixed PDF toolbar auto-hide being broken by changes in Firefox Beta v153. [Bug 2045670](https://bugzilla.mozilla.org/show_bug.cgi?id=2045670)
+
+* Fixed the distorted `view-opentabs.svg` icon caused by changes in Firefox Beta v153. [Bug 2032258](https://bugzilla.mozilla.org/show_bug.cgi?id=2032258)
+
+* Fixed tab jitter when Sidebery expands, caused by changes in Firefox Nightly v154. [Bug 2048146](https://bugzilla.mozilla.org/show_bug.cgi?id=2048146)
+
+* Added an icon for the new “Edit PDF...” item in the App Menu introduced in Firefox Nightly v154. [Bug 2047915](https://bugzilla.mozilla.org/show_bug.cgi?id=2047915)
+
+<!-- END What's New -->
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
+
+<!-- END Release Note -->
+
+## **v6.5.5**
 
 ![Preview: about:config preference descriptions](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/about-config-preference-descriptions.webp)
 
@@ -44,15 +86,6 @@
 ### Removed
 
 - Removed `deploy-userchrome.ps1` from the root folder.
-
-<!-- END What's New -->
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
-
-<!-- END Release Note -->
 
 **v6.5.4**
 

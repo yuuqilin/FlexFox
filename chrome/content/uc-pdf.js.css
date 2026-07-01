@@ -1,7 +1,7 @@
 /*
 @-moz-document regexp(".*\\.pdf$")
 */
-html[mozdisallowselectionprint]:has(head link:nth-of-type(1)[href^="resource://pdf.js"])
+html[mozdisallowselectionprint]:has(head script[src^="resource://pdf.js"])
 {
     /* https://github.com/mozilla/pdf.js/issues/2784#issuecomment-366480669 */
     .toolbar {

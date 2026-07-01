@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ## 🆕 更新内容
 
-**🦊 最新版本：v6.5.5** — 详细内容请参阅[更新日志](./docs/CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)。
+**🦊 最新版本：v6.5.6** — 详细内容请参阅[更新日志](./docs/CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md)。
 
 <!-- END What's New -->
 
