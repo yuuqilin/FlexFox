@@ -26,7 +26,7 @@
             --uc-bg-y: calc(
                 -2 *
                     (
-                        var(--tab-block-margin) + var(--toolbarbutton-padding-inner) +
+                        var(--tab-margin-block) + var(--toolbarbutton-padding-inner) +
                             var(--toolbarbutton-padding-outer)
                     ) -
                     var(--tab-min-height) + var(--uc-theme-bg-y-clip) - var(--bookmark-block-padding)

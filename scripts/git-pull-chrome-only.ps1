@@ -252,7 +252,8 @@ function Get-ActiveFirefoxProfiles {
 }
 
 function Read-CancellablePath {
-    Write-Host "Enter the Firefox profile directory (press Esc to cancel): " -NoNewline
+    Write-Host "Enter the Firefox profile directory (press Esc to cancel)"
+    Write-Host "> " -NoNewline
     $inputText = ""
     while ($true) {
         $key = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')

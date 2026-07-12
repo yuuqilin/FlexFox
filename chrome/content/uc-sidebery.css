@@ -457,13 +457,13 @@
     }
     */
 
+    /*
     #root:not([data-nav-inline="true"]) .NavigationBar .nav-item {
         --nav-btn-height: 33px;
         --nav-btn-width: 38px;
-        /*
         margin: 0 1px 1px;
-        */
     }
+    */
 
     #root:not([data-nav-inline="true"]) .NavigationBar .nav-item[data-class="space"] {
         width: 38px !important;
@@ -472,7 +472,7 @@
 
     @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
         @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
-            #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+            #root:not([data-nav-inline="true"]) .NavigationBar:not(.-vert):hover .nav-item .icon {
                 width: 22px !important;
                 height: 22px !important;
                 transition:
@@ -482,13 +482,20 @@
         }
     }
 
-    /* Explicitly restore the original icon size to override legacy scaling rules remaining in 
-        the Sidebery Style Editor from older FlexFox versions */
+    /** 
+     * Override inline styles: Explicitly restore the original icon size when
+     * icon scaling is disabled, since legacy Styles Editor rules may still
+     * apply the 22px scaled size without respecting this preference.
+     */
     @media -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
-        #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+        #root.root:not([data-nav-inline="true"]) .NavigationBar .nav-item .icon {
             width: 16px !important;
             height: 16px !important;
         }
+    }
+    #root:not([data-nav-layout="horizontal"]) .NavigationBar.-vert .nav-item .icon {
+        width: 16px !important;
+        height: 16px !important;
     }
 
     /* ? */
@@ -555,9 +562,11 @@
         */
 
         /* ? */
+        /*
         .NavigationBar .settings-btn {
             display: none;
         }
+        */
     }
 
     /* OPTIONAL */
@@ -593,11 +602,14 @@
         }
     }
 
-    /* Explicitly restore the original icon size to override legacy scaling rules remaining in 
-        the Sidebery Style Editor from older FlexFox versions */
+    /**
+     * Override inline styles: Explicitly restore the original icon size when
+     * icon scaling is disabled, since legacy Styles Editor rules may still
+     * apply the 20px scaled size without respecting this preference.
+     */
     @media -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
-        #root:hover .PinnedTabsBar .Tab .fav,
-        #root:hover .PinnedTabsBar .Tab .fav-icon {
+        #root.root .PinnedTabsBar .Tab .fav,
+        #root.root .PinnedTabsBar .Tab .fav-icon {
             width: 16px !important;
             height: 16px !important;
         }
@@ -706,19 +718,6 @@
     ═══════════════════════════════════════════════════════════════════════════ */
 
     #root {
-        --uc-sb-tabs-margin: 5px;
-        --uc-sb-sidebery-default-tabs-margin: 2px;
-        /*
-         * Sidebery positions tree level marks based on its default 2px tab margin.
-         * FlexFox uses a fixed 5px tab margin, so the tree line needs a 3px offset
-         * to stay visually aligned.
-         */
-        --uc-sb-tree-line-indent-offset: calc(var(--uc-sb-tabs-margin) - var(--uc-sb-sidebery-default-tabs-margin));
-        --uc-sb-navbar-padding: 3px 2px;
-        @media (width > 50px) {
-            --uc-sb-navbar-padding: 3px 3px;
-        }
-
         /** 
          * These variables must stay in sync with the identical ones in uc-variables.css.
          * If you copy and modify them in uc-custom-content.css, be sure to also update
@@ -956,10 +955,83 @@
 
     .NavigationBar {
         border-bottom: 1px solid var(--uc-sb-navbar-border-color) !important;
+        /* Override inline styles */
         margin-bottom: 0px !important;
+        .main-items {
+            /** 
+             * Sidebery adds a 1px margin to `--nav-btn-len-margin` in
+             * `#root[data-density="loose"]` to compensate for its variable
+             * navigation button size. Since FlexFox uses a fixed button size,
+             * this adjustment is unnecessary and is reset to 0.
+             */
+            --nav-btn-len-margin: 0px;
+            /* Match the spacing between navigation buttons to the pinned tabs below. */
+            column-gap: 3px !important;
+            @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
+                column-gap: 2px !important;
+            }
+        }
     }
 
-    /* Override Sidebery's inline display: none and hide nav items by clipping instead. */
+    #root.root .NavigationBar.-vert {
+        --uc-sb-navbar-bg-gradient-alpha: 0.1;
+        @media (prefers-color-scheme: dark) {
+            --uc-sb-navbar-bg-gradient-alpha: 0.05;
+        }
+        border-bottom: none !important;
+
+        /** 
+         * Multiple background layers:
+         * 1st layer: The 1px wide vertical border line gradient
+         * 2nd layer: The panel background gradient, angled toward the sidebar content
+         */
+        background-image:
+            linear-gradient(to bottom, transparent, var(--uc-sb-navbar-border-color)),
+            linear-gradient(
+                var(--uc-sb-navbar-bg-gradient-angle),
+                rgb(from var(--uc-sb-navbar-border-color) r g b / var(--uc-sb-navbar-bg-gradient-alpha)),
+                transparent
+            );
+
+        /** 
+         * Sizing for each background layer respectively:
+         * 1st layer (line): 1px wide, leaving a 6px gap at the top
+         * 2nd layer (body): Fills 100% of the container width and height
+         */
+        background-size:
+            1px calc(100% - 6px),
+            100% 100%;
+
+        /* Disable tiling for both background layers */
+        background-repeat: no-repeat, no-repeat;
+
+        /** 
+         * Position each background layer based on the sidebar layout:
+         * The border line switches sides, while the panel background
+         * remains anchored at the top-left corner (0 0).
+         */
+        &[data-layout="left"] {
+            --uc-sb-navbar-bg-gradient-angle: 45deg;
+            background-position:
+                right bottom,
+                0 0;
+        }
+        &[data-layout="right"] {
+            --uc-sb-navbar-bg-gradient-angle: 315deg;
+            background-position:
+                left bottom,
+                0 0;
+        }
+        /* Match the spacing between navigation buttons to the pinned tabs beside them. */
+        .main-items {
+            row-gap: 1px !important;
+        }
+        .nav-item {
+            margin-block: 2px !important;
+        }
+    }
+
+    /* Override inline styles: Hide navigation items by clipping instead of using `display: none`. */
     #root:not([data-nav-inline="true"]) .NavigationBar:not(:hover) .main-items {
         @media not -moz-pref("uc.flex.sidebery-allow-resizable-width"), (width <= 50px) {
             flex-wrap: nowrap !important;
@@ -991,7 +1063,7 @@
     #search_bar[data-showed="true"] {
         margin-top: 4px;
         margin-inline: 3px;
-        min-width: calc(var(--uc-sidebar-hover-width) - 2 * 3px) !important;
+        min-width: calc(var(--uc-sb-central-box-width) - 2 * 3px) !important;
         &::before {
             left: 2px !important;
             width: calc(100% - 2 * 2px) !important;
@@ -1155,10 +1227,13 @@
             --frame-el-overlay-hover-bg: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
         }
         padding-inline: var(--uc-sb-tabs-margin) !important;
-        /*
+
+        /** 
+         * Extend the sticky new tab button by 1px to hide a rounding gap that
+         * can appear at fractional display scaling due to device-pixel snapping.
+         */
         bottom: -1px !important;
         padding-bottom: 1px !important;
-        */
     }
 
     @media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
@@ -1177,30 +1252,91 @@
     */
 
     #root {
+        --uc-sb-tabs-margin: 5px;
+        --uc-sb-sidebery-default-tabs-margin: 2px;
+        /*
+         * Sidebery positions tree level marks based on its default 2px tab margin.
+         * FlexFox uses a fixed 5px tab margin, so the tree line needs a 3px offset
+         * to stay visually aligned.
+         */
+        --uc-sb-tree-line-indent-offset: calc(var(--uc-sb-tabs-margin) - var(--uc-sb-sidebery-default-tabs-margin));
+        --uc-sb-navbar-padding: 3px 2px;
+        @media (width > 50px) {
+            --uc-sb-navbar-padding: 3px 3px;
+        }
+        --uc-sb-central-box-width: var(--uc-sidebar-hover-width);
+        &:is([data-nav-layout="left"], [data-nav-layout="right"]) {
+            --uc-sb-navbar-padding: 4px 3px 4px 1px;
+            --uc-sb-central-box-width: calc(var(--uc-sidebar-hover-width) - var(--uc-sidebar-width));
+        }
         /*
         --tabs-margin: 2.5px !important;
         */
-        --uc-sb-pinned-tab-height: 38px;
+        --uc-sb-pinned-tab-row-gap: 1px;
+        --uc-sb-pinned-tab-height: 37px;
         &[data-density="compact"] {
-            --uc-sb-pinned-tab-height: 33px;
+            --uc-sb-pinned-tab-height: 32px;
         }
         &[data-density="loose"] {
-            --uc-sb-pinned-tab-height: 39px;
+            --uc-sb-pinned-tab-height: 38px;
+        }
+        .NavigationBar .nav-item {
+            #root:not([data-nav-inline="true"]) & {
+                --nav-btn-width: 38px;
+                --nav-btn-height: 33px;
+            }
+        }
+        .NavigationBar.-vert .nav-item {
+            #root[data-density="compact"] & {
+                --nav-btn-height: 28px;
+            }
+            #root[data-density="loose"] & {
+                --nav-btn-height: 34px;
+            }
+        }
+
+        .central-box {
+            width: auto !important;
+            min-width: 0 !important;
+            flex: 1 0 min(100%, var(--uc-sb-central-box-width)) !important;
+            overflow: clip;
+        }
+
+        .right-vertical-box,
+        .left-vertical-box {
+            width: auto !important;
+            min-width: 0 !important;
+            flex: 0 1 auto !important;
+            overflow: clip;
         }
 
         .PinnedTabsBar {
-            min-width: var(--uc-sidebar-hover-width);
-            grid-template-columns: repeat(auto-fit, minmax(var(--uc-sb-pinned-tab-max-columns), 1fr)) !important;
+            min-width: var(--uc-sb-central-box-width);
+            /** 
+             * .tab-wrapper requires a minimum width of var(--tabs-pinned-width).
+             * When the sidebar becomes narrower, the percentage-based value from
+             * --uc-sb-pinned-tab-max-columns may become smaller than that minimum,
+             * causing Grid to create more columns than the pinned tabs can actually fit.
+             * Use the larger of the two values so Grid reduces the column count instead
+             * of allowing pinned tabs to overlap. 
+             */
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(max(var(--tabs-pinned-width), var(--uc-sb-pinned-tab-max-columns)), 1fr)
+            ) !important;
             grid-auto-rows: min-content;
             column-gap: 2px !important;
-            row-gap: 1px !important;
+            row-gap: var(--uc-sb-pinned-tab-row-gap) !important;
             flex-shrink: 0;
             overflow-x: hidden;
             overflow-y: auto;
             scrollbar-width: thin;
             scroll-behavior: smooth;
             @media not -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 0) {
-                max-height: calc(var(--uc-sb-pinned-tab-max-rows) * var(--uc-sb-pinned-tab-height) - 0px);
+                max-height: calc(
+                    var(--uc-sb-pinned-tab-max-rows) * var(--uc-sb-pinned-tab-height) +
+                        (var(--uc-sb-pinned-tab-max-rows) - 1) * var(--uc-sb-pinned-tab-row-gap)
+                );
             }
 
             @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
@@ -1222,8 +1358,10 @@
             }
         }
 
-        /* Center items when collapsed, overriding inline styles */
-        /* Navbar dropdown arrow icon */
+        /** 
+         * Override inline styles: Center the navigation buttons when collapsed
+         * by replacing the original padding-based alignment with margins.
+         */
         &:not([data-nav-inline="true"]) .nav-item[data-active="true"] {
             padding: 0px !important;
         }
@@ -1231,7 +1369,10 @@
             margin: 0 1px !important;
         }
 
-        /* Reset inline offsets for all elements except .ScrollBox .Tab */
+        /** 
+         * Override inline styles: Reset the offsets originally used to center
+         * elements in the collapsed state, as alignment is now handled separately.
+         */
         &:not(:hover) {
             .PinnedTabsBar {
                 margin-left: 0px !important;
@@ -1258,7 +1399,10 @@
             padding: 0 7px var(--general-margin) !important;
         }
 
-        /* Override inline styles so Sidebery uses the same transition timing as the chrome sidebar */
+        /** 
+         * Override inline styles: Use the shared sidebar transition variables
+         * to synchronize Sidebery's animation with its browser chrome container.
+         */
         /* 🔽 Initial state block */
         /* Override padding-left transition time to prevent navbar dropdown arrow icon from shifting with delay */
         .NavigationBar {
@@ -1542,7 +1686,7 @@
         }
         @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
             @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
-                &:hover .nav-item[data-active="true"] > svg {
+                &:not(.-vert):hover .nav-item[data-active="true"] > svg {
                     width: 22px !important;
                     height: 22px !important;
                 }
@@ -1550,8 +1694,10 @@
         }
     }
 
-    /* Override inline styles so the NavigationBar uses the original tab panel icon
-       instead of FlexFox's default dropdown arrow when Sidebery is collapsed */
+    /** 
+     * Override inline styles: Remove the fixed collapsed navigation icon
+     * so it can be replaced according to `uc.flex.style-sidebery-nav-icon`.
+     */
     @media (max-width: 50px) {
         #root:not([data-nav-inline="true"]) .nav-item[data-active="true"] > svg {
             padding: 0 !important;
@@ -1624,7 +1770,7 @@
         }
 
         @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
-            #root:not([data-nav-inline="true"]) .NavigationBar:hover .nav-item .icon {
+            #root:not([data-nav-inline="true"]) .NavigationBar:not(.-vert):hover .nav-item .icon {
                 width: 22px;
                 height: 22px;
                 transition:
@@ -1685,8 +1831,7 @@
         }
     }
 
-    /* Override inline styles when Sidebery is resizable and width < 50px 
-        to prevent layout shifts */
+    /* Override inline styles: Prevent layout shifts when Sidebery is resizable and narrower than 50px. */
     @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px) {
         @media not (-moz-pref("uc.flex.fully-hide-sidebery") or (display-mode: fullscreen)) {
             #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
@@ -1739,7 +1884,7 @@
         }
     }
 
-    /* Override inline styles so Sidebery's background follows the theme automatically */
+    /* Override inline styles: Let Sidebery's background follow the current Firefox theme. */
     @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color"),
         not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
         #root {

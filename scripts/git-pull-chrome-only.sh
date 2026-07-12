@@ -291,7 +291,8 @@ if [ -z "$profile_path" ]; then
 
         if [ "$selection" -eq "$custom_number" ]; then
             while true; do
-                printf 'Enter the Firefox profile directory, or type Esc to cancel: '
+                printf 'Enter the Firefox profile directory, or type Esc to cancel:\n'
+                printf '> '
                 IFS= read -r profile_path
                 case "$profile_path" in
                     Esc|esc|ESC) print_yellow "Update cancelled by user."; exit 0 ;;

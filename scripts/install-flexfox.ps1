@@ -384,7 +384,8 @@ function Get-ActiveFirefoxProfiles {
 function Read-CancellableTextInput {
     param ([string]$Prompt)
 
-    Write-Host "$Prompt`: " -NoNewline
+    Write-Host $Prompt
+    Write-Host "> " -NoNewline
     $inputString = ""
 
     while ($true) {

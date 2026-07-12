@@ -1361,7 +1361,7 @@
 /* 🔽 [BLOCK F] Start of rules for inactive Sidebery */
 @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
     /* ── ▶️ Styles for verticalTabs when the sidebar is expanded */
-    /* TEMPORARY: Since Firefox v141, #vertical-pinned-tabs-container renamed to #pinned-tabs-container (Bug 1964534) */
+    /* !TEMPORARY: Since Firefox v141, #vertical-pinned-tabs-container renamed to #pinned-tabs-container (Bug 1964534) */
     :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] {
         :is(#vertical-pinned-tabs-container, #pinned-tabs-container) {
             /**
@@ -1637,7 +1637,7 @@
             /* Keep this in sync with the .tab-background margin-block adjustment below,
                  which adds 0.5px to the default vertical margin on each side. */
             --tab-height-with-margin-padding: calc(
-                var(--tab-min-height) + (2 * (var(--tab-block-margin) + 0.5px))
+                var(--tab-min-height) + (2 * (var(--tab-margin-block) + 0.5px))
             ) !important;
 
             .tabbrowser-tab {
@@ -1653,9 +1653,9 @@
         }
 
         .tab-background {
-            /* Add 0.5px to the default 2px value of --tab-block-margin so the
+            /* Add 0.5px to the default 2px value of --tab-margin-block so the
                 .tab-background shadow has enough space to render without clipping. */
-            margin-block: calc((var(--tab-block-margin) + 0.5px)) !important;
+            margin-block: calc((var(--tab-margin-block) + 0.5px)) !important;
             border-radius: 5px !important;
             transition:
                 max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)

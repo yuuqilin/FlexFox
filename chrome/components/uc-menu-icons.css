@@ -451,7 +451,7 @@
     }
     #appMenu-new-window-button2,
     #appMenuRecentlyClosedWindows {
-        list-style-image: url("chrome://browser/skin/window.svg");
+        list-style-image: url("../icons/menu/window.svg");
     }
     #appMenu-new-private-window-button2 {
         list-style-image: url("chrome://browser/skin/privateBrowsing.svg");
@@ -596,7 +596,7 @@
     #historyUndoWindowMenu,
     #context_openTabInWindow,
     menuitem[data-l10n-id*="-open-"][data-l10n-id$="-window"] {
-        background-image: url("chrome://browser/skin/window.svg");
+        background-image: url("../icons/menu/window.svg");
     }
     menuitem[data-l10n-id$="-private-window"] {
         background-image: url("chrome://browser/skin/privateBrowsing.svg") !important;
@@ -960,7 +960,7 @@
     }
     */
     menu#frame {
-        background-image: url("chrome://browser/skin/window.svg");
+        background-image: url("../icons/menu/window.svg");
     }
     #context_moveToStart,
     #context_closeTabsToTheStart {

@@ -591,6 +591,15 @@
         }
 
         @media -moz-pref("uc.flex.style-urlbar", 4) {
+            &[open] #star-button-box,
+            &:hover #star-button-box,
+            #star-button-box[open] {
+                opacity: 1;
+                margin-inline-end: 3px;
+            }
+        }
+
+        @media -moz-pref("uc.flex.style-urlbar", 4) {
             &[open] #urlbar-zoom-button,
             &:hover #urlbar-zoom-button {
                 opacity: 1;

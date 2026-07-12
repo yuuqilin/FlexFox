@@ -4,7 +4,29 @@
 
 ## 🆕 最新情報
 
-## **🦊 v6.5.6**
+**🦊 v6.5.7**
+
+* Sidebery のナビゲーションバーの垂直レイアウトに対応しました。
+  * 垂直レイアウト専用のスタイルを追加し、アイコンの位置ずれやピン留めタブが途中で切れる問題を修正しました。
+  * Sidebery の設定（歯車アイコン）から、**ナビゲーションバー** > **レイアウト** > **垂直** を選択すると有効にできます。
+  * 必要に応じて `uc.flex.increase-sidebery-expanded-width` も有効にしてください。垂直ナビゲーションバーは展開時のサイドバー幅を 44px 使用するため、タブタイトルの表示領域が狭くなり、ピン留めタブの列数も減る場合があります。たとえば、5 列に設定していても 4 列になることがあります。このオプションを有効にすると展開幅が広がり、従来とほぼ同じタブ領域を確保できます。  
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-dark.webp" style="width: 31%;">&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-light.webp" style="width: 31%;">  
+* `uc.flex.style-urlbar = 4` の使用時に、アドレスバーのブックマーク用スターアイコンが表示されなくなる問題を修正しました。
+* `browser.nova.enabled` の有効時に、ブックマークツールバーと Sidebery を展開できなくなる問題を修正しました。
+  * Nova UI は現在も開発中で、仕様やデザインが変更される可能性があります。FlexFox は現時点では Nova UI に対応しておらず、この修正は基本機能を維持するための暫定的なものです。
+* Firefox Beta v153 の変更により、`window.svg` アイコンが変形していた問題を修正しました。 [Bug 2032240](https://bugzilla.mozilla.org/show_bug.cgi?id=2032240)
+* Firefox Nightly v154 の変更により発生していた複数のレイアウト問題を修正しました。 [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+
+<!-- END What's New -->
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>過去の更新</b></summary>
+
+<!-- END Release Note -->
+
+## **v6.5.6**
 
 ### 更新
 
@@ -36,15 +58,6 @@
 * Firefox Nightly v154 の変更により、Sidebery の展開時にタブが上下に揺れる問題を修正しました。 [Bug 2048146](https://bugzilla.mozilla.org/show_bug.cgi?id=2048146)
 
 * Firefox Nightly v154 で追加された App メニューの「PDF を編集...」項目にアイコンを追加しました。 [Bug 2047915](https://bugzilla.mozilla.org/show_bug.cgi?id=2047915)
-
-<!-- END What's New -->
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>過去の更新</b></summary>
-
-<!-- END Release Note -->
 
 ## **v6.5.5**
 

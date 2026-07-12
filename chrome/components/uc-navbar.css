@@ -193,7 +193,7 @@ toolbarbutton:hover {
                     translate 0.3s ease !important;
             }
             */
-            transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+            transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-margin-block) * 2);
             transform: rotateX(89.9deg);
         }
 
@@ -375,7 +375,7 @@ toolbarbutton:hover {
                         calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration)) !important;
             }
             */
-            transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+            transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-margin-block) * 2);
             transform: rotateX(89.9deg);
         }
 
@@ -499,5 +499,12 @@ toolbarbutton:hover {
                 min(4px, (var(--urlbar-container-height) - var(--urlbar-height)) / 2) + var(--urlbar-container-padding)
             ) !important;
         }
+    }
+}
+
+/* Firefox Nova compatibility */
+@media -moz-pref("browser.nova.enabled") {
+    #navigator-toolbox {
+        overflow: visible !important;
     }
 }

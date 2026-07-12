@@ -1032,3 +1032,15 @@ split-view-footer {
         --toolbox-background-color-inactive: transparent !important;
     }
 }
+
+/* Firefox Nova compatibility */
+@media -moz-pref("browser.nova.enabled") {
+    .browserContainer {
+        border: none !important;
+    }
+
+    .split-view-splitter {
+        width: 6px !important;
+        margin-inline: 0px !important;
+    }
+}

@@ -4,7 +4,29 @@
 
 ## 🆕 更新内容
 
-## **🦊 v6.5.6**
+**🦊 v6.5.7**
+
+* 新增对 Sidebery 导航栏垂直布局的支持。
+  * FlexFox 现在会为垂直布局应用专用样式，修复图标未对齐、固定标签页被裁切等问题。
+  * 可前往 **Sidebery 设置**（齿轮图标）> **导航栏** > **布局** > **垂直排列** 启用。
+  * 根据实际布局，可能还需要启用 `uc.flex.increase-sidebery-expanded-width`。垂直导航栏会占用 44px 的侧边栏展开宽度，使标签页区域变窄，标签页标题可显示的文字减少，固定标签页的列数也可能下降。例如，原本设置为 5 列时可能只能显示 4 列。启用此选项后会增加侧边栏的展开宽度，使标签页区域大致维持原有的可用宽度。  
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-dark.webp" style="width: 31%;">&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-light.webp" style="width: 31%;">  
+* 修复使用 `uc.flex.style-urlbar = 4` 时，地址栏中的书签星形图标消失的问题。
+* 修复启用 `browser.nova.enabled` 时，书签工具栏和 Sidebery 无法展开的问题。
+  * Nova UI 仍在开发中，设计和结构可能随时发生变化。FlexFox 目前暂不支持 Nova UI，此项修复仅用于维持基本功能正常运行。
+* 修复 Firefox Beta v153 的变更导致 `window.svg` 图标变形的问题。 [Bug 2032240](https://bugzilla.mozilla.org/show_bug.cgi?id=2032240)
+* 修复 Firefox Nightly v154 的变更导致多处布局异常的问题。 [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+
+<!-- END What's New -->
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>历史更新</b></summary>
+
+<!-- END Release Note -->
+
+## **v6.5.6**
 
 ### 更新
 
@@ -36,15 +58,6 @@
 * 修复 Firefox Nightly v154 的变更导致 Sidebery 展开时标签页上下抖动的问题。 [Bug 2048146](https://bugzilla.mozilla.org/show_bug.cgi?id=2048146)
 
 * 为 Firefox Nightly v154 新增的 App 菜单“编辑 PDF...”选项添加图标。 [Bug 2047915](https://bugzilla.mozilla.org/show_bug.cgi?id=2047915)
-
-<!-- END What's New -->
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>历史更新</b></summary>
-
-<!-- END Release Note -->
 
 ## **v6.5.5**
 

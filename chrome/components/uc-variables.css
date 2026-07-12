@@ -1,22 +1,28 @@
 /* ════════════════════════════════════════════════════════════════════
-   🛠️ USER CONFIGURABLE VARIABLES — SAFE TO EDIT
+   🛠️ USER-CUSTOMIZABLE VARIABLES
 
-   The following values control appearance settings such as colors,
-   dimensions, and animation timing. You are welcome to customize
-   them — but DO NOT edit them directly in this file.
+   The variables below control appearance settings such as colors,
+   dimensions, spacing, and animation timing. They can be adjusted to
+   customize FlexFox's appearance.
 
-   ✅ Instead, to safely override any value:
-      1. Create a file named `uc-user-settings.css` inside the `components` folder.
-      2. Copy the relevant selector block (e.g. `:root`)
-         that contains the variable(s) you want to change.
-      3. Paste and edit them in your `uc-user-settings.css` file.
+   To preserve custom values across future updates, avoid editing them
+   directly in this file. Instead:
 
-   🛡️ Why? The `uc-user-settings.css` file is loaded last and will override values here.
-   It will not be affected by updates, so your changes will be preserved.
+    1. Create `uc-user-settings.css` in the `components` folder.
+    2. Copy the variable together with its complete selector or rule block.
+    3. Paste it into `uc-user-settings.css` and assign the preferred value.
 
-   ⚠️ IMPORTANT: If a variable is defined inside a selector (like `:root{...}`),
-   be sure to copy the *entire block*, not just the variable — this ensures
-   your overrides will take effect properly.
+   Styles and variables in this user-managed file override FlexFox's
+   defaults and remain unaffected by future updates.
+
+   Preserve the complete selector and conditional context when copying a
+   variable. For example, to change `--uc-bgcolor` only in dark mode, add:
+
+    :root {
+        @media (prefers-color-scheme: dark) {
+            --uc-bgcolor: #1a1b26;
+        }
+    }
 ════════════════════════════════════════════════════════════════════ */
 :root {
     /* ════════════════════════════════════════════════════════════════════
@@ -27,12 +33,13 @@
     ╚██████╗╚██████╔╝███████╗╚██████╔╝██║  ██║    ███████║╚██████╗██║  ██║███████╗██║ ╚═╝ ██║███████╗
      ╚═════╝ ╚═════╝ ╚══════╝ ╚═════╝ ╚═╝  ╚═╝    ╚══════╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚══════╝
                                                                                                      
-       🎨 COLOR SCHEME — FLEXFOX THEME PALETTE
+       🎨 COLOR SCHEME & THEME TOKENS
     
-       This section defines the color palette used by the FlexFox theme.
-       You can customize these to create your preferred visual style.
+       This section defines base interface colors, Firefox theme
+       integration values, accent color tokens, and gradient tokens
+       used across FlexFox.
     ════════════════════════════════════════════════════════════════════ */
-    /* 🔽 Start of color scheme definitions for FlexFox Theme */
+    /* 🔽 Start of color scheme and theme tokens */
     @media (prefers-color-scheme: dark) {
         --uc-bgcolor: #1a1b26; /* Background color of the toolbar */
         --uc-urlbar-outline: #414868; /* Outline color that appears when hovering over the URL bar */
@@ -272,7 +279,7 @@
     --uc-gradient-start-0: light-dark(oklch(65% 0.42 340), oklch(55% 0.45 350));
     --uc-gradient-end-0: light-dark(oklch(78% 0.42 200), oklch(95% 0.4 95));
 
-    /* 🔼 End of color scheme definitions */
+    /* 🔼 End of color scheme and theme tokens */
 
     /* ════════════════════════════════════════════════════════════════════
     ██████╗  █████╗ ███████╗███████╗    ███████╗████████╗██╗   ██╗██╗     ███████╗
@@ -282,13 +289,14 @@
     ██████╔╝██║  ██║███████║███████╗    ███████║   ██║      ██║   ███████╗███████╗
     ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝    ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝
                                                                                   
-       🧩 LAYOUT & HIGHLIGHT SETTINGS
+       🧩 BASE STYLE & LAYOUT SETTINGS
     
-       Base style variables for layout behaviors, animations, icon sizes,
-       element positions, and highlight colors used in key theme elements
-       like the logo, stripe, and bookmark star.
+       This section defines shared variables for layout dimensions,
+       icon assets, highlight colors, spacing, corner radii, animation
+       timing, wallpapers, Mica transparency, and interaction triggers
+       used across FlexFox.
     ════════════════════════════════════════════════════════════════════ */
-    /* 🔽 Start of layout and highlight definitions */
+    /* 🔽 Start of base style and layout settings */
     --uc-sidebar-width: 44px; /* Width when Sidebery or vertical tabs are collapsed */
     --uc-sidebar-hover-width: 220px; /* Width when Sidebery is expanded */
     /* Increase expanded width of Sidebery */
@@ -814,6 +822,14 @@
     @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
         --uc-web-content-margin: 8px;
     }
+    /*
+    @media -moz-pref("browser.nova.enabled") {
+        --uc-web-content-margin: 0px;
+        @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
+            --uc-web-content-margin: 4px;
+        }
+    }
+    */
     --uc-web-content-radius: 8px;
     @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
         --uc-web-content-radius: 4px;
@@ -1072,6 +1088,16 @@
     --uc-sidebar-hover-trigger-width: 22px;
     &:not([sizemode="normal"]) {
         --uc-sidebar-hover-trigger-width: 1px;
+        @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
+            &:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                @media -moz-pref("uc.flex.enable-rounded-web-content") {
+                    --uc-sidebar-hover-trigger-width: 4px;
+                    @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
+                        --uc-sidebar-hover-trigger-width: 8px;
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -1100,6 +1126,16 @@
     }
     &[sizemode="maximized"] {
         --uc-toolbox-rotation: 88.5deg;
+        @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
+            &:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                @media -moz-pref("uc.flex.enable-rounded-web-content") {
+                    --uc-toolbox-rotation: 86deg;
+                    @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
+                        --uc-toolbox-rotation: 84deg;
+                    }
+                }
+            }
+        }
     }
 
     /* Auto-hide delay for bookmarks toolbar and navigator toolbox */
@@ -1121,73 +1157,46 @@
     --uc-tabs-hide-animation-duration: 48ms; \/* Duration of horizontal tab hide animation *\/
     --uc-tabs-hide-animation-delay: 200ms; \/* Delay before hiding horizontal tabs *\/
     */
-    /* 🔼 End of layout and highlight definitions */
+    /* 🔼 End of base style and layout settings */
 }
 
 /* ════════════════════════════════════════════════════════════════════
-   ⚙️ SYSTEM LOGIC VARIABLES — DO NOT EDIT
+   ⚙️ INTERNAL LAYOUT LOGIC
 
-   These variables are dynamically assigned based on complex conditions,
-   using nested @media -moz-pref() queries and advanced selectors.
+   The sections below define FlexFox's internal layout logic. For
+   appearance customization, use the user-configurable sections above.
 
-   They are used internally by the stylesheet to switch layout behavior
-   based on the current environment and user settings.
+   These variables and rules are assigned automatically through Firefox
+   prefs, browser states, sidebar states, and toolbar conditions to support
+   layout switching, auto-hide behavior, Sidebery integration, clipping,
+   offsets, and transitions.
 
-   🚫 Do not modify this section unless you understand the logic fully.
+   Component styles usually consume these variables rather than repeating
+   the full condition logic. To trace how a variable affects the interface,
+   check both its assignments here and its usage in the related component
+   stylesheet.
+
+   When changing the logic below, review related conditions together so
+   connected layout states continue to work as expected.
 ════════════════════════════════════════════════════════════════════ */
 :root {
     /* ════════════════════════════════════════════════════════════════════
-    ██╗███╗   ██╗██╗████████╗██╗ █████╗ ██╗     ██╗███████╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
-    ██║████╗  ██║██║╚══██╔══╝██║██╔══██╗██║     ██║╚══███╔╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
-    ██║██╔██╗ ██║██║   ██║   ██║███████║██║     ██║  ███╔╝ ███████║   ██║   ██║██║   ██║██╔██╗ ██║
-    ██║██║╚██╗██║██║   ██║   ██║██╔══██║██║     ██║ ███╔╝  ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
-    ██║██║ ╚████║██║   ██║   ██║██║  ██║███████╗██║███████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
-    ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   ╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-                                                                                                  
-       🧪 INITIAL VARIABLE DEFINITIONS
+    ██╗      █████╗ ██╗   ██╗ ██████╗ ██╗   ██╗████████╗    ██╗      ██████╗  ██████╗ ██╗ ██████╗
+    ██║     ██╔══██╗╚██╗ ██╔╝██╔═══██╗██║   ██║╚══██╔══╝    ██║     ██╔═══██╗██╔════╝ ██║██╔════╝
+    ██║     ███████║ ╚████╔╝ ██║   ██║██║   ██║   ██║       ██║     ██║   ██║██║  ███╗██║██║     
+    ██║     ██╔══██║  ╚██╔╝  ██║   ██║██║   ██║   ██║       ██║     ██║   ██║██║   ██║██║██║     
+    ███████╗██║  ██║   ██║   ╚██████╔╝╚██████╔╝   ██║       ███████╗╚██████╔╝╚██████╔╝██║╚██████╗
+    ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝  ╚═════╝    ╚═╝       ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝ ╚═════╝
+                                                                                                 
+       🧪 CORE LAYOUT LOGIC VARIABLES
     
-       Sets fallback values to prevent undefined vars and layout issues.
-       Includes base sizes used in later layout calculations.
-
-           Originally, condition A was handled via a @media query.
-           Now that [titlepreface*="A"] offers equivalent logic,
-           we need to ensure both mechanisms (@media A and [titlepreface*="A"])
-           apply the same styles. The conversion pattern is as follows:
-        
-           When the original is:
-             @media A and B {
-                 ...
-             }
-        
-        +  Add a new block below:
-        +  @media (not A) and B {
-        +      [titlepreface*="A"] {
-        +          ...
-        +      }
-        +  }
-        
-           -------------------------------------------------------
-        
-           For negated conditions:
-        
-           When the original is:
-             @media not (A or B) {
-                 ...
-             }
-        
-        +  Simply insert this inside the existing block:
-        +      :not([titlepreface*="A"]) {
-                   ...
-        +      }
-        
-           Summary:
-           1. If the original rule is @media not A, no duplication is needed—
-              just wrap the existing rules with :not([titlepreface*="A"]).
-           2. If the original rule is @media A, duplicate the block with the
-              adjusted @media condition and nest [titlepreface*="A"] inside it.
+       This section defines the core layout variables used by FlexFox.
+       It sets baseline values, then adjusts them through Firefox prefs,
+       window states, sidebar states, Sidebery activity, and toolbar modes
+       to control spacing, offsets, clipping, visibility, and transitions.
 
     ════════════════════════════════════════════════════════════════════ */
-    /* 🔽 Begin initializing block */
+    /* 🔽 Start of core layout logic variables */
     /**
      * !TEMPORARY:
      * The tokens on the right below were renamed to the tokens on the left in newer Firefox versions.
@@ -1207,6 +1216,11 @@
     --toolbarbutton-background-color-hover: var(--toolbarbutton-hover-background);
     --tab-background-color-hover: var(--tab-hover-background-color);
     --tab-group-counter-size: 24px;
+    /* v154+ */
+    --tab-margin-block: var(--tab-block-margin);
+    /* Project Nova UI tokens and related overrides */
+    --chrome-window-gap: 0px !important;
+    --chrome-block-radius: 0px !important;
 
     --uc-toolbar-bgcolor: var(--uc-bgcolor); /* Internal fallback; must match --uc-bgcolor */
     --uc-sidebar-stripe-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
@@ -1257,7 +1271,7 @@
     }
 
     /* Toolbar sizing */
-    --uc-tabstoolbar-height: calc(2 * var(--tab-block-margin) + var(--tab-min-height));
+    --uc-tabstoolbar-height: calc(2 * var(--tab-margin-block) + var(--tab-min-height));
     #urlbar-container,
     #urlbar {
         --urlbar-height: 32px !important;
@@ -1539,7 +1553,7 @@
                 --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin-side)
                     var(--uc-web-content-margin) var(--uc-web-content-margin);
             }
-            :root[taskbartab] & {
+            :root:is([taskbartab], [chromehidden~="toolbar"]) & {
                 --uc-web-content-margin-box: var(--uc-web-content-margin-top) var(--uc-web-content-margin)
                     var(--uc-web-content-margin) var(--uc-web-content-margin);
             }
@@ -2002,7 +2016,7 @@
         }
     }
 
-    /* 🔼 End of initializing block */
+    /* 🔼 End of core layout logic variables */
 
     /* ════════════════════════════════════════════════════════════════════
     ███████╗██╗██████╗ ███████╗██████╗ ███████╗██████╗ ██╗   ██╗
@@ -2014,10 +2028,11 @@
                                                                 
        📌 VARIABLES FOR ACTIVE SIDEBERY
     
-       These values apply only when Sidebery is active, including layout
-       offsets and visibility-related adjustments.
+       This section defines Sidebery-specific layout variables used when
+       Sidebery is active, including sidebar width, hover expansion, toolbar
+       offsets, Mica clipping, window controls, and horizontal tab behavior.
     ════════════════════════════════════════════════════════════════════ */
-    /* 🔽 Start of variable definitions for active Sidebery */
+    /* 🔽 Start of variables for active Sidebery */
     &:has(
         > body
             > #browser
@@ -2186,7 +2201,7 @@
             }
         }
     }
-    /* 🔼 End of variable definitions for active Sidebery */
+    /* 🔼 End of variables for active Sidebery */
 
     /* ════════════════════════════════════════════════════════════════════
     ██████╗  ██████╗  ██████╗ ██╗  ██╗███╗   ███╗ █████╗ ██████╗ ██╗  ██╗███████╗
@@ -2196,12 +2211,13 @@
     ██████╔╝╚██████╔╝╚██████╔╝██║  ██╗██║ ╚═╝ ██║██║  ██║██║  ██║██║  ██╗███████║
     ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
                                                                                  
-       🧭 OFFSETS FOR BOOKMARKS TOOLBAR & NAVIGATOR
+       🧭 TOOLBAR & NAVIGATOR OFFSETS
     
-       These styles control spacing and layout shifts for the toolbar
-       and navigator depending on sidebar visibility and position.
+       This section defines toolbar and navigator offsets used to align
+       the bookmarks toolbar, theme background, and related spacing with
+       sidebar visibility, sidebar position, and vertical tab states.
     ════════════════════════════════════════════════════════════════════ */
-    /* 🔽 Start of offset block for bookmarks toolbar and navigator */
+    /* 🔽 Start of toolbar and navigator offsets */
     --uc-navigator-offset: var(--uc-sb-sidebar-offset, 0px);
     --uc-navigator-width: var(--uc-sb-sidebar-offset, 0px);
     --uc-personal-toolbar-offset: var(--uc-sb-sidebar-offset, 0px);
@@ -2376,5 +2392,5 @@
         --uc-navigator-offset: 0px;
         --uc-personal-toolbar-offset: 0px;
     }
-    /* 🔼 End of offset block for bookmarks toolbar and navigator */
+    /* 🔼 End of toolbar and navigator offsets */
 }

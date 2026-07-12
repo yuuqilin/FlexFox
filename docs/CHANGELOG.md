@@ -4,7 +4,29 @@
 
 ## 🆕 What's New
 
-## **🦊 v6.5.6**
+**🦊 v6.5.7**
+
+* Added support for Sidebery’s vertical navigation bar layout.
+  * FlexFox now provides dedicated styling for the vertical layout, fixing issues such as misaligned icons and clipped pinned tabs.
+  * To enable it, open **Sidebery Settings** (gear icon) > **Navigation bar** > **Layout** > **Vertical**.
+  * You may also want to enable `uc.flex.increase-sidebery-expanded-width`. The vertical navigation bar uses 44px of the expanded sidebar width, leaving less room for tab titles and pinned tabs. For example, a five-column pinned-tab layout may be reduced to four columns. This option increases the expanded width so the tab area can retain approximately the same usable width as before.  
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-dark.webp" style="width: 31%;">&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-light.webp" style="width: 31%;">  
+* Fixed the bookmark star icon disappearing when `uc.flex.style-urlbar = 4`.
+* Fixed the bookmarks toolbar and Sidebery failing to expand when `browser.nova.enabled` was enabled.
+  * Nova UI is still under development and may change at any time. FlexFox does not currently support Nova UI; this fix only preserves basic functionality.
+* Fixed the distorted `window.svg` icon caused by changes in Firefox Beta v153. [Bug 2032240](https://bugzilla.mozilla.org/show_bug.cgi?id=2032240)
+* Fixed multiple layout issues caused by changes in Firefox Nightly v154. [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+
+<!-- END What's New -->
+
+<a id="updates-top-start"></a>
+<details>
+
+<summary>💬 <b>Previous Updates</b></summary>
+
+<!-- END Release Note -->
+
+## **v6.5.6**
 
 ### Updated
 
@@ -36,15 +58,6 @@
 * Fixed tab jitter when Sidebery expands, caused by changes in Firefox Nightly v154. [Bug 2048146](https://bugzilla.mozilla.org/show_bug.cgi?id=2048146)
 
 * Added an icon for the new “Edit PDF...” item in the App Menu introduced in Firefox Nightly v154. [Bug 2047915](https://bugzilla.mozilla.org/show_bug.cgi?id=2047915)
-
-<!-- END What's New -->
-
-<a id="updates-top-start"></a>
-<details>
-
-<summary>💬 <b>Previous Updates</b></summary>
-
-<!-- END Release Note -->
 
 ## **v6.5.5**
 
