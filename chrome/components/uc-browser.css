@@ -1035,6 +1035,15 @@ split-view-footer {
 
 /* Firefox Nova compatibility */
 @media -moz-pref("browser.nova.enabled") {
+    .chrome-block {
+        border: none !important;
+        overflow: visible !important;
+    }
+
+    #PersonalToolbar {
+        border: none !important;
+    }
+
     .browserContainer {
         border: none !important;
     }

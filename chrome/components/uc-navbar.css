@@ -501,10 +501,3 @@ toolbarbutton:hover {
         }
     }
 }
-
-/* Firefox Nova compatibility */
-@media -moz-pref("browser.nova.enabled") {
-    #navigator-toolbox {
-        overflow: visible !important;
-    }
-}
