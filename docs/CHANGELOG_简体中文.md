@@ -4,18 +4,139 @@
 
 ## 🆕 更新内容
 
-**🦊 v6.5.7**
+## 🦊 v6.6.0
 
-* 新增对 Sidebery 导航栏垂直布局的支持。
-  * FlexFox 现在会为垂直布局应用专用样式，修复图标未对齐、固定标签页被裁切等问题。
-  * 可前往 **Sidebery 设置**（齿轮图标）> **导航栏** > **布局** > **垂直排列** 启用。
-  * 根据实际布局，可能还需要启用 `uc.flex.increase-sidebery-expanded-width`。垂直导航栏会占用 44px 的侧边栏展开宽度，使标签页区域变窄，标签页标题可显示的文字减少，固定标签页的列数也可能下降。例如，原本设置为 5 列时可能只能显示 4 列。启用此选项后会增加侧边栏的展开宽度，使标签页区域大致维持原有的可用宽度。  
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-dark.webp" style="width: 31%;">&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-light.webp" style="width: 31%;">  
-* 修复使用 `uc.flex.style-urlbar = 4` 时，地址栏中的书签星形图标消失的问题。
-* 修复启用 `browser.nova.enabled` 时，书签工具栏和 Sidebery 无法展开的问题。
-  * Nova UI 仍在开发中，设计和结构可能随时发生变化。FlexFox 目前暂不支持 Nova UI，此项修复仅用于维持基本功能正常运行。
-* 修复 Firefox Beta v153 的变更导致 `window.svg` 图标变形的问题。 [Bug 2032240](https://bugzilla.mozilla.org/show_bug.cgi?id=2032240)
-* 修复 Firefox Nightly v154 的变更导致多处布局异常的问题。 [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+### 新增
+
+https://github.com/user-attachments/assets/84a3ddf1-02f8-4c02-9957-4afcba52bf78
+
+* 新增 `uc.flex.sidebery-expand-style`，用于设置 Sidebery 和原生垂直标签页的展开与折叠动画风格：
+
+  ```
+  1 = 均衡（`ease-in-out`；平滑且均匀，默认）
+  2 = 渐进展开（`ease-out` / `ease-in`；内容会逐步呈现）
+  3 = 轻快（`easeOutQuart` / `easeInQuart`；快速展开并平滑停止）
+  4 = 利落有力（`easeOutExpo` / `ease-in-expo`；迅速展开并有力地折叠）
+  ```
+
+* 新增 `uc.flex.sidebery-expand-duration`，用于设置动画持续时间：
+
+  ```
+  1 = 展开 `115ms` / 折叠 `55ms`（默认）
+  2 = `160ms` / `80ms`
+  3 = `200ms` / `100ms`
+  4 = `340ms` / `220ms`
+  ```
+
+  持续时间越长，动画风格之间的差异越明显。
+
+* 新增 `uc.flex.sidebery-expand-delay`，用于设置鼠标悬停后 Sidebery 和原生垂直标签页开始展开前的延迟：
+
+  ```
+  0 = 无延迟
+  1 = `80ms`（默认）
+  2 = `160ms`
+  3 = `350ms`
+  4 = `460ms`
+  ```
+
+  此设置也会控制水平标签页和工具栏的展开延迟。
+
+* 新增 `uc.flex.sidebery-expand-width`，用于设置 Sidebery 和原生垂直标签页展开后的宽度：
+
+  ```
+  1 = `220px`（默认）
+  2 = `240px`
+  3 = `260px`
+  4 = `280px`
+  ```
+
+* 启用 Mica、壁纸或 `uc.flex.sidebery-apply-expand-speed-to-toolbars` 后，这些动画设置也会应用于水平标签页和工具栏。
+
+* 4 个选项的默认值均为 `1`，与 v6.6 之前的默认效果相同。需要手动修改数值，才能使用新的动画风格、速度或展开宽度。
+
+* 展示图使用的设置：
+
+  ```
+  uc.flex.sidebery-expand-delay    = 2
+  uc.flex.sidebery-expand-duration = 2
+  uc.flex.sidebery-expand-style    = 2
+  uc.flex.sidebery-expand-width    = 2
+  ```
+
+### 不兼容变更
+
+* 以下选项已废弃且不再生效。请从 `about:config` 中删除，以免 FlexFox 的选项说明发生错位：
+
+  ```
+  uc.flex.sidebery-fast-hover-expand
+  → 已由 uc.flex.sidebery-expand-delay 取代
+
+  uc.flex.sidebery-slow-hover-expand
+  → 已由 uc.flex.sidebery-expand-delay 取代
+
+  uc.flex.increase-sidebery-expanded-width
+  → 已由 uc.flex.sidebery-expand-width 取代
+  ```
+
+* 调整了 `uc.flex.findbar-position` 的可选值：
+
+  ```
+  top-left 或 1       = 左上
+  top-right 或 2      = 右上
+  bottom-right 或 3   = 右下
+  ```
+
+  原有的 `top-center-left` 已不再生效。
+
+### 改进
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-findbar.png" width="582px">
+
+* 改进查找栏的外观：
+
+  * 边缘显示更加流畅、稳定。
+  * 改进 Mica 和壁纸模式下的背景模糊与阴影效果。
+  * `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` 现在也会为查找栏图标应用彩带颜色。
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-bookmark-folders.png" width="364px">
+
+* 隐藏书签文件夹文字时，文件夹图标及其 Nova UI 悬停背景现在会居中显示。
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-gradient-tab-borders.png" width="330px">
+
+* 支持 Nova UI 的渐变标签页边框，可通过 `uc.flex.style-sidebar-stripe-color` 设置颜色：
+
+  ```
+  0      = Nova UI 默认渐变色
+  1～10  = FlexFox 强调色渐变
+  ```
+* Link Preview Panel 支持半透明背景。
+* 为 `about:config` 添加 Nova UI 样式。
+
+### 修复
+
+#### Sidebery UI
+
+* 调整 Sidebery 垂直导航栏的最后一个按钮，使其底部保持圆角。
+* 修复 v6.5.6 引起的回退问题：Sidebery 折叠时无法正确显示当前面板图标。
+* 修复 Sidebery v5.6.0 及更高版本中标签页徽章颜色错误的问题。[Commit ec84311](https://github.com/mbnuqw/sidebery/commit/ec8431190c3e42aa4f8357ca2c7aabc97db87fff)
+
+#### Firefox UI
+
+* 修复多个图标缺失或显示错误的问题。
+* 修复 `sidebar.visibility = expand-on-hover` 时侧边栏彩带位置错误的问题。
+* 修复 Firefox 154 中 `about:addons` 页面的 Nova UI 排版问题。[Bug 2051559](https://bugzilla.mozilla.org/show_bug.cgi?id=2051559)
+* 修复 Firefox 154 中全屏模式下 Sidebery 和原生垂直标签页无法展开的问题。[Bug 1927457](https://bugzilla.mozilla.org/show_bug.cgi?id=1927457)
+* 修复 Firefox 154 中右键菜单图标明暗色显示颠倒的问题。[Bug 2048186](https://bugzilla.mozilla.org/show_bug.cgi?id=2048186)
+* 修复 Firefox 154 中查找栏排版错位的问题。[Bug 2048907](https://bugzilla.mozilla.org/show_bug.cgi?id=2048907)、[Bug 2056829](https://bugzilla.mozilla.org/show_bug.cgi?id=2056829)
+* 修复 Firefox 154 中水平标签页模式下 `uc.flex.enable-rounded-web-content` 失效的问题。[Bug 2047653](https://bugzilla.mozilla.org/show_bug.cgi?id=2047653)
+* 修复 Firefox 154 中标签页分组背景颜色错误的问题。[Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+* 恢复 Firefox 155 中消失的标签页分组悬停背景。[Bug 2023691](https://bugzilla.mozilla.org/show_bug.cgi?id=2023691)
+* 恢复 Firefox 155 中消失的固定标签页边框和背景。[Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
+* 修复 Firefox 155 中部分面板圆角显示不正确的问题。[Bug 2054953](https://bugzilla.mozilla.org/show_bug.cgi?id=2054953)
+* 暂时缓解 Firefox 155 中显示缩放高于 125% 时原生垂直标签页排版错位的问题。[Bug 2044082](https://bugzilla.mozilla.org/show_bug.cgi?id=2044082)
+* 修复 Firefox 155 默认启用 Nova UI 后引起的多项排版和功能问题。[Bug 2056188](https://bugzilla.mozilla.org/show_bug.cgi?id=2056188)
 
 <!-- END What's New -->
 
@@ -25,86 +146,6 @@
 <summary>💬 <b>历史更新</b></summary>
 
 <!-- END Release Note -->
-
-## **v6.5.6**
-
-### 更新
-
-* 优化 Sidebery 的交互表现与视觉一致性。
-
-  * 提升 Sidebery 展开、折叠动画的流畅度，并减少布局计算带来的性能消耗。
-  * 修复搜索框展开、折叠时的反弹现象，并将其宽度与下方标签页列表对齐。
-  * 改进分屏视图下的圆角处理。现在只有与 Sidebery 相邻的网页区域会在相邻一侧使用直角，另一侧分屏网页会保留四个圆角。
-  * 调整启用 `uc.flex.sidebery-allow-resizable-width` 后，折叠状态下关闭按钮和树状分支展开按钮的位置，减少在点击标签页图标时误触的可能。
-  * 修复启用 `uc.flex.sidebery-allow-resizable-width` 后，折叠状态下无法展开导航栏标签页面板的问题。
-  * 修复启用网页区域圆角边距后，Sidebery 的面板设置窗口顶部和侧边边距消失的问题。
-
-* 优化 `uc.flex.enable-rounded-web-content` 的效果，同步调整侧边栏面板的下边距，使其与网页内容区域的高度保持对齐。
-
-### 变更
-
-* 原生垂直标签页在折叠状态下不再显示调整分隔线。现在分隔线只会在侧边栏展开时显示，让折叠状态下的界面更加干净。
-
-### 修复
-
-* 修复 v6.5.0 引入的回退问题：同时启用 `uc.flex.sidebery-allow-resizable-width` 与 `Lock Sidebery` 时，固定标签页无法自动换行。
-
-* 修复 v6.5.3 引入的回退问题：Sidebery 的新建标签页按钮左右两侧会出现阴影溢出。
-
-* 修复 Firefox Beta v153 的变更导致 PDF 工具栏无法自动隐藏的问题。 [Bug 2045670](https://bugzilla.mozilla.org/show_bug.cgi?id=2045670)
-
-* 修复 Firefox Beta v153 的变更导致 `view-opentabs.svg` 图标变形的问题。 [Bug 2032258](https://bugzilla.mozilla.org/show_bug.cgi?id=2032258)
-
-* 修复 Firefox Nightly v154 的变更导致 Sidebery 展开时标签页上下抖动的问题。 [Bug 2048146](https://bugzilla.mozilla.org/show_bug.cgi?id=2048146)
-
-* 为 Firefox Nightly v154 新增的 App 菜单“编辑 PDF...”选项添加图标。 [Bug 2047915](https://bugzilla.mozilla.org/show_bug.cgi?id=2047915)
-
-## **v6.5.5**
-
-![预览：about:config 选项说明](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/about-config-preference-descriptions.webp)
-
-### 新增
-
-- 改进 `about:config` 页面的使用体验。
-  - 将 FlexFox 版本信息居中显示，让版本号更容易识别。
-  - 在 FlexFox 选项列表右侧显示对应的简短说明。
-  - 选项说明会按照完整的 `uc.flex` 列表对齐显示。若要保持对应关系，请导入 `user.js`，或手动补齐所有 FlexFox 选项。
-
-- 重写 PowerShell 安装脚本。
-  - 安装脚本改为 `scripts/install-flexfox.ps1`。
-  - 可检测当前已安装的 FlexFox 版本，并仅在需要时下载最新发布版本。
-  - 新增下载包 SHA-256 校验。
-  - 新增交互式菜单，可从 Firefox 用户配置文件列表中选择，或手动输入指定路径。
-  - 新增用于无人值守安装的命令行选项：使用 `-ProfilePath 'path'` 指定配置文件路径，使用 `-Silent` 跳过交互式提示。
-  - 详细说明请参阅 [PowerShell Script](https://github.com/yuuqilin/FlexFox#-powershell-script)。
-
-- 更新 Git Pull 自动化脚本。
-  - 新增交互式菜单，可从 Firefox 用户配置文件列表中选择，或手动输入指定工作目录。
-  - 新增用于无人值守更新的命令行选项：使用 `-ProfilePath 'path'` 指定工作目录，使用 `-Silent` 跳过交互式提示。
-  - 改进对用户自定义文件和 Git 冲突的处理。
-  - 详细说明请参阅 [Git Pull](https://github.com/yuuqilin/FlexFox#-git-pull)。
-
-### 不兼容变更
-
-- 将 `uc.flex.show-flexfox-version-info-in-about-config` 的选项类型由布尔改为数值。
-  - `0`：不显示 FlexFox 版本信息。
-  - `1`：仅显示版本信息。
-  - `2`：显示版本信息和选项说明。这是默认值。
-  - 请先删除旧选项，再使用相同名称重新创建，并将类型设置为“数值”。
-
-### 更新
-
-- 将 `user.js` 从 `scripts` 文件夹移至根目录，以简化安装步骤。
-
-### 移除
-
-- 移除根目录中的 `deploy-userchrome.ps1`。
-
-**v6.5.4**
-
-* 修复启用地址栏文字居中时，地址栏缩放比例按钮周围间距过窄的问题。
-* 移除项目中遗留的旧版 Sidebery 样式文件，避免与当前安装和设置流程混淆。
-* 重新整理说明文档，使 README 更聚焦，选项说明更容易查找，并补充更实用的使用指南。
 
 更多旧版本的更新记录请参见  
 👉 [Wiki 上的历史归档页面](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Simplified-Chinese))

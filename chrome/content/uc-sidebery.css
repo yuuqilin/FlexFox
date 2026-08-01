@@ -214,8 +214,8 @@
         /* Light and Dark Theme base settings */
         --frame-bg: light-dark(#f1f5f9, #1a1b26) !important;
         --toolbar-bg: light-dark(#f1f5f9, #1a1b26) !important;
-        --bg: light-dark(#f1f5f9, #1a1b26) !important;
         /*
+        --bg: light-dark(#f1f5f9, #1a1b26) !important;
         --warn: light-dark(#fca5a5, #8c4351) !important;
         */
         --warn: light-dark(hsl(0 50% 60%), hsl(0 60% 50%)) !important;
@@ -505,22 +505,28 @@
     }
 
     /* ? */
+    /*
     .NavigationBar .panel-btn[data-active="true"] {
         border-radius: 3px !important;
         background-color: var(--bg) !important;
     }
+    */
 
     /* ? */
+    /*
     .NavigationBar .panel-btn[data-active="true"]:hover {
         border-radius: 3px !important;
         background-color: var(--tabs-bg-hover) !important;
     }
+    */
 
     /* ? */
+    /*
     .NavigationBar .panel-btn > svg,
     .NavigationBar .panel-btn > img {
         fill: var(--panel-btn) !important;
     }
+    */
 
     /* SIDEBAR HACK PATCHES */
 
@@ -723,35 +729,85 @@
          * If you copy and modify them in uc-custom-content.css, be sure to also update
          * the corresponding variables in uc-user-settings.css to keep both sides consistent. 
          */
-        /* Sidebar expand/collapse animation settings */
         --uc-sidebar-width: 44px;
         --uc-sidebar-hover-width: 220px;
-        @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
+        @media -moz-pref("uc.flex.sidebery-expand-width", 2) {
+            --uc-sidebar-hover-width: 240px;
+        }
+        @media -moz-pref("uc.flex.sidebery-expand-width", 3) {
             --uc-sidebar-hover-width: 260px;
         }
+        @media -moz-pref("uc.flex.sidebery-expand-width", 4) {
+            --uc-sidebar-hover-width: 280px;
+        }
+        /* Set the expand and collapse animation style for Sidebery and native vertical tabs. */
+        /* ease-in-out: cubic-bezier(0.42, 0, 0.58, 1) */
         --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
+        --uc-hover-transition-type: ease-in-out; /* Easing type for sidebar expanding animation */
+        /* ease-in/ease-out */
+        @media -moz-pref("uc.flex.sidebery-expand-style", 2) {
+            --uc-autohide-transition-type: cubic-bezier(0.42, 0, 1, 1);
+            --uc-hover-transition-type: cubic-bezier(0, 0, 0.58, 1);
+        }
+        /* easeInQuart/easeOutQuart */
+        @media -moz-pref("uc.flex.sidebery-expand-style", 3) {
+            --uc-autohide-transition-type: cubic-bezier(0.5, 0, 0.75, 0);
+            --uc-hover-transition-type: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        /* ease-in-expo/easeOutExpo */
+        @media -moz-pref("uc.flex.sidebery-expand-style", 4) {
+            --uc-autohide-transition-type: cubic-bezier(0.95, 0.05, 0.795, 0.035); /* cubic-bezier(0.7, 0, 0.84, 0) */
+            --uc-hover-transition-type: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Set the expand and collapse animation duration for Sidebery and native vertical tabs. */
         --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
         --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
+        @media -moz-pref("uc.flex.sidebery-expand-duration", 2) {
+            --uc-autohide-transition-duration: 80ms;
+            --uc-hover-transition-duration: 160ms;
+        }
+        @media -moz-pref("uc.flex.sidebery-expand-duration", 3) {
+            --uc-autohide-transition-duration: 100ms;
+            --uc-hover-transition-duration: 200ms;
+        }
+        @media -moz-pref("uc.flex.sidebery-expand-duration", 4) {
+            --uc-autohide-transition-duration: 220ms;
+            --uc-hover-transition-duration: 340ms;
+        }
+
+        /* Set the expand and collapse animation delay for Sidebery and native vertical tabs. */
         --uc-autohide-sidebar-delay: 28ms; /* Delay before collapsing the sidebar */
         --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar */
-
-        /* Speed up sidebar expand/collapse animation */
-        @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
-            --uc-hover-transition-duration: 100ms;
-            --uc-autohide-sidebar-delay: 28ms;
+        @media -moz-pref("uc.flex.sidebery-expand-delay", 0) {
             --uc-hover-sidebar-delay: 1ms;
         }
-        /* Slow down sidebar expand/collapse animation */
-        @media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
-            --uc-autohide-sidebar-delay: 28ms;
+        @media -moz-pref("uc.flex.sidebery-expand-delay", 2) {
+            --uc-hover-sidebar-delay: 160ms;
+        }
+        @media -moz-pref("uc.flex.sidebery-expand-delay", 3) {
             --uc-hover-sidebar-delay: 350ms;
-            --uc-hover-toolbar-delay: 200ms;
+        }
+        @media -moz-pref("uc.flex.sidebery-expand-delay", 4) {
+            --uc-hover-sidebar-delay: 460ms;
         }
 
+        /** 
+         * !TEMPORARY: 
+         * Clear the obsolete global `--bg` inherited from older VerticalFox and Sidebery styles.
+         * Sidebery now uses `--bg` for a JavaScript-provided custom badge color; when no inline value is set,
+         * a stale inherited definition prevents `var(--bg, var(--badge-urgent-bg))` from using its fallback.
+         * Setting the custom property to its guaranteed-invalid initial value preserves that fallback while
+         * still allowing a value set directly on the badge to override the inherited value.
+         * Remove this rule once residual legacy user styles are no longer supported and no longer need overriding. 
+         */
+        --bg: initial !important;
         @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
             --frame-bg: light-dark(#f5f6f6, #26252e) !important;
             --toolbar-bg: light-dark(#f5f6f6, #26252e) !important;
+            /*
             --bg: light-dark(#f5f6f6, #26252e) !important;
+            */
         }
 
         /* Max visible rows in native vertical pinned tabs and Sidebery (before scrolling) */
@@ -953,6 +1009,21 @@
         }
     }
 
+    .NavigationBar .nav-item {
+        #root:not([data-nav-inline="true"]) & {
+            --nav-btn-width: 38px;
+            --nav-btn-height: 33px;
+        }
+    }
+    .NavigationBar.-vert .nav-item {
+        #root[data-density="compact"] & {
+            --nav-btn-height: 28px !important;
+        }
+        #root[data-density="loose"] & {
+            --nav-btn-height: 34px !important;
+        }
+    }
+
     .NavigationBar {
         border-bottom: 1px solid var(--uc-sb-navbar-border-color) !important;
         /* Override inline styles */
@@ -966,9 +1037,27 @@
              */
             --nav-btn-len-margin: 0px;
             /* Match the spacing between navigation buttons to the pinned tabs below. */
-            column-gap: 3px !important;
-            @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
-                column-gap: 2px !important;
+            #root .NavigationBar.-top & {
+                @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+                    column-gap: 3px !important;
+                    @media -moz-pref("uc.flex.sidebery-expand-width", 2) {
+                        margin-inline: 2px;
+                        column-gap: 2.5px !important;
+                        .nav-item {
+                            --nav-btn-width: 34px !important;
+                        }
+                    }
+                    @media -moz-pref("uc.flex.sidebery-expand-width", 3) {
+                        column-gap: 2px !important;
+                    }
+                    @media -moz-pref("uc.flex.sidebery-expand-width", 4) {
+                        margin-inline: 2px;
+                        column-gap: 2px !important;
+                        .nav-item {
+                            --nav-btn-width: 34px !important;
+                        }
+                    }
+                }
             }
         }
     }
@@ -1028,12 +1117,15 @@
         }
         .nav-item {
             margin-block: 2px !important;
+            &:last-of-type {
+                border-radius: var(--nav-btn-border-radius) !important;
+            }
         }
     }
 
     /* Override inline styles: Hide navigation items by clipping instead of using `display: none`. */
     #root:not([data-nav-inline="true"]) .NavigationBar:not(:hover) .main-items {
-        @media not -moz-pref("uc.flex.sidebery-allow-resizable-width"), (width <= 50px) {
+        @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (width <= 50px) {
             flex-wrap: nowrap !important;
         }
         overflow: hidden;
@@ -1041,6 +1133,11 @@
 
     #root.root:not([data-nav-inline="true"]) .nav-item {
         display: flex !important;
+        @media (width <= 50px) {
+            &[data-active="true"] {
+                order: -1;
+            }
+        }
     }
 
     @media (max-width: 50px) {
@@ -1280,20 +1377,6 @@
         &[data-density="loose"] {
             --uc-sb-pinned-tab-height: 38px;
         }
-        .NavigationBar .nav-item {
-            #root:not([data-nav-inline="true"]) & {
-                --nav-btn-width: 38px;
-                --nav-btn-height: 33px;
-            }
-        }
-        .NavigationBar.-vert .nav-item {
-            #root[data-density="compact"] & {
-                --nav-btn-height: 28px;
-            }
-            #root[data-density="loose"] & {
-                --nav-btn-height: 34px;
-            }
-        }
 
         .central-box {
             width: auto !important;
@@ -1512,7 +1595,7 @@
                     transition:
                         opacity var(--d-fast),
                         transform var(--d-fast),
-                        visibility 0ms var(--uc-autohide-transition-type) var(--uc-hover-transition-duration) !important;
+                        visibility 0ms var(--uc-hover-transition-type) var(--uc-hover-transition-duration) !important;
                 }
             }
             @media (max-width: 50px) {
@@ -1531,16 +1614,16 @@
             .NavigationBar {
                 transition:
                     height 50ms ease-in-out 5ms,
-                    padding var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    padding var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             #search_bar {
                 &::before {
-                    transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transition: width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay);
                 }
                 .input {
-                    transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transition: opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         calc(var(--uc-hover-sidebar-delay) - 28ms);
                 }
                 .placeholder,
@@ -1548,7 +1631,7 @@
                     transition:
                         opacity var(--d-fast),
                         transform var(--d-fast),
-                        visibility var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        visibility var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             calc(var(--uc-hover-sidebar-delay) + 28ms) !important;
                 }
             }
@@ -1556,9 +1639,9 @@
             .PinnedTabsBar {
                 transition:
                     padding var(--d-fast),
-                    padding-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    padding-left var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
-                    margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    margin-left var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             */
@@ -1566,15 +1649,15 @@
             .PinnedTabsBar .Tab .fav-icon {
                 transition:
                     opacity var(--d-fast),
-                    width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
-                    height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    height var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             /*
             .tab-wrapper {
                 min-width: var(--tabs-pinned-width);
-                transition: margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                transition: margin-left var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay);
             }
             */
@@ -1584,18 +1667,18 @@
                     transform var(--d-fast),
                     opacity var(--d-fast),
                     z-index var(--d-fast) var(--d-fast) allow-discrete,
-                    margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    margin-left var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             .ScrollBox .bottom-shadow[data-show="true"] + .scroll-container .new-tab-btns {
                 transition:
                     transform var(--d-fast),
                     opacity var(--d-fast),
-                    margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    margin-left var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             .tool-btn > svg {
-                transition: margin-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                transition: margin-left var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay);
             }
             */
@@ -1604,11 +1687,11 @@
                     transform var(--d-fast),
                     opacity var(--d-fast),
                     padding var(--d-fast),
-                    padding-left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    padding-left var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
-                    margin var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    margin var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
-                    width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             /*
@@ -1616,7 +1699,7 @@
                 transition:
                     transform var(--d-fast),
                     margin-left 300ms ease,
-                    visibility var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    visibility var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             .Tab[data-pin="false"] .fav {
@@ -1625,12 +1708,12 @@
             */
             .Tab .audio {
                 margin-left: 0 !important;
-                transition: margin-left 0s var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+                transition: margin-left 0s var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
             }
 
             &[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
                 visibility: visible;
-                transition: visibility var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                transition: visibility var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay);
             }
 
@@ -1679,6 +1762,9 @@
          * to shift during sidebar expansion.
          */
         min-height: 40px;
+        @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+            max-height: 40px;
+        }
         padding: var(--uc-sb-navbar-padding) !important;
         .nav-item[data-active="true"] > svg {
             width: 16px !important;

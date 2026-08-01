@@ -65,10 +65,11 @@
 |-----------|:-------------:|-------------|
 | `uc.flex.fully-hide-sidebery` | `false` | 完全隐藏 Sidebery 和原生垂直标签页，仅在鼠标靠近屏幕边缘时显示。触发区域可通过 `--uc-sidebar-hover-trigger-width` 进行调整。启用此选项后，会覆盖 `Hide Sidebery` 快捷键，导致无法通过快捷键在隐藏和显示之间切换。日常使用建议保持此选项为 `false`，并通过快捷键切换布局。具体设置方法请参见“[布局切换](USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-布局切换)”。 |
 | `uc.flex.disable-sidebery-autohide` | `false` | 停用 Sidebery 和原生垂直标签页的自动折叠功能，并保持始终展开的布局。启用此选项后，会覆盖 `Lock Sidebery` 快捷键，导致无法通过快捷键在自动折叠和保持展开之间切换。日常使用建议保持此选项为 `false`，并通过快捷键切换布局。具体设置方法请参见“[布局切换](USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-布局切换)”。 |
-| `uc.flex.increase-sidebery-expanded-width` | `false` | 增加 Sidebery 和原生垂直标签页展开时的宽度。 |
-| `uc.flex.sidebery-fast-hover-expand` | `false` | 加快 Sidebery 和原生垂直标签页的展开和折叠速度。 |
-| `uc.flex.sidebery-slow-hover-expand` | `false` | 减慢 Sidebery 和原生垂直标签页的展开和折叠速度。 |
-| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `false` | 默认情况下，侧栏与导航栏使用不同的展开和折叠速度。启用此选项后，导航栏和工具栏将使用与侧栏相同的动画速度，使上述速度选项能够作用于整个界面。启用 Mica 或自定义壁纸时，系统会自动统一动画速度，因此此选项不会生效。 |
+| `uc.flex.sidebery-expand-delay` | `0`-`4`<br>(`1`) | 设置鼠标悬停后 Sidebery 和原生垂直标签页开始展开前的等待时间。此设置也会影响原生水平标签页和浏览器工具栏。取值：`0` = 无延迟，`1` = `80ms`（默认），`2` = `160ms`，`3` = `350ms`，`4` = `460ms`。数值越大，展开开始前的等待时间越长。 |
+| `uc.flex.sidebery-expand-duration` | `1`-`4`<br>(`1`) | 设置 Sidebery 和原生垂直标签页展开与折叠动画的持续时间。取值：`1` = 展开 `115ms` / 折叠 `55ms`（默认），`2` = `160ms` / `80ms`，`3` = `200ms` / `100ms`，`4` = `340ms` / `220ms`。数值越大，动画持续时间越长。 |
+| `uc.flex.sidebery-expand-style` | `1`-`4`<br>(`1`) | 设置 Sidebery 和原生垂直标签页展开与折叠动画的动态风格。取值：`1` = 均衡（`ease-in-out`；平滑且均匀，默认），`2` = 渐进展开（`ease-out` / `ease-in`；内容会逐步呈现），`3` = 轻快（`easeOutQuart` / `easeInQuart`；快速展开并平滑停止），`4` = 利落有力（`easeOutExpo` / `ease-in-expo`；迅速展开并有力地折叠）。 |
+| `uc.flex.sidebery-expand-width` | `1`-`4`<br>(`1`) | 设置 Sidebery 和原生垂直标签页展开时的宽度。取值：`1` = `220px`（默认），`2` = `240px`，`3` = `260px`，`4` = `280px`。数值越大，展开后的侧边栏越宽。 |
+| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `false` | 默认情况下，侧栏和工具栏使用不同的动画设置。启用此选项后，Sidebery 展开和折叠时的延迟、时长和动态风格将应用于导航栏和工具栏，使其动画保持同步。启用 Mica 或自定义壁纸时，系统会自动应用统一的动画设置，因此此选项不会生效。 |
 
 ### Sidebery 专用
 
@@ -76,7 +77,7 @@
 |-----------|:-------------:|-------------|
 | `uc.flex.sidebery-disable-icon-scaling` | `false` | 移除 Sidebery 固定标签页和导航面板在展开时的轻微图标放大效果。 |
 | `uc.flex.sidebery-allow-resizable-width` | `false` | 停用 Sidebery 的自动折叠功能，并允许通过拖动侧栏分隔线自由调整宽度。仍可使用侧栏切换按钮（Firefox 标志）快速切换展开和折叠状态。如果希望临时恢复自动隐藏以节省屏幕空间，可使用 `Hide Sidebery` 快捷键在可调整宽度模式和自动隐藏模式之间切换。此选项仅在 Firefox 的标签页模式设为垂直标签页时生效，在水平标签页模式下无效。 |
-| `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | 设置 Sidebery 收起状态下显示的导航图标。取值：`0` = 使用当前活动面板图标（新默认值），`1` = Sidebery 标志，`2` = V 形箭头图标（旧默认值）。 |
+| `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | 设置 Sidebery 折叠状态下显示的导航图标。取值：`0` = 使用当前活动面板图标（新默认值），`1` = Sidebery 标志，`2` = V 形箭头图标（旧默认值）。 |
 | `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `false` | 将当前活动面板的颜色应用到导航图标。 |
 
 ### 原生垂直标签页专用
@@ -250,7 +251,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.disable-findbar-autohide` | `false` | 停用查找栏在失去焦点后自动隐藏的行为。可使用 <kbd>Esc</kbd> 快速关闭查找栏。 |
-| `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 设置查找栏的位置。可选值：`'top-center-left'` 或 `'1'` = 顶部偏左居中，`'top-right'` 或 `'2'` = 右上角，`'bottom-right'` 或 `'3'` = 右下角。 |
+| `uc.flex.findbar-position` | `'top-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | 设置查找栏的位置。可选值：`'top-left'` 或 `'1'` = 左上角，`'top-right'` 或 `'2'` = 右上角，`'bottom-right'` 或 `'3'` = 右下角。 |
 
 </details>
 

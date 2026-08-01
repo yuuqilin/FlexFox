@@ -1,3 +1,19 @@
+/* Restore rule removed in Firefox 154 */
+:root[inDOMFullscreen] #sidebar-box,
+:root[inDOMFullscreen] #sidebar-container,
+:root[inDOMFullscreen] #sidebar-splitter,
+:root[inDOMFullscreen] #sidebar-launcher-splitter {
+    visibility: collapse;
+}
+
+/* Override sidebar hidden in Firefox 154 */
+:root[fullscreenNavToolboxHidden]:not([inDOMFullscreen]) #sidebar-box,
+:root[fullscreenNavToolboxHidden]:not([inDOMFullscreen]) #sidebar-container,
+:root[fullscreenNavToolboxHidden]:not([inDOMFullscreen]) #sidebar-splitter,
+:root[fullscreenNavToolboxHidden]:not([inDOMFullscreen]) #sidebar-launcher-splitter {
+    visibility: initial !important;
+}
+
 /*Full Screen Warning*/
 
 #fullscreen-warning {
@@ -128,9 +144,9 @@
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
             -moz-pref("uc.flex.browser-wallpaper-enabled") {
             transition:
-                transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
                 box-shadow 0.3s ease-out,
                 left 0.3s ease,
@@ -173,9 +189,9 @@
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
             -moz-pref("uc.flex.browser-wallpaper-enabled") {
             transition:
-                transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay) !important;
         }
         */

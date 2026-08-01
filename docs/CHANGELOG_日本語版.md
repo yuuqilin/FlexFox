@@ -4,18 +4,139 @@
 
 ## 🆕 最新情報
 
-**🦊 v6.5.7**
+## 🦊 v6.6.0
 
-* Sidebery のナビゲーションバーの垂直レイアウトに対応しました。
-  * 垂直レイアウト専用のスタイルを追加し、アイコンの位置ずれやピン留めタブが途中で切れる問題を修正しました。
-  * Sidebery の設定（歯車アイコン）から、**ナビゲーションバー** > **レイアウト** > **垂直** を選択すると有効にできます。
-  * 必要に応じて `uc.flex.increase-sidebery-expanded-width` も有効にしてください。垂直ナビゲーションバーは展開時のサイドバー幅を 44px 使用するため、タブタイトルの表示領域が狭くなり、ピン留めタブの列数も減る場合があります。たとえば、5 列に設定していても 4 列になることがあります。このオプションを有効にすると展開幅が広がり、従来とほぼ同じタブ領域を確保できます。  
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-dark.webp" style="width: 31%;">&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-light.webp" style="width: 31%;">  
-* `uc.flex.style-urlbar = 4` の使用時に、アドレスバーのブックマーク用スターアイコンが表示されなくなる問題を修正しました。
-* `browser.nova.enabled` の有効時に、ブックマークツールバーと Sidebery を展開できなくなる問題を修正しました。
-  * Nova UI は現在も開発中で、仕様やデザインが変更される可能性があります。FlexFox は現時点では Nova UI に対応しておらず、この修正は基本機能を維持するための暫定的なものです。
-* Firefox Beta v153 の変更により、`window.svg` アイコンが変形していた問題を修正しました。 [Bug 2032240](https://bugzilla.mozilla.org/show_bug.cgi?id=2032240)
-* Firefox Nightly v154 の変更により発生していた複数のレイアウト問題を修正しました。 [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+### 新機能
+
+https://github.com/user-attachments/assets/84a3ddf1-02f8-4c02-9957-4afcba52bf78
+
+* Sidebery とネイティブ垂直タブの展開・折りたたみアニメーションを変更する `uc.flex.sidebery-expand-style` を追加しました。
+
+  ```
+  1 = バランス型（`ease-in-out`、滑らかで均一、デフォルト）
+  2 = 段階表示型（`ease-out` / `ease-in`、内容が徐々に現れます）
+  3 = 軽快型（`easeOutQuart` / `easeInQuart`、素早く展開して滑らかに収まります）
+  4 = キビキビ型（`easeOutExpo` / `ease-in-expo`、勢いよく展開し、しっかりと折りたたまれます）
+  ```
+
+* アニメーション時間を設定する `uc.flex.sidebery-expand-duration` を追加しました。
+
+  ```
+  1 = 展開 `115ms` / 折りたたみ `55ms`（デフォルト）
+  2 = `160ms` / `80ms`
+  3 = `200ms` / `100ms`
+  4 = `340ms` / `220ms`
+  ```
+
+  時間を長くすると、アニメーションスタイルの違いが分かりやすくなります。
+
+* カーソルを合わせてから Sidebery とネイティブ垂直タブが展開するまでの待機時間を設定する `uc.flex.sidebery-expand-delay` を追加しました。
+
+  ```
+  0 = 待機なし
+  1 = `80ms`（デフォルト）
+  2 = `160ms`
+  3 = `350ms`
+  4 = `460ms`
+  ```
+
+  この設定は、横タブとツールバーの展開待機時間にも適用されます。
+
+* Sidebery とネイティブ垂直タブの展開幅を設定する `uc.flex.sidebery-expand-width` を追加しました。
+
+  ```
+  1 = `220px`（デフォルト）
+  2 = `240px`
+  3 = `260px`
+  4 = `280px`
+  ```
+
+* Mica、壁紙、または `uc.flex.sidebery-apply-expand-speed-to-toolbars` を有効にすると、これらのアニメーション設定が横タブとツールバーにも適用されます。
+
+* 4 つの設定はいずれもデフォルト値が `1` で、v6.6 より前と同じ動作になります。新しいアニメーションや展開幅を使用するには、値を手動で変更してください。
+
+* プレビューで使用している設定：
+
+  ```
+  uc.flex.sidebery-expand-delay    = 2
+  uc.flex.sidebery-expand-duration = 2
+  uc.flex.sidebery-expand-style    = 2
+  uc.flex.sidebery-expand-width    = 2
+  ```
+
+### 互換性のない変更
+
+* 以下の設定は廃止され、機能しなくなりました。FlexFox の設定説明がずれないよう、`about:config` から削除してください。
+
+  ```
+  uc.flex.sidebery-fast-hover-expand
+  → uc.flex.sidebery-expand-delay に置き換えられました
+
+  uc.flex.sidebery-slow-hover-expand
+  → uc.flex.sidebery-expand-delay に置き換えられました
+
+  uc.flex.increase-sidebery-expanded-width
+  → uc.flex.sidebery-expand-width に置き換えられました
+  ```
+
+* `uc.flex.findbar-position` で使用できる値を変更しました。
+
+  ```
+  top-left または 1       = 左上
+  top-right または 2      = 右上
+  bottom-right または 3   = 右下
+  ```
+
+  以前の `top-center-left` は機能しなくなりました。
+
+### 改善
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-findbar.png" width="582px">
+
+* 検索バーのデザインを改善しました。
+
+  * 輪郭をより滑らかで安定した表示に変更しました。
+  * Mica や壁紙使用時のぼかしと影を改善しました。
+  * `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` が検索バーのアイコンにも適用されるようになりました。
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-bookmark-folders.png" width="364px">
+
+* フォルダー名を非表示にした時、ブックマークフォルダーのアイコンと Nova UI のホバー背景が中央に表示されるようになりました。
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-gradient-tab-borders.png" width="330px">
+
+* Nova UI のグラデーションタブ枠線に対応しました。色は `uc.flex.style-sidebar-stripe-color` で設定できます。
+
+  ```
+  0      = Nova UI のデフォルトグラデーション
+  1～10  = FlexFox のアクセントカラーグラデーション
+  ```
+* リンクプレビューパネルの半透明背景に対応しました。
+* `about:config` に Nova UI スタイルを追加しました。
+
+### 修正
+
+#### Sidebery UI
+
+* Sidebery の垂直ナビゲーションバーで、最後のボタンの下側が角丸になるよう調整しました。
+* v6.5.6 で発生した、Sidebery の折りたたみ時に現在のパネルアイコンが正しく表示されない問題を修正しました。
+* Sidebery v5.6.0 以降でタブのバッジ色が正しく表示されない問題を修正しました。[Commit ec84311](https://github.com/mbnuqw/sidebery/commit/ec8431190c3e42aa4f8357ca2c7aabc97db87fff)
+
+#### Firefox UI
+
+* 複数のアイコンが欠ける、または正しく表示されない問題を修正しました。
+* `sidebar.visibility = expand-on-hover` 使用時のサイドバーストライプの位置を修正しました。
+* Firefox 154 の `about:addons` で発生する Nova UI のレイアウト崩れを修正しました。[Bug 2051559](https://bugzilla.mozilla.org/show_bug.cgi?id=2051559)
+* Firefox 154 で、全画面表示時に Sidebery とネイティブ垂直タブを展開できない問題を修正しました。[Bug 1927457](https://bugzilla.mozilla.org/show_bug.cgi?id=1927457)
+* Firefox 154 で、コンテキストメニューのアイコンの明暗が反転する問題を修正しました。[Bug 2048186](https://bugzilla.mozilla.org/show_bug.cgi?id=2048186)
+* Firefox 154 で発生する検索バーのレイアウト崩れを修正しました。[Bug 2048907](https://bugzilla.mozilla.org/show_bug.cgi?id=2048907)、[Bug 2056829](https://bugzilla.mozilla.org/show_bug.cgi?id=2056829)
+* Firefox 154 の横タブ使用時に `uc.flex.enable-rounded-web-content` が機能しない問題を修正しました。[Bug 2047653](https://bugzilla.mozilla.org/show_bug.cgi?id=2047653)
+* Firefox 154 でタブグループの背景色が正しく表示されない問題を修正しました。[Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+* Firefox 155 で消えていたタブグループのホバー背景を復元しました。[Bug 2023691](https://bugzilla.mozilla.org/show_bug.cgi?id=2023691)
+* Firefox 155 で消えていたピン留めタブの枠線と背景を復元しました。[Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
+* Firefox 155 で一部のパネルの角丸が正しく表示されない問題を修正しました。[Bug 2054953](https://bugzilla.mozilla.org/show_bug.cgi?id=2054953)
+* Firefox 155 でディスプレイ倍率が 125% を超えるとネイティブ垂直タブのレイアウトが崩れる問題を一時的に緩和しました。[Bug 2044082](https://bugzilla.mozilla.org/show_bug.cgi?id=2044082)
+* Firefox 155 で Nova UI がデフォルトで有効になったことによる、多数のレイアウトおよび機能上の問題を修正しました。[Bug 2056188](https://bugzilla.mozilla.org/show_bug.cgi?id=2056188)
 
 <!-- END What's New -->
 
@@ -25,86 +146,6 @@
 <summary>💬 <b>過去の更新</b></summary>
 
 <!-- END Release Note -->
-
-## **v6.5.6**
-
-### 更新
-
-* Sidebery の動作と表示の一貫性を改善しました。
-
-  * Sidebery の展開・折りたたみアニメーションをより滑らかにし、レイアウト処理の負荷を軽減しました。
-  * 検索ボックスの展開・折りたたみ時に発生していた反動のような動きを修正し、幅を下のタブ一覧と揃えました。
-  * 分割ビュー使用時の角丸処理を改善しました。Sidebery に隣接するウェブコンテンツのみ隣接側の角を直角にし、もう一方の分割ビューは四隅の角丸を維持するようになりました。
-  * `uc.flex.sidebery-allow-resizable-width` を有効にした折りたたみ状態で、閉じるボタンとツリー分岐の展開ボタンの位置を調整し、タブアイコン付近での誤クリックを減らしました。
-  * `uc.flex.sidebery-allow-resizable-width` を有効にした折りたたみ状態で、ナビゲーションバーのタブパネルを正しく展開できない問題を修正しました。
-  * 角丸ウェブコンテンツの余白を有効にしている場合に、Sidebery のパネル設定ダイアログで上側と側面の余白が消えていた問題を修正しました。
-
-* `uc.flex.enable-rounded-web-content` の動作を改善し、サイドバーパネルの下側余白をウェブコンテンツ領域と揃えるようにしました。これにより、両方の高さが視覚的に揃います。
-
-### 変更
-
-* ネイティブ垂直タブが折りたたまれている間は、リサイズ用の分割線を表示しないようにしました。分割線はサイドバー展開時のみ表示され、折りたたみ時の見た目がよりすっきりします。
-
-### 修正
-
-* v6.5.0 で発生した回帰を修正しました。`uc.flex.sidebery-allow-resizable-width` と `Lock Sidebery` を同時に有効にすると、ピン留めタブが自動的に折り返されない問題がありました。
-
-* v6.5.3 で発生した回帰を修正しました。Sidebery の新しいタブボタンの左右に影がはみ出して表示される問題がありました。
-
-* Firefox Beta v153 の変更により、PDF ツールバーの自動非表示が機能しなくなっていた問題を修正しました。 [Bug 2045670](https://bugzilla.mozilla.org/show_bug.cgi?id=2045670)
-
-* Firefox Beta v153 の変更により、`view-opentabs.svg` アイコンが変形していた問題を修正しました。 [Bug 2032258](https://bugzilla.mozilla.org/show_bug.cgi?id=2032258)
-
-* Firefox Nightly v154 の変更により、Sidebery の展開時にタブが上下に揺れる問題を修正しました。 [Bug 2048146](https://bugzilla.mozilla.org/show_bug.cgi?id=2048146)
-
-* Firefox Nightly v154 で追加された App メニューの「PDF を編集...」項目にアイコンを追加しました。 [Bug 2047915](https://bugzilla.mozilla.org/show_bug.cgi?id=2047915)
-
-## **v6.5.5**
-
-![プレビュー: about:config の設定項目説明](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/about-config-preference-descriptions.webp)
-
-### 新機能
-
-- `about:config` ページの使いやすさを改善しました。
-  - FlexFox のバージョン表示を中央に配置し、バージョン番号を確認しやすくしました。
-  - FlexFox 設定項目一覧の右側に、対応する短い説明を表示するようにしました。
-  - 設定項目の説明は完全な `uc.flex` 一覧に合わせて配置されます。対応を保つには、`user.js` をインポートするか、すべての FlexFox 設定項目を手動で追加してください。
-
-- PowerShell インストーラーを刷新しました。
-  - インストーラーは `scripts/install-flexfox.ps1` に変更されました。
-  - インストール済みの FlexFox バージョンを検出し、必要な場合のみ最新リリースをダウンロードします。
-  - ダウンロードしたパッケージの SHA-256 検証を追加しました。
-  - Firefox プロファイル一覧から選択するか、任意のプロファイルパスを入力できるメニューを追加しました。
-  - 非対話式インストール用のコマンドラインオプションを追加しました。`-ProfilePath 'path'` でプロファイルパスを指定し、`-Silent` で確認なしのインストールを実行できます。
-  - 詳細は [PowerShell Script](https://github.com/yuuqilin/FlexFox#-powershell-script) をご覧ください。
-
-- Git Pull 自動化スクリプトを更新しました。
-  - Firefox プロファイル一覧から選択するか、任意の作業ディレクトリを入力できるメニューを追加しました。
-  - 非対話式更新用のコマンドラインオプションを追加しました。`-ProfilePath 'path'` で作業ディレクトリを指定し、`-Silent` で確認なしの更新を実行できます。
-  - ユーザーが変更したファイルの保持と、Git 競合発生時の処理を改善しました。
-  - 詳細は [Git Pull](https://github.com/yuuqilin/FlexFox#-git-pull) をご覧ください。
-
-### 互換性のない変更
-
-- `uc.flex.show-flexfox-version-info-in-about-config` の設定タイプを真偽値から整数値へ変更しました。
-  - `0`: FlexFox のバージョン情報を表示しません。
-  - `1`: バージョン情報のみ表示します。
-  - `2`: バージョン情報と設定項目の説明を表示します。これがデフォルトです。
-  - 既存の設定を削除してから、同じ名前で新しい設定を作成し、種類に「整数値」を選択してください。
-
-### 更新
-
-- インストール手順を簡略化するため、`user.js` を `scripts` フォルダーからルートフォルダーへ移動しました。
-
-### 削除
-
-- ルートフォルダーの `deploy-userchrome.ps1` を削除しました。
-
-**v6.5.4**
-
-* URLバーのテキスト中央揃えを有効にしている場合に、URLバーのズーム表示ボタン周辺の間隔が詰まりすぎる問題を修正しました。
-* 現在のセットアップ手順との混同を避けるため、プロジェクト内に残っていた古いSidebery用スタイルファイルを削除しました。
-* READMEの内容を整理し、設定オプションを探しやすくし、実用的な使用ガイドを追加する形でドキュメントを見直しました。
 
 以前のバージョンの更新履歴については  
 👉 [Wiki のアーカイブページ](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(Japanese))をご覧ください。

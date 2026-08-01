@@ -1,5 +1,8 @@
-#link-preview-panel {
-    --panel-border-radius: 0 !important;
+/* !TEMPORARY: Firefox v154 makes #contentAreaContextMenu follow the page color preference,
+   which can conflict with FlexFox's UI-themed icon colors. Restore the previous browser UI
+   color-scheme behavior until separate content-menu color tokens are adopted. */
+#contentAreaContextMenu {
+    color-scheme: light-dark !important;
 }
 
 /* Modified from https://gist.github.com/emvaized/a379d61ed8970e5711ca7278a39c1895/ */
@@ -127,7 +130,7 @@
         margin-left: -16px !important;
     }
     */
-    menuitem[data-l10n-id*="-copy-"][data-l10n-id*="-link"] {
+    menuitem[data-l10n-id*="-copy-"][data-l10n-id*="-link"]:not(.menuitem-iconic) {
         background-image: url("../icons/menu/link.svg");
         background-position-x: 0.8em !important;
         background-size: 20px !important;
@@ -817,7 +820,7 @@
     menuitem.sendtab-target[clientType="vr"] {
         background-image: url("chrome://browser/skin/device-vr.svg");
     }
-    .share-tab-url-item {
+    .share-tab-url-item:not(#share-tab-button) {
         background-image: url("../icons/menu/share-tab-url.svg");
     }
     #context_reopenInContainer,
@@ -1037,8 +1040,9 @@
     #protections-popup-report-broken-site-button {
         list-style-image: url("chrome://global/skin/icons/error.svg");
     }
-    #context-ask-chat {
-        background-image: url("chrome://mozapps/skin/extensions/category-discover.svg");
+    #context-ask-chat,
+    #context_askChat {
+        background-image: url("chrome://global/skin/icons/highlights.svg");
     }
     #fill-login {
         background-image: url("chrome://browser/skin/login.svg");

@@ -66,6 +66,23 @@
     }
 }
 
+/* Keep folder bookmarks square in the navigation bar so Nova buttons remain circular. */
+@media -moz-pref("uc.flex.remove-bookmarks-labels") or -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+    #PlacesToolbarItems > .bookmark-item[container],
+    #OtherBookmarks {
+        min-width: 28px;
+        align-items: center;
+        justify-content: center;
+        #nav-bar-customization-target & {
+            margin-block: calc((var(--uc-nav-bar-height) - var(--uc-bookmark-item-height)) / 2) !important;
+        }
+        > :is(.toolbarbutton-icon, .menu-icon),
+        > .menu-iconic-left .menu-iconic-icon {
+            margin-inline-end: 0 !important;
+        }
+    }
+}
+
 @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons") {
     #PlacesToolbarItems,
     #PlacesChevronPopup {
@@ -94,7 +111,7 @@
                 }
             }
 
-            @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+            @media -moz-pref("uc.flex.remove-bookmarks-labels") or -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
                 padding: var(--uc-bookmark-folder-padding) !important;
             }
             /*
@@ -115,12 +132,10 @@
                     --uc-bookmark-folder-icon-7: var(--uc-bookmark-folder-open-icon);
                     --uc-bookmark-folder-icon-8: var(--uc-bookmark-folder-open-icon);
                     --uc-bookmark-folder-icon-9: var(--uc-bookmark-folder-open-icon);
-                    @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
-                        background-position: var(--uc-bookmark-folder-open-position);
-                        background-size: var(--uc-bookmark-folder-open-size);
-                        mask-position: var(--uc-bookmark-folder-open-position);
-                        mask-size: var(--uc-bookmark-folder-open-size);
-                    }
+                    background-position: var(--uc-bookmark-folder-open-position);
+                    background-size: var(--uc-bookmark-folder-open-size);
+                    mask-position: var(--uc-bookmark-folder-open-position);
+                    mask-size: var(--uc-bookmark-folder-open-size);
                 }
             }
             > :is(.toolbarbutton-icon, .menu-icon),
@@ -128,15 +143,13 @@
                 list-style-image: none !important;
                 background-position: var(--uc-bookmark-folder-position);
                 background-repeat: no-repeat;
-                background-size: 16px;
+                background-size: var(--uc-bookmark-folder-size);
                 mask-position: var(--uc-bookmark-folder-position);
                 mask-repeat: no-repeat;
-                mask-size: 16px;
-                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
-                    width: var(--uc-bookmark-folder-size) !important;
-                    height: var(--uc-bookmark-folder-size) !important;
-                    background-size: var(--uc-bookmark-folder-size);
-                    mask-size: var(--uc-bookmark-folder-size);
+                mask-size: var(--uc-bookmark-folder-size);
+                @media -moz-pref("uc.flex.remove-bookmarks-labels") or -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+                    width: var(--uc-bookmark-folder-width) !important;
+                    height: var(--uc-bookmark-folder-height) !important;
                 }
                 /*transform: scale(1.4);*/
             }
@@ -148,27 +161,23 @@
         &[open] {
             > .toolbarbutton-icon {
                 --uc-bookmark-folder-icon-10: var(--uc-bookmark-folder-open-icon);
-                @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
-                    background-position: var(--uc-bookmark-folder-open-position);
-                    background-size: var(--uc-bookmark-folder-open-size);
-                    mask-position: var(--uc-bookmark-folder-open-position);
-                    mask-size: var(--uc-bookmark-folder-open-size);
-                }
+                background-position: var(--uc-bookmark-folder-open-position);
+                background-size: var(--uc-bookmark-folder-open-size);
+                mask-position: var(--uc-bookmark-folder-open-position);
+                mask-size: var(--uc-bookmark-folder-open-size);
             }
         }
         > .toolbarbutton-icon {
             list-style-image: none !important;
             background-position: var(--uc-bookmark-folder-position);
             background-repeat: no-repeat;
-            background-size: 16px;
+            background-size: var(--uc-bookmark-folder-size);
             mask-position: var(--uc-bookmark-folder-position);
             mask-repeat: no-repeat;
-            mask-size: 16px;
-            @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
-                width: var(--uc-bookmark-folder-size) !important;
-                height: var(--uc-bookmark-folder-size) !important;
-                background-size: var(--uc-bookmark-folder-size);
-                mask-size: var(--uc-bookmark-folder-size);
+            mask-size: var(--uc-bookmark-folder-size);
+            @media -moz-pref("uc.flex.remove-bookmarks-labels") or -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+                width: var(--uc-bookmark-folder-width) !important;
+                height: var(--uc-bookmark-folder-height) !important;
             }
             /*transform: scale(1.4);*/
         }
@@ -177,7 +186,7 @@
             background-image: var(--uc-bookmark-folder-icon-10);
         }
 
-        @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+        @media -moz-pref("uc.flex.remove-bookmarks-labels") or -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
             padding: var(--uc-bookmark-folder-padding) !important;
         }
     }

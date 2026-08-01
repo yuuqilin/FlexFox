@@ -39,13 +39,33 @@ user_pref("uc.flex.style-sidebar-stripe-color-use-gradient",        false);
 user_pref("uc.flex.fully-hide-sidebery",                        false);
 /* Keeps Sidebery and native vertical tabs permanently expanded. */
 user_pref("uc.flex.disable-sidebery-autohide",                  false);
-/* Increases the expanded width of Sidebery and native vertical tabs. */
-user_pref("uc.flex.increase-sidebery-expanded-width",           false);
-/* Speeds up expand/collapse animations for Sidebery and native vertical tabs. */
-user_pref("uc.flex.sidebery-fast-hover-expand",                 false);
-/* Slows down expand/collapse animations for Sidebery and native vertical tabs. */
-user_pref("uc.flex.sidebery-slow-hover-expand",                 false);
-/* Applies sidebar expand/collapse speed to the navigation bar and toolbars. */
+/* Sets the delay before Sidebery and native vertical tabs expand after hover.
+   Also affects native horizontal tabs and browser toolbars.
+   0 = No delay
+   1 = 80ms (default)
+   2 = 160ms
+   3 = 350ms
+   4 = 460ms */
+user_pref("uc.flex.sidebery-expand-delay",                          1);
+/* Sets the duration of expand and collapse animations for Sidebery and native vertical tabs.
+   1 = 115ms expand / 55ms collapse (default)
+   2 = 160ms / 80ms
+   3 = 200ms / 100ms
+   4 = 340ms / 220ms */
+user_pref("uc.flex.sidebery-expand-duration",                       1);
+/* Sets the motion style of expand and collapse animations for Sidebery and native vertical tabs.
+   1 = Balanced: ease-in-out (default)
+   2 = Unfolding: ease-out / ease-in
+   3 = Swift: easeOutQuart / easeInQuart
+   4 = Snappy: easeOutExpo / ease-in-expo */
+user_pref("uc.flex.sidebery-expand-style",                          1);
+/* Sets the expanded width of Sidebery and native vertical tabs.
+   1 = 220px (default)
+   2 = 240px
+   3 = 260px
+   4 = 280px */
+user_pref("uc.flex.sidebery-expand-width",                          1);
+/* Applies Sidebery's expand/collapse delay, duration, and motion style to the navigation bar and toolbars. */
 user_pref("uc.flex.sidebery-apply-expand-speed-to-toolbars",    false);
 /* ### Sidebery Only */
 /* Removes the icon enlargement effect for Sidebery pinned tabs and navigation panels. */
@@ -230,7 +250,7 @@ user_pref("uc.flex.style-web-content-outline",                      0);
 /* Prevents the Findbar from hiding automatically. Press Esc to close it. */
 user_pref("uc.flex.disable-findbar-autohide",                   false);
 /* Sets the Findbar position.
-   "1" / "top-center-left" = Top center-left
+   "1" / "top-left" = Top left
    "2" / "top-right" = Top right
    "3" / "bottom-right" = Bottom right */
 user_pref("uc.flex.findbar-position",                     "top-right");
@@ -329,8 +349,6 @@ user_pref("browser.sessionstore.restore_pinned_tabs_on_demand",  true);
 user_pref("browser.tabs.fadeOutExplicitlyUnloadedTabs",          true);
 /* Fades tabs that have not yet been restored after startup in native tabs. */
 user_pref("browser.tabs.fadeOutUnloadedTabs",                   false);
-/* Sets animation duration for Firefox's native auto-collapse (only used if `sidebar.visibility` is set to `expand-on-hover`). */
-user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 
 /* 🧩 Optional native Firefox preferences */
 /* Sets the overall Firefox interface scale. 1.25 = 125% scaling. */
@@ -344,6 +362,12 @@ user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 // user_pref("browser.urlbar.openintab",                          true);
 // user_pref("browser.tabs.loadBookmarksInTabs",                  true);
 
+/* Opens new tabs next to the current tab. */
+// user_pref("browser.tabs.insertAfterCurrent",                   true);
+
+/* Sets animation duration for Firefox's native auto-collapse (only used if `sidebar.visibility` is set to `expand-on-hover`). */
+// user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
+
 /* Removes fullscreen transition animations for faster switching. */
 // user_pref("full-screen-api.transition-duration.enter",          0 0);
 // user_pref("full-screen-api.transition-duration.leave",          0 0);
@@ -353,7 +377,3 @@ user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 // user_pref("devtools.chrome.enabled",                           true);
 // user_pref("devtools.debugger.remote-enabled",                  true);
 // user_pref("devtools.debugger.prompt-connection",              false);
-
-/* Sets Firefox's native sidebar hover animation duration in milliseconds.
-   Only applies when sidebar.visibility = "expand-on-hover". */
-// user_pref("sidebar.animation.expand-on-hover.duration_ms",      120);

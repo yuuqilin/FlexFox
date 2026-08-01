@@ -33,7 +33,7 @@ For better video quality, watch on YouTube:
 
 ## 🆕 What's New
 
-**🦊 Latest: v6.5.7** — See [Full Changelog](./docs/CHANGELOG.md) for details.
+**🦊 Latest: v6.6.0** — See [Full Changelog](./docs/CHANGELOG.md) for details.
 
 <!-- END What's New -->
 

@@ -65,10 +65,11 @@
 |-----------|:-------------:|-------------|
 | `uc.flex.fully-hide-sidebery` | `false` | Sidebery とネイティブ垂直タブを完全に非表示にし、マウスカーソルを画面端に近づけたときだけ表示します。表示を開始する範囲は `--uc-sidebar-hover-trigger-width` で調整できます。この設定を有効にすると、`Hide Sidebery` ショートカットは上書きされ、表示と非表示を切り替えられなくなります。通常はこの設定を無効のままにし、ショートカットでレイアウトを切り替えることをおすすめします。設定方法については、「[レイアウトの切り替え](USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-レイアウトの切り替え)」を参照してください。 |
 | `uc.flex.disable-sidebery-autohide` | `false` | Sidebery とネイティブ垂直タブの自動折りたたみを無効にし、常に展開された状態を維持します。この設定を有効にすると、`Lock Sidebery` ショートカットは上書きされ、自動折りたたみと固定表示を切り替えられなくなります。通常はこの設定を無効のままにし、ショートカットでレイアウトを切り替えることをおすすめします。設定方法については、「[レイアウトの切り替え](USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-レイアウトの切り替え)」を参照してください。 |
-| `uc.flex.increase-sidebery-expanded-width` | `false` | Sidebery とネイティブ垂直タブを展開したときの幅を広げます。 |
-| `uc.flex.sidebery-fast-hover-expand` | `false` | Sidebery とネイティブ垂直タブの展開・折りたたみアニメーションを高速化します。 |
-| `uc.flex.sidebery-slow-hover-expand` | `false` | Sidebery とネイティブ垂直タブの展開・折りたたみアニメーションを低速化します。 |
-| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `false` | サイドバーとツールバーは標準では異なる速度で展開・折りたたまれます。この設定を有効にすると、サイドバーのアニメーション速度をナビゲーションバーやツールバーにも適用し、上記の速度設定をインターフェース全体で共有できるようになります。Mica またはカスタム壁紙を使用している場合は、自動的に統一された速度が適用されるため、この設定は無効になります。 |
+| `uc.flex.sidebery-expand-delay` | `0`-`4`<br>(`1`) | Sidebery とネイティブ垂直タブをホバーしてから展開するまでの待機時間を設定します。この設定は、ネイティブの水平タブとブラウザーツールバーにも影響します。値：`0` = 待機なし、`1` = `80ms`（デフォルト）、`2` = `160ms`、`3` = `350ms`、`4` = `460ms`。値を大きくするほど、展開が始まるまでの待機時間が長くなります。 |
+| `uc.flex.sidebery-expand-duration` | `1`-`4`<br>(`1`) | Sidebery とネイティブ垂直タブの展開・折りたたみアニメーションの時間を設定します。値：`1` = 展開 `115ms` / 折りたたみ `55ms`（デフォルト）、`2` = `160ms` / `80ms`、`3` = `200ms` / `100ms`、`4` = `340ms` / `220ms`。値を大きくするほど、アニメーションの時間が長くなります。 |
+| `uc.flex.sidebery-expand-style` | `1`-`4`<br>(`1`) | Sidebery とネイティブ垂直タブの展開・折りたたみアニメーションの動き方を設定します。値：`1` = バランス型（`ease-in-out`、滑らかで均一、デフォルト）、`2` = 段階表示型（`ease-out` / `ease-in`、内容が徐々に現れます）、`3` = 軽快型（`easeOutQuart` / `easeInQuart`、素早く展開して滑らかに収まります）、`4` = キビキビ型（`easeOutExpo` / `ease-in-expo`、勢いよく展開し、しっかりと折りたたまれます）。 |
+| `uc.flex.sidebery-expand-width` | `1`-`4`<br>(`1`) | Sidebery とネイティブ垂直タブを展開したときの幅を設定します。値：`1` = `220px`（デフォルト）、`2` = `240px`、`3` = `260px`、`4` = `280px`。値を大きくするほど、展開時のサイドバーが広くなります。 |
+| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `false` | 標準では、サイドバーとツールバーは別々のアニメーション設定を使用します。この設定を有効にすると、Sidebery の展開・折りたたみ時の待機時間、アニメーション時間、動き方をナビゲーションバーやツールバーにも適用し、アニメーションを同期できます。Mica またはカスタム壁紙を使用している場合は、統一されたアニメーション設定が自動的に適用されるため、この設定は無効になります。 |
 
 ### Sidebery 専用
 
@@ -250,7 +251,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.disable-findbar-autohide` | `false` | Findbar がフォーカスを失ったときに自動的に非表示になる動作を無効にします。<kbd>Esc</kbd> キーで Findbar をすばやく閉じることもできます。 |
-| `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Findbar の表示位置を設定します。指定可能な値：`'top-center-left'` または `'1'` = 上部中央左寄せ、`'top-right'` または `'2'` = 右上、`'bottom-right'` または `'3'` = 右下。 |
+| `uc.flex.findbar-position` | `'top-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Findbar の表示位置を設定します。指定可能な値：`'top-left'` または `'1'` = 左上、`'top-right'` または `'2'` = 右上、`'bottom-right'` または `'3'` = 右下。 |
 
 </details>
 

@@ -1,7 +1,7 @@
 #sidebar-box {
     max-width: calc(100% - 496px) !important;
     @media -moz-pref("sidebar.revamp") {
-        max-width: calc(100% - var(--uc-sidebar-stripe-width) - (16em + 260px)) !important;
+        max-width: calc(100% - var(--uc-sidebar-stripe-width) - var(--uc-findbar-width)) !important;
     }
     min-width: var(--uc-sidebar-stripe-width) !important;
 }
@@ -41,16 +41,12 @@
             right: 4px;
             width: 36px;
             height: var(--uc-nav-bar-height);
-            background-position: var(--uc-sidebar-button-bg-pos-edge);
             background-size: 20px;
-            mask-position: var(--uc-sidebar-button-bg-pos-edge);
             mask-size: 20px;
             /* In horizontal tab mode, adjust icon size only when Sidebery is active */
             @media not -moz-pref("sidebar.verticalTabs") {
                 position: var(--uc-sb-sidebar-button-bg-pos, flex);
-                background-position: var(--uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                 background-size: var(--uc-sb-sidebar-button-bg-size, 18px);
-                mask-position: var(---uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                 mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
             }
         }
@@ -76,8 +72,6 @@
             }
             */
             &:first-child {
-                background-position: var(--uc-sidebar-button-bg-pos-edge);
-                mask-position: var(--uc-sidebar-button-bg-pos-edge);
                 @media not (-moz-pref("uc.flex.move-window-controls-to-left") or (-moz-platform: macos)),
                     -moz-pref("uc.flex.auto-hide-window-controls") {
                     background-size: 20px;
@@ -86,15 +80,11 @@
                 /* In horizontal tab mode, adjust icon size only when Sidebery is active */
                 @media not (-moz-pref("sidebar.verticalTabs") or -moz-pref("uc.flex.move-window-controls-to-left")),
                     -moz-pref("uc.flex.auto-hide-window-controls") and (not -moz-pref("sidebar.verticalTabs")) {
-                    background-position: var(--uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                     background-size: var(--uc-sb-sidebar-button-bg-size, 18px);
-                    mask-position: var(--uc-sb-sidebar-button-bg-pos-edge, var(--uc-sidebar-button-bg-pos));
                     mask-size: var(--uc-sb-sidebar-button-bg-size, 18px);
                 }
                 @media (-moz-platform: macos) {
-                    background-position: var(--uc-sidebar-button-bg-pos);
                     background-size: 18px;
-                    mask-position: var(--uc-sidebar-button-bg-pos);
                     mask-size: 18px;
                 }
             }
@@ -182,17 +172,26 @@
             background-color: var(--uc-sidebar-header-bgcolor, var(--lwt-accent-color)) !important;
             background-image: initial;
             transition:
-                border-bottom var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                max-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                min-height var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                max-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                min-width var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                overflow var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay) allow-discrete,
-                padding var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                background-color var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay),
-                background-image var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay)
-                    allow-discrete,
-                opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
+                border-bottom var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                max-height var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                min-height var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                overflow var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay) allow-discrete,
+                padding var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                background-color var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay),
+                background-image var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay) allow-discrete,
+                opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay);
             /* Enable transitions for discrete properties like overflow or background-image */
             /*
             transition-behavior: allow-discrete;
@@ -200,7 +199,8 @@
         }
 
         #sidebar-header:hover :is(#sidebar-switcher-target, #sidebar-close) {
-            transition: opacity var(--uc-hover-transition-duration) ease-in-out var(--uc-hover-sidebar-delay);
+            transition: opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                var(--uc-hover-sidebar-delay);
         }
 
         /* Modified from https://www.reddit.com/r/FirefoxCSS/comments/77ehp1/how_to_hide_the_title_of_webextension_sidebars/ */
@@ -219,17 +219,23 @@
             }
             will-change: min-height, max-height, min-width, overflow, background-color, opacity;
             transition:
-                max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
-                    allow-discrete,
-                padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                background-image var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
-                    allow-discrete,
-                opacity 0ms ease-in-out 0ms;
+                max-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                min-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) allow-discrete,
+                padding var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay),
+                background-image var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                    var(--uc-autohide-sidebar-delay) allow-discrete,
+                opacity 0ms var(--uc-autohide-transition-type) 0ms;
             /* Enable transitions for discrete properties like overflow or background-image */
             /*
             transition-behavior: allow-discrete;
@@ -237,7 +243,7 @@
             :is(#sidebar-switcher-target, #sidebar-close) {
                 /* BAD NEWS: display: none !important; */
                 opacity: 0;
-                transition: opacity 0ms ease-in-out 0ms;
+                transition: opacity 0ms var(--uc-autohide-transition-type) 0ms;
             }
         }
 
@@ -295,17 +301,23 @@
                 opacity: 1;
                 will-change: min-height, max-height, min-width, overflow, background-color, opacity;
                 transition:
-                    max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                    min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                    min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                    max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                    overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
-                        allow-discrete,
-                    padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                    background-color var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                    background-image var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
-                        allow-discrete,
-                    opacity 0ms ease-in-out 0ms;
+                    max-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    min-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay) allow-discrete,
+                    padding var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay),
+                    background-image var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                        var(--uc-autohide-sidebar-delay) allow-discrete,
+                    opacity 0ms var(--uc-autohide-transition-type) 0ms;
             }
         }
     }
@@ -327,18 +339,23 @@
                     opacity: 1;
                     will-change: min-height, max-height, min-width, overflow, background-color, opacity;
                     transition:
-                        max-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                        min-height var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                        min-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                        max-width var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                        overflow var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay)
-                            allow-discrete,
-                        padding var(--uc-autohide-transition-duration) ease-in-out var(--uc-autohide-sidebar-delay),
-                        background-color var(--uc-autohide-transition-duration) ease-in-out
+                        max-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                             var(--uc-autohide-sidebar-delay),
-                        background-image var(--uc-autohide-transition-duration) ease-in-out
+                        min-height var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        overflow var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                             var(--uc-autohide-sidebar-delay) allow-discrete,
-                        opacity 0ms ease-in-out 0ms;
+                        padding var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        background-color var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay),
+                        background-image var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                            var(--uc-autohide-sidebar-delay) allow-discrete,
+                        opacity 0ms var(--uc-autohide-transition-type) 0ms;
                 }
             }
         }
@@ -381,10 +398,10 @@
             * to avoid abrupt display changes when opacity changes from 0 to 1 
             */
                 transition:
-                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         calc(var(--uc-hover-sidebar-delay) + 10ms),
                     z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete,
-                    clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    clip-path var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
                 opacity: 1;
             }
@@ -404,7 +421,7 @@
 
                 &:hover {
                     transition:
-                        opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             calc(var(--uc-hover-sidebar-delay) + 10ms),
                         z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete !important;
                     opacity: 1;
@@ -437,10 +454,10 @@
 
             &:hover {
                 transition:
-                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         calc(var(--uc-hover-sidebar-delay) + 10ms),
                     z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete,
-                    clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    clip-path var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
                 opacity: 1;
             }
@@ -460,7 +477,7 @@
 
                 &:hover {
                     transition:
-                        opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             calc(var(--uc-hover-sidebar-delay) + 10ms),
                         z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete !important;
                     opacity: 1;
@@ -808,27 +825,27 @@
         @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
             transition:
                 /*
-                min-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                min-height var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                max-height var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                max-height var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
-                overflow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                width var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
+                overflow var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay) allow-discrete,
-                background-color 0ms var(--uc-autohide-transition-type) 0ms,
-                background-image 0ms var(--uc-autohide-transition-type) 0ms allow-discrete,
+                background-color 0ms var(--uc-hover-transition-type) 0ms,
+                background-image 0ms var(--uc-hover-transition-type) 0ms allow-discrete,
                 */
-                opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     calc(var(--uc-hover-sidebar-delay) + 10ms),
                 z-index 0s linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete;
         }
         /* !TEMPORARY: Workaround for regression introduced in v142 [Bug 1957008] */
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
-            transition: opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+            transition: opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                 calc(var(--uc-hover-sidebar-delay) + 10ms);
         }
     }
@@ -872,11 +889,10 @@
         margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top));
 
         @media -moz-pref("sidebar.visibility", "expand-on-hover") {
-            /* Obsolete */
-            /*
-            \/* Remove unwanted 1px margin when Sidebery is in 'expand-on-hover' state *\/
-            margin-top: calc(var(--uc-sb-sidebar-main-stripe-height) + var(--uc-sb-sidebar-main-margin-top) - 1px);
-            */
+            /* Remove unwanted 1px margin when Sidebery is in 'expand-on-hover' state */
+            #sidebar {
+                margin-block-start: 0 !important;
+            }
 
             /* Remove unnecessary margin when Sidebery is in 'expand-on-hover' state */
             margin-inline-start: 0px !important;
@@ -1043,15 +1059,15 @@
             min-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-main-hover-width));
             /* transition-delay: 0ms !important; */
             transition:
-                margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                margin-inline-start var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                padding-inline-end var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                padding-inline-end var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                overflow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                overflow var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay) allow-discrete,
-                transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay);
             /**
              * Shift sidebar-main left by its extra expanded width (collapsed width - expanded width) 
@@ -1388,7 +1404,7 @@
                 &:hover {
                     --uc-expanded-sroot-splitter-opacity: 1;
                     --uc-expanded-sroot-splitter-opacity-transition: var(--uc-hover-transition-duration)
-                        var(--uc-autohide-transition-type)
+                        var(--uc-hover-transition-type)
                         calc(var(--uc-hover-sidebar-delay) + var(--uc-hover-transition-duration));
                 }
             }
@@ -1460,9 +1476,9 @@
                     width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-inner-inline-margin));
                     margin-inline: var(--tab-inner-inline-margin) !important;
                     transition:
-                        width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay),
-                        margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay);
                 }
                 /*
@@ -1474,9 +1490,9 @@
                             width: 10px;
                             margin-inline: calc(50% - 5px) !important;
                             transition:
-                                width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay);
                             &:hover {
                                 width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-inner-inline-margin));
@@ -1522,9 +1538,9 @@
                     width: 10px;
                     margin-inline: calc(50% - 5px) !important;
                     transition:
-                        width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay),
-                        margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay);
                 }
             }
@@ -1560,9 +1576,8 @@
             width: var(--uc-expanded-sroot-splitter-hover-width, auto);
             margin-inline: var(--tab-inner-inline-margin) !important;
             transition:
-                width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                width var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
+                margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
                 opacity var(--uc-expanded-sroot-splitter-opacity-transition);
         }
@@ -1664,7 +1679,7 @@
                 box-shadow 0.8s;
             .tabbrowser-tab:hover & {
                 transition:
-                    max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
                     background-color 0s,
                     box-shadow 0.1s;
@@ -1673,13 +1688,13 @@
                 transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                     var(--uc-autohide-sidebar-delay);
                 .tabbrowser-tab:hover & {
-                    transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transition: max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay);
                 }
             }
 
             @media not -moz-pref("uc.flex.style-tab-items", 2) {
-                border: 1.5px solid var(--uc-vt-pinned-tab-border-color);
+                border: 1.5px solid var(--uc-vt-pinned-tab-border-color) !important;
                 .tabbrowser-tab:not(:hover) &:not([selected], [multiselected]) {
                     background-color: transparent !important;
                 }
@@ -1735,7 +1750,7 @@
             box-shadow 0.06s;
         .tabbrowser-tab:hover & {
             transition:
-                max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
                 background-color 0s,
                 box-shadow 0.1s;
@@ -1744,7 +1759,7 @@
             transition: max-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay);
             .tabbrowser-tab:hover & {
-                transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                transition: max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay);
             }
         }
@@ -1761,6 +1776,27 @@
         .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background:is([selected], [multiselected]) > & {
             #tabbrowser-tabs[orient="vertical"] & {
                 margin: 3px 0px !important;
+            }
+        }
+    }
+    /* !NOVA: */
+    #tabbrowser-tabs .tab-background {
+        &:is([selected]:not([multiselected])) {
+            @media -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.~dev-revert-to-pre-nova-style")) {
+                background-image: var(--tab-border-color-accent), none !important;
+                background-origin: border-box, padding-box !important;
+                background-clip: border-area, padding-box !important;
+                /*
+                background-color: transparent !important;
+                */
+                border: 2px solid transparent !important;
+                box-shadow: none !important;
+            }
+            @media -moz-pref("uc.flex.~dev-revert-to-pre-nova-style") {
+                background-image: none !important;
+                background-origin: initial !important;
+                background-clip: initial !important;
+                border: none !important;
             }
         }
     }
@@ -1966,6 +2002,16 @@
     .tab-group-label-hover-highlight {
         @media not -moz-pref("uc.flex.style-tab-groups", 2) {
             background-color: transparent !important;
+        }
+        /* !NOVA: v155+ Nova moves the tab-group hover background from this wrapper to .tab-group-label.
+           Restore the previous behavior because FlexFox labels do not span the full tab-group width.
+           If Firefox removes this wrapper, move the background to its replacement and make it span the full group width. */
+        @media -moz-pref("uc.flex.style-tab-groups", 2) {
+            tab-group[collapsed]:not([movingtabgroup]) &:hover,
+            tab-group[previewpanelactive] & {
+                background-color: var(--tab-background-color-hover);
+                border-radius: 4px;
+            }
         }
         @media -moz-pref("uc.flex.style-tab-items", 2) and -moz-pref("uc.flex.style-tab-groups", 2) {
             transition: background-color 0.06s;
@@ -2379,7 +2425,7 @@
                         ) !important;
                     }
                     :is(#sidebar-main, #sidebar-container):hover & {
-                        transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        transition: width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay);
                     }
                 }
@@ -2427,11 +2473,10 @@
                 var(--uc-autohide-sidebar-delay);
         :is(#sidebar-main, #sidebar-container):hover & {
             --uc-split-view-transition:
-                width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                width var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
+                margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                    var(--uc-hover-sidebar-delay),
-                background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                background-color var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay);
         }
         &::before {
@@ -2439,9 +2484,9 @@
             position: absolute;
             background-color: var(--uc-split-view-in-tab-group-bgcolor, var(--uc-split-view-bgcolor));
             /*
-                background-color: var(--tab-background-color-hover);
-                border: 1.5px solid var(--uc-vt-pinned-tab-border-color);
-                */
+            background-color: var(--tab-background-color-hover);
+            border: 1.5px solid var(--uc-vt-pinned-tab-border-color);
+            */
             inset: 0;
             width: var(--uc-split-view-width);
             margin-block: 2px;
@@ -2546,38 +2591,38 @@
                     .tab-background {
                         max-width: 100%;
                         transition:
-                            max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
                             background-color 0.06s,
                             box-shadow 0.8s;
                         .tabbrowser-tab:hover & {
                             transition:
-                                max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
                                 background-color 0s,
                                 box-shadow 0.1s;
                         }
                         @media -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
-                            transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            transition: max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay);
                             .tabbrowser-tab:hover & {
                                 transition: max-width var(--uc-hover-transition-duration)
-                                    var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+                                    var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
                             }
                         }
                     }
                     .tab-stack {
                         transition:
-                            width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
-                            min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
-                            max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay);
                     }
                     .tab-content {
                         width: 100%;
-                        transition: width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        transition: width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay);
                     }
                 }
@@ -2751,13 +2796,13 @@
                     @media -moz-pref("uc.flex.style-tab-groups", 2) {
                         margin-inline-start: calc(var(--space-medium) + 0.8px);
                         transition:
-                            margin-inline-start var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            margin-inline-start var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
-                            background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            background-color var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
-                            border var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            border var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
-                            box-shadow var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            box-shadow var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay);
                         &:not([collapsed]),
                         &[hasactivetab] {
@@ -2806,11 +2851,11 @@
                         .tab-group-label-container {
                             margin-inline-start: 0 !important;
                             transition:
-                                margin-inline-start var(--uc-hover-transition-duration)
-                                    var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
-                                background-color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                margin-inline-start var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                filter var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                background-color var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                                    var(--uc-hover-sidebar-delay),
+                                filter var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay);
                         }
                     }
@@ -2826,21 +2871,21 @@
                             transition:
                                 scale 300ms ease 0s,
                                 box-shadow var(--tab-group-label-animation-duration),
-                                text-align var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                text-align var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay) allow-discrete,
-                                color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                color var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                padding-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                padding-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                font-size-adjust var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                font-size-adjust var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay) allow-discrete !important;
 
                             &::before {
                                 opacity: 1;
-                                transition: opacity var(--uc-hover-transition-duration)
-                                    var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+                                transition: opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                                    var(--uc-hover-sidebar-delay);
                             }
                         }
                         @media -moz-pref("uc.flex.style-tab-groups-center-label-text") {
@@ -2853,7 +2898,7 @@
                                 &::before {
                                     opacity: 1;
                                     transition: opacity var(--uc-hover-transition-duration)
-                                        var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+                                        var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
                                 }
                             }
                             @media -moz-pref("uc.flex.style-tab-groups", 0) {
@@ -2863,15 +2908,15 @@
                             transition:
                                 scale 300ms ease 0s,
                                 box-shadow var(--tab-group-label-animation-duration),
-                                text-align var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                text-align var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay) allow-discrete,
-                                color var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                color var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                padding-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                padding-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay),
-                                font-size-adjust var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                font-size-adjust var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay) allow-discrete !important;
 
                             /*
@@ -2879,9 +2924,9 @@
                                 left: calc((var(--uc-sidebar-main-hover-width) - 2 * var(--space-medium)) / 2 - 3px);
                                 transform: translateX(-50%);
                                 transition:
-                                    left var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                    left var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                         var(--uc-hover-sidebar-delay),
-                                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                                    transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                         var(--uc-hover-sidebar-delay);
                             }
                             */
@@ -2891,15 +2936,15 @@
                         label {
                             margin-inline-start: var(--tab-inner-inline-margin) !important;
                             transition: margin-inline-start var(--uc-hover-transition-duration)
-                                var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay) !important;
+                                var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay) !important;
                         }
                         &::after {
                             margin-inline-start: 0px;
                             visibility: var(--uc-tab-group-line-visibility);
                             transition:
-                                margin-inline-start var(--uc-hover-transition-duration)
-                                    var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
-                                visibility 0s var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+                                margin-inline-start var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                                    var(--uc-hover-sidebar-delay),
+                                visibility 0s var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
                         }
                     }
                     > .tabbrowser-tab,
@@ -2910,9 +2955,9 @@
                         ) !important;
                         margin-inline-end: 0 !important;
                         transition:
-                            margin-inline var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
-                            min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
                             min-height 150ms ease,
                             max-height 150ms ease,
@@ -2960,7 +3005,7 @@
 
             :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded]:hover {
                 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
-                    transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transition: min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
                 }
                 :is(.tab-label-container .tab-text, .tab-close-button) {
@@ -2978,26 +3023,26 @@
                 #tabbrowser-arrowscrollbox .tabbrowser-tab .tab-background {
                     max-width: 100%;
                     /*
-                    transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transition: max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay);
                     */
                     transition:
-                        max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay),
                         background-color 0.06s,
                         box-shadow 0.06s;
                     .tabbrowser-tab:hover & {
                         transition:
-                            max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay),
                             background-color 0s,
                             box-shadow 0.1s;
                     }
                     @media -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
-                        transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        transition: max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay);
                         .tabbrowser-tab:hover & {
-                            transition: max-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            transition: max-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay);
                         }
                     }
@@ -3233,3 +3278,5 @@
     }
 }
 /* 🔼 [BLOCK G] End of rules unrelated to Sidebery */
+
+/* !NOVA: */

@@ -76,10 +76,10 @@
                 :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
                     &:hover {
                         transition:
-                            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 calc(var(--uc-hover-sidebar-delay) + 10ms),
                             z-index 0ms linear calc(var(--uc-hover-sidebar-delay) - 10ms) allow-discrete,
-                            clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                            clip-path var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                 var(--uc-hover-sidebar-delay);
                         --browser-area-z-index-sidebar: 3;
                         /**
@@ -205,7 +205,7 @@
     &:hover #sidebar,
     #sidebar-header:has(> #sidebar-switcher-target.active) + .sidebar-browser-stack #sidebar {
         min-width: var(--uc-sb-hover-width, auto) !important;
-        transition: min-width var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+        transition: min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
             var(--uc-hover-sidebar-delay) !important;
     }
 

@@ -405,7 +405,7 @@ split-view-footer {
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 overflow: hidden;
                 box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
-                @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
+                @media -moz-pref("uc.flex.~dev-highlight-web-content-box-shadow") {
                     box-shadow: 0px 0px 10px red;
                 }
 
@@ -451,7 +451,7 @@ split-view-footer {
                     border-top-right-radius: var(--uc-web-content-radius);
                     margin-right: var(--uc-web-content-margin);
                     box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
-                    @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
+                    @media -moz-pref("uc.flex.~dev-highlight-web-content-box-shadow") {
                         box-shadow: 0px 0px 10px red;
                     }
                 }
@@ -460,7 +460,7 @@ split-view-footer {
                     border-top-left-radius: var(--uc-web-content-radius);
                     margin-left: var(--uc-web-content-margin);
                     box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
-                    @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
+                    @media -moz-pref("uc.flex.~dev-highlight-web-content-box-shadow") {
                         box-shadow: 0px 0px 10px red;
                     }
                 }
@@ -470,7 +470,7 @@ split-view-footer {
                 border-radius: var(--uc-web-content-radius);
                 margin-top: var(--uc-web-content-margin);
                 box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
-                @media -moz-pref("uc.flex.-dev-web-content-box-shadow-highlight") {
+                @media -moz-pref("uc.flex.~dev-highlight-web-content-box-shadow") {
                     box-shadow: 0px 0px 10px red;
                 }
             }
@@ -768,14 +768,14 @@ split-view-footer {
                         clip-path: inset(0 var(--uc-sidebar-stripe-width) 0 0);
                     }
                     transition:
-                        opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             calc(var(--uc-hover-sidebar-delay) + 10ms),
                         z-index 0ms linear 0ms /* calc(var(--uc-hover-sidebar-delay) - 10ms) */ allow-discrete,
                         /*
-                        clip-path var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                        clip-path var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay);
                         */
-                            clip-path 0ms var(--uc-autohide-transition-type) 0ms;
+                            clip-path 0ms var(--uc-hover-transition-type) 0ms;
                 }
             }
         }
@@ -819,7 +819,6 @@ split-view-footer {
         background-color: transparent !important;
     }
 
-    findbar,
     .found-matches {
         background-color: light-dark(
             rgba(249, 249, 251, var(--uc-urlbar-backdrop-transparency)),
@@ -828,19 +827,31 @@ split-view-footer {
         background-image: none !important;
     }
     findbar {
-        backdrop-filter: blur(26px) saturate(140%);
+        background-color: transparent !important;
+        background-image: none !important;
+        filter: none;
+        isolation: isolate;
     }
-    findbar:has(> .findbar-container > .found-matches:not([hidden])) {
-        border-bottom-left-radius: 0px;
+    /* Keep the blur on a backdrop layer. Applying it to findbar itself prevents .found-matches from blurring the page behind it. */
+    findbar::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        border-radius: inherit;
+        background-color: light-dark(
+            rgba(249, 249, 251, var(--uc-urlbar-backdrop-transparency)),
+            rgba(32, 32, 32, var(--uc-urlbar-backdrop-transparency))
+        );
+        backdrop-filter: blur(26px) saturate(140%);
+        filter: drop-shadow(0 18px 30px rgba(12, 12, 16, 0.28));
+    }
+    findbar > * {
+        z-index: 1;
     }
     .found-matches {
-        height: 25px;
-        padding: 2px 12px 0px 10px;
-        top: 35px;
-        border-bottom-right-radius: var(--uc-findbar-outer-border-radius);
-        &::after {
-            display: none;
-        }
+        backdrop-filter: blur(26px) saturate(140%);
     }
 }
 
@@ -862,7 +873,7 @@ split-view-footer {
     }
 
     menupopup,
-    panel:not(#autoscroller),
+    panel:not(#autoscroller, #feature-callout),
     tooltip,
     slot[part="content"] {
         background-color: light-dark(
@@ -877,7 +888,14 @@ split-view-footer {
         /* !TEMPORARY: v151 renames '--panel-shadow-margin' to '--panel-box-shadow-margin'; compatibility declarations for older versions can be removed in v151+. */
         --panel-shadow-margin: 0px !important;
         --panel-box-shadow-margin: 0px !important;
+        /* Some shadow DOM panels, such as #link-preview-panel, use this token across multiple background layers, so overriding only the outer background is insufficient. */
+        --panel-background-color: light-dark(
+            rgba(249, 249, 251, var(--uc-menupopup-backdrop-transparency)),
+            rgba(32, 32, 32, var(--uc-menupopup-backdrop-transparency))
+        ) !important;
         --panel-border-color: transparent !important;
+        /* !NOVA: Nova changes --border-radius-medium from 8px to 12px, so hard-code the previous value to keep --panel-border-radius aligned with appearance: menupopup. */
+        --panel-border-radius: 8px !important;
     }
 
     /* backdrop-filter doesn't blur remote <browser> element https://bugzilla.mozilla.org/show_bug.cgi?id=1799334 */
@@ -1033,7 +1051,7 @@ split-view-footer {
     }
 }
 
-/* Firefox Nova compatibility */
+/* !NOVA: */
 @media -moz-pref("browser.nova.enabled") {
     .chrome-block {
         border: none !important;
@@ -1051,5 +1069,12 @@ split-view-footer {
     .split-view-splitter {
         width: 6px !important;
         margin-inline: 0px !important;
+    }
+
+    :root:not([inFullscreen], [inDOMFullscreen]) #browser {
+        :root[uidensity="compact"] & {
+            padding-block-start: 0px !important;
+            gap: 0px !important;
+        }
     }
 }

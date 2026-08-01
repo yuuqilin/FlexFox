@@ -36,8 +36,9 @@
 }
 
 findbar checkbox {
-    padding: 1.5px 6px;
-    margin-block-end: 0.5px !important;
+    height: 24px;
+    padding-inline: 6px;
+    margin-block: auto !important;
     border-radius: var(--uc-findbar-inner-border-radius);
     color: var(--button-color);
     background-color: var(--button-bgcolor);
@@ -106,8 +107,8 @@ findbar {
     position: absolute;
     border-radius: var(--uc-findbar-outer-border-radius);
     top: calc(var(--uc-findbar-y-position) + var(--uc-findbar-y-offset));
-    right: min(var(--uc-findbar-x-position), calc(100% - (16em + 260px)));
-    width: calc(16em + 260px);
+    right: min(var(--uc-findbar-x-position), calc(100% - var(--uc-findbar-width)));
+    width: var(--uc-findbar-width);
     height: 36px;
     display: flex;
     align-items: center;
@@ -120,19 +121,24 @@ findbar {
             var(--uc-findbar-bgcolor, var(--toolbar-background-color))
         ),
         var(--lwt-additional-images) !important;
-    border: 0;
-    border-top-color: transparent !important;
+    border-top: none !important;
     overflow-x: visible;
-    filter: drop-shadow(rgb(from var(--uc-findbar-outline) r g b / calc(alpha * 0.7)) 0px 0px 0.5px);
-}
-
-.findbar-container,
-.findbar-container > hbox {
-    height: 100% !important;
+    filter: drop-shadow(rgb(from var(--uc-findbar-outline) r g b / calc(alpha * 0.7)) 0px 0px 0.5px)
+        drop-shadow(0 18px 30px rgba(12, 12, 16, 0.2));
+    z-index: 100;
 }
 
 .findbar-container {
-    margin-left: 0px;
+    height: 100% !important;
+}
+
+findbar [anonid="findbar-textbox-wrapper"] {
+    margin-block: auto;
+}
+
+.findbar-container {
+    margin-inline-start: 0 !important;
+    padding-inline-start: 0 !important;
 }
 
 /* change text to icons for smaller findbar */
@@ -145,6 +151,12 @@ findbar {
     -moz-context-properties: fill;
     fill: currentColor;
     color: inherit;
+}
+.findbar-container checkbox:not([checked])::after {
+    @media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
+        fill: var(--toolbarbutton-icon-fill);
+        color: var(--toolbarbutton-icon-fill);
+    }
 }
 .findbar-highlight::after {
     content: "";
@@ -182,8 +194,10 @@ findbar {
     /*
     padding: 5px 8px !important;
     */
-    width: 16em !important;
+    padding-inline-start: var(--space-medium) !important;
+    width: var(--uc-findbar-textbox-width) !important;
     height: 26px;
+    min-height: 26px !important;
 }
 
 .findbar-find-previous {
@@ -196,10 +210,17 @@ findbar {
     height: 26px;
 }
 
+.findbar-find-previous,
+.findbar-find-next {
+    padding: var(--space-xsmall) var(--space-small) !important;
+}
+
 .findbar-closebutton:hover {
     background: var(--toolbarbutton-background-color-hover) !important;
 }
 .findbar-closebutton {
+    /* Override v154 border styles */
+    border: none !important;
     background-color: var(--button-background-color, var(--toolbar-background-color)) !important;
     /* wasn't square for some reason */
     width: auto !important;
@@ -212,32 +233,41 @@ findbar {
 
 /* move matched amount below main findbar */
 .found-matches {
-    height: 40px;
+    --uc-found-matches-arc-width: 22px;
+    --uc-found-matches-arc-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 20' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H22C17 0 9 20 0 20V0Z'/%3E%3C/svg%3E");
+    @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
+        --uc-found-matches-arc-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 20' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H22C18 0 5 20 0 20V0Z'/%3E%3C/svg%3E");
+    }
+    height: 22px;
+    /* Avoid mask snapping gaps caused by font-derived normal line-height. */
+    line-height: 22px;
+    min-width: calc(var(--uc-findbar-textbox-width) + var(--uc-found-matches-arc-width) / 2);
     position: absolute;
-    padding: 20px 16px 3px 10px;
-    top: 16px;
+    padding: 0 28px 0 10px;
+    top: 36px;
     background-color: var(--uc-findbar-bgcolor, var(--toolbar-background-color));
     left: 0px;
     border-bottom-left-radius: var(--uc-findbar-outer-border-radius);
-    border-bottom-right-radius: 20px;
     z-index: 9;
+    mask-image: linear-gradient(#000 0 0), var(--uc-found-matches-arc-mask);
+    mask-position:
+        left top,
+        right top;
+    mask-size:
+        calc(100% - var(--uc-found-matches-arc-width)) 100%,
+        var(--uc-found-matches-arc-width) 100%;
+    mask-repeat: no-repeat;
+}
+findbar:has(> .findbar-container > .found-matches:not([hidden])) {
+    border-bottom-left-radius: 0px;
 }
 .findbar-find-status {
     display: none;
 }
 .found-matches::before {
+    position: relative;
+    inset-block-start: -1px;
     z-index: 8;
-}
-.found-matches::after {
-    position: absolute;
-    display: block;
-    content: "";
-    width: 22px;
-    height: 22px;
-    background-color: var(--uc-findbar-bgcolor, var(--toolbar-background-color));
-    right: -6px;
-    top: 7px;
-    transform: rotate(45deg);
 }
 .findbar-textbox {
     z-index: 10;
@@ -254,11 +284,9 @@ findbar checkbox,
 findbar [anonid="findbar-textbox-wrapper"] toolbarbutton,
 findbar [anonid="findbar-textbox-wrapper"] htmlNs|input {
     border: 1px solid ThreeDShadow;
-    /*
     @media -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons") {
-        border-color: var(--uc-urlbar-outline) !important;
+        border-color: var(--uc-findbar-outline) !important;
     }
-    */
 }
 /*
 findbar {
@@ -300,13 +328,16 @@ findbar [anonid="findbar-textbox-wrapper"] toolbarbutton {
     border-width: 1px !important;
     margin-inline: 0 !important;
 }
-findbar [anonid="findbar-textbox-wrapper"] toolbarbutton:last-of-type {
+findbar [anonid="findbar-textbox-wrapper"] toolbarbutton {
     border-top-left-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
+    border-left-width: 0 !important;
 }
 findbar [anonid="findbar-textbox-wrapper"] toolbarbutton:not(:last-of-type) {
     border-radius: 0 !important;
+    /*
     border-right-width: 0 !important;
+    */
 }
 /*
 findbar checkbox {

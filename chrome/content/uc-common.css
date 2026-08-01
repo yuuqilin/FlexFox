@@ -135,7 +135,6 @@
 
             /* Header */
             display: grid !important;
-            grid-template-rows: 1 !important;
             grid-template-columns: auto auto !important;
 
             /* Left part */
@@ -173,6 +172,18 @@
                     display: none !important;
                 }
             }
+
+            /**/
+            aboutaddons-themes-mode {
+                grid-column: 1 / -1;
+                grid-row: 2;
+                width: calc(100% - 2 * var(--main-margin-start)) !important;
+                margin-inline: var(--main-margin-start) !important;
+                margin-block-end: 20px;
+            }
+        }
+        moz-segmented-control {
+            box-sizing: border-box;
         }
         panel-list {
             --panel-list-background-color: var(--uc-background-color-box) !important;

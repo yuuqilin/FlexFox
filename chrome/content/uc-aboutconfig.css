@@ -4,7 +4,7 @@
         @media not -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 1) {
             body::before {
                 /* !-- Start of version info 2 -- */
-                content: " ____ _              ____            \A|  __| |  ___ __  __|  __| ___ __  __\A| |_ | | / _ \\\\ \\/ /| |_  / _ \\\\ \\/ /\A|  _|| ||  __/ >  < |  _|| (_) |>  < \A|_|  |_| \\___|/_/\\_\\|_|   \\___//_/\\_\\\A\Av6.5.7\A\AMaximize your view, shape it your way.\A\Ahttps://github.com/yuuqilin/FlexFox";
+                content: " ____ _              ____            \A|  __| |  ___ __  __|  __| ___ __  __\A| |_ | | / _ \\\\ \\/ /| |_  / _ \\\\ \\/ /\A|  _|| ||  __/ >  < |  _|| (_) |>  < \A|_|  |_| \\___|/_/\\_\\|_|   \\___//_/\\_\\\A\Av6.6.0\A\AMaximize your view, shape it your way.\A\Ahttps://github.com/yuuqilin/FlexFox";
                 /* !-- End of version info 2 -- */
                 display: flex;
                 justify-content: center;
@@ -20,7 +20,11 @@
                 background-color: var(--table-row-background-color);
                 border: var(--prefs-table-border);
                 border-color: light-dark(var(--border-color), cyan);
-                border-radius: 4px;
+                @media -moz-pref("browser.nova.enabled") {
+                    color: var(--focus-outline-color);
+                    border-color: var(--focus-outline-color);
+                }
+                border-radius: var(--border-radius-small);
                 white-space: pre;
                 line-height: 1;
                 font-family:
@@ -34,22 +38,22 @@
             /* !-- Start of version info 1 -- */
             body:lang(ja) {
                 &::before {
-                    content: "🎉  FlexFox v6.5.7 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
+                    content: "🎉  FlexFox v6.6.0 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
                 }
             }
             body:lang(zh-CN) {
                 &::before {
-                    content: "🎉  FlexFox v6.5.7 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
+                    content: "🎉  FlexFox v6.6.0 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
                 }
             }
             body:lang(zh-tw) {
                 &::before {
-                    content: "🎉  FlexFox v6.5.7 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
+                    content: "🎉  FlexFox v6.6.0 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
                 }
             }
 
             body::before {
-                content: "🎉  FlexFox v6.5.7 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
+                content: "🎉  FlexFox v6.6.0 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
                 /* !-- End of version info 1 -- */
                 display: block;
                 margin: 10px 10px 0px 10px;
@@ -58,7 +62,7 @@
                 color: var(--text-color, var(--in-content-text-color));
                 background-color: var(--table-row-background-color);
                 border: var(--prefs-table-border);
-                border-radius: 4px;
+                border-radius: var(--border-radius-small);
                 white-space: pre-line;
                 line-height: 1.6;
                 font-family: monospace;
@@ -103,6 +107,9 @@
         }
         th[scope="row"]::before {
             content: "🟢";
+            @media -moz-pref("browser.nova.enabled") {
+                content: "🟣";
+            }
             position: absolute;
             left: 16px;
         }
@@ -304,16 +311,17 @@
                     "▸ 0無効、1-2 Webコンテンツ領域の余白拡大\A" "▸ Webコンテンツ領域のすべての角を丸める\A"
                     "▸ 半透明メニューとポップアップ\A" "▸ 1左上、2右上、3右下\A" "▸ 画面端ホバーまで垂直タブを隠す\A"
                     "▸ 画面端ホバーまで上部ツールバーを隠す\A" "▸ 0無効、1-4幅拡大、2/4はアニメ\A"
-                    "▸ ナビバー高さを3px増加\A" "▸ サイドバー展開幅を拡大\A" "▸ 0無制限、1-5個、横タブ2倍\A"
-                    "▸ 0無制限、2-8個ピン留めタブ\A" "▸ 1狭い、2標準、3広い\A" "▸ PiP音量ボタンを上へ移動\A"
-                    "▸ 0無効、1フォーカス時、2入力時\A" "▸ ウィンドウボタンを左側へ移動\A"
-                    "▸ ブックマークフォルダーを非表示\A" "▸ ブックマーク名を非表示\A" "▸ サイドバーストライプを削除\A"
-                    "▸ 水平タブバーにウィンドウボタンを表示\A" "▸ 標準ブックマークスターへ戻す\A"
-                    "▸ 0小さい角丸、1大きい角丸、2四角、3URLのみ\A" "▸ 標準ウィンドウボタンへ戻す\A"
-                    "▸ 0非表示、1版のみ、2説明付き\A" "▸ ピン留めタブのサイズ変更バー表示\A"
-                    "▸ タブアイコンのホバーで閉じるボタン表示\A" "▸ 0無効、1全タブ、2読込済み\A"
-                    "▸ タブ名の前に番号を表示\A" "▸ Sidebery幅の手動変更を許可\A" "▸ ツールバー速度を同期\A"
-                    "▸ Sideberyアイコン拡大を無効化\A" "▸ サイドバー速度を高速化\A" "▸ サイドバー速度を低速化\A"
+                    "▸ ナビバー高さを3px増加\A" "▸ 0無制限、1-5個、横タブ2倍\A" "▸ 0無制限、2-8個ピン留めタブ\A"
+                    "▸ 1狭い、2標準、3広い\A" "▸ PiP音量ボタンを上へ移動\A" "▸ 0無効、1フォーカス時、2入力時\A"
+                    "▸ ウィンドウボタンを左側へ移動\A" "▸ ブックマークフォルダーを非表示\A" "▸ ブックマーク名を非表示\A"
+                    "▸ サイドバーストライプを削除\A" "▸ 水平タブバーにウィンドウボタンを表示\A"
+                    "▸ 標準ブックマークスターへ戻す\A" "▸ 0小さい角丸、1大きい角丸、2四角、3URLのみ\A"
+                    "▸ 標準ウィンドウボタンへ戻す\A" "▸ 0非表示、1版のみ、2説明付き\A"
+                    "▸ ピン留めタブのサイズ変更バー表示\A" "▸ タブアイコンのホバーで閉じるボタン表示\A"
+                    "▸ 0無効、1全タブ、2読込済み\A" "▸ タブ名の前に番号を表示\A" "▸ Sidebery幅の手動変更を許可\A"
+                    "▸ ツールバーのアニメーションをサイドバーと同期\A" "▸ Sideberyアイコン拡大を無効化\A"
+                    "▸ 0即時、1-4展開までの待機が長くなる\A" "▸ 1-4展開/折りたたみ時間を延長\A"
+                    "▸ 1バランス、2段階表示、3軽快、4キビキビ\A" "▸ 1は220px、2は240px、3は260px、4は280px\A"
                     "▸ 0標準、1フィルター、2山形\A" "▸ 0標準、1ブランド、2ブラウザー、3Sys、4旗\A"
                     "▸ 0クラシック、1-10アクセント色\A" "▸ アクセント色を全アイコンへ適用\A"
                     "▸ グラデーション色を使用\A" "▸ 0パネル、1ロゴ、2山形\A" "▸ アクティブ色をナビアイコンへ適用\A"
@@ -337,18 +345,20 @@
                     "▸ 垂直标签页始终展开\A" "▸ 隐藏非活动标签页关闭按钮\A" "▸ 0默认，1纯色，2图案图标\A"
                     "▸ 0关闭，1-2增大网页内容区边距\A" "▸ 圆角化整个网页内容区域\A" "▸ 启用半透明弹出层和菜单\A"
                     "▸ 1左上，2右上，3右下\A" "▸ 仅在边缘悬停时显示垂直标签页\A" "▸ 仅在边缘悬停时显示顶部工具栏\A"
-                    "▸ 0关闭，1-4越宽，2/4带动画\A" "▸ 导航栏高度增加3px\A" "▸ 增大侧栏展开宽度\A"
-                    "▸ 0不限，1-5个，水平标签页2倍\A" "▸ 0不限，2-8个固定标签页\A" "▸ 1紧凑，2默认，3宽松\A"
-                    "▸ 将PiP音量按钮移到顶部\A" "▸ 0关闭，1聚焦时，2输入时\A" "▸ 将窗口按钮移到左侧\A"
-                    "▸ 隐藏书签文件夹图标\A" "▸ 隐藏书签名称\A" "▸ 移除侧栏彩带\A" "▸ 在水平标签栏显示窗口按钮\A"
-                    "▸ 恢复默认收藏夹星标\A" "▸ 0小圆角，1大圆角，2直角，3仅网址栏\A" "▸ 恢复默认窗口按钮样式\A"
+                    "▸ 0关闭，1-4越宽，2/4带动画\A" "▸ 导航栏高度增加3px\A" "▸ 0不限，1-5个，水平标签页2倍\A"
+                    "▸ 0不限，2-8个固定标签页\A" "▸ 1紧凑，2默认，3宽松\A" "▸ 将PiP音量按钮移到顶部\A"
+                    "▸ 0关闭，1聚焦时，2输入时\A" "▸ 将窗口按钮移到左侧\A" "▸ 隐藏书签文件夹图标\A" "▸ 隐藏书签名称\A"
+                    "▸ 移除侧栏彩带\A" "▸ 在水平标签栏显示窗口按钮\A" "▸ 恢复默认收藏夹星标\A"
+                    "▸ 0小圆角，1大圆角，2直角，3仅网址栏\A" "▸ 恢复默认窗口按钮样式\A"
                     "▸ 0隐藏、1仅版本、2附选项说明\A" "▸ 显示固定标签页调整分隔条\A" "▸ 悬停标签页图标时显示关闭按钮\A"
                     "▸ 0关闭，1全部标签页，2已加载\A" "▸ 在标签名称前显示编号\A" "▸ 允许手动调整Sidebery宽度\A"
-                    "▸ 同步工具栏与侧栏动画速度\A" "▸ 禁用Sidebery图标放大\A" "▸ 加快侧栏动画速度\A"
-                    "▸ 减慢侧栏动画速度\A" "▸ 0默认，1筛选器，2箭头\A" "▸ 0默认，1品牌，2浏览器，3系统，4旗帜\A"
-                    "▸ 0经典，1-10强调色\A" "▸ 将强调色应用到全部图标\A" "▸ 使用渐变强调色\A" "▸ 0面板，1标志，2箭头\A"
-                    "▸ 导航图标使用当前面板颜色\A" "▸ 0树状，1三角，2文件夹\A" "▸ 0无，1展开/折叠，2加指示器旋转\A"
-                    "▸ 标签组名称居中显示\A" "▸ 1固定标签页边框，2背景高亮\A" "▸ 在标签页间移动时添加拖尾高亮\A"
+                    "▸ 同步工具栏与侧栏动画\A" "▸ 禁用Sidebery图标放大\A" "▸ 0立即展开，1-4展开延迟更长\A"
+                    "▸ 1-4展开/折叠动画更长\A" "▸ 1均衡，2渐进展开，3轻快，4利落有力\A"
+                    "▸ 1为220px，2为240px，3为260px，4为280px\A" "▸ 0默认，1筛选器，2箭头\A"
+                    "▸ 0默认，1品牌，2浏览器，3系统，4旗帜\A" "▸ 0经典，1-10强调色\A" "▸ 将强调色应用到全部图标\A"
+                    "▸ 使用渐变强调色\A" "▸ 0面板，1标志，2箭头\A" "▸ 导航图标使用当前面板颜色\A"
+                    "▸ 0树状，1三角，2文件夹\A" "▸ 0无，1展开/折叠，2加指示器旋转\A" "▸ 标签组名称居中显示\A"
+                    "▸ 1固定标签页边框，2背景高亮\A" "▸ 在标签页间移动时添加拖尾高亮\A"
                     "▸ 1Tokyo Night，2Firefox Acorn\A" "▸ 1平面，2内嵌，3凹刻，4无缝\A" "▸ 地址栏文字居中显示\A"
                     "▸ 0关闭，1当前面板，2全部\A" "▸ 1Traffic，2Yosemite，3GTK\A" "▸ 恢复较高的窗口按钮位置\A"
                     "▸ 缩小窗口按钮尺寸\A" "▸ 使用紧凑版扩展面板\A";
@@ -367,14 +377,15 @@
                     "▸ 0預設、1單色、2圖案圖示\A" "▸ 0關閉、1-2增加網頁內容區邊距\A" "▸ 將整個網頁內容區域圓角化\A"
                     "▸ 啟用半透明彈出層與選單\A" "▸ 1左上、2右上、3右下\A" "▸ 僅在邊緣懸停時顯示垂直分頁\A"
                     "▸ 僅在邊緣懸停時顯示頂端工具列\A" "▸ 0關閉、1-4越寬、2/4帶動畫\A" "▸ 導覽列高度增加3px\A"
-                    "▸ 增加側邊欄展開寬度\A" "▸ 0不限、1-5個、水平分頁2倍\A" "▸ 0不限、2-8個釘選分頁\A"
-                    "▸ 1緊湊、2標準、3寬鬆\A" "▸ 將PiP音量按鈕移至頂部\A" "▸ 0關閉、1聚焦時、2輸入時\A"
-                    "▸ 將視窗按鈕移到左側\A" "▸ 隱藏書籤資料夾圖示\A" "▸ 隱藏書籤名稱文字\A" "▸ 移除側邊欄彩帶\A"
-                    "▸ 在水平分頁列顯示視窗按鈕\A" "▸ 恢復預設書籤星號圖示\A" "▸ 0小圓角、1大圓角、2直角、3僅網址列\A"
-                    "▸ 恢復預設視窗控制按鈕\A" "▸ 0隱藏、1僅版本、2附選項說明\A" "▸ 顯示固定分頁調整分隔條\A"
-                    "▸ 懸停分頁圖示時顯示關閉按鈕\A" "▸ 0關閉、1全部分頁、2已載入\A" "▸ 在分頁標題前顯示編號\A"
-                    "▸ 允許手動調整Sidebery寬度\A" "▸ 同步工具列與側欄動畫速度\A" "▸ 停用Sidebery圖示放大\A"
-                    "▸ 加快側欄動畫速度\A" "▸ 減慢側欄動畫速度\A" "▸ 0預設、1篩選器、2箭頭\A"
+                    "▸ 0不限、1-5個、水平分頁2倍\A" "▸ 0不限、2-8個釘選分頁\A" "▸ 1緊湊、2標準、3寬鬆\A"
+                    "▸ 將PiP音量按鈕移至頂部\A" "▸ 0關閉、1聚焦時、2輸入時\A" "▸ 將視窗按鈕移到左側\A"
+                    "▸ 隱藏書籤資料夾圖示\A" "▸ 隱藏書籤名稱文字\A" "▸ 移除側邊欄彩帶\A" "▸ 在水平分頁列顯示視窗按鈕\A"
+                    "▸ 恢復預設書籤星號圖示\A" "▸ 0小圓角、1大圓角、2直角、3僅網址列\A" "▸ 恢復預設視窗控制按鈕\A"
+                    "▸ 0隱藏、1僅版本、2附選項說明\A" "▸ 顯示固定分頁調整分隔條\A" "▸ 懸停分頁圖示時顯示關閉按鈕\A"
+                    "▸ 0關閉、1全部分頁、2已載入\A" "▸ 在分頁標題前顯示編號\A" "▸ 允許手動調整Sidebery寬度\A"
+                    "▸ 同步工具列與側邊欄動畫\A" "▸ 停用Sidebery圖示放大\A" "▸ 0立即展開、1-4展開延遲更長\A"
+                    "▸ 1-4展開/摺疊動畫更長\A" "▸ 1均衡、2漸進展開、3輕快、4俐落有力\A"
+                    "▸ 1為220px、2為240px、3為260px、4為280px\A" "▸ 0預設、1篩選器、2箭頭\A"
                     "▸ 0預設、1品牌、2瀏覽器、3系統、4旗幟\A" "▸ 0經典、1-10強調色\A" "▸ 將強調色套用至所有圖示\A"
                     "▸ 使用漸層強調色\A" "▸ 0面板、1標誌、2箭頭\A" "▸ 導覽圖示使用目前面板色彩\A"
                     "▸ 0樹狀、1三角形、2資料夾\A" "▸ 0無、1展開/摺疊、2加指示器旋轉\A" "▸ 分頁群組名稱置中顯示\A"
@@ -402,20 +413,21 @@
                 "▸ Enable translucent popups and menus\A" "▸ 1 top-left, 2 top-right, 3 bottom-right\A"
                 "▸ Hide vertical tabs until edge hover\A" "▸ Hide top toolbars until edge hover\A"
                 "▸ 0 off, 1-4 wider, 2/4 animated\A" "▸ Increase navbar height by 3px\A"
-                "▸ Increase expanded sidebar width\A" "▸ 0 unlimited, 1-5 tabs, horizontal 2x\A"
-                "▸ 0 unlimited, 2-8 pinned tabs\A" "▸ 1 small, 2 medium, 3 large spacing\A"
-                "▸ Move PiP volume button to top\A" "▸ 0 off, 1 on focus, 2 while typing\A"
-                "▸ Move window controls to the left\A" "▸ Hide bookmark folder icons\A" "▸ Hide bookmark labels\A"
-                "▸ Remove the sidebar stripe\A" "▸ Show window buttons on horizontal tab bar\A"
-                "▸ Restore default bookmark star\A" "▸ 0 small corners, 1 large, 2 square, 3 URL\A"
-                "▸ Restore default window controls\A" "▸ 0 hide, 1 version, 2 version + descriptions\A"
-                "▸ Show pinned-tabs resize separator\A" "▸ Show tab close button on favicon hover\A"
-                "▸ 0 off, 1 all tabs, 2 loaded only\A" "▸ Show tab numbers in labels\A"
-                "▸ Allow manual Sidebery width resizing\A" "▸ Sync toolbar speed with sidebar\A"
-                "▸ Disable Sidebery icon enlargement\A" "▸ Speed up sidebar animations\A"
-                "▸ Slow down sidebar animations\A" "▸ 0 default, 1 filter, 2 chevron\A"
-                "▸ 0 default, 1 brand, 2 browser, 3 sys, 4 flag\A" "▸ 0 classic, 1-10 accent colors\A"
-                "▸ Apply accent color to all icons\A" "▸ Use gradient accent color\A" "▸ 0 panel, 1 logo, 2 chevron\A"
+                "▸ 0 unlimited, 1-5 tabs, horizontal 2x\A" "▸ 0 unlimited, 2-8 pinned tabs\A"
+                "▸ 1 small, 2 medium, 3 large spacing\A" "▸ Move PiP volume button to top\A"
+                "▸ 0 off, 1 on focus, 2 while typing\A" "▸ Move window controls to the left\A"
+                "▸ Hide bookmark folder icons\A" "▸ Hide bookmark labels\A" "▸ Remove the sidebar stripe\A"
+                "▸ Show window buttons on horizontal tab bar\A" "▸ Restore default bookmark star\A"
+                "▸ 0 small corners, 1 large, 2 square, 3 URL\A" "▸ Restore default window controls\A"
+                "▸ 0 hide, 1 version, 2 version + descriptions\A" "▸ Show pinned-tabs resize separator\A"
+                "▸ Show tab close button on favicon hover\A" "▸ 0 off, 1 all tabs, 2 loaded only\A"
+                "▸ Show tab numbers in labels\A" "▸ Allow manual Sidebery width resizing\A"
+                "▸ Sync toolbar animations with sidebar\A" "▸ Disable Sidebery icon enlargement\A"
+                "▸ 0 instant, 1-4 longer expand delay\A" "▸ 1-4 longer expand/collapse duration\A"
+                "▸ 1 balanced, 2 unfolding, 3 swift, 4 snappy\A" "▸ 1 220px, 2 240px, 3 260px, 4 280px\A"
+                "▸ 0 default, 1 filter, 2 chevron\A" "▸ 0 default, 1 brand, 2 browser, 3 sys, 4 flag\A"
+                "▸ 0 classic, 1-10 accent colors\A" "▸ Apply accent color to all icons\A"
+                "▸ Use gradient accent color\A" "▸ 0 panel, 1 logo, 2 chevron\A"
                 "▸ Use active panel color for nav icon\A" "▸ 0 tree, 1 triangle, 2 folder box\A"
                 "▸ 0 none, 1 expand/collapse, 2 + indicator\A" "▸ Center tab group labels\A"
                 "▸ 1 pinned border, 2 pinned background\A" "▸ Add cursor-trail highlight across tabs\A"

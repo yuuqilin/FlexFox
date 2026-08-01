@@ -372,8 +372,8 @@ toolbar#TabsToolbar {
                 var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
             &:hover {
                 max-width: 100vw !important;
-                transition: max-width calc(var(--uc-hover-transition-duration) + 885ms)
-                    var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+                transition: max-width calc(var(--uc-hover-transition-duration) + 885ms) var(--uc-hover-transition-type)
+                    var(--uc-hover-sidebar-delay);
             }
             /* Move sound-playing tabs to the beginning of the pinned tab container */
             .tabbrowser-tab:is([soundplaying], [muted]) {

@@ -65,10 +65,11 @@ Preferences are organized by the browser component or interface area they affect
 |-----------|:-------------:|-------------|
 | `uc.flex.fully-hide-sidebery` | `false` | Completely hides Sidebery and native vertical tabs until the cursor approaches the screen edge. The activation area can be adjusted using `--uc-sidebar-hover-trigger-width`. Enabling this option overrides the `Hide Sidebery` shortcut, preventing it from toggling between hidden and visible states. For normal use, keep this option disabled and switch layouts using keyboard shortcuts instead. See the [Layout Switching](USAGE.md#-layout-switching) section for setup instructions. |
 | `uc.flex.disable-sidebery-autohide` | `false` | Keeps Sidebery and native vertical tabs permanently expanded instead of auto-collapsing. Enabling this option overrides the `Lock Sidebery` shortcut, preventing it from toggling between collapsed and expanded states. For normal use, keep this option disabled and switch layouts using keyboard shortcuts instead. See the [Layout Switching](USAGE.md#-layout-switching) section for setup instructions. |
-| `uc.flex.increase-sidebery-expanded-width` | `false` | Increases the width of Sidebery and native vertical tabs when expanded. |
-| `uc.flex.sidebery-fast-hover-expand` | `false` | Speeds up the expand and collapse animations for Sidebery and native vertical tabs. |
-| `uc.flex.sidebery-slow-hover-expand` | `false` | Slows down the expand and collapse animations for Sidebery and native vertical tabs. |
-| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `false` | By default, the sidebar and toolbars use different animation speeds. This option applies the sidebar expand/collapse speed to the navigation bar and toolbars, allowing the speed settings above to affect the entire interface. This option has no effect when Mica or custom wallpapers are enabled, as a unified animation speed is applied automatically. |
+| `uc.flex.sidebery-expand-delay` | `0`-`4`<br>(`1`) | Sets the delay before Sidebery and native vertical tabs expand after hover. This setting also affects native horizontal tabs and browser toolbars. Values: `0` = no delay, `1` = `80ms` (default), `2` = `160ms`, `3` = `350ms`, `4` = `460ms`. Higher values wait longer before expansion begins. |
+| `uc.flex.sidebery-expand-duration` | `1`-`4`<br>(`1`) | Sets the duration of expand and collapse animations for Sidebery and native vertical tabs. Values: `1` = `115ms` expand / `55ms` collapse (default), `2` = `160ms` / `80ms`, `3` = `200ms` / `100ms`, `4` = `340ms` / `220ms`. Higher values make the animations take longer. |
+| `uc.flex.sidebery-expand-style` | `1`-`4`<br>(`1`) | Sets the motion style of expand and collapse animations for Sidebery and native vertical tabs. Values: `1` = Balanced (`ease-in-out`; smooth and even, default), `2` = Unfolding (`ease-out` / `ease-in`; content is revealed progressively), `3` = Swift (`easeOutQuart` / `easeInQuart`; expands quickly and settles gently), `4` = Snappy (`easeOutExpo` / `ease-in-expo`; expands abruptly and collapses with a firm finish). |
+| `uc.flex.sidebery-expand-width` | `1`-`4`<br>(`1`) | Sets the expanded width of Sidebery and native vertical tabs. Values: `1` = `220px` (default), `2` = `240px`, `3` = `260px`, `4` = `280px`. Higher values make the expanded sidebar wider. |
+| `uc.flex.sidebery-apply-expand-speed-to-toolbars` | `false` | By default, the sidebar and toolbars use separate animation settings. Enabling this option applies Sidebery's expand/collapse delay, duration, and motion style to the navigation bar and toolbars, keeping their animations in sync. This option has no effect when Mica or custom wallpapers are enabled, because those modes apply unified animation settings automatically. |
 
 ### Sidebery Only
 
@@ -251,7 +252,7 @@ Preferences are organized by the browser component or interface area they affect
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.disable-findbar-autohide` | `false` | Prevents the Findbar from automatically hiding when it loses focus. Press <kbd>Esc</kbd> to close the Findbar quickly. |
-| `uc.flex.findbar-position` | `'top-center-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the position of the Findbar. Accepted values: `'top-center-left'` or `'1'` = top center-left, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
+| `uc.flex.findbar-position` | `'top-left'`\|<br>`'top-right'`\|<br>`'bottom-right'` | Sets the position of the Findbar. Accepted values: `'top-left'` or `'1'` = top left, `'top-right'` or `'2'` = top right, `'bottom-right'` or `'3'` = bottom right. |
 
 </details>
 

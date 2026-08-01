@@ -4,18 +4,139 @@
 
 ## 🆕 What's New
 
-**🦊 v6.5.7**
+## 🦊 v6.6.0
 
-* Added support for Sidebery’s vertical navigation bar layout.
-  * FlexFox now provides dedicated styling for the vertical layout, fixing issues such as misaligned icons and clipped pinned tabs.
-  * To enable it, open **Sidebery Settings** (gear icon) > **Navigation bar** > **Layout** > **Vertical**.
-  * You may also want to enable `uc.flex.increase-sidebery-expanded-width`. The vertical navigation bar uses 44px of the expanded sidebar width, leaving less room for tab titles and pinned tabs. For example, a five-column pinned-tab layout may be reduced to four columns. This option increases the expanded width so the tab area can retain approximately the same usable width as before.  
-  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-dark.webp" style="width: 31%;">&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/sidebery-navbar-light.webp" style="width: 31%;">  
-* Fixed the bookmark star icon disappearing when `uc.flex.style-urlbar = 4`.
-* Fixed the bookmarks toolbar and Sidebery failing to expand when `browser.nova.enabled` was enabled.
-  * Nova UI is still under development and may change at any time. FlexFox does not currently support Nova UI; this fix only preserves basic functionality.
-* Fixed the distorted `window.svg` icon caused by changes in Firefox Beta v153. [Bug 2032240](https://bugzilla.mozilla.org/show_bug.cgi?id=2032240)
-* Fixed multiple layout issues caused by changes in Firefox Nightly v154. [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+### New
+
+https://github.com/user-attachments/assets/84a3ddf1-02f8-4c02-9957-4afcba52bf78
+
+* Added `uc.flex.sidebery-expand-style` to customize the expand and collapse animation of Sidebery and Native Vertical Tabs:
+
+  ```
+  1 = Balanced (`ease-in-out`; smooth and even, default)
+  2 = Unfolding (`ease-out` / `ease-in`; content is revealed progressively)
+  3 = Swift (`easeOutQuart` / `easeInQuart`; expands quickly and settles gently)
+  4 = Snappy (`easeOutExpo` / `ease-in-expo`; expands abruptly and collapses with a firm finish)
+  ```
+
+* Added `uc.flex.sidebery-expand-duration` to set the animation duration:
+
+  ```
+  1 = `115ms` expand / `55ms` collapse (default)
+  2 = `160ms` / `80ms`
+  3 = `200ms` / `100ms`
+  4 = `340ms` / `220ms`
+  ```
+
+  Longer durations make the differences between animation styles easier to see.
+
+* Added `uc.flex.sidebery-expand-delay` to set the hover delay before Sidebery and Native Vertical Tabs expand:
+
+  ```
+  0 = No delay
+  1 = `80ms` (default)
+  2 = `160ms`
+  3 = `350ms`
+  4 = `460ms`
+  ```
+
+  This setting also controls the expand delay of horizontal tabs and toolbars.
+
+* Added `uc.flex.sidebery-expand-width` to set the expanded width of Sidebery and Native Vertical Tabs:
+
+  ```
+  1 = `220px` (default)
+  2 = `240px`
+  3 = `260px`
+  4 = `280px`
+  ```
+
+* When Mica, wallpapers, or `uc.flex.sidebery-apply-expand-speed-to-toolbars` is enabled, these animation settings are also applied to horizontal tabs and toolbars.
+
+* All four preferences default to `1`, which preserves the same behavior as versions before v6.6. Change the values manually to use the new styles, timings, or widths.
+
+* Settings used in the preview:
+
+  ```
+  uc.flex.sidebery-expand-delay    = 2
+  uc.flex.sidebery-expand-duration = 2
+  uc.flex.sidebery-expand-style    = 2
+  uc.flex.sidebery-expand-width    = 2
+  ```
+
+### Breaking Changes
+
+* The following preferences are deprecated and no longer work. Remove them from `about:config` to keep the FlexFox preference descriptions aligned:
+
+  ```
+  uc.flex.sidebery-fast-hover-expand
+  → Replaced by uc.flex.sidebery-expand-delay
+
+  uc.flex.sidebery-slow-hover-expand
+  → Replaced by uc.flex.sidebery-expand-delay
+
+  uc.flex.increase-sidebery-expanded-width
+  → Replaced by uc.flex.sidebery-expand-width
+  ```
+
+* Updated the available values for `uc.flex.findbar-position`:
+
+  ```
+  top-left or 1       = Top left
+  top-right or 2      = Top right
+  bottom-right or 3   = Bottom right
+  ```
+
+  The previous `top-center-left` value no longer works.
+
+### Improvements
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-findbar.png" width="582px">
+
+* Improved the findbar appearance:
+
+  * Smoother and more consistent edges.
+  * Better blur and shadow effects with Mica and wallpapers.
+  * `uc.flex.style-sidebar-stripe-color-apply-to-all-icons` now also colors findbar icons.
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-bookmark-folders.png" width="364px">
+
+* Centered bookmark folder icons when folder labels are hidden, including their Nova UI hover background.
+
+<img src="https://raw.githubusercontent.com/yuuqilin/media-assets/FlexFox/assets/v6.6-gradient-tab-borders.png" width="330px">
+
+* Added support for Nova UI gradient tab borders. Set the colors with `uc.flex.style-sidebar-stripe-color`:
+
+  ```
+  0      = Nova UI default gradient
+  1–10   = FlexFox accent color gradients
+  ```
+* Added translucent background support for the Link Preview Panel.
+* Added Nova UI styling for `about:config`.
+
+### Fixes
+
+#### Sidebery UI
+
+* Rounded the bottom corners of the last button in Sidebery’s vertical navigation bar.
+* Fixed a v6.5.6 regression that showed the wrong active panel icon when Sidebery was collapsed.
+* Fixed incorrect tab badge colors with Sidebery v5.6.0 and later. [Commit ec84311](https://github.com/mbnuqw/sidebery/commit/ec8431190c3e42aa4f8357ca2c7aabc97db87fff)
+
+#### Firefox UI
+
+* Fixed several missing or incorrectly displayed icons.
+* Fixed the sidebar stripe position when `sidebar.visibility = expand-on-hover`.
+* Fixed Nova UI layout issues on `about:addons` in Firefox 154. [Bug 2051559](https://bugzilla.mozilla.org/show_bug.cgi?id=2051559)
+* Fixed Sidebery and Native Vertical Tabs not expanding in fullscreen in Firefox 154. [Bug 1927457](https://bugzilla.mozilla.org/show_bug.cgi?id=1927457)
+* Fixed inverted context-menu icon colors in Firefox 154. [Bug 2048186](https://bugzilla.mozilla.org/show_bug.cgi?id=2048186)
+* Fixed findbar layout issues in Firefox 154. [Bug 2048907](https://bugzilla.mozilla.org/show_bug.cgi?id=2048907), [Bug 2056829](https://bugzilla.mozilla.org/show_bug.cgi?id=2056829)
+* Fixed `uc.flex.enable-rounded-web-content` in horizontal tab layouts in Firefox 154. [Bug 2047653](https://bugzilla.mozilla.org/show_bug.cgi?id=2047653)
+* Fixed incorrect tab group backgrounds in Firefox 154. [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942)
+* Restored tab group hover backgrounds in Firefox 155. [Bug 2023691](https://bugzilla.mozilla.org/show_bug.cgi?id=2023691)
+* Restored pinned tab borders and backgrounds in Firefox 155. [Bug 2023619](https://bugzilla.mozilla.org/show_bug.cgi?id=2023619)
+* Fixed mismatched panel corners in Firefox 155. [Bug 2054953](https://bugzilla.mozilla.org/show_bug.cgi?id=2054953)
+* Added a temporary workaround for Native Vertical Tabs layout issues above 125% display scaling in Firefox 155. [Bug 2044082](https://bugzilla.mozilla.org/show_bug.cgi?id=2044082)
+* Fixed numerous layout and functionality issues caused by Nova UI becoming enabled by default in Firefox 155. [Bug 2056188](https://bugzilla.mozilla.org/show_bug.cgi?id=2056188)
 
 <!-- END What's New -->
 
@@ -25,86 +146,6 @@
 <summary>💬 <b>Previous Updates</b></summary>
 
 <!-- END Release Note -->
-
-## **v6.5.6**
-
-### Updated
-
-* Improved Sidebery behavior and visual consistency.
-
-  * Improved the smoothness of Sidebery expand and collapse animations while reducing layout cost.
-  * Fixed the search box bounce during expand and collapse animations, and aligned its width with the tab list below.
-  * Refined Split View support so only the web content area adjacent to Sidebery uses squared corners. The other split view pane now keeps rounded corners on all sides.
-  * Adjusted the close button and tree branch expand button positions when `uc.flex.sidebery-allow-resizable-width` is enabled in collapsed mode, reducing accidental clicks near tab icons.
-  * Fixed the tab panel in the navigation bar not expanding correctly in collapsed mode when `uc.flex.sidebery-allow-resizable-width` is enabled.
-  * Restored the missing top and side margins in Sidebery’s panel settings dialog when rounded web content margins are enabled.
-
-* Improved `uc.flex.enable-rounded-web-content` by synchronizing the bottom margin of sidebar panels with the web content area, keeping both areas visually aligned.
-
-### Changed
-
-* Native vertical tabs no longer show the resize splitter while collapsed. The splitter is now shown only when the sidebar is expanded, keeping the collapsed layout cleaner.
-
-### Fixed
-
-* Fixed a regression introduced in v6.5.0 where pinned tabs could not wrap automatically when `uc.flex.sidebery-allow-resizable-width` and `Lock Sidebery` were enabled at the same time.
-
-* Fixed a regression introduced in v6.5.3 where the Sidebery new tab button showed shadow overflow on both sides.
-
-* Fixed PDF toolbar auto-hide being broken by changes in Firefox Beta v153. [Bug 2045670](https://bugzilla.mozilla.org/show_bug.cgi?id=2045670)
-
-* Fixed the distorted `view-opentabs.svg` icon caused by changes in Firefox Beta v153. [Bug 2032258](https://bugzilla.mozilla.org/show_bug.cgi?id=2032258)
-
-* Fixed tab jitter when Sidebery expands, caused by changes in Firefox Nightly v154. [Bug 2048146](https://bugzilla.mozilla.org/show_bug.cgi?id=2048146)
-
-* Added an icon for the new “Edit PDF...” item in the App Menu introduced in Firefox Nightly v154. [Bug 2047915](https://bugzilla.mozilla.org/show_bug.cgi?id=2047915)
-
-## **v6.5.5**
-
-![Preview: about:config preference descriptions](https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/about-config-preference-descriptions.webp)
-
-### New
-
-- Improved the `about:config` experience.
-  - Centered the FlexFox version entry and made the version number easier to identify.
-  - Added short descriptions next to the FlexFox preference list.
-  - Preference descriptions are aligned with the full `uc.flex` list. To keep them matched, import `user.js` or manually add all FlexFox preferences.
-
-- Reworked the PowerShell installer.
-  - The installer is now `scripts/install-flexfox.ps1`.
-  - It detects the installed FlexFox version and downloads the latest release only when needed.
-  - Added SHA-256 verification for downloaded packages.
-  - Added an interactive menu for selecting a Firefox profile or entering a custom profile path.
-  - Added command-line options for unattended installation: use `-ProfilePath 'path'` to specify the profile path and `-Silent` to run without prompts.
-  - See [PowerShell Script](https://github.com/yuuqilin/FlexFox#-powershell-script) for details.
-
-- Updated the Git Pull automation scripts.
-  - Added an interactive menu for selecting a Firefox profile or entering a custom working directory.
-  - Added command-line options for unattended updates: use `-ProfilePath 'path'` to specify the working directory and `-Silent` to run without prompts.
-  - Improved handling of user-modified files and Git conflicts.
-  - See [Git Pull](https://github.com/yuuqilin/FlexFox#-git-pull) for details.
-
-### Breaking
-
-- Changed `uc.flex.show-flexfox-version-info-in-about-config` from a Boolean preference to a Number preference.
-  - `0`: Hide FlexFox version information.
-  - `1`: Show version information only.
-  - `2`: Show version information and preference descriptions. This is the default.
-  - Delete the old preference, then create a new preference with the same name and select Number as the type.
-
-### Updated
-
-- Moved `user.js` from the `scripts` folder to the root folder to simplify installation.
-
-### Removed
-
-- Removed `deploy-userchrome.ps1` from the root folder.
-
-**v6.5.4**
-
-* Fixed cramped spacing around the URL bar zoom indicator when centered URL bar text is enabled.
-* Removed obsolete legacy Sidebery style files from the project to avoid confusion with the current setup process.
-* Reworked the documentation with a more focused README, clearer preference references, and practical usage guides.
 
 For more update logs from earlier versions,  
 👉 see the [history archive on the Wiki](https://github.com/yuuqilin/FlexFox/wiki/Earlier-Update-History-(English))

@@ -297,11 +297,17 @@
        used across FlexFox.
     ════════════════════════════════════════════════════════════════════ */
     /* 🔽 Start of base style and layout settings */
+    /* Set the collapsed and expanded widths for Sidebery and native vertical tabs. */
     --uc-sidebar-width: 44px; /* Width when Sidebery or vertical tabs are collapsed */
     --uc-sidebar-hover-width: 220px; /* Width when Sidebery is expanded */
-    /* Increase expanded width of Sidebery */
-    @media -moz-pref("uc.flex.increase-sidebery-expanded-width") {
+    @media -moz-pref("uc.flex.sidebery-expand-width", 2) {
+        --uc-sidebar-hover-width: 240px;
+    }
+    @media -moz-pref("uc.flex.sidebery-expand-width", 3) {
         --uc-sidebar-hover-width: 260px;
+    }
+    @media -moz-pref("uc.flex.sidebery-expand-width", 4) {
+        --uc-sidebar-hover-width: 280px;
     }
 
     /* Color of the sidebar stripe */
@@ -333,6 +339,12 @@
                 var(--uc-sidebar-stripe-gradient-start) 100%
             );
         }
+    }
+
+    /* !NOVA: */
+    @media -moz-pref("browser.nova.enabled") {
+        --uc-sidebar-stripe-gradient-start: var(--color-violet-30);
+        --uc-sidebar-stripe-gradient-end: var(--color-orange-30);
     }
 
     /* Color for popup menu icons */
@@ -415,11 +427,29 @@
         }
     }
 
-    --uc-bookmark-folder-size: 20px; /* Size of the bookmark folder icon */
-    --uc-bookmark-folder-position: 0px 0px; /* Position of the bookmark folder icon */
-    --uc-bookmark-folder-open-size: 17.5px; /* Size of the open folder icon */
-    --uc-bookmark-folder-open-position: 2px 1px; /* Position of the open folder icon */
-    --uc-bookmark-folder-padding: 4px 2px; /* Padding around the folder icon */
+    --uc-bookmark-folder-width: 20px; /* Width of the bookmark folder icon container */
+    --uc-bookmark-folder-height: 20px; /* Height of the bookmark folder icon container */
+    --uc-bookmark-folder-size: 15px; /* Size of the bookmark folder icon */
+    --uc-bookmark-folder-position: 0px 1px; /* Position of the bookmark folder icon */
+    --uc-bookmark-folder-open-size: 17px; /* Size of the open folder icon */
+    --uc-bookmark-folder-open-position: 0px 1px; /* Position of the open folder icon */
+    @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 1) and -moz-pref("uc.flex.remove-bookmarks-labels") {
+        --uc-bookmark-folder-size: 16px;
+        --uc-bookmark-folder-position: 2px 2px;
+        --uc-bookmark-folder-open-size: 18px;
+        --uc-bookmark-folder-open-position: 2px 2px;
+    }
+    @media -moz-pref("uc.flex.enable-colored-bookmarks-folder-icons", 2) {
+        --uc-bookmark-folder-size: 20px;
+        --uc-bookmark-folder-position: 0px 0px;
+        --uc-bookmark-folder-open-size: 17px;
+        --uc-bookmark-folder-open-position: 2px 2px;
+    }
+    --uc-bookmark-folder-padding-block: 4px; /* Vertical padding around the bookmark folder icon */
+    --uc-bookmark-folder-padding: var(--uc-bookmark-folder-padding-block) 0px; /* Padding around the folder icon */
+    --uc-bookmark-item-height: calc(
+        var(--uc-bookmark-folder-height) + 2 * var(--uc-bookmark-folder-padding-block)
+    ); /* Total height of the bookmark folder item */
     --uc-bookmark-sub-folder-icon: url("../icons/bookmark/sub-folder.svg"); /* Icon for subfolders */
     --uc-bookmark-sub-folder-open-icon: url("../icons/bookmark/sub-folder-open.svg"); /* Icon for open subfolders */
 
@@ -748,8 +778,16 @@
      */
     --uc-theme-bg-x-offset: 0px;
 
+    /*
+     * Width settings for the floating findbar.
+     * The controls width reserves space for buttons, option toggles, gaps, and padding.
+     */
+    --uc-findbar-textbox-width: 16em;
+    --uc-findbar-controls-width: 258px;
+    --uc-findbar-width: calc(var(--uc-findbar-textbox-width) + var(--uc-findbar-controls-width));
+
     /* Horizontal position of the findbar */
-    --uc-findbar-x-position: 0.9vw;
+    --uc-findbar-x-position: 16px;
 
     /* Adjusts the vertical position of the findbar */
     /** 
@@ -758,16 +796,18 @@
      */
     --uc-findbar-y-position: 0px;
 
-    /* Move the findbar to the top-center-left area of the window */
-    @media -moz-pref("uc.flex.findbar-position", "top-center-left"), -moz-pref("uc.flex.findbar-position", "1") {
-        --uc-findbar-x-position: 40.65vw;
+    /* Move the findbar to the top-left area of the window */
+    @media -moz-pref("uc.flex.findbar-position", "top-left"), -moz-pref("uc.flex.findbar-position", "1") {
+        --uc-findbar-x-position: calc(100% - var(--uc-findbar-width) - 16px);
         --uc-findbar-y-position: 0px;
     }
     /* Move the findbar to the bottom-right corner of the window */
     @media -moz-pref("uc.flex.findbar-position", "bottom-right"), -moz-pref("uc.flex.findbar-position", "3") {
-        --uc-findbar-x-position: 0.9vw;
-        --uc-findbar-y-position: calc(100% - 60px);
-        --uc-findbar-y-offset: 0px !important;
+        --uc-findbar-x-position: 16px;
+        --uc-findbar-y-position: calc(100% - 58px);
+        findbar {
+            --uc-findbar-y-offset: 0px !important;
+        }
     }
 
     /* Corner radius settings for the urlbar, searchbar, findbar, and their icons */
@@ -818,7 +858,10 @@
     --uc-collapse-navbar-icons-duration: 0.28s; /* Duration of visibility collapse transition to remove icon spacing */
 
     /* Add margin, shadow, and rounded corners to the web content area */
-    --uc-web-content-margin: 4px;
+    --uc-web-content-margin: 0px;
+    @media -moz-pref("uc.flex.enable-rounded-web-content", 1) {
+        --uc-web-content-margin: 4px;
+    }
     @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
         --uc-web-content-margin: 8px;
     }
@@ -1030,27 +1073,60 @@
      * If you copy and modify them in uc-user-settings.css, be sure to also update
      * the corresponding variables in uc-custom-content.css to keep both sides consistent. 
      */
-    /* Sidebar expand/collapse animation settings */
+    /* Set the expand and collapse animation style for Sidebery and native vertical tabs. */
+    /* ease-in-out: cubic-bezier(0.42, 0, 0.58, 1) */
     --uc-autohide-transition-type: ease-in-out; /* Easing type for sidebar collapsing animation */
+    --uc-hover-transition-type: ease-in-out; /* Easing type for sidebar expanding animation */
+    /* ease-in/ease-out */
+    @media -moz-pref("uc.flex.sidebery-expand-style", 2) {
+        --uc-autohide-transition-type: cubic-bezier(0.42, 0, 1, 1);
+        --uc-hover-transition-type: cubic-bezier(0, 0, 0.58, 1);
+    }
+    /* easeInQuart/easeOutQuart */
+    @media -moz-pref("uc.flex.sidebery-expand-style", 3) {
+        --uc-autohide-transition-type: cubic-bezier(0.5, 0, 0.75, 0);
+        --uc-hover-transition-type: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    /* ease-in-expo/easeOutExpo */
+    @media -moz-pref("uc.flex.sidebery-expand-style", 4) {
+        --uc-autohide-transition-type: cubic-bezier(0.95, 0.05, 0.795, 0.035); /* cubic-bezier(0.7, 0, 0.84, 0) */
+        --uc-hover-transition-type: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Set the expand and collapse animation duration for Sidebery and native vertical tabs. */
     --uc-autohide-transition-duration: 55ms; /* Duration of sidebar collapsing animation */
     --uc-hover-transition-duration: 115ms; /* Duration of sidebar expanding animation */
+    @media -moz-pref("uc.flex.sidebery-expand-duration", 2) {
+        --uc-autohide-transition-duration: 80ms;
+        --uc-hover-transition-duration: 160ms;
+    }
+    @media -moz-pref("uc.flex.sidebery-expand-duration", 3) {
+        --uc-autohide-transition-duration: 100ms;
+        --uc-hover-transition-duration: 200ms;
+    }
+    @media -moz-pref("uc.flex.sidebery-expand-duration", 4) {
+        --uc-autohide-transition-duration: 220ms;
+        --uc-hover-transition-duration: 340ms;
+    }
+
+    /* Set the expand and collapse animation delay for Sidebery and native vertical tabs. */
     --uc-autohide-sidebar-delay: 28ms; /* Delay before collapsing the sidebar */
     --uc-hover-sidebar-delay: 80ms; /* Delay before expanding the sidebar */
-    --uc-horizontal-tab-width-transition-duration: 200ms; /* Duration of width transition for horizontal tab */
-
-    /* Speed up sidebar expand/collapse animation */
-    @media -moz-pref("uc.flex.sidebery-fast-hover-expand") {
-        --uc-hover-transition-duration: 100ms;
-        --uc-autohide-sidebar-delay: 28ms;
+    @media -moz-pref("uc.flex.sidebery-expand-delay", 0) {
         --uc-hover-sidebar-delay: 1ms;
-        --uc-horizontal-tab-width-transition-duration: 150ms;
+        --uc-hover-toolbar-delay: 1ms;
     }
-    /* Slow down sidebar expand/collapse animation */
-    @media -moz-pref("uc.flex.sidebery-slow-hover-expand") {
-        --uc-autohide-sidebar-delay: 28ms;
+    @media -moz-pref("uc.flex.sidebery-expand-delay", 2) {
+        --uc-hover-sidebar-delay: 160ms;
+        --uc-hover-toolbar-delay: 220ms;
+    }
+    @media -moz-pref("uc.flex.sidebery-expand-delay", 3) {
         --uc-hover-sidebar-delay: 350ms;
-        --uc-hover-toolbar-delay: 200ms;
-        --uc-horizontal-tab-width-transition-duration: 250ms;
+        --uc-hover-toolbar-delay: 390ms;
+    }
+    @media -moz-pref("uc.flex.sidebery-expand-delay", 4) {
+        --uc-hover-sidebar-delay: 460ms;
+        --uc-hover-toolbar-delay: 500ms;
     }
 
     /* Vertical spacing between items in the Firefox app menu (hamburger menu), bookmarks menu, and context menus. */
@@ -1143,6 +1219,7 @@
     --uc-autohide-toolbar-delay: 200ms; /* Delay before hiding the bookmarks toolbar */
     --uc-hover-toolbar-delay: 80ms; /* Delay before showing the bookmarks toolbar */
     --uc-autohide-toolbox-delay: 200ms; /* Delay before hiding the navigator toolbox */
+    --uc-horizontal-tab-width-transition-duration: 200ms; /* Duration of width transition for horizontal tab */
 
     /* Auto-hide timing for horizontal tabs */
     /**
@@ -1218,9 +1295,45 @@
     --tab-group-counter-size: 24px;
     /* v154+ */
     --tab-margin-block: var(--tab-block-margin);
-    /* Project Nova UI tokens and related overrides */
+    @media -moz-pref("sidebar.verticalTabs") {
+        --tab-group-blue: oklch(48% 0.2 260) !important; /* var(--color-blue-70) */
+        --tab-group-blue-invert: oklch(83% 0.17 260) !important; /* var(--color-blue-20) */
+        --tab-group-blue-pale: oklch(97% 0.05 260) !important; /* var(--color-blue-0) */
+        --tab-group-purple: oklch(48% 0.2 315) !important; /* var(--color-purple-70) */
+        --tab-group-purple-invert: oklch(83% 0.14 315) !important; /* var(--color-purple-20) */
+        --tab-group-purple-pale: oklch(97% 0.05 315) !important; /* var(--color-purple-0) */
+        --tab-group-cyan: oklch(48% 0.2 205) !important; /* var(--color-cyan-70) */
+        --tab-group-cyan-invert: oklch(83% 0.11 205) !important; /* var(--color-cyan-20) */
+        --tab-group-cyan-pale: oklch(97% 0.05 205) !important; /* var(--color-cyan-0) */
+        --tab-group-orange: oklch(48% 0.2 50) !important; /* var(--color-orange-70) */
+        --tab-group-orange-invert: oklch(86% 0.14 50) !important; /* var(--color-orange-20) */
+        --tab-group-orange-pale: oklch(97% 0.05 50) !important; /* var(--color-orange-0) */
+        --tab-group-yellow: oklch(51% 0.23 90) !important; /* var(--color-yellow-70) */
+        --tab-group-yellow-invert: oklch(86% 0.14 90) !important; /* var(--color-yellow-20) */
+        --tab-group-yellow-pale: oklch(97% 0.05 90) !important; /* var(--color-yellow-0) */
+        --tab-group-pink: oklch(48% 0.2 360) !important; /* var(--color-pink-70) */
+        --tab-group-pink-invert: oklch(83% 0.14 360) !important; /* var(--color-pink-20) */
+        --tab-group-pink-pale: oklch(97% 0.05 360) !important; /* var(--color-pink-0) */
+        --tab-group-green: oklch(48% 0.2 145) !important; /* var(--color-green-70) */
+        --tab-group-green-invert: oklch(83% 0.14 145) !important; /* var(--color-green-20) */
+        --tab-group-green-pale: oklch(97% 0.05 145) !important; /* var(--color-green-0) */
+        --tab-group-red: oklch(48% 0.2 15) !important; /* var(--color-red-70) */
+        --tab-group-red-invert: oklch(83% 0.14 15) !important; /* var(--color-red-20) */
+        --tab-group-red-pale: oklch(97% 0.05 15) !important; /* var(--color-red-0) */
+        --tab-group-gray: #5e6a77 !important;
+        --tab-group-gray-invert: #99a6b4 !important;
+        --tab-group-gray-pale: #f2f9ff !important;
+        tab-group {
+            --tab-group-line-color: light-dark(var(--tab-group-color), var(--tab-group-color-invert)) !important;
+        }
+    }
+    /* v155+ */
+    /* !NOVA: */
     --chrome-window-gap: 0px !important;
     --chrome-block-radius: 0px !important;
+    --tab-group-label-size: 24px !important;
+    --tab-border-color-selected-leading: var(--uc-sidebar-stripe-gradient-start) !important;
+    --tab-border-color-selected-trailing: var(--uc-sidebar-stripe-gradient-end) !important;
 
     --uc-toolbar-bgcolor: var(--uc-bgcolor); /* Internal fallback; must match --uc-bgcolor */
     --uc-sidebar-stripe-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
@@ -1241,7 +1354,11 @@
     }
 
     /* Shift the nav bar to align the first item with the vertical tabs */
-    --uc-nav-bar-first-child-margin-left: 4px;
+    --uc-nav-bar-first-child-margin-offset: 0px;
+    &[uidensity="compact"] {
+        --uc-nav-bar-first-child-margin-offset: 2px;
+    }
+    --uc-nav-bar-first-child-margin-left: calc(5.5px + var(--uc-nav-bar-first-child-margin-offset));
     @media (display-mode: fullscreen) {
         --uc-nav-bar-first-child-margin-left: 3px;
     }
@@ -1250,7 +1367,7 @@
     }
 
     /* Add right-side spacing after the first item to align nearby items with the vertical tabs */
-    --uc-nav-bar-first-child-margin-right: 4px;
+    --uc-nav-bar-first-child-margin-right: calc(4px + var(--uc-nav-bar-first-child-margin-offset));
     --uc-nav-bar-second-bookmarks-padding-left: 6px;
     /* When vertical tabs are not enabled, the extra spacing above is unnecessary */
     @media -moz-pref("uc.flex.disable-nav-bar-first-item-right-padding"),
@@ -1262,7 +1379,7 @@
         --uc-nav-bar-first-child-margin-right: 0px;
     }
     @media -moz-pref("uc.flex.auto-hide-window-controls") {
-        --uc-nav-bar-first-child-margin-right: 4px;
+        --uc-nav-bar-first-child-margin-right: calc(4px + var(--uc-nav-bar-first-child-margin-offset));
     }
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
         &:is([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
@@ -1331,7 +1448,9 @@
 
     /* Position of the sidebar button icon */
     --uc-sidebar-button-bg-pos: 50% 50%;
-    --uc-sidebar-button-bg-pos-edge: calc(50% + 1px) 50%;
+    @media ("uc.flex.style-sidebar-button", 4) {
+        --uc-sidebar-button-bg-pos: calc(50% + 0.5px) 50%;
+    }
 
     --uc-bm-height: 24px; /* Adjust as needed if other toolbar buttons are added */
     --uc-bm-padding: 4px; /* Vertical padding applied to bookmarks */
@@ -1462,10 +1581,14 @@
         }
         :root:not([inFullscreen]) & {
             @media -moz-pref("uc.flex.fully-hide-toolbox") {
-                --uc-findbar-y-offset: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 13px);
+                --uc-findbar-y-offset: calc(
+                    var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 5px - var(--uc-web-content-margin)
+                );
             }
             :root[titlepreface*="\200b "] & {
-                --uc-findbar-y-offset: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 13px);
+                --uc-findbar-y-offset: calc(
+                    var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 5px - var(--uc-web-content-margin)
+                );
             }
             :root[titlepreface*="\200d "] & {
                 --uc-findbar-y-offset: calc(var(--uc-personal-toolbar-height) + var(--uc-nav-bar-height) - 5px);
@@ -1535,7 +1658,9 @@
                     }
                 }
             }
-            @media -moz-pref("sidebar.visibility", "hide-sidebar") {
+            @media -moz-pref("sidebar.visibility", "hide-sidebar"),
+                -moz-pref("sidebar.visibility", "hide-on-close"),
+                -moz-pref("sidebar.visibility", "hide-launcher") {
                 @media not -moz-pref("sidebar.revamp") {
                     &:not([sidebar-panel-open]) {
                         --uc-web-content-margin-side: var(--uc-web-content-margin);
@@ -1767,33 +1892,30 @@
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         --uc-hover-tabstoolbar-transition:
             visibility 0ms linear var(--uc-hover-sidebar-delay),
-            margin-bottom var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+            margin-bottom var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                 var(--uc-hover-sidebar-delay);
         --uc-hover-navigator-transition:
             background-color var(--inactive-window-transition),
-            margin-bottom var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+            margin-bottom var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                 var(--uc-hover-sidebar-delay),
             z-index 0ms linear var(--uc-hover-sidebar-delay) allow-discrete;
         --uc-hover-navbar-transition:
-            transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay),
-            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+            transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
+            opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
         --uc-hover-urlbar-transition:
-            transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay),
-            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
+            transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
+            opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
             box-shadow 0.3s ease-out, left 0.3s ease, width 0.3s ease, margin-top 0.3s ease;
         --uc-hover-personal-toolbar-transition:
-            background-image var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+            background-image var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                 var(--uc-hover-sidebar-delay) allow-discrete,
-            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
-            transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-hover-sidebar-delay);
+            opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
+            transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
         --uc-hover-tabstoolbar-windows-controls-transition:
-            margin-block var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+            margin-block var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                 var(--uc-hover-sidebar-delay),
-            margin-inline 0s var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
-            opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay),
+            margin-inline 0s var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
+            opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
             padding-inline-start 0.1s ease-in-out 0.4s;
     }
 
@@ -1825,7 +1947,7 @@
 
         /**/
         --uc-hover-tabbox-clip-path-transition: clip-path var(--uc-hover-transition-duration)
-            var(--uc-autohide-transition-type) var(--uc-hover-sidebar-delay);
+            var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
     }
 
     /* Clip the Mica background when hovering the navigator in horizontal tabs mode */
@@ -1964,6 +2086,21 @@
      * the width difference to keep the collapsed Sidebery content visually centered.
      */
     @media -moz-pref("sidebar.verticalTabs") {
+        /* !NOVA: */
+        @media -moz-pref("browser.nova.enabled") {
+            --tab-min-height: max(32px, calc(var(--tab-label-line-height) * 1em)) !important;
+            --tab-inner-inline-margin: var(--space-medium) !important;
+            #tabbrowser-tabs tab-split-view-wrapper {
+                & .tabbrowser-tab {
+                    & .tab-background {
+                        :root[uidensity="compact"] & {
+                            --tab-collapsed-background-width: var(--tab-min-height) !important;
+                            --tab-min-height: max(32px, calc(var(--tab-label-line-height) * 1em)) !important;
+                        }
+                    }
+                }
+            }
+        }
         --tab-pinned-horizontal-count: 5;
         --uc-sidebar-main-width: var(--uc-sidebar-stripe-width);
         --uc-sidebar-main-hover-width: var(--uc-sidebar-hover-width);
@@ -2121,7 +2258,6 @@
             @media not ((-moz-platform: macos) and -moz-pref("sidebar.position_start")) {
                 --uc-sb-sidebar-button-bg-size: 20px;
             }
-            --uc-sb-sidebar-button-bg-pos-edge: calc(50% + 1px) 50%;
 
             /* Property values for the window controls when auto-hide navbar is enabled and Sidebery is active */
             @media not -moz-pref("sidebar.verticalTabs") {
@@ -2142,7 +2278,7 @@
             @media not (-moz-pref("uc.flex.disable-nav-bar-first-item-right-padding") or -moz-pref("uc.flex.fully-hide-toolbox") or -moz-pref("uc.flex.fully-hide-sidebery")) {
                 @media not (-moz-pref("uc.flex.move-window-controls-to-left") or (-moz-platform: macos)) {
                     &:not([titlepreface*="\200b "], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
-                        --uc-nav-bar-first-child-margin-right: 4px;
+                        --uc-nav-bar-first-child-margin-right: calc(4px + var(--uc-nav-bar-first-child-margin-offset));
                     }
                 }
             }
@@ -2365,21 +2501,25 @@
      * and the sidebar toggle button is in a collapsed state,
      * the sidebar is fully hidden, so all offsets are set to 0 
      */
-    @media -moz-pref("sidebar.revamp") and -moz-pref("sidebar.visibility", "hide-sidebar") {
-        /**
-         * Using #navigator-toolbox:has(#sidebar-button:not([expanded])) could avoid the cost of :root:has(),
-         * but it stops working if #sidebar-button is placed inside #customization-container,
-         * since it's no longer part of the active DOM.
-         * Given that the rule is behind a @media query and uses variable forwarding to limit scope,
-         * the overall performance impact of :root:has() is minimal in most cases,
-         * so we chose the more robust :root:has() version here.
-         */
-        &:has(> body > #browser > :is(#sidebar-main, #sidebar-container)[hidden]) {
-            --uc-personal-toolbar-offset: 0px;
-            --uc-personal-toolbar-width: 0px;
-            --uc-theme-bg-x-left-start: 0px;
-            --uc-theme-bg-x-right-end: 0px;
-            --uc-personal-toolbar-outline-margin-offset: var(--uc-web-content-margin);
+    @media -moz-pref("sidebar.revamp") {
+        @media -moz-pref("sidebar.visibility", "hide-sidebar"),
+            -moz-pref("sidebar.visibility", "hide-on-close"),
+            -moz-pref("sidebar.visibility", "hide-launcher") {
+            /**
+             * Using #navigator-toolbox:has(#sidebar-button:not([expanded])) could avoid the cost of :root:has(),
+             * but it stops working if #sidebar-button is placed inside #customization-container,
+             * since it's no longer part of the active DOM.
+             * Given that the rule is behind a @media query and uses variable forwarding to limit scope,
+             * the overall performance impact of :root:has() is minimal in most cases,
+             * so we chose the more robust :root:has() version here.
+             */
+            &:has(> body > #browser > :is(#sidebar-main, #sidebar-container)[hidden]) {
+                --uc-personal-toolbar-offset: 0px;
+                --uc-personal-toolbar-width: 0px;
+                --uc-theme-bg-x-left-start: 0px;
+                --uc-theme-bg-x-right-end: 0px;
+                --uc-personal-toolbar-outline-margin-offset: var(--uc-web-content-margin);
+            }
         }
     }
 

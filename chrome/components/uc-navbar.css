@@ -232,9 +232,9 @@ toolbarbutton:hover {
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
-                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
-                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             */
@@ -273,9 +273,9 @@ toolbarbutton:hover {
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
-                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
-                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             */
@@ -414,9 +414,9 @@ toolbarbutton:hover {
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
-                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
-                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
                     box-shadow 0.3s ease-out,
                     left 0.3s ease,
@@ -459,9 +459,9 @@ toolbarbutton:hover {
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
-                    transform var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    transform var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay),
-                    opacity var(--uc-hover-transition-duration) var(--uc-autohide-transition-type)
+                    opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
             }
             */
