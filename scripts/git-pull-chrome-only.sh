@@ -163,13 +163,13 @@ case "$(uname -s)" in
     Linux)
         firefox_roots+=(
             "$HOME/.mozilla/firefox"
-            "$HOME/.config/mozilla/firefox"
+            "${XDG_CONFIG_HOME:-$HOME/.config}/mozilla/firefox"
             "$HOME/snap/firefox/common/.mozilla/firefox"
             "$HOME/.var/app/org.mozilla.firefox/.mozilla/firefox"
         )
         profile_containers+=(
             "$HOME/.mozilla/firefox"
-            "$HOME/.config/mozilla/firefox"
+            "${XDG_CONFIG_HOME:-$HOME/.config}/mozilla/firefox"
             "$HOME/snap/firefox/common/.mozilla/firefox"
             "$HOME/.var/app/org.mozilla.firefox/.mozilla/firefox"
         )
