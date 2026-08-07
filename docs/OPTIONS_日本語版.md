@@ -29,7 +29,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.disable-flexfox` | `false` | Firefox を再起動することなく、FlexFox のすべてのスタイルを即座に無効化します。FlexFox と標準の Firefox UI の違いを比較したり、不具合を切り分けたりする際に便利です。 |
-| `uc.flex.skip-loading-uc-*.css` | `false` | `./components/` および `./content/` 内の特定の `uc-*.css` ファイルの読み込みをスキップします。コンポーネント単位でスタイルを完全に無効化したり、特定の CSS の影響を切り分けたりする際に使用できます。たとえば、`uc.flex.skip-loading-uc-newtab.css` を有効にすると、`./content/uc-newtab.css` は読み込まれません。 |
+| `uc.flex.~dev-skip-loading-uc-*.css` | `false` | `./components/` および `./content/` 内の特定の `uc-*.css` ファイルの読み込みをスキップします。コンポーネント単位でスタイルを完全に無効化したり、特定の CSS の影響を切り分けたりする際に使用できます。たとえば、`uc.flex.~dev-skip-loading-uc-newtab.css` を有効にすると、`./content/uc-newtab.css` は読み込まれません。 |
 
 </details>
 

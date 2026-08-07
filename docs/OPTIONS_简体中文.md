@@ -29,7 +29,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.disable-flexfox` | `false` | 启用后无需重启 Firefox 即可立即停用所有 FlexFox 样式，方便快速对比 FlexFox 与原生 Firefox 界面的差异，并用于排查问题。 |
-| `uc.flex.skip-loading-uc-*.css` | `false` | 跳过加载 `./components/` 和 `./content/` 中的特定 `uc-*.css` 文件。可用于完全停用某个组件的样式，或排除特定 CSS 文件的影响，以便进行问题排查。例如，启用 `uc.flex.skip-loading-uc-newtab.css` 后，将不会加载 `./content/uc-newtab.css`。 |
+| `uc.flex.~dev-skip-loading-uc-*.css` | `false` | 跳过加载 `./components/` 和 `./content/` 中的特定 `uc-*.css` 文件。可用于完全停用某个组件的样式，或排除特定 CSS 文件的影响，以便进行问题排查。例如，启用 `uc.flex.~dev-skip-loading-uc-newtab.css` 后，将不会加载 `./content/uc-newtab.css`。 |
 
 </details>
 

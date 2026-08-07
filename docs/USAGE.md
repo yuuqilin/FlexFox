@@ -42,7 +42,7 @@ Although these legacy styles remain compatible for now, removing them is strongl
 
 Open **Sidebery → Settings (gear icon) → Styles editor**, then delete all FlexFox-related styles from the **Sidebar** and **Group Page** tabs.
 
-Because all FlexFox Sidebery styles are now managed through `uc-sidebery.css`, enabling `uc.flex.skip-loading-uc-sidebery.css` completely disables FlexFox's Sidebery integration, making it easier to use your own custom styles or combine FlexFox with other style packs.
+Because all FlexFox Sidebery styles are now managed through `uc-sidebery.css`, enabling `uc.flex.~dev-skip-loading-uc-sidebery.css` completely disables FlexFox's Sidebery integration, making it easier to use your own custom styles or combine FlexFox with other style packs.
 
 ---
 

@@ -10,7 +10,7 @@ user_pref("sidebar.visibility",                         "always-show");
 /* Instantly disables all FlexFox styles without restarting Firefox. Useful for troubleshooting. */
 user_pref("uc.flex.disable-flexfox",                            false);
 /* Skips loading specific uc-*.css files from ./components/ or ./content. Use to disable individual features or troubleshoot conflicts. */
-// user_pref("uc.flex.skip-loading-uc-*.css",                   false);
+// user_pref("uc.flex.~dev-skip-loading-uc-*.css",              false);
 
 /* 🦊 Sidebar Button (Firefox Logo) */
 /* Sets the sidebar button icon.

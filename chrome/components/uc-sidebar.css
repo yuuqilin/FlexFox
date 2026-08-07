@@ -1279,6 +1279,9 @@
         align-items: var(--uc-sb-sroot-align-items, start) !important;
         > moz-button {
             --button-outer-padding-block-start: var(--uc-sb-sroot-btn-padding-block, var(--space-small)) !important;
+            /* !NOVA */
+            --button-outer-padding-block-end: var(--space-small) !important;
+            --button-outer-padding-inline: var(--space-medium) !important;
         }
     }
 

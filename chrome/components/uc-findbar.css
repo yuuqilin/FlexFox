@@ -105,11 +105,14 @@ findbar checkbox {
 findbar {
     --button-bgcolor: var(--uc-urlbar-bg, var(--button-background-color));
     position: absolute;
+    /* Keep absolute positioning relative to the full browser container instead of Firefox's findbar grid area. */
+    grid-area: unset !important;
     border-radius: var(--uc-findbar-outer-border-radius);
     top: calc(var(--uc-findbar-y-position) + var(--uc-findbar-y-offset));
     right: min(var(--uc-findbar-x-position), calc(100% - var(--uc-findbar-width)));
     width: var(--uc-findbar-width);
     height: 36px;
+    min-height: initial !important;
     display: flex;
     align-items: center;
     transform-origin: top center;

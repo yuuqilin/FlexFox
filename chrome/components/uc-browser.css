@@ -108,6 +108,9 @@
             position: absolute;
             inset: 0;
             pointer-events: none;
+            /* Use the splitter layer so this trailing ::after paints above the toolbox and splitter but below
+               higher overlays; the fallback preserves this order before Firefox exposes the variable. */
+            z-index: var(--browser-container-z-index-devtools-splitter, 2);
         }
         @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
             :root:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) & {
@@ -442,14 +445,14 @@ split-view-footer {
                 }
             }
 
-            .devtools-toolbox-side-iframe {
+            :is(.devtools-toolbox-side-iframe, .devtools-toolbox-iframe.side-host) {
                 border-radius: var(--uc-web-content-radius);
                 border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
                 border-top-right-radius: var(--uc-sb-web-content-radius-top-right, var(--uc-web-content-radius));
                 /* When DevTools is docked on the left, override sharp corner with a rounded one and add right margin */
                 @media -moz-pref("devtools.toolbox.host", "left") {
                     border-top-right-radius: var(--uc-web-content-radius);
-                    margin-right: var(--uc-web-content-margin);
+                    margin-right: 4px;
                     box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                     @media -moz-pref("uc.flex.~dev-highlight-web-content-box-shadow") {
                         box-shadow: 0px 0px 10px red;
@@ -458,7 +461,7 @@ split-view-footer {
                 /* When DevTools is docked on the right, override sharp corner with a rounded one and add left margin */
                 @media -moz-pref("devtools.toolbox.host", "right") {
                     border-top-left-radius: var(--uc-web-content-radius);
-                    margin-left: var(--uc-web-content-margin);
+                    margin-left: 4px;
                     box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                     @media -moz-pref("uc.flex.~dev-highlight-web-content-box-shadow") {
                         box-shadow: 0px 0px 10px red;
@@ -466,13 +469,17 @@ split-view-footer {
                 }
             }
 
-            .devtools-toolbox-bottom-iframe {
+            :is(.devtools-toolbox-bottom-iframe, .devtools-toolbox-iframe.bottom-host) {
                 border-radius: var(--uc-web-content-radius);
-                margin-top: var(--uc-web-content-margin);
+                margin-top: 4px;
                 box-shadow: var(--uc-web-content-box-shadow-depth) var(--uc-web-content-box-shadow-color);
                 @media -moz-pref("uc.flex.~dev-highlight-web-content-box-shadow") {
                     box-shadow: 0px 0px 10px red;
                 }
+            }
+
+            .devtools-toolbox-iframe {
+                border: none !important;
             }
 
             .devtools-side-splitter,
@@ -900,21 +907,49 @@ split-view-footer {
 
     /* backdrop-filter doesn't blur remote <browser> element https://bugzilla.mozilla.org/show_bug.cgi?id=1799334 */
     /* Needed to enable backdrop-filter effects on <browser> */
-    browser:not(.devtools-toolbox-side-iframe, .devtools-toolbox-bottom-iframe) {
+    browser:not(
+        .devtools-toolbox-side-iframe,
+        .devtools-toolbox-bottom-iframe,
+        .devtools-toolbox-iframe.side-host,
+        .devtools-toolbox-iframe.bottom-host
+    ) {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
     #urlbar[breakout][breakout-extend] {
         border-radius: 15px !important;
+        /*
         backdrop-filter: blur(26px) saturate(140%);
+        */
+        /* Firefox gives an open urlbar in .browser-titlebar will-change: opacity, which creates a Backdrop Root and prevents its background from sampling content behind #urlbar. Restore the urlbar's native translate hint; the inactive-window opacity transition still applies. */
+        will-change: translate !important;
     }
 
     #urlbar[breakout][breakout-extend] > :where(#urlbar-background, .urlbar-background) {
+        /* The previous workaround created the blur on a pseudo-element and let .urlbar-background own will-change: translate. This is now simplified by overriding #urlbar's will-change above and applying the blur directly to .urlbar-background. */
+        /*
+        &::before {
+            content: "";
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+            background-color: light-dark(
+                rgba(249, 249, 251, var(--uc-urlbar-backdrop-transparency)),
+                rgba(32, 32, 32, var(--uc-urlbar-backdrop-transparency))
+            );
+            border-radius: var(--uc-urlbar-popup-border-radius, var(--toolbarbutton-border-radius));
+            backdrop-filter: blur(26px) saturate(140%);
+        }
+        will-change: translate;
+        background-color: transparent !important;
+        */
         background-color: light-dark(
             rgba(249, 249, 251, var(--uc-urlbar-backdrop-transparency)),
             rgba(32, 32, 32, var(--uc-urlbar-backdrop-transparency))
         ) !important;
         background-image: none !important;
+        /* Keep the blur on the expanded background so it covers Nova's negative breakout inset outside the #urlbar border box. */
+        backdrop-filter: blur(26px) saturate(140%);
     }
 }
 
@@ -959,7 +994,7 @@ split-view-footer {
 ═════════════════════════════════════════════════════════════════════ */
 
 @media -moz-pref("uc.flex.browser-wallpaper-enabled") {
-    body {
+    :root {
         /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
         --toolbar-bgcolor: light-dark(
             rgba(var(--uc-browser-wallpaper-light-mask), var(--uc-browser-wallpaper-transparency)),
@@ -969,9 +1004,6 @@ split-view-footer {
             rgba(var(--uc-browser-wallpaper-light-mask), var(--uc-browser-wallpaper-transparency)),
             rgba(var(--uc-browser-wallpaper-dark-mask), var(--uc-browser-wallpaper-transparency))
         ) !important;
-        /*
-        -moz-appearance: -moz-win-borderless-glass !important;
-        */
         @media not -moz-pref("uc.flex.browser-wallpaper-index", 0) {
             --lwt-header-image: var(--uc-browser-wallpaper, none) !important;
             --lwt-additional-images: var(--uc-browser-wallpaper, none) !important;
@@ -979,7 +1011,12 @@ split-view-footer {
                 --uc-acrylic-noise-image: url("../icons/wallpaper/acrylic-noise.png");
             }
         }
+    }
 
+    body {
+        /*
+        -moz-appearance: -moz-win-borderless-glass !important;
+        */
         background-image:
             var(--uc-acrylic-noise-image, none),
             linear-gradient(var(--toolbar-background-color, Field), var(--toolbar-background-color, Field)),
@@ -1029,6 +1066,7 @@ split-view-footer {
 }
 
 @media -moz-pref("uc.flex.browser-wallpaper-enabled"),
+    -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
     -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("widget.windows.mica") {
     #navigator-toolbox {
         /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */

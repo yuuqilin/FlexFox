@@ -42,7 +42,7 @@ FlexFox 使用自己的侧栏自动隐藏和布局切换机制。Firefox 内置�
 
 打开 Sidebery 导航栏 → **设置（齿轮图标）→ 样式编辑器**，然后删除“**侧边栏**”和“**分组页面**”两个页面中的所有 FlexFox 旧样式。
 
-由于 FlexFox 的 Sidebery 样式现已统一由 `uc-sidebery.css` 管理，因此只需启用 `uc.flex.skip-loading-uc-sidebery.css`，即可完全禁用 FlexFox 对 Sidebery 的样式修改，更方便与自定义样式或其他样式包搭配使用。
+由于 FlexFox 的 Sidebery 样式现已统一由 `uc-sidebery.css` 管理，因此只需启用 `uc.flex.~dev-skip-loading-uc-sidebery.css`，即可完全禁用 FlexFox 对 Sidebery 的样式修改，更方便与自定义样式或其他样式包搭配使用。
 
 ---
 

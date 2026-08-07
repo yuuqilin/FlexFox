@@ -29,7 +29,7 @@ Preferences are organized by the browser component or interface area they affect
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.disable-flexfox` | `false` | Instantly disables all FlexFox styles without restarting Firefox. Useful for quickly comparing FlexFox with the native Firefox interface and for troubleshooting. |
-| `uc.flex.skip-loading-uc-*.css` | `false` | Skips loading specific `uc-*.css` files from `./components/` and `./content/`. This can be used to completely disable styles for individual components or isolate the effects of specific CSS files during troubleshooting. For example, enabling `uc.flex.skip-loading-uc-newtab.css` prevents `./content/uc-newtab.css` from being loaded. |
+| `uc.flex.~dev-skip-loading-uc-*.css` | `false` | Skips loading specific `uc-*.css` files from `./components/` and `./content/`. This can be used to completely disable styles for individual components or isolate the effects of specific CSS files during troubleshooting. For example, enabling `uc.flex.~dev-skip-loading-uc-newtab.css` prevents `./content/uc-newtab.css` from being loaded. |
 
 </details>
 

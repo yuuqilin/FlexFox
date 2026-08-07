@@ -1332,8 +1332,10 @@
     --chrome-window-gap: 0px !important;
     --chrome-block-radius: 0px !important;
     --tab-group-label-size: 24px !important;
+    --tab-group-label-padding: 4px !important;
     --tab-border-color-selected-leading: var(--uc-sidebar-stripe-gradient-start) !important;
     --tab-border-color-selected-trailing: var(--uc-sidebar-stripe-gradient-end) !important;
+    --toolbar-field-background-color: light-dark(rgba(0, 0, 0, 0.05), var(--color-black-alpha-30)) !important;
 
     --uc-toolbar-bgcolor: var(--uc-bgcolor); /* Internal fallback; must match --uc-bgcolor */
     --uc-sidebar-stripe-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */

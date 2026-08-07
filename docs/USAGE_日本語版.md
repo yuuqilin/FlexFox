@@ -42,7 +42,7 @@ v6 以降、FlexFox に含まれる Sidebery 用スタイルはすべて `uc-sid
 
 Sidebery のナビゲーションバー → **設定（歯車アイコン）→ スタイルエディター** に進み、「**サイドバー**」と「**グループページ**」タブ内に残っている FlexFox の旧スタイルをすべて削除してください。
 
-現在、FlexFox の Sidebery 用スタイルはすべて `uc-sidebery.css` で管理されています。`uc.flex.skip-loading-uc-sidebery.css` を有効にすると、FlexFox の Sidebery スタイルを完全に無効化できるため、独自のスタイルや他のスタイルセットと組み合わせやすくなります。
+現在、FlexFox の Sidebery 用スタイルはすべて `uc-sidebery.css` で管理されています。`uc.flex.~dev-skip-loading-uc-sidebery.css` を有効にすると、FlexFox の Sidebery スタイルを完全に無効化できるため、独自のスタイルや他のスタイルセットと組み合わせやすくなります。
 
 ---
 
