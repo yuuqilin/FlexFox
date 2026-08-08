@@ -161,15 +161,20 @@ case "$(uname -s)" in
         profile_containers+=("$HOME/Library/Application Support/Firefox/Profiles")
         ;;
     Linux)
+        xdg_config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+        if [[ "$xdg_config_home" != /* ]]; then
+            xdg_config_home="$HOME/.config"
+        fi
+
         firefox_roots+=(
             "$HOME/.mozilla/firefox"
-            "${XDG_CONFIG_HOME:-$HOME/.config}/mozilla/firefox"
+            "$xdg_config_home/mozilla/firefox"
             "$HOME/snap/firefox/common/.mozilla/firefox"
             "$HOME/.var/app/org.mozilla.firefox/.mozilla/firefox"
         )
         profile_containers+=(
             "$HOME/.mozilla/firefox"
-            "${XDG_CONFIG_HOME:-$HOME/.config}/mozilla/firefox"
+            "$xdg_config_home/mozilla/firefox"
             "$HOME/snap/firefox/common/.mozilla/firefox"
             "$HOME/.var/app/org.mozilla.firefox/.mozilla/firefox"
         )
