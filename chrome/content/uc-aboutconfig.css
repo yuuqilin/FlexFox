@@ -4,7 +4,7 @@
         @media not -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 1) {
             body::before {
                 /* !-- Start of version info 2 -- */
-                content: " ____ _              ____            \A|  __| |  ___ __  __|  __| ___ __  __\A| |_ | | / _ \\\\ \\/ /| |_  / _ \\\\ \\/ /\A|  _|| ||  __/ >  < |  _|| (_) |>  < \A|_|  |_| \\___|/_/\\_\\|_|   \\___//_/\\_\\\A\Av6.6.0\A\AMaximize your view, shape it your way.\A\Ahttps://github.com/yuuqilin/FlexFox";
+                content: " ____ _              ____            \A|  __| |  ___ __  __|  __| ___ __  __\A| |_ | | / _ \\\\ \\/ /| |_  / _ \\\\ \\/ /\A|  _|| ||  __/ >  < |  _|| (_) |>  < \A|_|  |_| \\___|/_/\\_\\|_|   \\___//_/\\_\\\A\Av7.0.0\A\AMaximize your view, shape it your way.\A\Ahttps://github.com/yuuqilin/FlexFox";
                 /* !-- End of version info 2 -- */
                 display: flex;
                 justify-content: center;
@@ -38,22 +38,22 @@
             /* !-- Start of version info 1 -- */
             body:lang(ja) {
                 &::before {
-                    content: "🎉  FlexFox v6.6.0 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
+                    content: "🎉  FlexFox v7.0.0 のインストールが完了しました。 \A 📝  オプションを調整するには、検索バーに `uc.flex` と入力してください。";
                 }
             }
             body:lang(zh-CN) {
                 &::before {
-                    content: "🎉  FlexFox v6.6.0 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
+                    content: "🎉  FlexFox v7.0.0 已成功安装。 \A 📝  如需调整选项，请在搜索栏中输入 `uc.flex`。";
                 }
             }
             body:lang(zh-tw) {
                 &::before {
-                    content: "🎉  FlexFox v6.6.0 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
+                    content: "🎉  FlexFox v7.0.0 已成功安裝。 \A 📝  若需要調整選項，請在搜尋欄中輸入 `uc.flex`。";
                 }
             }
 
             body::before {
-                content: "🎉  FlexFox v6.6.0 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
+                content: "🎉  FlexFox v7.0.0 has been successfully installed. \A 📝  To adjust options, type `uc.flex` in the search bar.";
                 /* !-- End of version info 1 -- */
                 display: block;
                 margin: 10px 10px 0px 10px;
@@ -219,6 +219,22 @@
 
     /* Display FlexFox's preference descriptions on the right side of the preferences list */
     @media not (-moz-pref("uc.flex.show-flexfox-version-info-in-about-config", false) or -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 0) or -moz-pref("uc.flex.show-flexfox-version-info-in-about-config", 1)) {
+        :root {
+            /* Firefox 140 ESR uses fixed 4px block margins on preference row buttons. */
+            --uc-prefs-desc-line-height: calc(var(--button-min-height, 32px) + 8px);
+        }
+
+        /*
+         * Firefox 151+ uses design-system spacing for the preference row buttons.
+         * Once Firefox 140 ESR support is dropped, remove this compatibility query
+         * and use the token-based value as the :root default above.
+         */
+        @container not style(--in-content-border-invalid) {
+            body {
+                --uc-prefs-desc-line-height: calc(var(--button-min-height, 32px) + 2 * var(--space-xsmall));
+            }
+        }
+
         body {
             /* Initial state for the preference description (hidden) */
             --uc-prefs-desc-width: 0vw;
@@ -229,6 +245,8 @@
             --uc-prefs-desc-opacity: 0;
             --uc-prefs-desc-pointer: none;
             --uc-prefs-desc-delay: 0s; /* No delay when hiding */
+            /* */
+            --uc-aboutconfig-search-flexfox-hint-opacity: 0;
 
             /* Split body into 2 columns and 4 rows */
             display: grid;
@@ -248,8 +266,8 @@
             --uc-prefs-desc-height: auto;
             --uc-prefs-desc-margin: 10px;
             --uc-prefs-desc-padding: 0px 15px 54px 15px;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("browser.tabs.allow_transparent_browser"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica) and -moz-pref("browser.tabs.allow_transparent_browser"),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica) and -moz-pref("browser.tabs.allow_transparent_browser"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser") {
                 --uc-prefs-desc-padding: 0px 15px 40px 15px;
             }
@@ -259,6 +277,12 @@
             --uc-prefs-desc-pointer: auto;
             */
             --uc-prefs-desc-delay: 0.15s; /* Opacity transition delay when showing */
+        }
+
+        /* */
+        body:has(> #toolbar > #about-config-search:placeholder-shown) {
+            --uc-prefs-desc-width: 0vw;
+            --uc-aboutconfig-search-flexfox-hint-opacity: 1;
         }
 
         /* Place the FlexFox version info in the first row */
@@ -277,12 +301,46 @@
         #prefs {
             grid-column: 1 / -1;
             grid-row: 3;
-            width: 100% !important;
+            width: calc(100% - 20px) !important;
             margin-top: 0 !important;
+            display: grid;
+            /* Preserve the table layout's 40% content width plus the name cell's inline padding. */
+            grid-template-columns:
+                minmax(calc(40% + 34px), max-content)
+                minmax(0, 1fr)
+                40px
+                calc(40px + var(--uc-prefs-desc-width));
         }
 
-        #prefs th {
-            width: 40%;
+        #prefs > tr {
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-column: 1 / -1;
+            align-items: stretch;
+
+            > * {
+                align-content: center;
+            }
+        }
+
+        /* Keep add-type choices on one line when space allows without moving the action columns. */
+        #prefs > .add {
+            grid-template-columns:
+                minmax(0, 1fr)
+                fit-content(420px)
+                40px
+                calc(40px + var(--uc-prefs-desc-width));
+        }
+
+        /* Keep visible row backgrounds inside the rounded table border without clipping the native add-row separators. */
+        #prefs > tr:nth-child(1 of :not(.hidden)) {
+            border-start-start-radius: calc(var(--border-radius-small) - var(--prefs-table-border-width));
+            border-start-end-radius: calc(var(--border-radius-small) - var(--prefs-table-border-width));
+        }
+
+        #prefs > tr:nth-last-child(1 of :not(.hidden)) {
+            border-end-start-radius: calc(var(--border-radius-small) - var(--prefs-table-border-width));
+            border-end-end-radius: calc(var(--border-radius-small) - var(--prefs-table-border-width));
         }
 
         #prefs .cell-reset {
@@ -325,10 +383,14 @@
                     "▸ 0標準、1フィルター、2山形\A" "▸ 0標準、1ブランド、2ブラウザー、3Sys、4旗\A"
                     "▸ 0クラシック、1-10アクセント色\A" "▸ アクセント色を全アイコンへ適用\A"
                     "▸ グラデーション色を使用\A" "▸ 0パネル、1ロゴ、2山形\A" "▸ アクティブ色をナビアイコンへ適用\A"
-                    "▸ 0ツリー、1三角、2フォルダー\A" "▸ 0なし、1展開/折りたたみ、2+インジケータ回転\A"
-                    "▸ タブグループ名を中央配置\A" "▸ 1ピン留めは枠線、2背景ハイライト\A"
-                    "▸ タブ間移動時に残像ハイライトを追加\A" "▸ 1Tokyo Night、2Firefox Acorn\A"
-                    "▸ 1フラット、2凹み、3刻印、4シームレス\A" "▸ URLバー文字を中央配置\A" "▸ 0無効、1選択中、2全て\A"
+                    "▸ 0非表示、1小、2大\A" "▸ 0ツリー、1三角、2フォルダー\A"
+                    "▸ 0なし、1展開/折りたたみ、2+インジケータ回転\A" "▸ タブグループ名を中央配置\A"
+                    "▸ 0なし、1ピン留め枠線、2背景塗りつぶし\A" "▸ タブ間移動時に残像ハイライトを追加\A"
+                    "▸ 0アクティブ透明、1アクセント、2全タブ塗りつぶし\A" "▸ 0自動、1Proton、2Nova\A"
+                    "▸ 0は0px、1は1px、2は2px\A" "▸ 0なし、1静止、2アニメーション\A" "▸ 0なし、1静止、2アニメーション\A"
+                    "▸ 1Tokyo Night、2Firefox Acorn\A" "▸ 0自動、1Proton、2Nova\A"
+                    "▸ 1フラット、2凹み、3刻印、4シームレス\A" "▸ URLバー文字を中央配置\A"
+                    "▸ 0なし、1アイコン、2＋ホバー枠線、3＋文字\A" "▸ 0無効、1選択中、2全て\A"
                     "▸ 1Traffic、2Yosemite、3GTK\A" "▸ ウィンドウボタンを上へ戻す\A" "▸ ウィンドウボタンを縮小\A"
                     "▸ コンパクト拡張パネルを使用\A";
             }
@@ -357,11 +419,14 @@
                     "▸ 1为220px，2为240px，3为260px，4为280px\A" "▸ 0默认，1筛选器，2箭头\A"
                     "▸ 0默认，1品牌，2浏览器，3系统，4旗帜\A" "▸ 0经典，1-10强调色\A" "▸ 将强调色应用到全部图标\A"
                     "▸ 使用渐变强调色\A" "▸ 0面板，1标志，2箭头\A" "▸ 导航图标使用当前面板颜色\A"
-                    "▸ 0树状，1三角，2文件夹\A" "▸ 0无，1展开/折叠，2加指示器旋转\A" "▸ 标签组名称居中显示\A"
-                    "▸ 1固定标签页边框，2背景高亮\A" "▸ 在标签页间移动时添加拖尾高亮\A"
-                    "▸ 1Tokyo Night，2Firefox Acorn\A" "▸ 1平面，2内嵌，3凹刻，4无缝\A" "▸ 地址栏文字居中显示\A"
-                    "▸ 0关闭，1当前面板，2全部\A" "▸ 1Traffic，2Yosemite，3GTK\A" "▸ 恢复较高的窗口按钮位置\A"
-                    "▸ 缩小窗口按钮尺寸\A" "▸ 使用紧凑版扩展面板\A";
+                    "▸ 0不显示、1小、2大\A" "▸ 0树状，1三角，2文件夹\A" "▸ 0无，1展开/折叠，2加指示器旋转\A"
+                    "▸ 标签组名称居中显示\A" "▸ 0无，1固定标签页边框，2背景填充\A" "▸ 在标签页间移动时添加拖尾高亮\A"
+                    "▸ 0活动透明，1活动强调色，2全部标签页填充\A" "▸ 0自动，1Proton，2Nova\A"
+                    "▸ 0为0px、1为1px、2为2px\A" "▸ 0无、1静态、2动态\A" "▸ 0无、1静态、2动态\A"
+                    "▸ 1Tokyo Night，2Firefox Acorn\A" "▸ 0自动，1Proton，2Nova\A" "▸ 1平面，2内嵌，3凹刻，4无缝\A"
+                    "▸ 地址栏文字居中显示\A" "▸ 0关闭，1图标，2加悬停边框，3加文字\A" "▸ 0关闭，1当前面板，2全部\A"
+                    "▸ 1Traffic，2Yosemite，3GTK\A" "▸ 恢复较高的窗口按钮位置\A" "▸ 缩小窗口按钮尺寸\A"
+                    "▸ 使用紧凑版扩展面板\A";
             }
         }
         body:lang(zh-tw) {
@@ -388,9 +453,12 @@
                     "▸ 1為220px、2為240px、3為260px、4為280px\A" "▸ 0預設、1篩選器、2箭頭\A"
                     "▸ 0預設、1品牌、2瀏覽器、3系統、4旗幟\A" "▸ 0經典、1-10強調色\A" "▸ 將強調色套用至所有圖示\A"
                     "▸ 使用漸層強調色\A" "▸ 0面板、1標誌、2箭頭\A" "▸ 導覽圖示使用目前面板色彩\A"
-                    "▸ 0樹狀、1三角形、2資料夾\A" "▸ 0無、1展開/摺疊、2加指示器旋轉\A" "▸ 分頁群組名稱置中顯示\A"
-                    "▸ 1釘選分頁邊框、2背景高亮\A" "▸ 在分頁間移動時加入拖尾高亮\A" "▸ 1Tokyo Night、2Firefox Acorn\A"
-                    "▸ 1平面、2內嵌、3凹刻、4無縫\A" "▸ 網址列文字置中顯示\A" "▸ 0關閉、1目前分頁、2全部\A"
+                    "▸ 0不顯示、1小、2大\A" "▸ 0樹狀、1三角形、2資料夾\A" "▸ 0無、1展開/摺疊、2加指示器旋轉\A"
+                    "▸ 分頁群組名稱置中顯示\A" "▸ 0無、1釘選分頁邊框、2背景填充\A" "▸ 在分頁間移動時加入拖尾高亮\A"
+                    "▸ 0活動透明、1活動強調色、2全部分頁填充\A" "▸ 0自動、1Proton、2Nova\A" "▸ 0為0px、1為1px、2為2px\A"
+                    "▸ 0無、1靜態、2動態\A" "▸ 0無、1靜態、2動態\A" "▸ 1Tokyo Night、2Firefox Acorn\A"
+                    "▸ 0自動、1Proton、2Nova\A" "▸ 1平面、2內嵌、3凹刻、4無縫\A" "▸ 網址列文字置中顯示\A"
+                    "▸ 0關閉、1圖示、2加懸停邊框、3加文字\A" "▸ 0關閉、1目前分頁、2全部\A"
                     "▸ 1Traffic、2Yosemite、3GTK\A" "▸ 恢復較高的視窗按鈕位置\A" "▸ 縮小視窗按鈕尺寸\A"
                     "▸ 使用精簡版擴充功能面板\A";
             }
@@ -428,13 +496,16 @@
                 "▸ 0 default, 1 filter, 2 chevron\A" "▸ 0 default, 1 brand, 2 browser, 3 sys, 4 flag\A"
                 "▸ 0 classic, 1-10 accent colors\A" "▸ Apply accent color to all icons\A"
                 "▸ Use gradient accent color\A" "▸ 0 panel, 1 logo, 2 chevron\A"
-                "▸ Use active panel color for nav icon\A" "▸ 0 tree, 1 triangle, 2 folder box\A"
-                "▸ 0 none, 1 expand/collapse, 2 + indicator\A" "▸ Center tab group labels\A"
-                "▸ 1 pinned border, 2 pinned background\A" "▸ Add cursor-trail highlight across tabs\A"
-                "▸ 1 Tokyo Night, 2 Firefox Acorn\A" "▸ 1 flat, 2 inset, 3 debossed, 4 seamless\A"
-                "▸ Center URL bar text\A" "▸ 0 off, 1 focused, 2 all outlines\A" "▸ 1 traffic, 2 Yosemite, 3 GTK\A"
-                "▸ Restore higher window control position\A" "▸ Shrink window controls\A"
-                "▸ Use compact extensions panel\A";
+                "▸ Use active panel color for nav icon\A" "▸ 0 hidden, 1 small, 2 large\A"
+                "▸ 0 tree, 1 triangle, 2 folder box\A" "▸ 0 none, 1 expand/collapse, 2 + indicator\A"
+                "▸ Center tab group labels\A" "▸ 0 none, 1 pinned border, 2 pinned background\A"
+                "▸ Add cursor-trail highlight across tabs\A" "▸ 0 active transparent, 1 accent, 2 all tabs filled\A"
+                "▸ 0 auto, 1 Proton, 2 Nova\A" "▸ 0 = 0px, 1 = 1px, 2 = 2px\A" "▸ 0 none, 1 static, 2 animated\A"
+                "▸ 0 none, 1 static, 2 animated\A" "▸ 1 Tokyo Night, 2 Firefox Acorn\A" "▸ 0 auto, 1 Proton, 2 Nova\A"
+                "▸ 1 flat, 2 inset, 3 debossed, 4 seamless\A" "▸ Center URL bar text\A"
+                "▸ 0 off, 1 icons, 2 + hover border, 3 + text\A" "▸ 0 off, 1 focused, 2 all outlines\A"
+                "▸ 1 traffic, 2 Yosemite, 3 GTK\A" "▸ Restore higher window control position\A"
+                "▸ Shrink window controls\A" "▸ Use compact extensions panel\A";
 
             grid-column: 2;
             grid-row: 3 / span 2;
@@ -450,9 +521,10 @@
 
             border-radius: 4px;
             */
-            white-space: pre-wrap;
-            line-height: calc(2.1em + 8px);
+            white-space: pre;
+            line-height: var(--uc-prefs-desc-line-height);
             overflow: hidden;
+            text-overflow: ellipsis;
 
             /*
             background-color: var(--background-color-box);
@@ -472,5 +544,60 @@
                 border-width 0.4s ease,
                 opacity 0.25s ease var(--uc-prefs-desc-delay);
         }
+    }
+
+    /* Firefox v151+ supports CSS anchor positioning. */
+    @supports (anchor-name: --uc-about-config-search) {
+        /* Localized FlexFox hint shown while the about:config search field is empty. */
+        body {
+            --uc-aboutconfig-search-flexfox-hint: "Type `uc.flex` to show all FlexFox preferences";
+        }
+        body:lang(ja) {
+            --uc-aboutconfig-search-flexfox-hint: "`uc.flex` を入力してすべての FlexFox 設定を表示";
+        }
+        body:lang(zh-CN) {
+            --uc-aboutconfig-search-flexfox-hint: "输入 `uc.flex` 可显示全部 FlexFox 偏好设置";
+        }
+        body:lang(zh-tw) {
+            --uc-aboutconfig-search-flexfox-hint: "輸入 `uc.flex` 可顯示全部 FlexFox 偏好設定";
+        }
+        #about-config-search {
+            anchor-name: --uc-about-config-search;
+        }
+        /*
+        #toolbar:has(> #about-config-search:placeholder-shown) {
+            --uc-aboutconfig-search-flexfox-hint-opacity: 1;
+        }
+        */
+        #toolbar {
+            /*
+            --uc-aboutconfig-search-flexfox-hint-opacity: 0;
+            */
+            &::after {
+                content: var(--uc-aboutconfig-search-flexfox-hint);
+                position: absolute;
+                position-anchor: --uc-about-config-search;
+                inset-inline-end: calc(anchor(end) + var(--space-small));
+                inset-block: calc(anchor(start) + 3 * var(--space-xxsmall)) calc(anchor(end) + 3 * var(--space-xxsmall));
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                border: 1px solid transparent;
+                border-radius: var(--border-radius-small);
+                padding-inline: var(--space-small);
+                white-space: nowrap;
+                color: rgb(from var(--focus-outline-color) r g b / calc(alpha * 0.78));
+                background-color: rgb(from var(--focus-outline-color) r g b / calc(alpha * 0.16));
+                pointer-events: none;
+                opacity: var(--uc-aboutconfig-search-flexfox-hint-opacity);
+            }
+        }
+        /* Previous placeholder replacement experiment, retained for reference. */
+        /*
+        #about-config-search::placeholder {
+            color: transparent;
+            text-indent: 32ch;
+        }
+        */
     }
 }

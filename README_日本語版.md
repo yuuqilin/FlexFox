@@ -1,7 +1,7 @@
 ﻿# <img src="https://static.cdnlogo.com/logos/f/26/firefox-preview.svg" width="32" height="32" style="vertical-align: middle;"> FlexFox（日本語版）
 
 <div>
- <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v154-orange?logo=firefox"></a>
+ <a href='https://www.mozilla.org'><img src="https://img.shields.io/badge/Last%20tested%20Firefox-v156-orange?logo=firefox"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/main/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/main"></a>
  <a href='https://github.com/yuuqilin/FlexFox/commits/Beta/'><img src="https://img.shields.io/github/last-commit/yuuqilin/FlexFox/Beta?label=last%20Nightly%20commit&color=purple"></a>
  <a href='https://github.com/yuuqilin/FlexFox/stargazers'><img src='https://img.shields.io/github/stars/yuuqilin/FlexFox?style=social'></a>
@@ -33,7 +33,7 @@ https://github.com/user-attachments/assets/64be5a0e-f97e-4257-aac8-63245791d07b
 
 ## 🆕 最新情報
 
-**🦊 最新バージョン: v6.6.0** — 詳細は[更新履歴](./docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md)をご覧ください。
+**🦊 最新バージョン: v7.0.0** — 詳細は[更新履歴](./docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md)をご覧ください。
 
 <!-- END What's New -->
 

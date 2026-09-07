@@ -50,53 +50,58 @@
             --uc-findbar-outline: #454c6c;
         }
 
-        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
-                -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
-                -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
-                &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-                    --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
-                    --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
+        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+            @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica)) {
+                @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not (-moz-windows-mica)),
+                    -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+                    -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+                    &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                        --lwt-accent-color: rgb(26, 27, 38) /*rgb(28, 27, 34)*/ !important;
+                        --lwt-accent-color-inactive: rgb(31, 30, 37) !important;
 
-                    --uc-urlbar-bg: #0d0d15; /* Background color of the URL bar */
-                    --uc-urldrop-bg: #0d0d15; /* Background color of the expanded URL bar dropdown */
-                    @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-                        --uc-urlbar-bg: /* #121212 */ #191917;
-                        --uc-urldrop-bg: /* #121212 */ #191917;
-                    }
-                    @media -moz-pref("uc.flex.style-urlbar", 3) {
-                        --uc-urlbar-bg: #171722;
-                        --uc-urldrop-bg: #171722;
+                        --uc-urlbar-bg: #0d0d15; /* Background color of the URL bar */
+                        --uc-urldrop-bg: #0d0d15; /* Background color of the expanded URL bar dropdown */
                         @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-                            --uc-urlbar-bg: #201f23;
-                            --uc-urldrop-bg: #201f23;
+                            --uc-urlbar-bg: /* #121212 */ #191917;
+                            --uc-urldrop-bg: /* #121212 */ #191917;
                         }
-                    }
-                    @media -moz-pref("uc.flex.style-urlbar", 4) {
-                        --uc-urlbar-bg: var(--uc-bgcolor);
-                    }
+                        @media -moz-pref("uc.flex.style-urlbar", 3) {
+                            --uc-urlbar-bg: #171722;
+                            --uc-urldrop-bg: #171722;
+                            @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                                --uc-urlbar-bg: #201f23;
+                                --uc-urldrop-bg: #201f23;
+                            }
+                        }
+                        @media -moz-pref("uc.flex.style-urlbar", 4) {
+                            --uc-urlbar-bg: var(--uc-bgcolor);
+                        }
 
-                    --arrowpanel-background: var(
-                        --uc-urlbar-bg
-                    ) !important; /* Toolbar button dropdown background color */
-                    --panel-background-color: var(
-                        --uc-urlbar-bg
-                    ) !important; /* Toolbar button dropdown background color */
-                    @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-                        --arrowpanel-background: #191917 !important;
-                        --panel-background-color: #191917 !important;
-                    }
-                    --arrowpanel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
-                    --panel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
+                        --arrowpanel-background: var(
+                            --uc-urlbar-bg
+                        ) !important; /* Toolbar button dropdown background color */
+                        --panel-background-color: var(
+                            --uc-urlbar-bg
+                        ) !important; /* Toolbar button dropdown background color */
+                        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                            --arrowpanel-background: #191917 !important;
+                            --panel-background-color: #191917 !important;
+                        }
+                        --arrowpanel-border-color: rgb(
+                            55,
+                            55,
+                            55
+                        ) !important; /* Toolbar button dropdown border color */
+                        --panel-border-color: rgb(55, 55, 55) !important; /* Toolbar button dropdown border color */
 
-                    --identity-btn-hover-color: rgba(
-                        117,
-                        117,
-                        117
-                    ) !important; /* Hover color for the URL bar lock icon */
+                        --identity-btn-hover-color: rgba(
+                            117,
+                            117,
+                            117
+                        ) !important; /* Hover color for the URL bar lock icon */
 
-                    /* Unused legacy vars – kept in case fallback is needed */
-                    /*
+                        /* Unused legacy vars – kept in case fallback is needed */
+                        /*
                     --uc-urlbar-border-top: #000; \/* Top border color when the URL bar is focused *\/
                     --uc-urlbar-border-bottom: #404040; \/* Bottom border color when the URL bar is focused *\/
 
@@ -110,6 +115,7 @@
                     --dark-menu-border-color: rgb(55, 55, 55) !important;
                     --dark-menuitem-hover-background-color: rgba(159, 159, 159, 0.35) !important;
                     */
+                    }
                 }
             }
         }
@@ -125,43 +131,44 @@
             --uc-findbar-outline: #a8a8a6;
         }
 
-        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
-                -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
-                -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
-                &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-                    --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
-                    --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
+        @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+            @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica)) {
+                @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not (-moz-windows-mica)),
+                    -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+                    -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+                    &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                        --lwt-accent-color: rgb(241, 245, 249) /*rgb(240, 240, 244)*/ !important;
+                        --lwt-accent-color-inactive: rgb(235, 235, 239) !important;
 
-                    --uc-urlbar-bg: #cbd5e1; /* Background color of the URL bar */
-                    --uc-urldrop-bg: #cbd5e1; /* Background color of the expanded URL bar dropdown */
-                    @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-                        --uc-urlbar-bg: #d9d9d7;
-                        --uc-urldrop-bg: #d9d9d7;
-                    }
-                    @media -moz-pref("uc.flex.style-urlbar", 3) {
-                        --uc-urlbar-bg: #dee5ed;
-                        --uc-urldrop-bg: #dee5ed;
+                        --uc-urlbar-bg: #cbd5e1; /* Background color of the URL bar */
+                        --uc-urldrop-bg: #cbd5e1; /* Background color of the expanded URL bar dropdown */
                         @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-                            --uc-urlbar-bg: #e7e8e7;
-                            --uc-urldrop-bg: #e7e8e7;
+                            --uc-urlbar-bg: #d9d9d7;
+                            --uc-urldrop-bg: #d9d9d7;
                         }
-                    }
-                    @media -moz-pref("uc.flex.style-urlbar", 4) {
-                        --uc-urlbar-bg: var(--uc-bgcolor);
-                    }
+                        @media -moz-pref("uc.flex.style-urlbar", 3) {
+                            --uc-urlbar-bg: #dee5ed;
+                            --uc-urldrop-bg: #dee5ed;
+                            @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                                --uc-urlbar-bg: #e7e8e7;
+                                --uc-urldrop-bg: #e7e8e7;
+                            }
+                        }
+                        @media -moz-pref("uc.flex.style-urlbar", 4) {
+                            --uc-urlbar-bg: var(--uc-bgcolor);
+                        }
 
-                    --arrowpanel-background: #e2e8f0 !important; /* Toolbar button dropdown background color */
-                    --panel-background-color: #e2e8f0 !important; /* Toolbar button dropdown background color */
-                    @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-                        --arrowpanel-background: #f8f8f8 !important;
-                        --panel-background-color: #f8f8f8 !important;
-                    }
+                        --arrowpanel-background: #e2e8f0 !important; /* Toolbar button dropdown background color */
+                        --panel-background-color: #e2e8f0 !important; /* Toolbar button dropdown background color */
+                        @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
+                            --arrowpanel-background: #f8f8f8 !important;
+                            --panel-background-color: #f8f8f8 !important;
+                        }
 
-                    --identity-btn-hover-color: white !important; /* Hover color for the URL bar lock icon */
+                        --identity-btn-hover-color: white !important; /* Hover color for the URL bar lock icon */
 
-                    /* Unused legacy vars – kept in case fallback is needed */
-                    /*
+                        /* Unused legacy vars – kept in case fallback is needed */
+                        /*
                     --uc-urlbar-border-top: #9ca3af; \/* Top border color when the URL bar is focused *\/
                     --uc-urlbar-border-bottom: #fff; \/* Bottom border color when the URL bar is focused *\/
 
@@ -169,6 +176,7 @@
                     --button-hover-bgcolor: #cbd5e1 !important;
                     --button-active-bgcolor: #cbd5e1 !important;
                     */
+                    }
                 }
             }
         }
@@ -177,32 +185,59 @@
 
     /* FlexFox UI color tokens */
     /**
-     * Derived from Firefox's built-in color tokens.
-     * Some original OKLCH values fall outside the Rec.2020 gamut
-     * and cannot be displayed accurately on any device.
-     * Since these are converted to fallback sRGB in practice,
-     * RGB values are used here to reduce conversion overhead.
+     * Derived from Firefox's built-in color tokens, grouped into Proton Tokens
+     * and Nova Tokens below.
+     *
+     * Proton Tokens retain Firefox's original OKLCH definitions instead of
+     * using precomputed sRGB fallbacks. Some original values are outside every
+     * display gamut, so Firefox performs the final gamut mapping at render time.
      */
-    --uc-color-light-red: #a82037; /* --color-red-70 */
-    --uc-color-light-orange: #d05500; /* --color-orange-60 */
-    --uc-color-light-yellow: #8a6200; /* --color-yellow-60 */
-    --uc-color-light-green: #007a34; /* --color-green-70 */
-    --uc-color-light-cyan: #007992; /* --color-cyan-70 */
-    --uc-color-light-blue: #0057c0; /* --color-blue-70 */
-    --uc-color-light-violet: #5e46bf; /* --color-violet-70 */
-    --uc-color-light-purple: #8634a3; /* --color-purple-70 */
-    --uc-color-light-pink: #d0457c; /* --color-pink-50 */
-    --uc-color-light-gray: #4b4d53; /* --color-gray-70 */
-    --uc-color-dark-red: #fe4f6d; /* --color-red-50 */
-    --uc-color-dark-orange: #fd7700; /* --color-orange-40 */
-    --uc-color-dark-yellow: #da9900; /* --color-yellow-40 */
-    --uc-color-dark-green: #03b432; /* --color-green-50 */
-    --uc-color-dark-cyan: #00b5d2; /* --color-cyan-50 */
-    --uc-color-dark-blue: #3e98ff; /* --color-blue-50 */
-    --uc-color-dark-violet: #a37cff; /* --color-violet-50 */
-    --uc-color-dark-purple: #c872ec; /* --color-purple-40 */
-    --uc-color-dark-pink: #f66098; /* --color-pink-40 */
-    --uc-color-dark-gray: #909299; /* --color-gray-60 */
+    /* Proton Tokens */
+    --uc-color-light: #e64886; /* #ea4c89 */
+    --uc-color-light-red: oklch(55% 0.21 15); /* --color-red-60 */ /* sRGB #cf1748 */
+    --uc-color-light-orange: oklch(58% 0.21 50); /* --color-orange-60 */ /* Unavailable on any device */
+    --uc-color-light-yellow: oklch(58% 0.24 90); /* --color-yellow-60 */ /* Unavailable on any device */
+    --uc-color-light-green: oklch(55% 0.21 145); /* --color-green-60 */ /* P3 */
+    --uc-color-light-cyan: oklch(55% 0.21 205); /* --color-cyan-60 */ /* Unavailable on any device */
+    --uc-color-light-blue: oklch(55% 0.24 260); /* --color-blue-60 */ /* P3 */
+    --uc-color-light-violet: oklch(55% 0.24 290); /* --color-violet-60 */ /* sRGB #7844f0 */
+    --uc-color-light-purple: oklch(55% 0.21 315); /* --color-purple-60 */ /* sRGB #9e3bc3 */
+    --uc-color-light-pink: oklch(55% 0.21 360); /* --color-pink-60 */ /* sRGB #c91a6d */
+    --uc-color-light-gray: #5b5b66; /* --color-gray-70 */ /* sRGB #4b4d53 */
+    --uc-color-dark: #9c66ff; /* #9059ff */
+    --uc-color-dark-red: oklch(69% 0.19 15); /* --color-red-40 */ /* sRGB #fa5e75 */
+    --uc-color-dark-orange: oklch(72% 0.19 50); /* --color-orange-40 */ /* sRGB #fe7802 */
+    --uc-color-dark-yellow: oklch(72% 0.22 90); /* --color-yellow-40 */ /* Unavailable on any device */
+    --uc-color-dark-green: oklch(69% 0.19 145); /* --color-green-40 */ /* sRGB #37b847 */
+    --uc-color-dark-cyan: oklch(69% 0.19 205); /* --color-cyan-40 */ /* Rec2020 */
+    --uc-color-dark-blue: oklch(69% 0.22 260); /* --color-blue-40 */ /* Unavailable on any device */
+    --uc-color-dark-violet: oklch(69% 0.22 290); /* --color-violet-40 */ /* Unavailable on any device */
+    --uc-color-dark-purple: oklch(69% 0.19 315); /* --color-purple-40 */ /* sRGB #c671eb */
+    --uc-color-dark-pink: oklch(69% 0.19 360); /* --color-pink-40 */ /* sRGB #f45e96 */
+    --uc-color-dark-gray: #8f8f9d; /* --color-gray-60 */ /* #909299 */
+    /* Nova Tokens */
+    @media -moz-pref("uc.flex.style-sidebar-stripe-accent-color-system", 2) {
+        --uc-color-light-red: #c52d4f; /* --color-red-50 */
+        --uc-color-light-orange: #cd4208; /* --color-orange-50 */
+        --uc-color-light-yellow: #b26100; /* --color-yellow-50 */
+        --uc-color-light-green: #008865; /* --color-green-50 */
+        --uc-color-light-cyan: #0a809f; /* --color-cyan-50 */
+        --uc-color-light-blue: #455fe7; /* --color-blue-50 */
+        --uc-color-light-violet: #764edd; /* --color-violet-50 */
+        --uc-color-light-purple: #9540c8; /* --color-purple-50 */
+        --uc-color-light-pink: #b32e9f; /* --color-pink-50 */
+        --uc-color-light-gray: #515054; /* --color-gray-55 */
+        --uc-color-dark-red: #ed566e; /* --color-red-40 */
+        --uc-color-dark-orange: #f4682c; /* --color-orange-40 */
+        --uc-color-dark-yellow: #db820e; /* --color-yellow-40 */
+        --uc-color-dark-green: #11ae84; /* --color-green-40 */
+        --uc-color-dark-cyan: #10a4ca; /* --color-cyan-40 */
+        --uc-color-dark-blue: #5a87fd; /* --color-blue-40 */
+        --uc-color-dark-violet: #9871ff; /* --color-violet-40 */
+        --uc-color-dark-purple: #b864ee; /* --color-purple-40 */
+        --uc-color-dark-pink: #db54bf; /* --color-pink-40 */
+        --uc-color-dark-gray: #949297; /* --color-gray-40 */
+    }
     /**
      * These color tokens are defined separately for light and dark mode instead of
      * using `light-dark()`. When `light-dark()` is combined with relative colors,
@@ -211,6 +246,7 @@
      * avoids that bug.
      */
     @media (prefers-color-scheme: light) {
+        --uc-color-light-dark-0: var(--uc-color-light);
         --uc-color-light-dark-1: var(--uc-color-light-red);
         --uc-color-light-dark-2: var(--uc-color-light-orange);
         --uc-color-light-dark-3: var(--uc-color-light-yellow);
@@ -221,9 +257,9 @@
         --uc-color-light-dark-8: var(--uc-color-light-purple);
         --uc-color-light-dark-9: var(--uc-color-light-pink);
         --uc-color-light-dark-10: var(--uc-color-light-gray);
-        --uc-color-light-dark-0: #ea4c89;
     }
     @media (prefers-color-scheme: dark) {
+        --uc-color-light-dark-0: var(--uc-color-dark);
         --uc-color-light-dark-1: var(--uc-color-dark-red);
         --uc-color-light-dark-2: var(--uc-color-dark-orange);
         --uc-color-light-dark-3: var(--uc-color-dark-yellow);
@@ -234,7 +270,6 @@
         --uc-color-light-dark-8: var(--uc-color-dark-purple);
         --uc-color-light-dark-9: var(--uc-color-dark-pink);
         --uc-color-light-dark-10: var(--uc-color-dark-gray);
-        --uc-color-light-dark-0: #9059ff;
     }
 
     /* FlexFox UI gradient color tokens */
@@ -245,6 +280,9 @@
      * while other colors remain in sRGB.
      * Dark mode uses larger lightness differences for added vibrancy.
      */
+    /* 0. Default */
+    --uc-gradient-start-0: light-dark(oklch(65% 0.42 340), oklch(55% 0.45 350));
+    --uc-gradient-end-0: light-dark(oklch(78% 0.42 200), oklch(95% 0.4 95));
     /* 1. Red */
     --uc-gradient-start-1: light-dark(oklch(0.566 0.1816 5.04), oklch(0.6782 0.2099 24.69));
     --uc-gradient-end-1: light-dark(oklch(0.5988 0.1558 33.06), oklch(0.8556 0.1451 81.73));
@@ -275,9 +313,10 @@
     /* 10. Gray */
     --uc-gradient-start-10: light-dark(oklch(0.5392 0.0706 303.2), oklch(0.7677 0.0522 285.11));
     --uc-gradient-end-10: light-dark(oklch(0.5556 0.0678 269.9), oklch(0.7329 0.0734 299.86));
-    /* 0. Default */
-    --uc-gradient-start-0: light-dark(oklch(65% 0.42 340), oklch(55% 0.45 350));
-    --uc-gradient-end-0: light-dark(oklch(78% 0.42 200), oklch(95% 0.4 95));
+
+    @media -moz-pref("uc.flex.~dev-disable-inactive-titlebar-opacity") {
+        --inactive-titlebar-opacity: 1 !important;
+    }
 
     /* 🔼 End of color scheme and theme tokens */
 
@@ -314,37 +353,29 @@
     --uc-sidebar-header-stripe: var(--uc-color-light-dark-0);
 
     /* Gradient colors of the sidebar stripe  */
-    @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
-        /*
-        --uc-sidebar-stripe-gradient-start: oklch(70% 0.5 340);
-        --uc-sidebar-stripe-gradient-end: oklch(90% 0.5 200);
-        */
-        --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-0);
-        --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-0);
-        /**
-         * Sidebar stripe gradients are defined in OKLCH
-         * but applied to very small stripes and icons.
-         * Interpolating in OKLCH can cause banding,
-         * so gradients are interpolated in OKLab for smoother results.
-         */
+    /*
+    --uc-sidebar-stripe-gradient-start: oklch(70% 0.5 340);
+    --uc-sidebar-stripe-gradient-end: oklch(90% 0.5 200);
+    */
+    --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-0);
+    --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-0);
+    /**
+    * Sidebar stripe gradients are defined in OKLCH
+    * but applied to very small stripes and icons.
+    * Interpolating in OKLCH can cause banding,
+    * so gradients are interpolated in OKLab for smoother results.
+    */
+    --uc-sidebar-stripe-gradient: linear-gradient(
+        20deg in oklab,
+        var(--uc-sidebar-stripe-gradient-start) 0%,
+        var(--uc-sidebar-stripe-gradient-end) 100%
+    );
+    @media -moz-pref("uc.flex.style-sidebar-stripe-color") {
         --uc-sidebar-stripe-gradient: linear-gradient(
-            to top right in oklab,
-            var(--uc-sidebar-stripe-gradient-start) 0%,
-            var(--uc-sidebar-stripe-gradient-end) 100%
+            22.5deg in oklab,
+            var(--uc-sidebar-stripe-gradient-end) 0%,
+            var(--uc-sidebar-stripe-gradient-start) 100%
         );
-        @media -moz-pref("uc.flex.style-sidebar-stripe-color") {
-            --uc-sidebar-stripe-gradient: linear-gradient(
-                60deg in oklab,
-                var(--uc-sidebar-stripe-gradient-end) 0%,
-                var(--uc-sidebar-stripe-gradient-start) 100%
-            );
-        }
-    }
-
-    /* !NOVA: */
-    @media -moz-pref("browser.nova.enabled") {
-        --uc-sidebar-stripe-gradient-start: var(--color-violet-30);
-        --uc-sidebar-stripe-gradient-end: var(--color-orange-30);
     }
 
     /* Color for popup menu icons */
@@ -390,7 +421,7 @@
     /* Bookmark Star button */
     --uc-bookmark-star-color: var(--uc-sidebar-header-stripe); /* Color of the bookmark star icon in the address bar */
     --uc-bookmark-star-color-mix: 0.77; /* Blend ratio for the bookmark star icon and background color */
-    @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+    @media -moz-pref("uc.flex.style-urlbar-gradient") {
         --uc-bookmark-star-color-mix: 1;
         @media (prefers-color-scheme: dark) {
             --uc-bookmark-star-color-mix: 0.87;
@@ -483,113 +514,147 @@
     }
 
     /* Max visible rows in native vertical pinned tabs and Sidebery (before scrolling) */
-    --uc-vt-pinned-tab-max-rows: 4;
+    --uc-vt-pinned-tab-max-row-count: 4;
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 2) {
-        --uc-vt-pinned-tab-max-rows: 2;
+        --uc-vt-pinned-tab-max-row-count: 2;
     }
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 3) {
-        --uc-vt-pinned-tab-max-rows: 3;
+        --uc-vt-pinned-tab-max-row-count: 3;
     }
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 5) {
-        --uc-vt-pinned-tab-max-rows: 5;
+        --uc-vt-pinned-tab-max-row-count: 5;
     }
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 6) {
-        --uc-vt-pinned-tab-max-rows: 6;
+        --uc-vt-pinned-tab-max-row-count: 6;
     }
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 7) {
-        --uc-vt-pinned-tab-max-rows: 7;
+        --uc-vt-pinned-tab-max-row-count: 7;
     }
     @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 8) {
-        --uc-vt-pinned-tab-max-rows: 8;
+        --uc-vt-pinned-tab-max-row-count: 8;
     }
 
-    /* Tabs per row for native pinned tabs and Sidebery (controlled by per-tab percentage width) */
-    --uc-vt-pinned-tab-max-columns: 19%;
-    --uc-ht-pinned-tab-max-columns: 10;
+    /* Maximum pinned tabs per row in native vertical and horizontal tab strips. */
+    --uc-vt-pinned-tab-max-column-count: 5;
+    --uc-ht-pinned-tab-max-column-count: 10;
     @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 4) {
-        --uc-vt-pinned-tab-max-columns: 24%;
-        --uc-ht-pinned-tab-max-columns: 8;
+        --uc-vt-pinned-tab-max-column-count: 4;
+        --uc-ht-pinned-tab-max-column-count: 8;
     }
     @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 3) {
-        --uc-vt-pinned-tab-max-columns: 32%;
-        --uc-ht-pinned-tab-max-columns: 6;
+        --uc-vt-pinned-tab-max-column-count: 3;
+        --uc-ht-pinned-tab-max-column-count: 6;
     }
     @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 2) {
-        --uc-vt-pinned-tab-max-columns: 49%;
-        --uc-ht-pinned-tab-max-columns: 4;
+        --uc-vt-pinned-tab-max-column-count: 2;
+        --uc-ht-pinned-tab-max-column-count: 4;
     }
     @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 1) {
-        --uc-vt-pinned-tab-max-columns: 100%;
-        --uc-ht-pinned-tab-max-columns: 2;
+        --uc-vt-pinned-tab-max-column-count: 1;
+        --uc-ht-pinned-tab-max-column-count: 2;
     }
 
-    /* Blend ratios for vertical tab colors and background color */
-    --uc-vt-pinned-tab-border-color-mix: 70%;
-    --uc-vt-pinned-tab-unloaded-border-color-mix: 28%;
-    --uc-vt-active-tab-color-mix: 37%;
+    /* Blend ratios for native tab colors and backgrounds */
+    --uc-pinned-tab-border-color-mix: 70%;
+    --uc-pinned-tab-unloaded-border-color-mix: 28%;
+    --uc-active-tab-color-mix: 37%;
     @media (prefers-color-scheme: dark) {
-        --uc-vt-active-tab-color-mix: 50%;
+        --uc-active-tab-color-mix: 50%;
     }
 
     /* Border color for pinned tabs */
-    --uc-vt-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
+    --uc-pinned-tab-border-color: light-dark(rgba(0, 0, 0, 0.22), rgba(172, 112, 255, 0.7));
     /* Border color for unloaded pinned tabs */
-    --uc-vt-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
+    --uc-pinned-tab-unloaded-border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(172, 112, 255, 0.28));
     /* Apply the sidebar stripe color to pinned tab borders in dark mode */
     @media -moz-pref("uc.flex.style-sidebar-stripe-color") {
         @media (prefers-color-scheme: dark) {
-            --uc-vt-pinned-tab-border-color: rgb(
-                from var(--uc-sidebar-header-stripe) r g b / var(--uc-vt-pinned-tab-border-color-mix)
+            --uc-pinned-tab-border-color: rgb(
+                from var(--uc-sidebar-header-stripe) r g b / var(--uc-pinned-tab-border-color-mix)
             );
-            --uc-vt-pinned-tab-unloaded-border-color: rgb(
-                from var(--uc-sidebar-header-stripe) r g b / var(--uc-vt-pinned-tab-unloaded-border-color-mix)
+            --uc-pinned-tab-unloaded-border-color: rgb(
+                from var(--uc-sidebar-header-stripe) r g b / var(--uc-pinned-tab-unloaded-border-color-mix)
             );
         }
     }
     /* Color for the splitter in vertical tabs */
-    --uc-vt-splitter-color: var(--uc-vt-pinned-tab-border-color);
+    --uc-vt-splitter-color: var(--uc-pinned-tab-border-color);
 
     /* Background color for pinned tabs */
-    --uc-vt-pinned-tab-bgcolor: light-dark(
-        rgb(from var(--uc-vt-tab-bgcolor) r g b / 0.9),
+    --uc-pinned-tab-bgcolor: light-dark(
+        rgb(from var(--uc-tab-bgcolor) r g b / 0.9),
         rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 87%, white) r g b / 0.2)
     );
-    --uc-vt-pinned-tab-unloaded-bgcolor: light-dark(
-        rgb(from var(--uc-vt-tab-bgcolor) r g b / 0.1),
+    --uc-pinned-tab-unloaded-bgcolor: light-dark(
+        rgb(from var(--uc-tab-bgcolor) r g b / 0.1),
         rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 87%, white) r g b / 0.05)
     );
-    --uc-vt-pinned-tab-hover-bgcolor: light-dark(
-        rgb(from color-mix(in srgb, var(--uc-vt-tab-bgcolor) 77%, black) r g b / 0.3),
-        rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.3)
-    );
-    --uc-vt-pinned-tab-box-shadow: 0px 0px 2px color-mix(in srgb, var(--uc-vt-tab-bgcolor) 25%, black);
+    --uc-pinned-tab-box-shadow: 0px 0px 2px color-mix(in srgb, var(--uc-tab-bgcolor) 25%, black);
     @media (prefers-color-scheme: dark) {
-        --uc-vt-pinned-tab-box-shadow: 0px 0px 3px color-mix(in srgb, var(--uc-sidebar-header-stripe) 15%, white);
+        --uc-pinned-tab-box-shadow: 0px 0px 3px color-mix(in srgb, var(--uc-sidebar-header-stripe) 15%, white);
     }
     /* Background color for regular tabs */
-    --uc-vt-tab-bgcolor: #cbd5e1;
+    --uc-tab-bgcolor: #cbd5e1;
     @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
-        --uc-vt-tab-bgcolor: #d9d8dd;
+        --uc-tab-bgcolor: #d9d8dd;
     }
-    --uc-vt-tab-hover-bgcolor: var(--uc-vt-pinned-tab-hover-bgcolor);
-    /* Background color for the tab split view */
-    --uc-split-view-bgcolor: var(--uc-vt-pinned-tab-bgcolor);
+    /*
+    --uc-tab-hover-bgcolor: light-dark(
+        rgb(from color-mix(in srgb, var(--uc-tab-bgcolor) 77%, black) r g b / 0.3),
+        rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.3)
+    );
+    */
+    --uc-tab-hover-bgcolor: light-dark(
+        rgba(117, 102, 159, 0.25),
+        rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.3)
+    );
+    --uc-tab-fill-bgcolor: light-dark(rgba(70, 70, 70, 0.11), rgba(170, 170, 170, 0.14));
+    --uc-pinned-tab-fill-bgcolor: light-dark(rgba(70, 70, 70, 0.14), rgba(170, 170, 170, 0.18));
+    /* Warning background behind native tab close icons on hover */
+    --uc-tab-close-button-warning-bgcolor: light-dark(hsl(350 60% 64%), hsl(0 60% 50%));
 
+    /* Background color for the tab split view */
+    --uc-split-view-bgcolor: var(--uc-pinned-tab-bgcolor);
+
+    /* Width of the active tab border */
+    --uc-active-tab-border-width: 2px;
+    @media -moz-pref("uc.flex.style-tab-items-border-width", 0) {
+        --uc-active-tab-border-width: 0px;
+    }
+    @media -moz-pref("uc.flex.style-tab-items-border-width", 1) {
+        --uc-active-tab-border-width: 1px;
+    }
+    /* Keep active and selected tabs identifiable when both their background fill and configured border are disabled. */
+    @media -moz-pref("uc.flex.style-tab-items-background-fill", 0) and -moz-pref("uc.flex.style-tab-items-border-width", 0) {
+        --uc-active-tab-border-width: 1px;
+    }
     /* Background color for the active tab */
-    --uc-vt-active-tab-bgcolor: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-vt-active-tab-color-mix));
+    --uc-active-tab-bgcolor: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-active-tab-color-mix));
+    @media -moz-pref("uc.flex.style-tab-items-background-fill", 0) {
+        --uc-active-tab-bgcolor: transparent;
+    }
     /* Inner border shadow (outline) for the active tab */
-    --uc-vt-active-tab-border-shadow: inset 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+    --uc-active-tab-border-shadow: inset 0 0 0 var(--uc-active-tab-border-width)
+        light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
     /* Drop shadow beneath the active tab */
-    --uc-vt-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
-    @media -moz-pref("uc.flex.style-tab-items", 2) {
-        --uc-vt-active-tab-border-shadow: inset 0 0 0 1px
-            color-mix(in srgb, var(--uc-sidebar-header-stripe) 40%, black 10%);
-        --uc-vt-active-tab-drop-shadow: inset 0 0px 2px
-            color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, black 10%);
-        @media (prefers-color-scheme: dark) {
-            --uc-vt-active-tab-border-shadow: inset 0 0 0 1px var(--uc-vt-pinned-tab-border-color);
-            --uc-vt-active-tab-drop-shadow: 0px 0px 3px -1px
-                color-mix(in srgb, var(--uc-sidebar-header-stripe) 75%, white);
+    --uc-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
+    @media not -moz-pref("uc.flex.style-tab-items", 0) {
+        /* Use sidebar-stripe colors for the active tab shadow border when a border is present. */
+        @media not -moz-pref("uc.flex.style-tab-items-border-width", 0),
+            -moz-pref("uc.flex.style-tab-items-border-width", 0) and -moz-pref("uc.flex.style-tab-items-background-fill", 0) {
+            /* In light mode, keep style 1 shadows neutral to match the borders of unselected pinned tabs. */
+            @media not -moz-pref("uc.flex.style-tab-items", 1) {
+                --uc-active-tab-border-shadow: inset 0 0 0 var(--uc-active-tab-border-width)
+                    color-mix(in srgb, var(--uc-sidebar-header-stripe) 40%, black 10%);
+                --uc-active-tab-drop-shadow: inset 0 0px 2px
+                    color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, black 10%);
+            }
+            @media (prefers-color-scheme: dark) {
+                --uc-active-tab-border-shadow: inset 0 0 0 var(--uc-active-tab-border-width)
+                    var(--uc-pinned-tab-border-color);
+                --uc-active-tab-drop-shadow: 0px 0px 3px -1px
+                    color-mix(in srgb, var(--uc-sidebar-header-stripe) 75%, white);
+            }
         }
     }
     /* Box shadow for the tab group */
@@ -608,6 +673,12 @@
         }
     }
 
+    --uc-tab-gradient-lightness-scale: 1.22;
+    --uc-tab-gradient-alpha: 0.91;
+    @media (prefers-color-scheme: dark) {
+        --uc-tab-gradient-lightness-scale: 0.77;
+    }
+
     /* Use FlexFox UI color tokens for the sidebar stripe */
     @media -moz-pref("uc.flex.style-sidebar-stripe-color", 1) {
         --uc-sidebar-header-stripe: var(--uc-color-light-dark-1);
@@ -618,7 +689,7 @@
         --uc-sidebar-header-stripe: var(--uc-color-light-dark-2);
         --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-2);
         --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-2);
-        --uc-vt-pinned-tab-border-color-mix: 65%;
+        --uc-pinned-tab-border-color-mix: 65%;
     }
     @media -moz-pref("uc.flex.style-sidebar-stripe-color", 3) {
         --uc-sidebar-header-stripe: var(--uc-color-light-dark-3);
@@ -654,14 +725,14 @@
         --uc-sidebar-header-stripe: var(--uc-color-light-dark-9);
         --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-9);
         --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-9);
-        --uc-vt-pinned-tab-border-color-mix: 65%;
+        --uc-pinned-tab-border-color-mix: 65%;
     }
     @media -moz-pref("uc.flex.style-sidebar-stripe-color", 10) {
         --uc-sidebar-header-stripe: var(--uc-color-light-dark-10);
         --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-10);
         --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-10);
-        --uc-vt-pinned-tab-border-color-mix: 60%;
-        --uc-vt-pinned-tab-unloaded-border-color-mix: 23%;
+        --uc-pinned-tab-border-color-mix: 60%;
+        --uc-pinned-tab-unloaded-border-color-mix: 23%;
     }
 
     /* Apply the sidebar stripe color to all icons */
@@ -677,9 +748,7 @@
         --uc-bookmark-folder-color-9: var(--uc-color-light-dark-9);
         --uc-bookmark-folder-color-10: var(--uc-color-light-dark-10);
 
-        --uc-vt-splitter-color: rgb(
-            from var(--uc-sidebar-header-stripe) r g b / var(--uc-vt-pinned-tab-border-color-mix)
-        );
+        --uc-vt-splitter-color: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-pinned-tab-border-color-mix));
         /*
         --panel-separator-color: rgb(
             from var(--uc-sidebar-header-stripe) r g b / var(--uc-flexfox-logo-color-mix)
@@ -811,8 +880,42 @@
     }
 
     /* Corner radius settings for the urlbar, searchbar, findbar, and their icons */
+    --button-border-radius: 8px !important;
+    --panel-menuitem-border-radius: 4px !important;
     --uc-findbar-outer-border-radius: 8px;
     --uc-findbar-inner-border-radius: 5px;
+    --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 2px);
+    --uc-sidebar-stripe-border-radius: 0px;
+    @media -moz-pref("browser.nova.enabled") {
+        --button-border-radius: 24px !important;
+        --panel-menuitem-border-radius: 16px !important;
+        --uc-findbar-outer-border-radius: 20px;
+        --uc-findbar-inner-border-radius: 16px;
+        --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 4px);
+        --uc-sidebar-stripe-border-radius: 24px;
+    }
+    @media -moz-pref("uc.flex.style-toolbar-items-border-radius", 1) {
+        --button-border-radius: 8px !important;
+        --panel-menuitem-border-radius: 4px !important;
+        --uc-findbar-outer-border-radius: 8px;
+        --uc-findbar-inner-border-radius: 5px;
+        --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 2px);
+        --uc-sidebar-stripe-border-radius: 0px;
+    }
+    @media -moz-pref("uc.flex.style-toolbar-items-border-radius", 2) {
+        --button-border-radius: 24px !important;
+        --panel-menuitem-border-radius: 16px !important;
+        --uc-findbar-outer-border-radius: 20px;
+        --uc-findbar-inner-border-radius: 16px;
+        --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 4px);
+        --uc-sidebar-stripe-border-radius: 24px;
+    }
+
+    @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
+        --uc-findbar-outer-border-radius: 4px;
+        --uc-findbar-inner-border-radius: 4px;
+    }
+
     @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style"),
         -moz-pref("uc.flex.revert-to-original-flat-corner-style", 3) {
         --uc-urlbar-border-radius: 30px;
@@ -829,6 +932,9 @@
         --toolbarbutton-border-radius: 4px !important;
         */
         --button-border-radius: 4px !important;
+        --panel-menuitem-border-radius: 4px !important;
+        --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 2px);
+        --uc-sidebar-stripe-border-radius: 0px;
         /*
         --border-radius-medium: 4px !important;
         --arrowpanel-border-radius: 8px;
@@ -838,9 +944,59 @@
         */
     }
 
-    @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
-        --uc-findbar-outer-border-radius: 4px;
-        --uc-findbar-inner-border-radius: 4px;
+    /* !NOVA: Corner radius for tab-shaped surfaces in native tabs. */
+    --uc-tab-border-radius: 4px;
+    --uc-tab-button-border-radius: 8px;
+    @media -moz-pref("browser.nova.enabled") {
+        --uc-tab-border-radius: 24px;
+        --uc-tab-button-border-radius: 24px;
+    }
+    @media -moz-pref("uc.flex.style-tab-items-border-radius", 1) {
+        --uc-tab-border-radius: 4px;
+        --uc-tab-button-border-radius: 8px;
+    }
+    @media -moz-pref("uc.flex.style-tab-items-border-radius", 2) {
+        --uc-tab-border-radius: 24px;
+        --uc-tab-button-border-radius: 24px;
+    }
+
+    /* Assets and geometry for native tab close buttons. */
+    --uc-tab-close-image: url("../icons/tab-close/tab-close.svg");
+    --uc-tab-close-button-width: 28px;
+    --uc-tab-close-button-height: 28px;
+    --uc-tab-close-button-padding: 8px;
+    --uc-tab-close-warning-size: 18px;
+    --uc-tab-close-button-opacity: 0.8;
+    @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 0) {
+        --uc-tab-close-button-opacity: 1;
+    }
+    @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 2) {
+        --uc-tab-close-button-width: 30px;
+        --uc-tab-close-button-height: var(--tab-min-height);
+        --uc-tab-close-button-padding: 9px;
+        --uc-tab-close-warning-size: 20px;
+    }
+    @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
+        -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
+        /* External SVG images cannot evaluate preferences from the chrome document, so select the rounded asset here. */
+        --uc-tab-close-image: url("../icons/tab-close/tab-close-rounded.svg");
+        @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 2) {
+            --uc-tab-close-button-height: var(--uc-tab-close-button-width);
+        }
+    }
+    .tab-close-button {
+        --uc-tab-close-margin-inline-end: -5px;
+        @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 2) {
+            --uc-tab-close-margin-inline-end: calc(-1 * var(--tab-inline-padding));
+        }
+        @media -moz-pref("sidebar.verticalTabs") {
+            --uc-tab-close-margin-inline-end: -4px;
+            @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 2) {
+                --uc-tab-close-margin-inline-end: calc(
+                    -1 * (var(--tab-inline-padding) - var(--tab-inner-inline-margin))
+                );
+            }
+        }
     }
 
     /* Adjusts background darkness behind the urlbar popup. Higher values = darker background. */
@@ -1331,11 +1487,36 @@
     /* !NOVA: */
     --chrome-window-gap: 0px !important;
     --chrome-block-radius: 0px !important;
-    --tab-group-label-size: 24px !important;
+    /* !NOVA: Firefox v156 scopes these variables to #tabbrowser-tabs, so override them here instead of at :root. */
+    #tabbrowser-tabs[orient="vertical"] {
+        --tab-group-label-hover-inset: 0 !important;
+        --tab-group-label-size: 24px !important;
+        --uc-tab-group-label-native-size: calc(var(--tab-min-height) - 2 * var(--dimension-2));
+    }
     --tab-group-label-padding: 4px !important;
-    --tab-border-color-selected-leading: var(--uc-sidebar-stripe-gradient-start) !important;
-    --tab-border-color-selected-trailing: var(--uc-sidebar-stripe-gradient-end) !important;
-    --toolbar-field-background-color: light-dark(rgba(0, 0, 0, 0.05), var(--color-black-alpha-30)) !important;
+    --tab-border-color-selected-leading: #b89cff;
+    --tab-border-color-selected-trailing: #ff9565;
+    @media -moz-pref("uc.flex.style-sidebar-stripe-color", 1),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 2),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 3),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 4),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 5),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 6),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 7),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 8),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 9),
+        -moz-pref("uc.flex.style-sidebar-stripe-color", 10) {
+        --tab-border-color-selected-leading: var(--uc-sidebar-stripe-gradient-start) !important;
+        --tab-border-color-selected-trailing: var(--uc-sidebar-stripe-gradient-end) !important;
+    }
+    --tab-border-color-accent: linear-gradient(
+        96deg,
+        var(--tab-border-color-selected-leading) 20.68%,
+        var(--tab-border-color-selected-trailing) 79.34%
+    );
+    --toolbar-field-background-color: light-dark(rgba(0, 0, 0, 0.1), var(--color-black-alpha-30)) !important;
+    /* Always use Nova UI colors for tab hover backgrounds */
+    --tab-background-color-hover: light-dark(rgba(117, 102, 159, 0.25), rgba(182, 170, 217, 0.25)) !important;
 
     --uc-toolbar-bgcolor: var(--uc-bgcolor); /* Internal fallback; must match --uc-bgcolor */
     --uc-sidebar-stripe-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
@@ -1389,7 +1570,13 @@
         }
     }
 
+    /* Toolbar stacking order: #PersonalToolbar = 1, #nav-bar = base + 1 = 2, #TabsToolbar = base + 2 = 3. */
+    --uc-toolbar-z-index-base: 1;
     /* Toolbar sizing */
+    @media not -moz-pref("sidebar.verticalTabs") {
+        --tab-min-height: 32px !important;
+        --tab-margin-block: 6px !important;
+    }
     --uc-tabstoolbar-height: calc(2 * var(--tab-margin-block) + var(--tab-min-height));
     #urlbar-container,
     #urlbar {
@@ -1502,8 +1689,8 @@
     --uc-searchbar-bgcolor: rgb(from var(--uc-urlbar-bg) r g b / calc(alpha * 0.5));
 
     /* Make the urlbar background transparent when Mica or wallpaper is enabled */
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         --uc-sidebar-header-bgcolor: transparent;
         @media -moz-pref("uc.flex.style-urlbar", 4) {
@@ -1545,19 +1732,22 @@
         --uc-findbar-bgcolor: var(--lwt-accent-color-inactive, var(--lwt-accent-color));
     }
 
+    /* Lighten the background color of the identity button to increase visual distinction */
+    --uc-identity-btn-bgcolor: light-dark(
+        var(--uc-toolbar-bgcolor),
+        color-mix(in srgb, var(--uc-toolbar-bgcolor) 92%, white)
+    );
+
     /* Override the default background color with a custom value when add-on color changes are not allowed */
-    @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
-        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
-            -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
-            -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
-            &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-                /* Lighten the background color of the identity button to increase visual distinction */
-                --uc-identity-btn-bgcolor: light-dark(
-                    var(--uc-toolbar-bgcolor),
-                    color-mix(in srgb, var(--uc-toolbar-bgcolor) 92%, white)
-                );
-                --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);
-                --uc-sidebar-header-bgcolor: var(--uc-toolbar-bgcolor);
+    @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+        @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica)) {
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not (-moz-windows-mica)),
+                -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+                -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+                &:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                    --uc-findbar-bgcolor: var(--uc-toolbar-bgcolor);
+                    --uc-sidebar-header-bgcolor: var(--uc-toolbar-bgcolor);
+                }
             }
         }
     }
@@ -1778,8 +1968,8 @@
         padding-inline-start 0.1s ease-in-out 0.4s;
 
     /* Unified autohide transition timing for the toolbar */
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
         -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         --uc-autohide-tabstoolbar-transition:
@@ -1888,8 +2078,8 @@
         padding-inline-start 0.1s ease-in-out 0.4s;
 
     /* Unified hover transition timing for the toolbar */
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
         -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         --uc-hover-tabstoolbar-transition:
@@ -1924,8 +2114,8 @@
     /* ════════════════════════════════════════════════════════════════════
         ✂️ Mica backdrop clipping dimensions and transition
     ════════════════════════════════════════════════════════════════════ */
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
         -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         /**/
@@ -2216,6 +2406,7 @@
                 }
             }
         }
+        --uc-sb-sidebar-stripe-border-radius: var(--uc-sidebar-stripe-border-radius);
 
         /* 
          * These rules apply in the following cases:

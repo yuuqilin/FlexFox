@@ -4,6 +4,176 @@
 
 ## 🆕 What's New
 
+## 🦊 v7.0.0 - Nova UI Edition
+
+> [!IMPORTANT]
+> v6.6.0 introduced several new preferences and breaking changes. If you missed its release notes, you can read them here:
+>
+> [English](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG.md#-whats-new) | [日本語](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v660) | [简体中文](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v660)
+
+### New and Changed
+
+- Added `uc.flex.style-urlbar-gradient` to apply the sidebar stripe gradient to URL bar elements:
+
+  ```
+  0 = Disabled (default)
+  1 = Gradient icons
+  2 = Gradient icons and an animated gradient border on hover
+  3 = Gradient icons, an animated gradient border on hover, and gradient URL text
+  ```
+
+  The gradient colors follow `uc.flex.style-sidebar-stripe-color`. Text dimming differs between Firefox 155 and 156 because of [Bug 2063127](https://bugzilla.mozilla.org/show_bug.cgi?id=2063127). For a fully undimmed gradient text effect, create the native `browser.urlbar.formatting.enabled` preference and set it to `false`.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/urlbar-gradient.webp" width="680px">
+
+  Preview settings:
+
+  ```
+  uc.flex.style-urlbar-gradient            = 3
+  uc.flex.style-sidebar-stripe-color       = 9
+  ```
+
+- Added `uc.flex.style-tab-items-border-width` to set the active-tab border width:
+
+  ```
+  0 = No border
+  1 = 1px border (previous default)
+  2 = 2px border (default)
+  ```
+
+- Added `uc.flex.style-tab-items-gradient-border` to control the gradient border on the active tab:
+
+  ```
+  0 = Disabled (previous default)
+  1 = Static gradient (default)
+  2 = Animated gradient
+  ```
+
+  The gradient colors follow `uc.flex.style-sidebar-stripe-color`. A static gradient is the Nova UI default and is enabled by default in FlexFox ahead of the rollout because of [Issue #41](https://github.com/yuuqilin/DevFlexFox/issues/41). This option has no effect when `uc.flex.style-tab-items-border-width` is set to `0`.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/gradient-border.webp" width="300px">
+
+  Preview settings:
+
+  ```
+  uc.flex.style-tab-items-gradient-border = 2
+  uc.flex.style-tab-items-background-fill = 0
+  ```
+
+- Expanded the value range of `uc.flex.style-tab-items` to `0`-`2` to control the appearance of pinned tabs:
+
+  ```
+  0 = No border or background fill
+  1 = Border only (default)
+  2 = Background fill only
+  ```
+
+  Borders and fills use neutral colors in Light Mode and the sidebar stripe accent color in Dark Mode. With value `2`, selected-tab borders always use the accent color.
+
+- Added `uc.flex.style-tab-items-background-fill` to control tab background fills:
+
+  ```
+  0 = Transparent active-tab background
+  1 = Accent-colored active-tab background (default)
+  2 = Add a neutral base background fill to all tabs
+  ```
+
+  Enabling `uc.flex.style-tab-items` overrides the base background of pinned tabs. When this option and `uc.flex.style-tab-items-border-width` are both set to `0`, a 1px border is retained.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/background-fill.webp" width="965px">
+
+  Preview setting: `uc.flex.style-tab-items-background-fill = 2`
+
+- Added `uc.flex.style-tab-items-gradient-background` to control the gradient background on the active tab:
+
+  ```
+  0 = Disabled (default)
+  1 = Static gradient
+  2 = Animated gradient
+  ```
+
+  It can be used together with a gradient border. This setting overrides `uc.flex.style-tab-items-background-fill`.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/gradient-background.webp" width="298px">
+
+  Preview settings:
+
+  ```
+  uc.flex.style-tab-items-gradient-background = 2
+  uc.flex.style-tab-items-border-width        = 0
+  ```
+
+- Expanded `uc.flex.show-tab-close-button-on-favicon-hover` to support Native Vertical Tabs and Sidebery in addition to native horizontal tabs. It merges the close button into the favicon and shows it when hovering over the favicon.
+
+- Added `uc.flex.style-tab-close-button-warning-zone-size` to control the visibility and size of the warning zone inside tab close buttons:
+
+  ```
+  0 = Hidden (native appearance)
+  1 = Small (default)
+  2 = Large
+  ```
+
+  When `uc.flex.show-tab-close-button-on-favicon-hover` is enabled, value `2` has no effect and the warning zone uses the default size (`1`).
+
+- Added `uc.flex.style-tab-items-border-radius` to control whether tab items use Proton UI or the larger Nova UI corners:
+
+  ```
+  0 = Automatic (default). Uses Nova UI corners when browser.nova.enabled = true
+  1 = Force Proton UI corners
+  2 = Force Nova UI corners
+  ```
+
+  The "List All Tabs" button placed on the horizontal tab bar also follows this setting.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/border-radius.webp" width="298px">
+
+  Preview settings:
+
+  ```
+  uc.flex.style-tab-items                          = 0
+  uc.flex.style-tab-close-button-warning-zone-size = 1
+  ```
+
+- Added `uc.flex.style-toolbar-items-border-radius` to control whether toolbar buttons, panel items, menu items, bookmark menu items, the upper outer corner of an expanded sidebar, the sidebar stripe, and the findbar use Proton UI or the larger Nova UI corners:
+
+  ```
+  0 = Automatic (default). Uses Nova UI corners when browser.nova.enabled = true
+  1 = Force Proton UI corners
+  2 = Force Nova UI corners
+  ```
+
+  `uc.flex.revert-to-original-flat-corner-style` overrides both border-radius preferences.
+
+### Improvements
+
+- Refined the whitespace and spacing in the pinned-tab grid for a less crowded and more balanced appearance.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/grid-gap.webp" width="300px">
+
+- Added a rounded outline to the findbar, giving it a floating appearance that separates it from the web content background.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/findbar-border.webp" width="923px">
+
+- Added the placeholder "Type `uc.flex` to show all FlexFox preferences" to the empty `about:config` search field.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/preference-search-hint.webp" width="630px">
+
+- Extended the sidebar stripe accent colors to horizontal tabs, which can now use the same border and background colors as vertical tabs.
+- Improved the gradient rendering of title text on Sidebery Group Pages so the full text uses the gradient regardless of its length.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/group-page-gradient.webp" width="214px">
+
+### Breaking Changes
+
+- Renamed the `uc.flex.skip-loading-uc-*.css` preferences to `uc.flex.~dev-skip-loading-uc-*.css`.
+
+  These preferences skip loading specific CSS files to help isolate components during troubleshooting. The old names were sorted among regular options in `about:config`, which could misalign their descriptions. The new namespace sorts them after the regular options, allowing new development preferences to be added without disrupting the layout.
+
+### Fixes
+
+- Fixed multiple styling and layout regressions caused by Firefox updates: [Bug 2049244](https://bugzilla.mozilla.org/show_bug.cgi?id=2049244), [Bug 2055840](https://bugzilla.mozilla.org/show_bug.cgi?id=2055840), [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942), [Bug 2033583](https://bugzilla.mozilla.org/show_bug.cgi?id=2033583), [Bug 2044711](https://bugzilla.mozilla.org/show_bug.cgi?id=2044711), [Bug 2045752](https://bugzilla.mozilla.org/show_bug.cgi?id=2045752), [Bug 2054481](https://bugzilla.mozilla.org/show_bug.cgi?id=2054481), [Bug 2023711](https://bugzilla.mozilla.org/show_bug.cgi?id=2023711), [Bug 2022975](https://bugzilla.mozilla.org/show_bug.cgi?id=2022975), [Bug 2052608](https://bugzilla.mozilla.org/show_bug.cgi?id=2052608), [Bug 2034495](https://bugzilla.mozilla.org/show_bug.cgi?id=2034495), [Bug 2029183](https://bugzilla.mozilla.org/show_bug.cgi?id=2029183), [Bug 2046646](https://bugzilla.mozilla.org/show_bug.cgi?id=2046646), [Bug 2039721](https://bugzilla.mozilla.org/show_bug.cgi?id=2039721), [Bug 2047784](https://bugzilla.mozilla.org/show_bug.cgi?id=2047784), [Bug 1998985](https://bugzilla.mozilla.org/show_bug.cgi?id=1998985), and [Bug 2063294](https://bugzilla.mozilla.org/show_bug.cgi?id=2063294).
+
+
 ## 🦊 v6.6.0
 
 ### New

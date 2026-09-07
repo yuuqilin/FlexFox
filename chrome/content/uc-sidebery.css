@@ -1,30 +1,82 @@
 @-moz-document regexp("^moz-extension://.*?/sidebery/group.html.*?"), regexp("^moz-extension://.*?/sidebar/sidebar.html")
 {
+    /* !NOVA: */
+    @property --uc-sb-active-border-angle {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+    }
+
+    @property --uc-sb-active-background-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 0%;
+    }
+
+    @keyframes uc-sb-active-border-flow {
+        to {
+            --uc-sb-active-border-angle: 360deg;
+        }
+    }
+
+    @keyframes uc-sb-active-background-flow {
+        to {
+            --uc-sb-active-background-position: 100%;
+        }
+    }
+
     #root {
         /* FlexFox UI color tokens. 
            These values must stay in sync with the tokens defined in
            uc-variables.css in the browser chrome. */
-        --uc-color-light-red: #a82037; /* --color-red-70 */
-        --uc-color-light-orange: #d05500; /* --color-orange-60 */
-        --uc-color-light-yellow: #8a6200; /* --color-yellow-60 */
-        --uc-color-light-green: #007a34; /* --color-green-70 */
-        --uc-color-light-cyan: #007992; /* --color-cyan-70 */
-        --uc-color-light-blue: #0057c0; /* --color-blue-70 */
-        --uc-color-light-violet: #5e46bf; /* --color-violet-70 */
-        --uc-color-light-purple: #8634a3; /* --color-purple-70 */
-        --uc-color-light-pink: #d0457c; /* --color-pink-50 */
-        --uc-color-light-gray: #4b4d53; /* --color-gray-70 */
-        --uc-color-dark-red: #fe4f6d; /* --color-red-50 */
-        --uc-color-dark-orange: #fd7700; /* --color-orange-40 */
-        --uc-color-dark-yellow: #da9900; /* --color-yellow-40 */
-        --uc-color-dark-green: #03b432; /* --color-green-50 */
-        --uc-color-dark-cyan: #00b5d2; /* --color-cyan-50 */
-        --uc-color-dark-blue: #3e98ff; /* --color-blue-50 */
-        --uc-color-dark-violet: #a37cff; /* --color-violet-50 */
-        --uc-color-dark-purple: #c872ec; /* --color-purple-40 */
-        --uc-color-dark-pink: #f66098; /* --color-pink-40 */
-        --uc-color-dark-gray: #909299; /* --color-gray-60 */
+        /* Proton Tokens */
+        --uc-color-light: #e64886; /* #ea4c89 */
+        --uc-color-light-red: oklch(55% 0.21 15); /* --color-red-60 */ /* sRGB #cf1748 */
+        --uc-color-light-orange: oklch(58% 0.21 50); /* --color-orange-60 */ /* Unavailable on any device */
+        --uc-color-light-yellow: oklch(58% 0.24 90); /* --color-yellow-60 */ /* Unavailable on any device */
+        --uc-color-light-green: oklch(55% 0.21 145); /* --color-green-60 */ /* P3 */
+        --uc-color-light-cyan: oklch(55% 0.21 205); /* --color-cyan-60 */ /* Unavailable on any device */
+        --uc-color-light-blue: oklch(55% 0.24 260); /* --color-blue-60 */ /* P3 */
+        --uc-color-light-violet: oklch(55% 0.24 290); /* --color-violet-60 */ /* sRGB #7844f0 */
+        --uc-color-light-purple: oklch(55% 0.21 315); /* --color-purple-60 */ /* sRGB #9e3bc3 */
+        --uc-color-light-pink: oklch(55% 0.21 360); /* --color-pink-60 */ /* sRGB #c91a6d */
+        --uc-color-light-gray: #5b5b66; /* --color-gray-70 */ /* sRGB #4b4d53 */
+        --uc-color-dark: #9c66ff; /* #9059ff */
+        --uc-color-dark-red: oklch(69% 0.19 15); /* --color-red-40 */ /* sRGB #fa5e75 */
+        --uc-color-dark-orange: oklch(72% 0.19 50); /* --color-orange-40 */ /* sRGB #fe7802 */
+        --uc-color-dark-yellow: oklch(72% 0.22 90); /* --color-yellow-40 */ /* Unavailable on any device */
+        --uc-color-dark-green: oklch(69% 0.19 145); /* --color-green-40 */ /* sRGB #37b847 */
+        --uc-color-dark-cyan: oklch(69% 0.19 205); /* --color-cyan-40 */ /* Rec2020 */
+        --uc-color-dark-blue: oklch(69% 0.22 260); /* --color-blue-40 */ /* Unavailable on any device */
+        --uc-color-dark-violet: oklch(69% 0.22 290); /* --color-violet-40 */ /* Unavailable on any device */
+        --uc-color-dark-purple: oklch(69% 0.19 315); /* --color-purple-40 */ /* sRGB #c671eb */
+        --uc-color-dark-pink: oklch(69% 0.19 360); /* --color-pink-40 */ /* sRGB #f45e96 */
+        --uc-color-dark-gray: #8f8f9d; /* --color-gray-60 */ /* #909299 */
+        /* Nova Tokens */
+        @media -moz-pref("uc.flex.style-sidebar-stripe-accent-color-system", 2) {
+            --uc-color-light-red: #c52d4f; /* --color-red-50 */
+            --uc-color-light-orange: #cd4208; /* --color-orange-50 */
+            --uc-color-light-yellow: #b26100; /* --color-yellow-50 */
+            --uc-color-light-green: #008865; /* --color-green-50 */
+            --uc-color-light-cyan: #0a809f; /* --color-cyan-50 */
+            --uc-color-light-blue: #455fe7; /* --color-blue-50 */
+            --uc-color-light-violet: #764edd; /* --color-violet-50 */
+            --uc-color-light-purple: #9540c8; /* --color-purple-50 */
+            --uc-color-light-pink: #b32e9f; /* --color-pink-50 */
+            --uc-color-light-gray: #515054; /* --color-gray-55 */
+            --uc-color-dark-red: #ed566e; /* --color-red-40 */
+            --uc-color-dark-orange: #f4682c; /* --color-orange-40 */
+            --uc-color-dark-yellow: #db820e; /* --color-yellow-40 */
+            --uc-color-dark-green: #11ae84; /* --color-green-40 */
+            --uc-color-dark-cyan: #10a4ca; /* --color-cyan-40 */
+            --uc-color-dark-blue: #5a87fd; /* --color-blue-40 */
+            --uc-color-dark-violet: #9871ff; /* --color-violet-40 */
+            --uc-color-dark-purple: #b864ee; /* --color-purple-40 */
+            --uc-color-dark-pink: #db54bf; /* --color-pink-40 */
+            --uc-color-dark-gray: #949297; /* --color-gray-40 */
+        }
         @media (prefers-color-scheme: light) {
+            --uc-color-light-dark-0: var(--uc-color-light);
             --uc-color-light-dark-1: var(--uc-color-light-red);
             --uc-color-light-dark-2: var(--uc-color-light-orange);
             --uc-color-light-dark-3: var(--uc-color-light-yellow);
@@ -35,9 +87,9 @@
             --uc-color-light-dark-8: var(--uc-color-light-purple);
             --uc-color-light-dark-9: var(--uc-color-light-pink);
             --uc-color-light-dark-10: var(--uc-color-light-gray);
-            --uc-color-light-dark-0: #ea4c89;
         }
         @media (prefers-color-scheme: dark) {
+            --uc-color-light-dark-0: var(--uc-color-dark);
             --uc-color-light-dark-1: var(--uc-color-dark-red);
             --uc-color-light-dark-2: var(--uc-color-dark-orange);
             --uc-color-light-dark-3: var(--uc-color-dark-yellow);
@@ -48,10 +100,12 @@
             --uc-color-light-dark-8: var(--uc-color-dark-purple);
             --uc-color-light-dark-9: var(--uc-color-dark-pink);
             --uc-color-light-dark-10: var(--uc-color-dark-gray);
-            --uc-color-light-dark-0: #9059ff;
         }
 
         /* FlexFox UI gradient color tokens */
+        /* 0. Default */
+        --uc-gradient-start-0: light-dark(oklch(65% 0.42 340), oklch(55% 0.45 350));
+        --uc-gradient-end-0: light-dark(oklch(78% 0.42 200), oklch(95% 0.4 95));
         /* 1. Red */
         --uc-gradient-start-1: light-dark(oklch(0.566 0.1816 5.04), oklch(0.6782 0.2099 24.69));
         --uc-gradient-end-1: light-dark(oklch(0.5988 0.1558 33.06), oklch(0.8556 0.1451 81.73));
@@ -82,14 +136,24 @@
         /* 10. Gray */
         --uc-gradient-start-10: light-dark(oklch(0.5392 0.0706 303.2), oklch(0.7677 0.0522 285.11));
         --uc-gradient-end-10: light-dark(oklch(0.5556 0.0678 269.9), oklch(0.7329 0.0734 299.86));
+
+        /* Default gradient color for Sidebery content */
         /* 0. Default */
-        --uc-gradient-start-0: light-dark(oklch(0.4978 0.1866 27.42), oklch(0.9695 0.1963 109.56));
-        --uc-gradient-end-0: light-dark(oklch(0.6383 0.2057 25.98 / 75%), oklch(0.6495 0.2379 19.2));
+        --uc-sb-gradient-start-0: light-dark(oklch(0.4978 0.1866 27.42), oklch(0.9695 0.1963 109.56));
+        --uc-sb-gradient-end-0: light-dark(oklch(0.6383 0.2057 25.98 / 75%), oklch(0.6495 0.2379 19.2));
 
         /**/
         --uc-sidebar-header-stripe: var(--uc-color-light-dark-0); /* Color of the sidebar header stripe */
-        --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-0);
-        --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-0);
+        --uc-sidebar-stripe-gradient-start: var(--uc-sb-gradient-start-0);
+        --uc-sidebar-stripe-gradient-end: var(--uc-sb-gradient-end-0);
+
+        --uc-tab-gradient-lightness-scale: 1.22;
+        --uc-tab-gradient-alpha: 0.91;
+        --uc-tab-group-text-fg-color-mix: 15%;
+        @media (prefers-color-scheme: dark) {
+            --uc-tab-gradient-lightness-scale: 0.77;
+            --uc-tab-group-text-fg-color-mix: 30%;
+        }
 
         /* Use FlexFox UI color tokens for the sidebar stripe */
         @media -moz-pref("uc.flex.style-sidebar-stripe-color", 1) {
@@ -141,6 +205,32 @@
             --uc-sidebar-header-stripe: var(--uc-color-light-dark-10);
             --uc-sidebar-stripe-gradient-start: var(--uc-gradient-start-10);
             --uc-sidebar-stripe-gradient-end: var(--uc-gradient-end-10);
+        }
+
+        /* Use Firefox's Nova gradient by default for the active tab border */
+        --uc-sb-tab-border-gradient-start: #b89cff;
+        --uc-sb-tab-border-gradient-end: #ff9565;
+        /* A valid FlexFox color selection takes precedence over the Nova default */
+        @media -moz-pref("uc.flex.style-sidebar-stripe-color", 1),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 2),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 3),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 4),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 5),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 6),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 7),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 8),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 9),
+            -moz-pref("uc.flex.style-sidebar-stripe-color", 10) {
+            --uc-sb-tab-border-gradient-start: var(--uc-sidebar-stripe-gradient-start);
+            --uc-sb-tab-border-gradient-end: var(--uc-sidebar-stripe-gradient-end);
+        }
+
+        /* Ensure light-dark() colors follow the Firefox UI scheme, since Sidebery content should not follow conflicting content preferences. */
+        &[data-toolbar-color-scheme="light"] {
+            color-scheme: light;
+        }
+        &[data-toolbar-color-scheme="dark"] {
+            color-scheme: dark;
         }
     }
 }
@@ -201,14 +291,14 @@
 
     #root {
         /* Tab and PinnedTab height adjustment */
-        --tabs-height: 33px !important;
+        --tabs-height: var(--uc-sb-tab-height) !important;
         --tabs-pinned-height: var(--tabs-height) !important;
-        --tabs-pinned-width: 40px !important;
+        --tabs-pinned-width: 34px !important;
         &[data-density="compact"] {
-            --tabs-height: 28px !important;
+            --tabs-height: var(--uc-sb-tab-height) !important;
         }
         &[data-density="loose"] {
-            --tabs-height: 34px !important;
+            --tabs-height: var(--uc-sb-tab-height) !important;
         }
 
         /* Light and Dark Theme base settings */
@@ -218,7 +308,7 @@
         --bg: light-dark(#f1f5f9, #1a1b26) !important;
         --warn: light-dark(#fca5a5, #8c4351) !important;
         */
-        --warn: light-dark(hsl(0 50% 60%), hsl(0 60% 50%)) !important;
+        --warn: light-dark(hsl(350 60% 64% / 0.8), hsl(0 60% 50%)) !important;
         @media (prefers-color-scheme: dark) {
             --tabs-fg: #d4d4d4 !important;
             --tabs-bg-hover: #3b3948 !important;
@@ -249,12 +339,13 @@
         --tabs-activated-color-layer-opacity: 0;
     }
 
-    /* #root[data-frame-color-scheme="light"] */
+    /*
+     * The active surface can be translucent when its gradient is enabled.
+     * Hide Sidebery's tab-color layer for active and multi-selected tabs so
+     * its color cannot show through that surface.
+     */
     .Tab:is([data-active="true"], [data-selected="true"]) .color-layer {
-        @media (prefers-color-scheme: dark) {
-            --tabs-activated-color-layer-opacity: 0;
-        }
-        opacity: var(--tabs-activated-color-layer-opacity) !important;
+        opacity: 0 !important;
     }
 
     .Tab[data-selected="true"] .body {
@@ -265,31 +356,55 @@
             background-color: color-mix(in srgb, var(--tabs-activated-bg) 85%, transparent) !important;
         }
         */
-        box-shadow: var(--active-el-shadow) !important;
+        /* The visible selected-tab surface is painted by .body::before below. */
+        box-shadow: none !important;
     }
 
     /* Apply gradient color transitions to group folder text labels */
     .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
+        /*
         --tabs-normal-fg: light-dark(hsl(0 73% 41%), transparent) !important;
         --tabs-activated-fg: light-dark(hsl(0 73% 41%), transparent) !important;
         @media -moz-pref("uc.flex.style-sidebar-stripe-color") {
             --tabs-normal-fg: light-dark(var(--uc-sidebar-header-stripe), transparent) !important;
             --tabs-activated-fg: light-dark(var(--uc-sidebar-header-stripe), transparent) !important;
         }
+        */
         /*filter: contrast(120%);*/
         display: flex;
+        /*
         @media (prefers-color-scheme: dark) {
-            --tabs-normal-fg: transparent !important;
-            --tabs-activated-fg: transparent !important;
-            background: linear-gradient(
-                70deg in oklab,
-                var(--uc-sidebar-stripe-gradient-start),
-                var(--uc-sidebar-stripe-gradient-end)
-            ) !important;
-            background-clip: text !important;
-            -webkit-background-clip: text !important;
-            -webkit-text-stroke-color: transparent;
+        */
+        --tabs-normal-fg: transparent !important;
+        --tabs-activated-fg: transparent !important;
+        background: linear-gradient(
+            135deg in oklab,
+            var(--uc-sidebar-stripe-gradient-start) 10%,
+            var(--uc-sidebar-stripe-gradient-end) 100%
+        ) !important;
+        @media -moz-pref("uc.flex.style-tab-items-gradient-background") {
+            .Tab[data-active="true"] & {
+                background-image: linear-gradient(
+                    135deg in oklab,
+                    color-mix(
+                            var(--uc-sidebar-stripe-gradient-start),
+                            var(--frame-fg) var(--uc-tab-group-text-fg-color-mix)
+                        )
+                        10%,
+                    color-mix(
+                            var(--uc-sidebar-stripe-gradient-end),
+                            var(--frame-fg) var(--uc-tab-group-text-fg-color-mix)
+                        )
+                        100%
+                ) !important;
+            }
         }
+        background-clip: text !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-stroke-color: transparent;
+        /*
+        }
+        */
     }
 
     /* Align the background color length with the text length */
@@ -304,12 +419,20 @@
             var(--uc-sidebar-stripe-gradient-end),
             var(--uc-sidebar-stripe-gradient-start)
         ) !important;
-        @media (prefers-color-scheme: dark), -moz-pref("uc.flex.style-sidebar-stripe-color") {
-            background-image: linear-gradient(
-                60deg in oklab,
-                var(--uc-sidebar-stripe-gradient-end),
-                var(--uc-sidebar-stripe-gradient-start)
-            ) !important;
+        @media -moz-pref("uc.flex.style-tab-items-gradient-background") {
+            .Tab[data-active="true"] & {
+                background-image: linear-gradient(
+                    45deg in oklab,
+                    color-mix(
+                        var(--uc-sidebar-stripe-gradient-end),
+                        var(--frame-fg) var(--uc-tab-group-text-fg-color-mix)
+                    ),
+                    color-mix(
+                        var(--uc-sidebar-stripe-gradient-start),
+                        var(--frame-fg) var(--uc-tab-group-text-fg-color-mix)
+                    )
+                ) !important;
+            }
         }
         fill: transparent !important;
         mask: url("data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbl9ncm91cCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMTYgMTYiIHN0eWxlPSIvKiEgbWFzazogbGluZWFyLWdyYWRpZW50KCA0NWRlZywgaHNsKDQyMCAxMDAlIDYyJSksIGhzbCgzNTAgMTAwJSA1OSUpICk7ICovIj48cGF0aCBkPSJNMCAzYzAtMS4xLjktMiAyLTJoNC41OWExIDEgMCAwIDEgLjcuM2wxLjQyIDEuNGExIDEgMCAwIDAgLjcuM2g1LjA5Yy44MyAwIDEuNS42NyAxLjUgMS41djhjMCAuODMtLjY3IDEuNS0xLjUgMS41aC0xM0ExLjUgMS41IDAgMCAxIDAgMTIuNVYzWiI+PC9wYXRoPjwvc3ZnPg==");
@@ -372,6 +495,7 @@
         /*
         border: 1.5px solid rgba(0, 0, 0, 0.22);
         */
+        border: none !important;
         border-radius: var(--general-border-radius) !important;
     }
 
@@ -379,6 +503,7 @@
         /*
         border: 1px solid rgba(0, 0, 0, 0.1);
         */
+        border: none !important;
         border-radius: var(--general-border-radius) !important;
     }
 
@@ -466,15 +591,15 @@
     */
 
     #root:not([data-nav-inline="true"]) .NavigationBar .nav-item[data-class="space"] {
-        width: 38px !important;
+        width: var(--nav-btn-width) !important;
         flex-grow: 0 !important;
     }
 
     @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
         @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
             #root:not([data-nav-inline="true"]) .NavigationBar:not(.-vert):hover .nav-item .icon {
-                width: 22px !important;
-                height: 22px !important;
+                width: var(--uc-sb-nav-item-icon-hover-size) !important;
+                height: var(--uc-sb-nav-item-icon-hover-size) !important;
                 transition:
                     width 50ms ease-in-out 10ms,
                     height 50ms ease-in-out 10ms !important;
@@ -602,8 +727,8 @@
         @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
             #root:hover .PinnedTabsBar .Tab .fav,
             #root:hover .PinnedTabsBar .Tab .fav-icon {
-                width: 20px !important;
-                height: 20px !important;
+                width: var(--uc-sb-pinned-tab-favicon-expanded-size) !important;
+                height: var(--uc-sb-pinned-tab-favicon-expanded-size) !important;
             }
         }
     }
@@ -616,8 +741,8 @@
     @media -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
         #root.root .PinnedTabsBar .Tab .fav,
         #root.root .PinnedTabsBar .Tab .fav-icon {
-            width: 16px !important;
-            height: 16px !important;
+            width: var(--uc-sb-pinned-tab-favicon-size) !important;
+            height: var(--uc-sb-pinned-tab-favicon-size) !important;
         }
     }
 
@@ -811,39 +936,39 @@
         }
 
         /* Max visible rows in native vertical pinned tabs and Sidebery (before scrolling) */
-        --uc-sb-pinned-tab-max-rows: 4;
+        --uc-sb-pinned-tab-max-row-count: 4;
         @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 2) {
-            --uc-sb-pinned-tab-max-rows: 2;
+            --uc-sb-pinned-tab-max-row-count: 2;
         }
         @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 3) {
-            --uc-sb-pinned-tab-max-rows: 3;
+            --uc-sb-pinned-tab-max-row-count: 3;
         }
         @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 5) {
-            --uc-sb-pinned-tab-max-rows: 5;
+            --uc-sb-pinned-tab-max-row-count: 5;
         }
         @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 6) {
-            --uc-sb-pinned-tab-max-rows: 6;
+            --uc-sb-pinned-tab-max-row-count: 6;
         }
         @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 7) {
-            --uc-sb-pinned-tab-max-rows: 7;
+            --uc-sb-pinned-tab-max-row-count: 7;
         }
         @media -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 8) {
-            --uc-sb-pinned-tab-max-rows: 8;
+            --uc-sb-pinned-tab-max-row-count: 8;
         }
 
-        /* Tabs per row for native vertical pinned tabs and Sidebery (controlled by per-tab percentage width) */
-        --uc-sb-pinned-tab-max-columns: 19%;
+        /* Maximum pinned tabs per row for native vertical tabs and Sidebery. */
+        --uc-sb-pinned-tab-max-column-count: 5;
         @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 4) {
-            --uc-sb-pinned-tab-max-columns: 24%;
+            --uc-sb-pinned-tab-max-column-count: 4;
         }
         @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 3) {
-            --uc-sb-pinned-tab-max-columns: 32%;
+            --uc-sb-pinned-tab-max-column-count: 3;
         }
         @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 2) {
-            --uc-sb-pinned-tab-max-columns: 49%;
+            --uc-sb-pinned-tab-max-column-count: 2;
         }
         @media -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 1) {
-            --uc-sb-pinned-tab-max-columns: 100%;
+            --uc-sb-pinned-tab-max-column-count: 1;
         }
 
         /* Blend ratios for icons, borders, pinned tabs, active tabs, and background colors */
@@ -893,10 +1018,6 @@
             rgb(from var(--uc-sb-tab-bgcolor) r g b / 0.1),
             rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 87%, white) r g b / 0.05)
         );
-        --uc-sb-pinned-tab-hover-bgcolor: light-dark(
-            rgb(from color-mix(in srgb, var(--uc-sb-tab-bgcolor) 77%, black) r g b / 0.3),
-            rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.3)
-        );
         --uc-sb-pinned-tab-box-shadow: 0px 0px 2px color-mix(in srgb, var(--uc-sb-tab-bgcolor) 25%, black);
         @media (prefers-color-scheme: dark) {
             --uc-sb-pinned-tab-box-shadow: 0px 0px 3px color-mix(in srgb, var(--uc-sidebar-header-stripe) 15%, white);
@@ -906,25 +1027,60 @@
         @media -moz-pref("uc.flex.style-toolbar-bgcolor", 2) {
             --uc-sb-tab-bgcolor: #d9d8dd;
         }
-        --uc-sb-tab-hover-bgcolor: var(--uc-sb-pinned-tab-hover-bgcolor);
+        /*
+        --uc-sb-tab-hover-bgcolor: light-dark(
+            rgb(from color-mix(in srgb, var(--uc-sb-tab-bgcolor) 77%, black) r g b / 0.3),
+            rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.3)
+        );
+        */
+        --uc-sb-tab-hover-bgcolor: light-dark(
+            rgba(117, 102, 159, 0.25),
+            rgb(from color-mix(in srgb, var(--uc-sidebar-header-stripe) 77%, white) r g b / 0.3)
+        );
+        --uc-sb-tab-fill-bgcolor: light-dark(rgba(70, 70, 70, 0.11), rgba(170, 170, 170, 0.14));
+        --uc-sb-pinned-tab-fill-bgcolor: light-dark(rgba(70, 70, 70, 0.14), rgba(170, 170, 170, 0.18));
 
+        /* Width of the active tab border */
+        --uc-sb-active-tab-border-width: 2px;
+        @media -moz-pref("uc.flex.style-tab-items-border-width", 0) {
+            --uc-sb-active-tab-border-width: 0px;
+        }
+        @media -moz-pref("uc.flex.style-tab-items-border-width", 1) {
+            --uc-sb-active-tab-border-width: 1px;
+        }
+        /* Keep active and selected tabs identifiable when both their background fill and configured border are disabled. */
+        @media -moz-pref("uc.flex.style-tab-items-background-fill", 0) and -moz-pref("uc.flex.style-tab-items-border-width", 0) {
+            --uc-sb-active-tab-border-width: 1px;
+        }
         /* Background color for the active tab */
         --uc-sb-active-tab-bgcolor: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-sb-active-tab-color-mix));
+        @media -moz-pref("uc.flex.style-tab-items-background-fill", 0) {
+            --uc-sb-active-tab-bgcolor: transparent;
+        }
         /* Inner border shadow (outline) for the active tab */
-        --uc-sb-active-tab-border-shadow: inset 0 0 0 1px light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
+        --uc-sb-active-tab-border-shadow: inset 0 0 0 var(--uc-sb-active-tab-border-width)
+            light-dark(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.467));
         /* Drop shadow beneath the active tab */
         --uc-sb-active-tab-drop-shadow: 0 1px 3px -1px light-dark(rgba(0, 0, 0, 0.196), rgba(0, 0, 0, 0.212));
-        @media -moz-pref("uc.flex.style-tab-items", 2) {
-            --uc-sb-active-tab-border-shadow: inset 0 0 0 1px
-                color-mix(in srgb, var(--uc-sidebar-header-stripe) 40%, black 10%);
-            --uc-sb-active-tab-drop-shadow: inset 0 0px 2px
-                color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, black 10%);
-            @media (prefers-color-scheme: dark) {
-                --uc-sb-active-tab-border-shadow: inset 0 0 0 1px var(--uc-sb-pinned-tab-border-color);
-                --uc-sb-active-tab-drop-shadow: 0px 0px 3px -1px
-                    color-mix(in srgb, var(--uc-sidebar-header-stripe) 75%, white);
+        @media not -moz-pref("uc.flex.style-tab-items", 0) {
+            /* Use sidebar-stripe colors for the active tab shadow border when a border is present. */
+            @media not -moz-pref("uc.flex.style-tab-items-border-width", 0),
+                -moz-pref("uc.flex.style-tab-items-border-width", 0) and -moz-pref("uc.flex.style-tab-items-background-fill", 0) {
+                /* In light mode, keep style 1 shadows neutral to match the borders of unselected pinned tabs. */
+                @media not -moz-pref("uc.flex.style-tab-items", 1) {
+                    --uc-sb-active-tab-border-shadow: inset 0 0 0 var(--uc-sb-active-tab-border-width)
+                        color-mix(in srgb, var(--uc-sidebar-header-stripe) 40%, black 10%);
+                    --uc-sb-active-tab-drop-shadow: inset 0 0px 2px
+                        color-mix(in srgb, var(--uc-sidebar-header-stripe) 70%, black 10%);
+                }
+                @media (prefers-color-scheme: dark) {
+                    --uc-sb-active-tab-border-shadow: inset 0 0 0 var(--uc-sb-active-tab-border-width)
+                        var(--uc-sb-pinned-tab-border-color);
+                    --uc-sb-active-tab-drop-shadow: 0px 0px 3px -1px
+                        color-mix(in srgb, var(--uc-sidebar-header-stripe) 75%, white);
+                }
             }
-            --frame-el-overlay-hover-bg: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
+            --frame-el-overlay-hover-bg: var(--uc-sb-tab-hover-bgcolor) !important;
             /*
             --frame-el-overlay-clicked-bg: transparent !important;
             */
@@ -938,16 +1094,17 @@
          * to define the hover background color.
          *
          * We redefine this variable on an ancestor element to make the
-         * pseudo-element transparent and let `.body` handle the hover
-         * background instead.
+         * pseudo-element transparent so FlexFox can paint the hover
+         * background on the same visual surface as its gradients.
          *
-         * This allows us to override transitions only on `.body`, avoiding
-         * the need to define transitions on both `.body` and `.body::before`,
-         * which helps reduce overhead.
+         * The surface rules below restore the required color and shadow
+         * transitions on `.body::before`.
          */
+        /*
         .panel-box {
             --frame-el-overlay-hover-bg: transparent !important;
         }
+        */
 
         /* Use FlexFox's UI color tokens for the sidebar stripe */
         @media -moz-pref("uc.flex.style-sidebar-stripe-color", 1) {
@@ -976,17 +1133,509 @@
         }
 
         --general-border-radius: 5px !important;
-        &[data-density="compact"] {
+        &:where([data-density="compact"]) {
             --general-border-radius: 4px !important;
         }
-        &[data-density="loose"] {
+        &:where([data-density="loose"]) {
             --general-border-radius: 6px !important;
+        }
+        @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
+            -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
+            --general-border-radius: 24px !important;
         }
 
         --tabs-activated-bg: var(--uc-sb-active-tab-bgcolor) !important;
         --active-el-shadow: var(--uc-sb-active-tab-border-shadow), var(--uc-sb-active-tab-drop-shadow) !important;
         .Tab[data-colorized="true"] {
             --tabs-activated-shadow: var(--active-el-shadow) !important;
+        }
+
+        /* ═══════════════════ SIDEBAR CONTENT GEOMETRY ═══════════════════ */
+        /* Content width when the sidebar is collapsed. */
+        --uc-sb-collapsed-content-width: calc(var(--uc-sidebar-width) - 2 * var(--uc-sb-tabs-margin));
+        /* Content width when the sidebar is expanded. */
+        --uc-sb-expanded-content-width: calc(var(--uc-sidebar-hover-width) - 2 * var(--uc-sb-tabs-margin));
+        /*
+        --tabs-margin: 2.5px !important;
+        */
+        --uc-sb-tabs-margin: 5px;
+        --uc-sb-sidebery-default-tabs-margin: 2px;
+        /*
+         * Sidebery positions tree level marks based on its default 2px tab margin.
+         * FlexFox uses a fixed 5px tab margin, so the tree line needs a 3px offset
+         * to stay visually aligned.
+         */
+        --uc-sb-tree-line-indent-offset: calc(var(--uc-sb-tabs-margin) - var(--uc-sb-sidebery-default-tabs-margin));
+
+        /* ═══════════════════ NAVIGATION BAR ═══════════════════ */
+
+        /*
+        --uc-sb-navbar-padding: 3px 2px;
+        @media (width > 50px) {
+            --uc-sb-navbar-padding: 3px 3px;
+        }
+        */
+        &[data-nav-layout="horizontal"] {
+            --uc-sb-navbar-padding-block: 3px;
+            --uc-sb-navbar-padding-inline: var(--uc-sb-tabs-margin);
+            --uc-sb-navbar-padding: var(--uc-sb-navbar-padding-block) var(--uc-sb-navbar-padding-inline);
+            --uc-sb-pinned-tab-margin-block: calc(
+                var(--uc-sb-navbar-padding-block) - var(--uc-sb-tab-item-margin-block) + var(--general-margin)
+            );
+        }
+        --uc-sb-navbar-min-height: 40px;
+        --uc-sb-central-box-block-start: 0px;
+        &:is([data-nav-layout="left"], [data-nav-layout="right"], [data-nav-layout="hidden"]) {
+            --uc-sb-central-box-block-start: calc(var(--general-margin) - var(--s-darker-border-width, 0px));
+        }
+        --uc-sb-central-box-width: var(--uc-sidebar-hover-width);
+        &:is([data-nav-layout="left"], [data-nav-layout="right"]) {
+            --uc-sb-central-box-width: calc(var(--uc-sidebar-hover-width) - var(--uc-sidebar-width));
+            /* Align the first vertical navigation button with a pinned-tab wrapper. */
+            --uc-sb-navbar-padding: calc(var(--uc-sb-tab-item-margin-block) + var(--uc-sb-central-box-block-start)) 3px
+                3px 1px;
+        }
+
+        --uc-sb-nav-item-size: 34px;
+        /* Leave 3px below navigation items for their bottom shadows before .main-items clips them. */
+        --uc-sb-main-items-min-height: 37px;
+        --uc-sb-nav-item-icon-hover-size: 22px;
+        /* Move the .main-items navigation container upward by 0.5px. */
+        --uc-sb-main-items-offset: -0.5px;
+        --uc-sb-nav-target-items-per-row: 5;
+        @media -moz-pref("uc.flex.sidebery-expand-width", 2) {
+            --uc-sb-nav-target-items-per-row: 6;
+        }
+        @media -moz-pref("uc.flex.sidebery-expand-width", 3) {
+            --uc-sb-nav-target-items-per-row: 6;
+        }
+        @media -moz-pref("uc.flex.sidebery-expand-width", 4) {
+            --uc-sb-nav-target-items-per-row: 7;
+        }
+
+        /**
+         * Distribute the remaining inline space across gaps in a complete first
+         * row. Subtract 0.6px to inset its last navigation item from the content
+         * end so it does not appear crowded against rounded sidebar corners,
+         * especially with the larger Nova UI corner radius.
+         */
+        --uc-sb-nav-column-gap: calc(
+            (var(--uc-sb-expanded-content-width) - var(--uc-sb-nav-target-items-per-row) * var(--uc-sb-nav-item-size)) /
+                (var(--uc-sb-nav-target-items-per-row) - 1) - 0.6px
+        );
+
+        /* ═══════════════════ TAB VARIABLES ═══════════════════ */
+        --uc-sb-tab-item-margin-block: 2px;
+        --uc-sb-tab-height: 32px;
+        --uc-sb-tab-surface-width: calc(100% - (var(--uc-sb-collapsed-content-width) - var(--uc-sb-tab-height)));
+        --uc-sb-pinned-tab-surface-width: var(--uc-sb-tab-surface-width);
+        /* Width of one pinned-tab grid column at the configured column count. */
+        --uc-sb-pinned-tab-column-width: calc(
+            (
+                    100% - 2 * var(--uc-sb-tabs-margin) - (var(--uc-sb-pinned-tab-max-column-count) - 1) *
+                        var(--uc-sb-pinned-tab-column-gap)
+                ) /
+                var(--uc-sb-pinned-tab-max-column-count)
+        );
+        /* Height of one pinned-tab grid row, excluding row gap. */
+        --uc-sb-pinned-tab-wrapper-height: calc(var(--uc-sb-tab-height) + 2 * var(--uc-sb-tab-item-margin-block));
+        --uc-sb-pinned-tab-row-gap: 2px;
+        --uc-sb-pinned-tab-column-gap: 4px;
+        --uc-sb-pinned-tab-favicon-size: 16px;
+        --uc-sb-pinned-tab-favicon-expanded-size: 19px;
+        &[data-density="compact"] {
+            --uc-sb-tab-height: 28px;
+            --uc-sb-pinned-tab-column-gap: 0px;
+            --uc-sb-pinned-tab-favicon-expanded-size: 17px;
+        }
+        &[data-density="loose"] {
+            --uc-sb-tab-height: 34px;
+            --uc-sb-pinned-tab-column-gap: 6px;
+            --uc-sb-pinned-tab-favicon-expanded-size: 20px;
+        }
+    }
+
+    /* ═══════════════════ TAB APPEARANCE ═══════════════════ */
+
+    /**
+     * Keep the tab's layout box independent from its visual surface. This
+     * leaves .body::after free to position Sidebery's tree guide line while
+     * ::before paints colors and shadows before the gradient layers.
+     */
+    .Tab .body {
+        --tabs-normal-bg: transparent;
+        background-color: transparent !important;
+        box-shadow: none !important;
+
+        &::before {
+            inset-inline: 0;
+            margin-inline: auto;
+            box-sizing: border-box;
+            background-color: transparent !important;
+            background-image: var(--uc-sb-tab-state-overlay, none) !important;
+            background-origin: border-box !important;
+            background-clip: border-box !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-size: 100% 100% !important;
+            pointer-events: none;
+        }
+    }
+    .Tab .color-layer {
+        inset-inline: 0;
+        margin-inline: auto;
+        box-sizing: border-box;
+    }
+    .Tab .body::before,
+    .Tab .color-layer {
+        inline-size: var(--uc-sb-tab-surface-width) !important;
+    }
+
+    .Tab[data-active="true"] .body::before {
+        background-color: var(--tabs-activated-bg) !important;
+        box-shadow: var(--tabs-activated-shadow) !important;
+    }
+    .Tab[data-selected="true"] .body::before {
+        box-shadow: var(--active-el-shadow) !important;
+    }
+    .Tab:not([data-active="true"], [data-selected="true"]):hover .body::before {
+        /*
+        background-color: light-dark(rgba(0, 0, 0, 0.071), rgba(255, 255, 255, 0.086)) !important;
+        */
+        background-color: light-dark(rgba(117, 102, 159, 0.25), rgba(182, 170, 217, 0.25)) !important;
+    }
+    .Tab[data-selected="true"][data-active="true"] .body::before {
+        --frame-el-overlay-selected-bg: transparent;
+        background-color: var(--tabs-activated-bg) !important;
+    }
+    .Tab[data-selected="true"][data-active="false"] .body::before {
+        background-color: rgb(from var(--tabs-activated-bg) r g b / calc(alpha * 0.65)) !important;
+    }
+    /**
+     * Native Sidebery's later selected and edit `background-color` rules replace
+     * its pressed background color. Our pressed state is a top `background-image`
+     * layer instead, so exclude these states to preserve the native precedence.
+     */
+    .Tab:not([data-selected="true"], [data-edit="true"]):active .body {
+        --uc-sb-tab-state-overlay: linear-gradient(
+            var(--frame-el-overlay-clicked-bg),
+            var(--frame-el-overlay-clicked-bg)
+        );
+    }
+    .Tab[data-edit="true"] .body {
+        --uc-sb-tab-state-overlay: linear-gradient(
+            var(--frame-el-overlay-selected-bg),
+            var(--frame-el-overlay-selected-bg)
+        );
+    }
+    .Tab[data-edit="true"] .body::before {
+        box-shadow: inset 0 0 0 1px var(--frame-el-overlay-selected-border) !important;
+    }
+    /* The later active gradient-border rule replaces this native edit outline when enabled. */
+    .Tab[data-edit="true"][data-active="true"] .body::before {
+        box-shadow: inset 0 0 0 2px var(--frame-el-overlay-selected-border) !important;
+    }
+    @supports (background-clip: border-area) {
+        .Tab[data-active="true"] .body {
+            @media not -moz-pref("uc.flex.~dev-revert-to-pre-nova-style") {
+                &::before {
+                    --uc-sb-active-border-gradient: none;
+                    --uc-sb-active-background-gradient: none;
+                    --uc-sb-active-border-animation-name: none;
+                    --uc-sb-active-background-animation-name: none;
+                    --uc-sb-active-background-position-value: center;
+                    --uc-sb-active-background-size: 100% 100%;
+                    background-image:
+                        var(--uc-sb-tab-state-overlay, none), var(--uc-sb-active-border-gradient),
+                        var(--uc-sb-active-background-gradient) !important;
+                    background-origin: border-box, border-box, border-box !important;
+                    background-clip: border-box, border-area, border-box !important;
+                    background-position: center, center, var(--uc-sb-active-background-position-value) !important;
+                    background-repeat: no-repeat, no-repeat, no-repeat !important;
+                    background-size:
+                        100% 100%,
+                        auto,
+                        var(--uc-sb-active-background-size) !important;
+                    animation-name:
+                        var(--uc-sb-active-border-animation-name), var(--uc-sb-active-background-animation-name);
+                    animation-duration: 5s;
+                    animation-timing-function: steps(30), ease-in-out;
+                    animation-iteration-count: infinite;
+                    animation-direction: normal, alternate;
+                }
+            }
+        }
+
+        @media -moz-pref("uc.flex.style-tab-items-gradient-background", 1) or -moz-pref("uc.flex.style-tab-items-gradient-background", 2) {
+            @media not -moz-pref("uc.flex.~dev-revert-to-pre-nova-style") {
+                .Tab[data-active="true"] .body {
+                    /**
+                     * Override the activated background on .body so its ::before
+                     * inherits transparent instead of the theme value declared on
+                     * #root. This keeps later theme rules from painting over the
+                     * active gradient. Inactive multi-selected tabs do not match
+                     * this selector and retain their inherited theme background.
+                     */
+                    --tabs-activated-bg: transparent !important;
+                    &::before {
+                        --uc-sb-active-background-gradient: linear-gradient(
+                            135deg in oklab,
+                            lch(
+                                    from var(--uc-sb-tab-border-gradient-start)
+                                        calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                        var(--uc-tab-gradient-alpha)
+                                )
+                                20.68%,
+                            lch(
+                                    from var(--uc-sb-tab-border-gradient-end)
+                                        calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                        var(--uc-tab-gradient-alpha)
+                                )
+                                79.34%
+                        );
+
+                        @media -moz-pref("uc.flex.style-tab-items-gradient-background", 2) {
+                            --uc-sb-active-background-gradient: linear-gradient(
+                                135deg in oklab,
+                                lch(
+                                        from var(--uc-sb-tab-border-gradient-start)
+                                            calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                            var(--uc-tab-gradient-alpha)
+                                    )
+                                    0%,
+                                lch(
+                                        from var(--uc-sb-tab-border-gradient-end)
+                                            calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                            var(--uc-tab-gradient-alpha)
+                                    )
+                                    50%,
+                                lch(
+                                        from var(--uc-sb-tab-border-gradient-start)
+                                            calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                            var(--uc-tab-gradient-alpha)
+                                    )
+                                    100%
+                            );
+                            --uc-sb-active-background-position-value: var(--uc-sb-active-background-position) center;
+                            --uc-sb-active-background-size: 200% 100%;
+                            --uc-sb-active-background-animation-name: uc-sb-active-background-flow;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media not (-moz-pref("uc.flex.style-tab-items-gradient-border", 0) or
+ -moz-pref("uc.flex.style-tab-items-border-width", 0) or
+ -moz-pref("uc.flex.~dev-revert-to-pre-nova-style")) {
+            .Tab[data-active="true"]:not([data-selected="true"]) .body {
+                --tabs-activated-shadow: none !important;
+                &::before {
+                    --uc-sb-active-border-gradient: linear-gradient(
+                        96deg,
+                        var(--uc-sb-tab-border-gradient-start) 20.68%,
+                        var(--uc-sb-tab-border-gradient-end) 79.34%
+                    );
+                    @media -moz-pref("uc.flex.style-tab-items-gradient-border", 2) {
+                        --uc-sb-active-border-gradient: conic-gradient(
+                            from var(--uc-sb-active-border-angle),
+                            var(--uc-sb-tab-border-gradient-start),
+                            var(--uc-sb-tab-border-gradient-end),
+                            var(--uc-sb-tab-border-gradient-start),
+                            var(--uc-sb-tab-border-gradient-end),
+                            var(--uc-sb-tab-border-gradient-start)
+                        );
+                        --uc-sb-active-border-animation-name: uc-sb-active-border-flow;
+                    }
+                    border: var(--uc-sb-active-tab-border-width) solid transparent;
+                    box-shadow: none !important;
+                }
+            }
+        }
+
+        @media -moz-pref("uc.flex.style-tab-items-gradient-border", 2) or -moz-pref("uc.flex.style-tab-items-gradient-background", 2) {
+            .Tab:hover .body::before {
+                animation-duration: 2.5s;
+            }
+        }
+    }
+
+    /* Keep Sidebery's loading effects above the tab surface. */
+    .Tab :is(.flash-fx, .progress-spinner) {
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .tab-wrapper .Tab {
+        --uc-sb-tab-surface-width: var(--uc-sb-pinned-tab-surface-width);
+    }
+    .tab-wrapper .Tab .body {
+        @media not -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
+            &::before {
+                transition:
+                    background-color 0.06s,
+                    box-shadow 0.8s;
+            }
+            .Tab:hover &::before {
+                transition:
+                    background-color 0s,
+                    box-shadow 0.1s;
+            }
+        }
+
+        @media not (-moz-pref("uc.flex.style-tab-items", 2) or -moz-pref("uc.flex.style-tab-items", 0)) {
+            &::before {
+                border: 1.5px solid var(--uc-sb-pinned-tab-border-color) !important;
+            }
+        }
+        @media -moz-pref("uc.flex.style-tab-items", 2) {
+            &::before {
+                border: none !important;
+            }
+
+            .Tab:not([data-active="true"], [data-selected="true"]) &::before {
+                box-shadow: 0px 0px 0px transparent !important;
+            }
+            .Tab:not([data-active="true"], [data-selected="true"], [data-colorized="true"]) &::before {
+                background-color: var(--uc-sb-pinned-tab-bgcolor) !important;
+            }
+
+            .Tab[data-discarded="true"] &::before {
+                background-color: var(--uc-sb-pinned-tab-unloaded-bgcolor) !important;
+            }
+
+            .Tab:not([data-active="true"], [data-selected="true"]):hover &::before {
+                box-shadow: var(--uc-sb-pinned-tab-box-shadow) !important;
+            }
+        }
+
+        @media not -moz-pref("uc.flex.style-tab-items", 0) {
+            .Tab[data-discarded="true"] &::before {
+                border: 1px solid var(--uc-sb-pinned-tab-unloaded-border-color) !important;
+            }
+            .Tab:not([data-active="true"], [data-selected="true"]):hover &::before {
+                background-color: var(--uc-sb-tab-hover-bgcolor) !important;
+            }
+        }
+    }
+
+    .AnimatedTabList .Tab .body {
+        @media not -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
+            &::before {
+                transition:
+                    background-color 0.06s,
+                    box-shadow 0.06s;
+            }
+            .Tab:hover &::before {
+                transition:
+                    background-color 0s,
+                    box-shadow 0.1s;
+            }
+        }
+
+        @media not -moz-pref("uc.flex.style-tab-items", 0) {
+            .Tab:not([data-active="true"], [data-selected="true"]):hover &::before {
+                background-color: var(--uc-sb-tab-hover-bgcolor) !important;
+            }
+        }
+    }
+
+    @media -moz-pref("uc.flex.style-tab-items-background-fill", 0) {
+        .Tab:is([data-active="true"], [data-selected="true"]) .color-layer {
+            opacity: 0 !important;
+            /*
+            opacity: 0.3 !important;
+            #root[data-frame-color-scheme="light"] & {
+                opacity: 0.2 !important;
+            }
+            */
+        }
+    }
+
+    @media -moz-pref("uc.flex.style-tab-items-background-fill", 2) {
+        .AnimatedTabList
+            .Tab:not([data-active="true"], [data-selected="true"], [data-colorized="true"], :hover)
+            .body::before {
+            background-color: var(--uc-sb-tab-fill-bgcolor) !important;
+        }
+        @media -moz-pref("uc.flex.style-tab-items", 0) {
+            .PinnedTabsBar
+                .Tab:not([data-active="true"], [data-selected="true"], [data-colorized="true"], :hover)
+                .body::before {
+                background-color: var(--uc-sb-pinned-tab-fill-bgcolor) !important;
+            }
+        }
+    }
+
+    @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
+        -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
+        #root .Tab .close > svg {
+            border-radius: var(--tabs-border-radius);
+        }
+    }
+
+    /* Configure the close button warning zone and position it over the favicon on hover. */
+    .AnimatedTabList .Tab {
+        /* Since --tabs-inner-gap is redefined under .Tab, variables calculated from it must also be declared under .Tab. */
+        --uc-sb-fav-size: calc(2 * var(--tabs-inner-gap) + 2px + 16px);
+        --uc-sb-fav-left-half: calc(var(--tabs-inner-gap) + 2px + 8px);
+        --uc-sb-tabs-close-btn-margin: var(--tabs-close-btn-margin);
+        --uc-sb-tab-close-button-size: calc(var(--uc-sb-tab-height) - var(--uc-sb-tabs-close-btn-margin) * 2);
+
+        @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 0) {
+            --uc-sb-tabs-close-btn-margin: calc(var(--tabs-close-btn-margin) + 2px);
+            .close {
+                top: var(--uc-sb-tabs-close-btn-margin) !important;
+                right: var(--uc-sb-tabs-close-btn-margin) !important;
+                height: var(--uc-sb-tab-close-button-size) !important;
+            }
+            /* Override the legacy hover background declaration. */
+            .close > svg:hover {
+                background: transparent !important;
+                opacity: 1 !important;
+            }
+        }
+        @media -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover") {
+            @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
+                &:hover .fav {
+                    opacity: 0 !important;
+                }
+                .close {
+                    order: -1 !important;
+                    position: relative !important;
+                    inset: 0 !important;
+                    left: calc(
+                        var(--uc-sb-fav-left-half) - (var(--uc-sb-fav-size) - var(--uc-sb-tab-close-button-size) / 2)
+                    ) !important;
+                    margin-inline: calc(var(--uc-sb-fav-size) - var(--uc-sb-tab-close-button-size))
+                        calc(-1 * var(--uc-sb-fav-size));
+                    z-index: 21 !important;
+                }
+            }
+        }
+        @media not -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover") {
+            @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 2) {
+                .close {
+                    top: 0 !important;
+                    right: 0 !important;
+                    width: calc(var(--uc-sb-tab-height) - 2px);
+                    height: var(--uc-sb-tab-height) !important;
+                    border-start-start-radius: 3px !important;
+                    border-end-start-radius: 3px !important;
+                    @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
+                        -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
+                        top: 1px !important;
+                        height: calc(var(--uc-sb-tab-height) - 2px) !important;
+                        border-radius: calc(var(--tabs-border-radius) - 1px) !important;
+                    }
+                }
+                .close-icon {
+                    top: calc(50% - 10px) !important;
+                    left: calc(50% - 10px) !important;
+                    width: 20px !important;
+                    height: 20px !important;
+                }
+            }
         }
     }
 
@@ -1000,28 +1649,19 @@
     }
 
     .Tab[data-group="true"][data-parent="true"] .body .t-box .title {
+        /*
         @media (prefers-color-scheme: light) {
             text-shadow: 0 0 0.03em rgb(from currentColor r g b / calc(alpha * 0.8));
         }
+        */
+        /*
         @media (prefers-color-scheme: dark) {
-            text-shadow: none;
-            -webkit-text-stroke: 0.03em;
+        */
+        text-shadow: none;
+        -webkit-text-stroke: 0.03em;
+        /*
         }
-    }
-
-    .NavigationBar .nav-item {
-        #root:not([data-nav-inline="true"]) & {
-            --nav-btn-width: 38px;
-            --nav-btn-height: 33px;
-        }
-    }
-    .NavigationBar.-vert .nav-item {
-        #root[data-density="compact"] & {
-            --nav-btn-height: 28px !important;
-        }
-        #root[data-density="loose"] & {
-            --nav-btn-height: 34px !important;
-        }
+        */
     }
 
     .NavigationBar {
@@ -1036,33 +1676,73 @@
              * this adjustment is unnecessary and is reset to 0.
              */
             --nav-btn-len-margin: 0px;
-            /* Match the spacing between navigation buttons to the pinned tabs below. */
-            #root .NavigationBar.-top & {
-                @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
-                    column-gap: 3px !important;
-                    @media -moz-pref("uc.flex.sidebery-expand-width", 2) {
-                        margin-inline: 2px;
-                        column-gap: 2.5px !important;
-                        .nav-item {
-                            --nav-btn-width: 34px !important;
-                        }
-                    }
-                    @media -moz-pref("uc.flex.sidebery-expand-width", 3) {
-                        column-gap: 2px !important;
-                    }
-                    @media -moz-pref("uc.flex.sidebery-expand-width", 4) {
-                        margin-inline: 2px;
-                        column-gap: 2px !important;
-                        .nav-item {
-                            --nav-btn-width: 34px !important;
-                        }
-                    }
-                }
-            }
         }
     }
 
+    /**
+     * Keep 34px navigation buttons centered in the 40px collapsed bar while
+     * leaving a 3px lower fade area for the active dark-theme shadow. Wrapped
+     * rows remain clipped until the bar is hovered.
+    */
+    #root:not([data-nav-inline="true"]) .NavigationBar.-top {
+        padding: var(--uc-sb-navbar-padding) !important;
+
+        .main-items {
+            /* Relative offset preserves the flex layout and Sidebery drag transforms. */
+            inset-block-start: var(--uc-sb-main-items-offset);
+            min-height: var(--uc-sb-main-items-min-height) !important;
+            row-gap: 3px !important;
+            /* Keep a complete first row's final navigation-item border aligned with the content end. */
+            @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+                column-gap: var(--uc-sb-nav-column-gap) !important;
+            }
+        }
+
+        .nav-item {
+            --nav-btn-width: var(--uc-sb-nav-item-size) !important;
+            --nav-btn-height: var(--uc-sb-nav-item-size) !important;
+        }
+    }
+
+    /**
+     * In layouts without a horizontal navigation bar, reserve Sidebery's
+     * standard block-start gap for central content. Reduce the height by the
+     * same offset to keep its block-end edge aligned.
+     */
+    #root:is([data-nav-layout="left"], [data-nav-layout="right"], [data-nav-layout="hidden"]) {
+        .central-box {
+            height: calc(100% - var(--uc-sb-central-box-block-start)) !important;
+            margin-top: var(--uc-sb-central-box-block-start);
+        }
+    }
+
+    /**
+     * In vertical navigation layouts, keep the central tab area at its preferred
+     * width while allowing the side navigation boxes to shrink first. This gives
+     * collapsed tabs the full 44px width instead of reducing them to make room
+     * for the navigation bar.
+     */
+    .central-box {
+        width: auto !important;
+        min-width: 0 !important;
+        flex: 1 0 min(100%, var(--uc-sb-central-box-width)) !important;
+        overflow: clip;
+    }
+
+    .right-vertical-box,
+    .left-vertical-box {
+        width: auto !important;
+        min-width: 0 !important;
+        flex: 0 1 auto !important;
+        overflow: clip;
+    }
+
     #root.root .NavigationBar.-vert {
+        /* Keep the side navigation track aligned with the collapsed sidebar width. */
+        box-sizing: border-box !important;
+        width: var(--uc-sidebar-width) !important;
+        min-width: var(--uc-sidebar-width) !important;
+
         --uc-sb-navbar-bg-gradient-alpha: 0.1;
         @media (prefers-color-scheme: dark) {
             --uc-sb-navbar-bg-gradient-alpha: 0.05;
@@ -1111,12 +1791,17 @@
                 left bottom,
                 0 0;
         }
+
         /* Match the spacing between navigation buttons to the pinned tabs beside them. */
         .main-items {
-            row-gap: 1px !important;
+            row-gap: var(--uc-sb-pinned-tab-row-gap) !important;
         }
+
         .nav-item {
-            margin-block: 2px !important;
+            /* Keep each button circular and match the pinned-tab row rhythm. */
+            --nav-btn-width: var(--uc-sb-tab-height) !important;
+            --nav-btn-height: var(--uc-sb-tab-height) !important;
+            margin-block: var(--uc-sb-tab-item-margin-block) !important;
             &:last-of-type {
                 border-radius: var(--nav-btn-border-radius) !important;
             }
@@ -1154,6 +1839,11 @@
     /* Adjust tree guide line positioning to account for FlexFox's custom tab margin. */
     #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
         left: calc((var(--tabs-indent) + var(--uc-sb-tree-line-indent-offset)) / -2) !important;
+    }
+
+    /* Extend tree guide lines through the inter-tab margin. */
+    .AnimatedTabList .Tab[data-pin="false"] .body::after {
+        height: calc(var(--tabs-height) + var(--tabs-margin) + var(--uc-sb-tab-item-margin-block)) !important;
     }
 
     /* Adjust spacing and layout of the search bar */
@@ -1207,103 +1897,21 @@
     }
 
     .PinnedTabsBar {
-        margin-block: 2px;
+        margin-block-start: var(--uc-sb-pinned-tab-margin-block, var(--uc-sb-tab-item-margin-block));
+        margin-block-end: var(
+            --uc-sb-pinned-tab-margin-block,
+            calc(var(--uc-sb-tab-item-margin-block) + var(--uc-sb-central-box-block-start))
+        );
     }
 
     .AnimatedTabList {
         margin-top: 2px;
         .Tab {
-            padding-block: 2px;
+            margin-block: var(--uc-sb-tab-item-margin-block) !important;
         }
     }
     .PinnedTabsBar ~ .ScrollBox .AnimatedTabList {
         margin-top: 0;
-    }
-
-    .tab-wrapper .Tab .body {
-        @media not -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
-            transition:
-                opacity var(--d-fast),
-                transform var(--d-fast),
-                background-color 0.06s,
-                box-shadow 0.8s !important;
-            .Tab:hover & {
-                transition:
-                    opacity var(--d-fast),
-                    transform var(--d-fast),
-                    background-color 0s,
-                    box-shadow 0.1s !important;
-            }
-        }
-
-        @media not -moz-pref("uc.flex.style-tab-items", 2) {
-            border: 1.5px solid var(--uc-sb-pinned-tab-border-color) !important;
-        }
-        @media -moz-pref("uc.flex.style-tab-items", 2) {
-            border: none !important;
-
-            .Tab:not([data-active="true"], [data-selected="true"]) & {
-                background-color: var(--uc-sb-pinned-tab-bgcolor) !important;
-                box-shadow: 0px 0px 0px transparent !important;
-            }
-            .Tab[data-discarded="true"] & {
-                background-color: var(--uc-sb-pinned-tab-unloaded-bgcolor) !important;
-            }
-
-            .Tab:not([data-active="true"], [data-selected="true"]):hover & {
-                background-color: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
-                box-shadow: var(--uc-sb-pinned-tab-box-shadow) !important;
-            }
-        }
-    }
-    .tab-wrapper .Tab[data-discarded="true"] .body {
-        border: 1px solid var(--uc-sb-pinned-tab-unloaded-border-color) !important;
-    }
-
-    /**
-     * Directly overriding the background color on `.body` would require
-     * `!important`, which would then force additional rules to also use
-     * `!important`.
-     *
-     * Instead, we redefine the `--tabs-normal-bg` variable on the target
-     * element and control the background color through the variable,
-     * reducing overall rule complexity and overhead.
-     */
-    .Tab .body {
-        --tabs-normal-bg: transparent;
-        .Tab:not([data-active="true"], [data-selected="true"]):hover & {
-            --tabs-normal-bg: light-dark(rgba(0, 0, 0, 0.071), rgba(255, 255, 255, 0.086));
-        }
-    }
-    .Tab[data-selected="true"][data-active="true"] .body {
-        background-color: var(--tabs-activated-bg) !important;
-        --frame-el-overlay-selected-bg: transparent;
-    }
-    .Tab[data-selected="true"][data-active="false"] .body {
-        background-color: rgb(from var(--tabs-activated-bg) r g b / calc(alpha * 0.65)) !important;
-    }
-
-    .AnimatedTabList .Tab .body {
-        @media not -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
-            transition:
-                opacity var(--d-fast),
-                transform var(--d-fast),
-                background-color 0.06s,
-                box-shadow 0.06s !important;
-            .Tab:hover & {
-                transition:
-                    opacity var(--d-fast),
-                    transform var(--d-fast),
-                    background-color 0s,
-                    box-shadow 0.1s !important;
-            }
-        }
-
-        @media -moz-pref("uc.flex.style-tab-items", 2) {
-            .Tab:not([data-active="true"], [data-selected="true"]):hover & {
-                background-color: var(--uc-sb-tab-hover-bgcolor) !important;
-            }
-        }
     }
 
     /* Prevent gaps between the background fill and the border */
@@ -1319,10 +1927,12 @@
          * on an ancestor element, it must be restored on `.new-tab-btns`,
          * as this element does not use a transparent hover background.
          */
+        /*
         --frame-el-overlay-hover-bg: light-dark(rgba(0, 0, 0, 0.071), rgba(255, 255, 255, 0.086)) !important;
         @media -moz-pref("uc.flex.style-tab-items", 2) {
-            --frame-el-overlay-hover-bg: var(--uc-sb-pinned-tab-hover-bgcolor) !important;
+            --frame-el-overlay-hover-bg: var(--uc-sb-tab-hover-bgcolor) !important;
         }
+        */
         padding-inline: var(--uc-sb-tabs-margin) !important;
 
         /** 
@@ -1349,66 +1959,21 @@
     */
 
     #root {
-        --uc-sb-tabs-margin: 5px;
-        --uc-sb-sidebery-default-tabs-margin: 2px;
-        /*
-         * Sidebery positions tree level marks based on its default 2px tab margin.
-         * FlexFox uses a fixed 5px tab margin, so the tree line needs a 3px offset
-         * to stay visually aligned.
-         */
-        --uc-sb-tree-line-indent-offset: calc(var(--uc-sb-tabs-margin) - var(--uc-sb-sidebery-default-tabs-margin));
-        --uc-sb-navbar-padding: 3px 2px;
-        @media (width > 50px) {
-            --uc-sb-navbar-padding: 3px 3px;
-        }
-        --uc-sb-central-box-width: var(--uc-sidebar-hover-width);
-        &:is([data-nav-layout="left"], [data-nav-layout="right"]) {
-            --uc-sb-navbar-padding: 4px 3px 4px 1px;
-            --uc-sb-central-box-width: calc(var(--uc-sidebar-hover-width) - var(--uc-sidebar-width));
-        }
-        /*
-        --tabs-margin: 2.5px !important;
-        */
-        --uc-sb-pinned-tab-row-gap: 1px;
-        --uc-sb-pinned-tab-height: 37px;
-        &[data-density="compact"] {
-            --uc-sb-pinned-tab-height: 32px;
-        }
-        &[data-density="loose"] {
-            --uc-sb-pinned-tab-height: 38px;
-        }
-
-        .central-box {
-            width: auto !important;
-            min-width: 0 !important;
-            flex: 1 0 min(100%, var(--uc-sb-central-box-width)) !important;
-            overflow: clip;
-        }
-
-        .right-vertical-box,
-        .left-vertical-box {
-            width: auto !important;
-            min-width: 0 !important;
-            flex: 0 1 auto !important;
-            overflow: clip;
-        }
-
         .PinnedTabsBar {
             min-width: var(--uc-sb-central-box-width);
             /** 
              * .tab-wrapper requires a minimum width of var(--tabs-pinned-width).
-             * When the sidebar becomes narrower, the percentage-based value from
-             * --uc-sb-pinned-tab-max-columns may become smaller than that minimum,
-             * causing Grid to create more columns than the pinned tabs can actually fit.
-             * Use the larger of the two values so Grid reduces the column count instead
-             * of allowing pinned tabs to overlap. 
+             * The derived size reserves all inter-column gaps while fitting the
+             * configured maximum column count into the available grid width. When
+             * the sidebar becomes narrower, use the larger native minimum width so
+             * Grid reduces the column count instead of allowing pinned tabs to overlap.
              */
             grid-template-columns: repeat(
                 auto-fit,
-                minmax(max(var(--tabs-pinned-width), var(--uc-sb-pinned-tab-max-columns)), 1fr)
+                minmax(max(var(--tabs-pinned-width), var(--uc-sb-pinned-tab-column-width)), 1fr)
             ) !important;
             grid-auto-rows: min-content;
-            column-gap: 2px !important;
+            column-gap: var(--uc-sb-pinned-tab-column-gap) !important;
             row-gap: var(--uc-sb-pinned-tab-row-gap) !important;
             flex-shrink: 0;
             overflow-x: hidden;
@@ -1417,8 +1982,8 @@
             scroll-behavior: smooth;
             @media not -moz-pref("uc.flex.max-visible-vertical-pinned-tabs", 0) {
                 max-height: calc(
-                    var(--uc-sb-pinned-tab-max-rows) * var(--uc-sb-pinned-tab-height) +
-                        (var(--uc-sb-pinned-tab-max-rows) - 1) * var(--uc-sb-pinned-tab-row-gap)
+                    var(--uc-sb-pinned-tab-max-row-count) * var(--uc-sb-pinned-tab-wrapper-height) +
+                        (var(--uc-sb-pinned-tab-max-row-count) - 1) * var(--uc-sb-pinned-tab-row-gap)
                 );
             }
 
@@ -1436,8 +2001,9 @@
             }
             .tab-wrapper {
                 min-width: var(--tabs-pinned-width) !important;
-                margin: 2px 0 !important;
-                padding: 0px 2px;
+                margin-block: var(--uc-sb-tab-item-margin-block) !important;
+                margin-inline: 0 !important;
+                padding: 0;
             }
         }
 
@@ -1449,7 +2015,7 @@
             padding: 0px !important;
         }
         &:not([data-nav-inline="true"]) .NavigationBar .nav-item {
-            margin: 0 1px !important;
+            margin: 0 !important;
         }
 
         /** 
@@ -1475,7 +2041,8 @@
         }
 
         .PinnedTabsBar {
-            padding: 0 3px !important;
+            padding-block: 0 !important;
+            padding-inline: var(--uc-sb-tabs-margin) !important;
         }
 
         .BottomBar {
@@ -1582,8 +2149,7 @@
             display: block !important;
 
             visibility: hidden;
-            transition: visibility var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                var(--uc-autohide-sidebar-delay);
+            transition: visibility 0s var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
         }
         /* 🔼 End of initial state block */
 
@@ -1761,9 +2327,14 @@
          * leaving the content-sized height slightly under 40px and causing tabs
          * to shift during sidebar expansion.
          */
-        min-height: 40px;
+        min-height: var(--uc-sb-navbar-min-height);
         @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
-            max-height: 40px;
+            max-height: var(--uc-sb-navbar-min-height);
+        }
+        @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+            &:not(:hover) {
+                max-height: var(--uc-sb-navbar-min-height);
+            }
         }
         padding: var(--uc-sb-navbar-padding) !important;
         .nav-item[data-active="true"] > svg {
@@ -1773,8 +2344,8 @@
         @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
             @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
                 &:not(.-vert):hover .nav-item[data-active="true"] > svg {
-                    width: 22px !important;
-                    height: 22px !important;
+                    width: var(--uc-sb-nav-item-icon-hover-size) !important;
+                    height: var(--uc-sb-nav-item-icon-hover-size) !important;
                 }
             }
         }
@@ -1821,7 +2392,7 @@
     /* When Sidebery's auto-collapse is disabled, stop the transition effect when hovering over Sidebery */
     @media (width > 50px) {
         #root:not([data-nav-inline="true"]) .NavigationBar {
-            max-height: 40px;
+            max-height: var(--uc-sb-navbar-min-height);
             height: auto !important;
             padding: var(--uc-sb-navbar-padding) !important;
             margin-bottom: 0px !important;
@@ -1857,8 +2428,8 @@
 
         @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
             #root:not([data-nav-inline="true"]) .NavigationBar:not(.-vert):hover .nav-item .icon {
-                width: 22px;
-                height: 22px;
+                width: var(--uc-sb-nav-item-icon-hover-size);
+                height: var(--uc-sb-nav-item-icon-hover-size);
                 transition:
                     width 50ms ease-in-out 120ms,
                     height 50ms ease-in-out 120ms !important;
@@ -1875,8 +2446,8 @@
         @media not -moz-pref("uc.flex.sidebery-disable-icon-scaling") {
             #root .PinnedTabsBar .Tab .fav,
             #root .PinnedTabsBar .Tab .fav-icon {
-                width: 20px !important;
-                height: 20px !important;
+                width: var(--uc-sb-pinned-tab-favicon-expanded-size) !important;
+                height: var(--uc-sb-pinned-tab-favicon-expanded-size) !important;
             }
         }
 
@@ -1928,8 +2499,8 @@
             }
             #root .PinnedTabsBar .Tab .fav,
             #root .PinnedTabsBar .Tab .fav-icon {
-                width: 16px !important;
-                height: 16px !important;
+                width: var(--uc-sb-pinned-tab-favicon-size) !important;
+                height: var(--uc-sb-pinned-tab-favicon-size) !important;
             }
             #root {
                 .ScrollBox .Tab {
@@ -1974,10 +2545,12 @@
     @media -moz-pref("uc.flex.allow-addons-to-change-toolbar-color"),
         not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org") or -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org")) {
         #root {
-            --tabs-activated-bg: var(--active-el-bg) !important;
+            @media not -moz-pref("uc.flex.style-tab-items-background-fill", 0) {
+                --tabs-activated-bg: var(--active-el-bg) !important;
+            }
 
             @media (prefers-color-scheme: dark) {
-                .Tab[data-selected="true"] .body {
+                .Tab[data-selected="true"] .body::before {
                     --frame-el-overlay-selected-border: var(--s-accent, #47cfff) !important;
                     background-color: var(--tabs-activated-bg) !important;
                     box-shadow: var(--tabs-activated-shadow) !important;
@@ -1989,7 +2562,7 @@
             }
 
             @media (prefers-color-scheme: light) {
-                .Tab[data-selected="true"] .body {
+                .Tab[data-selected="true"] .body::before {
                     --frame-el-overlay-selected-border: var(--s-accent, #146fd9) !important;
                     background-color: var(--tabs-activated-bg) !important;
                     box-shadow: var(--tabs-activated-shadow) !important;
@@ -2011,8 +2584,8 @@
     }
 
     /* Allow Sidebery's background to show Mica backdrop or a custom wallpaper */
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
         #root.root {
             --frame-bg: transparent !important;
@@ -2085,6 +2658,31 @@
         max-width: var(--max-width);
         */
         margin: 24px 0 28px !important;
+        /* Add a fade-out mask to the right side of the input field. */
+        /*
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            background: linear-gradient(to right, transparent calc(100% - 32px), var(--toolbar-bg) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        */
+    }
+
+    #title {
+        /* Firefox 152+ supports the field-sizing CSS property, used here to fit the input and gradient to the text width. */
+        field-sizing: content;
+        width: auto !important;
+        max-width: calc(100% - 16px);
+        margin-inline: auto !important;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: "";
     }
 
     #root[data-toolbar-color-scheme="light"] {
@@ -2094,11 +2692,10 @@
             text-align: center;
             */
             @media -moz-pref("uc.flex.style-sidebar-stripe-color") {
-                color: transparent !important;
                 background: linear-gradient(
-                    70deg in oklab,
-                    var(--uc-sidebar-stripe-gradient-start),
-                    var(--uc-sidebar-stripe-gradient-end)
+                    135deg in oklab,
+                    var(--uc-sidebar-stripe-gradient-start) 10%,
+                    var(--uc-sidebar-stripe-gradient-end) 100%
                 ) !important;
                 -webkit-background-clip: text !important;
                 -webkit-text-fill-color: transparent;
@@ -2110,9 +2707,9 @@
         --toolbar-bg: #2b2a33 !important;
         #title {
             background: linear-gradient(
-                70deg in oklab,
-                var(--uc-sidebar-stripe-gradient-start),
-                var(--uc-sidebar-stripe-gradient-end)
+                135deg in oklab,
+                var(--uc-sidebar-stripe-gradient-start) 10%,
+                var(--uc-sidebar-stripe-gradient-end) 100%
             ) !important;
             -webkit-background-clip: text !important;
             -webkit-text-fill-color: transparent;
@@ -2143,8 +2740,8 @@
     }
 
     /* Allow group page backgrounds to show Mica backdrop or a custom wallpaper */
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser"),
-        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("browser.tabs.allow_transparent_browser"),
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica) and -moz-pref("browser.tabs.allow_transparent_browser"),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica) and -moz-pref("browser.tabs.allow_transparent_browser"),
         -moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser") {
         #root.root {
             --frame-bg: transparent !important;

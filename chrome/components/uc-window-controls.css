@@ -199,7 +199,7 @@
         @media not -moz-pref("uc.flex.restore-window-controls-on-tabbar") {
             #TabsToolbar {
                 :root:not([customizing]) & {
-                    z-index: 3;
+                    z-index: calc(var(--uc-toolbar-z-index-base) + 2);
                     > .titlebar-buttonbox-container {
                         position: absolute;
                         top: var(--uc-tabstoolbar-height);

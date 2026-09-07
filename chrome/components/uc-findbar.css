@@ -104,6 +104,8 @@ findbar checkbox {
 /* === findbar === */
 findbar {
     --button-bgcolor: var(--uc-urlbar-bg, var(--button-background-color));
+    --uc-findbar-outline-color: rgb(from var(--uc-findbar-outline) r g b / calc(alpha * 0.7));
+    --uc-findbar-outline-width: 1px;
     position: absolute;
     /* Keep absolute positioning relative to the full browser container instead of Firefox's findbar grid area. */
     grid-area: unset !important;
@@ -126,9 +128,29 @@ findbar {
         var(--lwt-additional-images) !important;
     border-top: none !important;
     overflow-x: visible;
-    filter: drop-shadow(rgb(from var(--uc-findbar-outline) r g b / calc(alpha * 0.7)) 0px 0px 0.5px)
-        drop-shadow(0 18px 30px rgba(12, 12, 16, 0.2));
+    filter: drop-shadow(0 18px 30px rgba(12, 12, 16, 0.2));
     z-index: 100;
+}
+
+/* Uses a pseudo-element for the four-sided border to avoid turning the findbar 
+ * into a backdrop root, which would otherwise break the backdrop-filter blur 
+ * on .found-matches. The border automatically inherits the findbar's rounded 
+ * corners, switching to a square bottom-left corner when .found-matches is present. 
+ * Additionally, .found-matches overlays and covers the findbar's bottom border 
+ * to keep the elements visually connected. */
+findbar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    padding: var(--uc-findbar-outline-width);
+    pointer-events: none;
+    border-radius: inherit;
+    background-color: var(--uc-findbar-outline-color);
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask-composite: exclude;
 }
 
 .findbar-container {
@@ -228,6 +250,13 @@ findbar [anonid="findbar-textbox-wrapper"] {
     /* wasn't square for some reason */
     width: auto !important;
     padding: 4px !important;
+    margin-inline-start: 3px !important;
+    @media -moz-pref("uc.flex.style-toolbar-items-border-radius", 1) {
+        border-radius: 4px !important;
+    }
+    @media -moz-pref("uc.flex.style-toolbar-items-border-radius", 2) {
+        border-radius: var(--border-radius-circle) !important;
+    }
     .toolbarbutton-icon {
         width: 12px;
         height: 12px;
@@ -237,22 +266,39 @@ findbar [anonid="findbar-textbox-wrapper"] {
 /* move matched amount below main findbar */
 .found-matches {
     --uc-found-matches-arc-width: 22px;
-    --uc-found-matches-arc-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 20' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H22C17 0 9 20 0 20V0Z'/%3E%3C/svg%3E");
-    @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
-        --uc-found-matches-arc-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 20' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H22C18 0 5 20 0 20V0Z'/%3E%3C/svg%3E");
+    --uc-found-matches-arc-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 23' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H22V1C17 1 9 23 0 23V0Z'/%3E%3C/svg%3E");
+    --uc-found-matches-arc-outline-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 23' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M22 1C17 1 9 23 0 23L0 22C8.333 22 16.333 0 22 0Z'/%3E%3C/svg%3E");
+    @media -moz-pref("uc.flex.style-toolbar-items-border-radius", 2),
+        -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-toolbar-items-border-radius", 1)) {
+        /* A wider, flatter arc follows Nova's 18px findbar corner more closely. */
+        --uc-found-matches-arc-width: 28px;
+        --uc-found-matches-arc-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 23' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H28V1C22 1 13 23 0 23V0Z'/%3E%3C/svg%3E");
+        --uc-found-matches-arc-outline-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 23' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M28 1C22 1 13 23 0 23L0 22C12.333 22 21.333 0 28 0Z'/%3E%3C/svg%3E");
     }
-    height: 22px;
-    /* Avoid mask snapping gaps caused by font-derived normal line-height. */
+    @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
+        /* This mode overrides the Nova arc as well as its standard shape. */
+        --uc-found-matches-arc-width: 22px;
+        --uc-found-matches-arc-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 23' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H22V1C18 1 5 23 0 23V0Z'/%3E%3C/svg%3E");
+        --uc-found-matches-arc-outline-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 23' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M22 1C18 1 5 23 0 23L0 22C4.333 22 17.333 0 22 0Z'/%3E%3C/svg%3E");
+    }
+    height: 23px;
+    box-sizing: border-box;
     line-height: 22px;
     min-width: calc(var(--uc-findbar-textbox-width) + var(--uc-found-matches-arc-width) / 2);
     position: absolute;
-    padding: 0 28px 0 10px;
-    top: 36px;
+    padding: var(--uc-findbar-outline-width) 28px 0 10px;
+    /* Overlap findbar by the outline width so this background covers findbar::after's bottom outline. */
+    top: calc(36px - var(--uc-findbar-outline-width));
     background-color: var(--uc-findbar-bgcolor, var(--toolbar-background-color));
     left: 0px;
     border-bottom-left-radius: var(--uc-findbar-outer-border-radius);
     z-index: 9;
-    mask-image: linear-gradient(#000 0 0), var(--uc-found-matches-arc-mask);
+    /* Combines a rounded rectangular body and the right arc to create the .found-matches shape.
+     * The outline is defined separately by .found-matches::after. */
+    mask-image:
+        /* 1: The rectangular body uses border-radius for the bottom-left corner. */
+        linear-gradient(#000 0 0),
+        /* 2: This SVG mask completes the top overlap and the right arc. */ var(--uc-found-matches-arc-mask);
     mask-position:
         left top,
         right top;
@@ -260,6 +306,38 @@ findbar [anonid="findbar-textbox-wrapper"] {
         calc(100% - var(--uc-found-matches-arc-width)) 100%,
         var(--uc-found-matches-arc-width) 100%;
     mask-repeat: no-repeat;
+    mask-composite: add;
+}
+.found-matches::after {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--uc-findbar-outline-width)) 0 0;
+    z-index: 10;
+    pointer-events: none;
+    box-sizing: border-box;
+    padding: var(--uc-findbar-outline-width);
+    border-radius: inherit;
+    background-color: var(--uc-findbar-outline-color);
+    /* Uses the same content-box difference as findbar::after for the left and bottom borders,
+     * then adds a filled SVG band for the right curved border. */
+    mask-image:
+        /* 1: This filled band defines both edges of the right curved border. */
+        var(--uc-found-matches-arc-outline-mask),
+        /* 2 and 3: Excluding the content box from the full box leaves a 1px rounded border. */
+            linear-gradient(#000 0 0),
+        linear-gradient(#000 0 0);
+    mask-position:
+        right bottom,
+        left top,
+        left top;
+    mask-size:
+        var(--uc-found-matches-arc-width) calc(100% - var(--uc-findbar-outline-width)),
+        100% 100%,
+        100% 100%;
+    mask-origin: border-box, content-box, border-box;
+    mask-clip: border-box, content-box, border-box;
+    mask-repeat: no-repeat;
+    mask-composite: add, exclude;
 }
 findbar:has(> .findbar-container > .found-matches:not([hidden])) {
     border-bottom-left-radius: 0px;
@@ -270,6 +348,11 @@ findbar:has(> .findbar-container > .found-matches:not([hidden])) {
 .found-matches::before {
     position: relative;
     inset-block-start: -1px;
+    inset-inline-start: 3px;
+    @media -moz-pref("uc.flex.style-toolbar-items-border-radius", 2),
+        -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-toolbar-items-border-radius", 1)) {
+        inset-inline-start: 8px;
+    }
     z-index: 8;
 }
 .findbar-textbox {

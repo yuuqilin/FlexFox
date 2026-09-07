@@ -18,7 +18,7 @@
             transform: rotateX(90deg);
             transform-origin: top;
             transition: var(--uc-autohide-personal-toolbar-transition) !important;
-            z-index: 1;
+            z-index: var(--uc-toolbar-z-index-base);
             /* The following properties should allow the themes with trasparent toolbars to work */
             background-color: transparent !important;
             background-repeat: no-repeat, no-repeat, var(--lwt-background-tiling);
@@ -36,12 +36,14 @@
                 top left,
                 var(--lwt-background-alignment, top left);
             background-position-y: top, top, var(--uc-bg-y), var(--uc-bg-y), var(--uc-bg-y);
-            @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
-                @media not (-moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
-                    background-image:
-                        var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                        linear-gradient(var(--toolbar-background-color), var(--toolbar-background-color)),
-                        var(--lwt-header-image, var(--lwt-additional-images)) !important;
+            @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica)) {
+                @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
+                    @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica)) {
+                        background-image:
+                            var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
+                            linear-gradient(var(--toolbar-background-color), var(--toolbar-background-color)),
+                            var(--lwt-header-image, var(--lwt-additional-images)) !important;
+                    }
                 }
             }
 

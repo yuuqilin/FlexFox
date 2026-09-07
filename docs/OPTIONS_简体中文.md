@@ -96,9 +96,19 @@
 |-----------|:-------------:|-------------|
 | `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3`<br>(`0`) | 自动隐藏水平标签页，同时保留导航栏显示。取值：`0` = 不自动隐藏（默认），`1` = 鼠标悬停在导航栏时，标签页显示在导航栏下方，`2` = 鼠标悬停在导航栏时，标签页显示在导航栏上方，`3` = 仅当鼠标靠近屏幕顶部边缘时，标签页显示在导航栏上方。仅悬停在导航栏上不会触发显示。触发区域可通过 `--uc-tabstoolbar-hover-trigger-width` 进行调整。 |
 | `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1`<br>(`0`) | 自动隐藏导航栏，同时保留水平标签页显示。取值：`0` = 不自动隐藏（默认），`1` = 鼠标悬停在标签页时显示导航栏。此选项优先级更高，同时启用时会覆盖 `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar`。 |
-| `uc.flex.show-tab-close-button-on-favicon-hover` | `false` | 将关闭按钮与网站图标合并，并在鼠标悬停于网站图标时显示。此选项可为标签标题提供更多显示空间。 |
-| `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `false` | 为了方便快速关闭标签页，FlexFox 默认会在所有标签页上显示关闭按钮。当标签页变窄时，按钮会自动缩小并移动到角落，以减少误触。如果希望完全避免误触，可启用此选项以隐藏非活动标签页的关闭按钮。 |
 | `uc.flex.increase-active-horizontal-tab-min-width` | `0`-`4`<br>(`1`) | 自动增加当前标签页的宽度，使标签标题显示得更完整，并帮助当前标签页与其他标签页区分开来，以便快速定位。取值：`0` = 停用（所有标签页保持相同宽度），`1` = 宽度增加至 1.8 倍（无动画），`2` = 宽度增加至 1.8 倍（有动画），`3` = 宽度增加至 2 倍（无动画），`4` = 宽度增加至 2 倍（有动画）。此效果默认启用，如希望所有标签页保持相同宽度，请将其设为 `0`。 |
+| `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `false` | 为了方便快速关闭标签页，FlexFox 默认会在所有标签页上显示关闭按钮。当标签页变窄时，按钮会自动缩小并移动到角落，以减少误触。如果希望完全避免误触，可启用此选项以隐藏非活动标签页的关闭按钮。 |
+
+</details>
+
+<details>
+<summary>❌ 标签页关闭按钮</summary>
+<br>
+
+| Preference | Value | Description |
+|-----------|:-------------:|-------------|
+| `uc.flex.show-tab-close-button-on-favicon-hover` | `false` | 将关闭按钮与网站图标合并，并在鼠标悬停于网站图标时显示。此选项可为标签标题提供更多显示空间。 |
+| `uc.flex.style-tab-close-button-warning-zone-size` | `0`-`2`<br>(`1`) | 显示并调整标签页关闭按钮内警示区域的尺寸。取值：`0` = 不显示（原生外观），`1` = 小尺寸（默认），`2` = 大尺寸。启用 `uc.flex.show-tab-close-button-on-favicon-hover` 时，取值 `2` 无效，警示区域会以默认尺寸（`1`）显示。 |
 
 </details>
 
@@ -133,8 +143,13 @@
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | 设置标签页项目的外观。为了便于快速定位当前标签页，当前标签页会始终同时显示边框和背景高亮。普通标签页不显示边框和背景高亮。取值：`1` = 固定标签页仅显示边框（默认），`2` = 固定标签页仅显示背景高亮。背景高亮使用侧栏彩带的强调色。在暗色模式下选择 `2` 时，边框也会使用强调色。 |
+| `uc.flex.style-tab-items` | `0`-`2`<br>(`1`) | 设置固定标签页的外观。取值：`0` = 不显示边框和背景填充，`1` = 仅显示边框（默认），`2` = 仅显示背景填充。边框和背景填充在亮色模式下使用中性色，在暗色模式下使用侧栏彩带的强调色。取值为 `2` 时，选中标签页的边框始终使用强调色。 |
 | `uc.flex.style-tab-items-add-hover-trail` | `true` | 为标签页添加悬停拖尾效果。当鼠标划过标签页时，背景高亮会延迟消失，在光标后方形成高亮拖尾。此效果默认启用，如需关闭请将此选项设为 `false`。 |
+| `uc.flex.style-tab-items-background-fill` | `0`-`2`<br>(`1`) | 设置标签页背景填充。取值：`0` = 活动标签页背景透明，`1` = 活动标签页背景使用强调色（默认），`2` = 为所有标签页添加中性色基础背景填充。启用 `uc.flex.style-tab-items` 时，会覆盖固定标签页的基础背景色。当此选项与 `uc.flex.style-tab-items-border-width` 均设为 `0` 时，仍会保留 1px 边框。 |
+| `uc.flex.style-tab-items-border-radius` | `0`-`2`<br>(`0`) | 设置标签页项目的圆角。放置在水平标签栏上的“列出所有标签页”按钮也会跟随此设置。取值：`0` = 自动（默认）。遵循 Firefox 偏好设置，启用 Nova UI 时使用 Nova UI 圆角；`1` = 强制使用 Proton UI 圆角；`2` = 强制使用 Nova UI 圆角。 |
+| `uc.flex.style-tab-items-border-width` | `0`-`2`<br>(`2`) | 设置活动标签页的边框宽度。取值：`0` = 0px，`1` = 1px，`2` = 2px（默认）。 |
+| `uc.flex.style-tab-items-gradient-background` | `0`-`2`<br>(`0`) | 设置活动标签页的渐变背景。取值：`0` = 关闭（默认），`1` = 静态渐变，`2` = 动态渐变。此设置会覆盖 `uc.flex.style-tab-items-background-fill`。 |
+| `uc.flex.style-tab-items-gradient-border` | `0`-`2`<br>(`1`) | 设置活动标签页的 Nova UI 渐变边框。取值：`0` = 关闭，`1` = 静态渐变（默认），`2` = 动态渐变。当 `uc.flex.style-tab-items-border-width` 设置为 `0` 时，此选项不会生效。 |
 
 </details>
 
@@ -190,6 +205,7 @@
 | `uc.flex.auto-hide-urlbar-icons` | `true` | 自动隐藏地址栏中的图标，并在鼠标悬停于地址栏时通过滑入动画显示。此选项默认启用，如需始终显示图标，请将其设为 `false`。 |
 | `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | 设置地址栏的外观。取值：`1` = 扁平（默认），`2` = 嵌入，`3` = 压印，`4` = 无缝（与导航栏完全融合）。 |
 | `uc.flex.style-urlbar-center-text` | `false` | 将地址栏中的文字居中显示。 |
+| `uc.flex.style-urlbar-gradient` | `0`-`3`<br>(`0`) | 将侧栏彩带的渐变效果应用到地址栏元素。取值：`0` = 关闭（默认），`1` = 图标，`2` = 图标和边框，`3` = 图标、边框和网址文字。动画边框会在悬停时显示。如需 100% 没有淡化的文字渐变效果，请新建原生偏好设置 `browser.urlbar.formatting.enabled` 并设为 `false`。 |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | 将地址栏弹出面板移动到浏览器窗口中央。取值：`0` = 关闭（默认），`1` = 聚焦时居中显示，`2` = 仅在输入时居中显示。 |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2`<br>(`0`) | 在地址栏弹出面板显示时，将除弹出面板外的浏览器界面调暗。取值：`0` = 关闭，`1`-`2` = 不同强度的暗化效果，数值越大，暗化程度越高。 |
 
@@ -264,6 +280,7 @@
 | `uc.flex.add-ui-text-stroke` | `false` | 为界面文字添加描边，以提高可读性，尤其适用于低分辨率屏幕。 |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `false` | FlexFox 会自动检测带有背景图片的主题，并应用其配色规则。如果主题未设置背景图片，工具栏颜色可能无法正确生效。启用此选项后，可强制应用扩展或主题设置的工具栏颜色。为避免潜在冲突，建议优先为主题设置背景图片，而不是启用此选项。例如使用 [Firefox Color](https://color.firefox.com/) 时，无需启用此设置，只需选择任意一张纯色图片作为背景，FlexFox 即可自动识别并应用所配置的颜色。 |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | 使用 Firefox 内置亮色或暗色主题时，为工具栏应用以下配色方案：`1` = Tokyo Night 主题（默认），`2` = Firefox Acorn Design。 |
+| `uc.flex.style-toolbar-items-border-radius` | `0`-`2`<br>(`0`) | 设置工具栏按钮、面板项、菜单项、书签菜单项、展开的侧栏外侧上角、侧栏彩带和查找栏的圆角。取值：`0` = 自动（默认）。遵循 Firefox 偏好设置，启用 Nova UI 时使用 Nova UI 圆角；`1` = 强制使用 Proton UI 圆角；`2` = 强制使用 Nova UI 圆角。 |
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | 设置整个界面的圆角样式。取值：`0` = 小圆角（FlexFox 默认），`1` = 大圆角（Firefox 默认），`2` = 直角（旧版 Firefox 风格），`3` = 地址栏使用小圆角，其余界面使用直角。 |
 
 </details>

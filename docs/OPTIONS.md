@@ -96,9 +96,19 @@ Preferences are organized by the browser component or interface area they affect
 |-----------|:-------------:|-------------|
 | `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` | `0`-`3`<br>(`0`) | Automatically hides horizontal tabs while keeping the navigation bar visible. Values: `0` = tabs remain visible (default), `1` = tabs appear below the navigation bar when hovering over it, `2` = tabs appear above the navigation bar when hovering over it, `3` = tabs appear above the navigation bar only when the cursor reaches the top edge of the screen. Hovering over the navigation bar alone will not trigger them. The activation area can be adjusted using `--uc-tabstoolbar-hover-trigger-width`. |
 | `uc.flex.auto-hide-navbar-and-keep-horizontal-tabs` | `0`-`1`<br>(`0`) | Automatically hides the navigation bar while keeping horizontal tabs visible. Values: `0` = navigation bar remains visible (default), `1` = the navigation bar appears when hovering over the tabs. This option takes priority over `uc.flex.auto-hide-horizontal-tabs-and-keep-navbar` when both are enabled. |
-| `uc.flex.show-tab-close-button-on-favicon-hover` | `false` | Merges the close button into the favicon and shows it when hovering over the favicon. This option increases the available space for tab titles. |
-| `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `false` | To make tabs easier to close, FlexFox displays a close button on all tabs by default. When tabs become narrow, the button is automatically reduced in size and moved to the corner to help prevent accidental clicks. Enable this option to hide close buttons on inactive tabs completely. |
 | `uc.flex.increase-active-horizontal-tab-min-width` | `0`-`4`<br>(`1`) | Automatically increases the width of the active tab, making tab titles easier to read and helping the active tab stand out for quicker identification. Values: `0` = disabled (all tabs use the same width), `1` = 1.8× width without animation, `2` = 1.8× width with animation, `3` = 2× width without animation, `4` = 2× width with animation. This effect is enabled by default. Set the value to `0` to keep all tabs the same width. |
+| `uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs` | `false` | To make tabs easier to close, FlexFox displays a close button on all tabs by default. When tabs become narrow, the button is automatically reduced in size and moved to the corner to help prevent accidental clicks. Enable this option to hide close buttons on inactive tabs completely. |
+
+</details>
+
+<details>
+<summary>❌ Tab Close Buttons</summary>
+<br>
+
+| Preference | Value | Description |
+|-----------|:-------------:|-------------|
+| `uc.flex.show-tab-close-button-on-favicon-hover` | `false` | Merges the close button into the favicon and shows it when hovering over the favicon. This option increases the available space for tab titles. |
+| `uc.flex.style-tab-close-button-warning-zone-size` | `0`-`2`<br>(`1`) | Controls the visibility and size of the warning zone inside tab close buttons. Values: `0` = Hidden (native appearance), `1` = Small (default), `2` = Large. When `uc.flex.show-tab-close-button-on-favicon-hover` is enabled, value `2` has no effect and the warning zone uses the default size (`1`). |
 
 </details>
 
@@ -134,8 +144,13 @@ Preferences are organized by the browser component or interface area they affect
 
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
-| `uc.flex.style-tab-items` | `1`-`2`<br>(`1`) | Sets the appearance of tab items. The active tab always uses both a border and background highlight for easier identification. Regular tabs have no border or background highlight. Values: `1` = Pinned tabs use borders only (default), `2` = Pinned tabs use background highlights only. Background highlights use the sidebar stripe accent color. In Dark Mode with value `2`, borders also use the accent color. |
+| `uc.flex.style-tab-items` | `0`-`2`<br>(`1`) | Controls the appearance of pinned tabs. Values: `0` = No border or background fill, `1` = Border only (default), `2` = Background fill only. Borders and fills use neutral colors in Light Mode and the sidebar stripe accent color in Dark Mode. With value `2`, selected-tab borders always use the accent color. |
 | `uc.flex.style-tab-items-add-hover-trail` | `true` | Adds a trailing highlight effect when moving the cursor across tabs. The background highlight fades out gradually, creating a visual trail behind the cursor. This effect is enabled by default and can be disabled by setting this option to `false`. |
+| `uc.flex.style-tab-items-background-fill` | `0`-`2`<br>(`1`) | Controls tab background fills. Values: `0` = Transparent active-tab background, `1` = Accent-colored active-tab background (default), `2` = Add a neutral base background fill to all tabs. Enabling `uc.flex.style-tab-items` overrides the base background of pinned tabs. When this option and `uc.flex.style-tab-items-border-width` are both set to `0`, a 1px border is retained. |
+| `uc.flex.style-tab-items-border-radius` | `0`-`2`<br>(`0`) | Controls the corner radius of tab items. The “List All Tabs” button placed on the horizontal tab bar also follows this setting. Values: `0` = Automatic (default). Follows Firefox's preference and uses Nova UI corners when Nova UI is enabled; `1` = Force Proton UI corners; `2` = Force Nova UI corners. |
+| `uc.flex.style-tab-items-border-width` | `0`-`2`<br>(`2`) | Sets the border width of the active tab. Values: `0` = 0px, `1` = 1px, `2` = 2px (default). |
+| `uc.flex.style-tab-items-gradient-background` | `0`-`2`<br>(`0`) | Controls the gradient background on the active tab. Values: `0` = Disabled (default), `1` = Static gradient, `2` = Animated gradient. This setting overrides `uc.flex.style-tab-items-background-fill`. |
+| `uc.flex.style-tab-items-gradient-border` | `0`-`2`<br>(`1`) | Controls the Nova gradient border on the active tab. Values: `0` = Disabled, `1` = Static gradient (default), `2` = Animated gradient. This option has no effect when `uc.flex.style-tab-items-border-width` is set to `0`. |
 
 </details>
 
@@ -191,6 +206,7 @@ Preferences are organized by the browser component or interface area they affect
 | `uc.flex.auto-hide-urlbar-icons` | `true` | Hides URL bar icons and reveals them with a slide-in animation when hovering over the URL bar. This option is enabled by default; set it to `false` to keep the icons always visible. |
 | `uc.flex.style-urlbar` | `1`-`4`<br>(`1`) | Sets the appearance of the URL bar. Values: `1` = Flat (default), `2` = Inset, `3` = Debossed, `4` = Seamless (fully integrated into the navigation bar). |
 | `uc.flex.style-urlbar-center-text` | `false` | Centers the text in the URL bar. |
+| `uc.flex.style-urlbar-gradient` | `0`-`3`<br>(`0`) | Applies the sidebar stripe gradient to URL bar elements. Values: `0` = Disabled (default), `1` = Icons, `2` = Icons and border, `3` = Icons, border, and URL text. The animated border appears on hover. For an undimmed gradient text effect, create the native `browser.urlbar.formatting.enabled` preference and set it to `false`. |
 | `uc.flex.move-urlbar-popup-to-center` | `0`-`2`<br>(`0`) | Repositions the URL bar popup to the center of the browser window. Values: `0` = Disabled (default), `1` = Center when focused, `2` = Center only while typing. |
 | `uc.flex.dim-urlbar-popup-backdrop` | `0`-`2`<br>(`0`) | Dims the rest of the browser interface while the URL bar popup is open. Values: `0` = Disabled, `1`-`2` = Increasing dimming intensity. |
 
@@ -265,6 +281,7 @@ Preferences are organized by the browser component or interface area they affect
 | `uc.flex.add-ui-text-stroke` | `false` | Adds an outline to UI text to improve readability, especially on low-resolution displays. |
 | `uc.flex.allow-addons-to-change-toolbar-color` | `false` | FlexFox automatically applies colors from themes that include a background image. If a theme does not define a background image, its toolbar colors may not be applied correctly. Enable this option to force toolbar colors from extensions or themes to take effect. To avoid potential conflicts, using a background image is recommended instead. For example, when using [Firefox Color](https://color.firefox.com/), simply assign any solid-color image as the theme background and FlexFox will automatically apply the configured colors. |
 | `uc.flex.style-toolbar-bgcolor` | `1`-`2`<br>(`1`) | When using Firefox's built-in Light or Dark themes, applies one of the following toolbar color schemes: `1` = Tokyo Night theme (default), `2` = Firefox Acorn Design. |
+| `uc.flex.style-toolbar-items-border-radius` | `0`-`2`<br>(`0`) | Controls the corner radius of toolbar buttons, panel items, menu items, bookmark menu items, the upper outer corner of an expanded sidebar, the sidebar stripe, and the findbar. Values: `0` = Automatic (default). Follows Firefox's preference and uses Nova UI corners when Nova UI is enabled; `1` = Force Proton UI corners; `2` = Force Nova UI corners. |
 | `uc.flex.revert-to-original-flat-corner-style` | `0`-`3`<br>(`0`) | Sets the corner style used throughout the interface. Values: `0` = Small rounded corners (FlexFox default), `1` = Large rounded corners (Firefox default), `2` = Square corners (legacy Firefox style), `3` = Small rounded corners for the address bar with square corners elsewhere. |
 
 </details>

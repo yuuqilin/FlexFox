@@ -94,10 +94,6 @@ user_pref("uc.flex.auto-hide-horizontal-tabs-and-keep-navbar",      0);
    0 = Navigation bar remains visible (default)
    1 = Show navigation bar when hovering over tabs */
 user_pref("uc.flex.auto-hide-navbar-and-keep-horizontal-tabs",      0);
-/* Shows the close button when hovering over a tab favicon. */
-user_pref("uc.flex.show-tab-close-button-on-favicon-hover",     false);
-/* Hides close buttons on inactive tabs. */
-user_pref("uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs", false);
 /* Increases the width of the active tab.
    0 = Disabled
    1 = 1.8× width, no animation (default)
@@ -105,6 +101,17 @@ user_pref("uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs", false)
    3 = 2× width, no animation
    4 = 2× width, with animation */
 user_pref("uc.flex.increase-active-horizontal-tab-min-width",       1);
+/* Hides close buttons on inactive tabs. */
+user_pref("uc.flex.disable-tab-close-button-on-inactive-horizontal-tabs", false);
+
+/* ❌ Tab Close Buttons */
+/* Shows the close button when hovering over a tab favicon. */
+user_pref("uc.flex.show-tab-close-button-on-favicon-hover",     false);
+/* Controls the visibility and size of the warning zone inside tab close buttons.
+   0 = Hidden (native appearance)
+   1 = Small (default)
+   2 = Large */
+user_pref("uc.flex.style-tab-close-button-warning-zone-size",       1);
 
 /* 📌 Pinned Tabs */
 /* Sets the maximum number of pinned tabs per row.
@@ -137,13 +144,38 @@ user_pref("uc.flex.style-tab-groups-center-label-text",         false);
 
 /* 🧩 Tab Appearance */
 /* ### Sidebery & Native Vertical Tabs Only */
-/* Sets the appearance of tab items.
-   Active tabs always use both a border and background highlight.
-   1 = Pinned tabs use borders only (default)
-   2 = Pinned tabs use background highlights only */
+/* Controls the appearance of pinned tabs.
+   0 = No border or background fill
+   1 = Border only (default)
+   2 = Background fill only */
 user_pref("uc.flex.style-tab-items",                                1);
 /* Adds a trailing highlight effect when hovering over tabs. */
 user_pref("uc.flex.style-tab-items-add-hover-trail",             true);
+/* Controls tab background fills.
+   0 = Transparent active-tab background
+   1 = Accent-colored active-tab background (default)
+   2 = Add a neutral base background fill to all tabs */
+user_pref("uc.flex.style-tab-items-background-fill",                1);
+/* Controls the corner radius of tab items.
+   0 = Automatic (default): Follow Firefox's Nova UI preference
+   1 = Force Proton UI corners
+   2 = Force Nova UI corners */
+user_pref("uc.flex.style-tab-items-border-radius",                  0);
+/* Sets the border width of active tabs.
+   0 = 0px
+   1 = 1px
+   2 = 2px (default) */
+user_pref("uc.flex.style-tab-items-border-width",                   2);
+/* Controls the gradient background on active tabs.
+   0 = Disabled (default)
+   1 = Static gradient
+   2 = Animated gradient */
+user_pref("uc.flex.style-tab-items-gradient-background",            0);
+/* Controls the Nova gradient border on active tabs.
+   0 = Disabled
+   1 = Static gradient (default)
+   2 = Animated gradient */
+user_pref("uc.flex.style-tab-items-gradient-border",                1);
 
 /* 🔖 Bookmarks */
 /* ### Bookmark Items */
@@ -190,6 +222,13 @@ user_pref("uc.flex.auto-hide-urlbar-icons",                      true);
 user_pref("uc.flex.style-urlbar",                                   1);
 /* Centers the text in the URL bar. */
 user_pref("uc.flex.style-urlbar-center-text",                   false);
+/* Applies the sidebar stripe gradient to URL bar elements.
+   0 = Disabled (default)
+   1 = Icons
+   2 = Icons and border
+   3 = Icons, border, and text
+   The animated border appears on hover. */
+user_pref("uc.flex.style-urlbar-gradient",                          0);
 /* Repositions the URL bar popup to the center of the browser window.
    0 = Disabled (default)
    1 = Center when focused
@@ -264,6 +303,11 @@ user_pref("uc.flex.allow-addons-to-change-toolbar-color",       false);
    1 = Tokyo Night (default)
    2 = Firefox Acorn Design */
 user_pref("uc.flex.style-toolbar-bgcolor",                          1);
+/* Controls the corner radius of toolbar buttons, panel menu items, bookmark menu items, and the findbar.
+   0 = Automatic (default): Follow Firefox's Nova UI preference
+   1 = Force Proton UI corners
+   2 = Force Nova UI corners */
+user_pref("uc.flex.style-toolbar-items-border-radius",              0);
 /* Sets the interface corner style.
    0 = Small rounded corners (default)
    1 = Large rounded corners
@@ -366,6 +410,7 @@ user_pref("browser.tabs.fadeOutUnloadedTabs",                   false);
 // user_pref("browser.tabs.insertAfterCurrent",                   true);
 
 /* Sets animation duration for Firefox's native auto-collapse (only used if `sidebar.visibility` is set to `expand-on-hover`). */
+// user_pref("sidebar.animation.expand-on-hover.delay-duration-ms", 80);
 // user_pref("sidebar.animation.expand-on-hover.duration-ms",        120);
 
 /* Removes fullscreen transition animations for faster switching. */
@@ -377,3 +422,11 @@ user_pref("browser.tabs.fadeOutUnloadedTabs",                   false);
 // user_pref("devtools.chrome.enabled",                           true);
 // user_pref("devtools.debugger.remote-enabled",                  true);
 // user_pref("devtools.debugger.prompt-connection",              false);
+
+/* 🧪 Experimental FlexFox Preferences */
+/* Highlights web content shadows in red to verify their overlap with the navigation bar and sidebar. */
+// user_pref("uc.flex.~dev-highlight-web-content-box-shadow",    false);
+/* Restores the pre-Nova UI style. */
+// user_pref("uc.flex.~dev-revert-to-pre-nova-style",            false);
+/* Replaces the URL bar box shadow with a blurred gradient glow. */
+// user_pref("uc.flex.~dev-urlbar-gradient-border-glow",         false);

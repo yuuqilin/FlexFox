@@ -31,7 +31,7 @@
                     }
                     #TabsToolbar:not([customizing]) {
                         position: relative;
-                        z-index: 1;
+                        z-index: calc(var(--uc-toolbar-z-index-base) + 2);
                         /* When the tabs toolbar loses hover while the navigator may still be hovered, 
                            use the hover-state transition timing even when not hovered so their animations stay synchronized. */
                         transition: var(--uc-hover-tabstoolbar-transition) !important;
@@ -52,7 +52,7 @@
                     #mainPopupSet:has(> #tab-group-editor > [panelopen], > #tabgroup-preview-panel[panelopen])
                         ~ #navigator-toolbox,
                     &:not([customizing], [chromehidden~="menubar"]) #navigator-toolbox:is(:hover, :focus-within) {
-                        margin-bottom: var(--uc-autohide-navigator-bottom);
+                        margin-bottom: var(--uc-autohide-navigator-bottom) !important;
                         /* Direct child selectors can be used starting from version 133 */
                         #TabsToolbar {
                             visibility: var(--uc-autohide-tabstoolbar-visibility);
@@ -71,7 +71,7 @@
                     &:not([customizing], [chromehidden~="menubar"])
                         #navigator-toolbox:has(> :is(#toolbar-menubar, #TabsToolbar):hover),
                     #navigator-toolbox[movingtab] {
-                        margin-bottom: var(--uc-autohide-navigator-bottom);
+                        margin-bottom: var(--uc-autohide-navigator-bottom) !important;
                         #TabsToolbar {
                             visibility: var(--uc-autohide-tabstoolbar-visibility);
                             margin-bottom: var(--uc-autohide-tabstoolbar-bottom);
@@ -151,7 +151,7 @@
                     opacity: var(--uc-navbar-opacity, 0);
                     transition: var(--uc-autohide-navbar-transition) !important;
                     position: relative;
-                    z-index: 2;
+                    z-index: calc(var(--uc-toolbar-z-index-base) + 1);
                 }
 
                 /*
@@ -266,7 +266,7 @@
                     transition: transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay) !important;
                     */
                     position: relative;
-                    z-index: 1;
+                    z-index: var(--uc-toolbar-z-index-base);
                 }
 
                 /* Move up the content view */
@@ -363,11 +363,27 @@ toolbar#TabsToolbar {
         visibility: var(--uc-sb-tab-items-visibility, inherit);
     }
 
+    #tabbrowser-tabs[orient="horizontal"] tab-split-view-wrapper {
+        padding-block: 0 !important;
+        .tabbrowser-tab:first-child {
+            padding-inline-start: 0 !important;
+        }
+        .tabbrowser-tab:last-child {
+            padding-inline-end: 0 !important;
+        }
+        .tab-background {
+            margin-inline: 0 !important;
+        }
+        .tab-group-line {
+            inset-block-end: calc(var(--tab-group-line-toolbar-border-distance) - var(--tab-margin-block)) !important;
+        }
+    }
+
     /* Auto-collapse pinned tabs */
     @media not -moz-pref("uc.flex.max-visible-horizontal-pinned-tabs", 0) {
         #pinned-tabs-container[orient="horizontal"] {
             --uc-ht-sroot-pinned-tabs-overflow-display: none;
-            max-width: calc(var(--uc-ht-pinned-tab-max-columns) * 40px) !important;
+            max-width: calc(var(--uc-ht-pinned-tab-max-column-count) * 40px) !important;
             transition: max-width calc(var(--uc-autohide-transition-duration) + 200ms)
                 var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
             &:hover {
@@ -438,6 +454,15 @@ toolbar#TabsToolbar {
                 .tab-close-button {
                     display: flex !important;
                     @container tab-width (width < 110px) {
+                        --uc-tab-close-button-width: 16px;
+                        --uc-tab-close-button-height: 16px;
+                        --uc-tab-close-button-padding: 3px;
+                        --uc-tab-close-warning-size: 10px;
+                        --uc-tab-close-image: url("../icons/tab-close/tab-close-small.svg");
+                        @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
+                            -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
+                            --uc-tab-close-image: url("../icons/tab-close/tab-close-small-rounded.svg");
+                        }
                         position: absolute !important;
                         inset: auto;
                         right: 4px;
@@ -446,9 +471,9 @@ toolbar#TabsToolbar {
                             right: 4px;
                             top: -2px;
                         }
-                        width: 16px !important;
-                        height: 16px !important;
-                        padding: 3px !important;
+                        width: var(--uc-tab-close-button-width) !important;
+                        height: var(--uc-tab-close-button-height) !important;
+                        padding: var(--uc-tab-close-button-padding) !important;
                         pointer-events: none;
                         .tabbrowser-tab:hover & {
                             opacity: 0.5;
@@ -458,12 +483,226 @@ toolbar#TabsToolbar {
                             */
                         }
                         &:hover {
-                            opacity: 1 !important;
+                            opacity: var(--uc-tab-close-button-opacity) !important;
                             /*
                             mask-image: none !important;
                             */
                         }
                     }
+                }
+            }
+        }
+    }
+
+    /* Selected tabs: share the active background and border treatment with native vertical tabs. */
+    #tabbrowser-tabs .tab-background {
+        border: var(--uc-active-tab-border-width) solid transparent !important;
+        border-radius: var(--uc-tab-border-radius) !important;
+        &:is([selected], [multiselected]) {
+            box-shadow: var(--uc-active-tab-border-shadow), var(--uc-active-tab-drop-shadow) !important;
+            outline-color: transparent !important;
+        }
+        &[selected] {
+            background-color: var(--uc-active-tab-bgcolor) !important;
+        }
+        &[multiselected]:not([selected]) {
+            background-color: rgb(from var(--uc-active-tab-bgcolor) r g b / calc(alpha * 0.65)) !important;
+        }
+    }
+
+    @media not -moz-pref("uc.flex.style-tab-items", 0) {
+        #tabbrowser-tabs .tabbrowser-tab:hover .tab-background:not([selected], [multiselected]) {
+            background-color: var(--uc-tab-hover-bgcolor) !important;
+        }
+    }
+
+    @media -moz-pref("uc.flex.style-tab-items-background-fill", 2) {
+        #tabbrowser-arrowscrollbox .tabbrowser-tab:not(:hover) .tab-background:not([selected], [multiselected]) {
+            background-color: var(--uc-tab-fill-bgcolor) !important;
+        }
+        #pinned-tabs-container[orient="horizontal"]
+            .tabbrowser-tab:not(:hover)
+            .tab-background:not([selected], [multiselected]) {
+            background-color: var(--uc-pinned-tab-fill-bgcolor) !important;
+        }
+    }
+
+    .tab-group-label,
+    .tab-group-label-hover-highlight,
+    #tabbrowser-tabs tab-split-view-wrapper {
+        border-radius: var(--uc-tab-border-radius) !important;
+    }
+
+    :is(#tabs-newtab-button, #new-tab-button) .toolbarbutton-icon,
+    #TabsToolbar-customization-target > #alltabs-button .toolbarbutton-badge-stack {
+        border-radius: var(--uc-tab-button-border-radius) !important;
+    }
+
+    /*
+     * Firefox defines the radius variable on each shadow scroll button, so an
+     * outer override cannot replace it. Pass a tab-scoped value inward, then
+     * override the buttons directly without affecting other components.
+     */
+    #tabbrowser-arrowscrollbox,
+    #pinned-tabs-container {
+        --uc-arrowscrollbox-scrollicon-border-radius: var(--uc-tab-button-border-radius);
+    }
+
+    #scrollbutton-up,
+    #scrollbutton-down {
+        --arrowscrollbox-scrollicon-border-radius: var(--uc-arrowscrollbox-scrollicon-border-radius, 0) !important;
+    }
+
+    /* !NOVA: */
+    @property --uc-ht-active-border-angle {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+    }
+
+    @property --uc-ht-active-background-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 0%;
+    }
+
+    @keyframes uc-ht-active-border-flow {
+        to {
+            --uc-ht-active-border-angle: 360deg;
+        }
+    }
+
+    @keyframes uc-ht-active-background-flow {
+        to {
+            --uc-ht-active-background-position: 100%;
+        }
+    }
+
+    @supports (background-clip: border-area) {
+        #tabbrowser-tabs .tab-background {
+            &:is([selected]:not([multiselected])) {
+                @media not -moz-pref("uc.flex.~dev-revert-to-pre-nova-style") {
+                    --uc-ht-active-border-gradient: none;
+                    --uc-ht-active-background-gradient: none;
+                    --uc-ht-active-border-animation-name: none;
+                    --uc-ht-active-background-animation-name: none;
+                    --uc-ht-active-background-position-value: center;
+                    --uc-ht-active-background-size: 100% 100%;
+
+                    background-image:
+                        var(--uc-ht-active-border-gradient), var(--uc-ht-active-background-gradient) !important;
+                    background-origin: border-box, border-box !important;
+                    background-clip: border-area, border-box !important;
+                    background-position: center, var(--uc-ht-active-background-position-value) !important;
+                    background-repeat: no-repeat, no-repeat !important;
+                    background-size: auto, var(--uc-ht-active-background-size) !important;
+                    animation-name:
+                        var(--uc-ht-active-border-animation-name), var(--uc-ht-active-background-animation-name);
+                    animation-duration: 5s;
+                    animation-timing-function: steps(30), ease-in-out;
+                    animation-iteration-count: infinite;
+                    animation-direction: normal, alternate;
+
+                    @media not (-moz-pref("uc.flex.style-tab-items-gradient-border", 0) or -moz-pref("uc.flex.style-tab-items-border-width", 0)) {
+                        --uc-ht-active-border-gradient: var(--tab-border-color-accent);
+                        border: var(--uc-active-tab-border-width) solid transparent !important;
+                        box-shadow: none !important;
+                        /*
+                        background-color: var(--tab-background-color-selected) !important;
+                        */
+                        background-color: var(--uc-active-tab-bgcolor) !important;
+
+                        @media -moz-pref("uc.flex.style-tab-items-gradient-border", 2) {
+                            --uc-ht-active-border-gradient: conic-gradient(
+                                from var(--uc-ht-active-border-angle),
+                                var(--tab-border-color-selected-leading),
+                                var(--tab-border-color-selected-trailing),
+                                var(--tab-border-color-selected-leading),
+                                var(--tab-border-color-selected-trailing),
+                                var(--tab-border-color-selected-leading)
+                            );
+                            --uc-ht-active-border-animation-name: uc-ht-active-border-flow;
+                        }
+                    }
+
+                    @media -moz-pref("uc.flex.style-tab-items-gradient-border", 0) or -moz-pref("uc.flex.style-tab-items-border-width", 0) {
+                        /*
+                        background-color: light-dark(var(--color-white), rgba(106, 106, 120, 0.7)) !important;
+                        */
+                        background-color: var(--uc-active-tab-bgcolor) !important;
+                        outline-color: transparent !important;
+                        /*
+                        box-shadow: var(--box-shadow-level-1) !important;
+                        */
+                        box-shadow: var(--uc-active-tab-border-shadow), var(--uc-active-tab-drop-shadow) !important;
+                    }
+
+                    @media -moz-pref("uc.flex.style-tab-items-gradient-border", 2) or -moz-pref("uc.flex.style-tab-items-gradient-background", 2) {
+                        .tabbrowser-tab:hover & {
+                            animation-duration: 2.5s;
+                        }
+                    }
+
+                    @media -moz-pref("uc.flex.style-tab-items-gradient-background", 1) or -moz-pref("uc.flex.style-tab-items-gradient-background", 2) {
+                        background-color: transparent !important;
+                        --uc-ht-active-background-gradient: linear-gradient(
+                            135deg in oklab,
+                            lch(
+                                    from var(--tab-border-color-selected-leading)
+                                        calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                        var(--uc-tab-gradient-alpha)
+                                )
+                                20.68%,
+                            lch(
+                                    from var(--tab-border-color-selected-trailing)
+                                        calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                        var(--uc-tab-gradient-alpha)
+                                )
+                                79.34%
+                        );
+
+                        @media -moz-pref("uc.flex.style-tab-items-gradient-background", 2) {
+                            --uc-ht-active-background-gradient: linear-gradient(
+                                135deg in oklab,
+                                lch(
+                                        from var(--tab-border-color-selected-leading)
+                                            calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                            var(--uc-tab-gradient-alpha)
+                                    )
+                                    0%,
+                                lch(
+                                        from var(--tab-border-color-selected-trailing)
+                                            calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                            var(--uc-tab-gradient-alpha)
+                                    )
+                                    50%,
+                                lch(
+                                        from var(--tab-border-color-selected-leading)
+                                            calc(l * var(--uc-tab-gradient-lightness-scale)) c h /
+                                            var(--uc-tab-gradient-alpha)
+                                    )
+                                    100%
+                            );
+                            --uc-ht-active-background-position-value: var(--uc-ht-active-background-position) center;
+                            --uc-ht-active-background-size: 200% 100%;
+                            --uc-ht-active-background-animation-name: uc-ht-active-background-flow;
+                        }
+                    }
+                }
+
+                @media -moz-pref("uc.flex.~dev-revert-to-pre-nova-style") {
+                    background-image: none !important;
+                    background-origin: initial !important;
+                    background-clip: initial !important;
+                    /*
+                    background-color: light-dark(var(--color-white), rgba(106, 106, 120, 0.7)) !important;
+                    */
+                    background-color: var(--uc-active-tab-bgcolor) !important;
+                    outline-color: transparent !important;
+                    /*
+                    box-shadow: var(--box-shadow-level-1) !important;
+                    */
+                    box-shadow: var(--uc-active-tab-border-shadow), var(--uc-active-tab-drop-shadow) !important;
                 }
             }
         }
@@ -475,6 +714,11 @@ toolbar#TabsToolbar {
     /*
     display: -moz-box !important;
     */
+    border-radius: 3px !important;
+    @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
+        -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
+        border-radius: calc(var(--uc-tab-border-radius) - 3px) !important;
+    }
     opacity: 0;
     visibility: collapse !important;
     transition:
@@ -485,32 +729,66 @@ toolbar#TabsToolbar {
 .tabbrowser-tab:not([pinned]):hover .tab-close-button {
     opacity: 1;
     visibility: visible !important;
-    border-radius: 3px 3px 3px 3px !important;
+}
+.tabbrowser-tab:not([pinned]) .tab-close-button:hover {
+    opacity: var(--uc-tab-close-button-opacity);
 }
 
 /* Show tab close button when cursor is over the tab icon */
-@media not -moz-pref("sidebar.verticalTabs") {
-    @media -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover") {
-        .tabbrowser-tab:not([pinned]) {
-            .tab-content:has(> .tab-close-button:hover) {
-                --uc-tab-icon-image-visibility: hidden;
-            }
-            .tab-icon-image {
-                visibility: var(--uc-tab-icon-image-visibility, unset);
-            }
+@media -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover") {
+    .tabbrowser-tab:not([pinned]) {
+        .tab-content:has(> .tab-close-button:hover) {
+            --uc-tab-icon-image-visibility: hidden;
+        }
+        .tab-icon-image {
+            visibility: var(--uc-tab-icon-image-visibility, unset);
+        }
 
-            .tab-close-button {
-                order: -1;
-                display: flex !important;
-                position: relative;
-                margin-inline: -4px -20px !important;
-                padding-inline-start: 6px !important;
-                opacity: 0 !important;
-                width: unset !important;
-                z-index: 1;
+        .tab-close-button {
+            --uc-tab-close-button-width: 24px;
+            --uc-tab-close-button-height: 24px;
+            --uc-tab-close-button-padding: 4px;
+            --uc-tab-close-warning-size: 16px;
+            order: -1;
+            display: flex !important;
+            position: relative;
+            margin-inline: -4px -20px !important;
+            padding-inline-start: 6px !important;
+            opacity: 0 !important;
+            width: unset !important;
+            z-index: 1;
+        }
+        .tab-close-button:hover {
+            opacity: var(--uc-tab-close-button-opacity) !important;
+        }
+    }
+}
+
+@media not -moz-pref("sidebar.verticalTabs") {
+    /* Applies the warning SVG and geometry to native horizontal tab close buttons. */
+    @media not -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 0) {
+        #tabbrowser-tabs[orient="horizontal"] .tab-close-button {
+            -moz-context-properties: fill, fill-opacity, stroke !important;
+            list-style-image: none !important;
+            stroke: transparent;
+            background-image: var(--uc-tab-close-image);
+            background-origin: content-box;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: var(--uc-tab-close-warning-size) var(--uc-tab-close-warning-size);
+            width: var(--uc-tab-close-button-width) !important;
+            height: var(--uc-tab-close-button-height) !important;
+            padding: var(--uc-tab-close-button-padding) !important;
+
+            /* Keep one SVG loaded so the X and warning zone always share the same device-pixel grid. */
+            &:hover {
+                stroke: var(--uc-tab-close-button-warning-bgcolor);
             }
-            .tab-close-button:hover {
-                opacity: 1 !important;
+        }
+
+        @media not -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover") {
+            .tabbrowser-tab:not([pinned]) .tab-close-button {
+                margin-inline-end: var(--uc-tab-close-margin-inline-end) !important;
             }
         }
     }

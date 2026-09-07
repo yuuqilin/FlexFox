@@ -176,15 +176,15 @@
             #sidebar {
                 @media -moz-pref("uc.flex.enable-rounded-web-content") and (not -moz-pref("uc.flex.remove-sidebar-stripe")) {
                     #sidebar-box:not([sidebar-positionend]) & {
-                        border-top-right-radius: calc(var(--uc-web-content-radius) + 2px) !important;
+                        border-top-right-radius: var(--uc-sidebar-box-border-radius) !important;
                         /*
-                        border-bottom-right-radius: calc(var(--uc-web-content-radius) + 2px) !important;
+                        border-bottom-right-radius: var(--uc-sidebar-box-border-radius) !important;
                         */
                     }
                     #sidebar-box[sidebar-positionend] & {
-                        border-top-left-radius: calc(var(--uc-web-content-radius) + 2px) !important;
+                        border-top-left-radius: var(--uc-sidebar-box-border-radius) !important;
                         /*
-                        border-bottom-left-radius: calc(var(--uc-web-content-radius) + 2px) !important;
+                        border-bottom-left-radius: var(--uc-sidebar-box-border-radius) !important;
                         */
                     }
                     /*

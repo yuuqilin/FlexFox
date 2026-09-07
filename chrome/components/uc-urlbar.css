@@ -27,11 +27,95 @@
     }
 }
 
-/* Glow outline when hovering over the unfocused urlbar */
+@property --uc-urlbar-gradient-border-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes uc-urlbar-gradient-border-flow {
+    to {
+        --uc-urlbar-gradient-border-angle: 360deg;
+    }
+}
+
+/*
+ * The URL bar's outer box shadow and optional blurred glow may overlap the
+ * bookmarks toolbar. Raise #nav-bar above #PersonalToolbar (z-index: 1) so
+ * either effect can paint in that overlap. The glow alone also needs visible
+ * overflow on .urlbar-input-container because its filtered pseudo-element
+ * extends outside that box.
+ */
+#nav-bar:not([customizing]) {
+    z-index: calc(var(--uc-toolbar-z-index-base) + 1);
+}
+
+/* Animated gradient outline when hovering over the unfocused urlbar. */
 #urlbar:not(.megabar):not([focused]):not([breakout-extend]) {
     .urlbar-input-container {
         border-radius: var(--uc-urlbar-border-radius, var(--toolbarbutton-border-radius)) !important;
         transition: box-shadow 0.25s ease-out;
+
+        @supports (background-clip: border-area) {
+            @media -moz-pref("uc.flex.style-urlbar-gradient", 2), -moz-pref("uc.flex.style-urlbar-gradient", 3) {
+                position: relative;
+                border: none !important;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    z-index: 1;
+                    box-sizing: border-box;
+                    border: 2px solid transparent;
+                    border-radius: inherit;
+                    background-image: conic-gradient(
+                        from var(--uc-urlbar-gradient-border-angle),
+                        var(--uc-sidebar-stripe-gradient-start),
+                        var(--uc-sidebar-stripe-gradient-end),
+                        var(--uc-sidebar-stripe-gradient-start),
+                        var(--uc-sidebar-stripe-gradient-end),
+                        var(--uc-sidebar-stripe-gradient-start)
+                    );
+                    background-origin: border-box;
+                    background-clip: border-area;
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: opacity 0.25s ease-out;
+                    animation: uc-urlbar-gradient-border-flow steps(30) 2.5s infinite paused;
+                }
+
+                @media -moz-pref("uc.flex.~dev-urlbar-gradient-border-glow") {
+                    /* Allow the filtered ::after glow to paint outside this box. */
+                    overflow: visible !important;
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        /* Paint behind the input background: it masks the inward blur, leaving only the outer glow. */
+                        z-index: -1;
+                        box-sizing: border-box;
+                        border: 2px solid transparent;
+                        border-radius: inherit;
+                        background-image: conic-gradient(
+                            from var(--uc-urlbar-gradient-border-angle),
+                            var(--uc-sidebar-stripe-gradient-start),
+                            var(--uc-sidebar-stripe-gradient-end),
+                            var(--uc-sidebar-stripe-gradient-start),
+                            var(--uc-sidebar-stripe-gradient-end),
+                            var(--uc-sidebar-stripe-gradient-start)
+                        );
+                        background-origin: border-box;
+                        background-clip: border-area;
+                        filter: blur(5px);
+                        pointer-events: none;
+                        opacity: 0;
+                        transition: opacity 0.25s ease-out;
+                        animation: uc-urlbar-gradient-border-flow steps(30) 2.5s infinite paused;
+                    }
+                }
+            }
+        }
     }
     &:hover {
         :where(#urlbar-background, .urlbar-background) {
@@ -42,6 +126,17 @@
             box-shadow:
                 0px 0px 5px -2px rgba(12, 12, 16, 0.8),
                 0 0 0 1px rgb(from var(--uc-urlbar-outline) r g b / 0.93) !important;
+
+            @supports (background-clip: border-area) {
+                @media -moz-pref("uc.flex.style-urlbar-gradient", 2), -moz-pref("uc.flex.style-urlbar-gradient", 3) {
+                    box-shadow: 0px 0px 5px -2px rgba(12, 12, 16, 0.8) !important;
+
+                    &::before {
+                        opacity: 1;
+                        animation-play-state: running;
+                    }
+                }
+            }
         }
         @media (prefers-color-scheme: dark) {
             .urlbar-input-container {
@@ -55,6 +150,30 @@
                         color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 77%, white) 82%, transparent),
                     0 0 0 2px
                         color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 87%, white) 92%, transparent) !important;
+
+                @supports (background-clip: border-area) {
+                    @media -moz-pref("uc.flex.style-urlbar-gradient", 2),
+                        -moz-pref("uc.flex.style-urlbar-gradient", 3) {
+                        box-shadow: 0px 0px 8px
+                            color-mix(in srgb, color-mix(in srgb, var(--uc-urlbar-outline) 77%, white) 82%, transparent) !important;
+                    }
+                }
+            }
+        }
+        /* Development: replace the native shadow with a blurred copy of the gradient border. */
+        @media -moz-pref("uc.flex.~dev-urlbar-gradient-border-glow") {
+            .urlbar-input-container {
+                @supports (background-clip: border-area) {
+                    @media -moz-pref("uc.flex.style-urlbar-gradient", 2),
+                        -moz-pref("uc.flex.style-urlbar-gradient", 3) {
+                        box-shadow: none !important;
+
+                        &::after {
+                            opacity: 0.72;
+                            animation-play-state: running;
+                        }
+                    }
+                }
             }
         }
     }
@@ -163,7 +282,11 @@
     /*
     box-shadow: none !important;
     */
-    background: var(--uc-urldrop-bg, var(--toolbar-field-focus-background-color)) !important;
+    /* !TEMPORARY: Firefox 152 renamed --toolbar-field-focus-background-color to --toolbar-field-background-color-focus. Remove this fallback when support for versions before 153 is dropped. */
+    background: var(
+        --uc-urldrop-bg,
+        var(--toolbar-field-background-color-focus, var(--toolbar-field-focus-background-color))
+    ) !important;
     border-radius: var(--uc-urlbar-popup-border-radius, var(--toolbarbutton-border-radius)) !important;
 }
 
@@ -208,20 +331,27 @@
     background-color: var(--identity-btn-hover-color, var(--urlbar-box-background-color-hover)) !important;
 }
 
-/* !TEMPORARY: */
-#trust-icon-container,
+/* Keep URL bar controls aligned with Firefox's native square component size.
+ * The fallback preserves compatibility with versions before
+ * `--urlbar-basic-component-size` was introduced. */
 #tracking-protection-icon-container,
 #identity-box,
+#trust-icon-container,
 #urlbar-label-box,
 #urlbar-search-mode-indicator,
 #urlbar-revert-button-container,
 .urlbar-page-action,
 .urlbar-go-button,
-.search-go-button {
+.search-go-button,
+.searchbar-textbox::-moz-search-clear-button,
+.urlbar-input::-moz-search-clear-button {
     /* !TEMPORARY: `--urlbar-container-border-width` was renamed to `--urlbar-input-container-border-width` in v153 */
-    height: calc(
-        var(--urlbar-height) - 2 *
-            (var(--urlbar-input-container-border-width, var(--urlbar-container-border-width)) + 2px)
+    height: var(
+        --urlbar-basic-component-size,
+        calc(
+            var(--urlbar-height) - 2 *
+                (var(--urlbar-input-container-border-width, var(--urlbar-container-border-width)) + 2px)
+        )
     ) !important;
 }
 
@@ -484,11 +614,14 @@
 }
 
 #urlbar:not([breakout][breakout-extend], [focused][usertyping]) {
+    container-name: uc-urlbar-legacy-searchmode;
+
     /* Center the URL bar text */
     @media -moz-pref("uc.flex.style-urlbar-center-text") {
         .urlbar-input {
             text-align: center !important;
-            margin-bottom: 1px !important;
+            position: relative;
+            inset-block-start: -0.5px;
         }
 
         /*
@@ -498,33 +631,40 @@
         }
         */
 
-        &[unifiedsearchbutton-available] {
-            .urlbar-input-box {
-                margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px);
+        /* !TEMPORARY: Firefox v151+ removed --urlbar-searchmodeswitcher-margin-inline-end. Delete this block when pre-v151 Firefox is no longer supported. */
+        @container uc-urlbar-legacy-searchmode style(--urlbar-searchmodeswitcher-margin-inline-end) {
+            &[unifiedsearchbutton-available] {
+                .urlbar-input-box {
+                    margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px);
+                }
+                #userContext-icons:not([hidden]) {
+                    margin-inline-start: calc(
+                        -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px)
+                    ) !important;
+                }
+                #userContext-icons[hidden] ~ #urlbar-zoom-button:not([hidden]) {
+                    margin-inline-start: calc(
+                        -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px)
+                    ) !important;
+                }
             }
-            #userContext-icons:not([hidden]) {
-                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px)) !important;
-            }
-            #userContext-icons[hidden] ~ #urlbar-zoom-button:not([hidden]) {
-                margin-inline-start: calc(-1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px)) !important;
-            }
-        }
 
-        #identity-box[pageproxystate="valid"] {
-            ~ .urlbar-input-box {
-                margin-inline-end: calc(var(--identity-box-margin-inline) + 0px);
-            }
-            ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
-                margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 6px) !important;
-            }
-            &:is(.chromeUI) {
+            #identity-box[pageproxystate="valid"] {
                 ~ .urlbar-input-box {
-                    margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 46px);
+                    margin-inline-end: calc(var(--identity-box-margin-inline) + 0px);
                 }
                 ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
-                    margin-inline-start: calc(
-                        -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 46px)
-                    ) !important;
+                    margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 6px) !important;
+                }
+                &:is(.chromeUI) {
+                    ~ .urlbar-input-box {
+                        margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 46px);
+                    }
+                    ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
+                        margin-inline-start: calc(
+                            -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 46px)
+                        ) !important;
+                    }
                 }
             }
         }
@@ -574,7 +714,7 @@
         &:hover #tracking-protection-icon-container,
         #tracking-protection-icon-container[open] {
             opacity: 1;
-            margin-inline-start: 0 !important;
+            margin-inline-start: 3px !important;
         }
 
         &[open] #identity-permission-box,
@@ -680,6 +820,7 @@
     height: 25px !important;
     background-color: transparent !important;
     --button-background-color: transparent !important;
+    --button-background-color-muted: transparent !important;
 
     /* !TEMPORARY: These legacy container border-radius rules can be removed in v151+ */
     border-top-left-radius: var(
@@ -756,7 +897,8 @@
         background-color: var(--urlbar-box-background-color-hover) !important;
     }
     .toolbarbutton-text {
-        margin-bottom: 1px;
+        position: relative;
+        inset-block-start: -0.5px;
     }
 }
 
@@ -764,14 +906,16 @@
 #pageAction-panel-bookmark,
 #star-button {
     list-style-image: var(--uc-bookmark-star-empty-image) !important;
-}
-
-#pageAction-panel-bookmark[starred],
-#star-button[starred] {
-    list-style-image: var(--uc-bookmark-star-image) !important;
-    @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+    /* Use :where() to avoid increasing specificity, so the media query below can override it. */
+    &:where([starred]) {
+        list-style-image: var(--uc-bookmark-star-image) !important;
+    }
+    @media -moz-pref("uc.flex.style-urlbar-gradient") {
         list-style-image: none !important;
-        mask-image: var(--uc-bookmark-star-image);
+        mask-image: var(--uc-bookmark-star-empty-image);
+        &[starred] {
+            mask-image: var(--uc-bookmark-star-image);
+        }
         mask-position: 0px 0px;
         mask-repeat: no-repeat;
         mask-size: 16px;
@@ -803,11 +947,11 @@
 
 @media not -moz-pref("uc.flex.revert-to-original-bookmark-star-icon"),
     -moz-pref("uc.flex.style-sidebar-stripe-color-apply-to-all-icons"),
-    -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
-    #pageAction-panel-bookmark[starred],
-    #star-button[starred] {
+    -moz-pref("uc.flex.style-urlbar-gradient") {
+    #pageAction-panel-bookmark,
+    #star-button {
         fill: rgb(from var(--uc-bookmark-star-color) r g b / var(--uc-bookmark-star-color-mix)) !important;
-        @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+        @media -moz-pref("uc.flex.style-urlbar-gradient") {
             background: var(--uc-sidebar-stripe-gradient);
         }
     }
@@ -815,14 +959,14 @@
     #star-button-box:is(:hover, [open]) {
         /* Show hollow star icon on hover when the page is already bookmarked */
         &[data-l10n-id="urlbar-star-edit-bookmark"] #star-button[starred] {
-            @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+            @media -moz-pref("uc.flex.style-urlbar-gradient") {
                 background: none;
             }
         }
         /* Show filled star icon on hover when the page is not bookmarked */
         &[data-l10n-id="urlbar-star-add-bookmark"] #star-button:not([starred]) {
             background: rgb(from var(--uc-bookmark-star-color) r g b / var(--uc-bookmark-star-color-mix));
-            @media -moz-pref("uc.flex.style-sidebar-stripe-color-use-gradient") {
+            @media -moz-pref("uc.flex.style-urlbar-gradient") {
                 background: var(--uc-sidebar-stripe-gradient);
             }
         }
@@ -843,6 +987,7 @@
     #identity-box,
     #trust-icon-container,
     #tracking-protection-icon-container,
+    #notification-popup-box,
     .urlbar-page-action > .urlbar-icon {
         --uc-flexfox-logo-color-mix: 100%;
         fill: rgb(from var(--uc-sidebar-header-stripe) r g b / var(--uc-flexfox-logo-color-mix)) !important;
@@ -868,9 +1013,278 @@
     background-color: var(--uc-toolbar-bgcolor);
     --panel-color: var(--toolbar-field-focus-color);
     --panel-text-color: var(--toolbar-field-focus-color);
-    --panel-background: var(--uc-searchbar-bgcolor, var(--toolbar-field-focus-background-color)) !important;
-    --panel-background-color: var(--uc-searchbar-bgcolor, var(--toolbar-field-focus-background-color)) !important;
+    /* !TEMPORARY: Firefox 152 renamed --toolbar-field-focus-background-color to --toolbar-field-background-color-focus. Remove this fallback when support for versions before 153 is dropped. */
+    --panel-background: var(
+        --uc-searchbar-bgcolor,
+        var(--toolbar-field-background-color-focus, var(--toolbar-field-focus-background-color))
+    ) !important;
+    --panel-background-color: var(
+        --uc-searchbar-bgcolor,
+        var(--toolbar-field-background-color-focus, var(--toolbar-field-focus-background-color))
+    ) !important;
     /*
     --panel-border-color: var(--arrowpanel-border-color);
     */
+}
+
+@media -moz-pref("uc.flex.style-urlbar-gradient") {
+    #trust-icon-container {
+        &.insecure {
+            --uc-urlbar-trust-icon-image: url(chrome://browser/skin/trust-icon-insecure.svg);
+        }
+
+        &.secure:not(.has-blocked-trackers, .scanning, .breached) {
+            --uc-urlbar-trust-icon-image: url(chrome://browser/skin/trust-icon-active.svg);
+        }
+
+        &.scanning,
+        &.breached {
+            --uc-urlbar-trust-icon-image: url(chrome://browser/skin/tracking-protection.svg);
+        }
+
+        &.inactive:not(.insecure) {
+            --uc-urlbar-trust-icon-image: url(chrome://browser/skin/trust-icon-disabled.svg);
+        }
+
+        &.warning {
+            --uc-urlbar-trust-icon-image: url(chrome://browser/skin/trust-icon-warning.svg);
+        }
+
+        &.file {
+            --uc-urlbar-trust-icon-image: url(chrome://global/skin/icons/page-portrait.svg);
+        }
+
+        &:is(
+            .insecure,
+            .secure:not(.has-blocked-trackers, .scanning, .breached),
+            .scanning,
+            .breached,
+            .inactive:not(.insecure),
+            .warning,
+            .file
+        ) {
+            list-style-image: none !important;
+            > #trust-icon {
+                background: var(--uc-sidebar-stripe-gradient);
+                mask: center / contain no-repeat var(--uc-urlbar-trust-icon-image);
+            }
+        }
+    }
+
+    /*
+    @media -moz-pref("browser.urlbar.trustPanel.featureGate", false) {
+    */
+    #identity-icon {
+        --uc-urlbar-identity-icon-image: url(chrome://global/skin/icons/info.svg);
+    }
+
+    #identity-box:not(.chromeUI) #identity-icon {
+        list-style-image: none !important;
+        background: var(--uc-sidebar-stripe-gradient);
+        mask: center / contain no-repeat var(--uc-urlbar-identity-icon-image);
+    }
+
+    /*
+    #identity-box[pageproxystate="valid"].chromeUI #identity-icon {
+        --uc-urlbar-identity-icon-image: url(chrome://branding/content/icon16.png);
+    }
+
+    @media (min-resolution: 1.1dppx) {
+        #identity-box[pageproxystate="valid"].chromeUI #identity-icon {
+            --uc-urlbar-identity-icon-image: url(chrome://branding/content/icon32.png);
+        }
+    }
+    */
+
+    #identity-box[pageproxystate="valid"].localResource #identity-icon {
+        --uc-urlbar-identity-icon-image: url(chrome://global/skin/icons/page-portrait.svg);
+    }
+
+    #identity-box[pageproxystate="invalid"] #identity-icon {
+        --uc-urlbar-identity-icon-image: url(chrome://global/skin/icons/search-glass.svg);
+    }
+
+    #urlbar[actiontype="extension"] > .urlbar-input-container > #identity-box #identity-icon,
+    #identity-box[pageproxystate="valid"].extensionPage #identity-icon {
+        --uc-urlbar-identity-icon-image: url(chrome://mozapps/skin/extensions/extension.svg);
+    }
+
+    #identity-box[pageproxystate="valid"].verifiedDomain #identity-icon,
+    #identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon {
+        --uc-urlbar-identity-icon-image: url(chrome://global/skin/icons/security.svg);
+    }
+
+    #identity-box[pageproxystate="valid"].weakCipher #identity-icon,
+    #identity-box[pageproxystate="valid"].mixedDisplayContent #identity-icon,
+    #identity-box[pageproxystate="valid"].mixedDisplayContentLoadedActiveBlocked #identity-icon,
+    #identity-box[pageproxystate="valid"].certUserOverridden #identity-icon,
+    #identity-box[pageproxystate="valid"].certErrorPage #identity-icon {
+        --uc-urlbar-identity-icon-image: url(chrome://global/skin/icons/security-warning.svg);
+    }
+
+    #identity-box[pageproxystate="valid"].notSecure #identity-icon,
+    #identity-box[pageproxystate="valid"].mixedActiveContent #identity-icon,
+    #identity-box[pageproxystate="valid"].httpsOnlyErrorPage #identity-icon {
+        --uc-urlbar-identity-icon-image: url(chrome://global/skin/icons/security-broken.svg);
+    }
+    /*
+    }
+    */
+}
+
+@media -moz-pref("uc.flex.style-urlbar-gradient", 3) {
+    /*
+     * Add a gradient to the URL bar text
+     *
+     * Firefox before v156 fades text outside the main domain by mixing the text
+     * color (T) and the URL bar background (B) equally:
+     *
+     *   Displayed color = 0.5T + 0.5B
+     *
+     * Our opaque gradient (G) covers B. Set the hidden T to B so Firefox's
+     * original fade now mixes the gradient and background equally:
+     *
+     *   Displayed color = 0.5B + 0.5G
+     */
+    @media not -moz-pref("browser.urlbar.formatting.enabled", false) {
+        #urlbar .urlbar-input-box {
+            /*
+             * Firefox v156 changes the native mix to:
+             *
+             *   Displayed color = (178/255)T + (77/255)B
+             *
+             * G covers B, changing the calculation and target to:
+             *
+             *   Displayed color = (178/255)T + (77/255)G
+             *   Target color = (178/255)G + (77/255)B
+             *
+             * Solving for T gives:
+             *
+             *   T = (101/178)G + (77/178)B
+             *
+             * G changes across the text but T must be one fixed color. Use one
+             * representative gradient color for G in this compensation.
+             *
+             * For a background with alpha b, its required weight in T is
+             * p = (77/178)b. An equal-weight color-mix() premultiplies each color
+             * by its alpha, so giving B an alpha q makes its RGB weight q/(1+q).
+             * Solving q/(1+q) = p gives q = p/(1-p), which is the calc() below.
+             */
+            --uc-urlbar-deemphasized-text-compensation-color: var(
+                --uc-urlbar-bg,
+                var(--toolbar-field-background-color)
+            );
+            --uc-urlbar-gradient-reference-color: color-mix(
+                in oklab,
+                var(--uc-sidebar-stripe-gradient-start) 55.5556%,
+                var(--uc-sidebar-stripe-gradient-end) 44.4444%
+            );
+            --uc-urlbar-deemphasized-text-fill-color: color-mix(
+                in srgb,
+                rgb(
+                    from var(--uc-urlbar-deemphasized-text-compensation-color) r g b /
+                        calc((alpha * 77 / 178) / (1 - alpha * 77 / 178))
+                ),
+                var(--uc-urlbar-gradient-reference-color)
+            );
+        }
+
+        /*
+         * Firefox 155 and earlier expose this attribute. For a normal opaque
+         * background, set T = B as described above.
+         */
+        #urlbar .urlbar-input-box[flex="1"] {
+            --uc-urlbar-deemphasized-text-fill-color: var(--uc-urlbar-deemphasized-text-compensation-color);
+        }
+
+        /*
+         * Mica and wallpaper backgrounds
+         *
+         * The opaque G covers the URL bar background (B), our overlay, and the
+         * unknown Mica or wallpaper surface. Do not calculate the overlay or the
+         * unknown surface. As in normal mode, compensate only B and add G for the
+         * part left transparent by B.
+         *
+         * The v156+ rule above already reads B's alpha b and handles this case.
+         * Before v156 uses a different weight and needs the override below:
+         *
+         *   Firefox v156+: T = [1 - (77/178)b]G + (77/178)bB
+         *   Before v156:    T = (1 - b)G + bB
+         *
+         * Using the same q = p/(1-p) conversion with p = b gives the
+         * alpha b/(1-b) used by color-mix() below.
+         */
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
+            -moz-pref("uc.flex.browser-wallpaper-enabled") {
+            #urlbar .urlbar-input-box[flex="1"] {
+                --uc-urlbar-deemphasized-text-fill-color: color-mix(
+                    in srgb,
+                    rgb(from var(--uc-urlbar-deemphasized-text-compensation-color) r g b / calc(alpha / (1 - alpha))),
+                    var(--uc-urlbar-gradient-reference-color)
+                );
+            }
+        }
+    }
+
+    #urlbar:not(.megabar):not([focused]):not([breakout-extend]) {
+        /* Preserve the text cursor over the blank space left by the content-sized input. */
+        .urlbar-input-container {
+            cursor: text;
+        }
+
+        /* Let blank-space clicks reach .urlbar-input-container, which Firefox handles by focusing the URL bar. */
+        .urlbar-input-box {
+            pointer-events: none;
+        }
+
+        #urlbar-input {
+            pointer-events: auto;
+            /* Firefox 152+ supports the field-sizing CSS property, used here to fit the input and gradient to the text width. */
+            field-sizing: content;
+            width: auto;
+            /* Allow #urlbar-input to shrink to the size resolved by field-sizing. */
+            flex: 0 1 auto !important;
+            max-width: 100%;
+            @media -moz-pref("uc.flex.style-urlbar-center-text") {
+                margin-inline: auto !important;
+            }
+        }
+    }
+
+    #urlbar-input {
+        background-image: linear-gradient(
+            135deg in oklab,
+            var(--uc-sidebar-stripe-gradient-start) 10%,
+            var(--uc-sidebar-stripe-gradient-end) 100%
+        );
+
+        color: transparent !important;
+
+        /*
+         * A transparent fill reveals the gradient for emphasized text. Firefox
+         * still reads its hidden RGB channels when it paints the de-emphasized
+         * URL parts.
+         */
+        -webkit-text-fill-color: rgb(from var(--uc-urlbar-deemphasized-text-fill-color) r g b / 0);
+
+        background-clip: text;
+        caret-color: var(--uc-sidebar-header-stripe);
+
+        @media -moz-pref("browser.urlbar.formatting.enabled", false) {
+            /* Firefox does not de-emphasize URL parts, so every character reveals the gradient directly. */
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    #identity-icon-label {
+        background-image: linear-gradient(
+            135deg in oklab,
+            var(--uc-sidebar-stripe-gradient-end) 10%,
+            var(--uc-sidebar-stripe-gradient-start) 100%
+        );
+        color: transparent !important;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
 }

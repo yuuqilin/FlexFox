@@ -61,8 +61,8 @@
             transform 82ms linear,
             opacity 82ms linear !important;
         transition-delay: var(--uc-autohide-toolbox-delay) !important;
-        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
             -moz-pref("uc.flex.browser-wallpaper-enabled") {
             transition:
@@ -94,8 +94,8 @@
             left 0.3s ease,
             width 0.3s ease,
             translate 0.3s ease !important;
-        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
             -moz-pref("uc.flex.browser-wallpaper-enabled") {
             transition:
@@ -139,8 +139,8 @@
             left 0.3s ease,
             width 0.3s ease,
             translate 0.3s ease !important;
-        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
             -moz-pref("uc.flex.browser-wallpaper-enabled") {
             transition:
@@ -184,8 +184,8 @@
         transition: var(--uc-hover-navbar-transition) !important;
         /*
         transition-delay: 33ms !important;
-        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+            -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
             -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
             -moz-pref("uc.flex.browser-wallpaper-enabled") {
             transition:

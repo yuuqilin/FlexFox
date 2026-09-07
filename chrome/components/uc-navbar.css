@@ -12,49 +12,64 @@
 }
 */
 
-/* Override toolbar color if there's no theme background image. */
-@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
-        -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
-        -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
-        :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-            #navigator-toolbox {
-                /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
-                --toolbar-bgcolor: var(--uc-bgcolor) !important;
-                --toolbox-bgcolor: var(--uc-bgcolor) !important;
-                --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
-                --toolbar-background-color: var(--uc-bgcolor) !important;
-                --toolbox-background-color: var(--uc-bgcolor) !important;
-                --toolbox-background-color-inactive: var(--uc-bgcolor) !important;
-                background-image:
-                    var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                    linear-gradient(var(--uc-bgcolor), var(--uc-bgcolor)),
-                    var(--lwt-header-image, var(--lwt-additional-images)) !important;
+/**
+ * Override toolbar color if there is no theme background image. Although the
+ * activeThemeID checks cover Firefox's built-in themes, they do not reflect a
+ * Firefox Color (or similar) extension layered over one of them. Those themes
+ * add [lwtheme-image], so keep the selector-level exclusion as a fallback.
+ * Firefox 153+ exposes the effective theme through [theme-effective-id],
+ * but this remains necessary for pre-153 compatibility.
+ */
+@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+    @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica)) {
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not (-moz-windows-mica)),
+            -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+            -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+            :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                #navigator-toolbox {
+                    /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
+                    --toolbar-bgcolor: var(--uc-bgcolor) !important;
+                    --toolbox-bgcolor: var(--uc-bgcolor) !important;
+                    --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
+                    --toolbar-background-color: var(--uc-bgcolor) !important;
+                    --toolbox-background-color: var(--uc-bgcolor) !important;
+                    --toolbox-background-color-inactive: var(--uc-bgcolor) !important;
+                    background-image:
+                        var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
+                        linear-gradient(var(--uc-bgcolor), var(--uc-bgcolor)),
+                        var(--lwt-header-image, var(--lwt-additional-images)) !important;
+                }
             }
         }
     }
 }
 
-/** 
- * In v150, theme background images were moved to the body element, 
- * causing the navigator area to lose its background image when expanded. 
- * Reattach the background image to the navigator here. 
+/**
+ * Reattach the theme background image to the navigator when it is expanded.
+ * In v150, theme background images were moved to the body element, causing the
+ * navigator area to lose its background image. Firefox 153+
+ * exposes [theme-image-in-toolbox]: most themes (and the pre-Nova default
+ * theme) keep the image on <body>, while vertically aligned themes and the
+ * Nova default theme place it on the toolbox. Keep this legacy reattachment
+ * instead of relying on that attribute so pre-153 Firefox remains supported.
  */
-@media not (-moz-pref("sidebar.verticalTabs") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
-    @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
-        #navigator-toolbox {
-            :root[lwtheme] & {
-                background-image: var(--lwt-additional-images);
-                background-repeat: var(--lwt-background-tiling);
-                background-position: var(--lwt-background-alignment);
-            }
+@media not (-moz-pref("sidebar.verticalTabs") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+    @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica)) {
+        @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica)) {
+            #navigator-toolbox {
+                :root[lwtheme] & {
+                    background-image: var(--lwt-additional-images);
+                    background-repeat: var(--lwt-background-tiling);
+                    background-position: var(--lwt-background-alignment);
+                }
 
-            :root[lwtheme-image] & {
-                background-image: var(--lwt-header-image), var(--lwt-additional-images);
-                background-repeat: no-repeat, var(--lwt-background-tiling);
-                background-position:
-                    right top,
-                    var(--lwt-background-alignment);
+                :root[lwtheme-image] & {
+                    background-image: var(--lwt-header-image), var(--lwt-additional-images);
+                    background-repeat: no-repeat, var(--lwt-background-tiling);
+                    background-position:
+                        right top,
+                        var(--lwt-background-alignment);
+                }
             }
         }
     }
@@ -145,8 +160,8 @@ toolbarbutton:hover {
                 transform 82ms linear,
                 opacity 82ms linear !important;
             transition-delay: var(--uc-autohide-toolbox-delay) !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -178,8 +193,8 @@ toolbarbutton:hover {
                 left 0.3s ease,
                 width 0.3s ease,
                 translate 0.3s ease !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -227,8 +242,8 @@ toolbarbutton:hover {
                 left 0.3s ease,
                 width 0.3s ease,
                 translate 0.3s ease !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -268,8 +283,8 @@ toolbarbutton:hover {
             transition: var(--uc-hover-navbar-transition) !important;
             /*
             transition-delay: 33ms !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -331,8 +346,8 @@ toolbarbutton:hover {
                 transform 82ms linear,
                 opacity 82ms linear !important;
             transition-delay: var(--uc-autohide-toolbox-delay) !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -364,8 +379,8 @@ toolbarbutton:hover {
                 left 0.3s ease,
                 width 0.3s ease,
                 translate 0.3s ease !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -409,8 +424,8 @@ toolbarbutton:hover {
                 left 0.3s ease,
                 width 0.3s ease,
                 translate 0.3s ease !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:
@@ -454,8 +469,8 @@ toolbarbutton:hover {
             transition: var(--uc-hover-navbar-transition) !important;
             /*
             transition-delay: 33ms !important;
-            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+            @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+                -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
                 -moz-pref("uc.flex.sidebery-apply-expand-speed-to-toolbars"),
                 -moz-pref("uc.flex.browser-wallpaper-enabled") {
                 transition:

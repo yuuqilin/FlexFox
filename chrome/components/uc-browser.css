@@ -1,36 +1,19 @@
 /* Override browser color if there's no theme background image. */
-@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
-    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
-        -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
-        -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
-        :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
-            #browser {
-                /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
-                --toolbar-bgcolor: var(--uc-bgcolor) !important;
-                --toolbox-bgcolor: var(--uc-bgcolor) !important;
-                --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
-                --toolbar-background-color: var(--uc-bgcolor) !important;
-                --toolbox-background-color: var(--uc-bgcolor) !important;
-                --toolbox-background-color-inactive: var(--uc-bgcolor) !important;
-                background-image:
-                    var(--toolbar-bgimage, linear-gradient(transparent, transparent)),
-                    linear-gradient(var(--uc-bgcolor), var(--uc-bgcolor)),
-                    var(--lwt-header-image, var(--lwt-additional-images)) !important;
-
-                /* Ensure the background color of the sidebar stripe area matches the sidebar when the window is inactive */
-                @media -moz-pref("uc.flex.disable-sidebery-autohide") {
-                    background-image: none !important;
-                    &:-moz-window-inactive {
-                        background-color: var(--uc-bgcolor) !important;
-                    }
-                }
-                @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
-                    &[titlepreface*="\180e "] {
-                        background-image: none !important;
-                        &:-moz-window-inactive {
-                            background-color: var(--uc-bgcolor) !important;
-                        }
-                    }
+@media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+    @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica)) {
+        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not (-moz-windows-mica)),
+            -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+            -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+            :root:not([lwtheme-image], [style*="--lwt-additional-images"]) {
+                #browser {
+                    /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
+                    --toolbar-bgcolor: var(--uc-bgcolor) !important;
+                    --toolbox-bgcolor: var(--uc-bgcolor) !important;
+                    --toolbox-bgcolor-inactive: var(--uc-bgcolor) !important;
+                    --toolbar-background-color: var(--uc-bgcolor) !important;
+                    --toolbox-background-color: var(--uc-bgcolor) !important;
+                    --toolbox-background-color-inactive: var(--uc-bgcolor) !important;
+                    background-color: var(--uc-bgcolor) !important;
                 }
             }
         }
@@ -314,10 +297,15 @@ split-view-footer {
 @media -moz-pref("uc.flex.enable-rounded-web-content") {
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
         :root:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
-            /* Remove white overlay to match the browser margin background with the sidebar */
+            /** 
+             * !TEMPORARY: Remove the white overlay so the browser margin background matches the sidebar.
+             * Firefox 150+ no longer adds a background image to #browser, so remove this rule once ESR 140 support is dropped. 
+             */
             @media not -moz-pref("sidebar.verticalTabs") {
-                #browser /* :not(.browser-toolbox-background) */ {
-                    background-image: none !important;
+                :root[lwtheme] & {
+                    #browser /* :not(.browser-toolbox-background) */ {
+                        background-image: none !important;
+                    }
                 }
             }
 
@@ -344,12 +332,14 @@ split-view-footer {
                 margin: var(--uc-web-content-margin-box);
 
                 background-color: transparent !important;
-                @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled") or -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes")) {
-                    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not -moz-pref("widget.windows.mica")),
-                        -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
-                        -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
-                        :root:not([lwtheme-image], [style*="--lwt-additional-images"]) & {
-                            background-color: var(--uc-bgcolor) !important;
+                @media not (-moz-pref("uc.flex.allow-addons-to-change-toolbar-color") or -moz-pref("uc.flex.browser-wallpaper-enabled")) {
+                    @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica)) {
+                        @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (not (-moz-windows-mica)),
+                            -moz-pref("extensions.activeThemeID", "firefox-compact-light@mozilla.org"),
+                            -moz-pref("extensions.activeThemeID", "firefox-compact-dark@mozilla.org") {
+                            :root:not([lwtheme-image], [style*="--lwt-additional-images"]) & {
+                                background-color: var(--uc-bgcolor) !important;
+                            }
                         }
                     }
                 }
@@ -412,9 +402,9 @@ split-view-footer {
                     box-shadow: 0px 0px 10px red;
                 }
 
-                @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica") and -moz-pref("browser.tabs.allow_transparent_browser")) {
+                @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica) and -moz-pref("browser.tabs.allow_transparent_browser")) {
                     @media not (-moz-pref("uc.flex.browser-wallpaper-enabled") and -moz-pref("browser.tabs.allow_transparent_browser")) {
-                        @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("browser.tabs.allow_transparent_browser")) {
+                        @media not (-moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica) and -moz-pref("browser.tabs.allow_transparent_browser")) {
                             &::before {
                                 content: "";
                                 position: absolute;
@@ -511,8 +501,8 @@ split-view-footer {
 ═════════════════════════════════════════════════════════════════════ */
 
 /* Mica background clipping and window transparency settings */
-@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
     -moz-pref("uc.flex.browser-wallpaper-enabled") {
     #tabbrowser-tabpanels {
         background-color: transparent !important;
@@ -862,8 +852,8 @@ split-view-footer {
     }
 }
 
-@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes"),
+@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
     -moz-pref("uc.flex.browser-wallpaper-enabled"),
     -moz-pref("uc.flex.enable-translucent-urlbar-popup-and-menus") {
     .toolbar-menupopup,
@@ -953,8 +943,9 @@ split-view-footer {
     }
 }
 
-@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") {
+/**/
+@media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica) {
     @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
         #main-window {
             background-color: light-dark(
@@ -965,11 +956,6 @@ split-view-footer {
             -moz-appearance: -moz-win-borderless-glass !important;
             */
         }
-    }
-}
-
-@media -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (not -moz-pref("uc.flex.browser-wallpaper-enabled")) {
-    @media not (-moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica")) {
         :root,
         body {
             background: transparent !important;
@@ -1066,8 +1052,8 @@ split-view-footer {
 }
 
 @media -moz-pref("uc.flex.browser-wallpaper-enabled"),
-    -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and -moz-pref("widget.windows.mica"),
-    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and -moz-pref("widget.windows.mica") {
+    -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+    -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica) {
     #navigator-toolbox {
         /* !TEMPORARY: v152 renames '*-bgcolor' to '*-background-color'; compatibility declarations for older versions can be removed in v152+. */
         --toolbox-bgcolor: transparent !important;
@@ -1098,6 +1084,10 @@ split-view-footer {
 
     #PersonalToolbar {
         border: none !important;
+    }
+
+    #sidebar-box {
+        outline: none !important;
     }
 
     .browserContainer {
