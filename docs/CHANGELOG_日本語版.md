@@ -4,12 +4,38 @@
 
 ## 🆕 最新情報
 
+## 🦊 v7.0.1
+
+> [!IMPORTANT]
+> v7.0.0 では、複数の新機能と互換性のない変更が導入されました。まだ確認していない場合は、こちらから更新履歴をご覧ください。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### 修正
+
+- **重大：** Firefox 157 との互換性の問題により URL バーが機能しなくなり、ブラウザーを使用できなくなる不具合を修正しました。[Bug 2065901](https://bugzilla.mozilla.org/show_bug.cgi?id=2065901)
+
+  - `uc.flex.move-urlbar-popup-to-center` を有効にすると入力欄が消え、ナビゲーションツールバーやウェブコンテンツの位置がずれる問題を修正しました。
+  - `uc.flex.enable-translucent-urlbar-popup-and-menus` を有効にすると URL バーが完全に透明になり、背景のぼかし効果が失われる問題を修正しました。
+  - `uc.flex.dim-urlbar-popup-backdrop` を有効にしてもビューポート全体を暗くできない問題を修正しました。
+
+- **重大：** Firefox 157 との互換性の問題により、ブックマークツールバーを展開できなくなる不具合を修正しました。[Bug 2069885](https://bugzilla.mozilla.org/show_bug.cgi?id=2069885)
+- **重大：** Firefox 158 の変更により発生した、ネイティブタブのレイアウトが崩れる問題を修正しました。[Bug 2037111](https://bugzilla.mozilla.org/show_bug.cgi?id=2037111)
+- Firefox 157 の変更後、タブグループと Tab Split View の項目から角丸が失われる問題を修正しました。[Bug 2033008](https://bugzilla.mozilla.org/show_bug.cgi?id=2033008)
+- Firefox 156 の変更後、「カーソルを合わせた時にサイドバーを展開する」が無効でサイドバーが折りたたまれている場合に、下部のツールボタン上にある区切り線のスタイルが正しく表示されない問題を修正しました。[Bug 2056278](https://bugzilla.mozilla.org/show_bug.cgi?id=2056278)
+- Nova UI が有効な場合、`uc.flex.style-toolbar-items-border-radius = 1` でアプリケーションメニューとパネルを Proton UI の角丸に強制できない問題を修正しました。
+- `uc.flex.style-tab-items-gradient-border = 0` および `uc.flex.style-tab-items-border-width = 2` に設定した場合に、ネイティブタブの枠線が内側にずれて影から離れる v7.0.0 のリグレッションを修正しました。
+- ライトモードで Sidebery のタブを閉じるボタンの色の不透明度が正しくない問題を修正しました。
+- Sidebery の「密度」を「コンパクト」または「ゆったり」に設定した場合に、下部のボタンが中央に配置されない問題を修正しました。
+
+<!-- END What's New -->
+
 ## 🦊 v7.0.0 - Nova UI Edition
 
 > [!IMPORTANT]
 > v6.6.0 では、複数の新しい設定と互換性のない変更が導入されました。まだ確認していない場合は、こちらから更新履歴をご覧ください。
 >
-> [English](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG.md#-whats-new) | [日本語](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v660) | [简体中文](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v660)
+> [English](./CHANGELOG.md#-v660) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v660) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v660)
 
 ### 新機能と変更
 
@@ -306,8 +332,6 @@ https://github.com/user-attachments/assets/84a3ddf1-02f8-4c02-9957-4afcba52bf78
 * Firefox 155 で一部のパネルの角丸が正しく表示されない問題を修正しました。[Bug 2054953](https://bugzilla.mozilla.org/show_bug.cgi?id=2054953)
 * Firefox 155 でディスプレイ倍率が 125% を超えるとネイティブ垂直タブのレイアウトが崩れる問題を一時的に緩和しました。[Bug 2044082](https://bugzilla.mozilla.org/show_bug.cgi?id=2044082)
 * Firefox 155 で Nova UI がデフォルトで有効になったことによる、多数のレイアウトおよび機能上の問題を修正しました。[Bug 2056188](https://bugzilla.mozilla.org/show_bug.cgi?id=2056188)
-
-<!-- END What's New -->
 
 <a id="updates-top-start"></a>
 <details>

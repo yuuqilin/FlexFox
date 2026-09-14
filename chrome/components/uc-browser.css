@@ -915,30 +915,24 @@ split-view-footer {
         will-change: translate !important;
     }
 
-    #urlbar[breakout][breakout-extend] > :where(#urlbar-background, .urlbar-background) {
-        /* The previous workaround created the blur on a pseudo-element and let .urlbar-background own will-change: translate. This is now simplified by overriding #urlbar's will-change above and applying the blur directly to .urlbar-background. */
-        /*
-        &::before {
-            content: "";
-            pointer-events: none;
-            position: absolute;
-            inset: 0;
-            background-color: light-dark(
-                rgba(249, 249, 251, var(--uc-urlbar-backdrop-transparency)),
-                rgba(32, 32, 32, var(--uc-urlbar-backdrop-transparency))
-            );
-            border-radius: var(--uc-urlbar-popup-border-radius, var(--toolbarbutton-border-radius));
-            backdrop-filter: blur(26px) saturate(140%);
-        }
-        will-change: translate;
-        background-color: transparent !important;
-        */
+    #urlbar:is([breakout][breakout-extend], [popover-open]) > :where(#urlbar-background, .urlbar-background),
+    .urlbarView-background {
         background-color: light-dark(
             rgba(249, 249, 251, var(--uc-urlbar-backdrop-transparency)),
             rgba(32, 32, 32, var(--uc-urlbar-backdrop-transparency))
         ) !important;
         background-image: none !important;
-        /* Keep the blur on the expanded background so it covers Nova's negative breakout inset outside the #urlbar border box. */
+    }
+
+    /**
+     * The legacy top-layer urlbar and Firefox 157+'s top-layer view background
+     * can sample the remote browser after the clip-path workaround above. The
+     * new toolbar-bound background cannot. In Firefox 157+, uc-urlbar.css
+     * therefore extends the view background whenever translucent UI is active,
+     * cuts out the input outline, and paints only the exposed input opaque.
+     */
+    #urlbar[breakout][breakout-extend] > :where(#urlbar-background, .urlbar-background),
+    .urlbarView-background {
         backdrop-filter: blur(26px) saturate(140%);
     }
 }
@@ -1077,21 +1071,18 @@ split-view-footer {
 
 /* !NOVA: */
 @media -moz-pref("browser.nova.enabled") {
-    .chrome-block {
-        border: none !important;
+    #navigator-toolbox {
         overflow: visible !important;
     }
 
-    #PersonalToolbar {
+    #PersonalToolbar,
+    #sidebar-box,
+    .browserContainer {
         border: none !important;
     }
 
     #sidebar-box {
         outline: none !important;
-    }
-
-    .browserContainer {
-        border: none !important;
     }
 
     .split-view-splitter {

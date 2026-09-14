@@ -896,19 +896,27 @@
     }
     @media -moz-pref("uc.flex.style-toolbar-items-border-radius", 1) {
         --button-border-radius: 8px !important;
+        --panel-border-radius: 8px !important;
         --panel-menuitem-border-radius: 4px !important;
         --uc-findbar-outer-border-radius: 8px;
         --uc-findbar-inner-border-radius: 5px;
         --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 2px);
         --uc-sidebar-stripe-border-radius: 0px;
+        #link-preview-panel {
+            --panel-border-radius: 8px !important;
+        }
     }
     @media -moz-pref("uc.flex.style-toolbar-items-border-radius", 2) {
         --button-border-radius: 24px !important;
+        --panel-border-radius: 24px !important;
         --panel-menuitem-border-radius: 16px !important;
         --uc-findbar-outer-border-radius: 20px;
         --uc-findbar-inner-border-radius: 16px;
         --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 4px);
         --uc-sidebar-stripe-border-radius: 24px;
+        #link-preview-panel {
+            --panel-border-radius: calc(var(--border-radius-small) + var(--space-xlarge)) !important;
+        }
     }
 
     @media -moz-pref("uc.flex.revert-to-original-flat-corner-style", 2) {
@@ -987,13 +995,13 @@
     .tab-close-button {
         --uc-tab-close-margin-inline-end: -5px;
         @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 2) {
-            --uc-tab-close-margin-inline-end: calc(-1 * var(--tab-inline-padding));
+            --uc-tab-close-margin-inline-end: calc(-1 * var(--tab-padding-inline));
         }
         @media -moz-pref("sidebar.verticalTabs") {
             --uc-tab-close-margin-inline-end: -4px;
             @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 2) {
                 --uc-tab-close-margin-inline-end: calc(
-                    -1 * (var(--tab-inline-padding) - var(--tab-inner-inline-margin))
+                    -1 * (var(--tab-padding-inline) - var(--tab-margin-inline-inner))
                 );
             }
         }
@@ -1414,22 +1422,19 @@
 ════════════════════════════════════════════════════════════════════ */
 :root {
     /* ════════════════════════════════════════════════════════════════════
-    ██╗      █████╗ ██╗   ██╗ ██████╗ ██╗   ██╗████████╗    ██╗      ██████╗  ██████╗ ██╗ ██████╗
-    ██║     ██╔══██╗╚██╗ ██╔╝██╔═══██╗██║   ██║╚══██╔══╝    ██║     ██╔═══██╗██╔════╝ ██║██╔════╝
-    ██║     ███████║ ╚████╔╝ ██║   ██║██║   ██║   ██║       ██║     ██║   ██║██║  ███╗██║██║     
-    ██║     ██╔══██║  ╚██╔╝  ██║   ██║██║   ██║   ██║       ██║     ██║   ██║██║   ██║██║██║     
-    ███████╗██║  ██║   ██║   ╚██████╔╝╚██████╔╝   ██║       ███████╗╚██████╔╝╚██████╔╝██║╚██████╗
-    ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝  ╚═════╝    ╚═╝       ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝ ╚═════╝
-                                                                                                 
-       🧪 CORE LAYOUT LOGIC VARIABLES
-    
-       This section defines the core layout variables used by FlexFox.
-       It sets baseline values, then adjusts them through Firefox prefs,
-       window states, sidebar states, Sidebery activity, and toolbar modes
-       to control spacing, offsets, clipping, visibility, and transitions.
+     ██████╗ ██████╗ ███╗   ███╗██████╗  █████╗ ████████╗██╗██████╗ ██╗██╗     ██╗████████╗██╗   ██╗
+    ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔══██╗╚══██╔══╝██║██╔══██╗██║██║     ██║╚══██╔══╝╚██╗ ██╔╝
+    ██║     ██║   ██║██╔████╔██║██████╔╝███████║   ██║   ██║██████╔╝██║██║     ██║   ██║    ╚████╔╝ 
+    ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██╔══██║   ██║   ██║██╔══██╗██║██║     ██║   ██║     ╚██╔╝  
+    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║  ██║   ██║   ██║██████╔╝██║███████╗██║   ██║      ██║   
+     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝  ╚═╝   ╚═╝   ╚═╝╚═════╝ ╚═╝╚══════╝╚═╝   ╚═╝      ╚═╝   
+                                                                                                    
+        🔄 FIREFOX VERSION COMPATIBILITY
 
+        Compatibility aliases and overrides for Firefox version changes,
+        including renamed or removed variables and Nova UI differences.
     ════════════════════════════════════════════════════════════════════ */
-    /* 🔽 Start of core layout logic variables */
+    /* 🔽 Start of Firefox version compatibility */
     /**
      * !TEMPORARY:
      * The tokens on the right below were renamed to the tokens on the left in newer Firefox versions.
@@ -1484,14 +1489,14 @@
         }
     }
     /* v155+ */
-    /* !NOVA: */
+    /* !NOVA: Firefox v156 removed --chrome-window-gap and v157 removed --chrome-block-radius; retain these overrides for older versions where Nova can be manually enabled. */
     --chrome-window-gap: 0px !important;
     --chrome-block-radius: 0px !important;
     /* !NOVA: Firefox v156 scopes these variables to #tabbrowser-tabs, so override them here instead of at :root. */
     #tabbrowser-tabs[orient="vertical"] {
         --tab-group-label-hover-inset: 0 !important;
         --tab-group-label-size: 24px !important;
-        --uc-tab-group-label-native-size: calc(var(--tab-min-height) - 2 * var(--dimension-2));
+        --uc-tab-group-label-native-size: calc(var(--tab-min-height) - 4px);
     }
     --tab-group-label-padding: 4px !important;
     --tab-border-color-selected-leading: #b89cff;
@@ -1517,7 +1522,41 @@
     --toolbar-field-background-color: light-dark(rgba(0, 0, 0, 0.1), var(--color-black-alpha-30)) !important;
     /* Always use Nova UI colors for tab hover backgrounds */
     --tab-background-color-hover: light-dark(rgba(117, 102, 159, 0.25), rgba(182, 170, 217, 0.25)) !important;
+    /* v158+: Firefox renamed --tab-inline-padding to --tab-padding-inline. */
+    --tab-padding-inline: var(--tab-inline-padding);
+    /* Firefox only redefines this variable on descendant elements for vertical tabs.
+       Keep the compatibility alias under the same condition; otherwise a local
+       declaration would replace the horizontal tab strip's native root value with
+       an unresolved value. */
+    @media -moz-pref("sidebar.verticalTabs") {
+        #tabbrowser-tabs,
+        &:not([sidebar-expand-on-hover]) #pinned-tabs-container {
+            --tab-padding-inline: var(--tab-inline-padding);
+        }
+    }
+    --tab-margin-inline-inner: var(--tab-inner-inline-margin);
 
+    /* 🔼 End of Firefox version compatibility */
+    
+    /* ════════════════════════════════════════════════════════════════════
+    ██╗      █████╗ ██╗   ██╗ ██████╗ ██╗   ██╗████████╗    ██╗      ██████╗  ██████╗ ██╗ ██████╗
+    ██║     ██╔══██╗╚██╗ ██╔╝██╔═══██╗██║   ██║╚══██╔══╝    ██║     ██╔═══██╗██╔════╝ ██║██╔════╝
+    ██║     ███████║ ╚████╔╝ ██║   ██║██║   ██║   ██║       ██║     ██║   ██║██║  ███╗██║██║     
+    ██║     ██╔══██║  ╚██╔╝  ██║   ██║██║   ██║   ██║       ██║     ██║   ██║██║   ██║██║██║     
+    ███████╗██║  ██║   ██║   ╚██████╔╝╚██████╔╝   ██║       ███████╗╚██████╔╝╚██████╔╝██║╚██████╗
+    ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝  ╚═════╝    ╚═╝       ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝ ╚═════╝
+                                                                                                 
+       🧪 CORE LAYOUT LOGIC VARIABLES
+    
+       This section defines the core layout variables used by FlexFox.
+       It sets baseline values, then adjusts them through Firefox prefs,
+       window states, sidebar states, Sidebery activity, and toolbar modes
+       to control spacing, offsets, clipping, visibility, and transitions.
+
+    ════════════════════════════════════════════════════════════════════ */
+    /* 🔽 Start of core layout logic variables */
+
+    /* Internal fallback and shared layout references */
     --uc-toolbar-bgcolor: var(--uc-bgcolor); /* Internal fallback; must match --uc-bgcolor */
     --uc-sidebar-stripe-width: var(--uc-sidebar-width); /* Internal reference; must match --uc-sidebar-width */
 
@@ -2282,6 +2321,8 @@
         @media -moz-pref("browser.nova.enabled") {
             --tab-min-height: max(32px, calc(var(--tab-label-line-height) * 1em)) !important;
             --tab-inner-inline-margin: var(--space-medium) !important;
+            /* !TEMPORARY: Firefox v158+ renamed --tab-inner-inline-margin to --tab-margin-inline-inner. */
+            --tab-margin-inline-inner: var(--space-medium) !important;
             #tabbrowser-tabs tab-split-view-wrapper {
                 & .tabbrowser-tab {
                     & .tab-background {

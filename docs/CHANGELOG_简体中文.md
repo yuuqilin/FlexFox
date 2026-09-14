@@ -4,12 +4,38 @@
 
 ## 🆕 更新内容
 
+## 🦊 v7.0.1
+
+> [!IMPORTANT]
+> v7.0.0 引入了多个新功能和不兼容变更。如果此前错过，可以在此查看更新日志。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### 修复
+
+- **严重：** 修复 Firefox 157 兼容性问题导致地址栏损坏，并可能使浏览器完全无法使用的问题。[Bug 2065901](https://bugzilla.mozilla.org/show_bug.cgi?id=2065901)
+
+  - 修复启用 `uc.flex.move-urlbar-popup-to-center` 后输入框消失，导致导航工具栏和网页内容位置错乱的问题。
+  - 修复启用 `uc.flex.enable-translucent-urlbar-popup-and-menus` 后地址栏完全透明，且背景模糊效果失效的问题。
+  - 修复启用 `uc.flex.dim-urlbar-popup-backdrop` 后无法调暗整个视口的问题。
+
+- **严重：** 修复 Firefox 157 兼容性问题导致书签工具栏无法展开的问题。[Bug 2069885](https://bugzilla.mozilla.org/show_bug.cgi?id=2069885)
+- **严重：** 修复 Firefox 158 变更导致原生标签页布局错乱的问题。[Bug 2037111](https://bugzilla.mozilla.org/show_bug.cgi?id=2037111)
+- 修复 Firefox 157 变更导致标签组和分屏视图项目失去圆角的问题。[Bug 2033008](https://bugzilla.mozilla.org/show_bug.cgi?id=2033008)
+- 修复 Firefox 156 变更导致关闭“悬停时展开侧栏”且侧栏处于折叠模式时，底部工具按钮上方的分隔线样式错误的问题。[Bug 2056278](https://bugzilla.mozilla.org/show_bug.cgi?id=2056278)
+- 修复启用 Nova UI 时，`uc.flex.style-toolbar-items-border-radius = 1` 无法强制应用程序菜单和面板使用 Proton UI 圆角的问题。
+- 修复 v7.0.0 引起的回退问题：将 `uc.flex.style-tab-items-gradient-border` 设为 `0`，并将 `uc.flex.style-tab-items-border-width` 设为 `2` 时，原生标签页的边框向内收缩并与阴影分离。
+- 修复亮色模式下 Sidebery 标签页关闭按钮的颜色透明度不正确的问题。
+- 修复 Sidebery 的“排列方式”设为“紧凑”或“宽松”时，底部按钮未居中的问题。
+
+<!-- END What's New -->
+
 ## 🦊 v7.0.0 - Nova UI Edition
 
 > [!IMPORTANT]
 > v6.6.0 引入了多个新选项和不兼容变更。如果此前错过，可以在此查看更新日志。
 >
-> [English](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG.md#-whats-new) | [日本語](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v660) | [简体中文](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v660)
+> [English](./CHANGELOG.md#-v660) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v660) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v660)
 
 ### 新增与变更
 
@@ -306,8 +332,6 @@ https://github.com/user-attachments/assets/84a3ddf1-02f8-4c02-9957-4afcba52bf78
 * 修复 Firefox 155 中部分面板圆角显示不正确的问题。[Bug 2054953](https://bugzilla.mozilla.org/show_bug.cgi?id=2054953)
 * 暂时缓解 Firefox 155 中显示缩放高于 125% 时原生垂直标签页排版错位的问题。[Bug 2044082](https://bugzilla.mozilla.org/show_bug.cgi?id=2044082)
 * 修复 Firefox 155 默认启用 Nova UI 后引起的多项排版和功能问题。[Bug 2056188](https://bugzilla.mozilla.org/show_bug.cgi?id=2056188)
-
-<!-- END What's New -->
 
 <a id="updates-top-start"></a>
 <details>

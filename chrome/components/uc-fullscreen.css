@@ -213,7 +213,7 @@
     }
 
     /* This is a bit hacky fix for an issue that will make urlbar zero pixels tall after you enter customize mode */
-    #urlbar[breakout][breakout-extend] > .urlbar-input-container {
+    #urlbar:is([breakout][breakout-extend], [popover-open]) > .urlbar-input-container {
         padding-block: calc(
             min(4px, (var(--urlbar-container-height) - var(--urlbar-height)) / 2) + var(--urlbar-container-padding)
         ) !important;

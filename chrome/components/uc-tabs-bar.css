@@ -496,7 +496,14 @@ toolbar#TabsToolbar {
 
     /* Selected tabs: share the active background and border treatment with native vertical tabs. */
     #tabbrowser-tabs .tab-background {
-        border: var(--uc-active-tab-border-width) solid transparent !important;
+        border: none !important;
+        @supports (background-clip: border-area) {
+            @media not (-moz-pref("uc.flex.style-tab-items-gradient-border", 0) or
+                -moz-pref("uc.flex.style-tab-items-border-width", 0) or
+                -moz-pref("uc.flex.~dev-revert-to-pre-nova-style")) {
+                border: var(--uc-active-tab-border-width) solid transparent !important;
+            }
+        }
         border-radius: var(--uc-tab-border-radius) !important;
         &:is([selected], [multiselected]) {
             box-shadow: var(--uc-active-tab-border-shadow), var(--uc-active-tab-drop-shadow) !important;
@@ -731,7 +738,10 @@ toolbar#TabsToolbar {
     visibility: visible !important;
 }
 .tabbrowser-tab:not([pinned]) .tab-close-button:hover {
-    opacity: var(--uc-tab-close-button-opacity);
+    opacity: var(--uc-tab-close-button-opacity) !important;
+}
+.tabbrowser-tab:not([pinned]) .tab-close-button:hover:active {
+    opacity: 1 !important;
 }
 
 /* Show tab close button when cursor is over the tab icon */
@@ -796,6 +806,8 @@ toolbar#TabsToolbar {
     /* Makes the tab audio indicator show as overlay in all tabs, not just pinned ones */
     .tabbrowser-tab:not([pinned]) {
         --tab-icon-end-margin: inherit !important;
+        /* !TEMPORARY: Firefox v158+ renamed --tab-icon-end-margin to --tab-icon-margin-inline-end. */
+        --tab-icon-margin-inline-end: inherit !important;
 
         .tab-audio-button {
             --button-size-icon-small: 16px !important;

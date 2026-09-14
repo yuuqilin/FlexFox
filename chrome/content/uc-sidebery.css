@@ -308,7 +308,7 @@
         --bg: light-dark(#f1f5f9, #1a1b26) !important;
         --warn: light-dark(#fca5a5, #8c4351) !important;
         */
-        --warn: light-dark(hsl(350 60% 64% / 0.8), hsl(0 60% 50%)) !important;
+        --warn: light-dark(hsl(350 60% 64%), hsl(0 60% 50%)) !important;
         @media (prefers-color-scheme: dark) {
             --tabs-fg: #d4d4d4 !important;
             --tabs-bg-hover: #3b3948 !important;
@@ -470,6 +470,9 @@
         border-radius: 3px;
         background: var(--warn) !important;
         opacity: 80% !important;
+    }
+    .Tab .close > svg:hover:active {
+        opacity: 1 !important;
     }
 
     .Tab .title {
@@ -1849,22 +1852,28 @@
     /* Adjust spacing and layout of the search bar */
     #search_bar[data-showed="true"] {
         margin-top: 4px;
-        margin-inline: 3px;
-        min-width: calc(var(--uc-sb-central-box-width) - 2 * 3px) !important;
+        #root:not([data-nav-layout="horizontal"]) & {
+            margin-top: 6px;
+        }
+        margin-inline: var(--uc-sb-tabs-margin);
+        min-width: calc(var(--uc-sb-central-box-width) - 2 * var(--uc-sb-tabs-margin)) !important;
         &::before {
-            left: 2px !important;
-            width: calc(100% - 2 * 2px) !important;
+            left: calc((var(--uc-sb-collapsed-content-width) - var(--uc-sb-tab-height)) / 2) !important;
+            width: calc(100% - (var(--uc-sb-collapsed-content-width) - var(--uc-sb-tab-height))) !important;
+        }
+        .search-icon > svg {
+            margin: 0 !important;
         }
         .search-icon,
         .placeholder {
-            margin-inline: 4px;
+            margin-inline: calc((var(--uc-sb-collapsed-content-width) - var(--search-icon-width)) / 2);
         }
 
         @media (max-width: 50px) {
             @media not -moz-pref("uc.flex.sidebery-allow-resizable-width") {
                 #root:not(:hover) & {
                     &::before {
-                        width: 34px !important;
+                        width: var(--uc-sb-tab-height) !important;
                     }
                     .input {
                         opacity: 0;
@@ -2046,7 +2055,7 @@
         }
 
         .BottomBar {
-            padding: 0 7px var(--general-margin) !important;
+            padding: 0 calc((var(--uc-sidebar-width) - var(--bottom-bar-height)) / 2) var(--general-margin) !important;
         }
 
         /** 

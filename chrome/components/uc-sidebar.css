@@ -1409,9 +1409,10 @@
             --uc-vt-sroot-grid-template-columns: repeat(auto-fit, minmax(var(--uc-vt-pinned-tab-column-width), 1fr));
             --uc-vt-sroot-overflow-indicator-display: none;
         }
+        --uc-vt-splitter-inset-height: -0.8px;
         --uc-expanded-sroot-splitter-width: 10px;
         --uc-expanded-sroot-splitter-hover-width: calc(
-            var(--uc-sidebar-main-hover-width) - 2 * var(--tab-inner-inline-margin)
+            var(--uc-sidebar-main-hover-width) - 2 * var(--tab-margin-inline-inner)
         );
         --uc-expanded-sroot-splitter-margin-inline: calc(50% - 5px);
         --uc-expanded-sroot-splitter-bgcolor: transparent;
@@ -1469,7 +1470,7 @@
                 margin-block: -4px;
                 padding-block: 1px;
                 &:not(:hover) {
-                    box-shadow: inset 0 0.8px 0 0 var(--uc-vt-splitter-color);
+                    box-shadow: inset 0 var(--uc-vt-splitter-inset-height) 0 0 var(--uc-vt-splitter-color);
                     /*
                     color: var(--toolbox-textcolor) !important;
                     border-bottom: var(--tabstrip-inner-border) !important;
@@ -1491,8 +1492,8 @@
                     margin-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay);
                 &:hover {
-                    width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-inner-inline-margin));
-                    margin-inline: var(--tab-inner-inline-margin) !important;
+                    width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-margin-inline-inner));
+                    margin-inline: var(--tab-margin-inline-inner) !important;
                     transition:
                         width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay),
@@ -1503,7 +1504,7 @@
                 @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
                     :root:not([titlepreface*="\180e "]) & {
                         width: 24px;
-                        margin-inline: calc(var(--tab-inner-inline-margin) + 3px) !important;
+                        margin-inline: calc(var(--tab-margin-inline-inner) + 3px) !important;
                         :is(#sidebar-main, #sidebar-container):hover & {
                             width: 10px;
                             margin-inline: calc(50% - 5px) !important;
@@ -1513,8 +1514,8 @@
                                 margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                                     var(--uc-hover-sidebar-delay);
                             &:hover {
-                                width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-inner-inline-margin));
-                                margin-inline: var(--tab-inner-inline-margin) !important;
+                                width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-margin-inline-inner));
+                                margin-inline: var(--tab-margin-inline-inner) !important;
                             }
                         }
                     }
@@ -1534,7 +1535,7 @@
             /*
             border-bottom: none !important;
             height: 1.2px;
-            box-shadow: inset 0 -0.8px 0 0 var(--uc-vt-splitter-color) !important;
+            box-shadow: inset 0 var(--uc-vt-splitter-inset-height) 0 0 var(--uc-vt-splitter-color) !important;
 
             width: 10px;
             margin-inline: calc(50% - 5px) !important;
@@ -1550,7 +1551,7 @@
             :root:not([titlepreface*="\180e "]) & {
                 &::after {
                     width: 24px;
-                    margin-inline: calc(var(--tab-inner-inline-margin) + 3px) !important;
+                    margin-inline: calc(var(--tab-margin-inline-inner) + 3px) !important;
                 }
                 :is(#sidebar-main, #sidebar-container):hover &::after {
                     width: 10px;
@@ -1576,11 +1577,11 @@
         display: var(--uc-sb-sroot-splitter-display, block) !important;
         border-top: none !important;
         border-color: transparent !important;
-        box-shadow: inset 0 -0.8px 0 0 var(--uc-vt-splitter-color);
+        box-shadow: inset 0 var(--uc-vt-splitter-inset-height) 0 0 var(--uc-vt-splitter-color);
         opacity: var(--uc-expanded-sroot-splitter-opacity);
 
         width: var(--uc-expanded-sroot-splitter-width, auto);
-        margin-inline: var(--uc-expanded-sroot-splitter-margin-inline, var(--tab-inner-inline-margin)) !important;
+        margin-inline: var(--uc-expanded-sroot-splitter-margin-inline, var(--tab-margin-inline-inner)) !important;
         transition:
             width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
@@ -1588,11 +1589,11 @@
                 var(--uc-autohide-sidebar-delay),
             opacity var(--uc-expanded-sroot-splitter-opacity-transition);
         &:not(:hover) {
-            background-color: var(--uc-expanded-sroot-splitter-bgcolor, threedface) !important;
+            background-color: var(--uc-expanded-sroot-splitter-bgcolor, transparent) !important;
         }
         &:hover {
             width: var(--uc-expanded-sroot-splitter-hover-width, auto);
-            margin-inline: var(--tab-inner-inline-margin) !important;
+            margin-inline: var(--tab-margin-inline-inner) !important;
             transition:
                 width var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
                 margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
@@ -1667,6 +1668,8 @@
 
             /* Pass variables into the shadow DOM to control grid container spacing */
             --tab-pinned-container-margin-inline-expanded: calc(var(--space-small) - 0.5px) !important;
+            /* !TEMPORARY: Firefox v158+ renamed --tab-pinned-container-margin-inline-expanded to --tab-container-margin-inline-pinned-expanded. */
+            --tab-container-margin-inline-pinned-expanded: calc(var(--space-small) - 0.5px) !important;
             /* Keep this in sync with the .tab-background margin-block adjustment below,
                  which adds 0.5px to the default vertical margin on each side. */
             --tab-height-with-margin-padding: calc(
@@ -1756,7 +1759,14 @@
 
     /* Selected tabs: Style borders, backgrounds, and the container tab indicator for selected or multi-selected tabs */
     .tab-background {
-        border: var(--uc-active-tab-border-width) solid transparent !important;
+        border: none !important;
+        @supports (background-clip: border-area) {
+            @media not (-moz-pref("uc.flex.style-tab-items-gradient-border", 0) or
+                -moz-pref("uc.flex.style-tab-items-border-width", 0) or
+                -moz-pref("uc.flex.~dev-revert-to-pre-nova-style")) {
+                border: var(--uc-active-tab-border-width) solid transparent !important;
+            }
+        }
         border-radius: var(--uc-tab-border-radius) !important;
         &:is([selected], [multiselected]) {
             box-shadow: var(--uc-active-tab-border-shadow), var(--uc-active-tab-drop-shadow) !important;
@@ -1821,7 +1831,7 @@
             -moz-context-properties: fill, fill-opacity, stroke !important;
             list-style-image: none !important;
             stroke: transparent;
-            background-image: var(--uc-tab-close-image);
+            background-image: var(--uc-tab-close-image) !important;
             background-origin: content-box;
             background-position: center;
             background-repeat: no-repeat;
@@ -2237,8 +2247,8 @@
         --uc-tab-group-label-padding-inline: 32px 16px;
         --uc-tab-group-label-padding-inline-total: 48px;
         @media -moz-pref("uc.flex.style-tab-groups", 0) {
-            --uc-tab-group-label-padding-inline: calc(var(--tab-inline-padding) - var(--space-medium));
-            --uc-tab-group-label-padding-inline-total: calc(2 * (var(--tab-inline-padding) - var(--space-medium)));
+            --uc-tab-group-label-padding-inline: calc(var(--tab-padding-inline) - var(--space-medium));
+            --uc-tab-group-label-padding-inline-total: calc(2 * (var(--tab-padding-inline) - var(--space-medium)));
         }
         @media -moz-pref("uc.flex.style-tab-groups-center-label-text") {
             --uc-tab-group-label-padding-inline: 32px 26px;
@@ -2639,7 +2649,7 @@
                         var(--uc-autohide-sidebar-delay);
                     :is(#sidebar-main, #sidebar-container):not(:hover) & {
                         width: calc(
-                            var(--uc-sidebar-stripe-width) - var(--tab-inner-inline-margin) + var(--space-xsmall) / 2
+                            var(--uc-sidebar-stripe-width) - var(--tab-margin-inline-inner) + var(--space-xsmall) / 2
                         ) !important;
                     }
                     :is(#sidebar-main, #sidebar-container):hover & {
@@ -2753,7 +2763,7 @@
             }
 
             .tab-background {
-                margin-inline: var(--tab-inner-inline-margin) !important;
+                margin-inline: var(--tab-margin-inline-inner) !important;
 
                 /*
                 .tabbrowser-tab:first-child & {
@@ -2766,7 +2776,7 @@
                 margin-block: 2px !important;
             }
             .tab-content {
-                padding-inline: var(--tab-inline-padding) !important;
+                padding-inline: var(--tab-padding-inline) !important;
             }
         }
     }
@@ -3157,7 +3167,7 @@
                     }
                     .tab-group-overflow-count-container {
                         label {
-                            margin-inline-start: var(--tab-inner-inline-margin) !important;
+                            margin-inline-start: var(--tab-margin-inline-inner) !important;
                             transition: margin-inline-start var(--uc-hover-transition-duration)
                                 var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay) !important;
                         }
@@ -3288,6 +3298,10 @@
         --tab-inline-padding: calc(
             (var(--tab-collapsed-width) - var(--icon-size-default, var(--icon-size))) / 2 + 1px
         ) !important;
+        /* !TEMPORARY: Firefox v158+ renamed --tab-inline-padding to --tab-padding-inline. */
+        --tab-padding-inline: calc(
+            (var(--tab-collapsed-width) - var(--icon-size-default, var(--icon-size))) / 2 + 1px
+        ) !important;
         --tab-collapsed-width: var(--uc-sidebar-stripe-width) !important;
         width: var(--uc-sidebar-stripe-width) !important;
         .tab-background {
@@ -3368,6 +3382,7 @@
     }
 
     :is(#sidebar-main, #sidebar-container):not([sidebar-launcher-expanded]) {
+        --uc-vt-splitter-inset-height: 0px;
         --uc-expanded-sroot-btn-padding-inline: 5.5px;
         #vertical-tabs-newtab-button {
             margin-inline: auto !important;

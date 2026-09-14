@@ -4,12 +4,38 @@
 
 ## 🆕 What's New
 
+## 🦊 v7.0.1
+
+> [!IMPORTANT]
+> v7.0.0 introduced several new features and breaking changes. If you missed its release notes, you can read them here:
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### Fixes
+
+- **Critical:** Fixed Firefox 157 compatibility regressions that broke the URL bar and could make the browser unusable. [Bug 2065901](https://bugzilla.mozilla.org/show_bug.cgi?id=2065901)
+
+  - Fixed `uc.flex.move-urlbar-popup-to-center` causing the input field to disappear and shifting the navigation toolbar and web content out of place.
+  - Fixed `uc.flex.enable-translucent-urlbar-popup-and-menus` making the URL bar fully transparent and disabling background blur.
+  - Fixed `uc.flex.dim-urlbar-popup-backdrop` failing to dim the entire viewport.
+
+- **Critical:** Fixed a Firefox 157 compatibility regression that prevented the bookmarks toolbar from expanding. [Bug 2069885](https://bugzilla.mozilla.org/show_bug.cgi?id=2069885)
+- **Critical:** Fixed native tab layout issues caused by Firefox 158 changes. [Bug 2037111](https://bugzilla.mozilla.org/show_bug.cgi?id=2037111)
+- Restored rounded corners on tab group and Split View items after Firefox 157 changes. [Bug 2033008](https://bugzilla.mozilla.org/show_bug.cgi?id=2033008)
+- Fixed the separator above the sidebar's bottom tool buttons in collapsed mode when `Expand sidebar on hover` was disabled, following Firefox 156 changes. [Bug 2056278](https://bugzilla.mozilla.org/show_bug.cgi?id=2056278)
+- Fixed `uc.flex.style-toolbar-items-border-radius = 1` failing to force Proton UI corners on the App Menu and panels when Nova UI was enabled.
+- Fixed a v7.0.0 regression that inset native tab borders and separated them from their shadows when `uc.flex.style-tab-items-gradient-border = 0` and `uc.flex.style-tab-items-border-width = 2`.
+- Fixed incorrect color opacity on Sidebery tab close buttons in Light Mode.
+- Centered Sidebery's bottom-bar buttons when **Density** was set to **Compact** or **Relaxed**.
+
+<!-- END What's New -->
+
 ## 🦊 v7.0.0 - Nova UI Edition
 
 > [!IMPORTANT]
 > v6.6.0 introduced several new preferences and breaking changes. If you missed its release notes, you can read them here:
 >
-> [English](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG.md#-whats-new) | [日本語](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v660) | [简体中文](https://github.com/yuuqilin/FlexFox/blob/main/docs/CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v660)
+> [English](./CHANGELOG.md#-v660) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v660) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v660)
 
 ### New and Changed
 
@@ -173,7 +199,6 @@
 
 - Fixed multiple styling and layout regressions caused by Firefox updates: [Bug 2049244](https://bugzilla.mozilla.org/show_bug.cgi?id=2049244), [Bug 2055840](https://bugzilla.mozilla.org/show_bug.cgi?id=2055840), [Bug 2046942](https://bugzilla.mozilla.org/show_bug.cgi?id=2046942), [Bug 2033583](https://bugzilla.mozilla.org/show_bug.cgi?id=2033583), [Bug 2044711](https://bugzilla.mozilla.org/show_bug.cgi?id=2044711), [Bug 2045752](https://bugzilla.mozilla.org/show_bug.cgi?id=2045752), [Bug 2054481](https://bugzilla.mozilla.org/show_bug.cgi?id=2054481), [Bug 2023711](https://bugzilla.mozilla.org/show_bug.cgi?id=2023711), [Bug 2022975](https://bugzilla.mozilla.org/show_bug.cgi?id=2022975), [Bug 2052608](https://bugzilla.mozilla.org/show_bug.cgi?id=2052608), [Bug 2034495](https://bugzilla.mozilla.org/show_bug.cgi?id=2034495), [Bug 2029183](https://bugzilla.mozilla.org/show_bug.cgi?id=2029183), [Bug 2046646](https://bugzilla.mozilla.org/show_bug.cgi?id=2046646), [Bug 2039721](https://bugzilla.mozilla.org/show_bug.cgi?id=2039721), [Bug 2047784](https://bugzilla.mozilla.org/show_bug.cgi?id=2047784), [Bug 1998985](https://bugzilla.mozilla.org/show_bug.cgi?id=1998985), and [Bug 2063294](https://bugzilla.mozilla.org/show_bug.cgi?id=2063294).
 
-
 ## 🦊 v6.6.0
 
 ### New
@@ -307,8 +332,6 @@ https://github.com/user-attachments/assets/84a3ddf1-02f8-4c02-9957-4afcba52bf78
 * Fixed mismatched panel corners in Firefox 155. [Bug 2054953](https://bugzilla.mozilla.org/show_bug.cgi?id=2054953)
 * Added a temporary workaround for Native Vertical Tabs layout issues above 125% display scaling in Firefox 155. [Bug 2044082](https://bugzilla.mozilla.org/show_bug.cgi?id=2044082)
 * Fixed numerous layout and functionality issues caused by Nova UI becoming enabled by default in Firefox 155. [Bug 2056188](https://bugzilla.mozilla.org/show_bug.cgi?id=2056188)
-
-<!-- END What's New -->
 
 <a id="updates-top-start"></a>
 <details>
