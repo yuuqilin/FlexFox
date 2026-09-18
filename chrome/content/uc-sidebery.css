@@ -290,15 +290,23 @@
     */
 
     #root {
-        /* Tab and PinnedTab height adjustment */
-        --tabs-height: var(--uc-sb-tab-height) !important;
-        --tabs-pinned-height: var(--tabs-height) !important;
+        /* Sidebery reads --tabs-height from #root to calculate tab drag positions but
+           does not evaluate calc(). Since its calculation does not include FlexFox's
+           extra inter-tab margin, keep the root values hard-coded with that margin
+           included, then restore the actual tab height for descendants. */
+        --tabs-height: 34px !important;
+        --tabs-pinned-height: var(--uc-sb-tab-height) !important;
         --tabs-pinned-width: 34px !important;
         &[data-density="compact"] {
-            --tabs-height: var(--uc-sb-tab-height) !important;
+            --tabs-height: 30px !important;
         }
+
         &[data-density="loose"] {
-            --tabs-height: var(--uc-sb-tab-height) !important;
+            --tabs-height: 36px !important;
+        }
+
+        > * {
+            --tabs-height: var(--uc-sb-tab-height);
         }
 
         /* Light and Dark Theme base settings */
