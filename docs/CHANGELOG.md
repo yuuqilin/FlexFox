@@ -4,6 +4,49 @@
 
 ## 🆕 What's New
 
+## 🦊 v7.1.0
+
+> [!IMPORTANT]
+> v7.0.0 introduced several new features and breaking changes. If you missed its release notes, you can read them here:
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+> [!IMPORTANT]
+> Firefox 157 will enable Nova UI by default.
+>
+> In the next FlexFox release, support for Firefox ESR 140 will end in line with Firefox's support schedule. FlexFox will then support ESR 153 and later. The last ESR 140-compatible source code will be frozen and moved to the `ESR-v140` branch.
+>
+> The next release will also drop compatibility with legacy pre-v6 FlexFox styles remaining in Sidebery's Styles editor. If you still have these styles installed, please remove them before upgrading to the next FlexFox release. See [Upgrading from Pre-v6 Versions](./USAGE.md#-upgrading-from-pre-v6-versions) for instructions.
+
+### New
+
+- **QoL:** Added `uc.flex.show-native-vertical-tabs-on-sidebar-stripe-hover` to open the full native vertical tabs panel when hovering over the sidebar stripe while using Sidebery.
+
+  - By default, FlexFox reveals only the sidebar tool buttons on hover to avoid duplicating Sidebery's tab list.
+  - Firefox does not yet expose extension APIs for features such as Split View and Tab Notes, so Sidebery cannot use them directly. Normally, you must press <kbd>F1</kbd> to switch to native vertical tabs, then press <kbd>F1</kbd> again to return to Sidebery.
+  - The sidebar toggle button (Firefox logo) shows a colored icon in **expanded mode** and a grayscale icon in **collapsed mode**.
+  - With this option enabled, hovering over the sidebar stripe in expanded mode opens the full native vertical tabs panel without switching away from Sidebery. It has no effect in collapsed mode or when `uc.flex.remove-sidebar-stripe` is enabled.
+  - When Mica or a custom wallpaper is enabled alongside `uc.flex.sidebery-allow-resizable-width`, Sidebery cannot be resized narrower than the width set by `uc.flex.sidebery-expand-width` while the sidebar toggle button is in expanded mode. This restriction does not apply without Mica or wallpapers.
+
+- **Compatibility:** Added support for Sidebery Nightly (v5.6.1.5). This unreleased version introduces breaking changes that would otherwise disrupt several FlexFox styles and features. [Commit 6228919](https://github.com/mbnuqw/sidebery/commit/622891943b4ace519b827bf67eed9da07b8b6f4b) [Commit 43944c7](https://github.com/mbnuqw/sidebery/commit/43944c74e965d5ee9687696d2698da55bfd684a1)
+
+### Improvements
+
+- The corner radius of URL bar icon buttons now follows `uc.flex.style-toolbar-items-border-radius`.
+- In horizontal tabs mode, `Hide Sidebery` can now hide sidebar tool buttons. They also hide automatically with `Hide All` or in <kbd>F11</kbd> fullscreen mode, and reappear when the cursor approaches the screen edge.
+- Refactored the layout rules for sidebar tool buttons.
+- Refactored sidebar stacking order (`z-index`) handling.
+
+### Fixes
+
+- Fixed Sidebery tab drag-and-drop issues that prevented tabs from moving or placed them in the wrong position. [Issue #49](https://github.com/yuuqilin/FlexFox/issues/49)
+- Fixed a Firefox 154 regression that prevented native vertical tabs from expanding in <kbd>F11</kbd> fullscreen mode. [Bug 2052711](https://bugzilla.mozilla.org/show_bug.cgi?id=2052711) [Bug 2054085](https://bugzilla.mozilla.org/show_bug.cgi?id=2054085)
+- Fixed misaligned sidebar tool buttons in horizontal tabs mode after Firefox 156 changes. [Bug 2049659](https://bugzilla.mozilla.org/show_bug.cgi?id=2049659)
+- Fixed sidebar tool buttons appearing in the wrong position after Firefox 158 changes. [Bug 2041030](https://bugzilla.mozilla.org/show_bug.cgi?id=2041030)
+- Fixed misaligned Split View tabs after Firefox 158 changes. [Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+
+<!-- END What's New -->
+
 ## 🦊 v7.0.1
 
 > [!IMPORTANT]
@@ -27,8 +70,6 @@
 - Fixed a v7.0.0 regression that inset native tab borders and separated them from their shadows when `uc.flex.style-tab-items-gradient-border = 0` and `uc.flex.style-tab-items-border-width = 2`.
 - Fixed incorrect color opacity on Sidebery tab close buttons in Light Mode.
 - Centered Sidebery's bottom-bar buttons when **Density** was set to **Compact** or **Relaxed**.
-
-<!-- END What's New -->
 
 ## 🦊 v7.0.0 - Nova UI Edition
 
@@ -75,7 +116,7 @@
   2 = Animated gradient
   ```
 
-  The gradient colors follow `uc.flex.style-sidebar-stripe-color`. A static gradient is the Nova UI default and is enabled by default in FlexFox ahead of the rollout because of [Issue #41](https://github.com/yuuqilin/DevFlexFox/issues/41). This option has no effect when `uc.flex.style-tab-items-border-width` is set to `0`.
+  The gradient colors follow `uc.flex.style-sidebar-stripe-color`. A static gradient is the Nova UI default and is enabled by default in FlexFox ahead of the rollout because of [Issue #41](https://github.com/yuuqilin/FlexFox/issues/41). This option has no effect when `uc.flex.style-tab-items-border-width` is set to `0`.
 
   <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/gradient-border.webp" width="300px">
 

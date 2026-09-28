@@ -4,6 +4,49 @@
 
 ## 🆕 更新内容
 
+## 🦊 v7.1.0
+
+> [!IMPORTANT]
+> v7.0.0 引入了多个新功能和不兼容变更。如果此前错过，可以在此查看更新日志。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+> [!IMPORTANT]
+> Firefox 157 将默认启用 Nova UI。
+>
+> FlexFox 将在下一次版本更新时，随 Firefox 一同停止支持 Firefox ESR 140，之后仅支持 ESR 153 及更新版本。最后一版兼容 ESR 140 的源代码将冻结并移至 `ESR-v140` 分支。
+>
+> 下个版本也将不再兼容 Sidebery 样式编辑器中遗留的 v6 之前的 FlexFox 旧样式。如果尚未删除，请在**升级到下一个 FlexFox 版本之前**清除这些样式。具体操作请参阅[从 v6 之前的版本升级](./USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-从-v6-之前的版本升级)。
+
+### 新增
+
+- **体验优化：** 新增 `uc.flex.show-native-vertical-tabs-on-sidebar-stripe-hover`，使用 Sidebery 时，悬停侧栏彩带即可打开完整的原生垂直标签页面板。
+
+  - 默认情况下，FlexFox 仅在悬停彩带时展开侧栏工具按钮，以免与 Sidebery 的标签页列表重复显示。
+  - Firefox 尚未向扩展开放分屏视图、标签页便笺等原生功能所需的 API，因此 Sidebery 暂时无法直接使用这些功能。通常需要按 <kbd>F1</kbd> 切换到原生垂直标签页，再按一次 <kbd>F1</kbd> 才能返回 Sidebery。
+  - 侧栏切换按钮（Firefox 标志）在**展开模式**下显示彩色图标，在**折叠模式**下显示灰色图标。
+  - 启用此选项后，在展开模式下悬停侧栏彩带，即可打开完整的原生垂直标签页面板，无需切换离开 Sidebery。处于折叠模式或启用 `uc.flex.remove-sidebar-stripe` 移除彩带时，此选项不生效。
+  - 如果使用 Mica 或自定义壁纸，并启用了 `uc.flex.sidebery-allow-resizable-width`，当侧栏切换按钮处于展开模式时，Sidebery 的宽度不能调整得比 `uc.flex.sidebery-expand-width` 指定的宽度更窄。未使用 Mica 或壁纸时，不受此限制。
+
+- **兼容性：** 新增对 Sidebery Nightly（v5.6.1.5）的支持。这个尚未正式发布的版本包含多项不兼容旧版的变更，如果不进行适配，FlexFox 的部分样式和功能将无法正常工作。[Commit 6228919](https://github.com/mbnuqw/sidebery/commit/622891943b4ace519b827bf67eed9da07b8b6f4b) [Commit 43944c7](https://github.com/mbnuqw/sidebery/commit/43944c74e965d5ee9687696d2698da55bfd684a1)
+
+### 改进
+
+- 地址栏内图标按钮的圆角现在会跟随 `uc.flex.style-toolbar-items-border-radius` 的设置。
+- 在水平标签页模式下，现在也可以通过 `Hide Sidebery` 隐藏侧栏工具按钮。使用 `Hide All` 或进入 <kbd>F11</kbd> 全屏模式时，这些按钮也会自动隐藏，鼠标靠近屏幕边缘时则会重新显示。
+- 重构侧栏工具按钮的布局处理。
+- 重构侧栏的堆叠顺序（`z-index`）处理。
+
+### 修复
+
+- 修复 Sidebery 标签页拖拽时无法移动，或被移动到错误位置的问题。[Issue #49](https://github.com/yuuqilin/FlexFox/issues/49)
+- 修复 Firefox 154 变更导致在 <kbd>F11</kbd> 全屏模式下无法展开原生垂直标签页的问题。[Bug 2052711](https://bugzilla.mozilla.org/show_bug.cgi?id=2052711) [Bug 2054085](https://bugzilla.mozilla.org/show_bug.cgi?id=2054085)
+- 修复 Firefox 156 变更导致水平标签页模式下侧栏工具按钮未居中对齐的问题。[Bug 2049659](https://bugzilla.mozilla.org/show_bug.cgi?id=2049659)
+- 修复 Firefox 158 变更导致侧栏工具按钮显示位置错误的问题。[Bug 2041030](https://bugzilla.mozilla.org/show_bug.cgi?id=2041030)
+- 修复 Firefox 158 变更导致分屏视图标签页位置错乱的问题。[Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+
+<!-- END What's New -->
+
 ## 🦊 v7.0.1
 
 > [!IMPORTANT]
@@ -27,8 +70,6 @@
 - 修复 v7.0.0 引起的回退问题：将 `uc.flex.style-tab-items-gradient-border` 设为 `0`，并将 `uc.flex.style-tab-items-border-width` 设为 `2` 时，原生标签页的边框向内收缩并与阴影分离。
 - 修复亮色模式下 Sidebery 标签页关闭按钮的颜色透明度不正确的问题。
 - 修复 Sidebery 的“排列方式”设为“紧凑”或“宽松”时，底部按钮未居中的问题。
-
-<!-- END What's New -->
 
 ## 🦊 v7.0.0 - Nova UI Edition
 
@@ -75,7 +116,7 @@
   2 = 动态渐变
   ```
 
-  渐变颜色会跟随 `uc.flex.style-sidebar-stripe-color` 的设置变化。静态渐变是 Nova UI 的默认效果。由于 [Issue #41](https://github.com/yuuqilin/DevFlexFox/issues/41)，FlexFox 在正式推送前已将其设为默认启用。当 `uc.flex.style-tab-items-border-width` 设置为 `0` 时，此选项不会生效。
+  渐变颜色会跟随 `uc.flex.style-sidebar-stripe-color` 的设置变化。静态渐变是 Nova UI 的默认效果。由于 [Issue #41](https://github.com/yuuqilin/FlexFox/issues/41)，FlexFox 在正式推送前已将其设为默认启用。当 `uc.flex.style-tab-items-border-width` 设置为 `0` 时，此选项不会生效。
 
   <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/gradient-border.webp" width="300px">
 

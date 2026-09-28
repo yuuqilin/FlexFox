@@ -77,6 +77,7 @@
 |-----------|:-------------:|-------------|
 | `uc.flex.sidebery-disable-icon-scaling` | `false` | 移除 Sidebery 固定标签页和导航面板在展开时的轻微图标放大效果。 |
 | `uc.flex.sidebery-allow-resizable-width` | `false` | 停用 Sidebery 的自动折叠功能，并允许通过拖动侧栏分隔线自由调整宽度。仍可使用侧栏切换按钮（Firefox 标志）快速切换展开和折叠状态。如果希望临时恢复自动隐藏以节省屏幕空间，可使用 `Hide Sidebery` 快捷键在可调整宽度模式和自动隐藏模式之间切换。此选项仅在 Firefox 的标签页模式设为垂直标签页时生效，在水平标签页模式下无效。 |
+| `uc.flex.show-native-vertical-tabs-on-sidebar-stripe-hover` | `false` | 启用此选项并用侧栏切换按钮（Firefox 标志）展开侧栏启动器后，悬停侧栏彩带即可打开完整的原生垂直标签页面板。启动器处于折叠状态，或彩带已移除时，此选项不生效。通常悬停彩带只会展开侧栏工具按钮，以免与 Sidebery 的标签页列表重复。由于 Firefox 尚未向扩展开放创建分屏视图或管理标签页便笺的 API，Sidebery 无法直接提供这些功能。不启用此选项时，要使用它们就得按 <kbd>F1</kbd> 切换到 Firefox 原生垂直标签页；启用后，无需离开 Sidebery 也能使用这些功能。若同时使用 Mica 或自定义壁纸并启用 Sidebery 宽度调整，Sidebery 的最小宽度会限制为设置的侧栏展开宽度。非透明布局仍可自由调整宽度。 |
 | `uc.flex.style-sidebery-nav-icon` | `0`-`2`<br>(`0`) | 设置 Sidebery 折叠状态下显示的导航图标。取值：`0` = 使用当前活动面板图标（新默认值），`1` = Sidebery 标志，`2` = V 形箭头图标（旧默认值）。 |
 | `uc.flex.style-sidebery-nav-icon-use-active-panel-color` | `false` | 将当前活动面板的颜色应用到导航图标。 |
 

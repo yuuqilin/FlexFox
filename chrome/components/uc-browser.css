@@ -687,6 +687,33 @@ split-view-footer {
         }
     }
 
+    /* In hide modes, the collapsed launcher also expands on hover, so clip the tab box to reveal the Mica backdrop. */
+    @media not -moz-pref("sidebar.visibility", "expand-on-hover") {
+        @media -moz-pref("uc.flex.fully-hide-sidebery") {
+            :is(#sidebar-main, #sidebar-container):not(
+                    [hidden],
+                    [sidebar-panel-open],
+                    [sidebar-launcher-expanded]
+                ):hover
+                ~ #tabbrowser-tabbox {
+                --uc-tabbox-clip-path-side: var(--uc-sidebar-stripe-width);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+            }
+        }
+        @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+            :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "])
+                :is(#sidebar-main, #sidebar-container):not(
+                    [hidden],
+                    [sidebar-panel-open],
+                    [sidebar-launcher-expanded]
+                ):hover
+                ~ #tabbrowser-tabbox {
+                --uc-tabbox-clip-path-side: var(--uc-sidebar-stripe-width);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+            }
+        }
+    }
+
     /* Clip the tab box when native vertical tabs are expanded to reveal the Mica backdrop */
     @media -moz-pref("sidebar.verticalTabs") and (not -moz-pref("sidebar.visibility", "expand-on-hover")) {
         :is(#sidebar-main, #sidebar-container):hover
@@ -698,15 +725,16 @@ split-view-footer {
             --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
         }
 
-        /** 
-         * When the sidebar panel is open ([sidebar-panel-open]) 
-         * and native vertical tabs are in expanded mode ([sidebar-launcher-expanded]), 
-         * clip the sidebar panel on hover to reveal the Mica backdrop. 
+        /**
+         * Clip an open non-Sidebery panel below the native vertical-tabs overlay.
+         * In hide modes, the collapsed launcher also expands on hover, so clip
+         * the panel by the stripe width rather than the full hover width.
          */
-        #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
-                [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
-            ) {
-            min-width: var(--uc-sidebar-main-hover-clip-mica) !important;
+        #sidebar-box[sidebar-panel-open]:not([sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]) {
+            &[sidebar-launcher-expanded] {
+                min-width: var(--uc-sidebar-main-hover-clip-mica) !important;
+            }
+
             &:not([sidebar-positionend]) {
                 clip-path: inset(var(--uc-vt-sidebox-clip-path-top) 0 0 var(--uc-vt-sidebox-clip-path-side));
             }
@@ -717,11 +745,25 @@ split-view-footer {
             transition: var(--uc-tabbox-clip-path-transition);
         }
         :is(#sidebar-main, #sidebar-container):hover
-            ~ #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open]:not(
+            ~ #sidebar-box[sidebar-panel-open]:not(
                 [sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
             ) {
-            --uc-vt-sidebox-clip-path-side: var(--uc-sidebar-main-hover-clip-mica);
             --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+
+            &[sidebar-launcher-expanded] {
+                --uc-vt-sidebox-clip-path-side: var(--uc-sidebar-main-hover-clip-mica);
+            }
+            @media -moz-pref("uc.flex.fully-hide-sidebery") {
+                &:not([sidebar-launcher-expanded]) {
+                    --uc-vt-sidebox-clip-path-side: var(--uc-sidebar-stripe-width);
+                }
+            }
+            @media not -moz-pref("uc.flex.fully-hide-sidebery") {
+                :root:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "])
+                    &:not([sidebar-launcher-expanded]) {
+                    --uc-vt-sidebox-clip-path-side: var(--uc-sidebar-stripe-width);
+                }
+            }
         }
         #navigator-toolbox:hover
             ~ #browser
@@ -796,6 +838,108 @@ split-view-footer {
                     --uc-tabbox-clip-path-side: var(--uc-sb-sidebar-main-hover-clip-mica);
                     --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
                 }
+            }
+        }
+    }
+
+    /*
+     * Clip Sidebery and the tab box beneath the full native vertical-tabs overlay
+     * to reveal the Mica backdrop. #sidebar can overflow #sidebar-box, so its
+     * wipe spans the full overlay width; the tab-box clip is calculated
+     * separately for the current Sidebery layout.
+     */
+    @media -moz-pref("sidebar.verticalTabs") and -moz-pref("uc.flex.show-native-vertical-tabs-on-sidebar-stripe-hover") and (not -moz-pref("uc.flex.remove-sidebar-stripe")) {
+        @keyframes uc-vt-overlay-wipe-sidebery-start {
+            from {
+                clip-path: inset(0 0 0 var(--uc-sidebar-stripe-width));
+            }
+            to {
+                clip-path: inset(0 0 0 var(--uc-sidebar-main-hover-width));
+            }
+        }
+
+        @keyframes uc-vt-overlay-wipe-sidebery-end {
+            from {
+                clip-path: inset(0 var(--uc-sidebar-stripe-width) 0 0);
+            }
+            to {
+                clip-path: inset(0 var(--uc-sidebar-main-hover-width) 0 0);
+            }
+        }
+
+        @keyframes uc-vt-overlay-unwipe-sidebery-start {
+            from {
+                clip-path: inset(0 0 0 var(--uc-sidebar-main-hover-width));
+            }
+            to {
+                clip-path: inset(0 0 0 var(--uc-sidebar-stripe-width));
+            }
+        }
+
+        @keyframes uc-vt-overlay-unwipe-sidebery-end {
+            from {
+                clip-path: inset(0 var(--uc-sidebar-main-hover-width) 0 0);
+            }
+            to {
+                clip-path: inset(0 var(--uc-sidebar-stripe-width) 0 0);
+            }
+        }
+
+        #sidebar-box[sidebar-launcher-expanded][sidebar-panel-open][sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
+            /*
+             * A resizable Sidebery width cannot be used to calculate the tab box's
+             * clip. Keep #sidebar-box at least as wide as the native overlay so
+             * the tab box stays outside it and only #sidebar needs clipping.
+             */
+            @media -moz-pref("uc.flex.sidebery-allow-resizable-width") and (not -moz-pref("uc.flex.fully-hide-sidebery")) {
+                :root:not([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+                    min-width: var(--uc-sidebar-main-hover-width) !important;
+                }
+            }
+        }
+
+        /* `both` holds the initial clip during the hover delay and keeps the final clip after the wipe. */
+        :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded][sidebar-panel-open]:hover:has(
+                ~ #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]
+            ) {
+            & ~ #sidebar-box {
+                /* Sidebery overflows this stripe-wide box, so apply the wipe to #sidebar. */
+                clip-path: none;
+                transition:
+                    opacity var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                        calc(var(--uc-hover-sidebar-delay) + 10ms),
+                    z-index 0ms linear 0ms allow-discrete;
+
+                &:not([sidebar-positionend]) #sidebar {
+                    animation: uc-vt-overlay-wipe-sidebery-start var(--uc-hover-transition-duration)
+                        var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay) both;
+                }
+                &[sidebar-positionend] #sidebar {
+                    animation: uc-vt-overlay-wipe-sidebery-end var(--uc-hover-transition-duration)
+                        var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay) both;
+                }
+            }
+
+            & ~ #tabbrowser-tabbox {
+                --uc-tabbox-clip-path-side: var(--uc-vt-overlay-tabbox-clip-mica);
+                --uc-tabbox-clip-path-transition: var(--uc-hover-tabbox-clip-path-transition);
+            }
+        }
+
+        /* `backwards` holds the full-overlay clip during the collapse delay, then removes the temporary clip after the reverse wipe. */
+        :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded]:not(:hover)
+            ~ #sidebar-box[sidebar-panel-open][sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:not(
+                :hover
+            ) {
+            clip-path: none;
+
+            &:not([sidebar-positionend]) #sidebar {
+                animation: uc-vt-overlay-unwipe-sidebery-start var(--uc-autohide-transition-duration)
+                    var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) backwards;
+            }
+            &[sidebar-positionend] #sidebar {
+                animation: uc-vt-overlay-unwipe-sidebery-end var(--uc-autohide-transition-duration)
+                    var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay) backwards;
             }
         }
     }

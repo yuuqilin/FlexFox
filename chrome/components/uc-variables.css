@@ -882,6 +882,7 @@
     /* Corner radius settings for the urlbar, searchbar, findbar, and their icons */
     --button-border-radius: 8px !important;
     --panel-menuitem-border-radius: 4px !important;
+    --urlbar-inner-border-radius: 7px !important;
     --uc-findbar-outer-border-radius: 8px;
     --uc-findbar-inner-border-radius: 5px;
     --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 2px);
@@ -889,6 +890,7 @@
     @media -moz-pref("browser.nova.enabled") {
         --button-border-radius: 24px !important;
         --panel-menuitem-border-radius: 16px !important;
+        --urlbar-inner-border-radius: calc(var(--urlbarview-border-radius) - var(--urlbarView-padding)) !important;
         --uc-findbar-outer-border-radius: 20px;
         --uc-findbar-inner-border-radius: 16px;
         --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 4px);
@@ -898,6 +900,7 @@
         --button-border-radius: 8px !important;
         --panel-border-radius: 8px !important;
         --panel-menuitem-border-radius: 4px !important;
+        --urlbar-inner-border-radius: 7px !important;
         --uc-findbar-outer-border-radius: 8px;
         --uc-findbar-inner-border-radius: 5px;
         --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 2px);
@@ -910,6 +913,7 @@
         --button-border-radius: 24px !important;
         --panel-border-radius: 24px !important;
         --panel-menuitem-border-radius: 16px !important;
+        --urlbar-inner-border-radius: calc(var(--urlbarview-border-radius) - var(--urlbarView-padding)) !important;
         --uc-findbar-outer-border-radius: 20px;
         --uc-findbar-inner-border-radius: 16px;
         --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 4px);
@@ -1537,7 +1541,7 @@
     --tab-margin-inline-inner: var(--tab-inner-inline-margin);
 
     /* 🔼 End of Firefox version compatibility */
-    
+
     /* ════════════════════════════════════════════════════════════════════
     ██╗      █████╗ ██╗   ██╗ ██████╗ ██╗   ██╗████████╗    ██╗      ██████╗  ██████╗ ██╗ ██████╗
     ██║     ██╔══██╗╚██╗ ██╔╝██╔═══██╗██║   ██║╚══██╔══╝    ██║     ██╔═══██╗██╔════╝ ██║██╔════╝
@@ -1866,11 +1870,9 @@
             }
             @media -moz-pref("uc.flex.fully-hide-sidebery") {
                 --uc-web-content-margin-side: var(--uc-web-content-margin);
-                /* Apply margin when Sidebery is active and sidebar is collapsed; not needed for native vertical tabs */
-                @media -moz-pref("sidebar.verticalTabs") {
-                    &:not([sidebar-launcher-expanded]) {
-                        --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
-                    }
+                /* Hidden Sidebery retains this margin; other open sidebar panels remain visible and fall back to zero. */
+                &[sidebar-panel-open] {
+                    --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
                 }
                 @media -moz-pref("sidebar.visibility", "expand-on-hover") {
                     --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
@@ -1879,10 +1881,8 @@
             @media not -moz-pref("uc.flex.fully-hide-sidebery") {
                 :root[titlepreface*="\200c "] & {
                     --uc-web-content-margin-side: var(--uc-web-content-margin);
-                    @media -moz-pref("sidebar.verticalTabs") {
-                        &:not([sidebar-launcher-expanded]) {
-                            --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
-                        }
+                    &[sidebar-panel-open] {
+                        --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
                     }
                     @media -moz-pref("sidebar.visibility", "expand-on-hover") {
                         --uc-web-content-margin-side: var(--uc-sb-web-content-margin-side, 0);
@@ -1962,8 +1962,8 @@
             }
         }
 
-        /* Always apply margin when Sidebery is fully hidden, regardless of sidebar state */
-        @media -moz-pref("sidebar.verticalTabs") and -moz-pref("uc.flex.enable-rounded-web-content") {
+        /* Always apply margin when Sidebery is fully hidden */
+        @media -moz-pref("uc.flex.enable-rounded-web-content") {
             --uc-sb-web-content-margin-side: var(--uc-web-content-margin);
         }
     }
@@ -2294,6 +2294,34 @@
                 --uc-sidebar-main-hover-clip-mica: var(--uc-sidebar-main-hover-width);
             }
         }
+    }
+
+    /* Clip the Mica background when sidebar-stripe hover expands the full native vertical-tabs panel */
+    /* The tab box begins after Sidebery's stripe, so its clip excludes that width. */
+    --uc-vt-overlay-tabbox-clip-mica: max(
+        0px,
+        calc(var(--uc-sidebar-main-hover-width) - var(--uc-sidebar-stripe-width))
+    );
+
+    /* Sidebery occupies the full overlay width when it is locked open. */
+    @media -moz-pref("uc.flex.disable-sidebery-autohide") {
+        --uc-vt-overlay-tabbox-clip-mica: 0px;
+    }
+    &:is([sidebar-expand-on-hover], [titlepreface*="\180e "]) {
+        --uc-vt-overlay-tabbox-clip-mica: 0px;
+    }
+
+    /* The matching min-width constraint makes the resizable case deterministic. */
+    @media -moz-pref("uc.flex.sidebery-allow-resizable-width") {
+        --uc-vt-overlay-tabbox-clip-mica: 0px;
+    }
+
+    /* Hidden Sidebery contributes no visible surface below the overlay. */
+    @media -moz-pref("uc.flex.fully-hide-sidebery") {
+        --uc-vt-overlay-tabbox-clip-mica: var(--uc-sidebar-main-hover-width);
+    }
+    &:is([inFullscreen], [titlepreface*="\200c "], [titlepreface*="\200d "]) {
+        --uc-vt-overlay-tabbox-clip-mica: var(--uc-sidebar-main-hover-width);
     }
 
     /* Clip the Mica background when hovering the Sidebery */

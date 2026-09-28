@@ -4,6 +4,49 @@
 
 ## 🆕 最新情報
 
+## 🦊 v7.1.0
+
+> [!IMPORTANT]
+> v7.0.0 では、複数の新機能と互換性のない変更が導入されました。まだ確認していない場合は、こちらから更新履歴をご覧ください。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+> [!IMPORTANT]
+> Firefox 157 では、Nova UI がデフォルトで有効になります。
+>
+> 次回の FlexFox リリースでは、Firefox のサポート終了に合わせて Firefox ESR 140 のサポートを終了し、以降は ESR 153 以降のみをサポートします。ESR 140 に対応する最終版のソースコードは凍結し、`ESR-v140` ブランチへ移動します。
+>
+> また、次回のリリースでは、Sidebery のスタイルエディターに残っている v6 より前の FlexFox 旧スタイルとの互換性も終了します。まだ残っている場合は、**次回の FlexFox にアップデートする前に** 削除してください。詳しくは「[v6 より前のバージョンからアップデートする](./USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v6-より前のバージョンからアップデートする)」を参照してください。
+
+### 新機能
+
+- **使い勝手の向上：** Sidebery を使用中、サイドバーストライプにカーソルを合わせるとネイティブ垂直タブのパネル全体を開ける `uc.flex.show-native-vertical-tabs-on-sidebar-stripe-hover` を追加しました。
+
+  - デフォルトでは Sidebery のタブ一覧と重複しないよう、ストライプにカーソルを合わせてもサイドバーツールボタンだけが展開されます。
+  - Firefox は分割ビューやタブノートなどの機能を拡張機能から利用するための API をまだ提供しておらず、Sidebery から直接使用することはできません。通常は <kbd>F1</kbd> を押してネイティブ垂直タブに切り替え、もう一度 <kbd>F1</kbd> を押して Sidebery に戻る必要があります。
+  - サイドバー切り替えボタン（Firefox ロゴ）は、**展開モード**ではカラー表示、**折りたたみモード**ではグレー表示になります。
+  - この設定を有効にすると、展開モードでサイドバーストライプにカーソルを合わせるだけで、Sidebery から切り替えずにネイティブ垂直タブのパネル全体を開けます。折りたたみモードの場合や、`uc.flex.remove-sidebar-stripe` を有効にしている場合は機能しません。
+  - Mica またはカスタム壁紙と `uc.flex.sidebery-allow-resizable-width` を併用している場合、サイドバー切り替えボタンが展開モードの間は、Sidebery の幅を `uc.flex.sidebery-expand-width` で指定した幅より狭くできません。Mica や壁紙を使用していない場合、この制限はありません。
+
+- **互換性：** Sidebery Nightly（v5.6.1.5）に対応しました。未リリースのこのバージョンには旧版との互換性がない変更が複数含まれており、対応しないと FlexFox の一部スタイルや機能が正常に動作しなくなります。[Commit 6228919](https://github.com/mbnuqw/sidebery/commit/622891943b4ace519b827bf67eed9da07b8b6f4b) [Commit 43944c7](https://github.com/mbnuqw/sidebery/commit/43944c74e965d5ee9687696d2698da55bfd684a1)
+
+### 改善
+
+- URL バー内のアイコンボタンの角丸が `uc.flex.style-toolbar-items-border-radius` の設定に従うようになりました。
+- 水平タブモードでも `Hide Sidebery` でサイドバーツールボタンを非表示にできるようになりました。`Hide All` や <kbd>F11</kbd> の全画面表示でも自動的に非表示になり、マウスカーソルを画面端に近づけると再表示されます。
+- サイドバーツールボタンのレイアウト処理をリファクタリングしました。
+- サイドバーの重なり順（`z-index`）の処理をリファクタリングしました。
+
+### 修正
+
+- Sidebery でタブをドラッグしても移動できない、または意図しない位置に移動する問題を修正しました。[Issue #49](https://github.com/yuuqilin/FlexFox/issues/49)
+- Firefox 154 の変更により、<kbd>F11</kbd> の全画面表示でネイティブ垂直タブを展開できなくなる問題を修正しました。[Bug 2052711](https://bugzilla.mozilla.org/show_bug.cgi?id=2052711) [Bug 2054085](https://bugzilla.mozilla.org/show_bug.cgi?id=2054085)
+- Firefox 156 の変更後、水平タブモードでサイドバーツールボタンが中央に配置されない問題を修正しました。[Bug 2049659](https://bugzilla.mozilla.org/show_bug.cgi?id=2049659)
+- Firefox 158 の変更後、サイドバーツールボタンの表示位置がずれる問題を修正しました。[Bug 2041030](https://bugzilla.mozilla.org/show_bug.cgi?id=2041030)
+- Firefox 158 の変更により、Tab Split View のタブの位置がずれる問題を修正しました。[Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+
+<!-- END What's New -->
+
 ## 🦊 v7.0.1
 
 > [!IMPORTANT]
@@ -27,8 +70,6 @@
 - `uc.flex.style-tab-items-gradient-border = 0` および `uc.flex.style-tab-items-border-width = 2` に設定した場合に、ネイティブタブの枠線が内側にずれて影から離れる v7.0.0 のリグレッションを修正しました。
 - ライトモードで Sidebery のタブを閉じるボタンの色の不透明度が正しくない問題を修正しました。
 - Sidebery の「密度」を「コンパクト」または「ゆったり」に設定した場合に、下部のボタンが中央に配置されない問題を修正しました。
-
-<!-- END What's New -->
 
 ## 🦊 v7.0.0 - Nova UI Edition
 
@@ -75,7 +116,7 @@
   2 = アニメーショングラデーション
   ```
 
-  グラデーションの色は `uc.flex.style-sidebar-stripe-color` の設定に従います。静止グラデーションは Nova UI のデフォルトです。[Issue #41](https://github.com/yuuqilin/DevFlexFox/issues/41) に対応するため、FlexFox では正式な展開に先駆けてデフォルトで有効にしています。`uc.flex.style-tab-items-border-width` が `0` の場合、この設定は機能しません。
+  グラデーションの色は `uc.flex.style-sidebar-stripe-color` の設定に従います。静止グラデーションは Nova UI のデフォルトです。[Issue #41](https://github.com/yuuqilin/FlexFox/issues/41) に対応するため、FlexFox では正式な展開に先駆けてデフォルトで有効にしています。`uc.flex.style-tab-items-border-width` が `0` の場合、この設定は機能しません。
 
   <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/gradient-border.webp" width="300px">
 

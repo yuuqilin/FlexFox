@@ -14,6 +14,18 @@
     visibility: initial !important;
 }
 
+/**
+ * Firefox skips the native sidebar launcher's subtree while the F11 toolbox is
+ * hidden. The out-of-flow host keeps the edge trigger; render its subtree only
+ * after that host actually acquires hover.
+ */
+@media not -moz-pref("uc.flex.remove-sidebar-stripe") {
+    :root[fullscreenNavToolboxHidden] :is(#sidebar-main, #sidebar-container):not([hidden]):hover {
+        content-visibility: visible !important;
+        min-width: var(--uc-sb-sidebar-main-width, var(--uc-sidebar-stripe-width)) !important;
+    }
+}
+
 /*Full Screen Warning*/
 
 #fullscreen-warning {

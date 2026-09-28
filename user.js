@@ -72,6 +72,8 @@ user_pref("uc.flex.sidebery-apply-expand-speed-to-toolbars",    false);
 user_pref("uc.flex.sidebery-disable-icon-scaling",              false);
 /* Disables Sidebery auto-collapse and allows manual width adjustment via the sidebar splitter. */
 user_pref("uc.flex.sidebery-allow-resizable-width",             false);
+/* Shows the full native vertical-tabs panel on sidebar-stripe hover when the launcher is expanded. */
+user_pref("uc.flex.show-native-vertical-tabs-on-sidebar-stripe-hover", false);
 /* Sets the navigation icon shown when Sidebery is collapsed.
    0 = Active panel icon (default)
    1 = Sidebery Logo

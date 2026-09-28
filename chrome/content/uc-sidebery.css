@@ -290,10 +290,12 @@
     */
 
     #root {
-        /* Sidebery reads --tabs-height from #root to calculate tab drag positions but
-           does not evaluate calc(). Since its calculation does not include FlexFox's
-           extra inter-tab margin, keep the root values hard-coded with that margin
-           included, then restore the actual tab height for descendants. */
+        /* Sidebery v5.6.1 reads --tabs-height from #root to calculate tab drag
+           positions but does not evaluate calc(). Since that calculation does not
+           include FlexFox's extra inter-tab margin, keep the legacy root values
+           hard-coded with that margin included, then restore the actual tab height
+           for descendants. Newer Sidebery versions ignore this variable in the main
+           tabs panel and use the compatibility variables below instead. */
         --tabs-height: 34px !important;
         --tabs-pinned-height: var(--uc-sb-tab-height) !important;
         --tabs-pinned-width: 34px !important;
@@ -1238,6 +1240,13 @@
         /* ═══════════════════ TAB VARIABLES ═══════════════════ */
         --uc-sb-tab-item-margin-block: 2px;
         --uc-sb-tab-height: 32px;
+        --uc-sb-tab-inner-gap: 7px;
+        --uc-sb-tab-favicon-inline-start: 9px;
+        --uc-sb-tab-title-inline-start: 33px;
+        --uc-sb-tab-audio-inline-start: 25px;
+        --uc-sb-tab-audible-title-offset: calc(
+            var(--tabs-audio-btn-size, 22px) - var(--uc-sb-tab-inner-gap)
+        );
         --uc-sb-tab-surface-width: calc(100% - (var(--uc-sb-collapsed-content-width) - var(--uc-sb-tab-height)));
         --uc-sb-pinned-tab-surface-width: var(--uc-sb-tab-surface-width);
         /* Width of one pinned-tab grid column at the configured column count. */
@@ -1267,6 +1276,81 @@
     }
 
     /* ═══════════════════ TAB APPEARANCE ═══════════════════ */
+
+    /**
+     * Sidebery versions with .TabList derive a tab's minimum height from title
+     * line-height and padding instead of --tabs-height. Keep the native calculation
+     * intact and adjust only its line-height input so legacy and current layouts use
+     * the same FlexFox surface height at every density. .StickyTabs uses the same
+     * sizing contract for cloned tabs.
+     */
+    :is(.TabList, .StickyTabs) .Tab {
+        --tabs-title-line-height: calc(
+            var(--uc-sb-tab-height) - 2 * var(--tabs-padding) - var(--tabs-title-padding-top) -
+                var(--tabs-title-padding-bottom)
+        ) !important;
+    }
+
+    /**
+     * Sidebery v5.6.1 uses --tabs-inner-gap for all of these positions. Newer
+     * versions split them across absolute favicon placement and title/audio
+     * indentation, so map the shared FlexFox geometry to each new consumer.
+     */
+    .TabList > .Tab[data-pin="false"] .fav {
+        margin-inline-start: calc(var(--uc-sb-tab-favicon-inline-start) - var(--tabs-padding)) !important;
+    }
+    .TabList > .Tab .t-box {
+        --tabs-title-indent: calc(
+            var(--uc-sb-tab-title-inline-start) - var(--tabs-padding) - var(--tabs-fav-margin)
+        ) !important;
+        --tabs-title-indent-audio: calc(var(--tabs-title-indent) + var(--uc-sb-tab-audible-title-offset)) !important;
+    }
+    /* Keep each Sidebery generation's native horizontal coordinate system, but
+       expose its expanded audio margin as one compatibility baseline. Legacy
+       Sidebery supplies the main position through left, while current Sidebery
+       supplies it through margin-inline-start. */
+    .AnimatedTabList > .Tab[data-pin="false"] .audio {
+        --uc-sb-tab-audio-expanded-margin-inline-start: 0px;
+    }
+    .TabList > .Tab[data-pin="false"] .audio {
+        --uc-sb-tab-audio-expanded-margin-inline-start: calc(
+            var(--uc-sb-tab-audio-inline-start) - var(--tabs-padding)
+        );
+        top: calc(-1 * var(--tabs-padding)) !important;
+        width: calc(var(--tabs-audio-btn-size) + 2px) !important;
+        height: calc(100% + 2 * var(--tabs-padding)) !important;
+
+        &:hover::before {
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+        }
+    }
+    :is(.AnimatedTabList, .TabList) > .Tab[data-pin="false"] .audio {
+        margin-inline-start: var(--uc-sb-tab-audio-expanded-margin-inline-start) !important;
+
+        /* Use the same -12px collapsed offset in both Sidebery generations. */
+        @media (max-width: 50px) {
+            margin-inline-start: calc(
+                var(--uc-sb-tab-audio-expanded-margin-inline-start) - 12px
+            ) !important;
+        }
+    }
+
+    /* Offset the current pinned audio control out of .main-row's padding so its
+       hit area and hover background retain the legacy pinned-tab coordinates. */
+    .PinnedTabsBar .Tab .main-row > .audio {
+        top: calc(-1 * var(--tabs-padding)) !important;
+        right: calc(-1 * var(--tabs-padding)) !important;
+    }
+
+    /* Center current Sidebery pinned favicons by their actual scaled dimensions
+       without replacing the native transform: translateZ(0). */
+    .PinnedTabsBar .Tab .main-row > .fav {
+        top: 50% !important;
+        left: 50% !important;
+        translate: -50% -50% !important;
+    }
 
     /**
      * Keep the tab's layout box independent from its visual surface. This
@@ -1530,7 +1614,7 @@
         }
     }
 
-    .AnimatedTabList .Tab .body {
+    :is(.AnimatedTabList, .TabList) .Tab .body {
         @media not -moz-pref("uc.flex.style-tab-items-add-hover-trail", false) {
             &::before {
                 transition:
@@ -1564,7 +1648,7 @@
     }
 
     @media -moz-pref("uc.flex.style-tab-items-background-fill", 2) {
-        .AnimatedTabList
+        :is(.AnimatedTabList, .TabList)
             .Tab:not([data-active="true"], [data-selected="true"], [data-colorized="true"], :hover)
             .body::before {
             background-color: var(--uc-sb-tab-fill-bgcolor) !important;
@@ -1635,6 +1719,75 @@
                     border-end-start-radius: 3px !important;
                     @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
                         -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
+                        top: 1px !important;
+                        height: calc(var(--uc-sb-tab-height) - 2px) !important;
+                        border-radius: calc(var(--tabs-border-radius) - 1px) !important;
+                    }
+                }
+                .close-icon {
+                    top: calc(50% - 10px) !important;
+                    left: calc(50% - 10px) !important;
+                    width: 20px !important;
+                    height: 20px !important;
+                }
+            }
+        }
+    }
+
+    /* Current Sidebery uses a block body and an absolute close button. Keep the
+       legacy flex positioning above isolated to .AnimatedTabList and center the
+       current close target directly over the favicon. */
+    .TabList > .Tab {
+        --uc-sb-tabs-close-btn-margin: var(--tabs-close-btn-margin);
+        --uc-sb-tab-close-button-size: calc(var(--uc-sb-tab-height) - var(--uc-sb-tabs-close-btn-margin) * 2);
+
+        @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 0) {
+            --uc-sb-tabs-close-btn-margin: calc(var(--tabs-close-btn-margin) + 2px);
+            .close {
+                top: var(--uc-sb-tabs-close-btn-margin) !important;
+                right: var(--uc-sb-tabs-close-btn-margin) !important;
+                height: var(--uc-sb-tab-close-button-size) !important;
+            }
+            .close > svg:hover {
+                background: transparent !important;
+                opacity: 1 !important;
+            }
+        }
+
+        @media -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover") {
+            @media not (-moz-pref("uc.flex.sidebery-allow-resizable-width") and (width < 50px)) {
+                &:hover .fav {
+                    opacity: 0 !important;
+                }
+                .close {
+                    order: initial !important;
+                    position: absolute !important;
+                    inset: auto !important;
+                    top: var(--uc-sb-tabs-close-btn-margin) !important;
+                    right: auto !important;
+                    left: calc(
+                        var(--uc-sb-tab-favicon-inline-start) + 8px - var(--uc-sb-tab-close-button-size) / 2
+                    ) !important;
+                    width: var(--uc-sb-tab-close-button-size) !important;
+                    height: var(--uc-sb-tab-close-button-size) !important;
+                    margin: 0 !important;
+                    z-index: 21 !important;
+                }
+            }
+        }
+
+        @media not -moz-pref("uc.flex.show-tab-close-button-on-favicon-hover") {
+            @media -moz-pref("uc.flex.style-tab-close-button-warning-zone-size", 2) {
+                .close {
+                    top: 0 !important;
+                    right: 0 !important;
+                    width: calc(var(--uc-sb-tab-height) - 2px);
+                    height: var(--uc-sb-tab-height) !important;
+                    border-start-start-radius: 3px !important;
+                    border-end-start-radius: 3px !important;
+                    @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
+                        -moz-pref("browser.nova.enabled") and
+                            (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
                         top: 1px !important;
                         height: calc(var(--uc-sb-tab-height) - 2px) !important;
                         border-radius: calc(var(--tabs-border-radius) - 1px) !important;
@@ -1854,7 +2007,13 @@
 
     /* Extend tree guide lines through the inter-tab margin. */
     .AnimatedTabList .Tab[data-pin="false"] .body::after {
-        height: calc(var(--tabs-height) + var(--tabs-margin) + var(--uc-sb-tab-item-margin-block)) !important;
+        height: calc(100% + var(--tabs-margin) + var(--uc-sb-tab-item-margin-block)) !important;
+    }
+    .TabList > .Tab[data-pin="false"] .body::after {
+        top: calc(-20% - var(--tabs-margin)) !important;
+        height: calc(100% + var(--tabs-margin) + var(--uc-sb-tab-item-margin-block)) !important;
+        opacity: var(--tabs-lvl-opacity) !important;
+        --tabs-indent-line-color: var(--tabs-normal-fg);
     }
 
     /* Adjust spacing and layout of the search bar */
@@ -1921,13 +2080,13 @@
         );
     }
 
-    .AnimatedTabList {
+    :is(.AnimatedTabList, .TabList) {
         margin-top: 2px;
-        .Tab {
+        > .Tab {
             margin-block: var(--uc-sb-tab-item-margin-block) !important;
         }
     }
-    .PinnedTabsBar ~ .ScrollBox .AnimatedTabList {
+    .PinnedTabsBar ~ .ScrollBox :is(.AnimatedTabList, .TabList) {
         margin-top: 0;
     }
 
@@ -1967,13 +2126,6 @@
             fill: var(--uc-sb-nav-icon-color) !important;
         }
     }
-
-    /* Restore the original bottom-bar-space height used before Sidebery v5.3.3.26 */
-    /*
-    .TabsPanel .bottom-bar-space {
-        height: calc(var(--tabs-height) + var(--general-margin)) !important;
-    }
-    */
 
     #root {
         .PinnedTabsBar {
@@ -2290,8 +2442,10 @@
             }
             */
             .Tab .audio {
-                margin-left: 0 !important;
                 transition: margin-left 0s var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
+            }
+            :is(.AnimatedTabList, .TabList) > .Tab[data-pin="false"] .audio {
+                margin-inline-start: var(--uc-sb-tab-audio-expanded-margin-inline-start) !important;
             }
 
             &[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
@@ -2318,8 +2472,8 @@
         }
         /* 🔼 End of hover state block */
 
-        & .ScrollBox .Tab {
-            --tabs-inner-gap: 7px !important;
+        & .ScrollBox .AnimatedTabList .Tab {
+            --tabs-inner-gap: var(--uc-sb-tab-inner-gap) !important;
         }
 
         /* .fav uses --tabs-inner-gap for horizontal margins; override to restore original value after hover changes to prevent label shifting */
