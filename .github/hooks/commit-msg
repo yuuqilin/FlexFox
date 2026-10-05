@@ -1,0 +1,15 @@
+#!/bin/sh
+
+repo_root="$(git rev-parse --show-toplevel)" || exit 1
+
+if command -v pwsh >/dev/null 2>&1; then
+    powershell_cmd="pwsh"
+elif command -v powershell.exe >/dev/null 2>&1; then
+    powershell_cmd="powershell.exe"
+else
+    echo "FlexFox commit-msg: PowerShell was not found." >&2
+    exit 1
+fi
+
+"$powershell_cmd" -NoProfile -ExecutionPolicy Bypass -File "$repo_root/.github/scripts/flexfox-commit-msg-check.ps1" -CommitMessagePath "$1"
+exit $?

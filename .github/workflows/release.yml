@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  discussions: write
 
 jobs:
   release:
@@ -34,8 +35,8 @@ jobs:
           mkdir -p package
           zip -r package/FlexFox-${{ env.RELEASE_TAG }}.zip \
             chrome \
-            user.js \
             Sidebery/sidebery-settings.json
+          (cd config && zip ../package/FlexFox-${{ env.RELEASE_TAG }}.zip user.js)
 
       - name: Check if release notes exist
         id: check_notes
@@ -53,5 +54,6 @@ jobs:
           name: FlexFox ${{ env.RELEASE_TAG }}
           files: package/FlexFox-${{ env.RELEASE_TAG }}.zip
           body_path: ${{ steps.check_notes.outputs.NOTES_EXIST == 'true' && format('.github/release-notes/{0}.md', env.RELEASE_TAG) || '' }}
+          discussion_category_name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
