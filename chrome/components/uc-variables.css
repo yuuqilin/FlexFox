@@ -890,7 +890,7 @@
     @media -moz-pref("browser.nova.enabled") {
         --button-border-radius: 24px !important;
         --panel-menuitem-border-radius: 16px !important;
-        --urlbar-inner-border-radius: calc(var(--urlbarview-border-radius) - var(--urlbarView-padding)) !important;
+        --urlbar-inner-border-radius: calc(var(--urlbarview-border-radius) - var(--urlbarview-padding)) !important;
         --uc-findbar-outer-border-radius: 20px;
         --uc-findbar-inner-border-radius: 16px;
         --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 4px);
@@ -913,7 +913,7 @@
         --button-border-radius: 24px !important;
         --panel-border-radius: 24px !important;
         --panel-menuitem-border-radius: 16px !important;
-        --urlbar-inner-border-radius: calc(var(--urlbarview-border-radius) - var(--urlbarView-padding)) !important;
+        --urlbar-inner-border-radius: calc(var(--urlbarview-border-radius) - var(--urlbarview-padding)) !important;
         --uc-findbar-outer-border-radius: 20px;
         --uc-findbar-inner-border-radius: 16px;
         --uc-sidebar-box-border-radius: calc(var(--uc-web-content-radius) + 4px);
@@ -1539,6 +1539,15 @@
         }
     }
     --tab-margin-inline-inner: var(--tab-inner-inline-margin);
+    /* v159+: Map renamed urlbar view variables for older Firefox versions. */
+    --urlbarview-padding: var(--urlbarView-padding);
+    --urlbarview-row-gutter: var(--urlbarView-row-gutter);
+    --urlbarview-margin-block: var(--urlbarView-margin-block);
+    --urlbarview-joint-background-outset-inline: var(--urlbarView-joint-background-outset-inline);
+    --urlbarview-joint-background-outset-block: var(--urlbarView-joint-background-outset-block);
+    #urlbar > .urlbarView {
+        --urlbarView-margin-block: var(--urlbarview-margin-block);
+    }
 
     /* 🔼 End of Firefox version compatibility */
 

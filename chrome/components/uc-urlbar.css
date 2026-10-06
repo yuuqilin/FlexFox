@@ -444,13 +444,13 @@
     > .urlbarView:popover-open {
         /*
          * Resolve this on the view because the centered Nova states below override
-         * --urlbarView-margin-block here; #urlbar cannot read a descendant-defined value.
+         * --urlbarview-margin-block here; #urlbar cannot read a descendant-defined value.
          */
         --uc-urlbar-popup-surface-inset-block-start: calc(
             -1 *
                 (
                     var(--uc-urlbar-popup-input-height) + var(--urlbar-background-overhang-open, 8px) +
-                        var(--urlbarView-margin-block, 0px)
+                        var(--urlbarview-margin-block, 0px)
                 )
         );
         overflow-clip-margin: 128px !important;
@@ -460,9 +460,9 @@
             pointer-events: none;
             position: absolute;
             z-index: -2;
-            inset-inline: calc(-1 * var(--urlbarView-joint-background-outset-inline, 5px));
+            inset-inline: calc(-1 * var(--urlbarview-joint-background-outset-inline, 5px));
             inset-block-start: var(--uc-urlbar-popup-surface-inset-block-start);
-            inset-block-end: calc(-1 * var(--urlbarView-joint-background-outset-block, 5px));
+            inset-block-end: calc(-1 * var(--urlbarview-joint-background-outset-block, 5px));
             border-radius: var(--uc-urlbar-popup-border-radius, var(--toolbarbutton-border-radius));
             box-shadow: var(--uc-urlbar-popup-unified-box-shadow);
         }
@@ -637,7 +637,7 @@
 /* Adjust the corner radius of urlbar popup items to visually match the popup's overall roundness */
 @media not -moz-pref("uc.flex.revert-to-original-flat-corner-style") {
     .urlbarView-row {
-        border-radius: calc(var(--uc-urlbar-popup-border-radius) - 2 * var(--urlbarView-row-gutter)) !important;
+        border-radius: calc(var(--uc-urlbar-popup-border-radius) - 2 * var(--urlbarview-row-gutter)) !important;
     }
 }
 
@@ -784,7 +784,7 @@
         @media -moz-pref("browser.nova.enabled") {
             #urlbar:is([breakout][breakout-extend], [popover-open], [focused][usertyping]) {
                 > .urlbarView {
-                    --urlbarView-margin-block: 4px;
+                    --urlbarview-margin-block: 4px;
                     margin-block-start: 4px !important;
                     margin-block-end: 0 !important;
                 }
@@ -861,7 +861,7 @@
                 position: absolute;
                 z-index: 0;
                 /* An 8px surface overhang plus the 4px inset outline gives 12px on both sides. */
-                inset-block-start: var(--urlbarView-margin-block, 4px);
+                inset-block-start: var(--urlbarview-margin-block, 4px);
                 inset-inline: 8px;
                 border-top: 1px solid rgba(105, 105, 105, 0.2);
             }
@@ -876,7 +876,7 @@
         @media -moz-pref("browser.nova.enabled") {
             #urlbar[focused][usertyping] {
                 > .urlbarView {
-                    --urlbarView-margin-block: 4px;
+                    --urlbarview-margin-block: 4px;
                     margin-block-start: 4px !important;
                     margin-block-end: 0 !important;
                 }
@@ -951,7 +951,7 @@
                 position: absolute;
                 z-index: 0;
                 /* An 8px surface overhang plus the 4px inset outline gives 12px on both sides. */
-                inset-block-start: var(--urlbarView-margin-block, 4px);
+                inset-block-start: var(--urlbarview-margin-block, 4px);
                 inset-inline: 8px;
                 border-top: 1px solid rgba(105, 105, 105, 0.2);
             }
