@@ -767,6 +767,19 @@
             }
         }
 
+        /*
+         * Clicking #urlbar-input normally selects the full URL. If the URL bar
+         * opens from a press outside the content-sized input, centering it before
+         * mouseup makes the resulting click land outside the input/container and
+         * skips Firefox's select-all handling. Keep the URL bar in place until
+         * the click finishes, then center it after the selection is complete.
+         */
+        #urlbar[popover-open]:active {
+            --uc-fixed-urlbar-left: anchor(left);
+            --uc-fixed-urlbar-width: 100cqi;
+            --uc-fixed-urlbar-margin-top: 0px;
+        }
+
         /* !NOVA: apply the enlarged input geometry only while mode 1 is centered. */
         @media -moz-pref("browser.nova.enabled") {
             #urlbar:is([breakout][breakout-extend], [popover-open], [focused][usertyping]) {
