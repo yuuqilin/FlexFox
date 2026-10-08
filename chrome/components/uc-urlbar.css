@@ -774,11 +774,58 @@
          * skips Firefox's select-all handling. Keep the URL bar in place until
          * the click finishes, then center it after the selection is complete.
          */
+
+        /**
+         * This workaround preserves native select-all, but holding the initial
+         * click expands the urlbar at its toolbar position (breakout-extend).
+         * Keep it disabled because centering starts only after mouseup.
+         */
+        /*
+        \/* Mark centering as allowed for the rest of the current opening. *\/
+        @keyframes uc-urlbar-center-once {
+            to {
+                --uc-urlbar-center-ready: 1;
+            }
+        }
+
+        \/**
+         * Reset the flag for each opening. Keep its value of 1 until closing so
+         * subsequent presses leave the centered position unchanged.
+         *\/
+        #urlbar[popover-open] {
+            container-name: uc-urlbar-center;
+            --uc-urlbar-center-ready: 0;
+            animation: uc-urlbar-center-once 1ms steps(1, end) forwards;
+        }
+
+        \/**
+         * Pause the flag animation during the first press so mouseup can complete
+         * native select-all before centering. Later presses pause the completed
+         * animation, keeping the flag at 1.
+         *\/
         #urlbar[popover-open]:active {
             --uc-fixed-urlbar-left: anchor(left);
             --uc-fixed-urlbar-width: 100cqi;
             --uc-fixed-urlbar-margin-top: 0px;
+            animation-play-state: paused;
         }
+
+        \/**
+         * Center the input and background when the flag is 1. Defining their
+         * geometry here overrides the toolbar values inherited from #urlbar:active.
+         *\/
+        @container uc-urlbar-center style(--uc-urlbar-center-ready: 1) {
+            #urlbar:not([popover]) > :where(
+                #urlbar-background,
+                .urlbar-background,
+                .urlbar-input-container
+            ) {
+                --uc-fixed-urlbar-left: 28vw;
+                --uc-fixed-urlbar-width: 44vw;
+                --uc-fixed-urlbar-margin-top: 20vh;
+            }
+        }
+        */
 
         /* !NOVA: apply the enlarged input geometry only while mode 1 is centered. */
         @media -moz-pref("browser.nova.enabled") {
