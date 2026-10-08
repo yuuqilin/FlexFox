@@ -1540,7 +1540,7 @@
     }
     --tab-margin-inline-inner: var(--tab-inner-inline-margin);
     /* v159+: Map renamed urlbar view variables for older Firefox versions. */
-    --urlbarview-padding: var(--urlbarView-padding);
+    --urlbarview-padding: var(--urlbarView-padding, calc(var(--space-large) - var(--space-xsmall)));
     --urlbarview-row-gutter: var(--urlbarView-row-gutter);
     --urlbarview-margin-block: var(--urlbarView-margin-block);
     --urlbarview-joint-background-outset-inline: var(--urlbarView-joint-background-outset-inline);
