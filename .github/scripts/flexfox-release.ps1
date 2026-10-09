@@ -1,6 +1,10 @@
-﻿[CmdletBinding()]
+﻿[CmdletBinding(DefaultParameterSetName = "Update")]
 param(
+    [Parameter(ParameterSetName = "Update")]
     [switch]$PreCommit,
+    [Parameter(Mandatory = $true, ParameterSetName = "CommitMessage")]
+    [string]$CommitMessagePath,
+    [Parameter(ParameterSetName = "Update")]
     [string]$Version
 )
 
@@ -13,6 +17,8 @@ function Get-GitText {
         [switch]$AllowFailure
     )
 
+    # Windows PowerShell 5.1 treats redirected native stderr as an error.
+    $ErrorActionPreference = "Continue"
     $output = & git @Arguments 2>$null
     $exitCode = $LASTEXITCODE
     if ($exitCode -ne 0) {
@@ -175,84 +181,77 @@ function Assert-NoUnstagedChanges {
     }
 }
 
+function Expand-ManagerPath {
+    param([string]$Value)
+    $path = [Environment]::ExpandEnvironmentVariables($Value)
+    if ($path -eq "~" -or $path.StartsWith("~/") -or $path.StartsWith("~\")) {
+        $path = Join-Path ([Environment]::GetFolderPath([Environment+SpecialFolder]::UserProfile)) $path.Substring(1).TrimStart('\', '/')
+    }
+    return $path
+}
+
 function Get-FirefoxManagerRegistryPath {
     if (-not [string]::IsNullOrWhiteSpace($env:FLEXFOX_FIREFOX_CONFIG)) {
-        if (-not (Test-Path -LiteralPath $env:FLEXFOX_FIREFOX_CONFIG -PathType Leaf)) {
-            throw "FLEXFOX_FIREFOX_CONFIG does not point to an existing Firefox instance registry."
+        $registryPath = Expand-ManagerPath $env:FLEXFOX_FIREFOX_CONFIG
+    } else {
+        if (-not [string]::IsNullOrWhiteSpace($env:FLEXFOX_MANAGER_DATA_DIR)) {
+            $managerDataRoot = Expand-ManagerPath $env:FLEXFOX_MANAGER_DATA_DIR
+        } else {
+            $applicationDataRoot = $env:APPDATA
+            if ([string]::IsNullOrWhiteSpace($applicationDataRoot)) {
+                $applicationDataRoot = [Environment]::GetFolderPath([Environment+SpecialFolder]::ApplicationData)
+            }
+            if ([string]::IsNullOrWhiteSpace($applicationDataRoot)) { return $null }
+            # Match Manager's normalization of inherited MSIX roaming paths.
+            $packaged = [regex]::Match($applicationDataRoot.Replace('/', '\'), '(?i)^(.*\\AppData)\\Local\\Packages\\.*\\LocalCache\\Roaming$')
+            if ($packaged.Success) {
+                $applicationDataRoot = Join-Path $packaged.Groups[1].Value "Roaming"
+            }
+            $managerDataRoot = Join-Path $applicationDataRoot "FlexFox Manager"
         }
-
-        return (Resolve-Path -LiteralPath $env:FLEXFOX_FIREFOX_CONFIG).Path
+        $registryPath = Join-Path $managerDataRoot "firefox-instances.json"
     }
-
-    $applicationDataRoot = [Environment]::GetFolderPath(
-        [Environment+SpecialFolder]::ApplicationData
-    )
-
-    if ([string]::IsNullOrWhiteSpace($applicationDataRoot)) {
-        throw "Could not determine the platform application-data directory for FlexFox Manager."
-    }
-
-    $managerDataRoot = Join-Path $applicationDataRoot "FlexFox Manager"
-    $registryPath = Join-Path $managerDataRoot "firefox-instances.json"
-    if (-not (Test-Path -LiteralPath $registryPath -PathType Leaf)) {
-        throw "FlexFox Manager Firefox instance registry was not found. Configure a Nightly instance in FlexFox Manager first."
-    }
-
+    if (-not (Test-Path -LiteralPath $registryPath -PathType Leaf)) { return $null }
     return (Resolve-Path -LiteralPath $registryPath).Path
 }
 
 function Get-NightlyFirefoxExecutable {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$RegistryPath
-    )
-
+    param([string]$RegistryPath)
+    if ([string]::IsNullOrWhiteSpace($RegistryPath)) { return $null }
     $registryFile = Read-Utf8File -Path $RegistryPath
     $registry = $registryFile.Content | ConvertFrom-Json
-
-    if ($null -eq $registry.browsers) {
-        throw "FlexFox Manager Firefox instance registry does not contain browser definitions."
+    if ($registry -isnot [PSCustomObject]) { throw "Firefox instance registry must be an object." }
+    if ($null -eq $registry.browsers) { return $null }
+    if ($registry.browsers -isnot [PSCustomObject]) {
+        throw "Firefox instance registry browser definitions must be objects."
     }
-
-    $nightly = $registry.browsers.nightly
-    if ($null -eq $nightly) {
-        $nightlyCandidates = @(
-            $registry.browsers.PSObject.Properties |
-                ForEach-Object { $_.Value } |
-                Where-Object {
-                    $_.channel -eq "nightly" -or
-                    $_.sourceTree -eq "firefox-main"
-                }
-        )
-
-        if ($nightlyCandidates.Count -gt 0) {
-            $nightly = $nightlyCandidates[0]
+    foreach ($browser in $registry.browsers.PSObject.Properties) {
+        if ($browser.Value -isnot [PSCustomObject]) {
+            throw "Firefox instance registry browser definitions must be objects."
         }
     }
-
+    $nightly = $registry.browsers.nightly
     if ($null -eq $nightly) {
-        throw "No Nightly Firefox instance is configured in FlexFox Manager."
+        $nightly = $registry.browsers.PSObject.Properties | ForEach-Object { $_.Value } |
+            Where-Object { $_.channel -eq "nightly" -or $_.sourceTree -eq "firefox-main" } |
+            Select-Object -First 1
     }
-
-    $executableValue = [string]$nightly.executable
-    if (
-        [string]::IsNullOrWhiteSpace($executableValue) -or
-        $executableValue -eq "auto"
-    ) {
-        throw "The FlexFox Manager Nightly instance does not have a direct executable path."
-    }
-
-    if ([System.IO.Path]::IsPathRooted($executableValue)) {
-        $executablePath = $executableValue
+    if ($null -eq $nightly) { return $null }
+    if ($null -ne $nightly.launcher) {
+        if ($nightly.launcher -isnot [PSCustomObject]) { throw "Nightly launcher must be an object." }
+        if ($nightly.launcher.type -ne "executable") { return $null }
+        $executableValue = $nightly.launcher.path
     } else {
-        $registryDirectory = Split-Path -Parent $RegistryPath
-        $executablePath = Join-Path $registryDirectory $executableValue
+        $executableValue = $nightly.executable
     }
-
-    if (-not (Test-Path -LiteralPath $executablePath -PathType Leaf)) {
-        throw "The Nightly Firefox executable configured in FlexFox Manager does not exist."
+    if ($null -eq $executableValue) { return $null }
+    if ($executableValue -isnot [string]) { throw "Nightly executable path must be a string." }
+    if ([string]::IsNullOrWhiteSpace($executableValue) -or $executableValue -eq "auto") { return $null }
+    $executablePath = Expand-ManagerPath $executableValue
+    if (-not [System.IO.Path]::IsPathRooted($executablePath)) {
+        $executablePath = Join-Path (Split-Path -Parent $RegistryPath) $executablePath
     }
-
+    if (-not (Test-Path -LiteralPath $executablePath -PathType Leaf)) { return $null }
     return (Resolve-Path -LiteralPath $executablePath).Path
 }
 
@@ -305,7 +304,7 @@ try {
     )
     $shouldUpdateFirefoxBadge = $false
 
-    if ($PreCommit) {
+    if ($PreCommit -or $PSCmdlet.ParameterSetName -eq "CommitMessage") {
         & git diff --cached --quiet -- $changelogRelativePath
         $diffExitCode = $LASTEXITCODE
         if ($diffExitCode -eq 0) {
@@ -325,6 +324,20 @@ try {
         }
 
         if ($stagedVersion -eq $headVersion) {
+            exit 0
+        }
+
+        if ($PSCmdlet.ParameterSetName -eq "CommitMessage") {
+            $messagePath = (Resolve-Path -LiteralPath $CommitMessagePath).Path
+            $messageLines = [System.IO.File]::ReadAllLines($messagePath, [System.Text.Encoding]::UTF8)
+            $subject = if ($messageLines.Count -gt 0) { $messageLines[0].Trim() } else { "" }
+            $expectedSubject = "v$stagedVersion"
+
+            if ($subject -ne $expectedSubject) {
+                throw "Release commit subject must be '$expectedSubject' (got '$subject')."
+            }
+
+            Write-Host "FlexFox release commit subject verified: $expectedSubject" -ForegroundColor Green
             exit 0
         }
 
@@ -358,8 +371,13 @@ try {
     if ($shouldUpdateFirefoxBadge) {
         $registryPath = Get-FirefoxManagerRegistryPath
         $nightlyExecutable = Get-NightlyFirefoxExecutable -RegistryPath $registryPath
-        $firefoxMajorVersion = Get-FirefoxMajorVersion -ExecutablePath $nightlyExecutable
-        Write-Host "Detected Nightly Firefox major version: $firefoxMajorVersion" -ForegroundColor Green
+        if ([string]::IsNullOrWhiteSpace($nightlyExecutable)) {
+            $shouldUpdateFirefoxBadge = $false
+            Write-Warning "Nightly is not configured or its executable is missing; Firefox badges unchanged."
+        } else {
+            $firefoxMajorVersion = Get-FirefoxMajorVersion -ExecutablePath $nightlyExecutable
+            Write-Host "Detected Nightly Firefox major version: $firefoxMajorVersion" -ForegroundColor Green
+        }
     }
 
     # Validate and prepare every required update before writing any file.
@@ -439,6 +457,6 @@ try {
     Write-Host "FlexFox version update completed successfully: v$Version" -ForegroundColor Green
     exit 0
 } catch {
-    Write-Error "FlexFox version update failed: $($_.Exception.Message)"
+    Write-Error "FlexFox release check failed: $($_.Exception.Message)"
     exit 1
 }

@@ -1,2 +1,3 @@
 scripts/git-pull-chrome-only.sh text eol=lf
 .github/hooks/* text eol=lf
+.github/scripts/flexfox-release-hooks.sh text eol=lf
