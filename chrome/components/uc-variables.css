@@ -1331,13 +1331,16 @@
      */
     --uc-sidebar-hover-trigger-width: 22px;
     &:not([sizemode="normal"]) {
-        --uc-sidebar-hover-trigger-width: 1px;
-        @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
-            &:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
-                @media -moz-pref("uc.flex.enable-rounded-web-content") {
-                    --uc-sidebar-hover-trigger-width: 4px;
-                    @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
-                        --uc-sidebar-hover-trigger-width: 8px;
+        /* Reduce the trigger only when the wider edge trigger option is disabled. */
+        @media not -moz-pref("uc.flex.increase-sidebery-hover-trigger-width") {
+            --uc-sidebar-hover-trigger-width: 1px;
+            @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
+                &:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
+                    @media -moz-pref("uc.flex.enable-rounded-web-content") {
+                        --uc-sidebar-hover-trigger-width: 4px;
+                        @media -moz-pref("uc.flex.enable-rounded-web-content", 2) {
+                            --uc-sidebar-hover-trigger-width: 8px;
+                        }
                     }
                 }
             }

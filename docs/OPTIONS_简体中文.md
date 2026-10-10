@@ -64,6 +64,7 @@
 | Preference | Value | Description |
 |-----------|:-------------:|-------------|
 | `uc.flex.fully-hide-sidebery` | `false` | 完全隐藏 Sidebery 和原生垂直标签页，仅在鼠标靠近屏幕边缘时显示。触发区域可通过 `--uc-sidebar-hover-trigger-width` 进行调整。启用此选项后，会覆盖 `Hide Sidebery` 快捷键，导致无法通过快捷键在隐藏和显示之间切换。日常使用建议保持此选项为 `false`，并通过快捷键切换布局。具体设置方法请参见“[布局切换](USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-布局切换)”。 |
+| `uc.flex.increase-sidebery-hover-trigger-width` | `false` | 在窗口最大化和 Firefox 全屏模式下，将屏幕边缘的悬停触发区域扩大至 `22px`。这样更容易在多显示器环境中唤出完全隐藏的 Sidebery 和原生垂直标签页，但也更容易干扰网页边缘的鼠标操作。 |
 | `uc.flex.disable-sidebery-autohide` | `false` | 停用 Sidebery 和原生垂直标签页的自动折叠功能，并保持始终展开的布局。启用此选项后，会覆盖 `Lock Sidebery` 快捷键，导致无法通过快捷键在自动折叠和保持展开之间切换。日常使用建议保持此选项为 `false`，并通过快捷键切换布局。具体设置方法请参见“[布局切换](USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-布局切换)”。 |
 | `uc.flex.sidebery-expand-delay` | `0`-`4`<br>(`1`) | 设置鼠标悬停后 Sidebery 和原生垂直标签页开始展开前的等待时间。此设置也会影响原生水平标签页和浏览器工具栏。取值：`0` = 无延迟，`1` = `80ms`（默认），`2` = `160ms`，`3` = `350ms`，`4` = `460ms`。数值越大，展开开始前的等待时间越长。 |
 | `uc.flex.sidebery-expand-duration` | `1`-`4`<br>(`1`) | 设置 Sidebery 和原生垂直标签页展开与折叠动画的持续时间。取值：`1` = 展开 `115ms` / 折叠 `55ms`（默认），`2` = `160ms` / `80ms`，`3` = `200ms` / `100ms`，`4` = `340ms` / `220ms`。数值越大，动画持续时间越长。 |

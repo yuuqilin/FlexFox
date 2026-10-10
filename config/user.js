@@ -37,6 +37,8 @@ user_pref("uc.flex.style-sidebar-stripe-color-use-gradient",        false);
 /* ### Shared Settings */
 /* Completely hides Sidebery and native vertical tabs until the cursor reaches the screen edge. */
 user_pref("uc.flex.fully-hide-sidebery",                        false);
+/* Increases the sidebar edge-hover trigger area to 22px in maximized windows and Firefox fullscreen mode. */
+user_pref("uc.flex.increase-sidebery-hover-trigger-width",      false);
 /* Keeps Sidebery and native vertical tabs permanently expanded. */
 user_pref("uc.flex.disable-sidebery-autohide",                  false);
 /* Sets the delay before Sidebery and native vertical tabs expand after hover.
