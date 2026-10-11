@@ -1,23 +1,244 @@
+/**
+ * PDF.js UI structure used by FlexFox:
+ *
+ * .toolbar
+ * ├─ ::before
+ * │  └─ Inset hover trigger for revealing the toolbar.
+ * │
+ * └─ #toolbarContainer
+ *    ├─ ::before
+ *    │  └─ Inset toolbar surface: background, shadow, backdrop blur,
+ *    │     and bottom corner radius.
+ *    │
+ *    ├─ #toolbarViewer
+ *    │  ├─ Toolbar controls and their inner spacing.
+ *    │  └─ #toolbarViewerLeft
+ *    │     └─ #viewsManager
+ *    │        └─ Floating/collapsible PDF sidebar.
+ *    │
+ *    └─ #loadingBar
+ *       └─ Full-width PDF loading progress bar.
+ *
+ * #viewerContainer
+ * └─ Scrollable PDF document area extended behind the auto-hidden toolbar.
+ */
+
 /*
 @-moz-document regexp(".*\\.pdf$")
 */
 html[mozdisallowselectionprint]:has(head script[src^="resource://pdf.js"])
 {
-    /* https://github.com/mozilla/pdf.js/issues/2784#issuecomment-366480669 */
+    --uc-pdf-sidebar-trigger-width: 24px;
+    @media -moz-pref("uc.flex.increase-sidebery-hover-trigger-width") {
+        --uc-pdf-sidebar-trigger-width: 30px;
+    }
+    --uc-pdf-toolbar-margin-inline: var(--uc-pdf-sidebar-trigger-width);
+    --uc-pdf-toolbar-height: 43px;
+
+    /**
+     * Keep these values in sync with --uc-urlbar-backdrop-transparency
+     * in chrome/components/uc-variables.css.
+     */
+    --uc-pdf-backdrop-transparency: 0.75;
+    @media not -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        @media -moz-pref("uc.flex.browser-mica-transparency-level", 0) {
+            --uc-pdf-backdrop-transparency: 0.95;
+        }
+        @media -moz-pref("uc.flex.browser-mica-transparency-level", 1) {
+            --uc-pdf-backdrop-transparency: 0.85;
+        }
+        @media -moz-pref("uc.flex.browser-mica-transparency-level", 3) {
+            --uc-pdf-backdrop-transparency: 0.7;
+        }
+        @media -moz-pref("uc.flex.browser-mica-transparency-level", 4) {
+            --uc-pdf-backdrop-transparency: 0.5;
+        }
+    }
+    @media -moz-pref("uc.flex.browser-wallpaper-enabled") {
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 0) {
+            --uc-pdf-backdrop-transparency: 0.95;
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 1) {
+            --uc-pdf-backdrop-transparency: 0.85;
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 3) {
+            --uc-pdf-backdrop-transparency: 0.7;
+        }
+        @media -moz-pref("uc.flex.browser-wallpaper-transparency-level", 4) {
+            --uc-pdf-backdrop-transparency: 0.5;
+        }
+    }
+
+    /* Keep the full-width wrapper in place while the toolbar itself slides out of view. */
     .toolbar {
-        opacity: 0;
-        transition: opacity 48ms ease-out 200ms;
-    }
-    .toolbar:is(:hover, :has(.toolbarButtonWithContainer > .toggled, #secondaryToolbarToggleButton.toggled)) {
-        opacity: 1;
+        --uc-pdf-toolbar-offset: calc(-1 * var(--uc-pdf-toolbar-height));
+        --uc-pdf-toolbar-controls-opacity: 0;
+        --uc-pdf-toolbar-surface-color: var(--toolbar-bg-color);
+        --uc-pdf-toolbar-surface-alpha: 1;
+        --uc-pdf-toolbar-surface-backdrop: none;
+        --uc-pdf-toolbar-surface-border-color: light-dark(
+            rgb(21 20 26 / 0.1),
+            rgb(251 251 254 / 0.1)
+        );
+        --uc-pdf-toolbar-surface-radius: 8px;
+
+        /* .toolbar stays 100% width, so disable its pointer events to keep the native scrollbar clickable. */
+        pointer-events: none;
+
+        /* Match the hover trigger to the inset toolbar surface. */
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0 var(--uc-pdf-toolbar-margin-inline) auto;
+            height: var(--uc-pdf-toolbar-height);
+            pointer-events: auto;
+        }
+
+        /**
+         * Reveal the toolbar while it is hovered or a toolbar popup is open.
+         * Exclude #viewsManager because it is a descendant of .toolbar; hovering the
+         * sidebar would otherwise also match .toolbar:hover and reveal the toolbar.
+         */
+        &:is(:hover, :has(.toolbarButtonWithContainer > .toggled, #secondaryToolbarToggleButton.toggled)):not(
+                :has(#viewsManager:hover)
+            ) {
+            --uc-pdf-toolbar-offset: 0px;
+            --uc-pdf-toolbar-controls-opacity: 1;
+        }
+
+        /**
+         * Keep #toolbarContainer full-width because PDF.js sizes #loadingBar against it;
+         * only the toolbar surface and controls are inset. Move the container instead of
+         * fading it so the loading bar remains visible and spans the full viewport width.
+         */
+        #toolbarContainer {
+            height: var(--uc-pdf-toolbar-height) !important;
+            transform: translateY(var(--uc-pdf-toolbar-offset));
+            background-color: transparent !important;
+            box-shadow: none !important;
+            transition: transform 180ms ease-out !important;
+
+            /**
+             * Draw the toolbar surface on the moving container so background effects stay
+             * synchronized with the slide animation. The inline margins reduce the surface
+             * width so it does not cover the native scrollbar. Keeping these effects off
+             * #toolbarViewer also avoids changing the containing block used by the
+             * positioned #viewsManager.
+             */
+            &::before {
+                content: "";
+                position: absolute;
+                inset: 0 var(--uc-pdf-toolbar-margin-inline);
+                border-inline: 1px solid var(--uc-pdf-toolbar-surface-border-color);
+                border-block-end: 1px solid var(--uc-pdf-toolbar-surface-border-color);
+                border-end-start-radius: var(--uc-pdf-toolbar-surface-radius);
+                border-end-end-radius: var(--uc-pdf-toolbar-surface-radius);
+                background-color: rgb(
+                    from var(--uc-pdf-toolbar-surface-color) r g b / var(--uc-pdf-toolbar-surface-alpha)
+                );
+                box-shadow: var(--toolbar-box-shadow);
+                backdrop-filter: var(--uc-pdf-toolbar-surface-backdrop);
+                z-index: -1;
+            }
+
+            /**
+             * PDF.js positions #loadingBar below the native toolbar height. Use the FlexFox
+             * toolbar height instead so translating the container by the same amount places
+             * the loading bar exactly at the viewport top while the toolbar is hidden.
+             */
+            #loadingBar {
+                top: calc(var(--uc-pdf-toolbar-height) + var(--pfn-bar-height, 0px)) !important;
+            }
+        }
+
+        /**
+         * Inset the controls to match the toolbar surface while preserving PDF.js's native
+         * horizontal padding. Do not apply background or backdrop effects to this element.
+         */
+        #toolbarViewer {
+            width: calc(
+                100% - 2 * (var(--uc-pdf-toolbar-margin-inline) - var(--toolbar-horizontal-padding))
+            ) !important;
+            margin-inline: calc(var(--uc-pdf-toolbar-margin-inline) - var(--toolbar-horizontal-padding));
+            pointer-events: auto;
+            padding-inline: var(--toolbar-horizontal-padding);
+        }
+
+        /* Fade only toolbar controls; keep #viewsManager and #loadingBar independent. */
+        #toolbarViewerLeft > :not(#viewsManager),
+        #toolbarViewer > :not(#toolbarViewerLeft) {
+            opacity: var(--uc-pdf-toolbar-controls-opacity);
+            transition: opacity 180ms ease-out !important;
+        }
     }
 
+    /* Extend the PDF document into the space reclaimed by the auto-hidden toolbar. */
     #viewerContainer {
-        top: 0 !important; /* move doc up into empty bar space */
+        top: 0 !important;
     }
 
-    #toolbarContainer {
-        height: 43px !important;
+    /* Preserve the native resizable width; only translate the panel to collapse it. */
+    #viewsManager {
+        --uc-pdf-sidebar-offset: calc(-100% + var(--uc-pdf-sidebar-trigger-width));
+        --uc-pdf-sidebar-content-opacity: 0;
+        --uc-pdf-sidebar-transition-duration: 180ms;
+        height: calc(var(--viewer-container-height) - 100% - 2 * var(--sidebar-block-padding)) !important;
+        inset-inline-start: 0 !important;
+
+        &:dir(rtl) {
+            --uc-pdf-sidebar-offset: calc(100% - var(--uc-pdf-sidebar-trigger-width));
+        }
+
+        /**
+         * Counter #toolbarContainer's vertical transition with an equal inverse Y
+         * translation so the sidebar remains visually stationary.
+         */
+        transform:
+            translateY(calc(-1 * var(--uc-pdf-toolbar-offset)))
+            translateX(var(--uc-pdf-sidebar-offset));
+        transition: transform var(--uc-pdf-sidebar-transition-duration) ease-out !important;
+
+        &:is(:hover, .resizing),
+        &:has(:focus-visible) {
+            --uc-pdf-sidebar-offset: 0px;
+            --uc-pdf-sidebar-content-opacity: 1;
+        }
+
+        /* Hide the panel contents while keeping its background stripe visible. */
+        > :not(#viewsManagerResizer) {
+            opacity: var(--uc-pdf-sidebar-content-opacity);
+            transition: opacity var(--uc-pdf-sidebar-transition-duration) ease-out !important;
+        }
+
+        #viewsManagerResizer {
+            inset-inline-start: 100% !important;
+            width: 8px !important;
+        }
+        &:not(:hover):not(.resizing) #viewsManagerResizer {
+            pointer-events: none;
+        }
+    }
+
+    /* Match Nova's sidebar surface color, border, and panel radius. */
+    @media not (-moz-pref("pdfjs.enableNova", false) or -moz-pref("browser.nova.enabled", false)) {
+        .toolbar {
+            --uc-pdf-toolbar-surface-color: var(--background-color-box);
+            --uc-pdf-toolbar-surface-border-color: var(--border-color-deemphasized);
+            --uc-pdf-toolbar-surface-radius: var(--panel-border-radius);
+        }
+    }
+    #outerContainer.viewsManagerOpen {
+        /* Use a slower transition when opening the sidebar; hover expansion keeps the normal speed. */
+        &.viewsManagerMoving #viewsManager {
+            --uc-pdf-sidebar-transition-duration: 360ms;
+            --uc-pdf-sidebar-offset: 0px;
+            --uc-pdf-sidebar-content-opacity: 1;
+        }
+
+        /* Keep the PDF viewer full-width while the sidebar overlays it. */
+        #viewerContainer:not(.pdfPresentationMode) {
+            inset-inline-start: 0 !important;
+        }
     }
 
     #sidebarContainer {
@@ -39,6 +260,7 @@ html[mozdisallowselectionprint]:has(head script[src^="resource://pdf.js"])
         }
     }
 
+    /* Retain the legacy PDF sidebar and page transparency overrides. */
     @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
         -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
         -moz-pref("uc.flex.browser-wallpaper-enabled") {
@@ -52,11 +274,24 @@ html[mozdisallowselectionprint]:has(head script[src^="resource://pdf.js"])
             #sidebarContent {
                 background-color: rgb(from var(--body-bg-color) r g b / calc(alpha * 0.65));
             }
-            #outerContainer #mainContainer div.toolbar {
-                backdrop-filter: blur(26px) saturate(140%);
-            }
-            #toolbarContainer {
-                background-color: rgb(from var(--toolbar-bg-color) r g b / calc(alpha * 0.8)) !important;
+        }
+    }
+
+    /* Apply the same translucent UI conditions as uc-browser.css. */
+    @media -moz-pref("extensions.activeThemeID", "default-theme@mozilla.org") and (-moz-windows-mica),
+        -moz-pref("uc.flex.browser-mica-force-enabled-on-all-themes") and (-moz-windows-mica),
+        -moz-pref("uc.flex.browser-wallpaper-enabled"),
+        -moz-pref("uc.flex.enable-translucent-urlbar-popup-and-menus") {
+        .toolbar {
+            --uc-pdf-toolbar-surface-alpha: var(--uc-pdf-backdrop-transparency);
+            --uc-pdf-toolbar-surface-backdrop: blur(26px) saturate(140%);
+        }
+
+        #viewsManager {
+            background-color: rgb(from var(--sidebar-bg-color) r g b / var(--uc-pdf-backdrop-transparency)) !important;
+            backdrop-filter: blur(26px) saturate(140%) !important;
+            #viewsManagerHeader {
+                background-color: transparent !important;
             }
         }
     }
