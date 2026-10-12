@@ -892,7 +892,7 @@
                 border-top: 1px solid rgba(105, 105, 105, 0.2) !important;
             }
 
-            .urlbarView-row-inner {
+            .urlbarView-row:not([dynamicType="actions"]) > .urlbarView-row-inner {
                 flex-wrap: nowrap !important;
             }
 
@@ -982,7 +982,7 @@
                 border-top: 1px solid rgba(105, 105, 105, 0.2) !important;
             }
 
-            .urlbarView-row-inner {
+            .urlbarView-row:not([dynamicType="actions"]) > .urlbarView-row-inner {
                 flex-wrap: nowrap !important;
             }
 
