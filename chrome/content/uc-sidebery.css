@@ -2000,6 +2000,36 @@
         }
     }
 
+    /* Shorten and vertically center the container indicator on non-pinned tabs. */
+    .Tab[data-pin="false"][data-color] .ctx {
+        top: 50% !important;
+        width: 3px !important;
+        height: 12px !important;
+        border-radius: 1.5px;
+        z-index: 1;
+        translate: 0 -50%;
+        transition: translate 300ms ease;
+    }
+
+    @media (width > 50px) {
+        /* Inset the indicator by 5px when Sidebery is expanded. */
+        .Tab[data-pin="false"][data-color] .ctx {
+            translate: -5px -50%;
+        }
+
+        /* Move the indicator 8px right with the tab title on hover or selection when expanded. */
+        .Tab[data-pin="false"][data-color]:is(:hover, [data-active="true"], [data-selected="true"]) .ctx {
+            translate: 3px -50%;
+        }
+    }
+
+    /* Disable the transition when collapsed to prevent back-and-forth movement. */
+    @media (max-width: 50px) {
+        .Tab[data-pin="false"][data-color] .ctx {
+            transition-duration: 0s;
+        }
+    }
+
     /* Adjust tree guide line positioning to account for FlexFox's custom tab margin. */
     #root[data-tabs-tree-lvl-marks="true"] .Tab[data-pin="false"]:not([data-lvl="0"]) .body::after {
         left: calc((var(--tabs-indent) + var(--uc-sb-tree-line-indent-offset)) / -2) !important;
