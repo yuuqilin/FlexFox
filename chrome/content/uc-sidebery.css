@@ -1244,9 +1244,7 @@
         --uc-sb-tab-favicon-inline-start: 9px;
         --uc-sb-tab-title-inline-start: 33px;
         --uc-sb-tab-audio-inline-start: 25px;
-        --uc-sb-tab-audible-title-offset: calc(
-            var(--tabs-audio-btn-size, 22px) - var(--uc-sb-tab-inner-gap)
-        );
+        --uc-sb-tab-audible-title-offset: calc(var(--tabs-audio-btn-size, 22px) - var(--uc-sb-tab-inner-gap));
         --uc-sb-tab-surface-width: calc(100% - (var(--uc-sb-collapsed-content-width) - var(--uc-sb-tab-height)));
         --uc-sb-pinned-tab-surface-width: var(--uc-sb-tab-surface-width);
         /* Width of one pinned-tab grid column at the configured column count. */
@@ -1313,9 +1311,7 @@
         --uc-sb-tab-audio-expanded-margin-inline-start: 0px;
     }
     .TabList > .Tab[data-pin="false"] .audio {
-        --uc-sb-tab-audio-expanded-margin-inline-start: calc(
-            var(--uc-sb-tab-audio-inline-start) - var(--tabs-padding)
-        );
+        --uc-sb-tab-audio-expanded-margin-inline-start: calc(var(--uc-sb-tab-audio-inline-start) - var(--tabs-padding));
         top: calc(-1 * var(--tabs-padding)) !important;
         width: calc(var(--tabs-audio-btn-size) + 2px) !important;
         height: calc(100% + 2 * var(--tabs-padding)) !important;
@@ -1331,9 +1327,7 @@
 
         /* Use the same -12px collapsed offset in both Sidebery generations. */
         @media (max-width: 50px) {
-            margin-inline-start: calc(
-                var(--uc-sb-tab-audio-expanded-margin-inline-start) - 12px
-            ) !important;
+            margin-inline-start: calc(var(--uc-sb-tab-audio-expanded-margin-inline-start) - 12px) !important;
         }
     }
 
@@ -1580,12 +1574,12 @@
 
         @media not (-moz-pref("uc.flex.style-tab-items", 2) or -moz-pref("uc.flex.style-tab-items", 0)) {
             &::before {
-                border: 1.5px solid var(--uc-sb-pinned-tab-border-color) !important;
+                border: 1.5px solid var(--uc-sb-pinned-tab-border-color);
             }
         }
         @media -moz-pref("uc.flex.style-tab-items", 2) {
             &::before {
-                border: none !important;
+                border: none;
             }
 
             .Tab:not([data-active="true"], [data-selected="true"]) &::before {
@@ -1786,8 +1780,7 @@
                     border-start-start-radius: 3px !important;
                     border-end-start-radius: 3px !important;
                     @media -moz-pref("uc.flex.style-tab-items-border-radius", 2),
-                        -moz-pref("browser.nova.enabled") and
-                            (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
+                        -moz-pref("browser.nova.enabled") and (not -moz-pref("uc.flex.style-tab-items-border-radius", 1)) {
                         top: 1px !important;
                         height: calc(var(--uc-sb-tab-height) - 2px) !important;
                         border-radius: calc(var(--tabs-border-radius) - 1px) !important;
