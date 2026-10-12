@@ -525,6 +525,16 @@
 /*
 #identity-icon-box.identity-box-button {
 */
+/* Firefox v160+ derives #identity-box and child margins from --urlbar-component-gap.
+ * Restore FlexFox spacing while preserving Firefox's extension-page compensation. */
+#identity-box[pageproxystate="valid"].chromeUI {
+    --urlbar-component-gap: 0px;
+}
+
+#identity-icon-box {
+    --urlbar-component-gap: 3px;
+}
+
 #identity-icon-box,
 #trust-icon-container {
     /*
@@ -1136,6 +1146,11 @@
     /* Hide URL bar icons */
     @media not -moz-pref("uc.flex.auto-hide-urlbar-icons", false), -moz-pref("uc.flex.style-urlbar", 4) {
         #identity-permission-box,
+        #notification-popup-box {
+            --urlbar-component-gap: calc(-16px - 2 * var(--urlbar-icon-padding));
+        }
+
+        #identity-permission-box,
         #notification-popup-box,
         #tracking-protection-icon-container {
             margin-inline-start: calc(-16px - 2 * var(--urlbar-icon-padding));
@@ -1144,6 +1159,10 @@
         }
 
         @media -moz-pref("uc.flex.style-urlbar", 4) {
+            #identity-icon-box {
+                --urlbar-component-gap: calc(-16px - 2 * var(--urlbar-icon-padding));
+            }
+
             #identity-icon-box,
             #trust-icon-container {
                 margin-inline-start: calc(-16px - 2 * var(--urlbar-icon-padding));
