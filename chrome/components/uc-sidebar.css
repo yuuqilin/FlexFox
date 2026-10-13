@@ -1223,7 +1223,11 @@
                     width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay),
                     margin-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
-                        var(--uc-autohide-sidebar-delay);
+                        var(--uc-autohide-sidebar-delay),
+                    background-color 0s linear
+                        calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration)),
+                    box-shadow 0s linear
+                        calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration));
                 &:hover {
                     width: calc(var(--uc-sidebar-main-hover-width) - 2 * var(--tab-margin-inline-inner));
                     margin-inline: var(--tab-margin-inline-inner) !important;
@@ -1231,7 +1235,9 @@
                         width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                             var(--uc-hover-sidebar-delay),
                         margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
-                            var(--uc-hover-sidebar-delay);
+                            var(--uc-hover-sidebar-delay),
+                        background-color 0s linear,
+                        box-shadow 0s linear;
                 }
                 /*
                 @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
@@ -1310,7 +1316,6 @@
         display: var(--uc-sb-sroot-splitter-display, block) !important;
         border-top: none !important;
         border-color: transparent !important;
-        box-shadow: inset 0 var(--uc-vt-splitter-inset-height) 0 0 var(--uc-vt-splitter-color);
         opacity: var(--uc-vt-sroot-splitter-opacity);
 
         width: var(--uc-vt-sroot-splitter-width, auto);
@@ -1320,9 +1325,13 @@
                 var(--uc-autohide-sidebar-delay),
             margin-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                 var(--uc-autohide-sidebar-delay),
-            opacity var(--uc-vt-sroot-splitter-opacity-transition);
+            opacity var(--uc-vt-sroot-splitter-opacity-transition),
+            background-color 0s linear
+                calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration)),
+            box-shadow 0s linear calc(var(--uc-autohide-sidebar-delay) + var(--uc-autohide-transition-duration));
         &:not(:hover) {
             background-color: var(--uc-vt-sroot-splitter-bgcolor, transparent) !important;
+            box-shadow: inset 0 var(--uc-vt-splitter-inset-height) 0 0 var(--uc-vt-splitter-color);
         }
         &:hover {
             width: var(--uc-vt-sroot-splitter-hover-width, auto);
@@ -1331,7 +1340,9 @@
                 width var(--uc-hover-transition-duration) var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay),
                 margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                     var(--uc-hover-sidebar-delay),
-                opacity var(--uc-vt-sroot-splitter-opacity-transition);
+                opacity var(--uc-vt-sroot-splitter-opacity-transition),
+                background-color 0s linear,
+                box-shadow 0s linear;
         }
     }
 
