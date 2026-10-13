@@ -1604,12 +1604,81 @@
         }
     }
 
-    /* !NOVA */
-    @media not -moz-pref("browser.nova.enabled") {
-        .tab-context-line {
-            .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background:is([selected], [multiselected]) > & {
-                #tabbrowser-tabs[orient="vertical"] & {
-                    margin: 3px 0px !important;
+    /* Match Sidebery container indicators in native vertical tabs. */
+    @media -moz-pref("sidebar.verticalTabs") {
+        #sidebar-container {
+            /* Use expanded geometry as the default. */
+            --uc-vt-container-indicator-right: calc(var(--tab-margin-inline-inner) - 4px);
+            --uc-vt-container-indicator-x: -5px;
+            --uc-vt-container-indicator-active-x: 3px;
+
+            @media not -moz-pref("uc.flex.disable-sidebery-autohide") {
+                :root:not([titlepreface*="\180e "]) & {
+                    /* Sync indicator transitions with sidebar expansion. */
+                    &:hover {
+                        --uc-vt-container-indicator-right-transition: var(--uc-hover-transition-duration)
+                            var(--uc-hover-transition-type) var(--uc-hover-sidebar-delay);
+                        --uc-vt-container-indicator-translate-delay: var(--uc-hover-sidebar-delay);
+                    }
+
+                    /* Override the default geometry only while the sidebar is collapsed. */
+                    &:not(:hover) {
+                        --uc-vt-container-indicator-right: calc(
+                            100% - var(--tab-margin-inline-inner) - var(--tab-collapsed-background-width) - 1px
+                        );
+                        --uc-vt-container-indicator-right-transition: var(--uc-autohide-transition-duration)
+                            var(--uc-autohide-transition-type) var(--uc-autohide-sidebar-delay);
+                        --uc-vt-container-indicator-x: 0px;
+                        --uc-vt-container-indicator-active-x: 0px;
+                        --uc-vt-container-indicator-translate-duration: 0s;
+                    }
+                }
+            }
+        }
+
+        #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[usercontextid] {
+            .tab-context-line {
+                position: absolute !important;
+                margin: 0 !important;
+                border: 0 !important;
+                background: var(--identity-stroke-color, var(--identity-icon-color)) !important;
+                /* Override Firefox v153 Nova transform. */
+                transform: none !important;
+            }
+
+            &:not([pinned]) .tab-context-line {
+                top: 50%;
+                right: var(--uc-vt-container-indicator-right) !important;
+                width: 3px !important;
+                height: 12px !important;
+                border-radius: 1.5px !important;
+                translate: var(--uc-vt-container-indicator-x) -50%;
+                transition:
+                    right var(--uc-vt-container-indicator-right-transition, 0s),
+                    translate var(--uc-vt-container-indicator-translate-duration, 300ms) ease
+                        var(--uc-vt-container-indicator-translate-delay, 0s);
+            }
+
+            &:not([pinned]):is(:hover, [visuallyselected], [multiselected]) .tab-context-line {
+                translate: var(--uc-vt-container-indicator-active-x) -50%;
+            }
+
+            &[pinned] {
+                /* Anchor the indicator to the tab background so both share the same expansion transition. */
+                .tab-background {
+                    position: relative;
+                }
+
+                /* Match Sidebery pinned indicators: centered 16x2px line at the bottom. */
+                .tab-context-line {
+                    top: auto !important;
+                    right: auto !important;
+                    bottom: 0;
+                    left: 50%;
+                    width: 16px !important;
+                    height: 2px !important;
+                    border-radius: 0 !important;
+                    translate: -50%;
                 }
             }
         }
