@@ -177,6 +177,13 @@ html[mozdisallowselectionprint]:has(head script[src^="resource://pdf.js"])
         top: 0 !important;
     }
 
+    /* Overlay the dismissible PDF.js feature notice without shrinking the document area. */
+    #pdfFeaturesNotification {
+        position: relative;
+        top: calc(-1 * var(--uc-pdf-toolbar-height));
+        z-index: 3;
+    }
+
     /* Preserve the native resizable width; only translate the panel to collapse it. */
     #viewsManager {
         --uc-pdf-sidebar-offset: calc(-100% + var(--uc-pdf-sidebar-trigger-width));
