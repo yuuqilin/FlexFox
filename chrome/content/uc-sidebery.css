@@ -1993,13 +1993,17 @@
         }
     }
 
+    /* Keep container indicators above the tab surface and border. */
+    .Tab[data-color] .ctx {
+        z-index: 1;
+    }
+
     /* Shorten and vertically center the container indicator on non-pinned tabs. */
     .Tab[data-pin="false"][data-color] .ctx {
         top: 50% !important;
         width: 3px !important;
         height: 12px !important;
         border-radius: 1.5px;
-        z-index: 1;
         translate: 0 -50%;
         transition: translate 300ms ease;
     }
