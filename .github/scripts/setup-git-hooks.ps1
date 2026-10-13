@@ -4,9 +4,10 @@ param()
 $ErrorActionPreference = "Stop"
 
 try {
-    $repoRoot = (& git rev-parse --show-toplevel 2>$null)
+    $scriptRepoRoot = Join-Path $PSScriptRoot '../..'
+    $repoRoot = (& git -C $scriptRepoRoot rev-parse --show-toplevel 2>$null)
     if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($repoRoot)) {
-        throw "This script must be run from inside the FlexFox Git repository."
+        throw "Could not locate the FlexFox Git repository relative to this script."
     }
 
     $repoRoot = $repoRoot.Trim()
