@@ -4,6 +4,58 @@
 
 ## 🆕 更新内容
 
+## 🦊 v7.1.1
+
+> [!IMPORTANT]
+> v7.0.0 引入了多个新功能和不兼容变更。如果此前错过，可以在此查看更新日志。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+> [!IMPORTANT]
+> Firefox 157 及更新版本已默认启用 Nova UI。如需恢复 Proton 较小的圆角，可设置 `uc.flex.style-tab-items-border-radius = 1` 和 `uc.flex.style-toolbar-items-border-radius = 1`。
+>
+> FlexFox 已随 Firefox 一同停止支持 ESR 140，目前最低支持版本为 Firefox ESR 153。
+>
+> FlexFox 已不再支持 Sidebery 样式编辑器中遗留的 v6 之前的 FlexFox 旧样式。更新前，请删除“**侧边栏**”和“**分组页面**”中的这些旧样式。具体操作请参阅[从 v6 之前的版本升级](./USAGE_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-从-v6-之前的版本升级)。
+>
+> [English](./CHANGELOG.md#-v711) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v711) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v711)
+
+### 新增
+
+- 新增 `uc.flex.increase-sidebery-hover-trigger-width`，方便在多显示器环境中唤出完全隐藏的 Sidebery 和原生垂直标签页。启用后，窗口最大化和 <kbd>F11</kbd> 全屏模式下的边缘悬停触发区域会扩大至 `22px`。
+
+  较宽的触发区域可能干扰网页边缘的点击操作，因此此选项默认关闭。可在自定义 CSS 中通过 `--uc-sidebar-hover-trigger-width` 微调宽度。
+
+### 改进
+
+- 重构内置 PDF 查看器，顶部工具栏和侧边栏现在各自悬浮显示并独立自动隐藏。启用 Mica、壁纸或 `uc.flex.enable-translucent-urlbar-popup-and-menus` 时，两者均支持半透明效果，透明度可通过 `uc.flex.browser-*-transparency-level` 调整。
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/pdf-page.webp" width="934px">
+
+- 统一 Sidebery 与原生垂直标签页的容器标签页指示线样式。普通标签页使用右侧短竖线，并随标题同步移动；固定标签页使用底部短横线。指示线显示在标签页边框上方，避免被遮挡。
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/container-indicators.png" width="240px">
+
+- 优化原生垂直标签页中固定标签页区域和侧栏工具区域分隔线的悬停过渡动画。
+
+### 不兼容变更
+
+- 将 FlexFox 的偏好设置文件 `user.js` 从仓库根目录移至 `config/user.js`。在 Firefox 用户配置文件目录内用 Git 更新完整仓库时，`user.js` 将不再被恢复到根目录，避免在下次启动时覆盖用户修改过的设置。
+
+### 修复
+
+- 修复 v7.0.0 引入的回归问题：Sidebery 中当前选中的固定标签页无法显示渐变边框。
+- 修复 Nova UI 的圆角导致 Sidebery 容器标签页指示线被隐藏的问题。
+- 修复未启用 Nova UI 且设置 `uc.flex.style-toolbar-items-border-radius = 2` 时，地址栏按钮变为直角的问题。
+- 修复 Firefox 150 变更导致打开 PDF 侧边栏后页面无法滚动的问题。[Bug 2020258](https://bugzilla.mozilla.org/show_bug.cgi?id=2020258)
+- 修复 Firefox 157 变更导致 PDF 顶部工具栏完全透明的问题。[Bug 2063405](https://bugzilla.mozilla.org/show_bug.cgi?id=2063405) [Bug 2069497](https://bugzilla.mozilla.org/show_bug.cgi?id=2069497)
+- 修复 Firefox 158 变更导致地址栏按钮间距错误的问题。[Bug 2074921](https://bugzilla.mozilla.org/show_bug.cgi?id=2074921)
+- 修复 Firefox 159 变更导致地址栏弹出面板背景出现空隙、结果行圆角异常的问题。[Bug 2052926](https://bugzilla.mozilla.org/show_bug.cgi?id=2052926)
+- 修复 Firefox 159 变更导致地址栏搜索模式切换按钮颜色错误的问题。[Bug 2068504](https://bugzilla.mozilla.org/show_bug.cgi?id=2068504)
+- 修复 Firefox 159 变更导致快捷操作按钮在居中的地址栏弹出面板中被裁切的问题。[Bug 2074871](https://bugzilla.mozilla.org/show_bug.cgi?id=2074871)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.0
 
 > [!IMPORTANT]
@@ -44,8 +96,6 @@
 - 修复 Firefox 156 变更导致水平标签页模式下侧栏工具按钮未居中对齐的问题。[Bug 2049659](https://bugzilla.mozilla.org/show_bug.cgi?id=2049659)
 - 修复 Firefox 158 变更导致侧栏工具按钮显示位置错误的问题。[Bug 2041030](https://bugzilla.mozilla.org/show_bug.cgi?id=2041030)
 - 修复 Firefox 158 变更导致分屏视图标签页位置错乱的问题。[Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
-
-<!-- END What's New -->
 
 ## 🦊 v7.0.1
 

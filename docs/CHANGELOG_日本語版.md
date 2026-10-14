@@ -4,6 +4,58 @@
 
 ## 🆕 最新情報
 
+## 🦊 v7.1.1
+
+> [!IMPORTANT]
+> v7.0.0 では、複数の新機能と互換性のない変更が導入されました。まだ確認していない場合は、こちらから更新履歴をご覧ください。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+> [!IMPORTANT]
+> Firefox 157 以降では、Nova UI がデフォルトで有効です。Proton の小さめの角丸に戻すには、`uc.flex.style-tab-items-border-radius = 1` と `uc.flex.style-toolbar-items-border-radius = 1` を設定してください。
+>
+> FlexFox は Firefox のサポート終了に合わせて ESR 140 のサポートを終了しました。対応する最小バージョンは Firefox ESR 153 です。
+>
+> Sidebery のスタイルエディターに残っている v6 より前の FlexFox 旧スタイルは、サポート対象外になりました。アップデート前に「**サイドバー**」と「**グループページ**」タブから削除してください。詳しい手順は「[v6 より前のバージョンからアップデートする](./USAGE_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v6-より前のバージョンからアップデートする)」をご覧ください。
+>
+> [English](./CHANGELOG.md#-v711) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v711) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v711)
+
+### 新機能
+
+- マルチモニター環境で完全に非表示の Sidebery やネイティブ垂直タブを表示しやすくする `uc.flex.increase-sidebery-hover-trigger-width` を追加しました。有効にすると、ウィンドウ最大化時と <kbd>F11</kbd> の全画面表示で、画面端のホバー判定範囲が `22px` に広がります。
+
+  ページ端のクリック操作に干渉する場合があるため、デフォルトでは無効です。幅はカスタム CSS の `--uc-sidebar-hover-trigger-width` で微調整できます。
+
+### 改善
+
+- 内蔵 PDF ビューアーの上部ツールバーとサイドバーを独立したフローティング表示に変更し、それぞれ自動で隠れるようにしました。Mica、壁紙、または `uc.flex.enable-translucent-urlbar-popup-and-menus` が有効な場合は、どちらも半透明表示に対応します。透明度は `uc.flex.browser-*-transparency-level` で調整できます。
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/pdf-page.webp" width="934px">
+
+- Sidebery とネイティブ垂直タブで、コンテナータブのマーカーのデザインを統一しました。通常のタブではタイトルと一緒に動く短い縦線を右側に、ピン留めタブでは短い横線を下側に表示します。マーカーが枠線に隠れないようにしました。
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/container-indicators.png" width="240px">
+
+- ネイティブ垂直タブのピン留めタブ領域とサイドバーツール領域で、区切り線のホバーアニメーションを滑らかにしました。
+
+### 互換性のない変更
+
+- FlexFox の設定ファイル `user.js` を、リポジトリのルートから `config/user.js` に移動しました。Firefox のプロファイル内でリポジトリ全体を Git 管理している場合に、更新で `user.js` がプロファイル直下に復元され、次回起動時に変更した設定が上書きされるのを防ぎます。
+
+### 修正
+
+- v7.0.0 以降、Sidebery のアクティブなピン留めタブにグラデーション枠線が表示されなくなっていた問題を修正しました。
+- Nova UI の角丸によって Sidebery のコンテナータブのマーカーが隠れる問題を修正しました。
+- Nova UI が無効で `uc.flex.style-toolbar-items-border-radius = 2` を使用している場合に、URL バーのボタンが角丸にならない問題を修正しました。
+- Firefox 150 の変更により、PDF のサイドバーを開くとページをスクロールできなくなる問題を修正しました。[Bug 2020258](https://bugzilla.mozilla.org/show_bug.cgi?id=2020258)
+- Firefox 157 の変更により、PDF の上部ツールバーが完全に透明になる問題を修正しました。[Bug 2063405](https://bugzilla.mozilla.org/show_bug.cgi?id=2063405) [Bug 2069497](https://bugzilla.mozilla.org/show_bug.cgi?id=2069497)
+- Firefox 158 の変更後、URL バー内のボタンの間隔が崩れる問題を修正しました。[Bug 2074921](https://bugzilla.mozilla.org/show_bug.cgi?id=2074921)
+- Firefox 159 の変更後、URL バーのポップアップ背景に隙間が生じ、候補行の角丸が正しく表示されない問題を修正しました。[Bug 2052926](https://bugzilla.mozilla.org/show_bug.cgi?id=2052926)
+- Firefox 159 の変更後、URL バーの検索モード切り替えボタンの色が正しく表示されない問題を修正しました。[Bug 2068504](https://bugzilla.mozilla.org/show_bug.cgi?id=2068504)
+- Firefox 159 の変更後、中央表示の URL バーポップアップでクイックアクションのボタンが見切れる問題を修正しました。[Bug 2074871](https://bugzilla.mozilla.org/show_bug.cgi?id=2074871)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.0
 
 > [!IMPORTANT]
@@ -44,8 +96,6 @@
 - Firefox 156 の変更後、水平タブモードでサイドバーツールボタンが中央に配置されない問題を修正しました。[Bug 2049659](https://bugzilla.mozilla.org/show_bug.cgi?id=2049659)
 - Firefox 158 の変更後、サイドバーツールボタンの表示位置がずれる問題を修正しました。[Bug 2041030](https://bugzilla.mozilla.org/show_bug.cgi?id=2041030)
 - Firefox 158 の変更により、Tab Split View のタブの位置がずれる問題を修正しました。[Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
-
-<!-- END What's New -->
 
 ## 🦊 v7.0.1
 

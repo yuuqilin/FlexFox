@@ -4,6 +4,58 @@
 
 ## 🆕 What's New
 
+## 🦊 v7.1.1
+
+> [!IMPORTANT]
+> v7.0.0 introduced several new features and breaking changes. If you missed its release notes, you can read them here:
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+> [!IMPORTANT]
+> Firefox 157 and later enable Nova UI by default. To restore Proton's smaller corners, set `uc.flex.style-tab-items-border-radius = 1` and `uc.flex.style-toolbar-items-border-radius = 1`.
+>
+> FlexFox has ended support for Firefox ESR 140 in line with Firefox's support schedule. Firefox ESR 153 is now the minimum supported version.
+>
+> FlexFox no longer supports legacy pre-v6 styles left in Sidebery's Styles editor. Before updating, remove the old FlexFox styles from the **Sidebar** and **Group Page** tabs. See the [upgrade instructions](./USAGE.md#-upgrading-from-pre-v6-versions) for details.
+>
+> [English](./CHANGELOG.md#-v711) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v711) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v711)
+
+### New
+
+- Added `uc.flex.increase-sidebery-hover-trigger-width` to make fully hidden Sidebery and native vertical tabs easier to reveal on multi-monitor setups. It widens the edge-hover area to `22px` in maximized windows and <kbd>F11</kbd> fullscreen mode.
+
+  Disabled by default because the wider area may interfere with clicks near the webpage edge. Fine-tune the width with `--uc-sidebar-hover-trigger-width` in custom CSS.
+
+### Improvements
+
+- Reworked the built-in PDF viewer so its top toolbar and sidebar float and auto-hide independently. Both support translucent backgrounds with Mica, wallpapers, or `uc.flex.enable-translucent-urlbar-popup-and-menus`. Adjust transparency with `uc.flex.browser-*-transparency-level`.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/pdf-page.webp" width="934px">
+
+- Unified container tab indicators in Sidebery and native vertical tabs. Regular tabs use short right-side markers that move with their titles, while pinned tabs use short bottom lines. Indicators remain visible above tab borders.
+
+  <img src="https://raw.githubusercontent.com/yuuqilin/media-assets/refs/heads/FlexFox/assets/container-indicators.png" width="240px">
+
+- Smoothed the hover transitions of the pinned-tab and sidebar-tool separators in native vertical tabs.
+
+### Breaking Changes
+
+- Moved FlexFox's preference file from the repository root to `config/user.js`. For full-repository installations inside a Firefox profile, this prevents Git updates from restoring `user.js` at the profile root and resetting customized preferences on startup.
+
+### Fixes
+
+- Fixed a v7.0.0 regression that prevented active pinned tabs in Sidebery from showing gradient borders.
+- Fixed Nova UI's rounded corners hiding Sidebery container tab indicators.
+- Fixed square URL bar buttons when Nova UI was disabled and `uc.flex.style-toolbar-items-border-radius = 2` was used.
+- Fixed PDF pages becoming unscrollable with the sidebar open after Firefox 150 changes. [Bug 2020258](https://bugzilla.mozilla.org/show_bug.cgi?id=2020258)
+- Fixed the PDF toolbar becoming fully transparent after Firefox 157 changes. [Bug 2063405](https://bugzilla.mozilla.org/show_bug.cgi?id=2063405) [Bug 2069497](https://bugzilla.mozilla.org/show_bug.cgi?id=2069497)
+- Fixed incorrect URL bar button spacing after Firefox 158 changes. [Bug 2074921](https://bugzilla.mozilla.org/show_bug.cgi?id=2074921)
+- Fixed gaps in the URL bar popup background and incorrect result-row corners after Firefox 159 changes. [Bug 2052926](https://bugzilla.mozilla.org/show_bug.cgi?id=2052926)
+- Fixed incorrect URL bar search mode switcher colors after Firefox 159 changes. [Bug 2068504](https://bugzilla.mozilla.org/show_bug.cgi?id=2068504)
+- Fixed Quick Actions buttons being clipped in centered URL bar popups after Firefox 159 changes. [Bug 2074871](https://bugzilla.mozilla.org/show_bug.cgi?id=2074871)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.0
 
 > [!IMPORTANT]
@@ -44,8 +96,6 @@
 - Fixed misaligned sidebar tool buttons in horizontal tabs mode after Firefox 156 changes. [Bug 2049659](https://bugzilla.mozilla.org/show_bug.cgi?id=2049659)
 - Fixed sidebar tool buttons appearing in the wrong position after Firefox 158 changes. [Bug 2041030](https://bugzilla.mozilla.org/show_bug.cgi?id=2041030)
 - Fixed misaligned Split View tabs after Firefox 158 changes. [Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
-
-<!-- END What's New -->
 
 ## 🦊 v7.0.1
 
