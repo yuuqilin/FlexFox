@@ -36,13 +36,11 @@ To check the setting, right-click the **Sidebar toggle button** (Firefox logo) i
 
 Before v6, FlexFox used `sidebery-styles.json` to inject custom CSS through the Sidebery Styles Editor.
 
-Starting with v6, all built-in Sidebery styles have been migrated to `uc-sidebery.css`. Legacy styles previously imported into the Sidebery Styles Editor are no longer used.
+Since v6, FlexFox has included its Sidebery styles in `uc-sidebery.css` instead. **As of v7.1.1, legacy FlexFox styles left in Sidebery's Styles editor are no longer supported.** Sidebery still applies these old rules if they remain installed, which can cause conflicts and display issues.
 
-Although these legacy styles remain compatible for now, removing them is strongly recommended to avoid duplicate style processing and potential conflicts with future updates.
+**Before upgrading to v7.1.1 or later**, open **Sidebery → Settings (gear icon) → Styles editor** and remove the old FlexFox styles from both the **Sidebar** and **Group Page** tabs. If you have already removed them, no action is needed. Other custom styles can remain.
 
-Open **Sidebery → Settings (gear icon) → Styles editor**, then delete all FlexFox-related styles from the **Sidebar** and **Group Page** tabs.
-
-Because all FlexFox Sidebery styles are now managed through `uc-sidebery.css`, enabling `uc.flex.~dev-skip-loading-uc-sidebery.css` completely disables FlexFox's Sidebery integration, making it easier to use your own custom styles or combine FlexFox with other style packs.
+If you prefer your own Sidebery styles or another style pack, enable `uc.flex.~dev-skip-loading-uc-sidebery.css` to stop loading FlexFox's built-in `uc-sidebery.css`.
 
 ---
 

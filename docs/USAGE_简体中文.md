@@ -36,13 +36,11 @@ FlexFox 使用自己的侧栏自动隐藏和布局切换机制。Firefox 内置�
 
 在 v6 之前，FlexFox 使用 `sidebery-styles.json` 通过 Sidebery 的样式编辑器注入自定义 CSS。
 
-从 v6 开始，所有内置的 Sidebery 样式都已迁移到 `uc-sidebery.css`。此前导入到样式编辑器中的旧样式现已不再使用。
+从 v6 开始，FlexFox 已将内置的 Sidebery 样式迁移至 `uc-sidebery.css`。**自 v7.1.1 起，不再支持 Sidebery 样式编辑器中残留的旧版 FlexFox 样式。** Sidebery 仍会应用这些未删除的 CSS，可能与当前样式冲突，导致界面显示异常。
 
-虽然这些旧样式目前仍然兼容，但为了避免重复处理样式以及与未来版本发生冲突，仍然强烈建议将其删除。
+**升级到 v7.1.1 或更新版本前**，打开 Sidebery 导航栏 → **设置（齿轮图标）→ 样式编辑器**，删除“**侧边栏**”和“**分组页面**”中的所有旧版 FlexFox 样式。如果已经清理过，则无需重复操作；其他自定义样式可以保留。
 
-打开 Sidebery 导航栏 → **设置（齿轮图标）→ 样式编辑器**，然后删除“**侧边栏**”和“**分组页面**”两个页面中的所有 FlexFox 旧样式。
-
-由于 FlexFox 的 Sidebery 样式现已统一由 `uc-sidebery.css` 管理，因此只需启用 `uc.flex.~dev-skip-loading-uc-sidebery.css`，即可完全禁用 FlexFox 对 Sidebery 的样式修改，更方便与自定义样式或其他样式包搭配使用。
+如果想使用自己的 Sidebery 样式或其他样式包，可启用 `uc.flex.~dev-skip-loading-uc-sidebery.css`，停止加载 FlexFox 内置的 `uc-sidebery.css`。
 
 ---
 
