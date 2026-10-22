@@ -52,8 +52,8 @@ else
     print_red "Could not determine the installed Git version."
     exit 1
 fi
-if [ "$git_major" -lt 2 ] || { [ "$git_major" -eq 2 ] && [ "$git_minor" -lt 25 ]; }; then
-    print_red "Git 2.25 or later is required for sparse-checkout support. Installed version: $git_version_text"
+if [ "$git_major" -lt 2 ] || { [ "$git_major" -eq 2 ] && [ "$git_minor" -lt 27 ]; }; then
+    print_red "Git 2.27 or later is required for sparse-checkout reapply. Installed version: $git_version_text"
     exit 1
 fi
 
@@ -365,6 +365,57 @@ has_tracked_changes() {
     return 1
 }
 
+check_untracked_collisions() {
+    local incoming_file untracked_file reference incoming untracked collision=""
+    local ignore_case status previous_nocase=false
+    incoming_file=$(mktemp "${TMPDIR:-/tmp}/flexfox-incoming.XXXXXX") || return 1
+    untracked_file=$(mktemp "${TMPDIR:-/tmp}/flexfox-untracked.XXXXXX") || {
+        rm -f "$incoming_file"
+        return 1
+    }
+
+    # No exclusions: ignored custom files need the same protection as other untracked files.
+    if ! git ls-files --others -z -- chrome > "$untracked_file"; then
+        rm -f "$incoming_file" "$untracked_file"
+        print_red "Could not inspect untracked files and incoming paths."
+        return 1
+    fi
+    for reference in "$@"; do
+        if ! git ls-tree -r --name-only -z "$reference" -- chrome >> "$incoming_file"; then
+            rm -f "$incoming_file" "$untracked_file"
+            print_red "Could not inspect untracked files and incoming paths."
+            return 1
+        fi
+    done
+    if ignore_case=$(git config --bool --get core.ignorecase); then
+        :
+    else
+        status=$?
+        if [ "$status" -ne 1 ]; then
+            rm -f "$incoming_file" "$untracked_file"
+            print_red "Could not inspect filesystem case sensitivity."
+            return 1
+        fi
+    fi
+    if shopt -q nocasematch; then previous_nocase=true; fi
+    if [ "$ignore_case" = true ]; then shopt -s nocasematch; else shopt -u nocasematch; fi
+    while IFS= read -r -d '' incoming; do
+        while IFS= read -r -d '' untracked; do
+            if [[ "$incoming" = "$untracked" || "$incoming" = "$untracked/"* || "$untracked" = "$incoming/"* ]]; then
+                collision="$untracked"
+                break 2
+            fi
+        done < "$untracked_file"
+    done < "$incoming_file"
+    if [ "$previous_nocase" = true ]; then shopt -s nocasematch; else shopt -u nocasematch; fi
+    rm -f "$incoming_file" "$untracked_file"
+    if [ -n "$collision" ]; then
+        print_red "Untracked or ignored file conflicts with incoming FlexFox files: $collision. Move or back up the file before updating."
+        return 1
+    fi
+    return 0
+}
+
 abort_script_merge() {
     local output
     if ! output=$(git merge --abort 2>&1); then
@@ -427,21 +478,50 @@ merge_with_conflict_handling() {
     exit 1
 }
 
+# Import defaults only for first-time setup, without tracking user.js in sparse-checkout.
+install_initial_preferences() {
+    if [ -e "user.js" ] || [ -L "user.js" ]; then
+        print_yellow "Existing user.js was preserved. Review it before restarting Firefox."
+        return 0
+    fi
+
+    local temporary_user_js
+    temporary_user_js=$(mktemp "./.flexfox-user-js.XXXXXX") || {
+        print_red "Could not create a temporary file for initial FlexFox preferences."
+        return 1
+    }
+    if ! git show HEAD:config/user.js > "$temporary_user_js"; then
+        rm -f "$temporary_user_js"
+        print_red "Could not extract config/user.js from the checked-out Git revision."
+        return 1
+    fi
+
+    # Link within the profile directory so an existing user.js can never be overwritten.
+    if ! ln "$temporary_user_js" "user.js"; then
+        rm -f "$temporary_user_js"
+        print_red "Could not save user.js without overwriting an existing file."
+        return 1
+    fi
+    rm -f "$temporary_user_js"
+
+    print_green "Initial FlexFox preferences copied to: $profile_path/user.js"
+    print_yellow "Restart Firefox once to import them, then DELETE user.js from the profile folder."
+    print_yellow "Otherwise, it will reapply its preferences at every Firefox startup."
+}
+
+first_install=false
+if [ ! -e ".git" ] && { [ ! -f "chrome/userChrome.css" ] ||
+    ! grep -Eq 'FlexFox v[0-9]+\.[0-9]+\.[0-9]+' "chrome/userChrome.css"; }; then
+    first_install=true
+fi
+
 if [ ! -e ".git" ]; then
     print_yellow "Initializing Git repository..."
     run_git init --quiet
+    if [ "$first_install" = true ]; then
+        run_git config flexfox.initialPreferencesPending true
+    fi
     run_git remote add origin https://github.com/yuuqilin/FlexFox.git
-    run_git config flexfox.managed true
-    run_git remote set-branches origin main
-    run_git config remote.origin.tagOpt --no-tags
-    run_git sparse-checkout init --no-cone
-    run_git sparse-checkout set /chrome
-    print_yellow "Fetching the latest 'chrome' folder..."
-    run_git fetch --quiet --no-tags origin
-    run_git checkout --quiet --force -B main origin/main
-    run_git branch --set-upstream-to=origin/main main
-    run_git sparse-checkout reapply
-    print_green "Git repository initialized and the 'chrome' folder checked out."
 else
     print_green "Git repository already initialized."
     if origin_url=$(git remote get-url origin 2>/dev/null); then
@@ -467,18 +547,43 @@ else
             exit 1
         fi
     fi
-
-    run_git config flexfox.managed true
-    run_git remote set-branches origin main
-    run_git config remote.origin.tagOpt --no-tags
-    run_git sparse-checkout init --no-cone
-    run_git sparse-checkout set /chrome
-    print_yellow "Fetching the latest 'chrome' folder..."
-    run_git fetch --quiet --no-tags --prune origin
-    run_git checkout --quiet main
-    merge_with_conflict_handling
-    run_git sparse-checkout reapply
-    print_green "The 'chrome' folder was updated."
 fi
 
+run_git config flexfox.managed true
+run_git remote set-branches origin main
+run_git config remote.origin.tagOpt --no-tags
+print_yellow "Fetching the latest 'chrome' folder..."
+run_git fetch --quiet --no-tags --prune origin
+
+references=(origin/main)
+if git show-ref --verify --quiet refs/heads/main; then
+    main_exists=true
+    references+=(main)
+else
+    status=$?
+    [ "$status" -eq 1 ] || { print_red "Could not inspect the local main branch."; exit 1; }
+    main_exists=false
+fi
+check_untracked_collisions "${references[@]}"
+run_git sparse-checkout init --no-cone
+run_git sparse-checkout set /chrome
+if [ "$main_exists" = true ]; then
+    run_git checkout --quiet main
+    merge_with_conflict_handling
+else
+    run_git checkout --quiet -b main origin/main
+fi
+run_git branch --set-upstream-to=origin/main main
+run_git sparse-checkout reapply
+
+if pending_preferences=$(git config --bool --get flexfox.initialPreferencesPending); then
+    if [ "$pending_preferences" = true ]; then
+        install_initial_preferences
+        run_git config --unset flexfox.initialPreferencesPending
+    fi
+else
+    status=$?
+    [ "$status" -eq 1 ] || { print_red "Could not inspect pending initial preferences."; exit 1; }
+fi
+print_green "The 'chrome' folder was updated."
 print_green "Script completed."

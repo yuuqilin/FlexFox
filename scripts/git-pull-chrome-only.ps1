@@ -224,7 +224,7 @@ function Get-ActiveFirefoxProfiles {
     if (-not (Test-Path -LiteralPath $ProfilesIniPath -PathType Leaf)) { return $profiles }
 
     $section = ""
-    foreach ($line in Get-Content -LiteralPath $ProfilesIniPath) {
+    foreach ($line in Get-Content -LiteralPath $ProfilesIniPath -Encoding UTF8) {
         $trimmed = $line.Trim()
         if ($trimmed -match '^\[(.+)\]$') {
             $section = $matches[1]
@@ -232,12 +232,15 @@ function Get-ActiveFirefoxProfiles {
         }
         if ($section -match '^Install[0-9A-F]+$' -and $trimmed -match '^Default=(.+)$') {
             $configuredPath = $matches[1].Trim() -replace '/', '\'
-            $fullPath = if ([System.IO.Path]::IsPathRooted($configuredPath)) {
-                [System.IO.Path]::GetFullPath($configuredPath)
+            try {
+                $fullPath = if ([System.IO.Path]::IsPathRooted($configuredPath)) {
+                    [System.IO.Path]::GetFullPath($configuredPath)
+                }
+                else {
+                    [System.IO.Path]::GetFullPath((Join-Path $FirefoxRootPath $configuredPath))
+                }
             }
-            else {
-                [System.IO.Path]::GetFullPath((Join-Path $FirefoxRootPath $configuredPath))
-            }
+            catch { continue }
             if (Test-Path -LiteralPath $fullPath -PathType Container) {
                 $name = Split-Path $fullPath -Leaf
                 $profiles += [PSCustomObject]@{
@@ -370,6 +373,42 @@ function Test-TrackedGitChanges {
     return $workingTreeResult.ExitCode -eq 1 -or $indexResult.ExitCode -eq 1
 }
 
+function Get-GitPaths {
+    param ([string[]]$Arguments)
+
+    $previousEncoding = [Console]::OutputEncoding
+    try {
+        [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+        $result = Invoke-GitQuery -Arguments $Arguments
+    }
+    finally {
+        [Console]::OutputEncoding = $previousEncoding
+    }
+    if ($result.ExitCode -ne 0) {
+        throw "Could not inspect untracked files and incoming paths."
+    }
+    return @(([string]::Join([string][char]10, [string[]]$result.Output)).Split([char]0) | Where-Object { $_.Length -gt 0 })
+}
+
+function Assert-NoUntrackedCollisions {
+    param ([string[]]$References)
+
+    # No exclusions: ignored custom files need the same protection as other untracked files.
+    $untracked = @(Get-GitPaths -Arguments @("ls-files", "--others", "-z", "--", "chrome"))
+    foreach ($reference in $References) {
+        $incoming = @(Get-GitPaths -Arguments @("ls-tree", "-r", "--name-only", "-z", $reference, "--", "chrome"))
+        foreach ($incomingPath in $incoming) {
+            foreach ($localPath in $untracked) {
+                if ($incomingPath.Equals($localPath, [StringComparison]::OrdinalIgnoreCase) -or
+                    $incomingPath.StartsWith($localPath + "/", [StringComparison]::OrdinalIgnoreCase) -or
+                    $localPath.StartsWith($incomingPath + "/", [StringComparison]::OrdinalIgnoreCase)) {
+                    throw "Untracked or ignored file conflicts with incoming FlexFox files: $localPath. Move or back up the file before updating."
+                }
+            }
+        }
+    }
+}
+
 function Write-GitResultOutput {
     param ($Result)
     foreach ($line in $Result.Output) {
@@ -469,6 +508,67 @@ function Test-FlexFoxGitProfile {
     return $true
 }
 
+function Install-InitialFlexFoxPreferences {
+    param([string]$ProfileDirectory)
+
+    $userJsPath = Join-Path $ProfileDirectory "user.js"
+    if (Test-Path -LiteralPath $userJsPath) {
+        Write-ColoredText "Existing user.js was preserved. Review it before restarting Firefox." "Yellow"
+        return
+    }
+
+    # Read the Git blob as bytes; PowerShell 5.1 text redirection would change its encoding.
+    $gitExecutable = (Get-Command git -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
+    $processInfo = New-Object System.Diagnostics.ProcessStartInfo
+    $processInfo.FileName = $gitExecutable
+    $processInfo.Arguments = "show HEAD:config/user.js"
+    $processInfo.WorkingDirectory = $ProfileDirectory
+    $processInfo.UseShellExecute = $false
+    $processInfo.RedirectStandardOutput = $true
+    $processInfo.RedirectStandardError = $true
+    $processInfo.CreateNoWindow = $true
+
+    $temporaryPath = Join-Path $ProfileDirectory (".flexfox-user-js-" + [guid]::NewGuid().ToString("N") + ".tmp")
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $processInfo
+    $started = $false
+    try {
+        $started = $process.Start()
+        if (-not $started) { throw "Could not start Git to extract config/user.js." }
+
+        $output = [System.IO.File]::Create($temporaryPath)
+        try {
+            $process.StandardOutput.BaseStream.CopyTo($output)
+        }
+        finally {
+            $output.Dispose()
+        }
+
+        $gitError = $process.StandardError.ReadToEnd()
+        $process.WaitForExit()
+        if ($process.ExitCode -ne 0) {
+            throw "Could not extract config/user.js from Git: $gitError"
+        }
+
+        # File.Move fails if a user.js appeared during extraction; never overwrite it.
+        [System.IO.File]::Move($temporaryPath, $userJsPath)
+    }
+    finally {
+        if ($started -and -not $process.HasExited) {
+            $process.Kill()
+            $process.WaitForExit()
+        }
+        $process.Dispose()
+        if (Test-Path -LiteralPath $temporaryPath) {
+            Remove-Item -LiteralPath $temporaryPath -Force
+        }
+    }
+
+    Write-ColoredText "Initial FlexFox preferences copied to: $userJsPath" "Green"
+    Write-ColoredText "Restart Firefox once to import them, then DELETE user.js from the profile folder." "Yellow"
+    Write-ColoredText "Otherwise, it will reapply its preferences at every Firefox startup." "Yellow"
+}
+
 if ($null -eq (Get-Command git -ErrorAction SilentlyContinue)) {
     Write-ColoredText "Git is not installed or is not available in PATH." "Red"
     exit 1
@@ -481,8 +581,8 @@ if ($gitVersionResult.ExitCode -ne 0 -or $gitVersionResult.Output.Count -eq 0 -o
     exit 1
 }
 $gitVersion = [version]::new([int]$matches[1], [int]$matches[2], [int]$(if ($matches[3]) { $matches[3] } else { 0 }))
-if ($gitVersion -lt [version]"2.25.0") {
-    Write-ColoredText "Git 2.25 or later is required for sparse-checkout support. Installed version: $gitVersion" "Red"
+if ($gitVersion -lt [version]"2.27.0") {
+    Write-ColoredText "Git 2.27 or later is required for sparse-checkout reapply. Installed version: $gitVersion" "Red"
     exit 1
 }
 
@@ -491,7 +591,7 @@ $profilesDirectory = Join-Path $firefoxRoot "Profiles"
 $profilesIni = Join-Path $firefoxRoot "profiles.ini"
 $profileChoices = @()
 
-if ([string]::IsNullOrWhiteSpace($ProfilePath) -and (Test-Path -LiteralPath $profilesDirectory -PathType Container)) {
+if ([string]::IsNullOrWhiteSpace($ProfilePath)) {
     $channelOrder = @{ Release = 0; Beta = 1; Nightly = 2; Custom = 3 }
     $activeProfiles = @(Get-ActiveFirefoxProfiles $profilesIni $firefoxRoot |
         Group-Object Path | ForEach-Object { $_.Group[0] } |
@@ -510,10 +610,13 @@ if ([string]::IsNullOrWhiteSpace($ProfilePath) -and (Test-Path -LiteralPath $pro
     }
 
     $activePaths = @($activeProfiles.Path)
-    $otherProfiles = @(Get-ChildItem -LiteralPath $profilesDirectory -Directory | Where-Object {
-        $path = $_.FullName
-        -not ($activePaths | Where-Object { $_ -ieq $path })
-    } | Sort-Object @{ Expression = { $channelOrder[(Get-FirefoxProfileChannel $_.Name)] } }, Name)
+    $otherProfiles = @()
+    if (Test-Path -LiteralPath $profilesDirectory -PathType Container) {
+        $otherProfiles = @(Get-ChildItem -LiteralPath $profilesDirectory -Directory | Where-Object {
+            $path = $_.FullName
+            -not ($activePaths | Where-Object { $_ -ieq $path })
+        } | Sort-Object @{ Expression = { $channelOrder[(Get-FirefoxProfileChannel $_.Name)] } }, Name)
+    }
 
     foreach ($profile in $otherProfiles) {
         $profileChoices += [PSCustomObject]@{
@@ -556,6 +659,10 @@ else {
 }
 
 Write-ColoredText "Using Firefox profile: $profileDirectory" "Green"
+$existingUserChromePath = Join-Path $profileDirectory "chrome/userChrome.css"
+$hasFlexFox = (Test-Path -LiteralPath $existingUserChromePath -PathType Leaf) -and
+    (Select-String -LiteralPath $existingUserChromePath -Pattern 'FlexFox v\d+\.\d+\.\d+' -Quiet)
+$firstInstall = -not (Test-Path -LiteralPath (Join-Path $profileDirectory ".git")) -and -not $hasFlexFox
 $originalLocation = Get-Location
 
 try {
@@ -563,18 +670,10 @@ try {
     if (-not (Test-Path -LiteralPath ".git")) {
         Write-ColoredText "Initializing Git repository..." "Yellow"
         Invoke-GitCommand init --quiet
+        if ($firstInstall) {
+            Invoke-GitCommand config flexfox.initialPreferencesPending true
+        }
         Invoke-GitCommand remote add origin https://github.com/yuuqilin/FlexFox.git
-        Invoke-GitCommand config flexfox.managed true
-        Invoke-GitCommand remote set-branches origin main
-        Invoke-GitCommand config remote.origin.tagOpt --no-tags
-        Invoke-GitCommand sparse-checkout init --no-cone
-        Invoke-GitCommand sparse-checkout set /chrome
-        Write-ColoredText "Fetching the latest 'chrome' folder..." "Yellow"
-        Invoke-GitCommand fetch --quiet --no-tags origin
-        Invoke-GitCommand checkout --quiet --force -B main origin/main
-        Invoke-GitCommand branch --set-upstream-to=origin/main main
-        Invoke-GitCommand sparse-checkout reapply
-        Write-ColoredText "Git repository initialized and the 'chrome' folder checked out." "Green"
     }
     else {
         Write-ColoredText "Git repository already initialized." "Green"
@@ -592,19 +691,42 @@ try {
         if (Test-TrackedGitChanges) {
             throw "Tracked FlexFox files contain local modifications. Commit or restore them before running the update. Untracked custom files are not affected."
         }
+    }
 
-        Invoke-GitCommand config flexfox.managed true
-        Invoke-GitCommand remote set-branches origin main
-        Invoke-GitCommand config remote.origin.tagOpt --no-tags
-        Invoke-GitCommand sparse-checkout init --no-cone
-        Invoke-GitCommand sparse-checkout set /chrome
-        Write-ColoredText "Fetching the latest 'chrome' folder..." "Yellow"
-        Invoke-GitCommand fetch --quiet --no-tags --prune origin
+    Invoke-GitCommand config flexfox.managed true
+    Invoke-GitCommand remote set-branches origin main
+    Invoke-GitCommand config remote.origin.tagOpt --no-tags
+    Write-ColoredText "Fetching the latest 'chrome' folder..." "Yellow"
+    Invoke-GitCommand fetch --quiet --no-tags --prune origin
+
+    $mainResult = Invoke-GitQuery -Arguments @("show-ref", "--verify", "--quiet", "refs/heads/main")
+    if ($mainResult.ExitCode -gt 1) { throw "Could not inspect the local main branch." }
+    $references = @("origin/main")
+    if ($mainResult.ExitCode -eq 0) { $references += "main" }
+    Assert-NoUntrackedCollisions -References $references
+    Invoke-GitCommand sparse-checkout init --no-cone
+    Invoke-GitCommand sparse-checkout set /chrome
+    if ($mainResult.ExitCode -eq 0) {
         Invoke-GitCommand checkout --quiet main
         Invoke-SafeGitMerge -SilentMode:$Silent.IsPresent
-        Invoke-GitCommand sparse-checkout reapply
-        Write-ColoredText "The 'chrome' folder was updated." "Green"
     }
+    else {
+        Invoke-GitCommand checkout --quiet -b main origin/main
+    }
+    Invoke-GitCommand branch --set-upstream-to=origin/main main
+    Invoke-GitCommand sparse-checkout reapply
+
+    $pendingResult = Invoke-GitQuery -Arguments @("config", "--bool", "--get", "flexfox.initialPreferencesPending")
+    if ($pendingResult.ExitCode -eq 0) {
+        if ($pendingResult.Output[-1] -eq "true") {
+            Install-InitialFlexFoxPreferences -ProfileDirectory $profileDirectory
+            Invoke-GitCommand config --unset flexfox.initialPreferencesPending
+        }
+    }
+    elseif ($pendingResult.ExitCode -ne 1) {
+        throw "Could not inspect pending initial preferences."
+    }
+    Write-ColoredText "The 'chrome' folder was updated." "Green"
 }
 catch {
     Write-ColoredText "Update failed: $_" "Red"
@@ -615,3 +737,4 @@ finally {
 }
 
 Write-ColoredText "Script completed." "Green"
+exit 0

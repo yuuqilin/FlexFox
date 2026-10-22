@@ -126,7 +126,7 @@ FlexFox 的大部分功能、布局开关以及界面调整都直接集成在 Fi
    toolkit.legacyUserProfileCustomizations.stylesheets = true
    svg.context-properties.content.enabled = true
    sidebar.visibility = always-show
-   ````
+   ```
 
 6. 重启 Firefox，然后删除 `user.js`。
 
@@ -135,7 +135,7 @@ FlexFox 的大部分功能、布局开关以及界面调整都直接集成在 Fi
 7. 配置 Sidebery：
 
    * 打开 **设置**（齿轮图标）
-   * 清空 **样式编辑器** 中已有的样式
+   * 删除 **样式编辑器** 中残留的旧版 FlexFox 样式
    * 打开 **帮助 → 导入插件数据**
    * 导入压缩包中 `Sidebery` 文件夹内的 `sidebery-settings.json`
 
@@ -145,9 +145,7 @@ FlexFox 的大部分功能、布局开关以及界面调整都直接集成在 Fi
 
 FlexFox 支持通过 PowerShell 脚本或 Git 实现自动安装和更新。
 
-如果是首次安装，请先运行以下任一方法，然后继续执行 **手动安装** 中从第 5 步开始的内容。
-
-后续更新时，只需重新运行相同的方法即可，无需再执行额外的手动步骤。
+请选择下面任一种方式。首次安装时，按对应说明完成设置；后续更新时，重新运行同一脚本。
 
 #### 💻 PowerShell 脚本
 
@@ -156,14 +154,27 @@ FlexFox 支持通过 PowerShell 脚本或 Git 实现自动安装和更新。
 
 请在 PowerShell 窗口中运行以下任一命令。
 
-这些命令支持以下命令行选项：
+脚本支持以下命令行选项：
 
 * `-ProfilePath 'path'` / `--profile-path 'path'`
-  * 指定用于安装的 Firefox 配置文件夹，跳过路径选择提示。
+  * 指定 Firefox 配置文件夹，跳过选择提示。
 
 * `-Silent` / `--silent`
-  * 使用指定的配置文件夹执行静默安装。如果省略 `-ProfilePath`，则使用第一个检测到的 Firefox 配置文件夹。此选项会跳过所有提示，且不会复制 `user.js`。
-  * 适用于计划任务或无人值守更新。
+  * 不显示任何提示，且不会复制 `user.js`。如果省略 `-ProfilePath`，则使用第一个检测到的 Firefox 配置文件夹。
+
+**首次安装：** 交互模式下可以选择是否复制 `user.js`。如果复制了该文件，请重启 Firefox 一次，然后删除 `user.js`。
+
+如果不复制 `user.js`，或使用 `-Silent`，请在 `about:config` 中设置以下必需选项：
+
+```text
+toolkit.legacyUserProfileCustomizations.stylesheets = true
+svg.context-properties.content.enabled = true
+sidebar.visibility = always-show
+```
+
+**后续更新：** 重新运行同一脚本。如果再次复制了 `user.js`，请重启 Firefox 一次，然后删除该文件。
+
+**Sidebery（可选）：** 下载 [sidebery-settings.json](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/Sidebery/sidebery-settings.json)，然后从 **Sidebery → 设置 → 帮助 → 导入插件数据** 中导入。
 
 **在线安装**
 
@@ -192,25 +203,32 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Path\To\install-flex
 <details>
 <summary><i>[点击展开]</i> 👇</summary>
 
-请根据您的操作系统选择合适的脚本，将 Firefox 配置文件夹初始化为 Git 工作目录，或更新已有的工作目录。这些脚本会跟踪 FlexFox 仓库，且仅更新 `chrome` 文件夹，忽略其他项目文件。
+请根据操作系统下载并运行对应脚本，通过 Git 安装或更新 FlexFox。
+
+脚本只管理和更新 Firefox 配置文件夹中的 `chrome` 文件夹，不会复制项目中的其他文件。
 
 * Windows: [`git-pull-chrome-only.ps1`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.ps1)
 * macOS / Linux: [`git-pull-chrome-only.sh`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.sh)
 
-首次运行时，脚本会提示您选择或输入 Firefox 配置文件夹。后续运行将自动更新先前配置的工作目录。如果检测到多个工作目录，脚本将提示您选择其中一个。
+首次运行时选择 Firefox 配置文件夹。后续运行会检测已有的 Git 管理的配置文件夹；如果找到多个，则需要选择一个。
 
-这些脚本支持以下命令行选项：
+脚本支持以下命令行选项：
 
 * `-ProfilePath 'path'` / `--profile-path 'path'`
-  * 指定目标 Firefox 配置文件夹，跳过交互式提示。
+  * 指定 Firefox 配置文件夹，跳过选择提示。
 
 * `-Silent` / `--silent`
-  * 使用指定的配置文件夹执行静默更新。如果省略 `-ProfilePath`，则使用先前配置的工作目录。如果未找到受管理的工作目录或检测到多个受管理的工作目录，脚本将显示错误信息并退出，不执行更新。
-  * 适用于计划任务或无人值守更新。建议与配置文件路径选项配合使用，以明确指定目标。
+  * 不显示任何提示。如果省略 `-ProfilePath`，则必须只检测到一个 Git 管理的配置文件夹。用于计划更新时，请用 `-ProfilePath` 指定目标。
 
-更新时，脚本会保留未跟踪的自定义文件，包括 `components/uc-user-settings.css` 和 `content/uc-custom-content.css`。如果已跟踪的 FlexFox 文件存在未提交的修改，脚本将停止更新，且不会修改这些文件。
+**首次安装：** 如果尚未安装 FlexFox，脚本还会复制一次 `user.js`。如果复制了该文件，请重启 Firefox 一次，然后删除它。已有的 `user.js` 不会被覆盖。
 
-如果发生 Git 合并冲突，交互模式允许您中止合并并恢复到先前状态，或者保留冲突以便手动解决。静默模式将自动中止合并、恢复到先前状态、提示发生了冲突，然后退出。
+**后续更新：** 重新运行同一脚本，只更新 `chrome`。脚本不会再次复制 `user.js`。
+
+如需导入后续版本新增的选项，请下载最新的 [user.js](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/config/user.js)，检查内容后放入 Firefox 配置文件夹。重启 Firefox 一次，然后删除 `user.js`。导入时，已自定义的选项也会重新应用文件中的默认值。
+
+**Sidebery（可选）：** 下载 [sidebery-settings.json](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/Sidebery/sidebery-settings.json)，然后从 **Sidebery → 设置 → 帮助 → 导入插件数据** 中导入。
+
+未纳入 Git 跟踪的自定义文件会保留。如果已跟踪的 FlexFox 文件存在本地修改，脚本会停止，不会修改这些文件。如果发生合并冲突，交互模式下可以选择恢复到原先状态，或保留冲突以便手动解决；静默模式下会恢复到原先状态后退出。
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\git-pull-chrome-only.ps1' -ProfilePath 'C:\Path\To\Firefox\Profile' -Silent
@@ -220,7 +238,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\git-pu
 bash "/path/to/git-pull-chrome-only.sh" --profile-path "/path/to/firefox/profile" --silent
 ```
 
-或者，您也可以使用标准的 Git 命令手动初始化并配置工作目录：
+也可以在 Firefox 配置文件夹中手动运行以下 Git 命令：
 
 **首次设置**
 
@@ -234,6 +252,8 @@ git sparse-checkout set /chrome
 git fetch --no-tags origin
 git checkout -b main origin/main
 ```
+
+这些命令不会复制 `user.js`。如需导入默认设置，请通过上方链接下载，放入 Firefox 配置文件夹，重启 Firefox 一次后再删除。
 
 **手动更新**
 

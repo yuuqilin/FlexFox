@@ -135,7 +135,7 @@ When reusing styles from existing FlexFox files (such as `uc-variables.css`), co
 7. Configure Sidebery:
 
    * Open **Settings** (gear icon).
-   * Clear any existing styles from **Styles Editor**.
+   * Remove any old FlexFox styles from **Styles Editor**.
    * Go to **Help → Import addon data**.
    * Import `sidebery-settings.json` from the `Sidebery` folder in the downloaded archive.
 
@@ -145,9 +145,7 @@ When reusing styles from existing FlexFox files (such as `uc-variables.css`), co
 
 FlexFox can be installed and updated automatically using either PowerShell scripts or Git.
 
-If this is your first installation, run one of the methods below and then continue with **Manual Installation** starting from Step 5.
-
-For future updates, simply re-run the same method. No additional manual steps are required.
+Choose a method below. For a first installation, follow its setup instructions. For later updates, run the same script again.
 
 #### 💻 PowerShell Script
 
@@ -156,14 +154,27 @@ For future updates, simply re-run the same method. No additional manual steps ar
 
 Run one of the commands below in a PowerShell window.
 
-These commands support the following command-line options:
+The script supports the following command-line options:
 
 * `-ProfilePath 'path'` / `--profile-path 'path'`
-  * Specifies the Firefox profile folder for installation, bypassing the path selection prompt.
+  * Specifies the Firefox profile folder, bypassing the selection prompt.
 
 * `-Silent` / `--silent`
-  * Performs a silent installation using the specified profile. If `-ProfilePath` is omitted, the first detected Firefox profile is used. This option skips all prompts and will not copy `user.js`.
-  * Suitable for scheduled tasks or unattended updates.
+  * Runs without prompts and does not copy `user.js`. If `-ProfilePath` is omitted, the first detected Firefox profile is used.
+
+**First installation:** In interactive mode, choose whether to copy `user.js`. If you copy it, restart Firefox, then delete `user.js`.
+
+If you skip `user.js` or use `-Silent`, set these required preferences in `about:config`:
+
+```text
+toolkit.legacyUserProfileCustomizations.stylesheets = true
+svg.context-properties.content.enabled = true
+sidebar.visibility = always-show
+```
+
+**Later updates:** Run the same script again. If you copy `user.js` again, restart Firefox, then delete it.
+
+**Sidebery (optional):** Download [sidebery-settings.json](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/Sidebery/sidebery-settings.json) and import it from **Sidebery → Settings → Help → Import addon data**.
 
 **Online installation**
 
@@ -192,25 +203,32 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Path\To\install-flex
 <details>
 <summary><i>[Click to expand]</i> 👇</summary>
 
-Choose the appropriate script for your operating system to initialize your Firefox profile folder as a Git working directory or update an existing one. These scripts track the FlexFox repository and update only the `chrome` folder, ignoring other project files.
+Download and run the script for your operating system to install or update FlexFox with Git.
+
+The scripts manage and update only the `chrome` folder in your Firefox profile. Other project files are not copied there.
 
 * Windows: [`git-pull-chrome-only.ps1`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.ps1)
 * macOS / Linux: [`git-pull-chrome-only.sh`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.sh)
 
-On the first run, the script prompts you to select or enter your Firefox profile folder. Subsequent runs automatically update the previously configured directory. If multiple working directories are detected, you will be prompted to choose one.
+On the first run, choose your Firefox profile. Later runs detect the existing Git-managed profile; if several are found, choose one.
 
 The scripts support the following command-line options:
 
 * `-ProfilePath 'path'` / `--profile-path 'path'`
-  * Specifies the target Firefox profile folder, bypassing the interactive prompt.
+  * Specifies the Firefox profile folder, bypassing the selection prompt.
 
 * `-Silent` / `--silent`
-  * Performs a silent update using the specified profile. If `-ProfilePath` is omitted, the previously configured directory is used. If no managed working directory is found or multiple managed working directories are detected, the script displays an error message and exits without updating.
-  * Suitable for scheduled tasks or unattended updates. Use it alongside the profile path option to keep the target explicit.
+  * Runs without prompts. If `-ProfilePath` is omitted, the script requires exactly one detected Git-managed profile. For scheduled updates, use `-ProfilePath` to specify the target profile.
 
-Untracked custom files, including `components/uc-user-settings.css` and `content/uc-custom-content.css`, are preserved during updates. If tracked FlexFox files contain uncommitted changes, the update stops without modifying them.
+**First installation:** If FlexFox is not already installed, the script also copies `user.js` once. If the file is copied, restart Firefox, then delete it. An existing `user.js` is never overwritten.
 
-If a Git merge conflict occurs, interactive mode allows you to abort and restore the previous state, or retain the conflict for manual resolution. Silent mode automatically aborts the merge, restores the previous state, reports the conflict, and exits.
+**Later updates:** Run the same script again to update only `chrome`. The script does not copy `user.js` again.
+
+To import new preferences from a later release, download the latest [user.js](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/config/user.js), review its contents, and place it in your Firefox profile folder. Restart Firefox, then delete `user.js`. Importing it also reapplies its defaults to preferences you have customized.
+
+**Sidebery (optional):** Download [sidebery-settings.json](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/Sidebery/sidebery-settings.json) and import it from **Sidebery → Settings → Help → Import addon data**.
+
+Custom untracked files are preserved. If tracked FlexFox files have local changes, the script stops without modifying them. If a merge conflict occurs, interactive mode lets you restore the previous state or keep the conflict for manual resolution; silent mode restores the previous state and exits.
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\git-pull-chrome-only.ps1' -ProfilePath 'C:\Path\To\Firefox\Profile' -Silent
@@ -220,7 +238,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\git-pu
 bash "/path/to/git-pull-chrome-only.sh" --profile-path "/path/to/firefox/profile" --silent
 ```
 
-Alternatively, you can manually initialize and configure the working directory using standard Git commands:
+Alternatively, run these Git commands in your Firefox profile folder:
 
 **First-time setup**
 
@@ -234,6 +252,8 @@ git sparse-checkout set /chrome
 git fetch --no-tags origin
 git checkout -b main origin/main
 ```
+
+These commands do **not** copy `user.js`. To import default preferences, download it using the link above, place it in your Firefox profile folder, restart Firefox, then delete it.
 
 **Manual update**
 

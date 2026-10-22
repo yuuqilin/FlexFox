@@ -135,7 +135,7 @@ FlexFox の機能、レイアウト切り替え、および外観の調整項目
 7. Sidebery を設定します。
 
    * **設定**（歯車アイコン）を開く
-   * **スタイルエディター** 内の既存スタイルをすべて削除する
+   * **スタイルエディター** に残っている古い FlexFox スタイルを削除する
    * **ヘルプ → アドオンデータのインポート** を開く
    * アーカイブ内の `Sidebery` フォルダーにある `sidebery-settings.json` をインポートする
 
@@ -145,9 +145,7 @@ FlexFox の機能、レイアウト切り替え、および外観の調整項目
 
 FlexFox は PowerShell スクリプトまたは Git を利用して自動的にインストールおよび更新できます。
 
-初回インストールの場合は、以下のいずれかの方法を実行した後、**手動インストール** の手順 5 から続けてください。
-
-以降のアップデートでは、同じ方法を再実行するだけで更新できます。追加の手動作業は必要ありません。
+以下から利用する方法を選んでください。初回インストール時は各方法の設定手順に従い、以降の更新では同じスクリプトを再実行します。
 
 #### 💻 PowerShell スクリプト
 
@@ -156,14 +154,27 @@ FlexFox は PowerShell スクリプトまたは Git を利用して自動的に�
 
 PowerShell ウィンドウで以下のいずれかのコマンドを実行してください。
 
-これらのコマンドは、次のコマンドラインオプションに対応しています。
+スクリプトは次のコマンドラインオプションに対応しています。
 
 * `-ProfilePath 'path'` / `--profile-path 'path'`
-  * インストール先の Firefox プロファイルフォルダーを指定し、パス選択のプロンプトをスキップします。
+  * Firefox プロファイルフォルダーを指定し、選択のプロンプトをスキップします。
 
 * `-Silent` / `--silent`
-  * 指定したプロファイルを使用してサイレントインストールを実行します。`-ProfilePath` を省略した場合は、最初に検出された Firefox プロファイルが使用されます。このオプションはすべてのプロンプトをスキップし、`user.js` はコピーしません。
-  * タスクスケジューラや無人更新に適しています。
+  * プロンプトを表示せずに実行し、`user.js` はコピーしません。`-ProfilePath` を省略した場合は、最初に検出された Firefox プロファイルを使用します。
+
+**初回インストール：** 対話モードでは、`user.js` をコピーするか選べます。コピーした場合は Firefox を一度再起動し、その後 `user.js` を削除してください。
+
+`user.js` をコピーしない場合や `-Silent` を使う場合は、`about:config` で以下の必須設定を指定してください。
+
+```text
+toolkit.legacyUserProfileCustomizations.stylesheets = true
+svg.context-properties.content.enabled = true
+sidebar.visibility = always-show
+```
+
+**以降の更新：** 同じスクリプトを再実行します。`user.js` を再度コピーした場合は、Firefox を一度再起動し、その後削除してください。
+
+**Sidebery（任意）：** [sidebery-settings.json](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/Sidebery/sidebery-settings.json) をダウンロードし、**Sidebery → 設定 → ヘルプ → アドオンデータのインポート** から読み込んでください。
 
 **オンラインインストール**
 
@@ -192,25 +203,32 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Path\To\install-flex
 <details>
 <summary><i>[クリックして展開]</i> 👇</summary>
 
-お使いの OS に応じて適切なスクリプトを選択してください。スクリプトは Firefox のプロファイルフォルダーを Git の作業ディレクトリとして初期化するか、既存の作業ディレクトリを更新します。また、FlexFox リポジトリを追跡し、他のプロジェクトファイルを無視して `chrome` フォルダーのみを更新します。
+お使いの OS に合ったスクリプトをダウンロードして実行すると、Git で FlexFox をインストールまたは更新できます。
+
+スクリプトが Firefox プロファイルフォルダー内で管理・更新するのは、`chrome` フォルダーだけです。プロジェクト内のほかのファイルはコピーしません。
 
 * Windows: [`git-pull-chrome-only.ps1`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.ps1)
 * macOS / Linux: [`git-pull-chrome-only.sh`](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/scripts/git-pull-chrome-only.sh)
 
-初回実行時は、Firefox のプロファイルフォルダーを選択または入力するプロンプトが表示されます。2 回目以降は、前回設定した作業ディレクトリが自動的に更新されます。複数の作業ディレクトリが検出された場合は、いずれか 1 つを選択するよう求められます。
+初回実行時に Firefox のプロファイルを選択します。2 回目以降は既存の Git 管理のプロファイルを検出し、複数ある場合は選択します。
 
 スクリプトは次のコマンドラインオプションに対応しています。
 
 * `-ProfilePath 'path'` / `--profile-path 'path'`
-  * 対象となる Firefox プロファイルフォルダーを指定し、対話形式のプロンプトをスキップします。
+  * Firefox プロファイルフォルダーを指定し、選択のプロンプトをスキップします。
 
 * `-Silent` / `--silent`
-  * 指定したプロファイルを使用してサイレント更新を実行します。`-ProfilePath` を省略した場合は、前回設定した作業ディレクトリが使用されます。管理対象の作業ディレクトリが見つからない場合、または複数の管理対象ディレクトリが検出された場合は、エラーメッセージを表示して更新せずに終了します。
-  * タスクスケジューラや無人更新に適しています。対象を明確にするため、プロファイルパスのオプションとの併用をおすすめします。
+  * プロンプトを表示せずに実行します。`-ProfilePath` を省略する場合は、Git 管理のプロファイルが 1 つだけ検出される必要があります。定期更新では `-ProfilePath` で対象を指定してください。
 
-`components/uc-user-settings.css` や `content/uc-custom-content.css` など、未追跡のカスタムファイルは更新時も保持されます。一方、追跡対象の FlexFox ファイルに未コミットの変更がある場合は、それらを変更せずに更新を中止します。
+**初回インストール：** FlexFox がまだ入っていない場合は、`user.js` も一度だけコピーします。コピーされた場合は Firefox を一度再起動し、その後削除してください。既存の `user.js` は上書きしません。
 
-Git のマージ競合が発生した場合、対話モードでは更新を中止して元の状態に戻すか、競合状態を保持したまま手動で解決するかを選択できます。サイレントモードでは、自動的にマージを中止して元の状態へ復元した後、競合を通知して終了します。
+**以降の更新：** 同じスクリプトを再実行すると、`chrome` のみを更新します。`user.js` は再度コピーしません。
+
+後のリリースで追加された設定を取り込むには、最新の [user.js](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/config/user.js) をダウンロードし、内容を確認してから Firefox プロファイルフォルダーに配置してください。Firefox を一度再起動し、その後 `user.js` を削除してください。読み込むと、変更済みの設定にもファイル内の既定値が再適用されます。
+
+**Sidebery（任意）：** [sidebery-settings.json](https://raw.githubusercontent.com/yuuqilin/FlexFox/refs/heads/main/Sidebery/sidebery-settings.json) をダウンロードし、**Sidebery → 設定 → ヘルプ → アドオンデータのインポート** から読み込んでください。
+
+Git 管理外のカスタムファイルは保持されます。追跡中の FlexFox ファイルにローカル変更がある場合は、それらを変更せずに処理を中止します。マージ競合が発生した場合、対話モードでは元の状態に戻すか、競合を残して手動で解決するかを選べます。サイレントモードでは元の状態に戻して終了します。
 
 ```powershell
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\git-pull-chrome-only.ps1' -ProfilePath 'C:\Path\To\Firefox\Profile' -Silent
@@ -220,7 +238,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; & 'C:\Path\To\git-pu
 bash "/path/to/git-pull-chrome-only.sh" --profile-path "/path/to/firefox/profile" --silent
 ```
 
-代替案として、標準的な Git コマンドを使用して、手動で作業ディレクトリの初期化および設定を行うことも可能です。
+スクリプトの代わりに、Firefox プロファイルフォルダーで以下の Git コマンドを実行することもできます。
 
 **初回セットアップ**
 
@@ -234,6 +252,8 @@ git sparse-checkout set /chrome
 git fetch --no-tags origin
 git checkout -b main origin/main
 ```
+
+これらのコマンドでは `user.js` はコピーされません。既定の設定を読み込むには、上記のリンクからダウンロードして Firefox プロファイルフォルダーに配置し、Firefox を一度再起動してから削除してください。
 
 **手動アップデート**
 
