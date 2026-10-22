@@ -131,7 +131,7 @@
 
 @media not (-moz-platform: macos) {
     .titlebar-buttonbox-container {
-        margin-left: -4px;
+        margin-left: calc(-1 * var(--uc-titlebar-buttonbox-margin-left));
         @media -moz-pref("uc.flex.restore-window-controls-on-tabbar") and (not -moz-pref("sidebar.verticalTabs")) {
             margin-left: 0px;
         }
@@ -141,7 +141,7 @@
             }
         }
         @media -moz-pref("uc.flex.move-window-controls-to-left") {
-            margin-left: 4px;
+            margin-left: var(--uc-titlebar-buttonbox-margin-left);
             order: -1 !important;
             .titlebar-close {
                 order: -1 !important;
@@ -152,7 +152,7 @@
 
 .titlebar-buttonbox {
     z-index: 3 !important;
-    padding-right: 3px;
+    padding-right: var(--uc-titlebar-buttonbox-padding-right);
 }
 
 .titlebar-button {
@@ -169,6 +169,38 @@
         }
         @media -moz-pref("uc.flex.revert-to-original-window-controls") {
             padding: 8px 0px !important;
+        }
+    }
+}
+
+/* Keep the visual buttons unchanged while extending their hover and click targets to the window edges. */
+@media (-moz-platform: windows) {
+    :is(#nav-bar, #TabsToolbar) {
+        .titlebar-button {
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: calc(-1 * var(--uc-titlebar-button-hit-area-top-offset));
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: transparent;
+                pointer-events: auto;
+            }
+        }
+
+        @media not -moz-pref("uc.flex.move-window-controls-to-left") {
+            .titlebar-close::after {
+                right: calc(-1 * var(--uc-titlebar-button-hit-area-right-offset));
+            }
+        }
+
+        @media -moz-pref("uc.flex.move-window-controls-to-left") {
+            .titlebar-close::after {
+                left: calc(-1 * var(--uc-titlebar-button-hit-area-left-offset));
+            }
         }
     }
 }
@@ -247,7 +279,7 @@
     }
 }
 
-/* Auto-hide window controls by leaving a small trigger area at the edge of #nav-bar. */
+/* Auto-hide window controls at the outer edge of #nav-bar or #TabsToolbar. */
 @media -moz-pref("uc.flex.auto-hide-window-controls") {
     :where(#nav-bar, #TabsToolbar) > .titlebar-buttonbox-container {
         @media -moz-pref("sidebar.position_start") {
@@ -266,10 +298,12 @@
             }
             @media -moz-pref("uc.flex.move-window-controls-to-left") {
                 /**
-                 * Shift the navbar left by 3px less than the full width of the window controls,
-                 * leaving 1px of space reserved for hover detection.
+                 * Shift the controls mostly beyond the left edge. The fixed transparent trigger below
+                 * provides a stable hover target independent of the remaining visible strip or button width.
                  */
-                margin-inline-start: calc(-1 * (var(--uc-window-controls-width) + 3px));
+                margin-inline-start: calc(
+                    -1 * (var(--uc-window-controls-width) + var(--uc-titlebar-buttonbox-padding-right))
+                );
                 opacity: 0;
                 transition:
                     margin-inline-start 0.5s ease-in-out,
@@ -280,7 +314,7 @@
                     margin-inline-start: 0;
                     /* Use padding instead of margin to create left spacing,
                        preventing hover state loss when reaching the edge. */
-                    padding-inline-start: 4px;
+                    padding-inline-start: var(--uc-titlebar-buttonbox-margin-left);
                     opacity: 1;
                     transition-delay: 0s, 0.4s;
                 }
@@ -321,6 +355,57 @@
                 }
             }
         }
+    }
+}
+
+/* Keep an easy-to-reach, non-button hover target while window controls are auto-hidden. */
+@media (-moz-platform: windows) and -moz-pref("uc.flex.auto-hide-window-controls") {
+    :is(#nav-bar, #TabsToolbar) .titlebar-buttonbox-container {
+        z-index: 4;
+    }
+
+    /* Let the visible buttons take pointer ownership after the edge trigger yields on hover. */
+    :is(#nav-bar, #TabsToolbar) .titlebar-button {
+        z-index: 1;
+    }
+
+    :is(#nav-bar, #TabsToolbar) .titlebar-buttonbox::after {
+        content: "";
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        bottom: auto;
+        width: var(--uc-window-controls-hover-trigger-width);
+        background: transparent;
+        pointer-events: auto;
+        transition: z-index 0s;
+    }
+
+    :is(#nav-bar, #TabsToolbar) .titlebar-buttonbox-container:hover .titlebar-buttonbox::after {
+        z-index: 0;
+        transition-delay: 0.5s;
+    }
+
+    @media not -moz-pref("uc.flex.move-window-controls-to-left") {
+        :is(#nav-bar, #TabsToolbar) .titlebar-buttonbox::after {
+            right: 0;
+            left: auto;
+        }
+    }
+
+    @media -moz-pref("uc.flex.move-window-controls-to-left") {
+        :is(#nav-bar, #TabsToolbar) .titlebar-buttonbox::after {
+            right: auto;
+            left: 0;
+        }
+    }
+
+    #nav-bar .titlebar-buttonbox::after {
+        height: var(--uc-nav-bar-height);
+    }
+
+    #TabsToolbar .titlebar-buttonbox::after {
+        height: var(--uc-tabstoolbar-height);
     }
 }
 

@@ -1679,6 +1679,21 @@
         --uc-titlebar-buttonbox-margin-top: 0px;
     }
 
+    /* Window control spacing and invisible interaction areas */
+    --uc-titlebar-buttonbox-margin-left: 4px;
+    --uc-titlebar-buttonbox-padding-right: 3px;
+    --uc-titlebar-button-hit-area-top-offset: var(--uc-titlebar-buttonbox-margin-top);
+    --uc-titlebar-button-hit-area-left-offset: var(--uc-titlebar-buttonbox-margin-left);
+    --uc-titlebar-button-hit-area-right-offset: var(--uc-titlebar-buttonbox-padding-right);
+    @media -moz-pref("uc.flex.style-window-controls-shrink-size") {
+        @media -moz-pref("sidebar.position_start") and (not -moz-pref("uc.flex.move-window-controls-to-left")) {
+            --uc-titlebar-button-hit-area-right-offset: calc(
+                var(--uc-titlebar-buttonbox-padding-right) + var(--uc-web-content-margin)
+            );
+        }
+    }
+    --uc-window-controls-hover-trigger-width: 8px;
+
     /* Initial display and positioning values for the window controls when auto-hide navbar is enabled */
     @media not -moz-pref("sidebar.verticalTabs") {
         &:not([customizing]) {
