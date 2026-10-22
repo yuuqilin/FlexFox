@@ -955,6 +955,11 @@
             border-radius: 0px !important;
             box-shadow: none !important;
         }
+
+        /* Firefox v160+ places the shared panel header in browser chrome. */
+        #sidebar-panel-header {
+            display: none !important;
+        }
     }
 
     /* Remove sidebar launcher splitter */
@@ -993,7 +998,8 @@
         }
     }
 
-    /* Hide the sidebar header in web extension panel windows to restore compact layout */
+    /* Compatibility with Firefox before v160: hide headers inside WebExtension panel documents
+       to restore the compact layout. */
     #webextpanels-window #sidebar-panel-header {
         display: none !important;
     }
