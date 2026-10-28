@@ -189,6 +189,22 @@
                 background: transparent;
                 pointer-events: auto;
             }
+
+            &.titlebar-min::after {
+                -moz-default-appearance: -moz-window-button-minimize;
+            }
+
+            &.titlebar-max::after {
+                -moz-default-appearance: -moz-window-button-maximize;
+            }
+
+            &.titlebar-restore::after {
+                -moz-default-appearance: -moz-window-button-restore;
+            }
+
+            &.titlebar-close::after {
+                -moz-default-appearance: -moz-window-button-close;
+            }
         }
 
         @media not -moz-pref("uc.flex.move-window-controls-to-left") {
