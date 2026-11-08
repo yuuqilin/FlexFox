@@ -102,7 +102,7 @@ url-prefix("about:home") {
     }
 
     /* Recent activity / Pocket cards */
-    .card-outer {
+    .classic-enabled .card-outer {
         --uc-border-radius: 8px;
 
         &,
