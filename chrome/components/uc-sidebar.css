@@ -1653,7 +1653,7 @@
             }
 
             &:not([pinned]) .tab-context-line {
-                top: 50%;
+                top: 50% !important;
                 right: var(--uc-vt-container-indicator-right) !important;
                 width: 3px !important;
                 height: 12px !important;
@@ -1680,7 +1680,7 @@
                     top: auto !important;
                     right: auto !important;
                     bottom: 0;
-                    left: 50%;
+                    left: 50% !important;
                     width: 16px !important;
                     height: 2px !important;
                     border-radius: 0 !important;
