@@ -59,11 +59,12 @@
             @media -moz-pref("uc.flex.style-urlbar-gradient", 2), -moz-pref("uc.flex.style-urlbar-gradient", 3) {
                 position: relative;
                 border: none !important;
+                overflow-clip-margin: 2px;
 
                 &::before {
                     content: "";
                     position: absolute;
-                    inset: 0;
+                    inset: -2px;
                     z-index: 1;
                     box-sizing: border-box;
                     border: 2px solid transparent;
