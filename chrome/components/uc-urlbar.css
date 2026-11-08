@@ -1145,6 +1145,22 @@
 
     /* Hide URL bar icons */
     @media not -moz-pref("uc.flex.auto-hide-urlbar-icons", false), -moz-pref("uc.flex.style-urlbar", 4) {
+        @media -moz-pref("browser.urlbar.unifiedSearchButton.always") {
+            &[pageproxystate="valid"] .urlbar-input-container > .searchmode-switcher:not([offscreen]) {
+                margin-inline-start: 3px !important;
+                transition: margin-inline-start 0.3s, opacity 0.3s;
+            }
+
+            &[pageproxystate="valid"]:not(:hover, :focus-within, [usertyping], [searchmode], [open])
+                .urlbar-input-container > .searchmode-switcher:not([open], [offscreen]) {
+                margin-inline-start: calc(
+                    -1 * (var(--icon-size) + 3 * var(--space-small) + 16px)
+                ) !important;
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+
         #identity-permission-box,
         #notification-popup-box {
             --urlbar-component-gap: calc(-16px - 2 * var(--urlbar-icon-padding));
