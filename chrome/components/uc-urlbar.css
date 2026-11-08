@@ -1088,8 +1088,6 @@
 }
 
 #urlbar:not([breakout][breakout-extend], [popover-open], [focused][usertyping]) {
-    container-name: uc-urlbar-legacy-searchmode;
-
     /* Center the URL bar text */
     @media -moz-pref("uc.flex.style-urlbar-center-text") {
         .urlbar-input {
@@ -1105,43 +1103,6 @@
         }
         */
 
-        /* !TEMPORARY: Firefox v151+ removed --urlbar-searchmodeswitcher-margin-inline-end. Delete this block when pre-v151 Firefox is no longer supported. */
-        @container uc-urlbar-legacy-searchmode style(--urlbar-searchmodeswitcher-margin-inline-end) {
-            &[unifiedsearchbutton-available] {
-                .urlbar-input-box {
-                    margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px);
-                }
-                #userContext-icons:not([hidden]) {
-                    margin-inline-start: calc(
-                        -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px)
-                    ) !important;
-                }
-                #userContext-icons[hidden] ~ #urlbar-zoom-button:not([hidden]) {
-                    margin-inline-start: calc(
-                        -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 24px)
-                    ) !important;
-                }
-            }
-
-            #identity-box[pageproxystate="valid"] {
-                ~ .urlbar-input-box {
-                    margin-inline-end: calc(var(--identity-box-margin-inline) + 0px);
-                }
-                ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
-                    margin-inline-start: calc(-1 * var(--identity-box-margin-inline) + 6px) !important;
-                }
-                &:is(.chromeUI) {
-                    ~ .urlbar-input-box {
-                        margin-inline-end: calc(var(--urlbar-searchmodeswitcher-margin-inline-end) + 46px);
-                    }
-                    ~ #page-action-buttons #urlbar-zoom-button:not([hidden]) {
-                        margin-inline-start: calc(
-                            -1 * (var(--urlbar-searchmodeswitcher-margin-inline-end) + 46px)
-                        ) !important;
-                    }
-                }
-            }
-        }
     }
 
     /* Hide URL bar icons */
