@@ -1627,8 +1627,8 @@
                         --uc-vt-container-indicator-translate-delay: var(--uc-hover-sidebar-delay);
                     }
 
-                    /* Override the default geometry only while the sidebar is collapsed. */
-                    &:not(:hover) {
+                    /* Use collapsed geometry when an expanded sidebar automatically hides. */
+                    &[sidebar-launcher-expanded]:not(:hover) {
                         --uc-vt-container-indicator-right: calc(
                             100% - var(--tab-margin-inline-inner) - var(--tab-collapsed-background-width) - 1px
                         );
