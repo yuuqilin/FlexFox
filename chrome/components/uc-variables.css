@@ -1636,8 +1636,32 @@
         }
     }
 
-    /* Toolbar stacking order: #PersonalToolbar = 1, #nav-bar = base + 1 = 2, #TabsToolbar = base + 2 = 3. */
+    /* Toolbar stacking order: #PersonalToolbar = 1, #nav-bar = 2, #TabsToolbar = 3, #notifications-toolbar = 4. */
     --uc-toolbar-z-index-base: 1;
+
+    #PersonalToolbar {
+        z-index: var(--uc-toolbar-z-index-base);
+    }
+
+    /*
+     * The URL bar's outer box shadow and optional blurred glow may overlap the
+     * bookmarks toolbar. Raise #nav-bar above #PersonalToolbar (z-index: 1) so
+     * either effect can paint in that overlap. The glow alone also needs visible
+     * overflow on .urlbar-input-container because its filtered pseudo-element
+     * extends outside that box.
+     */
+    #nav-bar {
+        z-index: calc(var(--uc-toolbar-z-index-base) + 1);
+    }
+
+    #TabsToolbar {
+        z-index: calc(var(--uc-toolbar-z-index-base) + 2);
+    }
+
+    #notifications-toolbar {
+        z-index: calc(var(--uc-toolbar-z-index-base) + 3);
+    }
+
     /* Toolbar sizing */
     @media not -moz-pref("sidebar.verticalTabs") {
         --tab-min-height: 32px !important;

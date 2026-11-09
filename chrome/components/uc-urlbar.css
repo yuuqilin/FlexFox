@@ -38,17 +38,6 @@
     }
 }
 
-/*
- * The URL bar's outer box shadow and optional blurred glow may overlap the
- * bookmarks toolbar. Raise #nav-bar above #PersonalToolbar (z-index: 1) so
- * either effect can paint in that overlap. The glow alone also needs visible
- * overflow on .urlbar-input-container because its filtered pseudo-element
- * extends outside that box.
- */
-#nav-bar:not([customizing]) {
-    z-index: calc(var(--uc-toolbar-z-index-base) + 1);
-}
-
 /* Animated gradient outline when hovering over the unfocused urlbar. */
 #urlbar:not([focused], [breakout-extend], [popover-open]) {
     .urlbar-input-container {

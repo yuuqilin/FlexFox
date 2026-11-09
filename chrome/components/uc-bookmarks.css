@@ -18,7 +18,6 @@
             transform: rotateX(90deg);
             transform-origin: top;
             transition: var(--uc-autohide-personal-toolbar-transition) !important;
-            z-index: var(--uc-toolbar-z-index-base);
             /* The following properties should allow the themes with trasparent toolbars to work */
             background-color: transparent !important;
             background-repeat: no-repeat, no-repeat, var(--lwt-background-tiling);

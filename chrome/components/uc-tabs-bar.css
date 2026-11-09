@@ -31,7 +31,6 @@
                     }
                     #TabsToolbar:not([customizing]) {
                         position: relative;
-                        z-index: calc(var(--uc-toolbar-z-index-base) + 2);
                         /* When the tabs toolbar loses hover while the navigator may still be hovered, 
                            use the hover-state transition timing even when not hovered so their animations stay synchronized. */
                         transition: var(--uc-hover-tabstoolbar-transition) !important;
@@ -151,7 +150,6 @@
                     opacity: var(--uc-navbar-opacity, 0);
                     transition: var(--uc-autohide-navbar-transition) !important;
                     position: relative;
-                    z-index: calc(var(--uc-toolbar-z-index-base) + 1);
                 }
 
                 /*
@@ -266,7 +264,6 @@
                     transition: transform var(--uc-autohide-toolbar-duration) ease var(--uc-autohide-toolbar-delay) !important;
                     */
                     position: relative;
-                    z-index: var(--uc-toolbar-z-index-base);
                 }
 
                 /* Move up the content view */
