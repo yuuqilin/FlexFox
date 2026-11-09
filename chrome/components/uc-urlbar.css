@@ -1108,12 +1108,13 @@
     /* Hide URL bar icons */
     @media not -moz-pref("uc.flex.auto-hide-urlbar-icons", false), -moz-pref("uc.flex.style-urlbar", 4) {
         @media -moz-pref("browser.urlbar.unifiedSearchButton.always") {
-            &[pageproxystate="valid"] .urlbar-input-container > .searchmode-switcher:not([offscreen]) {
+            /* Keep the switcher hidden on all idle tabs, including New Tab, until the URL bar is used. */
+            .urlbar-input-container > .searchmode-switcher:not([offscreen]) {
                 margin-inline-start: 3px !important;
                 transition: margin-inline-start 0.3s, opacity 0.3s;
             }
 
-            &[pageproxystate="valid"]:not(:hover, :focus-within, [usertyping], [searchmode], [open])
+            &:not(:hover, :focus-within, [focused], [usertyping], [searchmode], [open])
                 .urlbar-input-container > .searchmode-switcher:not([open], [offscreen]) {
                 margin-inline-start: calc(
                     -1 * (var(--icon-size) + 3 * var(--space-small) + 16px)
@@ -1247,6 +1248,21 @@
                     opacity: 1;
                 }
             }
+        }
+    }
+}
+
+/* Keep leading URL bar controls fixed so the switcher reveals after the identity icons. */
+@media -moz-pref("browser.urlbar.unifiedSearchButton.always") {
+    @media not -moz-pref("uc.flex.auto-hide-urlbar-icons", false), -moz-pref("uc.flex.style-urlbar", 4) {
+        #urlbar .urlbar-input-container
+            > :is(
+                #remote-control-box,
+                #trust-icon-container,
+                #tracking-protection-icon-container,
+                #identity-box
+            ) {
+            order: -1;
         }
     }
 }
