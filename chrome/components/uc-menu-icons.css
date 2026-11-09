@@ -11,6 +11,52 @@
 /* based on https://gist.github.com/qaz69wsx/83a90423163b65a8344b2e60fc356a58 (now removed) */
 /* for better compatibility with dark mode, enable `svg.context-properties.content.enabled` in `about:config` */
 @media not -moz-pref("uc.flex.disable-menu-icons") {
+    /* Bug 2088635 (Firefox 162) moved these media SVGs to content-accessible resources.
+       Keep both URIs as background layers so only the available image is painted. */
+    :root {
+        --uc-menu-media-fullscreen-enter:
+            url("resource://content-accessible/media/fullscreenEnterButton.svg"),
+            url("chrome://global/skin/media/fullscreenEnterButton.svg");
+        --uc-menu-media-audio-muted:
+            url("resource://content-accessible/media/audio-muted.svg"),
+            url("chrome://global/skin/media/audio-muted.svg");
+        --uc-menu-media-audio:
+            url("resource://content-accessible/media/audio.svg"),
+            url("chrome://global/skin/media/audio.svg");
+        --uc-menu-media-play:
+            url("resource://content-accessible/media/play-fill.svg"),
+            url("chrome://global/skin/media/play-fill.svg");
+        --uc-menu-media-pause:
+            url("resource://content-accessible/media/pause-fill.svg"),
+            url("chrome://global/skin/media/pause-fill.svg");
+        --uc-menu-media-picture-in-picture:
+            url("resource://content-accessible/media/picture-in-picture-open.svg"),
+            url("chrome://global/skin/media/picture-in-picture-open.svg");
+    }
+
+    #appMenu-zoom-controls {
+        background-image: var(--uc-menu-media-fullscreen-enter);
+    }
+    menuitem[id^="context_toggleMute"]:not([soundplaying], [muted]),
+    menuitem[id^="context_toggleMute"][soundplaying]:not([muted]),
+    #context-media-mute {
+        background-image: var(--uc-menu-media-audio-muted);
+    }
+    menuitem[id^="context_toggleMute"][muted],
+    #context-media-unmute {
+        background-image: var(--uc-menu-media-audio);
+    }
+    #context-media-play {
+        background-image: var(--uc-menu-media-play);
+    }
+    #context-media-pause,
+    #doNotDisturbMenuItem {
+        background-image: var(--uc-menu-media-pause);
+    }
+    #context-video-pictureinpicture:not([checked]) {
+        background-image: var(--uc-menu-media-picture-in-picture);
+    }
+
     /* Reverts the menu gutter changes introduced in Firefox v140+.
        Firefox started displaying empty .menu-icon elements to standardize gutter behavior across platforms.
        This broke our existing padding-based spacing by adding extra visual gaps.
@@ -27,7 +73,7 @@
     #appMenu-zoom-controls {
         padding-inline-start: calc(36px + var(--uc-appMenu-zoom-controls-x-offset)) !important;
         margin-inline-start: 0px !important;
-        background-image: url("chrome://global/skin/media/fullscreenEnterButton.svg");
+        /* background-image: url("chrome://global/skin/media/fullscreenEnterButton.svg"); */
         background-position: left calc(10px + var(--uc-appMenu-zoom-controls-x-offset)) center;
         background-repeat: no-repeat;
         background-size: 18px;
@@ -785,6 +831,7 @@
     #context-reloadframe {
         background-image: url("chrome://global/skin/icons/reload.svg");
     }
+    /* Previous media icon URIs, retained for reference.
     menuitem[id^="context_toggleMute"]:not([soundplaying], [muted]),
     menuitem[id^="context_toggleMute"][soundplaying]:not([muted]),
     #context-media-mute {
@@ -794,6 +841,7 @@
     #context-media-unmute {
         background-image: url("chrome://global/skin/media/audio.svg");
     }
+    */
     /*
     menuitem[data-l10n-id^="pin-"],
     .customize-context-moveToPanel {
@@ -892,6 +940,7 @@
         background-image: url("chrome://devtools/content/shared/images/command-pick.svg");
     }
     */
+    /* Previous media icon URIs, retained for reference.
     #context-media-play {
         background-image: url("chrome://global/skin/media/play-fill.svg");
     }
@@ -899,6 +948,7 @@
     #doNotDisturbMenuItem {
         background-image: url("chrome://global/skin/media/pause-fill.svg");
     }
+    */
     #context-video-fullscreen {
         background-image: url("chrome://browser/skin/fullscreen.svg");
     }
@@ -1004,9 +1054,11 @@
         padding-inline-start: 1em !important;
     }
     */
+    /* Previous media icon URI, retained for reference.
     #context-video-pictureinpicture:not([checked]) {
         background-image: url("chrome://global/skin/media/picture-in-picture-open.svg");
     }
+    */
     #spell-dictionaries {
         background-image: url("chrome://devtools/skin/images/globe.svg");
     }
