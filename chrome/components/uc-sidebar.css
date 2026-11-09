@@ -1654,6 +1654,7 @@
 
             &:not([pinned]) .tab-context-line {
                 top: 50% !important;
+                left: auto !important;
                 right: var(--uc-vt-container-indicator-right) !important;
                 width: 3px !important;
                 height: 12px !important;
