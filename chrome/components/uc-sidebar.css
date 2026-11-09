@@ -2557,6 +2557,10 @@
             &:first-child {
                 border-block-end: none !important;
                 border-inline-end: none !important;
+
+                > .tab-stack {
+                    border-block-end: none !important;
+                }
             }
 
             &:last-child {
