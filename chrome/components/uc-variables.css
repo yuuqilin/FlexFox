@@ -1526,6 +1526,17 @@
         var(--tab-border-color-selected-leading) 20.68%,
         var(--tab-border-color-selected-trailing) 79.34%
     );
+    /* Bug 2074327 sets both container-tab gradient stops to the same identity color.
+       Capture FlexFox's colors before that override and restore them on container tabs. */
+    #tabbrowser-tabs {
+        --uc-container-tab-border-leading: var(--tab-border-color-selected-leading);
+        --uc-container-tab-border-trailing: var(--tab-border-color-selected-trailing);
+
+        .tabbrowser-tab[usercontextid] {
+            --tab-border-color-selected-leading: var(--uc-container-tab-border-leading) !important;
+            --tab-border-color-selected-trailing: var(--uc-container-tab-border-trailing) !important;
+        }
+    }
     --toolbar-field-background-color: light-dark(rgba(0, 0, 0, 0.1), var(--color-black-alpha-30)) !important;
     /* Always use Nova UI colors for tab hover backgrounds */
     --tab-background-color-hover: light-dark(rgba(117, 102, 159, 0.25), rgba(182, 170, 217, 0.25)) !important;
