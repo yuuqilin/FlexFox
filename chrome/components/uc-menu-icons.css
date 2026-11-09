@@ -299,13 +299,15 @@
     }
 
     /* Tab menu */
-    #context_moveTabToGroup {
+    #context_moveTabToGroup,
+    #context_addTabToGroup {
         background-image: url("../icons/menu/move-tab-to-group.svg");
         background-position-x: 0.9em;
         background-size: 18px;
     }
     #context_moveTabToGroupNewGroup,
-    #context_moveTabToNewGroup {
+    #context_moveTabToNewGroup,
+    #context_addTabToGroupNewGroup {
         background-image: url("../icons/menu/new-group.svg");
         background-size: 18px;
     }
