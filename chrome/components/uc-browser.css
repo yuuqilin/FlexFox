@@ -296,7 +296,7 @@ split-view-footer {
 /* Add margin, shadow, and rounded corners to the web content area */
 @media -moz-pref("uc.flex.enable-rounded-web-content") {
     @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
-        :root:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
+        :root:not([mini-window], [inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) {
             /** 
              * !TEMPORARY: Remove the white overlay so the browser margin background matches the sidebar.
              * Firefox 150+ no longer adds a background image to #browser, so remove this rule once ESR 140 support is dropped. 
