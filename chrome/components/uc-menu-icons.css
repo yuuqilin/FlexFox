@@ -530,6 +530,9 @@
     #sidebar-switcher-history {
         list-style-image: url("chrome://browser/skin/history.svg");
     }
+    #appMenu-tab-groups-button {
+        list-style-image: url("chrome://browser/skin/tabbrowser/tab-groups.svg");
+    }
     /*
     #appMenuRecentlyClosedTabs {
         list-style-image: url("chrome://browser/content/firefoxview/view-opentabs.svg");
