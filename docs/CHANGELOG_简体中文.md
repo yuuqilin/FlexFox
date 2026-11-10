@@ -4,6 +4,38 @@
 
 ## 🆕 更新内容
 
+## 🦊 v7.1.2
+
+> [!IMPORTANT]
+> v7.0.0 引入了多个新功能和不兼容变更。如果此前错过，可以在此查看更新日志。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### 改进
+
+- 将地址栏的动态渐变边框外移，拉开与内部按钮的距离。
+- 为迷你窗口（Firefox 160）和标签组（Firefox 161）的菜单项添加图标。[Bug 2074676](https://bugzilla.mozilla.org/show_bug.cgi?id=2074676) [Bug 2048790](https://bugzilla.mozilla.org/show_bug.cgi?id=2048790) [Bug 2063723](https://bugzilla.mozilla.org/show_bug.cgi?id=2063723)
+- 适配 Firefox 161，让地址栏搜索模式切换按钮也能按设置自动隐藏。[Bug 2085310](https://bugzilla.mozilla.org/show_bug.cgi?id=2085310)
+
+### 不兼容变更
+
+- Git 安装和更新脚本现要求 Git 2.27（2020 年 6 月 1 日发布）或更新版本。
+
+### 修复
+
+- 修复浏览器工具栏遮挡通知栏的问题。
+- 修复迷你窗口中页面边距和内容裁切异常的问题。
+- 修复 Windows 下在窗口边缘点击控制按钮无效的问题，并让自动隐藏的按钮更容易唤出。[Issue #55](https://github.com/yuuqilin/FlexFox/issues/55)
+- 适配 Sidebery v5.6.1.6 的变更，恢复容器标签页指示线的正常显示。[Commit 0584261](https://github.com/mbnuqw/sidebery/commit/05842619cd16cda6116ec3ee6efc3d9810617391)
+- 隐藏 Firefox 158 变更后分屏视图中多余的分隔线。[Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+- 修复 Firefox 159 变更后，右键菜单中的刷新图标重复显示的问题。[Issue #57](https://github.com/yuuqilin/FlexFox/issues/57) [Bug 2073889](https://bugzilla.mozilla.org/show_bug.cgi?id=2073889)
+- 修复 Firefox 160 变更后，Sidebery 顶部出现侧边栏标题栏的问题。[Issue #56](https://github.com/yuuqilin/FlexFox/issues/56) [Bug 2077206](https://bugzilla.mozilla.org/show_bug.cgi?id=2077206)
+- 修复 Firefox 161 变更后，原生容器标签页的指示线和渐变边框显示异常的问题。[Bug 2074327](https://bugzilla.mozilla.org/show_bug.cgi?id=2074327)
+- 修复 Firefox 161 变更后，新标签页“近期动态”卡片的样式异常。[Bug 2088559](https://bugzilla.mozilla.org/show_bug.cgi?id=2088559)
+- 恢复因 Firefox 162 变更而缺失的媒体菜单图标。[Bug 2088635](https://bugzilla.mozilla.org/show_bug.cgi?id=2088635)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.1
 
 > [!IMPORTANT]
@@ -53,8 +85,6 @@
 - 修复 Firefox 159 变更导致地址栏弹出面板背景出现空隙、结果行圆角异常的问题。[Bug 2052926](https://bugzilla.mozilla.org/show_bug.cgi?id=2052926)
 - 修复 Firefox 159 变更导致地址栏搜索模式切换按钮颜色错误的问题。[Bug 2068504](https://bugzilla.mozilla.org/show_bug.cgi?id=2068504)
 - 修复 Firefox 159 变更导致快捷操作按钮在居中的地址栏弹出面板中被裁切的问题。[Bug 2074871](https://bugzilla.mozilla.org/show_bug.cgi?id=2074871)
-
-<!-- END What's New -->
 
 ## 🦊 v7.1.0
 

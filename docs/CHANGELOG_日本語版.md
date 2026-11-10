@@ -4,6 +4,38 @@
 
 ## 🆕 最新情報
 
+## 🦊 v7.1.2
+
+> [!IMPORTANT]
+> v7.0.0 では、複数の新機能と互換性のない変更が導入されました。まだ確認していない場合は、こちらから更新履歴をご覧ください。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### 改善
+
+- URL バーのアニメーション付きグラデーション枠線を外側に移し、ボタンとの間隔を広げました。
+- ミニウィンドウ（Firefox 160）とタブグループ（Firefox 161）のメニュー項目にアイコンを追加しました。[Bug 2074676](https://bugzilla.mozilla.org/show_bug.cgi?id=2074676) [Bug 2048790](https://bugzilla.mozilla.org/show_bug.cgi?id=2048790) [Bug 2063723](https://bugzilla.mozilla.org/show_bug.cgi?id=2063723)
+- Firefox 161 の検索モード切り替えボタンが、URL バーのアイコン自動非表示設定に従うようになりました。[Bug 2085310](https://bugzilla.mozilla.org/show_bug.cgi?id=2085310)
+
+### 互換性のない変更
+
+- Git でのインストール・更新用スクリプトには、Git 2.27（2020年6月1日リリース）以降が必要になりました。
+
+### 修正
+
+- ブラウザーのツールバーが通知バーを覆い隠す問題を修正しました。
+- ミニウィンドウでコンテンツに余白が生じたり、表示が見切れたりする問題を修正しました。
+- Windows のウィンドウ操作ボタンがウィンドウ端のクリックに反応しない問題を修正し、自動非表示時も再表示しやすくしました。[Issue #55](https://github.com/yuuqilin/FlexFox/issues/55)
+- Sidebery v5.6.1.6 の変更で崩れていたコンテナータブのマーカー表示を修正しました。[Commit 0584261](https://github.com/mbnuqw/sidebery/commit/05842619cd16cda6116ec3ee6efc3d9810617391)
+- Firefox 158 の変更後に表示される分割ビューの不要な区切り線を非表示にしました。[Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+- Firefox 159 の変更後、コンテキストメニューの再読み込みアイコンが二重に表示される問題を修正しました。[Issue #57](https://github.com/yuuqilin/FlexFox/issues/57) [Bug 2073889](https://bugzilla.mozilla.org/show_bug.cgi?id=2073889)
+- Firefox 160 の変更後、Sidebery の上部にサイドバーのヘッダーが表示される問題を修正しました。[Issue #56](https://github.com/yuuqilin/FlexFox/issues/56) [Bug 2077206](https://bugzilla.mozilla.org/show_bug.cgi?id=2077206)
+- Firefox 161 の変更後、ネイティブのコンテナータブのマーカーとグラデーション枠線が正しく表示されない問題を修正しました。[Bug 2074327](https://bugzilla.mozilla.org/show_bug.cgi?id=2074327)
+- Firefox 161 の変更後、新しいタブの「最近のアクティビティ」カードのスタイルが崩れる問題を修正しました。[Bug 2088559](https://bugzilla.mozilla.org/show_bug.cgi?id=2088559)
+- Firefox 162 の変更で表示されなくなったメディア関連のメニューアイコンを復元しました。[Bug 2088635](https://bugzilla.mozilla.org/show_bug.cgi?id=2088635)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.1
 
 > [!IMPORTANT]
@@ -53,8 +85,6 @@
 - Firefox 159 の変更後、URL バーのポップアップ背景に隙間が生じ、候補行の角丸が正しく表示されない問題を修正しました。[Bug 2052926](https://bugzilla.mozilla.org/show_bug.cgi?id=2052926)
 - Firefox 159 の変更後、URL バーの検索モード切り替えボタンの色が正しく表示されない問題を修正しました。[Bug 2068504](https://bugzilla.mozilla.org/show_bug.cgi?id=2068504)
 - Firefox 159 の変更後、中央表示の URL バーポップアップでクイックアクションのボタンが見切れる問題を修正しました。[Bug 2074871](https://bugzilla.mozilla.org/show_bug.cgi?id=2074871)
-
-<!-- END What's New -->
 
 ## 🦊 v7.1.0
 

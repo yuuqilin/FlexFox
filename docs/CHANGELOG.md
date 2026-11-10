@@ -4,6 +4,38 @@
 
 ## 🆕 What's New
 
+## 🦊 v7.1.2
+
+> [!IMPORTANT]
+> v7.0.0 introduced several new features and breaking changes. If you missed its release notes, you can read them here:
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### Improvements
+
+- Moved the URL bar's animated gradient border outward for more spacing.
+- Added menu icons for Mini Window (Firefox 160) and Tab Groups (Firefox 161). [Bug 2074676](https://bugzilla.mozilla.org/show_bug.cgi?id=2074676) [Bug 2048790](https://bugzilla.mozilla.org/show_bug.cgi?id=2048790) [Bug 2063723](https://bugzilla.mozilla.org/show_bug.cgi?id=2063723)
+- The URL bar search mode switcher now follows icon auto-hide settings after Firefox 161 changes. [Bug 2085310](https://bugzilla.mozilla.org/show_bug.cgi?id=2085310)
+
+### Breaking Changes
+
+- Git installation and update scripts now require Git 2.27 (released June 1, 2020) or later.
+
+### Fixes
+
+- Fixed browser toolbars covering notification bars.
+- Fixed content margins and clipping in Mini Windows.
+- Fixed edge clicks on Windows window controls and made auto-hidden controls easier to reveal. [Issue #55](https://github.com/yuuqilin/FlexFox/issues/55)
+- Restored container tab indicators after Sidebery v5.6.1.6 changes. [Commit 0584261](https://github.com/mbnuqw/sidebery/commit/05842619cd16cda6116ec3ee6efc3d9810617391)
+- Removed unwanted Split View dividers after Firefox 158 changes. [Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+- Fixed duplicate Reload icons in the context menu after Firefox 159 changes. [Issue #57](https://github.com/yuuqilin/FlexFox/issues/57) [Bug 2073889](https://bugzilla.mozilla.org/show_bug.cgi?id=2073889)
+- Fixed the sidebar header appearing above Sidebery after Firefox 160 changes. [Issue #56](https://github.com/yuuqilin/FlexFox/issues/56) [Bug 2077206](https://bugzilla.mozilla.org/show_bug.cgi?id=2077206)
+- Restored native container tab indicators and gradient borders after Firefox 161 changes. [Bug 2074327](https://bugzilla.mozilla.org/show_bug.cgi?id=2074327)
+- Fixed New Tab Highlights card styling after Firefox 161 changes. [Bug 2088559](https://bugzilla.mozilla.org/show_bug.cgi?id=2088559)
+- Restored missing media menu icons after Firefox 162 changes. [Bug 2088635](https://bugzilla.mozilla.org/show_bug.cgi?id=2088635)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.1
 
 > [!IMPORTANT]
@@ -53,8 +85,6 @@
 - Fixed gaps in the URL bar popup background and incorrect result-row corners after Firefox 159 changes. [Bug 2052926](https://bugzilla.mozilla.org/show_bug.cgi?id=2052926)
 - Fixed incorrect URL bar search mode switcher colors after Firefox 159 changes. [Bug 2068504](https://bugzilla.mozilla.org/show_bug.cgi?id=2068504)
 - Fixed Quick Actions buttons being clipped in centered URL bar popups after Firefox 159 changes. [Bug 2074871](https://bugzilla.mozilla.org/show_bug.cgi?id=2074871)
-
-<!-- END What's New -->
 
 ## 🦊 v7.1.0
 
