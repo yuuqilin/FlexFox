@@ -212,6 +212,9 @@
         background-position-x: 0.75em;
         background-size: 21px;
     }
+    #context-use-mini-window {
+        background-image: url("chrome://browser/content/miniwindow/assets/mini-window.svg");
+    }
     #context-visual-search {
         background-image: url("../icons/menu/google-lens-logo.svg");
     }
