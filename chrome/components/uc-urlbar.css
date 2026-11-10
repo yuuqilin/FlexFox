@@ -1241,8 +1241,14 @@
     }
 }
 
-/* Keep leading URL bar controls fixed so the switcher reveals after the identity icons. */
 @media -moz-pref("browser.urlbar.unifiedSearchButton.always") {
+    @media -moz-pref("uc.flex.auto-hide-urlbar-icons", false) {
+        .urlbar-input-container > .searchmode-switcher:not([offscreen]) {
+            margin-left: 3px;
+        }
+    }
+
+    /* Keep leading URL bar controls fixed so the switcher reveals after the identity icons. */
     @media not -moz-pref("uc.flex.auto-hide-urlbar-icons", false), -moz-pref("uc.flex.style-urlbar", 4) {
         #urlbar .urlbar-input-container
             > :is(
