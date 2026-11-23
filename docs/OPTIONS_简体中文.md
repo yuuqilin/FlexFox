@@ -258,7 +258,7 @@
 |-----------|:-------------:|-------------|
 | `uc.flex.enable-rounded-web-content` | `0`-`2`<br>(`0`) | 为网页内容区域添加边距、阴影和圆角，营造悬浮卡片般的立体效果。数值越大，边距越宽，留白越多。 |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `false` | 默认情况下，为了让网页内容区域与侧栏彩带自然衔接，FlexFox 不会对紧邻侧栏彩带的一角应用圆角。启用此选项后，即使侧栏彩带处于显示状态，网页内容区域的四个角也会保持一致的圆角效果。 |
-| `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | 在网页内容区域周围显示边框。此选项与 `uc.flex.enable-rounded-web-content` 搭配使用时效果最明显。取值：`0` = 不显示边框（默认），`1` = 仅在分屏视图中为当前聚焦的网页显示高亮边框，`2` = 为所有网页内容显示边框。 |
+| `uc.flex.style-web-content-outline` | `1`-`2`<br>(`1`) | 默认仅为 Tab Split View 中当前聚焦的面板显示边框。设为 `2` 后，普通网页内容区域也会显示边框。与 `uc.flex.enable-rounded-web-content` 搭配使用时效果更明显。 |
 
 </details>
 

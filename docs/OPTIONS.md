@@ -259,7 +259,7 @@ Preferences are organized by the browser component or interface area they affect
 |-----------|:-------------:|-------------|
 | `uc.flex.enable-rounded-web-content` | `0`-`2`<br>(`0`) | Adds margins, shadows, and rounded corners to the web content area, creating a floating card-like effect. Higher values increase the margins and surrounding space. |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `false` | By default, FlexFox keeps the corner adjacent to the sidebar stripe square so the web content area aligns seamlessly with the stripe. Enable this option to apply rounded corners to all four corners, even when the sidebar stripe is visible. |
-| `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | Shows an outline around the web content area. This option is most noticeable when used with `uc.flex.enable-rounded-web-content`. Values: `0` = No outline (default), `1` = Highlight only the focused panel in Tab Split View, `2` = Show outlines around all web content areas. |
+| `uc.flex.style-web-content-outline` | `1`-`2`<br>(`1`) | Highlights the focused panel in Tab Split View by default. Set `2` to also show outlines around regular web content areas. The effect is most noticeable with `uc.flex.enable-rounded-web-content`. |
 
 </details>
 

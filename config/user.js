@@ -283,11 +283,10 @@ user_pref("uc.flex.menu-item-spacing",                        "small");
 user_pref("uc.flex.enable-rounded-web-content",                     0);
 /* Rounds all four web content corners when the sidebar stripe is visible. */
 user_pref("uc.flex.enable-rounded-web-content-at-sidebery-corner", false);
-/* Shows outlines around web content areas.
-   0 = No outline (default)
-   1 = Highlight focused panel in Tab Split View
+/* Highlights the focused panel in Tab Split View by default.
+   1 = Highlight focused panel in Tab Split View (default)
    2 = Show outlines on all web content areas */
-user_pref("uc.flex.style-web-content-outline",                      0);
+user_pref("uc.flex.style-web-content-outline",                      1);
 
 /* 🔍 Findbar */
 /* Prevents the Findbar from hiding automatically. Press Esc to close it. */

@@ -391,7 +391,7 @@
                     "▸ 0は0px、1は1px、2は2px\A" "▸ 0なし、1静止、2アニメーション\A" "▸ 0なし、1静止、2アニメーション\A"
                     "▸ 1Tokyo Night、2Firefox Acorn\A" "▸ 0自動、1Proton、2Nova\A"
                     "▸ 1フラット、2凹み、3刻印、4シームレス\A" "▸ URLバー文字を中央配置\A"
-                    "▸ 0なし、1アイコン、2＋ホバー枠線、3＋文字\A" "▸ 0無効、1選択中、2全て\A"
+                    "▸ 0なし、1アイコン、2＋ホバー枠線、3＋文字\A" "▸ 1選択中、2全て\A"
                     "▸ 1Traffic、2Yosemite、3GTK\A" "▸ ウィンドウボタンを上へ戻す\A" "▸ ウィンドウボタンを縮小\A"
                     "▸ コンパクト拡張パネルを使用\A";
             }
@@ -426,7 +426,7 @@
                     "▸ 0自动，1Proton，2Nova\A" "▸ 0为0px、1为1px、2为2px\A" "▸ 0无、1静态、2动态\A"
                     "▸ 0无、1静态、2动态\A" "▸ 1Tokyo Night，2Firefox Acorn\A" "▸ 0自动，1Proton，2Nova\A"
                     "▸ 1平面，2内嵌，3凹刻，4无缝\A" "▸ 地址栏文字居中显示\A" "▸ 0关闭，1图标，2加悬停边框，3加文字\A"
-                    "▸ 0关闭，1当前面板，2全部\A" "▸ 1Traffic，2Yosemite，3GTK\A" "▸ 恢复较高的窗口按钮位置\A"
+                    "▸ 1当前面板，2全部\A" "▸ 1Traffic，2Yosemite，3GTK\A" "▸ 恢复较高的窗口按钮位置\A"
                     "▸ 缩小窗口按钮尺寸\A" "▸ 使用紧凑版扩展面板\A";
             }
         }
@@ -460,7 +460,7 @@
                     "▸ 0自動、1Proton、2Nova\A" "▸ 0為0px、1為1px、2為2px\A" "▸ 0無、1靜態、2動態\A"
                     "▸ 0無、1靜態、2動態\A" "▸ 1Tokyo Night、2Firefox Acorn\A" "▸ 0自動、1Proton、2Nova\A"
                     "▸ 1平面、2內嵌、3凹刻、4無縫\A" "▸ 網址列文字置中顯示\A" "▸ 0關閉、1圖示、2加懸停邊框、3加文字\A"
-                    "▸ 0關閉、1目前分頁、2全部\A" "▸ 1Traffic、2Yosemite、3GTK\A" "▸ 恢復較高的視窗按鈕位置\A"
+                    "▸ 1目前面板、2全部\A" "▸ 1Traffic、2Yosemite、3GTK\A" "▸ 恢復較高的視窗按鈕位置\A"
                     "▸ 縮小視窗按鈕尺寸\A" "▸ 使用精簡版擴充功能面板\A";
             }
         }
@@ -505,7 +505,7 @@
                 "▸ 0 auto, 1 Proton, 2 Nova\A" "▸ 0 = 0px, 1 = 1px, 2 = 2px\A" "▸ 0 none, 1 static, 2 animated\A"
                 "▸ 0 none, 1 static, 2 animated\A" "▸ 1 Tokyo Night, 2 Firefox Acorn\A" "▸ 0 auto, 1 Proton, 2 Nova\A"
                 "▸ 1 flat, 2 inset, 3 debossed, 4 seamless\A" "▸ Center URL bar text\A"
-                "▸ 0 off, 1 icons, 2 + hover border, 3 + text\A" "▸ 0 off, 1 focused, 2 all outlines\A"
+                "▸ 0 off, 1 icons, 2 + hover border, 3 + text\A" "▸ 1 focused, 2 all outlines\A"
                 "▸ 1 traffic, 2 Yosemite, 3 GTK\A" "▸ Restore higher window control position\A"
                 "▸ Shrink window controls\A" "▸ Use compact extensions panel\A";
 

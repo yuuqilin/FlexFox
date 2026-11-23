@@ -258,7 +258,7 @@
 |-----------|:-------------:|-------------|
 | `uc.flex.enable-rounded-web-content` | `0`-`2`<br>(`0`) | Web コンテンツ領域に余白、影、角丸を追加し、浮かび上がるカードのような立体感を演出します。値が大きいほど余白が広がります。 |
 | `uc.flex.enable-rounded-web-content-at-sidebery-corner` | `false` | デフォルトでは、サイドバーストライプと自然につながるよう、ストライプに隣接する角には角丸を適用しません。サイドバーストライプ表示時も 4 つの角すべてを同じ角丸にしたい場合は、この設定を有効にしてください。 |
-| `uc.flex.style-web-content-outline` | `0`-`2`<br>(`0`) | Web コンテンツ領域の周囲に枠線を表示します。この設定は `uc.flex.enable-rounded-web-content` と組み合わせることで、よりはっきりとした効果が得られます。値：`0` = 枠線なし（デフォルト）、`1` = Tab Split View でフォーカス中のパネルのみ強調表示、`2` = すべての Web コンテンツ領域に枠線を表示。 |
+| `uc.flex.style-web-content-outline` | `1`-`2`<br>(`1`) | デフォルトでは Tab Split View でフォーカス中のパネルに枠線を表示します。`2` に設定すると、通常の Web コンテンツ領域にも枠線を表示します。`uc.flex.enable-rounded-web-content` と組み合わせると、よりはっきりとした効果が得られます。 |
 
 </details>
 

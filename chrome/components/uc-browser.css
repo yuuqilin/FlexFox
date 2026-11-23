@@ -85,89 +85,87 @@
             }
         }
     }
-    @media -moz-pref("uc.flex.style-web-content-outline") {
-        &::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            /* Use the splitter layer so this trailing ::after paints above the toolbox and splitter but below
-               higher overlays; the fallback preserves this order before Firefox exposes the variable. */
-            z-index: var(--browser-container-z-index-devtools-splitter, 2);
-        }
-        @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
-            :root:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-                &::after {
-                    @media -moz-pref("uc.flex.style-web-content-outline", 2) {
-                        @media not -moz-pref("uc.flex.enable-rounded-web-content") {
-                            border-top: var(--border-width) solid var(--uc-urlbar-outline);
-                            @media -moz-pref("sidebar.position_start") {
-                                border-left: var(--border-width) solid var(--uc-urlbar-outline);
-                            }
-                            @media not -moz-pref("sidebar.position_start") {
-                                border-right: var(--border-width) solid var(--uc-urlbar-outline);
-                            }
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        /* Use the splitter layer so this trailing ::after paints above the toolbox and splitter but below
+           higher overlays; the fallback preserves this order before Firefox exposes the variable. */
+        z-index: var(--browser-container-z-index-devtools-splitter, 2);
+    }
+    @media not (-moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery")) {
+        :root:not([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) & {
+            &::after {
+                @media -moz-pref("uc.flex.style-web-content-outline", 2) {
+                    @media not -moz-pref("uc.flex.enable-rounded-web-content") {
+                        border-top: var(--border-width) solid var(--uc-urlbar-outline);
+                        @media -moz-pref("sidebar.position_start") {
+                            border-left: var(--border-width) solid var(--uc-urlbar-outline);
                         }
-                        @media -moz-pref("uc.flex.enable-rounded-web-content") {
-                            border: var(--border-width) solid var(--uc-urlbar-outline);
-                        }
-                    }
-
-                    @media -moz-pref("sidebar.revamp") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
-                        @media -moz-pref("sidebar.revamp.round-content-area") {
-                            @media -moz-pref("sidebar.position_start") {
-                                border-start-start-radius: var(
-                                    --uc-sb-tabbox-border-radius,
-                                    var(--border-radius-medium)
-                                ) !important;
-                            }
-                            @media not -moz-pref("sidebar.position_start") {
-                                border-start-end-radius: var(
-                                    --uc-sb-tabbox-border-radius,
-                                    var(--border-radius-medium)
-                                ) !important;
-                            }
+                        @media not -moz-pref("sidebar.position_start") {
+                            border-right: var(--border-width) solid var(--uc-urlbar-outline);
                         }
                     }
                     @media -moz-pref("uc.flex.enable-rounded-web-content") {
-                        border-radius: var(--uc-web-content-radius);
-                        border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
-                        border-top-right-radius: var(
-                            --uc-sb-web-content-radius-top-right,
-                            var(--uc-web-content-radius)
-                        );
+                        border: var(--border-width) solid var(--uc-urlbar-outline);
                     }
                 }
 
-                @media -moz-pref("uc.flex.style-web-content-outline", 2) {
-                    @media not -moz-pref("uc.flex.enable-rounded-web-content") {
-                        .split-view-panel[column="0"] &::after {
-                            border-right: var(--border-width) solid var(--uc-urlbar-outline);
+                @media -moz-pref("sidebar.revamp") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
+                    @media -moz-pref("sidebar.revamp.round-content-area") {
+                        @media -moz-pref("sidebar.position_start") {
+                            border-start-start-radius: var(
+                                --uc-sb-tabbox-border-radius,
+                                var(--border-radius-medium)
+                            ) !important;
                         }
-                        .split-view-panel[column="1"] &::after {
-                            border-left: var(--border-width) solid var(--uc-urlbar-outline);
+                        @media not -moz-pref("sidebar.position_start") {
+                            border-start-end-radius: var(
+                                --uc-sb-tabbox-border-radius,
+                                var(--border-radius-medium)
+                            ) !important;
                         }
+                    }
+                }
+                @media -moz-pref("uc.flex.enable-rounded-web-content") {
+                    border-radius: var(--uc-web-content-radius);
+                    border-top-left-radius: var(--uc-sb-web-content-radius-top-left, var(--uc-web-content-radius));
+                    border-top-right-radius: var(
+                        --uc-sb-web-content-radius-top-right,
+                        var(--uc-web-content-radius)
+                    );
+                }
+            }
+
+            @media -moz-pref("uc.flex.style-web-content-outline", 2) {
+                @media not -moz-pref("uc.flex.enable-rounded-web-content") {
+                    .split-view-panel[column="0"] &::after {
+                        border-right: var(--border-width) solid var(--uc-urlbar-outline);
+                    }
+                    .split-view-panel[column="1"] &::after {
+                        border-left: var(--border-width) solid var(--uc-urlbar-outline);
                     }
                 }
             }
         }
+    }
 
-        /* Add an element selector to increase specificity and override the rule above */
-        #tabbrowser-tabpanels > .split-view-panel.deck-selected &::after {
-            border: var(--focus-outline);
-        }
+    /* Add an element selector to increase specificity and override the rule above */
+    #tabbrowser-tabpanels > .split-view-panel.deck-selected &::after {
+        border: var(--focus-outline);
+    }
 
-        @media -moz-pref("sidebar.revamp") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
-            @media -moz-pref("sidebar.revamp.round-content-area") {
-                .browserSidebarContainer.split-view-panel[column="1"] &::after {
-                    @media -moz-pref("sidebar.position_start") {
-                        border-start-start-radius: 0 !important;
-                    }
+    @media -moz-pref("sidebar.revamp") and (not -moz-pref("uc.flex.enable-rounded-web-content")) {
+        @media -moz-pref("sidebar.revamp.round-content-area") {
+            .browserSidebarContainer.split-view-panel[column="1"] &::after {
+                @media -moz-pref("sidebar.position_start") {
+                    border-start-start-radius: 0 !important;
                 }
-                .browserSidebarContainer.split-view-panel[column="0"] &::after {
-                    @media not -moz-pref("sidebar.position_start") {
-                        border-start-end-radius: 0 !important;
-                    }
+            }
+            .browserSidebarContainer.split-view-panel[column="0"] &::after {
+                @media not -moz-pref("sidebar.position_start") {
+                    border-start-end-radius: 0 !important;
                 }
             }
         }
@@ -186,6 +184,10 @@
 
 .split-view-panel {
     margin: 0 !important;
+
+    &.deck-selected::after {
+        outline: none !important;
+    }
 
     &:not(.deck-selected) {
         overflow: unset !important;
