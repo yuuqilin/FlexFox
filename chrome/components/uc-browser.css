@@ -193,21 +193,14 @@
         overflow: unset !important;
     }
 
-    @media not -moz-pref("uc.flex.enable-rounded-web-content"),
-        -moz-pref("uc.flex.fully-hide-toolbox") and -moz-pref("uc.flex.fully-hide-sidebery") {
-        > split-view-footer {
-            border-end-end-radius: 0 !important;
-        }
-    }
-    :root:where([inFullscreen], [titlepreface*="\200b "][titlepreface*="\200c "], [titlepreface*="\200d "]) & {
-        > split-view-footer {
-            border-end-end-radius: 0 !important;
-        }
+    :is(split-view-footer, address-footer) {
+        /* Let the rounded .browserStack clip this square corner without rendering gaps. */
+        border-end-end-radius: 0 !important;
+        border-color: var(--uc-urlbar-outline) !important;
     }
 }
 
-#statuspanel-label,
-split-view-footer {
+#statuspanel-label {
     border-color: var(--uc-urlbar-outline) !important;
 }
 
