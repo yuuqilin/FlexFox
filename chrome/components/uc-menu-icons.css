@@ -1079,6 +1079,11 @@
     #manage-saved-logins {
         background-image: url("chrome://global/skin/icons/settings.svg");
     }
+    toolbarbutton[data-l10n-id="user-context-manage-containers2"] {
+        padding-inline-start: var(--uc-app-menu-item-padding-inline) !important;
+        background-image: none;
+        list-style-image: url("chrome://global/skin/icons/settings.svg");
+    }
     #context-sendpagetodevice-popup menuseparator + menuitem {
         background-image: url("chrome://browser/skin/forward.svg");
     }
