@@ -496,7 +496,8 @@
     .subviewbutton[data-l10n-id$="-settings"] {
         list-style-image: url("chrome://global/skin/icons/settings.svg");
     }
-    .subviewbutton[data-l10n-id="fxa-menu-connect-another-device"] {
+    .subviewbutton[data-l10n-id="fxa-menu-connect-another-device"],
+    toolbarbutton[data-l10n-id="user-context-add-container2"] {
         list-style-image: url("chrome://global/skin/icons/plus.svg");
     }
     #PanelUI-fxa-menu-account-signout-button {
@@ -597,7 +598,7 @@
         list-style-image: url("chrome://devtools/skin/images/command-eyedropper.svg");
     }
     .subviewbutton[data-l10n-id="appmenu-developer-tools-extensions"] {
-        list-style-image: url("chrome://activity-stream/content/data/content/assets/glyph-webextension-16.svg");
+        list-style-image: url("chrome://mozapps/skin/extensions/extension.svg");
     }
     #appMenu-help-button2,
     #appMenu_menu_openHelp {
@@ -663,7 +664,8 @@
     menuitem[data-l10n-id*="-open-"][data-l10n-id$="-window"] {
         background-image: url("../icons/menu/window.svg");
     }
-    menuitem[data-l10n-id$="-private-window"] {
+    menuitem[data-l10n-id$="-private-window"],
+    #placesContext_open\:newprivatewindow {
         background-image: url("chrome://browser/skin/privateBrowsing.svg") !important;
     }
     #menu_openFile {
@@ -817,7 +819,7 @@
         background-image: url("chrome://devtools/skin/images/command-eyedropper.svg");
     }
     #extensionsForDevelopers {
-        background-image: url("chrome://activity-stream/content/data/content/assets/glyph-webextension-16.svg");
+        background-image: url("chrome://mozapps/skin/extensions/extension.svg");
     }
     #menu_pageInfo,
     menuitem[data-l10n-id*="about-"],
@@ -1104,6 +1106,7 @@
     toolbarbutton.restoreallitem > .toolbarbutton-icon {
         transform: scaleX(-1);
     }
+    #appMenu_help_reportBrokenSite,
     #appMenu-report-broken-site-button,
     #protections-popup-report-broken-site-button {
         list-style-image: url("chrome://global/skin/icons/error.svg");
