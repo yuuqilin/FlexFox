@@ -1328,7 +1328,7 @@
         display: var(--uc-sb-sroot-splitter-display, block) !important;
         border-top: none !important;
         border-color: transparent !important;
-        opacity: var(--uc-vt-sroot-splitter-opacity);
+        opacity: var(--uc-vt-sroot-splitter-opacity) !important;
 
         width: var(--uc-vt-sroot-splitter-width, auto);
         margin-inline: var(--uc-vt-sroot-splitter-margin-inline, var(--tab-margin-inline-inner)) !important;
