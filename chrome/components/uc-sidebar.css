@@ -1185,6 +1185,12 @@
     spacer[part="overflow-end-indicator"] {
         display: var(--uc-vt-sroot-overflow-indicator-display, flex);
     }
+    /* Bug 2049500: Hide the scrollbox fade when pinned overflow indicators are disabled. */
+    @container style(--uc-vt-sroot-overflow-indicator-display: none) {
+        scrollbox[part="scrollbox"] {
+            mask-image: none !important;
+        }
+    }
 
     #tabbrowser-tabs[orient="vertical"][expanded] {
         /* Reduce spacing between vertical tabs */
