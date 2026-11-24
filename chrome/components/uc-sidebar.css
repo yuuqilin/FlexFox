@@ -1495,9 +1495,9 @@
         }
     }
 
-    /* Reduce spacing between vertical tabs */
+    /* Reduce vertical tab spacing without overriding native closing animations. */
     #tabbrowser-arrowscrollbox .tabbrowser-tab {
-        #tabbrowser-tabs[orient="vertical"] & {
+        #tabbrowser-tabs[orient="vertical"] &:not([height-animating]) {
             padding-block: 2px 1px !important;
         }
     }
@@ -2375,7 +2375,7 @@
         }
     }
 
-    /* Tab group: Expand/collapse animation */
+    /* Animate tab group expansion/collapse without overriding native tab closing. */
     @media not -moz-pref("uc.flex.style-tab-groups-add-transition", 0) {
         tab-group {
             .tabbrowser-tab {
@@ -2386,6 +2386,20 @@
                     max-height 150ms ease,
                     padding-block 150ms ease,
                     opacity 150ms ease !important;
+                &[height-animating]:not(tab-split-view-wrapper > .tabbrowser-tab) {
+                    --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-enter);
+                    &:not([fadein]) {
+                        --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-exit);
+                    }
+                    transition:
+                        opacity 150ms ease,
+                        grid-template-rows var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                        padding-block-start var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                        padding-block-end var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing) !important;
+                    @media (prefers-reduced-motion: reduce) {
+                        transition: none !important;
+                    }
+                }
             }
             tab-split-view-wrapper {
                 display: grid !important;
@@ -2851,6 +2865,24 @@
                             max-height 150ms ease,
                             padding-block 150ms ease,
                             opacity 150ms ease !important;
+                        &[height-animating]:not(tab-split-view-wrapper > .tabbrowser-tab) {
+                            --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-enter);
+                            &:not([fadein]) {
+                                --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-exit);
+                            }
+                            transition:
+                                margin-inline var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-autohide-sidebar-delay),
+                                min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                    var(--uc-autohide-sidebar-delay),
+                                opacity 150ms ease,
+                                grid-template-rows var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                                padding-block-start var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                                padding-block-end var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing) !important;
+                            @media (prefers-reduced-motion: reduce) {
+                                transition: none !important;
+                            }
+                        }
                         .tab-group-line {
                             visibility: hidden;
                             transition: visibility 0s var(--uc-autohide-sidebar-delay);
@@ -3029,6 +3061,24 @@
                             max-height 150ms ease,
                             padding-block 150ms ease,
                             opacity 150ms ease !important;
+                        &[height-animating]:not(tab-split-view-wrapper > .tabbrowser-tab) {
+                            --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-enter);
+                            &:not([fadein]) {
+                                --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-exit);
+                            }
+                            transition:
+                                margin-inline var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                                    var(--uc-hover-sidebar-delay),
+                                min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                                    var(--uc-hover-sidebar-delay),
+                                opacity 150ms ease,
+                                grid-template-rows var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                                padding-block-start var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                                padding-block-end var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing) !important;
+                            @media (prefers-reduced-motion: reduce) {
+                                transition: none !important;
+                            }
+                        }
                         .tab-group-line {
                             visibility: var(--uc-tab-group-line-visibility);
                             transition: visibility 0s var(--uc-hover-sidebar-delay);
@@ -3037,11 +3087,26 @@
                 }
             }
 
-            /* Set transition duration for tab animations */
+            /* Preserve native tab closing while animating sidebar width changes. */
             :is(#sidebar-main, #sidebar-container)[sidebar-launcher-expanded] {
                 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
                     transition: min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
                         var(--uc-autohide-sidebar-delay) !important;
+                    &[height-animating]:not(tab-split-view-wrapper > .tabbrowser-tab) {
+                        --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-enter);
+                        &:not([fadein]) {
+                            --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-exit);
+                        }
+                        transition:
+                            min-width var(--uc-autohide-transition-duration) var(--uc-autohide-transition-type)
+                                var(--uc-autohide-sidebar-delay),
+                            grid-template-rows var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                            padding-block-start var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                            padding-block-end var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing) !important;
+                        @media (prefers-reduced-motion: reduce) {
+                            transition: none !important;
+                        }
+                    }
                 }
                 :is(.tab-label-container .tab-text, .tab-close-button) {
                     visibility: collapse;
@@ -3073,6 +3138,21 @@
                 #tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
                     transition: min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
                         var(--uc-hover-sidebar-delay) !important;
+                    &[height-animating]:not(tab-split-view-wrapper > .tabbrowser-tab) {
+                        --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-enter);
+                        &:not([fadein]) {
+                            --uc-vt-tab-height-motion-duration: var(--sidebar-motion-duration-exit);
+                        }
+                        transition:
+                            min-width var(--uc-hover-transition-duration) var(--uc-hover-transition-type)
+                                var(--uc-hover-sidebar-delay),
+                            grid-template-rows var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                            padding-block-start var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing),
+                            padding-block-end var(--uc-vt-tab-height-motion-duration) var(--sidebar-motion-easing) !important;
+                        @media (prefers-reduced-motion: reduce) {
+                            transition: none !important;
+                        }
+                    }
                 }
                 :is(.tab-label-container .tab-text, .tab-close-button) {
                     visibility: visible;
