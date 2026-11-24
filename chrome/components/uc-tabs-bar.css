@@ -361,7 +361,7 @@ toolbar#TabsToolbar {
     }
 
     #tabbrowser-tabs[orient="horizontal"] tab-split-view-wrapper {
-        padding-block: 0 !important;
+        --split-view-padding-block: 0px;
         .tabbrowser-tab:first-child {
             padding-inline-start: 0 !important;
         }
@@ -370,6 +370,7 @@ toolbar#TabsToolbar {
         }
         .tab-background {
             margin-inline: 0 !important;
+            min-height: var(--tab-min-height) !important;
         }
         .tab-group-line {
             inset-block-end: calc(var(--tab-group-line-toolbar-border-distance) - var(--tab-margin-block)) !important;
