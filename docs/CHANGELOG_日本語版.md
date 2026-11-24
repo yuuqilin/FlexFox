@@ -4,6 +4,33 @@
 
 ## 🆕 最新情報
 
+## 🦊 v7.1.3
+
+> [!IMPORTANT]
+> v7.0.0 では、複数の新機能と互換性のない変更が導入されました。まだ確認していない場合は、こちらから更新履歴をご覧ください。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### 改善
+
+- メニュー項目に不足していたアイコンを追加し、コンテナー関連のメニュー項目でアイコンと文字の位置を揃えました。
+
+### 互換性のない変更
+
+- `uc.flex.style-web-content-outline` のデフォルト値を `1` に変更し、分割ビューでフォーカス中のパネルに枠線を表示するようにしました。`2` に設定すると、通常の Web コンテンツ領域にも枠線が表示されます。従来の設定値 `0` は廃止しました。
+
+### 修正
+
+- Firefox 149 と 157 の変更後、水平タブの分割ビューでタブの周囲に隙間が生じる問題を修正しました。[Bug 2006018](https://bugzilla.mozilla.org/show_bug.cgi?id=2006018) [Bug 2066745](https://bugzilla.mozilla.org/show_bug.cgi?id=2066745)
+- Firefox 158 の変更後、分割ビューのタブを切り替える際にタブバーが上下にずれる問題を修正しました。[Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+- Firefox 161 の変更後、ピン留めタブに不要なフェード効果がかかる問題を修正しました。[Bug 2049500](https://bugzilla.mozilla.org/show_bug.cgi?id=2049500)
+- Firefox 162 の変更後、ネイティブ垂直タブを閉じる際のアニメーションが動作しない問題を修正しました。[Bug 1932997](https://bugzilla.mozilla.org/show_bug.cgi?id=1932997)
+- Firefox 162 での要素名の変更により、分割ビューのフッターのスタイルが崩れる問題を修正しました。[Bug 1645648](https://bugzilla.mozilla.org/show_bug.cgi?id=1645648)
+- Firefox 163 の変更後、分割ビューで枠線が二重に表示される問題を修正しました。[Bug 2066737](https://bugzilla.mozilla.org/show_bug.cgi?id=2066737)
+- Firefox 163 の変更後、折りたたみ状態のネイティブ垂直タブに区切り線が表示される問題を修正しました。[Bug 2069488](https://bugzilla.mozilla.org/show_bug.cgi?id=2069488)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.2
 
 > [!IMPORTANT]
@@ -33,8 +60,6 @@
 - Firefox 161 の変更後、ネイティブのコンテナータブのマーカーとグラデーション枠線が正しく表示されない問題を修正しました。[Bug 2074327](https://bugzilla.mozilla.org/show_bug.cgi?id=2074327)
 - Firefox 161 の変更後、新しいタブの「最近のアクティビティ」カードのスタイルが崩れる問題を修正しました。[Bug 2088559](https://bugzilla.mozilla.org/show_bug.cgi?id=2088559)
 - Firefox 162 の変更で表示されなくなったメディア関連のメニューアイコンを復元しました。[Bug 2088635](https://bugzilla.mozilla.org/show_bug.cgi?id=2088635)
-
-<!-- END What's New -->
 
 ## 🦊 v7.1.1
 

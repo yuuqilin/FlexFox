@@ -4,6 +4,33 @@
 
 ## 🆕 更新内容
 
+## 🦊 v7.1.3
+
+> [!IMPORTANT]
+> v7.0.0 引入了多个新功能和不兼容变更。如果此前错过，可以在此查看更新日志。
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### 改进
+
+- 补充缺失的菜单图标，并调整容器相关菜单项的图标与文字对齐方式。
+
+### 不兼容变更
+
+- `uc.flex.style-web-content-outline` 的默认值改为 `1`，分屏视图中当前聚焦的面板现在会显示边框。设为 `2` 时，普通网页内容区域也会显示边框。原有的 `0` 选项已移除。
+
+### 修复
+
+- 修复 Firefox 149 和 157 变更后，水平标签页模式下分屏视图的标签页周围出现空隙的问题。[Bug 2006018](https://bugzilla.mozilla.org/show_bug.cgi?id=2006018) [Bug 2066745](https://bugzilla.mozilla.org/show_bug.cgi?id=2066745)
+- 修复 Firefox 158 变更后，切换分屏视图标签页时标签栏上下偏移的问题。[Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+- 修复 Firefox 161 变更后，固定标签页出现多余渐隐效果的问题。[Bug 2049500](https://bugzilla.mozilla.org/show_bug.cgi?id=2049500)
+- 修复 Firefox 162 变更后，原生垂直标签页关闭动画失效的问题。[Bug 1932997](https://bugzilla.mozilla.org/show_bug.cgi?id=1932997)
+- 修复 Firefox 162 更改分屏视图底部栏元素名称后，其样式显示异常的问题。[Bug 1645648](https://bugzilla.mozilla.org/show_bug.cgi?id=1645648)
+- 修复 Firefox 163 变更后，分屏视图边框重复显示的问题。[Bug 2066737](https://bugzilla.mozilla.org/show_bug.cgi?id=2066737)
+- 修复 Firefox 163 变更后，折叠状态的原生垂直标签页中出现多余分隔线的问题。[Bug 2069488](https://bugzilla.mozilla.org/show_bug.cgi?id=2069488)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.2
 
 > [!IMPORTANT]
@@ -33,8 +60,6 @@
 - 修复 Firefox 161 变更后，原生容器标签页的指示线和渐变边框显示异常的问题。[Bug 2074327](https://bugzilla.mozilla.org/show_bug.cgi?id=2074327)
 - 修复 Firefox 161 变更后，新标签页“近期动态”卡片的样式异常。[Bug 2088559](https://bugzilla.mozilla.org/show_bug.cgi?id=2088559)
 - 恢复因 Firefox 162 变更而缺失的媒体菜单图标。[Bug 2088635](https://bugzilla.mozilla.org/show_bug.cgi?id=2088635)
-
-<!-- END What's New -->
 
 ## 🦊 v7.1.1
 

@@ -4,6 +4,33 @@
 
 ## 🆕 What's New
 
+## 🦊 v7.1.3
+
+> [!IMPORTANT]
+> v7.0.0 introduced several new features and breaking changes. If you missed its release notes, you can read them here:
+>
+> [English](./CHANGELOG.md#-v700---nova-ui-edition) | [日本語](./CHANGELOG_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88.md#-v700---nova-ui-edition) | [简体中文](./CHANGELOG_%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87.md#-v700---nova-ui-edition)
+
+### Improvements
+
+- Added missing menu icons and corrected the alignment of container menu items.
+
+### Breaking Changes
+
+- `uc.flex.style-web-content-outline` now defaults to `1`, showing an outline around the focused Split View panel. Set it to `2` to also outline regular web content. The previous `0` option has been removed.
+
+### Fixes
+
+- Fixed gaps around horizontal Split View tabs after Firefox 149 and 157 changes. [Bug 2006018](https://bugzilla.mozilla.org/show_bug.cgi?id=2006018) [Bug 2066745](https://bugzilla.mozilla.org/show_bug.cgi?id=2066745)
+- Fixed the tab bar shifting when switching Split View tabs after Firefox 158 changes. [Bug 2068234](https://bugzilla.mozilla.org/show_bug.cgi?id=2068234)
+- Fixed unwanted fading over pinned tabs after Firefox 161 changes. [Bug 2049500](https://bugzilla.mozilla.org/show_bug.cgi?id=2049500)
+- Restored native vertical tab closing animations after Firefox 162 changes. [Bug 1932997](https://bugzilla.mozilla.org/show_bug.cgi?id=1932997)
+- Fixed Split View footer styling after Firefox 162 renamed the footer element. [Bug 1645648](https://bugzilla.mozilla.org/show_bug.cgi?id=1645648)
+- Fixed duplicate Split View outlines after Firefox 163 changes. [Bug 2066737](https://bugzilla.mozilla.org/show_bug.cgi?id=2066737)
+- Fixed the divider appearing in collapsed native vertical tabs after Firefox 163 changes. [Bug 2069488](https://bugzilla.mozilla.org/show_bug.cgi?id=2069488)
+
+<!-- END What's New -->
+
 ## 🦊 v7.1.2
 
 > [!IMPORTANT]
@@ -33,8 +60,6 @@
 - Restored native container tab indicators and gradient borders after Firefox 161 changes. [Bug 2074327](https://bugzilla.mozilla.org/show_bug.cgi?id=2074327)
 - Fixed New Tab Highlights card styling after Firefox 161 changes. [Bug 2088559](https://bugzilla.mozilla.org/show_bug.cgi?id=2088559)
 - Restored missing media menu icons after Firefox 162 changes. [Bug 2088635](https://bugzilla.mozilla.org/show_bug.cgi?id=2088635)
-
-<!-- END What's New -->
 
 ## 🦊 v7.1.1
 
